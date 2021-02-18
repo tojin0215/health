@@ -30,9 +30,9 @@ const todolistStateToProps = (state) => {
 
 const todolistDispatchToProps = (dispatch) => {
     return {
-        onClick(data){
-          // dispatch(complete2(data))
-          dispatch(complete(data))
+        onClick(data){ // 브라우저에서 이벤트가 발생한다
+          //dispatch(complete2(data))
+          dispatch(complete(data)) // 액션 메서드가 호출된다 -> store의 dispatch() 메서드가 호출된다
         }
     }
 }

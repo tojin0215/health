@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTodo2 } from '../../action/todo';
+import { addTodo } from '../../action/todo';
 
 class Header extends Component {
 
@@ -26,7 +26,7 @@ class Header extends Component {
 const headerDispatchToProps = (dispatch) => {
     return {
         onClick(txt){
-          dispatch(addTodo2(txt))
+          dispatch(addTodo(txt))
         }
     }
 }

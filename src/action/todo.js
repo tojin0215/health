@@ -18,6 +18,7 @@ function addTodo2(text) {
 
 
 function complete({complete, id}) {
+	console.log(complete+" "+ id);
 	return { type: COMPLETE_TODO,  complete, id};
 }
 
