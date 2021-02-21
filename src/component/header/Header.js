@@ -1,12 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTodo } from '../../action/todo';
+import { setFitness } from '../../action/userinfo';
 
 class Header extends Component {
+  render() {
+    const { userinfo } = this.props;
+
+    return (
+      <div>
+          <h1>{userinfo.fitnessname}</h1>
+          <h3>{userinfo.username}님</h3>
+      </div>
+    );
+  }
+}
+const headerStateToProps = (state) => {
+  return {
+    userinfo: state.userinfo
+  }
+}
+export default connect(headerStateToProps, undefined)(Header);
+
+
+/*class Header extends Component {
 
   render() {
     let input;
     const {onClick} = this.props;
+    
 
     return (
       <div>
@@ -32,3 +53,4 @@ const headerDispatchToProps = (dispatch) => {
 }
 
 export default connect(undefined, headerDispatchToProps)(Header);
+*/

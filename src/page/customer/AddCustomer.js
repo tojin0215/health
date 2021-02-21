@@ -1,27 +1,31 @@
-import React,{ Component } from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 
-class Home extends Component {
+class AddCustomer extends Component {
     render() {
         const { userinfo } = this.props;
         console.log("userinfo : ");
-        console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
+        console.log(userinfo);
         
         return (
             <div>
             <Header />
             <Navigation />
-            <h2>Home</h2>
+            <h2>신규회원 등록</h2>
+            <Link to="/customer">등록하기</Link>
         </div>
         );
     }
 }
 
-const HomeStateToProps = (state) => {
+const CustomerStateToProps = (state) => {
     return {
-      userinfo: state.userinfo
+      userinfo : state.userinfo
     }
 }
-export default connect(HomeStateToProps, undefined)(Home);
+
+export default connect(CustomerStateToProps, undefined)(AddCustomer);

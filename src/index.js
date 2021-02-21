@@ -8,11 +8,7 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 
 const store = configureStore(reducer,{
-	"todos" : [
-		{"id":1, "todo":"빨래하기", "complete":false},
-		{"id":2, "todo":"청소하기", "complete":false},
-		{"id":3, "todo":"공부하기", "complete":false}
-	]
+	"userinfo" : {"useridx":1, "username":"박재진", "fitnessidx":1, "fitnessname":"투진헬스장"}
 });
 
 const render = () => {
