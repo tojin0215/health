@@ -24,4 +24,7 @@ const SalesStateToProps = (state) => {
       userinfo: state.userinfo
     }
 }
+
 export default connect(SalesStateToProps, undefined)(Sales);
+//새 page 추가 시 guide : 이 폴더 안에 페이지 하나 더 만든 후, src/component/app.js && src/page/index 함께 변경해주세요
+//잘 모르겠으면 customer폴더 참고

@@ -13,7 +13,7 @@ function setUser(text) {
 function setUser2() {
   return (dispatch) => {
 	return fetch("api/set.json").then(
-		res => res.json().then(data => dispatch(addTodo(data.useridx)))
+		res => res.json().then(data => dispatch(setUser(data.useridx)))
 	);
   };
 }
@@ -24,7 +24,7 @@ function setFitness(text) {
 function setFitness2() {
   return (dispatch) => {
 	return fetch("api/set.json").then(
-		res => res.json().then(data => dispatch(addTodo(data.fitnessidx)))
+		res => res.json().then(data => dispatch(setFitness(data.fitnessidx)))
 	);
   };
 }
