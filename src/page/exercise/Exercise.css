@@ -1,0 +1,65 @@
+div.container {
+    width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0rem;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+div.title {
+    background: #22b8cf;
+    color: white;
+    height: 4rem;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h2 {
+    /* justify-content: flex-start; */
+    /* flex: 1; */
+}
+
+h4 {
+    /* justify-content: flex-end; */
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    /* transition: 0.1s; */
+}
+
+.content {
+    background: white;
+}
+
+form {
+    display: inline-flex;
+}
+
+div.input-title {
+    display: inline;
+    width: 100px;
+    align-items: center;
+}
+label {
+    display: block;
+}
+input {
+    display: block;
+}
+
+.part {
+    display: flex;
+}
+
+button {
+    align-content: flex-end;
+}
+
+div.checkbox {
+    display: flex;
+}
+.input-exercise {
+    display: flex;
+}

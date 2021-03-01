@@ -3,6 +3,14 @@ import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 
+import './Exercise.css';
+// userinfo = {
+    // useridx: 1,
+    // username: "박재진",
+    // fitnessidx: 1,
+    // fitnessname: "투진헬스장"
+// }
+
 class Exercise extends Component {
     render() {
         const { userinfo } = this.props;
@@ -13,7 +21,81 @@ class Exercise extends Component {
             <div>
             <Header />
             <Navigation />
-            <h2>Exercise</h2>
+            <div className='container'>
+                <div className='title'>
+                <h2>운동 설정</h2><h4>운동{'>'}운동 설정</h4>
+                </div>
+            
+                <div>운동 정보 입력</div>
+                <hr />
+                <form className='input-exercise'>
+                    
+                    <div className="input-title">
+                        <label className="label-name">운동 이름</label>
+                        <label className="label-description">부위</label>
+                        <label className="label-description">운동 기구</label>
+                        <label className="label-description">영상 링크</label>
+
+                    </div>
+                    <div>
+                        <input placeholder="name" />
+                        <div className="part">
+                            <div className="checkbox">
+                                <input type="checkbox"></input>
+                                <div className="text">상체</div>
+                            </div>
+                            <div className="checkbox">
+                                <input type="checkbox"></input>
+                                <div className="text">하체</div>
+                            </div>
+                            <div className="checkbox">
+                                <input type="checkbox"></input>
+                                <div className="text">코어</div>
+                            </div>
+                            
+                            <div className="checkbox">
+                                <input type="checkbox"></input>
+                                <div className="text">전신</div>
+                            </div>
+                            <div className="checkbox">
+                                <input type="checkbox"></input>
+                                <div className="text">유산소</div>
+                            </div>
+                        </div>
+                        <input placeholder="machine" />
+                        <input placeholder="link" />
+                    </div>
+                    
+                </form>
+                    <button type="submit">저장하기</button>
+                
+                <br />
+                <div className="table">
+                    <input placeholder="search" />
+                    <table>
+                        <caption>Exercise Table</caption>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Name</th>
+                                <th>Machine</th>
+                                <th>Part</th>
+                                <th>Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Dead Lift</td>
+                                <td>Babel</td>
+                                <td>상체</td>
+                                <td><a>Link...</a></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
         </div>
         );
     }
