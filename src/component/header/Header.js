@@ -8,8 +8,7 @@ class Header extends Component {
 
     return (
       <div>
-          <h1>{userinfo.fitnessname}</h1>
-          <h3>{userinfo.username}님</h3>
+          
       </div>
     );
   }
