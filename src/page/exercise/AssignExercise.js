@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 // import './Exercise.css';
 // userinfo = {
@@ -22,6 +23,9 @@ class AssignExercise extends Component {
             <Header />
             <Navigation />
             <div className='container'>
+                <NavLink exact to="/exercise">[운동 설정]</NavLink>
+                <NavLink exact to="/exercise/package">[운동 묶음 설정]</NavLink>
+                <NavLink exact to="/exercise/assign">[운동 배정 설정]</NavLink>
                 <div className='title'>
                 <h2>운동 배정</h2><h4>운동{'>'}운동 배정</h4>
                 </div>
