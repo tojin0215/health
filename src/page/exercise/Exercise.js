@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import './Exercise.css';
 // userinfo = {
@@ -22,6 +23,9 @@ class Exercise extends Component {
             <Header />
             <Navigation />
             <div className='container'>
+                <NavLink exact to="/exercise">[운동 설정]</NavLink>
+                <NavLink exact to="/exercise/package">[운동 묶음 설정]</NavLink>
+                <NavLink exact to="/exercise/assign">[운동 배정 설정]</NavLink>
                 <div className='title'>
                 <h2>운동 설정</h2><h4>운동{'>'}운동 설정</h4>
                 </div>
@@ -30,15 +34,13 @@ class Exercise extends Component {
                 <hr />
                 <form className='input-exercise'>
                     
-                    <div className="input-title">
-                        <label className="label-name">운동 이름</label>
-                        <label className="label-description">부위</label>
-                        <label className="label-description">운동 기구</label>
-                        <label className="label-description">영상 링크</label>
-
-                    </div>
-                    <div>
+                    <div className="input-row">
+                        <label className="label-description">운동 이름</label>
                         <input placeholder="name" />
+                    </div>
+                    
+                    <div className="input-row">
+                        <label className="label-description">부위</label>
                         <div className="part">
                             <div className="checkbox">
                                 <input type="checkbox"></input>
@@ -62,10 +64,16 @@ class Exercise extends Component {
                                 <div className="text">유산소</div>
                             </div>
                         </div>
-                        <input placeholder="machine" />
-                        <input placeholder="link" />
                     </div>
                     
+                    <div className="input-row">
+                        <label className="label-description">운동 기구</label>
+                        <input placeholder="machine" />
+                    </div>
+                    <div className="input-row">
+                        <label className="label-description">영상 링크</label>
+                        <input placeholder="link" />
+                    </div>
                 </form>
                     <button type="submit">저장하기</button>
                 
@@ -73,21 +81,21 @@ class Exercise extends Component {
                 <div className="table">
                     <input placeholder="search" />
                     <table>
-                        <caption>Exercise Table</caption>
+                        <caption>운동 테이블</caption>
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Name</th>
-                                <th>Machine</th>
-                                <th>Part</th>
-                                <th>Link</th>
+                                <th>이름</th>
+                                <th>운동 기구</th>
+                                <th>운동 부위</th>
+                                <th>링크</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Dead Lift</td>
-                                <td>Babel</td>
+                                <td>데드 리프트</td>
+                                <td>바벨</td>
                                 <td>상체</td>
                                 <td><a>Link...</a></td>
                             </tr>
