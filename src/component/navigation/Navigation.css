@@ -1,0 +1,9 @@
+:local(.navbar) {
+    background:rgb(0, 0, 82);
+    color:white !important;
+}
+:local(.navitem) {
+    color:rgb(220, 220, 245) !important;
+    margin-right: 2.5em;
+    
+}
