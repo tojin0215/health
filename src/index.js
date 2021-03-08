@@ -8,7 +8,7 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 
 const store = configureStore(reducer,{
-	"userinfo" : {"useridx":1, "username":"박재진", "fitnessidx":1, "fitnessname":"투진헬스장"}
+	"userinfo" : {"member_no":1, "member_name":"박재진", "fitness_no":1, "fitness_name":"투진헬스장"}
 });
 
 const render = () => {

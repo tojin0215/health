@@ -5,18 +5,101 @@ import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+
 class AddCustomer extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            fitness_no:this.props.userinfo.fitness_no,
+            name: "",
+            sex: 111,
+            startDate: new Date(),
+            period: 0,
+            phone: "",
+            solar_or_lunar: true,
+            address:"",
+            join_route:0,
+            uncollected:0,
+            in_charge:"",
+            note:"",
+        };
+        this.handleDateChange = this.handleDateChange.bind(this);
+    };
+
+
+    handleChange = (e) => { 
+        this.setState({ 
+            [e.target.id]: e.target.value,
+        }); 
+    };
+
+    handleOnClick = (e) => {
+        console.log(this.state);
+        // 서버 연결하는 부분
+        fetch("http://localhost:3000/user", {
+            method: "POST",
+            headers: {
+              'Content-type': 'application/json'
+          },
+            body: JSON.stringify({
+                fitness_no:this.state.fitness_no,
+                name:this.state.name,
+                sex:this.state.sex,
+                start_date:this.state.startDate,
+                period:this.state.period,
+                phone:this.state.phone,
+                solar_or_lunar:this.state.solar_or_lunar,
+                address:this.state.address,
+                join_route:this.state.join_route,
+                uncollected:this.state.uncollected,
+                in_charge:this.state.in_charge,
+                note:this.state.note
+            })
+          })
+            .then(response => response.json())
+            .then(response => {
+                // 서버에서 데이터 전달하면 여기서 json type으로 받게 됨
+                alert("신규 회원이 등록되었습니다.");
+            });
+        this.props.history.push('/customer');
+    }
+
+    handleDateChange(date) {
+        this.setState({
+           startDate: date
+        })
+    }
+
     render() {
-        const { userinfo } = this.props;
-        console.log("userinfo : ");
-        console.log(userinfo);
+        //const { userinfo } = this.props;
+        //console.log("userinfo : ");
+        //console.log(userinfo);
         
         return (
             <div>
             <Header />
             <Navigation />
-            <h2>신규회원 등록</h2>
-            <Link to="/customer">등록하기</Link>
+            <h2>신규 회원 등록 페이지</h2>
+            <form className="AddSalesForm">
+                <hr/>
+                <label>담당자 : <input type="text" id='in_charge' defaultChecked={this.state.isChecked} onChange={this.handleChange}/></label>
+                <label>강습시작일 :  <DatePicker
+                    selected={ this.state.startDate }
+                    onChange={ this.handleDateChange }
+                    name="startDate"
+                    dateFormat="yyyy-MM-dd"
+                /></label>
+                <label>성명 : <input type="text" id='name' defaultChecked={this.state.isChecked} onChange={this.handleChange}/></label>
+                <label>핸드폰 : <input type="text" id='phone' defaultChecked={this.state.isChecked} onChange={this.handleChange}/></label><br/>
+                <label>주소 : <input type="address" id='기구 필라테스' defaultChecked={this.state.isChecked} onChange={this.handleChange}/></label>
+                <label>비고 : <input type="note" id='1:1 필라테스' defaultChecked={this.state.isChecked} onChange={this.handleChange}/></label>
+                <br/><br/>
+                
+                <button className="btn btn-lg btn-primary btn-block" type="button" onClick={this.handleOnClick}> 등록하기 </button>
+            </form>
         </div>
         );
     }
@@ -29,3 +112,4 @@ const CustomerStateToProps = (state) => {
 }
 
 export default connect(CustomerStateToProps, undefined)(AddCustomer);
+
