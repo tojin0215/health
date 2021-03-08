@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { Home, Customer, AddCustomer, Exercise, Sales, Login } from '../page';
+import { Home, Customer, AddCustomer, Exercise, Sales, AddSales, Login } from '../page';
 import { PackageSetting, AssignExercise } from '../page';
 
 class App extends Component {
