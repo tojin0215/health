@@ -13,7 +13,7 @@ class AddCustomer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fitness_no:this.props.userinfo.fitness_no,
+            fitness_no:this.props.userinfo.fitness_no, //Redux를 통해 받은 값
             name: "",
             sex: 111,
             startDate: new Date(),
@@ -73,11 +73,7 @@ class AddCustomer extends Component {
         })
     }
 
-    render() {
-        //const { userinfo } = this.props;
-        //console.log("userinfo : ");
-        //console.log(userinfo);
-        
+    render() {        
         return (
             <div>
             <Header />
@@ -85,17 +81,17 @@ class AddCustomer extends Component {
             <h2>신규 회원 등록 페이지</h2>
             <form className="AddSalesForm">
                 <hr/>
-                <label>담당자 : <input type="text" id='in_charge' defaultChecked={this.state.isChecked} onChange={this.handleChange}/></label>
+                <label>담당자 : <input type="text" id='in_charge' onChange={this.handleChange}/></label>
                 <label>강습시작일 :  <DatePicker
                     selected={ this.state.startDate }
                     onChange={ this.handleDateChange }
                     name="startDate"
                     dateFormat="yyyy-MM-dd"
                 /></label>
-                <label>성명 : <input type="text" id='name' defaultChecked={this.state.isChecked} onChange={this.handleChange}/></label>
-                <label>핸드폰 : <input type="text" id='phone' defaultChecked={this.state.isChecked} onChange={this.handleChange}/></label><br/>
-                <label>주소 : <input type="address" id='기구 필라테스' defaultChecked={this.state.isChecked} onChange={this.handleChange}/></label>
-                <label>비고 : <input type="note" id='1:1 필라테스' defaultChecked={this.state.isChecked} onChange={this.handleChange}/></label>
+                <label>성명 : <input type="text" id='name' onChange={this.handleChange}/></label>
+                <label>핸드폰 : <input type="text" id='phone' onChange={this.handleChange}/></label><br/>
+                <label>주소 : <input type="text" id='address' onChange={this.handleChange}/></label>
+                <label>비고 : <input type="text" id='note' onChange={this.handleChange}/></label>
                 <br/><br/>
                 
                 <button className="btn btn-lg btn-primary btn-block" type="button" onClick={this.handleOnClick}> 등록하기 </button>
