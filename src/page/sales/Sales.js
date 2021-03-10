@@ -12,6 +12,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
+import './Sales.css'
+
 const totalSales = [
     { "card": 325000, "cash": 100000, "transfer": 200000, "total" : 625000 },
   ]
@@ -54,46 +56,48 @@ class Sales extends Component {
             <div>
                 <Header />
                 <Navigation />
-                <h2>상품등록 페이지</h2>
-                <Link to="/sales/add">상품 등록</Link>
-                <h5>매출 현황</h5>
-                <DatePicker
-                    selected={ this.state.startDate }
-                    selectsStart
-                    maxDate={new Date()}
-                    onChange={ this.handleDateChange }
-                    name="startDate"
-                    dateFormat="MM/dd/yyyy"
-                />
-                <text>~</text>
-                <DatePicker
-                    selected={ this.state.endDate }
-                    selectsEnd
-                    minDate={this.state.startDate}
-                    maxDate={new Date()}
-                    onChange={ this.handleDateChange }
-                    name="endDate"
-                    dateFormat="MM/dd/yyyy"
-                />
+                <div className="salesContainer">
+                    <h2>상품등록 페이지</h2>
+                    <Link to="/sales/add">상품 등록</Link>
+                    <h5>매출 현황</h5>
+                    <DatePicker
+                        selected={ this.state.startDate }
+                        selectsStart
+                        maxDate={new Date()}
+                        onChange={ this.handleDateChange }
+                        name="startDate"
+                        dateFormat="MM/dd/yyyy"
+                    />
+                    <text>~</text>
+                    <DatePicker
+                        selected={ this.state.endDate }
+                        selectsEnd
+                        minDate={this.state.startDate}
+                        maxDate={new Date()}
+                        onChange={ this.handleDateChange }
+                        name="endDate"
+                        dateFormat="MM/dd/yyyy"
+                    />
 
-                <div>
-                <BootstrapTable data={ totalSales }>
-                    <TableHeaderColumn dataField='card'>카드</TableHeaderColumn>
-                    <TableHeaderColumn dataField='cash'>현금</TableHeaderColumn>
-                    <TableHeaderColumn dataField='transfer'>계좌이체</TableHeaderColumn>
-                    <TableHeaderColumn dataField='total' isKey>총 매출</TableHeaderColumn>
-                </BootstrapTable>
-                <br/><br/>
-                <h5>전체 기록</h5>
-                <BootstrapTable data={ salesList }>
-                    <TableHeaderColumn dataField='no' isKey>No.</TableHeaderColumn>
-                    <TableHeaderColumn dataField='user'>회원이름</TableHeaderColumn>
-                    <TableHeaderColumn dataField='product'>상품</TableHeaderColumn>
-                    <TableHeaderColumn dataField='paymentDate'>결제일</TableHeaderColumn>
-                    <TableHeaderColumn dataField='payment'>결제 금액</TableHeaderColumn>
-                    <TableHeaderColumn dataField='kinds'>종류</TableHeaderColumn>
-                </BootstrapTable>
+                    <div>
+                    <BootstrapTable data={ totalSales }>
+                        <TableHeaderColumn dataField='card'>카드</TableHeaderColumn>
+                        <TableHeaderColumn dataField='cash'>현금</TableHeaderColumn>
+                        <TableHeaderColumn dataField='transfer'>계좌이체</TableHeaderColumn>
+                        <TableHeaderColumn dataField='total' isKey>총 매출</TableHeaderColumn>
+                    </BootstrapTable>
+                    <br/><br/>
+                    <h5>전체 기록</h5>
+                    <BootstrapTable data={ salesList }>
+                        <TableHeaderColumn dataField='no' isKey>No.</TableHeaderColumn>
+                        <TableHeaderColumn dataField='user'>회원이름</TableHeaderColumn>
+                        <TableHeaderColumn dataField='product'>상품</TableHeaderColumn>
+                        <TableHeaderColumn dataField='paymentDate'>결제일</TableHeaderColumn>
+                        <TableHeaderColumn dataField='payment'>결제 금액</TableHeaderColumn>
+                        <TableHeaderColumn dataField='kinds'>종류</TableHeaderColumn>
+                    </BootstrapTable>
 
+                    </div>
                 </div>
             </div>
         );

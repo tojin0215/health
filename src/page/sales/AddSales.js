@@ -7,6 +7,9 @@ import { connect } from 'react-redux';
 
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+
+import './AddSales.css'
+
 //import 'bootstrap/dist/css/bootstrap.min.css';
 
 
