@@ -27,14 +27,13 @@ class Navigation extends Component {
                         <NavLink exact to="/sales"><span className={styles.navitem}>상품/매출</span></NavLink>
                         <NavLink exact to="/exercise"><span className={styles.navitem}>운동</span></NavLink>
                     </Nav>
-                    <Nav>
+                    <Nav className={styles.navUtill}>
                         <Nav.Item><span className={styles.navitem}>{userinfo.member_name}님</span></Nav.Item>
                         <Nav.Link eventKey={2} href="/login">
                         <span className={styles.navitem}>Logout</span>
                         </Nav.Link>
                     </Nav>
                 </Navbar>
-                
             </div>
         );
     }
