@@ -3,3 +3,45 @@
     margin:0 auto;
     padding-top:8rem;
 }
+
+.salesUtill{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:2rem 0 1rem;
+}
+
+.salesUtill Button {
+    width:15rem;
+    background-color:rgb(38, 38, 134);
+    border:none;
+    border-radius:10px;
+}
+
+.addPr {
+    font-size:1.5rem;
+}
+
+.tableBody {
+    text-align:center;
+}
+
+.tableContainer {
+    border-radius:0;
+    border:none;
+    border-top:1px solid rgb(0,0,82);
+    border-bottom:1px solid rgb(0,0,82);
+}
+
+.table thead th {
+    border:none;
+    height:4rem;
+}
+
+.table-bordered td, .table-bordered th {
+    border:none;
+}
+
+.table2 .tableHeader {
+    border-bottom:1px solid rgb(0,0,82)
+}

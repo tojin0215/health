@@ -1,5 +1,6 @@
 .Navigation {
     width:100%;
+    min-width:1080px;
     background-color:rgb(0, 0, 82);
     display:flex;
 }
