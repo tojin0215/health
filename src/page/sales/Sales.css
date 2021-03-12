@@ -1,7 +1,8 @@
 .salesContainer {
     width:1080px;
     margin:0 auto;
-    padding-top:8rem;
+    padding-top:6rem;
+    padding-bottom:8rem;
 }
 
 .salesUtill{
@@ -41,7 +42,14 @@
 .table-bordered td, .table-bordered th {
     border:none;
 }
-
+/*
+.table2 :hover {
+    background-color: #fff;
+    border:1px solid rgb(0,0,82);
+    border-radius: 5px;
+}
+전체기록 표의 행에 하버시 css 적용
+*/
 .table2 .tableHeader {
     border-bottom:1px solid rgb(0,0,82)
 }

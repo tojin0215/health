@@ -90,7 +90,7 @@ class Sales extends Component {
                     </div>
 
                     <div>
-                    <BootstrapTable hover data={ totalSales } 
+                    <BootstrapTable data={ totalSales } 
                         tableHeaderClass='tableHeader'
                         tableContainerClass='tableContainer'>
                         <TableHeaderColumn dataField='card'
@@ -112,7 +112,7 @@ class Sales extends Component {
                     </BootstrapTable>
                     <br/><br/>
                     <h5>전체 기록</h5>
-                    <BootstrapTable hover data={ salesList } 
+                    <BootstrapTable data={ salesList } hover 
                         tableHeaderClass='tableHeader'
                         tableContainerClass='tableContainer'
                         className="table2">
