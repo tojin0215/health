@@ -15,6 +15,29 @@ class Login extends Component{
     };
     handleOnClick = (e) => {
         console.log(this.state.ID, this.state.Password);
+        fetch("http://localhost:3000/manager", {
+            method: "POST",
+            headers: {
+              'Content-type': 'application/json'
+          },
+            body: JSON.stringify({
+                id:this.state.ID,
+                password:this.state.Password,
+            })
+          })
+            .then(response => response.json())
+            .then(response => {
+                if(response == ""){
+                    alert("ID 혹은 비밀번호가 잘못 입력되었습니다. 다시 로그인 해주세요.");
+                }else{
+                    this.props.history.push('/');
+                }
+            })
+            .catch(e =>{
+                alert("서버 점검 중입니다.");
+            });
+        
+
     }
     render(){
         return (
