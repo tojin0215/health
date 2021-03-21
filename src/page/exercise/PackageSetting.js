@@ -3,6 +3,7 @@ import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { TableHeaderColumn } from 'react-bootstrap-table';
 
 // userinfo = {
     // useridx: 1,
@@ -11,7 +12,83 @@ import { NavLink } from 'react-router-dom';
     // fitnessname: "투진헬스장"
 // }
 
+const totalExercisePack = [
+    {"part": "", "name": "", "strength": "쉬움", "cnt": "1", "rest": "20", "setcnt": "3", "move": "", "delete": ""},
+    {"part": "상체", "name": "윗몸 일으키기", "strength": "보통", "cnt": "2", "rest": "10", "setcnt": "5", "move": "", "delete": ""},
+    {"part": "", "name": "", "strength": "어려움", "cnt": "3", "rest": "5", "setcnt": "10", "move": "", "delete": ""},
+    {"part": "", "name": "", "strength": "쉬움", "cnt": "1", "rest": "20", "setcnt": "3", "move": "", "delete": ""},
+    {"part": "상체", "name": "윗몸 일으키기", "strength": "보통", "cnt": "2", "rest": "10", "setcnt": "5", "move": "", "delete": ""},
+    {"part": "", "name": "", "strength": "어려움", "cnt": "3", "rest": "5", "setcnt": "10", "move": "", "delete": ""},
+    {"part": "", "name": "", "strength": "쉬움", "cnt": "1", "rest": "20", "setcnt": "3", "move": "", "delete": ""},
+    {"part": "상체", "name": "윗몸 일으키기", "strength": "보통", "cnt": "2", "rest": "10", "setcnt": "5", "move": "", "delete": ""},
+    {"part": "", "name": "", "strength": "어려움", "cnt": "3", "rest": "5", "setcnt": "10", "move": "", "delete": ""},
+    {"part": "", "name": "", "strength": "쉬움", "cnt": "1", "rest": "20", "setcnt": "3", "move": "", "delete": ""},
+    {"part": "상체", "name": "윗몸 일으키기", "strength": "보통", "cnt": "2", "rest": "10", "setcnt": "5", "move": "", "delete": ""},
+    {"part": "", "name": "", "strength": "어려움", "cnt": "3", "rest": "5", "setcnt": "10", "move": "", "delete": ""},
+    {"part": "", "name": "", "strength": "쉬움", "cnt": "1", "rest": "20", "setcnt": "3", "move": "", "delete": ""},
+    {"part": "상체", "name": "윗몸 일으키기", "strength": "보통", "cnt": "2", "rest": "10", "setcnt": "5", "move": "", "delete": ""},
+    {"part": "", "name": "", "strength": "어려움", "cnt": "3", "rest": "5", "setcnt": "10", "move": "", "delete": ""},
+    {"part": "", "name": "", "strength": "쉬움", "cnt": "1", "rest": "20", "setcnt": "3", "move": "", "delete": ""},
+    {"part": "상체", "name": "윗몸 일으키기", "strength": "보통", "cnt": "2", "rest": "10", "setcnt": "5", "move": "", "delete": ""},
+    {"part": "", "name": "", "strength": "어려움", "cnt": "3", "rest": "5", "setcnt": "10", "move": "", "delete": ""},
+]
 class PackageSetting extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            fitness_no: this.props.userinfo.fitnessidx,
+            name: "",
+            stength: 0,
+            exercise_link: []
+        };
+    };
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value,
+        });
+    };
+
+    handleOnChange = (e) => {
+        console.log(this.state);
+        var exercise_pack_no = -1
+
+        fetch("http://localhost:3000/exercise", {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                fitness_no: this.state.fitness_no,
+                name: this.state.name,
+                strength: this.state.strength
+            })
+        })
+        .then(response => response.json())
+        .then(response => { exercise_pack_no = response.exercise_pack_no });
+
+        this.state.exercise_link.forEach(element => {
+            fetch("http://localhost:3000/exercise", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    exercise_no: element.exercise_no,
+                    exercise_pack_no: exercise_pack_no,
+                    order_no: element.order_no,
+                    cnt: element.cnt,
+                    sec: element.sec,
+                    rest: element.rest,
+                    setcnt: element.setcnt
+                })
+            })
+            .then(response => response.json())
+            .then(response => { alert("새 운동 패키지가 등록되었습니다.") });
+        });
+
+    }
+
     render() {
         const { userinfo } = this.props;
         console.log("userinfo : ");
@@ -48,7 +125,17 @@ class PackageSetting extends Component {
                         </label>
                     </div>
                     <hr />
-                    <table>
+                    <BootstrapTable data={ totalExercisePack }>
+                        <TableHeaderColumn dataField="part">운동 부위</TableHeaderColumn>
+                        <TableHeaderColumn dataField="name">운동 이름</TableHeaderColumn>
+                        <TableHeaderColumn dataField="strength">강도</TableHeaderColumn>
+                        <TableHeaderColumn dataField="cnt">횟수/시간</TableHeaderColumn>
+                        <TableHeaderColumn dataField="rest">휴식 시간</TableHeaderColumn>
+                        <TableHeaderColumn dataField="setcnt">세트 갯수</TableHeaderColumn>
+                        <TableHeaderColumn dataField="move">순서 이동</TableHeaderColumn>
+                        <TableHeaderColumn dataField="delete">제거</TableHeaderColumn>
+                    </BootstrapTable>
+                    {/* <table>
                         <caption>운동 묶음 설정 테이블</caption>
                         <thead>
                             <tr>
@@ -98,8 +185,8 @@ class PackageSetting extends Component {
                                 <td>&nbsp;</td>
                             </tr>
                         </tbody>
-                    </table>
-                    <button type="submit">+</button>
+                    </table> */}
+                    <button>+</button>
                 </div>
                 <hr />
             </div>
