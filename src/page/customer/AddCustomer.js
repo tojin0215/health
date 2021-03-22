@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { TextField } from '@material-ui/core';
 
 class AddCustomer extends Component {
 
@@ -25,9 +26,13 @@ class AddCustomer extends Component {
             uncollected:0,
             in_charge:"",
             note:"",
-            resiNumber1:"",
-            resiNumber2:"",
-
+            resiNumber:"",
+            
+            name_err:false,
+            period_err:false,
+            phone_err:false,
+            address_err:false,
+            resiNumber_err:false,
 
             signboard:false,
             homepage:false,
@@ -62,8 +67,6 @@ class AddCustomer extends Component {
             SportswearPayment: 0,
             LockerPayment: 0,
             TotalPayment:0,
-
-
         };
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.handlePayDateChange = this.handlePayDateChange.bind(this);
@@ -85,41 +88,70 @@ class AddCustomer extends Component {
         })
     }
     handleOnClick = (e) => {
-        let aa = (this.state.signboard?"1":"0");
-        let bb = (this.state.homepage?"1":"0");
-        let cc = (this.state.flyers?"1":"0");
-        let dd = (this.state.friend?"1":"0");
-        let ee = (this.state.sns?"1":"0");
-        let ff = (this.state.etc?"1":"0");
-        // 서버 연결하는 부분
-        fetch("http://localhost:3000/customer", {
-            method: "POST",
-            headers: {
-              'Content-type': 'application/json'
-          },
-            body: JSON.stringify({
-                fitness_no:this.state.fitness_no,
-                name:this.state.name,
-                sex:this.state.radioGroup.male?0:1,//0:'남', 1:'여'
-                start_date:this.state.startDate,
-                period:this.state.period,
-                phone:this.state.phone,
-                solar_or_lunar:this.state.radioGroup2.solar?0:1,//0:'양', 1:'음'
-                address:this.state.address,
-                join_route:aa+bb+cc+dd+ee+ff,
-                //uncollected:this.state.uncollected,
-                in_charge:this.state.in_charge,
-                note:this.state.note,
-                resi_no : String(this.state.resiNumber1)+"-"+String(this.state.resiNumber2),
-            })
-          })
-            .then(response => response.json())
-            .then(response => {
-                // 서버에서 데이터 전달하면 여기서 json type으로 받게 됨
-                alert("신규 회원이 등록되었습니다.");
-                this.props.history.push('/customer');
-            });
         
+        this.setState({
+            name_err:false,
+            period_err:false,
+            phone_err:false,
+            address_err:false,
+            resiNumber_err:false,
+        });
+    
+        if( this.state.name==="") {
+           this.setState({name_err:true});
+        }
+        if(this.state.period===0){
+            this.setState({period_err:true});
+        }
+        if(this.state.phone=== ""){
+            this.setState({phone_err:true});
+        }
+        if(this.state.address===""){
+            this.setState({address_err:true});
+        }
+        if(this.state.resiNumber===""){
+            this.setState({resiNumber_err:true});
+        }
+
+        if(this.state.name==="" || this.state.period===0 || this.state.phone=== "" || this.state.address==="" || this.state.resiNumber==="" ){
+            alert("빈칸을 채워주세요.")
+        }
+        else{
+            let aa = (this.state.signboard?"1":"0");
+            let bb = (this.state.homepage?"1":"0");
+            let cc = (this.state.flyers?"1":"0");
+            let dd = (this.state.friend?"1":"0");
+            let ee = (this.state.sns?"1":"0");
+            let ff = (this.state.etc?"1":"0");
+            // 서버 연결하는 부분
+            fetch("http://localhost:3000/customer", {
+                method: "POST",
+                headers: {
+                'Content-type': 'application/json'
+            },
+                body: JSON.stringify({
+                    fitness_no:this.state.fitness_no,
+                    name:this.state.name,
+                    sex:this.state.radioGroup.male?true:false,//true:'남', false:'여'
+                    start_date:this.state.startDate,
+                    period:this.state.period,
+                    phone:this.state.phone,
+                    solar_or_lunar:this.state.radioGroup2.solar?true:false,//true:'양', false:'음'
+                    address:this.state.address,
+                    join_route:aa+bb+cc+dd+ee+ff,
+                    //uncollected:this.state.uncollected,
+                    in_charge:this.state.in_charge,
+                    note:this.state.note,
+                    resi_no : String(this.state.resiNumber),
+                })
+            })
+                .then(response => response.json())
+                .then(response => {
+                    // 서버에서 데이터 전달하면 여기서 json type으로 받게 됨
+                    alert("신규 회원이 등록되었습니다.");
+                    this.props.history.push('/customer');
+                });
+        }
     }
 
     handleStartDateChange(date) {
@@ -172,18 +204,20 @@ class AddCustomer extends Component {
             <div>
             <Header />
             <Navigation />
+            
             <h2>신규 회원 등록</h2>
             <form className="AddSalesForm" style={{flexDirection:'column',display:'flex'}}>
-                <hr/>
-                <label>담당자 : <input type="text" id='in_charge' onChange={this.handleChange}/></label>
-                <label>강습시작일 :  <DatePicker
-                    selected={ this.state.startDate }
-                    onChange={ this.handleStartDateChange }
-                    name="startDate"
-                    dateFormat="yyyy-MM-dd"
-                /></label>
-                <label><input type="number" id='period' onChange={this.handleChange}/>개월</label>
-                <label>성명 : <input type="text" id='name' onChange={this.handleChange}/>
+                <hr/><label>
+                <TextField
+                        variant="outlined"
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        id='name'
+                        label="성명"
+                        error={this.state.name_err}
+                        required
+                        autoFocus
+                    />
                     <label className='labelCheck'>
                         <input className='btnRadio' type="radio" name="radioGroup" id='male'
                         checked={this.state.radioGroup['male']} onChange={this.handleRadio}/>
@@ -194,9 +228,48 @@ class AddCustomer extends Component {
                         checked={this.state.radioGroup['female']} onChange={this.handleRadio}/>
                         <span>여</span>
                     </label>
+                </label><br/>
+                <label>강습시작일<br/><DatePicker
+                    selected={ this.state.startDate }
+                    onChange={ this.handleStartDateChange }
+                    name="startDate"
+                    dateFormat="yyyy-MM-dd"
+                    />
+                    <TextField
+                        variant="outlined"
+                        value={this.state.period}
+                        onChange={this.handleChange}
+                        type='number'
+                        id='period'
+                        label="개월"
+                        error={this.state.period_err}
+                        required
+                    />
                 </label>
-                <label>핸드폰 : <input type="text" id='phone' onChange={this.handleChange}/></label><br/>
-                <label>주민번호 : <input type="number" id='resiNumber1' onChange={this.handleChange}/>-<input type="number" id='resiNumber2' onChange={this.handleChange}/>
+                
+                <br />
+                <TextField
+                    variant="outlined"
+                    value={this.state.phone}
+                    onChange={this.handleChange}
+                    type='number'
+                    id='phone'
+                    label="핸드폰(-제외)"
+                    error={this.state.phone_err}
+                    required
+                />
+                <br />
+                <label>
+                <TextField
+                    variant="outlined"
+                    value={this.state.resiNumber}
+                    onChange={this.handleChange}
+                    type='number'
+                    id='resiNumber'
+                    label="주민번호 앞자리(6자리)"
+                    error={this.state.resiNumber_err}
+                    required
+                />
                 <label className='labelCheck'>
                     <input className='btnRadio' type="radio" name="radioGroup2" id='solar'
                         checked={this.state.radioGroup2['solar']} onChange={this.handleRadio2}/>
@@ -208,9 +281,24 @@ class AddCustomer extends Component {
                         <span>음</span>
                     </label>
                 </label><br/>
-                <label>주소 : <input type="text" id='address' onChange={this.handleChange}/></label>
+                <TextField
+                    variant="outlined"
+                    value={this.state.address}
+                    onChange={this.handleChange}
+                    id='address'
+                    label="주소"
+                    error={this.state.address_err}
+                    required
+                />
+                <br />
+                <TextField
+                    variant="outlined"
+                    value={this.state.in_charge}
+                    onChange={this.handleChange}
+                    id='in_charge'
+                    label="담당자"    
+                />
                 <br/><br/>
-                
                 <h5> 가입 경로 </h5>
                 <hr/>
                 <label><input type="checkbox" id='signboard' checked={this.state.signboard} onChange={this.toggleChange}/>간판</label>
@@ -241,10 +329,29 @@ class AddCustomer extends Component {
                 <label><input type="checkbox" id='card' checked={this.state.card} onChange={this.toggleChange}/>카드</label>
                 <label><input type="checkbox" id='cash' checked={this.state.cash} onChange={this.toggleChange}/>현금</label>
                 <label><input type="checkbox" id='accountTransfer' checked={this.state.accountTransfer} onChange={this.toggleChange}/>계좌이체</label><br/>
-                <label>운동 <input type="number" className="form-control" id="ExercisePayment" value={this.state.ExercisePayment} onChange={this.handleChangeAndSum}/></label>
-                <label>운동복 <input type="number" className="form-control" id="SportswearPayment" value={this.state.SportswearPayment} onChange={this.handleChangeAndSum}/></label>
-                <label>개인 사물함 <input type="number" className="form-control" id="LockerPayment" value={this.state.LockerPayment} onChange={this.handleChangeAndSum}/></label><br/>
                 
+                <TextField
+                    variant="outlined"
+                    value={this.state.ExercisePayment===''?0:this.state.ExercisePayment}
+                    onChange={this.handleChangeAndSum}
+                    id='ExercisePayment'
+                    label="운동"
+                /><br />
+                <TextField
+                    variant="outlined"
+                    value={this.state.SportswearPayment===''?0:this.state.SportswearPayment}
+                    onChange={this.handleChangeAndSum}
+                    id='SportswearPayment'
+                    label="운동복"
+                /><br />
+                <TextField
+                    type="number"
+                    variant="outlined"
+                    value={this.state.LockerPayment===''?0:this.state.LockerPayment}
+                    onChange={this.handleChangeAndSum}
+                    id='LockerPayment'
+                    label="개인 사물함"
+                /><br />                
                 <h5> 결제일</h5>
                  <DatePicker
                     selected={ this.state.payDate }
