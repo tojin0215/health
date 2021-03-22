@@ -3,6 +3,7 @@ import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { TableHeaderColumn } from 'react-bootstrap-table';
 
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
@@ -111,7 +112,6 @@ class PackageSetting extends Component {
             exercise_link: []
         };
     };
-
 
     handleChange = (e) => {
         this.setState({
