@@ -6,7 +6,6 @@ import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
- 
 
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
@@ -35,7 +34,9 @@ class Customer extends Component {
     
         this.cusFetch();
     }
-
+    goLogin = () => {
+        this.props.history.push("/");
+    }
     cusFetch = () => {
         fetch("http://localhost:3000/customer?type=all&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
@@ -88,8 +89,8 @@ class Customer extends Component {
               'Content-type': 'application/json'
           }
         })
-            .then(response => response.json())
-            .then(res => {
+        .then(response => response.json())
+        .then(res => {
                 let arr = [];
                 for(let i=0 ; i<res.length ; i++){
                     let sor = res[i].solar_or_lunar===true?"양":"음";
@@ -119,7 +120,7 @@ class Customer extends Component {
         return (
             <div>
                 <Header />
-                <Navigation />
+                <Navigation goLogin={this.goLogin}/>
                 <Link to="/customer/add">신규회원 등록</Link>
                 <Dropdown options={options} onChange={this.selectItem} value={this.state.item} placeholder="Select an option" />
                 <input type="text" id='search' checked={this.state.search} onChange={this.handleChange}/>
@@ -165,7 +166,7 @@ class Customer extends Component {
 
 const CustomerStateToProps = (state) => {
     return {
-      userinfo : state.userinfo
+      userinfo : state.authentication.userinfo
     }
 }
 

@@ -71,7 +71,9 @@ class AddCustomer extends Component {
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.handlePayDateChange = this.handlePayDateChange.bind(this);
     };
-
+    goLogin = () => {
+        this.props.history.push("/");
+    }
 
     handleChange = (e) => { 
         this.setState({ 
@@ -203,7 +205,7 @@ class AddCustomer extends Component {
         return (
             <div>
             <Header />
-            <Navigation />
+            <Navigation goLogin={this.goLogin}/>
             
             <h2>신규 회원 등록</h2>
             <form className="AddSalesForm" style={{flexDirection:'column',display:'flex'}}>
@@ -373,7 +375,7 @@ class AddCustomer extends Component {
 
 const CustomerStateToProps = (state) => {
     return {
-      userinfo : state.userinfo
+      userinfo : state.authentication.userinfo
     }
 }
 

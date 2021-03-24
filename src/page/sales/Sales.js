@@ -40,7 +40,9 @@ class Sales extends Component {
         };
         this.handleDateChange = this.handleDateChange.bind(this);
     };
-
+    goLogin = () => {
+        this.props.history.push("/");
+    }
     handleDateChange(date) {
         this.setState({
             startDate: date,
@@ -56,7 +58,7 @@ class Sales extends Component {
         return (
             <div>
                 <Header />
-                <Navigation />
+                <Navigation goLogin={this.goLogin}/>
                 <localNavigation />
                 <div className="salesContainer">
                     <h2>상품등록 페이지</h2>
@@ -150,7 +152,7 @@ class Sales extends Component {
 
 const SalesStateToProps = (state) => {
     return {
-      userinfo: state.userinfo
+      userinfo: state.authentication.userinfo
     }
 }
 

@@ -26,7 +26,9 @@ import './AddSales.css'
 // ];
 
 class AddSales extends Component {
-
+    goLogin = () => {
+        this.props.history.push("/");
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -75,7 +77,7 @@ class AddSales extends Component {
 
             <div>
             <Header />
-            <Navigation />
+            <Navigation goLogin={goLogin}/>
             <h2>상품 등록페이지</h2>
             <Link to="/sales">회원 검색</Link><br/>
             <form className="AddSalesForm">
@@ -120,7 +122,7 @@ class AddSales extends Component {
 
 const SalesStateToProps = (state) => {
     return {
-      userinfo : state.userinfo
+      userinfo : state.authentication.userinfo
     }
 }
 

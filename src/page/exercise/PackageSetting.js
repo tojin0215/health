@@ -12,6 +12,9 @@ import { NavLink } from 'react-router-dom';
 // }
 
 class PackageSetting extends Component {
+    goLogin = () => {
+        this.props.history.push("/");
+    }
     render() {
         const { userinfo } = this.props;
         console.log("userinfo : ");
@@ -20,7 +23,7 @@ class PackageSetting extends Component {
         return (
             <div>
             <Header />
-            <Navigation />
+            <Navigation goLogin={goLogin}/> 
             <div className='title'>
                 <div className='titleIn'>
                     <h2>운동 묶음 설정</h2><h4>운동{'>'}운동 묶음 설정</h4>
@@ -111,7 +114,7 @@ class PackageSetting extends Component {
 
 const PackageStateToProps = (state) => {
     return {
-      userinfo: state.userinfo
+      userinfo: state.authentication.userinfo
     }
 }
 

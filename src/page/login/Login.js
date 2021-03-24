@@ -1,58 +1,53 @@
-import React, {Component} from 'react';
-
-class Login extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            ID: "",
-            Password: ""
-        };
-    };
-    handleChange = (e) => { 
-        this.setState({ 
-            [e.target.name]: e.target.value
-        }); 
-    };
-    handleOnClick = (e) => {
-        console.log(this.state.ID, this.state.Password);
-        fetch("http://localhost:3000/manager", {
-            method: "POST",
-            headers: {
-              'Content-type': 'application/json'
-          },
-            body: JSON.stringify({
-                id:this.state.ID,
-                password:this.state.Password,
-            })
-          })
-            .then(response => response.json())
-            .then(response => {
-                if(response == ""){
-                    alert("ID 혹은 비밀번호가 잘못 입력되었습니다. 다시 로그인 해주세요.");
-                }else{
-                    this.props.history.push('/');
+import React, { Component } from 'react';
+import Authentication from '../login/Authentication';
+import { connect } from 'react-redux';
+import {loginRequest} from '../../action/authentication';
+class Login extends Component {
+    handleLogin = (id, pw) => {
+        return this.props.loginRequest(id, pw).then(
+            () => {
+                if(this.props.status === "SUCCESS") {
+                    // create session data
+                    let loginData = {
+                        isLoggedIn: true,
+                        id: id
+                    };
+                    document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+                    alert('Welcome, ' + id + '!') 
+                    this.props.history.push('/home');
+                    return true;
+                } else {
+                    alert('Incorrect ID or password');
+                    return false;
                 }
-            })
-            .catch(e =>{
-                alert("서버 점검 중입니다.");
-            });
-        
-
-    }
-    render(){
-        return (
-            <form className="LoginForm">
-                <h2 className="LoginHeader"> 로그인 </h2>
-                <input type="text" id="inputId" className="form-control" placeholder="ID" name="ID" onChange={this.handleChange}/>
-                <input type="password" id="inputPassword" className="form-control" placeholder="Password" name="Password" onChange={this.handleChange}/>
-                <button className="btn btn-lg btn-primary btn-block" type="button" onClick={this.handleOnClick}> 로그인 </button>
-            </form>
+            }
         );
-    };
-
-}
-
-export default Login;
-
-
+    }
  
+    render() {
+        return (
+            <div>
+                <Authentication 
+                mode={true} 
+                onLogin={this.handleLogin}/>
+            </div>
+        );
+    }
+}
+ 
+const mapStateToProps = (state) => {
+    return {
+        status: state.authentication.login.status
+    };
+};
+ 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loginRequest: (id, pw) => {
+            return dispatch(loginRequest(id,pw));
+        }
+    };
+};
+ 
+ 
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

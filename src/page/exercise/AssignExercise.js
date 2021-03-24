@@ -13,6 +13,9 @@ import { NavLink } from 'react-router-dom';
 // }
 
 class AssignExercise extends Component {
+    goLogin = () => {
+        this.props.history.push("/");
+    }
     render() {
         const { userinfo } = this.props;
         console.log("userinfo : ");
@@ -21,7 +24,7 @@ class AssignExercise extends Component {
         return (
             <div>
             <Header />
-            <Navigation />
+            <Navigation goLogin={this.goLogin}/>
             <div className='container'>
                 <NavLink exact to="/exercise">[운동 설정]</NavLink>
                 <NavLink exact to="/exercise/package">[운동 묶음 설정]</NavLink>
@@ -126,7 +129,7 @@ class AssignExercise extends Component {
 
 const AssignExerciseStateToProps = (state) => {
     return {
-      userinfo: state.userinfo
+      userinfo: state.authentication.userinfo
     }
 }
 

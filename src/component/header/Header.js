@@ -15,7 +15,7 @@ class Header extends Component {
 }
 const headerStateToProps = (state) => {
   return {
-    userinfo: state.userinfo
+    userinfo: state.authentication.userinfo
   }
 }
 export default connect(headerStateToProps, undefined)(Header);

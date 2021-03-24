@@ -13,6 +13,9 @@ import './Exercise.css';
 // }
 
 class Exercise extends Component {
+    goLogin = () => {
+        this.props.history.push("/");
+    }
     render() {
         const { userinfo } = this.props;
         console.log("userinfo : ");
@@ -21,7 +24,7 @@ class Exercise extends Component {
         return (
             <div>
             <Header />
-            <Navigation />
+            <Navigation goLogin={this.goLogin}/>
             <div className='title'>
                 <div className='titleIn'>
                     <h2>운동 설정</h2><h4>운동 {'>'} 운동 설정</h4>
@@ -113,7 +116,7 @@ class Exercise extends Component {
 
 const ExerciseStateToProps = (state) => {
     return {
-      userinfo: state.userinfo
+      userinfo: state.authentication.userinfo
     }
 }
 
