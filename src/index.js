@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import reducer from './reducer/index';
 import App from './component/App'
-import './index.css';
+import './styles/index.css';
 import { BrowserRouter } from 'react-router-dom';
 
 const store = configureStore(reducer,{});

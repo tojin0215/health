@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
-import './Sales.css'
+import '../../styles/sales/Sales.css'
 
 const totalSales = [
     { "card": 325000, "cash": 100000, "transfer": 200000, "total" : 625000 },

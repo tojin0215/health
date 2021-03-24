@@ -4,7 +4,8 @@ import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import './Exercise.css';
+import '../../styles/exercise/Exercise.css';
+
 // userinfo = {
     // useridx: 1,
     // username: "박재진",
