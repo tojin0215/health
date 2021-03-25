@@ -1,3 +1,18 @@
+html {
+  font-size:10px;
+  word-break:break-word;
+}
+
+.wrap {
+  width:100%;
+}
+
+.container {
+  width:1080px;
+  margin:0 auto;
+  padding:0 0.5rem;
+}
+
 .App {
   text-align: center;
   width:1080px;

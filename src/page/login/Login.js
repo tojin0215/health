@@ -35,6 +35,13 @@ class Login extends Component {
                     <Header />
                     <Navigation />
                 </div>
+                <div className='localNavigation'>
+                    <div className='container'>
+                        <h2>
+                            로그인
+                        </h2>
+                    </div>
+                </div>
                 <div className='container'>
                     <Authentication 
                     mode={true} 
