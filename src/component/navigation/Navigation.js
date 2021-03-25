@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {Nav, Navbar, Container} from 'react-bootstrap';
+import {logoutRequest} from '../../action/authentication';
+
 import 'bootstrap/dist/css/bootstrap.css';
 import styles from './Navigation.css';
-import {logoutRequest} from '../../action/authentication';
+
+import imgLogo from '../../images/logo.png';
+import imgLogoFull from '../../images/logo-text.png';
 
 class Navigation extends Component {
     constructor(props){
@@ -36,9 +40,9 @@ class Navigation extends Component {
                 <Navbar className={styles.navbar}>
                     <Navbar.Brand href="/home">
                         <img
-                            alt=""
-                            src="../../logo.svg"
-                            width="30"
+                            alt="투진컴퍼니"
+                            src={imgLogo}
+                            width="auto"
                             height="30"
                             className="d-inline-block align-top"
                         />{' '}

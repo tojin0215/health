@@ -1,0 +1,22 @@
+.loginWrap .navbar a{
+    display:none;
+}
+.loginWrap .navbar .navbar-brand {
+    display:flex;
+    flex-grow:unset;
+    width:56px;
+    height:56px;
+    margin:3.3rem 0 0 0;
+    padding:0;
+    background-color:#fff;
+    border-radius:100%;
+}
+.loginWrap .navbar .navbar-brand img {
+    width:auto;
+    height:100%;
+
+}
+
+.loginWrap .navbar .navbar-nav{
+    display:none;
+}
