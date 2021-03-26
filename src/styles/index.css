@@ -3,6 +3,7 @@
 html {
   font-size:10px;
   word-break:break-word;
+  letter-spacing:-.05rem;
 }
 
 body {

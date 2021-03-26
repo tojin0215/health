@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Authentication from '../login/Authentication';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import {loginRequest} from '../../action/authentication';
 import '../../styles/login/Login.css';
@@ -48,7 +49,7 @@ class Login extends Component {
                     onLogin={this.handleLogin}/>
                 </div>
                 <div className='footer'>
-
+                    <Footer />
                 </div>
             </div>
         );
