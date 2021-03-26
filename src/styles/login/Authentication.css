@@ -50,6 +50,8 @@
   border-radius:1rem;
   border:1px solid #999;
   margin-bottom:0.8rem;
+  text-indent:1rem;
+  color:#777;
 }
 .auth .card .row .btn {
   margin-top:2rem;

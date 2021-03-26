@@ -9,6 +9,8 @@ import 'react-dropdown/style.css';
 
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
+import '../../styles/customer/Customer.css';
+
 require('moment-timezone');
 var moment = require('moment');
 
@@ -121,6 +123,18 @@ class Customer extends Component {
             <div>
                 <Header />
                 <Navigation goLogin={this.goLogin}/>
+                <div className='localNavigation'>
+                    <div className='container'>
+                        <h2>
+                            고객 관리
+                        </h2>
+                        <div className='breadCrumb'>
+                            <Link to='#'>HOME</Link>
+                            <span>&#60;</span>
+                            <Link to='#'>고객 관리</Link>
+                        </div>
+                    </div>
+                </div>
                 <Link to="/customer/add">신규회원 등록</Link>
                 <Dropdown options={options} onChange={this.selectItem} value={this.state.item} placeholder="Select an option" />
                 <input type="text" id='search' checked={this.state.search} onChange={this.handleChange}/>

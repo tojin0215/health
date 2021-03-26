@@ -10,6 +10,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Noto Sans KR', sans-serif, 'Nanum Gothic', sans-serif;
+  font-size:1.6rem;
 }
 
 h2 {
@@ -29,4 +30,34 @@ h2 {
 
 a {
   color:#000;
+}
+
+.localNavigation {
+  width:100%;
+  height:5rem;
+  border-bottom:0.1rem solid #000051;
+}
+
+.localNavigation .container {
+  padding:0 .5rem;
+  height:5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.localNavigation .container h2{
+  line-height:5rem;
+}
+.localNavigation .breadCrumb {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom:1rem;
+    font-size:1.2rem;
+}
+.localNavigation .breadCrumb a {
+  padding:0 1rem;
+}
+.localNavigation .breadCrumb a:last-child {
+  color:#000051;
+  font-size:1.4rem;
+  font-weight:600;
 }

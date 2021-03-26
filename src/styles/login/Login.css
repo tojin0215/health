@@ -12,12 +12,16 @@
     line-height:5rem;
 }
 
+.loginWrap .navbar {
+    justify-content:center;
+}
 .loginWrap .navbar a{
     display:none;
 }
 .loginWrap .navbar .navbar-brand {
     display:flex;
-    flex-grow:unset;
+    width:6rem;
+    height:6rem;
     margin:4.5rem 0 0 0;
 }
 

@@ -57,7 +57,7 @@ class Navigation extends Component {
                     <Nav className={styles.navUtill}>
                         <Nav.Item><span className={styles.navitem}>{userinfo.manager_name}님</span></Nav.Item>
                         <Nav.Item>
-                        <button onClick={this.handleLogout}>Logout</button>
+                        <button onClick={this.handleLogout}>로그아웃</button>
                         </Nav.Item>
                     </Nav>
                 </Navbar>
