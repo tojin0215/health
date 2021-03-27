@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import Authentication from '../login/Authentication';
+import Navigation from '../../component/navigation/Navigation';
+import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import {loginRequest} from '../../action/authentication';
+import '../../styles/login/Login.css';
+
 class Login extends Component {
     handleLogin = (id, pw) => {
         return this.props.loginRequest(id, pw).then(
@@ -26,10 +31,26 @@ class Login extends Component {
  
     render() {
         return (
-            <div>
-                <Authentication 
-                mode={true} 
-                onLogin={this.handleLogin}/>
+            <div className='wrap loginWrap'>
+                <div className='header'>
+                    <Header />
+                    <Navigation />
+                </div>
+                <div className='localNavigation'>
+                    <div className='container'>
+                        <h2>
+                            로그인
+                        </h2>
+                    </div>
+                </div>
+                <div className='container'>
+                    <Authentication 
+                    mode={true} 
+                    onLogin={this.handleLogin}/>
+                </div>
+                <div className='footer'>
+                    <Footer />
+                </div>
             </div>
         );
     }

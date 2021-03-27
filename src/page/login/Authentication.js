@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+
+import '../../styles/login/Authentication.css';
  
 class Authentication extends Component {
     state = {
@@ -57,7 +59,7 @@ class Authentication extends Component {
         const inputBoxes = (
             <div>
                 <div className="input-field col s12 id">
-                    <label>ID</label>
+                    <label>아이디</label>
                     <input
                     name="id"
                     type="text"
@@ -66,7 +68,7 @@ class Authentication extends Component {
                     value={this.state.id}/>
                 </div>
                 <div className="input-field col s12">
-                    <label>Password</label>
+                    <label>비밀번호</label>
                     <input
                     name="password"
                     type="password"
@@ -110,6 +112,11 @@ class Authentication extends Component {
         );*/
         return (
           <div className="container auth">
+              <div className='welcomeMent'>
+                  <p>Hello,</p>
+                  <p>안녕하세요</p>
+                  <p>헬스짐 관리자 로그인입니다</p>
+              </div>
               <Link className="logo" to="/">헬스 웹</Link>
               <div className="card">
                     {/*<div className="header blue white-text center">

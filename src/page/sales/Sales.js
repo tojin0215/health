@@ -14,7 +14,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select'
 
-import './Sales.css'
+import '../../styles/sales/Sales.css'
 
 const options = [
     { value: 'all', label: '전체' },
@@ -220,11 +220,11 @@ class Sales extends Component {
         const { selectedOption } = this.state;
 
         return (
-            <div>
+            <div className='sales'>
                 <Header />
                 <Navigation goLogin={this.goLogin}/>
                 <localNavigation />
-                <div className="salesContainer">
+                <div className="container">
                      <h2>상품등록 페이지</h2>
                     <div className="salesUtill">
                         <Link to="/sales/add">

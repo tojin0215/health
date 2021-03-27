@@ -11,6 +11,8 @@ import { TextField } from '@material-ui/core';
 import NumberFormat from 'react-number-format';
 
 
+import '../../styles/customer/AddCustomer.css';
+
 class AddCustomer extends Component {
 
     constructor(props) {
@@ -289,13 +291,21 @@ class AddCustomer extends Component {
     render() {     
         console.log('11111',this.state.exercisePrice)   
         return (
-            <div>
-            <Header />
-            <Navigation goLogin={this.goLogin}/>
-            
-            <h2>신규 회원 등록</h2>
+        <div className='addCustomer'>
+            <div className='header'>
+                <Header />
+                <Navigation goLogin={this.goLogin}/>
+                <div className='localNavigation'>
+                    <div className='container'>
+                        <h2>
+                          신규 회원 등록
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div className='container'>
             <form className="AddSalesForm" style={{flexDirection:'column',display:'flex'}}>
-                <hr/><label>
+                <label>
                 <TextField
                         variant="outlined"
                         value={this.state.name}
@@ -434,6 +444,7 @@ class AddCustomer extends Component {
                 
                 <button type="button" onClick={this.handleOnClick}> 등록하기 </button>
             </form>
+            </div>
         </div>
         );
     }

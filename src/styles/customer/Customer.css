@@ -1,0 +1,51 @@
+.customer .container{
+  display:flex;
+  padding-top:10rem;
+  flex-wrap:wrap;
+  justify-content:space-between;
+}
+
+.customerSearch {
+  display:flex;
+  flex-wrap:wrap;
+  width:41rem;
+}
+
+.customerSearch .Dropdown-root {
+  width:20rem;
+  margin:0 20rem 1rem 0;
+}
+
+.customerSearch .Dropdown-control {
+  border-radius:1rem;
+  text-indent:1rem;
+}
+
+.customerSearch input[type=text] {
+  margin-right:1rem;
+}
+
+.btnCustomerNew {
+  width:20rem;
+  height:4rem;
+  border-radius:1rem;
+  padding:.4rem .8rem;
+  margin:1rem 0 0 0;
+  background-color:#000055;
+  color:#fff;
+  text-align:center;
+  align-self:flex-end;
+  transition:.35s ease-in-out;
+  line-height:3rem;
+}
+
+.btnCustomerNew:hover {
+  color:#fff;
+  background-color:#0069d9;
+  text-decoration:none;
+}
+
+.customerTable {
+  width:100%;
+  padding-top:2rem;
+}
