@@ -1,16 +1,4 @@
-.loginWrap .localNavigation {
-    width:100%;
-    height:5rem;
-    border-bottom:0.1rem solid #000051;
-}
 
-.loginWrap .localNavigation .container {
-    padding:0 .5rem;
-    height:5rem;
-}
-.loginWrap .localNavigation .container h2{
-    line-height:5rem;
-}
 
 .loginWrap .navbar {
     justify-content:center;

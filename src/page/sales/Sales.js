@@ -59,13 +59,6 @@ class Sales extends Component {
             <div>
                 <Header />
                 <Navigation goLogin={this.goLogin}/>
-                <div className='localNavigation'>
-                    <div className='container'>
-                        <h2>
-                            로그인
-                        </h2>
-                    </div>
-                </div>
                 <div className="salesContainer">
                     <h2>상품등록 페이지</h2>
                     <div className="salesUtill">

@@ -65,10 +65,6 @@ div.input-title {
     width: 100px;
     align-items: center;
 }
-label {
-    /*display: block;*/
-}
-
 
 input {
     display: block;

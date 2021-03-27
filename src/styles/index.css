@@ -12,9 +12,12 @@ body {
   font-family: 'Noto Sans KR', sans-serif, 'Nanum Gothic', sans-serif;
   font-size:1.6rem;
 }
-
+ㄴ
 h2 {
   font-size:2.1rem;
+}
+h5 {
+  font-size:1.7rem;
 }
 
 .wrap {
@@ -31,6 +34,34 @@ h2 {
 a {
   color:#000;
 }
+
+button {
+  width:20rem;
+  height:4rem;
+  border:none;
+  border-radius:1rem;
+  padding:.4rem .8rem;
+  background-color:#000055;
+  color:#fff;
+  text-align:center;
+  align-self:flex-end;
+  transition:.35s ease-in-out;
+}
+button:hover {
+  color:#fff;
+  background-color:#0069d9;
+  text-decoration:none;
+}
+
+input[type=text] {
+  width:20rem;
+  height:4rem;
+  border-radius:1rem;
+  border:1px solid #000;
+  text-indent:1rem;
+  outline:none;
+}
+
 
 .localNavigation {
   width:100%;

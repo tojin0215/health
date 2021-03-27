@@ -120,7 +120,7 @@ class Customer extends Component {
         console.log(userinfo);
         
         return (
-            <div>
+            <div className='customer'>
                 <Header />
                 <Navigation goLogin={this.goLogin}/>
                 <div className='localNavigation'>
@@ -135,44 +135,52 @@ class Customer extends Component {
                         </div>
                     </div>
                 </div>
-                <Link to="/customer/add">신규회원 등록</Link>
-                <Dropdown options={options} onChange={this.selectItem} value={this.state.item} placeholder="Select an option" />
-                <input type="text" id='search' checked={this.state.search} onChange={this.handleChange}/>
-                <button type="button" onClick={this.search}> 고객 검색 </button>
-                <h5>회원 목록</h5>
-                <BootstrapTable data={ this.state.customerList } hover 
-                    tableHeaderClass='tableHeader'
-                    tableContainerClass='tableContainer'
-                    className="table2">
-                    <TableHeaderColumn dataField='no'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                         isKey>No.</TableHeaderColumn>
-                    <TableHeaderColumn dataField='name'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >회원이름</TableHeaderColumn>
-                    <TableHeaderColumn dataField='sex'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >성별</TableHeaderColumn>
-                    <TableHeaderColumn dataField='phone'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >핸드폰</TableHeaderColumn>
-                    <TableHeaderColumn dataField='in_charge'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >담당자</TableHeaderColumn>
-                    <TableHeaderColumn dataField='start_date'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >강습시작일</TableHeaderColumn>
-                    <TableHeaderColumn dataField='resi_no'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >주민번호</TableHeaderColumn>
-                </BootstrapTable>
+                <div className='container'>
+                    <div className='customerSearch'>
+                        <Dropdown className='searchDrop' options={options} onChange={this.selectItem} value={this.state.item} placeholder="Select an option" />
+                        <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />
+                        <button type="button" onClick={this.search}> 고객 검색 </button>
+                    </div>
+                    <Link to="/customer/add" className='btnCustomerNew'>
+                        신규회원 등록
+                    </Link>
+                    <div className='customerTable'>
+                        <h5>회원 목록</h5>
+                        <BootstrapTable data={ this.state.customerList } hover 
+                            tableHeaderClass='tableHeader'
+                            tableContainerClass='tableContainer'
+                            className="table2">
+                            <TableHeaderColumn dataField='no'
+                                thStyle={ { 'textAlign': 'center' } }
+                                tdStyle={ { 'textAlign': 'center' } }
+                                isKey>No.</TableHeaderColumn>
+                            <TableHeaderColumn dataField='name'
+                                thStyle={ { 'textAlign': 'center' } }
+                                tdStyle={ { 'textAlign': 'center' } }
+                                >회원이름</TableHeaderColumn>
+                            <TableHeaderColumn dataField='sex'
+                                thStyle={ { 'textAlign': 'center' } }
+                                tdStyle={ { 'textAlign': 'center' } }
+                                >성별</TableHeaderColumn>
+                            <TableHeaderColumn dataField='phone'
+                                thStyle={ { 'textAlign': 'center' } }
+                                tdStyle={ { 'textAlign': 'center' } }
+                                >핸드폰</TableHeaderColumn>
+                            <TableHeaderColumn dataField='in_charge'
+                                thStyle={ { 'textAlign': 'center' } }
+                                tdStyle={ { 'textAlign': 'center' } }
+                                >담당자</TableHeaderColumn>
+                            <TableHeaderColumn dataField='start_date'
+                                thStyle={ { 'textAlign': 'center' } }
+                                tdStyle={ { 'textAlign': 'center' } }
+                                >강습시작일</TableHeaderColumn>
+                            <TableHeaderColumn dataField='resi_no'
+                                thStyle={ { 'textAlign': 'center' } }
+                                tdStyle={ { 'textAlign': 'center' } }
+                                >주민번호</TableHeaderColumn>
+                        </BootstrapTable>
+                    </div>
+                </div>
             </div>
         );
     }
