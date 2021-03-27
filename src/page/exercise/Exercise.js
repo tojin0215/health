@@ -3,7 +3,10 @@ import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import BootstrapTable from 'react-bootstrap-table-next';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
+import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
 import './Exercise.css';
 // userinfo = {
     // useridx: 1,
@@ -12,10 +15,96 @@ import './Exercise.css';
     // fitnessname: "투진헬스장"
 // }
 
+const { SearchBar } = Search;
+const exerciseData = [
+    {'no': 1, 'name': "윗몸 일으키기", 'part': '상체', 'machine': "없음", 'link': "https://youtube.com"},
+    {'no': 2, 'name': "윗몸 일으키기", 'part': '상체', 'machine': "없음", 'link': "https://youtube.com"},
+    {'no': 3, 'name': "윗몸 일으키기", 'part': '상체', 'machine': "없음", 'link': "https://youtube.com"},
+    {'no': 4, 'name': "윗몸 일으키기", 'part': '상체', 'machine': "없음", 'link': "https://youtube.com"},
+    {'no': 5, 'name': "윗몸 일으키기", 'part': '상체', 'machine': "없음", 'link': "https://youtube.com"},
+    {'no': 6, 'name': "윗몸 일으키기", 'part': '상체', 'machine': "없음", 'link': "https://youtube.com"},
+    {'no': 7, 'name': "윗몸 일으키기", 'part': '상체', 'machine': "없음", 'link': "https://youtube.com"},
+    {'no': 8, 'name': "윗몸 일으키기", 'part': '상체', 'machine': "없음", 'link': "https://youtube.com"},
+    {'no': 9, 'name': "윗몸 일으키기", 'part': '상체', 'machine': "없음", 'link': "https://youtube.com"},
+    {'no': 10, 'name': "윗몸 일으키기", 'part': '상체', 'machine': "없음", 'link': "https://youtube.com"}
+]
+
+
+const columns = [{
+    dataField: 'no',
+    text: 'No.'
+  }, {
+    dataField: 'name',
+    text: '이름'
+  }, {
+    dataField: 'part',
+    text: '운동 부위'
+  }, {
+    dataField: 'machine',
+    text: '운동 기구'
+  }, {
+    dataField: 'link',
+    text: '링크'
+  }];
+
+  const expandRow = {
+    renderer: row => (
+      <div>
+        <p>{ `This Expand row is belong to rowKey ${row.no}` }</p>
+        <p>You can render anything here, also you can add additional data on every row object</p>
+        <p>expandRow.renderer callback will pass the origin row object to you</p>
+      </div>
+    )
+  };
+
 class Exercise extends Component {
+
     goLogin = () => {
         this.props.history.push("/");
     }
+    constructor(props) {
+        super(props);
+        this.state = {
+            fitness_no: this.props.userinfo.fitnessidx,
+            name: "",
+            part: 0,
+            sporting_goods: "",
+            url: "",
+        };
+    };
+    
+    handleChange = (e) => { 
+        this.setState({ 
+            [e.target.id]: e.target.value,
+        }); 
+    };
+
+    handleCheck = (e) => {
+        this.setState({[e.target.name]: e.target.checked});
+    }
+
+    handleOnClick = (e) => {
+        console.log(this.state);
+
+        fetch("http://localhost:3000/exercise", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                fitness_no: this.state.fitness_no,
+                name: this.state.name,
+                part: this.state.part,
+                sporting_goods: this.state.sporting_goods,
+                url: this.state.url
+            })
+        })
+        .then(response => response.json())
+        .then(response => {alert("새 운동이 등록되었습니다.")});
+        
+        this.props.history.push("/exercise");
+    }
+
     render() {
         const { userinfo } = this.props;
         console.log("userinfo : ");
@@ -41,31 +130,31 @@ class Exercise extends Component {
                     
                     <div className="input-row">
                         <label className="label-description">운동 이름</label>
-                        <input placeholder="name" />
+                        <input placeholder="name" type="text" id="name" onChange={this.handleChange}/>
                     </div>
                     
                     <div className="input-row">
                         <label className="label-description">부위</label>
                         <div className="part">
                             <div className="checkbox">
-                                <input type="checkbox"></input>
-                                <div className="text">상체</div>
+                                <input type="checkbox" name="body-up" onChange={this.handleCheck}></input>
+                                <div className="text" >상체</div>
                             </div>
                             <div className="checkbox">
-                                <input type="checkbox"></input>
+                                <input type="checkbox" name="body-down"></input>
                                 <div className="text">하체</div>
                             </div>
                             <div className="checkbox">
-                                <input type="checkbox"></input>
+                                <input type="checkbox" name="body-core"></input>
                                 <div className="text">코어</div>
                             </div>
                             
                             <div className="checkbox">
-                                <input type="checkbox"></input>
+                                <input type="checkbox" name="body-all"></input>
                                 <div className="text">전신</div>
                             </div>
                             <div className="checkbox">
-                                <input type="checkbox"></input>
+                                <input type="checkbox" name="body-oxygen"></input>
                                 <div className="text">유산소</div>
                             </div>
                         </div>
@@ -73,17 +162,51 @@ class Exercise extends Component {
                     
                     <div className="input-row">
                         <label className="label-description">운동 기구</label>
-                        <input placeholder="machine" />
+                        <input placeholder="machine"  type="text" id="sporting_goods" onChange={this.handleChange}/>
                     </div>
                     <div className="input-row">
                         <label className="label-description">영상 링크</label>
-                        <input placeholder="link" />
+                        <input placeholder="link"  type="text" id="url" onChange={this.handleChange}/>
                     </div>
                 </form>
-                <button type="submit">저장하기</button>
+                {/* <button type="submit">저장하기</button> */}
+
+                <button type="submit" onClick={this.handleOnClick}>저장하기</button>
+
                 
                 <br />
-                <div className="table">
+                
+<ToolkitProvider
+    keyField='no'
+    data={ exerciseData }
+    columns={ columns }
+    expandRow={ expandRow }
+    striped
+    search
+>
+  {
+    props => (
+      <div>
+        <h3>검색</h3>
+        <SearchBar { ...props.searchProps } />
+        <hr />
+        <BootstrapTable
+          { ...props.baseProps }
+        />
+      </div>
+    )
+  }
+</ToolkitProvider>
+
+                {/* <BootstrapTable
+                        keyField='no'
+                        data={ exerciseData }
+                        columns={ columns }
+                        expandRow={ expandRow }
+                        striped
+                        search>
+                </BootstrapTable> */}
+                {/* <div className="table">
                     <input placeholder="search" />
                     <table>
                         <caption>운동 테이블</caption>
@@ -107,7 +230,7 @@ class Exercise extends Component {
                         </tbody>
 
                     </table>
-                </div>
+                </div> */}
             </div>
         </div>
         );
@@ -123,5 +246,3 @@ const ExerciseStateToProps = (state) => {
 export default connect(ExerciseStateToProps, undefined)(Exercise);
 //새 page 추가 시 guide : 이 폴더 안에 페이지 하나 더 만든 후, src/component/app.js && src/page/index 함께 변경해주세요
 //잘 모르겠으면 customer폴더 참고
-
-//와 멋져요
