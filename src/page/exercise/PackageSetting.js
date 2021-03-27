@@ -3,14 +3,7 @@ import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { TableHeaderColumn } from 'react-bootstrap-table';
 
-import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
-
-import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
-
-const { SearchBar } = Search;
 // userinfo = {
     // useridx: 1,
     // username: "박재진",
@@ -18,160 +11,14 @@ const { SearchBar } = Search;
     // fitnessname: "투진헬스장"
 // }
 
-const totalExercisePack = [
-    {"no": 1, "part": "", "name": "", "strength": "쉬움", "cnt": "1", "rest": "20", "setcnt": "3", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 2, "part": "상체", "name": "윗몸 일으키기", "strength": "보통", "cnt": "2", "rest": "10", "setcnt": "5", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 3, "part": "", "name": "", "strength": "어려움", "cnt": "3", "rest": "5", "setcnt": "10", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 4, "part": "", "name": "", "strength": "쉬움", "cnt": "1", "rest": "20", "setcnt": "3", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 5, "part": "상체", "name": "윗몸 일으키기", "strength": "보통", "cnt": "2", "rest": "10", "setcnt": "5", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 6, "part": "", "name": "", "strength": "어려움", "cnt": "3", "rest": "5", "setcnt": "10", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 7, "part": "", "name": "", "strength": "쉬움", "cnt": "1", "rest": "20", "setcnt": "3", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 8, "part": "상체", "name": "윗몸 일으키기", "strength": "보통", "cnt": "2", "rest": "10", "setcnt": "5", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 9, "part": "", "name": "", "strength": "어려움", "cnt": "3", "rest": "5", "setcnt": "10", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-]
-
-const columns = [{
-    dataField: 'no',
-    text: 'No.'
-  }, {
-    dataField: 'name',
-    text: '이름'
-  }, {
-    dataField: 'part',
-    text: '운동 부위'
-  }, {
-    dataField: 'strength',
-    text: '운동 강도'
-  }, {
-    dataField: 'cnt',
-    text: '횟수'
-  }, {
-    dataField: 'rest',
-    text: '휴식'
-  }, {
-    dataField: 'setcnt',
-    text: '세트 횟수'
-  }];
-
-const sub_columns = [{
-    dataField: 'data',
-    text: 'data'
-}, {
-    dataField: 'data_second',
-    text: 'second'
-}];
-const expandRow = {
-    renderer: row => (
-<BootstrapTable data={ row.expand } columns={ sub_columns } />
-    )
-};
-
-function onAfterSaveCell(row, cellName, cellValue) {
-    alert(`Save cell ${cellName} with value ${cellValue}`);
-  
-    let rowStr = '';
-    for (const prop in row) {
-      rowStr += prop + ': ' + row[prop] + '\n';
-    }
-  
-    alert('Thw whole row :\n' + rowStr);
-  }
-  
-  function onBeforeSaveCell(row, cellName, cellValue) {
-    // You can do any validation on here for editing value,
-    // return false for reject the editing
-    return true;
-  }
-  
-  const cellEditProp = {
-    mode: 'dbclick',
-    blurToSave: true,
-    beforeSaveCell: onBeforeSaveCell, // a hook for before saving cell
-    afterSaveCell: onAfterSaveCell  // a hook for after saving cell
-  };
-
-  
-function isExpandableRow(row) {
-    if (row.id < 2) return true;
-    else return false;
-  };
-
-function expandComponent(row) {
-    console.log("test");
-    return (
-      <BSTable data={ row.expand } />
-    );
-  };
 class PackageSetting extends Component {
-
     goLogin = () => {
         this.props.history.push("/");
     }
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            fitness_no: this.props.userinfo.fitnessidx,
-            name: "",
-            stength: 0,
-            exercise_link: []
-        };
-    };
-
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value,
-        });
-    };
-
-    handleOnChange = (e) => {
-        console.log(this.state);
-        var exercise_pack_no = -1
-
-        fetch("http://localhost:3000/exercise", {
-            method: 'POST',
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify({
-                fitness_no: this.state.fitness_no,
-                name: this.state.name,
-                strength: this.state.strength
-            })
-        })
-        .then(response => response.json())
-        .then(response => { exercise_pack_no = response.exercise_pack_no });
-
-        this.state.exercise_link.forEach(element => {
-            fetch("http://localhost:3000/exercise", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    exercise_no: element.exercise_no,
-                    exercise_pack_no: exercise_pack_no,
-                    order_no: element.order_no,
-                    cnt: element.cnt,
-                    sec: element.sec,
-                    rest: element.rest,
-                    setcnt: element.setcnt
-                })
-            })
-            .then(response => response.json())
-            .then(response => { alert("새 운동 패키지가 등록되었습니다.") });
-        });
-
-    }
-
     render() {
         const { userinfo } = this.props;
         console.log("userinfo : ");
         console.log(userinfo); //나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
-
-        const options = {
-            expandRowBgColor: 'rgb(242, 255, 163)'
-          };
         
         return (
             <div>
@@ -205,28 +52,7 @@ class PackageSetting extends Component {
                         </label>
                     </div>
                     <hr />
-<ToolkitProvider
-    keyField='no'
-    data={ totalExercisePack }
-    columns={ columns }
-    expandRow={ expandRow }
-    striped
-    search
->
-  {
-    props => (
-      <div>
-        <h3>검색</h3>
-        <SearchBar { ...props.searchProps } />
-        <hr />
-        <BootstrapTable
-          { ...props.baseProps }
-        />
-      </div>
-    )
-  }
-</ToolkitProvider>
-                    {/* <table>
+                    <table>
                         <caption>운동 묶음 설정 테이블</caption>
                         <thead>
                             <tr>
@@ -276,8 +102,8 @@ class PackageSetting extends Component {
                                 <td>&nbsp;</td>
                             </tr>
                         </tbody>
-                    </table> */}
-                    <button>+</button>
+                    </table>
+                    <button type="submit">+</button>
                 </div>
                 <hr />
             </div>

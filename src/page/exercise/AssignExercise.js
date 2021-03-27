@@ -6,22 +6,15 @@ import { NavLink } from 'react-router-dom';
 
 // import './Exercise.css';
 // userinfo = {
-    // member_no: 1,
-    // member_name: "박재진",
-    // fitness_no: 1,
-    // fitness_name: "투진헬스장"
+    // useridx: 1,
+    // username: "박재진",
+    // fitnessidx: 1,
+    // fitnessname: "투진헬스장"
 // }
 
 class AssignExercise extends Component {
     goLogin = () => {
         this.props.history.push("/");
-    }
-    constructor(props) {
-        super(props);
-        this.state = {
-            fitness_no: this.props.userinfo.fitness_no,
-
-        }
     }
     render() {
         const { userinfo } = this.props;
