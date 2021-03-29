@@ -22,7 +22,6 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import NumberFormat from 'react-number-format';
 
-
 const userList = [
     {'num':1, 'userName':'김투진','phone':'000-0000-0000'},
     {'num':2, 'userName':'이투진','phone':'000-1111-0000'},
@@ -66,6 +65,30 @@ class AddSales extends Component {
         
         this.cusFetch();
     };
+    
+    cusFetch = () => {
+        fetch("http://localhost:3000/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json'
+          },
+          })
+            .then(response => response.json())
+            .then(res => {
+                let arr = [];
+                for(let i=0 ; i<res.length ; i++){
+                    arr.push({"num":res[i].member_no, "userName":res[i].name, "phone":res[i].phone})
+                }
+                this.setState({customerList : arr});
+            });
+        
+    }
+    
+    handleClickOpen() {
+        this.setState({
+            open: true
+        });
+    }
 
     goLogin = () => {
         this.props.history.push("/");
@@ -211,6 +234,7 @@ class AddSales extends Component {
         nextState[e.target.name] = e.target.value;
         this.setState(nextState);
     }
+
 
     render() {
         console.log('___',this.state.customerList)
