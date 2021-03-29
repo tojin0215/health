@@ -24,7 +24,7 @@ class AssignExercise extends Component {
         const { userinfo } = this.props;
         console.log("userinfo : ");
         console.log(userinfo); //나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
-        
+
         return (
             <div>
             <Header />

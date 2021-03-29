@@ -9,6 +9,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
+import './PackageSettings.css';
 
 const { SearchBar } = Search;
 // userinfo = {
@@ -18,16 +19,11 @@ const { SearchBar } = Search;
     // fitnessname: "투진헬스장"
 // }
 
+
 const totalExercisePack = [
-    {"no": 1, "part": "", "name": "", "strength": "쉬움", "cnt": "1", "rest": "20", "setcnt": "3", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
     {"no": 2, "part": "상체", "name": "윗몸 일으키기", "strength": "보통", "cnt": "2", "rest": "10", "setcnt": "5", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 3, "part": "", "name": "", "strength": "어려움", "cnt": "3", "rest": "5", "setcnt": "10", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 4, "part": "", "name": "", "strength": "쉬움", "cnt": "1", "rest": "20", "setcnt": "3", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 5, "part": "상체", "name": "윗몸 일으키기", "strength": "보통", "cnt": "2", "rest": "10", "setcnt": "5", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 6, "part": "", "name": "", "strength": "어려움", "cnt": "3", "rest": "5", "setcnt": "10", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 7, "part": "", "name": "", "strength": "쉬움", "cnt": "1", "rest": "20", "setcnt": "3", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 8, "part": "상체", "name": "윗몸 일으키기", "strength": "보통", "cnt": "2", "rest": "10", "setcnt": "5", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
-    {"no": 9, "part": "", "name": "", "strength": "어려움", "cnt": "3", "rest": "5", "setcnt": "10", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
+    {"no": 5, "part": "하체", "name": "스쿼드", "strength": "보통", "cnt": "2", "rest": "10", "setcnt": "5", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
+    {"no": 8, "part": "팔", "name": "데드 리프트", "strength": "보통", "cnt": "2", "rest": "10", "setcnt": "5", "move": "", "delete": "", expand: {"data": 1, "data_second": 2}},
 ]
 
 const columns = [{
@@ -39,18 +35,6 @@ const columns = [{
   }, {
     dataField: 'part',
     text: '운동 부위'
-  }, {
-    dataField: 'strength',
-    text: '운동 강도'
-  }, {
-    dataField: 'cnt',
-    text: '횟수'
-  }, {
-    dataField: 'rest',
-    text: '휴식'
-  }, {
-    dataField: 'setcnt',
-    text: '세트 횟수'
   }];
 
 const sub_columns = [{
@@ -61,10 +45,47 @@ const sub_columns = [{
     text: 'second'
 }];
 const expandRow = {
-    renderer: row => (
-<BootstrapTable data={ row.expand } columns={ sub_columns } />
-    )
+  renderer: row => (
+    <div>
+      <table>
+        <caption>운동 난이도별 설정</caption>
+        <thead>
+          <tr>
+            <th>난이도</th>
+            <th>횟수</th>
+            <th>휴식</th>
+            <th>세트 횟수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>쉬움</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>보통</td>
+            <td>2</td>
+            <td>3</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>어려움</td>
+            <td>4</td>
+            <td>5</td>
+            <td>3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  )
 };
+// const expandRow = {
+//     renderer: row => (
+// <BootstrapTable keyField='data' data={ row.expand } columns={ sub_columns } />
+//     )
+// };
 
 function onAfterSaveCell(row, cellName, cellValue) {
     alert(`Save cell ${cellName} with value ${cellValue}`);
@@ -166,7 +187,7 @@ class PackageSetting extends Component {
 
         const options = {
             expandRowBgColor: 'rgb(242, 255, 163)'
-          };
+        };
         
         return (
             <div>
@@ -199,12 +220,11 @@ class PackageSetting extends Component {
                         </label>
                     </div>
                     <hr />
-<ToolkitProvider
+{/* <ToolkitProvider
     keyField='no'
     data={ totalExercisePack }
     columns={ columns }
     expandRow={ expandRow }
-    striped
     search
 >
   {
@@ -219,7 +239,13 @@ class PackageSetting extends Component {
       </div>
     )
   }
-</ToolkitProvider>
+</ToolkitProvider> */}
+<BootstrapTable
+  keyField='no'
+  data={ totalExercisePack }
+  columns={ columns }
+  expandRow={ expandRow }
+/>
                     {/* <table>
                         <caption>운동 묶음 설정 테이블</caption>
                         <thead>

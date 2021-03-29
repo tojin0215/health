@@ -66,6 +66,7 @@ class Exercise extends Component {
             part: 0,
             sporting_goods: "",
             url: "",
+            a:"",
         };
     };
     
@@ -164,7 +165,7 @@ class Exercise extends Component {
                     </div>
                 </form>
                     <button type="submit" onClick={this.handleOnClick}>저장하기</button>
-                
+
                 <br />
                 
 <ToolkitProvider

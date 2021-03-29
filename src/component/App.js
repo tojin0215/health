@@ -15,7 +15,7 @@ class App extends Component {
             <Route exact path="/exercise/package" component={PackageSetting}/>
             <Route exact path="/exercise/assign" component={AssignExercise}/>
             <Route exact path="/sales" component={Sales}/>
-            <Route exact path="/sales/add" component={AddSales}/>
+            {/* <Route exact path="/sales/add" component={AddSales}/> */}
         </div>
     );
   }
