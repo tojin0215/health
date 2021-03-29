@@ -3,6 +3,7 @@
     height:4.8rem;
     background-color:rgb(0, 0, 82);
     display:flex;
+    white-space:nowrap;
 }
 
 .Navigation > .navbar {
@@ -54,6 +55,12 @@
     display:flex;
 }
 :local(.navUtill button){
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:10rem;
+    height:3rem;
+    line-height:3rem;
     font-size:1.2rem;
     padding:1rem 2rem;
     background-color:#000055a6;
