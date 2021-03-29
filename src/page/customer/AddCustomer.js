@@ -10,7 +10,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { TextField } from '@material-ui/core';
 import NumberFormat from 'react-number-format';
 
-
 import '../../styles/customer/AddCustomer.css';
 
 class AddCustomer extends Component {

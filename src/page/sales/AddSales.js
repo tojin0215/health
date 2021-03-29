@@ -22,7 +22,6 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import NumberFormat from 'react-number-format';
 
-import './AddSales.css'
 
 const userList = [
     {'num':1, 'userName':'김투진','phone':'000-0000-0000'},

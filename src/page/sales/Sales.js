@@ -16,6 +16,11 @@ import Select from 'react-select'
 
 import '../../styles/sales/Sales.css'
 
+require('moment-timezone');
+var moment = require('moment');
+
+moment.tz.setDefault("Asia/Seoul");
+
 const options = [
     { value: 'all', label: '전체' },
     { value: 'card', label: '카드' },
@@ -100,12 +105,14 @@ class Sales extends Component {
                 let transfer = 0
                 this.state.salesLists.map((data) => {
                     let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
-                    data = {...data, total}
+                    let time = moment(data.paymentDate).format("YYYY/MM/DD")
+                    data = {...data, total, time}
                     this.state.customerList.map((c)=>{
                         if(data.member_no === c.num){
                             let userName = c.userName;
                             data = {...data, userName}
                         }
+                        console.log('+++++++++++++++++++++++++',data.paymentDate)
                     })
                     let date1 = new Date(data.paymentDate)
                     let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
@@ -153,7 +160,8 @@ class Sales extends Component {
             let list = []
             this.state.salesLists.map((data) => {
                 let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
-                data = {...data, total}
+                let time = moment(data.paymentDate).format("YYYY/MM/DD")
+                data = {...data, total, time}
                 this.state.customerList.map((c)=>{
                     if(data.member_no === c.num){
                         let userName = c.userName;
@@ -179,14 +187,15 @@ class Sales extends Component {
         let transfer = 0
 
         this.state.salesLists.map((data) => {
-            //console.log(data)
+            console.log(data)
             let date1 = new Date(data.paymentDate)
             let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
             let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
             console.log('****num',data.member_no,'data1__',date1,'*****start__',startTime,'end_--',endTime)
             if(date1 >= startTime && date1 < endTime){
                 let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
-                data = {...data, total}
+                let time = moment(data.paymentDate).format("YYYY/MM/DD")
+                data = {...data, total,time}
                 this.state.customerList.map((c)=>{
                     if(data.member_no === c.num){
                         let userName = c.userName;
@@ -295,7 +304,7 @@ class Sales extends Component {
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >상품</TableHeaderColumn>
-                        <TableHeaderColumn dataField='paymentDate' dataFormat={dataFormatter}
+                        <TableHeaderColumn dataField='time' dataFormat={dataFormatter}
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >결제일</TableHeaderColumn>
@@ -306,14 +315,14 @@ class Sales extends Component {
                         <TableHeaderColumn dataField='paymentTools'
                         thStyle={ { 'textAlign': 'center'} }
                         tdStyle={ { 'textAlign': 'center'} }
-                        >
-                            <Select 
+                        >결제도구
+                            {/* <Select 
                                 menuPortalTarget={document.querySelector('body')}
                                 placeholder = '결제도구' 
                                 value={selectedOption}
                                 onChange={this.handleChange}
                                 options={options} 
-                        />
+                        /> */}
                         </TableHeaderColumn>
                     </BootstrapTable>
                     </div>
