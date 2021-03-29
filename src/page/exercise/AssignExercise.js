@@ -25,13 +25,14 @@ class AssignExercise extends Component {
             <div>
             <Header />
             <Navigation goLogin={this.goLogin}/>
-            <div className='container'>
-                <NavLink exact to="/exercise">[운동 설정]</NavLink>
-                <NavLink exact to="/exercise/package">[운동 묶음 설정]</NavLink>
-                <NavLink exact to="/exercise/assign">[운동 배정 설정]</NavLink>
-                <div className='title'>
-                <h2>운동 배정</h2><h4>운동{'>'}운동 배정</h4>
+            <div className='title'>
+                <div className='titleIn'>
+                    <h2>운동 배정</h2><h4>운동 {'>'} 운동 배정</h4>
                 </div>
+            </div>
+            <div className='container'>
+                <NavLink exact to="/assign">[운동 배정 설정]</NavLink>
+                <NavLink exact to="/assign/inbody">[고객인바디]</NavLink>
             
                 <div>
                 <input placeholder="검색" /><button>돋보기</button>

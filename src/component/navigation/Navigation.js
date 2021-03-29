@@ -52,7 +52,9 @@ class Navigation extends Component {
                         <NavLink exact to="/home"><span className={styles.navitem}>Home</span></NavLink>
                         <NavLink exact to="/customer"><span className={styles.navitem}>고객</span></NavLink>
                         <NavLink exact to="/sales"><span className={styles.navitem}>상품/매출</span></NavLink>
-                        <NavLink exact to="/exercise"><span className={styles.navitem}>운동</span></NavLink>
+                        <NavLink exact to="/exercise"><span className={styles.navitem}>설정</span></NavLink>
+                        <NavLink exact to="/assign"><span className={styles.navitem}>운동</span></NavLink>
+                        <NavLink exact to="/statistics"><span className={styles.navitem}>통계</span></NavLink>
                     </Nav>
                     <Nav className={styles.navUtill}>
                         <Nav.Item><span className={styles.navitem}>{userinfo.manager_name}님</span></Nav.Item>

@@ -33,8 +33,7 @@ class Exercise extends Component {
             </div>
             <div className='container'>
                 <NavLink exact to="/exercise">[운동 설정]</NavLink>
-                <NavLink exact to="/exercise/package">[운동 묶음 설정]</NavLink>
-                <NavLink exact to="/exercise/assign">[운동 배정 설정]</NavLink>
+                <NavLink exact to="/setting/package">[운동 묶음 설정]</NavLink>
             
                 <div className='subTitle'>운동 정보 입력</div>
                 <hr />
