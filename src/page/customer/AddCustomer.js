@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 
 import DatePicker from 'react-datepicker';
@@ -299,85 +300,202 @@ class AddCustomer extends Component {
                         <h2>
                           신규 회원 등록
                         </h2>
-                    </div>
-                </div>
-            </div>
+                    </div>{/*.container */}
+                </div>{/*.localNavigation */}
+            </div>{/*.header */}
             <div className='container'>
-            <form className="AddSalesForm" style={{flexDirection:'column',display:'flex'}}>
-                <label>
-                <TextField
-                        variant="outlined"
-                        value={this.state.name}
-                        onChange={this.handleChange}
-                        id='name'
-                        label="성명"
-                        error={this.state.name_err}
-                        required
-                        autoFocus
-                    />
-                    <label className='labelCheck'>
-                        <input className='btnRadio' type="radio" name="radioGroup" id='male'
-                        checked={this.state.radioGroup['male']} onChange={this.handleRadio}/>
-                        <span>남</span>
+                <h3>
+                    회원 정보 입력
+                </h3>
+                <form className="formAddCustomer">
+                    <label className='customerName'>
+                    <TextField
+                            variant="outlined"
+                            value={this.state.name}
+                            onChange={this.handleChange}
+                            id='name'
+                            label="성명"
+                            error={this.state.name_err}
+                            required
+                            autoFocus
+                        />
+                        <label className='labelCheck'>
+                            <input className='btnRadio' type="radio" name="radioGroup" id='male'
+                            checked={this.state.radioGroup['male']} onChange={this.handleRadio}/>
+                            <span>남</span>
+                        </label>{/*.labelCheck */}
+                        <label className='labelCheck'>
+                            <input className='btnRadio' type="radio" name="radioGroup" id='female' 
+                            checked={this.state.radioGroup['female']} onChange={this.handleRadio}/>
+                            <span>여</span>
+                        </label>{/*.labelCheck */}
+                    </label>{/*.customerName */}
+                    <label className='customerPeriod'>강습시작일
+                        <DatePicker
+                        selected={ this.state.startDate }
+                        onChange={ this.handleStartDateChange }
+                        name="startDate"
+                        dateFormat="yyyy-MM-dd"
+                        />
+                        <TextField
+                            variant="outlined"
+                            value={this.state.period}
+                            onChange={this.handleChange}
+                            type='number'
+                            id='period'
+                            label="개월"
+                            error={this.state.period_err}
+                            required
+                        />
+                    </label>{/*.customerPeriod */}
+                    <label className='customerPhone'>
+                        <TextField
+                            variant="outlined"
+                            value={this.state.phone}
+                            onChange={this.handleChange}
+                            type='number'
+                            id='phone'
+                            className='numberControlNone'
+                            label="핸드폰(-제외)"
+                            error={this.state.phone_err}
+                            required
+                        />
+                    </label>{/*.customerPhone */}
+                    <label className='customerResi'>
+                        <TextField
+                            variant="outlined"
+                            value={this.state.resiNumber}
+                            onChange={this.handleChange}
+                            type='number'
+                            id='resiNumber'
+                            label="주민번호 앞자리(6자리)"
+                            error={this.state.resiNumber_err}
+                            required
+                        />{/*#resiNumber */}
+                        <label className='labelCheck'>
+                            <input className='btnRadio' type="radio" name="radioGroup2" id='solar'
+                            checked={this.state.radioGroup2['solar']} onChange={this.handleRadio2}/>
+                            <span>양</span>
+                        </label>{/*.labelCheck */}
+                        <label className='labelCheck'>
+                            <input className='btnRadio' type="radio" name="radioGroup2" id='lunar' 
+                            checked={this.state.radioGroup2['lunar']} onChange={this.handleRadio2}/>{/*.btnRadio */}
+                            <span>음</span>
+                        </label>{/*.labelCheck */}
+                    </label>{/*.customerResi */}
+                    <label className='customerAddress'>
+                        <TextField
+                            variant="outlined"
+                            value={this.state.address}
+                            onChange={this.handleChange}
+                            id='address'
+                            label="주소"
+                            error={this.state.address_err}
+                            required
+                        />{/*#address */}
+                    </label>{/*.customerAddress */}
+                    <label className='customerIncharge'>
+                        <TextField
+                            variant="outlined"
+                            value={this.state.in_charge}
+                            onChange={this.handleChange}
+                            id='in_charge'
+                            label="담당자"    
+                        />{/*#in_charge */}
+                    </label>{/*.customerIncharge */}
+                    <label className='customerRoute'>
+                        <h5> 가입 경로 </h5>
+                        <div>
+                            <label>
+                                <input type="checkbox" id='signboard' checked={this.state.signboard} onChange={this.toggleChange}/>
+                                간판
+                            </label>
+                            <label>
+                                <input type="checkbox" id='homepage' checked={this.state.homepage} onChange={this.toggleChange}/>
+                                홈페이지
+                            </label>
+                            <label>
+                                <input type="checkbox" id='flyers' checked={this.state.flyers} onChange={this.toggleChange}/>
+                                전단지
+                            </label>
+                            <label>
+                                <input type="checkbox" id='friend' checked={this.state.friend} onChange={this.toggleChange}/>
+                                지인소개
+                            </label>
+                            <label>
+                                <input type="checkbox" id='sns' checked={this.state.sns} onChange={this.toggleChange}/>
+                                SNS
+                            </label>
+                            <label>
+                                <input type="checkbox" id='etc' checked={this.state.etc} onChange={this.toggleChange}/>
+                                <input type="text" id="inputExercise" className="form-control" placeholder="기타 가입경로" name="Exercise" onChange={this.handleChange}/>{/*#inputExercise */}
+                            </label>
+                        </div>
                     </label>
-                    <label className='labelCheck'>
-                        <input className='btnRadio' type="radio" name="radioGroup" id='female' 
-                        checked={this.state.radioGroup['female']} onChange={this.handleRadio}/>
-                        <span>여</span>
+                    
+
+                    <h5 className="AddSalesHeader"> 운동 종목 </h5>{/*.AddSalesHeader */}
+                    <label><input type="checkbox" id='allPremium' checked={this.state.allPremium} onChange={this.toggleChange}/>PREMIUM 전종목</label>
+                    <label><input type="checkbox" id='gxTwo' checked={this.state.gxTwo} onChange={this.toggleChange}/>GX 2종목</label>
+                    <label><input type="checkbox" id='gxOne' checked={this.state.gxOne} onChange={this.toggleChange}/>GX 1종목</label>
+                    <label><input type="checkbox" id='pt' checked={this.state.pt} onChange={this.toggleChange}/>개인 PT</label>
+                    <label><input type="checkbox" id='spinning' checked={this.state.spinning} onChange={this.toggleChange}/>스피닝</label>
+                    <label><input type="checkbox" id='guigiPilates' checked={this.state.guigiPilates} onChange={this.toggleChange}/>기구 필라테스</label>
+                    <label><input type="checkbox" id='onePilates' checked={this.state.onePilates} onChange={this.toggleChange}/>1:1 필라테스</label>
+                    <label><input type="checkbox" id='health' checked={this.state.health} onChange={this.toggleChange}/>헬스</label>
+                    <label><input type="checkbox" id='etc2' checked={this.state.etc2} onChange={this.toggleChange}/>기타</label>
+                    <input type="text" id="inputExercise" className="form-control" placeholder="Exercise" name="Exercise" onChange={this.handleChange}/>{/*#inputExercise .form-control */}
+                    <h5> 결제 금액</h5>
+                    <label>
+                        <input type="checkbox" id='card' checked={this.state.card} onChange={this.toggleChange}/>{/*#card */}
+                        카드
                     </label>
-                </label><br/>
-                <label>강습시작일<br/><DatePicker
-                    selected={ this.state.startDate }
-                    onChange={ this.handleStartDateChange }
-                    name="startDate"
-                    dateFormat="yyyy-MM-dd"
-                    />
+                    <label>
+                        <input type="checkbox" id='cash' checked={this.state.cash} onChange={this.toggleChange}/>{/*#cash */}
+                        현금
+                    </label>
+                    <label>
+                        <input type="checkbox" id='accountTransfer' checked={this.state.accountTransfer} onChange={this.toggleChange}/>{/*#accountTransfer */}
+                        계좌이체
+                    </label>
+                    
                     <TextField
                         variant="outlined"
-                        value={this.state.period}
-                        onChange={this.handleChange}
-                        type='number'
-                        id='period'
-                        label="개월"
-                        error={this.state.period_err}
-                        required
+                        value={this.state.ExercisePayment===''?0:this.state.ExercisePayment}
+                        onChange={this.handleChangeAndSum}
+                        id='ExercisePayment'
+                        label="운동"
+                    />{/*#ExercisePayment */}
+                    <TextField
+                        variant="outlined"
+                        value={this.state.SportswearPayment===''?0:this.state.SportswearPayment}
+                        onChange={this.handleChangeAndSum}
+                        id='SportswearPayment'
+                        label="운동복"
+                    />{/*#SportswearPayment */}
+                    <TextField
+                        type="number"
+                        variant="outlined"
+                        value={this.state.LockerPayment===''?0:this.state.LockerPayment}
+                        onChange={this.handleChangeAndSum}
+                        id='LockerPayment'
+                        label="개인 사물함"
+                    />{/*#LockerPayment */}
+                    <h5> 결제일</h5>
+                    <DatePicker
+                        selected={ this.state.payDate }
+                        onChange={ this.handlePayDateChange }
+                        name="payDate"
+                        dateFormat="yyyy-MM-dd"
                     />
-                </label>
-                
-                <br />
-                <TextField
-                    variant="outlined"
-                    value={this.state.phone}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='phone'
-                    label="핸드폰(-제외)"
-                    error={this.state.phone_err}
-                    required
-                />
-                <br />
-                <label>
-                <TextField
-                    variant="outlined"
-                    value={this.state.resiNumber}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='resiNumber'
-                    label="주민번호 앞자리(6자리)"
-                    error={this.state.resiNumber_err}
-                    required
-                />
-                <label className='labelCheck'>
-                    <input className='btnRadio' type="radio" name="radioGroup2" id='solar'
-                        checked={this.state.radioGroup2['solar']} onChange={this.handleRadio2}/>
-                        <span>양</span>
+                    <h5>금액 합계</h5>
+                    <label>{this.state.TotalPayment}</label>
+                    
+                    <label>
+                        비고 : 
+                        <input type="text" id='note' onChange={this.handleChange}/>{/*#note */}
                     </label>
-                    <label className='labelCheck'>
-                        <input className='btnRadio' type="radio" name="radioGroup2" id='lunar' 
-                        checked={this.state.radioGroup2['lunar']} onChange={this.handleRadio2}/>
-                        <span>음</span>
-                    </label>
-                </label><br/>
+                <br/>
                 <TextField
                     variant="outlined"
                     value={this.state.address}
@@ -444,7 +562,7 @@ class AddCustomer extends Component {
                 <button type="button" onClick={this.handleOnClick}> 등록하기 </button>
             </form>
             </div>
-        </div>
+        </div>/*.addCustomer */
         );
     }
 }

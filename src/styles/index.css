@@ -61,6 +61,7 @@ input[type=text] {
   border:1px solid #000;
   text-indent:1rem;
   outline:none;
+  box-sizing:border-box;
 }
 
 input[type=number] {
@@ -70,6 +71,7 @@ input[type=number] {
   border:1px solid #000;
   text-indent:1rem;
   outline:none;
+  box-sizing:border-box;
 }
 
 .container .react-datepicker .react-datepicker__navigation {
@@ -83,6 +85,18 @@ input[type=number] {
 }
 .container .react-datepicker .react-datepicker__navigation--next {
   border-left-color:#b3b3b3;
+}
+html .MuiOutlinedInput-notchedOutline {
+  border:none;
+}
+html .MuiInputBase-root {
+  font-size:inherit;
+}
+html .MuiFormLabel-root {
+  font-size:inherit;
+}
+html .MuiInputLabel-outlined {
+  transform: translate(2.3rem, 2.3rem) scale(1);
 }
 
 .localNavigation {
@@ -118,4 +132,7 @@ input[type=number] {
 /*신규회원등록*/
 .container .MuiOutlinedInput-input {
   padding:0;
+}
+.container .react-datepicker-popper {
+  z-index:2;
 }
