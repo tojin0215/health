@@ -1,4 +1,5 @@
 import React,{ Component } from 'react';
+import { Link } from 'react-router-dom';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
@@ -62,6 +63,21 @@ class Home extends Component {
             <Header />
             <Navigation goLogin={this.goLogin}/>
             <h2>Home</h2>
+            <Link to="/customer" className='btnCustomerNew'>
+                고객
+            </Link>
+            <Link to="/sales" className='btnCustomerNew'>
+                상품매출
+            </Link>
+            <Link to="/exercise" className='btnCustomerNew'>
+                설정
+            </Link>
+            <Link to="/assign" className='btnCustomerNew'>
+                운동
+            </Link>
+            <Link to="/statistics" className='btnCustomerNew'>
+                통계
+            </Link>
         </div>
         );
     }

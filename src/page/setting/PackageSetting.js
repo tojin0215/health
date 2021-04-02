@@ -23,16 +23,15 @@ class PackageSetting extends Component {
         return (
             <div>
             <Header />
-            <Navigation goLogin={goLogin}/> 
+            <Navigation goLogin={this.goLogin}/>
             <div className='title'>
                 <div className='titleIn'>
-                    <h2>운동 묶음 설정</h2><h4>운동{'>'}운동 묶음 설정</h4>
+                    <h2>운동 묶음 설정</h2><h4>설정{'>'}운동 묶음 설정</h4>
                 </div>
             </div>
             <div className='container'>
                 <NavLink exact to="/exercise">[운동 설정]</NavLink>
-                <NavLink exact to="/exercise/package">[운동 묶음 설정]</NavLink>
-                <NavLink exact to="/exercise/assign">[운동 배정 설정]</NavLink>
+                <NavLink exact to="/setting/package">[운동 묶음 설정]</NavLink>
                 <div className="ExercisePackageSelect">
                     <div>운동 묶음 선택</div>
                     <hr />
