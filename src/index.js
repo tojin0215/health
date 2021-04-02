@@ -4,12 +4,10 @@ import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import reducer from './reducer/index';
 import App from './component/App'
-import './index.css';
+import './styles/index.css';
 import { BrowserRouter } from 'react-router-dom';
 
-const store = configureStore(reducer,{
-	"userinfo" : {"member_no":1, "member_name":"박재진", "fitness_no":1, "fitness_name":"투진헬스장"}
-});
+const store = configureStore(reducer,{});
 
 const render = () => {
   ReactDOM.render(

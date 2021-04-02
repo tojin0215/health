@@ -5,12 +5,15 @@ import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 
+import { Button } from 'react-bootstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+
+import '../../styles/sales/Sales.css'
 
 const totalSales = [
     { "card": 325000, "cash": 100000, "transfer": 200000, "total" : 625000 },
@@ -37,7 +40,9 @@ class Sales extends Component {
         };
         this.handleDateChange = this.handleDateChange.bind(this);
     };
-
+    goLogin = () => {
+        this.props.history.push("/");
+    }
     handleDateChange(date) {
         this.setState({
             startDate: date,
@@ -51,49 +56,93 @@ class Sales extends Component {
         console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
         
         return (
-            <div>
+            <div className='sales'>
                 <Header />
-                <Navigation />
-                <h2>상품등록 페이지</h2>
-                <Link to="/sales/add">상품 등록</Link>
-                <h5>매출 현황</h5>
-                <DatePicker
-                    selected={ this.state.startDate }
-                    selectsStart
-                    maxDate={new Date()}
-                    onChange={ this.handleDateChange }
-                    name="startDate"
-                    dateFormat="MM/dd/yyyy"
-                />
-                <text>~</text>
-                <DatePicker
-                    selected={ this.state.endDate }
-                    selectsEnd
-                    minDate={this.state.startDate}
-                    maxDate={new Date()}
-                    onChange={ this.handleDateChange }
-                    name="endDate"
-                    dateFormat="MM/dd/yyyy"
-                />
+                <Navigation goLogin={this.goLogin}/>
+                <div className="container">
+                    <h2>상품등록 페이지</h2>
+                    <div className="salesUtill">
+                        <Link to="/sales/add">
+                            <Button color="primary">
+                                상품 등록
+                            </Button>
+                        </Link>
+                        <div className="salesStatus">
+                            <h5>매출 현황</h5>
+                            <DatePicker
+                                selected={ this.state.startDate }
+                                selectsStart
+                                maxDate={new Date()}
+                                onChange={ this.handleDateChange }
+                                name="startDate"
+                                dateFormat="MM/dd/yyyy"
+                            />
+                            <text> ~ </text>
+                            <DatePicker
+                                selected={ this.state.endDate }
+                                selectsEnd
+                                minDate={this.state.startDate}
+                                maxDate={new Date()}
+                                onChange={ this.handleDateChange }
+                                name="endDate"
+                                dateFormat="MM/dd/yyyy"
+                            />
+                        </div>
+                    </div>
 
-                <div>
-                <BootstrapTable data={ totalSales }>
-                    <TableHeaderColumn dataField='card'>카드</TableHeaderColumn>
-                    <TableHeaderColumn dataField='cash'>현금</TableHeaderColumn>
-                    <TableHeaderColumn dataField='transfer'>계좌이체</TableHeaderColumn>
-                    <TableHeaderColumn dataField='total' isKey>총 매출</TableHeaderColumn>
-                </BootstrapTable>
-                <br/><br/>
-                <h5>전체 기록</h5>
-                <BootstrapTable data={ salesList }>
-                    <TableHeaderColumn dataField='no' isKey>No.</TableHeaderColumn>
-                    <TableHeaderColumn dataField='user'>회원이름</TableHeaderColumn>
-                    <TableHeaderColumn dataField='product'>상품</TableHeaderColumn>
-                    <TableHeaderColumn dataField='paymentDate'>결제일</TableHeaderColumn>
-                    <TableHeaderColumn dataField='payment'>결제 금액</TableHeaderColumn>
-                    <TableHeaderColumn dataField='kinds'>종류</TableHeaderColumn>
-                </BootstrapTable>
-
+                    <div>
+                    <BootstrapTable data={ totalSales } 
+                        tableHeaderClass='tableHeader'
+                        tableContainerClass='tableContainer'>
+                        <TableHeaderColumn dataField='card'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >카드</TableHeaderColumn>
+                        <TableHeaderColumn dataField='cash'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >현금</TableHeaderColumn>
+                        <TableHeaderColumn dataField='transfer'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >계좌이체</TableHeaderColumn>
+                        <TableHeaderColumn dataField='total'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                         isKey>총 매출</TableHeaderColumn>
+                    </BootstrapTable>
+                    <br/><br/>
+                    <h5>전체 기록</h5>
+                    <BootstrapTable data={ salesList } hover 
+                        tableHeaderClass='tableHeader'
+                        tableContainerClass='tableContainer'
+                        className="table2">
+                        <TableHeaderColumn dataField='no'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                         isKey>No.</TableHeaderColumn>
+                        <TableHeaderColumn dataField='user'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >회원이름</TableHeaderColumn>
+                        <TableHeaderColumn dataField='product'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >상품</TableHeaderColumn>
+                        <TableHeaderColumn dataField='paymentDate'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >결제일</TableHeaderColumn>
+                        <TableHeaderColumn dataField='payment'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >결제 금액</TableHeaderColumn>
+                        <TableHeaderColumn dataField='kinds'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >종류</TableHeaderColumn>
+                    </BootstrapTable>
+                    </div>
                 </div>
             </div>
         );
@@ -102,7 +151,7 @@ class Sales extends Component {
 
 const SalesStateToProps = (state) => {
     return {
-      userinfo: state.userinfo
+      userinfo: state.authentication.userinfo
     }
 }
 

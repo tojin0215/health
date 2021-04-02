@@ -1,4 +1,3 @@
-
 // action type
 const SET_USER = 'SET_USER'
 const SET_FITNESS = 'SET_FITNESS'

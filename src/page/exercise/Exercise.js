@@ -4,7 +4,8 @@ import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import './Exercise.css';
+import '../../styles/exercise/Exercise.css';
+
 // userinfo = {
     // useridx: 1,
     // username: "박재진",
@@ -13,6 +14,9 @@ import './Exercise.css';
 // }
 
 class Exercise extends Component {
+    goLogin = () => {
+        this.props.history.push("/");
+    }
     render() {
         const { userinfo } = this.props;
         console.log("userinfo : ");
@@ -21,16 +25,18 @@ class Exercise extends Component {
         return (
             <div>
             <Header />
-            <Navigation />
+            <Navigation goLogin={this.goLogin}/>
+            <div className='title'>
+                <div className='titleIn'>
+                    <h2>운동 설정</h2><h4>운동 {'>'} 운동 설정</h4>
+                </div>
+            </div>
             <div className='container'>
                 <NavLink exact to="/exercise">[운동 설정]</NavLink>
                 <NavLink exact to="/exercise/package">[운동 묶음 설정]</NavLink>
                 <NavLink exact to="/exercise/assign">[운동 배정 설정]</NavLink>
-                <div className='title'>
-                <h2>운동 설정</h2><h4>운동{'>'}운동 설정</h4>
-                </div>
             
-                <div>운동 정보 입력</div>
+                <div className='subTitle'>운동 정보 입력</div>
                 <hr />
                 <form className='input-exercise'>
                     
@@ -75,7 +81,7 @@ class Exercise extends Component {
                         <input placeholder="link" />
                     </div>
                 </form>
-                    <button type="submit">저장하기</button>
+                <button type="submit">저장하기</button>
                 
                 <br />
                 <div className="table">
@@ -111,7 +117,7 @@ class Exercise extends Component {
 
 const ExerciseStateToProps = (state) => {
     return {
-      userinfo: state.userinfo
+      userinfo: state.authentication.userinfo
     }
 }
 
