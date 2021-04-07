@@ -79,16 +79,18 @@ class UpdateCustomer extends Component {
 
                 this.state.customerList.map((c)=>{
                     let exc = ''
-                    let route = c.join_route
-                    if(c.join_route !== '기타'){
+                    let route = ''
+                    //console.log('1111',(c.join_route||'').split('(')[0])
+                    if((c.join_route||'').split('(')[0] === '기타'){
                         let a = (c.join_route||'').split('(')[1];
                         exc = (a||'').split(')')[0];
                         route = '기타'
-                        console.log('################33',a,'  ',exc)
+                        //console.log('################33',a,'  ',exc)
                     }else{
                         exc = null;
                         route = c.join_route
                     }
+                    //console.log('11111111111111111111',route)
                     let radio = ''
                     if(c.sex === true){
                         radio = {male:true, female:false}
@@ -96,11 +98,15 @@ class UpdateCustomer extends Component {
                         radio = {male:false, female:true}
                     }
                     let radio2 = ''
-                    if(c.solar === true){
+                    console.log('양음',c.solar_or_lunar )
+                    if(c.solar_or_lunar === true){
                         radio2 = {solar:true, lunar:false}
                     } else{
                         radio2 = {solar:false, lunar:true}
                     }
+
+                    //console.log('2222222222222222222',radio2)
+                    
                     this.setState({
                         name : c.name,
                         sex : c.sex,
@@ -136,6 +142,7 @@ class UpdateCustomer extends Component {
     
     handleOnClick = (e) => {
         
+        alert('수정수정')
         this.setState({
             name_err:false,
             period_err:false,
@@ -199,7 +206,6 @@ class UpdateCustomer extends Component {
                     alert("회원 정보가 수정되었습니다.");
                     this.props.history.push('/customer');
                 });
-
         }
     }
 
@@ -239,7 +245,7 @@ class UpdateCustomer extends Component {
         console.log("userinfo : ");
         console.log(userinfo);
         
-        //console.log('*************8',this.state.customerList)
+        console.log('*************8',this.state.join_route)
 
         return (
 
@@ -259,7 +265,7 @@ class UpdateCustomer extends Component {
                 <h3>
                     회원 정보 수정 
                 </h3>
-                <div>{this.state.member_no}</div>
+                
                 <form className="formAddCustomer">
                     <label className='customerName'>
                     <TextField
