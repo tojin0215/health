@@ -227,7 +227,6 @@ class Customer extends Component {
         const { userinfo } = this.props;
         console.log("userinfo : ");
         console.log(userinfo);
-        console.log('아아아ㅏ',this.state.userSalesListsLists)
         
         const selectRowProp = {
             mode: 'checkbox',
