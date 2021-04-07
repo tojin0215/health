@@ -191,7 +191,6 @@ class Inbody extends Component {
                         }
                     </TableBody>
                     </Table>
-
                         </DialogContent>
                         <DialogActions>
                             <button type='button' onClick={this.handleClose}>닫기</button>

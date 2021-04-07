@@ -33,7 +33,7 @@ class AssignExercise extends Component {
             </div>
             <div className='container'>
                 <NavLink exact to="/assign">[운동 배정 설정]</NavLink>
-                <NavLink exact to={{pathname:"/assign/inbody?member_no=0"}}>[고객인바디]</NavLink>
+                <NavLink exact to={{pathname:"/assign/inbody?member_no=-1"}}>[고객인바디]</NavLink>
             
                 <div>
                 <input placeholder="검색" /><button>돋보기</button>

@@ -227,8 +227,11 @@ class Customer extends Component {
         const { userinfo } = this.props;
         console.log("userinfo : ");
         console.log(userinfo);
-        console.log('아아아ㅏ',this.state.userSalesListsLists)
         
+        const textOptions = {
+            noDataText: '결제한 상품이 없습니다.'
+        };
+
         const selectRowProp = {
             mode: 'checkbox',
             //bgColor: 'pink', // you should give a bgcolor, otherwise, you can't regonize which row has been selected
@@ -267,6 +270,7 @@ class Customer extends Component {
                         <h5>회원 목록</h5>
                         <div>
                         <BootstrapTable data={ this.state.customerList } hover 
+                            options={textOptions}
                             tableHeaderClass='tableHeader'
                             tableContainerClass='tableContainer'
                             selectRow={ selectRowProp }

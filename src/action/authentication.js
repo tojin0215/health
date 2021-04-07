@@ -67,7 +67,7 @@ export function getStatusRequest() {
     return (dispatch) => {
         // inform Get Status API is starting
         dispatch(getStatus());
-        return fetch("http://"+ip+":3000/manager", {
+        return fetch("http://"+ip+":3001/manager", {
             method: "GET",
             headers: {
                 'Content-type': 'application/json'
@@ -111,7 +111,7 @@ export function getStatusFailure() {
 }
 export function logoutRequest() {
     return (dispatch) => {
-        return fetch("http://"+ip+":3000/manager", {
+        return fetch("http://"+ip+":3001/manager", {
             method: "DELETE",
             credentials: 'include'
         })
