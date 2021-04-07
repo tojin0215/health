@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 import '../../styles/exercise/Exercise.css';
 
+const ip = '13.124.141.28';
 // userinfo = {
     // useridx: 1,
     // username: "박재진",

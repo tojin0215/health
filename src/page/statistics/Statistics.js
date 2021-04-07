@@ -5,6 +5,7 @@ import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 
+const ip = '13.124.141.28';
 class Statistics extends Component {
 
     constructor(props) {

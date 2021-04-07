@@ -5,22 +5,219 @@ import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+import { TextField } from '@material-ui/core';
+
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+
+import '../../styles/customer/AddCustomer.css';
+
+
+const ip = '13.124.141.28';
+
 class AddInbody extends Component {
     
     constructor(props) {
         super(props);
+
+        const search = location.search;
+
         this.state = {
+            fitness_no:this.props.userinfo.fitness_no, //Redux를 통해 받은 값
+            member_no: (search.split('='))[1] ,
+            height : '', //키
+            measurementDate : new Date(), // 측정날짜
+             //체성분 분석
+            bodyMoisture : '', //체수분
+            protein : '',  //단백질
+            mineral : '',  //무기질
+            bodyFat : '',  //체지방
+            muscleMass : '', //근육량
+            bodyFatMass1 : '', //체지방량1
+            weight : '', //체중
+            //골격근,지방
+            skeletalMuscleMass : '', //골격근량
+            bodyFatMass2 : '', //체지방량2
+            //비만진단
+            bmi : '', //BMI
+            percentBodyFat : '', //체지방률
+            sex:'',
+            age:0,
+            name:'',
+            customerList:[],
+            resiNumber:'',
+
+            height_err:false,
+            bodyMoisture_err:false,
+            protein_err:false,
+            minerals_err:false,
+            bodyFat_err:false,
+            muscleMass_err:false,
+            bodyFatMass1_err:false,
+            weight_err:false,
+            skeletalMuscleMass_err:false,
+            bodyFatMass2_err:false,
+            bmi_err:false,
+            percentBodyFat_err:false,
         };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
+        this.cusFetch();
     };
 
     goLogin = () => {
         this.props.history.push("/");
     }
 
+    cusFetch = () => {
+        if(this.state.member_no === ''){
+            alert('선택된 회원이 없습니다. 회원을 선택 해주세요.')
+            this.props.history.push('/assign/inbody');
+        }
+
+        fetch("http://"+ip+":3001/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json'
+          },
+          })
+            .then(response => response.json())
+            .then(res => {
+                this.setState({
+                    customerList : res
+                });
+
+                this.state.customerList.map((c)=>{
+                    let s = c.sex===true?"남":"여";
+                    this.setState({
+                        name : c.name,
+                        sex : s,
+                        phone: c.phone,
+                        resiNumber:c.resi_no,
+                    })
+                })
+            });
+    }
+
+    handleChange = (e) => { 
+        this.setState({ 
+            [e.target.id]: e.target.value,
+        }); 
+    };
+
+    handleDateChange(date) {
+        this.setState({
+            measurementDate: date
+        })
+    }
+
+    handleOnClick= (e) => {
+        
+        this.setState({
+            height_err:false,
+            bodyMoisture_err:false,
+            protein_err:false,
+            minerals_err:false,
+            bodyFat_err:false,
+            muscleMass_err:false,
+            bodyFatMass1_err:false,
+            weight_err:false,
+            skeletalMuscleMass_err:false,
+            bodyFatMass2_err:false,
+            bmi_err:false,
+            percentBodyFat_err:false,
+        });
+    
+        if( this.state.height==="") {
+           this.setState({height_err:true});
+        }
+        if(this.state.bodyMoisture===''){
+            this.setState({bodyMoisture_err:true});
+        }
+        if(this.state.protein=== ""){
+            this.setState({protein_err:true});
+        }
+        if(this.state.minerals===""){
+            this.setState({minerals_err:true});
+        }
+        if(this.state.bodyFat===""){
+            this.setState({bodyFat_err:true});
+        }
+        if( this.state.muscleMass==="") {
+            this.setState({muscleMass_err:true});
+         }
+         if(this.state.bodyFatMass1===''){
+             this.setState({bodyFatMass1_err:true});
+         }
+         if(this.state.weight=== ""){
+             this.setState({weight_err:true});
+         }
+         if(this.state.skeletalMuscleMass===""){
+             this.setState({skeletalMuscleMass_err:true});
+         }
+         if(this.state.bodyFatMass2===""){
+             this.setState({bodyFatMass2_err:true});
+         }
+         if(this.state.bmi===""){
+            this.setState({bmi_err:true});
+        }
+        if(this.state.percentBodyFat===""){
+            this.setState({percentBodyFat_err:true});
+        }
+
+        if(this.state.height==="" || this.state.bodyMoisture===0 || this.state.protein=== "" || this.state.minerals==="" 
+        || this.state.bodyFat==="" || this.state.muscleMass===0 || this.state.bodyFatMass1=== "" || this.state.weight==="" 
+        || this.state.skeletalMuscleMass==="" || this.state.bodyFatMass2===0 || this.state.bmi=== "" || this.state.percentBodyFat==="" ){
+            alert("빈칸을 채워주세요.")
+        }
+
+        else{
+            // 서버 연결하는 부분
+            // fetch("http://"+ip+":3001/inbody", {
+            //     method: "POST",
+            //     headers: {
+            //     'Content-type': 'application/json'
+            // },
+            //     body: JSON.stringify({
+            //         // fitness_no:this.state.fitness_no,
+            //         // name:this.state.name,
+            //         // sex:this.state.radioGroup.male?true:false,//true:'남', false:'여'
+            //         // start_date:this.state.startDate,
+            //         // period:this.state.period,
+            //         // phone:this.state.phone,
+            //         // solar_or_lunar:this.state.radioGroup2.solar?true:false,//true:'양', false:'음'
+            //         // address:this.state.address,
+            //         // join_route:ex2,
+            //         // //uncollected:this.state.uncollected,
+            //         // in_charge:this.state.in_charge,
+            //         // note:this.state.note,
+            //         // resi_no : String(this.state.resiNumber),
+            //     })
+            // })
+            //     .then(response => response.json())
+            //     .then(response => {
+            //         alert("신규 회원이 등록되었습니다.");
+            //         this.props.history.push('/assign/inbody');
+            //     });
+
+            alert("신규 회원이 등록되었습니다.");
+            this.props.history.push({
+                pathname: "'/assign/inbody",
+                state: {member_no: this.state.member_no}
+            })
+        }
+    }
+
     render() {
         const { userinfo } = this.props;
         console.log("userinfo : ");
         console.log(userinfo);
+        console.log('___',this.state.member_no)
         
         return (
 
@@ -28,7 +225,185 @@ class AddInbody extends Component {
             <Header />
             <Navigation goLogin={this.goLogin}/>
             <h2>인바디 추가페이지</h2>
-          
+               {/* <label>번호 : {this.state.member_no}</label>  */}
+               
+               <label>이름 : {this.state.name}, </label> 
+               <label>생년월일 : {this.state.resiNumber}, </label> 
+               <label>성별 : {this.state.sex}</label> 
+
+                <br></br>
+               <form className="formAddCustomer" style={{flexDirection:'column'}}>
+                    <label>
+                    <TextField
+                        variant="outlined"
+                        value={this.state.height}
+                        onChange={this.handleChange}
+                        type='number'
+                        id='height'
+                        label="키"
+                        error={this.state.height_err}
+                        required
+                        autoFocus
+                    />
+                    </label><br/>
+                    <h5>검사날짜</h5>
+                    <DatePicker
+                        selected={ this.state.measurementDate }
+                        onChange={ this.handleDateChange }
+                        name="measurementDate"
+                        dateFormat="MM/dd/yyyy"
+                    /><br/><br/>
+                    <h5>체성분 분석</h5><br/>
+                    <label>
+                    <TextField
+                        variant="outlined"
+                        value={this.state.bodyMoisture}
+                        onChange={this.handleChange}
+                        type='number'
+                        id='bodyMoisture'
+                        label="체수분"
+                        error={this.state.bodyMoisture_err}
+                        required
+                        autoFocus
+                    />
+                    </label><br/>
+                    <label>
+                    <TextField
+                        variant="outlined"
+                        value={this.state.protein}
+                        onChange={this.handleChange}
+                        type='number'
+                        id='protein'
+                        label="단백질"
+                        error={this.state.protein_err}
+                        required
+                        autoFocus
+                    />
+                    </label><br/>
+                    <label>
+                    <TextField
+                        variant="outlined"
+                        value={this.state.mineral}
+                        onChange={this.handleChange}
+                        type='number'
+                        id='mineral'
+                        label="무기질"
+                        error={this.state.mineral_err}
+                        required
+                        autoFocus
+                    />
+                    </label><br/>
+                    <label>
+                    <TextField
+                        variant="outlined"
+                        value={this.state.bodyFat}
+                        onChange={this.handleChange}
+                        type='number'
+                        id='bodyFat'
+                        label="체지방"
+                        error={this.state.bodyFat_err}
+                        required
+                        autoFocus
+                    />
+                    </label><br/>
+                    <label>
+                    <TextField
+                        variant="outlined"
+                        value={this.state.muscleMass}
+                        onChange={this.handleChange}
+                        type='number'
+                        id='muscleMass'
+                        label="근육량"
+                        error={this.state.muscleMass_err}
+                        required
+                        autoFocus
+                    />
+                    </label><br/>  
+                    <label>
+                    <TextField
+                        variant="outlined"
+                        value={this.state.bodyFatMass1}
+                        onChange={this.handleChange}
+                        type='number'
+                        id='bodyFatMass1'
+                        label="체지방량"
+                        error={this.state.bodyFatMass1_err}
+                        required
+                        autoFocus
+                    />
+                    </label><br/>
+                    <label>
+                    <TextField
+                        variant="outlined"
+                        value={this.state.weight}
+                        onChange={this.handleChange}
+                        type='number'
+                        id='weight'
+                        label="체중"
+                        error={this.state.weight_err}
+                        required
+                        autoFocus
+                    />
+                    </label><br/>
+                    
+                    <h5>골격근, 지방</h5>
+                    <label>
+                    <TextField
+                        variant="outlined"
+                        value={this.state.skeletalMuscleMass}
+                        onChange={this.handleChange}
+                        type='number'
+                        id='skeletalMuscleMass'
+                        label="골격근량"
+                        error={this.state.skeletalMuscleMass_err}
+                        required
+                        autoFocus
+                    />
+                    </label><br/>
+                    <label>
+                    <TextField
+                        variant="outlined"
+                        value={this.state.bodyFatMass2}
+                        onChange={this.handleChange}
+                        type='number'
+                        id='bodyFatMass2'
+                        label="체지방량"
+                        error={this.state.bodyFatMass2_err}
+                        required
+                        autoFocus
+                    />
+                    </label><br/>
+
+                    <h5>비만진단</h5>
+                    <label>
+                    <TextField
+                        variant="outlined"
+                        value={this.state.bmi}
+                        onChange={this.handleChange}
+                        type='number'
+                        id='bmi'
+                        label="BMI"
+                        error={this.state.bmi_err}
+                        required
+                        autoFocus
+                    />
+                    </label><br/>
+                    <label> 
+                    <TextField
+                        variant="outlined"
+                        value={this.state.percentBodyFat}
+                        onChange={this.handleChange}
+                        type='number'
+                        id='percentBodyFat'
+                        label="체지방률"
+                        error={this.state.percentBodyFat_err}
+                        required
+                        autoFocus
+                    />
+                    </label><br/>
+                
+                <button type="button" onClick={this.handleOnClick}> 등록하기 </button>
+            </form>
             </div>
         );
     }
