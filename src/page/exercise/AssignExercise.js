@@ -12,7 +12,6 @@ import { NavLink } from 'react-router-dom';
     // fitnessname: "투진헬스장"
 // }
 
-const ip = '13.124.141.28';
 class AssignExercise extends Component {
     goLogin = () => {
         this.props.history.push("/");
@@ -33,7 +32,7 @@ class AssignExercise extends Component {
             </div>
             <div className='container'>
                 <NavLink exact to="/assign">[운동 배정 설정]</NavLink>
-                <NavLink exact to={{pathname:"/assign/inbody?member_no=0"}}>[고객인바디]</NavLink>
+                <NavLink exact to="/assign/inbody">[고객인바디]</NavLink>
             
                 <div>
                 <input placeholder="검색" /><button>돋보기</button>

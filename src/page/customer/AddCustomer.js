@@ -13,9 +13,6 @@ import NumberFormat from 'react-number-format';
 
 import '../../styles/customer/AddCustomer.css';
 
-
-const ip = '13.124.141.28';
-
 class AddCustomer extends Component {
 
     constructor(props) {
@@ -29,18 +26,24 @@ class AddCustomer extends Component {
             phone: "",
             solar_or_lunar: true,
             address:"",
-            join_route:[],
+            join_route:0,
             uncollected:0,
             in_charge:"",
             note:"",
             resiNumber:"",
-            joinRouteEXC:"",
             
             name_err:false,
             period_err:false,
             phone_err:false,
             address_err:false,
             resiNumber_err:false,
+
+            signboard:false,
+            homepage:false,
+            flyers:false,
+            friend:false,
+            sns:false,
+            etc:false,
 
             radioGroup: {
                 male: true,
@@ -50,6 +53,24 @@ class AddCustomer extends Component {
                 solar: true,
                 lunar: false,
             },
+
+            // allPremium:false,
+            // gxTwo:false,
+            // gxOne:false,
+            // pt:false,
+            // spinning:false,
+            // guigiPilates:false,
+            // health:false,
+            // etc2:false,
+
+            // card:false, cash:false, accountTransfer:false,
+
+            // payDate: new Date(),
+            // Exercise:"",
+            // ExercisePayment: 0,
+            // SportswearPayment: 0,
+            // LockerPayment: 0,
+            // TotalPayment:0,
 
             member_no: '',
             paymentDate: new Date(),
@@ -75,7 +96,7 @@ class AddCustomer extends Component {
     }
 
     handleChange = (e) => { 
-        if(e.target.name ==='paymentTools' || e.target.name === 'exerciseName' || e.target.name === 'join_route'){
+        if(e.target.name ==='paymentTools'){
             this.setState({ 
                 [e.target.name]: e.target.id,
             }); 
@@ -99,20 +120,17 @@ class AddCustomer extends Component {
         });
     
         let ex='';
-        if(this.state.exerciseName === '기타'){
-            ex = this.state.exerciseName +'('+this.state.inputExercise +')'
-        } else{
-            ex = this.state.exerciseName
+        for(var i=0; i<this.state.exerciseName.length;i++){
+            if(this.state.exerciseName[i] === '기타'){
+                ex = this.state.exerciseName[i] +'('+this.state.inputExercise +') /'+ex
+            }
+            else{
+                ex = this.state.exerciseName[i] +'/ '+ex
+            }
+            
         }
-
-        let ex2='';
-        if(this.state.join_route === '기타'){
-            ex2 = this.state.join_route +'('+this.state.joinRouteEXC +')'
-        } else{
-            ex2 = this.state.join_route
-        }
-        //console.log('start___',this.state.startDate)
-        //console.log('payment',this.state.paymentDate)
+        console.log('start___',this.state.startDate)
+        console.log('payment',this.state.paymentDate)
 
         let exercisePrice1 = parseInt((this.state.exercisePrice).toString().replace(/[^(0-9)]/gi,""));
         let lockerPrice1 = parseInt((this.state.lockerPrice).toString().replace(/[^(0-9)]/gi,""));
@@ -138,8 +156,14 @@ class AddCustomer extends Component {
             alert("빈칸을 채워주세요.")
         }
         else{
+            let aa = (this.state.signboard?"1":"0");
+            let bb = (this.state.homepage?"1":"0");
+            let cc = (this.state.flyers?"1":"0");
+            let dd = (this.state.friend?"1":"0");
+            let ee = (this.state.sns?"1":"0");
+            let ff = (this.state.etc?"1":"0");
             // 서버 연결하는 부분
-            fetch("http://"+ip+":3001/customer", {
+            fetch("http://localhost:3000/customer", {
                 method: "POST",
                 headers: {
                 'Content-type': 'application/json'
@@ -153,7 +177,7 @@ class AddCustomer extends Component {
                     phone:this.state.phone,
                     solar_or_lunar:this.state.radioGroup2.solar?true:false,//true:'양', false:'음'
                     address:this.state.address,
-                    join_route:ex2,
+                    join_route:aa+bb+cc+dd+ee+ff,
                     //uncollected:this.state.uncollected,
                     in_charge:this.state.in_charge,
                     note:this.state.note,
@@ -169,7 +193,7 @@ class AddCustomer extends Component {
                         console.log('333___________',m_no)
                     }
                     // 서버에서 데이터 전달하면 여기서 json type으로 받게 됨
-                    fetch("http://"+ip+":3001/sales", {
+                    fetch("http://localhost:3000/sales", {
                         method: "POST",
                         headers: {
                           'Content-type': 'application/json'
@@ -232,18 +256,37 @@ class AddCustomer extends Component {
     }
   
 
-    // toggleChange = (e) => {
-    //     if(this.state[e.target.id]===false){
-    //         this.setState({ 
-    //             [e.target.id]: true,
-    //         }); 
-    //     }
-    //     else if(this.state[e.target.id]===true){
-    //         this.setState({ 
-    //             [e.target.id]: false,
-    //         }); 
-    //     }
-    // }
+    toggleChange = (e) => {
+        if(this.state[e.target.id]===false){
+            this.setState({ 
+                [e.target.id]: true,
+            }); 
+        }
+        else if(this.state[e.target.id]===true){
+            this.setState({ 
+                [e.target.id]: false,
+            }); 
+        }
+    }
+
+    toggleChange1 = (e) => {
+        const target = e.target
+        let value = target.id
+        //console.log(target.checked)
+        if(target.checked === true){
+            this.state.exerciseName[value] = value;
+            this.setState({
+                exerciseName : [...this.state.exerciseName, this.state.exerciseName[value]]
+            })
+        }else {     
+            for(var i=0; i<this.state.exerciseName.length; i++){
+                if(this.state.exerciseName[i] === value){
+                    this.state.exerciseName.splice(i, 1)
+                }
+            }
+            //console.log(this.state.exerciseName)
+        }
+    }
 
     render() {     
         console.log('11111',this.state.exercisePrice)   
@@ -363,26 +406,46 @@ class AddCustomer extends Component {
                     <label className='customerRoute'>
                         <h5> 가입 경로 </h5>
                         <div>
-                            <label><input type="radio" id='간판' value='1' name='join_route' onChange={this.handleChange}/>간판</label>
-                            <label><input type="radio" id='홈페이지' value='2' name='join_route' onChange={this.handleChange}/>홈페이지</label>
-                            <label><input type="radio" id='전단지' value='3' name='join_route' onChange={this.handleChange}/>전단지</label>
-                            <label><input type="radio" id='지인소개' value='4' name='join_route' onChange={this.handleChange}/>지인소개</label>
-                            <label><input type="radio" id='SNS' value='5' name='join_route' onChange={this.handleChange}/>SNS</label>
-                            <label><input type="radio" id='기타' value='6' name='join_route' onChange={this.handleChange}/>기타</label>
-                            <input type="text" id="joinRouteEXC" className="form-control" placeholder="기타 가입경로" name="joinexc" onChange={this.handleChange}/>
-                            
+                            <label>
+                                <input type="checkbox" id='signboard' checked={this.state.signboard} onChange={this.toggleChange}/>
+                                간판
+                            </label>
+                            <label>
+                                <input type="checkbox" id='homepage' checked={this.state.homepage} onChange={this.toggleChange}/>
+                                홈페이지
+                            </label>
+                            <label>
+                                <input type="checkbox" id='flyers' checked={this.state.flyers} onChange={this.toggleChange}/>
+                                전단지
+                            </label>
+                            <label>
+                                <input type="checkbox" id='friend' checked={this.state.friend} onChange={this.toggleChange}/>
+                                지인소개
+                            </label>
+                            <label>
+                                <input type="checkbox" id='sns' checked={this.state.sns} onChange={this.toggleChange}/>
+                                SNS
+                            </label>
+                            <label>
+                                <input type="checkbox" id='etc' checked={this.state.etc} onChange={this.toggleChange}/>
+                                <input type="text" id="inputExercise" className="form-control" placeholder="기타 가입경로" name="Exercise" onChange={this.handleChange}/>{/*#inputExercise */}
+                            </label>
                         </div>
                     </label>
                     
 
                 <h5 className="AddSalesHeader"> 운동 종목 </h5>
                 <hr/>
-                <label><input type="radio" id='개인 PT' name='exerciseName' value='1' onChange={this.handleChange}/>개인 PT</label>
-                <label><input type="radio" id='GX' name='exerciseName' value='2' onChange={this.handleChange}/>GX</label>
-                <label><input type="radio" id='필라테스' name='exerciseName' value='3' onChange={this.handleChange}/>필라테스</label>
-                <label><input type="radio" id='헬스' name='exerciseName' value='4'onChange={this.handleChange}/>헬스</label>
-                <label><input type="radio" id='기타' name='exerciseName' value='5' onChange={this.handleChange}/>기타</label>
-                <input type="text" id="inputExercise" className="form-control" placeholder="기타 운동" name="Exercise" onChange={this.handleChange}/><br/><br/>
+                <label><input type="checkbox" id='PREMIUM 전종목' name='exerciseName' value='1' onChange={this.toggleChange1}/>PREMIUM 전종목</label>
+                <label><input type="checkbox" id='GX 2종목' name='exerciseName' value='2' onChange={this.toggleChange1}/>GX 2종목</label>
+                <label><input type="checkbox" id='GX 1종목' name='exerciseName' value='3' onChange={this.toggleChange1}/>GX 1종목</label>
+                <label><input type="checkbox" id='개인 PT' name='exerciseName' value='4'onChange={this.toggleChange1}/>개인 PT</label><br/>
+                <label><input type="checkbox" id='스피닝' name='exerciseName' value='5' onChange={this.toggleChange1}/>스피닝</label>
+                <label><input type="checkbox" id='기구 필라테스' name='exerciseName' value='6' onChange={this.toggleChange1}/>기구 필라테스</label>
+                <label><input type="checkbox" id='1:1 필라테스' name='exerciseName' value='7' onChange={this.toggleChange1}/>1:1 필라테스</label>
+                <label><input type="checkbox" id='헬스' name='exerciseName' value='8' onChange={this.toggleChange1}/>헬스</label><br/>
+                <label><input type="checkbox" id='기타' name='exerciseName' value='9' onChange={this.toggleChange1}/>기타</label>
+                <input type="text" id="inputExercise" className="form-control" placeholder="Exercise" name="Exercise" onChange={this.handleChange}/><br/><br/>
                 <h5> 결제 금액</h5>
                 <hr/>
                 <label><input type="radio" name='paymentTools' id='카드' onChange={this.handleChange}/>카드</label>

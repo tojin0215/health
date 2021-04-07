@@ -11,9 +11,6 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
 import '../../styles/customer/Customer.css';
 
-
-const ip = '13.124.141.28';
-
 require('moment-timezone');
 var moment = require('moment');
 
@@ -22,14 +19,6 @@ const options = [
     '이름', '핸드폰', '담당자', '주민번호(앞자리)'
   ];
 const defaultOption = options[0];
-
-function dataFormatter(cell, row) {
-    return ` ${cell}`.substring(0,11);
-}
-
-function PriceFormatter(cell, row){
-    return ` ${cell}`.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")+'원';
-}
 
 class Customer extends Component {
 
@@ -40,30 +29,18 @@ class Customer extends Component {
             isOpenPopup: false,
             search:"",
             item:options[0],
-            userLists:[],
-            userLists2:[],
-            userSalesLists:[],
-            userSalesLists2:[],
-            name:'',
-            member_no:'',
-            info:'',
-            addr:'',
-            phone:'',
-            startDate:'',
-            trainer:'',
-            note:''
         }
         
         this.openPopup = this.openPopup.bind(this);
         this.closePopup = this.closePopup.bind(this);
-        this.onSelectRow = this.onSelectRow.bind(this);
+    
         this.cusFetch();
     }
     goLogin = () => {
         this.props.history.push("/");
     }
     cusFetch = () => {
-        fetch("http://"+ip+":3001/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://localhost:3000/customer?type=all&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -97,92 +74,6 @@ class Customer extends Component {
             [e.target.id]: e.target.value,
         }); 
     };
-    
-    calAge(data){ //만 나이 계산
-        const today = new Date();
-        let year = (data).substring(0,2)
-        if(parseInt(year) >= '00' && parseInt(year) <=30){
-            year = 20+year
-        }else{
-            year = 19+year
-        }
-        let month = (data).substring(2,4)-1
-        let day = (data).substring(4,6)
-        let birthday = new Date(year,month,day)
-        
-        let age = today.getFullYear()-birthday.getFullYear();
-        let m = today.getMonth()-birthday.getMonth();
-
-        if(m<0 || (m === 0 && today.getDate() < birthday.getDate())){
-            age --;
-        }
-        return age;        
-    }
-
-    onSelectRow=(row, isSelected, e)=> { //table row 클릭시
-        if (isSelected) {
-            //alert(row['no'])
-            fetch("http://"+ip+":3001/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
-            method: "GET",
-            headers: {
-              'Content-type': 'application/json'
-            },
-            })
-            .then(response => response.json())
-            .then(res => {
-                this.setState({userLists : res});
-                this.state.userLists.map((data)=>{
-                    let age = this.calAge(data.resi_no) // 만나이
-                    let sex = data.sex===true?"남":"여";
-                    let info = sex+'/만'+age+'세/'+data.resi_no
-                    let phone = data.phone.substring(0,3)+'-'+data.phone.substring(3,7)+'-'+data.phone.substring(7,11)
-                    data = {...data,age}
-                    this.setState({
-                        //userLists2:data,
-                        name : data.name,
-                        member_no:data.member_no,
-                        info : info,
-                        addr : data.address,
-                        phone : phone,
-                        startDate : data.start_date,
-                        trainer: data.in_charge,
-                        note : data.note
-                    })
-                    //alert('age : '+this.calAge(data.resi_no))
-                })
-            });
-            fetch("http://"+ip+":3001/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
-            method: "GET",
-            headers: {
-              'Content-type': 'application/json'
-            },
-            })
-            .then(response => response.json())
-            .then(res => {
-                this.setState({userSalesLists : res});
-                
-                let arr = [];
-                this.state.userSalesLists.map((data)=>{
-                    let locker = '';
-                    let sportswear = '';
-                    if(data.lockerPrice !== 0){
-                        locker = '개인 사물함'
-                        arr.push({'product':locker,'date':data.paymentDate,'payment':data.lockerPrice})
-                    } 
-                    if(data.sportswearPrice !== 0){
-                        sportswear = '운동복'
-                        arr.push({'product':sportswear,'date':data.paymentDate,'payment':data.sportswearPrice})
-                    }
-                    arr.push({'product':data.exerciseName,'date':data.paymentDate,'payment':data.exercisePrice})
-                })
-                
-                this.setState({
-                    userSalesLists2:arr
-                })
-            });
-        }
-      }
-
     search = () =>{
         let it = '0'
         if(this.state.item === "이름"){
@@ -194,7 +85,7 @@ class Customer extends Component {
         }else if(this.state.item === "주민번호(앞자리)"){
             it = '3'
         }
-        fetch("http://"+ip+":3001/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -227,17 +118,7 @@ class Customer extends Component {
         const { userinfo } = this.props;
         console.log("userinfo : ");
         console.log(userinfo);
-        console.log('아아아ㅏ',this.state.userSalesListsLists)
         
-        const selectRowProp = {
-            mode: 'checkbox',
-            //bgColor: 'pink', // you should give a bgcolor, otherwise, you can't regonize which row has been selected
-            hideSelectColumn: true,  // enable hide selection column.
-            clickToSelect: true , // you should enable clickToSelect, otherwise, you can't select column.
-            onSelect: this.onSelectRow,
-          };
-
-        console.log('table__',this.state.userSalesLists2)
         return (
             <div className='customer'>
                 <Header />
@@ -265,11 +146,9 @@ class Customer extends Component {
                     </Link>
                     <div className='customerTable'>
                         <h5>회원 목록</h5>
-                        <div>
                         <BootstrapTable data={ this.state.customerList } hover 
                             tableHeaderClass='tableHeader'
                             tableContainerClass='tableContainer'
-                            selectRow={ selectRowProp }
                             className="table2">
                             <TableHeaderColumn dataField='no'
                                 thStyle={ { 'textAlign': 'center' } }
@@ -300,41 +179,6 @@ class Customer extends Component {
                                 tdStyle={ { 'textAlign': 'center' } }
                                 >주민번호</TableHeaderColumn>
                         </BootstrapTable>
-                    </div><br/><br/><br/>
-
-{/* --------여기가 클릭하면 나와야하는 부분입니다 -------- -------- */}
-                    <div>
-                        <h5>상품 결제 내역</h5>
-                        <Link to={{pathname:"/customer/update?member_no="+this.state.member_no}} className='btnCustomerNew'>
-                            수정하기
-                        </Link><br/><br/>
-                        <label>이름</label><label>{ this.state.name }</label><br/>
-                        <label>고객번호</label><label>{ this.state.member_no }</label><br/>
-                        <label>정보</label><label>{ this.state.info }</label><br/>
-                        <label>연락처</label><label>{ this.state.phone }</label><br/>
-                        <label>주소</label><label>{ this.state.addr }</label><br/>
-                        <label>등록일</label><label>{ this.state.startDate }</label><br/>
-                        <label>담당자</label><label>{ this.state.trainer }</label><br/>
-                        <label>비고</label><label>{ this.state.note }</label><br/>
-                        <BootstrapTable data={ this.state.userSalesLists2 } hover 
-                            tableHeaderClass='tableHeader'
-                            tableContainerClass='tableContainer'
-                            className="table2">
-                            <TableHeaderColumn dataField='product'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                isKey>상품</TableHeaderColumn>
-                            <TableHeaderColumn dataField='date' dataFormat={dataFormatter}
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >결제일자</TableHeaderColumn>
-                            <TableHeaderColumn dataField='payment' dataFormat={PriceFormatter}
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >금액</TableHeaderColumn>
-                        </BootstrapTable>
-                    </div>
-{/* --------여기가 클릭하면 나와야하는 부분입니다 -------- -------- */}
                     </div>
                 </div>
             </div>

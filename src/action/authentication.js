@@ -7,8 +7,6 @@ export const AUTH_GET_STATUS_SUCCESS = "AUTH_GET_STATUS_SUCCESS";
 export const AUTH_GET_STATUS_FAILURE = "AUTH_GET_STATUS_FAILURE";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
-const ip = '13.124.141.28';
-
 /* LOGIN */
 export function loginRequest(id, password) {
   return (dispatch) => {
@@ -16,7 +14,7 @@ export function loginRequest(id, password) {
     dispatch(login());
 
     // API REQUEST
-    return fetch("http://"+ip+":3001/manager", {
+    return fetch("http://localhost:3000/manager", {
         method: "POST",
         credentials: 'include',
         headers: {
