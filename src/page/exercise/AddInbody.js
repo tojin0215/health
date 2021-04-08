@@ -174,42 +174,41 @@ class AddInbody extends Component {
         || this.state.bodyFat==="" || this.state.muscleMass===0 || this.state.bodyFatMass1=== "" || this.state.weight==="" 
         || this.state.skeletalMuscleMass==="" || this.state.bodyFatMass2===0 || this.state.bmi=== "" || this.state.percentBodyFat==="" ){
             alert("빈칸을 채워주세요.")
-        }
-
-        else{
+        }else{
             // 서버 연결하는 부분
-            // fetch("http://"+ip+":3001/inbody", {
-            //     method: "POST",
-            //     headers: {
-            //     'Content-type': 'application/json'
-            // },
-            //     body: JSON.stringify({
-            //         // fitness_no:this.state.fitness_no,
-            //         // name:this.state.name,
-            //         // sex:this.state.radioGroup.male?true:false,//true:'남', false:'여'
-            //         // start_date:this.state.startDate,
-            //         // period:this.state.period,
-            //         // phone:this.state.phone,
-            //         // solar_or_lunar:this.state.radioGroup2.solar?true:false,//true:'양', false:'음'
-            //         // address:this.state.address,
-            //         // join_route:ex2,
-            //         // //uncollected:this.state.uncollected,
-            //         // in_charge:this.state.in_charge,
-            //         // note:this.state.note,
-            //         // resi_no : String(this.state.resiNumber),
-            //     })
-            // })
-            //     .then(response => response.json())
-            //     .then(response => {
-            //         alert("신규 회원이 등록되었습니다.");
-            //         this.props.history.push('/assign/inbody');
-            //     });
-
-            alert("신규 회원이 등록되었습니다.");
-            this.props.history.push({
-                pathname: "'/assign/inbody",
-                state: {member_no: this.state.member_no}
+            fetch("http://"+ip+":3001/inbody", {
+                method: "POST",
+                headers: {
+                'Content-type': 'application/json'
+            },
+                body: JSON.stringify({
+                    fitness_no:this.state.fitness_no,
+                    member_no:this.state.member_no,
+                    height : this.state.height, //키
+                    measurementDate : new Date(), // 측정날짜
+                    //체성분 분석
+                    bodyMoisture : this.state.bodyMoisture, //체수분
+                    protein : this.state.protein,  //단백질
+                    mineral : this.state.mineral,  //무기질
+                    bodyFat : this.state.bodyFat,  //체지방
+                    muscleMass : this.state.muscleMass, //근육량
+                    bodyFatMass1 : this.state.bodyFatMass1, //체지방량1
+                    weight : this.state.weight, //체중
+                    //골격근,지방
+                    skeletalMuscleMass : this.state.skeletalMuscleMass, //골격근량
+                    bodyFatMass2 : this.state.bodyFatMass2, //체지방량2
+                    //비만진단
+                    bmi : this.state.bmi, //BMI
+                    PercentBodyFat : this.state.percentBodyFat, //체지방률
+                })
             })
+                .then(response => response.json())
+                .then(response => {
+                    alert("인바디 등록되었습니다.");
+                    this.props.history.push({
+                        pathname: "/assign/inbody?member_no="+this.state.member_no
+                    })
+                });
         }
     }
 
@@ -264,7 +263,6 @@ class AddInbody extends Component {
                         label="체수분"
                         error={this.state.bodyMoisture_err}
                         required
-                        autoFocus
                     />
                     </label><br/>
                     <label>
@@ -277,7 +275,6 @@ class AddInbody extends Component {
                         label="단백질"
                         error={this.state.protein_err}
                         required
-                        autoFocus
                     />
                     </label><br/>
                     <label>
@@ -290,7 +287,6 @@ class AddInbody extends Component {
                         label="무기질"
                         error={this.state.mineral_err}
                         required
-                        autoFocus
                     />
                     </label><br/>
                     <label>
@@ -303,7 +299,6 @@ class AddInbody extends Component {
                         label="체지방"
                         error={this.state.bodyFat_err}
                         required
-                        autoFocus
                     />
                     </label><br/>
                     <label>
@@ -316,7 +311,6 @@ class AddInbody extends Component {
                         label="근육량"
                         error={this.state.muscleMass_err}
                         required
-                        autoFocus
                     />
                     </label><br/>  
                     <label>
@@ -329,7 +323,6 @@ class AddInbody extends Component {
                         label="체지방량"
                         error={this.state.bodyFatMass1_err}
                         required
-                        autoFocus
                     />
                     </label><br/>
                     <label>
@@ -342,7 +335,6 @@ class AddInbody extends Component {
                         label="체중"
                         error={this.state.weight_err}
                         required
-                        autoFocus
                     />
                     </label><br/>
                     
@@ -357,7 +349,6 @@ class AddInbody extends Component {
                         label="골격근량"
                         error={this.state.skeletalMuscleMass_err}
                         required
-                        autoFocus
                     />
                     </label><br/>
                     <label>
@@ -370,7 +361,6 @@ class AddInbody extends Component {
                         label="체지방량"
                         error={this.state.bodyFatMass2_err}
                         required
-                        autoFocus
                     />
                     </label><br/>
 
@@ -385,7 +375,6 @@ class AddInbody extends Component {
                         label="BMI"
                         error={this.state.bmi_err}
                         required
-                        autoFocus
                     />
                     </label><br/>
                     <label> 
@@ -398,7 +387,6 @@ class AddInbody extends Component {
                         label="체지방률"
                         error={this.state.percentBodyFat_err}
                         required
-                        autoFocus
                     />
                     </label><br/>
                 
