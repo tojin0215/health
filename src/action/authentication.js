@@ -17,6 +17,7 @@ export function loginRequest(id, password) {
 
     // API REQUEST
     return fetch("http://"+ip+":3001/manager", {
+    //return fetch("http://localhost:3000/manager", {
         method: "POST",
         credentials: 'include',
         headers: {

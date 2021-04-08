@@ -3,6 +3,7 @@ import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // import './Exercise.css';
 // userinfo = {
@@ -33,7 +34,7 @@ class AssignExercise extends Component {
             </div>
             <div className='container'>
                 <NavLink exact to="/assign">[운동 배정 설정]</NavLink>
-                <NavLink exact to={{pathname:"/assign/inbody?member_no=0"}}>[고객인바디]</NavLink>
+                <Link to={{pathname:"/assign/inbody?member_no="+0}}>[고객인바디]</Link>
             
                 <div>
                 <input placeholder="검색" /><button>돋보기</button>

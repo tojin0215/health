@@ -27,18 +27,20 @@ const options = [
     '이름', '핸드폰'
 ];
 const defaultOption = options[0];
-
+let num = '';
 class Inbody extends Component {
-
+    
     constructor(props) {
         super(props);
 
-        const search = location.search;
-
+        const search1 = location.search;
+        num = (search1.split('='))[1];
+        console.log('search1',search1)
+        console.log('search1__',(search1.split('='))[1])
         this.state = {
             open:false,
             //member_no:member_no,
-            member_no:(search.split('='))[1],
+            member_no: (search1.split('='))[1],
             search:"",
             item:options[0],
             customerList:[],
@@ -50,10 +52,60 @@ class Inbody extends Component {
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
             
-        //this.cusFetch();
+        this.cusFetch();
     };
     goLogin = () => {
         this.props.history.push("/");
+    }
+
+    cusFetch = () => {
+        //alert('요기?',this.state.member_no)
+        let url;
+        alert(num)
+        if(num === '0'){
+            //url = "http://"+ip+":3001/inbody?type=all&fn="+this.props.userinfo.fitness_no
+            this.setState({inbodyList : []});
+        } else{
+            url = "http://"+ip+":3001/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
+            fetch(url, {
+                method: "GET",
+                headers: {
+                  'Content-type': 'application/json'
+                },
+                })
+                .then(response => response.json())
+                .then(res => {
+                        let arr1 = [];
+                        for(let i=(res.length-1) ; i>=0 ; i--){
+                            arr1.push({"no":res[i].num,"member_no":res[i].member_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral })
+                        }
+                        this.setState({inbodyList : arr1});
+
+                        fetch("http://"+ip+":3001/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
+                            method: "GET",
+                            headers: {
+                            'Content-type': 'application/json'
+                        }
+                        })
+                        .then(response => response.json())
+                        .then(res => {
+                            for(let i=0 ; i<res.length ; i++){
+                                let sor = res[i].solar_or_lunar===true?"양":"음";
+                                let s = res[i].sex===true?"남":"여";
+
+                                this.setState({
+                                    userName : res[i].name,
+                                    member_no: num,
+                                    phone:res[i].phone,
+                                    sex:s,
+                                    resi_no:res[i].resi_no,
+                                })
+                                //arr2.push({"no":res[i].member_no, "userName":res[i].name, "sex":s, "phone":res[i].phone, "resi_no":res[i].resi_no })
+                            }
+                        });
+                    });
+        }
+        
     }
 
     handleClickOpen() {
@@ -71,6 +123,8 @@ class Inbody extends Component {
     choiceUser=(e)=>{
         console.log('value',e.target.value)
         let values = e.target.value.split(',')
+
+        console.log(this.state.inbodyList)
 
         this.setState({
             userName : values[0],
@@ -126,7 +180,6 @@ class Inbody extends Component {
     }
 
     render() {
-        console.log('______________',this.state.member_no)
         const { userinfo } = this.props;
         console.log("userinfo : ");
         console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
@@ -135,6 +188,7 @@ class Inbody extends Component {
         };
 
         console.log(',,,,,',this.state.member_no)
+        console.log('.....',this.state.inbodyList)
         return (
             <div className='inbody'>
                 <Header />
@@ -191,7 +245,6 @@ class Inbody extends Component {
                         }
                     </TableBody>
                     </Table>
-
                         </DialogContent>
                         <DialogActions>
                             <button type='button' onClick={this.handleClose}>닫기</button>
@@ -212,22 +265,58 @@ class Inbody extends Component {
                         options={textOptions}
                         tableHeaderClass='tableHeader'
                         tableContainerClass='tableContainer'>
-                        <TableHeaderColumn dataField='card' 
+                        <TableHeaderColumn dataField='measurementDate' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } } isKey
                         >날짜</TableHeaderColumn>
-                        <TableHeaderColumn dataField='cash' 
+                        <TableHeaderColumn dataField='height' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >키</TableHeaderColumn>
-                        <TableHeaderColumn dataField='transfer' 
+                        <TableHeaderColumn dataField='height' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >체수분</TableHeaderColumn>
+                        <TableHeaderColumn dataField='height' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >단백질</TableHeaderColumn>
+                        <TableHeaderColumn dataField='height' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >무기질</TableHeaderColumn>
+                        <TableHeaderColumn dataField='height' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >체지방</TableHeaderColumn>
+                        <TableHeaderColumn dataField='height' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >근육량</TableHeaderColumn>
+                        <TableHeaderColumn dataField='height' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >체지방량1</TableHeaderColumn>
+                        <TableHeaderColumn dataField='height' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >체중</TableHeaderColumn>
-                        <TableHeaderColumn dataField='total' 
+                        <TableHeaderColumn dataField='height' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
-                        >인바디</TableHeaderColumn>
+                        >골격근량</TableHeaderColumn>
+                        <TableHeaderColumn dataField='height' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >체지방량2</TableHeaderColumn>
+                        <TableHeaderColumn dataField='height' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >BMI</TableHeaderColumn>
+                        <TableHeaderColumn dataField='height' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >체지방률</TableHeaderColumn>
                     </BootstrapTable>
                 </div>
             </div>

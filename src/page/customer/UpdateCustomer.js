@@ -20,6 +20,7 @@ class UpdateCustomer extends Component {
         super(props);
         
         const search = location.search;
+        //alert(search)
 
         this.state = {
             fitness_no:this.props.userinfo.fitness_no, //Redux를 통해 받은 값
