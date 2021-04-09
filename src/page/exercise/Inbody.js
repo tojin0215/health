@@ -134,6 +134,21 @@ class Inbody extends Component {
             resi_no:values[3],
             open:false
         })
+        let url = "http://"+ip+":3001/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
+        fetch(url, {
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json'
+            },
+            })
+            .then(response => response.json())
+            .then(res => {
+                    let arr1 = [];
+                    for(let i=(res.length-1) ; i>=0 ; i--){
+                        arr1.push({"no":res[i].num,"member_no":res[i].member_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral })
+                    }
+                    this.setState({inbodyList : arr1});
+                });
         alert('선택하셨습니다.'+e.target.id)
     }
 
