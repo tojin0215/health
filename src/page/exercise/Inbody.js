@@ -17,6 +17,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+
 const ip = '13.124.141.28';
 
 require('moment-timezone');
@@ -47,7 +50,9 @@ class Inbody extends Component {
             userName:'회원',
             sex:'',
             resi_no:'',
-            inbodyList:[]
+            inbodyList:[],
+            startDate: '',
+            endDate: '',
         };
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -59,14 +64,14 @@ class Inbody extends Component {
     }
 
     cusFetch = () => {
-        //alert('요기?',this.state.member_no)
         let url;
-        alert(num)
+        //alert(num)
         if(num === '0'){
             //url = "http://"+ip+":3001/inbody?type=all&fn="+this.props.userinfo.fitness_no
             this.setState({inbodyList : []});
         } else{
             url = "http://"+ip+":3001/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
+            //url = "http://localhost:3000/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
             fetch(url, {
                 method: "GET",
                 headers: {
@@ -77,11 +82,12 @@ class Inbody extends Component {
                 .then(res => {
                         let arr1 = [];
                         for(let i=(res.length-1) ; i>=0 ; i--){
-                            arr1.push({"no":res[i].num,"member_no":res[i].member_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral })
+                            arr1.push({"no":res[i].num,"member_no":res[i].member_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat})
                         }
                         this.setState({inbodyList : arr1});
 
                         fetch("http://"+ip+":3001/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
+                        //fetch("http://localhost:3000/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
                             method: "GET",
                             headers: {
                             'Content-type': 'application/json'
@@ -90,7 +96,6 @@ class Inbody extends Component {
                         .then(response => response.json())
                         .then(res => {
                             for(let i=0 ; i<res.length ; i++){
-                                let sor = res[i].solar_or_lunar===true?"양":"음";
                                 let s = res[i].sex===true?"남":"여";
 
                                 this.setState({
@@ -100,7 +105,6 @@ class Inbody extends Component {
                                     sex:s,
                                     resi_no:res[i].resi_no,
                                 })
-                                //arr2.push({"no":res[i].member_no, "userName":res[i].name, "sex":s, "phone":res[i].phone, "resi_no":res[i].resi_no })
                             }
                         });
                     });
@@ -134,7 +138,8 @@ class Inbody extends Component {
             resi_no:values[3],
             open:false
         })
-        let url = "http://"+ip+":3001/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
+        let url = "http://"+ip+":3001/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
+        //let url = "http://localhost:3000/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
         fetch(url, {
             method: "GET",
             headers: {
@@ -143,12 +148,12 @@ class Inbody extends Component {
             })
             .then(response => response.json())
             .then(res => {
-                    let arr1 = [];
-                    for(let i=(res.length-1) ; i>=0 ; i--){
-                        arr1.push({"no":res[i].num,"member_no":res[i].member_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral })
-                    }
-                    this.setState({inbodyList : arr1});
-                });
+                let arr = [];
+                for(let i=(res.length-1) ; i>=0 ; i--){
+                    arr.push({"no":res[i].num,"member_no":res[i].member_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat})
+                }
+                this.setState({inbodyList : arr});
+            });
         alert('선택하셨습니다.'+e.target.id)
     }
 
@@ -157,6 +162,40 @@ class Inbody extends Component {
             [e.target.id]: e.target.value,
         }); 
     };
+
+    handleOnClick = (e) => {
+        let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
+        let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
+
+        fetch('http://'+ip+':3001/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
+        //fetch('http://localhost:3000/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json'
+          },
+          })
+            .then(data => {
+                return data.json();
+            }).then(data => {
+                this.setState({
+                    inbodyList : data,
+                })
+
+                if(this.state.inbodyList.length ==0){
+                    //alert('없음')                        
+                    this.setState({
+                        inbodyList:[],
+                    })
+                } else{
+                    let arr1 = [];
+                    for(let i=(res.length-1) ; i>=0 ; i--){
+                        arr1.push({"no":res[i].num,"member_no":res[i].member_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat
+                    })
+                    }
+                    this.setState({inbodyList : arr1});
+                }
+            }); 
+    }
 
     search = () =>{
         console.log('click')
@@ -167,6 +206,7 @@ class Inbody extends Component {
             it = '1'
         }
         fetch("http://"+ip+":3001/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        //fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -178,7 +218,6 @@ class Inbody extends Component {
                 for(let i=0 ; i<res.length ; i++){
                     let sor = res[i].solar_or_lunar===true?"양":"음";
                     let s = res[i].sex===true?"남":"여";
-                    //arr.push({"no":res[i].member_no, "userName":res[i].name, "sex":s, "phone":res[i].phone, "resi_no":res[i].resi_no+ " ("+sor+")" })
                     arr.push({"no":res[i].member_no, "userName":res[i].name, "sex":s, "phone":res[i].phone, "resi_no":res[i].resi_no })
                 }
                 this.setState({customerList : arr});
@@ -202,8 +241,8 @@ class Inbody extends Component {
             noDataText: '인바디 정보가 없습니다.'
         };
 
-        console.log(',,,,,',this.state.member_no)
-        console.log('.....',this.state.inbodyList)
+        //console.log(',,,,,',this.state.member_no)
+        //console.log('.....',this.state.inbodyList)
         return (
             <div className='inbody'>
                 <Header />
@@ -276,6 +315,26 @@ class Inbody extends Component {
                     </Link>
                     <br/><br/>
 
+                    <DatePicker
+                        selected={ this.state.startDate }
+                        selectsStart
+                        maxDate={new Date()}
+                        onChange={(date)=> this.setState({startDate : date})}
+                        name="startDate"
+                        dateFormat="MM/dd/yyyy"
+                    />
+                    <text> ~ </text>
+                    <DatePicker
+                        selected={ this.state.endDate }
+                        selectsEnd
+                        minDate={this.state.startDate}
+                        maxDate={new Date()}
+                        onChange={(date)=> this.setState({endDate : date})}
+                        name="endDate"
+                        dateFormat="MM/dd/yyyy"
+                    />
+                    <button type="button" onClick={this.handleOnClick}> 조회하기 </button>                 
+
                     <BootstrapTable data={ this.state.inbodyList } 
                         options={textOptions}
                         tableHeaderClass='tableHeader'
@@ -288,47 +347,47 @@ class Inbody extends Component {
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >키</TableHeaderColumn>
-                        <TableHeaderColumn dataField='height' 
+                        <TableHeaderColumn dataField='bodyMoisture' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >체수분</TableHeaderColumn>
-                        <TableHeaderColumn dataField='height' 
+                        <TableHeaderColumn dataField='protein' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >단백질</TableHeaderColumn>
-                        <TableHeaderColumn dataField='height' 
+                        <TableHeaderColumn dataField='mineral' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >무기질</TableHeaderColumn>
-                        <TableHeaderColumn dataField='height' 
+                        <TableHeaderColumn dataField='bodyFat' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >체지방</TableHeaderColumn>
-                        <TableHeaderColumn dataField='height' 
+                        <TableHeaderColumn dataField='muscleMass' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >근육량</TableHeaderColumn>
-                        <TableHeaderColumn dataField='height' 
+                        <TableHeaderColumn dataField='bodyFatMass1' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >체지방량1</TableHeaderColumn>
-                        <TableHeaderColumn dataField='height' 
+                        <TableHeaderColumn dataField='weight' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >체중</TableHeaderColumn>
-                        <TableHeaderColumn dataField='height' 
+                        <TableHeaderColumn dataField='skeletalMuscleMass' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >골격근량</TableHeaderColumn>
-                        <TableHeaderColumn dataField='height' 
+                        <TableHeaderColumn dataField='bodyFatMass2' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >체지방량2</TableHeaderColumn>
-                        <TableHeaderColumn dataField='height' 
+                        <TableHeaderColumn dataField='BMI' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >BMI</TableHeaderColumn>
-                        <TableHeaderColumn dataField='height' 
+                        <TableHeaderColumn dataField='PercentBodyFat' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >체지방률</TableHeaderColumn>
