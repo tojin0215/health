@@ -53,6 +53,7 @@ class Inbody extends Component {
             inbodyList:[],
             startDate: '',
             endDate: '',
+            age:''
         };
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -97,6 +98,7 @@ class Inbody extends Component {
                         .then(res => {
                             for(let i=0 ; i<res.length ; i++){
                                 let s = res[i].sex===true?"남":"여";
+                                let age = this.calAge(res[i].resi_no) // 만나이
 
                                 this.setState({
                                     userName : res[i].name,
@@ -104,6 +106,7 @@ class Inbody extends Component {
                                     phone:res[i].phone,
                                     sex:s,
                                     resi_no:res[i].resi_no,
+                                    age:age,
                                 })
                             }
                         });
@@ -124,10 +127,32 @@ class Inbody extends Component {
         });
     }
 
+    calAge(data){ //만 나이 계산
+        const today = new Date();
+        let year = (data).substring(0,2)
+        if(parseInt(year) >= '00' && parseInt(year) <=30){
+            year = 20+year
+        }else{
+            year = 19+year
+        }
+        let month = (data).substring(2,4)-1
+        let day = (data).substring(4,6)
+        let birthday = new Date(year,month,day)
+        
+        let age = today.getFullYear()-birthday.getFullYear();
+        let m = today.getMonth()-birthday.getMonth();
+
+        if(m<0 || (m === 0 && today.getDate() < birthday.getDate())){
+            age --;
+        }
+        return age;        
+    }
+
     choiceUser=(e)=>{
         console.log('value',e.target.value)
         let values = e.target.value.split(',')
 
+        let age = this.calAge(values[3]) // 만나이
         console.log(this.state.inbodyList)
 
         this.setState({
@@ -136,6 +161,7 @@ class Inbody extends Component {
             phone:values[1],
             sex:values[2],
             resi_no:values[3],
+            age:age,
             open:false
         })
         let url = "http://"+ip+":3001/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
@@ -310,7 +336,8 @@ class Inbody extends Component {
                     <label>{this.state.userName}님 반갑습니다.</label><br/>
                     <label>성별 : {this.state.sex}</label><br/>
                     <label>폰번호 : {this.state.phone}</label><br/>
-                    <label>생년월일 : {this.state.resi_no}</label>
+                    <label>생년월일 : {this.state.resi_no}</label><br/>
+                    <label>나이 : 만 {this.state.age}세</label>
                     <br/><br/>
                      <Link  to={{pathname:"/assign/add?member_no="+this.state.member_no}} className='btnCustomerNew'>
                         인바디정보추가
