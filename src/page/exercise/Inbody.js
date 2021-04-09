@@ -238,7 +238,9 @@ class Inbody extends Component {
         console.log("userinfo : ");
         console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
         const textOptions = {
-            noDataText: '인바디 정보가 없습니다.'
+            noDataText: '인바디 정보가 없습니다.',
+            alwaysShowAllBtns: true,
+            hideSizePerPage:true
         };
 
         //console.log(',,,,,',this.state.member_no)
@@ -337,6 +339,7 @@ class Inbody extends Component {
 
                     <BootstrapTable data={ this.state.inbodyList } 
                         options={textOptions}
+                        pagination={ this.state.inbodyList.length > 1 }
                         tableHeaderClass='tableHeader'
                         tableContainerClass='tableContainer'>
                         <TableHeaderColumn dataField='measurementDate' 
@@ -392,6 +395,7 @@ class Inbody extends Component {
                         tdStyle={ { 'textAlign': 'center' } }
                         >체지방률</TableHeaderColumn>
                     </BootstrapTable>
+                    <text style={{marginTop:'50px'}}></text>
                 </div>
             </div>
         );

@@ -301,7 +301,9 @@ class Sales extends Component {
         console.log("userinfo : ");
         console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
         const textOptions = {
-            noDataText: '결제내역이 없습니다.'
+            noDataText: '결제내역이 없습니다.',
+            alwaysShowAllBtns: true,
+            hideSizePerPage:true
         };
 
         return (
@@ -367,6 +369,7 @@ class Sales extends Component {
                     <h5>전체 기록</h5>
                     <BootstrapTable data={ this.state.salesLists2 } hover 
                         options={textOptions}
+                        pagination={ this.state.customerList.length > 1 }
                         tableHeaderClass='tableHeader'
                         tableContainerClass='tableContainer'
                         className="table2">

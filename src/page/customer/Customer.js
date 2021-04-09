@@ -229,7 +229,9 @@ class Customer extends Component {
         console.log(userinfo);
         
         const textOptions = {
-            noDataText: '결제한 상품이 없습니다.'
+            noDataText: '결제한 상품이 없습니다.',
+            alwaysShowAllBtns: true,
+            hideSizePerPage:true
         };
 
         const selectRowProp = {
@@ -273,6 +275,7 @@ class Customer extends Component {
                             options={textOptions}
                             tableHeaderClass='tableHeader'
                             tableContainerClass='tableContainer'
+                            pagination={ this.state.customerList.length > 1 }
                             selectRow={ selectRowProp }
                             className="table2">
                             <TableHeaderColumn dataField='no'
