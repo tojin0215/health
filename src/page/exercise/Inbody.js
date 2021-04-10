@@ -51,9 +51,9 @@ class Inbody extends Component {
             sex:'',
             resi_no:'',
             inbodyList:[],
-            startDate: '',
-            endDate: '',
-            age:''
+            age:'',
+            startDate: new Date("2021-01-01"),
+            endDate: new Date(),
         };
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -190,9 +190,10 @@ class Inbody extends Component {
     };
 
     handleOnClick = (e) => {
+        alert('조회')
         let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
         let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
-
+        //console.log(startTime,endTime)
         fetch('http://'+ip+':3001/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
         //fetch('http://localhost:3000/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
@@ -220,6 +221,8 @@ class Inbody extends Component {
                     }
                     this.setState({inbodyList : arr1});
                 }
+                
+                alert('조회완료')
             }); 
     }
 

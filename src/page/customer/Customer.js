@@ -8,6 +8,7 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 import '../../styles/customer/Customer.css';
 
@@ -51,11 +52,13 @@ class Customer extends Component {
             phone:'',
             startDate:'',
             trainer:'',
-            note:''
+            note:'',
+            show:false
         }
         
         this.openPopup = this.openPopup.bind(this);
         this.closePopup = this.closePopup.bind(this);
+        this.handleClickAway = this.handleClickAway.bind(this);
         this.onSelectRow = this.onSelectRow.bind(this);
         this.cusFetch();
     }
@@ -91,6 +94,11 @@ class Customer extends Component {
             isOpenPopup: false,
         })
     }
+    handleClickAway=()=>{
+        this.setState({
+            show:false
+        })
+    }
 
     handleChange = (e) => { 
         this.setState({ 
@@ -119,6 +127,7 @@ class Customer extends Component {
         return age;        
     }
 
+
     onSelectRow=(row, isSelected, e)=> { //table row 클릭시
         if (isSelected) {
             //alert(row['no'])
@@ -146,7 +155,7 @@ class Customer extends Component {
                         phone : phone,
                         startDate : data.start_date,
                         trainer: data.in_charge,
-                        note : data.note
+                        note : data.note,
                     })
                     //alert('age : '+this.calAge(data.resi_no))
                 })
@@ -177,7 +186,8 @@ class Customer extends Component {
                 })
                 
                 this.setState({
-                    userSalesLists2:arr
+                    userSalesLists2:arr,
+                    show:true
                 })
             });
         }
@@ -234,6 +244,13 @@ class Customer extends Component {
             hideSizePerPage:true
         };
 
+        const options1 = {
+            alwaysShowAllBtns: true,
+            hideSizePerPage:true,
+            sizePerPage:5
+        };
+
+
         const selectRowProp = {
             mode: 'checkbox',
             //bgColor: 'pink', // you should give a bgcolor, otherwise, you can't regonize which row has been selected
@@ -243,6 +260,7 @@ class Customer extends Component {
           };
 
         console.log('table__',this.state.userSalesLists2)
+        console.log('클릭,',this.state.show)
         return (
             <div className='customer'>
                 <Header />
@@ -259,7 +277,10 @@ class Customer extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='container'>
+                
+            <ClickAwayListener onClickAway={this.handleClickAway}>
+               
+                <div className='container'style={{backgroundColor:'blue'}}>
                     <div className='customerSearch'>
                         <Dropdown className='searchDrop' options={options} onChange={this.selectItem} value={this.state.item} placeholder="Select an option" />
                         <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />
@@ -308,42 +329,51 @@ class Customer extends Component {
                                 >주민번호</TableHeaderColumn>
                         </BootstrapTable>
                     </div><br/><br/><br/>
-
-{/* --------여기가 클릭하면 나와야하는 부분입니다 -------- -------- */}
-                    <div>
-                        <h5>상품 결제 내역</h5>
-                        <Link to={{pathname:"/customer/update?member_no="+this.state.member_no}} className='btnCustomerNew'>
-                            수정하기
-                        </Link><br/><br/>
-                        <label>이름</label><label>{ this.state.name }</label><br/>
-                        <label>고객번호</label><label>{ this.state.member_no }</label><br/>
-                        <label>정보</label><label>{ this.state.info }</label><br/>
-                        <label>연락처</label><label>{ this.state.phone }</label><br/>
-                        <label>주소</label><label>{ this.state.addr }</label><br/>
-                        <label>등록일</label><label>{ this.state.startDate }</label><br/>
-                        <label>담당자</label><label>{ this.state.trainer }</label><br/>
-                        <label>비고</label><label>{ this.state.note }</label><br/>
-                        <BootstrapTable data={ this.state.userSalesLists2 } hover 
-                            tableHeaderClass='tableHeader'
-                            tableContainerClass='tableContainer'
-                            className="table2">
-                            <TableHeaderColumn dataField='product'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                isKey>상품</TableHeaderColumn>
-                            <TableHeaderColumn dataField='date' dataFormat={dataFormatter}
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >결제일자</TableHeaderColumn>
-                            <TableHeaderColumn dataField='payment' dataFormat={PriceFormatter}
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >금액</TableHeaderColumn>
-                        </BootstrapTable>
                     </div>
-{/* --------여기가 클릭하면 나와야하는 부분입니다 -------- -------- */}
-                    </div>
-                </div>
+        
+        {/* --------여기가 클릭하면 나와야하는 부분입니다 -------- -------- */}
+                    {this.state.show?
+                        <div>
+                            <h5>상품 결제 내역</h5>
+                            <Link to={{pathname:"/customer/update?member_no="+this.state.member_no}} className='btnCustomerNew'>
+                                수정하기
+                            </Link><br/><br/>
+                            <button type="button" onClick={this.handleClickAway}>X</button><br/>
+                            <label>이름</label><label>{ this.state.name }</label><br/>
+                            <label>고객번호</label><label>{ this.state.member_no }</label><br/>
+                            <label>정보</label><label>{ this.state.info }</label><br/>
+                            <label>연락처</label><label>{ this.state.phone }</label><br/>
+                            <label>주소</label><label>{ this.state.addr }</label><br/>
+                            <label>등록일</label><label>{ this.state.startDate }</label><br/>
+                            <label>담당자</label><label>{ this.state.trainer }</label><br/>
+                            <label>비고</label><label>{ this.state.note }</label><br/>
+                            <BootstrapTable data={ this.state.userSalesLists2 } hover 
+                                pagination={ this.state.customerList.length > 1 }
+                                options={options1}
+                                tableHeaderClass='tableHeader'  
+                                tableContainerClass='tableContainer'
+                                className="table2">
+                                <TableHeaderColumn dataField='product'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    isKey>상품</TableHeaderColumn>
+                                <TableHeaderColumn dataField='date' dataFormat={dataFormatter}
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    >결제일자</TableHeaderColumn>
+                                <TableHeaderColumn dataField='payment' dataFormat={PriceFormatter}
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    >금액</TableHeaderColumn>
+                            </BootstrapTable>
+                        </div>
+                        :null
+                        }
+                            
+        {/* --------여기가 클릭하면 나와야하는 부분입니다 -------- -------- */}      
+                    
+                </div>    
+                </ClickAwayListener>    
             </div>
         );
     }
