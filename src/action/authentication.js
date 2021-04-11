@@ -67,6 +67,9 @@ export function loginFailure() {
 export function getStatusRequest() {
     return (dispatch) => {
         // inform Get Status API is starting
+
+        console.log('____getStatus', getStatus())
+
         dispatch(getStatus());
         return fetch("http://"+ip+":3001/manager", {
         //return fetch("http://localhost:3000/manager", {

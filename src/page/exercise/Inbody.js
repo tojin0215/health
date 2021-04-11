@@ -20,6 +20,8 @@ import TableCell from '@material-ui/core/TableCell';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
+import {getStatusRequest} from '../../action/authentication';
+
 const ip = '13.124.141.28';
 
 require('moment-timezone');
@@ -38,8 +40,8 @@ class Inbody extends Component {
 
         const search1 = location.search;
         num = (search1.split('='))[1];
-        console.log('search1',search1)
-        console.log('search1__',(search1.split('='))[1])
+        //console.log('search1',search1)
+        //console.log('search1__',(search1.split('='))[1])
         this.state = {
             open:false,
             //member_no:member_no,
@@ -56,11 +58,63 @@ class Inbody extends Component {
         };
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
-            
+        this.handleOnClick = this.handleOnClick.bind(this);
+
         this.cusFetch();
     };
     goLogin = () => {
         this.props.history.push("/");
+    }
+    componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+        // get cookie by name
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "="); 
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+   
+        // get loginData from cookie
+        let loginData = getCookie('key');
+        // if loginData is undefined, do nothing
+        if(typeof loginData === "undefined"){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // decode base64 & parse json
+        loginData = JSON.parse(atob(loginData));
+        // if not logged in, do nothing
+        if(!loginData.isLoggedIn){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // page refreshed & has a session in cookie,
+        // check whether this cookie is valid or not
+        this.props.getStatusRequest().then(
+            () => {
+                console.log('????',this.props.status.valid)
+                // if session is not valid
+                if(!this.props.status.valid) {
+                    // logout the session
+                    loginData = {
+                        isLoggedIn: false,
+                        id: ''
+                    };
+   
+                    document.cookie='key=' + btoa(JSON.stringify(loginData));
+   
+                    // and notify
+                    alert("Your session is expired, please log in again")
+                }
+                else{
+                    alert('member_id'+this.state.member_no)
+                    // this.props.history.push({
+                    //     pathname: "/assign/inbody?member_no="+0
+                    // })
+                }
+            }
+        );
     }
 
     cusFetch = () => {
@@ -164,10 +218,12 @@ class Inbody extends Component {
     };
 
     handleOnClick = (e) => {
-        alert('조회')
+        if(this.state.member_no === '0'){
+            alert('선택된 회원이 없습니다. 회원을 선택 해주세요.')
+        }
         let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
         let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
-        //console.log(startTime,endTime)
+        console.log('clickclickclick')
         fetch('http://'+ip+':3001/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
         //fetch('http://localhost:3000/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
@@ -196,7 +252,7 @@ class Inbody extends Component {
                     this.setState({inbodyList : arr1});
                 }
                 
-                alert('조회완료')
+                //alert('조회완료')
             }); 
     }
 
@@ -407,8 +463,16 @@ class Inbody extends Component {
 
 const InbodyStateToProps = (state) => {
     return {
-      userinfo: state.authentication.userinfo
+      userinfo: state.authentication.userinfo,
+      status: state.authentication.status
     }
 }
+const InbodyDispatchToProps = (dispatch) => {
+    return {
+        getStatusRequest: () => {
+            return dispatch(getStatusRequest());
+        },
+    };
+};
 
-export default connect(InbodyStateToProps, undefined)(Inbody);
+export default connect(InbodyStateToProps, InbodyDispatchToProps)(Inbody);

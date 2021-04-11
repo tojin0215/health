@@ -23,6 +23,8 @@ class Home extends Component {
             this.props.history.push('/');
             return;
         } 
+        console.log('get cookie by name / get loginData from cookie : ',loginData)
+        //eyJpc0xvZ2dlZEluIjp0cnVlLCJpZCI6InRvamluIn0=
    
         // decode base64 & parse json
         loginData = JSON.parse(atob(loginData));
@@ -31,11 +33,14 @@ class Home extends Component {
             this.props.history.push('/');
             return;
         } 
+        console.log('get loginData from cookie / decode base64 & parse json : ',loginData)
+        //{isLoggedIn:true, id:"tojin"}
    
         // page refreshed & has a session in cookie,
         // check whether this cookie is valid or not
         this.props.getStatusRequest().then(
             () => {
+                console.log('????',this.props.status.valid)
                 // if session is not valid
                 if(!this.props.status.valid) {
                     // logout the session

@@ -9,6 +9,7 @@ import 'react-dropdown/style.css';
 
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import {getStatusRequest} from '../../action/authentication';
 
 import '../../styles/customer/Customer.css';
 
@@ -64,6 +65,50 @@ class Customer extends Component {
     }
     goLogin = () => {
         this.props.history.push("/");
+    }
+    componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+        // get cookie by name
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "="); 
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+   
+        // get loginData from cookie
+        let loginData = getCookie('key');
+        // if loginData is undefined, do nothing
+        if(typeof loginData === "undefined"){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // decode base64 & parse json
+        loginData = JSON.parse(atob(loginData));
+        // if not logged in, do nothing
+        if(!loginData.isLoggedIn){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // page refreshed & has a session in cookie,
+        // check whether this cookie is valid or not
+        this.props.getStatusRequest().then(
+            () => {
+                // if session is not valid
+                if(!this.props.status.valid) {
+                    // logout the session
+                    loginData = {
+                        isLoggedIn: false,
+                        id: ''
+                    };
+   
+                    document.cookie='key=' + btoa(JSON.stringify(loginData));
+   
+                    // and notify
+                    alert("Your session is expired, please log in again")
+                }
+            }
+        );
     }
     cusFetch = () => {
         fetch("http://"+ip+":3001/customer?type=all&fn="+this.props.userinfo.fitness_no, {
@@ -257,7 +302,7 @@ class Customer extends Component {
             hideSelectColumn: true,  // enable hide selection column.
             clickToSelect: true , // you should enable clickToSelect, otherwise, you can't select column.
             onSelect: this.onSelectRow,
-          };
+        };
 
         console.log('table__',this.state.userSalesLists2)
         console.log('클릭,',this.state.show)
@@ -280,7 +325,7 @@ class Customer extends Component {
                 
             <ClickAwayListener onClickAway={this.handleClickAway}>
                
-                <div className='container'style={{backgroundColor:'blue'}}>
+                <div className='container'>
                     <div className='customerSearch'>
                         <Dropdown className='searchDrop' options={options} onChange={this.selectItem} value={this.state.item} placeholder="Select an option" />
                         <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />
@@ -381,8 +426,17 @@ class Customer extends Component {
 
 const CustomerStateToProps = (state) => {
     return {
-      userinfo : state.authentication.userinfo
+      userinfo : state.authentication.userinfo,
+      status: state.authentication.status
     }
 }
 
-export default connect(CustomerStateToProps, undefined)(Customer);
+const CustomerDispatchToProps = (dispatch) => {
+    return {
+        getStatusRequest: () => {
+            return dispatch(getStatusRequest());
+        },
+    };
+};
+
+export default connect(CustomerStateToProps, CustomerDispatchToProps)(Customer);
