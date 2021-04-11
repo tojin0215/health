@@ -146,7 +146,7 @@ class Sales extends Component {
                 let card = 0
                 let cash = 0
                 let transfer = 0
-                this.state.salesLists.map((data) => {
+                this.state.salesLists.reverse().map((data) => {
                     let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
                     let time = moment(data.paymentDate).format("YYYY/MM/DD")
                     data = {...data, total, time}
@@ -196,7 +196,7 @@ class Sales extends Component {
                 salesLists3 : data,
             })
             let list = []
-            this.state.salesLists3.map((data) => {
+            this.state.salesLists3.reverse().map((data) => {
                 let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
                 let time = moment(data.paymentDate).format("YYYY/MM/DD")
                 data = {...data, total, time}
@@ -243,7 +243,7 @@ class Sales extends Component {
             let transfer = 0
             let list = []
             let toolLists=[]
-            this.state.salesLists3.map((data) => {
+            this.state.salesLists3.reverse().map((data) => {
                 let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
                 let time = moment(data.paymentDate).format("YYYY/MM/DD")
                 data = {...data, total, time}
@@ -309,7 +309,7 @@ class Sales extends Component {
                     let lists = []
                     let toolLists = []
     
-                    this.state.salesLists.map((data) => {
+                    this.state.salesLists.reverse()((data) => {
                         let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
                         let time = moment(data.paymentDate).format("YYYY/MM/DD")
                         data = {...data, total, time}
