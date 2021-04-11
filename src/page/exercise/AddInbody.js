@@ -75,9 +75,11 @@ class AddInbody extends Component {
     }
 
     cusFetch = () => {
-        if(this.state.member_no === ''){
+        if(this.state.member_no === '0'){
             alert('선택된 회원이 없습니다. 회원을 선택 해주세요.')
-            this.props.history.push('/assign/inbody');
+            this.props.history.push({
+                pathname: "/assign/inbody?member_no="+0
+            })
         }
 
         fetch("http://"+ip+":3001/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {

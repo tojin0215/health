@@ -75,7 +75,7 @@ class Customer extends Component {
             .then(response => response.json())
             .then(res => {
                 let arr = [];
-                for(let i=0 ; i<res.length ; i++){
+                for(let i=(res.length-1) ; i>=0 ; i--){
                     let sor = res[i].solar_or_lunar===true?"양":"음";
                     let s = res[i].sex===true?"남":"여";
                     arr.push({"no":res[i].member_no, "name":res[i].name, "sex":s, "phone":res[i].phone, "in_charge":res[i].in_charge,"start_date":moment(res[i].start_date).format("YYYY/MM/DD")+"~ ("+res[i].period+"개월)", "resi_no":res[i].resi_no+ " ("+sor+")" })
@@ -213,7 +213,7 @@ class Customer extends Component {
         .then(response => response.json())
         .then(res => {
                 let arr = [];
-                for(let i=0 ; i<res.length ; i++){
+                for(let i=(res.length-1) ; i>=0 ; i--){
                     let sor = res[i].solar_or_lunar===true?"양":"음";
                     let s = res[i].sex===true?"남":"여";
                     arr.push({"no":res[i].member_no, "name":res[i].name, "sex":s, "phone":res[i].phone, "in_charge":res[i].in_charge,"start_date":moment(res[i].start_date).format("YYYY/MM/DD")+"~ ("+res[i].period+"개월)", "resi_no":res[i].resi_no+ " ("+sor+")" })
@@ -280,7 +280,7 @@ class Customer extends Component {
                 
             <ClickAwayListener onClickAway={this.handleClickAway}>
                
-                <div className='container'style={{backgroundColor:'blue'}}>
+                <div className='container'>
                     <div className='customerSearch'>
                         <Dropdown className='searchDrop' options={options} onChange={this.selectItem} value={this.state.item} placeholder="Select an option" />
                         <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />

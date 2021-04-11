@@ -191,6 +191,10 @@ class Inbody extends Component {
 
     handleOnClick = (e) => {
         alert('조회')
+        if(this.state.member_no === '0'){
+            alert('선택된 회원이 없습니다. 회원을 선택 해주세요.')
+        }
+        
         let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
         let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
         //console.log(startTime,endTime)
