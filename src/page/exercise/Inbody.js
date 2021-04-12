@@ -231,14 +231,10 @@ class Inbody extends Component {
               'Content-type': 'application/json'
           },
           })
-            .then(data => {
-                return data.json();
-            }).then(data => {
-                this.setState({
-                    inbodyList : data,
-                })
-
-                if(this.state.inbodyList.length ==0){
+            .then(response => response.json())
+            .then(res => {
+                //alert('res'+res)
+                if(res.length ==0){
                     //alert('없음')                        
                     this.setState({
                         inbodyList:[],

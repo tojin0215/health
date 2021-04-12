@@ -309,7 +309,7 @@ class Sales extends Component {
                     let lists = []
                     let toolLists = []
     
-                    this.state.salesLists.reverse()((data) => {
+                    this.state.salesLists.reverse().map((data) => {
                         let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
                         let time = moment(data.paymentDate).format("YYYY/MM/DD")
                         data = {...data, total, time}
