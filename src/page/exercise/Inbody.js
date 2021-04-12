@@ -190,14 +190,12 @@ class Inbody extends Component {
     };
 
     handleOnClick = (e) => {
-        alert('조회')
         if(this.state.member_no === '0'){
             alert('선택된 회원이 없습니다. 회원을 선택 해주세요.')
         }
-        
         let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
         let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
-        //console.log(startTime,endTime)
+        console.log('clickclickclick')
         fetch('http://'+ip+':3001/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
         //fetch('http://localhost:3000/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
@@ -205,14 +203,10 @@ class Inbody extends Component {
               'Content-type': 'application/json'
           },
           })
-            .then(data => {
-                return data.json();
-            }).then(data => {
-                this.setState({
-                    inbodyList : data,
-                })
-
-                if(this.state.inbodyList.length ==0){
+            .then(response => response.json())
+            .then(res => {
+                //alert('res'+res)
+                if(res.length ==0){
                     //alert('없음')                        
                     this.setState({
                         inbodyList:[],
@@ -226,7 +220,7 @@ class Inbody extends Component {
                     this.setState({inbodyList : arr1});
                 }
                 
-                alert('조회완료')
+                //alert('조회완료')
             }); 
     }
 
