@@ -49,3 +49,57 @@
   width:100%;
   padding-top:2rem;
 }
+
+.customerSlide {
+  background-color:rgba(0,0,0,.9);
+  width:60%;
+  height:100%;
+  padding:5rem;
+  position:fixed;
+  top:0;
+  right:0;
+  color:#fff;
+}
+
+.customerSlide button {
+}
+
+.customerSlide .tableContainer {
+  border-top:1px solid #999;
+  border-bottom:1px solid #999;
+}
+
+.customerSlide .table2 .tableHeader {
+  border-bottom:1px solid #999;
+}
+
+.customerSlide ul {
+  width:100%;
+  padding:5rem;
+}
+
+.customerSlide ul label {
+  padding:.3rem;
+  min-width:10rem;
+}
+
+.customerSlide ul li label:first-child {
+  text-align:center;
+}
+
+.customerSlide .customerSlideUtill {
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+}
+
+.customerSlide .btnCustomerNew {
+  margin:0;
+  width:12rem;
+}
+
+.customerSlide .btnCustomerClose {
+  width:5rem;
+  height:4rem;
+  margin:0 2rem;
+}

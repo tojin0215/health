@@ -12,12 +12,18 @@ body {
   font-family: 'Noto Sans KR', sans-serif, 'Nanum Gothic', sans-serif;
   font-size:1.6rem;
 }
-ㄴ
+
 h2 {
   font-size:2.1rem;
 }
+
 h5 {
   font-size:1.7rem;
+}
+
+ul, ol, li {
+  list-style:none;
+  padding:0;
 }
 
 .wrap {
@@ -47,6 +53,7 @@ button {
   text-align:center;
   align-self:flex-end;
   transition:.35s ease-in-out;
+  cursor:pointer;
 }
 button:hover {
   color:#fff;

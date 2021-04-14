@@ -331,28 +331,60 @@ class Customer extends Component {
                     </div><br/><br/><br/>
                     </div>
         
-        {/* --------여기가 클릭하면 나와야하는 부분입니다 -------- -------- */}
+        {/* ------ 클릭하면 나와야하는 부분 ------ */}
                     {this.state.show?
-                        <div>
+                        <div className='customerSlide'>
+                            <div className='customerSlideUtill'>
+                                <Link to={{pathname:"/customer/update?member_no="+this.state.member_no}} className='btnCustomerNew'>
+                                    수정하기
+                                </Link>
+                                <button type="button" onClick={this.handleClickAway} className='btnCustomerClose'>X</button>
+                            </div>
+                            <h5>회원 정보</h5>
+                            <ul>
+                                <li>
+                                    <label>이름</label>
+                                    <label>{ this.state.name }</label>
+                                </li>
+                                <li>
+                                    <label>고객번호</label>
+                                    <label>{ this.state.member_no }</label>
+                                </li>
+                                <li>
+                                    <label>정보</label>
+                                    <label>{ this.state.info }</label>
+                                </li>
+                                <li>
+                                    <label>연락처</label>
+                                    <label>{ this.state.phone }</label>
+                                </li>
+                                <li>
+                                    <label>주소</label>
+                                    <label>{ this.state.addr }</label>
+                                </li>
+                                <li>
+                                    <label>등록일</label>
+                                    <label>{ this.state.startDate }</label>
+                                </li>
+                                <li>
+                                    <label>담당자</label>
+                                    <label>{ this.state.trainer }</label>
+                                </li>
+                                <li>
+                                    <label>비고</label>
+                                    <label>{ this.state.note }</label>
+                                </li>
+                            </ul>
                             <h5>상품 결제 내역</h5>
-                            <Link to={{pathname:"/customer/update?member_no="+this.state.member_no}} className='btnCustomerNew'>
-                                수정하기
-                            </Link><br/><br/>
-                            <button type="button" onClick={this.handleClickAway}>X</button><br/>
-                            <label>이름</label><label>{ this.state.name }</label><br/>
-                            <label>고객번호</label><label>{ this.state.member_no }</label><br/>
-                            <label>정보</label><label>{ this.state.info }</label><br/>
-                            <label>연락처</label><label>{ this.state.phone }</label><br/>
-                            <label>주소</label><label>{ this.state.addr }</label><br/>
-                            <label>등록일</label><label>{ this.state.startDate }</label><br/>
-                            <label>담당자</label><label>{ this.state.trainer }</label><br/>
-                            <label>비고</label><label>{ this.state.note }</label><br/>
-                            <BootstrapTable data={ this.state.userSalesLists2 } hover 
+                            <BootstrapTable 
+                                data={ this.state.userSalesLists2 } 
+                                hover
                                 pagination={ this.state.customerList.length > 1 }
                                 options={options1}
                                 tableHeaderClass='tableHeader'  
                                 tableContainerClass='tableContainer'
-                                className="table2">
+                                className="table2"
+                                >
                                 <TableHeaderColumn dataField='product'
                                     thStyle={ { 'textAlign': 'center' } }
                                     tdStyle={ { 'textAlign': 'center' } }
@@ -369,11 +401,9 @@ class Customer extends Component {
                         </div>
                         :null
                         }
-                            
-        {/* --------여기가 클릭하면 나와야하는 부분입니다 -------- -------- */}      
-                    
-                </div>    
-                </ClickAwayListener>    
+        {/* ------ 클릭하면 나와야하는 부분 ------ */}      
+                </div>
+                </ClickAwayListener>
             </div>
         );
     }
