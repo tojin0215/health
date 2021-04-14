@@ -3,8 +3,12 @@ import configureStore from './store/index';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import reducer from './reducer/index';
-import App from './component/App'
+import App from './component/App';
 import './styles/index.css';
+import './styles/basic.css';
+import './styles/layout.css';
+import './styles/table.css';
+import './styles/specific.css';
 import { BrowserRouter } from 'react-router-dom';
 
 const store = configureStore(reducer,{});

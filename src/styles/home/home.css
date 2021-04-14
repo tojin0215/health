@@ -1,0 +1,6 @@
+.home > .container {
+  padding-top:40rem;
+  padding-bottom:40rem;
+  display:flex;
+  justify-content:space-around;
+}
