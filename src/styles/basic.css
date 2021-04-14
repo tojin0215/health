@@ -33,7 +33,7 @@ ul, ol, li {
 .container {
   width:100%;
   max-width:1080px;
-  margin:0 auto;
+  margin:30rem auto;
   padding:0 0.5rem;
 }
 

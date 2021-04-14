@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -292,45 +293,44 @@ class Customer extends Component {
                     <div className='customerTable'>
                         <h5>회원 목록</h5>
                         <div>
-                        <BootstrapTable data={ this.state.customerList } hover 
+                            <BootstrapTable data={ this.state.customerList } hover 
                             options={textOptions}
                             tableHeaderClass='tableHeader'
                             tableContainerClass='tableContainer'
                             pagination={ this.state.customerList.length > 1 }
                             selectRow={ selectRowProp }
                             className="table2">
-                            <TableHeaderColumn dataField='no'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                isKey>No.</TableHeaderColumn>
-                            <TableHeaderColumn dataField='name'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >회원이름</TableHeaderColumn>
-                            <TableHeaderColumn dataField='sex'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >성별</TableHeaderColumn>
-                            <TableHeaderColumn dataField='phone'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >핸드폰</TableHeaderColumn>
-                            <TableHeaderColumn dataField='in_charge'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >담당자</TableHeaderColumn>
-                            <TableHeaderColumn dataField='start_date'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >강습시작일</TableHeaderColumn>
-                            <TableHeaderColumn dataField='resi_no'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >주민번호</TableHeaderColumn>
-                        </BootstrapTable>
-                    </div><br/><br/><br/>
+                                <TableHeaderColumn dataField='no'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    isKey>No.</TableHeaderColumn>
+                                <TableHeaderColumn dataField='name'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    >회원이름</TableHeaderColumn>
+                                <TableHeaderColumn dataField='sex'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    >성별</TableHeaderColumn>
+                                <TableHeaderColumn dataField='phone'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    >핸드폰</TableHeaderColumn>
+                                <TableHeaderColumn dataField='in_charge'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    >담당자</TableHeaderColumn>
+                                <TableHeaderColumn dataField='start_date'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    >강습시작일</TableHeaderColumn>
+                                <TableHeaderColumn dataField='resi_no'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    >주민번호</TableHeaderColumn>
+                            </BootstrapTable>
+                        </div>
                     </div>
-        
         {/* ------ 클릭하면 나와야하는 부분 ------ */}
                     {this.state.show?
                         <div className='customerSlide'>
@@ -404,6 +404,9 @@ class Customer extends Component {
         {/* ------ 클릭하면 나와야하는 부분 ------ */}      
                 </div>
                 </ClickAwayListener>
+                <div className='footer'>
+                    <Footer />
+                </div>
             </div>
         );
     }
