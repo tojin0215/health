@@ -43,3 +43,8 @@
 .MuiTable-root .MuiTableCell-body {
   padding:0 3rem;
 }
+
+/* 상품/매출 테이블 필터 크기 조절 */
+.sales .css-b8ldur-Input input[type=text] {
+  height:.2rem;
+}
