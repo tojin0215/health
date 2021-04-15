@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 
 import DatePicker from 'react-datepicker';
@@ -223,11 +224,25 @@ class AddInbody extends Component {
         console.log('___',this.state.member_no)
         
         return (
-
             <div>
-            <Header />
-            <Navigation goLogin={this.goLogin}/>
-            <h2>인바디 추가페이지</h2>
+                <div className='header'>
+                    <Header />
+                    <Navigation goLogin={this.goLogin}/>
+                    <div className='localNavigation'>
+                        <div className='container'>
+                            <h2>
+                            인바디 입력
+                            </h2>
+                            <div className='breadCrumb'>
+                                <Link to='#'>HOME</Link>
+                                <span>&#62;</span>
+                                <Link to='#'>인바디 정보</Link>
+                                <span>&#62;</span>
+                                <Link to='#'>인바디 입력</Link>
+                            </div>
+                        </div>{/*.container */}
+                    </div>{/*.localNavigation */}
+                </div>{/*.header */}
                {/* <label>번호 : {this.state.member_no}</label>  */}
                
                <label>이름 : {this.state.name}, </label> 
@@ -396,6 +411,9 @@ class AddInbody extends Component {
                 
                 <button type="button" onClick={this.handleOnClick}> 등록하기 </button>
             </form>
+            <div className='footer'>
+                <Footer />
+            </div>{/*.footer */}
             </div>
         );
     }

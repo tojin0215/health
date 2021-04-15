@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
@@ -23,13 +24,24 @@ class PackageSetting extends Component {
         
         return (
             <div>
-            <Header />
-            <Navigation goLogin={this.goLogin}/>
-            <div className='title'>
-                <div className='titleIn'>
-                    <h2>운동 묶음 설정</h2><h4>설정{'>'}운동 묶음 설정</h4>
-                </div>
-            </div>
+                <header className='header'>
+                    <Header />
+                    <Navigation goLogin={this.goLogin}/>
+                    <div className='localNavigation'>
+                        <div className='container'>
+                            <h2>
+                                운동 묶음 설정
+                            </h2>
+                            <div className='breadCrumb'>
+                                <NavLink exact to='#'>HOME</NavLink>
+                                <span>&#62;</span>
+                                <NavLink exact to='#'>운동 설정</NavLink>
+                                <span>&#62;</span>
+                                <NavLink exact to='#'>운동 묶음 설정</NavLink>
+                            </div>{/*.breadCrumb */}
+                        </div>{/*.container */}
+                    </div>{/*.localNavigation */}
+                </header>{/*.header */}
             <div className='container'>
                 <NavLink exact to="/exercise">[운동 설정]</NavLink>
                 <NavLink exact to="/setting/package">[운동 묶음 설정]</NavLink>
@@ -107,6 +119,9 @@ class PackageSetting extends Component {
                 </div>
                 <hr />
             </div>
+            <div className='footer'>
+                <Footer />
+            </div>{/*.footer */}
         </div>
         );
     }

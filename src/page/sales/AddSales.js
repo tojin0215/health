@@ -244,17 +244,24 @@ class AddSales extends Component {
         
         return (
         <div className='addSales'>
-            <header className='header'>
+            <div className='header'>
                 <Header />
                 <Navigation goLogin={this.goLogin}/>
-            </header>{/*.header */}
-            <div className='localNavigation'>
-                <div className='container'>
-                    <h2>
-                        결제 등록
-                    </h2>
-                </div>{/*.container */}
-            </div>{/*.localNavigation */}
+                <div className='localNavigation'>
+                    <div className='container'>
+                        <h2>
+                            결제 등록
+                        </h2>
+                        <div className='breadCrumb'>
+                            <Link to='#'>HOME</Link>
+                            <span>&#62;</span>
+                            <Link to='#'>상품/매출</Link>
+                            <span>&#62;</span>
+                            <Link to='#'>결제 등록</Link>
+                        </div>
+                    </div>{/*.container */}
+                </div>{/*.localNavigation */}
+            </div>{/*.header */}
             <div className='container'>
                 <h2>상품 등록페이지</h2>
                 <div>

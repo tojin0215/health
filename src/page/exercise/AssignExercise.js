@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -25,8 +26,22 @@ class AssignExercise extends Component {
         
         return (
             <div>
-            <Header />
-            <Navigation goLogin={this.goLogin}/>
+                <div className='header'>
+                    <Header />
+                    <Navigation goLogin={this.goLogin}/>
+                    <div className='localNavigation'>
+                        <div className='container'>
+                            <h2>
+                                운동 배정
+                            </h2>
+                            <div className='breadCrumb'>
+                                <Link to='#'>HOME</Link>
+                                <span>&#62;</span>
+                                <Link to='#'>운동 배정</Link>
+                            </div>
+                        </div>{/*.container */}
+                    </div>{/*.localNavigation */}
+                </div>{/*.header */}
             <div className='title'>
                 <div className='titleIn'>
                     <h2>운동 배정</h2><h4>운동 {'>'} 운동 배정</h4>
@@ -125,6 +140,9 @@ class AssignExercise extends Component {
                 <br />
                 <button>배정하기</button>
             </div>
+            <div className='footer'>
+                <Footer />
+            </div>{/*.footer */}
         </div>
         );
     }

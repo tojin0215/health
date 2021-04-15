@@ -249,7 +249,7 @@ class AddCustomer extends Component {
         console.log('11111',this.state.exercisePrice)   
         return (
         <div className='addCustomer'>
-            <div className='header'>
+            <header className='header'>
                 <Header />
                 <Navigation goLogin={this.goLogin}/>
                 <div className='localNavigation'>
@@ -257,9 +257,16 @@ class AddCustomer extends Component {
                         <h2>
                           신규 회원 등록
                         </h2>
+                        <div className='breadCrumb'>
+                            <Link to='#'>HOME</Link>
+                            <span>&#62;</span>
+                            <Link to='#'>회원 관리</Link>
+                            <span>&#62;</span>
+                            <Link to='#'>신규 회원 등록</Link>
+                        </div>{/*.breadCrumb */}
                     </div>{/*.container */}
                 </div>{/*.localNavigation */}
-            </div>{/*.header */}
+            </header>{/*.header */}
             <div className='container'>
                 <h3>
                     회원 정보 입력

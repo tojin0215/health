@@ -27,7 +27,11 @@ input[type=number] {
 input[type=password] {
   margin:1rem;
 }
-
+/* 드롭다운 메뉴 아래 화살표 위치 */
+.Dropdown-arrow {
+  top:1.8rem;
+}
+/* 달력 셀렉터 */
 .container .react-datepicker .react-datepicker__navigation {
   width:1rem;
   border:0.45rem solid transparent;

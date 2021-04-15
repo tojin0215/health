@@ -264,23 +264,23 @@ class Customer extends Component {
         console.log('클릭,',this.state.show)
         return (
             <div className='customer'>
-                <Header />
-                <Navigation goLogin={this.goLogin}/>
-                <div className='localNavigation'>
-                    <div className='container'>
-                        <h2>
-                            고객 관리
-                        </h2>
-                        <div className='breadCrumb'>
-                            <Link to='#'>HOME</Link>
-                            <span>&#60;</span>
-                            <Link to='#'>고객 관리</Link>
-                        </div>
-                    </div>
-                </div>
-                
+                <header className='header'>
+                    <Header />
+                    <Navigation goLogin={this.goLogin}/>
+                    <div className='localNavigation'>
+                        <div className='container'>
+                            <h2>
+                                회원 관리
+                            </h2>
+                            <div className='breadCrumb'>
+                                <Link to='#'>HOME</Link>
+                                <span>&#62;</span>
+                                <Link to='#'>회원 관리</Link>
+                            </div>{/*.breadCrumb */}
+                        </div>{/*.container */}
+                    </div>{/*.localNavigation */}
+                </header>
             <ClickAwayListener onClickAway={this.handleClickAway}>
-               
                 <div className='container'>
                     <div className='customerSearch'>
                         <Dropdown className='searchDrop' options={options} onChange={this.selectItem} value={this.state.item} placeholder="Select an option" />

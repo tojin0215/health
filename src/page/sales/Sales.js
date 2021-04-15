@@ -312,14 +312,19 @@ class Sales extends Component {
                 <div className='header'>
                     <Header />
                     <Navigation goLogin={this.goLogin}/>
-                </div>
-                <div className='localNavigation'>
-                    <div className='container'>
-                        <h2>
-                            상품/매출
-                        </h2>
-                    </div>
-                </div>
+                    <div className='localNavigation'>
+                        <div className='container'>
+                            <h2>
+                                상품/매출
+                            </h2>
+                            <div className='breadCrumb'>
+                                <Link to='#'>HOME</Link>
+                                <span>&#62;</span>
+                                <Link to='#'>상품/매출</Link>
+                            </div>
+                        </div>{/*.container */}
+                    </div>{/*.localNavigation */}
+                </div>{/*.header */}
                 <div className="container">
                     <h2>매출 현황</h2>
                     <div className="salesUtill">

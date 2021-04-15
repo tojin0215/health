@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
@@ -24,14 +25,23 @@ class Exercise extends Component {
         console.log(userinfo); //나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
         
         return (
-            <div>
-            <Header />
-            <Navigation goLogin={this.goLogin}/>
-            <div className='title'>
-                <div className='titleIn'>
-                    <h2>운동 설정</h2><h4>운동 {'>'} 운동 설정</h4>
-                </div>
-            </div>
+        <div>
+            <header className='header'>
+                <Header />
+                <Navigation goLogin={this.goLogin}/>
+                <div className='localNavigation'>
+                    <div className='container'>
+                        <h2>
+                            운동 설정
+                        </h2>
+                        <div className='breadCrumb'>
+                            <NavLink exact to='#'>HOME</NavLink>
+                            <span>&#62;</span>
+                            <NavLink exact to='#'>운동 설정</NavLink>
+                        </div>{/*.breadCrumb */}
+                    </div>{/*.container */}
+                </div>{/*.localNavigation */}
+            </header>{/*.header */}
             <div className='container'>
                 <NavLink exact to="/exercise">[운동 설정]</NavLink>
                 <NavLink exact to="/setting/package">[운동 묶음 설정]</NavLink>
@@ -39,7 +49,6 @@ class Exercise extends Component {
                 <div className='subTitle'>운동 정보 입력</div>
                 <hr />
                 <form className='input-exercise'>
-                    
                     <div className="input-row">
                         <label className="label-description">운동 이름</label>
                         <input placeholder="name" />
@@ -110,6 +119,9 @@ class Exercise extends Component {
                     </table>
                 </div>
             </div>
+            <div className='footer'>
+                <Footer />
+            </div>{/*.footer */}
         </div>
         );
     }

@@ -65,14 +65,14 @@ class Home extends Component {
             <div className='header'>
                 <Header />
                 <Navigation goLogin={this.goLogin}/>
-            </div>
-            <div className='localNavigation'>
-                <div className='container'>
-                    <h2>
-                        Home
-                    </h2>
-                </div>
-            </div>
+                <div className='localNavigation'>
+                    <div className='container'>
+                        <h2>
+                            Home
+                        </h2>
+                    </div>{/*.container */}
+                </div>{/*.localNavigation */}
+            </div>{/*.header */}
             <div className='container'>
                 <Link to="/customer" className='btnCustomerNew'>
                     고객

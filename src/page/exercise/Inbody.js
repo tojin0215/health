@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import Dropdown from 'react-dropdown';
 
@@ -274,9 +275,24 @@ class Inbody extends Component {
         //console.log('.....',this.state.inbodyList)
         return (
             <div className='inbody'>
-                <Header />
-                <Navigation goLogin={this.goLogin}/>
-                <localNavigation />
+                <div className='header'>
+                    <Header />
+                    <Navigation goLogin={this.goLogin}/>
+                    <div className='localNavigation'>
+                        <div className='container'>
+                            <h2>
+                                인바디 정보
+                            </h2>
+                            <div className='breadCrumb'>
+                                <Link to='#'>HOME</Link>
+                                <span>&#62;</span>
+                                <Link to='#'>운동 배정</Link>
+                                <span>&#62;</span>
+                                <Link to='#'>인바디 정보</Link>
+                            </div>
+                        </div>{/*.container */}
+                    </div>{/*.localNavigation */}
+                </div>{/*.header */}
                 <div className="container">
                      <h2>인바디보기</h2>
                      
@@ -425,6 +441,9 @@ class Inbody extends Component {
                     </BootstrapTable>
                     <text style={{marginTop:'50px'}}></text>
                 </div>
+                <div className='footer'>
+                    <Footer />
+                </div>{/*.footer */}
             </div>
         );
     }
