@@ -13,7 +13,7 @@
 
 .customerSearch .Dropdown-root {
   width:20rem;
-  margin:0 20rem 1rem 0;
+  margin:1rem;
 }
 
 .customerSearch .Dropdown-control {
@@ -21,8 +21,8 @@
   text-indent:1rem;
 }
 
-.customerSearch input[type=text] {
-  margin-right:1rem;
+.customerSearch .customerSearchIn {
+  display: flex;
 }
 
 .btnCustomerNew {
@@ -30,7 +30,7 @@
   height:4rem;
   border-radius:1rem;
   padding:.4rem .8rem;
-  margin:1rem 0 0 0;
+  margin:1rem;
   background-color:#000055;
   color:#fff;
   text-align:center;

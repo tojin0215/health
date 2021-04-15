@@ -284,8 +284,10 @@ class Customer extends Component {
                 <div className='container'>
                     <div className='customerSearch'>
                         <Dropdown className='searchDrop' options={options} onChange={this.selectItem} value={this.state.item} placeholder="Select an option" />
-                        <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />
-                        <button type="button" onClick={this.search}> 고객 검색 </button>
+                        <div className='customerSearchIn'>
+                            <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />
+                            <button type="button" onClick={this.search}> 고객 검색 </button>
+                        </div>
                     </div>
                     <Link to="/customer/add" className='btnCustomerNew'>
                         신규회원 등록
