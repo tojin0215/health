@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+html {
+  font-size:10px;
+  word-break:break-word;
+  letter-spacing:-.05rem;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans KR', sans-serif, 'Nanum Gothic', sans-serif;
+  font-size:1.6rem;
+}
+ㄴ
+h2 {
+  font-size:2.1rem;
+}
+h5 {
+  font-size:1.7rem;
+}
+
+.wrap {
+  width:100%;
+}
+
+.container {
+  width:100%;
+  max-width:1080px;
+  margin:0 auto;
+  padding:0 0.5rem;
+}
+
+a {
+  color:#000;
+}
+
+button {
+  width:20rem;
+  height:4rem;
+  border:none;
+  border-radius:1rem;
+  padding:.4rem .8rem;
+  background-color:#000055;
+  color:#fff;
+  font-size:1.7rem;
+  text-align:center;
+  align-self:flex-end;
+  transition:.35s ease-in-out;
+}
+button:hover {
+  color:#fff;
+  background-color:#0069d9;
+  text-decoration:none;
+}
+
+input[type=text] {
+  width:20rem;
+  height:4rem;
+  border-radius:1rem;
+  border:1px solid #000;
+  text-indent:1rem;
+  outline:none;
+  box-sizing:border-box;
+}
+
+input[type=number] {
+  width:20rem;
+  height:4rem;
+  border-radius:1rem;
+  border:1px solid #000;
+  text-indent:1rem;
+  outline:none;
+  box-sizing:border-box;
+}
+
+.container .react-datepicker .react-datepicker__navigation {
+  width:1rem;
+  border:0.45rem solid transparent;
+  border-radius:0;
+  background-color:transparent;
+}
+.container .react-datepicker .react-datepicker__navigation--previous {
+  border-right-color:#ccc;
+}
+.container .react-datepicker .react-datepicker__navigation--next {
+  border-left-color:#b3b3b3;
+}
+html .MuiOutlinedInput-notchedOutline {
+  border:none;
+}
+html .MuiInputBase-root {
+  font-size:inherit;
+}
+html .MuiFormLabel-root {
+  font-size:inherit;
+}
+html .MuiInputLabel-outlined {
+  transform: translate(2.3rem, 2.3rem) scale(1);
+}
+
+.localNavigation {
+  width:100%;
+  height:5rem;
+  border-bottom:0.1rem solid #000051;
+}
+
+.localNavigation .container {
+  padding:0 .5rem;
+  height:5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.localNavigation .container h2{
+  line-height:5rem;
+}
+.localNavigation .breadCrumb {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom:1rem;
+    font-size:1.2rem;
+}
+.localNavigation .breadCrumb a {
+  padding:0 1rem;
+}
+.localNavigation .breadCrumb a:last-child {
+  color:#000051;
+  font-size:1.4rem;
+  font-weight:600;
+}
+
+/*신규회원등록*/
+.container .MuiOutlinedInput-input {
+  padding:0;
+}
+.container .react-datepicker-popper {
+  z-index:2;
+}

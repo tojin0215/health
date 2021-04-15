@@ -3,22 +3,20 @@ import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // import './Exercise.css';
 // userinfo = {
-    // member_no: 1,
-    // member_name: "박재진",
-    // fitness_no: 1,
-    // fitness_name: "투진헬스장"
+    // useridx: 1,
+    // username: "박재진",
+    // fitnessidx: 1,
+    // fitnessname: "투진헬스장"
 // }
 
+const ip = '13.124.141.28';
 class AssignExercise extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            fitness_no: this.props.userinfo.fitness_no,
-
-        }
+    goLogin = () => {
+        this.props.history.push("/");
     }
     render() {
         const { userinfo } = this.props;
@@ -28,14 +26,15 @@ class AssignExercise extends Component {
         return (
             <div>
             <Header />
-            <Navigation />
-            <div className='container'>
-                <NavLink exact to="/exercise">[운동 설정]</NavLink>
-                <NavLink exact to="/exercise/package">[운동 묶음 설정]</NavLink>
-                <NavLink exact to="/exercise/assign">[운동 배정 설정]</NavLink>
-                <div className='title'>
-                <h2>운동 배정</h2><h4>운동{'>'}운동 배정</h4>
+            <Navigation goLogin={this.goLogin}/>
+            <div className='title'>
+                <div className='titleIn'>
+                    <h2>운동 배정</h2><h4>운동 {'>'} 운동 배정</h4>
                 </div>
+            </div>
+            <div className='container'>
+                <NavLink exact to="/assign">[운동 배정 설정]</NavLink>
+                <Link to={{pathname:"/assign/inbody?member_no="+0}}>[고객인바디]</Link>
             
                 <div>
                 <input placeholder="검색" /><button>돋보기</button>
@@ -133,7 +132,7 @@ class AssignExercise extends Component {
 
 const AssignExerciseStateToProps = (state) => {
     return {
-      userinfo: state.userinfo
+      userinfo: state.authentication.userinfo
     }
 }
 

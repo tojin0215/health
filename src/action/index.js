@@ -1,8 +1,6 @@
 import * as userinfo from "./userinfo";
-import * as exerciseinfo from "./exerciseinfo";
-
+import * as authentication from "./authentication"
 
 export default {
-    userinfo,
-    exerciseinfo
+    userinfo, authentication
 }
