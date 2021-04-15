@@ -21,6 +21,11 @@ input[type=number] {
   text-indent:1rem;
   outline:none;
   box-sizing:border-box;
+  margin:1rem;
+}
+
+input[type=password] {
+  margin:1rem;
 }
 
 .container .react-datepicker .react-datepicker__navigation {
