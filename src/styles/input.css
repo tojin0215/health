@@ -1,0 +1,57 @@
+input[type=radio] {
+  margin:1rem;
+}
+
+input[type=text] {
+  width:20rem;
+  height:4rem;
+  border-radius:1rem;
+  border:1px solid #000;
+  text-indent:1rem;
+  outline:none;
+  box-sizing:border-box;
+  margin:1rem;
+}
+
+input[type=number] {
+  width:20rem;
+  height:4rem;
+  border-radius:1rem;
+  border:1px solid #000;
+  text-indent:1rem;
+  outline:none;
+  box-sizing:border-box;
+}
+
+.container .react-datepicker .react-datepicker__navigation {
+  width:1rem;
+  border:0.45rem solid transparent;
+  border-radius:0;
+  background-color:transparent;
+}
+.container .react-datepicker .react-datepicker__navigation--previous {
+  border-right-color:#ccc;
+}
+.container .react-datepicker .react-datepicker__navigation--next {
+  border-left-color:#b3b3b3;
+}
+html .MuiOutlinedInput-notchedOutline {
+  border:none;
+}
+html .MuiInputBase-root {
+  font-size:inherit;
+}
+html .MuiFormLabel-root {
+  font-size:inherit;
+}
+html .MuiInputLabel-outlined {
+  transform: translate(2.3rem, 2.3rem) scale(1);
+}
+
+/*신규회원등록*/
+.container .MuiOutlinedInput-input {
+  padding:0;
+}
+.container .react-datepicker-popper {
+  z-index:2;
+}

@@ -368,45 +368,97 @@ class AddCustomer extends Component {
                             <label><input type="radio" id='전단지' value='3' name='join_route' onChange={this.handleChange}/>전단지</label>
                             <label><input type="radio" id='지인소개' value='4' name='join_route' onChange={this.handleChange}/>지인소개</label>
                             <label><input type="radio" id='SNS' value='5' name='join_route' onChange={this.handleChange}/>SNS</label>
-                            <label><input type="radio" id='기타' value='6' name='join_route' onChange={this.handleChange}/>기타</label>
-                            <input type="text" id="joinRouteEXC" className="form-control" placeholder="기타 가입경로" name="joinexc" onChange={this.handleChange}/>
-                            
+                            <label>
+                                <input type="radio" id='기타' value='6' name='join_route' onChange={this.handleChange}/>
+                                기타
+                                <input type="text" id="joinRouteEXC" className="form-control" placeholder="기타 가입경로" name="joinexc" onChange={this.handleChange}/>
+                            </label>
                         </div>
-                    </label>
-                    
-
-                <h5 className="AddSalesHeader"> 운동 종목 </h5>
-                <hr/>
-                <label><input type="radio" id='개인 PT' name='exerciseName' value='1' onChange={this.handleChange}/>개인 PT</label>
-                <label><input type="radio" id='GX' name='exerciseName' value='2' onChange={this.handleChange}/>GX</label>
-                <label><input type="radio" id='필라테스' name='exerciseName' value='3' onChange={this.handleChange}/>필라테스</label>
-                <label><input type="radio" id='헬스' name='exerciseName' value='4'onChange={this.handleChange}/>헬스</label>
-                <label><input type="radio" id='기타' name='exerciseName' value='5' onChange={this.handleChange}/>기타</label>
-                <input type="text" id="inputExercise" className="form-control" placeholder="기타 운동" name="Exercise" onChange={this.handleChange}/><br/><br/>
-                <h5> 결제 금액</h5>
-                <hr/>
-                <label><input type="radio" name='paymentTools' id='카드' onChange={this.handleChange}/>카드</label>
-                <label><input type="radio" name='paymentTools' id='현금' onChange={this.handleChange}/>현금</label>
-                <label><input type="radio" name='paymentTools' id='계좌이체' onChange={this.handleChange}/>계좌이체</label><br/>
-                <label>운동 <NumberFormat thousandSeparator={true} id="exercisePrice" placeholder="0" onChange={this.handleChange}/></label>
-                <label>운동복 <NumberFormat thousandSeparator={true} id="sportswearPrice" placeholder="0" onChange={this.handleChange}/></label>
-                <label>개인 사물함 <NumberFormat thousandSeparator={true} id="lockerPrice" placeholder="0" onChange={this.handleChange}/></label><br/>
-
-                <h5> 결제일</h5>
-                 <DatePicker
-                    selected={ this.state.paymentDate }
-                    onChange={ this.handleDateChange }
-                    name="paymentDate"
-                    dateFormat="MM/dd/yyyy"
-                />
-                <h5>금액 합계</h5>
-                <NumberFormat thousandSeparator={true} name="payment" id="TotalPayment" readOnly value={parseInt((this.state.exercisePrice).toString().replace(/[^(0-9)]/gi,""))+parseInt((this.state.sportswearPrice).toString().replace(/[^(0-9)]/gi,""))+parseInt((this.state.lockerPrice).toString().replace(/[^(0-9)]/gi,""))}/>
-                
-                <label>비고 : <input type="text" id='note' onChange={this.handleChange}/></label>
-                
-                <button type="button" onClick={this.handleOnClick}> 등록하기 </button>
-            </form>
-            </div>
+                    </label>{/*.customerRoute */}
+                    <div className='productPay'>
+                        <h3>상품 결제</h3>
+                        <h5 className="AddSalesHeader"> 운동 종목</h5>
+                        <div className='exerciseType'>
+                            <label>
+                                <input type="radio" id='개인 PT' name='exerciseName' value='1' onChange={this.handleChange}/>
+                                개인 PT
+                            </label>
+                            <label>
+                                <input type="radio" id='GX' name='exerciseName' value='2' onChange={this.handleChange}/>
+                                GX
+                            </label>
+                            <label>
+                                <input type="radio" id='필라테스' name='exerciseName' value='3' onChange={this.handleChange}/>
+                                필라테스
+                            </label>
+                            <label>
+                                <input type="radio" id='헬스' name='exerciseName' value='4'onChange={this.handleChange}/>
+                                헬스
+                            </label>
+                            <label>
+                                <input type="radio" id='기타' name='exerciseName' value='5' onChange={this.handleChange}/>
+                                <span>기타</span>
+                                <input type="text" id="inputExercise" className="form-control" placeholder="기타 운동" name="Exercise" onChange={this.handleChange}/>
+                            </label>
+                        </div>{/*.exerciseType */}
+                        <h5> 결제 금액</h5>
+                        <div className='payType'>
+                            <label>
+                                <input type="radio" name='paymentTools' id='카드' onChange={this.handleChange}/>
+                                카드
+                            </label>
+                            <label>
+                                <input type="radio" name='paymentTools' id='현금' onChange={this.handleChange}/>
+                                현금
+                            </label>
+                            <label>
+                                <input type="radio" name='paymentTools' id='계좌이체' onChange={this.handleChange}/>
+                                계좌이체
+                            </label>
+                        </div>{/*.payType */}
+                        <div className='paymentAmount'>
+                            <label>
+                                운동
+                                <NumberFormat thousandSeparator={true} id="exercisePrice" placeholder="0 원" onChange={this.handleChange}/>
+                            </label>
+                            <label>
+                                운동복
+                                <NumberFormat thousandSeparator={true} id="sportswearPrice" placeholder="0 원" onChange={this.handleChange}/>
+                            </label>
+                            <label>
+                                개인 사물함
+                                <NumberFormat thousandSeparator={true} id="lockerPrice" placeholder="0 원" onChange={this.handleChange}/>
+                            </label>
+                        </div>{/*.paymentAmount */}
+                        <div className='finalAmount'>
+                            <div className='finalAmountOthers'>
+                                <label className='amountDay'>
+                                    <span>결제일</span>
+                                    <DatePicker
+                                    selected={ this.state.paymentDate }
+                                    onChange={ this.handleDateChange }
+                                    name="paymentDate"
+                                    dateFormat="MM/dd/yyyy"/>
+                                </label>
+                                <label className='amountOther'>
+                                    <span>비고</span>
+                                    <input type="text" id='note' onChange={this.handleChange}/>
+                                </label>
+                            </div>
+                            <label className='amountTotal'>
+                                금액 합계
+                                <NumberFormat thousandSeparator={true} name="payment" id="TotalPayment" readOnly value={parseInt((this.state.exercisePrice).toString().replace(/[^(0-9)]/gi,""))+parseInt((this.state.sportswearPrice).toString().replace(/[^(0-9)]/gi,""))+parseInt((this.state.lockerPrice).toString().replace(/[^(0-9)]/gi,""))}/>
+                            </label>
+                        </div>{/*.finalAmount */}
+                        <button type="button" onClick={this.handleOnClick}>
+                            등록하기
+                        </button>
+                    </div>{/*.productPay */}
+                </form>{/*.formAddCustomer */}
+            </div>{/*.container */}
+            <div className='footer'>
+                <Footer />
+            </div>{/*.footer */}
         </div>/*.addCustomer */
         );
     }

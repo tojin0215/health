@@ -1,6 +1,6 @@
 .home > .container {
-  padding-top:40rem;
-  padding-bottom:40rem;
+  padding-top:30rem;
+  padding-bottom:15rem;
   display:flex;
   justify-content:space-around;
 }

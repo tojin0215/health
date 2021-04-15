@@ -1,0 +1,24 @@
+.btn {
+  font-size:1.7rem;
+}
+
+button {
+  width:20rem;
+  height:4rem;
+  border:none;
+  border-radius:1rem;
+  padding:.4rem .8rem;
+  background-color:#000055;
+  color:#fff;
+  font-size:1.7rem;
+  text-align:center;
+  align-self:flex-end;
+  transition:.35s ease-in-out;
+  cursor:pointer;
+}
+
+button:hover {
+  color:#fff;
+  background-color:#0069d9;
+  text-decoration:none;
+}
