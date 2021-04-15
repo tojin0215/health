@@ -1,0 +1,45 @@
+/*------ 고객 검색창 ------*/
+
+/* 선택창 레이아웃 */
+.MuiDialog-root .Dropdown-root {
+  width:100%;
+  padding:1rem;
+  margin:0;
+}
+/* 고객 이름 등 셀렉트 */
+.MuiDialog-root .Dropdown-root .Dropdown-control{
+  width: calc(50% - 1rem);
+}
+/* 타이틀 폰트 */
+.MuiDialog-root .MuiTypography-h6 {
+  font-size:2rem;
+}
+/* 검색창 div 크기 */
+.MuiDialog-root .customerSearch .customerSearchIn {
+  width:100%;
+}
+/* 텍스트 인풋 크기 */
+.MuiDialog-root .customerSearch .customerSearchIn #search {
+  width:50%;
+}
+/* 고객 검색 버튼크기 */
+.MuiDialog-root .customerSearch .customerSearchIn button {
+  width:50%;
+}
+/* 테이블 폰트 크기 */
+.MuiTable-root .MuiTableCell-root {
+  font-size:1.6rem;
+}
+/* 버튼 크기 */
+.MuiTable-root button {
+  width:8rem;
+}
+/* 테이블 헤더 */
+.MuiTable-root .MuiTableCell-head {
+  padding:1rem 3rem;
+  text-align: center;
+}
+/* 테이블 셀 사이즈 */
+.MuiTable-root .MuiTableCell-body {
+  padding:0 3rem;
+}

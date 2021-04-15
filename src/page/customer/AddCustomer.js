@@ -377,7 +377,9 @@ class AddCustomer extends Component {
                     </label>{/*.customerRoute */}
                     <div className='productPay'>
                         <h3>상품 결제</h3>
-                        <h5 className="AddSalesHeader"> 운동 종목</h5>
+                        <h5 className="AddSalesHeader">
+                            운동 종목
+                        </h5>
                         <div className='exerciseType'>
                             <label>
                                 <input type="radio" id='개인 PT' name='exerciseName' value='1' onChange={this.handleChange}/>
@@ -439,16 +441,16 @@ class AddCustomer extends Component {
                                     onChange={ this.handleDateChange }
                                     name="paymentDate"
                                     dateFormat="MM/dd/yyyy"/>
-                                </label>
+                                </label>{/*.amountDay */}
                                 <label className='amountOther'>
                                     <span>비고</span>
                                     <input type="text" id='note' onChange={this.handleChange}/>
-                                </label>
-                            </div>
+                                </label>{/*.amountOther */}
+                            </div>{/*.finalAmountOthers */}
                             <label className='amountTotal'>
                                 금액 합계
                                 <NumberFormat thousandSeparator={true} name="payment" id="TotalPayment" readOnly value={parseInt((this.state.exercisePrice).toString().replace(/[^(0-9)]/gi,""))+parseInt((this.state.sportswearPrice).toString().replace(/[^(0-9)]/gi,""))+parseInt((this.state.lockerPrice).toString().replace(/[^(0-9)]/gi,""))}/>
-                            </label>
+                            </label>{/*.amountTotal */}
                         </div>{/*.finalAmount */}
                         <button type="button" onClick={this.handleOnClick}>
                             등록하기
