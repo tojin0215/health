@@ -1,6 +1,78 @@
 .home > .container {
-  padding-top:30rem;
   padding-bottom:15rem;
   display:flex;
-  justify-content:space-around;
+  flex-wrap:wrap;
+}
+
+.home .mainVisual {
+  width:100%;
+  height:40rem;
+  /* background-image: url(${mainVisual1}); */
+  background:no-repeat top/contain url(../../images/mainVisual1.png);
+  text-indent:-9999rem;
+}
+
+.home .homeIcon {
+  width:100%;
+  position:absolute;
+  top:50rem;
+  left:0;
+}
+
+.home .homeIcon ul {
+  display:flex;
+  justify-content: space-around;
+  flex-wrap:wrap;
+  width:100%;
+  padding:0 20rem;
+}
+
+.home .homeIcon ul li {
+  width:20%;
+  height:22rem;
+}
+
+.home .homeIcon ul li:hover {
+  
+}
+
+.home .homeIcon a {
+  display:flex;
+  width:100%;
+  height:100%;
+  background:no-repeat center/contain;
+  /* height:100px; */
+  color:#005;
+  padding:0;
+  margin:0;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.home .homeIcon a p {
+  text-indent:-1rem;
+  font-size:1.6rem;
+  color:#3675F6;
+  font-weight:700;
+  padding-bottom:1rem;
+}
+
+.home .homeIcon .btnCustomer {
+  background-image:url(../../images/btnCustomer.png)
+}
+
+.home .homeIcon .btnExercise {
+  background-image:url(../../images/btnExercise.png)
+}
+
+.home .homeIcon .btnSales {
+  background-image:url(../../images/btnSales.png)
+}
+
+.home .homeIcon .btnStatic {
+  background-image:url(../../images/btnStatic.png)
+}
+
+.home .homeIcon .btnSetting {
+  background-image:url(../../images/btnSetting.png)
 }

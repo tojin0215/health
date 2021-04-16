@@ -6,6 +6,10 @@ import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import {getStatusRequest} from '../../action/authentication';
 import '../../styles/home/home.css';
+
+import mainVisual1 from '../../images/mainVisual1.png';
+import mainVisual2 from '../../images/mainVisual2.png';
+
 class Home extends Component {
     goLogin = () => {
         this.props.history.push("/");
@@ -74,21 +78,41 @@ class Home extends Component {
                 </div>{/*.localNavigation */}
             </div>{/*.header */}
             <div className='container'>
-                <Link to="/customer" className='btnCustomerNew'>
-                    고객
-                </Link>
-                <Link to="/sales" className='btnCustomerNew'>
-                    상품매출
-                </Link>
-                <Link to="/exercise" className='btnCustomerNew'>
-                    설정
-                </Link>
-                <Link to="/assign" className='btnCustomerNew'>
-                    운동
-                </Link>
-                <Link to="/statistics" className='btnCustomerNew'>
-                    통계
-                </Link>
+                <div className='mainVisual'>
+                    메인 이미지
+                </div>
+                <div className='homeIcon'>
+                    <ul>
+                        <li>
+                            <Link to="/customer" className='btnCustomerNew btnCustomer'>
+                                <p>고객</p>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/sales" className='btnCustomerNew btnSales'>
+                                <p>상품매출</p>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/exercise" className='btnCustomerNew btnSetting'>
+                                <p>설정</p>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/assign" className='btnCustomerNew btnExercise'>
+                                <p>운동</p>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/statistics" className='btnCustomerNew btnStatic'>
+                                <p>통계</p>
+                            </Link>
+                        </li>
+                    </ul>
+                    
+                        
+                    
+                </div>
             </div>
             <div className='footer'>
                 <Footer />
