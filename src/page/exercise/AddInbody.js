@@ -234,7 +234,7 @@ class AddInbody extends Component {
                             인바디 입력
                             </h2>
                             <div className='breadCrumb'>
-                                <Link to='#'>HOME</Link>
+                                <Link to='/home'>HOME</Link>
                                 <span>&#62;</span>
                                 <Link to='#'>인바디 정보</Link>
                                 <span>&#62;</span>

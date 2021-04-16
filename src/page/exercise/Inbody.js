@@ -284,9 +284,9 @@ class Inbody extends Component {
                                 인바디 정보
                             </h2>
                             <div className='breadCrumb'>
-                                <Link to='#'>HOME</Link>
+                                <Link to='/home'>HOME</Link>
                                 <span>&#62;</span>
-                                <Link to='#'>운동 배정</Link>
+                                <Link to='/assign'>운동 배정</Link>
                                 <span>&#62;</span>
                                 <Link to='#'>인바디 정보</Link>
                             </div>

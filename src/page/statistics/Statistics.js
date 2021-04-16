@@ -34,9 +34,9 @@ class Statistics extends Component {
                                 통계
                             </h2>
                             <div className='breadCrumb'>
-                                <Link to='#'>HOME</Link>
+                                <Link to='/home'>HOME</Link>
                                 <span>&#62;</span>
-                                <Link to='#'>통계</Link>
+                                <Link to='/statistics'>통계</Link>
                             </div>
                         </div>{/*.container */}
                     </div>{/*.localNavigation */}

@@ -258,11 +258,11 @@ class AddCustomer extends Component {
                           신규 회원 등록
                         </h2>
                         <div className='breadCrumb'>
-                            <Link to='#'>HOME</Link>
+                            <Link to='/home'>HOME</Link>
                             <span>&#62;</span>
-                            <Link to='#'>회원 관리</Link>
+                            <Link to='/customer'>회원 관리</Link>
                             <span>&#62;</span>
-                            <Link to='#'>신규 회원 등록</Link>
+                            <Link to='/customer/add'>신규 회원 등록</Link>
                         </div>{/*.breadCrumb */}
                     </div>{/*.container */}
                 </div>{/*.localNavigation */}

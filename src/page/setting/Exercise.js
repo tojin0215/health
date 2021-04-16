@@ -4,6 +4,7 @@ import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import '../../styles/exercise/Exercise.css';
 
@@ -35,9 +36,9 @@ class Exercise extends Component {
                             운동 설정
                         </h2>
                         <div className='breadCrumb'>
-                            <NavLink exact to='#'>HOME</NavLink>
+                            <Link to='/home'>HOME</Link>
                             <span>&#62;</span>
-                            <NavLink exact to='#'>운동 설정</NavLink>
+                            <Link to='#'>운동 설정</Link>
                         </div>{/*.breadCrumb */}
                     </div>{/*.container */}
                 </div>{/*.localNavigation */}

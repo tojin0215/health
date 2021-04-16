@@ -273,9 +273,9 @@ class Customer extends Component {
                                 회원 관리
                             </h2>
                             <div className='breadCrumb'>
-                                <Link to='#'>HOME</Link>
+                                <Link to='/home'>HOME</Link>
                                 <span>&#62;</span>
-                                <Link to='#'>회원 관리</Link>
+                                <Link to='/customer'>회원 관리</Link>
                             </div>{/*.breadCrumb */}
                         </div>{/*.container */}
                     </div>{/*.localNavigation */}
