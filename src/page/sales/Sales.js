@@ -70,7 +70,8 @@ class Sales extends Component {
 
     componentWillMount() {
 
-        fetch("http://"+ip+":3001/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+        //fetch("http://"+ip+":3001/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://localhost:3000/customer?type=all&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -84,8 +85,9 @@ class Sales extends Component {
                 }
                 this.setState({customerList : arr});
         });
-
-        fetch('http://'+ip+':3001/sales?type=all&fn='+this.props.userinfo.fitness_no, {
+        
+        //fetch('http://'+ip+':3001/sales?type=all&fn='+this.props.userinfo.fitness_no, {
+        fetch('http://localhost:3000/sales?type=all&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -134,9 +136,11 @@ class Sales extends Component {
 
         let url = ''
         if(selectedOption.label === '전체'){
-            url = 'http://'+ip+':3001/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            //url = 'http://'+ip+':3001/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            url = 'http://localhost:3000/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
         } else{
-            url = 'http://'+ip+':3001/sales?type=tools&paymentTools='+selectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            //url = 'http://'+ip+':3001/sales?type=tools&paymentTools='+selectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            url = 'http://localhost:3000/sales?type=tools&paymentTools='+selectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
         }
         fetch(url, {
             method: "GET",
@@ -177,9 +181,11 @@ class Sales extends Component {
 
         let url = ''
         if(exerciseSelectedOption.label === '전체'){
-            url = 'http://'+ip+':3001/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            //url = 'http://'+ip+':3001/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            url = 'http://localhost:3000/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
         }  else{
-            url = 'http://'+ip+':3001/sales?type=exercise&exerciseName='+exerciseSelectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+           //url = 'http://'+ip+':3001/sales?type=exercise&exerciseName='+exerciseSelectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            url = 'http://localhost:3000/sales?type=exercise&exerciseName='+exerciseSelectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
         }
         fetch(url, {
             method: "GET",
@@ -238,7 +244,8 @@ class Sales extends Component {
         let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
         let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
 
-        fetch('http://'+ip+':3001/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no, {
+        //fetch('http://'+ip+':3001/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no, {
+        fetch('http://localhost:3000/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'

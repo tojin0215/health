@@ -71,8 +71,8 @@ class Inbody extends Component {
             //url = "http://"+ip+":3001/inbody?type=all&fn="+this.props.userinfo.fitness_no
             this.setState({inbodyList : []});
         } else{
-            url = "http://"+ip+":3001/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
-            //url = "http://localhost:3000/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
+            //url = "http://"+ip+":3001/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
+            url = "http://localhost:3000/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
             fetch(url, {
                 method: "GET",
                 headers: {
@@ -87,8 +87,8 @@ class Inbody extends Component {
                         }
                         this.setState({inbodyList : arr1});
 
-                        fetch("http://"+ip+":3001/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
-                        //fetch("http://localhost:3000/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
+                        //fetch("http://"+ip+":3001/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
+                        fetch("http://localhost:3000/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
                             method: "GET",
                             headers: {
                             'Content-type': 'application/json'
@@ -164,8 +164,8 @@ class Inbody extends Component {
             age:age,
             open:false
         })
-        let url = "http://"+ip+":3001/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
-        //let url = "http://localhost:3000/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
+        //let url = "http://"+ip+":3001/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
+        let url = "http://localhost:3000/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
         fetch(url, {
             method: "GET",
             headers: {
@@ -196,8 +196,8 @@ class Inbody extends Component {
         let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
         let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
         console.log('clickclickclick')
-        fetch('http://'+ip+':3001/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
-        //fetch('http://localhost:3000/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
+        //fetch('http://'+ip+':3001/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
+        fetch('http://localhost:3000/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -232,8 +232,8 @@ class Inbody extends Component {
         }else if(this.state.item === "핸드폰"){
             it = '1'
         }
-        fetch("http://"+ip+":3001/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
-        //fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        //fetch("http://"+ip+":3001/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
