@@ -60,7 +60,7 @@ class AssignCheckExercise extends Component {
                 <Link to={{pathname:"/assign/inbody?member_no="+0}}>[고객인바디]</Link>
             
                 <div>
-                    <label>{this.state.member_no}님의 운동배정입니다.</label>
+                    <label>{this.state.name}님의 운동배정입니다.</label>
 
                 </div>
                 <BootstrapTable data={ List } hover 
