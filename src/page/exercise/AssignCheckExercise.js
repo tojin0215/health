@@ -4,88 +4,6 @@ import Header from '../../component/header/Header';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-const List = [
-    {
-        no: 1,
-        name: 'AAA',
-        tool: '바벨',
-        aa: '상체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 2,
-        name: 'BBB',
-        tool: '바벨',
-        aa: '하체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 3,
-        name: 'CCC',
-        tool: '바벨',
-        aa: '전신',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 4,
-        name: 'AAA',
-        tool: '바벨',
-        aa: '상체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 5,
-        name: 'BBB',
-        tool: '바벨',
-        aa: '하체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 6,
-        name: 'CCC',
-        tool: '바벨',
-        aa: '전신',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 7,
-        name: 'AAA',
-        tool: '바벨',
-        aa: '상체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 8,
-        name: 'BBB',
-        tool: '바벨',
-        aa: '하체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-];
 
 // const ip = '13.124.141.28';
 
@@ -100,11 +18,33 @@ class AssignCheckExercise extends Component {
             fitness_no: this.props.userinfo.fitness_no, //Redux를 통해 받은 값
             member_no: Number(search.split('=')[1]),
             assignDefault: this.props.location.state.assignDefault,
+            assignCustom: this.props.location.state.assignCustom,
 
             exerciseList: [],
         };
-
-        this.getExerciseListDefault();
+        if (this.props.location.state.assignDefault.length !== 0)
+            this.getExerciseListDefault();
+        else {
+            let arr = [];
+            let idx = 0;
+            for (const [key, value] of Object.entries(
+                this.props.location.state.assignCustom
+            )) {
+                console.log(key, value);
+                for (const [k, v] of Object.entries(value)) {
+                    idx = idx + 1;
+                    console.log(idx, v);
+                    if (v.hasOwnProperty('exercise_no')) {
+                        v['no'] = idx;
+                    } else {
+                        v['exercise_no'] = k;
+                        v['no'] = idx;
+                    }
+                    arr.push(v);
+                }
+            }
+            this.state.exerciseList = arr;
+        }
     }
     getExerciseListDefault = () => {
         let exList = [];
@@ -121,6 +61,7 @@ class AssignCheckExercise extends Component {
             -1
         );
     };
+    loadInbody = () => {};
 
     goLogin = () => {
         this.props.history.push('/');
@@ -139,6 +80,7 @@ class AssignCheckExercise extends Component {
                 console.log(response);
             });
         });
+        alert('배정되었습니다.');
     };
     procDefaultPackage = (
         next_func,
@@ -230,7 +172,7 @@ class AssignCheckExercise extends Component {
                         last_group_no
                     );
                 } else {
-                    next_func(arr, last_group_no);
+                    next_func(exerciseList, last_group_no);
                 }
             })
             .catch((err) => console.error(err));
@@ -287,6 +229,21 @@ class AssignCheckExercise extends Component {
                 last_group_no
             );
         } else {
+            const exerciseList = this.state.exerciseList;
+            let arr = [];
+            [...exerciseList].forEach((ex) => {
+                let res = JSON.parse(JSON.stringify(ex));
+                res['fitness_no'] = fitness_no;
+                res['member_no'] = member_no;
+                res['group_no'] = last_group_no + 1;
+                res['data_type'] = res['default_data_type'];
+                res['data'] = res['default_data'];
+                res['set_count'] = res['default_set_count'];
+                res['rest_second'] = res['default_rest_second'];
+                arr.push(res);
+            });
+            next_func(arr, last_group_no);
+            // this.state.assignCustom;
         }
     };
 

@@ -26,96 +26,6 @@ function onChangeHandler(a, e) {
     [e.target.a] = e.target.value;
 }
 
-let List = [
-    {
-        no: 1,
-        name: 'AAA',
-        tool: '바벨',
-        aa: '상체',
-        set: (
-            <input
-                type="text"
-                id="1"
-                value="3"
-                onChange={(e) => this.onChangeHandler('id', e)}
-            />
-        ),
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 2,
-        name: 'BBB',
-        tool: '바벨',
-        aa: '하체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 3,
-        name: 'CCC',
-        tool: '바벨',
-        aa: '전신',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 4,
-        name: 'AAA',
-        tool: '바벨',
-        aa: '상체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 5,
-        name: 'BBB',
-        tool: '바벨',
-        aa: '하체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 6,
-        name: 'CCC',
-        tool: '바벨',
-        aa: '전신',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 7,
-        name: 'AAA',
-        tool: '바벨',
-        aa: '상체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 8,
-        name: 'BBB',
-        tool: '바벨',
-        aa: '하체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-];
-
 const options = ['이름', '핸드폰'];
 const defaultOption = options[0];
 
@@ -138,6 +48,16 @@ class AssignExercise extends Component {
             show3: false,
             show4: false,
             show5: false,
+            select_top: [],
+            select_top_data: {},
+            select_bottom: [],
+            select_bottom_data: {},
+            select_allbody: [],
+            select_allbody_data: {},
+            select_core: [],
+            select_core_data: {},
+            select_oxy: [],
+            select_oxy_data: {},
         };
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -163,6 +83,29 @@ class AssignExercise extends Component {
     // handleChange=(e)=>{
     //     [e.target.name]=e.target.value
     // }
+    beforeSaveCell = (row, cellName, cellValue) => {
+        if (
+            cellName === 'no' ||
+            cellName === 'name' ||
+            cellName === 'tool' ||
+            cellName === 'aa' ||
+            cellName === 'link'
+        ) {
+            alert('변경할 수 없습니다');
+            return false;
+        } else if (
+            cellName === 'set' ||
+            cellName === 'bb' ||
+            cellName === 'cc'
+        ) {
+            if (/\d+/.test(cellValue)) {
+            } else {
+                alert('숫자만 입력 가능합니다.');
+                return false;
+            }
+        }
+    };
+    afterSaveCell = (row, cellName, cellValue) => {};
 
     choiceUser = (e) => {
         console.log('value', e.target.value);
@@ -259,6 +202,131 @@ class AssignExercise extends Component {
             });
         }
     }
+
+    onSelectRowTop = (row, isSelected, e) => {
+        const exercise_no = row['no'];
+        const select_name = 'select_top';
+        const select_data = 'select_top_data';
+
+        let selected = this.state.select_top;
+        let selected_data = JSON.parse(
+            JSON.stringify(this.state.select_top_data)
+        );
+
+        if (isSelected) {
+            const d = {};
+            selected_data[exercise_no] = row;
+            d[select_name] = [...selected, exercise_no];
+            d[select_data] = selected_data;
+            this.setState(d);
+        } else {
+            const d = {};
+            delete selected_data[exercise_no];
+            d[select_name] = selected.filter((i) => i !== exercise_no);
+            d[select_data] = selected_data;
+            this.setState(d);
+        }
+    };
+
+    onSelectRowBottom = (row, isSelected, e) => {
+        const exercise_no = row['no'];
+        const select_name = 'select_bottom';
+        const select_data = 'select_bottom_data';
+
+        let selected = this.state.select_bottom;
+        let selected_data = JSON.parse(
+            JSON.stringify(this.state.select_bottom_data)
+        );
+
+        if (isSelected) {
+            const d = {};
+            selected_data[exercise_no] = row;
+            d[select_name] = [...selected, exercise_no];
+            d[select_data] = selected_data;
+            this.setState(d);
+        } else {
+            const d = {};
+            delete selected_data[exercise_no];
+            d[select_name] = selected.filter((i) => i !== exercise_no);
+            d[select_data] = selected_data;
+            this.setState(d);
+        }
+    };
+
+    onSelectRowCore = (row, isSelected, e) => {
+        const exercise_no = row['no'];
+        const select_name = 'select_core';
+        const select_data = 'select_core_data';
+
+        let selected = this.state.select_core;
+        let selected_data = JSON.parse(
+            JSON.stringify(this.state.select_core_data)
+        );
+
+        if (isSelected) {
+            const d = {};
+            selected_data[exercise_no] = row;
+            d[select_name] = [...selected, exercise_no];
+            d[select_data] = selected_data;
+            this.setState(d);
+        } else {
+            const d = {};
+            delete selected_data[exercise_no];
+            d[select_name] = selected.filter((i) => i !== exercise_no);
+            d[select_data] = selected_data;
+            this.setState(d);
+        }
+    };
+
+    onSelectRowAllbody = (row, isSelected, e) => {
+        const exercise_no = row['no'];
+        const select_name = 'select_allbody';
+        const select_data = 'select_allbody_data';
+
+        let selected = this.state.select_allbody;
+        let selected_data = JSON.parse(
+            JSON.stringify(this.state.select_allbody_data)
+        );
+
+        if (isSelected) {
+            const d = {};
+            selected_data[exercise_no] = row;
+            d[select_name] = [...selected, exercise_no];
+            d[select_data] = selected_data;
+            this.setState(d);
+        } else {
+            const d = {};
+            delete selected_data[exercise_no];
+            d[select_name] = selected.filter((i) => i !== exercise_no);
+            d[select_data] = selected_data;
+            this.setState(d);
+        }
+    };
+
+    onSelectRowOxy = (row, isSelected, e) => {
+        const exercise_no = row['no'];
+        const select_name = 'select_oxy';
+        const select_data = 'select_oxy_data';
+
+        let selected = this.state.select_oxy;
+        let selected_data = JSON.parse(
+            JSON.stringify(this.state.select_oxy_data)
+        );
+
+        if (isSelected) {
+            const d = {};
+            selected_data[exercise_no] = row;
+            d[select_name] = [...selected, exercise_no];
+            d[select_data] = selected_data;
+            this.setState(d);
+        } else {
+            const d = {};
+            delete selected_data[exercise_no];
+            d[select_name] = selected.filter((i) => i !== exercise_no);
+            d[select_data] = selected_data;
+            this.setState(d);
+        }
+    };
 
     click1 = (e) => {
         //상체
@@ -411,40 +479,70 @@ class AssignExercise extends Component {
             .then((res) => {
                 let arr = [];
                 let arr2 = [];
+
+                let arr_top = [];
+                let arr_bottom = [];
+                let arr_allbody = [];
+                let arr_core = [];
+                let arr_oxy = [];
+
                 for (let i = res.length - 1; i >= 0; i--) {
                     let part = ', ';
                     let part_num = Number(res[i].part);
                     if (part_num >= 16) {
                         part = '유산소, ' + part;
                         part_num = part_num - 16;
+                        if (res[i].is_default) {
+                            arr_oxy.push(res[i].exercise_no);
+                        }
                     }
                     if (part_num >= 8) {
                         part = '코어, ' + part;
                         part_num = part_num - 8;
+                        if (res[i].is_default) {
+                            arr_core.push(res[i].exercise_no);
+                        }
                     }
                     if (part_num >= 4) {
                         part = '전신, ' + part;
                         part_num = part_num - 4;
+                        if (res[i].is_default) {
+                            arr_allbody.push(res[i].exercise_no);
+                        }
                     }
                     if (part_num >= 2) {
                         part = '하체, ' + part;
                         part_num = part_num - 2;
+                        if (res[i].is_default) {
+                            arr_bottom.push(res[i].exercise_no);
+                        }
                     }
                     if (part_num === 1) {
                         part = '상체, ' + part;
+                        if (res[i].is_default) {
+                            arr_top.push(res[i].exercise_no);
+                        }
                     }
                     part = part.slice(0, -2);
 
-                    arr.push({
-                        no: res[i].exercise_no,
-                        name: res[i].name,
-                        tool: res[i].machine,
-                        aa: part,
-                        set: res[i].default_set_count,
-                        bb: res[i].default_data,
-                        cc: res[i].default_rest_second,
-                        link: res[i].url,
-                    });
+                    res[i]['no'] = res[i].exercise_no;
+                    res[i]['tool'] = res[i].machine;
+                    res[i]['aa'] = part;
+                    res[i]['set'] = res[i].default_set_count;
+                    res[i]['bb'] = res[i].default_data;
+                    res[i]['cc'] = res[i].default_rest_second;
+                    res[i]['link'] = res[i].url;
+                    arr.push(res[i]);
+                    // arr.push({
+                    //     no: res[i].exercise_no,
+                    //     name: res[i].name,
+                    //     tool: res[i].machine,
+                    //     aa: part,
+                    //     set: res[i].default_set_count,
+                    //     bb: res[i].default_data,
+                    //     cc: res[i].default_rest_second,
+                    //     link: res[i].url,
+                    // });
                     if (res[i].is_default) {
                         arr2.push(res[i].exercise_no);
                     }
@@ -454,6 +552,16 @@ class AssignExercise extends Component {
                     selectedListId: arr2,
                     exerciseList: arr,
                 });
+
+                //   this.setState({
+                //     select_top: arr_top,
+                //     select_bottom: arr_bottom,
+                //     select_allbody: arr_allbody,
+                //     select_core: arr_core,
+                //     select_oxy: arr_oxy,
+                //     selectedListId: arr2,
+                //     exerciseList: arr,
+                // });
             });
     };
 
@@ -579,172 +687,6 @@ class AssignExercise extends Component {
 
     handleOnClick = () => {
         return;
-        let url =
-            'http://' +
-            ip +
-            '/assignexercise' +
-            '?type=' +
-            'member' +
-            '&fitness_no=' +
-            this.props.userinfo.fitness_no +
-            '&member_no=' +
-            this.props.userinfo.member_no;
-
-        let inits = {
-            methods: 'GET',
-            headers: {
-                'Content-type': 'application/json',
-            },
-        };
-
-        let last_group_no = 0;
-
-        fetch(url, inits)
-            .then((res) => res.json())
-            .then((res) => {
-                if (res.length === 0) {
-                    last_group_no = 0;
-                } else {
-                    last_group_no = res[res.length - 1].group_no;
-                }
-                this.sendAssign(last_group_no);
-            })
-            .catch((err) => console.error(err));
-
-        alert('선택');
-        let arr = [];
-        let arr2 = [];
-        if (this.state.assignDefault.length > 0) {
-            this.state.assignDefault.forEach((part) => {
-                let it = '2';
-                let search = part;
-                let v = 0;
-                if (/상체/.test(search)) {
-                    search = search.replace('상체', '');
-                    v = v + 1;
-                }
-                if (/하체/.test(search)) {
-                    search = search.replace('하체', '');
-                    v = v + 2;
-                }
-                if (/전신/.test(search)) {
-                    search = search.replace('전신', '');
-                    v = v + 4;
-                }
-                if (/코어/.test(search)) {
-                    search = search.replace('코어', '');
-                    v = v + 8;
-                }
-                if (/유산소/.test(search)) {
-                    search = search.replace('유산소', '');
-                    v = v + 16;
-                }
-
-                if (v === 0) {
-                    console.error('assignDefault:' + part);
-                    return;
-                }
-                search = v;
-
-                fetch(
-                    'http://' +
-                        ip +
-                        '/exercise?type=search' +
-                        it +
-                        '&search=' +
-                        search +
-                        '&fn=' +
-                        this.props.userinfo.fitness_no,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Content-type': 'application/json',
-                        },
-                    }
-                )
-                    .then((response) => response.json())
-                    .then((res) => {
-                        for (let i = res.length - 1; i >= 0; i--) {
-                            let part = ', ';
-                            let part_num = Number(res[i].part);
-                            if (part_num >= 16) {
-                                part = '유산소, ' + part;
-                                part_num = part_num - 16;
-                            }
-                            if (part_num >= 8) {
-                                part = '코어, ' + part;
-                                part_num = part_num - 8;
-                            }
-                            if (part_num >= 4) {
-                                part = '전신, ' + part;
-                                part_num = part_num - 4;
-                            }
-                            if (part_num >= 2) {
-                                part = '하체, ' + part;
-                                part_num = part_num - 2;
-                            }
-                            if (part_num === 1) {
-                                part = '상체, ' + part;
-                            }
-                            part = part.slice(0, -2);
-
-                            if (res[i].is_default) {
-                                arr.push(res[i]);
-                                console.log(res[i]);
-                            } else {
-                            }
-                            if (res[i].is_default) {
-                                arr2.push(res[i].exercise_no);
-                            }
-                        }
-                        arr2.reverse();
-                    })
-                    .then(() => {
-                        console.error('arr: ' + arr);
-                        url =
-                            'http://' +
-                            ip +
-                            '/assignexercise' +
-                            '?type=' +
-                            'member' +
-                            '&fitness_no=' +
-                            this.props.userinfo.fitness_no +
-                            '&member_no=' +
-                            this.props.userinfo.member_no;
-                        arr.forEach((ex) => {
-                            ex['fitness_no'] = this.props.userinfo.fitness_no;
-                            ex['member_no'] = this.props.userinfo.member_no;
-                            ex['last_group_no'] = last_group_no + 1;
-                            fetch(url, {
-                                methods: 'GET',
-                                headers: {
-                                    'Content-type': 'application/json',
-                                },
-                                body: JSON.stringify(ex),
-                            }).then((response) => {
-                                console.log(response);
-                            });
-                        });
-                    });
-            });
-        } else {
-        }
-
-        alert('선택');
-        // fetch(url, inits)
-        // .then(res => {
-        //     let arr = [];
-        //     for(let i=0 ; i<res.length ; i++){
-        //         arr.push({
-        //             "no": res[i].member_no,
-        //             "userName": res[i].name,
-        //             "phone": res[i].phone
-        //         })
-        //     }
-        //     this.setState({customerList : arr});
-        // });
-
-        this.props.history.push('/assign/check');
     };
 
     render() {
@@ -759,13 +701,56 @@ class AssignExercise extends Component {
             hideSizePerPage: true,
         };
 
-        const selectRowProp = {
+        const cellEdit = {
+            mode: 'dbclick', // click cell to edit
+            beforeSaveCell: this.beforeSaveCell,
+            afterSaveCell: this.afterSaveCell,
+        };
+
+        const selectRowProp_상체 = {
             mode: 'checkbox',
             clickToSelect: true,
             //unselectable: [2],
             //selected: [1],
-            selected: this.state.selectedListId,
-            onSelect: this.onSelectRow,
+            selected: this.state.select_top,
+            onSelect: this.onSelectRowTop,
+            bgColor: 'mint',
+        };
+        const selectRowProp_하체 = {
+            mode: 'checkbox',
+            clickToSelect: true,
+            //unselectable: [2],
+            //selected: [1],
+            selected: this.state.select_bottom,
+            onSelect: this.onSelectRowBottom,
+            bgColor: 'mint',
+        };
+        const selectRowProp_코어 = {
+            mode: 'checkbox',
+            clickToSelect: true,
+            //unselectable: [2],
+            //selected: [1],
+            selected: this.state.select_core,
+            onSelect: this.onSelectRowCore,
+            bgColor: 'mint',
+        };
+        const selectRowProp_전신 = {
+            mode: 'checkbox',
+            clickToSelect: true,
+            //unselectable: [2],
+            //selected: [1],
+            selected: this.state.select_allbody,
+            onSelect: this.onSelectRowAllbody,
+            bgColor: 'mint',
+        };
+
+        const selectRowProp_유산소 = {
+            mode: 'checkbox',
+            clickToSelect: true,
+            //unselectable: [2],
+            //selected: [1],
+            selected: this.state.select_oxy,
+            onSelect: this.onSelectRowOxy,
             bgColor: 'mint',
         };
 
@@ -966,7 +951,8 @@ class AssignExercise extends Component {
                                     options={options1}
                                     tableHeaderClass="tableHeader"
                                     tableContainerClass="tableContainer"
-                                    selectRow={selectRowProp}
+                                    selectRow={selectRowProp_상체}
+                                    cellEdit={cellEdit}
                                     className="table2"
                                 >
                                     <TableHeaderColumn
@@ -1046,7 +1032,7 @@ class AssignExercise extends Component {
                                     options={options1}
                                     tableHeaderClass="tableHeader"
                                     tableContainerClass="tableContainer"
-                                    selectRow={selectRowProp}
+                                    selectRow={selectRowProp_하체}
                                     className="table2"
                                 >
                                     <TableHeaderColumn
@@ -1126,7 +1112,7 @@ class AssignExercise extends Component {
                                     options={options1}
                                     tableHeaderClass="tableHeader"
                                     tableContainerClass="tableContainer"
-                                    selectRow={selectRowProp}
+                                    selectRow={selectRowProp_전신}
                                     className="table2"
                                 >
                                     <TableHeaderColumn
@@ -1206,7 +1192,7 @@ class AssignExercise extends Component {
                                     options={options1}
                                     tableHeaderClass="tableHeader"
                                     tableContainerClass="tableContainer"
-                                    selectRow={selectRowProp}
+                                    selectRow={selectRowProp_코어}
                                     className="table2"
                                 >
                                     <TableHeaderColumn
@@ -1286,7 +1272,7 @@ class AssignExercise extends Component {
                                     options={options1}
                                     tableHeaderClass="tableHeader"
                                     tableContainerClass="tableContainer"
-                                    selectRow={selectRowProp}
+                                    selectRow={selectRowProp_유산소}
                                     className="table2"
                                 >
                                     <TableHeaderColumn
@@ -1358,6 +1344,13 @@ class AssignExercise extends Component {
                             pathname: '/assign/check?member_no=' + 1,
                             state: {
                                 assignDefault: this.state.assignDefault,
+                                assignCustom: {
+                                    1: this.state.select_top_data,
+                                    2: this.state.select_bottom_data,
+                                    4: this.state.select_allbody_data,
+                                    8: this.state.select_core_data,
+                                    16: this.state.select_oxy_data,
+                                },
                             },
                         }}
                     >
