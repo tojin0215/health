@@ -27,7 +27,7 @@ function onChangeHandler(a,e){
 
 
 let List = [
-    {'no':1,'name':'AAA','tool':'바벨','aa':'상체','set':<input type="text" id='1' value='3' onChange={(e) => this.onChangeHandler("id",e)}/>,'bb':'10','cc':'10분','link':'www.www.www'},
+    {'no':1,'name':'AAA','tool':'바벨','aa':'상체','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
     {'no':2,'name':'BBB','tool':'바벨','aa':'하체','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
     {'no':3,'name':'CCC','tool':'바벨','aa':'전신','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
     {'no':4,'name':'AAA','tool':'바벨','aa':'상체','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
@@ -371,11 +371,11 @@ class AssignExercise extends Component {
                 <hr></hr>
                 <h5>운동 묶음 선택(기본값)</h5>
                 <div style={{flexDirection:'row'}}>
-                <label><input type="checkBox" id="1" onClick={this.selectHandleOnClick}/>상체</label>
-                <label><input type="checkBox" id="2" onClick={this.selectHandleOnClick}/>하체</label>
-                <label><input type="checkBox" id="3" onClick={this.selectHandleOnClick}/>전신</label>
-                <label><input type="checkBox" id="4" onClick={this.selectHandleOnClick}/>코어</label>
-                <label><input type="checkBox" id="5" onClick={this.selectHandleOnClick}/>유산소</label>
+                <label><input type="checkBox" id="1" name="defaultExercise" value="상체" onClick={this.selectHandleOnClick}/>상체</label>
+                <label><input type="checkBox" id="2" name="defaultExercise" value="하체" onClick={this.selectHandleOnClick}/>하체</label>
+                <label><input type="checkBox" id="3" name="defaultExercise" value="전신" onClick={this.selectHandleOnClick}/>전신</label>
+                <label><input type="checkBox" id="4" name="defaultExercise" value="코어" onClick={this.selectHandleOnClick}/>코어</label>
+                <label><input type="checkBox" id="5" name="defaultExercise" value="유산소" onClick={this.selectHandleOnClick}/>유산소</label>
                 </div>
 
                 <h5>운동 개별 선택</h5>
