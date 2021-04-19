@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-// const ip = 'localhost';
+const ip = '13.124.141.28:3000';
 
-const ip = 'localhost:3001';
+// const ip = 'localhost:3001';
 class AssignCheckExercise extends Component {
     constructor(props) {
         super(props);

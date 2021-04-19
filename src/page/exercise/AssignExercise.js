@@ -20,7 +20,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
 // const ip = 'localhost';
-const ip = 'localhost:3001';
+const ip = '13.124.141.28:3000';
+// const ip = 'localhost:3001';
 
 function onChangeHandler(a, e) {
     [e.target.a] = e.target.value;
