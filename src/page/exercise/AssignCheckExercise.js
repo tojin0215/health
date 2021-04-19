@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-// const ip = '13.124.141.28';
+// const ip = 'localhost';
 
 const ip = 'localhost:3001';
 class AssignCheckExercise extends Component {
@@ -16,7 +16,8 @@ class AssignCheckExercise extends Component {
 
         this.state = {
             fitness_no: this.props.userinfo.fitness_no, //Redux를 통해 받은 값
-            member_no: Number(search.split('=')[1]),
+            // member_no: Number(search.split('=')[1]),
+            member_no: Number(this.props.location.state.member_no),
             assignDefault: this.props.location.state.assignDefault,
             assignCustom: this.props.location.state.assignCustom,
 
@@ -92,7 +93,6 @@ class AssignCheckExercise extends Component {
     ) => {
         let it = 2;
         let search = searchs.pop();
-        console.log(search);
         let url = 'http://' + ip + '/exercise';
         url = url + '?type=search' + it;
         url = url + '&search=' + search;
@@ -172,7 +172,7 @@ class AssignCheckExercise extends Component {
                         last_group_no
                     );
                 } else {
-                    next_func(exerciseList, last_group_no);
+                    next_func(arr, last_group_no);
                 }
             })
             .catch((err) => console.error(err));
@@ -180,7 +180,8 @@ class AssignCheckExercise extends Component {
 
     sendAssign = (next_func, procDefaultPackage, last_group_no) => {
         const fitness_no = this.props.userinfo.fitness_no;
-        const member_no = this.props.userinfo.member_no;
+        // const member_no = this.props.userinfo.member_no;
+        const member_no = this.state.member_no;
         let v_arr = [];
         if (this.state.assignDefault.length > 0) {
             this.state.assignDefault.forEach((part) => {
@@ -229,7 +230,9 @@ class AssignCheckExercise extends Component {
                 last_group_no
             );
         } else {
-            const exerciseList = this.state.exerciseList;
+            const exerciseList = this.state.exerciseList
+                ? this.state.exerciseList
+                : [];
             let arr = [];
             [...exerciseList].forEach((ex) => {
                 let res = JSON.parse(JSON.stringify(ex));
@@ -305,12 +308,21 @@ class AssignCheckExercise extends Component {
                     <NavLink exact to="/assign">
                         [운동 배정 설정]
                     </NavLink>
-                    <Link to={{ pathname: '/assign/inbody?member_no=' + 0 }}>
+                    <Link
+                        to={{
+                            pathname:
+                                '/assign/inbody?member_no=' +
+                                this.state.member_no,
+                        }}
+                    >
                         [고객인바디]
                     </Link>
 
                     <div>
-                        <label>{this.state.name}님의 운동배정입니다.</label>
+                        <label>
+                            {this.props.location.state.userName}님의
+                            운동배정입니다.
+                        </label>
                     </div>
                     <BootstrapTable
                         data={this.state.exerciseList}

@@ -19,7 +19,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-// const ip = '13.124.141.28';
+// const ip = 'localhost';
 const ip = 'localhost:3001';
 
 function onChangeHandler(a, e) {
@@ -66,6 +66,35 @@ class AssignExercise extends Component {
 
     goLogin = () => {
         this.props.history.push('/');
+    };
+
+    loadInbody = (member_no) => {
+        let url =
+            'http://' +
+            ip +
+            '/inbody?type=customer&member_no=' +
+            member_no +
+            '&fn=' +
+            this.props.userinfo.fitness_no;
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((res) => {
+                for (let i = res.length - 1; i >= 0; i--) {
+                    this.setState({
+                        user_height: res[i].height,
+                        user_weight: res[i].weight,
+                        user_bodyFat: res[i].bodyFat,
+                        user_muscleMass: res[i].muscleMass,
+                    });
+                    break;
+                }
+            });
+        alert('선택하셨습니다.' + member_no);
     };
 
     handleClickOpen() {
@@ -117,6 +146,7 @@ class AssignExercise extends Component {
             open: false,
         });
         alert('선택하셨습니다.');
+        this.loadInbody(e.target.id);
     };
 
     search = () => {
@@ -873,13 +903,13 @@ class AssignExercise extends Component {
                     <div>
                         <label>{this.state.userName}인바디</label>
                         <br />
-                        <label>키 : </label>
+                        <label>키 : {this.state.user_height}</label>
                         <br />
-                        <label>체중 : </label>
+                        <label>체중 : {this.state.user_weight}</label>
                         <br />
-                        <label>체지방 : </label>
+                        <label>체지방 : {this.state.user_bodyFat}</label>
                         <br />
-                        <label>근육량 : </label>
+                        <label>근육량 : {this.state.user_muscleMass}</label>
                         <br />
                     </div>
                     <hr></hr>
@@ -1341,8 +1371,12 @@ class AssignExercise extends Component {
                     <br />
                     <Link
                         to={{
-                            pathname: '/assign/check?member_no=' + 1,
+                            pathname:
+                                '/assign/check?member_no=' +
+                                this.state.member_no,
                             state: {
+                                userName: this.state.userName,
+                                member_no: this.state.member_no,
                                 assignDefault: this.state.assignDefault,
                                 assignCustom: {
                                     1: this.state.select_top_data,
