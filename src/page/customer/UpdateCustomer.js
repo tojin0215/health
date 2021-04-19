@@ -112,7 +112,8 @@ class UpdateCustomer extends Component {
     }
 
     cusFetch = () => {
-        fetch("http://"+ip+":3001/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
+        //fetch("http://"+ip+":3001/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://localhost:3000/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -226,7 +227,8 @@ class UpdateCustomer extends Component {
         }
         else{
             // 서버 연결하는 부분
-            fetch("http://"+ip+":3001/customer?fn="+this.props.userinfo.fitness_no, {
+            //fetch("http://"+ip+":3001/customer?fn="+this.props.userinfo.fitness_no, {
+            fetch("http://localhost:3000/customer?fn="+this.props.userinfo.fitness_no, {
                 method: "PUT",
                 headers: {
                     'Content-type': 'application/json',

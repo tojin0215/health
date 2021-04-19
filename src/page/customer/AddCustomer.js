@@ -185,7 +185,8 @@ class AddCustomer extends Component {
         }
         else{
             // 서버 연결하는 부분
-            fetch("http://"+ip+":3001/customer", {
+            //fetch("http://"+ip+":3001/customer", {
+            fetch("http://localhost:3000/customer", {
                 method: "POST",
                 headers: {
                 'Content-type': 'application/json'
@@ -215,7 +216,8 @@ class AddCustomer extends Component {
                         console.log('333___________',m_no)
                     }
                     // 서버에서 데이터 전달하면 여기서 json type으로 받게 됨
-                    fetch("http://"+ip+":3001/sales", {
+                    //fetch("http://"+ip+":3001/sales", {
+                    fetch("http://localhost:3000/sales", {    
                         method: "POST",
                         headers: {
                           'Content-type': 'application/json'
