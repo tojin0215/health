@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
-// const ip = '13.124.141.28';
-const ip = '127.0.0.1';
+// const ip = '13.124.141.28:3000';
+const ip = '127.0.0.1:3001';
 const List = [
     {'no':1,'name':'AAA','tool':'바벨','aa':'상체','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
     {'no':2,'name':'BBB','tool':'바벨','aa':'하체','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
@@ -30,6 +30,8 @@ class DefaultExercise extends Component {
         super(props);
         this.state = {
             selectedList: [],
+            selectedListId: [],
+            exerciseList: [],
             show1:false,
             show2:false,
             show3:false,
@@ -39,10 +41,65 @@ class DefaultExercise extends Component {
         this.handleOnClick = this.handleOnClick.bind(this);
         this.onSelectRow = this.onSelectRow.bind(this);
         
+        this.search("상체");
     };
+
 
     goLogin = () => {
         this.props.history.push("/");
+    }
+
+    search = (part) =>{
+        let it = '2'
+        let search = part;
+        let v = 0;
+        if (/상체/.test(search)){search = search.replace("상체", ""); v = v + 1}
+        if (/하체/.test(search)){search = search.replace("하체", ""); v = v + 2}
+        if (/전신/.test(search)){search = search.replace("전신", ""); v = v + 4}
+        if (/코어/.test(search)){search = search.replace("코어", ""); v = v + 8}
+        if (/유산소/.test(search)){search = search.replace("유산소", ""); v = v + 16}
+
+        if (v===0) {alert("부위를 입력바랍니다."); return;}
+        search = v
+
+        fetch("http://"+ip+"/exercise?type=search"+it+"&search="+search+"&fn="+this.props.userinfo.fitness_no, {
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json'
+          }
+        })
+        .then(response => response.json())
+        .then(res => {
+            let arr = [];
+            let arr2 = [];
+            for(let i=(res.length-1) ; i>=0 ; i--){
+                let part = ", ";
+                let part_num = Number(res[i].part);
+                if (part_num >= 16) {part = "유산소, " + part; part_num = part_num - 16}
+                if (part_num >= 8) {part = "코어, " + part; part_num = part_num - 8}
+                if (part_num >= 4) {part = "전신, " + part; part_num = part_num - 4}
+                if (part_num >= 2) {part = "하체, " + part; part_num = part_num - 2}
+                if (part_num === 1) {part = "상체, " + part;}
+                part = part.slice(0, -2)
+
+                arr.push({
+                    "no": res[i].exercise_no,
+                    "name": res[i].name,
+                    "tool": res[i].machine,
+                    "aa": part,
+                    "set": res[i].default_set_count,
+                    "bb": res[i].default_data,
+                    "cc": res[i].default_rest_second,
+                    "link": res[i].url,
+                })
+                if (res[i].is_default) {arr2.push(res[i].exercise_no)}
+            }
+            arr2.reverse();
+            this.setState({
+                selectedListId : arr2,
+                exerciseList : arr,
+            });
+        });
     }
 
     handleChange = (e) => { 
@@ -54,10 +111,13 @@ class DefaultExercise extends Component {
     onSelectRow(row, isSelected, e) {
         const exercise_no = row['no']
 
-        this.setState({'selectedList': [...this.state.selectedList, [exercise_no, isSelected]]})
-        console.log(this.state.selectedList)
+        this.setState({'selectedList': [...this.state.selectedList, [exercise_no, isSelected]]});
+
+        console.log(this.state.selectedListId);
         if (isSelected) {
-          alert(`You just selected '${row['name']}'`)
+            this.setState({'selectedListId': [...this.state.selectedListId, exercise_no]})
+        } else {
+            this.setState({'selectedListId': this.state.selectedListId.filter(i => i!==exercise_no)})
         }
     }
 
@@ -67,6 +127,7 @@ class DefaultExercise extends Component {
 
     click1=(e)=>{ //상체
         e.preventDefault();
+        this.search("상체")
         this.setState({
             show1: !this.state.show1,
             show2:false,
@@ -78,6 +139,7 @@ class DefaultExercise extends Component {
     
     click2=(e)=>{ //하체
         e.preventDefault();
+        this.search("하체")
         this.setState({
             show2: !this.state.show2,
             show1:false,
@@ -89,6 +151,7 @@ class DefaultExercise extends Component {
 
     click3=(e)=>{ //전신
         e.preventDefault();
+        this.search("전신")
         this.setState({
             show3: !this.state.show3,
             show1:false,
@@ -100,6 +163,7 @@ class DefaultExercise extends Component {
     
     click4=(e)=>{ //코어
         e.preventDefault();
+        this.search("코어")
         this.setState({
             show4: !this.state.show4,
             show1:false,
@@ -111,6 +175,7 @@ class DefaultExercise extends Component {
     
     click5=(e)=>{ //유산소
         e.preventDefault();
+        this.search("유산소")
         this.setState({
             show5: !this.state.show5,
             show1:false,
@@ -121,7 +186,7 @@ class DefaultExercise extends Component {
     }
 
     handleOnClick(){
-        fetch("http://"+ip+":3001/exercise",{
+        fetch("http://"+ip+"/exercise?fn="+this.props.userinfo.fitness_no, {
             method: "PUT",
             headers: {
                 'Content-type': 'application/json'
@@ -131,30 +196,31 @@ class DefaultExercise extends Component {
         .then(res => res.json())
         .then(res => {
             alert('저장됨')
-            // if (res['status'] === 200) {alert('저장됨')}
         })
         .catch(err => console.error(err));
-        // this.state.selectedList.forEach(element => {
-        //     console.log(element)
-        //     fetch("http://"+ip+":3001/exercise",{
-        //         method: "GET",
-        //         headers: {
-        //         'Content-type': 'application/json'
-        //         },
-        //         body: JSON.stringify()
-        //     });
-        // });
-        // for(let i=(res.length-1) ; i>=0 ; i--){
+    }
+    handleRowSelectAll = (isSelected, rows) => {
+        // const exercise_no = row['no']
+        let arr = [];
+        let arr2 = [];
 
-        //     alert('저장')
-        // }
+        rows.forEach(row => {
+            const exercise_no = row['no']
+            arr.push([exercise_no, isSelected]);
+            arr2.push(exercise_no);
+        })
+        this.setState({'selectedList': [...this.state.selectedList, ...arr]});
+        
+        if (isSelected) {
+            this.setState({'selectedListId': [...this.state.selectedListId, ...arr2]})
+        } else {
+            this.setState({'selectedListId': this.state.selectedListId.filter(i => !arr2.includes(i))})
+        }
     }
 
     render() {
         const { userinfo } = this.props;
-        console.log("userinfo : ");
-        console.log(userinfo); //나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
-        
+
         const options1 = {
             noDataText: '운동 기본값 설정 해주세요.',
             alwaysShowAllBtns: true,
@@ -164,9 +230,10 @@ class DefaultExercise extends Component {
         const selectRowProp = {
             mode: 'checkbox',
             clickToSelect: true,
-            //unselectable: [2],
-            //selected: [1],
+            // unselectable: [2],
+            selected: this.state.selectedListId,
             onSelect: this.onSelectRow,
+            onSelectAll: this.handleRowSelectAll,
             bgColor: 'mint'
           };
 
@@ -193,8 +260,8 @@ class DefaultExercise extends Component {
                 {this.state.show1?
                     <div>
                     <label>상체</label>
-                        <BootstrapTable data={ List } hover 
-                    //pagination={ List.length > 1 }
+                        <BootstrapTable data={ this.state.exerciseList } hover 
+                    pagination={ this.state.exerciseList.length > 1 }
                     options={options1}
                     tableHeaderClass='tableHeader'  
                     tableContainerClass='tableContainer'
@@ -240,8 +307,8 @@ class DefaultExercise extends Component {
                 {this.state.show2?
                     <div>
                     <label>하체</label>
-                        <BootstrapTable data={ List } hover 
-                    //pagination={ List.length > 1 }
+                        <BootstrapTable data={ this.state.exerciseList } hover 
+                    pagination={ this.state.exerciseList.length > 1 }
                     options={options1}
                     tableHeaderClass='tableHeader'  
                     tableContainerClass='tableContainer'
@@ -286,8 +353,8 @@ class DefaultExercise extends Component {
                 {this.state.show3?
                     <div>
                     <label>전신</label>
-                        <BootstrapTable data={ List } hover 
-                    //pagination={ List.length > 1 }
+                        <BootstrapTable data={ this.state.exerciseList } hover 
+                    pagination={ this.state.exerciseList.length > 1 }
                     options={options1}
                     tableHeaderClass='tableHeader'  
                     tableContainerClass='tableContainer'
@@ -332,8 +399,8 @@ class DefaultExercise extends Component {
                 {this.state.show4?
                     <div>
                     <label>코어</label>
-                        <BootstrapTable data={ List } hover 
-                    //pagination={ List.length > 1 }
+                        <BootstrapTable data={ this.state.exerciseList } hover 
+                    pagination={ this.state.exerciseList.length > 1 }
                     options={options1}
                     tableHeaderClass='tableHeader'  
                     tableContainerClass='tableContainer'
@@ -378,8 +445,8 @@ class DefaultExercise extends Component {
                 {this.state.show5?
                     <div>
                     <label>유산소</label>
-                        <BootstrapTable data={ List } hover 
-                    //pagination={ List.length > 1 }
+                        <BootstrapTable data={ this.state.exerciseList } hover 
+                    pagination={ this.state.exerciseList.length > 1 }
                     options={options1}
                     tableHeaderClass='tableHeader'  
                     tableContainerClass='tableContainer'
