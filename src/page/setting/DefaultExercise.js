@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
-const ip = '13.124.141.28';
+// const ip = '13.124.141.28';
+const ip = '127.0.0.1';
 const List = [
     {'no':1,'name':'AAA','tool':'바벨','aa':'상체','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
     {'no':2,'name':'BBB','tool':'바벨','aa':'하체','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
@@ -28,6 +29,7 @@ class DefaultExercise extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            selectedList: [],
             show1:false,
             show2:false,
             show3:false,
@@ -50,6 +52,10 @@ class DefaultExercise extends Component {
     };
 
     onSelectRow(row, isSelected, e) {
+        const exercise_no = row['no']
+
+        this.setState({'selectedList': [...this.state.selectedList, [exercise_no, isSelected]]})
+        console.log(this.state.selectedList)
         if (isSelected) {
           alert(`You just selected '${row['name']}'`)
         }
@@ -115,7 +121,33 @@ class DefaultExercise extends Component {
     }
 
     handleOnClick(){
-        alert('저장')
+        fetch("http://"+ip+":3001/exercise",{
+            method: "PUT",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({type: 'set_default', data: this.state.selectedList})
+        })
+        .then(res => res.json())
+        .then(res => {
+            alert('저장됨')
+            // if (res['status'] === 200) {alert('저장됨')}
+        })
+        .catch(err => console.error(err));
+        // this.state.selectedList.forEach(element => {
+        //     console.log(element)
+        //     fetch("http://"+ip+":3001/exercise",{
+        //         method: "GET",
+        //         headers: {
+        //         'Content-type': 'application/json'
+        //         },
+        //         body: JSON.stringify()
+        //     });
+        // });
+        // for(let i=(res.length-1) ; i>=0 ; i--){
+
+        //     alert('저장')
+        // }
     }
 
     render() {

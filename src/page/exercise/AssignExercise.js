@@ -193,13 +193,84 @@ class AssignExercise extends Component {
         });
     }
 
+    loadExerciseList() {
+        let url = 'http://' + ip + ":3001" + "/assignexercise"
+        + "?type=" + "member"
+        + "&fitness_no=" + this.props.userinfo.fitness_no
+        + "&member_no=" + this.props.userinfo.member_no
+
+        let inits = {
+            methods: "GET",
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }
+
+        fetch(url, inits)
+        .then(res => {
+            last_group_id = res[res.length - 1].group_id;
+            
+            let arr = [];
+            for(let i=0 ; i<res.length ; i++){
+                console.log(res[i]);
+                arr.push(res[i]);
+                // arr.push({
+                //     "no": res[i].member_no,
+                //     "name": res[i].name,
+                //     "part": res[i].part
+                // })
+            }
+            this.setState({exerciseList : arr});
+        });
+    }
+
     handleOnClick(){
         alert('선택')
+        
+        // let it = '0'
+        // if(this.state.item === "이름"){
+        //     it = '0'
+        // }else if(this.state.item === "핸드폰"){
+        //     it = '1'
+        // }
+        // let url = 'http://' + ip + ":3001" + "/assignexercise"
+        // + "?type=" + "member"
+        // + "&fitness_no=" + this.props.userinfo.fitness_no
+        // + "&member_no=" + this.props.userinfo.member_no
+
+        // let inits = {
+        //     methods: "GET",
+        //     headers: {
+        //         'Content-type': 'application/json'
+        //     }
+        // }
+
+        // let last_group_id = -1;
+
+        // fetch(url, inits)
+        // .then(res => {
+        //     last_group_id = res[res.length - 1].group_id;
+        // });
+        
+        // fetch(url, inits)
+        // .then(res => {
+        //     let arr = [];
+        //     for(let i=0 ; i<res.length ; i++){
+        //         arr.push({
+        //             "no": res[i].member_no,
+        //             "userName": res[i].name,
+        //             "phone": res[i].phone
+        //         })
+        //     }
+        //     this.setState({customerList : arr});
+        // });
+        
         //this.props.history.push("/assign/check")
     }
 
     render() {
         const { userinfo } = this.props;
+        this.loadExerciseList();
         console.log("userinfo : ");
         console.log(userinfo); //나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
         
