@@ -291,7 +291,7 @@ class AssignCheckExercise extends Component {
         const { userinfo } = this.props;
 
         const options = {
-            noDataText: '인바디 정보가 없습니다.',
+            noDataText: '선택된 운동이 없습니다.',
         };
 
         return (

@@ -147,6 +147,7 @@ class Customer extends Component {
                     let sex = data.sex===true?"남":"여";
                     let info = sex+'/만'+age+'세/'+data.resi_no
                     let phone = data.phone.substring(0,3)+'-'+data.phone.substring(3,7)+'-'+data.phone.substring(7,11)
+                    let date = moment(data.start_date).format("YYYY/MM/DD")
                     data = {...data,age}
                     this.setState({
                         //userLists2:data,
@@ -155,7 +156,7 @@ class Customer extends Component {
                         info : info,
                         addr : data.address,
                         phone : phone,
-                        startDate : data.start_date,
+                        startDate : date,
                         trainer: data.in_charge,
                         note : data.note,
                     })
@@ -243,7 +244,7 @@ class Customer extends Component {
         console.log(userinfo);
         
         const textOptions = {
-            noDataText: '결제한 상품이 없습니다.',
+            noDataText: '가입된 회원이 없습니다.',
             alwaysShowAllBtns: true,
             hideSizePerPage:true
         };

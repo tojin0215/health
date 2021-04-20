@@ -180,7 +180,7 @@ class Inbody extends Component {
                 }
                 this.setState({inbodyList : arr});
             });
-        alert('선택하셨습니다.'+e.target.id)
+        alert('선택하셨습니다.')
     }
 
     handleChange = (e) => { 

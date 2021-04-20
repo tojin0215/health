@@ -10,7 +10,7 @@ import Dropdown from 'react-dropdown';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import '../../styles/exercise/Exercise.css';
 
-// const ip = '13.124.141.28:3000';
+// const ip = '13.124.141.28:3001';
 const ip = 'localhost:3000';
 
 const List2 = [

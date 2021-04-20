@@ -144,7 +144,7 @@ class UpdateCustomer extends Component {
     
     handleOnClick = (e) => {
         
-        alert('수정수정')
+        //alert('수정수정')
         this.setState({
             name_err:false,
             period_err:false,
