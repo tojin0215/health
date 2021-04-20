@@ -514,7 +514,7 @@ class AddExercise extends Component {
                     res.json();
                 })
                 .then((res) => {
-                    alert('운동 등록됨');
+                    alert('운동 등록되었습니다.');
                     this.search();
                 })
                 .catch((err) => {
@@ -566,6 +566,7 @@ class AddExercise extends Component {
                                 id="name"
                                 placeholder="name"
                                 name="name"
+                                defaultValue={this.state.name}
                                 onChange={this.handleChange}
                             />
                         </div>

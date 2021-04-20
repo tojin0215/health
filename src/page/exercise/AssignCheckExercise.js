@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-const ip = '13.124.141.28:3000';
+// const ip = '13.124.141.28:3003';
 
-// const ip = 'localhost:3001';
+const ip = 'localhost:3000';
 class AssignCheckExercise extends Component {
     constructor(props) {
         super(props);
@@ -82,6 +82,7 @@ class AssignCheckExercise extends Component {
             });
         });
         alert('배정되었습니다.');
+        this.props.history.push("/assign")
     };
     procDefaultPackage = (
         next_func,

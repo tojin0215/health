@@ -166,7 +166,7 @@ class AddSales extends Component {
 
         console.log('***********paymentDate : ', this.state.paymentDate)
         console.log(this.state);
-        //fetch("http://"+ip+":3001/sales", {
+        //fetch("http://"+ip+":3003/sales", {
         fetch("http://localhost:3000/sales", {
             method: "POST",
             headers: {
@@ -210,7 +210,7 @@ class AddSales extends Component {
         }else if(this.state.item === "핸드폰"){
             it = '1'
         }
-        //fetch("http://"+ip+":3001/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        //fetch("http://"+ip+":3003/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
         fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {

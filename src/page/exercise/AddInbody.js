@@ -82,7 +82,7 @@ class AddInbody extends Component {
             })
         }
 
-        //fetch("http://"+ip+":3001/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
+        //fetch("http://"+ip+":3003/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
         fetch("http://localhost:3000/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
@@ -179,7 +179,7 @@ class AddInbody extends Component {
             alert("빈칸을 채워주세요.")
         }else{
             // 서버 연결하는 부분
-            //fetch("http://"+ip+":3001/inbody", {
+            //fetch("http://"+ip+":3003/inbody", {
             fetch("http://localhost:3000/inbody", {
                 method: "POST",
                 headers: {

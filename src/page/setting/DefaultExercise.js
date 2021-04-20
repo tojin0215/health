@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
-// const ip = '13.124.141.28:3001';
+// const ip = '13.124.141.28:3003';
 const ip = 'localhost:3000';
 const List = [
     {'no':1,'name':'AAA','tool':'바벨','aa':'상체','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
