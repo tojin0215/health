@@ -38,14 +38,13 @@ class Inbody extends Component {
     constructor(props) {
         super(props);
 
-        const search1 = location.search;
-        num = (search1.split('='))[1];
-        //console.log('search1',search1)
-        //console.log('search1__',(search1.split('='))[1])
+        const search1 = location.pathname;
+        num = (search1.split('/'))[3];
+        
         this.state = {
             open:false,
             //member_no:member_no,
-            member_no: (search1.split('='))[1],
+            member_no: (search1.split('/'))[3],
             search:"",
             item:options[0],
             customerList:[],
@@ -395,7 +394,7 @@ class Inbody extends Component {
                     <label>나이 : 만 {this.state.age}세</label>
                     <br/><br/>
                     {/* <Link  to={{pathname:"/assign/add?member_no="+this.state.member_no}} className='btnCustomerNew'> */}
-                    <Link  to={{pathname:"/assign/add?"+this.state.member_no}} className='btnCustomerNew'>
+                    <Link  to={{pathname:"/assign/add/"+this.state.member_no}} className='btnCustomerNew'>
                        인바디정보추가
                     </Link>
                     <br/><br/>

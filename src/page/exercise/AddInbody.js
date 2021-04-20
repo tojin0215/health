@@ -27,11 +27,12 @@ class AddInbody extends Component {
     constructor(props) {
         super(props);
 
-        const search = location.search;
+        const search = location.pathname;
+        alert(search+'   '+search.split('/')[3])
 
         this.state = {
             fitness_no:this.props.userinfo.fitness_no, //Redux를 통해 받은 값
-            member_no: (search.split('='))[1] ,
+            member_no: search.split('/')[3] ,
             height : '', //키
             measurementDate : new Date(), // 측정날짜
              //체성분 분석
@@ -124,7 +125,8 @@ class AddInbody extends Component {
         if(this.state.member_no === '0'){
             alert('선택된 회원이 없습니다. 회원을 선택 해주세요.')
             this.props.history.push({
-                pathname: "/assign/inbody?member_no="+0
+                //pathname: "/assign/inbody?member_no="+0
+                pathname: "/assign/inbody/"+0
             })
         }
 
@@ -235,7 +237,7 @@ class AddInbody extends Component {
                     fitness_no:this.state.fitness_no,
                     member_no:this.state.member_no,
                     height : this.state.height, //키
-                    measurementDate : new Date(), // 측정날짜
+                    measurementDate : this.state.measurementDate, // 측정날짜
                     //체성분 분석
                     bodyMoisture : this.state.bodyMoisture, //체수분
                     protein : this.state.protein,  //단백질
@@ -256,7 +258,8 @@ class AddInbody extends Component {
                 .then(response => {
                     alert("인바디 등록되었습니다.");
                     this.props.history.push({
-                        pathname: "/assign/inbody?member_no="+this.state.member_no
+                        //pathname: "/assign/inbody?member_no="+this.state.member_no
+                        pathname: "/assign/inbody/"+this.state.member_no
                     })
                 });
         }

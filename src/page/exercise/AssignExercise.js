@@ -346,8 +346,9 @@ class AssignExercise extends Component {
             </div>
             <div className='container'>
                 <NavLink exact to="/assign">[운동 배정 설정]</NavLink>
-                <Link to={{pathname:"/assign/inbody?member_no="+0}}>[고객인바디]</Link>
-            
+                {/* <Link to={{pathname:"/assign/inbody?member_no="+0}}>[고객인바디]</Link> */}
+                <Link to={{pathname:"/assign/inbody/"+0}}>[고객인바디]</Link>
+                
                 <div>
             <button type='button' onClick={this.handleClickOpen}>
                 회원검색

@@ -20,12 +20,12 @@ class UpdateCustomer extends Component {
     constructor(props) {
         super(props);
         
-        const search = location.search;
+        const search = location.pathname;
         //alert(search)
 
         this.state = {
             fitness_no:this.props.userinfo.fitness_no, //Redux를 통해 받은 값
-            member_no: (search.split('='))[1] ,
+            member_no: (search.split('/'))[3] ,
             name: "",
             sex: 1,
             startDate: new Date(),

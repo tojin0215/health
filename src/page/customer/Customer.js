@@ -384,7 +384,7 @@ class Customer extends Component {
                     {this.state.show?
                         <div>
                             <h5>상품 결제 내역</h5>
-                            <Link to={{pathname:"/customer/update?member_no="+this.state.member_no}} className='btnCustomerNew'>
+                            <Link to={{pathname:"/customer/update/"+this.state.member_no}} className='btnCustomerNew'>
                                 수정하기
                             </Link><br/><br/>
                             <button type="button" onClick={this.handleClickAway}>X</button><br/>
