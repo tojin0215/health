@@ -10,8 +10,8 @@ import Dropdown from 'react-dropdown';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import '../../styles/exercise/Exercise.css';
 
-// const ip = '13.124.141.28';
-const ip = '127.0.0.1';
+// const ip = '13.124.141.28:3000';
+const ip = 'localhost:3000';
 
 const List2 = [
     {'no':1,'name':'AAA','tool':'바벨','aa':'상체','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
@@ -65,7 +65,7 @@ class AddExercise extends Component {
             is_default: false,
         };
         this.handleOnClick = this.handleOnClick.bind(this);
-        
+        this.search();
     };
 
     goLogin = () => {
@@ -137,8 +137,7 @@ class AddExercise extends Component {
             search = v
         }
 
-        //fetch("http://"+ip+":3001/exercise?type=search"+it+"&search="+search+"&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/exercise?type=search"+it+"&search="+search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://"+ip+"/exercise?type=search"+it+"&search="+search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -207,15 +206,14 @@ class AddExercise extends Component {
         // else if (this.state.is_default === undefined) this.setState({is_default: false});
         // else {
             const userinfo = {member_no: -1, manager_name: "", fitness_no: -1, fitness_name: ""}
-            if (this.state.userinfo!==undefined) {
-                userinfo['member_no'] = this.state.userinfo.member_no;
-                userinfo['manager_name'] = this.state.userinfo.manager_name;
-                userinfo['fitness_no'] = this.state.userinfo.fitness_no;
-                userinfo['fitness_name'] = this.state.userinfo.fitness_name;
-            }
+            if (this.props.userinfo!==undefined) {
+                userinfo['member_no'] = this.props.userinfo.member_no;
+                userinfo['manager_name'] = this.props.userinfo.manager_name;
+                userinfo['fitness_no'] = this.props.userinfo.fitness_no;
+                userinfo['fitness_name'] = this.props.userinfo.fitness_name;
+            } else {alert('debug');}
 
-            //fetch('http://'+ip+":3001/exercise", {
-            fetch('http://localhost:3000/exercise', {
+            fetch('http://'+ip+"/exercise", {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -235,10 +233,8 @@ class AddExercise extends Component {
                 })
             })
             .then(res => {res.json()})
-            .then(res => {alert('운동 등록됨');})
-            .catch(err => {
-                alert(err);
-            });
+            .then(res => {alert('운동 등록됨'); this.search();})
+            .catch(err => { alert(err); });
         }
     }
     handleKeyUp = (e) => {
@@ -259,7 +255,6 @@ class AddExercise extends Component {
             hideSizePerPage:true,
             sizePerPage:5
         };
-        if (!this.state.exerciseListLoaded) {this.setState({exerciseListLoaded: true});this.search();}
 
         return (
             <div>
@@ -320,7 +315,7 @@ class AddExercise extends Component {
                         <button type="button" onClick={this.search}> 운동 검색 </button>
                     </div>
                 <BootstrapTable data={ this.state.exerciseList } hover 
-                    pagination={ List.length > 1 }
+                    pagination={ this.state.exerciseList.length > 1 }
                     options={options1}
                     tableHeaderClass='tableHeader'  
                     tableContainerClass='tableContainer'
