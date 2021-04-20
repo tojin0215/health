@@ -137,7 +137,8 @@ class AddExercise extends Component {
             search = v
         }
 
-        fetch("http://"+ip+":3000/exercise?type=search"+it+"&search="+search+"&fn="+this.props.userinfo.fitness_no, {
+        //fetch("http://"+ip+":3001/exercise?type=search"+it+"&search="+search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://localhost:3000/exercise?type=search"+it+"&search="+search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -213,7 +214,8 @@ class AddExercise extends Component {
                 userinfo['fitness_name'] = this.state.userinfo.fitness_name;
             }
 
-            fetch('http://'+ip+":3000/exercise", {
+            //fetch('http://'+ip+":3001/exercise", {
+            fetch('http://localhost:3000/exercise', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

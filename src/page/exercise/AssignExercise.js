@@ -103,7 +103,7 @@ class AssignExercise extends Component {
             it = '1'
         }
         //fetch("http://"+ip+":3001/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:30001/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -194,7 +194,8 @@ class AssignExercise extends Component {
     }
 
     loadExerciseList() {
-        let url = 'http://' + ip + ":3001" + "/assignexercise"
+        //let url = 'http://' + ip + ":3001" + "/assignexercise"
+        let url = 'http://localhost:3000' + "/assignexercise"
         + "?type=" + "member"
         + "&fitness_no=" + this.props.userinfo.fitness_no
         + "&member_no=" + this.props.userinfo.member_no

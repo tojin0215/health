@@ -121,7 +121,8 @@ class DefaultExercise extends Component {
     }
 
     handleOnClick(){
-        fetch("http://"+ip+":3001/exercise",{
+        //fetch("http://"+ip+":3001/exercise",{
+        fetch("http://localhost:3000/exercise",{
             method: "PUT",
             headers: {
                 'Content-type': 'application/json'
