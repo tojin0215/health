@@ -424,6 +424,46 @@ class AssignExercise extends Component {
         });
     };
 
+    parserIsDefault = (ex, part) => {
+        let is_default = Number(ex.is_default);
+        if (is_default >= 160000) {
+            if (part === '유산소') {
+                return true;
+            } else {
+                is_default = is_default - 160000;
+            }
+        }
+        if (is_default >= 8000) {
+            if (part === '코어') {
+                return true;
+            } else {
+                is_default = is_default - 8000;
+            }
+        }
+        if (is_default >= 400) {
+            if (part === '전신') {
+                return true;
+            } else {
+                is_default = is_default - 400;
+            }
+        }
+        if (is_default >= 20) {
+            if (part === '하체') {
+                return true;
+            } else {
+                is_default = is_default - 20;
+            }
+        }
+        if (is_default >= 1) {
+            if (part === '상체') {
+                return true;
+            } else {
+                is_default = is_default - 1;
+            }
+        }
+        return false;
+    };
+
     loadExerciseList() {
         let url =
             'http://' +
@@ -520,37 +560,38 @@ class AssignExercise extends Component {
                 for (let i = res.length - 1; i >= 0; i--) {
                     let part = ', ';
                     let part_num = Number(res[i].part);
+
                     if (part_num >= 16) {
                         part = '유산소, ' + part;
                         part_num = part_num - 16;
-                        if (res[i].is_default) {
+                        if (this.parserIsDefault(res[i], '유산소')) {
                             arr_oxy.push(res[i].exercise_no);
                         }
                     }
                     if (part_num >= 8) {
                         part = '코어, ' + part;
                         part_num = part_num - 8;
-                        if (res[i].is_default) {
+                        if (this.parserIsDefault(res[i], '코어')) {
                             arr_core.push(res[i].exercise_no);
                         }
                     }
                     if (part_num >= 4) {
                         part = '전신, ' + part;
                         part_num = part_num - 4;
-                        if (res[i].is_default) {
+                        if (this.parserIsDefault(res[i], '전신')) {
                             arr_allbody.push(res[i].exercise_no);
                         }
                     }
                     if (part_num >= 2) {
                         part = '하체, ' + part;
                         part_num = part_num - 2;
-                        if (res[i].is_default) {
+                        if (this.parserIsDefault(res[i], '하체')) {
                             arr_bottom.push(res[i].exercise_no);
                         }
                     }
                     if (part_num === 1) {
                         part = '상체, ' + part;
-                        if (res[i].is_default) {
+                        if (this.parserIsDefault(res[i], '상체')) {
                             arr_top.push(res[i].exercise_no);
                         }
                     }
@@ -580,9 +621,17 @@ class AssignExercise extends Component {
                 }
                 arr2.reverse();
                 this.setState({
-                    selectedListId: arr2,
                     exerciseList: arr,
+                    select_top: arr_top,
+                    select_bottom: arr_bottom,
+                    select_allbody: arr_allbody,
+                    select_core: arr_core,
+                    select_oxy: arr_oxy,
                 });
+                // this.setState({
+                //     selectedListId: arr2,
+                //     exerciseList: arr,
+                // });
 
                 //   this.setState({
                 //     select_top: arr_top,
