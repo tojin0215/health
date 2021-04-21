@@ -178,7 +178,7 @@ class AddExercise extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            exerciseList: List,
+            exerciseList: [],
             exerciseListLoaded: false,
 
             search: '',
@@ -189,7 +189,7 @@ class AddExercise extends Component {
             part: 0,
             machine: '',
             url: 'http://localhost',
-            default_data_type: -1,
+            default_data_type: 1,
             default_data: '',
             default_rest_second: -1,
             default_set_count: -1,
@@ -429,7 +429,8 @@ class AddExercise extends Component {
                     });
                 }
                 this.setState({ exerciseList: arr });
-            });
+            })
+            .catch((err) => console.error(err));
     };
     selectItem = (e) => {
         if (e.value == '이름') {
@@ -466,16 +467,6 @@ class AddExercise extends Component {
         } else if (this.state.is_default === undefined)
             this.setState({ is_default: false });
         else {
-            // if (this.state.name==="") this.setState({name: ""});
-            // else if (this.state.part == false) this.setState({part: ""});
-            // else if (this.state.machine == false) this.setState({machine: ""});
-            // else if (this.state.url == false) this.setState({url: ""});
-            // else if (this.state.default_data_type==false) this.setState({default_data_type: ""});
-            // else if (this.state.default_data==false) this.setState({default_data: ""});
-            // else if (this.state.default_rest_second==false) this.setState({default_rest_second: ""});
-            // else if (this.state.default_set_count==false) this.setState({default_set_count: ""});
-            // else if (this.state.is_default === undefined) this.setState({is_default: false});
-            // else {
             const userinfo = {
                 member_no: -1,
                 manager_name: '',
@@ -516,6 +507,21 @@ class AddExercise extends Component {
                 .then((res) => {
                     alert('운동 등록되었습니다.');
                     this.search();
+                    this.iptName.value = '';
+                    this.chkPartTop.checked = false;
+                    this.chkPartBottom.checked = false;
+                    this.chkPartAllbody.checked = false;
+                    this.chkPartCore.checked = false;
+                    this.chkPartOxy.checked = false;
+                    this.iptMachine.value = '';
+                    this.iptUrl.value = '';
+                    this.iptDD.value = '';
+                    this.iptDRS.value = '';
+                    this.iptDSC.value = '';
+
+                    this.cusFetch();
+                    alert('운동 등록됨');
+                    // this.search();
                 })
                 .catch((err) => {
                     alert(err);
@@ -528,6 +534,18 @@ class AddExercise extends Component {
             this.AddExercise();
         }
     };
+
+    iptName = null;
+    chkPartTop = null;
+    chkPartBottom = null;
+    chkPartAllbody = null;
+    chkPartCore = null;
+    chkPartOxy = null;
+    iptMachine = null;
+    iptUrl = null;
+    iptDD = null;
+    iptDRS = null;
+    iptDSC = null;
 
     render() {
         const { userinfo } = this.props;
@@ -566,7 +584,9 @@ class AddExercise extends Component {
                                 id="name"
                                 placeholder="name"
                                 name="name"
-                                defaultValue={this.state.name}
+                                ref={(ref) => {
+                                    this.iptName = ref;
+                                }}
                                 onChange={this.handleChange}
                             />
                         </div>
@@ -579,6 +599,9 @@ class AddExercise extends Component {
                                 id="tool"
                                 placeholder="machine"
                                 name="machine"
+                                ref={(ref) => {
+                                    this.iptMachine = ref;
+                                }}
                                 onChange={this.handleChange}
                             />
                         </div>
@@ -591,6 +614,9 @@ class AddExercise extends Component {
                                         type="checkBox"
                                         value="1"
                                         name="part"
+                                        ref={(ref) => {
+                                            this.chkPartTop = ref;
+                                        }}
                                         onChange={this.handleChange}
                                     />
                                     상체
@@ -600,6 +626,9 @@ class AddExercise extends Component {
                                         type="checkBox"
                                         value="2"
                                         name="part"
+                                        ref={(ref) => {
+                                            this.chkPartBottom = ref;
+                                        }}
                                         onChange={this.handleChange}
                                     />
                                     하체
@@ -609,6 +638,9 @@ class AddExercise extends Component {
                                         type="checkBox"
                                         value="4"
                                         name="part"
+                                        ref={(ref) => {
+                                            this.chkPartAllbody = ref;
+                                        }}
                                         onChange={this.handleChange}
                                     />
                                     전신
@@ -618,6 +650,9 @@ class AddExercise extends Component {
                                         type="checkBox"
                                         value="8"
                                         name="part"
+                                        ref={(ref) => {
+                                            this.chkPartCore = ref;
+                                        }}
                                         onChange={this.handleChange}
                                     />
                                     코어
@@ -627,6 +662,9 @@ class AddExercise extends Component {
                                         type="checkBox"
                                         value="16"
                                         name="part"
+                                        ref={(ref) => {
+                                            this.chkPartOxy = ref;
+                                        }}
                                         onChange={this.handleChange}
                                     />
                                     유산소
@@ -640,6 +678,9 @@ class AddExercise extends Component {
                                 id="세트"
                                 placeholder="세트"
                                 name="default_set_count"
+                                ref={(ref) => {
+                                    this.iptDSC = ref;
+                                }}
                                 onChange={this.handleChange}
                             />
                             <label>횟수</label>
@@ -647,6 +688,9 @@ class AddExercise extends Component {
                                 id="횟수"
                                 placeholder="횟수"
                                 name="default_data"
+                                ref={(ref) => {
+                                    this.iptDD = ref;
+                                }}
                                 onChange={this.handleChange}
                             />
                             <label>휴식시간</label>
@@ -654,6 +698,9 @@ class AddExercise extends Component {
                                 id="휴식시간"
                                 placeholder="휴식시간"
                                 name="default_rest_second"
+                                ref={(ref) => {
+                                    this.iptDRS = ref;
+                                }}
                                 onChange={this.handleChange}
                             />
                         </div>
@@ -665,6 +712,9 @@ class AddExercise extends Component {
                                 id="link"
                                 placeholder="link"
                                 name="url"
+                                ref={(ref) => {
+                                    this.iptUrl = ref;
+                                }}
                                 onChange={this.handleChange}
                                 onKeyUp={this.handleKeyUp}
                             />
