@@ -1,4 +1,5 @@
 .home > .container {
+  margin: 4rem auto 16rem;
   padding-bottom:15rem;
   display:flex;
   flex-wrap:wrap;

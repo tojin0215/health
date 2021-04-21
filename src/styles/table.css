@@ -1,0 +1,10 @@
+/* 운동개별선택 테이블 체크박스 크기 조절 */
+.exerciseSelectList input[type=checkbox] {
+  width:1.5rem;
+  height:1.5rem;
+  margin:0;
+}
+/* 운동 개별선택 테이블 제목 보더 제거 */
+.exerciseSelectList h3 {
+  border-bottom:none;
+}

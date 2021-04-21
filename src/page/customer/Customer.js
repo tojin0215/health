@@ -265,7 +265,7 @@ class Customer extends Component {
         return (
             <div className='customer'>
                 <header className='header'>
-                    <Header />
+                    <Header /> 
                     <Navigation goLogin={this.goLogin}/>
                     <div className='localNavigation'>
                         <div className='container'>
@@ -282,11 +282,23 @@ class Customer extends Component {
                 </header>
             <ClickAwayListener onClickAway={this.handleClickAway}>
                 <div className='container'>
-                    <div className='customerSearch'>
-                        <Dropdown className='searchDrop' options={options} onChange={this.selectItem} value={this.state.item} placeholder="Select an option" />
-                        <div className='customerSearchIn'>
-                            <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />
-                            <button type="button" onClick={this.search}> 고객 검색 </button>
+                    <div className='SearchInput'>
+                        <Dropdown
+                        className='searchDrop'
+                        options={options}
+                        onChange={this.selectItem}
+                        value={this.state.item}
+                        placeholder="Select an option"
+                        />
+                        <div className='SearchInputIn'>
+                            <input
+                            type="text"
+                            id='search'
+                            checked={this.state.search}
+                            onChange={this.handleChange}
+                            />
+                            <button type="button" onClick={this.search}> 고객 검색
+                            </button>
                         </div>
                     </div>
                     <Link to="/customer/add" className='btnCustomerNew'>
@@ -295,7 +307,9 @@ class Customer extends Component {
                     <div className='customerTable'>
                         <h5>회원 목록</h5>
                         <div>
-                            <BootstrapTable data={ this.state.customerList } hover 
+                            <BootstrapTable
+                            hover
+                            data={ this.state.customerList }
                             options={textOptions}
                             tableHeaderClass='tableHeader'
                             tableContainerClass='tableContainer'

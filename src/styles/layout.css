@@ -5,6 +5,20 @@
 .container {
   width:100%;
   max-width:1080px;
-  margin:20rem auto;
+  margin:0 auto 20rem;
   padding:3rem 0.5rem;
+}
+
+section {
+  padding:4rem 0 3rem;
+}
+
+.localNavigation .container {
+  margin: 0 auto;
+}
+
+.flexbetween {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }

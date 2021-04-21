@@ -5,23 +5,23 @@
   justify-content:space-between;
 }
 
-.customerSearch {
+.SearchInput {
   display:flex;
   flex-wrap:wrap;
   width:41rem;
 }
 
-.customerSearch .Dropdown-root {
+.SearchInput .Dropdown-root {
   width:20rem;
   margin:1rem;
 }
 
-.customerSearch .Dropdown-control {
+.SearchInput .Dropdown-control {
   border-radius:1rem;
   text-indent:1rem;
 }
 
-.customerSearch .customerSearchIn {
+.SearchInput .SearchInputIn {
   display: flex;
 }
 
@@ -75,7 +75,7 @@
 
 .customerSlide ul {
   width:100%;
-  padding:5rem;
+  padding:2rem;
 }
 
 .customerSlide ul label {
