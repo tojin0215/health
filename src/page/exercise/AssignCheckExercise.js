@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-const ip = '13.124.141.28:3000';
+import '../../styles/exercise/AssignCheckExercise.css';
 
-// const ip = 'localhost:3001';
+const List = [
+    {'no':1,'name':'AAA','tool':'바벨','aa':'상체','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
+    {'no':2,'name':'BBB','tool':'바벨','aa':'하체','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
+    {'no':3,'name':'CCC','tool':'바벨','aa':'전신','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
+    {'no':4,'name':'AAA','tool':'바벨','aa':'상체','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
+    {'no':5,'name':'BBB','tool':'바벨','aa':'하체','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
+    {'no':6,'name':'CCC','tool':'바벨','aa':'전신','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
+    {'no':7,'name':'AAA','tool':'바벨','aa':'상체','set':'3','bb':'10','cc':'10분','link':'www.www.www'},
+    {'no':8,'name':'BBB','tool':'바벨','aa':'하체','set':'3','bb':'10','cc':'10분','link':'www.www.www'}
+]
+
+const ip = '13.124.141.28';
+
 class AssignCheckExercise extends Component {
     constructor(props) {
         super(props);
@@ -295,19 +308,8 @@ class AssignCheckExercise extends Component {
         };
 
         return (
+<<<<<<< HEAD
             <div>
-                <Header />
-                <Navigation goLogin={this.goLogin} />
-                <div className="title">
-                    <div className="titleIn">
-                        <h2>운동 배정</h2>
-                        <h4>운동 {'>'} 운동 배정</h4>
-                    </div>
-                </div>
-                <div className="container">
-                    <NavLink exact to="/assign">
-                        [운동 배정 설정]
-                    </NavLink>
                     <Link
                         to={{
                             pathname:
@@ -339,52 +341,145 @@ class AssignCheckExercise extends Component {
                             thStyle={{ textAlign: 'center' }}
                             tdStyle={{ textAlign: 'center' }}
                             isKey
+=======
+        <div className='assignCheckExercise'>
+            <div className='header'>
+                <Header />
+                <Navigation goLogin={this.goLogin}/>
+                <div className='localNavigation'>
+                    <div className='container'>
+                        <h2>
+                            운동 배정 확인
+                        </h2>
+                        <div className='breadCrumb'>
+                            <Link to='/home'>HOME</Link>
+                            <span>&#62;</span>
+                            <Link to='/assign'>운동 배정</Link>
+                            <span>&#62;</span>
+                            <Link to='#'>운동 배정 확인</Link>
+                        </div>{/*.breadCrumb */}
+                    </div>{/*.container */}
+                </div>{/*.localNavigation */}
+            </div>{/*.header */}
+            <div className='container'>
+                <article className='waySub'>
+                    <NavLink exact to="/assign">
+                        <button type='button'>
+                            운동 배정 설정
+                        </button>
+                    </NavLink>
+                    <Link to={{pathname:"/assign/inbody?member_no="+0}}>    
+                        <button type='button'>
+                            고객인바디
+                        </button>
+                    </Link>
+                </article>{/*.waySub */}
+                <section className='checkExercise'>
+                    <h3>
+                        <span>
+                            {this.state.member_no}
+                        </span>
+                        님의 운동배정입니다.
+                    </h3>
+                    <BootstrapTable
+                    hover
+                    data={ List }  
+                    //pagination={ List.length > 1 }
+                    options={options}
+                    tableHeaderClass='tableHeader'  
+                    tableContainerClass='tableContainer'
+                    //selectRow={selectRowProp}
+                    className="table2"
+                    >
+                        <TableHeaderColumn
+                        dataField='no'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        isKey
+>>>>>>> seungd1
                         >
                             no
                         </TableHeaderColumn>
                         <TableHeaderColumn
+<<<<<<< HEAD
                             dataField="name"
                             thStyle={{ textAlign: 'center' }}
                             tdStyle={{ textAlign: 'center' }}
+=======
+                        dataField='name'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+>>>>>>> seungd1
                         >
                             운동이름
                         </TableHeaderColumn>
                         <TableHeaderColumn
+<<<<<<< HEAD
                             dataField="tool"
                             thStyle={{ textAlign: 'center' }}
                             tdStyle={{ textAlign: 'center' }}
+=======
+                        dataField='tool'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+>>>>>>> seungd1
                         >
                             운동도구
                         </TableHeaderColumn>
                         <TableHeaderColumn
+<<<<<<< HEAD
                             dataField="aa"
                             thStyle={{ textAlign: 'center' }}
                             tdStyle={{ textAlign: 'center' }}
+=======
+                        dataField='aa'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+>>>>>>> seungd1
                         >
                             운동부위
                         </TableHeaderColumn>
                         <TableHeaderColumn
+<<<<<<< HEAD
                             dataField="set"
                             thStyle={{ textAlign: 'center' }}
                             tdStyle={{ textAlign: 'center' }}
+=======
+                        dataField='set' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+>>>>>>> seungd1
                         >
                             세트
                         </TableHeaderColumn>
                         <TableHeaderColumn
+<<<<<<< HEAD
                             dataField="bb"
                             thStyle={{ textAlign: 'center' }}
                             tdStyle={{ textAlign: 'center' }}
+=======
+                        dataField='bb' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+>>>>>>> seungd1
                         >
                             횟수
                         </TableHeaderColumn>
                         <TableHeaderColumn
+<<<<<<< HEAD
                             dataField="cc"
                             thStyle={{ textAlign: 'center' }}
                             tdStyle={{ textAlign: 'center' }}
+=======
+                        dataField='cc' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+>>>>>>> seungd1
                         >
                             휴식시간
                         </TableHeaderColumn>
                         <TableHeaderColumn
+<<<<<<< HEAD
                             dataField="link"
                             thStyle={{ textAlign: 'center' }}
                             tdStyle={{ textAlign: 'center' }}
@@ -398,6 +493,28 @@ class AssignCheckExercise extends Component {
                     </button>
                 </div>
             </div>
+=======
+                        dataField='link' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >
+                            링크
+                        </TableHeaderColumn>
+                    </BootstrapTable>{/*.table2 */}
+                    <button
+                    className='btnOneCenter'
+                    type="button"
+                    onClick={this.handleOnClick}
+                    >
+                        배정하기
+                    </button>
+                </section>{/*.checkExercise */}
+            </div>{/*.container */}
+            <div className='footer'>
+                <Footer />
+            </div>{/*.footer */}
+        </div>/*.assignCheckExercise */
+>>>>>>> seungd1
         );
     }
 }

@@ -6,7 +6,7 @@
 .salesUtill{
     display:flex;
     justify-content:space-between;
-    align-items:center;
+    align-items:flex-end;
     padding:2rem 0 1rem;
 }
 
@@ -50,4 +50,16 @@
 */
 .table2 .tableHeader {
     border-bottom:1px solid rgb(0,0,82)
+}
+
+.salesTotal {
+    padding-bottom:4rem;
+}
+
+.css-g1d714-ValueContainer {
+    /* height:4rem; */
+}
+
+/*상품 매출 현황 페이지 전체 기록 상품이름 필터 크기 조절*/
+.sales .css-1wa3eu0-placeholder {
 }
