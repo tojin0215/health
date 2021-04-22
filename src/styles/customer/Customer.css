@@ -5,24 +5,24 @@
   justify-content:space-between;
 }
 
-.customerSearch {
+.SearchInput {
   display:flex;
   flex-wrap:wrap;
   width:41rem;
 }
 
-.customerSearch .Dropdown-root {
+.SearchInput .Dropdown-root {
   width:20rem;
-  margin:0 20rem 1rem 0;
+  margin:1rem;
 }
 
-.customerSearch .Dropdown-control {
+.SearchInput .Dropdown-control {
   border-radius:1rem;
   text-indent:1rem;
 }
 
-.customerSearch input[type=text] {
-  margin-right:1rem;
+.SearchInput .SearchInputIn {
+  display: flex;
 }
 
 .btnCustomerNew {
@@ -30,7 +30,7 @@
   height:4rem;
   border-radius:1rem;
   padding:.4rem .8rem;
-  margin:1rem 0 0 0;
+  margin:1rem;
   background-color:#000055;
   color:#fff;
   text-align:center;
@@ -48,4 +48,58 @@
 .customerTable {
   width:100%;
   padding-top:2rem;
+}
+
+.customerSlide {
+  background-color:rgba(0,0,0,.9);
+  width:60%;
+  height:100%;
+  padding:5rem;
+  position:fixed;
+  top:0;
+  right:0;
+  color:#fff;
+}
+
+.customerSlide button {
+}
+
+.customerSlide .tableContainer {
+  border-top:1px solid #999;
+  border-bottom:1px solid #999;
+}
+
+.customerSlide .table2 .tableHeader {
+  border-bottom:1px solid #999;
+}
+
+.customerSlide ul {
+  width:100%;
+  padding:2rem;
+}
+
+.customerSlide ul label {
+  padding:.3rem;
+  min-width:10rem;
+}
+
+.customerSlide ul li label:first-child {
+  text-align:center;
+}
+
+.customerSlide .customerSlideUtill {
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+}
+
+.customerSlide .btnCustomerNew {
+  margin:0;
+  width:12rem;
+}
+
+.customerSlide .btnCustomerClose {
+  width:5rem;
+  height:4rem;
+  margin:0 2rem;
 }

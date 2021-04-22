@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 
 import DatePicker from 'react-datepicker';
@@ -166,7 +167,7 @@ class AddSales extends Component {
 
         console.log('***********paymentDate : ', this.state.paymentDate)
         console.log(this.state);
-        //fetch("http://"+ip+":3001/sales", {
+        //fetch("http://"+ip+":3003/sales", {
         fetch("http://localhost:3000/sales", {
             method: "POST",
             headers: {
@@ -210,7 +211,7 @@ class AddSales extends Component {
         }else if(this.state.item === "핸드폰"){
             it = '1'
         }
-        //fetch("http://"+ip+":3001/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        //fetch("http://"+ip+":3003/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
         fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
@@ -244,98 +245,187 @@ class AddSales extends Component {
         console.log(userinfo);
         
         return (
-
-            <div>
-            <Header />
-            <Navigation goLogin={this.goLogin}/>
-            <h2>상품 등록페이지</h2>
-            <div>
-            <button type='button' onClick={this.handleClickOpen}>
-                회원검색
-            </button>
-            <Dialog open={this.state.open} onClose={this.handleClose} maxWidth='lg'>
-                <DialogTitle>고객 검색</DialogTitle>
-                <DialogContent>
-                    {/* <label>이름을 입력해주세요</label>
-                    <input type="search" className="form-control" placeholder="김투진" name="searchKeyword" value={this.state.searchKeyword} onChange={this.handleValueChange}/> */}
-                    <div className='customerSearch'>
-                        <Dropdown className='searchDrop' options={options} onChange={this.selectItem} value={this.state.item} placeholder="Select an option" />
-                        <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />
-                        <button type="button" onClick={this.search}> 고객 검색 </button>
-                    </div>
-                    <Table>
-                    <TableHead>
-                        <TableRow>
-                        <TableCell>번호</TableCell>
-                        <TableCell>이름</TableCell>
-                        <TableCell>폰번호</TableCell>
-                        <TableCell>선택</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.state.customerList ?
-                        //filteredComponents(this.state.customerList)
-                            this.state.customerList.map(c => (
-                                <TableRow>
-                                    <TableCell>{c.no}</TableCell>
-                                    <TableCell>{c.userName}</TableCell>
-                                    <TableCell>{c.phone}</TableCell>
-                                    <TableCell>
-                                    <DialogActions>
-                                        <button type='button' onClick={this.choiceUser} id={c.no} value={[c.userName,c.phone]}>선택</button>
-                                    </DialogActions>
-                                </TableCell>
-                                </TableRow>
-                        )) 
-                        :
-                        <TableRow>
-                            <TableCell colSpan="6" align="center">
-                            </TableCell>
-                        </TableRow>
-                        }
-                    </TableBody>
-                    </Table>
-
-
-                </DialogContent>
-                <DialogActions>
-                    <button type='button' onClick={this.handleClose}>닫기</button>
-                </DialogActions>
-            </Dialog>
-            </div>
-            {/* <Link to="/sales">회원 검색</Link><br/> */}
-            <form className="AddSalesForm" style={{flexDirection:'column'}}>
-                
-                <label>{this.state.userName}님 반갑습니다.</label>
-                <h5 className="AddSalesHeader"> 운동 종목 </h5>
-                <hr/>
-                <label><input type="radio" id='개인 PT' name='exerciseName' value='1' onChange={this.handleChange}/>개인 PT</label>
-                <label><input type="radio" id='GX' name='exerciseName' value='2' onChange={this.handleChange}/>GX</label>
-                <label><input type="radio" id='필라테스' name='exerciseName' value='3' onChange={this.handleChange}/>필라테스</label>
-                <label><input type="radio" id='헬스' name='exerciseName' value='4'onChange={this.handleChange}/>헬스</label>
-                <label><input type="radio" id='기타' name='exerciseName' value='5' onChange={this.handleChange}/>기타</label>
-                <input type="text" id="inputExercise" className="form-control" placeholder="Exercise" name="Exercise" onChange={this.handleChange}/><br/><br/>
-                <h5> 결제 금액</h5>
-                <hr/>
-                <label><input type="radio" name='paymentTools' id='카드' onChange={this.handleChange}/>카드</label>
-                <label><input type="radio" name='paymentTools' id='현금' onChange={this.handleChange}/>현금</label>
-                <label><input type="radio" name='paymentTools' id='계좌이체' onChange={this.handleChange}/>계좌이체</label><br/>
-                <label>운동 <NumberFormat thousandSeparator={true} id="exercisePrice" placeholder="0" onChange={this.handleChange}/></label>
-                <label>운동복 <NumberFormat thousandSeparator={true} id="sportswearPrice" placeholder="0" onChange={this.handleChange}/></label>
-                <label>개인 사물함 <NumberFormat thousandSeparator={true} id="lockerPrice" placeholder="0" onChange={this.handleChange}/></label><br/>
-
-                <h5> 결제일</h5>
-                 <DatePicker
-                    selected={ this.state.paymentDate }
-                    onChange={ this.handleDateChange }
-                    name="paymentDate"
-                    dateFormat="MM/dd/yyyy"
-                />
-                <h5>금액 합계</h5>
-                <NumberFormat thousandSeparator={true} name="payment" id="TotalPayment" readOnly value={parseInt((this.state.exercisePrice).toString().replace(/[^(0-9)]/gi,""))+parseInt((this.state.sportswearPrice).toString().replace(/[^(0-9)]/gi,""))+parseInt((this.state.lockerPrice).toString().replace(/[^(0-9)]/gi,""))}/>
-                <button className="btn btn-lg btn-primary btn-block" type="button" onClick={this.handleOnClick}> 등록하기 </button>
-                </form>
-        </div>
+        <div className='addSales'>
+            <div className='header'>
+                <Header />
+                <Navigation goLogin={this.goLogin}/>
+                <div className='localNavigation'>
+                    <div className='container'>
+                        <h2>
+                            결제 등록
+                        </h2>
+                        <div className='breadCrumb'>
+                            <Link to='/home'>HOME</Link>
+                            <span>&#62;</span>
+                            <Link to='/sales'>상품/매출</Link>
+                            <span>&#62;</span>
+                            <Link to='#'>결제 등록</Link>
+                        </div>
+                    </div>{/*.container */}
+                </div>{/*.localNavigation */}
+            </div>{/*.header */}
+            <div className='container'>
+                <h2>상품 등록페이지</h2>
+                <div>
+                    <button type='button' onClick={this.handleClickOpen}>
+                        회원검색
+                    </button>
+                    <Dialog open={this.state.open} onClose={this.handleClose} maxWidth='lg'>
+                        <DialogTitle>고객 검색</DialogTitle>
+                        <DialogContent>
+                            {/* <label>이름을 입력해주세요</label>
+                            <input type="search" className="form-control" placeholder="김투진" name="searchKeyword" value={this.state.searchKeyword} onChange={this.handleValueChange}/> */}
+                            <div className='customerSearch'>
+                                <Dropdown
+                                    className='searchDrop'
+                                    options={options}
+                                    onChange={this.selectItem}
+                                    value={this.state.item}
+                                    placeholder="Select an option"
+                                />{/*.searchDrop */}
+                                <div className='customerSearchIn'>
+                                    <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />
+                                    <button type="button" onClick={this.search}>
+                                        고객 검색
+                                    </button>
+                                </div>{/*.customerSearchIn */}
+                            </div>{/*.customerSearch */}
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                    <TableCell>번호</TableCell>
+                                    <TableCell>이름</TableCell>
+                                    <TableCell>폰번호</TableCell>
+                                    <TableCell>선택</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {this.state.customerList ?
+                                    //filteredComponents(this.state.customerList)
+                                        this.state.customerList.map(c => (
+                                            <TableRow>
+                                                <TableCell>{c.no}</TableCell>
+                                                <TableCell>{c.userName}</TableCell>
+                                                <TableCell>{c.phone}</TableCell>
+                                                <TableCell>
+                                                <DialogActions>
+                                                    <button type='button' onClick={this.choiceUser} id={c.no} value={[c.userName,c.phone]}>선택</button>
+                                                </DialogActions>
+                                                </TableCell>
+                                            </TableRow>
+                                    ))
+                                    :
+                                    <TableRow>
+                                        <TableCell colSpan="6" align="center">
+                                        </TableCell>
+                                    </TableRow>
+                                    }
+                                    </TableBody>
+                            </Table>
+                        </DialogContent>
+                        <DialogActions>
+                            <button type='button' onClick={this.handleClose}>
+                                닫기
+                            </button>
+                        </DialogActions>
+                    </Dialog>
+                </div>
+                {/* <Link to="/sales">회원 검색</Link><br/> */}
+                <form className="AddSalesForm productPay" style={{flexDirection:'column'}}>
+                    <label className='salesCustomer'>
+                        <span>
+                            {this.state.userName}
+                        </span>
+                        님 반갑습니다.
+                    </label>
+                    <h3 className="AddSalesHeader">
+                        운동 종목
+                    </h3>
+                    <div className='exerciseType'>
+                        <label>
+                            <input type="radio" id='개인 PT' name='exerciseName' value='1' onChange={this.handleChange}/>
+                            개인 PT
+                        </label>
+                        <label>
+                            <input type="radio" id='GX' name='exerciseName' value='2' onChange={this.handleChange}/>
+                            GX
+                        </label>
+                        <label>
+                            <input type="radio" id='필라테스' name='exerciseName' value='3' onChange={this.handleChange}/>
+                            필라테스
+                        </label>
+                        <label>
+                            <input type="radio" id='헬스' name='exerciseName' value='4'onChange={this.handleChange}/>
+                            헬스
+                        </label>
+                        <label>
+                            <input type="radio" id='기타' name='exerciseName' value='5' onChange={this.handleChange}/>
+                            <span>기타</span>
+                            <input type="text" id="inputExercise" className="form-control" placeholder="기타 운동" name="Exercise" onChange={this.handleChange}/>
+                        </label>
+                    </div>{/*.exerciseType */}
+                    <h3>결제 금액</h3>
+                    <div className='payType'>
+                        <label>
+                            <input type="radio" name='paymentTools' id='카드' onChange={this.handleChange}/>
+                            카드
+                        </label>
+                        <label>
+                            <input type="radio" name='paymentTools' id='현금' onChange={this.handleChange}/>
+                            현금
+                        </label>
+                        <label>
+                            <input type="radio" name='paymentTools' id='계좌이체' onChange={this.handleChange}/>
+                            계좌이체
+                        </label>
+                    </div>{/*.payType */}
+                    <div className='paymentAmount'>
+                        <label>
+                            운동
+                            <NumberFormat thousandSeparator={true} id="exercisePrice" placeholder="0" onChange={this.handleChange}/>
+                        </label>
+                        <label>
+                            운동복
+                            <NumberFormat thousandSeparator={true} id="sportswearPrice" placeholder="0" onChange={this.handleChange}/>
+                        </label>
+                        <label>
+                            개인 사물함
+                            <NumberFormat thousandSeparator={true} id="lockerPrice" placeholder="0" onChange={this.handleChange}/>
+                        </label>
+                    </div>{/*.paymentAmount */}
+                    <div className='finalAmount'>
+                        <div className='finalAmountOthers'>
+                            <label className='amountDay'>
+                                <span>결제일</span>
+                                <DatePicker
+                                    selected={ this.state.paymentDate }
+                                    onChange={ this.handleDateChange }
+                                    name="paymentDate"
+                                    dateFormat="MM/dd/yyyy"
+                                />
+                            </label>{/*.amountDay */}
+                        </div>{/*.finalAmountOthers */}
+                        <label className='amountTotal'>
+                            금액 합계
+                            <NumberFormat 
+                                thousandSeparator={true}
+                                name="payment"
+                                id="TotalPayment"
+                                readOnly
+                                value={parseInt((this.state.exercisePrice).toString().replace(/[^(0-9)]/gi,""))+parseInt((this.state.sportswearPrice).toString().replace(/[^(0-9)]/gi,""))+parseInt((this.state.lockerPrice).toString().replace(/[^(0-9)]/gi,""))}
+                            />
+                        </label>{/*.amountTotal */}
+                    </div>{/*.finalAmount */}
+                    <button
+                        className="btn btn-lg btn-block" type="button" onClick={this.handleOnClick}>
+                        등록하기
+                    </button>
+                </form>{/*.AddSalesForm productPay */}
+            </div>{/*.container */}
+            <div className='footer'>
+                <Footer />
+            </div>{/*.footer */}
+        </div>/*.addSales */
         );
     }
 }

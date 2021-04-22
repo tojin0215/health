@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 
 import DatePicker from 'react-datepicker';
@@ -16,6 +17,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
 import '../../styles/customer/AddCustomer.css';
+import '../../styles/exercise/AddInbody.css';
 
 
 const ip = '13.124.141.28';
@@ -82,7 +84,7 @@ class AddInbody extends Component {
             })
         }
 
-        //fetch("http://"+ip+":3001/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
+        //fetch("http://"+ip+":3003/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
         fetch("http://localhost:3000/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
@@ -179,7 +181,7 @@ class AddInbody extends Component {
             alert("빈칸을 채워주세요.")
         }else{
             // 서버 연결하는 부분
-            //fetch("http://"+ip+":3001/inbody", {
+            //fetch("http://"+ip+":3003/inbody", {
             fetch("http://localhost:3000/inbody", {
                 method: "POST",
                 headers: {
@@ -223,180 +225,222 @@ class AddInbody extends Component {
         console.log('___',this.state.member_no)
         
         return (
-
-            <div>
-            <Header />
-            <Navigation goLogin={this.goLogin}/>
-            <h2>인바디 추가페이지</h2>
-               {/* <label>번호 : {this.state.member_no}</label>  */}
-               
-               <label>이름 : {this.state.name}, </label> 
-               <label>생년월일 : {this.state.resiNumber}, </label> 
-               <label>성별 : {this.state.sex}</label> 
-
-                <br></br>
-               <form className="formAddCustomer" style={{flexDirection:'column'}}>
-                    <label>
-                    <TextField
-                        variant="outlined"
-                        value={this.state.height}
-                        onChange={this.handleChange}
-                        type='number'
-                        id='height'
-                        label="키"
-                        error={this.state.height_err}
-                        required
-                        autoFocus
-                    />
-                    </label><br/>
-                    <h5>검사날짜</h5>
-                    <DatePicker
-                        selected={ this.state.measurementDate }
-                        onChange={ this.handleDateChange }
-                        name="measurementDate"
-                        dateFormat="MM/dd/yyyy"
-                    /><br/><br/>
-                    <h5>체성분 분석</h5><br/>
-                    <label>
-                    <TextField
-                        variant="outlined"
-                        value={this.state.bodyMoisture}
-                        onChange={this.handleChange}
-                        type='number'
-                        id='bodyMoisture'
-                        label="체수분"
-                        error={this.state.bodyMoisture_err}
-                        required
-                    />
-                    </label><br/>
-                    <label>
-                    <TextField
-                        variant="outlined"
-                        value={this.state.protein}
-                        onChange={this.handleChange}
-                        type='number'
-                        id='protein'
-                        label="단백질"
-                        error={this.state.protein_err}
-                        required
-                    />
-                    </label><br/>
-                    <label>
-                    <TextField
-                        variant="outlined"
-                        value={this.state.mineral}
-                        onChange={this.handleChange}
-                        type='number'
-                        id='mineral'
-                        label="무기질"
-                        error={this.state.mineral_err}
-                        required
-                    />
-                    </label><br/>
-                    <label>
-                    <TextField
-                        variant="outlined"
-                        value={this.state.bodyFat}
-                        onChange={this.handleChange}
-                        type='number'
-                        id='bodyFat'
-                        label="체지방"
-                        error={this.state.bodyFat_err}
-                        required
-                    />
-                    </label><br/>
-                    <label>
-                    <TextField
-                        variant="outlined"
-                        value={this.state.muscleMass}
-                        onChange={this.handleChange}
-                        type='number'
-                        id='muscleMass'
-                        label="근육량"
-                        error={this.state.muscleMass_err}
-                        required
-                    />
-                    </label><br/>  
-                    <label>
-                    <TextField
-                        variant="outlined"
-                        value={this.state.bodyFatMass1}
-                        onChange={this.handleChange}
-                        type='number'
-                        id='bodyFatMass1'
-                        label="체지방량"
-                        error={this.state.bodyFatMass1_err}
-                        required
-                    />
-                    </label><br/>
-                    <label>
-                    <TextField
-                        variant="outlined"
-                        value={this.state.weight}
-                        onChange={this.handleChange}
-                        type='number'
-                        id='weight'
-                        label="체중"
-                        error={this.state.weight_err}
-                        required
-                    />
-                    </label><br/>
-                    
-                    <h5>골격근, 지방</h5>
-                    <label>
-                    <TextField
-                        variant="outlined"
-                        value={this.state.skeletalMuscleMass}
-                        onChange={this.handleChange}
-                        type='number'
-                        id='skeletalMuscleMass'
-                        label="골격근량"
-                        error={this.state.skeletalMuscleMass_err}
-                        required
-                    />
-                    </label><br/>
-                    <label>
-                    <TextField
-                        variant="outlined"
-                        value={this.state.bodyFatMass2}
-                        onChange={this.handleChange}
-                        type='number'
-                        id='bodyFatMass2'
-                        label="체지방량"
-                        error={this.state.bodyFatMass2_err}
-                        required
-                    />
-                    </label><br/>
-
-                    <h5>비만진단</h5>
-                    <label>
-                    <TextField
-                        variant="outlined"
-                        value={this.state.bmi}
-                        onChange={this.handleChange}
-                        type='number'
-                        id='bmi'
-                        label="BMI"
-                        error={this.state.bmi_err}
-                        required
-                    />
-                    </label><br/>
-                    <label> 
-                    <TextField
-                        variant="outlined"
-                        value={this.state.percentBodyFat}
-                        onChange={this.handleChange}
-                        type='number'
-                        id='percentBodyFat'
-                        label="체지방률"
-                        error={this.state.percentBodyFat_err}
-                        required
-                    />
-                    </label><br/>
-                
-                <button type="button" onClick={this.handleOnClick}> 등록하기 </button>
-            </form>
-            </div>
+            <div className='addInbody'>
+                <div className='header'>
+                    <Header />
+                    <Navigation goLogin={this.goLogin}/>
+                    <div className='localNavigation'>
+                        <div className='container'>
+                            <h2>
+                            인바디 입력
+                            </h2>
+                            <div className='breadCrumb'>
+                                <Link to='/home'>HOME</Link>
+                                <span>&#62;</span>
+                                <Link to='#'>인바디 정보</Link>
+                                <span>&#62;</span>
+                                <Link to='#'>인바디 입력</Link>
+                            </div>{/*.breadCrumb */}
+                        </div>{/*.container */}
+                    </div>{/*.localNavigation */}
+                </div>{/*.header */}
+                {/* <label>번호 : {this.state.member_no}</label>  */}
+                <div className='container'>
+                    <section className='addInCustomerInfo'>
+                        <h3>
+                            회원 정보
+                        </h3>
+                        <label>
+                            <p>
+                                이름
+                            </p>
+                            <span>{this.state.name}</span>
+                        </label>
+                        <label>
+                            <p>
+                                생년월일
+                            </p>
+                            <span>{this.state.resiNumber}</span>
+                        </label>
+                        <label>
+                            <p>
+                                성별
+                            </p>
+                            <span>{this.state.sex}</span>
+                        </label>
+                    </section>{/*.addInCustomerInfo */}
+                    <form className="formAddCustomer">
+                        <h3>인바디 정보 입력</h3>
+                        <h5>검사날짜</h5>
+                        <label className='inbodyMeasurementDate'>
+                            <DatePicker
+                                selected={ this.state.measurementDate }
+                                onChange={ this.handleDateChange }
+                                name="measurementDate"
+                                dateFormat="MM/dd/yyyy"
+                            />
+                        </label>
+                        <label>
+                            <TextField
+                                variant="outlined"
+                                value={this.state.height}
+                                onChange={this.handleChange}
+                                type='number'
+                                id='height'
+                                label="키"
+                                error={this.state.height_err}
+                                required
+                                autoFocus
+                            />{/*#height */}
+                        </label>
+                        <h5>체성분 분석</h5>
+                        <label>
+                            <TextField
+                            variant="outlined"
+                            value={this.state.bodyMoisture}
+                            onChange={this.handleChange}
+                            type='number'
+                            id='bodyMoisture'
+                            label="체수분"
+                            error={this.state.bodyMoisture_err}
+                            required
+                            />{/*#bodyMoisture */}
+                        </label>
+                        <label>
+                            <TextField
+                            variant="outlined"
+                            value={this.state.protein}
+                            onChange={this.handleChange}
+                            type='number'
+                            id='protein'
+                            label="단백질"
+                            error={this.state.protein_err}
+                            required
+                            />{/*# */}
+                        </label>
+                        <label>
+                            <TextField
+                            variant="outlined"
+                            value={this.state.mineral}
+                            onChange={this.handleChange}
+                            type='number'
+                            id='mineral'
+                            label="무기질"
+                            error={this.state.mineral_err}
+                            required
+                            />{/*#mineral */}
+                        </label>
+                        <label>
+                            <TextField
+                            variant="outlined"
+                            value={this.state.bodyFat}
+                            onChange={this.handleChange}
+                            type='number'
+                            id='bodyFat'
+                            label="체지방"
+                            error={this.state.bodyFat_err}
+                            required
+                            />{/*#bodyFat */}
+                        </label>
+                        <label>
+                            <TextField
+                            variant="outlined"
+                            value={this.state.muscleMass}
+                            onChange={this.handleChange}
+                            type='number'
+                            id='muscleMass'
+                            label="근육량"
+                            error={this.state.muscleMass_err}
+                            required
+                            />{/*#muscleMass */}
+                        </label>
+                        <label>
+                            <TextField
+                            variant="outlined"
+                            value={this.state.bodyFatMass1}
+                            onChange={this.handleChange}
+                            type='number'
+                            id='bodyFatMass1'
+                            label="체지방량"
+                            error={this.state.bodyFatMass1_err}
+                            required
+                            />{/*#bodyFatMass1 */}
+                        </label>
+                        <label>
+                            <TextField
+                            variant="outlined"
+                            value={this.state.weight}
+                            onChange={this.handleChange}
+                            type='number'
+                            id='weight'
+                            label="체중"
+                            error={this.state.weight_err}
+                            required
+                            />{/*#weight */}
+                        </label>
+                        <h5>골격근, 지방</h5>
+                        <label>
+                            <TextField
+                            variant="outlined"
+                            value={this.state.skeletalMuscleMass}
+                            onChange={this.handleChange}
+                            type='number'
+                            id='skeletalMuscleMass'
+                            label="골격근량"
+                            error={this.state.skeletalMuscleMass_err}
+                            required
+                            />{/*#skeletalMuscleMass */}
+                        </label>
+                        <label>
+                            <TextField
+                            variant="outlined"
+                            value={this.state.bodyFatMass2}
+                            onChange={this.handleChange}
+                            type='number'
+                            id='bodyFatMass2'
+                            label="체지방량"
+                            error={this.state.bodyFatMass2_err}
+                            required
+                            />{/*#bodyFatMass2 */}
+                        </label>
+                        <h5>비만진단</h5>
+                        <label>
+                            <TextField
+                            variant="outlined"
+                            value={this.state.bmi}
+                            onChange={this.handleChange}
+                            type='number'
+                            id='bmi'
+                            label="BMI"
+                            error={this.state.bmi_err}
+                            required
+                            />{/*#bmi */}
+                        </label>
+                        <label> 
+                            <TextField
+                            variant="outlined"
+                            value={this.state.percentBodyFat}
+                            onChange={this.handleChange}
+                            type='number'
+                            id='percentBodyFat'
+                            label="체지방률"
+                            error={this.state.percentBodyFat_err}
+                            required
+                            />{/*#percentBodyFat */}
+                        </label>
+                        <button
+                        className='btnOneCenter'
+                        type="button"
+                        onClick={this.handleOnClick}
+                        >
+                            등록하기
+                        </button>
+                    </form>{/*.formAddCustomer */}
+                </div>{/*.container */}
+                <div className='footer'>
+                    <Footer />
+                </div>{/*.footer */}
+            </div>/*.addInbody */
         );
     }
 }

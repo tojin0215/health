@@ -1,0 +1,37 @@
+.inbodyCustomer {
+  position:relative;
+  padding-bottom:5rem;
+}
+
+.inbodyCustomer .waySub {
+  top:14rem;
+  right:0;
+}
+
+.inbody .inbodyCustomer > div {
+  display:flex;
+  flex-wrap:wrap;
+}
+
+.inbody .inbodyCustomer > div > label {
+  font-size:2rem;
+  padding-left:1rem;
+}
+
+.inbody .inbodyCustomer > div > h3 {
+  /* border-bottom:none; */
+}
+
+.inbody .inbodyCustomer h3 span {
+  font-size:3rem;
+}
+
+.inbody .inbodyCustomer > div label{
+  width:100%;
+}
+
+.inbody .inbodyListUtill {
+  justify-content: flex-end;
+  display: flex;
+  align-items: center;
+}
