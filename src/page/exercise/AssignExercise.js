@@ -557,6 +557,12 @@ class AssignExercise extends Component {
                 let arr_core = [];
                 let arr_oxy = [];
 
+                let select_top_data = {};
+                let select_bottom_data = {};
+                let select_allbody_data = {};
+                let select_core_data = {};
+                let select_oxy_data = {};
+
                 for (let i = res.length - 1; i >= 0; i--) {
                     let part = ', ';
                     let part_num = Number(res[i].part);
@@ -566,6 +572,7 @@ class AssignExercise extends Component {
                         part_num = part_num - 16;
                         if (this.parserIsDefault(res[i], '유산소')) {
                             arr_oxy.push(res[i].exercise_no);
+                            select_oxy_data[res[i].exercise_no] = res[i];
                         }
                     }
                     if (part_num >= 8) {
@@ -573,6 +580,7 @@ class AssignExercise extends Component {
                         part_num = part_num - 8;
                         if (this.parserIsDefault(res[i], '코어')) {
                             arr_core.push(res[i].exercise_no);
+                            select_core_data[res[i].exercise_no] = res[i];
                         }
                     }
                     if (part_num >= 4) {
@@ -580,6 +588,7 @@ class AssignExercise extends Component {
                         part_num = part_num - 4;
                         if (this.parserIsDefault(res[i], '전신')) {
                             arr_allbody.push(res[i].exercise_no);
+                            select_allbody_data[res[i].exercise_no] = res[i];
                         }
                     }
                     if (part_num >= 2) {
@@ -587,12 +596,14 @@ class AssignExercise extends Component {
                         part_num = part_num - 2;
                         if (this.parserIsDefault(res[i], '하체')) {
                             arr_bottom.push(res[i].exercise_no);
+                            select_bottom_data[res[i].exercise_no] = res[i];
                         }
                     }
                     if (part_num === 1) {
                         part = '상체, ' + part;
                         if (this.parserIsDefault(res[i], '상체')) {
                             arr_top.push(res[i].exercise_no);
+                            select_top_data[res[i].exercise_no] = res[i];
                         }
                     }
                     part = part.slice(0, -2);
@@ -627,6 +638,12 @@ class AssignExercise extends Component {
                     select_allbody: arr_allbody,
                     select_core: arr_core,
                     select_oxy: arr_oxy,
+
+                    select_top_data: select_top_data,
+                    select_bottom_data: select_bottom_data,
+                    select_allbody_data: select_allbody_data,
+                    select_core_data: select_core_data,
+                    select_oxy_data: select_oxy_data,
                 });
                 // this.setState({
                 //     selectedListId: arr2,
