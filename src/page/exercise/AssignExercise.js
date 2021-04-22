@@ -23,8 +23,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
 // const ip = 'localhost';
-// const ip = 'localhost:3000';
-const ip = 'localhost:3001';
+const ip = 'localhost:3000';
+// const ip = 'localhost:3003';
 
 function onChangeHandler(a, e) {
     [e.target.a] = e.target.value;
@@ -98,7 +98,7 @@ class AssignExercise extends Component {
                     break;
                 }
             });
-        alert('선택하셨습니다.' + member_no);
+        // alert('선택하셨습니다.' + member_no);
     };
 
     handleClickOpen() {
@@ -560,6 +560,12 @@ class AssignExercise extends Component {
                 let arr_core = [];
                 let arr_oxy = [];
 
+                let select_top_data = {};
+                let select_bottom_data = {};
+                let select_allbody_data = {};
+                let select_core_data = {};
+                let select_oxy_data = {};
+
                 for (let i = res.length - 1; i >= 0; i--) {
                     let part = ', ';
                     let part_num = Number(res[i].part);
@@ -569,6 +575,7 @@ class AssignExercise extends Component {
                         part_num = part_num - 16;
                         if (this.parserIsDefault(res[i], '유산소')) {
                             arr_oxy.push(res[i].exercise_no);
+                            select_oxy_data[res[i].exercise_no] = res[i];
                         }
                     }
                     if (part_num >= 8) {
@@ -576,6 +583,7 @@ class AssignExercise extends Component {
                         part_num = part_num - 8;
                         if (this.parserIsDefault(res[i], '코어')) {
                             arr_core.push(res[i].exercise_no);
+                            select_core_data[res[i].exercise_no] = res[i];
                         }
                     }
                     if (part_num >= 4) {
@@ -583,6 +591,7 @@ class AssignExercise extends Component {
                         part_num = part_num - 4;
                         if (this.parserIsDefault(res[i], '전신')) {
                             arr_allbody.push(res[i].exercise_no);
+                            select_allbody_data[res[i].exercise_no] = res[i];
                         }
                     }
                     if (part_num >= 2) {
@@ -590,12 +599,14 @@ class AssignExercise extends Component {
                         part_num = part_num - 2;
                         if (this.parserIsDefault(res[i], '하체')) {
                             arr_bottom.push(res[i].exercise_no);
+                            select_bottom_data[res[i].exercise_no] = res[i];
                         }
                     }
                     if (part_num === 1) {
                         part = '상체, ' + part;
                         if (this.parserIsDefault(res[i], '상체')) {
                             arr_top.push(res[i].exercise_no);
+                            select_top_data[res[i].exercise_no] = res[i];
                         }
                     }
                     part = part.slice(0, -2);
@@ -630,6 +641,12 @@ class AssignExercise extends Component {
                     select_allbody: arr_allbody,
                     select_core: arr_core,
                     select_oxy: arr_oxy,
+
+                    select_top_data: select_top_data,
+                    select_bottom_data: select_bottom_data,
+                    select_allbody_data: select_allbody_data,
+                    select_core_data: select_core_data,
+                    select_oxy_data: select_oxy_data,
                 });
                 // this.setState({
                 //     selectedListId: arr2,
@@ -838,654 +855,677 @@ class AssignExercise extends Component {
         };
 
         return (
-        <div className='assignExercise'>
-            <div className='header'>
-                <Header />
-                <Navigation goLogin={this.goLogin}/>
-                <div className='localNavigation'>
-                    <div className='container'>
-                        <h2>
-                            운동 배정
-                        </h2>
-                        <div className='breadCrumb'>
-                            <Link to='/home'>HOME</Link>
-                            <span>&#62;</span>
-                            <Link to='/assign'>운동 배정</Link>
-                        </div>{/*.breadCrumb */}
-                    </div>{/*.container */}
-                </div>{/*.localNavigation */}
-            </div>{/*.header */}
-            <div className='container'>
-                <article className='waySub'>
-                    <Link to={{ pathname: '/assign/inbody?member_no=' + 0 }}>
-                        <button type='button'>
-                            고객인바디
+            <div className="assignExercise">
+                <div className="header">
+                    <Header />
+                    <Navigation goLogin={this.goLogin} />
+                    <div className="localNavigation">
+                        <div className="container">
+                            <h2>운동 배정</h2>
+                            <div className="breadCrumb">
+                                <Link to="/home">HOME</Link>
+                                <span>&#62;</span>
+                                <Link to="/assign">운동 배정</Link>
+                            </div>
+                            {/*.breadCrumb */}
+                        </div>
+                        {/*.container */}
+                    </div>
+                    {/*.localNavigation */}
+                </div>
+                {/*.header */}
+                <div className="container">
+                    <article className="waySub">
+                        <Link
+                            to={{ pathname: '/assign/inbody?member_no=' + 0 }}
+                        >
+                            <button type="button">고객인바디</button>
+                        </Link>
+                    </article>
+                    <section>
+                        <button type="button" onClick={this.handleClickOpen}>
+                            회원검색
                         </button>
-                    </Link>
-                </article>
-                <section>
-                    <button type='button' onClick={this.handleClickOpen}>
-                        회원검색
-                    </button>
-                    <Dialog
-                    open={this.state.open}
-                    onClose={this.handleClose}
-                    maxWidth='lg'
-                    >
-                        <DialogTitle>
-                            고객 검색
-                        </DialogTitle>
-                        <DialogContent>
-                            <div className='customerSearch'>
-                                <Dropdown
-                                className='searchDrop'
-                                options={options}
-                                onChange={this.selectItem}
-                                value={this.state.item}
-                                placeholder="Select an option"
-                                />{/*.searchDrop */}
-                                <input
-                                type="text"
-                                id='search'
-                                checked={this.state.search}
-                                onChange={this.handleChange}
-                                />{/*#search */}
-                                <button
-                                type="button"
-                                onClick={this.search}
-                                >
-                                    {' '}
-                                    고객 검색{' '}
-                                </button>
-                            </div>{/*.customerSearch */}
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                    <TableCell>번호</TableCell>
-                                    <TableCell>이름</TableCell>
-                                    <TableCell>폰번호</TableCell>
-                                    <TableCell>선택</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {this.state.customerList ? (
-                                        //filteredComponents(this.state.customerList)
-                                        this.state.customerList.map((c) => (
-                                          <TableRow>
-                                            <TableCell>
-                                              {c.no}
-                                            </TableCell>
-                                            <TableCell>
-                                              {c.userName}
-                                            </TableCell>
-                                            <TableCell>
-                                              {c.phone}
-                                            </TableCell>
-                                            <TableCell>
-                                              <DialogActions>
-                                                <button
-                                                type='button'
-                                                onClick={this.choiceUser}
-                                                id={c.no}
-                                                value={[c.userName,c.phone,]}
-                                                >
-                                                    선택
-                                                </button>{/*#{c.no} */}
-                                              </DialogActions>
-                                            </TableCell>
-                                          </TableRow>
-                                        ))
+                        <Dialog
+                            open={this.state.open}
+                            onClose={this.handleClose}
+                            maxWidth="lg"
+                        >
+                            <DialogTitle>고객 검색</DialogTitle>
+                            <DialogContent>
+                                <div className="customerSearch">
+                                    <Dropdown
+                                        className="searchDrop"
+                                        options={options}
+                                        onChange={this.selectItem}
+                                        value={this.state.item}
+                                        placeholder="Select an option"
+                                    />
+                                    {/*.searchDrop */}
+                                    <input
+                                        type="text"
+                                        id="search"
+                                        checked={this.state.search}
+                                        onChange={this.handleChange}
+                                    />
+                                    {/*#search */}
+                                    <button type="button" onClick={this.search}>
+                                        고객 검색
+                                    </button>
+                                </div>
+                                {/*.customerSearch */}
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>번호</TableCell>
+                                            <TableCell>이름</TableCell>
+                                            <TableCell>폰번호</TableCell>
+                                            <TableCell>선택</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {this.state.customerList ? (
+                                            //filteredComponents(this.state.customerList)
+                                            this.state.customerList.map((c) => (
+                                                <TableRow>
+                                                    <TableCell>
+                                                        {c.no}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        {c.userName}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        {c.phone}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <DialogActions>
+                                                            <button
+                                                                type="button"
+                                                                onClick={
+                                                                    this
+                                                                        .choiceUser
+                                                                }
+                                                                id={c.no}
+                                                                value={[
+                                                                    c.userName,
+                                                                    c.phone,
+                                                                ]}
+                                                            >
+                                                                선택
+                                                            </button>
+                                                            {/*#{c.no} */}
+                                                        </DialogActions>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))
                                         ) : (
-                                    <TableRow>
-                                        <TableCell
-                                        colSpan="6"
-                                        align="center"
-                                        >
-                                        </TableCell>
-                                    </TableRow>
+                                            <TableRow>
+                                                <TableCell
+                                                    colSpan="6"
+                                                    align="center"
+                                                ></TableCell>
+                                            </TableRow>
                                         )}
-                                </TableBody>
-                            </Table>
-                        </DialogContent>
-                        <DialogActions>
-                            <button
-                            type='button'
-                            onClick={this.handleClose}
-                            >
-                                닫기
-                            </button>
-                        </DialogActions>
-                    </Dialog>
-                </section>
-                <section className='CustomerInbody'>
-                    <h3>
-                        <span>{this.state.userName}</span>님 운동배정
-                    </h3>
-                    <div>
-                        <h4>
-                            {/* <span>
+                                    </TableBody>
+                                </Table>
+                            </DialogContent>
+                            <DialogActions>
+                                <button
+                                    type="button"
+                                    onClick={this.handleClose}
+                                >
+                                    닫기
+                                </button>
+                            </DialogActions>
+                        </Dialog>
+                    </section>
+                    <section className="CustomerInbody">
+                        <h3>
+                            <span>{this.state.userName}</span>님 운동배정
+                        </h3>
+                        <div>
+                            <h4>
+                                {/* <span>
                                 {this.state.userName}
                             </span>
                             님 */}
-                            최근 인바디 정보입니다.
-                        </h4>
-                        <label>키 : {this.state.user_height}</label>
-                        <label>체중 : {this.state.user_weight}</label>
-                        <label>체지방 : {this.state.user_bodyFat}</label>
-                        <label>근육량 : {this.state.user_muscleMass}</label>
-                    </div>
-                </section>{/*.CustomerInbody */}
-                <section className='assignWorkout'>
-                    <h3>운동 목록</h3>
-                    <div className='inputCheckRow'>
-                        <h5>운동 묶음 선택 (기본 설정)</h5>
-                        <label>
-                            <input
-                            type="checkBox"
-                            id="1"
-                            name="assignDefault|상체"
-                            onClick={this.selectHandleOnClick}
-                            />{/*#1 */}
-                            <p>상체</p>
-                        </label>
-                        <label>
-                            <input
-                            type="checkBox"
-                            id="2"
-                            name="assignDefault|하체"
-                            onClick={this.selectHandleOnClick}
-                            />{/*#2 */}
-                            <p>하체</p>
-                        </label>
-                        <label>
-                            <input
-                            type="checkBox"
-                            id="3"
-                            name="assignDefault|전신"
-                            onClick={this.selectHandleOnClick}
-                            />{/*#3 */}
-                            <p>전신</p>
-                        </label>
-                        <label>
-                            <input
-                            type="checkBox"
-                            id="4"
-                            name="assignDefault|코어"
-                            onClick={this.selectHandleOnClick}
-                            />{/*#4 */}
-                            <p>코어</p>
-                        </label>
-                        <label>
-                            <input
-                            type="checkBox"
-                            id="5"
-                            name="assignDefault|유산소"
-                            onClick={this.selectHandleOnClick}
-                            />{/*#5 */}
-                            <p>유산소</p>
-                        </label>
-                    </div>
-                    <h5>운동 개별 선택</h5>
-                    <div className='exerciseSelectList'>
-                        <div className='flexbetween'>
-                            <button
-                            type="button"
-                            id="1"
-                            onClick={this.click1}
-                            >
-                                상체
-                            </button>{/*#1 */}
-                            <button
-                            type="button"
-                            id="2"
-                            onClick={this.click2}
-                            >
-                                하체
-                            </button>{/*#2 */}
-                            <button
-                            type="button"
-                            id="3"
-                            onClick={this.click3}
-                            >
-                                전신
-                            </button>{/*#3 */}
-                            <button
-                            type="button"
-                            id="4"
-                            onClick={this.click4}
-                            >
-                                코어
-                            </button>{/*#4 */}
-                            <button
-                            type="button"
-                            id="5"
-                            onClick={this.click5}
-                            >
-                                유산소
-                            </button>{/*#5 */}
+                                최근 인바디 정보입니다.
+                            </h4>
+                            <label>키 : {this.state.user_height}</label>
+                            <label>체중 : {this.state.user_weight}</label>
+                            <label>체지방 : {this.state.user_bodyFat}</label>
+                            <label>근육량 : {this.state.user_muscleMass}</label>
                         </div>
-                        {this.state.show1? (
-                            <div>
-                                <h3>
-                                    상체 운동 목록
-                                </h3>
-                                <BootstrapTable
-                                hover
-                                data={this.state.exerciseList}
-                                pagination={
-                                    this.state.exerciseList.length > 1
-                                }
-                                options={options1}
-                                tableHeaderClass='tableHeader'  
-                                tableContainerClass='tableContainer'
-                                selectRow={selectRowProp_상체}
-                                className="table2">
-                                    <TableHeaderColumn
-                                    dataField='no'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    isKey
-                                    >
-                                        no
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='name'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    >
-                                        운동이름
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='tool'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    >
-                                        운동도구
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='aa'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    >
-                                        운동부위
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='set' 
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    >
-                                        세트
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='bb' 
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    >
-                                        횟수
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='cc' 
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    >
-                                        휴식시간
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='link' 
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    >
-                                        링크
-                                    </TableHeaderColumn>
-                                </BootstrapTable>{/*.table2 */}
+                    </section>
+                    {/*.CustomerInbody */}
+                    <section className="assignWorkout">
+                        <h3>운동 목록</h3>
+                        <div className="inputCheckRow">
+                            <h5>운동 묶음 선택 (기본 설정)</h5>
+                            <label>
+                                <input
+                                    type="checkBox"
+                                    id="1"
+                                    name="assignDefault|상체"
+                                    onClick={this.selectHandleOnClick}
+                                />
+                                {/*#1 */}
+                                <p>상체</p>
+                            </label>
+                            <label>
+                                <input
+                                    type="checkBox"
+                                    id="2"
+                                    name="assignDefault|하체"
+                                    onClick={this.selectHandleOnClick}
+                                />
+                                {/*#2 */}
+                                <p>하체</p>
+                            </label>
+                            <label>
+                                <input
+                                    type="checkBox"
+                                    id="3"
+                                    name="assignDefault|전신"
+                                    onClick={this.selectHandleOnClick}
+                                />
+                                {/*#3 */}
+                                <p>전신</p>
+                            </label>
+                            <label>
+                                <input
+                                    type="checkBox"
+                                    id="4"
+                                    name="assignDefault|코어"
+                                    onClick={this.selectHandleOnClick}
+                                />
+                                {/*#4 */}
+                                <p>코어</p>
+                            </label>
+                            <label>
+                                <input
+                                    type="checkBox"
+                                    id="5"
+                                    name="assignDefault|유산소"
+                                    onClick={this.selectHandleOnClick}
+                                />
+                                {/*#5 */}
+                                <p>유산소</p>
+                            </label>
+                        </div>
+                        <h5>운동 개별 선택</h5>
+                        <div className="exerciseSelectList">
+                            <div className="flexbetween">
+                                <button
+                                    type="button"
+                                    id="1"
+                                    onClick={this.click1}
+                                >
+                                    상체
+                                </button>
+                                {/*#1 */}
+                                <button
+                                    type="button"
+                                    id="2"
+                                    onClick={this.click2}
+                                >
+                                    하체
+                                </button>
+                                {/*#2 */}
+                                <button
+                                    type="button"
+                                    id="3"
+                                    onClick={this.click3}
+                                >
+                                    전신
+                                </button>
+                                {/*#3 */}
+                                <button
+                                    type="button"
+                                    id="4"
+                                    onClick={this.click4}
+                                >
+                                    코어
+                                </button>
+                                {/*#4 */}
+                                <button
+                                    type="button"
+                                    id="5"
+                                    onClick={this.click5}
+                                >
+                                    유산소
+                                </button>
+                                {/*#5 */}
                             </div>
-                        ) : null} 
-                    </div>
-                    <div>
-                        {this.state.show2? (
-                            <div>
-                                <h3>
-                                    하체 운동 목록
-                                </h3>
-                                <BootstrapTable
-                                hover
-                                data={this.state.exerciseList}
-                                pagination={
-                                    this.state.exerciseList.length > 1
-                                }
-                                options={options1}
-                                tableHeaderClass='tableHeader'  
-                                tableContainerClass='tableContainer'
-                                selectRow={selectRowProp_하체}
-                                className="table2">
-                                    <TableHeaderColumn
-                                    dataField='no'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    isKey
+                            {this.state.show1 ? (
+                                <div>
+                                    <h3>상체 운동 목록</h3>
+                                    <BootstrapTable
+                                        hover
+                                        data={this.state.exerciseList}
+                                        pagination={
+                                            this.state.exerciseList.length > 1
+                                        }
+                                        options={options1}
+                                        tableHeaderClass="tableHeader"
+                                        tableContainerClass="tableContainer"
+                                        selectRow={selectRowProp_상체}
+                                        cellEdit={cellEdit}
+                                        className="table2"
                                     >
-                                        no
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='name'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
+                                        <TableHeaderColumn
+                                            dataField="no"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                            isKey
+                                        >
+                                            no
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="name"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동이름
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="tool"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동도구
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="aa"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동부위
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="set"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            세트
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="bb"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            횟수
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="cc"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            휴식시간
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="link"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            링크
+                                        </TableHeaderColumn>
+                                    </BootstrapTable>
+                                    {/*.table2 */}
+                                </div>
+                            ) : null}
+                        </div>
+                        <div>
+                            {this.state.show2 ? (
+                                <div>
+                                    <h3>하체 운동 목록</h3>
+                                    <BootstrapTable
+                                        hover
+                                        data={this.state.exerciseList}
+                                        pagination={
+                                            this.state.exerciseList.length > 1
+                                        }
+                                        options={options1}
+                                        tableHeaderClass="tableHeader"
+                                        tableContainerClass="tableContainer"
+                                        selectRow={selectRowProp_하체}
+                                        cellEdit={cellEdit}
+                                        className="table2"
                                     >
-                                        운동이름
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='tool'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
+                                        <TableHeaderColumn
+                                            dataField="no"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                            isKey
+                                        >
+                                            no
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="name"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동이름
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="tool"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동도구
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="aa"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동부위
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="set"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            세트
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="bb"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            횟수
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="cc"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            휴식시간
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="link"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            링크
+                                        </TableHeaderColumn>
+                                    </BootstrapTable>
+                                    {/*.table2 */}
+                                </div>
+                            ) : null}
+                        </div>
+                        <div>
+                            {this.state.show3 ? (
+                                <div>
+                                    <h3>코어 운동 목록</h3>
+                                    <BootstrapTable
+                                        hover
+                                        data={this.state.exerciseList}
+                                        pagination={
+                                            this.state.exerciseList.length > 1
+                                        }
+                                        options={options1}
+                                        tableHeaderClass="tableHeader"
+                                        tableContainerClass="tableContainer"
+                                        selectRow={selectRowProp_코어}
+                                        cellEdit={cellEdit}
+                                        className="table2"
                                     >
-                                        운동도구
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='aa'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
+                                        <TableHeaderColumn
+                                            dataField="no"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                            isKey
+                                        >
+                                            no
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="name"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동이름
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="tool"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동도구
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="aa"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동부위
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="set"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            세트
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="bb"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            횟수
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="cc"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            휴식시간
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="link"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            링크
+                                        </TableHeaderColumn>
+                                    </BootstrapTable>
+                                    {/*.table2 */}
+                                </div>
+                            ) : null}
+                        </div>
+                        <div>
+                            {this.state.show4 ? (
+                                <div>
+                                    <h3>전신 운동 목록</h3>
+                                    <BootstrapTable
+                                        hover
+                                        data={this.state.exerciseList}
+                                        pagination={
+                                            this.state.exerciseList.length > 1
+                                        }
+                                        options={options1}
+                                        tableHeaderClass="tableHeader"
+                                        tableContainerClass="tableContainer"
+                                        selectRow={selectRowProp_전신}
+                                        cellEdit={cellEdit}
+                                        className="table2"
                                     >
-                                        운동부위
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='set' 
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
+                                        <TableHeaderColumn
+                                            dataField="no"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                            isKey
+                                        >
+                                            no
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="name"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동이름
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="tool"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동도구
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="aa"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동부위
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="set"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            세트
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="bb"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            횟수
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="cc"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            휴식시간
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="link"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            링크
+                                        </TableHeaderColumn>
+                                    </BootstrapTable>
+                                    {/*.table2 */}
+                                </div>
+                            ) : null}
+                        </div>
+                        <div>
+                            {this.state.show5 ? (
+                                <div>
+                                    <h3>유산소 운동 목록</h3>
+                                    <BootstrapTable
+                                        hover
+                                        data={this.state.exerciseList}
+                                        pagination={
+                                            this.state.exerciseList.length > 1
+                                        }
+                                        options={options1}
+                                        tableHeaderClass="tableHeader"
+                                        tableContainerClass="tableContainer"
+                                        selectRow={selectRowProp_유산소}
+                                        cellEdit={cellEdit}
+                                        className="table2"
                                     >
-                                        세트
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='bb'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    >
-                                        횟수
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='cc'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    >
-                                        휴식시간
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='link'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    >
-                                        링크
-                                    </TableHeaderColumn>
-                                </BootstrapTable>{/*.table2 */}
-                            </div>
-                        ) : null}
-                    </div>
-                    <div>
-                        {this.state.show3 ? (
-                            <div>
-                                <h3>
-                                    코어 운동 목록
-                                </h3>
-                                <BootstrapTable
-                                hover
-                                data={this.state.exerciseList}
-                                pagination={
-                                    this.state.exerciseList.length > 1
-                                }
-                                options={options1}
-                                tableHeaderClass='tableHeader'  
-                                tableContainerClass='tableContainer'
-                                selectRow={selectRowProp_전신}
-                                className="table2">
-                                    <TableHeaderColumn
-                                    dataField='no'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    isKey
-                                    >
-                                        no
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="name"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        운동이름
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="tool"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        운동도구
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="aa"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        운동부위
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="set"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        세트
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="bb"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        횟수
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="cc"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        휴식시간
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='link' 
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    >
-                                        링크
-                                    </TableHeaderColumn>
-                                </BootstrapTable>{/*.table2 */}
-                            </div>
-                        ) : null}
-                    </div>
-                    <div>
-                        {this.state.show4 ? (
-                            <div>
-                                <h3>
-                                    전신 운동 목록
-                                </h3>
-                                <BootstrapTable
-                                hover
-                                data={this.state.exerciseList}
-                                pagination={
-                                    this.state.exerciseList.length > 1
-                                }
-                                options={options1}
-                                tableHeaderClass='tableHeader'  
-                                tableContainerClass='tableContainer'
-                                selectRow={selectRowProp_코어}
-                                className="table2">
-                                    <TableHeaderColumn
-                                    dataField='no'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    isKey
-                                    >
-                                        no
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="name"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        운동이름
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="tool"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        운동도구
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="aa"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        운동부위
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="set"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        세트
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="bb"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        횟수
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="cc"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        휴식시간
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField='link' 
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    >
-                                        링크
-                                    </TableHeaderColumn>
-                                </BootstrapTable>{/*.table2 */}
-                            </div>
-                        ) : null}
-                    </div>
-                    <div>
-                        {this.state.show5 ? (
-                            <div>
-                                <h3>
-                                    유산소 운동 목록
-                                </h3>
-                                <BootstrapTable
-                                hover
-                                data={this.state.exerciseList}
-                                pagination={
-                                    this.state.exerciseList.length > 1
-                                }
-                                options={options1}
-                                tableHeaderClass='tableHeader'  
-                                tableContainerClass='tableContainer'
-                                selectRow={selectRowProp_유산소}
-                                className="table2">
-                                    <TableHeaderColumn
-                                    dataField='no'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
-                                    isKey
-                                    >
-                                        no
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="name"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        운동이름
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="tool"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        운동도구
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="aa"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        운동부위
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="set"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        세트
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="bb"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        횟수
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        dataField="cc"
-                                        thStyle={{ textAlign: 'center' }}
-                                        tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        휴식시간
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                    dataField="link"
-                                    thStyle={{ textAlign: 'center' }}
-                                    tdStyle={{ textAlign: 'center' }}
-                                    >
-                                        링크
-                                    </TableHeaderColumn>
-                                </BootstrapTable>{/*.table2 */}
-                            </div>
-                        ) : null}
-                    </div>
-                    <Link
-                        to={{
-                            pathname:
-                                '/assign/check?member_no=' +
-                                this.state.member_no,
-                            state: {
-                                userName: this.state.userName,
-                                member_no: this.state.member_no,
-                                assignDefault: this.state.assignDefault,
-                                assignCustom: {
-                                    1: this.state.select_top_data,
-                                    2: this.state.select_bottom_data,
-                                    4: this.state.select_allbody_data,
-                                    8: this.state.select_core_data,
-                                    16: this.state.select_oxy_data,
+                                        <TableHeaderColumn
+                                            dataField="no"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                            isKey
+                                        >
+                                            no
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="name"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동이름
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="tool"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동도구
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="aa"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동부위
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="set"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            세트
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="bb"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            횟수
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="cc"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            휴식시간
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="link"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            링크
+                                        </TableHeaderColumn>
+                                    </BootstrapTable>
+                                    {/*.table2 */}
+                                </div>
+                            ) : null}
+                        </div>
+                        <Link
+                            to={{
+                                pathname:
+                                    '/assign/check?member_no=' +
+                                    this.state.member_no,
+                                state: {
+                                    userName: this.state.userName,
+                                    member_no: this.state.member_no,
+                                    assignDefault: this.state.assignDefault,
+                                    assignCustom: {
+                                        1: this.state.select_top_data,
+                                        2: this.state.select_bottom_data,
+                                        4: this.state.select_allbody_data,
+                                        8: this.state.select_core_data,
+                                        16: this.state.select_oxy_data,
+                                    },
                                 },
-                            },
-                        }}
-                    >
-                        <button
-                        className='btnOneCenter'
-                        type="button"
-                        onClick={this.handleOnClick}
+                            }}
                         >
-                            배정 확인하기
-                        </button>
-                    </Link>
-                </section>
-            </div>{/*.container */}
-            <div className='footer'>
-                <Footer />
-            </div>{/*.footer */}
-        </div>/*.assignExercise */
+                            <button
+                                className="btnOneCenter"
+                                type="button"
+                                onClick={this.handleOnClick}
+                            >
+                                배정 확인하기
+                            </button>
+                        </Link>
+                    </section>
+                </div>
+                {/*.container */}
+                <div className="footer">
+                    <Footer />
+                </div>
+                {/*.footer */}
+            </div> /*.assignExercise */
         );
     }
 }

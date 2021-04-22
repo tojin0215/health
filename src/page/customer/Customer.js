@@ -67,7 +67,7 @@ class Customer extends Component {
         this.props.history.push("/");
     }
     cusFetch = () => {
-        //fetch("http://"+ip+":3001/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+        //fetch("http://"+ip+":3003/customer?type=all&fn="+this.props.userinfo.fitness_no, {
         fetch("http://localhost:3000/customer?type=all&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
@@ -133,7 +133,7 @@ class Customer extends Component {
     onSelectRow=(row, isSelected, e)=> { //table row 클릭시
         if (isSelected) {
             //alert(row['no'])
-            //fetch("http://"+ip+":3001/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
+            //fetch("http://"+ip+":3003/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             fetch("http://localhost:3000/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
@@ -148,6 +148,7 @@ class Customer extends Component {
                     let sex = data.sex===true?"남":"여";
                     let info = sex+'/만'+age+'세/'+data.resi_no
                     let phone = data.phone.substring(0,3)+'-'+data.phone.substring(3,7)+'-'+data.phone.substring(7,11)
+                    let date = moment(data.start_date).format("YYYY/MM/DD")
                     data = {...data,age}
                     this.setState({
                         //userLists2:data,
@@ -156,14 +157,14 @@ class Customer extends Component {
                         info : info,
                         addr : data.address,
                         phone : phone,
-                        startDate : data.start_date,
+                        startDate : date,
                         trainer: data.in_charge,
                         note : data.note,
                     })
                     //alert('age : '+this.calAge(data.resi_no))
                 })
             });
-            //fetch("http://"+ip+":3001/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
+            //fetch("http://"+ip+":3003/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             fetch("http://localhost:3000/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
@@ -208,7 +209,7 @@ class Customer extends Component {
         }else if(this.state.item === "주민번호(앞자리)"){
             it = '3'
         }
-        //fetch("http://"+ip+":3001/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        //fetch("http://"+ip+":3003/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
         fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
@@ -244,7 +245,7 @@ class Customer extends Component {
         console.log(userinfo);
         
         const textOptions = {
-            noDataText: '결제한 상품이 없습니다.',
+            noDataText: '가입된 회원이 없습니다.',
             alwaysShowAllBtns: true,
             hideSizePerPage:true
         };

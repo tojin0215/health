@@ -8,165 +8,11 @@ import { Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import Dropdown from 'react-dropdown';
 
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../../styles/setting/addExercise.css';
 
-// const ip = '13.124.141.28:3000';
+// const ip = '13.124.141.28:3003';
 const ip = 'localhost:3000';
-
-const List2 = [
-    {
-        no: 1,
-        name: 'AAA',
-        tool: '바벨',
-        aa: '상체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 2,
-        name: 'BBB',
-        tool: '바벨',
-        aa: '하체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 3,
-        name: 'CCC',
-        tool: '바벨',
-        aa: '전신',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 4,
-        name: 'AAA',
-        tool: '바벨',
-        aa: '상체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 5,
-        name: 'BBB',
-        tool: '바벨',
-        aa: '하체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 6,
-        name: 'CCC',
-        tool: '바벨',
-        aa: '전신',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 7,
-        name: 'AAA',
-        tool: '바벨',
-        aa: '상체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 8,
-        name: 'BBB',
-        tool: '바벨',
-        aa: '하체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 9,
-        name: 'CCC',
-        tool: '바벨',
-        aa: '전신',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 10,
-        name: 'AAA',
-        tool: '바벨',
-        aa: '상체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 11,
-        name: 'BBB',
-        tool: '바벨',
-        aa: '하체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 12,
-        name: 'CCC',
-        tool: '바벨',
-        aa: '전신',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 13,
-        name: 'AAA',
-        tool: '바벨',
-        aa: '상체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 14,
-        name: 'BBB',
-        tool: '바벨',
-        aa: '하체',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-    {
-        no: 15,
-        name: 'CCC',
-        tool: '바벨',
-        aa: '전신',
-        set: '3',
-        bb: '10',
-        cc: '10분',
-        link: 'www.www.www',
-    },
-];
-const List = [];
 
 require('moment-timezone');
 var moment = require('moment');
@@ -184,15 +30,15 @@ class AddExercise extends Component {
             exerciseList: [],
             exerciseListLoaded: false,
 
-            search:'',
-            item:options[0],
+            search: '',
+            item: options[0],
 
             fitness_no: this.props.userinfo.fitness_no,
             name: '',
             part: 0,
             machine: '',
             url: 'http://localhost',
-            default_data_type: -1,
+            default_data_type: 1,
             default_data: '',
             default_rest_second: -1,
             default_set_count: -1,
@@ -204,7 +50,7 @@ class AddExercise extends Component {
 
     goLogin = () => {
         this.props.history.push('/');
-    }
+    };
 
     handleOnClick() {
         alert('운동 저장');
@@ -268,7 +114,6 @@ class AddExercise extends Component {
             this.setState({ [e.target.name]: e.target.value });
         }
     };
-
     cusFetch = () => {
         let it = '';
         let search = '';
@@ -333,6 +178,7 @@ class AddExercise extends Component {
                 this.setState({ exerciseList: arr });
             });
     };
+
     search = () => {
         let it = '0';
         if (this.state.item === '이름') {
@@ -421,19 +267,20 @@ class AddExercise extends Component {
                     part = part.slice(0, -2);
 
                     arr.push({
-                        'no': res[i].exercise_no,
-                        'name': res[i].name,
-                        'tool': res[i].machine,
-                        'aa': part,
-                        'set': res[i].default_set_count,
-                        'bb': res[i].default_data,
-                        'cc': res[i].default_rest_second,
-                        'link': res[i].url,
-                    })
+                        no: res[i].exercise_no,
+                        name: res[i].name,
+                        tool: res[i].machine,
+                        aa: part,
+                        set: res[i].default_set_count,
+                        bb: res[i].default_data,
+                        cc: res[i].default_rest_second,
+                        link: res[i].url,
+                    });
                 }
                 this.setState({ exerciseList: arr });
-            });
-    }
+            })
+            .catch((err) => console.error(err));
+    };
     selectItem = (e) => {
         if (e.value == '이름') {
             this.setState({ item: '이름' });
@@ -481,7 +328,7 @@ class AddExercise extends Component {
                 userinfo['fitness_no'] = this.props.userinfo.fitness_no;
                 userinfo['fitness_name'] = this.props.userinfo.fitness_name;
             } else {
-                alert('debug');
+                alert('DEBUG');
             }
 
             fetch('http://' + ip + '/exercise', {
@@ -549,8 +396,6 @@ class AddExercise extends Component {
 
     render() {
         const { userinfo } = this.props;
-        // console.log('userinfo : ');
-        // console.log(userinfo); //나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
 
         const options1 = {
             noDataText: '등록된 운동이 없습니다.',
@@ -560,290 +405,307 @@ class AddExercise extends Component {
         };
 
         return (
-        <div className='addExercise'>
-            <header className='header'>
-                <Header />
-                <Navigation goLogin={this.goLogin} />
-                <div className='localNavigation'>
-                    <div className='container'>
-                        <h2>
-                            운동 설정
-                        </h2>
-                        <div className='breadCrumb'>
-                            <Link to='/home'>HOME</Link>
-                            <span>&#62;</span>
-                            <Link to='/exercise'>운동 설정</Link>
-                        </div>{/*.breadCrumb */}
-                    </div>{/*.container */}
-                </div>{/*.localNavigation */}
-            </header>{/*.header */}
-            <div className='container'>
-                {/* <NavLink exact to='/exercise'>[운동 추가]</NavLink>
-                <NavLink exact to='/setting/default'>[운동 기본묶음 설정]</NavLink> */}
-                <section className='settingInfoInput'>
-                    <h3>
-                        운동 정보 입력
-                    </h3>
-                    <article className='wayDefault waySub'>
-                        <Link to='/setting/default'>
-                            <button type='button'>
-                                운동 묶음 설정
-                            </button>
-                        </Link>
-                    </article>
-                    <form>
-                        <div className='input-row'>
-                            <label className='label-description'>
-                                운동 이름
-                            </label>{/*.label-description */}
-                            <input 
-                            id='name'
-                            type='text'
-                            placeholder='name'
-                            name='name'
-                            ref={(ref) => {
-                                this.iptName = ref;
-                            }}
-                            onChange={this.handleChange}
-                            />{/*#name */}
-                        </div>{/*.input-row */}
-                        <div className='input-row'>
-                            <label className='label-description'>
-                                운동 기구
-                            </label>{/*.label-description */}
-                            <input 
-                            id='tool'
-                            type='text'
-                            placeholder='machine'
-                            name='machine'
-                            ref={(ref) => {
-                                this.iptMachine = ref;
-                            }}
-                            onChange={this.handleChange}
-                            />{/*#tool */}
-                        </div>{/*.input-row */}
-                        <div className='input-row exercisePart'>
-                            <label className='label-description'>
-                                부위
-                            </label>{/*.label-description */}
-                            <div className='part'>
-                                <label>
-                                    <input
-                                    type='checkBox'
-                                    value='1'
-                                    name='part'
-                                    ref={(ref) => {
-                                        this.chkPartTop = ref;
-                                    }}
-                                    onChange={this.handleChange}
-                                    />
-                                    상체
-                                </label>
-                                <label>
-                                    <input
-                                    type='checkBox'
-                                    value='2'
-                                    name='part'
-                                    ref={(ref) => {
-                                        this.chkPartBottom = ref;
-                                    }}
-                                    onChange={this.handleChange}
-                                    />
-                                    하체
-                                </label>
-                                <label>
-                                    <input
-                                    type='checkBox'
-                                    value='4'
-                                    name='part'
-                                    ref={(ref) => {
-                                        this.chkPartAllbody = ref;
-                                    }}
-                                    onChange={this.handleChange}
-                                    />
-                                    전신
-                                </label>
-                                <label>
-                                    <input
-                                    type='checkBox'
-                                    value='8'
-                                    name='part'
-                                    ref={(ref) => {
-                                        this.chkPartCore = ref;
-                                    }}
-                                    onChange={this.handleChange}
-                                    />
-                                    코어
-                                </label>
-                                <label>
-                                    <input
-                                    type='checkBox'
-                                    value='16'
-                                    name='part'
-                                    ref={(ref) => {
-                                        this.chkPartOxy = ref;
-                                    }}
-                                    onChange={this.handleChange}
-                                    />
-                                    유산소
-                                </label>
-                            </div>{/*.part */}
-                        </div>{/*.input-row */}
-                        <div className='input-row'>
-                            <label className='label-description'>
-                              영상 링크
-                            </label>
-                            <input
-                             id='link'
-                             type='text'
-                             placeholder='link'
-                             name='url'
-                             ref={(ref) => {
-                                 this.iptUrl = ref;
-                             }}
-                             onChange={this.handleChange}
-                             onKeyUp={this.handleKeyUp}
-                            />
-                        </div>{/*.input-row */}
-                        <div className='input-row settingRoutin'>
-                            <label className='label-description'>
-                                기본 세트 설정
-                            </label>
-                            <div>
-                                <label className='inputColumn'>
-                                    <p>횟수</p>
-                                    <input
-                                     id='횟수'
-                                     type='number'
-                                     placeholder='횟수'
-                                     name='default_data'
-                                     ref={(ref) => {
-                                         this.iptDD = ref;
-                                     }}
-                                     onChange={this.handleChange}
-                                    />
-                                </label>
-                                <label className='inputColumn'>
-                                    <p>휴식시간</p>
-                                    <input
-                                    id='휴식시간'
-                                    type='number'
-                                    placeholder='휴식시간'
-                                    name='default_rest_second'
-                                    ref={(ref) => {
-                                        this.iptDRS = ref;
-                                    }}
-                                    onChange={this.handleChange}
-                                    />
-                                </label>
-                                <label className='inputColumn'>
-                                    <p>세트</p>
-                                    <input
-                                    id='세트'
-                                    type='number'
-                                    placeholder='세트'
-                                    name='default_set_count'
-                                    ref={(ref) => {
-                                        this.iptDSC = ref;
-                                    }}
-                                    onChange={this.handleChange}
-                                    />
-                                </label>
+            <div className="addExercise">
+                <header className="header">
+                    <Header />
+                    <Navigation goLogin={this.goLogin} />
+                    <div className="localNavigation">
+                        <div className="container">
+                            <h2>운동 설정</h2>
+                            <div className="breadCrumb">
+                                <Link to="/home">HOME</Link>
+                                <span>&#62;</span>
+                                <Link to="/exercise">운동 설정</Link>
                             </div>
-                        </div>{/*.input-row */}
-                        <button
-                        type='button'
-                        onClick={this.AddExercise}>
-                            저장하기
-                        </button>
-                    </form>
-                </section>{/*.settingInfoInput */}
-                <section className='settingExerciseList'>
-                    <h3>운동 목록</h3>
-                    <div className='searchInputRow'>
-                        <Dropdown
-                        className='searchDrop'
-                        options={options}
-                        onChange={this.selectItem}
-                        value={this.state.item}
-                        placeholder='Select an option'
-                        />
-                        <input
-                        type='text'
-                        id='search'
-                        name='search'
-                        checked={this.state.search}
-                        onChange={this.handleChange}
-                        />
-                        <button type='button' onClick={this.search}>
-                            {' '}
-                            운동 검색{' '}
-                        </button>
+                            {/*.breadCrumb */}
+                        </div>
+                        {/*.container */}
                     </div>
-                    <BootstrapTable
-                    data={ this.state.exerciseList }
-                    hover 
-                    pagination={ List.length > 1 }
-                    options={options1}
-                    tableHeaderClass='tableHeader'  
-                    tableContainerClass='tableContainer'
-                    className='table2'>
-                        <TableHeaderColumn
-                        dataField='no'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        isKey>
-                            번호
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='name'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }>
-                            운동이름
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='tool'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }>
-                            운동도구
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='aa'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }>
-                            운동부위
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='set' 
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }>
-                            세트
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='bb' 
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }>
-                            횟수
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='cc' 
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }>
-                            휴식시간
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='link'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }>
-                            링크
-                        </TableHeaderColumn>
-                    </BootstrapTable>
-                </section>
-            </div>{/*.container */}
-            <footer className='footer'>
-                <Footer />
-            </footer>{/*.footer */}
-        </div>
+                    {/*.localNavigation */}
+                </header>
+                {/*.header */}
+                <div className="container">
+                    {/* <NavLink exact to='/exercise'>[운동 추가]</NavLink>
+                <NavLink exact to='/setting/default'>[운동 기본묶음 설정]</NavLink> */}
+                    <section className="settingInfoInput">
+                        <h3>운동 정보 입력</h3>
+                        <article className="wayDefault waySub">
+                            <Link to="/setting/default">
+                                <button type="button">운동 묶음 설정</button>
+                            </Link>
+                        </article>
+                        <form>
+                            <div className="input-row">
+                                <label className="label-description">
+                                    운동 이름
+                                </label>
+                                {/*.label-description */}
+                                <input
+                                    id="name"
+                                    type="text"
+                                    placeholder="name"
+                                    name="name"
+                                    ref={(ref) => {
+                                        this.iptName = ref;
+                                    }}
+                                    onChange={this.handleChange}
+                                />
+                                {/*#name */}
+                            </div>
+                            {/*.input-row */}
+                            <div className="input-row">
+                                <label className="label-description">
+                                    운동 기구
+                                </label>
+                                {/*.label-description */}
+                                <input
+                                    id="tool"
+                                    type="text"
+                                    placeholder="machine"
+                                    name="machine"
+                                    ref={(ref) => {
+                                        this.iptMachine = ref;
+                                    }}
+                                    onChange={this.handleChange}
+                                />
+                                {/*#tool */}
+                            </div>
+                            {/*.input-row */}
+                            <div className="input-row exercisePart">
+                                <label className="label-description">
+                                    부위
+                                </label>
+                                {/*.label-description */}
+                                <div className="part">
+                                    <label>
+                                        <input
+                                            type="checkBox"
+                                            value="1"
+                                            name="part"
+                                            ref={(ref) => {
+                                                this.chkPartTop = ref;
+                                            }}
+                                            onChange={this.handleChange}
+                                        />
+                                        상체
+                                    </label>
+                                    <label>
+                                        <input
+                                            type="checkBox"
+                                            value="2"
+                                            name="part"
+                                            ref={(ref) => {
+                                                this.chkPartBottom = ref;
+                                            }}
+                                            onChange={this.handleChange}
+                                        />
+                                        하체
+                                    </label>
+                                    <label>
+                                        <input
+                                            type="checkBox"
+                                            value="4"
+                                            name="part"
+                                            ref={(ref) => {
+                                                this.chkPartAllbody = ref;
+                                            }}
+                                            onChange={this.handleChange}
+                                        />
+                                        전신
+                                    </label>
+                                    <label>
+                                        <input
+                                            type="checkBox"
+                                            value="8"
+                                            name="part"
+                                            ref={(ref) => {
+                                                this.chkPartCore = ref;
+                                            }}
+                                            onChange={this.handleChange}
+                                        />
+                                        코어
+                                    </label>
+                                    <label>
+                                        <input
+                                            type="checkBox"
+                                            value="16"
+                                            name="part"
+                                            ref={(ref) => {
+                                                this.chkPartOxy = ref;
+                                            }}
+                                            onChange={this.handleChange}
+                                        />
+                                        유산소
+                                    </label>
+                                </div>
+                                {/*.part */}
+                            </div>
+                            {/*.input-row */}
+                            <div className="input-row">
+                                <label className="label-description">
+                                    영상 링크
+                                </label>
+                                <input
+                                    id="link"
+                                    type="text"
+                                    placeholder="link"
+                                    name="url"
+                                    ref={(ref) => {
+                                        this.iptUrl = ref;
+                                    }}
+                                    onChange={this.handleChange}
+                                />
+                            </div>
+                            {/*.input-row */}
+                            <div className="input-row settingRoutin">
+                                <label className="label-description">
+                                    기본 세트 설정
+                                </label>
+                                <div>
+                                    <label className="inputColumn">
+                                        <p>횟수</p>
+                                        <input
+                                            id="횟수"
+                                            type="number"
+                                            placeholder="횟수"
+                                            name="default_data"
+                                            ref={(ref) => {
+                                                this.iptDD = ref;
+                                            }}
+                                            onChange={this.handleChange}
+                                        />
+                                    </label>
+                                    <label className="inputColumn">
+                                        <p>휴식시간</p>
+                                        <input
+                                            id="휴식시간"
+                                            type="number"
+                                            placeholder="휴식시간"
+                                            name="default_rest_second"
+                                            ref={(ref) => {
+                                                this.iptDRS = ref;
+                                            }}
+                                            onChange={this.handleChange}
+                                        />
+                                    </label>
+                                    <label className="inputColumn">
+                                        <p>세트</p>
+                                        <input
+                                            id="세트"
+                                            type="number"
+                                            placeholder="세트"
+                                            name="default_set_count"
+                                            ref={(ref) => {
+                                                this.iptDSC = ref;
+                                            }}
+                                            onChange={this.handleChange}
+                                        />
+                                    </label>
+                                </div>
+                            </div>
+                            {/*.input-row */}
+                            <button type="button" onClick={this.AddExercise}>
+                                저장하기
+                            </button>
+                        </form>
+                    </section>
+                    {/*.settingInfoInput */}
+                    <section className="settingExerciseList">
+                        <h3>운동 목록</h3>
+                        <div className="searchInputRow">
+                            <Dropdown
+                                className="searchDrop"
+                                options={options}
+                                onChange={this.selectItem}
+                                value={this.state.item}
+                                placeholder="Select an option"
+                            />
+                            <input
+                                type="text"
+                                id="search"
+                                name="search"
+                                checked={this.state.search}
+                                onChange={this.handleChange}
+                            />
+                            <button type="button" onClick={this.search}>
+                                운동 검색
+                            </button>
+                        </div>
+                        <BootstrapTable
+                            data={this.state.exerciseList}
+                            hover
+                            pagination={this.state.exerciseList.length > 1}
+                            options={options1}
+                            tableHeaderClass="tableHeader"
+                            tableContainerClass="tableContainer"
+                            className="table2"
+                        >
+                            <TableHeaderColumn
+                                dataField="no"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                                isKey
+                            >
+                                번호
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="name"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                            >
+                                운동이름
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="tool"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                            >
+                                운동도구
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="aa"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                            >
+                                운동부위
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="set"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                            >
+                                세트
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="bb"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                            >
+                                횟수
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="cc"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                            >
+                                휴식시간
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="link"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                            >
+                                링크
+                            </TableHeaderColumn>
+                        </BootstrapTable>
+                    </section>
+                </div>
+                {/*.container */}
+                <footer className="footer">
+                    <Footer />
+                </footer>
+                {/*.footer */}
+            </div>
         );
     }
 }
