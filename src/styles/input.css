@@ -1,0 +1,124 @@
+input[type=radio] {
+  margin:1rem;
+}
+
+input[type=text] {
+  width:20rem;
+  height:4rem;
+  border-radius:1rem;
+  border:1px solid #000;
+  text-indent:1rem;
+  outline:none;
+  box-sizing:border-box;
+  margin:1rem;
+}
+
+input[type=number] {
+  width:20rem;
+  height:4rem;
+  border-radius:1rem;
+  border:1px solid #000;
+  text-indent:1rem;
+  outline:none;
+  box-sizing:border-box;
+  margin:1rem;
+}
+
+input[type=checkbox] {
+  width:1.5rem;
+  height:1.5rem;
+  margin:0;
+}
+
+input[type=password] {
+  margin:1rem;
+}
+/* 세로 형식 인풋 박스 */
+.inputColumn {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.inputColumn p {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin:0;
+  padding-top:1rem;
+}
+/* 체크박스 가로형 5개 */
+.inputCheckRow {
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap:wrap;
+}
+.inputCheckRow input[type=checkbox] {
+  margin:1rem;
+  width:2rem;
+  height:2rem;
+}
+.inputCheckRow h5 {
+  width:100%;
+}
+.inputCheckRow > label {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:20%;
+}
+.inputCheckRow > label > p {
+  font-size:2.4rem;
+}
+/* 세로형 인풋박스 길이 */
+.inputColumn input {
+  width: 100%;
+}
+/* 검색 인풋 컴포넌트 가로형*/
+.searchInputRow {
+  display: flex;
+  align-items: center;
+}
+.searchInputRow .searchDrop {
+  width: 20rem;
+  margin: 1rem;
+}
+
+/* 드롭다운 메뉴 아래 화살표 위치 */
+.Dropdown-arrow {
+  top:1.8rem;
+}
+/* 달력 셀렉터 */
+.container .react-datepicker .react-datepicker__navigation {
+  width:1rem;
+  border:0.45rem solid transparent;
+  border-radius:0;
+  background-color:transparent;
+}
+.container .react-datepicker .react-datepicker__navigation--previous {
+  border-right-color:#ccc;
+}
+.container .react-datepicker .react-datepicker__navigation--next {
+  border-left-color:#b3b3b3;
+}
+html .MuiOutlinedInput-notchedOutline {
+  border:none;
+}
+html .MuiInputBase-root {
+  font-size:inherit;
+}
+html .MuiFormLabel-root {
+  font-size:inherit;
+}
+html .MuiInputLabel-outlined {
+  transform: translate(2.3rem, 2.3rem) scale(1);
+}
+
+/*신규회원등록*/
+.container .MuiOutlinedInput-input {
+  padding:0;
+}
+.container .react-datepicker-popper {
+  z-index:2;
+}

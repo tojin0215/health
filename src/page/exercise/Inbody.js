@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import Dropdown from 'react-dropdown';
 
@@ -19,6 +20,7 @@ import TableCell from '@material-ui/core/TableCell';
 
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import '../../styles/exercise/Inbody.css';
 
 const ip = '13.124.141.28';
 
@@ -274,87 +276,169 @@ class Inbody extends Component {
         //console.log('.....',this.state.inbodyList)
         return (
             <div className='inbody'>
-                <Header />
-                <Navigation goLogin={this.goLogin}/>
-                <localNavigation />
+                <div className='header'>
+                    <Header />
+                    <Navigation goLogin={this.goLogin}/>
+                    <div className='localNavigation'>
+                        <div className='container'>
+                            <h2>
+                                인바디 정보
+                            </h2>
+                            <div className='breadCrumb'>
+                                <Link to='/home'>HOME</Link>
+                                <span>&#62;</span>
+                                <Link to='/assign'>운동 배정</Link>
+                                <span>&#62;</span>
+                                <Link to='#'>인바디 정보</Link>
+                            </div>{/*.breadCrumb */}
+                        </div>{/*.container */}
+                    </div>{/*.localNavigation */}
+                </div>{/*.header */}
                 <div className="container">
-                     <h2>인바디보기</h2>
-                     
-                    <div>
-                    <button type='button' onClick={this.handleClickOpen}>
-                        회원검색
-                    </button>
-                    <Dialog open={this.state.open} onClose={this.handleClose} maxWidth='lg'>
-                        <DialogTitle>고객 검색</DialogTitle>
-                        <DialogContent>
-                        <div className='customerSearch'>
-                            <Dropdown className='searchDrop' options={options} onChange={this.selectItem} value={this.state.item} placeholder="Select an option" />
-                            <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />
-                            <button type="button" onClick={this.search}> 고객 검색 </button>
+                    <section className='inbodyCustomer'>
+                        <div>
+                            <button
+                            type='button'
+                            onClick={this.handleClickOpen}
+                            >
+                                회원검색
+                            </button>
+                            <Dialog
+                            open={this.state.open}
+                            onClose={this.handleClose}
+                            maxWidth='lg'
+                            >
+                                <DialogTitle>
+                                    고객 검색
+                                </DialogTitle>
+                                <DialogContent>
+                                    <div className='customerSearch'>
+                                        <Dropdown
+                                        className='searchDrop'
+                                        options={options}
+                                        onChange={this.selectItem}
+                                        value={this.state.item}
+                                        placeholder="Select an option"
+                                        />{/*.searchDrop */}
+                                        <input
+                                        type="text"
+                                        id='search'
+                                        checked={this.state.search}
+                                        onChange={this.handleChange}
+                                        />{/*#search */}
+                                        <button
+                                        type="button"
+                                        onClick={this.search}
+                                        >
+                                            고객 검색
+                                        </button>
+                                    </div>{/*.customerSearch */}
+                                    <Table>
+                                        <TableHead>
+                                            <TableRow>
+                                            <TableCell>번호</TableCell>
+                                            <TableCell>이름</TableCell>
+                                            <TableCell>폰번호</TableCell>
+                                            <TableCell>성별</TableCell>
+                                            <TableCell>생년월일</TableCell>
+                                            <TableCell>선택</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.state.customerList ?
+                                                this.state.customerList.map(c=>(
+                                                    <TableRow>
+                                                        <TableCell>
+                                                            {c.no}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {c.userName}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {c.phone}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {c.sex}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {c.resi_no}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            <DialogActions>
+                                                                <button
+                                                                type='button'
+                                                                onClick={this.choiceUser}
+                                                                id={c.no}
+                                                                value={[c.userName,c.phone,c.sex,c.resi_no]}
+                                                                >
+                                                                    선택
+                                                                </button>
+                                                            </DialogActions>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                ))
+                                            :
+                                            <TableRow>
+                                                <TableCell
+                                                colSpan="6"
+                                                align="center"
+                                                >
+                                                </TableCell>
+                                            </TableRow>
+                                            }
+                                        </TableBody>
+                                    </Table>
+                                </DialogContent>
+                                <DialogActions>
+                                    <button type='button' onClick={this.handleClose}>
+                                        닫기
+                                    </button>
+                                </DialogActions>
+                            </Dialog>
                         </div>
-
-                        <Table>
-                    <TableHead>
-                        <TableRow>
-                        <TableCell>번호</TableCell>
-                        <TableCell>이름</TableCell>
-                        <TableCell>폰번호</TableCell>
-                        <TableCell>성별</TableCell>
-                        <TableCell>생년월일</TableCell>
-                        <TableCell>선택</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                    {this.state.customerList ?
-                        this.state.customerList.map(c=>(
-                            <TableRow>
-                                <TableCell>{c.no}</TableCell>
-                                <TableCell>{c.userName}</TableCell>
-                                <TableCell>{c.phone}</TableCell>
-                                <TableCell>{c.sex}</TableCell>
-                                <TableCell>{c.resi_no}</TableCell>
-                                <TableCell>
-                                    <DialogActions>
-                                        <button type='button' onClick={this.choiceUser} id={c.no} value={[c.userName,c.phone,c.sex,c.resi_no]}>선택</button>
-                                    </DialogActions>
-                                </TableCell>
-                            </TableRow>
-                        ))
-                        :
-                        <TableRow>
-                            <TableCell colSpan="6" align="center">
-                            </TableCell>
-                        </TableRow>
-                        }
-                    </TableBody>
-                    </Table>
-                        </DialogContent>
-                        <DialogActions>
-                            <button type='button' onClick={this.handleClose}>닫기</button>
-                        </DialogActions>
-                    </Dialog>
-                    </div>
-                    <label>{this.state.userName}님 반갑습니다.</label><br/>
-                    <label>성별 : {this.state.sex}</label><br/>
-                    <label>폰번호 : {this.state.phone}</label><br/>
-                    <label>생년월일 : {this.state.resi_no}</label><br/>
-                    <label>나이 : 만 {this.state.age}세</label>
-                    <br/><br/>
-                     <Link  to={{pathname:"/assign/add?member_no="+this.state.member_no}} className='btnCustomerNew'>
-                        인바디정보추가
-                    </Link>
-                    <br/><br/>
-
-                    <DatePicker
+                        <h3>
+                            <span>
+                                {this.state.userName}
+                            </span>
+                            님 인바디 정보입니다
+                        </h3>
+                        <div>
+                            <label>
+                                성별 : {this.state.sex}
+                            </label>
+                            <label>
+                                폰번호 : {this.state.phone}
+                            </label>
+                            <label>
+                                생년월일 : {this.state.resi_no}
+                            </label>
+                            <label>
+                                나이 : 만 {this.state.age}세
+                            </label>
+                        </div>
+                        <article className='waySub'>
+                            <Link
+                            to={{pathname:"/assign/add?member_no="+this.state.member_no}}
+                            >
+                                <button>
+                                    인바디정보추가
+                                </button>
+                            </Link>{/*.btnCustomerNew */}
+                        </article>{/*.waySub */}
+                    </section>{/*.inbodyCustomer */}
+                    <div className='inbodyListUtill'>
+                        <DatePicker
                         selected={ this.state.startDate }
                         selectsStart
                         maxDate={new Date()}
                         onChange={(date)=> this.setState({startDate : date})}
                         name="startDate"
                         dateFormat="MM/dd/yyyy"
-                    />
-                    <text> ~ </text>
-                    <DatePicker
+                        />
+                        <text>
+                            ~ 
+                        </text>
+                        <DatePicker
                         selected={ this.state.endDate }
                         selectsEnd
                         minDate={this.state.startDate}
@@ -362,70 +446,122 @@ class Inbody extends Component {
                         onChange={(date)=> this.setState({endDate : date})}
                         name="endDate"
                         dateFormat="MM/dd/yyyy"
-                    />
-                    <button type="button" onClick={this.handleOnClick}> 조회하기 </button>                 
-
-                    <BootstrapTable data={ this.state.inbodyList } 
-                        options={textOptions}
-                        pagination={ this.state.inbodyList.length > 1 }
-                        tableHeaderClass='tableHeader'
-                        tableContainerClass='tableContainer'>
-                        <TableHeaderColumn dataField='measurementDate' 
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } } isKey
-                        >날짜</TableHeaderColumn>
-                        <TableHeaderColumn dataField='height' 
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >키</TableHeaderColumn>
-                        <TableHeaderColumn dataField='bodyMoisture' 
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >체수분</TableHeaderColumn>
-                        <TableHeaderColumn dataField='protein' 
+                        />
+                        <button
+                        type="button"
+                        onClick={this.handleOnClick}
+                        >
+                            조회하기
+                        </button>
+                    </div>
+                    <BootstrapTable
+                    data={ this.state.inbodyList } 
+                    options={textOptions}
+                    pagination={ this.state.inbodyList.length > 1 }
+                    tableHeaderClass='tableHeader'
+                    tableContainerClass='tableContainer'>
+                        <TableHeaderColumn
+                        dataField='measurementDate'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
-                        >단백질</TableHeaderColumn>
-                        <TableHeaderColumn dataField='mineral' 
+                        isKey
+                        >
+                            날짜
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='height' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
-                        >무기질</TableHeaderColumn>
-                        <TableHeaderColumn dataField='bodyFat' 
+                        >
+                            키
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='bodyMoisture' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
-                        >체지방</TableHeaderColumn>
-                        <TableHeaderColumn dataField='muscleMass' 
+                        >
+                            체수분
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='protein' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
-                        >근육량</TableHeaderColumn>
-                        <TableHeaderColumn dataField='bodyFatMass1' 
+                        >
+                            단백질
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='mineral' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
-                        >체지방량1</TableHeaderColumn>
-                        <TableHeaderColumn dataField='weight' 
+                        >
+                            무기질
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='bodyFat' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
-                        >체중</TableHeaderColumn>
-                        <TableHeaderColumn dataField='skeletalMuscleMass' 
+                        >
+                            체지방
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='muscleMass' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
-                        >골격근량</TableHeaderColumn>
-                        <TableHeaderColumn dataField='bodyFatMass2' 
+                        >
+                            근육량
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='bodyFatMass1' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
-                        >체지방량2</TableHeaderColumn>
-                        <TableHeaderColumn dataField='BMI' 
+                        >
+                            체지방량1
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='weight' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
-                        >BMI</TableHeaderColumn>
-                        <TableHeaderColumn dataField='PercentBodyFat' 
+                        >
+                            체중
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='skeletalMuscleMass' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
-                        >체지방률</TableHeaderColumn>
+                        >
+                            골격근량
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='bodyFatMass2' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >
+                            체지방량2
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='BMI' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >
+                            BMI
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='PercentBodyFat' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >
+                            체지방률
+                        </TableHeaderColumn>
                     </BootstrapTable>
-                    <text style={{marginTop:'50px'}}></text>
-                </div>
-            </div>
+                    {/*
+                    <text>
+                    </text>
+                    */}
+                </div>{/*.container */}
+                <div className='footer'>
+                    <Footer />
+                </div>{/*.footer */}
+            </div>/*.inbody */
         );
     }
 }

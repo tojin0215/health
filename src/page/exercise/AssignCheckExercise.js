@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -296,109 +297,126 @@ class AssignCheckExercise extends Component {
         };
 
         return (
-            <div>
+        <div className='assignCheckExercise'>
+            <div className='header'>
                 <Header />
-                <Navigation goLogin={this.goLogin} />
-                <div className="title">
-                    <div className="titleIn">
-                        <h2>운동 배정</h2>
-                        <h4>운동 {'>'} 운동 배정</h4>
-                    </div>
-                </div>
-                <div className="container">
+                <Navigation goLogin={this.goLogin}/>
+                <div className='localNavigation'>
+                    <div className='container'>
+                        <h2>
+                            운동 배정 확인
+                        </h2>
+                        <div className='breadCrumb'>
+                            <Link to='/home'>HOME</Link>
+                            <span>&#62;</span>
+                            <Link to='/assign'>운동 배정</Link>
+                            <span>&#62;</span>
+                            <Link to='#'>운동 배정 확인</Link>
+                        </div>{/*.breadCrumb */}
+                    </div>{/*.container */}
+                </div>{/*.localNavigation */}
+            </div>{/*.header */}
+            <div className='container'>
+                <article className='waySub'>
                     <NavLink exact to="/assign">
-                        [운동 배정 설정]
+                        <button type='button'>
+                            운동 배정 설정
+                        </button>
                     </NavLink>
-                    <Link
-                        to={{
-                            pathname:
-                                '/assign/inbody?member_no=' +
-                                this.state.member_no,
-                        }}
-                    >
-                        [고객인바디]
+                    <Link to={{pathname:"/assign/inbody?member_no="+0}}>    
+                        <button type='button'>
+                            고객인바디
+                        </button>
                     </Link>
-
-                    <div>
-                        <label>
-                            {this.props.location.state.userName}님의
-                            운동배정입니다.
-                        </label>
-                    </div>
+                </article>{/*.waySub */}
+                <section className='checkExercise'>
+                    <h3>
+                        <span>
+                            {this.state.member_no}
+                        </span>
+                        님의 운동배정입니다.
+                    </h3>
                     <BootstrapTable
-                        data={this.state.exerciseList}
-                        hover
-                        pagination={this.state.exerciseList > 1}
-                        options={options}
-                        tableHeaderClass="tableHeader"
-                        tableContainerClass="tableContainer"
-                        //selectRow={selectRowProp}
-                        className="table2"
+                    hover
+                    data={ List }  
+                    //pagination={ List.length > 1 }
+                    options={options}
+                    tableHeaderClass='tableHeader'  
+                    tableContainerClass='tableContainer'
+                    //selectRow={selectRowProp}
+                    className="table2"
                     >
                         <TableHeaderColumn
-                            dataField="no"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
-                            isKey
+                        dataField='no'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        isKey
                         >
                             no
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                            dataField="name"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
+                        dataField='name'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
                         >
                             운동이름
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                            dataField="tool"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
+                        dataField='tool'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
                         >
                             운동도구
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                            dataField="aa"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
+                        dataField='aa'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
                         >
                             운동부위
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                            dataField="set"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
+                        dataField='set' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
                         >
                             세트
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                            dataField="bb"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
+                        dataField='bb' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
                         >
                             횟수
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                            dataField="cc"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
+                        dataField='cc' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
                         >
                             휴식시간
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                            dataField="link"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
+                        dataField='link' 
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
                         >
                             링크
                         </TableHeaderColumn>
-                    </BootstrapTable>
-
-                    <button type="button" onClick={this.handleOnClick}>
+                    </BootstrapTable>{/*.table2 */}
+                    <button
+                    className='btnOneCenter'
+                    type="button"
+                    onClick={this.handleOnClick}
+                    >
                         배정하기
                     </button>
-                </div>
-            </div>
+                </section>{/*.checkExercise */}
+            </div>{/*.container */}
+            <div className='footer'>
+                <Footer />
+            </div>{/*.footer */}
+        </div>/*.assignCheckExercise */
         );
     }
 }
