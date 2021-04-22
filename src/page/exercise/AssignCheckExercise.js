@@ -308,40 +308,6 @@ class AssignCheckExercise extends Component {
         };
 
         return (
-<<<<<<< HEAD
-            <div>
-                    <Link
-                        to={{
-                            pathname:
-                                '/assign/inbody?member_no=' +
-                                this.state.member_no,
-                        }}
-                    >
-                        [고객인바디]
-                    </Link>
-
-                    <div>
-                        <label>
-                            {this.props.location.state.userName}님의
-                            운동배정입니다.
-                        </label>
-                    </div>
-                    <BootstrapTable
-                        data={this.state.exerciseList}
-                        hover
-                        pagination={this.state.exerciseList > 1}
-                        options={options}
-                        tableHeaderClass="tableHeader"
-                        tableContainerClass="tableContainer"
-                        //selectRow={selectRowProp}
-                        className="table2"
-                    >
-                        <TableHeaderColumn
-                            dataField="no"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
-                            isKey
-=======
         <div className='assignCheckExercise'>
             <div className='header'>
                 <Header />
@@ -368,7 +334,12 @@ class AssignCheckExercise extends Component {
                             운동 배정 설정
                         </button>
                     </NavLink>
-                    <Link to={{pathname:"/assign/inbody?member_no="+0}}>    
+                    <Link to={{
+                        pathname:
+                            '/assign/inbody?member_no=' +
+                            this.state.member_no,
+                    }}
+                    >
                         <button type='button'>
                             고객인바디
                         </button>
@@ -377,123 +348,71 @@ class AssignCheckExercise extends Component {
                 <section className='checkExercise'>
                     <h3>
                         <span>
-                            {this.state.member_no}
+                            {this.props.location.state.userName}
                         </span>
                         님의 운동배정입니다.
                     </h3>
                     <BootstrapTable
+                    data={this.state.exerciseList}
                     hover
-                    data={ List }  
-                    //pagination={ List.length > 1 }
+                    pagination={this.state.exerciseList > 1}
                     options={options}
-                    tableHeaderClass='tableHeader'  
-                    tableContainerClass='tableContainer'
+                    tableHeaderClass="tableHeader"
+                    tableContainerClass="tableContainer"
                     //selectRow={selectRowProp}
                     className="table2"
                     >
                         <TableHeaderColumn
-                        dataField='no'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
+                        dataField="no"
+                        thStyle={{ textAlign: 'center' }}
+                        tdStyle={{ textAlign: 'center' }}
                         isKey
->>>>>>> seungd1
                         >
                             no
                         </TableHeaderColumn>
                         <TableHeaderColumn
-<<<<<<< HEAD
-                            dataField="name"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
-=======
-                        dataField='name'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
->>>>>>> seungd1
+                        dataField="name"
+                        thStyle={{ textAlign: 'center' }}
+                        tdStyle={{ textAlign: 'center' }}
                         >
                             운동이름
                         </TableHeaderColumn>
                         <TableHeaderColumn
-<<<<<<< HEAD
-                            dataField="tool"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
-=======
-                        dataField='tool'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
->>>>>>> seungd1
+                        dataField="tool"
+                        thStyle={{ textAlign: 'center' }}
+                        tdStyle={{ textAlign: 'center' }}
                         >
                             운동도구
                         </TableHeaderColumn>
                         <TableHeaderColumn
-<<<<<<< HEAD
-                            dataField="aa"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
-=======
-                        dataField='aa'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
->>>>>>> seungd1
+                        dataField="aa"
+                        thStyle={{ textAlign: 'center' }}
+                        tdStyle={{ textAlign: 'center' }}
                         >
                             운동부위
                         </TableHeaderColumn>
                         <TableHeaderColumn
-<<<<<<< HEAD
-                            dataField="set"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
-=======
-                        dataField='set' 
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
->>>>>>> seungd1
+                        dataField="set"
+                        thStyle={{ textAlign: 'center' }}
+                        tdStyle={{ textAlign: 'center' }}
                         >
                             세트
                         </TableHeaderColumn>
                         <TableHeaderColumn
-<<<<<<< HEAD
-                            dataField="bb"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
-=======
-                        dataField='bb' 
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
->>>>>>> seungd1
+                        dataField="bb"
+                        thStyle={{ textAlign: 'center' }}
+                        tdStyle={{ textAlign: 'center' }}
                         >
                             횟수
                         </TableHeaderColumn>
                         <TableHeaderColumn
-<<<<<<< HEAD
-                            dataField="cc"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
-=======
-                        dataField='cc' 
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
->>>>>>> seungd1
+                        dataField="cc"
+                        thStyle={{ textAlign: 'center' }}
+                        tdStyle={{ textAlign: 'center' }}
                         >
                             휴식시간
                         </TableHeaderColumn>
                         <TableHeaderColumn
-<<<<<<< HEAD
-                            dataField="link"
-                            thStyle={{ textAlign: 'center' }}
-                            tdStyle={{ textAlign: 'center' }}
-                        >
-                            링크
-                        </TableHeaderColumn>
-                    </BootstrapTable>
-
-                    <button type="button" onClick={this.handleOnClick}>
-                        배정하기
-                    </button>
-                </div>
-            </div>
-=======
                         dataField='link' 
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
@@ -514,7 +433,6 @@ class AssignCheckExercise extends Component {
                 <Footer />
             </div>{/*.footer */}
         </div>/*.assignCheckExercise */
->>>>>>> seungd1
         );
     }
 }
