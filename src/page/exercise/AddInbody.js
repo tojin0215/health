@@ -22,7 +22,7 @@ import '../../styles/customer/AddCustomer.css';
 import '../../styles/exercise/AddInbody.css';
 
 
-const ip = '13.124.141.28:3003';
+const ip = '13.124.141.28:3002';
 //const ip = 'localhost:3000';
 
 class AddInbody extends Component {
@@ -33,10 +33,17 @@ class AddInbody extends Component {
         const search = location.pathname;
         //alert(search+'   '+search.split('/')[3])
 
+        let inbody_no1 = ''
+        if(this.props.location.state.inbody_no == null){
+            inbody_no1 = 0
+        } else{
+            inbody_no1 = Number(this.props.location.state.inbody_no)
+        }
+
         this.state = {
             fitness_no:this.props.userinfo.fitness_no, //Redux를 통해 받은 값
             member_no: search.split('/')[3] ,
-            inbody_no: Number(this.props.location.state.inbody_no),
+            inbody_no: inbody_no1,
             height : '', //키
             measurementDate : new Date(), // 측정날짜
              //체성분 분석
@@ -171,7 +178,7 @@ class AddInbody extends Component {
     }
 
     handleOnClick= (e) => {
-        
+        //alert('여기')
         this.setState({
             height_err:false,
             bodyMoisture_err:false,

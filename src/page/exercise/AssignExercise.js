@@ -24,7 +24,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-const ip = '13.124.141.28:3003';
+const ip = '13.124.141.28:3002';
 //const ip = 'localhost:3000';
 
 function onChangeHandler(a, e) {
