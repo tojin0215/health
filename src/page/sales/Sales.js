@@ -374,11 +374,6 @@ class Sales extends Component {
                 <div className="container">
                     <h2>매출 현황</h2>
                     <div className="salesUtill">
-                        <Link to="/sales/add">
-                            <Button color="primary">
-                                결제 등록
-                            </Button>
-                        </Link>
                         <div className="salesStatus">
                             <DatePicker
                                 selected={ this.state.startDate }
@@ -425,6 +420,13 @@ class Sales extends Component {
                             tdStyle={ { 'textAlign': 'center' } }
                             isKey>총 매출</TableHeaderColumn>
                         </BootstrapTable>
+                        <div className='salesUtill salesUtill2'>
+                            <Link to="/sales/add">
+                                <Button color="primary">
+                                    결제 등록
+                                </Button>
+                            </Link>
+                        </div>
                         <h5>전체 기록</h5>
                         <BootstrapTable 
                         data={ this.state.salesLists2 } 
