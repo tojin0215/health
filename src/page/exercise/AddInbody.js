@@ -22,7 +22,8 @@ import '../../styles/customer/AddCustomer.css';
 import '../../styles/exercise/AddInbody.css';
 
 
-const ip = '13.124.141.28';
+//const ip = '13.124.141.28:3003';
+const ip = 'localhost:3000';
 
 class AddInbody extends Component {
     
@@ -30,7 +31,7 @@ class AddInbody extends Component {
         super(props);
 
         const search = location.pathname;
-        alert(search+'   '+search.split('/')[3])
+        //alert(search+'   '+search.split('/')[3])
 
         this.state = {
             fitness_no:this.props.userinfo.fitness_no, //Redux를 통해 받은 값
@@ -132,8 +133,7 @@ class AddInbody extends Component {
             })
         }
 
-        //fetch("http://"+ip+":3003/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://"+ip+"/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -229,8 +229,7 @@ class AddInbody extends Component {
             alert("빈칸을 채워주세요.")
         }else{
             // 서버 연결하는 부분
-            //fetch("http://"+ip+":3003/inbody", {
-            fetch("http://localhost:3000/inbody", {
+            fetch("http://"+ip+"/inbody", {
                 method: "POST",
                 headers: {
                 'Content-type': 'application/json'

@@ -24,7 +24,8 @@ import '../../styles/exercise/Inbody.css';
 
 import {getStatusRequest} from '../../action/authentication';
 
-const ip = '13.124.141.28';
+//const ip = '13.124.141.28:3003';
+const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
@@ -110,7 +111,7 @@ class Inbody extends Component {
                     alert("Your session is expired, please log in again")
                 }
                 else{
-                    alert('member_id'+this.state.member_no)
+                    //alert('member_id'+this.state.member_no)
                     // this.props.history.push({
                     //     pathname: "/assign/inbody?member_no="+0
                     // })
@@ -126,8 +127,7 @@ class Inbody extends Component {
             //url = "http://"+ip+":3003/inbody?type=all&fn="+this.props.userinfo.fitness_no
             this.setState({inbodyList : []});
         } else{
-            //url = "http://"+ip+":3003/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
-            url = "http://localhost:3000/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
+            url = "http://"+ip+"/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
             fetch(url, {
                 method: "GET",
                 headers: {
@@ -142,8 +142,7 @@ class Inbody extends Component {
                         }
                         this.setState({inbodyList : arr1});
 
-                        //fetch("http://"+ip+":3003/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
-                        fetch("http://localhost:3000/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
+                        fetch("http://"+ip+"/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
                             method: "GET",
                             headers: {
                             'Content-type': 'application/json'
@@ -219,8 +218,7 @@ class Inbody extends Component {
             age:age,
             open:false
         })
-        //let url = "http://"+ip+":3003/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
-        let url = "http://localhost:3000/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
+        let url = "http://"+ip+"/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
         fetch(url, {
             method: "GET",
             headers: {
@@ -251,8 +249,7 @@ class Inbody extends Component {
         let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
         let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
         console.log('clickclickclick')
-        //fetch('http://'+ip+':3003/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
-        fetch('http://localhost:3000/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
+        fetch('http://'+ip+'/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -287,8 +284,7 @@ class Inbody extends Component {
         }else if(this.state.item === "핸드폰"){
             it = '1'
         }
-        //fetch("http://"+ip+":3003/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://"+ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -471,7 +467,7 @@ class Inbody extends Component {
                         </div>
                         <article className='waySub'>
                             <Link
-                            to={{pathname:"/assign/add?member_no="+this.state.member_no}}
+                            to={{pathname:"/assign/add/"+this.state.member_no}}
                             >
                                 <button>
                                     인바디정보추가

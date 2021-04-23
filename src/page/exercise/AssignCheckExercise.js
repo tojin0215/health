@@ -8,13 +8,13 @@ import { Link } from 'react-router-dom';
 import '../../styles/exercise/AssignCheckExercise.css';
 
 // const ip = '13.124.141.28:3003';
-
 const ip = 'localhost:3000';
+
 class AssignCheckExercise extends Component {
     constructor(props) {
         super(props);
 
-        const search = location.search;
+        const search = location.pathname;
 
         this.state = {
             fitness_no: this.props.userinfo.fitness_no, //Redux를 통해 받은 값

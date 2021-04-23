@@ -15,7 +15,8 @@ import {getStatusRequest} from '../../action/authentication';
 import '../../styles/customer/Customer.css';
 
 
-const ip = '13.124.141.28';
+//const ip = '13.124.141.28:3003';
+const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
@@ -112,8 +113,7 @@ class Customer extends Component {
         );
     }
     cusFetch = () => {
-        //fetch("http://"+ip+":3003/customer?type=all&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://"+ip+"/customer?type=all&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -178,8 +178,7 @@ class Customer extends Component {
     onSelectRow=(row, isSelected, e)=> { //table row 클릭시
         if (isSelected) {
             //alert(row['no'])
-            //fetch("http://"+ip+":3003/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
-            fetch("http://localhost:3000/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
+            fetch("http://"+ip+"/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -209,8 +208,7 @@ class Customer extends Component {
                     //alert('age : '+this.calAge(data.resi_no))
                 })
             });
-            //fetch("http://"+ip+":3003/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
-            fetch("http://localhost:3000/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
+            fetch("http://"+ip+"/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -254,8 +252,7 @@ class Customer extends Component {
         }else if(this.state.item === "주민번호(앞자리)"){
             it = '3'
         }
-        //fetch("http://"+ip+":3003/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://"+ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -401,7 +398,7 @@ class Customer extends Component {
                     {this.state.show?
                         <div className='customerSlide'>
                             <div className='customerSlideUtill'>
-                                <Link to={{pathname:"/customer/update?member_no="+this.state.member_no}} className='btnCustomerNew'>
+                                <Link to={{pathname:"/customer/update/"+this.state.member_no}} className='btnCustomerNew'>
                                     수정하기
                                 </Link>
                                 <button type="button" onClick={this.handleClickAway} className='btnCustomerClose'>X</button>
@@ -442,18 +439,7 @@ class Customer extends Component {
                                 </li>
                             </ul>
                             <h5>상품 결제 내역</h5>
-                            <Link to={{pathname:"/customer/update/"+this.state.member_no}} className='btnCustomerNew'>
-                                수정하기
-                            </Link><br/><br/>
-                            <button type="button" onClick={this.handleClickAway}>X</button><br/>
-                            <label>이름</label><label>{ this.state.name }</label><br/>
-                            <label>고객번호</label><label>{ this.state.member_no }</label><br/>
-                            <label>정보</label><label>{ this.state.info }</label><br/>
-                            <label>연락처</label><label>{ this.state.phone }</label><br/>
-                            <label>주소</label><label>{ this.state.addr }</label><br/>
-                            <label>등록일</label><label>{ this.state.startDate }</label><br/>
-                            <label>담당자</label><label>{ this.state.trainer }</label><br/>
-                            <label>비고</label><label>{ this.state.note }</label><br/>
+                            
                             <BootstrapTable 
                                 data={ this.state.userSalesLists2 } 
                                 hover

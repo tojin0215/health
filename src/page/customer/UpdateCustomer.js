@@ -13,7 +13,8 @@ import { TextField } from '@material-ui/core';
 import {getStatusRequest} from '../../action/authentication';
 import '../../styles/customer/UpdateCustomer.css'
 
-const ip = '13.124.141.28';
+//const ip = '13.124.141.28:3003';
+const ip = 'localhost:3000';
 
 class UpdateCustomer extends Component {
 
@@ -113,8 +114,7 @@ class UpdateCustomer extends Component {
     }
 
     cusFetch = () => {
-        //fetch("http://"+ip+":3003/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://"+ip+"/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -228,8 +228,7 @@ class UpdateCustomer extends Component {
         }
         else{
             // 서버 연결하는 부분
-            //fetch("http://"+ip+":3003/customer?fn="+this.props.userinfo.fitness_no, {
-            fetch("http://localhost:3000/customer?fn="+this.props.userinfo.fitness_no, {
+            fetch("http://"+ip+"/customer?fn="+this.props.userinfo.fitness_no, {
                 method: "PUT",
                 headers: {
                     'Content-type': 'application/json',

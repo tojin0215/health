@@ -26,7 +26,8 @@ import NumberFormat from 'react-number-format';
 
 import {getStatusRequest} from '../../action/authentication';
 
-const ip = '13.124.141.28';
+//const ip = '13.124.141.28:3003';
+const ip = 'localhost:3000';
 
 const userList = [
     {'num':1, 'userName':'김투진','phone':'000-0000-0000'},
@@ -212,8 +213,7 @@ class AddSales extends Component {
 
         console.log('***********paymentDate : ', this.state.paymentDate)
         console.log(this.state);
-        //fetch("http://"+ip+":3003/sales", {
-        fetch("http://localhost:3000/sales", {
+        fetch("http://"+ip+"/sales", {
             method: "POST",
             headers: {
               'Content-type': 'application/json'
@@ -256,8 +256,7 @@ class AddSales extends Component {
         }else if(this.state.item === "핸드폰"){
             it = '1'
         }
-        //fetch("http://"+ip+":3003/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://"+ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'

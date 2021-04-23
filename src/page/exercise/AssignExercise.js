@@ -24,9 +24,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-// const ip = 'localhost';
+//const ip = '13.124.141.28:3003';
 const ip = 'localhost:3000';
-// const ip = 'localhost:3003';
 
 function onChangeHandler(a, e) {
     [e.target.a] = e.target.value;
@@ -922,7 +921,7 @@ class AssignExercise extends Component {
                 <div className="container">
                     <article className="waySub">
                         <Link
-                            to={{ pathname: '/assign/inbody?member_no=' + 0 }}
+                            to={{ pathname: '/assign/inbody/' + 0 }}
                         >
                             <button type="button">고객인바디</button>
                         </Link>
@@ -1539,7 +1538,7 @@ class AssignExercise extends Component {
                         <Link
                             to={{
                                 pathname:
-                                    '/assign/check?member_no=' +
+                                    '/assign/check/' +
                                     this.state.member_no,
                                 state: {
                                     userName: this.state.userName,
