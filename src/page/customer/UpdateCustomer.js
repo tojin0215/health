@@ -13,8 +13,8 @@ import { TextField } from '@material-ui/core';
 import {getStatusRequest} from '../../action/authentication';
 import '../../styles/customer/UpdateCustomer.css'
 
-//const ip = '13.124.141.28:3003';
-const ip = 'localhost:3000';
+const ip = '13.124.141.28:3003';
+//const ip = 'localhost:3000';
 
 class UpdateCustomer extends Component {
 

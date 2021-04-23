@@ -19,8 +19,8 @@ import '../../styles/sales/Sales.css'
 
 import {getStatusRequest} from '../../action/authentication';
 
-//const ip = '13.124.141.28:3003';
-const ip = 'localhost:3000';
+const ip = '13.124.141.28:3003';
+//const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
