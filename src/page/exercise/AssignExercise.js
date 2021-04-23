@@ -985,10 +985,10 @@ class AssignExercise extends Component {
                             님 */}
                             최근 인바디 정보입니다.
                         </h4>
-                        <label>키 : </label>
-                        <label>체중 : </label>
-                        <label>체지방 : </label>
-                        <label>근육량 : </label>
+                        <label>키 : {this.state.user_height}</label>
+                        <label>체중 : {this.state.user_weight}</label>
+                        <label>체지방 : {this.state.user_bodyFat}</label>
+                        <label>근육량 : {this.state.user_muscleMass}</label>
                     </div>
                 </section>{/*.CustomerInbody */}
                 <section className='assignWorkout'>
@@ -1087,7 +1087,7 @@ class AssignExercise extends Component {
                                 options={options1}
                                 tableHeaderClass='tableHeader'  
                                 tableContainerClass='tableContainer'
-                                selectRow={selectRowProp}
+                                selectRow={selectRowProp_상체}
                                 className="table2">
                                     <TableHeaderColumn
                                     dataField='no'
@@ -1163,7 +1163,7 @@ class AssignExercise extends Component {
                                 options={options1}
                                 tableHeaderClass='tableHeader'  
                                 tableContainerClass='tableContainer'
-                                selectRow={selectRowProp}
+                                selectRow={selectRowProp_하체}
                                 className="table2">
                                     <TableHeaderColumn
                                     dataField='no'
@@ -1239,7 +1239,7 @@ class AssignExercise extends Component {
                                 options={options1}
                                 tableHeaderClass='tableHeader'  
                                 tableContainerClass='tableContainer'
-                                selectRow={selectRowProp}
+                                selectRow={selectRowProp_코어}
                                 className="table2">
                                     <TableHeaderColumn
                                     dataField='no'
@@ -1315,7 +1315,7 @@ class AssignExercise extends Component {
                                 options={options1}
                                 tableHeaderClass='tableHeader'  
                                 tableContainerClass='tableContainer'
-                                selectRow={selectRowProp}
+                                selectRow={selectRowProp_전신}
                                 className="table2">
                                     <TableHeaderColumn
                                     dataField='no'
@@ -1391,7 +1391,7 @@ class AssignExercise extends Component {
                                 options={options1}
                                 tableHeaderClass='tableHeader'  
                                 tableContainerClass='tableContainer'
-                                selectRow={selectRowProp}
+                                selectRow={selectRowProp_유산소}
                                 className="table2">
                                     <TableHeaderColumn
                                     dataField='no'
@@ -1454,7 +1454,21 @@ class AssignExercise extends Component {
                             </div>
                         :null}
                     </div>
-                    <Link to={{pathname:"/assign/check?member_no="+1}}>
+                    <Link to={{pathname:
+                                '/assign/check?member_no=' +
+                                this.state.member_no,
+                                state: {
+                                    userName: this.state.userName,
+                                    member_no: this.state.member_no,
+                                    assignDefault: this.state.assignDefault,
+                                    assignCustom: {
+                                        1: this.state.select_top_data,
+                                        2: this.state.select_bottom_data,
+                                        4: this.state.select_allbody_data,
+                                        8: this.state.select_core_data,
+                                        16: this.state.select_oxy_data,
+                                    },
+                                },}}>
                         <button
                         className='btnOneCenter'
                         type="button"

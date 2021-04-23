@@ -1074,7 +1074,7 @@ class DefaultExercise extends Component {
                         options={options1}
                         tableHeaderClass='tableHeader'  
                         tableContainerClass='tableContainer'
-                        selectRow={selectRowProp}
+                        selectRow={selectRowProp_상체}
                         className="table2"
                         >
                             <TableHeaderColumn

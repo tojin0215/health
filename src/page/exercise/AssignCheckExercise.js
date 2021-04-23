@@ -331,14 +331,14 @@ class AssignCheckExercise extends Component {
                 </article>{/*.waySub */}
                 <section className='checkExercise'>
                     <h3>
-                        <span>
-                            {this.state.member_no}
-                        </span>
-                        님의 운동배정입니다.
+                    <label>
+                            {this.props.location.state.userName}님의
+                            운동배정입니다.
+                        </label>
                     </h3>
                     <BootstrapTable
                     hover
-                    data={ List }  
+                    data={ exerciseList }  
                     //pagination={ List.length > 1 }
                     options={options}
                     tableHeaderClass='tableHeader'  

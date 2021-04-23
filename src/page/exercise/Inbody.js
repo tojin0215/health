@@ -462,8 +462,8 @@ class Inbody extends Component {
                     tableContainerClass='tableContainer'>
                         <TableHeaderColumn
                         dataField='measurementDate'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
+                        thStyle={ { 'textAlign': 'center', 'width':'100px' } }
+                        tdStyle={ { 'textAlign': 'center','width':'100px'  } }
                         isKey
                         >
                             날짜
