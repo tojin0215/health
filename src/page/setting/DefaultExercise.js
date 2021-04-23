@@ -5,9 +5,8 @@ import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../../styles/setting/defaultExercise.css';
-
 
 // const ip = '13.124.141.28:3003';
 const ip = 'localhost:3000';
@@ -1069,11 +1068,11 @@ class DefaultExercise extends Component {
                         </h3>
                         <BootstrapTable
                         hover
-                        data={ List } 
-                        //pagination={ List.length > 1 }
+                        data={this.state.exerciseList}
+                        pagination={this.state.exerciseList > 1}
                         options={options1}
-                        tableHeaderClass='tableHeader'  
-                        tableContainerClass='tableContainer'
+                        tableHeaderClass="tableHeader"
+                        tableContainerClass="tableContainer"
                         selectRow={selectRowProp_상체}
                         className="table2"
                         >
@@ -1144,12 +1143,12 @@ class DefaultExercise extends Component {
                         </h3>
                         <BootstrapTable
                         hover
-                        data={ List }  
-                        //pagination={ List.length > 1 }
+                        data={this.state.exerciseList}
+                        pagination={this.state.exerciseList > 1}
                         options={options1}
-                        tableHeaderClass='tableHeader'  
-                        tableContainerClass='tableContainer'
-                        selectRow={selectRowProp}
+                        tableHeaderClass="tableHeader"
+                        tableContainerClass="tableContainer"
+                        selectRow={selectRowProp_하체}
                         className="table2"
                         >
                             <TableHeaderColumn
@@ -1211,243 +1210,245 @@ class DefaultExercise extends Component {
                             </TableHeaderColumn>
                         </BootstrapTable>{/*.table2 */}
 
-                    </div>
-                :null} 
-                {this.state.show3?
-                    <div>
-                        <h3>
-                            전신 운동 목록
-                        </h3>
-                        <BootstrapTable
-                        hover
-                        data={ List }  
-                        //pagination={ List.length > 1 }
-                        options={options1}
-                        tableHeaderClass='tableHeader'  
-                        tableContainerClass='tableContainer'
-                        selectRow={selectRowProp}
-                        className="table2">
-                            <TableHeaderColumn
-                            dataField='no'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            isKey
+                    
+                        </div>
+                     : null}
+                    {this.state.show3 ? (
+                        <div>
+                            <h3>전신 운동 목록</h3>
+                            <BootstrapTable
+                                hover
+                                data={this.state.exerciseList}
+                                pagination={this.state.exerciseList.length > 1}
+                                options={options1}
+                                tableHeaderClass="tableHeader"
+                                tableContainerClass="tableContainer"
+                                selectRow={selectRowProp_전신}
+                                className="table2"
                             >
-                                no
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='name'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                                <TableHeaderColumn
+                                    dataField="no"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                    isKey
+                                >
+                                    no
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="name"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동이름
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="tool"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동도구
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="aa"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동부위
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="set"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    세트
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="bb"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    횟수
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="cc"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    휴식시간
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="link"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    링크
+                                </TableHeaderColumn>
+                            </BootstrapTable>
+                            {/*.table2 */}
+                        </div>
+                    ) : null}
+                    {this.state.show4 ? (
+                        <div>
+                            <h3>코어 운동 목록</h3>
+                            <BootstrapTable
+                                hover
+                                data={this.state.exerciseList}
+                                pagination={this.state.exerciseList.length > 1}
+                                options={options1}
+                                tableHeaderClass="tableHeader"
+                                tableContainerClass="tableContainer"
+                                selectRow={selectRowProp_코어}
+                                className="table2"
                             >
-                                운동이름
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='tool'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                                <TableHeaderColumn
+                                    dataField="no"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                    isKey
+                                >
+                                    no
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="name"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동이름
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="tool"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동도구
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="aa"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동부위
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="set"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    세트
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="bb"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    횟수
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="cc"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    휴식시간
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="link"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    링크
+                                </TableHeaderColumn>
+                            </BootstrapTable>
+                            {/*.table2 */}
+                        </div>
+                    ) : null}
+                    {this.state.show5 ? (
+                        <div>
+                            <h3>유산소 운동 목록</h3>
+                            <BootstrapTable
+                                hover
+                                data={this.state.exerciseList}
+                                pagination={this.state.exerciseList.length > 1}
+                                options={options1}
+                                tableHeaderClass="tableHeader"
+                                tableContainerClass="tableContainer"
+                                selectRow={selectRowProp_유산소}
+                                className="table2"
                             >
-                                운동도구
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='aa'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                운동부위
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='set' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                세트
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='bb' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                횟수
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='cc' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                휴식시간
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='link' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                링크
-                            </TableHeaderColumn>
-                        </BootstrapTable>{/*.table2 */}
-                    </div>
-                :null}
-                {this.state.show4?
-                    <div>
-                        <h3>
-                            코어 운동 목록
-                        </h3>
-                        <BootstrapTable
-                        hover
-                        data={ List }  
-                        //pagination={ List.length > 1 }
-                        options={options1}
-                        tableHeaderClass='tableHeader'  
-                        tableContainerClass='tableContainer'
-                        selectRow={selectRowProp}
-                        className="table2"
-                        >
-                            <TableHeaderColumn
-                            dataField='no'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            isKey
-                            >
-                                no
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='name'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                운동이름
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='tool'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                운동도구
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='aa'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                운동부위
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='set' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                세트
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='bb' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                횟수
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='cc' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                휴식시간
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='link' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                링크
-                            </TableHeaderColumn>
-                        </BootstrapTable>{/*.table2 */}
-                    </div>
-                :null}
-                {this.state.show5?
-                    <div>
-                        <h3>
-                            유산소 운동 목록
-                        </h3>
-                        <BootstrapTable
-                        hover
-                        data={ List }  
-                        //pagination={ List.length > 1 }
-                        options={options1}
-                        tableHeaderClass='tableHeader'  
-                        tableContainerClass='tableContainer'
-                        selectRow={selectRowProp}
-                        className="table2">
-                            <TableHeaderColumn
-                            dataField='no'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            isKey
-                            >
-                                no
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='name'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                운동이름
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='tool'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                운동도구
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='aa'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                운동부위
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='set' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                세트
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='bb' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                횟수
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='cc' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                휴식시간
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='link' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                링크
-                            </TableHeaderColumn>
-                        </BootstrapTable>{/*.table2 */}
-                    </div>
-                :null}
-                <button
-                className='btnOneCenter'
-                type="button"
-                onClick={this.handleOnClick}
-                >
-                    저장하기
-                </button>
-            </div>{/*.container */}
-            <footer className='footer'>
-                <Footer />
-            </footer>{/*.footer */}
-        </div>
+                                <TableHeaderColumn
+                                    dataField="no"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                    isKey
+                                >
+                                    no
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="name"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동이름
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="tool"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동도구
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="aa"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동부위
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="set"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    세트
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="bb"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    횟수
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="cc"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    휴식시간
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="link"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    링크
+                                </TableHeaderColumn>
+                            </BootstrapTable>
+                            {/*.table2 */}
+                        </div>
+                    ) : null}
+                    <button
+                        className="btnOneCenter"
+                        type="button"
+                        onClick={this.handleOnClick}
+                    >
+                        저장하기
+                    </button>
+                </div>
+                {/*.container */}
+                <footer className="footer">
+                    <Footer />
+                </footer>
+                {/*.footer */}
+            </div>
         );
     }
 }
