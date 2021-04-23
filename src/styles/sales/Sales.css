@@ -1,63 +1,75 @@
 .sales .container {
-    padding-top:6rem;
-    padding-bottom:8rem;
+	padding-top: 6rem;
+	padding-bottom: 8rem;
+}
+/* 날짜 검색창 가로 100% 채우기 */
+.sales .salesStatus {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }
 
-.salesUtill{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    padding:2rem 0 1rem;
+.salesUtill {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	padding: 2rem 0 1rem;
 }
 
 .salesUtill Button {
-    width:15rem;
-    background-color:rgb(38, 38, 134);
-    border:none;
-    border-radius:10px;
+	width: 15rem;
+	background-color: rgb(38, 38, 134);
+	border: none;
+	border-radius: 10px;
+}
+/*결제 등록 버튼 위치*/
+.salesUtill2 {
+	justify-content: flex-end;
 }
 
 .addPr {
-    font-size:1.5rem;
+	font-size: 1.5rem;
 }
 
 .tableBody {
-    text-align:center;
+	text-align: center;
 }
 
 .tableContainer {
-    border-radius:0;
-    border:none;
-    border-top:1px solid rgb(0,0,82);
-    border-bottom:1px solid rgb(0,0,82);
+	border-radius: 0;
+	border: none;
+	border-top: 1px solid rgb(0, 0, 82);
+	border-bottom: 1px solid rgb(0, 0, 82);
 }
 
 .table thead th {
-    border:none;
-    height:4rem;
+	border: none;
+	height: 4rem;
 }
 
-.table-bordered td, .table-bordered th {
-    border:none;
+.table-bordered td,
+.table-bordered th {
+	border: none;
 }
 /*
 .table2 :hover {
-    background-color: #fff;
-    border:1px solid rgb(0,0,82);
-    border-radius: 5px;
+  background-color: #fff;
+  border:1px solid rgb(0,0,82);
+  border-radius: 5px;
 }
 전체기록 표의 행에 하버시 css 적용
 */
 .table2 .tableHeader {
-    border-bottom:1px solid rgb(0,0,82)
+	border-bottom: 1px solid rgb(0, 0, 82);
 }
 
 .salesTotal {
-    padding-bottom:4rem;
+	padding-bottom: 4rem;
 }
 
 .css-g1d714-ValueContainer {
-    /* height:4rem; */
+	/* height:4rem; */
 }
 
 /*상품 매출 현황 페이지 전체 기록 상품이름 필터 크기 조절*/
