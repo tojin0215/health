@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 
 import {getStatusRequest} from '../../action/authentication';
@@ -70,13 +71,28 @@ class Statistics extends Component {
 
         return (
             <div className='statistics'>
-                <Header />
-                <Navigation goLogin={this.goLogin}/>
-                <localNavigation />
+                <div className='header'>
+                    <Header />
+                    <Navigation goLogin={this.goLogin}/>
+                    <div className='localNavigation'>
+                        <div className='container'>
+                            <h2>
+                                통계
+                            </h2>
+                            <div className='breadCrumb'>
+                                <Link to='/home'>HOME</Link>
+                                <span>&#62;</span>
+                                <Link to='/statistics'>통계</Link>
+                            </div>
+                        </div>{/*.container */}
+                    </div>{/*.localNavigation */}
+                </div>{/*.header */}
                 <div className="container">
                      <h2>통계페이지</h2>
-
                 </div>
+                <div className='footer'>
+                    <Footer />
+                </div>{/*.footer */}
             </div>
         );
     }

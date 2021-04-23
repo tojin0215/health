@@ -16,7 +16,7 @@ export function loginRequest(id, password) {
     dispatch(login());
 
     // API REQUEST
-    //return fetch("http://"+ip+":3001/manager", {
+    //return fetch("http://"+ip+":3003/manager", {
     return fetch("http://localhost:3000/manager", {
         method: "POST",
         credentials: 'include',
@@ -71,7 +71,7 @@ export function getStatusRequest() {
         console.log('____getStatus', getStatus())
 
         dispatch(getStatus());
-        //return fetch("http://"+ip+":3001/manager", {
+        //return fetch("http://"+ip+":3003/manager", {
         return fetch("http://localhost:3000/manager", {
             method: "GET",
             headers: {
@@ -116,7 +116,7 @@ export function getStatusFailure() {
 }
 export function logoutRequest() {
     return (dispatch) => {
-        //return fetch("http://"+ip+":3001/manager", {
+        //return fetch("http://"+ip+":3003/manager", {
         return fetch("http://localhost:3000/manager", {
             method: "DELETE",
             credentials: 'include'

@@ -1,0 +1,16 @@
+.assignCheckExercise .container {
+  position: relative;
+}
+
+.checkExercise > h3 {
+  border-bottom:none;
+  font-size:2.6rem;
+}
+
+.checkExercise h3 span {
+  /* font-size:3rem; */
+}
+
+.assignCheckExercise .waySub {
+  top:0rem;
+}

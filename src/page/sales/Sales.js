@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 
 import { Button } from 'react-bootstrap';
@@ -360,19 +361,31 @@ class Sales extends Component {
 
         return (
             <div className='sales'>
-                <Header />
-                <Navigation goLogin={this.goLogin}/>
-                <localNavigation />
+                <div className='header'>
+                    <Header />
+                    <Navigation goLogin={this.goLogin}/>
+                    <div className='localNavigation'>
+                        <div className='container'>
+                            <h2>
+                                상품/매출
+                            </h2>
+                            <div className='breadCrumb'>
+                                <Link to='/home'>HOME</Link>
+                                <span>&#62;</span>
+                                <Link to='#'>상품/매출</Link>
+                            </div>
+                        </div>{/*.container */}
+                    </div>{/*.localNavigation */}
+                </div>{/*.header */}
                 <div className="container">
-                     <h2>상품등록 페이지</h2>
+                    <h2>매출 현황</h2>
                     <div className="salesUtill">
                         <Link to="/sales/add">
                             <Button color="primary">
-                                상품 등록
+                                결제 등록
                             </Button>
                         </Link>
                         <div className="salesStatus">
-                            <h5>매출 현황</h5>
                             <DatePicker
                                 selected={ this.state.startDate }
                                 selectsStart
@@ -392,83 +405,99 @@ class Sales extends Component {
                                 dateFormat="MM/dd/yyyy"
                             />
                             <button type="button" onClick={this.handleOnClick}> 조회하기 </button>
-                        </div>
-                    </div>
-
+                        </div>{/*.salesStatus */}
+                    </div>{/*.salesUtill */}
                     <div>
-                    <BootstrapTable data={ this.state.toolList } 
-                        options={textOptions}
-                        tableHeaderClass='tableHeader'
-                        tableContainerClass='tableContainer'>
-                        <TableHeaderColumn dataField='card' dataFormat={PriceFormatter}
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >카드</TableHeaderColumn>
-                        <TableHeaderColumn dataField='cash' dataFormat={PriceFormatter}
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >현금</TableHeaderColumn>
-                        <TableHeaderColumn dataField='transfer' dataFormat={PriceFormatter}
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >계좌이체</TableHeaderColumn>
-                        <TableHeaderColumn dataField='total' dataFormat={PriceFormatter}
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                         isKey>총 매출</TableHeaderColumn>
-                    </BootstrapTable>
-                    <br/><br/>
-                    <h5>전체 기록</h5>
-                    <BootstrapTable data={ this.state.salesLists2 } hover 
+                        <BootstrapTable data={ this.state.toolList } 
+                            options={textOptions}
+                            tableHeaderClass='tableHeader'
+                            tableContainerClass='tableContainer'
+                            className='salesTotal'
+                            >
+                            <TableHeaderColumn dataField='card' dataFormat={PriceFormatter}
+                            thStyle={ { 'textAlign': 'center' } }
+                            tdStyle={ { 'textAlign': 'center' } }
+                            >카드</TableHeaderColumn>
+                            <TableHeaderColumn dataField='cash' dataFormat={PriceFormatter}
+                            thStyle={ { 'textAlign': 'center' } }
+                            tdStyle={ { 'textAlign': 'center' } }
+                            >현금</TableHeaderColumn>
+                            <TableHeaderColumn dataField='transfer' dataFormat={PriceFormatter}
+                            thStyle={ { 'textAlign': 'center' } }
+                            tdStyle={ { 'textAlign': 'center' } }
+                            >계좌이체</TableHeaderColumn>
+                            <TableHeaderColumn dataField='total' dataFormat={PriceFormatter}
+                            thStyle={ { 'textAlign': 'center' } }
+                            tdStyle={ { 'textAlign': 'center' } }
+                            isKey>총 매출</TableHeaderColumn>
+                        </BootstrapTable>
+                        <h5>전체 기록</h5>
+                        <BootstrapTable 
+                        data={ this.state.salesLists2 } 
+                        hover
                         options={textOptions}
                         pagination={ this.state.customerList.length > 1 }
                         tableHeaderClass='tableHeader'
                         tableContainerClass='tableContainer'
                         className="table2">
-                        <TableHeaderColumn dataField='num'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                         isKey>No.</TableHeaderColumn>
-                        <TableHeaderColumn dataField='userName'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >회원이름</TableHeaderColumn>
-                        <TableHeaderColumn dataField='exerciseName'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >
-                             <Select 
+                            <TableHeaderColumn
+                            dataField='num'
+                            thStyle={ { 'textAlign': 'center' } }
+                            tdStyle={ { 'textAlign': 'center' } }
+                            isKey>
+                                No.
+                            </TableHeaderColumn>
+                            <TableHeaderColumn 
+                            dataField='userName'
+                            thStyle={ { 'textAlign': 'center' } }
+                            tdStyle={ { 'textAlign': 'center' } }>
+                                회원이름
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                            dataField='exerciseName'
+                            thStyle={ { 'textAlign': 'center' } }
+                            tdStyle={ { 'textAlign': 'center' } }>
+                                <Select 
                                 menuPortalTarget={document.querySelector('body')}
-                                placeholder = '상품이름' 
+                                placeholder = '상품이름'
                                 value={this.state.exerciseSelectedOption}
                                 onChange={this.exhandleChange}
                                 options={exerciseOptions} 
-                            /> 
-                        </TableHeaderColumn>
-                        <TableHeaderColumn dataField='time' dataFormat={dataFormatter}
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >결제일</TableHeaderColumn>
-                        <TableHeaderColumn dataField='total' dataFormat={PriceFormatter}
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >결제 금액</TableHeaderColumn>
-                        <TableHeaderColumn dataField='paymentTools'
-                        thStyle={ { 'textAlign': 'center'} }
-                        tdStyle={ { 'textAlign': 'center'} }
-                        >
-                            <Select 
+                                /> 
+                            </TableHeaderColumn>
+                            <TableHeaderColumn 
+                            dataField='time'
+                            dataFormat={dataFormatter}
+                            thStyle={ { 'textAlign': 'center' } }
+                            tdStyle={ { 'textAlign': 'center' } }>
+                                결제일
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                            dataField='total'
+                            dataFormat={PriceFormatter}
+                            thStyle={ { 'textAlign': 'center' } }
+                            tdStyle={ { 'textAlign': 'center' } }>
+                                결제 금액
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                            dataField='paymentTools'
+                            thStyle={ { 'textAlign': 'center'} }
+                            tdStyle={ { 'textAlign': 'center'} }>
+                                <Select 
                                 menuPortalTarget={document.querySelector('body')}
                                 placeholder = '결제도구' 
                                 value={this.state.selectedOption}
                                 onChange={this.handleChange}
                                 options={options} 
-                            /> 
-                        </TableHeaderColumn>
-                    </BootstrapTable>
+                                />
+                            </TableHeaderColumn>
+                        </BootstrapTable>
                     </div>
-                </div>
-            </div>
+                </div>{/*.container */}
+                <footer className='footer'>
+                    <Footer />
+                </footer>
+            </div>/*.sales */
         );
     }
 }

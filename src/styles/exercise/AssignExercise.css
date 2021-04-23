@@ -1,0 +1,32 @@
+.assignExercise > .container {
+  position:relative;
+}
+
+.assignExercise .waySub {
+  top:3rem;
+}
+
+.assignExercise > .container > section:nth-child(2) {
+  padding:0;
+}
+
+.assignExercise .inputCheckRow {
+  padding:2rem 0;
+}
+
+.assignExercise .CustomerInbody > div {
+  display:flex;
+  flex-wrap:wrap;
+}
+
+.assignExercise .CustomerInbody > label {
+  font-size:2rem;
+}
+
+.assignExercise .CustomerInbody h3 span {
+  font-size:3rem;
+}
+
+.assignExercise .CustomerInbody > div label{
+  width:100%;
+}

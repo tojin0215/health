@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -111,7 +112,7 @@ class Customer extends Component {
         );
     }
     cusFetch = () => {
-        //fetch("http://"+ip+":3001/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+        //fetch("http://"+ip+":3003/customer?type=all&fn="+this.props.userinfo.fitness_no, {
         fetch("http://localhost:3000/customer?type=all&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
@@ -177,7 +178,7 @@ class Customer extends Component {
     onSelectRow=(row, isSelected, e)=> { //table row 클릭시
         if (isSelected) {
             //alert(row['no'])
-            //fetch("http://"+ip+":3001/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
+            //fetch("http://"+ip+":3003/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             fetch("http://localhost:3000/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
@@ -192,6 +193,7 @@ class Customer extends Component {
                     let sex = data.sex===true?"남":"여";
                     let info = sex+'/만'+age+'세/'+data.resi_no
                     let phone = data.phone.substring(0,3)+'-'+data.phone.substring(3,7)+'-'+data.phone.substring(7,11)
+                    let date = moment(data.start_date).format("YYYY/MM/DD")
                     data = {...data,age}
                     this.setState({
                         //userLists2:data,
@@ -200,14 +202,14 @@ class Customer extends Component {
                         info : info,
                         addr : data.address,
                         phone : phone,
-                        startDate : data.start_date,
+                        startDate : date,
                         trainer: data.in_charge,
                         note : data.note,
                     })
                     //alert('age : '+this.calAge(data.resi_no))
                 })
             });
-            //fetch("http://"+ip+":3001/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
+            //fetch("http://"+ip+":3003/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             fetch("http://localhost:3000/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
@@ -252,7 +254,7 @@ class Customer extends Component {
         }else if(this.state.item === "주민번호(앞자리)"){
             it = '3'
         }
-        //fetch("http://"+ip+":3001/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        //fetch("http://"+ip+":3003/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
         fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
@@ -288,7 +290,7 @@ class Customer extends Component {
         console.log(userinfo);
         
         const textOptions = {
-            noDataText: '결제한 상품이 없습니다.',
+            noDataText: '가입된 회원이 없습니다.',
             alwaysShowAllBtns: true,
             hideSizePerPage:true
         };
@@ -312,28 +314,42 @@ class Customer extends Component {
         console.log('클릭,',this.state.show)
         return (
             <div className='customer'>
-                <Header />
-                <Navigation goLogin={this.goLogin}/>
-                <div className='localNavigation'>
-                    <div className='container'>
-                        <h2>
-                            고객 관리
-                        </h2>
-                        <div className='breadCrumb'>
-                            <Link to='#'>HOME</Link>
-                            <span>&#60;</span>
-                            <Link to='#'>고객 관리</Link>
-                        </div>
-                    </div>
-                </div>
-                
+                <header className='header'>
+                    <Header /> 
+                    <Navigation goLogin={this.goLogin}/>
+                    <div className='localNavigation'>
+                        <div className='container'>
+                            <h2>
+                                회원 관리
+                            </h2>
+                            <div className='breadCrumb'>
+                                <Link to='/home'>HOME</Link>
+                                <span>&#62;</span>
+                                <Link to='/customer'>회원 관리</Link>
+                            </div>{/*.breadCrumb */}
+                        </div>{/*.container */}
+                    </div>{/*.localNavigation */}
+                </header>
             <ClickAwayListener onClickAway={this.handleClickAway}>
-               
                 <div className='container'>
-                    <div className='customerSearch'>
-                        <Dropdown className='searchDrop' options={options} onChange={this.selectItem} value={this.state.item} placeholder="Select an option" />
-                        <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />
-                        <button type="button" onClick={this.search}> 고객 검색 </button>
+                    <div className='SearchInput'>
+                        <Dropdown
+                        className='searchDrop'
+                        options={options}
+                        onChange={this.selectItem}
+                        value={this.state.item}
+                        placeholder="Select an option"
+                        />
+                        <div className='SearchInputIn'>
+                            <input
+                            type="text"
+                            id='search'
+                            checked={this.state.search}
+                            onChange={this.handleChange}
+                            />
+                            <button type="button" onClick={this.search}> 고객 검색
+                            </button>
+                        </div>
                     </div>
                     <Link to="/customer/add" className='btnCustomerNew'>
                         신규회원 등록
@@ -341,48 +357,90 @@ class Customer extends Component {
                     <div className='customerTable'>
                         <h5>회원 목록</h5>
                         <div>
-                        <BootstrapTable data={ this.state.customerList } hover 
+                            <BootstrapTable
+                            hover
+                            data={ this.state.customerList }
                             options={textOptions}
                             tableHeaderClass='tableHeader'
                             tableContainerClass='tableContainer'
                             pagination={ this.state.customerList.length > 1 }
                             selectRow={ selectRowProp }
                             className="table2">
-                            <TableHeaderColumn dataField='no'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                isKey>No.</TableHeaderColumn>
-                            <TableHeaderColumn dataField='name'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >회원이름</TableHeaderColumn>
-                            <TableHeaderColumn dataField='sex'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >성별</TableHeaderColumn>
-                            <TableHeaderColumn dataField='phone'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >핸드폰</TableHeaderColumn>
-                            <TableHeaderColumn dataField='in_charge'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >담당자</TableHeaderColumn>
-                            <TableHeaderColumn dataField='start_date'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >강습시작일</TableHeaderColumn>
-                            <TableHeaderColumn dataField='resi_no'
-                                thStyle={ { 'textAlign': 'center' } }
-                                tdStyle={ { 'textAlign': 'center' } }
-                                >주민번호</TableHeaderColumn>
-                        </BootstrapTable>
-                    </div><br/><br/><br/>
+                                <TableHeaderColumn dataField='no'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    isKey>No.</TableHeaderColumn>
+                                <TableHeaderColumn dataField='name'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    >회원이름</TableHeaderColumn>
+                                <TableHeaderColumn dataField='sex'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    >성별</TableHeaderColumn>
+                                <TableHeaderColumn dataField='phone'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    >핸드폰</TableHeaderColumn>
+                                <TableHeaderColumn dataField='in_charge'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    >담당자</TableHeaderColumn>
+                                <TableHeaderColumn dataField='start_date'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    >강습시작일</TableHeaderColumn>
+                                <TableHeaderColumn dataField='resi_no'
+                                    thStyle={ { 'textAlign': 'center' } }
+                                    tdStyle={ { 'textAlign': 'center' } }
+                                    >주민번호</TableHeaderColumn>
+                            </BootstrapTable>
+                        </div>
                     </div>
-        
-        {/* --------여기가 클릭하면 나와야하는 부분입니다 -------- -------- */}
+        {/* ------ 클릭하면 나와야하는 부분 ------ */}
                     {this.state.show?
-                        <div>
+                        <div className='customerSlide'>
+                            <div className='customerSlideUtill'>
+                                <Link to={{pathname:"/customer/update?member_no="+this.state.member_no}} className='btnCustomerNew'>
+                                    수정하기
+                                </Link>
+                                <button type="button" onClick={this.handleClickAway} className='btnCustomerClose'>X</button>
+                            </div>
+                            <h5>회원 정보</h5>
+                            <ul>
+                                <li>
+                                    <label>이름</label>
+                                    <label>{ this.state.name }</label>
+                                </li>
+                                <li>
+                                    <label>고객번호</label>
+                                    <label>{ this.state.member_no }</label>
+                                </li>
+                                <li>
+                                    <label>정보</label>
+                                    <label>{ this.state.info }</label>
+                                </li>
+                                <li>
+                                    <label>연락처</label>
+                                    <label>{ this.state.phone }</label>
+                                </li>
+                                <li>
+                                    <label>주소</label>
+                                    <label>{ this.state.addr }</label>
+                                </li>
+                                <li>
+                                    <label>등록일</label>
+                                    <label>{ this.state.startDate }</label>
+                                </li>
+                                <li>
+                                    <label>담당자</label>
+                                    <label>{ this.state.trainer }</label>
+                                </li>
+                                <li>
+                                    <label>비고</label>
+                                    <label>{ this.state.note }</label>
+                                </li>
+                            </ul>
                             <h5>상품 결제 내역</h5>
                             <Link to={{pathname:"/customer/update/"+this.state.member_no}} className='btnCustomerNew'>
                                 수정하기
@@ -396,12 +454,15 @@ class Customer extends Component {
                             <label>등록일</label><label>{ this.state.startDate }</label><br/>
                             <label>담당자</label><label>{ this.state.trainer }</label><br/>
                             <label>비고</label><label>{ this.state.note }</label><br/>
-                            <BootstrapTable data={ this.state.userSalesLists2 } hover 
+                            <BootstrapTable 
+                                data={ this.state.userSalesLists2 } 
+                                hover
                                 pagination={ this.state.customerList.length > 1 }
                                 options={options1}
                                 tableHeaderClass='tableHeader'  
                                 tableContainerClass='tableContainer'
-                                className="table2">
+                                className="table2"
+                                >
                                 <TableHeaderColumn dataField='product'
                                     thStyle={ { 'textAlign': 'center' } }
                                     tdStyle={ { 'textAlign': 'center' } }
@@ -418,11 +479,12 @@ class Customer extends Component {
                         </div>
                         :null
                         }
-                            
-        {/* --------여기가 클릭하면 나와야하는 부분입니다 -------- -------- */}      
-                    
-                </div>    
-                </ClickAwayListener>    
+        {/* ------ 클릭하면 나와야하는 부분 ------ */}      
+                </div>
+                </ClickAwayListener>
+                <div className='footer'>
+                    <Footer />
+                </div>
             </div>
         );
     }
