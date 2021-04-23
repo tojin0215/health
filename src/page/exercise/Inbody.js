@@ -48,6 +48,7 @@ class Inbody extends Component {
             open:false,
             //member_no:member_no,
             member_no: (search1.split('/'))[3],
+            inbody_no:'',
             search:"",
             item:options[0],
             customerList:[],
@@ -137,10 +138,12 @@ class Inbody extends Component {
                 .then(response => response.json())
                 .then(res => {
                         let arr1 = [];
+                        let inbody_no1 = [];
                         for(let i=(res.length-1) ; i>=0 ; i--){
-                            arr1.push({"no":res[i].num,"member_no":res[i].member_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat})
+                            arr1.push({"no":res[i].num,"member_no":res[i].member_no,"inbody_no":res[i].inbody_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat});
+                            inbody_no1.push(res[i].inbody_no)                  
                         }
-                        this.setState({inbodyList : arr1});
+                        this.setState({inbodyList : arr1, inbody_no:inbody_no1});
 
                         fetch("http://"+ip+"/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
                             method: "GET",
@@ -228,10 +231,12 @@ class Inbody extends Component {
             .then(response => response.json())
             .then(res => {
                 let arr = [];
+                let inbody_no1 = [];
                 for(let i=(res.length-1) ; i>=0 ; i--){
-                    arr.push({"no":res[i].num,"member_no":res[i].member_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat})
+                    arr.push({"no":res[i].num,"member_no":res[i].member_no,"inbody_no":res[i].inbody_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat})
+                    inbody_no1.push(res[i].inbody_no)  
                 }
-                this.setState({inbodyList : arr});
+                this.setState({inbodyList : arr, inbody_no:inbody_no1[0]});
             });
         alert('선택하셨습니다.')
     }
@@ -266,7 +271,7 @@ class Inbody extends Component {
                 } else{
                     let arr1 = [];
                     for(let i=(res.length-1) ; i>=0 ; i--){
-                        arr1.push({"no":res[i].num,"member_no":res[i].member_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat
+                        arr1.push({"no":res[i].num,"member_no":res[i].member_no,"inbody_no":res[i].inbody_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat
                     })
                     }
                     this.setState({inbodyList : arr1});
@@ -321,8 +326,10 @@ class Inbody extends Component {
             hideSizePerPage:true
         };
 
+        console.log('inbody_no : ', this.state.inbody_no)
+
         //console.log(',,,,,',this.state.member_no)
-        //console.log('.....',this.state.inbodyList)
+        console.log('inbodyList.....',this.state.inbodyList)
         return (
             <div className='inbody'>
                 <div className='header'>
@@ -467,7 +474,11 @@ class Inbody extends Component {
                         </div>
                         <article className='waySub'>
                             <Link
-                            to={{pathname:"/assign/add/"+this.state.member_no}}
+                            to={{pathname:"/assign/add/"+this.state.member_no,
+                            state: {
+                                inbody_no: this.state.inbody_no,
+                                },
+                            }}
                             >
                                 <button>
                                     인바디정보추가
@@ -510,10 +521,17 @@ class Inbody extends Component {
                     tableHeaderClass='tableHeader'
                     tableContainerClass='tableContainer'>
                         <TableHeaderColumn
+                        dataField='inbody_no'
+                        thStyle={ { 'textAlign': 'center', 'width':'35px' } }
+                        tdStyle={ { 'textAlign': 'center','width':'35px'  } }
+                        isKey
+                        >
+                            no
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
                         dataField='measurementDate'
                         thStyle={ { 'textAlign': 'center', 'width':'100px' } }
                         tdStyle={ { 'textAlign': 'center','width':'100px'  } }
-                        isKey
                         >
                             날짜
                         </TableHeaderColumn>

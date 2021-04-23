@@ -36,6 +36,7 @@ class AddInbody extends Component {
         this.state = {
             fitness_no:this.props.userinfo.fitness_no, //Redux를 통해 받은 값
             member_no: search.split('/')[3] ,
+            inbody_no: Number(this.props.location.state.inbody_no),
             height : '', //키
             measurementDate : new Date(), // 측정날짜
              //체성분 분석
@@ -237,6 +238,7 @@ class AddInbody extends Component {
                 body: JSON.stringify({
                     fitness_no:this.state.fitness_no,
                     member_no:this.state.member_no,
+                    inbody_no:this.state.inbody_no+1,
                     height : this.state.height, //키
                     measurementDate : this.state.measurementDate, // 측정날짜
                     //체성분 분석
