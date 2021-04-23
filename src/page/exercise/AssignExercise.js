@@ -636,11 +636,11 @@ class AssignExercise extends Component {
                 arr2.reverse();
                 this.setState({
                     exerciseList: arr,
-                    select_top: arr_top,
-                    select_bottom: arr_bottom,
-                    select_allbody: arr_allbody,
-                    select_core: arr_core,
-                    select_oxy: arr_oxy,
+                    // select_top: arr_top,
+                    // select_bottom: arr_bottom,
+                    // select_allbody: arr_allbody,
+                    // select_core: arr_core,
+                    // select_oxy: arr_oxy,
 
                     select_top_data: select_top_data,
                     select_bottom_data: select_bottom_data,
@@ -791,7 +791,6 @@ class AssignExercise extends Component {
 
     render() {
         const { userinfo } = this.props;
-        // this.loadExerciseList();
         console.log('userinfo : ');
         console.log(userinfo); //나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
 
