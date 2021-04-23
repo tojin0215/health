@@ -11,10 +11,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import { TextField } from '@material-ui/core';
 import NumberFormat from 'react-number-format';
 
+import {getStatusRequest} from '../../action/authentication';
+
 import '../../styles/customer/AddCustomer.css';
 
 
-const ip = '13.124.141.28';
+const ip = '13.124.141.28:3003';
+//const ip = 'localhost:3000';
 
 class AddCustomer extends Component {
 
@@ -72,6 +75,50 @@ class AddCustomer extends Component {
     };
     goLogin = () => {
         this.props.history.push("/");
+    }
+    componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+        // get cookie by name
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "="); 
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+   
+        // get loginData from cookie
+        let loginData = getCookie('key');
+        // if loginData is undefined, do nothing
+        if(typeof loginData === "undefined"){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // decode base64 & parse json
+        loginData = JSON.parse(atob(loginData));
+        // if not logged in, do nothing
+        if(!loginData.isLoggedIn){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // page refreshed & has a session in cookie,
+        // check whether this cookie is valid or not
+        this.props.getStatusRequest().then(
+            () => {
+                // if session is not valid
+                if(!this.props.status.valid) {
+                    // logout the session
+                    loginData = {
+                        isLoggedIn: false,
+                        id: ''
+                    };
+   
+                    document.cookie='key=' + btoa(JSON.stringify(loginData));
+   
+                    // and notify
+                    alert("Your session is expired, please log in again")
+                }
+            }
+        );
     }
 
     handleChange = (e) => { 
@@ -139,8 +186,7 @@ class AddCustomer extends Component {
         }
         else{
             // 서버 연결하는 부분
-            //fetch("http://"+ip+":3003/customer", {
-            fetch("http://localhost:3000/customer", {
+            fetch("http://"+ip+"/customer", {
                 method: "POST",
                 headers: {
                 'Content-type': 'application/json'
@@ -170,8 +216,7 @@ class AddCustomer extends Component {
                         console.log('333___________',m_no)
                     }
                     // 서버에서 데이터 전달하면 여기서 json type으로 받게 됨
-                    //fetch("http://"+ip+":3003/sales", {
-                    fetch("http://localhost:3000/sales", {    
+                    fetch("http://"+ip+"/sales", {
                         method: "POST",
                         headers: {
                           'Content-type': 'application/json'
@@ -477,9 +522,18 @@ class AddCustomer extends Component {
 
 const CustomerStateToProps = (state) => {
     return {
-      userinfo : state.authentication.userinfo
+      userinfo : state.authentication.userinfo,
+      status: state.authentication.status
     }
 }
 
-export default connect(CustomerStateToProps, undefined)(AddCustomer);
+const AddCustomerDispatchToProps = (dispatch) => {
+    return {
+        getStatusRequest: () => {
+            return dispatch(getStatusRequest());
+        },
+    };
+};
+
+export default connect(CustomerStateToProps, AddCustomerDispatchToProps)(AddCustomer);
 

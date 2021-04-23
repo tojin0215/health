@@ -10,11 +10,13 @@ import 'react-dropdown/style.css';
 
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import {getStatusRequest} from '../../action/authentication';
 
 import '../../styles/customer/Customer.css';
 
 
-const ip = '13.124.141.28';
+const ip = '13.124.141.28:3003';
+//const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
@@ -66,9 +68,52 @@ class Customer extends Component {
     goLogin = () => {
         this.props.history.push("/");
     }
+    componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+        // get cookie by name
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "="); 
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+   
+        // get loginData from cookie
+        let loginData = getCookie('key');
+        // if loginData is undefined, do nothing
+        if(typeof loginData === "undefined"){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // decode base64 & parse json
+        loginData = JSON.parse(atob(loginData));
+        // if not logged in, do nothing
+        if(!loginData.isLoggedIn){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // page refreshed & has a session in cookie,
+        // check whether this cookie is valid or not
+        this.props.getStatusRequest().then(
+            () => {
+                // if session is not valid
+                if(!this.props.status.valid) {
+                    // logout the session
+                    loginData = {
+                        isLoggedIn: false,
+                        id: ''
+                    };
+   
+                    document.cookie='key=' + btoa(JSON.stringify(loginData));
+   
+                    // and notify
+                    alert("Your session is expired, please log in again")
+                }
+            }
+        );
+    }
     cusFetch = () => {
-        //fetch("http://"+ip+":3003/customer?type=all&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://"+ip+"/customer?type=all&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -133,8 +178,7 @@ class Customer extends Component {
     onSelectRow=(row, isSelected, e)=> { //table row 클릭시
         if (isSelected) {
             //alert(row['no'])
-            //fetch("http://"+ip+":3003/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
-            fetch("http://localhost:3000/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
+            fetch("http://"+ip+"/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -164,8 +208,7 @@ class Customer extends Component {
                     //alert('age : '+this.calAge(data.resi_no))
                 })
             });
-            //fetch("http://"+ip+":3003/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
-            fetch("http://localhost:3000/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
+            fetch("http://"+ip+"/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -209,8 +252,7 @@ class Customer extends Component {
         }else if(this.state.item === "주민번호(앞자리)"){
             it = '3'
         }
-        //fetch("http://"+ip+":3003/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://"+ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -263,7 +305,7 @@ class Customer extends Component {
             hideSelectColumn: true,  // enable hide selection column.
             clickToSelect: true , // you should enable clickToSelect, otherwise, you can't select column.
             onSelect: this.onSelectRow,
-          };
+        };
 
         console.log('table__',this.state.userSalesLists2)
         console.log('클릭,',this.state.show)
@@ -356,7 +398,7 @@ class Customer extends Component {
                     {this.state.show?
                         <div className='customerSlide'>
                             <div className='customerSlideUtill'>
-                                <Link to={{pathname:"/customer/update?member_no="+this.state.member_no}} className='btnCustomerNew'>
+                                <Link to={{pathname:"/customer/update/"+this.state.member_no}} className='btnCustomerNew'>
                                     수정하기
                                 </Link>
                                 <button type="button" onClick={this.handleClickAway} className='btnCustomerClose'>X</button>
@@ -397,6 +439,7 @@ class Customer extends Component {
                                 </li>
                             </ul>
                             <h5>상품 결제 내역</h5>
+                            
                             <BootstrapTable 
                                 data={ this.state.userSalesLists2 } 
                                 hover
@@ -435,8 +478,17 @@ class Customer extends Component {
 
 const CustomerStateToProps = (state) => {
     return {
-      userinfo : state.authentication.userinfo
+      userinfo : state.authentication.userinfo,
+      status: state.authentication.status
     }
 }
 
-export default connect(CustomerStateToProps, undefined)(Customer);
+const CustomerDispatchToProps = (dispatch) => {
+    return {
+        getStatusRequest: () => {
+            return dispatch(getStatusRequest());
+        },
+    };
+};
+
+export default connect(CustomerStateToProps, CustomerDispatchToProps)(Customer);

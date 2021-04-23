@@ -10,9 +10,11 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { TextField } from '@material-ui/core';
 
+import {getStatusRequest} from '../../action/authentication';
 import '../../styles/customer/UpdateCustomer.css'
 
-const ip = '13.124.141.28';
+const ip = '13.124.141.28:3003';
+//const ip = 'localhost:3000';
 
 class UpdateCustomer extends Component {
 
@@ -20,12 +22,12 @@ class UpdateCustomer extends Component {
     constructor(props) {
         super(props);
         
-        const search = location.search;
+        const search = location.pathname;
         //alert(search)
 
         this.state = {
             fitness_no:this.props.userinfo.fitness_no, //Redux를 통해 받은 값
-            member_no: (search.split('='))[1] ,
+            member_no: (search.split('/'))[3] ,
             name: "",
             sex: 1,
             startDate: new Date(),
@@ -66,9 +68,53 @@ class UpdateCustomer extends Component {
         this.props.history.push("/");
     }
 
+    componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+        // get cookie by name
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "="); 
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+   
+        // get loginData from cookie
+        let loginData = getCookie('key');
+        // if loginData is undefined, do nothing
+        if(typeof loginData === "undefined"){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // decode base64 & parse json
+        loginData = JSON.parse(atob(loginData));
+        // if not logged in, do nothing
+        if(!loginData.isLoggedIn){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // page refreshed & has a session in cookie,
+        // check whether this cookie is valid or not
+        this.props.getStatusRequest().then(
+            () => {
+                // if session is not valid
+                if(!this.props.status.valid) {
+                    // logout the session
+                    loginData = {
+                        isLoggedIn: false,
+                        id: ''
+                    };
+   
+                    document.cookie='key=' + btoa(JSON.stringify(loginData));
+   
+                    // and notify
+                    alert("Your session is expired, please log in again")
+                }
+            }
+        );
+    }
+
     cusFetch = () => {
-        //fetch("http://"+ip+":3003/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://"+ip+"/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -182,8 +228,7 @@ class UpdateCustomer extends Component {
         }
         else{
             // 서버 연결하는 부분
-            //fetch("http://"+ip+":3003/customer?fn="+this.props.userinfo.fitness_no, {
-            fetch("http://localhost:3000/customer?fn="+this.props.userinfo.fitness_no, {
+            fetch("http://"+ip+"/customer?fn="+this.props.userinfo.fitness_no, {
                 method: "PUT",
                 headers: {
                     'Content-type': 'application/json',
@@ -407,9 +452,17 @@ class UpdateCustomer extends Component {
 
 const CustomerStateToProps = (state) => {
     return {
-      userinfo : state.authentication.userinfo
+      userinfo : state.authentication.userinfo,
+      status: state.authentication.status
     }
 }
+const UpdateCustomerDispatchToProps = (dispatch) => {
+    return {
+        getStatusRequest: () => {
+            return dispatch(getStatusRequest());
+        },
+    };
+};
 
 
-export default connect(CustomerStateToProps, undefined)(UpdateCustomer);
+export default connect(CustomerStateToProps, UpdateCustomerDispatchToProps)(UpdateCustomer);

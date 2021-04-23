@@ -16,22 +16,26 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
+import {getStatusRequest} from '../../action/authentication';
+
 import '../../styles/customer/AddCustomer.css';
 import '../../styles/exercise/AddInbody.css';
 
 
-const ip = '13.124.141.28';
+const ip = '13.124.141.28:3003';
+//const ip = 'localhost:3000';
 
 class AddInbody extends Component {
     
     constructor(props) {
         super(props);
 
-        const search = location.search;
+        const search = location.pathname;
+        //alert(search+'   '+search.split('/')[3])
 
         this.state = {
             fitness_no:this.props.userinfo.fitness_no, //Redux를 통해 받은 값
-            member_no: (search.split('='))[1] ,
+            member_no: search.split('/')[3] ,
             height : '', //키
             measurementDate : new Date(), // 측정날짜
              //체성분 분석
@@ -75,17 +79,61 @@ class AddInbody extends Component {
     goLogin = () => {
         this.props.history.push("/");
     }
+    componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+        // get cookie by name
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "="); 
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+   
+        // get loginData from cookie
+        let loginData = getCookie('key');
+        // if loginData is undefined, do nothing
+        if(typeof loginData === "undefined"){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // decode base64 & parse json
+        loginData = JSON.parse(atob(loginData));
+        // if not logged in, do nothing
+        if(!loginData.isLoggedIn){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // page refreshed & has a session in cookie,
+        // check whether this cookie is valid or not
+        this.props.getStatusRequest().then(
+            () => {
+                // if session is not valid
+                if(!this.props.status.valid) {
+                    // logout the session
+                    loginData = {
+                        isLoggedIn: false,
+                        id: ''
+                    };
+   
+                    document.cookie='key=' + btoa(JSON.stringify(loginData));
+   
+                    // and notify
+                    alert("Your session is expired, please log in again")
+                }
+            }
+        );
+    }
 
     cusFetch = () => {
         if(this.state.member_no === '0'){
             alert('선택된 회원이 없습니다. 회원을 선택 해주세요.')
             this.props.history.push({
-                pathname: "/assign/inbody?member_no="+0
+                //pathname: "/assign/inbody?member_no="+0
+                pathname: "/assign/inbody/"+0
             })
         }
 
-        //fetch("http://"+ip+":3003/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://"+ip+"/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -181,8 +229,7 @@ class AddInbody extends Component {
             alert("빈칸을 채워주세요.")
         }else{
             // 서버 연결하는 부분
-            //fetch("http://"+ip+":3003/inbody", {
-            fetch("http://localhost:3000/inbody", {
+            fetch("http://"+ip+"/inbody", {
                 method: "POST",
                 headers: {
                 'Content-type': 'application/json'
@@ -191,7 +238,7 @@ class AddInbody extends Component {
                     fitness_no:this.state.fitness_no,
                     member_no:this.state.member_no,
                     height : this.state.height, //키
-                    measurementDate : new Date(), // 측정날짜
+                    measurementDate : this.state.measurementDate, // 측정날짜
                     //체성분 분석
                     bodyMoisture : this.state.bodyMoisture, //체수분
                     protein : this.state.protein,  //단백질
@@ -212,7 +259,8 @@ class AddInbody extends Component {
                 .then(response => {
                     alert("인바디 등록되었습니다.");
                     this.props.history.push({
-                        pathname: "/assign/inbody?member_no="+this.state.member_no
+                        //pathname: "/assign/inbody?member_no="+this.state.member_no
+                        pathname: "/assign/inbody/"+this.state.member_no
                     })
                 });
         }
@@ -447,8 +495,17 @@ class AddInbody extends Component {
 
 const InbodyStateToProps = (state) => {
     return {
-      userinfo : state.authentication.userinfo
+      userinfo : state.authentication.userinfo,
+      status: state.authentication.status
     }
 }
 
-export default connect(InbodyStateToProps, undefined)(AddInbody);
+const AddInbodyDispatchToProps = (dispatch) => {
+    return {
+        getStatusRequest: () => {
+            return dispatch(getStatusRequest());
+        },
+    };
+};
+
+export default connect(InbodyStateToProps, AddInbodyDispatchToProps)(AddInbody);

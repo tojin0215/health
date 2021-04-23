@@ -22,7 +22,10 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import '../../styles/exercise/Inbody.css';
 
-const ip = '13.124.141.28';
+import {getStatusRequest} from '../../action/authentication';
+
+const ip = '13.124.141.28:3003';
+//const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
@@ -38,14 +41,13 @@ class Inbody extends Component {
     constructor(props) {
         super(props);
 
-        const search1 = location.search;
-        num = (search1.split('='))[1];
-        console.log('search1',search1)
-        console.log('search1__',(search1.split('='))[1])
+        const search1 = location.pathname;
+        num = (search1.split('/'))[3];
+        
         this.state = {
             open:false,
             //member_no:member_no,
-            member_no: (search1.split('='))[1],
+            member_no: (search1.split('/'))[3],
             search:"",
             item:options[0],
             customerList:[],
@@ -59,11 +61,63 @@ class Inbody extends Component {
         };
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
-            
+        this.handleOnClick = this.handleOnClick.bind(this);
+
         this.cusFetch();
     };
     goLogin = () => {
         this.props.history.push("/");
+    }
+    componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+        // get cookie by name
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "="); 
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+   
+        // get loginData from cookie
+        let loginData = getCookie('key');
+        // if loginData is undefined, do nothing
+        if(typeof loginData === "undefined"){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // decode base64 & parse json
+        loginData = JSON.parse(atob(loginData));
+        // if not logged in, do nothing
+        if(!loginData.isLoggedIn){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // page refreshed & has a session in cookie,
+        // check whether this cookie is valid or not
+        this.props.getStatusRequest().then(
+            () => {
+                console.log('????',this.props.status.valid)
+                // if session is not valid
+                if(!this.props.status.valid) {
+                    // logout the session
+                    loginData = {
+                        isLoggedIn: false,
+                        id: ''
+                    };
+   
+                    document.cookie='key=' + btoa(JSON.stringify(loginData));
+   
+                    // and notify
+                    alert("Your session is expired, please log in again")
+                }
+                else{
+                    //alert('member_id'+this.state.member_no)
+                    // this.props.history.push({
+                    //     pathname: "/assign/inbody?member_no="+0
+                    // })
+                }
+            }
+        );
     }
 
     cusFetch = () => {
@@ -73,8 +127,7 @@ class Inbody extends Component {
             //url = "http://"+ip+":3003/inbody?type=all&fn="+this.props.userinfo.fitness_no
             this.setState({inbodyList : []});
         } else{
-            //url = "http://"+ip+":3003/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
-            url = "http://localhost:3000/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
+            url = "http://"+ip+"/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
             fetch(url, {
                 method: "GET",
                 headers: {
@@ -89,8 +142,7 @@ class Inbody extends Component {
                         }
                         this.setState({inbodyList : arr1});
 
-                        //fetch("http://"+ip+":3003/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
-                        fetch("http://localhost:3000/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
+                        fetch("http://"+ip+"/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
                             method: "GET",
                             headers: {
                             'Content-type': 'application/json'
@@ -166,8 +218,7 @@ class Inbody extends Component {
             age:age,
             open:false
         })
-        //let url = "http://"+ip+":3003/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
-        let url = "http://localhost:3000/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
+        let url = "http://"+ip+"/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
         fetch(url, {
             method: "GET",
             headers: {
@@ -198,8 +249,7 @@ class Inbody extends Component {
         let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
         let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
         console.log('clickclickclick')
-        //fetch('http://'+ip+':3003/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
-        fetch('http://localhost:3000/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
+        fetch('http://'+ip+'/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -234,8 +284,7 @@ class Inbody extends Component {
         }else if(this.state.item === "핸드폰"){
             it = '1'
         }
-        //fetch("http://"+ip+":3003/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch("http://"+ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -418,7 +467,7 @@ class Inbody extends Component {
                         </div>
                         <article className='waySub'>
                             <Link
-                            to={{pathname:"/assign/add?member_no="+this.state.member_no}}
+                            to={{pathname:"/assign/add/"+this.state.member_no}}
                             >
                                 <button>
                                     인바디정보추가
@@ -568,8 +617,16 @@ class Inbody extends Component {
 
 const InbodyStateToProps = (state) => {
     return {
-      userinfo: state.authentication.userinfo
+      userinfo: state.authentication.userinfo,
+      status: state.authentication.status
     }
 }
+const InbodyDispatchToProps = (dispatch) => {
+    return {
+        getStatusRequest: () => {
+            return dispatch(getStatusRequest());
+        },
+    };
+};
 
-export default connect(InbodyStateToProps, undefined)(Inbody);
+export default connect(InbodyStateToProps, InbodyDispatchToProps)(Inbody);
