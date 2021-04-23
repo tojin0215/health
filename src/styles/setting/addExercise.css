@@ -8,6 +8,11 @@
   width:100%;
 }
 
+.addExercise .waySub {
+  top:-3rem;
+}
+
+
 .settingInfoInput {
   position:relative;
 }
