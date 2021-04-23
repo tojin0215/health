@@ -7,14 +7,14 @@ import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../../styles/exercise/AssignCheckExercise.css';
 
-// const ip = '13.124.141.28:3003';
+const ip = '13.124.141.28:3003';
+//const ip = 'localhost:3000';
 
-const ip = 'localhost:3000';
 class AssignCheckExercise extends Component {
     constructor(props) {
         super(props);
 
-        const search = location.search;
+        const search = location.pathname;
 
         this.state = {
             fitness_no: this.props.userinfo.fitness_no, //Redux를 통해 받은 값
@@ -84,7 +84,7 @@ class AssignCheckExercise extends Component {
             });
         });
         alert('배정되었습니다.');
-        // this.props.history.push("/assign")
+        this.props.history.push("/assign")
     };
     procDefaultPackage = (
         next_func,
@@ -298,38 +298,33 @@ class AssignCheckExercise extends Component {
         };
 
         return (
-            <div className="assignCheckExercise">
-                <div className="header">
-                    <Header />
-                    <Navigation goLogin={this.goLogin} />
-                    <div className="localNavigation">
-                        <div className="container">
-                            <h2>운동 배정 확인</h2>
-                            <div className="breadCrumb">
-                                <Link to="/home">HOME</Link>
-                                <span>&#62;</span>
-                                <Link to="/assign">운동 배정</Link>
-                                <span>&#62;</span>
-                                <Link to="#">운동 배정 확인</Link>
-                            </div>
-                            {/*.breadCrumb */}
-                        </div>
-                        {/*.container */}
-                    </div>
-                    {/*.localNavigation */}
-                </div>
-                {/*.header */}
-                <div className="container">
-                    <article className="waySub">
-                        <NavLink exact to="/assign">
-                            <button type="button">운동 배정 설정</button>
-                        </NavLink>
-                        <Link
-                            to={{
-                                pathname:
-                                    '/assign/inbody?member_no=' +
-                                    this.state.member_no,
-                            }}
+        <div className='assignCheckExercise'>
+            <div className='header'>
+                <Header />
+                <Navigation goLogin={this.goLogin}/>
+                <div className='localNavigation'>
+                    <div className='container'>
+                        <h2>
+                            운동 배정 확인
+                        </h2>
+                        <div className='breadCrumb'>
+                            <Link to='/home'>HOME</Link>
+                            <span>&#62;</span>
+                            <Link to='/assign'>운동 배정</Link>
+                            <span>&#62;</span>
+                            <Link to='#'>운동 배정 확인</Link>
+                        </div>{/*.breadCrumb */}
+                    </div>{/*.container */}
+                </div>{/*.localNavigation */}
+            </div>{/*.header */}
+            <div className='container'>
+                <article className='waySub'>
+                    <NavLink exact to="/assign">
+                        <button type='button'>
+                            운동 배정 설정
+                        </button>
+                    </NavLink>
+                    <Link to={{pathname:"/assign/inbody?member_no="+this.state.member_no}}            
                         >
                             <button type="button">고객인바디</button>
                         </Link>

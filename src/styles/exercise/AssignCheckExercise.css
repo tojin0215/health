@@ -10,3 +10,7 @@
 .checkExercise h3 span {
   /* font-size:3rem; */
 }
+
+.assignCheckExercise .waySub {
+  top:0rem;
+}

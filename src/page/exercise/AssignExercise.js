@@ -7,6 +7,8 @@ import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
+import {getStatusRequest} from '../../action/authentication';
+
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import '../../styles/exercise/AssignExercise.css';
@@ -22,9 +24,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-// const ip = 'localhost';
-const ip = 'localhost:3000';
-// const ip = 'localhost:3003';
+const ip = '13.124.141.28:3003';
+//const ip = 'localhost:3000';
 
 function onChangeHandler(a, e) {
     [e.target.a] = e.target.value;
@@ -69,8 +70,52 @@ class AssignExercise extends Component {
     }
 
     goLogin = () => {
-        this.props.history.push('/');
-    };
+        this.props.history.push("/");
+    }
+    componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+        // get cookie by name
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "="); 
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+   
+        // get loginData from cookie
+        let loginData = getCookie('key');
+        // if loginData is undefined, do nothing
+        if(typeof loginData === "undefined"){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // decode base64 & parse json
+        loginData = JSON.parse(atob(loginData));
+        // if not logged in, do nothing
+        if(!loginData.isLoggedIn){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // page refreshed & has a session in cookie,
+        // check whether this cookie is valid or not
+        this.props.getStatusRequest().then(
+            () => {
+                // if session is not valid
+                if(!this.props.status.valid) {
+                    // logout the session
+                    loginData = {
+                        isLoggedIn: false,
+                        id: ''
+                    };
+   
+                    document.cookie='key=' + btoa(JSON.stringify(loginData));
+   
+                    // and notify
+                    alert("Your session is expired, please log in again")
+                }
+            }
+        );
+    }
 
     loadInbody = (member_no) => {
         let url =
@@ -636,11 +681,11 @@ class AssignExercise extends Component {
                 arr2.reverse();
                 this.setState({
                     exerciseList: arr,
-                    select_top: arr_top,
-                    select_bottom: arr_bottom,
-                    select_allbody: arr_allbody,
-                    select_core: arr_core,
-                    select_oxy: arr_oxy,
+                    // select_top: arr_top,
+                    // select_bottom: arr_bottom,
+                    // select_allbody: arr_allbody,
+                    // select_core: arr_core,
+                    // select_oxy: arr_oxy,
 
                     select_top_data: select_top_data,
                     select_bottom_data: select_bottom_data,
@@ -791,7 +836,6 @@ class AssignExercise extends Component {
 
     render() {
         const { userinfo } = this.props;
-        // this.loadExerciseList();
         console.log('userinfo : ');
         console.log(userinfo); //나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
 
@@ -877,7 +921,7 @@ class AssignExercise extends Component {
                 <div className="container">
                     <article className="waySub">
                         <Link
-                            to={{ pathname: '/assign/inbody?member_no=' + 0 }}
+                            to={{ pathname: '/assign/inbody/' + 0 }}
                         >
                             <button type="button">고객인바디</button>
                         </Link>
@@ -1494,7 +1538,7 @@ class AssignExercise extends Component {
                         <Link
                             to={{
                                 pathname:
-                                    '/assign/check?member_no=' +
+                                    '/assign/check/' +
                                     this.state.member_no,
                                 state: {
                                     userName: this.state.userName,
@@ -1532,10 +1576,19 @@ class AssignExercise extends Component {
 
 const AssignExerciseStateToProps = (state) => {
     return {
-        userinfo: state.authentication.userinfo,
+      userinfo: state.authentication.userinfo,
+      status: state.authentication.status
+    }
+}
+
+const AssignExerciseDispatchToProps = (dispatch) => {
+    return {
+        getStatusRequest: () => {
+            return dispatch(getStatusRequest());
+        },
     };
 };
 
-export default connect(AssignExerciseStateToProps, undefined)(AssignExercise);
+export default connect(AssignExerciseStateToProps, AssignExerciseDispatchToProps)(AssignExercise);
 //새 page 추가 시 guide : 이 폴더 안에 페이지 하나 더 만든 후, src/component/app.js && src/page/index 함께 변경해주세요
 //잘 모르겠으면 customer폴더 참고

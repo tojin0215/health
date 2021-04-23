@@ -11,8 +11,8 @@ import Dropdown from 'react-dropdown';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../../styles/setting/addExercise.css';
 
-// const ip = '13.124.141.28:3003';
-const ip = 'localhost:3000';
+const ip = '13.124.141.28:3003';
+//const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
@@ -114,6 +114,7 @@ class AddExercise extends Component {
             this.setState({ [e.target.name]: e.target.value });
         }
     };
+    
     cusFetch = () => {
         let it = '';
         let search = '';
