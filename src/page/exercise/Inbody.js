@@ -23,9 +23,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import '../../styles/exercise/Inbody.css';
 
 import {getStatusRequest} from '../../action/authentication';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
@@ -35,6 +36,12 @@ const options = [
     '이름', '핸드폰'
 ];
 const defaultOption = options[0];
+
+const optionsInbody = [
+    '1', '2', '3'
+];
+const defaultOptionInbody = optionsInbody[0];
+
 let num = '';
 class Inbody extends Component {
     
@@ -42,13 +49,15 @@ class Inbody extends Component {
         super(props);
 
         const search1 = location.pathname;
-        num = (search1.split('/'))[3];
-        
+        //num = (search1.split('/'))[3];
+        num = Number(this.props.location.state.member_no)
+
         this.state = {
             open:false,
-            //member_no:member_no,
-            member_no: (search1.split('/'))[3],
+            member_no:Number(this.props.location.state.member_no),
+            //member_no: (search1.split('/'))[3],
             inbody_no:'',
+            inbody_noList:[],
             search:"",
             item:options[0],
             customerList:[],
@@ -59,16 +68,22 @@ class Inbody extends Component {
             age:'',
             startDate: new Date("2021-01-01"),
             endDate: new Date(),
+            show:false,
+            startNum:'',
+            endNum:'',
+            inbodySelect:[],
         };
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleOnClick = this.handleOnClick.bind(this);
+        this.handleClickAway = this.handleClickAway.bind(this);
 
         this.cusFetch();
     };
     goLogin = () => {
         this.props.history.push("/");
     }
+
     componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
         // get cookie by name
         function getCookie(name) {
@@ -97,7 +112,6 @@ class Inbody extends Component {
         // check whether this cookie is valid or not
         this.props.getStatusRequest().then(
             () => {
-                console.log('????',this.props.status.valid)
                 // if session is not valid
                 if(!this.props.status.valid) {
                     // logout the session
@@ -111,16 +125,9 @@ class Inbody extends Component {
                     // and notify
                     alert("Your session is expired, please log in again")
                 }
-                else{
-                    //alert('member_id'+this.state.member_no)
-                    // this.props.history.push({
-                    //     pathname: "/assign/inbody?member_no="+0
-                    // })
-                }
             }
         );
     }
-
     cusFetch = () => {
         let url;
         //alert(num)
@@ -143,7 +150,10 @@ class Inbody extends Component {
                             arr1.push({"no":res[i].num,"member_no":res[i].member_no,"inbody_no":res[i].inbody_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat});
                             inbody_no1.push(res[i].inbody_no)                  
                         }
-                        this.setState({inbodyList : arr1, inbody_no:inbody_no1});
+                        this.setState({
+                            inbodyList : arr1, 
+                            inbody_no:inbody_no1,
+                        });
 
                         fetch("http://"+ip+"/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
                             method: "GET",
@@ -236,7 +246,10 @@ class Inbody extends Component {
                     arr.push({"no":res[i].num,"member_no":res[i].member_no,"inbody_no":res[i].inbody_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat})
                     inbody_no1.push(res[i].inbody_no)  
                 }
-                this.setState({inbodyList : arr, inbody_no:inbody_no1[0]});
+                this.setState({
+                    inbodyList : arr, 
+                    inbody_no:inbody_no1[0],
+                    inbody_noList:inbody_no1.reverse()});
             });
         alert('선택하셨습니다.')
     }
@@ -316,6 +329,62 @@ class Inbody extends Component {
         }
     }
 
+    selectItem1 = (e) =>{
+        this.setState({
+            startNum:e.value
+        })
+    }
+
+    selectItem2 = (e) =>{
+        this.setState({
+            endNum:e.value
+        })
+    }
+
+    clickInbody=()=>{
+        if(Number(this.state.startNum)>=Number(this.state.endNum)){
+            alert('회차를 다시 선택해주세요.')
+        } else{
+            alert(this.state.startNum+'~'+this.state.endNum+' 인바디 정보 불러오기')
+            let url = "http://"+ip+"/inbody?type=inbodySelect&startNum="+this.state.startNum+"&endNum="+this.state.endNum+"&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no
+            fetch(url, {
+                method: "GET",
+                headers: {
+                  'Content-type': 'application/json'
+                },
+                })
+                .then(response => response.json())
+                .then(res => {
+                        let arr = [];
+                        alert(res.length)
+                        for(let i=0 ; i<res.length; i++){
+                            arr.push({"no":res[i].num,"member_no":res[i].member_no,"inbody_no":res[i].inbody_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat});               
+                        
+                            console.log(i,'여기',arr)
+                        }
+                        this.setState({
+                            inbodySelect : arr, 
+                        });
+
+                    });
+        }
+    }
+
+    handleClickAway=()=>{
+        this.setState({
+            show:false
+        })
+    }
+
+    clickOpen=()=>{
+        if(this.state.member_no == '0'){
+            alert('회원을 선택해주세요.')
+        } else{
+            this.setState({show:true})
+            alert(this.state.userName+'님의 인바디')
+        }
+    }
+
     render() {
         const { userinfo } = this.props;
         console.log("userinfo : ");
@@ -326,7 +395,7 @@ class Inbody extends Component {
             hideSizePerPage:true
         };
 
-        console.log('inbody_no : ', this.state.inbody_no)
+        console.log('!!inbodySelect : ', this.state.inbodySelect)
 
         //console.log(',,,,,',this.state.member_no)
         console.log('inbodyList.....',this.state.inbodyList)
@@ -350,6 +419,8 @@ class Inbody extends Component {
                         </div>{/*.container */}
                     </div>{/*.localNavigation */}
                 </div>{/*.header */}
+                
+            <ClickAwayListener onClickAway={this.handleClickAway}> 
                 <div className="container">
                     <section className='inbodyCustomer'>
                         <div>
@@ -474,9 +545,10 @@ class Inbody extends Component {
                         </div>
                         <article className='waySub'>
                             <Link
-                            to={{pathname:"/assign/add/"+this.state.member_no,
+                            to={{pathname:"/assign/add",
                             state: {
                                 inbody_no: this.state.inbody_no,
+                                member_no : this.state.member_no
                                 },
                             }}
                             >
@@ -484,6 +556,9 @@ class Inbody extends Component {
                                     인바디정보추가
                                 </button>
                             </Link>{/*.btnCustomerNew */}
+                                <button onClick={this.clickOpen}>
+                                    인바디변화보기
+                                </button>
                         </article>{/*.waySub */}
                     </section>{/*.inbodyCustomer */}
                     <div className='inbodyListUtill'>
@@ -620,11 +695,37 @@ class Inbody extends Component {
                             체지방률
                         </TableHeaderColumn>
                     </BootstrapTable>
+                    
+                    {this.state.show?
+                        <div>
+                            <label>{this.state.userName}님의 인바디 변화 입니다.</label>
+                            <button onClick={this.handleClickAway}>X</button>
+                            <Dropdown
+                                className='searchDrop'
+                                options={this.state.inbody_noList}
+                                onChange={this.selectItem1}
+                                //value={this.state.item}
+                                placeholder="Select an option"
+                            />
+                            <label>~</label>
+                            <Dropdown
+                                className='searchDrop'
+                                options={this.state.inbody_noList}
+                                onChange={this.selectItem2}
+                                //value={this.state.item}
+                                placeholder="Select an option"
+                            />
+                            <button onClick={this.clickInbody}>조회하기</button>
+                        </div>
+                    :null
+                    }
+                    
                     {/*
                     <text>
                     </text>
                     */}
                 </div>{/*.container */}
+                </ClickAwayListener>
                 <div className='footer'>
                     <Footer />
                 </div>{/*.footer */}

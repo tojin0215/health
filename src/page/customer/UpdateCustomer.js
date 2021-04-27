@@ -13,8 +13,8 @@ import { TextField } from '@material-ui/core';
 import {getStatusRequest} from '../../action/authentication';
 import '../../styles/customer/UpdateCustomer.css'
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 class UpdateCustomer extends Component {
 
@@ -27,7 +27,8 @@ class UpdateCustomer extends Component {
 
         this.state = {
             fitness_no:this.props.userinfo.fitness_no, //Redux를 통해 받은 값
-            member_no: (search.split('/'))[3] ,
+            //member_no: (search.split('/'))[3] ,
+            member_no:Number(this.props.location.state.member_no),
             name: "",
             sex: 1,
             startDate: new Date(),

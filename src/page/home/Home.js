@@ -10,7 +10,25 @@ import '../../styles/home/home.css';
 import mainVisual1 from '../../images/mainVisual1.png';
 import mainVisual2 from '../../images/mainVisual2.png';
 
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
+require('moment-timezone');
+var moment = require('moment');
+
+moment.tz.setDefault("Asia/Seoul");
+
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            totalCustomer:'',
+            todayCustomer:'',
+            monthSales:'',
+            todaySales:'',
+        }
+        this.cusFetch();
+    }
+
     goLogin = () => {
         this.props.history.push("/");
     }
@@ -63,6 +81,60 @@ class Home extends Component {
             }
         );
     }
+
+    cusFetch=()=>{
+        fetch("http://"+ip+"/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json'
+          },
+        })
+            .then(response => response.json())
+            .then(res => {
+                //alert(res.length)
+                this.setState({totalCustomer:res.length})
+                // let arr = [];
+                // for(let i=(res.length-1) ; i>=0 ; i--){
+                //     let sor = res[i].solar_or_lunar===true?"양":"음";
+                //     let s = res[i].sex===true?"남":"여";
+                //     arr.push({"no":res[i].member_no, "name":res[i].name, "sex":s, "phone":res[i].phone, "in_charge":res[i].in_charge,"start_date":moment(res[i].start_date).format("YYYY/MM/DD")+"~ ("+res[i].period+"개월)", "resi_no":res[i].resi_no+ " ("+sor+")" })
+                // }
+                // this.setState({customerList : arr});
+        });
+        fetch('http://'+ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no, {
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json'
+          }
+        })
+        .then(response => response.json())
+        .then(res => {
+            let sum = '';
+            for(let i=0; i<res.length;i++){
+                sum = Number(sum) + Number(res[i].lockerPrice)+Number(res[i].sportswearPrice)+Number(res[i].exercisePrice)
+            }
+            this.setState({todaySales:sum})
+        })
+
+        let today = new Date();
+        let startTime = new Date(today.getFullYear(),today.getMonth(),1)
+        let endTime = new Date(today.getFullYear(),today.getMonth()+1,0)
+        //alert(today)
+        fetch('http://'+ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no, {
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json'
+          }
+        })
+        .then(response => response.json())
+        .then(res => {
+            let sum = '';
+            for(let i=0; i<res.length;i++){
+                sum = Number(sum) + Number(res[i].lockerPrice)+Number(res[i].sportswearPrice)+Number(res[i].exercisePrice)
+            }
+            this.setState({monthSales:sum})
+        })
+    }
     
     render() {
         const { userinfo } = this.props;
@@ -83,6 +155,13 @@ class Home extends Component {
                 </div>{/*.localNavigation */}
             </div>{/*.header */}
             <div className='container'>
+                
+                <div>
+                    <label>전체고객 {this.state.totalCustomer}</label><br/>
+                    <label>오늘방문고객</label><br/>
+                    <label>월매출 {this.state.monthSales}</label><br/>
+                    <label>일매출 {this.state.todaySales}</label><br/>
+                </div>
                 <div className='mainVisual'>
                     메인 이미지
                 </div>

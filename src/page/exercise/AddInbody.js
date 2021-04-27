@@ -22,8 +22,8 @@ import '../../styles/customer/AddCustomer.css';
 import '../../styles/exercise/AddInbody.css';
 
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 class AddInbody extends Component {
     
@@ -42,7 +42,8 @@ class AddInbody extends Component {
 
         this.state = {
             fitness_no:this.props.userinfo.fitness_no, //Redux를 통해 받은 값
-            member_no: search.split('/')[3] ,
+            //member_no: search.split('/')[3] ,
+            member_no:Number(this.props.location.state.member_no),
             inbody_no: inbody_no1,
             height : '', //키
             measurementDate : new Date(), // 측정날짜
@@ -137,7 +138,8 @@ class AddInbody extends Component {
             alert('선택된 회원이 없습니다. 회원을 선택 해주세요.')
             this.props.history.push({
                 //pathname: "/assign/inbody?member_no="+0
-                pathname: "/assign/inbody/"+0
+                pathname: "/assign/inbody",
+                state:{member_no:0}
             })
         }
 
@@ -269,7 +271,8 @@ class AddInbody extends Component {
                     alert("인바디 등록되었습니다.");
                     this.props.history.push({
                         //pathname: "/assign/inbody?member_no="+this.state.member_no
-                        pathname: "/assign/inbody/"+this.state.member_no
+                        pathname: "/assign/inbody",
+                        state:{member_no:this.state.member_no}
                     })
                 });
         }

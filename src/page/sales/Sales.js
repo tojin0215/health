@@ -13,14 +13,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import Select from 'react-select'
+import Select from 'react-select';
 
 import '../../styles/sales/Sales.css'
 
 import {getStatusRequest} from '../../action/authentication';
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
