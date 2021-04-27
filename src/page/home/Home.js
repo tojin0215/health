@@ -83,6 +83,22 @@ class Home extends Component {
                 </div>{/*.localNavigation */}
             </div>{/*.header */}
             <div className='container'>
+                <section className='dashboard'>
+                    <ul>
+                        <li>
+                            <p>총 회원 수</p>
+                            <p><span>100</span> 명</p>
+                        </li>
+                        <li>
+                            <p>오늘 방문자 수</p>
+                            <p><span>18</span> 명</p>
+                        </li>
+                        <li>
+                            <p>오늘 매출 금액</p>
+                            <p><span>1,580,000</span> 원</p>
+                        </li>
+                    </ul>
+                </section>
                 <div className='mainVisual'>
                     메인 이미지
                 </div>
@@ -114,9 +130,6 @@ class Home extends Component {
                             </Link>
                         </li>
                     </ul>
-                    
-                        
-                    
                 </div>
             </div>
             <div className='footer'>

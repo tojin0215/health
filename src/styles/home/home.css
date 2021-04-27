@@ -1,79 +1,117 @@
 .home > .container {
-  margin: 4rem auto 16rem;
-  padding-bottom:15rem;
-  display:flex;
-  flex-wrap:wrap;
+	margin: 0rem auto 16rem;
+	padding-bottom: 15rem;
+	padding-top: 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.home .dashboard {
+	padding: 0.8rem 0 0;
+	width: 100%;
+	/* position: absolute;
+	top: 0;
+	left: 0;
+	right: 0; */
+}
+
+.home .dashboard ul {
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+}
+
+.home .dashboard ul li {
+	display: flex;
+	width: 30%;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	border: 1px solid #885;
+	border-radius: 2rem;
+	font-size: 1.6rem;
+	padding: 0.4rem 0;
+}
+
+.home .dashboard ul li p {
+	width: 100%;
+	text-align: center;
+}
+
+.home .dashboard ul li p span {
+	font-size: 2.4rem;
+	font-weight: 600;
 }
 
 .home .mainVisual {
-  width:100%;
-  height:40rem;
-  /* background-image: url(${mainVisual1}); */
-  background:no-repeat top/contain url(../../images/mainVisual1.png);
-  text-indent:-9999rem;
+	width: 100%;
+	height: 40rem;
+	/* background-image: url(${mainVisual1}); */
+	background: no-repeat top/contain url(../../images/mainVisual1.png);
+	text-indent: -9999rem;
 }
 
 .home .homeIcon {
-  width:100%;
-  position:absolute;
-  top:50rem;
-  left:0;
+	width: 100%;
+	position: absolute;
+	top: 50rem;
+	left: 0;
 }
 
 .home .homeIcon ul {
-  display:flex;
-  justify-content: space-around;
-  flex-wrap:wrap;
-  width:100%;
-  padding:0 20rem;
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	width: 100%;
+	padding: 0 20rem;
 }
 
 .home .homeIcon ul li {
-  width:20%;
-  height:22rem;
+	width: 20%;
+	height: 22rem;
 }
 
 .home .homeIcon ul li:hover {
-  
 }
 
 .home .homeIcon a {
-  display:flex;
-  width:100%;
-  height:100%;
-  background:no-repeat center/contain;
-  /* height:100px; */
-  color:#005;
-  padding:0;
-  margin:0;
-  justify-content: center;
-  align-items: flex-end;
+	display: flex;
+	width: 100%;
+	height: 100%;
+	background: no-repeat center/contain;
+	/* height:100px; */
+	color: #005;
+	padding: 0;
+	margin: 0;
+	justify-content: center;
+	align-items: flex-end;
 }
 
 .home .homeIcon a p {
-  text-indent:-1rem;
-  font-size:1.6rem;
-  color:#3675F6;
-  font-weight:700;
-  padding-bottom:1rem;
+	text-indent: -1rem;
+	font-size: 1.6rem;
+	color: #3675f6;
+	font-weight: 700;
+	padding-bottom: 1rem;
 }
 
 .home .homeIcon .btnCustomer {
-  background-image:url(../../images/btnCustomer.png)
+	background-image: url(../../images/btnCustomer.png);
 }
 
 .home .homeIcon .btnExercise {
-  background-image:url(../../images/btnExercise.png)
+	background-image: url(../../images/btnExercise.png);
 }
 
 .home .homeIcon .btnSales {
-  background-image:url(../../images/btnSales.png)
+	background-image: url(../../images/btnSales.png);
 }
 
 .home .homeIcon .btnStatic {
-  background-image:url(../../images/btnStatic.png)
+	background-image: url(../../images/btnStatic.png);
 }
 
 .home .homeIcon .btnSetting {
-  background-image:url(../../images/btnSetting.png)
+	background-image: url(../../images/btnSetting.png);
 }
