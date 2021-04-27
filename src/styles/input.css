@@ -40,6 +40,10 @@ input[type='password'] {
 .container .dateSort {
 	width: 7rem;
 }
+/* 고객검색 버튼 가로 */
+.btnSearch {
+	width: 12rem;
+}
 /* 세로 형식 인풋 박스 */
 .inputColumn {
 	display: flex;
