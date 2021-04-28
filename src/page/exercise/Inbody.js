@@ -41,7 +41,7 @@ const defaultOption = options[0];
 
 let num = '';
 class Inbody extends Component {
-    
+
     constructor(props) {
         super(props);
 
@@ -87,8 +87,8 @@ class Inbody extends Component {
             ],
             chartOptions: {
               chart: {
-                id:'인바디결과',
-                height: 500,
+                id:'인바디',
+                height: 600,
                 type: 'line',
                 zoom: {
                   enabled: true
@@ -103,16 +103,16 @@ class Inbody extends Component {
                 dashArray: 0
               },
               title: {
-                text: '인바디 변화',
+                text: '인바디 변화 그래프',
                 align: 'left'
               },
               legend: {
                 tooltipHoverFormatter: function(val, opts) {
-                  return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
+                  return val //+ ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
                 }
               },
               markers: {
-                size: 0,
+                size: 6,
                 hover: {
                   sizeOffset: 6
                 }
@@ -152,27 +152,27 @@ class Inbody extends Component {
     componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
         // get cookie by name
         function getCookie(name) {
-            var value = "; " + document.cookie; 
-            var parts = value.split("; " + name + "="); 
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
             if (parts.length == 2) return parts.pop().split(";").shift();
         }
-   
+
         // get loginData from cookie
         let loginData = getCookie('key');
         // if loginData is undefined, do nothing
         if(typeof loginData === "undefined"){
             this.props.history.push('/');
             return;
-        } 
-   
+        }
+
         // decode base64 & parse json
         loginData = JSON.parse(atob(loginData));
         // if not logged in, do nothing
         if(!loginData.isLoggedIn){
             this.props.history.push('/');
             return;
-        } 
-   
+        }
+
         // page refreshed & has a session in cookie,
         // check whether this cookie is valid or not
         this.props.getStatusRequest().then(
@@ -184,9 +184,9 @@ class Inbody extends Component {
                         isLoggedIn: false,
                         id: ''
                     };
-   
+
                     document.cookie='key=' + btoa(JSON.stringify(loginData));
-   
+
                     // and notify
                     alert("Your session is expired, please log in again")
                 }
@@ -213,10 +213,10 @@ class Inbody extends Component {
                         let inbody_no1 = [];
                         for(let i=(res.length-1) ; i>=0 ; i--){
                             arr1.push({"no":res[i].num,"member_no":res[i].member_no,"inbody_no":res[i].inbody_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat});
-                            inbody_no1.push(res[i].inbody_no)                  
+                            inbody_no1.push(res[i].inbody_no)
                         }
                         this.setState({
-                            inbodyList : arr1, 
+                            inbodyList : arr1,
                             inbody_no:inbody_no1,
                         });
 
@@ -244,7 +244,7 @@ class Inbody extends Component {
                         });
                     });
         }
-        
+
     }
 
     handleClickOpen() {
@@ -270,14 +270,14 @@ class Inbody extends Component {
         let month = (data).substring(2,4)-1
         let day = (data).substring(4,6)
         let birthday = new Date(year,month,day)
-        
+
         let age = today.getFullYear()-birthday.getFullYear();
         let m = today.getMonth()-birthday.getMonth();
 
         if(m<0 || (m === 0 && today.getDate() < birthday.getDate())){
             age --;
         }
-        return age;        
+        return age;
     }
 
     choiceUser=(e)=>{
@@ -309,20 +309,20 @@ class Inbody extends Component {
                 let inbody_no1 = [];
                 for(let i=(res.length-1) ; i>=0 ; i--){
                     arr.push({"no":res[i].num,"member_no":res[i].member_no,"inbody_no":res[i].inbody_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat})
-                    inbody_no1.push(res[i].inbody_no)  
+                    inbody_no1.push(res[i].inbody_no)
                 }
                 this.setState({
-                    inbodyList : arr, 
+                    inbodyList : arr,
                     inbody_no:inbody_no1[0],
                     inbody_noList:inbody_no1.reverse()});
             });
         alert('선택하셨습니다.')
     }
 
-    handleChange = (e) => { 
-        this.setState({ 
+    handleChange = (e) => {
+        this.setState({
             [e.target.id]: e.target.value,
-        }); 
+        });
     };
 
     handleOnClick = (e) => {
@@ -342,7 +342,7 @@ class Inbody extends Component {
             .then(res => {
                 //alert('res'+res)
                 if(res.length ==0){
-                    //alert('없음')                        
+                    //alert('없음')
                     this.setState({
                         inbodyList:[],
                     })
@@ -354,9 +354,9 @@ class Inbody extends Component {
                     }
                     this.setState({inbodyList : arr1});
                 }
-                
+
                 //alert('조회완료')
-            }); 
+            });
     }
 
     search = () =>{
@@ -420,21 +420,79 @@ class Inbody extends Component {
                 })
                 .then(response => response.json())
                 .then(res => {
-                        let arr = [];
-                        let date = [];
+                        //let arr = [];
+                        let inbodyNum = [];
+
+                        let weight=[];
+                        let height=[];
+                        let bodyMoisture=[];
+                        let protein=[];
+                        let mineral=[];
+                        let bodyFat=[];
+                        let muscleMass=[];
+                        let bodyFatMass1=[];
+                        let skeletalMuscleMass=[];
+                        let bodyFatMass2=[];
+                        let BMI=[];
+                        let PercentBodyFat=[];
                         //alert(res.length)
+
                         for(let i=0 ; i<res.length; i++){
-                            arr.push({"name":res[i].inbody_no+'회, '+moment(res[i].measurementDate).format("YYYY/MM/DD"), "data":[res[i].weight, res[i].bodyMoisture, res[i].protein, res[i].mineral, res[i].bodyFat, res[i].muscleMass, res[i].bodyFatMass1, res[i].skeletalMuscleMass, res[i].bodyFatMass2, res[i].BMI, res[i].PercentBodyFat]});
-                            date.push(moment(res[i].measurementDate).format("YYYY/MM/DD"))
+                            //arr.push({"no":res[i].num,"member_no":res[i].member_no,"inbody_no":res[i].inbody_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat});
+                            inbodyNum.push(res[i].inbody_no+'회, ')
+
+                            height.push(res[i].height)
+                            weight.push(res[i].weight)
+                            bodyMoisture.push(res[i].bodyMoisture)
+                            protein.push(res[i].protein)
+                            mineral.push(res[i].mineral)
+                            bodyFat.push(res[i].bodyFat)
+                            muscleMass.push(res[i].muscleMass)
+                            bodyFatMass1.push(res[i].bodyFatMass1)
+                            skeletalMuscleMass.push(res[i].skeletalMuscleMass)
+                            bodyFatMass2.push(res[i].bodyFatMass2)
+                            BMI.push(res[i].BMI)
+                            PercentBodyFat.push(res[i].PercentBodyFat)
+
+                            //date.push(res[i].inbody_no+'회, '+moment(res[i].measurementDate).format("YYYY/MM/DD"))
                             //console.log(i,'여기',arr)
                         }
+                        let chartData = [
+                            {"name":'체중',"data":weight},
+                            //{"name":'키',"data":height},
+                            {"name":'체수분',"data":bodyMoisture},
+                            {"name":'단백질',"data":protein},
+                            {"name":'무기질',"data":mineral},
+                            {"name":'체지방',"data":bodyFat},
+                            {"name":'근육량',"data":muscleMass},
+                            {"name":'체지방량1',"data":bodyFatMass1},
+                            {"name":'골격근량',"data":skeletalMuscleMass},
+                            {"name":'체지방량2',"data":bodyFatMass2},
+                            {"name":'BMI',"data":BMI},
+                            {"name":'체지방률',"data":PercentBodyFat}
+                        ]
                         this.setState({
-                            series : arr, 
-                            showChart : true
+                            series : chartData,
+                            showChart : true,
+                            chartOptions: {
+                                ...this.state.chartOptions,
+                                chart: {
+                                    id:this.state.userName+'님, 인바디',
+                                    height: 600,
+                                    type: 'line',
+                                    zoom: {
+                                      enabled: true
+                                    }
+                                },
+                                xaxis: {
+                                  categories: inbodyNum
+                                }
+                            }
                             //selectDate:['Day',date]
                         });
 
                     });
+            
         }
     }
 
@@ -472,7 +530,7 @@ class Inbody extends Component {
             }]
         };
 
-        console.log('inbodyList.....',this.state.inbodyList)
+        console.log('series.....',this.state.series)
         return (
             <div className='inbody'>
                 <div className='header'>
@@ -493,8 +551,8 @@ class Inbody extends Component {
                         </div>{/*.container */}
                     </div>{/*.localNavigation */}
                 </div>{/*.header */}
-                
-            <ClickAwayListener onClickAway={this.handleClickAway}> 
+
+            <ClickAwayListener onClickAway={this.handleClickAway}>
                 <div className="container">
                     <section className='inbodyCustomer'>
                         <div>
@@ -645,7 +703,7 @@ class Inbody extends Component {
                         dateFormat="MM/dd/yyyy"
                         />
                         <text>
-                            ~ 
+                            ~
                         </text>
                         <DatePicker
                         selected={ this.state.endDate }
@@ -664,7 +722,7 @@ class Inbody extends Component {
                         </button>
                     </div>
                     <BootstrapTable
-                    data={ this.state.inbodyList } 
+                    data={ this.state.inbodyList }
                     options={textOptions}
                     pagination={ this.state.inbodyList.length > 1 }
                     tableHeaderClass='tableHeader'
@@ -685,94 +743,94 @@ class Inbody extends Component {
                             날짜
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                        dataField='height' 
+                        dataField='height'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
                             키
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                        dataField='bodyMoisture' 
+                        dataField='bodyMoisture'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
                             체수분
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                        dataField='protein' 
+                        dataField='protein'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
                             단백질
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                        dataField='mineral' 
+                        dataField='mineral'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
                             무기질
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                        dataField='bodyFat' 
+                        dataField='bodyFat'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
                             체지방
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                        dataField='muscleMass' 
+                        dataField='muscleMass'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
                             근육량
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                        dataField='bodyFatMass1' 
+                        dataField='bodyFatMass1'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
                             체지방량1
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                        dataField='weight' 
+                        dataField='weight'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
                             체중
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                        dataField='skeletalMuscleMass' 
+                        dataField='skeletalMuscleMass'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
                             골격근량
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                        dataField='bodyFatMass2' 
+                        dataField='bodyFatMass2'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
                             체지방량2
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                        dataField='BMI' 
+                        dataField='BMI'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
                             BMI
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                        dataField='PercentBodyFat' 
+                        dataField='PercentBodyFat'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
                             체지방률
                         </TableHeaderColumn>
                     </BootstrapTable>
-                    
+
                     {this.state.show?
                         <div>
-                            <label>{this.state.userName}님의 인바디 변화 입니다.</label>
+                            <label>{this.state.userName}님의 인바디 변화그래프 입니다.</label>
                             <button onClick={this.handleClickAway}>X</button>
                             <Dropdown
                                 className='searchDrop'
@@ -790,42 +848,7 @@ class Inbody extends Component {
                                 placeholder="선택"
                             />
                             <button onClick={this.clickInbody}>조회하기</button>
-                            {/* <Chart
-                                width={'600px'}
-                                height={'400px'}
-                                chartType="Line"
-                                loader={<div>Loading Chart</div>}
-                                data={[
-                                    [
-                                    'Day',
-                                    '2021.04.21',
-                                    '2021.05.21',
-                                    '2021.06.21',
-                                    ],
-                                    [1, 37.8, 80.8, 41.8],
-                                    [2, 30.9, 69.5, 32.4],
-                                    [3, 25.4, 57, 25.7],
-                                    [4, 11.7, 18.8, 10.5],
-                                    [5, 11.9, 17.6, 10.4],
-                                    [6, 8.8, 13.6, 7.7],
-                                    [7, 7.6, 12.3, 9.6],
-                                    [8, 12.3, 29.2, 10.6],
-                                    [9, 16.9, 42.9, 14.8],
-                                    [10, 12.8, 30.9, 11.6],
-                                    [11, 5.3, 7.9, 4.7],
-                                    [12, 6.6, 8.4, 5.2],
-                                    [13, 4.8, 6.3, 3.6],
-                                    [14, 4.2, 6.2, 3.4],
-                                ]}
-                                options={{
-                                    chart: {
-                                    //title: 'Box Office Earnings in First Two Weeks of Opening',
-                                    //subtitle: 'in millions of dollars (USD)',
-                                    },
-                                }}
-                                rootProps={{ 'data-testid': '5' }}
-                                /> */}
-                                
+
                                 {this.state.showChart?
                                     <Chart
                                         options={this.state.chartOptions}
@@ -834,11 +857,11 @@ class Inbody extends Component {
                                         width="700"
                                     />
                             :null}
-                                
+
                         </div>
                     :null
                     }
-                    
+
                     {/*
                     <text>
                     </text>
