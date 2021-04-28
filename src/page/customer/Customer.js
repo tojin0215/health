@@ -289,13 +289,20 @@ class Customer extends Component {
         const textOptions = {
             noDataText: '가입된 회원이 없습니다.',
             alwaysShowAllBtns: true,
-            hideSizePerPage:true
+            //hideSizePerPage:true
+            sizePerPageList: [{
+                text: '10', value: 10
+              }, {
+                text: '50', value: 50
+              }, {
+                text: '100', value: 100
+            }]
         };
 
         const options1 = {
             alwaysShowAllBtns: true,
             hideSizePerPage:true,
-            sizePerPage:5
+            sizePerPage:3
         };
 
 

@@ -350,7 +350,14 @@ class Sales extends Component {
         const textOptions = {
             noDataText: '결제내역이 없습니다.',
             alwaysShowAllBtns: true,
-            hideSizePerPage:true
+            //hideSizePerPage:true
+            sizePerPageList: [{
+                text: '10', value: 10
+              }, {
+                text: '50', value: 50
+              }, {
+                text: '100', value: 100
+            }]
         };
 
         return (

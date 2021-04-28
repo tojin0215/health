@@ -24,6 +24,8 @@ import '../../styles/exercise/Inbody.css';
 
 import {getStatusRequest} from '../../action/authentication';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+//import { Chart } from "react-google-charts";
+import Chart from "react-apexcharts";
 
 //const ip = '13.124.141.28:3002';
 const ip = 'localhost:3000';
@@ -36,11 +38,6 @@ const options = [
     '이름', '핸드폰'
 ];
 const defaultOption = options[0];
-
-const optionsInbody = [
-    '1', '2', '3'
-];
-const defaultOptionInbody = optionsInbody[0];
 
 let num = '';
 class Inbody extends Component {
@@ -72,6 +69,74 @@ class Inbody extends Component {
             startNum:'',
             endNum:'',
             inbodySelect:[],
+            //selectDate:[],
+            showChart:false,
+
+            series: [{
+                name: "Session Duration",
+                data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+              },
+              {
+                name: "Page Views",
+                data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
+              },
+              {
+                name: 'Total Visits',
+                data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+              }
+            ],
+            chartOptions: {
+              chart: {
+                id:'인바디결과',
+                height: 500,
+                type: 'line',
+                zoom: {
+                  enabled: true
+                },
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                width: 2,
+                curve: 'straight',
+                dashArray: 0
+              },
+              title: {
+                text: '인바디 변화',
+                align: 'left'
+              },
+              legend: {
+                tooltipHoverFormatter: function(val, opts) {
+                  return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
+                }
+              },
+              markers: {
+                size: 0,
+                hover: {
+                  sizeOffset: 6
+                }
+              },
+              xaxis: {
+                categories: [
+                   '체중','체수분','단백질','무기질','체지방','근육량','체지방량1','골격근량','체지방량2','BMI','체지방률'
+                ],
+              },
+              tooltip: {
+                y: [
+                  {
+                    title: {
+                      formatter: function (val) {
+                        return val;
+                      }
+                    }
+                  }
+                ]
+              },
+              grid: {
+                borderColor: '#f1f1f1',
+              }
+            },
         };
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -342,10 +407,10 @@ class Inbody extends Component {
     }
 
     clickInbody=()=>{
-        if(Number(this.state.startNum)>=Number(this.state.endNum)){
+        if(Number(this.state.startNum)>Number(this.state.endNum)){
             alert('회차를 다시 선택해주세요.')
         } else{
-            alert(this.state.startNum+'~'+this.state.endNum+' 인바디 정보 불러오기')
+            //alert(this.state.startNum+'~'+this.state.endNum+' 인바디 정보 불러오기')
             let url = "http://"+ip+"/inbody?type=inbodySelect&startNum="+this.state.startNum+"&endNum="+this.state.endNum+"&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no
             fetch(url, {
                 method: "GET",
@@ -356,14 +421,17 @@ class Inbody extends Component {
                 .then(response => response.json())
                 .then(res => {
                         let arr = [];
-                        alert(res.length)
+                        let date = [];
+                        //alert(res.length)
                         for(let i=0 ; i<res.length; i++){
-                            arr.push({"no":res[i].num,"member_no":res[i].member_no,"inbody_no":res[i].inbody_no, "height":res[i].height, "measurementDate":moment(res[i].measurementDate).format("YYYY/MM/DD"), "bodyMoisture":res[i].bodyMoisture,"protein":res[i].protein, "mineral":res[i].mineral, "bodyFat":res[i].bodyFat, "muscleMass":res[i].muscleMass, "bodyFatMass1":res[i].bodyFatMass1, "weight":res[i].weight, "skeletalMuscleMass":res[i].skeletalMuscleMass,"bodyFatMass2":res[i].bodyFatMass2, "BMI":res[i].BMI, "PercentBodyFat":res[i].PercentBodyFat});               
-                        
-                            console.log(i,'여기',arr)
+                            arr.push({"name":res[i].inbody_no+'회, '+moment(res[i].measurementDate).format("YYYY/MM/DD"), "data":[res[i].weight, res[i].bodyMoisture, res[i].protein, res[i].mineral, res[i].bodyFat, res[i].muscleMass, res[i].bodyFatMass1, res[i].skeletalMuscleMass, res[i].bodyFatMass2, res[i].BMI, res[i].PercentBodyFat]});
+                            date.push(moment(res[i].measurementDate).format("YYYY/MM/DD"))
+                            //console.log(i,'여기',arr)
                         }
                         this.setState({
-                            inbodySelect : arr, 
+                            series : arr, 
+                            showChart : true
+                            //selectDate:['Day',date]
                         });
 
                     });
@@ -372,7 +440,9 @@ class Inbody extends Component {
 
     handleClickAway=()=>{
         this.setState({
-            show:false
+            show:false,
+            showChart:false,
+            series:[]
         })
     }
 
@@ -381,7 +451,7 @@ class Inbody extends Component {
             alert('회원을 선택해주세요.')
         } else{
             this.setState({show:true})
-            alert(this.state.userName+'님의 인바디')
+            //(this.state.userName+'님의 인바디')
         }
     }
 
@@ -392,12 +462,16 @@ class Inbody extends Component {
         const textOptions = {
             noDataText: '인바디 정보가 없습니다.',
             alwaysShowAllBtns: true,
-            hideSizePerPage:true
+            //hideSizePerPage:true
+            sizePerPageList: [{
+                text: '10', value: 10
+              }, {
+                text: '50', value: 50
+              }, {
+                text: '100', value: 100
+            }]
         };
 
-        console.log('!!inbodySelect : ', this.state.inbodySelect)
-
-        //console.log(',,,,,',this.state.member_no)
         console.log('inbodyList.....',this.state.inbodyList)
         return (
             <div className='inbody'>
@@ -705,7 +779,7 @@ class Inbody extends Component {
                                 options={this.state.inbody_noList}
                                 onChange={this.selectItem1}
                                 //value={this.state.item}
-                                placeholder="Select an option"
+                                placeholder="선택"
                             />
                             <label>~</label>
                             <Dropdown
@@ -713,9 +787,54 @@ class Inbody extends Component {
                                 options={this.state.inbody_noList}
                                 onChange={this.selectItem2}
                                 //value={this.state.item}
-                                placeholder="Select an option"
+                                placeholder="선택"
                             />
                             <button onClick={this.clickInbody}>조회하기</button>
+                            {/* <Chart
+                                width={'600px'}
+                                height={'400px'}
+                                chartType="Line"
+                                loader={<div>Loading Chart</div>}
+                                data={[
+                                    [
+                                    'Day',
+                                    '2021.04.21',
+                                    '2021.05.21',
+                                    '2021.06.21',
+                                    ],
+                                    [1, 37.8, 80.8, 41.8],
+                                    [2, 30.9, 69.5, 32.4],
+                                    [3, 25.4, 57, 25.7],
+                                    [4, 11.7, 18.8, 10.5],
+                                    [5, 11.9, 17.6, 10.4],
+                                    [6, 8.8, 13.6, 7.7],
+                                    [7, 7.6, 12.3, 9.6],
+                                    [8, 12.3, 29.2, 10.6],
+                                    [9, 16.9, 42.9, 14.8],
+                                    [10, 12.8, 30.9, 11.6],
+                                    [11, 5.3, 7.9, 4.7],
+                                    [12, 6.6, 8.4, 5.2],
+                                    [13, 4.8, 6.3, 3.6],
+                                    [14, 4.2, 6.2, 3.4],
+                                ]}
+                                options={{
+                                    chart: {
+                                    //title: 'Box Office Earnings in First Two Weeks of Opening',
+                                    //subtitle: 'in millions of dollars (USD)',
+                                    },
+                                }}
+                                rootProps={{ 'data-testid': '5' }}
+                                /> */}
+                                
+                                {this.state.showChart?
+                                    <Chart
+                                        options={this.state.chartOptions}
+                                        series={this.state.series}
+                                        type="line"
+                                        width="700"
+                                    />
+                            :null}
+                                
                         </div>
                     :null
                     }
