@@ -147,16 +147,16 @@ class AddSales extends Component {
             this.setState({
                 exerciseName : [...this.state.exerciseName, this.state.exerciseName[value]]
             })
-            console.log('들어오는 값 )    ')
-            console.log(this.state.exerciseName)
+            //console.log('들어오는 값 )    ')
+            //console.log(this.state.exerciseName)
         }else {     
-            console.log('들어오니')
+            //console.log('들어오니')
             for(var i=0; i<this.state.exerciseName.length; i++){
                 if(this.state.exerciseName[i] === value){
                     this.state.exerciseName.splice(i, 1)
                 }
             }
-            console.log(this.state.exerciseName)
+            //console.log(this.state.exerciseName)
         }
 
         // this.setState({

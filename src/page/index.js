@@ -9,6 +9,7 @@ export { default as AddExercise } from './setting/AddExercise';
 export { default as DefaultExercise } from './setting/DefaultExercise';
 export { default as AssignExercise } from './exercise/AssignExercise';
 export { default as AssignCheckExercise } from './exercise/AssignCheckExercise';
+export { default as AssignCustomer } from './exercise/AssignCustomer';
 export { default as Inbody } from './exercise/Inbody';
 export { default as AddInbody } from './exercise/AddInbody';
 export { default as Statistics } from './statistics/Statistics';

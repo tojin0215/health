@@ -134,7 +134,7 @@ class AddInbody extends Component {
     }
 
     cusFetch = () => {
-        if(this.state.member_no === '0'){
+        if(this.state.member_no == '0'){
             alert('선택된 회원이 없습니다. 회원을 선택 해주세요.')
             this.props.history.push({
                 //pathname: "/assign/inbody?member_no="+0
