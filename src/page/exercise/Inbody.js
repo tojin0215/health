@@ -68,8 +68,6 @@ class Inbody extends Component {
             show:false,
             startNum:'',
             endNum:'',
-            inbodySelect:[],
-            //selectDate:[],
             showChart:false,
 
             series: [{
@@ -217,7 +215,7 @@ class Inbody extends Component {
                         }
                         this.setState({
                             inbodyList : arr1,
-                            inbody_no:inbody_no1,
+                            inbody_noList:inbody_no1.reverse()
                         });
 
                         fetch("http://"+ip+"/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
