@@ -19,7 +19,11 @@ require('moment-timezone');
 var moment = require('moment');
 
 moment.tz.setDefault('Asia/Seoul');
-const options = ['이름', '운동기구', '운동부위'];
+const options = [
+    '이름', '운동기구', '운동부위'
+  ];
+const defaultOption = options[0];
+
 class AddExercise extends Component {
     constructor(props) {
         super(props);
@@ -284,7 +288,7 @@ class AddExercise extends Component {
             .then((res) => {
                 console.log(res);
                 let arr = [];
-                for (let i = res.length - 1; i >= 0; i--) {
+                for (let i = (res.length-1) ; i >= 0; i--) {
                     let part = ', ';
                     let part_num = Number(res[i].part);
                     console.log(part_num);

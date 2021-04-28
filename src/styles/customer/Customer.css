@@ -1,105 +1,111 @@
-.customer .container{
-  display:flex;
-  padding-top:10rem;
-  flex-wrap:wrap;
-  justify-content:space-between;
+.customer .container {
+	display: flex;
+	padding-top: 0;
+	margin-top: 10rem;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	position: relative;
 }
 
 .SearchInput {
-  display:flex;
-  flex-wrap:wrap;
-  width:41rem;
+	display: flex;
+	flex-wrap: wrap;
+	width: 41rem;
 }
 
 .SearchInput .Dropdown-root {
-  width:20rem;
-  margin:1rem;
+	width: 20rem;
+	margin: 1rem;
 }
 
 .SearchInput .Dropdown-control {
-  border-radius:1rem;
-  text-indent:1rem;
+	border-radius: 1rem;
+	text-indent: 1rem;
 }
 
 .SearchInput .SearchInputIn {
-  display: flex;
+	display: flex;
 }
 
 .btnCustomerNew {
-  width:20rem;
-  height:4rem;
-  border-radius:1rem;
-  padding:.4rem .8rem;
-  margin:1rem;
-  background-color:#000055;
-  color:#fff;
-  text-align:center;
-  align-self:flex-end;
-  transition:.35s ease-in-out;
-  line-height:3rem;
+	width: 20rem;
+	height: 4rem;
+	border-radius: 1rem;
+	padding: 0.4rem 0.8rem;
+	margin: 1rem;
+	background-color: #000055;
+	color: #fff;
+	text-align: center;
+	align-self: flex-end;
+	transition: 0.35s ease-in-out;
+	line-height: 3rem;
 }
 
 .btnCustomerNew:hover {
-  color:#fff;
-  background-color:#0069d9;
-  text-decoration:none;
+	color: #fff;
+	background-color: #0069d9;
+	text-decoration: none;
 }
-
+/* 50개씩 보기 드롭다운 메뉴*/
+.customer .customerTableSort {
+	border: 1px solid #005;
+	position: absolute;
+	top: 6rem;
+	right: 1rem;
+	padding: 0.6rem;
+}
 .customerTable {
-  width:100%;
-  padding-top:2rem;
+	width: 100%;
+	padding-top: 2rem;
 }
 
 .customerSlide {
-  background-color:rgba(0,0,0,.9);
-  width:60%;
-  height:100%;
-  padding:5rem;
-  position:fixed;
-  top:0;
-  right:0;
-  color:#fff;
-}
-
-.customerSlide button {
+	background-color: rgba(0, 0, 0, 0.9);
+	width: 60%;
+	height: 100%;
+	padding: 5rem;
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: #fff;
 }
 
 .customerSlide .tableContainer {
-  border-top:1px solid #999;
-  border-bottom:1px solid #999;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
 }
 
 .customerSlide .table2 .tableHeader {
-  border-bottom:1px solid #999;
+	border-bottom: 1px solid #999;
 }
 
 .customerSlide ul {
-  width:100%;
-  padding:2rem;
+	width: 100%;
+	padding: 2rem;
 }
 
 .customerSlide ul label {
-  padding:.3rem;
-  min-width:10rem;
+	padding: 0.3rem;
+	min-width: 10rem;
 }
 
 .customerSlide ul li label:first-child {
-  text-align:center;
+	text-align: center;
 }
 
 .customerSlide .customerSlideUtill {
-  display:flex;
-  justify-content:flex-end;
-  align-items:center;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 }
 
 .customerSlide .btnCustomerNew {
-  margin:0;
-  width:12rem;
+	margin: 0;
+	width: 12rem;
 }
 
 .customerSlide .btnCustomerClose {
-  width:5rem;
-  height:4rem;
-  margin:0 2rem;
+	width: 5rem;
+	height: 4rem;
+	margin: 0 2rem;
 }

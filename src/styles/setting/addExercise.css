@@ -7,6 +7,10 @@
 .addExercise .container .input-row {
   width:100%;
 }
+/* 운동묶음설정 버튼 우측 상단 위치 조정 */
+.addExercise .waySub {
+  top:-2rem;
+}
 
 .addExercise .waySub {
   top:-3rem;
@@ -31,13 +35,22 @@
   align-items:center;
 }
 
+
+
 .exercisePart .part {
   display:flex;
+  width:80%;
+  justify-content: space-around;
 }
 
 .exercisePart .part label {
   display:flex;
   align-items:center;
+  width:100%;
+}
+
+.exercisePart .part label input[type=checkBox] {
+  margin:1rem;
 }
 
 .settingRoutin {

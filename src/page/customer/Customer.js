@@ -12,6 +12,8 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import {getStatusRequest} from '../../action/authentication';
 
+import DropdownButton from 'react-bootstrap/DropdownButton';
+
 import '../../styles/customer/Customer.css';
 
 
@@ -337,21 +339,21 @@ class Customer extends Component {
             <ClickAwayListener onClickAway={this.handleClickAway}>
                 <div className='container'>
                     <div className='SearchInput'>
-                        <Dropdown
-                        className='searchDrop'
-                        options={options}
-                        onChange={this.selectItem}
-                        value={this.state.item}
-                        placeholder="Select an option"
-                        />
                         <div className='SearchInputIn'>
+                            <Dropdown
+                            className='searchDrop'
+                            options={options}
+                            onChange={this.selectItem}
+                            value={this.state.item}
+                            placeholder="Select an option"
+                            />
                             <input
                             type="text"
                             id='search'
                             checked={this.state.search}
                             onChange={this.handleChange}
                             />
-                            <button type="button" onClick={this.search}> 고객 검색
+                            <button className='btnSearch' type="button" onClick={this.search}> 고객 검색
                             </button>
                         </div>
                     </div>
@@ -360,6 +362,9 @@ class Customer extends Component {
                     </Link>
                     <div className='customerTable'>
                         <h5>회원 목록</h5>
+                        <div className='customerTableSort'>
+                            50개씩 보기 ▼
+                        </div>
                         <div>
                             <BootstrapTable
                             hover

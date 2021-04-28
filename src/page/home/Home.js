@@ -156,7 +156,6 @@ class Home extends Component {
                 </div>{/*.localNavigation */}
             </div>{/*.header */}
             <div className='container'>
-                
                 <div>
                     <label>전체고객 {this.state.totalCustomer}</label><br/>
                     <label>오늘방문고객</label><br/>
@@ -194,9 +193,6 @@ class Home extends Component {
                             </Link>
                         </li>
                     </ul>
-                    
-                        
-                    
                 </div>
             </div>
             <div className='footer'>

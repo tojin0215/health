@@ -382,6 +382,12 @@ class Sales extends Component {
                     <h2>매출 현황</h2>
                     <div className="salesUtill">
                         <div className="salesStatus">
+                            <button className='dateSort'>
+                                당일
+                            </button>
+                            <button className='dateSort'>
+                                1개월
+                            </button>
                             <DatePicker
                                 selected={ this.state.startDate }
                                 selectsStart
