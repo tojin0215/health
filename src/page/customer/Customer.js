@@ -14,7 +14,6 @@ import {getStatusRequest} from '../../action/authentication';
 
 import '../../styles/customer/Customer.css';
 
-
 const ip = '13.124.141.28:3002';
 //const ip = 'localhost:3000';
 
