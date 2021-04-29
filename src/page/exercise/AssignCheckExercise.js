@@ -122,8 +122,7 @@ class AssignCheckExercise extends Component {
             fetch(url, {
                 method: 'POST',
                 headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json'
+                    'Content-type': 'application/json'
                 },
                 body: JSON.stringify(ex),
             }).then((response) => {
