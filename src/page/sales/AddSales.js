@@ -327,12 +327,10 @@ class AddSales extends Component {
                                     value={this.state.item}
                                     placeholder="Select an option"
                                 />{/*.searchDrop */}
-                                <div className='customerSearchIn'>
-                                    <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />
-                                    <button type="button" onClick={this.search}>
-                                        고객 검색
-                                    </button>
-                                </div>{/*.customerSearchIn */}
+                                <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />
+                                <button type="button" onClick={this.search}>
+                                    고객 검색
+                                </button>
                             </div>{/*.customerSearch */}
                             <Table>
                                 <TableHead>
