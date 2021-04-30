@@ -156,12 +156,24 @@ class Home extends Component {
                 </div>{/*.localNavigation */}
             </div>{/*.header */}
             <div className='container'>
-                <div>
-                    <label>전체고객 {this.state.totalCustomer}</label><br/>
-                    <label>오늘방문고객</label><br/>
-                    <label>월매출 {this.state.monthSales}</label><br/>
-                    <label>일매출 {this.state.todaySales}</label><br/>
-                </div>
+                <div className='dashboard'>
+                    <label>
+                        <p>전체고객</p>
+                        <p><span>{this.state.totalCustomer}</span>명</p>
+                    </label>
+                    <label>
+                        <p>오늘 방문고객</p>
+                        <p><span>00</span>명</p>
+                    </label>
+                    <label>
+                        <p>월매출</p>
+                        <p><span>{this.state.monthSales}</span>원</p>
+                    </label>
+                    <label>
+                        <p>일매출</p>
+                        <p><span>{this.state.todaySales}</span>원</p>
+                    </label>
+                </div>{/*.dashboard */}
                 <div className='mainVisual'>
                     메인 이미지
                 </div>
