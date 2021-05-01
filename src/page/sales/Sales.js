@@ -276,6 +276,14 @@ class Sales extends Component {
         })
     }
 
+    todayClick =()=>{
+        alert('오늘')
+    }   
+
+    monthClick =()=>{
+        alert('한달')
+    }
+
     handleOnClick = (e) => {
         this.setState({
             exerciseSelectedOption: null,
@@ -382,10 +390,10 @@ class Sales extends Component {
                     <h2>매출 현황</h2>
                     <div className="salesUtill">
                         <div className="salesStatus">
-                            <button className='dateSort'>
+                            <button className='dateSort' onClick={this.todayClick}>
                                 당일
                             </button>
-                            <button className='dateSort'>
+                            <button className='dateSort' onClick={this.monthClick}>
                                 1개월
                             </button>
                             <DatePicker

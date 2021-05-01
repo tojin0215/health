@@ -208,7 +208,7 @@ class AssignCustomer extends Component {
                         {/* <label>{this.state.member_no}</label> */}
                         <div>
                             <label>{this.state.userName}님의 운동배정 목록입니다.</label>
-                            <div>
+                            {/* <div>
                                 <DatePicker
                                 selected={ this.state.startDate }
                                 selectsStart
@@ -292,8 +292,8 @@ class AssignCustomer extends Component {
                                 >
                                     세트
                                 </TableHeaderColumn>
-                            </BootstrapTable>
-                        </div>
+                            </BootstrapTable>*/}
+                        </div> 
                 </div>
                 <div className='footer'>
                     <Footer />
