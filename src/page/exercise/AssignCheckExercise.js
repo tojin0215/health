@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 import '../../styles/exercise/AssignCheckExercise.css';
 import {getStatusRequest} from '../../action/authentication';
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 class AssignCheckExercise extends Component {
     constructor(props) {
@@ -122,7 +122,7 @@ class AssignCheckExercise extends Component {
             fetch(url, {
                 method: 'POST',
                 headers: {
-                    'Content-type': 'application/json',
+                    'Content-type': 'application/json'
                 },
                 body: JSON.stringify(ex),
             }).then((response) => {
@@ -130,7 +130,10 @@ class AssignCheckExercise extends Component {
             });
         });
         alert('배정되었습니다.');
-        this.props.history.push("/assign")
+        
+        this.props.history.push(
+            {pathname:"/assign/customer",state:{member_no:this.state.member_no}}
+        )
     };
     procDefaultPackage = (
         next_func,
