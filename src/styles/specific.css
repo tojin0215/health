@@ -1,50 +1,67 @@
 /*------ 고객 검색창 ------*/
-
+/* 전체 창 가로 값*/
+.customerSearch {
+	width: 54rem;
+	display: flex;
+	align-items: center;
+	padding-bottom: 2rem;
+}
 /* 선택창 레이아웃 */
 .MuiDialog-root .Dropdown-root {
-  width:100%;
-  padding:1rem;
-  margin:0;
+	width: calc(33.33% - 1rem);
+	padding: 1rem;
+	margin: 0;
+}
+/* 버튼, 인풋창 크기 */
+.MuiDialog-root input[type='text'] {
+	width: calc(33.33% - 1rem);
+}
+.MuiDialog-root button {
+	width: calc(33.33% - 1rem);
 }
 /* 고객 이름 등 셀렉트 */
-.MuiDialog-root .Dropdown-root .Dropdown-control{
-  width: calc(50% - 1rem);
+.MuiDialog-root .Dropdown-root .Dropdown-control {
+	/* width: 100%; */
 }
 /* 타이틀 폰트 */
 .MuiDialog-root .MuiTypography-h6 {
-  font-size:2rem;
+	font-size: 2rem;
 }
 /* 검색창 div 크기 */
 .MuiDialog-root .customerSearch .customerSearchIn {
-  width:100%;
+	width: 100%;
 }
 /* 텍스트 인풋 크기 */
 .MuiDialog-root .customerSearch .customerSearchIn #search {
-  width:50%;
+	width: 50%;
 }
 /* 고객 검색 버튼크기 */
 .MuiDialog-root .customerSearch .customerSearchIn button {
-  width:50%;
+	width: 50%;
 }
 /* 테이블 폰트 크기 */
 .MuiTable-root .MuiTableCell-root {
-  font-size:1.6rem;
+	font-size: 1.6rem;
 }
 /* 버튼 크기 */
 .MuiTable-root button {
-  width:8rem;
+	width: 8rem;
 }
 /* 테이블 헤더 */
 .MuiTable-root .MuiTableCell-head {
-  padding:1rem 3rem;
-  text-align: center;
+	padding: 1rem 3rem;
+	text-align: center;
 }
 /* 테이블 셀 사이즈 */
 .MuiTable-root .MuiTableCell-body {
-  padding:0 3rem;
+	padding: 0 3rem;
 }
 
 /* 상품/매출 테이블 필터 크기 조절 */
-.sales .css-b8ldur-Input input[type=text] {
-  height:.2rem;
+.sales .css-b8ldur-Input input[type='text'] {
+	height: 0.2rem;
+}
+/* 닫기 버튼 */
+.MuiPaper-root .MuiDialogActions-spacing {
+	justify-content: center;
 }
