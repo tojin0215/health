@@ -276,13 +276,62 @@ class Sales extends Component {
         })
     }
 
-    todayClick =()=>{
-        alert('오늘')
-    }   
+    dateClick =(e)=>{
 
-    monthClick =()=>{
-        alert('한달')
-    }
+        let today = new Date();
+        let url = ''
+        if(e.target.value === '오늘'){
+            alert('오늘입니다.')
+            url = 'http://'+ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no
+        } else if (e.target.value === '한달'){
+            let startTime = new Date(today.getFullYear(),today.getMonth()-1,today.getDate())
+            let endTime = new Date(today.getFullYear(),today.getMonth(),today.getDate())
+            url = 'http://'+ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            alert('한달입니다.'+startTime+', '+endTime)
+        }
+        
+        fetch(url,{
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json'
+          },
+          })
+            .then(data => {
+                return data.json();
+            }).then(data => {
+                this.setState({
+                    salesLists : data,
+                })
+                
+                let card = 0
+                let cash = 0
+                let transfer = 0
+                this.state.salesLists.reverse().map((data) => {
+                    let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
+                    let time = moment(data.paymentDate).format("YYYY/MM/DD")
+                    data = {...data, total, time}
+                    this.state.customerList.map((c)=>{
+                        if(data.member_no === c.num){
+                            let userName = c.userName;
+                            data = {...data, userName}
+                        }
+                    })
+                    if(data.paymentTools === '카드'){
+                        card = card + data.total
+                    } else if(data.paymentTools === '현금'){
+                        cash = cash + data.total
+                    } else if(data.paymentTools === '계좌이체'){
+                        transfer = transfer + data.total
+                    } 
+                        
+                    this.setState({
+                        salesLists2 : [...this.state.salesLists2, data],
+                        toolList : [{'card':card, 'cash':cash,'transfer':transfer,'total':card+ cash+transfer}]
+                    })
+                })
+                
+            }); 
+    } 
 
     handleOnClick = (e) => {
         this.setState({
@@ -390,10 +439,10 @@ class Sales extends Component {
                     <h2>매출 현황</h2>
                     <div className="salesUtill">
                         <div className="salesStatus">
-                            <button className='dateSort' onClick={this.todayClick}>
+                            <button className='dateSort' value='오늘' onClick={this.dateClick}>
                                 당일
                             </button>
-                            <button className='dateSort' onClick={this.monthClick}>
+                            <button className='dateSort' value='한달' onClick={this.dateClick}>
                                 1개월
                             </button>
                             <DatePicker
