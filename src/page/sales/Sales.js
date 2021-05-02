@@ -280,12 +280,14 @@ class Sales extends Component {
 
         let today = new Date();
         let url = ''
+        let startTime = new Date();
+        let endTime = new Date();
         if(e.target.value === '오늘'){
             alert('오늘입니다.')
             url = 'http://'+ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no
         } else if (e.target.value === '한달'){
-            let startTime = new Date(today.getFullYear(),today.getMonth()-1,today.getDate())
-            let endTime = new Date(today.getFullYear(),today.getMonth(),today.getDate())
+            startTime = new Date(today.getFullYear(),today.getMonth()-1,today.getDate())
+            endTime = new Date(today.getFullYear(),today.getMonth(),today.getDate())
             url = 'http://'+ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
             alert('한달입니다.'+startTime+', '+endTime)
         }
@@ -326,7 +328,9 @@ class Sales extends Component {
                         
                     this.setState({
                         salesLists2 : [...this.state.salesLists2, data],
-                        toolList : [{'card':card, 'cash':cash,'transfer':transfer,'total':card+ cash+transfer}]
+                        toolList : [{'card':card, 'cash':cash,'transfer':transfer,'total':card+ cash+transfer}],
+                        startDate : startTime,
+                        endDate : endTime
                     })
                 })
                 
