@@ -188,6 +188,8 @@ class DefaultExercise extends Component {
             select_core_data: {},
             select_oxy: [],
             select_oxy_data: {},
+            select_etc: [],
+            select_etc_data: {},
         };
         this.handleOnClick = this.handleOnClick.bind(this);
         this.onSelectRow = this.onSelectRow.bind(this);
@@ -274,11 +276,20 @@ class DefaultExercise extends Component {
                 let arr_allbody = [];
                 let arr_core = [];
                 let arr_oxy = [];
+                let arr_etc = [];
 
                 for (let i = res.length - 1; i >= 0; i--) {
                     let part = ', ';
                     let part_num = Number(res[i].part);
                     console.log(part_num);
+                    
+                    if (part_num == 32) {
+                        part = '기타, ' + part;
+                        part_num = 0;
+                        if (this.parserIsDefault(res[i], '기타')) {
+                            arr_etc.push(res[i].exercise_no);
+                        }
+                    }
                     if (part_num >= 16) {
                         part = '유산소, ' + part;
                         part_num = part_num - 16;
@@ -333,6 +344,7 @@ class DefaultExercise extends Component {
                     select_allbody: arr_allbody,
                     select_core: arr_core,
                     select_oxy: arr_oxy,
+                    select_etc: arr_etc,
                 });
             });
     };
@@ -360,6 +372,10 @@ class DefaultExercise extends Component {
         if (/유산소/.test(search)) {
             search = search.replace('유산소', '');
             v = v + 16;
+        }
+        if (/기타/.test(this.state.search)) {
+            search = search.replace('기타', '');
+            v = 32;
         }
 
         if (v === 0) {
@@ -392,11 +408,20 @@ class DefaultExercise extends Component {
                 let arr_allbody = [];
                 let arr_core = [];
                 let arr_oxy = [];
+                let arr_etc = [];
                 let arr2 = [];
                 for (let i = res.length - 1; i >= 0; i--) {
                     let part = ', ';
                     let part_num = Number(res[i].part);
                     console.log('isD' + res[i].is_default);
+                    
+                    if (part_num === 32) {
+                        part = '기타, ' + part;
+                        part_num = 0;
+                        if (this.parserIsDefault(res[i], '기타')) {
+                            arr_etc.push(res[i].exercise_no);
+                        }
+                    }
                     if (part_num >= 16) {
                         part = '유산소, ' + part;
                         part_num = part_num - 16;
@@ -454,6 +479,7 @@ class DefaultExercise extends Component {
                     select_allbody: arr_allbody,
                     select_core: arr_core,
                     select_oxy: arr_oxy,
+                    select_etc: arr_etc,
                     selectedListId: arr2,
                     exerciseList: arr,
                 });
@@ -601,6 +627,30 @@ class DefaultExercise extends Component {
         let selected = this.state.select_oxy;
         let selected_data = JSON.parse(
             JSON.stringify(this.state.select_oxy_data)
+        );
+
+        if (isSelected) {
+            const d = {};
+            selected_data[exercise_no] = row;
+            d[select_name] = [...selected, exercise_no];
+            d[select_data] = selected_data;
+            this.setState(d);
+        } else {
+            const d = {};
+            delete selected_data[exercise_no];
+            d[select_name] = selected.filter((i) => i !== exercise_no);
+            d[select_data] = selected_data;
+            this.setState(d);
+        }
+    };
+    onSelectRowEtc = (row, isSelected, e) => {
+        const exercise_no = row['no'];
+        const select_name = 'select_etc';
+        const select_data = 'select_etc_data';
+
+        let selected = this.state.select_etc;
+        let selected_data = JSON.parse(
+            JSON.stringify(this.state.select_etc_data)
         );
 
         if (isSelected) {

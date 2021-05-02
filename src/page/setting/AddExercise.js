@@ -190,6 +190,10 @@ class AddExercise extends Component {
                     let part = ', ';
                     let part_num = Number(res[i].part);
                     console.log(part_num);
+                    if (part_num === 32) {
+                        part = '기타, ' + part;
+                        part_num = 0;
+                    }
                     if (part_num >= 16) {
                         part = '유산소, ' + part;
                         part_num = part_num - 16;
@@ -260,6 +264,10 @@ class AddExercise extends Component {
                 search = search.replace('유산소', '');
                 v = v + 16;
             }
+            if (/기타/.test(this.state.search)) {
+                search = search.replace('기타', '');
+                v = 32;
+            }
 
             if (v === 0) {
                 alert('부위를 입력바랍니다.');
@@ -292,6 +300,10 @@ class AddExercise extends Component {
                     let part = ', ';
                     let part_num = Number(res[i].part);
                     console.log(part_num);
+                    if (part_num == 32) {
+                        part = '기타, ' + part;
+                        part_num = 0;
+                    }
                     if (part_num >= 16) {
                         part = '유산소, ' + part;
                         part_num = part_num - 16;
@@ -583,6 +595,18 @@ class AddExercise extends Component {
                                             onChange={this.handleChange}
                                         />
                                         유산소
+                                    </label>
+                                    <label>
+                                        <input
+                                            type="checkBox"
+                                            value="32"
+                                            name="part"
+                                            ref={(ref) => {
+                                                this.chkPartOxy = ref;
+                                            }}
+                                            onChange={this.handleChange}
+                                        />
+                                        기타
                                     </label>
                                 </div>
                                 {/*.part */}
