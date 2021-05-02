@@ -53,6 +53,9 @@ class AssignExercise extends Component {
             show3: false,
             show4: false,
             show5: false,
+            show6: false,
+            select: [],
+            select_data: {},
             select_top: [],
             select_top_data: {},
             select_bottom: [],
@@ -263,24 +266,26 @@ class AssignExercise extends Component {
 
     onSelectRow(row, isSelected, e) {
         const exercise_no = row['no'];
+        const select_name = 'select';
+        const select_data = 'select_data';
 
-        this.setState({
-            selectedList: [
-                ...this.state.selectedList,
-                [exercise_no, isSelected],
-            ],
-        });
+        let selected = this.state.select;
+        let selected_data = JSON.parse(
+            JSON.stringify(this.state.select_data)
+        );
 
         if (isSelected) {
-            this.setState({
-                selectedListId: [...this.state.selectedListId, exercise_no],
-            });
+            const d = {};
+            selected_data[exercise_no] = row;
+            d[select_name] = [...selected, exercise_no];
+            d[select_data] = selected_data;
+            this.setState(d);
         } else {
-            this.setState({
-                selectedListId: this.state.selectedListId.filter(
-                    (i) => i !== exercise_no
-                ),
-            });
+            const d = {};
+            delete selected_data[exercise_no];
+            d[select_name] = selected.filter((i) => i !== exercise_no);
+            d[select_data] = selected_data;
+            this.setState(d);
         }
     }
 
@@ -918,61 +923,74 @@ class AssignExercise extends Component {
             afterSaveCell: this.afterSaveCell,
         };
 
-        const selectRowProp_상체 = {
+        const selectRowProp = {
             mode: 'checkbox',
             clickToSelect: true,
-            //unselectable: [2],
-            //selected: [1],
-            selected: this.state.select_top,
-            onSelect: this.onSelectRowTop,
+            selected: this.state.select,
+            onSelect: this.onSelectRow,
             bgColor: 'mint',
         };
-        const selectRowProp_하체 = {
-            mode: 'checkbox',
-            clickToSelect: true,
-            //unselectable: [2],
-            //selected: [1],
-            selected: this.state.select_bottom,
-            onSelect: this.onSelectRowBottom,
-            bgColor: 'mint',
-        };
-        const selectRowProp_코어 = {
-            mode: 'checkbox',
-            clickToSelect: true,
-            //unselectable: [2],
-            //selected: [1],
-            selected: this.state.select_core,
-            onSelect: this.onSelectRowCore,
-            bgColor: 'mint',
-        };
-        const selectRowProp_전신 = {
-            mode: 'checkbox',
-            clickToSelect: true,
-            //unselectable: [2],
-            //selected: [1],
-            selected: this.state.select_allbody,
-            onSelect: this.onSelectRowAllbody,
-            bgColor: 'mint',
-        };
+        const selectRowProp_상체 = selectRowProp
+        const selectRowProp_하체 = selectRowProp
+        const selectRowProp_코어 = selectRowProp
+        const selectRowProp_유산소 = selectRowProp
+        const selectRowProp_전신 = selectRowProp
+        const selectRowProp_기타 = selectRowProp
+        // const selectRowProp_상체 = {
+        //     mode: 'checkbox',
+        //     clickToSelect: true,
+        //     //unselectable: [2],
+        //     //selected: [1],
+        //     selected: this.state.select_top,
+        //     onSelect: this.onSelectRowTop,
+        //     bgColor: 'mint',
+        // };
+        // const selectRowProp_하체 = {
+        //     mode: 'checkbox',
+        //     clickToSelect: true,
+        //     //unselectable: [2],
+        //     //selected: [1],
+        //     selected: this.state.select_bottom,
+        //     onSelect: this.onSelectRowBottom,
+        //     bgColor: 'mint',
+        // };
+        // const selectRowProp_코어 = {
+        //     mode: 'checkbox',
+        //     clickToSelect: true,
+        //     //unselectable: [2],
+        //     //selected: [1],
+        //     selected: this.state.select_core,
+        //     onSelect: this.onSelectRowCore,
+        //     bgColor: 'mint',
+        // };
+        // const selectRowProp_전신 = {
+        //     mode: 'checkbox',
+        //     clickToSelect: true,
+        //     //unselectable: [2],
+        //     //selected: [1],
+        //     selected: this.state.select_allbody,
+        //     onSelect: this.onSelectRowAllbody,
+        //     bgColor: 'mint',
+        // };
 
-        const selectRowProp_유산소 = {
-            mode: 'checkbox',
-            clickToSelect: true,
-            //unselectable: [2],
-            //selected: [1],
-            selected: this.state.select_oxy,
-            onSelect: this.onSelectRowOxy,
-            bgColor: 'mint',
-        };
-        const selectRowProp_기타 = {
-            mode: 'checkbox',
-            clickToSelect: true,
-            //unselectable: [2],
-            //selected: [1],
-            selected: this.state.select_etc,
-            onSelect: this.onSelectRowEtc,
-            bgColor: 'mint',
-        };
+        // const selectRowProp_유산소 = {
+        //     mode: 'checkbox',
+        //     clickToSelect: true,
+        //     //unselectable: [2],
+        //     //selected: [1],
+        //     selected: this.state.select_oxy,
+        //     onSelect: this.onSelectRowOxy,
+        //     bgColor: 'mint',
+        // };
+        // const selectRowProp_기타 = {
+        //     mode: 'checkbox',
+        //     clickToSelect: true,
+        //     //unselectable: [2],
+        //     //selected: [1],
+        //     selected: this.state.select_etc,
+        //     onSelect: this.onSelectRowEtc,
+        //     bgColor: 'mint',
+        // };
 
         return (
             <div className="assignExercise">
@@ -1626,6 +1644,86 @@ class AssignExercise extends Component {
                                 </div>
                             ) : null}
                         </div>
+                        <div>
+                            {this.state.show6 ? (
+                                <div>
+                                    <h3>기타 운동 목록</h3>
+                                    <BootstrapTable
+                                        hover
+                                        data={this.state.exerciseList}
+                                        pagination={
+                                            this.state.exerciseList.length > 1
+                                        }
+                                        options={options1}
+                                        tableHeaderClass="tableHeader"
+                                        tableContainerClass="tableContainer"
+                                        selectRow={selectRowProp_기타}
+                                        cellEdit={cellEdit}
+                                        className="table2"
+                                    >
+                                        <TableHeaderColumn
+                                            dataField="no"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                            isKey
+                                        >
+                                            no
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="name"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동이름
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="tool"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동도구
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="aa"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            운동부위
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="set"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            세트
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="bb"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            횟수
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="cc"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            휴식시간
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn
+                                            dataField="link"
+                                            thStyle={{ textAlign: 'center' }}
+                                            tdStyle={{ textAlign: 'center' }}
+                                        >
+                                            링크
+                                        </TableHeaderColumn>
+                                    </BootstrapTable>
+                                    {/*.table2 */}
+                                </div>
+                            ) : null}
+                        </div>
+                        
                         <Link
                             to={{
                                 pathname:
@@ -1640,6 +1738,7 @@ class AssignExercise extends Component {
                                         4: this.state.select_allbody_data,
                                         8: this.state.select_core_data,
                                         16: this.state.select_oxy_data,
+                                        32: this.state.select_etc_data,
                                     },
                                 },
                             }}
