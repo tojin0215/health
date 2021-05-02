@@ -291,7 +291,8 @@ class Sales extends Component {
                 this.setState({
                     salesLists4:[],
                     salesLists2:[],
-                    startDate: startTime
+                    startDate : startTime,
+                    endDate : endTime
                 })
             }
             url = 'http://'+ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no
@@ -299,7 +300,8 @@ class Sales extends Component {
             if(this.state.salesLists4.length != 0){                 
                 this.setState({
                     salesLists4:[],
-                    salesLists2:[]
+                    salesLists2:[],
+                    endDate : endTime
                 })
             }
             startTime = new Date(today.getFullYear(),today.getMonth()-1,today.getDate())
@@ -352,7 +354,6 @@ class Sales extends Component {
                             salesLists2 : [...this.state.salesLists2, data],
                             toolList : [{'card':card, 'cash':cash,'transfer':transfer,'total':card+ cash+transfer}],
                             startDate : startTime,
-                            endDate : endTime
                         })
                     })  
                 }
