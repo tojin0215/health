@@ -63,6 +63,8 @@ class AssignExercise extends Component {
             select_core_data: {},
             select_oxy: [],
             select_oxy_data: {},
+            select_etc: [],
+            select_etc_data: {},
         };
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -406,6 +408,31 @@ class AssignExercise extends Component {
             this.setState(d);
         }
     };
+    
+    onSelectRowEtc = (row, isSelected, e) => {
+        const exercise_no = row['no'];
+        const select_name = 'select_etc';
+        const select_data = 'select_etc_data';
+
+        let selected = this.state.select_etc;
+        let selected_data = JSON.parse(
+            JSON.stringify(this.state.select_etc_data)
+        );
+
+        if (isSelected) {
+            const d = {};
+            selected_data[exercise_no] = row;
+            d[select_name] = [...selected, exercise_no];
+            d[select_data] = selected_data;
+            this.setState(d);
+        } else {
+            const d = {};
+            delete selected_data[exercise_no];
+            d[select_name] = selected.filter((i) => i !== exercise_no);
+            d[select_data] = selected_data;
+            this.setState(d);
+        }
+    };
 
     click1 = (e) => {
         //상체
@@ -417,6 +444,7 @@ class AssignExercise extends Component {
             show3: false,
             show4: false,
             show5: false,
+            show6: false,
         });
     };
 
@@ -430,6 +458,7 @@ class AssignExercise extends Component {
             show3: false,
             show4: false,
             show5: false,
+            show6: false,
         });
     };
 
@@ -443,6 +472,7 @@ class AssignExercise extends Component {
             show2: false,
             show4: false,
             show5: false,
+            show6: false,
         });
     };
 
@@ -456,6 +486,7 @@ class AssignExercise extends Component {
             show2: false,
             show3: false,
             show5: false,
+            show6: false,
         });
     };
 
@@ -469,6 +500,20 @@ class AssignExercise extends Component {
             show2: false,
             show3: false,
             show4: false,
+            show6: false,
+        });
+    };
+    click6 = (e) => {
+        //기타
+        e.preventDefault();
+        this.searchExercise('기타');
+        this.setState({
+            show6: !this.state.show6,
+            show1: false,
+            show2: false,
+            show3: false,
+            show4: false,
+            show5: false,
         });
     };
 
@@ -571,6 +616,10 @@ class AssignExercise extends Component {
             search = search.replace('유산소', '');
             v = v + 16;
         }
+        if (/기타/.test(search)) {
+            search = search.replace('기타', '');
+            v = 32;
+        }
 
         if (v === 0) {
             alert('부위를 입력바랍니다.');
@@ -604,17 +653,27 @@ class AssignExercise extends Component {
                 let arr_allbody = [];
                 let arr_core = [];
                 let arr_oxy = [];
+                let arr_etc = [];
 
                 let select_top_data = {};
                 let select_bottom_data = {};
                 let select_allbody_data = {};
                 let select_core_data = {};
                 let select_oxy_data = {};
+                let select_etc_data = {};
 
                 for (let i = res.length - 1; i >= 0; i--) {
                     let part = ', ';
                     let part_num = Number(res[i].part);
 
+                    if (part_num == 32) {
+                        part = '기타, ' + part;
+                        part_num = 0;
+                        if (this.parserIsDefault(res[i], '기타')) {
+                            arr_etc.push(res[i].exercise_no);
+                            select_etc_data[res[i].exercise_no] = res[i];
+                        }
+                    }
                     if (part_num >= 16) {
                         part = '유산소, ' + part;
                         part_num = part_num - 16;
@@ -738,6 +797,10 @@ class AssignExercise extends Component {
                     search = search.replace('유산소', '');
                     v = v + 16;
                 }
+                if (/기타/.test(search)) {
+                    search = search.replace('기타                              ', '');
+                    v = v + 16;
+                }
 
                 if (v === 0) {
                     console.error('assignDefault:' + part);
@@ -766,6 +829,10 @@ class AssignExercise extends Component {
                         for (let i = res.length - 1; i >= 0; i--) {
                             let part = ', ';
                             let part_num = Number(res[i].part);
+                            if (part_num == 32) {
+                                part = '유산소, ' + part;
+                                part_num = 32;
+                            }
                             if (part_num >= 16) {
                                 part = '유산소, ' + part;
                                 part_num = part_num - 16;
@@ -895,6 +962,15 @@ class AssignExercise extends Component {
             //selected: [1],
             selected: this.state.select_oxy,
             onSelect: this.onSelectRowOxy,
+            bgColor: 'mint',
+        };
+        const selectRowProp_기타 = {
+            mode: 'checkbox',
+            clickToSelect: true,
+            //unselectable: [2],
+            //selected: [1],
+            selected: this.state.select_etc,
+            onSelect: this.onSelectRowEtc,
             bgColor: 'mint',
         };
 
@@ -1147,9 +1223,17 @@ class AssignExercise extends Component {
                                     유산소
                                 </button>
                                 {/*#5 */}
+                                <button
+                                    type="button"
+                                    id="6"
+                                    onClick={this.click6}
+                                >
+                                    기타
+                                </button>
+                                {/*#6 */}
                             </div>
                             {this.state.show1 ? (
-                                <div>
+                                <div>                                                          
                                     <h3>상체 운동 목록</h3>
                                     <BootstrapTable
                                         hover
