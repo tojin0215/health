@@ -89,7 +89,7 @@ class Inbody extends Component {
                 height: 600,
                 type: 'line',
                 zoom: {
-                  enabled: true
+                  enabled: false
                 },
               },
               dataLabels: {
@@ -187,6 +187,9 @@ class Inbody extends Component {
 
                     // and notify
                     alert("Your session is expired, please log in again")
+                }
+                else{
+                    this.cusFetch();
                 }
             }
         );
@@ -520,11 +523,11 @@ class Inbody extends Component {
             alwaysShowAllBtns: true,
             //hideSizePerPage:true
             sizePerPageList: [{
-                text: '10', value: 10
+                text: '10개씩 보기', value: 10
               }, {
-                text: '50', value: 50
+                text: '50개씩 보기', value: 50
               }, {
-                text: '100', value: 100
+                text: '100개씩 보기', value: 100
             }]
         };
 

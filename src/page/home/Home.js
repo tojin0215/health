@@ -22,10 +22,10 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            totalCustomer:'',
-            todayCustomer:'',
-            monthSales:'',
-            todaySales:'',
+            totalCustomer:0,
+            todayCustomer:0,
+            monthSales:0,
+            todaySales:0,
         }
         this.cusFetch();
     }
@@ -79,6 +79,9 @@ class Home extends Component {
                     // and notify
                     alert("Your session is expired, please log in again")
                 }
+                else{
+                    this.cusFetch();
+                }
             }
         );
     }
@@ -110,7 +113,7 @@ class Home extends Component {
         })
         .then(response => response.json())
         .then(res => {
-            let sum = '';
+            let sum = 0;
             for(let i=0; i<res.length;i++){
                 sum = Number(sum) + Number(res[i].lockerPrice)+Number(res[i].sportswearPrice)+Number(res[i].exercisePrice)
             }
@@ -129,19 +132,28 @@ class Home extends Component {
         })
         .then(response => response.json())
         .then(res => {
-            let sum = '';
+            let sum = 0;
             for(let i=0; i<res.length;i++){
                 sum = Number(sum) + Number(res[i].lockerPrice)+Number(res[i].sportswearPrice)+Number(res[i].exercisePrice)
             }
             this.setState({monthSales:sum})
         })
     }
+
+    fommat=(num)=>{
+        if(Number(num)>=1000){
+            return num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+        } else {
+            return num
+        }
+    }
     
     render() {
         const { userinfo } = this.props;
         console.log("userinfo : ");
         console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
-        
+        console.log('오늘매출',this.state.todaySales)
+
         return (
         <div className='wrap home'>
             <div className='header'>
@@ -159,21 +171,22 @@ class Home extends Component {
                 <div className='dashboard'>
                     <label>
                         <p>전체고객</p>
-                        <p><span>{this.state.totalCustomer}</span>명</p>
+                        <p><span>{this.fommat(this.state.totalCustomer)}</span>명</p>
                     </label>
                     <label>
                         <p>오늘 방문고객</p>
-                        <p><span>00</span>명</p>
+                        <p><span>{this.fommat(this.state.todayCustomer)}</span>명</p>
                     </label>
                     <label>
                         <p>월매출</p>
-                        <p><span>{this.state.monthSales}</span>원</p>
+                        <p><span>{this.fommat(this.state.monthSales)}</span>원</p>
                     </label>
                     <label>
                         <p>일매출</p>
-                        <p><span>{this.state.todaySales}</span>원</p>
+                        <p><span>{this.fommat(this.state.todaySales)}</span>원</p>
                     </label>
                 </div>{/*.dashboard */}
+
                 <div className='mainVisual'>
                     메인 이미지
                 </div>
