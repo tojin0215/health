@@ -61,6 +61,7 @@ class Sales extends Component {
             salesLists:[],
             salesLists2:[],
             salesLists3:[],
+            salesLists4:[],
             toolList:[],
             customerList:[],
             selectedOption: null,
@@ -284,15 +285,26 @@ class Sales extends Component {
         let today = new Date();
         let url = ''
         let startTime = new Date();
-        let endTime = new Date();
+        let endTime = new Date(today.getFullYear(),today.getMonth(),today.getDate())
         if(e.target.value === '오늘'){
-            alert('오늘입니다.')
+            if(this.state.salesLists4.length != 0){            
+                this.setState({
+                    salesLists4:[],
+                    salesLists2:[],
+                    startDate: startTime
+                })
+            }
             url = 'http://'+ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no
         } else if (e.target.value === '한달'){
+            if(this.state.salesLists4.length != 0){                 
+                this.setState({
+                    salesLists4:[],
+                    salesLists2:[]
+                })
+            }
             startTime = new Date(today.getFullYear(),today.getMonth()-1,today.getDate())
-            endTime = new Date(today.getFullYear(),today.getMonth(),today.getDate())
+            endTime = new Date(today.getFullYear(),today.getMonth(),(today.getDate()+1))
             url = 'http://'+ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
-            alert('한달입니다.'+startTime+', '+endTime)
         }
         
         fetch(url,{
@@ -305,37 +317,46 @@ class Sales extends Component {
                 return data.json();
             }).then(data => {
                 this.setState({
-                    salesLists : data,
+                    salesLists4 : data,
                 })
-                
-                let card = 0
-                let cash = 0
-                let transfer = 0
-                this.state.salesLists.reverse().map((data) => {
-                    let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
-                    let time = moment(data.paymentDate).format("YYYY/MM/DD")
-                    data = {...data, total, time}
-                    this.state.customerList.map((c)=>{
-                        if(data.member_no === c.num){
-                            let userName = c.userName;
-                            data = {...data, userName}
-                        }
-                    })
-                    if(data.paymentTools === '카드'){
-                        card = card + data.total
-                    } else if(data.paymentTools === '현금'){
-                        cash = cash + data.total
-                    } else if(data.paymentTools === '계좌이체'){
-                        transfer = transfer + data.total
-                    } 
-                        
+                if(this.state.salesLists4.length == 0){
+                    //alert('없음')                        
                     this.setState({
-                        salesLists2 : [...this.state.salesLists2, data],
-                        toolList : [{'card':card, 'cash':cash,'transfer':transfer,'total':card+ cash+transfer}],
-                        startDate : startTime,
-                        endDate : endTime
+                        salesLists2:[],
+                        toolList:[]
                     })
-                })
+                }else{
+                    //alert(this.state.salesLists4)
+                    let card = 0
+                    let cash = 0
+                    let transfer = 0
+                    this.state.salesLists4.reverse().map((data) => {
+                        let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
+                        let time = moment(data.paymentDate).format("YYYY/MM/DD")
+                        data = {...data, total, time}
+                        this.state.customerList.map((c)=>{
+                            if(data.member_no === c.num){
+                                let userName = c.userName;
+                                data = {...data, userName}
+                            }
+                        })
+                        if(data.paymentTools === '카드'){
+                            card = card + data.total
+                        } else if(data.paymentTools === '현금'){
+                            cash = cash + data.total
+                        } else if(data.paymentTools === '계좌이체'){
+                            transfer = transfer + data.total
+                        } 
+                            
+                        this.setState({
+                            salesLists2 : [...this.state.salesLists2, data],
+                            toolList : [{'card':card, 'cash':cash,'transfer':transfer,'total':card+ cash+transfer}],
+                            startDate : startTime,
+                            endDate : endTime
+                        })
+                    })  
+                }
+                
                 
             }); 
     } 
