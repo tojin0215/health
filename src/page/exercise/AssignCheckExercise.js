@@ -122,6 +122,7 @@ class AssignCheckExercise extends Component {
         arr.forEach((ex) => {
             fetch(url, {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-type': 'application/json'
                 },
@@ -152,6 +153,7 @@ class AssignCheckExercise extends Component {
         url = url + '&fn=' + fitness_no;
         fetch(url, {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-type': 'application/json',
             },
@@ -326,6 +328,7 @@ class AssignCheckExercise extends Component {
 
         let inits = {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-type': 'application/json',
             },
