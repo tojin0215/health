@@ -89,7 +89,7 @@ class Inbody extends Component {
                 height: 600,
                 type: 'line',
                 zoom: {
-                  enabled: false
+                  enabled: true
                 },
               },
               dataLabels: {
