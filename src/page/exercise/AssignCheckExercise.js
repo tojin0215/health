@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 import '../../styles/exercise/AssignCheckExercise.css';
 import {getStatusRequest} from '../../action/authentication';
 
-//const ip = '13.124.141.28:3002';
-const ip = 'localhost:3000';
+const ip = '13.124.141.28:3002';
+//const ip = 'localhost:3000';
 
 class AssignCheckExercise extends Component {
     constructor(props) {
@@ -26,6 +26,7 @@ class AssignCheckExercise extends Component {
 
             exerciseList: [],
         };
+        console.log(this.props.location.state.assignDefault, this.props.location.state.assignCustom);
         if (this.props.location.state.assignDefault.length !== 0)
             this.getExerciseListDefault();
         else {
@@ -166,6 +167,10 @@ class AssignCheckExercise extends Component {
                     idx = idx + 1;
                     let part = ', ';
                     let part_num = Number(res[i].part);
+                    if (part_num === 32) {
+                        part = '기타, ' + part;
+                        part_num = 0;
+                    }
                     if (part_num >= 16) {
                         part = '유산소, ' + part;
                         part_num = part_num - 16;
@@ -266,6 +271,11 @@ class AssignCheckExercise extends Component {
                     search = search.replace('유산소', '');
                     v = v + 16;
                     v_arr.push(16);
+                }
+                if (/기타/.test(search)) {
+                    search = search.replace('기타', '');
+                    v = 32;
+                    v_arr.push(32);
                 }
                 if (v === 0) {
                     console.error('assignDefault:' + part);
