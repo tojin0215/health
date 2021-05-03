@@ -264,7 +264,7 @@ class AssignExercise extends Component {
         console.log(v);
     };
 
-    onSelectRow(row, isSelected, e) {
+    onSelectRow = (row, isSelected, e) => {
         const exercise_no = row['no'];
         const select_name = 'select';
         const select_data = 'select_data';
@@ -274,19 +274,18 @@ class AssignExercise extends Component {
             JSON.stringify(this.state.select_data)
         );
 
+        const d = {};
         if (isSelected) {
-            const d = {};
             selected_data[exercise_no] = row;
             d[select_name] = [...selected, exercise_no];
             d[select_data] = selected_data;
-            this.setState(d);
         } else {
-            const d = {};
             delete selected_data[exercise_no];
             d[select_name] = selected.filter((i) => i !== exercise_no);
             d[select_data] = selected_data;
-            this.setState(d);
         }
+        this.setState(d);
+        console.log(d);
     }
 
     onSelectRowTop = (row, isSelected, e) => {
@@ -803,7 +802,7 @@ class AssignExercise extends Component {
                     v = v + 16;
                 }
                 if (/기타/.test(search)) {
-                    search = search.replace('기타                              ', '');
+                    search = search.replace('기타', '');
                     v = v + 16;
                 }
 
@@ -941,7 +940,8 @@ class AssignExercise extends Component {
         //     clickToSelect: true,
         //     //unselectable: [2],
         //     //selected: [1],
-        //     selected: this.state.select_top,
+        //     selected: this.state.select,
+        //     // selected: this.state.select_top,
         //     onSelect: this.onSelectRowTop,
         //     bgColor: 'mint',
         // };
@@ -950,7 +950,8 @@ class AssignExercise extends Component {
         //     clickToSelect: true,
         //     //unselectable: [2],
         //     //selected: [1],
-        //     selected: this.state.select_bottom,
+        //     selected: this.state.select,
+        //     // selected: this.state.select_bottom,
         //     onSelect: this.onSelectRowBottom,
         //     bgColor: 'mint',
         // };
@@ -959,7 +960,8 @@ class AssignExercise extends Component {
         //     clickToSelect: true,
         //     //unselectable: [2],
         //     //selected: [1],
-        //     selected: this.state.select_core,
+        //     selected: this.state.select,
+        //     // selected: this.state.select_core,
         //     onSelect: this.onSelectRowCore,
         //     bgColor: 'mint',
         // };
@@ -978,7 +980,8 @@ class AssignExercise extends Component {
         //     clickToSelect: true,
         //     //unselectable: [2],
         //     //selected: [1],
-        //     selected: this.state.select_oxy,
+        //     selected: this.state.select,
+        //     // selected: this.state.select_oxy,
         //     onSelect: this.onSelectRowOxy,
         //     bgColor: 'mint',
         // };
@@ -987,7 +990,8 @@ class AssignExercise extends Component {
         //     clickToSelect: true,
         //     //unselectable: [2],
         //     //selected: [1],
-        //     selected: this.state.select_etc,
+        //     selected: this.state.select,
+        //     // selected: this.state.select_etc,
         //     onSelect: this.onSelectRowEtc,
         //     bgColor: 'mint',
         // };
@@ -1733,12 +1737,13 @@ class AssignExercise extends Component {
                                     member_no: this.state.member_no,
                                     assignDefault: this.state.assignDefault,
                                     assignCustom: {
-                                        1: this.state.select_top_data,
-                                        2: this.state.select_bottom_data,
-                                        4: this.state.select_allbody_data,
-                                        8: this.state.select_core_data,
-                                        16: this.state.select_oxy_data,
-                                        32: this.state.select_etc_data,
+                                        0: this.state.select_data,
+                                        // 1: this.state.select_top_data,
+                                        // 2: this.state.select_bottom_data,
+                                        // 4: this.state.select_allbody_data,
+                                        // 8: this.state.select_core_data,
+                                        // 16: this.state.select_oxy_data,
+                                        // 32: this.state.select_etc_data,
                                     },
                                 },
                             }}
