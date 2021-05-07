@@ -48,6 +48,7 @@
 .home .mainVisual {
 	width: 100%;
 	height: 40rem;
+	margin-top: 2rem;
 	/* background-image: url(${mainVisual1}); */
 	background: no-repeat top/contain url(../../images/mainVisual1.png);
 	text-indent: -9999rem;
@@ -56,7 +57,7 @@
 .home .homeIcon {
 	width: 100%;
 	position: absolute;
-	top: 50rem;
+	top: 60rem;
 	left: 0;
 }
 
@@ -78,23 +79,25 @@
 
 .home .homeIcon a {
 	display: flex;
-	width: 100%;
-	height: 100%;
-	background: no-repeat center/contain;
+	width: 10rem;
+	height: 10rem;
+	border-radius: 1rem;
+	background: no-repeat center/90%;
+	box-shadow: 5px 5px 15px 6px #ddd;
 	/* height:100px; */
 	color: #005;
-	padding: 0;
-	margin: 0;
+	padding: 1rem;
+	margin: 0 auto;
 	justify-content: center;
 	align-items: flex-end;
 }
 
-.home .homeIcon a p {
-	text-indent: -1rem;
-	font-size: 2.4rem;
-	color: #3675f6;
-	font-weight: 400;
-	padding-bottom: 3rem;
+.home .homeIcon p {
+	font-size: 2rem;
+	color: #333;
+	font-weight: 300;
+	padding-top: 1rem;
+	text-align: center;
 }
 
 .home .homeIcon .btnCustomer {
