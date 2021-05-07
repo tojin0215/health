@@ -55,7 +55,12 @@ class Navigation extends Component {
                         <NavLink exact to="/exercise"><span className={styles.navitem}>설정</span></NavLink>
                         <NavLink exact to="/assign"><span className={styles.navitem}>운동</span></NavLink>
                         <NavLink exact to="/statistics"><span className={styles.navitem}></span></NavLink>
-                    </Nav>
+                        {userinfo.fitness_name === '투진컴퍼니'?
+                        <NavLink exact to="/admin"><span className={styles.navitem}>관리자</span></NavLink>
+                        :null
+                        }
+                        
+                        </Nav>
                     <Nav className={styles.navUtill}>
                         <Nav.Item><span className={styles.navitem}>{userinfo.manager_name}님</span></Nav.Item>
                         <Nav.Item>
