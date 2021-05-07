@@ -194,28 +194,28 @@ class Home extends Component {
                     <ul>
                         <li>
                             <Link to="/customer" className='btnCustomerNew btnCustomer'>
-                                <p>고객</p>
                             </Link>
-                        </li>
-                        <li>
-                            <Link to="/sales" className='btnCustomerNew btnSales'>
-                                <p>상품매출</p>
-                            </Link>
+                            <p>고객</p>
                         </li>
                         <li>
                             <Link to="/exercise" className='btnCustomerNew btnSetting'>
-                                <p>설정</p>
                             </Link>
+                            <p>운동 설정</p>
                         </li>
                         <li>
                             <Link to="/assign" className='btnCustomerNew btnExercise'>
-                                <p>운동</p>
                             </Link>
+                            <p>운동 배정</p>
+                        </li>
+                        <li>
+                            <Link to="/sales" className='btnCustomerNew btnSales'>
+                            </Link>
+                            <p>상품매출</p>
                         </li>
                         <li>
                             <Link to="/statistics" className='btnCustomerNew btnStatic'>
-                                <p>통계</p>
                             </Link>
+                            <p>통계</p>
                         </li>
                     </ul>
                 </div>

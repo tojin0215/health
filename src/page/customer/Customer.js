@@ -366,9 +366,6 @@ class Customer extends Component {
                     </Link>
                     <div className='customerTable'>
                         <h5>회원 목록</h5>
-                        <div className='customerTableSort'>
-                            50개씩 보기 ▼
-                        </div>
                         <div>
                             <BootstrapTable
                             hover
