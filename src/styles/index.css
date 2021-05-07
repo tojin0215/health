@@ -1,31 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
 .localNavigation {
-  width:100%;
-  height:5rem;
-  border-bottom:0.1rem solid #000051;
+	width: 100%;
+	height: 9.6rem;
+	border-bottom: 0.1rem solid #000051;
 }
 
 .localNavigation .container {
-  padding:0 .5rem;
-  height:5rem;
-  display: flex;
-  justify-content: space-between;
+	padding: 0 0.5rem;
+	height: 5rem;
+	display: flex;
+	justify-content: space-between;
 }
-.localNavigation .container h2{
-  line-height:5rem;
+.localNavigation .container h2 {
+	line-height: 5rem;
 }
 .localNavigation .breadCrumb {
-    display: flex;
-    align-items: flex-end;
-    padding-bottom:1rem;
-    font-size:1.2rem;
+	display: flex;
+	align-items: flex-end;
+	padding-bottom: 1rem;
+	font-size: 1.2rem;
 }
 .localNavigation .breadCrumb a {
-  padding:0 1rem;
+	padding: 0 1rem;
 }
 .localNavigation .breadCrumb a:last-child {
-  color:#000051;
-  font-size:1.4rem;
-  font-weight:600;
+	color: #000051;
+	font-size: 1.4rem;
+	font-weight: 600;
 }

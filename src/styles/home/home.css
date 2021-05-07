@@ -7,7 +7,7 @@
 }
 
 .home .dashboard {
-	padding: 0.8rem 0 0;
+	padding: 0;
 	width: 100%;
 	/* position: absolute;
 	top: 0;
@@ -23,15 +23,13 @@
 
 .home .dashboard label {
 	display: flex;
-	width: 23%;
+	width: 100%;
 	height: 100%;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
-	border: 1px solid #885;
-	border-radius: 1rem;
-	font-size: 1.6rem;
-	padding: 0.4rem;
+	font-size: 1.8rem;
+	padding: 0;
 }
 
 .home .dashboard label p {
@@ -40,7 +38,7 @@
 }
 
 .home .dashboard label p span {
-	font-size: 2.4rem;
+	font-size: 1.8rem;
 	font-weight: 600;
 	padding: 0.4rem;
 }
@@ -57,7 +55,7 @@
 .home .homeIcon {
 	width: 100%;
 	position: absolute;
-	top: 60rem;
+	top: 66rem;
 	left: 0;
 }
 

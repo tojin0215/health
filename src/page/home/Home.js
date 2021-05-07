@@ -161,32 +161,28 @@ class Home extends Component {
                 <Navigation goLogin={this.goLogin}/>
                 <div className='localNavigation'>
                     <div className='container'>
-                        <h2>
-                            Home
-                        </h2>
+                        <div className='dashboard'>
+                            <div>
+                                <label>
+                                    <p>전체고객<span>{this.fommat(this.state.totalCustomer)}</span></p>
+                                </label>
+                                <label>
+                                    <p>오늘 방문고객<span>{this.fommat(this.state.todayCustomer)}</span></p>
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    <p>월매출<span>{this.fommat(this.state.monthSales)}</span></p>
+                                </label>
+                                <label>
+                                    <p>일매출<span>{this.fommat(this.state.todaySales)}</span></p>
+                                </label>
+                            </div>
+                        </div>{/*.dashboard */}
                     </div>{/*.container */}
                 </div>{/*.localNavigation */}
             </div>{/*.header */}
             <div className='container'>
-                <div className='dashboard'>
-                    <label>
-                        <p>전체고객</p>
-                        <p><span>{this.fommat(this.state.totalCustomer)}</span>명</p>
-                    </label>
-                    <label>
-                        <p>오늘 방문고객</p>
-                        <p><span>{this.fommat(this.state.todayCustomer)}</span>명</p>
-                    </label>
-                    <label>
-                        <p>월매출</p>
-                        <p><span>{this.fommat(this.state.monthSales)}</span>원</p>
-                    </label>
-                    <label>
-                        <p>일매출</p>
-                        <p><span>{this.fommat(this.state.todaySales)}</span>원</p>
-                    </label>
-                </div>{/*.dashboard */}
-
                 <div className='mainVisual'>
                     메인 이미지
                 </div>
