@@ -27,8 +27,8 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 //import { Chart } from "react-google-charts";
 import Chart from "react-apexcharts";
 
-//const ip = '13.124.141.28:3002';
-const ip = 'localhost:3000';
+const ip = '13.124.141.28:3002';
+//const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
@@ -828,41 +828,6 @@ class Inbody extends Component {
                             체지방률
                         </TableHeaderColumn>
                     </BootstrapTable>
-
-                    {this.state.show?
-                        <div>
-                            <label>{this.state.userName}님의 인바디 변화그래프 입니다.</label>
-                            <button onClick={this.handleClickAway}>X</button>
-                            <Dropdown
-                                className='searchDrop'
-                                options={this.state.inbody_noList}
-                                onChange={this.selectItem1}
-                                //value={this.state.item}
-                                placeholder="선택"
-                            />
-                            <label>~</label>
-                            <Dropdown
-                                className='searchDrop'
-                                options={this.state.inbody_noList}
-                                onChange={this.selectItem2}
-                                //value={this.state.item}
-                                placeholder="선택"
-                            />
-                            <button onClick={this.clickInbody}>조회하기</button>
-
-                                {this.state.showChart?
-                                    <Chart
-                                        options={this.state.chartOptions}
-                                        series={this.state.series}
-                                        type="line"
-                                        width="700"
-                                    />
-                            :null}
-
-                        </div>
-                    :null
-                    }
-
                     {/*
                     <text>
                     </text>
@@ -872,6 +837,40 @@ class Inbody extends Component {
                 <div className='footer'>
                     <Footer />
                 </div>{/*.footer */}
+
+            {this.state.show?
+                <div className='inbodySlide'>
+                    <label>{this.state.userName}님의 인바디 변화그래프 입니다.</label>
+                    <button onClick={this.handleClickAway}>X</button>
+                    <Dropdown
+                        className='searchDrop'
+                        options={this.state.inbody_noList}
+                        onChange={this.selectItem1}
+                        //value={this.state.item}
+                        placeholder="선택"
+                    />
+                    <label>~</label>
+                    <Dropdown
+                        className='searchDrop'
+                        options={this.state.inbody_noList}
+                        onChange={this.selectItem2}
+                        //value={this.state.item}
+                        placeholder="선택"
+                    />
+                    <button onClick={this.clickInbody}>조회하기</button>
+
+                        {this.state.showChart?
+                            <Chart
+                                options={this.state.chartOptions}
+                                series={this.state.series}
+                                type="line"
+                                width="700"
+                            />
+                    :null}
+
+                </div>
+            :null
+            }
             </div>/*.inbody */
         );
     }

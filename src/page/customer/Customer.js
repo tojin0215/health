@@ -16,8 +16,8 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 
 import '../../styles/customer/Customer.css';
 
-//const ip = '13.124.141.28:3002';
-const ip = 'localhost:3000';
+const ip = '13.124.141.28:3002';
+//const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
@@ -366,9 +366,6 @@ class Customer extends Component {
                     </Link>
                     <div className='customerTable'>
                         <h5>회원 목록</h5>
-                        <div className='customerTableSort'>
-                            50개씩 보기 ▼
-                        </div>
                         <div>
                             <BootstrapTable
                             hover
