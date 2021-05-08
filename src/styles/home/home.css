@@ -19,34 +19,62 @@
 	display: flex;
 	width: 100%;
 	justify-content: space-around;
+	padding: 1.8rem 0;
+}
+
+.home .dashboard > div {
+	width: 50%;
+}
+
+.home .dashboard > div label:last-child span {
+	color: #000;
+}
+
+.home .dashboard .homeDashLeft {
+	padding-left: 20%;
+	border-right: 1px solid #bbb;
+}
+
+.home .dashboard .homeDashRight {
+	padding-right: 20%;
+}
+
+.home .dashboard .homeDashLeft label {
+	justify-content: flex-end;
+}
+
+.home .dashboard .homeDashRight label {
+	justify-content: flex-start;
 }
 
 .home .dashboard label {
 	display: flex;
 	width: 100%;
-	height: 100%;
-	justify-content: center;
+	height: 50%;
 	align-items: center;
 	flex-wrap: wrap;
 	font-size: 1.8rem;
-	padding: 0;
+	margin: 0;
 }
 
 .home .dashboard label p {
-	width: 100%;
-	text-align: center;
+	text-align: end;
+	font-weight: 300;
+	padding: 0 1rem;
 }
 
-.home .dashboard label p span {
+.home .dashboard label span {
 	font-size: 1.8rem;
-	font-weight: 600;
-	padding: 0.4rem;
+	font-weight: 700;
+	color: #0f78ff;
+	text-align: end;
+	padding: 0 1rem;
 }
 
 .home .mainVisual {
 	width: 100%;
-	height: 40rem;
-	margin-top: 2rem;
+	height: 46.4rem;
+	margin-top: 4.7rem;
 	/* background-image: url(${mainVisual1}); */
 	background: no-repeat top/contain url(../../images/mainVisual1.png);
 	text-indent: -9999rem;
@@ -54,9 +82,10 @@
 
 .home .homeIcon {
 	width: 100%;
-	position: absolute;
+	/* position: absolute;
 	top: 66rem;
-	left: 0;
+	left: 0; */
+	margin-top: 7.8rem;
 }
 
 .home .homeIcon ul {
@@ -64,15 +93,11 @@
 	justify-content: space-around;
 	flex-wrap: wrap;
 	width: 100%;
-	padding: 0 20rem;
+	padding: 0 10rem;
 }
 
 .home .homeIcon ul li {
-	width: 20%;
-	height: 22rem;
-}
-
-.home .homeIcon ul li:hover {
+	width: 16%;
 }
 
 .home .homeIcon a {
@@ -81,7 +106,7 @@
 	height: 10rem;
 	border-radius: 1rem;
 	background: no-repeat center/90%;
-	box-shadow: 5px 5px 15px 6px #ddd;
+	box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
 	/* height:100px; */
 	color: #005;
 	padding: 1rem;
@@ -116,4 +141,50 @@
 
 .home .homeIcon .btnSetting {
 	background-image: url(../../images/btnSetting.png);
+}
+
+.home .homeAbout {
+	margin-top: 4.7rem;
+	width: 100%;
+}
+
+.home .homeAbout h3 {
+	display: flex;
+	flex-direction: row;
+	font-size: 5rem;
+	font-weight: 700;
+	line-height: 5rem;
+	color: #213449;
+	border: none;
+	margin-bottom: 2rem;
+}
+
+.home .homeAbout h3 .parallelogram {
+	margin: 0.7rem 2rem 0 1rem;
+}
+
+.home .homeAbout section {
+	position: relative;
+}
+
+.home .homeAbout section > p {
+	font-size: 1.9rem;
+	font-weight: 300;
+}
+
+.home .homeAbout .aboutExplain button {
+	position: absolute;
+	top: 4rem;
+	right: 0;
+}
+.home .homeAbout .aboutList ul {
+	display: flex;
+	justify-content: space-around;
+}
+
+.home .homeAbout .aboutList ul li {
+	width: 30rem;
+	height: 41rem;
+	box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
+	border-radius: 25px;
 }

@@ -3,12 +3,12 @@
 .localNavigation {
 	width: 100%;
 	height: 9.6rem;
-	border-bottom: 0.1rem solid #000051;
+	box-shadow: 0 6px 7px rgba(187, 187, 187, 0.5);
 }
 
 .localNavigation .container {
 	padding: 0 0.5rem;
-	height: 5rem;
+	height: 100%;
 	display: flex;
 	justify-content: space-between;
 }
@@ -28,4 +28,14 @@
 	color: #000051;
 	font-size: 1.4rem;
 	font-weight: 600;
+}
+
+.parallelogram {
+	width: 0.8rem;
+	height: 4.2rem;
+	background: #0f78ff;
+	-webkit-transform: skew(-20deg);
+	-moz-transform: skew(-20deg);
+	-o-transform: skew(-20deg);
+	transform: skew(-20deg);
 }

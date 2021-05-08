@@ -163,20 +163,24 @@ class Home extends Component {
                 <div className='localNavigation'>
                     <div className='container'>
                         <div className='dashboard'>
-                            <div>
+                            <div className='homeDashLeft'>
                                 <label>
-                                    <p>전체고객<span>{this.fommat(this.state.totalCustomer)}</span></p>
+                                    <p>오늘 방문고객</p>
+                                    <span>{this.fommat(this.state.todayCustomer)}</span>
                                 </label>
                                 <label>
-                                    <p>오늘 방문고객<span>{this.fommat(this.state.todayCustomer)}</span></p>
+                                    <p>전체고객</p>
+                                    <span>{this.fommat(this.state.totalCustomer)}</span>
                                 </label>
                             </div>
-                            <div>
+                            <div className='homeDashRight'>
                                 <label>
-                                    <p>월매출<span>{this.fommat(this.state.monthSales)}</span></p>
+                                    <p>일매출</p>
+                                    <span>{this.fommat(this.state.todaySales)}</span>
                                 </label>
                                 <label>
-                                    <p>일매출<span>{this.fommat(this.state.todaySales)}</span></p>
+                                    <p>월매출</p>
+                                    <span>{this.fommat(this.state.monthSales)}</span>
                                 </label>
                             </div>
                         </div>{/*.dashboard */}
@@ -216,12 +220,41 @@ class Home extends Component {
                         </li>
                         <li>
                             <Link to="/statistics" className='btnCustomerNew btnStatic'>
-                                <p>관리자</p>
                             </Link>
+                            <p>관리자</p>
                         </li>
-                        
                     </ul>
                 </div>
+                <section className='homeAbout'>
+                    <h3>
+                        <div className='parallelogram'></div>
+                    About 오마이짐
+                    </h3>
+                    <section className='aboutExplain'>
+                        <p>
+                            헬스 회원 스마트 관리 시스템으로 기존 회원 관리 방식에서 탈피하여
+                        </p>
+                        <p>
+                            쉬운 회원관리, 스마트한 서비스를 제공합니다.
+                        </p>
+                        <button>
+                            자세히보기
+                        </button>
+                    </section>
+                    <section className='aboutList'>
+                        <ul>
+                            <li>
+
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                        </ul>
+                    </section>
+                </section>
             </div>
             <div className='footer'>
                 <Footer />
