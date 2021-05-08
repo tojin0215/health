@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { Home, Customer, AddCustomer, AddExercise, Sales, AddSales, Login,Statistics, Inbody, AddInbody, UpdateCustomer, DefaultExercise, AssignExercise, AssignCheckExercise, AssignCustomer} from '../page';
+import { Home, Customer, AddCustomer, AddExercise, Sales, AddSales, Login,Statistics, Inbody, AddInbody, UpdateCustomer, DefaultExercise, AssignExercise, AssignCheckExercise, AssignCustomer, Admin} from '../page';
 
 
 class App extends Component {
@@ -22,6 +22,7 @@ class App extends Component {
             <Route exact path="/sales" component={Sales}/>
             <Route exact path="/sales/add" component={AddSales}/>
             <Route exact path="/statistics" component={Statistics}/>
+            <Route exact path="/admin" component={Admin}/>
         </div>
     );
   }

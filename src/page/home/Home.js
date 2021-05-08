@@ -26,6 +26,7 @@ class Home extends Component {
             todayCustomer:0,
             monthSales:0,
             todaySales:0,
+            admin:this.props.userinfo.manager_name
         }
         this.cusFetch();
     }
@@ -213,6 +214,12 @@ class Home extends Component {
                             </Link>
                             <p>통계</p>
                         </li>
+                        <li>
+                            <Link to="/statistics" className='btnCustomerNew btnStatic'>
+                                <p>관리자</p>
+                            </Link>
+                        </li>
+                        
                     </ul>
                 </div>
             </div>
