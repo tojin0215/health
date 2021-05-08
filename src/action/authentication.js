@@ -71,7 +71,7 @@ export function getStatusRequest() {
         console.log('____getStatus', getStatus())
 
         dispatch(getStatus());
-        return fetch("http://"+ip+"/manager?type=session", {
+        return fetch("http://"+ip+"/manager", {
             method: "GET",
             headers: {
                 'Content-type': 'application/json'
