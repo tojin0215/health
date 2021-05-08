@@ -26,8 +26,8 @@ import NumberFormat from 'react-number-format';
 
 import {getStatusRequest} from '../../action/authentication';
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 const userList = [
     {'num':1, 'userName':'김투진','phone':'000-0000-0000'},

@@ -7,8 +7,8 @@ export const AUTH_GET_STATUS_SUCCESS = "AUTH_GET_STATUS_SUCCESS";
 export const AUTH_GET_STATUS_FAILURE = "AUTH_GET_STATUS_FAILURE";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 /* LOGIN */
 export function loginRequest(id, password) {
@@ -17,7 +17,7 @@ export function loginRequest(id, password) {
     dispatch(login());
 
     // API REQUEST
-    return fetch("http://"+ip+"/manager", {
+    return fetch("http://"+ip+"/manager?type=session", {
         method: "POST",
         credentials: 'include',
         headers: {
@@ -71,7 +71,7 @@ export function getStatusRequest() {
         console.log('____getStatus', getStatus())
 
         dispatch(getStatus());
-        return fetch("http://"+ip+"/manager", {
+        return fetch("http://"+ip+"/manager?type=session", {
             method: "GET",
             headers: {
                 'Content-type': 'application/json'
@@ -115,7 +115,7 @@ export function getStatusFailure() {
 }
 export function logoutRequest() {
     return (dispatch) => {
-        return fetch("http://"+ip+"/manager", {
+        return fetch("http://"+ip+"/manager?type=session", {
             method: "DELETE",
             credentials: 'include'
         })

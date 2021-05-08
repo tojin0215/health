@@ -12,6 +12,7 @@
     "chart.js": "^3.2.0",
     "checkbox-group": "^2.0.0",
     "material-table": "^1.69.2",
+    "material-ui-password-field": "^2.1.2",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
     "query-string": "^7.0.0",

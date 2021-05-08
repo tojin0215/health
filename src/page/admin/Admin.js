@@ -7,6 +7,11 @@ import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import { TextField } from '@material-ui/core';
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 import {getStatusRequest} from '../../action/authentication';
 
 //const ip = '13.124.141.28:3002';
@@ -25,9 +30,16 @@ class Admin extends Component {
             id_err:false,
             pwd_err:false,
             fitness_name_err:false,
-            manager_name_err:false
+            manager_name_err:false,
+
+            open:false,
+            fitnessList:[],
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleClickOpen = this.handleClickOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        
+        this.cusFetch();
     };
     goLogin = () => {
         this.props.history.push("/");
@@ -75,6 +87,39 @@ class Admin extends Component {
                 }
             }
         );
+    }
+
+    cusFetch =() =>{
+        let url = "http://"+ip+"/manager?type=all"
+            fetch(url, {
+                method: "GET",
+                headers: {
+                  'Content-type': 'application/json'
+                },
+                })
+                .then(response => response.json())
+                .then(res => {
+                        let arr1 = [];
+                        for(let i=(res.length-1) ; i>=0 ; i--){
+                            arr1.push({"no":res[i].fitness_no,"id":res[i].id, "fitness_name":res[i].fitness_name, "manager_name":res[i].manager_name});
+                        }
+                        this.setState({
+                            fitnessList : arr1,
+                        });
+                       
+                    });
+    }
+
+    handleClickOpen() {
+        this.setState({
+            open: true
+        });
+    }
+
+    handleClose() {
+        this.setState({
+            open: false
+        });
     }
 
     handleChange = (e) => { 
@@ -126,7 +171,10 @@ class Admin extends Component {
                 .then(response => response.json())
                 .then(response => {
                     alert("등록되었습니다.");
-                    this.props.history.push('/home');
+                    this.setState({
+                        open:false
+                    })
+                    this.cusFetch();
                 });
 
         }
@@ -136,6 +184,19 @@ class Admin extends Component {
         const { userinfo } = this.props;
         console.log("userinfo : ");
         console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
+
+        const textOptions = {
+            noDataText: '등록된 헬스장이 없습니다.',
+            alwaysShowAllBtns: true,
+            //hideSizePerPage:true
+            sizePerPageList: [{
+                text: '10개씩 보기', value: 10
+              }, {
+                text: '50개씩 보기', value: 50
+              }, {
+                text: '100개씩 보기', value: 100
+            }]
+        };
 
         return (
             <div className='statistics'>
@@ -157,64 +218,137 @@ class Admin extends Component {
                 </div>{/*.header */}
                 <div className="container">
                      <h2>관리자페이지</h2>
-                     <form className="formAddCustomer">
-                    <label>
-                    <TextField
-                            variant="outlined"
-                            value={this.state.id}
-                            onChange={this.handleChange}
-                            id='id'
-                            label="아이디"
-                            error={this.state.id_err}
-                            required
-                            autoFocus
-                        />
-                    </label>{/*.customerName */}
-                
-                    <label>
-                    <TextField
-                            variant="outlined"
-                            type="password"
-                            value={this.state.pwd}
-                            onChange={this.handleChange}
-                            id='pwd'
-                            label="비밀번호"
-                            error={this.state.pwd_err}
-                            required
-                            autoFocus
-                        />
-                    </label>
 
-                    <label>
-                    <TextField
-                            variant="outlined"
-                            value={this.state.fitness_name}
-                            onChange={this.handleChange}
-                            id='fitness_name'
-                            label="헬스장이름"
-                            error={this.state.fitness_name_err}
-                            required
-                            autoFocus
-                        />
-                    </label>
+                    <div>
+                    <button
+                            type='button'
+                            onClick={this.handleClickOpen}
+                            >
+                                헬스장 추가하기
+                            </button>
+                            <Dialog
+                            open={this.state.open}
+                            onClose={this.handleClose}
+                            maxWidth='lg'
+                            >
+                                <DialogTitle>
+                                    추가하기
+                                </DialogTitle>
+                                <DialogContent>
+                                <form className="formAddCustomer">
+                                <label>
+                                <TextField
+                                        variant="outlined"
+                                        value={this.state.id}
+                                        onChange={this.handleChange}
+                                        id='id'
+                                        label="아이디"
+                                        error={this.state.id_err}
+                                        required
+                                        autoFocus
+                                    />
+                                </label>{/*.customerName */}
+                            
+                                <label>
+                                <TextField
+                                        variant="outlined"
+                                        type="password"
+                                        value={this.state.pwd}
+                                        onChange={this.handleChange}
+                                        id='pwd'
+                                        label="비밀번호"
+                                        error={this.state.pwd_err}
+                                        required
+                                        autoFocus
+                                    />
+                                </label>
+
+                                <label>
+                                <TextField
+                                        variant="outlined"
+                                        value={this.state.fitness_name}
+                                        onChange={this.handleChange}
+                                        id='fitness_name'
+                                        label="헬스장이름"
+                                        error={this.state.fitness_name_err}
+                                        required
+                                        autoFocus
+                                    />
+                                </label>
+                                
+                                <label>
+                                <TextField
+                                        variant="outlined"
+                                        value={this.state.manager_name}
+                                        onChange={this.handleChange}
+                                        id='manager_name'
+                                        label="담당자이름"
+                                        error={this.state.manager_name_err}
+                                        required
+                                        autoFocus
+                                    />
+                                </label>
+
+                                
+                            </form>{/*.formAddCustomer */}
+                                    
+                                </DialogContent>
+                                <DialogActions>
+                                    <button type="button" onClick={this.handleOnClick}>
+                                        등록하기
+                                    </button>
+                                    <button type='button' onClick={this.handleClose}>
+                                        닫기
+                                    </button>
+                                </DialogActions>
+                            </Dialog>
+                    </div>
+                    <div>
+                    <BootstrapTable
+                    data={ this.state.fitnessList }
+                    options={textOptions}
+                    pagination={ this.state.fitnessList.length > 1 }
+                    tableHeaderClass='tableHeader'
+                    tableContainerClass='tableContainer'>
+                        <TableHeaderColumn
+                        dataField='no'
+                        thStyle={ { 'textAlign': 'center', 'width':'35px' } }
+                        tdStyle={ { 'textAlign': 'center','width':'35px'  } }
+                        isKey
+                        >
+                            no
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='fitness_name'
+                        thStyle={ { 'textAlign': 'center', 'width':'100px' } }
+                        tdStyle={ { 'textAlign': 'center','width':'100px'  } }
+                        >
+                            이름
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='manager_name'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >
+                            대표
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='id'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >
+                            아이디
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='no'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >
+                            연락처
+                        </TableHeaderColumn>
+                    </BootstrapTable>
+                    </div>
                     
-                    <label>
-                    <TextField
-                            variant="outlined"
-                            value={this.state.manager_name}
-                            onChange={this.handleChange}
-                            id='manager_name'
-                            label="담당자이름"
-                            error={this.state.manager_name_err}
-                            required
-                            autoFocus
-                        />
-                    </label>
-
-                     <button type="button" onClick={this.handleOnClick}>
-                        등록하기
-                    </button>
-                </form>{/*.formAddCustomer */}
                 </div>
                 <div className='footer'>
                     <Footer />

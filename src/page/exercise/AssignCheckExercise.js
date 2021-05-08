@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 import '../../styles/exercise/AssignCheckExercise.css';
 import {getStatusRequest} from '../../action/authentication';
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 class AssignCheckExercise extends Component {
     constructor(props) {
