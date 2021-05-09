@@ -177,6 +177,7 @@
 	top: 4rem;
 	right: 0;
 }
+
 .home .homeAbout .aboutList ul {
 	display: flex;
 	justify-content: space-around;
@@ -187,4 +188,29 @@
 	height: 41rem;
 	box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
 	border-radius: 25px;
+	padding: 2rem;
+	position: relative;
+}
+
+.home .homeAbout .aboutList ul li div {
+	height: 20rem;
+	background-repeat: no-repeat;
+	background-size: 12rem auto;
+}
+
+.home .homeAbout .aboutList ul li:nth-child(1) div {
+	background-image: url(/src/images/aboutProduct.png);
+}
+.home .homeAbout .aboutList ul li:nth-child(2) div {
+	background-image: url(/src/images/aboutExercise.png);
+}
+.home .homeAbout .aboutList ul li:nth-child(3) div {
+	background-image: url(/src/images/aboutManage.png);
+}
+
+.home .homeAbout .aboutList ul li button {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 1rem;
 }

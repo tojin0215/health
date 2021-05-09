@@ -540,7 +540,9 @@ class Inbody extends Component {
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
+                                <div className='parallelogram'></div>
                                 인바디 정보
+                                <span>.</span>
                             </h2>
                             <div className='breadCrumb'>
                                 <Link to='/home'>HOME</Link>

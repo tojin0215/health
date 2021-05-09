@@ -32,17 +32,22 @@ input[type='checkbox'] {
 input[type='password'] {
 	margin: 1rem;
 }
+
+.container .inputTextLine {
+	border: none;
+	border-bottom: 1px solid #000;
+	border-radius: 0;
+	background: url(../images/search.png) no-repeat right center/2rem auto;
+}
+
 /* 달력 데이터 피커 인풋 박스 크기 */
 .react-datepicker__input-container input[type='text'] {
 	width: 11rem;
+	border: 1px solid #bbb;
 }
 /* 달력 데이터 피커 분류(당일, 1개월) */
 .container .dateSort {
-	width: 7rem;
-}
-/* 고객검색 버튼 가로 */
-.btnSearch {
-	width: 12rem;
+	/* width: 7rem; */
 }
 /* 세로 형식 인풋 박스 */
 .inputColumn {
@@ -101,6 +106,7 @@ input[type='password'] {
 	top: 1.8rem;
 }
 /* 달력 셀렉터 */
+
 .container .react-datepicker .react-datepicker__navigation {
 	width: 1rem;
 	border: 0.45rem solid transparent;
@@ -132,4 +138,9 @@ html .MuiInputLabel-outlined {
 }
 .container .react-datepicker-popper {
 	z-index: 2;
+}
+
+/* 드롭다운 메뉴 */
+.Dropdown-menu {
+	border-radius: 1rem;
 }

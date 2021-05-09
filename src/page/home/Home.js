@@ -244,13 +244,43 @@ class Home extends Component {
                     <section className='aboutList'>
                         <ul>
                             <li>
-
+                                <div className='imageBox'>
+                                </div>
+                                <h5>
+                                    상품
+                                </h5>
+                                <p>
+                                    헬스 관련한 상품을 모아놓은 카테고리 설명을 넣으면 될 것 같습니다.
+                                </p>
+                                <button>
+                                    더보기
+                                </button>
                             </li>
                             <li>
-                                
+                                <div className='imageBox'>
+                                </div>
+                                <h5>
+                                    운동
+                                </h5>
+                                <p>
+                                    헬스 운동, 전신부터 유산소,하체 등 설명을 이곳에 적어주면 깔끔하고 좋을 것 같네요.
+                                </p>
+                                <button>
+                                    더보기
+                                </button>
                             </li>
                             <li>
-                                
+                                <div className='imageBox'>
+                                </div>
+                                <h5>
+                                    회원관리
+                                </h5>
+                                <p>
+                                    보다 쉬워진 헬스장 회원 관리 스마트 관리 시스템이란 걸 간단한게 소개해주면 좋을듯해요.
+                                </p>
+                                <button>
+                                    더보기
+                                </button>
                             </li>
                         </ul>
                     </section>

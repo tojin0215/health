@@ -299,7 +299,9 @@ class AddSales extends Component {
                 <div className='localNavigation'>
                     <div className='container'>
                         <h2>
+                            <div className='parallelogram'></div>
                             결제 등록
+                            <span>.</span>
                         </h2>
                         <div className='breadCrumb'>
                             <Link to='/home'>HOME</Link>

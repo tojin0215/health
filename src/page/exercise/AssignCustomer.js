@@ -190,7 +190,9 @@ class AssignCustomer extends Component {
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
+                                <div className='parallelogram'></div>
                                 운동배정목록
+                                <span>.</span>
                             </h2>
                             <div className='breadCrumb'>
                                 <Link to='/home'>HOME</Link>
