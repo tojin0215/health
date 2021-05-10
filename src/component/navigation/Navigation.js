@@ -7,7 +7,7 @@ import {logoutRequest} from '../../action/authentication';
 import 'bootstrap/dist/css/bootstrap.css';
 import styles from './Navigation.css';
 
-import imgLogo from '../../images/logo.png';
+import imgLogo from '../../images/logo-text.png';
 import imgLogoFull from '../../images/logo-text.png';
 
 class Navigation extends Component {

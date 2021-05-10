@@ -33,6 +33,11 @@ input[type='password'] {
 	margin: 1rem;
 }
 
+input[type='password']:focus {
+	outline: none;
+	border: 1px solid #0f78ff;
+}
+
 .container .inputTextLine {
 	border: none;
 	border-bottom: 1px solid #000;

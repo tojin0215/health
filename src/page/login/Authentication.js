@@ -86,7 +86,11 @@ class Authentication extends Component {
                     <div className="row">
                         {inputBoxes}
                         <a className="waves-effect waves-light btn"
-                          onClick={this.handleLogin}>LOGIN</a>
+                          onClick={this.handleLogin}>
+                            <button>
+                                LOGIN
+                            </button>
+                        </a>
                     </div>
                 </div>
  

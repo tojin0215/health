@@ -56,10 +56,11 @@
 .auth .card .row .btn {
 	margin-top: 2rem;
 	display: block;
-	width: 31.8rem;
-	height: 4rem;
 	border-radius: 1rem;
-	background-color: #000055;
 	font-size: 1.6rem;
 	color: #fff;
+}
+
+.auth .card .row .btn button {
+	width: 31.8rem;
 }
