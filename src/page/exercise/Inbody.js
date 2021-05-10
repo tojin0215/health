@@ -555,7 +555,7 @@ class Inbody extends Component {
                     </div>{/*.localNavigation */}
                 </div>{/*.header */}
 
-            <ClickAwayListener onClickAway={this.handleClickAway}>
+            {/* <ClickAwayListener onClickAway={this.handleClickAway}> */}
                 <div className="container">
                     <section className='inbodyCustomer'>
                         <div>
@@ -835,7 +835,7 @@ class Inbody extends Component {
                     </text>
                     */}
                 </div>{/*.container */}
-                </ClickAwayListener>
+                {/* </ClickAwayListener> */}
                 <div className='footer'>
                     <Footer />
                 </div>{/*.footer */}
