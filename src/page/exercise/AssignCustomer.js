@@ -17,8 +17,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import {getStatusRequest} from '../../action/authentication';
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
@@ -190,7 +190,9 @@ class AssignCustomer extends Component {
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
+                                <div className='parallelogram'></div>
                                 운동배정목록
+                                <span>.</span>
                             </h2>
                             <div className='breadCrumb'>
                                 <Link to='/home'>HOME</Link>

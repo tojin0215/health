@@ -25,27 +25,17 @@
 
 .SearchInput .SearchInputIn {
 	display: flex;
+	align-items: center;
 }
 
-.btnCustomerNew {
-	width: 20rem;
+.SearchInput .SearchInputIn .btnGhost {
 	height: 4rem;
-	border-radius: 1rem;
-	padding: 0.4rem 0.8rem;
-	margin: 1rem;
-	background-color: #000055;
-	color: #fff;
-	text-align: center;
-	align-self: flex-end;
-	transition: 0.35s ease-in-out;
-	line-height: 3rem;
+	width: 16rem;
+	font-size: 2rem;
+	font-weight: 500;
+	align-self: auto;
 }
 
-.btnCustomerNew:hover {
-	color: #fff;
-	background-color: #0069d9;
-	text-decoration: none;
-}
 /* 50개씩 보기 드롭다운 메뉴*/
 /* .customer .customerTableSort {
 	border: 1px solid #005;
@@ -56,32 +46,48 @@
 } */
 .customerTable {
 	width: 100%;
-	padding-top: 2rem;
+}
+
+.customerTable h5 {
+	display: flex;
+	align-items: center;
+	font-size: 2.3rem;
+	padding-bottom: 2rem;
+}
+
+.customerTable h5 .circle {
+	margin-right: 1rem;
 }
 
 .customerSlide {
-	background-color: rgba(0, 0, 0, 0.9);
+	background-color: rgba(33, 52, 73, 0.94);
 	width: 60%;
 	height: 100%;
-	padding: 5rem;
+	padding: 12rem 5rem 5rem;
 	position: fixed;
 	top: 0;
 	right: 0;
 	color: #fff;
+	z-index: 1;
+}
+
+.customerSlide h5 {
+	padding-bottom: 2.5rem;
+	border-bottom: 1px solid #bbb;
 }
 
 .customerSlide .tableContainer {
-	border-top: 1px solid #999;
-	border-bottom: 1px solid #999;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
 }
 
 .customerSlide .table2 .tableHeader {
-	border-bottom: 1px solid #999;
+	border-bottom: 1px solid #bbb;
 }
 
 .customerSlide ul {
 	width: 100%;
-	padding: 2rem;
+	padding: 2rem 2rem 3rem;
 }
 
 .customerSlide ul label {
@@ -94,18 +100,39 @@
 }
 
 .customerSlide .customerSlideUtill {
+	position: absolute;
+	top: 10.4rem;
+	right: 3rem;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 }
 
-.customerSlide .btnCustomerNew {
-	margin: 0;
-	width: 12rem;
+.customerSlide .customerSlideUtill button {
+	height: 4rem;
 }
 
-.customerSlide .btnCustomerClose {
+.customerSlide .customerSlideUtill .btnCustomerNew button {
+	width: auto;
+	padding: 0 3rem;
+	font-weight: 400;
+	font-size: 1.8rem;
+}
+
+.customerSlide .customerSlideUtill .btnCustomerClose {
+	color: #fff;
+	background: transparent url(/src/images/btnCloseWhite.png) no-repeat center
+		center/15px auto;
+	box-shadow: none;
+	text-indent: -9999px;
 	width: 5rem;
-	height: 4rem;
-	margin: 0 2rem;
+	padding: 0;
+}
+
+.customerSlide .btnSolid {
+	box-shadow: 5px 3px 5px rgba(22, 22, 22, 0.75);
+}
+
+.customerSlide h6 {
+	padding-bottom: 2.5rem;
 }

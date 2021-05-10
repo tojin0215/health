@@ -12,8 +12,8 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import {getStatusRequest} from '../../action/authentication';
 import '../../styles/setting/addExercise.css';
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
@@ -473,7 +473,11 @@ class AddExercise extends Component {
                     <Navigation goLogin={this.goLogin} />
                     <div className="localNavigation">
                         <div className="container">
-                            <h2>운동 설정</h2>
+                            <h2>
+                                <div className='parallelogram'></div>
+                                운동 설정
+                                <span>.</span>
+                            </h2>
                             <div className="breadCrumb">
                                 <Link to="/home">HOME</Link>
                                 <span>&#62;</span>
@@ -489,8 +493,11 @@ class AddExercise extends Component {
                 <div className="container">
                     {/* <NavLink exact to='/exercise'>[운동 추가]</NavLink>
                 <NavLink exact to='/setting/default'>[운동 기본묶음 설정]</NavLink> */}
-                    <section className="settingInfoInput">
-                        <h3>운동 정보 입력</h3>
+                    <section className="settingInfoInput sectionGlass">
+                        <h6>
+                            <div className='circle'></div>
+                            운동 정보 입력
+                        </h6>
                         <article className="wayDefault waySub">
                             <Link to="/setting/default">
                                 <button type="button">운동 묶음 설정</button>
@@ -684,8 +691,11 @@ class AddExercise extends Component {
                         </form>
                     </section>
                     {/*.settingInfoInput */}
-                    <section className="settingExerciseList">
-                        <h3>운동 목록</h3>
+                    <section className="settingExerciseList sectionGlass">
+                        <h6>
+                            <div className='circle'></div>
+                            운동 목록
+                        </h6>
                         <div className="searchInputRow">
                             <Dropdown
                                 className="searchDrop"

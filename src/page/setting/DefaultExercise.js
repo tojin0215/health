@@ -9,8 +9,8 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import {getStatusRequest} from '../../action/authentication';
 import '../../styles/setting/defaultExercise.css';
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 const List = [
     {
@@ -1111,7 +1111,9 @@ class DefaultExercise extends Component {
                 <div className='localNavigation'>
                     <div className='container'>
                         <h2>
+                            <div className='parallelogram'></div>
                             운동 기본묶음 설정
+                            <span>.</span>
                         </h2>
                         <div className='breadCrumb'>
                             <Link to='/home'>HOME</Link>

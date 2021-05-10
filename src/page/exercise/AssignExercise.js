@@ -24,8 +24,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 function onChangeHandler(a, e) {
     [e.target.a] = e.target.value;
@@ -1006,7 +1006,11 @@ class AssignExercise extends Component {
                     <Navigation goLogin={this.goLogin} />
                     <div className="localNavigation">
                         <div className="container">
-                            <h2>운동 배정</h2>
+                            <h2>
+                                <div className='parallelogram'></div>
+                                운동 배정
+                                <span>.</span>
+                            </h2>
                             <div className="breadCrumb">
                                 <Link to="/home">HOME</Link>
                                 <span>&#62;</span>
@@ -1022,20 +1026,14 @@ class AssignExercise extends Component {
                 <div className="container">
                     <article className="waySub">
                         <Link
-                            to={{ pathname: '/assign/customer',
-                                state:{member_no:this.state.member_no} }}
-                        >
-                            <button type="button">고객운동배정</button>
-                        </Link>
-                        <Link
                             to={{ pathname: '/assign/inbody',
                                 state:{member_no:0} }}
                         >
-                            <button type="button">고객인바디</button>
+                            <button className='btnSolid' type="button">고객인바디</button>
                         </Link>
                     </article>
-                    <section>
-                        <button type="button" onClick={this.handleClickOpen}>
+                    <section className='customerSearch'>
+                        <button className='btnAssignCusSearch' type="button" onClick={this.handleClickOpen}>
                             회원검색
                         </button>
                         <Dialog
@@ -1131,7 +1129,7 @@ class AssignExercise extends Component {
                             </DialogActions>
                         </Dialog>
                     </section>
-                    <section className="CustomerInbody">
+                    <section className="CustomerInbody sectionGlass">
                         <h3>
                             <span>{this.state.userName}</span>님 운동배정
                         </h3>
@@ -1141,20 +1139,30 @@ class AssignExercise extends Component {
                                 {this.state.userName}
                             </span>
                             님 */}
-                                최근 인바디 정보입니다.
+                                최근 <span>인바디</span> 정보입니다.
                             </h4>
-                            <label>키 : {this.state.user_height}</label>
-                            <label>체중 : {this.state.user_weight}</label>
-                            <label>체지방 : {this.state.user_bodyFat}</label>
-                            <label>근육량 : {this.state.user_muscleMass}</label>
+                            <label>키 {this.state.user_height}</label>
+                            <label>체중 {this.state.user_weight}</label>
+                            <label>체지방 {this.state.user_bodyFat}</label>
+                            <label>근육량 {this.state.user_muscleMass}</label>
                         </div>
+                        <Link
+                            to={{ pathname: '/assign/customer',
+                                state:{member_no:this.state.member_no} }}
+                        >
+                            <button className='btnSolid' type="button">운동 배정 확인</button>
+                        </Link>
                     </section>
                     {/*.CustomerInbody */}
                     <section className="assignWorkout">
                         <h3>운동 목록</h3>
                         <div className="inputCheckRow">
-                            <h5>운동 묶음 선택 (기본 설정)</h5>
+                            <h5>
+                                <div className='circle'></div>
+                                운동 묶음 선택 (기본 설정)
+                            </h5>
                             <label>
+                                <div className='imageBox'></div>
                                 <input
                                     type="checkBox"
                                     id="1"
@@ -1165,6 +1173,7 @@ class AssignExercise extends Component {
                                 <p>상체</p>
                             </label>
                             <label>
+                                <div className='imageBox'></div>
                                 <input
                                     type="checkBox"
                                     id="2"
@@ -1175,6 +1184,7 @@ class AssignExercise extends Component {
                                 <p>하체</p>
                             </label>
                             <label>
+                                <div className='imageBox'></div>
                                 <input
                                     type="checkBox"
                                     id="3"
@@ -1185,6 +1195,7 @@ class AssignExercise extends Component {
                                 <p>전신</p>
                             </label>
                             <label>
+                                <div className='imageBox'></div>
                                 <input
                                     type="checkBox"
                                     id="4"
@@ -1195,6 +1206,7 @@ class AssignExercise extends Component {
                                 <p>코어</p>
                             </label>
                             <label>
+                                <div className='imageBox'></div>
                                 <input
                                     type="checkBox"
                                     id="5"
@@ -1205,7 +1217,10 @@ class AssignExercise extends Component {
                                 <p>유산소</p>
                             </label>
                         </div>
-                        <h5>운동 개별 선택</h5>
+                        <h5>
+                            <div className='circle'></div>
+                            운동 개별 선택
+                        </h5>
                         <div className="exerciseSelectList">
                             <div className="flexbetween">
                                 <button
@@ -1752,7 +1767,7 @@ class AssignExercise extends Component {
                             }}
                         >
                             <button
-                                className="btnOneCenter"
+                                className="btnOneCenter btnSolid"
                                 type="button"
                                 onClick={this.handleOnClick}
                             >

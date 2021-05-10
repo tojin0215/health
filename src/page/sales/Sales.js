@@ -19,8 +19,8 @@ import '../../styles/sales/Sales.css'
 
 import {getStatusRequest} from '../../action/authentication';
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
@@ -454,7 +454,9 @@ class Sales extends Component {
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
+                                <div className='parallelogram'></div>
                                 상품/매출
+                                <span>.</span>
                             </h2>
                             <div className='breadCrumb'>
                                 <Link to='/home'>HOME</Link>
@@ -492,7 +494,9 @@ class Sales extends Component {
                                 name="endDate"
                                 dateFormat="MM/dd/yyyy"
                             />
-                            <button type="button" onClick={this.handleOnClick}> 조회하기 </button>
+                            <button type="button" onClick={this.handleOnClick}>
+                                조회하기
+                            </button>
                         </div>{/*.salesStatus */}
                     </div>{/*.salesUtill */}
                     <div>
@@ -521,9 +525,9 @@ class Sales extends Component {
                         </BootstrapTable>
                         <div className='salesUtill salesUtill2'>
                             <Link to="/sales/add">
-                                <Button color="primary">
+                                <button className='btnSolid'>
                                     결제 등록
-                                </Button>
+                                </button>
                             </Link>
                         </div>
                         <h5>전체 기록</h5>

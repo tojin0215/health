@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 import '../../styles/exercise/AssignCheckExercise.css';
 import {getStatusRequest} from '../../action/authentication';
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 class AssignCheckExercise extends Component {
     constructor(props) {
@@ -125,6 +125,7 @@ class AssignCheckExercise extends Component {
         arr.forEach((ex) => {
             fetch(url, {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-type': 'application/json'
                 },
@@ -155,6 +156,7 @@ class AssignCheckExercise extends Component {
         url = url + '&fn=' + fitness_no;
         fetch(url, {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-type': 'application/json',
             },
@@ -329,6 +331,7 @@ class AssignCheckExercise extends Component {
 
         let inits = {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-type': 'application/json',
             },
@@ -367,7 +370,9 @@ class AssignCheckExercise extends Component {
                 <div className='localNavigation'>
                     <div className='container'>
                         <h2>
+                            <div className='parallelogram'></div>
                             운동 배정 확인
+                            <span>.</span>
                         </h2>
                         <div className='breadCrumb'>
                             <Link to='/home'>HOME</Link>

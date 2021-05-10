@@ -39,7 +39,9 @@ class Login extends Component {
                 <div className='localNavigation'>
                     <div className='container'>
                         <h2>
+                            <div className='parallelogram'></div>
                             로그인
+                            <span>.</span>
                         </h2>
                     </div>
                 </div>
@@ -69,6 +71,6 @@ const mapDispatchToProps = (dispatch) => {
         }
     };
 };
- 
- 
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

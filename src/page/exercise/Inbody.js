@@ -27,8 +27,8 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 //import { Chart } from "react-google-charts";
 import Chart from "react-apexcharts";
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
@@ -540,7 +540,9 @@ class Inbody extends Component {
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
+                                <div className='parallelogram'></div>
                                 인바디 정보
+                                <span>.</span>
                             </h2>
                             <div className='breadCrumb'>
                                 <Link to='/home'>HOME</Link>

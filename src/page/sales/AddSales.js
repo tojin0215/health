@@ -26,8 +26,8 @@ import NumberFormat from 'react-number-format';
 
 import {getStatusRequest} from '../../action/authentication';
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 const userList = [
     {'num':1, 'userName':'김투진','phone':'000-0000-0000'},
@@ -299,7 +299,9 @@ class AddSales extends Component {
                 <div className='localNavigation'>
                     <div className='container'>
                         <h2>
+                            <div className='parallelogram'></div>
                             결제 등록
+                            <span>.</span>
                         </h2>
                         <div className='breadCrumb'>
                             <Link to='/home'>HOME</Link>

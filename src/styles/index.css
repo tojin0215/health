@@ -2,24 +2,40 @@
 
 .localNavigation {
 	width: 100%;
-	height: 9.6rem;
-	border-bottom: 0.1rem solid #000051;
+	height: 8rem;
+	box-shadow: 0 6px 7px rgba(187, 187, 187, 0.5);
 }
 
 .localNavigation .container {
 	padding: 0 0.5rem;
-	height: 5rem;
+	height: 100%;
 	display: flex;
 	justify-content: space-between;
 }
 .localNavigation .container h2 {
-	line-height: 5rem;
+	line-height: 100%;
+	font-size: 2.3rem;
+	display: flex;
+	align-items: center;
 }
+
+.localNavigation .container h2 .parallelogram {
+	margin-right: 1.4rem;
+	height: 2.4rem;
+	width: 0.6rem;
+}
+
+.localNavigation .container h2 span {
+	color: #0f78ff;
+	font-weight: 900;
+	padding-left: 0.4rem;
+}
+
 .localNavigation .breadCrumb {
 	display: flex;
-	align-items: flex-end;
-	padding-bottom: 1rem;
+	align-items: center;
 	font-size: 1.2rem;
+	font-weight: 300;
 }
 .localNavigation .breadCrumb a {
 	padding: 0 1rem;
@@ -28,4 +44,22 @@
 	color: #000051;
 	font-size: 1.4rem;
 	font-weight: 600;
+}
+
+.parallelogram {
+	width: 0.8rem;
+	height: 4.2rem;
+	background: #0f78ff;
+	-webkit-transform: skew(-20deg);
+	-moz-transform: skew(-20deg);
+	-o-transform: skew(-20deg);
+	transform: skew(-20deg);
+}
+
+.circle {
+	width: 1rem;
+	height: 1rem;
+	background: #0f78ff;
+	border-radius: 50%;
+	margin-right: 1rem;
 }

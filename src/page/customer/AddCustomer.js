@@ -16,8 +16,8 @@ import {getStatusRequest} from '../../action/authentication';
 import '../../styles/customer/AddCustomer.css';
 
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 class AddCustomer extends Component {
 
@@ -302,7 +302,9 @@ class AddCustomer extends Component {
                 <div className='localNavigation'>
                     <div className='container'>
                         <h2>
-                          신규 회원 등록
+                            <div className='parallelogram'></div>
+                            신규 회원 등록
+                            <span>.</span>
                         </h2>
                         <div className='breadCrumb'>
                             <Link to='/home'>HOME</Link>
@@ -506,7 +508,7 @@ class AddCustomer extends Component {
                                 <NumberFormat thousandSeparator={true} name="payment" id="TotalPayment" readOnly value={parseInt((this.state.exercisePrice).toString().replace(/[^(0-9)]/gi,""))+parseInt((this.state.sportswearPrice).toString().replace(/[^(0-9)]/gi,""))+parseInt((this.state.lockerPrice).toString().replace(/[^(0-9)]/gi,""))}/>
                             </label>{/*.amountTotal */}
                         </div>{/*.finalAmount */}
-                        <button type="button" onClick={this.handleOnClick}>
+                        <button className='btnSolid' type="button" onClick={this.handleOnClick}>
                             등록하기
                         </button>
                     </div>{/*.productPay */}

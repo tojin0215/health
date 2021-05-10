@@ -22,8 +22,8 @@ import '../../styles/customer/AddCustomer.css';
 import '../../styles/exercise/AddInbody.css';
 
 
-const ip = '13.124.141.28:3002';
-//const ip = 'localhost:3000';
+//const ip = '13.124.141.28:3002';
+const ip = 'localhost:3000';
 
 class AddInbody extends Component {
     
@@ -295,7 +295,9 @@ class AddInbody extends Component {
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
-                            인바디 입력
+                                <div className='parallelogram'></div>
+                                인바디 입력
+                                <span>.</span>
                             </h2>
                             <div className='breadCrumb'>
                                 <Link to='/home'>HOME</Link>
