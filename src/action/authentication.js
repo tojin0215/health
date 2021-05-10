@@ -8,7 +8,7 @@ export const AUTH_GET_STATUS_FAILURE = "AUTH_GET_STATUS_FAILURE";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 //const ip = '13.124.141.28:3002';
-const ip = 'localhost:3000';
+const ip = '13.124.141.28:3002';
 
 /* LOGIN */
 export function loginRequest(id, password) {

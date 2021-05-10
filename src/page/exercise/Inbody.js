@@ -28,7 +28,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Chart from "react-apexcharts";
 
 //const ip = '13.124.141.28:3002';
-const ip = 'localhost:3000';
+const ip = '13.124.141.28:3002';
 
 require('moment-timezone');
 var moment = require('moment');
