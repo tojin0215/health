@@ -13,4 +13,5 @@ export { default as AssignCustomer } from './exercise/AssignCustomer';
 export { default as Inbody } from './exercise/Inbody';
 export { default as AddInbody } from './exercise/AddInbody';
 export { default as Statistics } from './statistics/Statistics';
+export { default as Admin } from './admin/Admin';
 

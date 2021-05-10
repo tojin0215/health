@@ -61,6 +61,7 @@ class Sales extends Component {
             salesLists:[],
             salesLists2:[],
             salesLists3:[],
+            salesLists4:[],
             toolList:[],
             customerList:[],
             selectedOption: null,
@@ -111,6 +112,9 @@ class Sales extends Component {
    
                     // and notify
                     alert("Your session is expired, please log in again")
+                }
+                else{
+                    this.cusFetch();
                 }
             }
         );
@@ -276,13 +280,87 @@ class Sales extends Component {
         })
     }
 
-    todayClick =()=>{
-        alert('오늘')
-    }   
+    dateClick =(e)=>{
 
-    monthClick =()=>{
-        alert('한달')
-    }
+        let today = new Date();
+        let url = ''
+        let startTime = new Date();
+        let endTime = new Date(today.getFullYear(),today.getMonth(),today.getDate())
+        if(e.target.value === '오늘'){
+            if(this.state.salesLists4.length != 0){            
+                this.setState({
+                    salesLists4:[],
+                    salesLists2:[],
+                    startDate : startTime,
+                    endDate : endTime
+                })
+            }
+            url = 'http://'+ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no
+        } else if (e.target.value === '한달'){
+            if(this.state.salesLists4.length != 0){                 
+                this.setState({
+                    salesLists4:[],
+                    salesLists2:[],
+                    endDate : endTime
+                })
+            }
+            startTime = new Date(today.getFullYear(),today.getMonth()-1,today.getDate())
+            endTime = new Date(today.getFullYear(),today.getMonth(),(today.getDate()+1))
+            url = 'http://'+ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+        }
+        
+        fetch(url,{
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json'
+          },
+          })
+            .then(data => {
+                return data.json();
+            }).then(data => {
+                this.setState({
+                    salesLists4 : data,
+                })
+                if(this.state.salesLists4.length == 0){
+                    //alert('없음')                        
+                    this.setState({
+                        salesLists2:[],
+                        toolList:[]
+                    })
+                }else{
+                    //alert(this.state.salesLists4)
+                    let card = 0
+                    let cash = 0
+                    let transfer = 0
+                    this.state.salesLists4.reverse().map((data) => {
+                        let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
+                        let time = moment(data.paymentDate).format("YYYY/MM/DD")
+                        data = {...data, total, time}
+                        this.state.customerList.map((c)=>{
+                            if(data.member_no === c.num){
+                                let userName = c.userName;
+                                data = {...data, userName}
+                            }
+                        })
+                        if(data.paymentTools === '카드'){
+                            card = card + data.total
+                        } else if(data.paymentTools === '현금'){
+                            cash = cash + data.total
+                        } else if(data.paymentTools === '계좌이체'){
+                            transfer = transfer + data.total
+                        } 
+                            
+                        this.setState({
+                            salesLists2 : [...this.state.salesLists2, data],
+                            toolList : [{'card':card, 'cash':cash,'transfer':transfer,'total':card+ cash+transfer}],
+                            startDate : startTime,
+                        })
+                    })  
+                }
+                
+                
+            }); 
+    } 
 
     handleOnClick = (e) => {
         this.setState({
@@ -360,11 +438,11 @@ class Sales extends Component {
             alwaysShowAllBtns: true,
             //hideSizePerPage:true
             sizePerPageList: [{
-                text: '10', value: 10
+                text: '10개씩 보기', value: 10
               }, {
-                text: '50', value: 50
+                text: '50개씩 보기', value: 50
               }, {
-                text: '100', value: 100
+                text: '100개씩 보기', value: 100
             }]
         };
 
@@ -376,7 +454,9 @@ class Sales extends Component {
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
+                                <div className='parallelogram'></div>
                                 상품/매출
+                                <span>.</span>
                             </h2>
                             <div className='breadCrumb'>
                                 <Link to='/home'>HOME</Link>
@@ -390,10 +470,10 @@ class Sales extends Component {
                     <h2>매출 현황</h2>
                     <div className="salesUtill">
                         <div className="salesStatus">
-                            <button className='dateSort' onClick={this.todayClick}>
+                            <button className='dateSort' value='오늘' onClick={this.dateClick}>
                                 당일
                             </button>
-                            <button className='dateSort' onClick={this.monthClick}>
+                            <button className='dateSort' value='한달' onClick={this.dateClick}>
                                 1개월
                             </button>
                             <DatePicker
@@ -414,7 +494,9 @@ class Sales extends Component {
                                 name="endDate"
                                 dateFormat="MM/dd/yyyy"
                             />
-                            <button type="button" onClick={this.handleOnClick}> 조회하기 </button>
+                            <button type="button" onClick={this.handleOnClick}>
+                                조회하기
+                            </button>
                         </div>{/*.salesStatus */}
                     </div>{/*.salesUtill */}
                     <div>
@@ -443,9 +525,9 @@ class Sales extends Component {
                         </BootstrapTable>
                         <div className='salesUtill salesUtill2'>
                             <Link to="/sales/add">
-                                <Button color="primary">
+                                <button className='btnSolid'>
                                     결제 등록
-                                </Button>
+                                </button>
                             </Link>
                         </div>
                         <h5>전체 기록</h5>

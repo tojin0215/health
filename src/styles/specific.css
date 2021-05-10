@@ -45,7 +45,7 @@
 }
 /* 버튼 크기 */
 .MuiTable-root button {
-	width: 8rem;
+	width: auto;
 }
 /* 테이블 헤더 */
 .MuiTable-root .MuiTableCell-head {

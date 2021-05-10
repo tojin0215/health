@@ -188,6 +188,9 @@ class Inbody extends Component {
                     // and notify
                     alert("Your session is expired, please log in again")
                 }
+                else{
+                    this.cusFetch();
+                }
             }
         );
     }
@@ -520,11 +523,11 @@ class Inbody extends Component {
             alwaysShowAllBtns: true,
             //hideSizePerPage:true
             sizePerPageList: [{
-                text: '10', value: 10
+                text: '10개씩 보기', value: 10
               }, {
-                text: '50', value: 50
+                text: '50개씩 보기', value: 50
               }, {
-                text: '100', value: 100
+                text: '100개씩 보기', value: 100
             }]
         };
 
@@ -537,7 +540,9 @@ class Inbody extends Component {
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
+                                <div className='parallelogram'></div>
                                 인바디 정보
+                                <span>.</span>
                             </h2>
                             <div className='breadCrumb'>
                                 <Link to='/home'>HOME</Link>
@@ -825,41 +830,6 @@ class Inbody extends Component {
                             체지방률
                         </TableHeaderColumn>
                     </BootstrapTable>
-
-                    {this.state.show?
-                        <div>
-                            <label>{this.state.userName}님의 인바디 변화그래프 입니다.</label>
-                            <button onClick={this.handleClickAway}>X</button>
-                            <Dropdown
-                                className='searchDrop'
-                                options={this.state.inbody_noList}
-                                onChange={this.selectItem1}
-                                //value={this.state.item}
-                                placeholder="선택"
-                            />
-                            <label>~</label>
-                            <Dropdown
-                                className='searchDrop'
-                                options={this.state.inbody_noList}
-                                onChange={this.selectItem2}
-                                //value={this.state.item}
-                                placeholder="선택"
-                            />
-                            <button onClick={this.clickInbody}>조회하기</button>
-
-                                {this.state.showChart?
-                                    <Chart
-                                        options={this.state.chartOptions}
-                                        series={this.state.series}
-                                        type="line"
-                                        width="700"
-                                    />
-                            :null}
-
-                        </div>
-                    :null
-                    }
-
                     {/*
                     <text>
                     </text>
@@ -869,6 +839,40 @@ class Inbody extends Component {
                 <div className='footer'>
                     <Footer />
                 </div>{/*.footer */}
+
+            {this.state.show?
+                <div className='inbodySlide'>
+                    <label>{this.state.userName}님의 인바디 변화그래프 입니다.</label>
+                    <button onClick={this.handleClickAway}>X</button>
+                    <Dropdown
+                        className='searchDrop'
+                        options={this.state.inbody_noList}
+                        onChange={this.selectItem1}
+                        //value={this.state.item}
+                        placeholder="선택"
+                    />
+                    <label>~</label>
+                    <Dropdown
+                        className='searchDrop'
+                        options={this.state.inbody_noList}
+                        onChange={this.selectItem2}
+                        //value={this.state.item}
+                        placeholder="선택"
+                    />
+                    <button onClick={this.clickInbody}>조회하기</button>
+
+                        {this.state.showChart?
+                            <Chart
+                                options={this.state.chartOptions}
+                                series={this.state.series}
+                                type="line"
+                                width="700"
+                            />
+                    :null}
+
+                </div>
+            :null
+            }
             </div>/*.inbody */
         );
     }

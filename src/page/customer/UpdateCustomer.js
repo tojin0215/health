@@ -110,6 +110,9 @@ class UpdateCustomer extends Component {
                     // and notify
                     alert("Your session is expired, please log in again")
                 }
+                else{
+                    this.cusFetch();
+                }
             }
         );
     }
@@ -305,7 +308,9 @@ class UpdateCustomer extends Component {
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
-                            회원 정보 수정
+                                <div className='parallelogram'></div>
+                                회원 정보 수정
+                                <span>.</span>
                             </h2>
                             <div className='breadCrumb'>
                                 <Link to='/home'>HOME</Link>
@@ -437,7 +442,7 @@ class UpdateCustomer extends Component {
                             <span>비고</span>
                             <input type="text" id='note' onChange={this.handleChange}/>
                         </label>
-                        <button type="button" onClick={this.handleOnClick}>
+                        <button className='btnSolid' type="button" onClick={this.handleOnClick}>
                             수정하기
                         </button>
                     </form>

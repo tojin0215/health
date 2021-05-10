@@ -1,225 +1,225 @@
-.addCustomer .customerPhone input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.addCustomer .customerPhone input[type='number']::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }
-.addCustomer .customerPhone input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.addCustomer .customerPhone input[type='number']::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }
 
-.addCustomer .customerResi input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.addCustomer .customerResi input[type='number']::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }
-.addCustomer .customerResi input[type="number"]::-webkit-inner-spin-button {
--webkit-appearance: none;
-margin: 0;
+.addCustomer .customerResi input[type='number']::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 .addCustomer .container {
-  padding-top:10rem;
-  padding-bottom:20rem;
-  white-space:nowrap;
+	padding-top: 10rem;
+	padding-bottom: 20rem;
+	white-space: nowrap;
 }
 
 .addCustomer h3 {
-  width:100%;
-  font-size:1.7rem;
-  font-weight:600;
-  padding-bottom:.5rem;
-  border-bottom:1px solid #000055;
+	width: 100%;
+	font-size: 2.7rem;
+	font-weight: 600;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid #000055;
 }
 
 .formAddCustomer h5 {
-  width:100%;
-  padding-top:1.2rem;
+	width: 100%;
+	padding-top: 1.2rem;
 }
 
-.container .formAddCustomer{
-  display:flex;
-  flex-flow:row wrap;
-  padding:1rem 0 0 0;
+.container .formAddCustomer {
+	display: flex;
+	flex-flow: row wrap;
+	padding: 1rem 0 0 0;
 }
 
 .formAddCustomer > label {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 .formAddCustomer > label input {
-  margin:1rem;
+	margin: 1rem;
 }
 
-.formAddCustomer input[type='text']{
-  min-width:23.1rem;
+.formAddCustomer input[type='text'] {
+	min-width: 23.1rem;
 }
 
 .formAddCustomer .labelCheck {
-  display:flex;
-  flex-direction: row;
-  align-items:center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .formAddCustomer .customerName {
-  width:50%;
+	width: 50%;
 }
 .formAddCustomer .customerPeriod {
-  width:50%;
-  justify-content:flex-start;
+	width: 50%;
+	justify-content: flex-start;
 }
-.formAddCustomer .customerPeriod input[type='number']{
-  width:8rem;
+.formAddCustomer .customerPeriod input[type='number'] {
+	width: 8rem;
 }
 
 .formAddCustomer .customerPhone {
-  width:50%;
+	width: 50%;
 }
 
 .formAddCustomer .customerResi {
-  width:50%;
-  justify-content:flex-start;
-  padding-right:1rem;
+	width: 50%;
+	justify-content: flex-start;
+	padding-right: 1rem;
 }
 
 .formAddCustomer .customerResi .labelCheck {
-  display:none;
+	display: none;
 }
 
 .formAddCustomer #phone {
-  width:23.1rem;
+	width: 23.1rem;
 }
 
 .formAddCustomer .customerAddress {
-  width:50%;
+	width: 50%;
 }
-.formAddCustomer #address{
-  width:46.2rem;
+.formAddCustomer #address {
+	width: 46.2rem;
 }
 .formAddCustomer .customerIncharge {
-  width:50%;
+	width: 50%;
 }
 
 .formAddCustomer .customerRoute {
-  width:100%;
-  display:flex;
-  flex-flow:row wrap;
-  padding-bottom:6rem;
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	padding-bottom: 6rem;
 }
 
 .formAddCustomer .customerRoute div {
-  display:flex;
-  flex-flow:wrap;
-  width:100%;
-  justify-content: space-between;
+	display: flex;
+	flex-flow: wrap;
+	width: 100%;
+	justify-content: space-between;
 }
-.formAddCustomer .customerRoute div label{
-  display:flex;
-  width:20%;
-  height:4rem;
-  flex-direction:row;
-  align-items:center;
+.formAddCustomer .customerRoute div label {
+	display: flex;
+	width: 20%;
+	height: 4rem;
+	flex-direction: row;
+	align-items: center;
 }
-.formAddCustomer .customerRoute div label input[type=text] {
-  width:40%;
+.formAddCustomer .customerRoute div label input[type='text'] {
+	width: 40%;
 }
 .formAddCustomer .customerRoute div label:last-child {
-  width:100%;
+	width: 100%;
 }
 
 .productPay {
-  width:100%;
+	width: 100%;
 }
 
 .productPay > div {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-around;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
 }
 
 .productPay .exerciseType {
-  padding-right:20%;
+	padding-right: 20%;
 }
 
 .productPay .exerciseType label {
-  display:flex;
-  width:25%;
-  align-items:center;
+	display: flex;
+	width: 25%;
+	align-items: center;
 }
 
-.productPay .exerciseType label span{
-  padding-right:1rem;
+.productPay .exerciseType label span {
+	padding-right: 1rem;
 }
 
-.productPay .exerciseType label input[type=text] {
-  width:50%;
+.productPay .exerciseType label input[type='text'] {
+	width: 50%;
 }
 
 .productPay .exerciseType label:last-child {
-  width:100%;
+	width: 100%;
 }
 
 .productPay .payType {
-  display:flex;
-  padding-right:40%;
+	display: flex;
+	padding-right: 40%;
 }
 
 .productPay .payType label {
-  display:flex;
-  align-items:center;
-  width:33.3%;
+	display: flex;
+	align-items: center;
+	width: 33.3%;
 }
 
 .productPay .paymentAmount {
-  justify-content:center;
-  padding-bottom:6rem;
-  padding-top:2rem;
+	justify-content: center;
+	padding-bottom: 6rem;
+	padding-top: 2rem;
 }
 
-.productPay .paymentAmount input[type=text] {
-  text-align:center;
+.productPay .paymentAmount input[type='text'] {
+	text-align: center;
 }
 
 .productPay .finalAmount {
-  padding-top:1rem;
-  border-top:1px solid #000055;
-  padding-bottom:4rem;
+	padding-top: 1rem;
+	border-top: 1px solid #000055;
+	padding-bottom: 4rem;
 }
 
 .productPay .finalAmount .finalAmountOthers {
-  display:flex;
-  flex-direction:column;
-  width:50%;
+	display: flex;
+	flex-direction: column;
+	width: 50%;
 }
 
 .productPay .finalAmountOthers .amountOther {
-  display:flex;
-  align-items:center;
+	display: flex;
+	align-items: center;
 }
 
-.productPay .finalAmountOthers .amountOther span{
-  padding:0 .7rem;
+.productPay .finalAmountOthers .amountOther span {
+	padding: 0 0.7rem;
 }
 
 .productPay .finalAmountOthers .amountOther input {
-  width:70%;
+	width: 70%;
 }
 
 .productPay .finalAmount .amountTotal {
-  width:50%;
+	width: 50%;
 }
 
 .productPay .finalAmount #TotalPayment {
-  width:35.6rem;
-  height:8rem;
-  text-align:center;
-  color:#2D3791;
-  font-size:4rem;
-  border:1px solid #2D3791;
+	width: 35.6rem;
+	height: 8rem;
+	text-align: center;
+	color: #2d3791;
+	font-size: 4rem;
+	border: 1px solid #2d3791;
 }
 
 .formAddCustomer button {
-  margin:0 auto;
-  display:flex;
-  width:20rem;
-  justify-content: center;
-  align-items: center;
+	margin: 0 auto;
+	display: flex;
+	width: 20rem;
+	justify-content: center;
+	align-items: center;
 }

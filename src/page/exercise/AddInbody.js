@@ -129,6 +129,9 @@ class AddInbody extends Component {
                     // and notify
                     alert("Your session is expired, please log in again")
                 }
+                else{
+                    this.cusFetch();
+                }
             }
         );
     }
@@ -292,7 +295,9 @@ class AddInbody extends Component {
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
-                            인바디 입력
+                                <div className='parallelogram'></div>
+                                인바디 입력
+                                <span>.</span>
                             </h2>
                             <div className='breadCrumb'>
                                 <Link to='/home'>HOME</Link>

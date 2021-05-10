@@ -110,6 +110,9 @@ class Customer extends Component {
                     // and notify
                     alert("Your session is expired, please log in again")
                 }
+                else{
+                    this.cusFetch();
+                }
             }
         );
     }
@@ -292,11 +295,13 @@ class Customer extends Component {
             alwaysShowAllBtns: true,
             //hideSizePerPage:true
             sizePerPageList: [{
-                text: '10', value: 10
+                //text: '10명씩 보기', value: 10
+                text: '5명씩 보기', value: 5
               }, {
-                text: '50', value: 50
+                //text: '50명씩 보기', value: 50
+                text: '10명씩 보기', value: 10
               }, {
-                text: '100', value: 100
+                text: '100명씩 보기', value: 100
             }]
         };
 
@@ -325,12 +330,14 @@ class Customer extends Component {
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
-                                회원 관리
+                                <div className='parallelogram'></div>
+                                회원관리
+                                <span>.</span>
                             </h2>
                             <div className='breadCrumb'>
                                 <Link to='/home'>HOME</Link>
                                 <span>&#62;</span>
-                                <Link to='/customer'>회원 관리</Link>
+                                <Link to='/customer'>고객</Link>
                             </div>{/*.breadCrumb */}
                         </div>{/*.container */}
                     </div>{/*.localNavigation */}
@@ -349,21 +356,24 @@ class Customer extends Component {
                             <input
                             type="text"
                             id='search'
+                            className='inputTextLine'
                             checked={this.state.search}
                             onChange={this.handleChange}
                             />
-                            <button className='btnSearch' type="button" onClick={this.search}> 고객 검색
+                            <button className='btnSearch btnGhost' type="button" onClick={this.search}> 고객 검색
                             </button>
                         </div>
                     </div>
                     <Link to="/customer/add" className='btnCustomerNew'>
-                        신규회원 등록
+                        <button className='btnSolid'>
+                            신규회원 등록
+                        </button>
                     </Link>
-                    <div className='customerTable'>
-                        <h5>회원 목록</h5>
-                        <div className='customerTableSort'>
-                            50개씩 보기 ▼
-                        </div>
+                    <div className='customerTable sectionGlass'>
+                        <h5>
+                            <div className='circle'></div>
+                            회원 목록
+                        </h5>
                         <div>
                             <BootstrapTable
                             hover
@@ -413,11 +423,21 @@ class Customer extends Component {
                                     pathname:"/customer/update",
                                     state:{member_no: this.state.member_no,}
                                     }} className='btnCustomerNew'>
-                                    수정하기
+                                        <button className='btnSolid'>
+                                            수정하기
+                                        </button>
                                 </Link>
-                                <button type="button" onClick={this.handleClickAway} className='btnCustomerClose'>X</button>
+                                <button
+                                type="button"
+                                onClick={this.handleClickAway} className='btnCustomerClose btnsolid'
+                                >
+                                    닫기
+                                </button>
                             </div>
-                            <h5>회원 정보</h5>
+                            <h5>
+                                <div className='parallelogram'></div>
+                                회원 정보
+                            </h5>
                             <ul>
                                 <li>
                                     <label>이름</label>
@@ -452,7 +472,10 @@ class Customer extends Component {
                                     <label>{ this.state.note }</label>
                                 </li>
                             </ul>
-                            <h5>상품 결제 내역</h5>
+                            <h6>
+                                <div className='circle'></div>
+                                상품 결제 내역
+                            </h6>
                             
                             <BootstrapTable 
                                 data={ this.state.userSalesLists2 } 

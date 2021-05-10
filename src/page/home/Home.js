@@ -22,10 +22,11 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            totalCustomer:'',
-            todayCustomer:'',
-            monthSales:'',
-            todaySales:'',
+            totalCustomer:0,
+            todayCustomer:0,
+            monthSales:0,
+            todaySales:0,
+            admin:this.props.userinfo.manager_name
         }
         this.cusFetch();
     }
@@ -79,6 +80,9 @@ class Home extends Component {
                     // and notify
                     alert("Your session is expired, please log in again")
                 }
+                else{
+                    this.cusFetch();
+                }
             }
         );
     }
@@ -110,7 +114,7 @@ class Home extends Component {
         })
         .then(response => response.json())
         .then(res => {
-            let sum = '';
+            let sum = 0;
             for(let i=0; i<res.length;i++){
                 sum = Number(sum) + Number(res[i].lockerPrice)+Number(res[i].sportswearPrice)+Number(res[i].exercisePrice)
             }
@@ -129,19 +133,28 @@ class Home extends Component {
         })
         .then(response => response.json())
         .then(res => {
-            let sum = '';
+            let sum = 0;
             for(let i=0; i<res.length;i++){
                 sum = Number(sum) + Number(res[i].lockerPrice)+Number(res[i].sportswearPrice)+Number(res[i].exercisePrice)
             }
             this.setState({monthSales:sum})
         })
     }
+
+    fommat=(num)=>{
+        if(Number(num)>=1000){
+            return num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+        } else {
+            return num
+        }
+    }
     
     render() {
         const { userinfo } = this.props;
         console.log("userinfo : ");
         console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
-        
+        console.log('오늘매출',this.state.todaySales)
+
         return (
         <div className='wrap home'>
             <div className='header'>
@@ -149,31 +162,32 @@ class Home extends Component {
                 <Navigation goLogin={this.goLogin}/>
                 <div className='localNavigation'>
                     <div className='container'>
-                        <h2>
-                            Home
-                        </h2>
+                        <div className='dashboard'>
+                            <div className='homeDashLeft'>
+                                <label>
+                                    <p>오늘 방문고객</p>
+                                    <span>{this.fommat(this.state.todayCustomer)}</span>
+                                </label>
+                                <label>
+                                    <p>전체고객</p>
+                                    <span>{this.fommat(this.state.totalCustomer)}</span>
+                                </label>
+                            </div>
+                            <div className='homeDashRight'>
+                                <label>
+                                    <p>일매출</p>
+                                    <span>{this.fommat(this.state.todaySales)}</span>
+                                </label>
+                                <label>
+                                    <p>월매출</p>
+                                    <span>{this.fommat(this.state.monthSales)}</span>
+                                </label>
+                            </div>
+                        </div>{/*.dashboard */}
                     </div>{/*.container */}
                 </div>{/*.localNavigation */}
             </div>{/*.header */}
             <div className='container'>
-                <div className='dashboard'>
-                    <label>
-                        <p>전체고객</p>
-                        <p><span>{this.state.totalCustomer}</span>명</p>
-                    </label>
-                    <label>
-                        <p>오늘 방문고객</p>
-                        <p><span>00</span>명</p>
-                    </label>
-                    <label>
-                        <p>월매출</p>
-                        <p><span>{this.state.monthSales}</span>원</p>
-                    </label>
-                    <label>
-                        <p>일매출</p>
-                        <p><span>{this.state.todaySales}</span>원</p>
-                    </label>
-                </div>{/*.dashboard */}
                 <div className='mainVisual'>
                     메인 이미지
                 </div>
@@ -181,31 +195,96 @@ class Home extends Component {
                     <ul>
                         <li>
                             <Link to="/customer" className='btnCustomerNew btnCustomer'>
-                                <p>고객</p>
                             </Link>
-                        </li>
-                        <li>
-                            <Link to="/sales" className='btnCustomerNew btnSales'>
-                                <p>상품매출</p>
-                            </Link>
+                            <p>고객</p>
                         </li>
                         <li>
                             <Link to="/exercise" className='btnCustomerNew btnSetting'>
-                                <p>설정</p>
                             </Link>
+                            <p>운동 설정</p>
                         </li>
                         <li>
                             <Link to="/assign" className='btnCustomerNew btnExercise'>
-                                <p>운동</p>
                             </Link>
+                            <p>운동 배정</p>
+                        </li>
+                        <li>
+                            <Link to="/sales" className='btnCustomerNew btnSales'>
+                            </Link>
+                            <p>상품매출</p>
                         </li>
                         <li>
                             <Link to="/statistics" className='btnCustomerNew btnStatic'>
-                                <p>통계</p>
                             </Link>
+                            <p>통계</p>
+                        </li>
+                        <li>
+                            <Link to="/statistics" className='btnCustomerNew btnStatic'>
+                            </Link>
+                            <p>관리자</p>
                         </li>
                     </ul>
                 </div>
+                <section className='homeAbout'>
+                    <h3>
+                        <div className='parallelogram'></div>
+                    About 오마이짐
+                    </h3>
+                    <section className='aboutExplain'>
+                        <p>
+                            헬스 회원 스마트 관리 시스템으로 기존 회원 관리 방식에서 탈피하여
+                        </p>
+                        <p>
+                            쉬운 회원관리, 스마트한 서비스를 제공합니다.
+                        </p>
+                        <button>
+                            자세히보기
+                        </button>
+                    </section>
+                    <section className='aboutList'>
+                        <ul>
+                            <li>
+                                <div className='imageBox'>
+                                </div>
+                                <h5>
+                                    상품
+                                </h5>
+                                <p>
+                                    헬스 관련한 상품을 모아놓은 카테고리 설명을 넣으면 될 것 같습니다.
+                                </p>
+                                <button>
+                                    더보기
+                                </button>
+                            </li>
+                            <li>
+                                <div className='imageBox'>
+                                </div>
+                                <h5>
+                                    운동
+                                </h5>
+                                <p>
+                                    헬스 운동, 전신부터 유산소,하체 등 설명을 이곳에 적어주면 깔끔하고 좋을 것 같네요.
+                                </p>
+                                <button>
+                                    더보기
+                                </button>
+                            </li>
+                            <li>
+                                <div className='imageBox'>
+                                </div>
+                                <h5>
+                                    회원관리
+                                </h5>
+                                <p>
+                                    보다 쉬워진 헬스장 회원 관리 스마트 관리 시스템이란 걸 간단한게 소개해주면 좋을듯해요.
+                                </p>
+                                <button>
+                                    더보기
+                                </button>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
             </div>
             <div className='footer'>
                 <Footer />

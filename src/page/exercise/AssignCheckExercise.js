@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 import '../../styles/exercise/AssignCheckExercise.css';
 import {getStatusRequest} from '../../action/authentication';
 
-//const ip = '13.124.141.28:3002';
-const ip = 'localhost:3000';
+const ip = '13.124.141.28:3002';
+//const ip = 'localhost:3000';
 
 class AssignCheckExercise extends Component {
     constructor(props) {
@@ -112,6 +112,9 @@ class AssignCheckExercise extends Component {
    
                     // and notify
                     alert("Your session is expired, please log in again")
+                }
+                else{
+                    this.cusFetch();
                 }
             }
         );
@@ -367,7 +370,9 @@ class AssignCheckExercise extends Component {
                 <div className='localNavigation'>
                     <div className='container'>
                         <h2>
+                            <div className='parallelogram'></div>
                             운동 배정 확인
+                            <span>.</span>
                         </h2>
                         <div className='breadCrumb'>
                             <Link to='/home'>HOME</Link>

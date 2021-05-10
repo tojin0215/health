@@ -7,7 +7,7 @@
 }
 
 .home .dashboard {
-	padding: 0.8rem 0 0;
+	padding: 0;
 	width: 100%;
 	/* position: absolute;
 	top: 0;
@@ -19,35 +19,62 @@
 	display: flex;
 	width: 100%;
 	justify-content: space-around;
+	padding: 1.8rem 0;
+}
+
+.home .dashboard > div {
+	width: 50%;
+}
+
+.home .dashboard > div label:last-child span {
+	color: #000;
+}
+
+.home .dashboard .homeDashLeft {
+	padding-left: 20%;
+	border-right: 1px solid #bbb;
+}
+
+.home .dashboard .homeDashRight {
+	padding-right: 20%;
+}
+
+.home .dashboard .homeDashLeft label {
+	justify-content: flex-end;
+}
+
+.home .dashboard .homeDashRight label {
+	justify-content: flex-start;
 }
 
 .home .dashboard label {
 	display: flex;
-	width: 23%;
-	height: 100%;
-	justify-content: center;
+	width: 100%;
+	height: 50%;
 	align-items: center;
 	flex-wrap: wrap;
-	border: 1px solid #885;
-	border-radius: 1rem;
-	font-size: 1.6rem;
-	padding: 0.4rem;
+	font-size: 1.8rem;
+	margin: 0;
 }
 
 .home .dashboard label p {
-	width: 100%;
-	text-align: center;
+	text-align: end;
+	font-weight: 300;
+	padding: 0 1rem;
 }
 
-.home .dashboard label p span {
-	font-size: 2.4rem;
-	font-weight: 600;
-	padding: 0.4rem;
+.home .dashboard label span {
+	font-size: 1.8rem;
+	font-weight: 700;
+	color: #0f78ff;
+	text-align: end;
+	padding: 0 1rem;
 }
 
 .home .mainVisual {
 	width: 100%;
-	height: 40rem;
+	height: 46.4rem;
+	margin-top: 4.7rem;
 	/* background-image: url(${mainVisual1}); */
 	background: no-repeat top/contain url(../../images/mainVisual1.png);
 	text-indent: -9999rem;
@@ -55,9 +82,10 @@
 
 .home .homeIcon {
 	width: 100%;
-	position: absolute;
-	top: 50rem;
-	left: 0;
+	/* position: absolute;
+	top: 66rem;
+	left: 0; */
+	margin-top: 7.8rem;
 }
 
 .home .homeIcon ul {
@@ -65,36 +93,34 @@
 	justify-content: space-around;
 	flex-wrap: wrap;
 	width: 100%;
-	padding: 0 20rem;
+	padding: 0 10rem;
 }
 
 .home .homeIcon ul li {
-	width: 20%;
-	height: 22rem;
-}
-
-.home .homeIcon ul li:hover {
+	width: 16%;
 }
 
 .home .homeIcon a {
 	display: flex;
-	width: 100%;
-	height: 100%;
-	background: no-repeat center/contain;
+	width: 10rem;
+	height: 10rem;
+	border-radius: 1rem;
+	background: no-repeat center/90%;
+	box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
 	/* height:100px; */
 	color: #005;
-	padding: 0;
-	margin: 0;
+	padding: 1rem;
+	margin: 0 auto;
 	justify-content: center;
 	align-items: flex-end;
 }
 
-.home .homeIcon a p {
-	text-indent: -1rem;
-	font-size: 2.4rem;
-	color: #3675f6;
-	font-weight: 400;
-	padding-bottom: 3rem;
+.home .homeIcon p {
+	font-size: 2rem;
+	color: #333;
+	font-weight: 300;
+	padding-top: 1rem;
+	text-align: center;
 }
 
 .home .homeIcon .btnCustomer {
@@ -115,4 +141,76 @@
 
 .home .homeIcon .btnSetting {
 	background-image: url(../../images/btnSetting.png);
+}
+
+.home .homeAbout {
+	margin-top: 4.7rem;
+	width: 100%;
+}
+
+.home .homeAbout h3 {
+	display: flex;
+	flex-direction: row;
+	font-size: 5rem;
+	font-weight: 700;
+	line-height: 5rem;
+	color: #213449;
+	border: none;
+	margin-bottom: 2rem;
+}
+
+.home .homeAbout h3 .parallelogram {
+	margin: 0.7rem 2rem 0 1rem;
+}
+
+.home .homeAbout section {
+	position: relative;
+}
+
+.home .homeAbout section > p {
+	font-size: 1.9rem;
+	font-weight: 300;
+}
+
+.home .homeAbout .aboutExplain button {
+	position: absolute;
+	top: 4rem;
+	right: 0;
+}
+
+.home .homeAbout .aboutList ul {
+	display: flex;
+	justify-content: space-around;
+}
+
+.home .homeAbout .aboutList ul li {
+	width: 30rem;
+	height: 41rem;
+	box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
+	border-radius: 25px;
+	padding: 2rem;
+	position: relative;
+}
+
+.home .homeAbout .aboutList ul li div {
+	height: 20rem;
+	background-repeat: no-repeat;
+	background-size: 12rem auto;
+}
+
+.home .homeAbout .aboutList ul li:nth-child(1) div {
+	background-image: url(/src/images/aboutProduct.png);
+}
+.home .homeAbout .aboutList ul li:nth-child(2) div {
+	background-image: url(/src/images/aboutExercise.png);
+}
+.home .homeAbout .aboutList ul li:nth-child(3) div {
+	background-image: url(/src/images/aboutManage.png);
+}
+
+.home .homeAbout .aboutList ul li button {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 1rem;
 }

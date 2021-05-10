@@ -17,11 +17,10 @@
 	padding: 2rem 0 1rem;
 }
 
-.salesUtill Button {
-	width: 15rem;
-	background-color: rgb(38, 38, 134);
-	border: none;
-	border-radius: 10px;
+.dateSort {
+	height: 4rem;
+	width: auto;
+	font-weight: 400;
 }
 /*결제 등록 버튼 위치*/
 .salesUtill2 {

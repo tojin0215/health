@@ -1,84 +1,77 @@
 .addExercise form {
-  display: flex;
-  flex-wrap: wrap;
-  border-bottom: 1px solid #005;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .addExercise .container .input-row {
-  width:100%;
+	width: 100%;
 }
 /* 운동묶음설정 버튼 우측 상단 위치 조정 */
 .addExercise .waySub {
-  top:-2rem;
+	top: -8rem;
 }
 
-.addExercise .waySub {
-  top:-3rem;
-}
-
-
-.settingInfoInput {
-  position:relative;
+.addExercise .settingInfoInput {
+	position: relative;
+	margin-top: 8rem;
 }
 
 .contHeader {
-  display:flex;
+	display: flex;
 }
 
 .label-description {
-  width:20%;
-  text-align: center;
+	width: 20%;
+	text-align: center;
 }
 
 .exercisePart {
-  display:flex;
-  align-items:center;
+	display: flex;
+	align-items: center;
 }
 
-
-
 .exercisePart .part {
-  display:flex;
-  width:80%;
-  justify-content: space-around;
+	display: flex;
+	width: 80%;
+	justify-content: space-around;
 }
 
 .exercisePart .part label {
-  display:flex;
-  align-items:center;
-  width:100%;
+	display: flex;
+	align-items: center;
+	width: 100%;
 }
 
-.exercisePart .part label input[type=checkBox] {
-  margin:1rem;
+.exercisePart .part label input[type='checkBox'] {
+	margin: 1rem;
 }
 
 .settingRoutin {
-  display:flex;
-  align-items:center;
+	display: flex;
+	align-items: center;
 }
 
 .settingRoutin > div {
-  display: flex;
-  width:80%;
-  justify-content: space-between;
+	display: flex;
+	width: 80%;
+	justify-content: space-between;
 }
 
 .settingInfoInput form button {
-  margin: 2rem auto;
+	margin: 2rem auto;
 }
 
 .settingExerciseList {
-  padding-top: 4rem;
-  position: relative;
+	padding-top: 4rem;
+	position: relative;
 }
 
 .settingExerciseList h3 {
-  border-bottom: none;
+	border-bottom: none;
 }
 
 .settingExerciseList .searchInputRow {
-  position: absolute;
-  top: 1rem;
-  right: 0;
+	position: absolute;
+	top: 1rem;
+	right: 0;
 }
