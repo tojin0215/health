@@ -20,8 +20,8 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 import {getStatusRequest} from '../../action/authentication';
 
-//const ip = '13.124.141.28:3002';
-const ip = 'localhost:3000';
+const ip = '13.124.141.28:3002';
+//const ip = 'localhost:3000';
 
 const options = [
     '헬스장이름', '담당자이름', '아이디', '전화번호'
