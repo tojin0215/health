@@ -718,6 +718,7 @@ class Inbody extends Component {
                         dateFormat="MM/dd/yyyy"
                         />
                         <button
+                        className='btnSolid'
                         type="button"
                         onClick={this.handleOnClick}
                         >
@@ -844,30 +845,31 @@ class Inbody extends Component {
                 <div className='inbodySlide'>
                     <label>{this.state.userName}님의 인바디 변화그래프 입니다.</label>
                     <button onClick={this.handleClickAway}>X</button>
-                    <Dropdown
-                        className='searchDrop'
-                        options={this.state.inbody_noList}
-                        onChange={this.selectItem1}
-                        //value={this.state.item}
-                        placeholder="선택"
-                    />
-                    <label>~</label>
-                    <Dropdown
-                        className='searchDrop'
-                        options={this.state.inbody_noList}
-                        onChange={this.selectItem2}
-                        //value={this.state.item}
-                        placeholder="선택"
-                    />
-                    <button onClick={this.clickInbody}>조회하기</button>
-
-                        {this.state.showChart?
-                            <Chart
-                                options={this.state.chartOptions}
-                                series={this.state.series}
-                                type="line"
-                                width="700"
-                            />
+                    <div className='inbodySlideUtill'>
+                        <Dropdown
+                            className='searchDrop'
+                            options={this.state.inbody_noList}
+                            onChange={this.selectItem1}
+                            //value={this.state.item}
+                            placeholder="선택"
+                        />
+                        <label>~</label>
+                        <Dropdown
+                            className='searchDrop'
+                            options={this.state.inbody_noList}
+                            onChange={this.selectItem2}
+                            //value={this.state.item}
+                            placeholder="선택"
+                        />
+                        <button onClick={this.clickInbody}>조회하기</button>
+                    </div>
+                    {this.state.showChart?
+                        <Chart
+                            options={this.state.chartOptions}
+                            series={this.state.series}
+                            type="line"
+                            width="700"
+                        />
                     :null}
 
                 </div>

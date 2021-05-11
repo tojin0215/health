@@ -40,6 +40,10 @@
 	align-items: center;
 }
 
+.inbody .inbodyListUtill .btnSolid {
+	height: 4rem;
+}
+
 .inbody .inbodySlide {
 	position: absolute;
 	right: 0;
@@ -48,5 +52,22 @@
 	width: 80%;
 	height: 100%;
 	background-color: rgba(33, 52, 73, 0.9);
+	color: #fff;
+	padding: 2rem;
+}
+
+.inbody .inbodySlide .inbodySlideUtill {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.inbody .inbodySlide .inbodySlideUtill > label {
+	padding: 0 1.6rem;
+	font-size: 3rem;
+	font-weight: 700;
+}
+
+.inbodySlide .apexcharts-legend-text {
 	color: #fff;
 }

@@ -472,7 +472,7 @@ class AssignCheckExercise extends Component {
                         </BootstrapTable>
                         {/*.table2 */}
                         <button
-                            className="btnOneCenter"
+                            className="btnSolid"
                             type="button"
                             onClick={this.handleOnClick}
                         >

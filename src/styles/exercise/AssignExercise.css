@@ -120,6 +120,11 @@
 	border: 2px solid #0f78ff;
 }
 
+.assignWorkout .btnSolid {
+	margin: 2rem auto;
+	display: block;
+}
+
 .assignExercise h3 {
 	border: none;
 }
