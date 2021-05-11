@@ -1162,7 +1162,7 @@ class DefaultExercise extends Component {
                     >
                         유산소
                     </button>{/*#5 */}
-                </div>
+                </div>{/*.defaultKind .flexbetween*/}
                 {this.state.show1?
                     <div>
                         <h3>
@@ -1538,7 +1538,7 @@ class DefaultExercise extends Component {
                         </div>
                     ) : null}
                     <button
-                        className="btnOneCenter"
+                        className="btnSolid"
                         type="button"
                         onClick={this.handleOnClick}
                     >

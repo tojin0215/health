@@ -1141,10 +1141,22 @@ class AssignExercise extends Component {
                             님 */}
                                 최근 <span>인바디</span> 정보입니다.
                             </h4>
-                            <label>키 {this.state.user_height}</label>
-                            <label>체중 {this.state.user_weight}</label>
-                            <label>체지방 {this.state.user_bodyFat}</label>
-                            <label>근육량 {this.state.user_muscleMass}</label>
+                            <label>
+                                키
+                                <span>{this.state.user_height}</span>
+                            </label>
+                            <label>
+                                체중
+                                <span>{this.state.user_weight}</span>
+                            </label>
+                            <label>
+                                체지방
+                                <span>{this.state.user_bodyFat}</span>
+                            </label>
+                            <label>
+                                근육량
+                                <span>{this.state.user_muscleMass}</span>
+                            </label>
                         </div>
                         <Link
                             to={{ pathname: '/assign/customer',
@@ -1767,7 +1779,7 @@ class AssignExercise extends Component {
                             }}
                         >
                             <button
-                                className="btnOneCenter btnSolid"
+                                className="btnSolid"
                                 type="button"
                                 onClick={this.handleOnClick}
                             >

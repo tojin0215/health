@@ -685,7 +685,7 @@ class AddExercise extends Component {
                                 </div>
                             </div>
                             {/*.input-row */}
-                            <button type="button" onClick={this.AddExercise}>
+                            <button className='btnSolid' type="button" onClick={this.AddExercise}>
                                 저장하기
                             </button>
                         </form>

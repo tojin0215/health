@@ -6,7 +6,6 @@
 	top: 3rem;
 }
 .assignExercise .customerSearch .btnAssignCusSearch {
-	text-indent: -1rem;
 	background-image: url(/src/images/search.png);
 	background-repeat: no-repeat;
 	background-size: 2rem auto;
@@ -24,6 +23,12 @@
 .assignExercise .CustomerInbody > div {
 	display: flex;
 	flex-wrap: wrap;
+}
+
+.assignExercise .CustomerInbody > div > label span {
+	font-size: 3rem;
+	padding: 0 2rem;
+	color: #0f78ff;
 }
 
 .assignExercise .CustomerInbody > label {

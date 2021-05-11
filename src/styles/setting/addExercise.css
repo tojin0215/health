@@ -73,5 +73,10 @@
 .settingExerciseList .searchInputRow {
 	position: absolute;
 	top: 1rem;
-	right: 0;
+	right: 2rem;
+}
+
+.settingExerciseList .searchInputRow button {
+	height: 4rem;
+	font-weight: 500;
 }

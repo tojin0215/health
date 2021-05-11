@@ -1,13 +1,28 @@
 .defaultExercise .waySub {
-  top:-2rem;
+	top: -2rem;
 }
 
 .defaultExercise > .container {
-  min-height:60rem;
-  position:relative;
+	min-height: 60rem;
+	position: relative;
+}
+
+.defaultExercise > .container > div:nth-child(2) {
+}
+
+.defaultExercise > .container > button:last-child {
+	margin: 3rem auto 0;
+	width: 18rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .defaultExercise h3 {
-  border-bottom: none;
-  padding:2rem 0 1rem;
+	border-bottom: none;
+	padding: 2rem 0 1rem;
+}
+
+.defaultExercise .defaultKind button {
+	width: 20%;
 }

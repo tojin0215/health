@@ -52,7 +52,7 @@ input[type='password']:focus {
 }
 /* 달력 데이터 피커 분류(당일, 1개월) */
 .container .dateSort {
-	/* width: 7rem; */
+	align-self: auto;
 }
 /* 세로 형식 인풋 박스 */
 .inputColumn {
