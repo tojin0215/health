@@ -102,12 +102,20 @@ class Inbody extends Component {
               },
               title: {
                 text: '인바디 변화 그래프',
-                align: 'left'
+                align: 'left',
+                style: {
+                    color:  '#fff'
+                  },
               },
               legend: {
                 tooltipHoverFormatter: function(val, opts) {
                   return val //+ ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
-                }
+                },
+                fontSize: '2rem',          
+                labels: {
+                    colors: '#fff',
+                    useSeriesColors: false
+                },
               },
               markers: {
                 size: 6,
@@ -121,6 +129,9 @@ class Inbody extends Component {
                 ],
               },
               tooltip: {
+                style: {
+                    color:'#000'
+                  },
                 y: [
                   {
                     title: {
@@ -475,6 +486,7 @@ class Inbody extends Component {
                         this.setState({
                             series : chartData,
                             showChart : true,
+                            width: '100%',
                             chartOptions: {
                                 ...this.state.chartOptions,
                                 chart: {
@@ -863,15 +875,16 @@ class Inbody extends Component {
                         />
                         <button onClick={this.clickInbody}>조회하기</button>
                     </div>
-                    {this.state.showChart?
-                        <Chart
-                            options={this.state.chartOptions}
-                            series={this.state.series}
-                            type="line"
-                            width="700"
-                        />
-                    :null}
-
+                    <section className='inbodyGraph'>
+                        {this.state.showChart?
+                            <Chart
+                                options={this.state.chartOptions}
+                                series={this.state.series}
+                                type="line"
+                                width="700"
+                            />
+                        :null}
+                    </section>
                 </div>
             :null
             }
