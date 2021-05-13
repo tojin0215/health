@@ -64,11 +64,6 @@ class Navigation extends Component {
                                 상품/매출
                             </span>
                         </NavLink>
-                        <NavLink exact to="/exercise">
-                            <span className={styles.navitem}>
-                                설정
-                            </span>
-                        </NavLink>
                         <NavLink exact to="/assign">
                             <span className={styles.navitem}>
                                 운동
@@ -100,6 +95,67 @@ class Navigation extends Component {
                         </Nav.Item>
                     </Nav>
                 </Navbar>
+                <div className='dropdownNav'>
+                    <ul>
+                    <li>
+                        <NavLink exact to="/home">
+                                Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <ul>
+                        <li>
+                            <NavLink exact to="/customer">
+                                회원 관리
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink exact to="/customer/add">
+                                회원 등록
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink exact to="/assign/inbody">
+                                인바디 정보
+                            </NavLink>
+                        </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul>
+                        <li>
+                            <NavLink exact to="/sales">
+                                매출 현황
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink exact to="/sales/add">
+                                결제 등록
+                            </NavLink>
+                        </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul>
+                        <li>
+                            <NavLink exact to="/assign">
+                                운동 배정
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink exact to="/exercise">
+                                운동 설정
+                            </NavLink>
+                        </li>
+                        </ul>
+                    </li>
+                    <li></li>
+                    {userinfo.fitness_name === '투진컴퍼니'?
+                        <li></li>
+                    :null
+                    }
+                    </ul>
+                </div>
             </div>
         );
     }

@@ -7,9 +7,6 @@ import { connect } from 'react-redux';
 import {getStatusRequest} from '../../action/authentication';
 import '../../styles/home/home.css';
 
-import mainVisual1 from '../../images/mainVisual1.png';
-import mainVisual2 from '../../images/mainVisual2.png';
-
 const ip = '13.124.141.28:3002';
 //const ip = 'localhost:3000';
 
