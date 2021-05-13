@@ -67,12 +67,13 @@
 
 .dropdownNav > ul {
 	display: flex;
-	justify-content: space-around;
-	padding: 0 26rem 3rem 39rem;
+	justify-content: flex-start;
+	padding: 0 10rem 3rem 31rem;
 }
 
 .dropdownNav > ul > li {
 	text-align: center;
+	width: 10rem;
 }
 
 :local(.navitem) {
