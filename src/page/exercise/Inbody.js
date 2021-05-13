@@ -856,7 +856,7 @@ class Inbody extends Component {
             {this.state.show?
                 <div className='inbodySlide'>
                     <label>{this.state.userName}님의 인바디 변화그래프 입니다.</label>
-                    <button onClick={this.handleClickAway}>X</button>
+                    <button type='button' onClick={this.handleClickAway}>X</button>
                     <div className='inbodySlideUtill'>
                         <Dropdown
                             className='searchDrop'
