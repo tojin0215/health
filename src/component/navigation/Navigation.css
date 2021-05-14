@@ -67,20 +67,23 @@
 
 .dropdownNav > ul {
 	display: flex;
-	justify-content: flex-start;
-	padding: 0 10rem 3rem 31rem;
+	justify-content: flex-end;
+	padding: 0 23rem 3rem 31rem;
 }
 
 .dropdownNav > ul > li {
 	text-align: center;
-	width: 10rem;
+	width: 9rem;
 }
 
 :local(.navitem) {
 	color: #000;
 	justify-content: space-around;
-	padding: 0 2.5rem;
+	padding: 0;
 	font-size: 1.8rem;
+	display: block;
+	width: 9rem;
+	text-align: center;
 }
 
 :local(.navUtill) {
@@ -92,6 +95,7 @@
 	padding: 0 1rem;
 	font-size: 1.3rem;
 	line-height: 1.3rem;
+	width: 10rem;
 	display: flex;
 }
 :local(.navUtill button) {
