@@ -63,12 +63,14 @@
 .dropdownNav {
 	width: 1080px;
 	margin: 0 auto;
+	font-size: 1.8rem;
 }
 
 .dropdownNav > ul {
 	display: flex;
 	justify-content: flex-end;
 	padding: 0 23rem 3rem 31rem;
+	height: 100%;
 }
 
 .dropdownNav > ul > li {

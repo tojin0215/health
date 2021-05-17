@@ -541,8 +541,8 @@ class Sales extends Component {
                         className="table2">
                             <TableHeaderColumn
                             dataField='num'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center', 'width': '8rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '8rem' } }
                             isKey>
                                 No.
                             </TableHeaderColumn>
@@ -554,7 +554,7 @@ class Sales extends Component {
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='exerciseName'
-                            thStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center','padding': '0.6rem 3rem' } }
                             tdStyle={ { 'textAlign': 'center' } }>
                                 <Select 
                                 menuPortalTarget={document.querySelector('body')}
@@ -567,8 +567,8 @@ class Sales extends Component {
                             <TableHeaderColumn 
                             dataField='time'
                             dataFormat={dataFormatter}
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }>
+                            thStyle={ { 'textAlign': 'center', 'width': '12rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '12rem' } }>
                                 결제일
                             </TableHeaderColumn>
                             <TableHeaderColumn
@@ -580,8 +580,8 @@ class Sales extends Component {
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='paymentTools'
-                            thStyle={ { 'textAlign': 'center'} }
-                            tdStyle={ { 'textAlign': 'center'} }>
+                            thStyle={ { 'textAlign': 'center','width': '16rem' } }
+                            tdStyle={ { 'textAlign': 'center','width': '16rem' } }>
                                 <Select 
                                 menuPortalTarget={document.querySelector('body')}
                                 placeholder = '결제도구' 
