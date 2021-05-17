@@ -13,6 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import Dropdown from 'react-dropdown';
+import '../../styles/admin/Admin.css';
 import 'react-dropdown/style.css';
 
 import { confirmAlert } from 'react-confirm-alert'; // Import
@@ -309,7 +310,7 @@ class Admin extends Component {
         };
 
         return (
-            <div className='statistics'>
+            <div className='admin'>
                 <div className='header'>
                     <Header />
                     <Navigation goLogin={this.goLogin}/>
@@ -327,8 +328,6 @@ class Admin extends Component {
                     </div>{/*.localNavigation */}
                 </div>{/*.header */}
                 <div className="container">
-                     <h2>관리자페이지</h2>
-
                     <div>
                     <button
                             type='button'
@@ -443,7 +442,8 @@ class Admin extends Component {
                             checked={this.state.search}
                             onChange={this.handleChange}
                             />
-                            <button className='btnSearch' type="button" onClick={this.search}> 헬스장 검색
+                            <button className='btnSolid' type="button" onClick={this.search}>
+                                검색
                             </button>
                         </div>
                     </div>
