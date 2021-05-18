@@ -1,5 +1,7 @@
 input[type='radio'] {
 	margin: 1rem;
+	width: 2rem;
+	height: 2rem;
 }
 
 input[type='text'] {
@@ -45,9 +47,12 @@ input[type='password']:focus {
 	background: url(../images/search.png) no-repeat right center/2rem auto;
 }
 
+.react-datepicker {
+	font-size: 1.2rem;
+}
 /* 달력 데이터 피커 인풋 박스 크기 */
 .react-datepicker__input-container input[type='text'] {
-	width: 11rem;
+	width: 15rem;
 	border: 1px solid #bbb;
 }
 /* 달력 데이터 피커 분류(당일, 1개월) */
@@ -114,6 +119,7 @@ input[type='password']:focus {
 
 .container .react-datepicker .react-datepicker__navigation {
 	width: 1rem;
+	height: 1rem;
 	border: 0.45rem solid transparent;
 	border-radius: 0;
 	background-color: transparent;

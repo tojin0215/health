@@ -1180,8 +1180,8 @@ class DefaultExercise extends Component {
                         >
                             <TableHeaderColumn
                             dataField='no'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center','width': '6rem' } }
+                            tdStyle={ { 'textAlign': 'center','width': '6rem' } }
                             isKey
                             >
                                 no
@@ -1209,22 +1209,22 @@ class DefaultExercise extends Component {
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='set' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                             >
                                 세트
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='bb' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                             >
                                 횟수
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='cc' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                             >
                                 휴식시간
                             </TableHeaderColumn>
@@ -1255,8 +1255,8 @@ class DefaultExercise extends Component {
                         >
                             <TableHeaderColumn
                             dataField='no'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center','width': '6rem' } }
+                            tdStyle={ { 'textAlign': 'center','width': '6rem' } }
                             isKey
                             >
                                 no
@@ -1284,22 +1284,22 @@ class DefaultExercise extends Component {
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='set' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                             >
                                 세트
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='bb' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                             >
                                 횟수
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='cc' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                             >
                                 휴식시간
                             </TableHeaderColumn>
@@ -1330,8 +1330,8 @@ class DefaultExercise extends Component {
                             >
                                 <TableHeaderColumn
                                     dataField="no"
-                                    thStyle={{ textAlign: 'center' }}
-                                    tdStyle={{ textAlign: 'center' }}
+                                    thStyle={{ textAlign: 'center','width': '6rem' }}
+                                    tdStyle={{ textAlign: 'center','width': '6rem' }}
                                     isKey
                                 >
                                     no
@@ -1358,23 +1358,23 @@ class DefaultExercise extends Component {
                                     운동부위
                                 </TableHeaderColumn>
                                 <TableHeaderColumn
-                                    dataField="set"
-                                    thStyle={{ textAlign: 'center' }}
-                                    tdStyle={{ textAlign: 'center' }}
+                                dataField='set' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                                 >
                                     세트
                                 </TableHeaderColumn>
                                 <TableHeaderColumn
-                                    dataField="bb"
-                                    thStyle={{ textAlign: 'center' }}
-                                    tdStyle={{ textAlign: 'center' }}
+                                dataField='bb' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                                 >
                                     횟수
                                 </TableHeaderColumn>
                                 <TableHeaderColumn
-                                    dataField="cc"
-                                    thStyle={{ textAlign: 'center' }}
-                                    tdStyle={{ textAlign: 'center' }}
+                                dataField='cc' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                                 >
                                     휴식시간
                                 </TableHeaderColumn>
@@ -1404,8 +1404,8 @@ class DefaultExercise extends Component {
                             >
                                 <TableHeaderColumn
                                     dataField="no"
-                                    thStyle={{ textAlign: 'center' }}
-                                    tdStyle={{ textAlign: 'center' }}
+                                    thStyle={{ textAlign: 'center','width': '6rem' }}
+                                    tdStyle={{ textAlign: 'center','width': '6rem' }}
                                     isKey
                                 >
                                     no
@@ -1432,23 +1432,23 @@ class DefaultExercise extends Component {
                                     운동부위
                                 </TableHeaderColumn>
                                 <TableHeaderColumn
-                                    dataField="set"
-                                    thStyle={{ textAlign: 'center' }}
-                                    tdStyle={{ textAlign: 'center' }}
+                                dataField='set' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                                 >
                                     세트
                                 </TableHeaderColumn>
                                 <TableHeaderColumn
-                                    dataField="bb"
-                                    thStyle={{ textAlign: 'center' }}
-                                    tdStyle={{ textAlign: 'center' }}
+                                dataField='bb' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                                 >
                                     횟수
                                 </TableHeaderColumn>
                                 <TableHeaderColumn
-                                    dataField="cc"
-                                    thStyle={{ textAlign: 'center' }}
-                                    tdStyle={{ textAlign: 'center' }}
+                                dataField='cc' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                                 >
                                     휴식시간
                                 </TableHeaderColumn>
@@ -1478,8 +1478,8 @@ class DefaultExercise extends Component {
                             >
                                 <TableHeaderColumn
                                     dataField="no"
-                                    thStyle={{ textAlign: 'center' }}
-                                    tdStyle={{ textAlign: 'center' }}
+                                    thStyle={{ textAlign: 'center','width': '6rem' }}
+                                    tdStyle={{ textAlign: 'center','width': '6rem' }}
                                     isKey
                                 >
                                     no
@@ -1506,23 +1506,23 @@ class DefaultExercise extends Component {
                                     운동부위
                                 </TableHeaderColumn>
                                 <TableHeaderColumn
-                                    dataField="set"
-                                    thStyle={{ textAlign: 'center' }}
-                                    tdStyle={{ textAlign: 'center' }}
+                                dataField='set' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                                 >
                                     세트
                                 </TableHeaderColumn>
                                 <TableHeaderColumn
-                                    dataField="bb"
-                                    thStyle={{ textAlign: 'center' }}
-                                    tdStyle={{ textAlign: 'center' }}
+                                dataField='bb' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                                 >
                                     횟수
                                 </TableHeaderColumn>
                                 <TableHeaderColumn
-                                    dataField="cc"
-                                    thStyle={{ textAlign: 'center' }}
-                                    tdStyle={{ textAlign: 'center' }}
+                                dataField='cc' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                                 >
                                     휴식시간
                                 </TableHeaderColumn>

@@ -385,16 +385,16 @@ class Customer extends Component {
                             selectRow={ selectRowProp }
                             className="table2">
                                 <TableHeaderColumn dataField='no'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
+                                    thStyle={ { 'textAlign': 'center', 'width' : '5.5rem' } }
+                                    tdStyle={ { 'textAlign': 'center', 'width' : '5.5rem'  } }
                                     isKey>No.</TableHeaderColumn>
                                 <TableHeaderColumn dataField='name'
                                     thStyle={ { 'textAlign': 'center' } }
                                     tdStyle={ { 'textAlign': 'center' } }
                                     >회원이름</TableHeaderColumn>
                                 <TableHeaderColumn dataField='sex'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
+                                    thStyle={ { 'textAlign': 'center', 'width' : '6rem' } }
+                                    tdStyle={ { 'textAlign': 'center', 'width' : '6rem' } }
                                     >성별</TableHeaderColumn>
                                 <TableHeaderColumn dataField='phone'
                                     thStyle={ { 'textAlign': 'center' } }
@@ -409,8 +409,8 @@ class Customer extends Component {
                                     tdStyle={ { 'textAlign': 'center' } }
                                     >강습시작일</TableHeaderColumn>
                                 <TableHeaderColumn dataField='resi_no'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
+                                    thStyle={ { 'textAlign': 'center', 'width' : '12rem' } }
+                                    tdStyle={ { 'textAlign': 'center', 'width' : '12rem' } }
                                     >주민번호</TableHeaderColumn>
                             </BootstrapTable>
                         </div>

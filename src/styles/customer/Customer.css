@@ -63,12 +63,13 @@
 	background-color: rgba(33, 52, 73, 0.94);
 	width: 60%;
 	height: 100%;
-	padding: 12rem 5rem 5rem;
+	overflow: auto;
+	padding: 5rem;
 	position: fixed;
 	top: 0;
 	right: 0;
 	color: #fff;
-	z-index: 1;
+	z-index: 999;
 }
 
 .customerSlide h5 {
@@ -88,11 +89,25 @@
 .customerSlide ul {
 	width: 100%;
 	padding: 2rem 2rem 3rem;
+	display: flex;
+	flex-flow: row;
+	flex-wrap: wrap;
+}
+
+.customerSlide ul li {
+	width: 50%;
 }
 
 .customerSlide ul label {
-	padding: 0.3rem;
+	padding: 0 0.6rem;
 	min-width: 10rem;
+	font-weight: 300;
+	font-size: 2rem;
+}
+
+.customerSlide ul li label:first-child {
+	font-weight: 700;
+	font-size: 2.2rem;
 }
 
 .customerSlide ul li label:first-child {
@@ -101,7 +116,7 @@
 
 .customerSlide .customerSlideUtill {
 	position: absolute;
-	top: 10.4rem;
+	top: 3.4rem;
 	right: 3rem;
 	display: flex;
 	justify-content: flex-end;
@@ -135,4 +150,8 @@
 
 .customerSlide h6 {
 	padding-bottom: 2.5rem;
+}
+
+.customerSlide .react-bs-table {
+	font-size: 2rem;
 }

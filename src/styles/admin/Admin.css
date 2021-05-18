@@ -1,0 +1,11 @@
+.admin .btnSolid {
+	width: 10rem;
+	height: 4rem;
+}
+
+.admin td button {
+	margin: -0.7rem 0 0.3rem 0;
+	height: auto;
+	font-size: 1.6rem;
+	padding: 0.4rem 3rem;
+}

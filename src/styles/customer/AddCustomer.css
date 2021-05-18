@@ -39,6 +39,7 @@
 	display: flex;
 	flex-flow: row wrap;
 	padding: 1rem 0 0 0;
+	font-size: 2rem;
 }
 
 .formAddCustomer > label {
@@ -77,11 +78,14 @@
 .formAddCustomer .customerResi {
 	width: 50%;
 	justify-content: flex-start;
-	padding-right: 1rem;
 }
 
 .formAddCustomer .customerResi .labelCheck {
 	display: none;
+}
+
+.formAddCustomer .customerResi #resiNumber {
+	min-width: 23.1rem;
 }
 
 .formAddCustomer #phone {
@@ -127,6 +131,7 @@
 
 .productPay {
 	width: 100%;
+	font-size: 2rem;
 }
 
 .productPay > div {
@@ -169,7 +174,7 @@
 }
 
 .productPay .paymentAmount {
-	justify-content: center;
+	justify-content: space-evenly;
 	padding-bottom: 6rem;
 	padding-top: 2rem;
 }
@@ -205,11 +210,13 @@
 
 .productPay .finalAmount .amountTotal {
 	width: 50%;
+	display: flex;
+	align-items: center;
 }
 
 .productPay .finalAmount #TotalPayment {
-	width: 35.6rem;
-	height: 8rem;
+	width: 80%;
+	height: 10rem;
 	text-align: center;
 	color: #2d3791;
 	font-size: 4rem;

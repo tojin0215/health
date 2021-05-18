@@ -464,7 +464,7 @@ class AddSales extends Component {
                         </label>{/*.amountTotal */}
                     </div>{/*.finalAmount */}
                     <button
-                        className="btn btn-lg btn-block" type="button" onClick={this.handleOnClick}>
+                        className="btnSolid" type="button" onClick={this.handleOnClick}>
                         등록하기
                     </button>
                 </form>{/*.AddSalesForm productPay */}
