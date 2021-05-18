@@ -1027,7 +1027,7 @@ class AssignExercise extends Component {
                     <article className="waySub">
                         <Link
                             to={{ pathname: '/assign/inbody',
-                                state:{member_no:this.state.member_no} }}
+                                state:{member_no:this.state.member_no, a:false} }}
                         >
                             <button className='btnSolid' type="button">고객인바디</button>
                         </Link>

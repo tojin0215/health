@@ -117,7 +117,7 @@ class Navigation extends Component {
                         <li>
                             <NavLink exact to=
                             {{ pathname: '/assign/inbody',
-                                state:{member_no:0} }}>
+                                state:{member_no:0,a:true} }}>
                                 인바디 정보
                             </NavLink>
                         </li>
