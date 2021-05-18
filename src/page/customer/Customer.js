@@ -295,11 +295,11 @@ class Customer extends Component {
             alwaysShowAllBtns: true,
             //hideSizePerPage:true
             sizePerPageList: [{
-                //text: '10명씩 보기', value: 10
-                text: '5명씩 보기', value: 5
-              }, {
-                //text: '50명씩 보기', value: 50
                 text: '10명씩 보기', value: 10
+                //text: '5명씩 보기', value: 5
+              }, {
+                text: '50명씩 보기', value: 50
+                //text: '10명씩 보기', value: 10
               }, {
                 text: '100명씩 보기', value: 100
             }]

@@ -1027,7 +1027,7 @@ class AssignExercise extends Component {
                     <article className="waySub">
                         <Link
                             to={{ pathname: '/assign/inbody',
-                                state:{member_no:0} }}
+                                state:{member_no:this.state.member_no} }}
                         >
                             <button className='btnSolid' type="button">고객인바디</button>
                         </Link>
@@ -1144,18 +1144,22 @@ class AssignExercise extends Component {
                             <label>
                                 키
                                 <span>{this.state.user_height}</span>
+                                cm
                             </label>
                             <label>
                                 체중
                                 <span>{this.state.user_weight}</span>
+                                kg
                             </label>
                             <label>
                                 체지방
                                 <span>{this.state.user_bodyFat}</span>
+                                kg
                             </label>
                             <label>
                                 근육량
                                 <span>{this.state.user_muscleMass}</span>
+                                kg
                             </label>
                         </div>
                         <Link
