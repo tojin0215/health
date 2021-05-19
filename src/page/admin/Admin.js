@@ -21,7 +21,9 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 import {getStatusRequest} from '../../action/authentication';
 
-const ip = '13.124.141.28:3002';
+import {SERVER_URL} from '../../const/settings';
+
+const ip = SERVER_URL;;
 //const ip = 'localhost:3000';
 
 const options = [

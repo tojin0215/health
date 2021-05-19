@@ -7,8 +7,13 @@ import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../../styles/exercise/AssignCheckExercise.css';
 import {getStatusRequest} from '../../action/authentication';
+import Setting from '../../const/settings';
+import CustomUtil from '../../const/utils'
 
-const ip = '13.124.141.28:3002';
+// const ip = Setting.ip;
+import {SERVER_URL} from '../../const/settings';
+
+const ip = SERVER_URL;;
 //const ip = 'localhost:3000';
 
 class AssignCheckExercise extends Component {
@@ -51,6 +56,7 @@ class AssignCheckExercise extends Component {
             this.state.exerciseList = arr;
         }
     }
+
     getExerciseListDefault = () => {
         let exList = [];
         // let setState = this.setState;

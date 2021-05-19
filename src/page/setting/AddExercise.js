@@ -12,7 +12,10 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import {getStatusRequest} from '../../action/authentication';
 import '../../styles/setting/addExercise.css';
 
-const ip = '13.124.141.28:3002';
+import {SERVER_URL} from '../../const/settings';
+import {getExercise} from '../../const/utils';
+
+const ip = SERVER_URL;
 //const ip = 'localhost:3000';
 
 require('moment-timezone');
@@ -163,74 +166,78 @@ class AddExercise extends Component {
             this.setState({ [e.target.name]: e.target.value });
         }
     };
-    
+
     cusFetch = () => {
-        let it = '';
-        let search = '';
-        //customer 참고해서 검색기능 넣기
+        // this.setState(fitness_no => ({ exerciseList: getExercise(fitness_no) }))
+        // this.state.exerciseList = getExercise(this.state.fitness_no);
+        // this.setState({ exerciseList: getExercise(this.state.fitness_no) });
+        getExercise(arr => {this.setState({exerciseList: arr})}, this.state.fitness_no)
+        // let it = '';
+        // let search = '';
+        // //customer 참고해서 검색기능 넣기
 
-        fetch(
-            'http://' +
-                ip +
-                '/exercise?type=search' +
-                it +
-                '&search=' +
-                search +
-                '&fn=' +
-                this.props.userinfo.fitness_no,
-            {
-                method: 'GET',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-            }
-        )
-            .then((response) => response.json())
-            .then((res) => {
-                console.log(res);
-                let arr = [];
-                for (let i = res.length - 1; i >= 0; i--) {
-                    let part = ', ';
-                    let part_num = Number(res[i].part);
-                    console.log(part_num);
-                    if (part_num === 32) {
-                        part = '기타, ' + part;
-                        part_num = 0;
-                    }
-                    if (part_num >= 16) {
-                        part = '유산소, ' + part;
-                        part_num = part_num - 16;
-                    }
-                    if (part_num >= 8) {
-                        part = '코어, ' + part;
-                        part_num = part_num - 8;
-                    }
-                    if (part_num >= 4) {
-                        part = '전신, ' + part;
-                        part_num = part_num - 4;
-                    }
-                    if (part_num >= 2) {
-                        part = '하체, ' + part;
-                        part_num = part_num - 2;
-                    }
-                    if (part_num === 1) {
-                        part = '상체, ' + part;
-                    }
-                    part = part.slice(0, -2);
+        // fetch(
+        //     'http://' +
+        //         ip +
+        //         '/exercise?type=search' +
+        //         it +
+        //         '&search=' +
+        //         search +
+        //         '&fn=' +
+        //         this.props.userinfo.fitness_no,
+        //     {
+        //         method: 'GET',
+        //         headers: {
+        //             'Content-type': 'application/json',
+        //         },
+        //     }
+        // )
+        //     .then((response) => response.json())
+        //     .then((res) => {
+        //         console.log(res);
+        //         let arr = [];
+        //         for (let i = res.length - 1; i >= 0; i--) {
+        //             let part = ', ';
+        //             let part_num = Number(res[i].part);
+        //             console.log(part_num);
+        //             if (part_num === 32) {
+        //                 part = '기타, ' + part;
+        //                 part_num = 0;
+        //             }
+        //             if (part_num >= 16) {
+        //                 part = '유산소, ' + part;
+        //                 part_num = part_num - 16;
+        //             }
+        //             if (part_num >= 8) {
+        //                 part = '코어, ' + part;
+        //                 part_num = part_num - 8;
+        //             }
+        //             if (part_num >= 4) {
+        //                 part = '전신, ' + part;
+        //                 part_num = part_num - 4;
+        //             }
+        //             if (part_num >= 2) {
+        //                 part = '하체, ' + part;
+        //                 part_num = part_num - 2;
+        //             }
+        //             if (part_num === 1) {
+        //                 part = '상체, ' + part;
+        //             }
+        //             part = part.slice(0, -2);
 
-                    arr.push({
-                        no: res[i].exercise_no,
-                        name: res[i].name,
-                        tool: res[i].machine,
-                        aa: part,
-                        set: res[i].default_set_count,
-                        bb: res[i].default_data,
-                        cc: res[i].default_rest_second,
-                        link: res[i].url,
-                    });
-                }
-                this.setState({ exerciseList: arr });
-            });
+        //             arr.push({
+        //                 no: res[i].exercise_no,
+        //                 name: res[i].name,
+        //                 tool: res[i].machine,
+        //                 aa: part,
+        //                 set: res[i].default_set_count,
+        //                 bb: res[i].default_data,
+        //                 cc: res[i].default_rest_second,
+        //                 link: res[i].url,
+        //             });
+        //         }
+        //         this.setState({ exerciseList: arr });
+        //     });
     };
 
     search = () => {
