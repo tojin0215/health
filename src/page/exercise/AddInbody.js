@@ -144,7 +144,7 @@ class AddInbody extends Component {
             this.props.history.push({
                 //pathname: "/assign/inbody?member_no="+0
                 pathname: "/assign/inbody",
-                state:{member_no:0, a:true}
+                state:{member_no:0, a : true}
             })
         }
 
