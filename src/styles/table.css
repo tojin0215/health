@@ -48,5 +48,15 @@
 .react-bs-table-pagination {
 	position: absolute;
 	bottom: -10rem;
-	right: 0;
+	right: 1rem;
+}
+.react-bs-table-pagination ul {
+	flex-wrap: nowrap;
+}
+.react-bs-table-pagination ul li {
+	width: 100%;
+}
+/**/
+.customerSlide .react-bs-table-pagination {
+	right: 50%;
 }
