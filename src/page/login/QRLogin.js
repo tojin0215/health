@@ -4,7 +4,7 @@ import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import {loginRequest} from '../../action/authentication';
-import '../../styles/login/Login.css';
+import '../../styles/login/QRLogin.css';
 
 import QrReader from 'react-qr-scanner';
 import {SERVER_URL} from '../../const/settings';
@@ -13,12 +13,26 @@ import QRCode from "react-qr-code";
 
 const ip = SERVER_URL;
 class QRLogin extends Component {
-    handleScan(data) {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            fitness_no: this.props.userinfo? this.props.userinfo.fitness_no:1, //Redux를 통해 받은 값
+            member_no: this.props.location.state?Number(this.props.location.state.member_no):1,
+            token: '',
+            is_checking: false,
+        };
+        this.getTestCustomerQRCode();
+    };
+    handleScan = (data) => {
         console.log(data);
         if (data === null) {
             return;
         }
-        alert('QR코드: ' + data.text);
+        else if (this.state.is_checking) {
+            console.log('is_checking');
+            return;
+        } else {this.setState({is_checking: true})}
         try {
             fetch('http://'+ip+'/customerenter?token='+data.text,
             {
@@ -33,6 +47,7 @@ class QRLogin extends Component {
                 else {
                     alert(response.user.name+' 님 반갑습니다.');
                 }
+                this.setState({is_checking: false})
             })
             .catch(error => {
                 if (data.text === '1') {
@@ -41,13 +56,40 @@ class QRLogin extends Component {
                 else if (data.text === '2') {
                     alert('QR을 다시 인식바랍니다.');
                 }
+                this.setState({is_checking: false})
             })
         } catch (e) {
             console.error(e);
+            this.setState({is_checking: false})
         }
     }
     handleError(err) {
         console.error(err);
+    }
+
+    getTestCustomerQRCode = () => {
+        // const data = new FormData();
+        // data.append('fitness_no', 1);
+        // data.append('customer_no', 1);
+        const data = {
+            fitness_no: 1,
+            customer_no: 1,
+        }
+        fetch(
+            'http://'+ip+'/customerenter?type=check&type2=customer',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            }
+        )
+        .then(response => response.json())
+        .then(response => {
+            console.log(response.token);
+            this.setState({token: response.token})
+        })
     }
  
     render() {
@@ -55,8 +97,8 @@ class QRLogin extends Component {
             display: 'flex',
             'alignItems': 'center',
             'justifyContent': 'center',
-            height: 400,
-            width: 400,
+            height: 600,
+            width: 600,
         }
         return (
             <div className='wrap loginWrap'>
@@ -75,11 +117,22 @@ class QRLogin extends Component {
                 </div>
                 <div className='container'>
                 <QrReader
-                    delay={100}
+                    delay={500}
                     style={previewStyle}
                     onError={this.handleError}
                     onScan={this.handleScan}
                     />
+                </div>
+                <div className='container'>
+                    <div>
+                    <h1>
+                        테스트를 위한 QR입니다.
+                    </h1>
+                    </div>
+                    
+                    <div>
+                        <QRCode value={this.state.token} />
+                    </div>
                 </div>
                 <div className='footer'>
                     <Footer />
