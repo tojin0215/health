@@ -138,6 +138,17 @@ class Home extends Component {
             }
             this.setState({monthSales:sum})
         })
+        // 금일 방문 고객
+        fetch('http://'+ip+'/customerenter?fitness_no='+this.props.userinfo.fitness_no, {
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json'
+          }
+        })
+        .then(response => response.json())
+        .then(res => {
+            this.setState({todayCustomer:res.length})
+        })
     }
 
     fommat=(num)=>{
