@@ -25,7 +25,7 @@
 	display: none;
 }
 
-.container {
+.container .qr-reader {
     display: flex;
     align-items: center;
     justify-content: center;
