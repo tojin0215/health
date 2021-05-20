@@ -48,10 +48,12 @@ class Inbody extends Component {
         const search1 = location.pathname;
         //num = (search1.split('/'))[3];
         num = Number(this.props.location.state.member_no)
+        
 
         this.state = {
             open:false,
             member_no:Number(this.props.location.state.member_no),
+            a:Number(this.props.location.state.a),
             //member_no: (search1.split('/'))[3],
             inbody_no:'',
             inbody_noList:[],
@@ -570,106 +572,109 @@ class Inbody extends Component {
             {/* <ClickAwayListener onClickAway={this.handleClickAway}> */}
                 <div className="container">
                     <section className='inbodyCustomer'>
-                        <div>
-                            <button
-                            type='button'
-                            onClick={this.handleClickOpen}
-                            >
-                                회원검색
-                            </button>
-                            <Dialog
-                            open={this.state.open}
-                            onClose={this.handleClose}
-                            maxWidth='lg'
-                            >
-                                <DialogTitle>
-                                    고객 검색
-                                </DialogTitle>
-                                <DialogContent>
-                                    <div className='customerSearch'>
-                                        <Dropdown
-                                        className='searchDrop'
-                                        options={options}
-                                        onChange={this.selectItem}
-                                        value={this.state.item}
-                                        placeholder="Select an option"
-                                        />{/*.searchDrop */}
-                                        <input
-                                        type="text"
-                                        id='search'
-                                        checked={this.state.search}
-                                        onChange={this.handleChange}
-                                        />{/*#search */}
-                                        <button
-                                        type="button"
-                                        onClick={this.search}
-                                        >
-                                            고객 검색
-                                        </button>
-                                    </div>{/*.customerSearch */}
-                                    <Table>
-                                        <TableHead>
-                                            <TableRow>
-                                            <TableCell>번호</TableCell>
-                                            <TableCell>이름</TableCell>
-                                            <TableCell>폰번호</TableCell>
-                                            <TableCell>성별</TableCell>
-                                            <TableCell>생년월일</TableCell>
-                                            <TableCell>선택</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {this.state.customerList ?
-                                                this.state.customerList.map(c=>(
-                                                    <TableRow>
-                                                        <TableCell>
-                                                            {c.no}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {c.userName}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {c.phone}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {c.sex}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {c.resi_no}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            <DialogActions>
-                                                                <button
-                                                                type='button'
-                                                                onClick={this.choiceUser}
-                                                                id={c.no}
-                                                                value={[c.userName,c.phone,c.sex,c.resi_no]}
-                                                                >
-                                                                    선택
-                                                                </button>
-                                                            </DialogActions>
-                                                        </TableCell>
-                                                    </TableRow>
-                                                ))
-                                            :
-                                            <TableRow>
-                                                <TableCell
-                                                colSpan="6"
-                                                align="center"
-                                                >
-                                                </TableCell>
-                                            </TableRow>
-                                            }
-                                        </TableBody>
-                                    </Table>
-                                </DialogContent>
-                                <DialogActions>
-                                    <button type='button' onClick={this.handleClose}>
-                                        닫기
-                                    </button>
-                                </DialogActions>
-                            </Dialog>
-                        </div>
+                        {this.state.a?
+                         <div>
+                         <button
+                         type='button'
+                         onClick={this.handleClickOpen}
+                         >
+                             회원검색
+                         </button>
+                         <Dialog
+                         open={this.state.open}
+                         onClose={this.handleClose}
+                         maxWidth='lg'
+                         >
+                             <DialogTitle>
+                                 고객 검색
+                             </DialogTitle>
+                             <DialogContent>
+                                 <div className='customerSearch'>
+                                     <Dropdown
+                                     className='searchDrop'
+                                     options={options}
+                                     onChange={this.selectItem}
+                                     value={this.state.item}
+                                     placeholder="Select an option"
+                                     />{/*.searchDrop */}
+                                     <input
+                                     type="text"
+                                     id='search'
+                                     checked={this.state.search}
+                                     onChange={this.handleChange}
+                                     />{/*#search */}
+                                     <button
+                                     type="button"
+                                     onClick={this.search}
+                                     >
+                                         고객 검색
+                                     </button>
+                                 </div>{/*.customerSearch */}
+                                 <Table>
+                                     <TableHead>
+                                         <TableRow>
+                                         <TableCell>번호</TableCell>
+                                         <TableCell>이름</TableCell>
+                                         <TableCell>폰번호</TableCell>
+                                         <TableCell>성별</TableCell>
+                                         <TableCell>생년월일</TableCell>
+                                         <TableCell>선택</TableCell>
+                                         </TableRow>
+                                     </TableHead>
+                                     <TableBody>
+                                         {this.state.customerList ?
+                                             this.state.customerList.map(c=>(
+                                                 <TableRow>
+                                                     <TableCell>
+                                                         {c.no}
+                                                     </TableCell>
+                                                     <TableCell>
+                                                         {c.userName}
+                                                     </TableCell>
+                                                     <TableCell>
+                                                         {c.phone}
+                                                     </TableCell>
+                                                     <TableCell>
+                                                         {c.sex}
+                                                     </TableCell>
+                                                     <TableCell>
+                                                         {c.resi_no}
+                                                     </TableCell>
+                                                     <TableCell>
+                                                         <DialogActions>
+                                                             <button
+                                                             type='button'
+                                                             onClick={this.choiceUser}
+                                                             id={c.no}
+                                                             value={[c.userName,c.phone,c.sex,c.resi_no]}
+                                                             >
+                                                                 선택
+                                                             </button>
+                                                         </DialogActions>
+                                                     </TableCell>
+                                                 </TableRow>
+                                             ))
+                                         :
+                                         <TableRow>
+                                             <TableCell
+                                             colSpan="6"
+                                             align="center"
+                                             >
+                                             </TableCell>
+                                         </TableRow>
+                                         }
+                                     </TableBody>
+                                 </Table>
+                             </DialogContent>
+                             <DialogActions>
+                                 <button type='button' onClick={this.handleClose}>
+                                     닫기
+                                 </button>
+                             </DialogActions>
+                         </Dialog>
+                     </div>
+                        :null}
+                       
                         <h3>
                             <span>
                                 {this.state.userName}
