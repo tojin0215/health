@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 import {getStatusRequest} from '../../action/authentication';
 import '../../styles/home/home.css';
 
-const ip = '13.124.141.28:3002';
+import {SERVER_URL} from '../../const/settings';
+
+const ip = SERVER_URL;
 //const ip = 'localhost:3000';
 
 require('moment-timezone');

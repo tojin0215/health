@@ -7,7 +7,9 @@ export const AUTH_GET_STATUS_SUCCESS = "AUTH_GET_STATUS_SUCCESS";
 export const AUTH_GET_STATUS_FAILURE = "AUTH_GET_STATUS_FAILURE";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
-const ip = '13.124.141.28:3002';
+import {SERVER_URL} from '../const/settings';
+
+const ip = SERVER_URL;
 //const ip = 'localhost:3000';
 
 /* LOGIN */

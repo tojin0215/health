@@ -22,7 +22,9 @@ import '../../styles/customer/AddCustomer.css';
 import '../../styles/exercise/AddInbody.css';
 
 
-const ip = '13.124.141.28:3002';
+import {SERVER_URL} from '../../const/settings';
+
+const ip = SERVER_URL;;
 //const ip = 'localhost:3000';
 
 class AddInbody extends Component {

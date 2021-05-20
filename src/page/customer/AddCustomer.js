@@ -16,7 +16,9 @@ import {getStatusRequest} from '../../action/authentication';
 import '../../styles/customer/AddCustomer.css';
 
 
-const ip = '13.124.141.28:3002';
+import {SERVER_URL} from '../../const/settings';
+
+const ip = SERVER_URL;;
 //const ip = 'localhost:3000';
 
 class AddCustomer extends Component {
