@@ -873,7 +873,7 @@ class AssignExercise extends Component {
           })
           .then(() => {
             console.error('arr: ' + arr);
-            url =
+            const url =
               'http://' +
               ip +
               '/assignexercise' +
@@ -903,15 +903,57 @@ class AssignExercise extends Component {
     }
   };
 
+  getCustomerEnterList = () => {
+    fetch(
+      'http://' +
+        ip +
+        '/customerenter?' +
+        '&fitness_no=' +
+        this.props.userinfo.fitness_no,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }
+    )
+    .then(response => response.json())
+    .then(response => {
+      alert(response);
+    })
+    .error(error => alert(error));
+  }
+
   handleOnClick = (e) => {
+    //기타
+    e.preventDefault();
+    
+    this.searchExercise(e.target.value);
+    // this.searchExercise('기타');
+    let result = {
+      show1: false,
+      show2: false,
+      show3: false,
+      show4: false,
+      show5: false,
+      show6: false,
+    }
+    if (e.target.value === '상체') result.show1 = true;
+    else if (e.target.value === '하체') result.show2 = true;
+    else if (e.target.value === '전신') result.show3 = true;
+    else if (e.target.value === '코어') result.show4 = true;
+    else if (e.target.value === '유산소') result.show5 = true;
+    else if (e.target.value === '기타') result.show6 = true;
+    this.setState(result);
     console.log(e);
     return;
   };
 
+
   createViewExerciseListButton = () => {
     const exerciseList = ['상체', '하체', '전신', '코어', '유산소', '기타'];
     return exerciseList.map((name, index) => (
-      <button type="button" key={'createViewExerciseListButton.' + index} onClick={this.handleOnClick}>
+      <button type="button" key={'createViewExerciseListButton.' + index} value={name} onClick={this.handleOnClick}>
         {name}
       </button>
     ));
@@ -925,7 +967,8 @@ class AssignExercise extends Component {
                 type="checkBox"
                 name={"assignDefault|" + name}
                 key={'createViewDefaultExerciseButton' + index}
-                onClick={this.selectHandleOnClick}
+                onChange={this.selectHandleOnClick}
+                // onClick={this.selectHandleOnClick}
             />
             <p>{name}</p>
         </label>
@@ -1251,7 +1294,7 @@ class AssignExercise extends Component {
               <button
                 className="btnSolid"
                 type="button"
-                onClick={this.handleOnClick}
+                // onClick={this.handleOnClick}
               >
                 배정 확인하기
               </button>
