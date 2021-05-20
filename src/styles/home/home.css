@@ -6,6 +6,10 @@
 	flex-wrap: wrap;
 }
 
+.home .localNavigation {
+	height: 6rem;
+}
+
 .home .dashboard {
 	padding: 0;
 	width: 100%;
@@ -13,17 +17,15 @@
 	top: 0;
 	left: 0;
 	right: 0; */
-}
-
-.home .dashboard {
 	display: flex;
-	width: 100%;
 	justify-content: space-around;
-	padding: 1.8rem 0;
+	align-items: center;
 }
 
 .home .dashboard > div {
 	width: 50%;
+	display: flex;
+	flex-wrap: nowrap;
 }
 
 .home .dashboard > div label:last-child span {
@@ -31,20 +33,20 @@
 }
 
 .home .dashboard .homeDashLeft {
-	padding-left: 20%;
+	padding-left: 15%;
 	border-right: 1px solid #bbb;
 }
 
 .home .dashboard .homeDashRight {
-	padding-right: 20%;
+	padding-right: 15%;
 }
 
 .home .dashboard .homeDashLeft label {
-	justify-content: flex-end;
+	justify-content: center;
 }
 
 .home .dashboard .homeDashRight label {
-	justify-content: flex-start;
+	justify-content: center;
 }
 
 .home .dashboard label {
@@ -53,22 +55,22 @@
 	height: 50%;
 	align-items: center;
 	flex-wrap: wrap;
-	font-size: 1.8rem;
+	font-size: 2rem;
 	margin: 0;
 }
 
 .home .dashboard label p {
 	text-align: end;
-	font-weight: 300;
-	padding: 0 1rem;
+	font-weight: 100;
+	padding: 0.4rem 0.5rem 0;
 }
 
 .home .dashboard label span {
-	font-size: 1.8rem;
+	font-size: 2.6rem;
 	font-weight: 700;
 	color: #0f78ff;
 	text-align: end;
-	padding: 0 1rem;
+	padding: 0 0.5rem;
 }
 
 .home .mainVisual {
