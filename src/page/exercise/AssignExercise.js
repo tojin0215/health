@@ -79,6 +79,7 @@ class AssignExercise extends Component {
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     //this.handleChange = this.handleChange.bind(this);
+    this.prefetchQRLogin();
   }
 
   goLogin = () => {
@@ -243,6 +244,47 @@ class AssignExercise extends Component {
         this.setState({ customerList: arr });
       });
   };
+  prefetchQRLogin = () => {
+    
+    fetch('http://'+ip+'/customerenter?fitness_no='+this.props.userinfo.fitness_no,
+      {
+          method: 'GET',
+          credential: 'include',
+      })
+      .then(response => response.json())
+      .then(res => {
+          if (res.code === 200) {
+            for (let i = 0; i < res.length; i++) {
+              console.log(res)
+              fetch(
+                'http://' +
+                  ip +
+                  '/customer?type=select' +
+                  '&member_no=' +
+                  res[i].customer_no +
+                  '&fn=' +
+                  this.props.userinfo.fitness_no,
+                {
+                  method: 'GET',
+                  headers: {
+                    'Content-type': 'application/json',
+                  },
+                }
+              )
+              .then(response => response.json())
+              .then(res => {
+                const cl = JSON.parse(JSON.stringify(this.state.customerList))
+                cl.append({
+                  no: res[0].member_no,
+                  userName: res[0].name,
+                  phone: res[0].phone
+                })
+                this.setState({ customerList: cl});
+              });
+            }
+          }
+      })
+  }
 
   selectItem = (e) => {
     if (e.value == '이름') {
