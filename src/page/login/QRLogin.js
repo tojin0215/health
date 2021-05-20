@@ -119,6 +119,7 @@ class QRLogin extends Component {
                 <QrReader
                     delay={500}
                     style={previewStyle}
+                    className='qr-reader'
                     onError={this.handleError}
                     onScan={this.handleScan}
                     />
