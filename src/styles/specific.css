@@ -65,3 +65,6 @@
 .MuiPaper-root .MuiDialogActions-spacing {
 	justify-content: center;
 }
+.MuiDialog-paperWidthLg {
+	width:50%
+}
