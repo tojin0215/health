@@ -16,6 +16,7 @@ class Authentication extends Component {
         this.setState(nextState);
     }
  
+
     handleRegister = () => {
         let id = this.state.id;
         let pw = this.state.password;
@@ -91,6 +92,11 @@ class Authentication extends Component {
                                 LOGIN
                             </button>
                         </a>
+                        <Link to="/login/register">
+                            <button className='btnSolid'>
+                                회원가입
+                            </button>
+                        </Link>
                     </div>
                 </div>
  
@@ -105,15 +111,15 @@ class Authentication extends Component {
             </div>
         );
  
-        /*const registerView = (
-            <div className="card-content">
-                <div className="row">
-                    {inputBoxes}
-                    <a className="waves-effect waves-light btn"
-                      onClick={this.handleRegister}>CREATE</a>
-                </div>
-            </div>
-        );*/
+        // const registerView = (
+        //     <div className="card-content">
+        //         <div className="row">
+        //             {inputBoxes}
+        //             <a className="waves-effect waves-light btn"
+        //               onClick={this.handleRegister}>회원가입</a>
+        //         </div>
+        //     </div>
+        // );
         return (
           <div className="container auth">
               <div className='welcomeMent'>
@@ -127,6 +133,7 @@ class Authentication extends Component {
                       <div className="card-content">{this.props.mode ? "LOGIN" : "REGISTER"}</div>
                     </div>*/}
                   {this.props.mode ? loginView : registerView }
+
               </div>
           </div>
         );
