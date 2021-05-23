@@ -12,6 +12,7 @@ import { TextField } from '@material-ui/core';
 import {getStatusRequest} from '../../action/authentication';
 
 import {SERVER_URL} from '../../const/settings';
+import { NavItem } from 'react-bootstrap';
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -39,9 +40,9 @@ class Register extends Component {
             manager_name_err :false,
             phone_err :false,
             business_number_err :false,
-            business_phone_err:false
+            business_phone_err:false,
 
-
+            check:0
         };
     };
 
@@ -54,6 +55,32 @@ class Register extends Component {
 
     idCheck =()=>{
         alert(this.state.id)
+        let url = "http://"+ip+"/manager?type=idCheck&id="+this.state.id
+            fetch(url, {
+                method: "GET",
+                headers: {
+                  'Content-type': 'application/json'
+                },
+            })
+            .then(response => response.json())
+            .then((response) => {
+                console.log(response)
+                console.log(response.length)
+                if(response.length == 0){
+                    alert('사용가능합니다.')
+                    this.setState({
+                        check:1
+                    })
+                } else{
+                    alert('존재하는 아이디입니다. 다시 입력해주세요.')
+                    this.setState({
+                        check:0,
+                        id:""
+                    })
+                }
+                
+            });
+                 
     }
     
 
@@ -66,8 +93,8 @@ class Register extends Component {
             fitness_addr_err:false,
             manager_name_err:false,
             phone_err:false,
-            business_number:false,
-            business_phone:false
+            business_number_err:false,
+            business_phone_err:false,
         });
 
 
@@ -98,6 +125,9 @@ class Register extends Component {
 
         if(this.state.id==="" || this.state.password==="" || this.state.fitness_name=== ""  || this.state.fitness_addr==="" || this.state.manager_name==="" || this.state.phone===""  || this.state.business_number === "" || this.state.business_phone=== ""  ){
             alert("빈칸을 채워주세요.")
+        }
+        else if(this.state.check == 0){
+            alert("아이디 중복체크 해주세요.")
         }
         else{
             // 서버 연결하는 부분
@@ -172,6 +202,12 @@ class Register extends Component {
                         autoFocus
                     />
                     <button type="button" onClick={this.idCheck}>아이디 중복체크</button>
+                    {this.state.check == 0?
+                    <label></label>
+                    :
+                    <label>사용가능한 아이디입니다.</label>
+                    }
+                    
                     <TextField
                         variant="outlined"
                         value={this.state.password}
