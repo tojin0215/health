@@ -1,6 +1,7 @@
 export const AUTH_LOGIN = "AUTH_LOGIN";
 export const AUTH_LOGIN_SUCCESS = "AUTH_LOGIN_SUCCESS";
 export const AUTH_LOGIN_FAILURE = "AUTH_LOGIN_FAILURE";
+export const AUTH_LOGIN_WAITING = "AUTH_LOGIN_WAITING";
 // Check sessions
 export const AUTH_GET_STATUS = "AUTH_GET_STATUS";
 export const AUTH_GET_STATUS_SUCCESS = "AUTH_GET_STATUS_SUCCESS";
@@ -32,10 +33,14 @@ export function loginRequest(id, password) {
     .then(response => response.json())
     .then((response) => {
         console.log(response)
+        console.log(response.code)
         if(response.success){
             // SUCCEED
             dispatch(loginSuccess(response));
-        }else{
+        }else if(response.code == 5){
+            //alert('승인 대기중입니다.')   
+            dispatch(loginWaiting());
+        } else{
             // FAILED
             dispatch(loginFailure());
         }
@@ -62,6 +67,12 @@ export function loginSuccess(info) {
 export function loginFailure() {
     return {
         type: AUTH_LOGIN_FAILURE
+    };
+}
+
+export function loginWaiting(){
+    return{
+        type:AUTH_LOGIN_WAITING
     };
 }
 
