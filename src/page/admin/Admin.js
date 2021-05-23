@@ -479,7 +479,6 @@ class Admin extends Component {
                                         label="비밀번호"
                                         error={this.state.pwd_err}
                                         required
-                                        autoFocus
                                     />
                                 </label>
 
@@ -492,7 +491,6 @@ class Admin extends Component {
                                         label="헬스장이름"
                                         error={this.state.fitness_name_err}
                                         required
-                                        autoFocus
                                     />
                                 </label>
                                 <label>
@@ -515,7 +513,6 @@ class Admin extends Component {
                                         label="대표 이름"
                                         error={this.state.manager_name_err}
                                         required
-                                        autoFocus
                                     />
                                 </label>
 
@@ -528,7 +525,6 @@ class Admin extends Component {
                                         label="대표 연락처"
                                         error={this.state.phone_err}
                                         required
-                                        autoFocus
                                     />
                                 </label>
                                 <label>
@@ -607,6 +603,13 @@ class Admin extends Component {
                             no
                         </TableHeaderColumn>
                         <TableHeaderColumn
+                        dataField='id'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >
+                            아이디
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
                         dataField='fitness_name'
                         thStyle={ { 'textAlign': 'center', 'width':'100px' } }
                         tdStyle={ { 'textAlign': 'center','width':'100px'  } }
@@ -621,20 +624,26 @@ class Admin extends Component {
                             대표 이름
                         </TableHeaderColumn>
                         <TableHeaderColumn
-                        dataField='id'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >
-                            아이디
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
                         dataField='phone'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
                             대표 연락처
                         </TableHeaderColumn>
-                        
+                        <TableHeaderColumn
+                        dataField='business_number'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >
+                            사업자등록번호
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='business_phone'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >
+                            사업장연락처
+                        </TableHeaderColumn>
                         <TableHeaderColumn
                         dataField='permit'
                         dataFormat={this.permitButton.bind(this)}
