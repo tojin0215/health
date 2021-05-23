@@ -59,6 +59,8 @@ class Admin extends Component {
             fitnessList:[],
             search:"",
             item:options[0],
+
+            check:0
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -155,6 +157,36 @@ class Admin extends Component {
             [e.target.id]: e.target.value,
         });
     };
+
+    idCheck =()=>{
+        //alert(this.state.id)
+        let url = "http://"+ip+"/manager?type=idCheck&id="+this.state.id
+            fetch(url, {
+                method: "GET",
+                headers: {
+                  'Content-type': 'application/json'
+                },
+            })
+            .then(response => response.json())
+            .then((response) => {
+                console.log(response)
+                //console.log(response.length)
+                if(response.length == 0){
+                    alert('사용가능합니다.')
+                    this.setState({
+                        check:1
+                    })
+                } else{
+                    alert('존재하는 아이디입니다. 다시 입력해주세요.')
+                    this.setState({
+                        check:0,
+                        id:""
+                    })
+                }
+                
+            });
+                 
+    }
 
     handleOnClick = (e) => {
 
@@ -287,7 +319,7 @@ class Admin extends Component {
                 //this.delete(row['no'])
             }
            >
-           삭제 { row['no'] }
+           삭제{/*  { row['no'] } */}
            </button>
         
         )
@@ -431,6 +463,12 @@ class Admin extends Component {
                                     />
                                 </label>{/*.customerName */}
 
+                                <button type="button" onClick={this.idCheck}>아이디 중복체크</button>
+                                {this.state.check == 0?
+                                <label></label>
+                                :
+                                <label>사용가능한 아이디입니다.</label>
+                                }
                                 <label>
                                 <TextField
                                         variant="outlined"
@@ -499,7 +537,7 @@ class Admin extends Component {
                                         value={this.state.business_number}
                                         onChange={this.handleChange}
                                         id='business_number'
-                                        label="사업자 번호"
+                                        label="사업자 등록번호"
                                         error={this.state.business_number_err}
                                         required
                                     />

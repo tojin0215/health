@@ -54,7 +54,7 @@ class Register extends Component {
     };
 
     idCheck =()=>{
-        alert(this.state.id)
+        //alert(this.state.id)
         let url = "http://"+ip+"/manager?type=idCheck&id="+this.state.id
             fetch(url, {
                 method: "GET",
@@ -65,7 +65,7 @@ class Register extends Component {
             .then(response => response.json())
             .then((response) => {
                 console.log(response)
-                console.log(response.length)
+                //console.log(response.length)
                 if(response.length == 0){
                     alert('사용가능합니다.')
                     this.setState({
@@ -259,7 +259,7 @@ class Register extends Component {
                         value={this.state.business_number}
                         onChange={this.handleChange}
                         id='business_number'
-                        label="사업자 번호"
+                        label="사업자 등록번호"
                         error={this.state.business_number_err}
                         required
                     />

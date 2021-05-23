@@ -92,7 +92,7 @@ class Authentication extends Component {
                                 LOGIN
                             </button>
                         </a>
-                        <Link to="/login/register">
+                        <Link to="/register">
                             <button className='btnSolid'>
                                 회원가입
                             </button>
