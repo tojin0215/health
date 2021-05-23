@@ -105,7 +105,7 @@ class AddExercise extends Component {
     }
 
     handleOnClick() {
-        alert('운동 저장');
+        alert('운동이 저장되었습니다.');
         this.setState({
             open: false,
         });
@@ -436,7 +436,7 @@ class AddExercise extends Component {
                     this.iptDSC.value = '';
 
                     this.cusFetch();
-                    alert('운동 등록됨');
+                    alert('운동 등록되었습니다.');
                     // this.search();
                 })
                 .catch((err) => {

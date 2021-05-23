@@ -25,6 +25,7 @@ class Register extends Component {
         this.state = {
             id:'',
             password:'',
+            password_confirm:'',
             fitness_name :'',
             fitness_addr:'',
             manager_name :'',
@@ -35,6 +36,7 @@ class Register extends Component {
             
             id_err:false,
             password_err:false,
+            password_confirm_err:false,
             fitness_name_err :false,
             fitness_addr_err:false,
             manager_name_err :false,
@@ -88,7 +90,8 @@ class Register extends Component {
         
         this.setState({
             id_err:false,
-            pwd_err:false,
+            password_err:false,
+            password_confirm_err:false,
             fitness_name_err:false,
             fitness_addr_err:false,
             manager_name_err:false,
@@ -103,6 +106,9 @@ class Register extends Component {
         }
         if(this.state.password===""){
             this.setState({password_err:true});
+        }
+        if(this.state.password_confirm===""){
+            this.setState({password_confirmm_err:true});
         }
         if(this.state.fitness_name=== ""){
             this.setState({fitness_name_err:true});
@@ -123,8 +129,11 @@ class Register extends Component {
             this.setState({business_phone_err:true});
         }
 
-        if(this.state.id==="" || this.state.password==="" || this.state.fitness_name=== ""  || this.state.fitness_addr==="" || this.state.manager_name==="" || this.state.phone===""  || this.state.business_number === "" || this.state.business_phone=== ""  ){
+        if(this.state.id==="" || this.state.password===""|| this.state.password_confirm==="" || this.state.fitness_name=== ""  || this.state.fitness_addr==="" || this.state.manager_name==="" || this.state.phone===""  || this.state.business_number === "" || this.state.business_phone=== ""  ){
             alert("빈칸을 채워주세요.")
+        }
+        if(this.state.password != this.state.password_confirm){
+            alert("비밀번호가 다릅니다. 다시 입력해주세요.")
         }
         else if(this.state.check == 0){
             alert("아이디 중복체크 해주세요.")
@@ -216,6 +225,16 @@ class Register extends Component {
                         id='password'
                         label="비밀번호"
                         error={this.state.password_err}
+                        required
+                    />
+                    <TextField
+                        variant="outlined"
+                        value={this.state.password_confirm}
+                        onChange={this.handleChange}
+                        type="password"
+                        id='password_confirm'
+                        label="비밀번호확인"
+                        error={this.state.password_confirm_err}
                         required
                     />
                     <TextField
