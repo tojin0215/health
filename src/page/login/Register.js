@@ -52,6 +52,10 @@ class Register extends Component {
         }); 
     };
 
+    idCheck =()=>{
+        alert(this.state.id)
+    }
+    
 
     handleOnClick = (e) => {
         
@@ -140,27 +144,21 @@ class Register extends Component {
         console.log(userinfo);
         
         return (
-        <div className='addSales'>
+            <div className='wrap loginWrap'>
             <div className='header'>
                 <Header />
-                <Navigation/>
-                <div className='localNavigation'>
-                    <div className='container'>
-                        <h2>
-                            <div className='parallelogram'></div>
-                            회원가입
-                            <span>.</span>
-                        </h2>
-                        <div className='breadCrumb'>
-                            <Link to='/'>LOGIN</Link>
-                            <span>&#62;</span>
-                            <Link to='/#'>회원가입</Link>
-                        </div>
-                    </div>{/*.container */}
-                </div>{/*.localNavigation */}
-            </div>{/*.header */}
+                <Navigation />
+            </div>
+            <div className='localNavigation'>
+                <div className='container'>
+                    <h2>
+                        <div className='parallelogram'></div>
+                        회원가입
+                        <span>.</span>
+                    </h2>
+                </div>
+            </div>
             <div className='container'>
-                <h2>회원가입하기</h2>
                 
                 <form className="AddSalesForm productPay" style={{flexDirection:'column'}}>
                     <TextField
@@ -173,6 +171,7 @@ class Register extends Component {
                         required
                         autoFocus
                     />
+                    <button type="button" onClick={this.idCheck}>아이디 중복체크</button>
                     <TextField
                         variant="outlined"
                         value={this.state.password}
@@ -244,11 +243,11 @@ class Register extends Component {
                         등록하기
                     </button>
                 </form>{/*.AddSalesForm productPay */}
-            </div>{/*.container */}
-            <div className='footer'>
-                <Footer />
-            </div>{/*.footer */}
-        </div>/*.addSales */
+                </div>
+                <div className='footer'>
+                    <Footer />
+                </div>
+            </div>
         );
     }
 }
