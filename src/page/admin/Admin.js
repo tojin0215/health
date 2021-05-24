@@ -40,19 +40,27 @@ class Admin extends Component {
             id:"",
             pwd:"",
             fitness_name:"",
-            manager_name:"",
-            phone:"",
+            fitness_addr:'',
+            manager_name :'',
+            phone :'',
+            business_number :'',
+            business_phone:'',
 
             id_err:false,
             pwd_err:false,
-            fitness_name_err:false,
-            manager_name_err:false,
-            phone_err:false,
+            fitness_name_err :false,
+            fitness_addr_err:false,
+            manager_name_err :false,
+            phone_err :false,
+            business_number_err :false,
+            business_phone_err:false,
 
             open:false,
             fitnessList:[],
             search:"",
             item:options[0],
+
+            check:0
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -122,7 +130,8 @@ class Admin extends Component {
                         for(let i=(res.length-1) ; i>=0 ; i--){
 
                             let phone = res[i].phone.substring(0,3)+'-'+res[i].phone.substring(3,7)+'-'+res[i].phone.substring(7,11)
-                            arr1.push({"no":res[i].fitness_no,"id":res[i].id, "fitness_name":res[i].fitness_name, "manager_name":res[i].manager_name, "phone":phone});
+                            let business_phone = res[i].business_phone.substring(0,3)+'-'+res[i].business_phone.substring(3,7)+'-'+res[i].business_phone.substring(7,11)
+                            arr1.push({"no":res[i].fitness_no,"id":res[i].id, "fitness_name":res[i].fitness_name, "manager_name":res[i].manager_name, "phone":phone, "business_number":res[i].business_number, "business_phone":business_phone, "permit":res[i].permit});
                         }
                         this.setState({
                             fitnessList : arr1,
@@ -149,14 +158,47 @@ class Admin extends Component {
         });
     };
 
+    idCheck =()=>{
+        //alert(this.state.id)
+        let url = "http://"+ip+"/manager?type=idCheck&id="+this.state.id
+            fetch(url, {
+                method: "GET",
+                headers: {
+                  'Content-type': 'application/json'
+                },
+            })
+            .then(response => response.json())
+            .then((response) => {
+                console.log(response)
+                //console.log(response.length)
+                if(response.length == 0){
+                    alert('사용가능합니다.')
+                    this.setState({
+                        check:1
+                    })
+                } else{
+                    alert('존재하는 아이디입니다. 다시 입력해주세요.')
+                    this.setState({
+                        check:0,
+                        id:""
+                    })
+                }
+                
+            });
+                 
+    }
+
     handleOnClick = (e) => {
 
         this.setState({
             id_err:false,
             pwd_err:false,
             fitness_name_err:false,
+            fitness_addr_err:false,
             manager_name_err:false,
-            phone_err:false
+            phone_err:false,
+            business_number:false,
+            business_phone:false
         });
 
 
@@ -169,14 +211,22 @@ class Admin extends Component {
         if(this.state.fitness_name=== ""){
             this.setState({fitness_name_err:true});
         }
+        if(this.state.fitness_addr===""){
+            this.setState({fitness_addr_err:true});
+        }
         if(this.state.manager_name===""){
             this.setState({manager_name_err:true});
         }
         if(this.state.phone===""){
             this.setState({phone_err:true});
         }
-
-        if(this.state.id==="" || this.state.pwd==="" || this.state.fitness_name=== "" || this.state.manager_name==="" || this.state.phone==="" ){
+        if(this.state.business_number===""){
+            this.setState({business_number_err:true});
+        }
+        if(this.state.business_phone===""){
+            this.setState({business_phone_err:true});
+        }
+        if(this.state.id==="" || this.state.pwd==="" || this.state.fitness_name=== ""  || this.state.fitness_addr==="" || this.state.manager_name==="" || this.state.phone===""  || this.state.business_number === "" || this.state.business_phone=== ""  ){
             alert("빈칸을 채워주세요.")
         }
         else{
@@ -190,8 +240,12 @@ class Admin extends Component {
                     id:this.state.id,
                     password:this.state.pwd,
                     fitness_name:this.state.fitness_name,
+                    fitness_addr:this.state.fitness_addr,
                     manager_name:this.state.fitness_name,
-                    phone:this.state.phone
+                    phone:this.state.phone,
+                    business_number:this.state.business_number,
+                    business_phone:this.state.business_phone,
+                    permit :0,
                 })
             })
                 .then(response => response.json())
@@ -202,14 +256,46 @@ class Admin extends Component {
                         id:"",
                         pwd:"",
                         fitness_name:"",
+                        fitness_addr_err:"",
                         manager_name:"",
                         phone:"",
+                        business_number_err :"",
+                        business_phone_err:""
                     })
                     this.cusFetch();
                 });
 
         }
     }
+    permitButton(cell, row, enumObject, rowIndex) {
+        
+        return (
+        row['permit']==1?"O":
+           <button
+              type="button"
+              onClick={() =>
+                confirmAlert({
+                    title: '가입 승인',
+                    message: row['fitness_name']+' 가입 승인 하시겠습니까?',
+                    buttons: [
+                      {
+                        label: 'Yes',
+                        onClick: () => this.register(row['no'])
+                      },
+                      {
+                        label: 'No',
+                        onClick: () => alert('취소되었습니다.')
+                      }
+                    ]
+                  })
+                //this.delete(row['no'])
+            }
+           >
+            승인하기
+           </button>
+        
+        )
+     }
 
     cellButton(cell, row, enumObject, rowIndex) {
         return (
@@ -233,10 +319,27 @@ class Admin extends Component {
                 //this.delete(row['no'])
             }
            >
-           삭제 { row['no'] }
+           삭제{/*  { row['no'] } */}
            </button>
         
         )
+     }
+
+     register=(fn)=>{
+        fetch("http://"+ip+"/manager?fn="+fn, {
+            method: "PUT",
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                permit:1
+            })
+        })
+        .then((response) => {
+            alert('가입 승인 되었습니다.')
+            this.cusFetch();
+        });
      }
 
      delete =(fn)=>{
@@ -360,6 +463,12 @@ class Admin extends Component {
                                     />
                                 </label>{/*.customerName */}
 
+                                <button type="button" onClick={this.idCheck}>아이디 중복체크</button>
+                                {this.state.check == 0?
+                                <label></label>
+                                :
+                                <label>사용가능한 아이디입니다.</label>
+                                }
                                 <label>
                                 <TextField
                                         variant="outlined"
@@ -370,7 +479,6 @@ class Admin extends Component {
                                         label="비밀번호"
                                         error={this.state.pwd_err}
                                         required
-                                        autoFocus
                                     />
                                 </label>
 
@@ -383,20 +491,28 @@ class Admin extends Component {
                                         label="헬스장이름"
                                         error={this.state.fitness_name_err}
                                         required
-                                        autoFocus
                                     />
                                 </label>
-
+                                <label>
+                                    <TextField
+                                        variant="outlined"
+                                        value={this.state.fitness_addr}
+                                        onChange={this.handleChange}
+                                        id='fitness_addr'
+                                        label="헬스장 주소"
+                                        error={this.state.fitness_addr_err}
+                                        required
+                                    />
+                                </label>
                                 <label>
                                 <TextField
                                         variant="outlined"
                                         value={this.state.manager_name}
                                         onChange={this.handleChange}
                                         id='manager_name'
-                                        label="담당자이름"
+                                        label="대표 이름"
                                         error={this.state.manager_name_err}
                                         required
-                                        autoFocus
                                     />
                                 </label>
 
@@ -406,10 +522,31 @@ class Admin extends Component {
                                         value={this.state.phone}
                                         onChange={this.handleChange}
                                         id='phone'
-                                        label="담당자연락처"
+                                        label="대표 연락처"
                                         error={this.state.phone_err}
                                         required
-                                        autoFocus
+                                    />
+                                </label>
+                                <label>
+                                    <TextField
+                                        variant="outlined"
+                                        value={this.state.business_number}
+                                        onChange={this.handleChange}
+                                        id='business_number'
+                                        label="사업자 등록번호"
+                                        error={this.state.business_number_err}
+                                        required
+                                    />
+                                </label>
+                                <label>
+                                    <TextField
+                                        variant="outlined"
+                                        value={this.state.business_phone}
+                                        onChange={this.handleChange}
+                                        id='business_phone'
+                                        label="사업장 연락처(-제외)"
+                                        error={this.state.business_phone_err}
+                                        required
                                     />
                                 </label>
 
@@ -466,6 +603,13 @@ class Admin extends Component {
                             no
                         </TableHeaderColumn>
                         <TableHeaderColumn
+                        dataField='id'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >
+                            아이디
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
                         dataField='fitness_name'
                         thStyle={ { 'textAlign': 'center', 'width':'100px' } }
                         tdStyle={ { 'textAlign': 'center','width':'100px'  } }
@@ -477,22 +621,38 @@ class Admin extends Component {
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
-                            대표자이름
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='id'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >
-                            아이디
+                            대표 이름
                         </TableHeaderColumn>
                         <TableHeaderColumn
                         dataField='phone'
                         thStyle={ { 'textAlign': 'center' } }
                         tdStyle={ { 'textAlign': 'center' } }
                         >
-                            연락처
+                            대표 연락처
                         </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='business_number'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >
+                            사업자등록번호
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='business_phone'
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >
+                            사업장연락처
+                        </TableHeaderColumn>
+                        <TableHeaderColumn
+                        dataField='permit'
+                        dataFormat={this.permitButton.bind(this)}
+                        thStyle={ { 'textAlign': 'center' } }
+                        tdStyle={ { 'textAlign': 'center' } }
+                        >
+                            승인   
+                        </TableHeaderColumn>
+
                         <TableHeaderColumn
                         dataField='button'
                         dataFormat={this.cellButton.bind(this)}

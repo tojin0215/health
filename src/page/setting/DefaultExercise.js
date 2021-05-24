@@ -1010,7 +1010,7 @@ class DefaultExercise extends Component {
         )
             .then((res) => res.json())
             .then((res) => {
-                alert('저장됨');
+                alert('저장되었습니다.');
             })
             .catch((err) => console.error(err));
     }

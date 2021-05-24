@@ -123,7 +123,7 @@ class Navigation extends Component {
                             <span className={styles.navitem}>
                             </span>
                         </NavLink>
-                        {userinfo.fitness_name === '투진컴퍼니'?
+                        {userinfo.fitness_no === 1?
                             <NavLink exact to="/admin">
                                 <span className={styles.navitem}>
                                     관리자

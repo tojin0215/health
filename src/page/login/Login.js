@@ -21,6 +21,9 @@ class Login extends Component {
                     alert(id + '님 반갑습니다.') 
                     this.props.history.push('/home');
                     return true;
+                } else if(this.props.status === "PERMITWAITING"){
+                    alert('승인 대기 중입니다.');
+                    return false;
                 } else {
                     alert('ID나 비밀번호를 확인해주세요.');
                     return false;

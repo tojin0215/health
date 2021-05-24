@@ -1,6 +1,6 @@
 import authenticationAction from '../action/index';
 
-const {AUTH_LOGIN, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE, AUTH_GET_STATUS, AUTH_GET_STATUS_SUCCESS,AUTH_GET_STATUS_FAILURE, AUTH_LOGOUT} = authenticationAction.authentication;
+const {AUTH_LOGIN, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE,AUTH_LOGIN_WAITING, AUTH_GET_STATUS, AUTH_GET_STATUS_SUCCESS,AUTH_GET_STATUS_FAILURE, AUTH_LOGOUT} = authenticationAction.authentication;
 
 
 const authentication = (state =
@@ -46,6 +46,14 @@ const authentication = (state =
                     status: 'FAILURE'
                 }
             }
+       
+        case AUTH_LOGIN_WAITING:
+            return {
+                ...state,
+                login:{
+                    status: 'PERMITWAITING'
+                }
+            }     
         case AUTH_GET_STATUS:
                 return {
                   ...state,
