@@ -32,6 +32,13 @@ input[type='checkbox'] {
 	margin: 0;
 }
 input[type='password'] {
+	width: 20rem;
+	height: 4rem;
+	border-radius: 1rem;
+	border: 1px solid #000;
+	text-indent: 1rem;
+	outline: none;
+	box-sizing: border-box;
 	margin: 1rem;
 }
 
