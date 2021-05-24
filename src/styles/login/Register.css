@@ -1,11 +1,12 @@
 .register > .container > form {
 	display: flex;
 	flex-wrap: wrap;
-	flex-direction: column;
+	flex-direction: row;
 }
 
 .register > .container > form > div {
 	align-self: center;
+	width: 50%;
 }
 
 .register > .container > form input {
