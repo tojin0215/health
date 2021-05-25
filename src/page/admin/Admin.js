@@ -27,7 +27,7 @@ const ip = SERVER_URL;;
 //const ip = 'localhost:3000';
 
 const options = [
-    '헬스장이름', '담당자이름', '아이디', '전화번호'
+    '헬스장이름', '대표 이름', '아이디', '전화번호'
   ];
 const defaultOption = options[0];
 
@@ -376,7 +376,8 @@ class Admin extends Component {
                 for(let i=(res.length-1) ; i>=0 ; i--){
 
                     let phone = res[i].phone.substring(0,3)+'-'+res[i].phone.substring(3,7)+'-'+res[i].phone.substring(7,11)
-                    arr1.push({"no":res[i].fitness_no,"id":res[i].id, "fitness_name":res[i].fitness_name, "manager_name":res[i].manager_name, "phone":phone});
+                    let business_phone = res[i].business_phone.substring(0,3)+'-'+res[i].business_phone.substring(3,7)+'-'+res[i].business_phone.substring(7,11)
+                    arr1.push({"no":res[i].fitness_no,"id":res[i].id, "fitness_name":res[i].fitness_name, "manager_name":res[i].manager_name, "phone":phone, "business_number":res[i].business_number, "business_phone":business_phone, "permit":res[i].permit});
                 }
                 this.setState({
                     fitnessList : arr1,
