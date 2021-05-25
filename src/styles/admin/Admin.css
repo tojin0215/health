@@ -9,3 +9,15 @@
 	font-size: 1.6rem;
 	padding: 0.4rem 3rem;
 }
+
+.react-confirm-alert .react-confirm-alert-body > h1 {
+	margin-bottom: 2rem;
+}
+
+.react-confirm-alert .react-confirm-alert-button-group {
+	justify-content: center;
+}
+
+.react-confirm-alert .react-confirm-alert-button-group > button {
+	padding: 1rem 4rem;
+}
