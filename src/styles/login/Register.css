@@ -11,6 +11,14 @@
 	margin: 1.6rem 0;
 }
 
+.register .MuiFormLabel-root {
+	color: #0f78ff;
+}
+
+.register .MuiInput-underline:before {
+	border-bottom: 1px solid #0f78ff;
+}
+
 .register > .container > form > div {
 }
 
@@ -35,8 +43,8 @@
 }
 
 .register form .overlapCheck .btnSolid {
-	height: 3rem;
-	border-radius: 1.5rem;
+	height: 4rem;
+	border-radius: 2rem;
 	width: auto;
 	font-size: 1.8rem;
 	font-weight: 400;

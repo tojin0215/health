@@ -210,6 +210,7 @@ class Register extends Component {
                                 id='id'
                                 label="아이디"
                                 error={this.state.id_err}
+                                color="blue"
                                 required
                                 autoFocus
                             />

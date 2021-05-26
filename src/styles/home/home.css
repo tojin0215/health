@@ -216,3 +216,7 @@
 	transform: translateX(-50%);
 	bottom: 1rem;
 }
+
+.home .homeAbout .aboutList ul li p {
+	word-break: keep-all;
+}
