@@ -107,7 +107,7 @@ class AssignCustomer extends Component {
             let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
             let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
         
-            fetch('http://'+ip+'/assignexercise?type=customer&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
+            fetch(ip+'/assignexercise?type=customer&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
                 method: "GET",
                 headers: {
                   'Content-type': 'application/json'
@@ -142,7 +142,7 @@ class AssignCustomer extends Component {
         let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
         let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
     
-        fetch('http://'+ip+'/assignexercise?type=customer&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
+        fetch(ip+'/assignexercise?type=customer&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'

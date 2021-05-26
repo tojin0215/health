@@ -132,7 +132,7 @@ class AssignExercise extends Component {
 
     loadInbody = (member_no) => {
         let url =
-            'http://' +
+            
             ip +
             '/inbody?type=customer&member_no=' +
             member_no +
@@ -219,7 +219,7 @@ class AssignExercise extends Component {
             it = '1';
         }
         fetch(
-            'http://' +
+            
                 ip +
                 '/customer?type=search' +
                 it +
@@ -571,7 +571,7 @@ class AssignExercise extends Component {
 
     loadExerciseList() {
         let url =
-            'http://' +
+            
             ip +
             '/assignexercise' +
             '?type=' +
@@ -640,7 +640,7 @@ class AssignExercise extends Component {
         search = v;
 
         fetch(
-            'http://' +
+            
                 ip +
                 '/exercise?type=search' +
                 it +
@@ -821,7 +821,7 @@ class AssignExercise extends Component {
                 search = v;
 
                 fetch(
-                    'http://' +
+                    
                         ip +
                         '/exercise?type=search' +
                         it +
@@ -880,7 +880,7 @@ class AssignExercise extends Component {
                     .then(() => {
                         console.error('arr: ' + arr);
                         url =
-                            'http://' +
+                            
                             ip +
                             '/assignexercise' +
                             '?type=' +

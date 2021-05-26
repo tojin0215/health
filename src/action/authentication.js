@@ -20,7 +20,7 @@ export function loginRequest(id, password) {
     dispatch(login());
 
     // API REQUEST
-    return fetch("http://"+ip+"/manager?type=session", {
+    return fetch(ip+"/manager?type=session", {
         method: "POST",
         credentials: 'include',
         headers: {
@@ -84,7 +84,7 @@ export function getStatusRequest() {
         console.log('____getStatus', getStatus())
 
         dispatch(getStatus());
-        return fetch("http://"+ip+"/manager?type=session", {
+        return fetch(ip+"/manager?type=session", {
             method: "GET",
             headers: {
                 'Content-type': 'application/json'
@@ -128,7 +128,7 @@ export function getStatusFailure() {
 }
 export function logoutRequest() {
     return (dispatch) => {
-        return fetch("http://"+ip+"/manager?type=session", {
+        return fetch(ip+"/manager?type=session", {
             method: "DELETE",
             credentials: 'include'
         })

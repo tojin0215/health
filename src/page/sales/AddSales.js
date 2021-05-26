@@ -218,7 +218,7 @@ class AddSales extends Component {
 
         console.log('***********paymentDate : ', this.state.paymentDate)
         console.log(this.state);
-        fetch("http://"+ip+"/sales", {
+        fetch(ip+"/sales", {
             method: "POST",
             headers: {
               'Content-type': 'application/json'
@@ -261,7 +261,7 @@ class AddSales extends Component {
         }else if(this.state.item === "핸드폰"){
             it = '1'
         }
-        fetch("http://"+ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch(ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'

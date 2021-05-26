@@ -148,7 +148,7 @@ class AddInbody extends Component {
             })
         }
 
-        fetch("http://"+ip+"/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
+        fetch(ip+"/customer?type=select&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -244,7 +244,7 @@ class AddInbody extends Component {
             alert("빈칸을 채워주세요.")
         }else{
             // 서버 연결하는 부분
-            fetch("http://"+ip+"/inbody", {
+            fetch(ip+"/inbody", {
                 method: "POST",
                 headers: {
                 'Content-type': 'application/json'

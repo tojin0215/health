@@ -55,7 +55,7 @@ const CustomUtil = {
 export function getExercise(callback, fitness_no) {
   let arr = [];
   const url =
-    'http://' + SERVER_URL + '/exercise?type=search&search=&fn=' + fitness_no;
+     SERVER_URL + '/exercise?type=search&search=&fn=' + fitness_no;
   fetch(url, {
     method: 'GET',
     async: false,

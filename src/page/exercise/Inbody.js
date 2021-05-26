@@ -213,10 +213,10 @@ class Inbody extends Component {
         let url;
         //alert(num)
         if(num === '0'){
-            //url = "http://"+ip+":3003/inbody?type=all&fn="+this.props.userinfo.fitness_no
+            //url = ip+":3003/inbody?type=all&fn="+this.props.userinfo.fitness_no
             this.setState({inbodyList : []});
         } else{
-            url = "http://"+ip+"/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
+            url = ip+"/inbody?type=customer&member_no="+num+"&fn="+this.props.userinfo.fitness_no
             fetch(url, {
                 method: "GET",
                 headers: {
@@ -236,7 +236,7 @@ class Inbody extends Component {
                             inbody_noList:inbody_no1.reverse()
                         });
 
-                        fetch("http://"+ip+"/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
+                        fetch(ip+"/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
                             method: "GET",
                             headers: {
                             'Content-type': 'application/json'
@@ -312,7 +312,7 @@ class Inbody extends Component {
             age:age,
             open:false
         })
-        let url = "http://"+ip+"/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
+        let url = ip+"/inbody?type=customer&member_no="+e.target.id+"&fn="+this.props.userinfo.fitness_no
         fetch(url, {
             method: "GET",
             headers: {
@@ -348,7 +348,7 @@ class Inbody extends Component {
         let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
         let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
         console.log('clickclickclick')
-        fetch('http://'+ip+'/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
+        fetch(ip+'/inbody?type=select&startDate='+startTime+'&endDate='+endTime+'&member_no='+this.state.member_no+'&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -383,7 +383,7 @@ class Inbody extends Component {
         }else if(this.state.item === "핸드폰"){
             it = '1'
         }
-        fetch("http://"+ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch(ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -427,7 +427,7 @@ class Inbody extends Component {
             alert('회차를 다시 선택해주세요.')
         } else{
             //alert(this.state.startNum+'~'+this.state.endNum+' 인바디 정보 불러오기')
-            let url = "http://"+ip+"/inbody?type=inbodySelect&startNum="+this.state.startNum+"&endNum="+this.state.endNum+"&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no
+            let url = ip+"/inbody?type=inbodySelect&startNum="+this.state.startNum+"&endNum="+this.state.endNum+"&member_no="+this.state.member_no+"&fn="+this.props.userinfo.fitness_no
             fetch(url, {
                 method: "GET",
                 headers: {

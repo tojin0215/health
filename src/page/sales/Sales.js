@@ -123,7 +123,7 @@ class Sales extends Component {
     }
 
     cusFetch = () => {
-        fetch("http://"+ip+"/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+        fetch(ip+"/customer?type=all&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -138,7 +138,7 @@ class Sales extends Component {
                 this.setState({customerList : arr});
         });
         
-        fetch('http://'+ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no, {
+        fetch(ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -187,9 +187,9 @@ class Sales extends Component {
 
         let url = ''
         if(selectedOption.label === '전체'){
-            url = 'http://'+ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            url = ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
         } else{
-            url = 'http://'+ip+'/sales?type=tools&paymentTools='+selectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            url = ip+'/sales?type=tools&paymentTools='+selectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
         }
         fetch(url, {
             method: "GET",
@@ -230,9 +230,9 @@ class Sales extends Component {
 
         let url = ''
         if(exerciseSelectedOption.label === '전체'){
-            url = 'http://'+ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            url = ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
         }  else{
-           url = 'http://'+ip+'/sales?type=exercise&exerciseName='+exerciseSelectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+           url = ip+'/sales?type=exercise&exerciseName='+exerciseSelectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
         }
         fetch(url, {
             method: "GET",
@@ -297,7 +297,7 @@ class Sales extends Component {
                     endDate : endTime
                 })
             }
-            url = 'http://'+ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no
+            url = ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no
         } else if (e.target.value === '한달'){
             if(this.state.salesLists4.length != 0){                 
                 this.setState({
@@ -308,7 +308,7 @@ class Sales extends Component {
             }
             startTime = new Date(today.getFullYear(),today.getMonth()-1,today.getDate())
             endTime = new Date(today.getFullYear(),today.getMonth(),(today.getDate()+1))
-            url = 'http://'+ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            url = ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
         }
         
         fetch(url,{
@@ -373,7 +373,7 @@ class Sales extends Component {
         let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
         let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
 
-        fetch('http://'+ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no, {
+        fetch(ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
