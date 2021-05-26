@@ -242,10 +242,7 @@ class Home extends Component {
                     </h3>
                     <section className='aboutExplain'>
                         <p>
-                            헬스 회원 스마트 관리 시스템으로 기존 회원 관리 방식에서 탈피하여
-                        </p>
-                        <p>
-                            쉬운 회원관리, 스마트한 서비스를 제공합니다.
+                            헬스 회원 스마트 관리 시스템으로 기존 회원 관리 방식에서 탈피하여   쉬운 회원관리, 스마트한 서비스를 제공합니다.
                         </p>
                         <button>
                             자세히보기

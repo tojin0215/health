@@ -35,6 +35,9 @@
 	padding: 0.7rem 1.4rem;
 }
 /* 회원목록 테이블 */
+.react-bs-table .table-bordered > thead > tr:first-child > th {
+	font-size: 2rem;
+}
 .tableContainer {
 	border-top: 1px solid #bbb;
 	border-bottom: 1px solid #bbb;
@@ -60,4 +63,9 @@
 /**/
 .customerSlide .react-bs-table-pagination {
 	right: 50%;
+}
+
+.react-bs-table table td,
+.react-bs-table table th {
+	overflow: inherit;
 }

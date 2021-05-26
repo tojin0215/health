@@ -7,7 +7,7 @@ button {
 	height: 5rem;
 	border: none;
 	border-radius: 3rem;
-	padding: 0.4rem 3rem;
+	padding: 0.4rem 2rem;
 	margin: 1rem;
 	background-color: #fff;
 	color: #0f78ff;
@@ -23,7 +23,8 @@ button {
 .btnSolid {
 	background-color: #0f78ff;
 	color: #fff;
-	font-weight: 300;
+	font-weight: 500;
+	font-size: 2.2rem;
 }
 
 .btnSolid:hover {

@@ -577,6 +577,7 @@ class Inbody extends Component {
                         {this.state.a?
                          <div>
                          <button
+                         className='btnSolid'
                          type='button'
                          onClick={this.handleClickOpen}
                          >

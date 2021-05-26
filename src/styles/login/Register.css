@@ -1,0 +1,60 @@
+.register > .container > form > ul {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 3rem 15rem 0;
+}
+
+.register > .container > form > ul li {
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	margin: 1.6rem 0;
+}
+
+.register .MuiFormLabel-root {
+	color: #0f78ff;
+}
+
+.register .MuiInput-underline:before {
+	border-bottom: 1px solid #0f78ff;
+}
+
+.register > .container > form > div {
+}
+
+.register > .container > form input[type='text'] {
+	width: 30rem;
+	height: auto;
+	border: none;
+	margin: 0;
+}
+
+.register > .container > form input[type='password'] {
+	width: 30rem;
+	border: none;
+	margin: 0;
+}
+
+.register .registerId {
+}
+
+.register > .container form .overlapCheck {
+	justify-content: flex-start;
+}
+
+.register form .overlapCheck .btnSolid {
+	height: 4rem;
+	border-radius: 2rem;
+	width: auto;
+	font-size: 1.8rem;
+	font-weight: 400;
+	margin: 0;
+}
+
+.register .btnSolid {
+	margin-top: 8rem;
+	width: 40rem;
+	height: 6rem;
+	font-size: 2.4rem;
+	font-weight: 500;
+}
