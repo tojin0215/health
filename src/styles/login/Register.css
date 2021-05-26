@@ -1,30 +1,50 @@
-.register > .container > form {
+.register > .container > form > ul {
 	display: flex;
 	flex-wrap: wrap;
-	flex-direction: row;
+	margin: 3rem 15rem 0;
+}
+
+.register > .container > form > ul li {
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	margin: 1.6rem 0;
 }
 
 .register > .container > form > div {
-	align-self: center;
-	width: 50%;
 }
 
-.register > .container > form input {
-	width: 40rem;
-	height: 6rem;
+.register > .container > form input[type='text'] {
+	width: 30rem;
+	height: auto;
+	border: none;
+	margin: 0;
+}
+
+.register > .container > form input[type='password'] {
+	width: 30rem;
+	border: none;
+	margin: 0;
 }
 
 .register .registerId {
 }
 
-.register .overlapCheck {
-	height: 5rem;
-	margin-bottom: 2rem;
-	border-radius: 1rem;
+.register > .container form .overlapCheck {
+	justify-content: flex-start;
+}
+
+.register form .overlapCheck .btnSolid {
+	height: 3rem;
+	border-radius: 1.5rem;
+	width: auto;
+	font-size: 1.8rem;
+	font-weight: 400;
+	margin: 0;
 }
 
 .register .btnSolid {
-	margin-top: 2rem;
+	margin-top: 8rem;
 	width: 40rem;
 	height: 6rem;
 	font-size: 2.4rem;

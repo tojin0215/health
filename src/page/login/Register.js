@@ -202,8 +202,9 @@ class Register extends Component {
                 <div className='container'>
                     <form className="AddSalesForm productPay">
                         {/* <div className='registerId'> */}
+                        <ul>
+                            <li>
                             <TextField
-                                variant="outlined"
                                 value={this.state.id}
                                 onChange={this.handleChange}
                                 id='id'
@@ -212,89 +213,98 @@ class Register extends Component {
                                 required
                                 autoFocus
                             />
-                            <button className='overlapCheck' type="button" onClick={this.idCheck}>아이디 중복체크</button>
-                            {this.state.check == 0?
-                                <label></label>
-                                :
-                                <label>사용가능한 아이디입니다.</label>
-                            }
-                        
-                        <TextField
-                            variant="outlined"
-                            value={this.state.password}
-                            onChange={this.handleChange}
-                            type="password"
-                            id='password'
-                            label="비밀번호"
-                            error={this.state.password_err}
-                            required
-                        />
-                        <TextField
-                            variant="outlined"
-                            value={this.state.password_confirm}
-                            onChange={this.handleChange}
-                            type="password"
-                            id='password_confirm'
-                            label="비밀번호확인"
-                            error={this.state.password_confirm_err}
-                            required
-                        />
-                        <TextField
-                            variant="outlined"
-                            value={this.state.fitness_name}
-                            onChange={this.handleChange}
-                            id='fitness_name'
-                            label="헬스장 이름"
-                            error={this.state.fitness_name_err}
-                            required
-                        />
-                        <TextField
-                            variant="outlined"
-                            value={this.state.fitness_addr}
-                            onChange={this.handleChange}
-                            id='fitness_addr'
-                            label="헬스장 주소"
-                            error={this.state.fitness_addr_err}
-                            required
-                        />
-                        <TextField
-                            variant="outlined"
-                            value={this.state.manager_name}
-                            onChange={this.handleChange}
-                            id='manager_name'
-                            label="대표 이름"
-                            error={this.state.manager_name_err}
-                            required
-                        />
-                        <TextField
-                            variant="outlined"
-                            value={this.state.phone}
-                            onChange={this.handleChange}
-                            id='phone'
-                            label="대표 연락처(-제외)"
-                            error={this.state.phone_err}
-                            required
-                        />
-                        <TextField
-                            variant="outlined"
-                            value={this.state.business_number}
-                            onChange={this.handleChange}
-                            id='business_number'
-                            label="사업자 등록번호"
-                            error={this.state.business_number_err}
-                            required
-                        />
-                        <TextField
-                            variant="outlined"
-                            value={this.state.business_phone}
-                            onChange={this.handleChange}
-                            id='business_phone'
-                            label="사업장 연락처(-제외)"
-                            error={this.state.business_phone_err}
-                            required
-                        />
-
-                        
+                            </li>
+                            <li className='overlapCheck'>
+                                <button className='btnSolid' type="button" onClick={this.idCheck}>중복확인</button>
+                                {this.state.check == 0?
+                                    <label></label>
+                                    :
+                                    <label>사용가능한 아이디입니다.</label>
+                                }
+                            </li>
+                            <li>
+                            <TextField
+                                value={this.state.password}
+                                onChange={this.handleChange}
+                                type="password"
+                                id='password'
+                                label="비밀번호"
+                                error={this.state.password_err}
+                                required
+                            />
+                            </li>
+                            <li>
+                            <TextField
+                                value={this.state.password_confirm}
+                                onChange={this.handleChange}
+                                type="password"
+                                id='password_confirm'
+                                label="비밀번호확인"
+                                error={this.state.password_confirm_err}
+                                required
+                            />
+                            </li>
+                            <li>
+                            <TextField
+                                value={this.state.fitness_name}
+                                onChange={this.handleChange}
+                                id='fitness_name'
+                                label="헬스장 이름"
+                                error={this.state.fitness_name_err}
+                                required
+                            />
+                            </li>
+                            <li>
+                            <TextField
+                                value={this.state.fitness_addr}
+                                onChange={this.handleChange}
+                                id='fitness_addr'
+                                label="헬스장 주소"
+                                error={this.state.fitness_addr_err}
+                                required
+                            />
+                            </li>
+                            <li>
+                            <TextField
+                                value={this.state.manager_name}
+                                onChange={this.handleChange}
+                                id='manager_name'
+                                label="대표 이름"
+                                error={this.state.manager_name_err}
+                                required
+                            />
+                            </li>
+                            <li>
+                            <TextField
+                                value={this.state.phone}
+                                onChange={this.handleChange}
+                                id='phone'
+                                label="대표 연락처(-제외)"
+                                error={this.state.phone_err}
+                                required
+                            />
+                            </li>
+                            <li>
+                            <TextField
+                                value={this.state.business_number}
+                                onChange={this.handleChange}
+                                id='business_number'
+                                label="사업자 등록번호"
+                                error={this.state.business_number_err}
+                                required
+                            />
+                            </li>
+                            <li>
+                            <TextField
+                                value={this.state.business_phone}
+                                onChange={this.handleChange}
+                                id='business_phone'
+                                label="사업장 연락처(-제외)"
+                                error={this.state.business_phone_err}
+                                required
+                            />
+                            </li>
+                        </ul>
                         <button
                             className="btnSolid" type="button" onClick={this.handleOnClick}>
                             등록하기
