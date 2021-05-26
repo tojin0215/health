@@ -82,7 +82,7 @@ class Authentication extends Component {
         );
  
         const loginView = (
-            <div>
+            <div className='loginCard'>
                 <div className="card-content">
                     <div className="row">
                         {inputBoxes}

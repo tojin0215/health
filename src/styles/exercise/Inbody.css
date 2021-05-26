@@ -4,8 +4,10 @@
 }
 
 .inbodyCustomer .waySub {
-	top: 1rem;
+	top: 4rem;
 	right: 0;
+}
+.inbodyCustomer .waySub button {
 }
 
 .inbody {

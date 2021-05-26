@@ -13,6 +13,7 @@ input[type='text'] {
 	outline: none;
 	box-sizing: border-box;
 	margin: 1rem;
+	font-size: 2rem;
 }
 
 input[type='number'] {
@@ -32,6 +33,13 @@ input[type='checkbox'] {
 	margin: 0;
 }
 input[type='password'] {
+	width: 20rem;
+	height: 4rem;
+	border-radius: 1rem;
+	border: 1px solid #000;
+	text-indent: 1rem;
+	outline: none;
+	box-sizing: border-box;
 	margin: 1rem;
 }
 
@@ -127,9 +135,11 @@ input[type='password']:focus {
 }
 .container .react-datepicker .react-datepicker__navigation--previous {
 	border-right-color: #ccc;
+	margin: 0;
 }
 .container .react-datepicker .react-datepicker__navigation--next {
 	border-left-color: #b3b3b3;
+	margin: 0;
 }
 html .MuiOutlinedInput-notchedOutline {
 	border: none;
