@@ -35,7 +35,7 @@ class AddInbody extends Component {
         const search = location.pathname;
         //alert(search+'   '+search.split('/')[3])
 
-        alert(this.props.location.state.inbody_no)
+        //alert(this.props.location.state.inbody_no)
         let inbody_no1 = ''
         if(this.props.location.state.inbody_no == null){
             inbody_no1 = 0

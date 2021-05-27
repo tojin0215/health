@@ -233,8 +233,8 @@ class Inbody extends Component {
                         }
                         this.setState({
                             inbodyList : arr1,
-                            inbody_noList:inbody_no1.reverse(),
                             inbody_no:inbody_no1[0],
+                            inbody_noList:inbody_no1.reverse(),
                         });
 
                         fetch(ip+"/customer?type=select&member_no="+num+"&fn="+this.props.userinfo.fitness_no, {
