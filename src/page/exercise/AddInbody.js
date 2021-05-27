@@ -35,6 +35,7 @@ class AddInbody extends Component {
         const search = location.pathname;
         //alert(search+'   '+search.split('/')[3])
 
+        alert(this.props.location.state.inbody_no)
         let inbody_no1 = ''
         if(this.props.location.state.inbody_no == null){
             inbody_no1 = 0
@@ -199,6 +200,7 @@ class AddInbody extends Component {
             bodyFatMass2_err:false,
             bmi_err:false,
             percentBodyFat_err:false,
+            inbody_no : this.state.inbody_no+1
         });
     
         if( this.state.height==="") {
@@ -243,6 +245,8 @@ class AddInbody extends Component {
         || this.state.skeletalMuscleMass==="" || this.state.bodyFatMass2===0 || this.state.bmi=== "" || this.state.percentBodyFat==="" ){
             alert("빈칸을 채워주세요.")
         }else{
+            //let in_no = this.state.inbody_no + 1
+            //alert('this.state.inbody_no + 1' + in_no)
             // 서버 연결하는 부분
             fetch("http://"+ip+"/inbody", {
                 method: "POST",
@@ -252,7 +256,8 @@ class AddInbody extends Component {
                 body: JSON.stringify({
                     fitness_no:this.state.fitness_no,
                     member_no:this.state.member_no,
-                    inbody_no:this.state.inbody_no+1,
+                    //inbody_no:in_no,
+                    inbody_no:this.state.inbody_no + 1,
                     height : this.state.height, //키
                     measurementDate : this.state.measurementDate, // 측정날짜
                     //체성분 분석
