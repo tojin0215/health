@@ -87,7 +87,7 @@ class Home extends Component {
     }
 
     cusFetch=()=>{
-        fetch("http://"+ip+"/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+        fetch(ip+"/customer?type=all&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -105,7 +105,7 @@ class Home extends Component {
                 // }
                 // this.setState({customerList : arr});
         });
-        fetch('http://'+ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no, {
+        fetch(ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -124,7 +124,7 @@ class Home extends Component {
         let startTime = new Date(today.getFullYear(),today.getMonth(),1)
         let endTime = new Date(today.getFullYear(),today.getMonth()+1,0)
         //alert(today)
-        fetch('http://'+ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no, {
+        fetch(ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -139,7 +139,7 @@ class Home extends Component {
             this.setState({monthSales:sum})
         })
         // 금일 방문 고객
-        fetch('http://'+ip+'/customerenter?fitness_no='+this.props.userinfo.fitness_no, {
+        fetch(ip+'/customerenter?fitness_no='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'

@@ -177,7 +177,7 @@ class AddExercise extends Component {
         // //customer 참고해서 검색기능 넣기
 
         // fetch(
-        //     'http://' +
+        //     
         //         ip +
         //         '/exercise?type=search' +
         //         it +
@@ -287,7 +287,7 @@ class AddExercise extends Component {
         }
 
         fetch(
-            'http://' +
+            
                 ip +
                 '/exercise?type=search' +
                 it +
@@ -400,7 +400,7 @@ class AddExercise extends Component {
                 alert('DEBUG');
             }
 
-            fetch('http://' + ip + '/exercise', {
+            fetch( ip + '/exercise', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

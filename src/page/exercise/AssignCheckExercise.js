@@ -127,7 +127,7 @@ class AssignCheckExercise extends Component {
     }
 
     sendAssign2 = (arr, last_group_no) => {
-        let url = 'http://' + ip + '/assignexercise';
+        let url =  ip + '/assignexercise';
         arr.forEach((ex) => {
             fetch(url, {
                 method: 'POST',
@@ -156,7 +156,7 @@ class AssignCheckExercise extends Component {
     ) => {
         let it = 2;
         let search = searchs.pop();
-        let url = 'http://' + ip + '/exercise';
+        let url =  ip + '/exercise';
         url = url + '?type=search' + it;
         url = url + '&search=' + search;
         url = url + '&fn=' + fitness_no;
@@ -325,7 +325,7 @@ class AssignCheckExercise extends Component {
 
     handleOnClick = () => {
         let url =
-            'http://' +
+            
             ip +
             '/assignexercise' +
             '?type=' +

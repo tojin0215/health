@@ -133,7 +133,7 @@ class AssignExercise extends Component {
 
   loadInbody = (member_no) => {
     let url =
-      'http://' +
+      
       ip +
       '/inbody?type=customer&member_no=' +
       member_no +
@@ -216,7 +216,7 @@ class AssignExercise extends Component {
       it = '1';
     }
     fetch(
-      'http://' +
+      
         ip +
         '/customer?type=search' +
         it +
@@ -246,7 +246,7 @@ class AssignExercise extends Component {
   };
   prefetchQRLogin = () => {
     
-    fetch('http://'+ip+'/customerenter?fitness_no='+this.props.userinfo.fitness_no,
+    fetch(ip+'/customerenter?fitness_no='+this.props.userinfo.fitness_no,
       {
           method: 'GET',
           credential: 'include',
@@ -257,7 +257,7 @@ class AssignExercise extends Component {
             for (let i = 0; i < res.length; i++) {
               console.log(res)
               fetch(
-                'http://' +
+                
                   ip +
                   '/customer?type=select' +
                   '&member_no=' +
@@ -599,7 +599,7 @@ class AssignExercise extends Component {
 
   loadExerciseList() {
     let url =
-      'http://' +
+      
       ip +
       '/assignexercise' +
       '?type=' +
@@ -668,7 +668,7 @@ class AssignExercise extends Component {
     search = v;
 
     fetch(
-      'http://' +
+      
         ip +
         '/exercise?type=search' +
         it +
@@ -857,7 +857,7 @@ class AssignExercise extends Component {
         search = v;
 
         fetch(
-          'http://' +
+          
             ip +
             '/exercise?type=search' +
             it +
@@ -916,7 +916,7 @@ class AssignExercise extends Component {
           .then(() => {
             console.error('arr: ' + arr);
             const url =
-              'http://' +
+              
               ip +
               '/assignexercise' +
               '?type=' +
@@ -947,7 +947,7 @@ class AssignExercise extends Component {
 
   getCustomerEnterList = () => {
     fetch(
-      'http://' +
+      
         ip +
         '/customerenter?' +
         '&fitness_no=' +

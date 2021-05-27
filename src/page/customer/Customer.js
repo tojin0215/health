@@ -119,7 +119,7 @@ class Customer extends Component {
         );
     }
     cusFetch = () => {
-        fetch("http://"+ip+"/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+        fetch(ip+"/customer?type=all&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -184,7 +184,7 @@ class Customer extends Component {
     onSelectRow=(row, isSelected, e)=> { //table row 클릭시
         if (isSelected) {
             //alert(row['no'])
-            fetch("http://"+ip+"/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
+            fetch(ip+"/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -214,7 +214,7 @@ class Customer extends Component {
                     //alert('age : '+this.calAge(data.resi_no))
                 })
             });
-            fetch("http://"+ip+"/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
+            fetch(ip+"/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -258,7 +258,7 @@ class Customer extends Component {
         }else if(this.state.item === "주민번호(앞자리)"){
             it = '3'
         }
-        fetch("http://"+ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch(ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'

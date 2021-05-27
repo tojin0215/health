@@ -257,7 +257,7 @@ class DefaultExercise extends Component {
         //customer 참고해서 검색기능 넣기
 
         fetch(
-            'http://' +
+            
                 ip +
                 '/exercise?type=search' +
                 it +
@@ -390,7 +390,7 @@ class DefaultExercise extends Component {
         search = v;
 
         fetch(
-            'http://' +
+            
                 ip +
                 '/exercise?type=search' +
                 it +
@@ -996,7 +996,7 @@ class DefaultExercise extends Component {
             });
         }
         fetch(
-            'http://' + ip + '/exercise?fn=' + this.props.userinfo.fitness_no,
+             ip + '/exercise?fn=' + this.props.userinfo.fitness_no,
             {
                 method: 'PUT',
                 headers: {

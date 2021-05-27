@@ -117,7 +117,7 @@ class Admin extends Component {
     }
 
     cusFetch =() =>{
-        let url = "http://"+ip+"/manager?type=all"
+        let url = ip+"/manager?type=all"
             fetch(url, {
                 method: "GET",
                 headers: {
@@ -160,7 +160,7 @@ class Admin extends Component {
 
     idCheck =()=>{
         //alert(this.state.id)
-        let url = "http://"+ip+"/manager?type=idCheck&id="+this.state.id
+        let url = ip+"/manager?type=idCheck&id="+this.state.id
             fetch(url, {
                 method: "GET",
                 headers: {
@@ -231,7 +231,7 @@ class Admin extends Component {
         }
         else{
             // 서버 연결하는 부분
-            fetch("http://"+ip+"/manager", {
+            fetch(ip+"/manager", {
                 method: "POST",
                 headers: {
                 'Content-type': 'application/json'
@@ -326,7 +326,7 @@ class Admin extends Component {
      }
 
      register=(fn)=>{
-        fetch("http://"+ip+"/manager?fn="+fn, {
+        fetch(ip+"/manager?fn="+fn, {
             method: "PUT",
             headers: {
                 'Content-type': 'application/json',
@@ -344,7 +344,7 @@ class Admin extends Component {
 
      delete =(fn)=>{
 
-        fetch("http://"+ip+"/manager?type=delete&fn="+fn, {
+        fetch(ip+"/manager?type=delete&fn="+fn, {
             method: "DELETE",
         })
         .then((response) => {
@@ -364,7 +364,7 @@ class Admin extends Component {
         }else if(this.state.item === "전화번호"){
             it = '3'
         }
-        fetch("http://"+ip+"/manager?type=search"+it+"&search="+this.state.search, {
+        fetch(ip+"/manager?type=search"+it+"&search="+this.state.search, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
