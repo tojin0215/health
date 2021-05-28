@@ -670,7 +670,7 @@ class Inbody extends Component {
                                  </Table>
                              </DialogContent>
                              <DialogActions>
-                                 <button type='button' onClick={this.handleClose}>
+                                 <button className='btnSolid' type='button' onClick={this.handleClose}>
                                      닫기
                                  </button>
                              </DialogActions>
@@ -863,8 +863,11 @@ class Inbody extends Component {
 
             {this.state.show?
                 <div className='inbodySlide'>
-                    <label>{this.state.userName}님의 인바디 변화그래프 입니다.</label>
-                    <button type='button' onClick={this.handleClickAway}>X</button>
+                    <label>
+                        <span>{this.state.userName}</span>
+                        님의 인바디 변화그래프 입니다.
+                    </label>
+                    <button className='btnSlideClose' type='button' onClick={this.handleClickAway}>X</button>
                     <div className='inbodySlideUtill'>
                         <Dropdown
                             className='searchDrop'
@@ -882,6 +885,9 @@ class Inbody extends Component {
                             placeholder="선택"
                         />
                         <button onClick={this.clickInbody}>조회하기</button>
+                        <p>
+                            변화량을 조회하고 싶은 인바디 측정 회차를 선택해주세요.
+                        </p>
                     </div>
                     <section className='inbodyGraph'>
                         {this.state.showChart?

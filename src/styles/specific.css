@@ -50,12 +50,12 @@
 }
 /* 테이블 헤더 */
 .MuiTable-root .MuiTableCell-head {
-	padding: 1rem 3rem;
 	text-align: center;
 }
 /* 테이블 셀 사이즈 */
 .MuiTable-root .MuiTableCell-body {
-	padding: 0 3rem;
+	padding: 0;
+	text-align: center;
 }
 
 /* 상품/매출 테이블 필터 크기 조절 */
