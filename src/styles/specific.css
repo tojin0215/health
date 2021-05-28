@@ -43,6 +43,7 @@
 /* 테이블 폰트 크기 */
 .MuiTable-root .MuiTableCell-root {
 	font-size: 1.6rem;
+	width: auto;
 }
 /* 버튼 크기 */
 .MuiTable-root button {
@@ -52,10 +53,31 @@
 .MuiTable-root .MuiTableCell-head {
 	text-align: center;
 }
+
+.MuiTable-root .MuiTableCell-head:nth-child(1) {
+	width: 6rem;
+}
+.MuiTable-root .MuiTableCell-head:nth-child(3) {
+	width: 12rem;
+}
+.MuiTable-root .MuiTableCell-head:nth-child(4) {
+	width: 6rem;
+}
+.MuiTable-root .MuiTableCell-head:nth-child(5) {
+	width: 9rem;
+}
+.MuiTable-root .MuiTableCell-head:nth-child(6) {
+	width: 12rem;
+}
 /* 테이블 셀 사이즈 */
 .MuiTable-root .MuiTableCell-body {
 	padding: 0;
 	text-align: center;
+}
+.MuiTable-root .MuiTableCell-body button {
+	height: 3rem;
+	font-size: 1.8rem;
+	font-weight: 500;
 }
 
 /* 상품/매출 테이블 필터 크기 조절 */

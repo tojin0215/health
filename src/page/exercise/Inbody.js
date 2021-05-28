@@ -618,7 +618,7 @@ class Inbody extends Component {
                                          <TableRow>
                                          <TableCell>번호</TableCell>
                                          <TableCell>이름</TableCell>
-                                         <TableCell>폰번호</TableCell>
+                                         <TableCell>휴대폰</TableCell>
                                          <TableCell>성별</TableCell>
                                          <TableCell>생년월일</TableCell>
                                          <TableCell>선택</TableCell>
@@ -643,7 +643,10 @@ class Inbody extends Component {
                                                      <TableCell>
                                                          {c.resi_no}
                                                      </TableCell>
-                                                     <TableCell>
+                                                     <TableCell
+                                                        thStyle={ { 'textAlign': 'center', 'width':'120px' } }
+                                                        tdStyle={ { 'textAlign': 'center','width':'120px'  } }
+                                                     >
                                                          <DialogActions>
                                                              <button
                                                              type='button'
