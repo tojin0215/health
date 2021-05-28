@@ -34,7 +34,7 @@ class QRLogin extends Component {
             return;
         } else {this.setState({is_checking: true})}
         try {
-            fetch('http://'+ip+'/customerenter?token='+data.text,
+            fetch(ip+'/customerenter?token='+data.text,
             {
                 method: 'GET',
                 credential: 'include',
@@ -76,7 +76,7 @@ class QRLogin extends Component {
             customer_no: 1,
         }
         fetch(
-            'http://'+ip+'/customerenter?type=check&type2=customer',
+            ip+'/customerenter?type=check&type2=customer',
             {
                 method: 'POST',
                 headers: {

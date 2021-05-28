@@ -105,7 +105,7 @@ class AddExercise extends Component {
     }
 
     handleOnClick() {
-        alert('운동 저장');
+        alert('운동이 저장되었습니다.');
         this.setState({
             open: false,
         });
@@ -177,7 +177,7 @@ class AddExercise extends Component {
         // //customer 참고해서 검색기능 넣기
 
         // fetch(
-        //     'http://' +
+        //     
         //         ip +
         //         '/exercise?type=search' +
         //         it +
@@ -287,7 +287,7 @@ class AddExercise extends Component {
         }
 
         fetch(
-            'http://' +
+            
                 ip +
                 '/exercise?type=search' +
                 it +
@@ -472,7 +472,7 @@ class AddExercise extends Component {
                 alert('DEBUG');
             }
 
-            fetch('http://' + ip + '/exercise', {
+            fetch( ip + '/exercise', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -508,7 +508,7 @@ class AddExercise extends Component {
                     this.iptDSC.value = '';
 
                     this.cusFetch();
-                    alert('운동 등록됨');
+                    alert('운동 등록되었습니다.');
                     // this.search();
                 })
                 .catch((err) => {

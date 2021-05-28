@@ -40,10 +40,9 @@
 }
 
 .Navigation .navbar-brand {
-	width: 20rem;
+	width: auto;
 	height: 100%;
 	padding: 1rem;
-	margin-right: 10rem;
 	background-color: #fff;
 	border-radius: 100%;
 	text-align: center;
@@ -60,31 +59,36 @@
 	display: none;
 }
 
-.dropdownNav {
-	width: 1080px;
-	margin: 0 auto;
-	font-size: 1.8rem;
+.dropdownNav > a {
+	position: relative;
 }
 
-.dropdownNav > ul {
-	display: flex;
-	justify-content: flex-end;
-	padding: 0 23rem 3rem 31rem;
+.dropdownNav ul {
+	position: absolute;
+	top: 6rem;
+	right: 0;
+	left: 0;
 	height: 100%;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	font-size: 2rem;
+	font-weight: 400;
 }
 
-.dropdownNav > ul > li {
+.dropdownNav ul > li {
 	text-align: center;
 	width: 9rem;
 }
 
-:local(.navitem) {
-	color: #000;
+.navitem {
+	color: #333;
 	justify-content: space-around;
 	padding: 0;
-	font-size: 1.8rem;
+	font-size: 2.2rem;
+	font-weight: 700;
 	display: block;
-	width: 9rem;
+	width: 100%;
 	text-align: center;
 }
 

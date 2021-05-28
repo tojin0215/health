@@ -35,6 +35,9 @@
 	padding: 0.7rem 1.4rem;
 }
 /* 회원목록 테이블 */
+.react-bs-table .table-bordered > thead > tr:first-child > th {
+	font-size: 2rem;
+}
 .tableContainer {
 	border-top: 1px solid #bbb;
 	border-bottom: 1px solid #bbb;
@@ -44,9 +47,25 @@
 }
 .react-bs-table-container {
 	position: relative;
+	padding: 1.4rem 0;
 }
 .react-bs-table-pagination {
 	position: absolute;
 	bottom: -10rem;
-	right: 0;
+	right: 1rem;
+}
+.react-bs-table-pagination ul {
+	flex-wrap: nowrap;
+}
+.react-bs-table-pagination ul li {
+	width: 100%;
+}
+/**/
+.customerSlide .react-bs-table-pagination {
+	right: 50%;
+}
+
+.react-bs-table table td,
+.react-bs-table table th {
+	overflow: inherit;
 }

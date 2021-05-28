@@ -48,6 +48,9 @@
 }
 .formAddCustomer > label input {
 	margin: 1rem;
+	border: 1px solid #999;
+	border-radius: 15px;
+	height: 4.4rem;
 }
 
 .formAddCustomer input[type='text'] {

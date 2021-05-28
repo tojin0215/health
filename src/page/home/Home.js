@@ -87,7 +87,7 @@ class Home extends Component {
     }
 
     cusFetch=()=>{
-        fetch("http://"+ip+"/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+        fetch(ip+"/customer?type=all&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -105,7 +105,7 @@ class Home extends Component {
                 // }
                 // this.setState({customerList : arr});
         });
-        fetch('http://'+ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no, {
+        fetch(ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -124,7 +124,7 @@ class Home extends Component {
         let startTime = new Date(today.getFullYear(),today.getMonth(),1)
         let endTime = new Date(today.getFullYear(),today.getMonth()+1,0)
         //alert(today)
-        fetch('http://'+ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no, {
+        fetch(ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -139,7 +139,7 @@ class Home extends Component {
             this.setState({monthSales:sum})
         })
         // 금일 방문 고객
-        fetch('http://'+ip+'/customerenter?fitness_no='+this.props.userinfo.fitness_no, {
+        fetch(ip+'/customerenter?fitness_no='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -242,10 +242,7 @@ class Home extends Component {
                     </h3>
                     <section className='aboutExplain'>
                         <p>
-                            헬스 회원 스마트 관리 시스템으로 기존 회원 관리 방식에서 탈피하여
-                        </p>
-                        <p>
-                            쉬운 회원관리, 스마트한 서비스를 제공합니다.
+                            헬스 회원 스마트 관리 시스템으로 기존 회원 관리 방식에서 탈피하여   쉬운 회원관리, 스마트한 서비스를 제공합니다.
                         </p>
                         <button>
                             자세히보기

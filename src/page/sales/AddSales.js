@@ -218,28 +218,33 @@ class AddSales extends Component {
 
         console.log('***********paymentDate : ', this.state.paymentDate)
         console.log(this.state);
-        fetch("http://"+ip+"/sales", {
-            method: "POST",
-            headers: {
-              'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                fitness_no:this.state.fitness_no,
-                member_no:this.state.member_no,
-                exerciseName:ex,
-                exercisePrice:exercisePrice1,
-                lockerPrice:lockerPrice1,
-                sportswearPrice:sportswearPrice1,
-                paymentTools:this.state.paymentTools,
-                paymentDate:this.state.paymentDate
-            })
-          })
-            .then(response => response.json())
-            .then(response => {
-                alert("등록되었습니다.");
-            });
+        if(this.state.userName === '회원'){
+            alert("회원을 선택해주세요.")
+        } else{
+            fetch(ip+"/sales", {
+                method: "POST",
+                headers: {
+                  'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fitness_no:this.state.fitness_no,
+                    member_no:this.state.member_no,
+                    exerciseName:ex,
+                    exercisePrice:exercisePrice1,
+                    lockerPrice:lockerPrice1,
+                    sportswearPrice:sportswearPrice1,
+                    paymentTools:this.state.paymentTools,
+                    paymentDate:this.state.paymentDate
+                })
+              })
+                .then(response => response.json())
+                .then(response => {
+                    alert("등록되었습니다.");
+                });
+            
+            this.props.history.push('/sales');
+        }
         
-        this.props.history.push('/sales');
     }
 
     choiceUser=(e)=>{
@@ -261,7 +266,7 @@ class AddSales extends Component {
         }else if(this.state.item === "핸드폰"){
             it = '1'
         }
-        fetch("http://"+ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch(ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
