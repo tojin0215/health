@@ -361,29 +361,101 @@ class AddExercise extends Component {
     };
 
     AddExercise = () => {
-        if (this.state.name === '') {
-            alert('이름이 없습니다');
-            return;
-        } else if (this.state.part === 0) {
-            alert('운동 부위가 선택되지 않았습니다');
-            return;
-        } else if (this.state.machine === '') {
-            alert('운동 기구가 없습니다');
-            return;
-        } else if (this.state.url === '') this.setState({ url: '' });
-        else if (this.state.default_data_type === '')
-            this.setState({ default_data_type: 1 });
-        else if (this.state.default_data === '') {
-            alert('운동 기본 횟수가 없습니다');
-            return;
-        } else if (this.state.default_rest_second === '') {
-            alert('쉬는 시간이 없습니다');
-            return;
-        } else if (this.state.default_set_count === '') {
-            alert('운동 세트 횟수가 없습니다');
-            return;
-        } else if (this.state.is_default === undefined)
-            this.setState({ is_default: false });
+
+        // 기본 데이터 입력 확인
+        if (!this.state.name) {alert('이름을 입력하세요.'); return;}
+        if (!this.state.part) {alert('운동 부위를 선택하세요.'); return;}
+        if (!this.state.machine) {alert('운동 기구를 입력하세요.'); return;}
+        if (!this.state.url) {this.setState({url: ''});}
+        if (!this.state.default_data_type) {this.setState({default_data_type: 1});}
+        if (!this.state.default_data) {alert('기본 횟수를 입력하세요.'); return;}
+        if (!this.state.default_rest_second) {alert('쉬는 시간를 입력하세요.'); return;}
+        if (!this.state.default_set_count) {alert('세트 횟수를 입력하세요.'); return;}
+        if (!this.state.is_default) {this.setState({is_default: false});}
+
+        // 사용자 정보 확인
+        const userinfo = {
+            member_no: -1,
+            manager_name: '',
+            fitness_no: -1,
+            fitness_name: '',
+        };
+        if (this.props.userinfo !== undefined) {
+            userinfo['member_no'] = this.props.userinfo.member_no;
+            userinfo['manager_name'] = this.props.userinfo.manager_name;
+            userinfo['fitness_no'] = this.props.userinfo.fitness_no;
+            userinfo['fitness_name'] = this.props.userinfo.fitness_name;
+        } else {
+            alert('DEBUG');
+        }
+
+        
+        fetch('http://' + ip + '/exercise', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                fitness_no: userinfo.fitness_no,
+
+                name: this.state.name, // 운동 이름
+                part: this.state.part, // 운동 부위
+                machine: this.state.machine, // 운동 기구
+                url: this.state.url, // 운동 링크
+                default_data_type: this.state.default_data_type, // 기본 운동 데이터 타입
+                default_data: this.state.default_data, // 기본 값
+                default_rest_second: this.state.default_rest_second, // 쉬는 시간(초)
+                default_set_count: this.state.default_set_count, // 세트 횟수
+                is_default: this.state.is_default, // 기본값인가?
+            }),
+        })
+            .then((res) => {
+                res.json();
+            })
+            .then((res) => {
+                this.iptName.value = '';
+                this.chkPartTop.checked = false;
+                this.chkPartBottom.checked = false;
+                this.chkPartAllbody.checked = false;
+                this.chkPartCore.checked = false;
+                this.chkPartOxy.checked = false;
+                this.iptMachine.value = '';
+                this.iptUrl.value = '';
+                this.iptDD.value = '';
+                this.iptDRS.value = '';
+                this.iptDSC.value = '';
+
+                this.cusFetch();
+                alert('운동 등록됨');
+                // this.search();
+            })
+            .catch((err) => {
+                alert(err);
+            });
+
+        // if (this.state.name === '') {
+        //     alert('이름이 없습니다');
+        //     return;
+        // } else if (this.state.part === 0) {
+        //     alert('운동 부위가 선택되지 않았습니다');
+        //     return;
+        // } else if (this.state.machine === '') {
+        //     alert('운동 기구가 없습니다');
+        //     return;
+        // } else if (this.state.url === '') this.setState({ url: '' });
+        // else if (this.state.default_data_type === '')
+        //     this.setState({ default_data_type: 1 });
+        // else if (this.state.default_data === '') {
+        //     alert('운동 기본 횟수가 없습니다');
+        //     return;
+        // } else if (this.state.default_rest_second === '') {
+        //     alert('쉬는 시간이 없습니다');
+        //     return;
+        // } else if (this.state.default_set_count === '') {
+        //     alert('운동 세트 횟수가 없습니다');
+        //     return;
+        // } else if (this.state.is_default === undefined)
+        //     this.setState({ is_default: false });
         else {
             const userinfo = {
                 member_no: -1,
