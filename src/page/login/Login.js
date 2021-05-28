@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Authentication from '../login/Authentication';
 import Navigation from '../../component/navigation/Navigation';
+
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
@@ -31,6 +32,7 @@ class Login extends Component {
             }
         );
     }
+
  
     render() {
         return (
