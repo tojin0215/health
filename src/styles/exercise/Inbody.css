@@ -59,6 +59,16 @@
 	z-index: 999;
 }
 
+.inbody .inbodySlide > label {
+	font-size: 1.75rem;
+}
+
+.inbody .inbodySlide > label > span {
+	font-size: 3rem;
+	font-weight: 500;
+	padding: 3px;
+}
+
 .inbody .inbodySlide button:nth-child(2) {
 	position: absolute;
 	top: 2rem;
@@ -68,13 +78,30 @@
 .inbody .inbodySlide .inbodySlideUtill {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
+	justify-content: center;
+	border: 1px solid #fff;
+	position: relative;
+	padding: 2rem;
+	flex-wrap: wrap;
 }
 
 .inbody .inbodySlide .inbodySlideUtill > label {
 	padding: 0 1.6rem;
 	font-size: 3rem;
 	font-weight: 700;
+}
+
+.inbody .inbodySlide .inbodySlideUtill > button {
+	height: 4rem;
+	position: absolute;
+	top: 14px;
+	right: 30px;
+	box-shadow: inherit;
+}
+
+.inbody .inbodySlide .inbodySlideUtill > p {
+	width: 100%;
+	text-align: center;
 }
 
 .inbody .inbodySlide .inbodyGraph {
