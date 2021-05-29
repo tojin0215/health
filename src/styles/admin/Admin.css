@@ -21,3 +21,46 @@
 .react-confirm-alert .react-confirm-alert-button-group > button {
 	padding: 1rem 4rem;
 }
+
+.formAddAdmin {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.formAddAdmin label {
+	width: 50%;
+	justify-content: center;
+}
+
+.MuiDialog-root .formAddAdmin button {
+	width: 29rem;
+	justify-content: center;
+	align-self: center;
+	margin-bottom: 1.6rem;
+	font-size: 1.8rem;
+	font-weight: 400;
+	height: 3.6rem;
+}
+
+.formAddAdmin .MuiFormControl-root {
+	width: 100%;
+}
+
+.formAddAdmin label input[type='text'] {
+	width: 100%;
+}
+.formAddAdmin label #phone {
+	width: 100%;
+}
+.formAddAdmin label input[type='number'] {
+	width: 100%;
+}
+.formAddAdmin label input[type='password'] {
+	width: 100%;
+}
+.MuiDialogActions-root {
+	flex-wrap: wrap;
+}
+.MuiDialogContent-root {
+	overflow-y: unset;
+}

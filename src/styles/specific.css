@@ -17,7 +17,7 @@
 	width: calc(33.33% - 1rem);
 }
 .MuiDialog-root button {
-	width: calc(33.33% - 1rem);
+	width: 30%;
 	height: 4rem;
 }
 /* 고객 이름 등 셀렉트 */
@@ -54,21 +54,32 @@
 	text-align: center;
 }
 
-.MuiTable-root .MuiTableCell-head:nth-child(1) {
+.inbodySearchTable .MuiTableCell-head:nth-child(1) {
 	width: 6rem;
 }
-.MuiTable-root .MuiTableCell-head:nth-child(3) {
+.inbodySearchTable .MuiTableCell-head:nth-child(3) {
 	width: 12rem;
 }
-.MuiTable-root .MuiTableCell-head:nth-child(4) {
+.inbodySearchTable .MuiTableCell-head:nth-child(4) {
 	width: 6rem;
 }
-.MuiTable-root .MuiTableCell-head:nth-child(5) {
+.inbodySearchTable .MuiTableCell-head:nth-child(5) {
 	width: 9rem;
 }
-.MuiTable-root .MuiTableCell-head:nth-child(6) {
+.inbodySearchTable .MuiTableCell-head:nth-child(6) {
 	width: 12rem;
 }
+
+.addsalesSearchTable .MuiTableCell-head:nth-child(1) {
+	width: 7rem;
+}
+.addsalesSearchTable .MuiTableCell-head:nth-child(3) {
+	width: 14rem;
+}
+.addsalesSearchTable .MuiTableCell-head:nth-child(4) {
+	width: 11rem;
+}
+
 /* 테이블 셀 사이즈 */
 .MuiTable-root .MuiTableCell-body {
 	padding: 0;
@@ -89,5 +100,5 @@
 	justify-content: center;
 }
 .MuiDialog-paperWidthLg {
-	width: 50%;
+	width: 56%;
 }

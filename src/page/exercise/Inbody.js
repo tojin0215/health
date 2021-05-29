@@ -614,7 +614,7 @@ class Inbody extends Component {
                                          고객 검색
                                      </button>
                                  </div>{/*.customerSearch */}
-                                 <Table>
+                                 <Table className='inbodySearchTable'>
                                      <TableHead>
                                          <TableRow>
                                          <TableCell>번호</TableCell>
@@ -629,7 +629,7 @@ class Inbody extends Component {
                                          {this.state.customerList ?
                                              this.state.customerList.map(c=>(
                                                  <TableRow>
-                                                     <TableCell>
+                                                     <TableCell className='tableNo'>
                                                          {c.no}
                                                      </TableCell>
                                                      <TableCell>
