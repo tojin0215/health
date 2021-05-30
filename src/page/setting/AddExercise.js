@@ -41,11 +41,11 @@ class AddExercise extends Component {
             name: '',
             part: 0,
             machine: '',
-            url: 'http://localhost',
+            url: '',
             default_data_type: 1,
             default_data: '',
-            default_rest_second: -1,
-            default_set_count: -1,
+            default_rest_second: -0,
+            default_set_count: -0,
             is_default: false,
         };
         this.handleOnClick = this.handleOnClick.bind(this);
@@ -375,64 +375,66 @@ class AddExercise extends Component {
 
         // 사용자 정보 확인
         const userinfo = {
-            member_no: -1,
-            manager_name: '',
-            fitness_no: -1,
-            fitness_name: '',
+            member_no: this.props.userinfo.member_no,
+            manager_name: this.props.userinfo.manager_name,
+            fitness_no: this.props.userinfo.fitness_no,
+            fitness_name: this.props.userinfo.fitness_name,
         };
-        if (this.props.userinfo !== undefined) {
-            userinfo['member_no'] = this.props.userinfo.member_no;
-            userinfo['manager_name'] = this.props.userinfo.manager_name;
-            userinfo['fitness_no'] = this.props.userinfo.fitness_no;
-            userinfo['fitness_name'] = this.props.userinfo.fitness_name;
-        } else {
-            alert('DEBUG');
-        }
+        // if (this.props.userinfo !== undefined) {
+        //     userinfo['member_no'] = this.props.userinfo.member_no;
+        //     userinfo['manager_name'] = this.props.userinfo.manager_name;
+        //     userinfo['fitness_no'] = this.props.userinfo.fitness_no;
+        //     userinfo['fitness_name'] = this.props.userinfo.fitness_name;
+        // } else {
+        //     alert('DEBUG');
+        // }
 
-        
-        fetch('http://' + ip + '/exercise', {
+        const url = ip + '/exercise'
+        const body = {
+            fitness_no: userinfo.fitness_no,
+
+            name: this.state.name, // 운동 이름
+            part: this.state.part, // 운동 부위
+            machine: this.state.machine, // 운동 기구
+            url: this.state.url, // 운동 링크
+            default_data_type: this.state.default_data_type, // 기본 운동 데이터 타입
+            default_data: this.state.default_data, // 기본 값
+            default_rest_second: this.state.default_rest_second, // 쉬는 시간(초)
+            default_set_count: this.state.default_set_count, // 세트 횟수
+            is_default: this.state.is_default, // 기본값인가?
+        }
+        fetch(url, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
             },
-            body: JSON.stringify({
-                fitness_no: userinfo.fitness_no,
-
-                name: this.state.name, // 운동 이름
-                part: this.state.part, // 운동 부위
-                machine: this.state.machine, // 운동 기구
-                url: this.state.url, // 운동 링크
-                default_data_type: this.state.default_data_type, // 기본 운동 데이터 타입
-                default_data: this.state.default_data, // 기본 값
-                default_rest_second: this.state.default_rest_second, // 쉬는 시간(초)
-                default_set_count: this.state.default_set_count, // 세트 횟수
-                is_default: this.state.is_default, // 기본값인가?
-            }),
+            body: JSON.stringify(body),
         })
-            .then((res) => {
-                res.json();
-            })
-            .then((res) => {
-                this.iptName.value = '';
-                this.chkPartTop.checked = false;
-                this.chkPartBottom.checked = false;
-                this.chkPartAllbody.checked = false;
-                this.chkPartCore.checked = false;
-                this.chkPartOxy.checked = false;
-                this.iptMachine.value = '';
-                this.iptUrl.value = '';
-                this.iptDD.value = '';
-                this.iptDRS.value = '';
-                this.iptDSC.value = '';
+        .then((res) => {
+            res.json();
+        })
+        .then((res) => {
+            this.iptName.value = '';
+            this.chkPartTop.checked = false;
+            this.chkPartBottom.checked = false;
+            this.chkPartAllbody.checked = false;
+            this.chkPartCore.checked = false;
+            this.chkPartOxy.checked = false;
+            this.iptMachine.value = '';
+            this.iptUrl.value = '';
+            this.iptDD.value = '';
+            this.iptDRS.value = '';
+            this.iptDSC.value = '';
 
-                this.cusFetch();
-                alert('운동 등록됨');
-                // this.search();
-            })
-            .catch((err) => {
-                alert(err);
-            });
+            this.cusFetch();
+            alert('운동 등록됨');
+            // this.search();
+        })
+        .catch((err) => {
+            alert(err);
+        });
 
+        return;
         // if (this.state.name === '') {
         //     alert('이름이 없습니다');
         //     return;
@@ -456,7 +458,7 @@ class AddExercise extends Component {
         //     return;
         // } else if (this.state.is_default === undefined)
         //     this.setState({ is_default: false });
-        else {
+        if (true) {} else {
             const userinfo = {
                 member_no: -1,
                 manager_name: '',
