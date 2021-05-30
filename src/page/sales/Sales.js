@@ -443,8 +443,6 @@ class Sales extends Component {
         console.log("userinfo : ");
         console.log(userinfo); 
 
-        console.log('!!!!!!!!!!!!customerList:',this.state.customerList)
-
         const textOptions = {
             noDataText: '결제내역이 없습니다.',
             alwaysShowAllBtns: true,
