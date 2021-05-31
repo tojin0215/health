@@ -64,7 +64,17 @@ class AssignCheckExercise extends Component {
                     arr.push(v);
                 }
             }
-            this.state.exerciseList = arr;
+
+            let uniqueArr = [];
+
+            const result = [];
+            arr.forEach((element) => {
+                if (!uniqueArr.includes(element.exercise_no)) {
+                    uniqueArr.push(element.exercise_no);
+                    result.push(element);
+                }
+            })
+            this.state.exerciseList = result;
         }
     }
 
