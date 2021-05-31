@@ -64,9 +64,19 @@ class AssignCheckExercise extends Component {
 
         this.sendAssign(
             function (arr, n) {
+                let uniqueArr = [];
+
                 // arr.forEach((res) => {});
                 exList = [...arr];
-                setState({ exerciseList: exList });
+
+                const result = [];
+                exList.forEach((element) => {
+                    if (!uniqueArr.includes(element.no)) {
+                        uniqueArr.push(element.no);
+                        result.push(element);
+                    }
+                })
+                setState({ exerciseList: result });
             },
             this.procDefaultPackage,
             -1
@@ -248,9 +258,10 @@ class AssignCheckExercise extends Component {
 
     sendAssign = (next_func, procDefaultPackage, last_group_no) => {
         const fitness_no = this.props.userinfo.fitness_no;
-        // const member_no = this.props.userinfo.member_no;
         const member_no = this.state.member_no;
+
         let v_arr = [];
+
         if (this.state.assignDefault.length > 0) {
             this.state.assignDefault.forEach((part) => {
                 let search = part;
