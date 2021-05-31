@@ -10,6 +10,18 @@ import {loginRequest} from '../../action/authentication';
 import 'react-slideshow-image/dist/styles.css'
 import '../../styles/login/Login.css';
 
+import imgA from '../../images/mainVisual1.png';
+import imgB from '../../images/mainVisual2.png';
+//import imgC from '../../images/mainVisual1.png';
+
+import { Slide } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css'
+
+const fadeProperties = {
+    duration: 2000,
+    canSwipe: false,
+  };
+
 class Login extends Component {
     handleLogin = (id, pw) => {
         return this.props.loginRequest(id, pw).then(
@@ -56,10 +68,32 @@ class Login extends Component {
                     <Authentication 
                     mode={true} 
                     onLogin={this.handleLogin}/>
-                    <div className='sectionGlass'>
-                        <Slideshow></Slideshow>
+
+                    <div className="slide-container">
+                    {/* <h5>슬라이드</h5> */}
+                    <Slide {...fadeProperties}>
+                    <div className="each-slide">
+                        <div className="image-container">
+                        {/* <span>Slide 1</span> */}
+                        <img src={imgA} width='1000rem' />
+                        </div>
                     </div>
+                    <div className="each-slide">
+                        <div className="image-container">
+                        {/* <span>Slide 2</span> */}
+                        <img src={imgB} width='1000rem' />
+                        </div>
+                    </div>
+                    <div className="each-slide">
+                        <div className="image-container">
+                        {/* <span>Slide 3</span> */}
+                        <img src={imgA} width='1000rem' />
+                        </div>
+                    </div>
+                    </Slide>
                 </div>
+                </div>
+                
                 <div className='footer'>
                     <Footer />
                 </div>

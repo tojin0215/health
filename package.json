@@ -38,6 +38,7 @@
     "react-redux": "^4.4.5",
     "react-router-dom": "^5.2.0",
     "react-select": "^4.3.0",
+    "react-simple-image-slider": "^2.1.0",
     "react-slideshow-image": "^3.4.6",
     "reactstrap": "^8.9.0",
     "redux": "^3.5.2",
