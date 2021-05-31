@@ -294,8 +294,8 @@ class AssignExercise extends Component {
     }
   };
   selectHandleOnClick = (e) => {
-    let n = e.target.name.split('|')[0];
-    let v = e.target.name.split('|')[1];
+    let n = e.target.name.split('|')[0]; // assignDefault
+    let v = e.target.name.split('|')[1]; // 운동 이름
     if (e.target.checked) {
       this.setState({
         [n]: [...this.state.assignDefault, v],

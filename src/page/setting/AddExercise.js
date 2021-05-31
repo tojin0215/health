@@ -287,7 +287,6 @@ class AddExercise extends Component {
         }
 
         fetch(
-            
                 ip +
                 '/exercise?type=search' +
                 it +
