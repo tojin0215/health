@@ -49,6 +49,8 @@
 
 .register > .container form .overlapCheck {
 	justify-content: flex-start;
+	flex-wrap: wrap;
+	margin-bottom: 0;
 }
 
 .register form .overlapCheck .btnSolid {
@@ -57,6 +59,14 @@
 	width: auto;
 	font-size: 1.8rem;
 	font-weight: 400;
+	margin: 0;
+}
+
+.register > .container form .overlapCheck label {
+	width: 100%;
+	font-size: 2rem;
+	font-weight: 300;
+	color: #0f78ff;
 	margin: 0;
 }
 

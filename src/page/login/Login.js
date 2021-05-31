@@ -7,14 +7,9 @@ import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import {loginRequest} from '../../action/authentication';
-import 'react-slideshow-image/dist/styles.css'
+import 'react-slideshow-image/dist/styles.css';
 import '../../styles/login/Login.css';
 
-import imgA from '../../images/mainVisual1.png';
-import imgB from '../../images/mainVisual2.png';
-//import imgC from '../../images/mainVisual1.png';
-
-// import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 
 const fadeProperties = {
@@ -65,35 +60,14 @@ class Login extends Component {
                     </div>
                 </div>
                 <div className='container'>
-                    <Authentication 
-                    mode={true} 
-                    onLogin={this.handleLogin}/>
-
-                    <div className="slide-container">
-                    {/* <h5>슬라이드</h5> */}
-                    <Slide {...fadeProperties}>
-                    <div className="each-slide">
-                        <div className="image-container">
-                        {/* <span>Slide 1</span> */}
-                        <img src={imgA} width='1000rem' />
-                        </div>
-                    </div>
-                    <div className="each-slide">
-                        <div className="image-container">
-                        {/* <span>Slide 2</span> */}
-                        <img src={imgB} width='1000rem' />
-                        </div>
-                    </div>
-                    <div className="each-slide">
-                        <div className="image-container">
-                        {/* <span>Slide 3</span> */}
-                        <img src={imgA} width='1000rem' />
-                        </div>
-                    </div>
-                    </Slide>
+                  <Authentication 
+                  mode={true} 
+                  onLogin={this.handleLogin}/>
+                  <div className="slide-container sectionGlass">
+                    <h5>오마이짐 미리보기</h5>
+                    <Slideshow {...fadeProperties}></Slideshow>
+                  </div>
                 </div>
-                </div>
-                
                 <div className='footer'>
                     <Footer />
                 </div>
@@ -122,7 +96,7 @@ const slideImages = [
     'src/images/slide_3.png',
     'src/images/slide_4.png',
     'src/images/slide_5.png'
-  ];
+];
 
   const Slideshow = () => {
     return (
