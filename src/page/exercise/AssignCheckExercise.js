@@ -16,6 +16,17 @@ import {SERVER_URL} from '../../const/settings';
 const ip = SERVER_URL;;
 //const ip = 'localhost:3000';
 
+function isDefaultExercise(exercise_name, default_value) {
+    const value = default_value.toString().split('');//.map(v => Number(v));
+    console.log(exercise_name);
+    console.log(value);
+    if (exercise_name === 1) return (value.length > 0 && value.includes('1') && !value.includes('6')) 
+    else if (exercise_name === 2) return (value.length > 0 && value.includes('2')) 
+    else if (exercise_name === 4) return (value.length > 0 && value.includes('4')) 
+    else if (exercise_name === 8) return (value.length > 0 && value.includes('8')) 
+    else if (exercise_name === 16) return (value.length > 0 && value.includes('1') && value.includes('6')) 
+    else return false;
+};
 class AssignCheckExercise extends Component {
     constructor(props) {
         super(props);
@@ -166,10 +177,19 @@ class AssignCheckExercise extends Component {
     ) => {
         let it = 2;
         let search = searchs.pop();
+        let default_num = 0;
+
         let url =  ip + '/exercise';
         url = url + '?type=search' + it;
         url = url + '&search=' + search;
         url = url + '&fn=' + fitness_no;
+
+        if (search==="상체") default_num = 1;
+        if (search==="하체") default_num = 20;
+        if (search==="전신") default_num = 400;
+        if (search==="코어") default_num = 8000;
+        if (search==="유산소") default_num = 160000;
+
         fetch(url, {
             method: 'GET',
             credentials: 'include',
@@ -210,7 +230,9 @@ class AssignCheckExercise extends Component {
                     }
                     part = part.slice(0, -2);
 
-                    if (res[i].is_default) {
+                    if (isDefaultExercise(search, res[i].is_default)) {
+
+                    // if (res[i].is_default) {
                         res[i]['fitness_no'] = fitness_no;
                         res[i]['member_no'] = member_no;
                         res[i]['group_no'] = last_group_no + 1;
