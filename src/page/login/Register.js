@@ -59,7 +59,10 @@ class Register extends Component {
 
     idCheck =()=>{
         //alert(this.state.id)
-        let url = ip+"/manager?type=idCheck&id="+this.state.id
+        if(this.state.id === ""){
+            alert('아이디를 입력해주세요.')
+        } else{
+            let url = ip+"/manager?type=idCheck&id="+this.state.id
             fetch(url, {
                 method: "GET",
                 headers: {
@@ -84,7 +87,8 @@ class Register extends Component {
                 }
                 
             });
-                 
+        }
+        
     }
     
 
