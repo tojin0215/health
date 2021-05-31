@@ -200,8 +200,11 @@ class Register extends Component {
                     </div>
                 </div>
                 <div className='container'>
-                    <form className="AddSalesForm productPay">
+                    <form className="AddSalesForm productPay sectionGlass">
                         {/* <div className='registerId'> */}
+                        <div className='resigterVisual'>
+
+                        </div>
                         <ul>
                             <li>
                             <TextField

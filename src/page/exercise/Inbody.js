@@ -614,12 +614,12 @@ class Inbody extends Component {
                                          고객 검색
                                      </button>
                                  </div>{/*.customerSearch */}
-                                 <Table>
+                                 <Table className='inbodySearchTable'>
                                      <TableHead>
                                          <TableRow>
                                          <TableCell>번호</TableCell>
                                          <TableCell>이름</TableCell>
-                                         <TableCell>폰번호</TableCell>
+                                         <TableCell>휴대폰</TableCell>
                                          <TableCell>성별</TableCell>
                                          <TableCell>생년월일</TableCell>
                                          <TableCell>선택</TableCell>
@@ -629,7 +629,7 @@ class Inbody extends Component {
                                          {this.state.customerList ?
                                              this.state.customerList.map(c=>(
                                                  <TableRow>
-                                                     <TableCell>
+                                                     <TableCell className='tableNo'>
                                                          {c.no}
                                                      </TableCell>
                                                      <TableCell>
@@ -644,7 +644,10 @@ class Inbody extends Component {
                                                      <TableCell>
                                                          {c.resi_no}
                                                      </TableCell>
-                                                     <TableCell>
+                                                     <TableCell
+                                                        thStyle={ { 'textAlign': 'center', 'width':'120px' } }
+                                                        tdStyle={ { 'textAlign': 'center','width':'120px'  } }
+                                                     >
                                                          <DialogActions>
                                                              <button
                                                              type='button'
@@ -671,7 +674,7 @@ class Inbody extends Component {
                                  </Table>
                              </DialogContent>
                              <DialogActions>
-                                 <button type='button' onClick={this.handleClose}>
+                                 <button className='btnSolid' type='button' onClick={this.handleClose}>
                                      닫기
                                  </button>
                              </DialogActions>
@@ -864,8 +867,11 @@ class Inbody extends Component {
 
             {this.state.show?
                 <div className='inbodySlide'>
-                    <label>{this.state.userName}님의 인바디 변화그래프 입니다.</label>
-                    <button type='button' onClick={this.handleClickAway}>X</button>
+                    <label>
+                        <span>{this.state.userName}</span>
+                        님의 인바디 변화그래프 입니다.
+                    </label>
+                    <button className='btnSlideClose' type='button' onClick={this.handleClickAway}>X</button>
                     <div className='inbodySlideUtill'>
                         <Dropdown
                             className='searchDrop'
@@ -883,6 +889,9 @@ class Inbody extends Component {
                             placeholder="선택"
                         />
                         <button onClick={this.clickInbody}>조회하기</button>
+                        <p>
+                            변화량을 조회하고 싶은 인바디 측정 회차를 선택해주세요.
+                        </p>
                     </div>
                     <section className='inbodyGraph'>
                         {this.state.showChart?

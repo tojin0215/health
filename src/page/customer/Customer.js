@@ -431,7 +431,7 @@ class Customer extends Component {
                                 </Link>
                                 <button
                                 type="button"
-                                onClick={this.handleClickAway} className='btnCustomerClose btnsolid'
+                                onClick={this.handleClickAway} className='btnSlideClose btnsolid'
                                 >
                                     닫기
                                 </button>

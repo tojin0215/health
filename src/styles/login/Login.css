@@ -24,3 +24,40 @@
 .loginWrap .navbar .navbar-nav {
 	display: none;
 }
+
+.loginWrap .slide-container h5 {
+	justify-content: center;
+	padding: 0 0 3rem 0;
+	color: #0f78ff;
+	font-size: 2.8rem;
+}
+
+.each-slide > div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-size: cover;
+	height: 50rem;
+}
+
+.each-slide span {
+	padding: 6rem 8rem;
+	font-size: 3rem;
+	font-weight: 800;
+	color: #0f78ff;
+	border-radius: 2rem;
+	background: rgba(245, 245, 245, 0.8);
+	box-shadow: 8px 6px 13px rgba(187, 187, 187, 0.95);
+	text-align: center;
+}
+
+.react-slideshow-container button {
+	padding: 0;
+	margin: 0;
+	align-self: auto;
+}
+
+.react-slideshow-container .default-nav {
+	width: 4rem;
+	height: 4rem;
+}

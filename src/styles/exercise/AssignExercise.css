@@ -6,10 +6,11 @@
 	top: 3rem;
 }
 .assignExercise .customerSearch .btnAssignCusSearch {
-	background-image: url(/src/images/search.png);
+	/* background-image: url(/src/images/search.png);
 	background-repeat: no-repeat;
 	background-size: 2rem auto;
-	background-position: 14.5rem center;
+	background-position: 14.5rem center; */
+	width: 19rem;
 }
 
 .assignExercise > .container > section:nth-child(2) {

@@ -154,6 +154,7 @@ class Sales extends Component {
                 let card = 0
                 let cash = 0
                 let transfer = 0
+                let lists=[];
                 this.state.salesLists.reverse().map((data) => {
                     let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
                     let time = moment(data.paymentDate).format("YYYY/MM/DD")
@@ -164,6 +165,8 @@ class Sales extends Component {
                             data = {...data, userName}
                         }
                     })
+                    lists = [...lists, data]
+                    
                     if(data.paymentTools === '카드'){
                         card = card + data.total
                     } else if(data.paymentTools === '현금'){
@@ -171,9 +174,9 @@ class Sales extends Component {
                     } else if(data.paymentTools === '계좌이체'){
                         transfer = transfer + data.total
                     } 
-                        
+                    
                     this.setState({
-                        salesLists2 : [...this.state.salesLists2, data],
+                        salesLists2 :lists,
                         toolList : [{'card':card, 'cash':cash,'transfer':transfer,'total':card+ cash+transfer}]
                     })
                 })
@@ -438,7 +441,8 @@ class Sales extends Component {
     render() {
         const { userinfo } = this.props;
         console.log("userinfo : ");
-        console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
+        console.log(userinfo); 
+
         const textOptions = {
             noDataText: '결제내역이 없습니다.',
             alwaysShowAllBtns: true,

@@ -344,7 +344,7 @@ class AddSales extends Component {
                                     고객 검색
                                 </button>
                             </div>{/*.customerSearch */}
-                            <Table>
+                            <Table className='addsalesSearchTable'>
                                 <TableHead>
                                     <TableRow>
                                     <TableCell>번호</TableCell>

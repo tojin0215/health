@@ -1207,7 +1207,7 @@ class AssignExercise extends Component {
                   </button>
                 </div>
                 {/*.customerSearch */}
-                <Table>
+                <Table className='addsalesSearchTable'>
                   <TableHead>
                     <TableRow>
                       <TableCell>번호</TableCell>

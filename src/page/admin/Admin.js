@@ -435,135 +435,129 @@ class Admin extends Component {
                 </div>{/*.header */}
                 <div className="container">
                     <div>
-                    <button
-                            type='button'
-                            onClick={this.handleClickOpen}
-                            >
-                                헬스장 추가하기
-                            </button>
-                            <Dialog
-                            open={this.state.open}
-                            onClose={this.handleClose}
-                            maxWidth='lg'
-                            >
-                                <DialogTitle>
-                                    추가하기
-                                </DialogTitle>
-                                <DialogContent>
-                                <form className="formAddCustomer">
-                                <label>
-                                <TextField
-                                        variant="outlined"
-                                        value={this.state.id}
-                                        onChange={this.handleChange}
-                                        id='id'
-                                        label="아이디"
-                                        error={this.state.id_err}
-                                        required
-                                        autoFocus
-                                    />
-                                </label>{/*.customerName */}
-
-                                <button type="button" onClick={this.idCheck}>아이디 중복체크</button>
-                                {this.state.check == 0?
-                                <label></label>
-                                :
-                                <label>사용가능한 아이디입니다.</label>
-                                }
-                                <label>
-                                <TextField
-                                        variant="outlined"
-                                        type="password"
-                                        value={this.state.pwd}
-                                        onChange={this.handleChange}
-                                        id='pwd'
-                                        label="비밀번호"
-                                        error={this.state.pwd_err}
-                                        required
-                                    />
-                                </label>
-
-                                <label>
-                                <TextField
-                                        variant="outlined"
-                                        value={this.state.fitness_name}
-                                        onChange={this.handleChange}
-                                        id='fitness_name'
-                                        label="헬스장이름"
-                                        error={this.state.fitness_name_err}
-                                        required
-                                    />
-                                </label>
-                                <label>
-                                    <TextField
-                                        variant="outlined"
-                                        value={this.state.fitness_addr}
-                                        onChange={this.handleChange}
-                                        id='fitness_addr'
-                                        label="헬스장 주소"
-                                        error={this.state.fitness_addr_err}
-                                        required
-                                    />
-                                </label>
-                                <label>
-                                <TextField
-                                        variant="outlined"
-                                        value={this.state.manager_name}
-                                        onChange={this.handleChange}
-                                        id='manager_name'
-                                        label="대표 이름"
-                                        error={this.state.manager_name_err}
-                                        required
-                                    />
-                                </label>
-
-                                <label>
-                                <TextField
-                                        variant="outlined"
-                                        value={this.state.phone}
-                                        onChange={this.handleChange}
-                                        id='phone'
-                                        label="대표 연락처"
-                                        error={this.state.phone_err}
-                                        required
-                                    />
-                                </label>
-                                <label>
-                                    <TextField
-                                        variant="outlined"
-                                        value={this.state.business_number}
-                                        onChange={this.handleChange}
-                                        id='business_number'
-                                        label="사업자 등록번호"
-                                        error={this.state.business_number_err}
-                                        required
-                                    />
-                                </label>
-                                <label>
-                                    <TextField
-                                        variant="outlined"
-                                        value={this.state.business_phone}
-                                        onChange={this.handleChange}
-                                        id='business_phone'
-                                        label="사업장 연락처(-제외)"
-                                        error={this.state.business_phone_err}
-                                        required
-                                    />
-                                </label>
-
-
-                            </form>{/*.formAddCustomer */}
-
-                                </DialogContent>
-                                <DialogActions>
-                                    <button type="button" onClick={this.handleOnClick}>
-                                        등록하기
-                                    </button>
-                                    <button type='button' onClick={this.handleClose}>
-                                        닫기
-                                    </button>
-                                </DialogActions>
-                            </Dialog>
+                        <button
+                        type='button'
+                        onClick={this.handleClickOpen}
+                        >
+                            헬스장 추가하기
+                        </button>
+                        <Dialog
+                        open={this.state.open}
+                        onClose={this.handleClose}
+                        maxWidth='lg'
+                        >
+                            <DialogTitle>
+                                추가하기
+                            </DialogTitle>
+                            <DialogContent>
+                                <form className="formAddCustomer formAddAdmin">
+                                    <label>
+                                        <TextField
+                                            variant="outlined"
+                                            value={this.state.id}
+                                            onChange={this.handleChange}
+                                            id='id'
+                                            label="아이디"
+                                            error={this.state.id_err}
+                                            required
+                                            autoFocus
+                                        />
+                                    </label>{/*.customerName */}
+                                    <label>
+                                        <TextField
+                                            variant="outlined"
+                                            type="password"
+                                            value={this.state.pwd}
+                                            onChange={this.handleChange}
+                                            id='pwd'
+                                            label="비밀번호"
+                                            error={this.state.pwd_err}
+                                            required
+                                        />
+                                    </label>
+                                    <button className='btnSolid' type="button" onClick={this.idCheck}>아이디 중복체크</button>
+                                        {this.state.check == 0?
+                                            <label></label>
+                                            :
+                                            <label>사용가능한 아이디입니다.</label>
+                                        }
+                                    <label>
+                                        <TextField
+                                            variant="outlined"
+                                            value={this.state.fitness_name}
+                                            onChange={this.handleChange}
+                                            id='fitness_name'
+                                            label="헬스장이름"
+                                            error={this.state.fitness_name_err}
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        <TextField
+                                            variant="outlined"
+                                            value={this.state.fitness_addr}
+                                            onChange={this.handleChange}
+                                            id='fitness_addr'
+                                            label="헬스장 주소"
+                                            error={this.state.fitness_addr_err}
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        <TextField
+                                            variant="outlined"
+                                            value={this.state.manager_name}
+                                            onChange={this.handleChange}
+                                            id='manager_name'
+                                            label="대표 이름"
+                                            error={this.state.manager_name_err}
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        <TextField
+                                            variant="outlined"
+                                            value={this.state.phone}
+                                            onChange={this.handleChange}
+                                            id='phone'
+                                            label="대표 연락처"
+                                            error={this.state.phone_err}
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        <TextField
+                                            variant="outlined"
+                                            value={this.state.business_number}
+                                            onChange={this.handleChange}
+                                            id='business_number'
+                                            label="사업자 등록번호"
+                                            error={this.state.business_number_err}
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        <TextField
+                                            variant="outlined"
+                                            value={this.state.business_phone}
+                                            onChange={this.handleChange}
+                                            id='business_phone'
+                                            label="사업장 연락처(-제외)"
+                                            error={this.state.business_phone_err}
+                                            required
+                                        />
+                                    </label>
+                                </form>{/*.formAddCustomer */}
+                            </DialogContent>
+                            <DialogActions>
+                                <button type="button" onClick={this.handleOnClick}>
+                                    등록하기
+                                </button>
+                                <button type='button' onClick={this.handleClose}>
+                                    닫기
+                                </button>
+                            </DialogActions>
+                        </Dialog>
                     </div>
 
 

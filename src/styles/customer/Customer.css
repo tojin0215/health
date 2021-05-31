@@ -134,7 +134,7 @@
 	font-size: 1.8rem;
 }
 
-.customerSlide .customerSlideUtill .btnCustomerClose {
+.btnSlideClose {
 	color: #fff;
 	background: transparent url(/src/images/btnCloseWhite.png) no-repeat center
 		center/15px auto;

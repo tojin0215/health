@@ -1,18 +1,22 @@
 .salesCustomer {
-  padding-bottom:3rem;
+	padding-bottom: 3rem;
 }
 
 .salesCustomer span {
-  font-size:2.4rem;
-  font-weight:bold;
-  padding:.6rem;
+	font-size: 2.4rem;
+	font-weight: bold;
+	padding: 0.6rem;
 }
 
 .productPay button {
-  margin:0 auto;
-  display:flex;
-  width:34%;
-  height: 5rem;
-  justify-content: center;
-  align-items: center;
+	margin: 0 auto;
+	display: flex;
+	width: 34%;
+	height: 5rem;
+	justify-content: center;
+	align-items: center;
+}
+
+.addSales > .container > div > button {
+	width: 20rem;
 }

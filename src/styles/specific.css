@@ -17,7 +17,7 @@
 	width: calc(33.33% - 1rem);
 }
 .MuiDialog-root button {
-	width: calc(33.33% - 1rem);
+	width: 30%;
 	height: 4rem;
 }
 /* 고객 이름 등 셀렉트 */
@@ -43,6 +43,7 @@
 /* 테이블 폰트 크기 */
 .MuiTable-root .MuiTableCell-root {
 	font-size: 1.6rem;
+	width: auto;
 }
 /* 버튼 크기 */
 .MuiTable-root button {
@@ -50,12 +51,44 @@
 }
 /* 테이블 헤더 */
 .MuiTable-root .MuiTableCell-head {
-	padding: 1rem 3rem;
 	text-align: center;
 }
+
+.inbodySearchTable .MuiTableCell-head:nth-child(1) {
+	width: 7rem;
+}
+.inbodySearchTable .MuiTableCell-head:nth-child(3) {
+	width: 13rem;
+}
+.inbodySearchTable .MuiTableCell-head:nth-child(4) {
+	width: 7rem;
+}
+.inbodySearchTable .MuiTableCell-head:nth-child(5) {
+	width: 10rem;
+}
+.inbodySearchTable .MuiTableCell-head:nth-child(6) {
+	width: 13rem;
+}
+
+.addsalesSearchTable .MuiTableCell-head:nth-child(1) {
+	width: 8rem;
+}
+.addsalesSearchTable .MuiTableCell-head:nth-child(3) {
+	width: 15rem;
+}
+.addsalesSearchTable .MuiTableCell-head:nth-child(4) {
+	width: 12rem;
+}
+
 /* 테이블 셀 사이즈 */
 .MuiTable-root .MuiTableCell-body {
-	padding: 0 3rem;
+	padding: 0;
+	text-align: center;
+}
+.MuiTable-root .MuiTableCell-body button {
+	height: 3rem;
+	font-size: 1.8rem;
+	font-weight: 500;
 }
 
 /* 상품/매출 테이블 필터 크기 조절 */
@@ -67,5 +100,5 @@
 	justify-content: center;
 }
 .MuiDialog-paperWidthLg {
-	width: 50%;
+	width: 56%;
 }
