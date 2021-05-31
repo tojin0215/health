@@ -55,29 +55,29 @@
 }
 
 .inbodySearchTable .MuiTableCell-head:nth-child(1) {
-	width: 6rem;
+	width: 7rem;
 }
 .inbodySearchTable .MuiTableCell-head:nth-child(3) {
-	width: 12rem;
+	width: 13rem;
 }
 .inbodySearchTable .MuiTableCell-head:nth-child(4) {
-	width: 6rem;
+	width: 7rem;
 }
 .inbodySearchTable .MuiTableCell-head:nth-child(5) {
-	width: 9rem;
+	width: 10rem;
 }
 .inbodySearchTable .MuiTableCell-head:nth-child(6) {
-	width: 12rem;
+	width: 13rem;
 }
 
 .addsalesSearchTable .MuiTableCell-head:nth-child(1) {
-	width: 7rem;
+	width: 8rem;
 }
 .addsalesSearchTable .MuiTableCell-head:nth-child(3) {
-	width: 14rem;
+	width: 15rem;
 }
 .addsalesSearchTable .MuiTableCell-head:nth-child(4) {
-	width: 11rem;
+	width: 12rem;
 }
 
 /* 테이블 셀 사이즈 */
