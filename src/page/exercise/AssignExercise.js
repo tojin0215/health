@@ -992,7 +992,7 @@ class AssignExercise extends Component {
   };
 
   handleIgnoreClick = (e) => {
-    if (!this.state.member_no) e.preventDefault();
+    if (!this.state.member_no) alert('회원을 선택하세요.');
 
   }
 
@@ -1322,6 +1322,7 @@ class AssignExercise extends Component {
             <button
                 className="btnSolid"
                 type="button"
+                onClick={this.handleIgnoreClick}
               > {this.state.member_no===''?'배정 확인하기':(
               <Link
               to={{
