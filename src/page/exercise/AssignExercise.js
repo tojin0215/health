@@ -991,6 +991,11 @@ class AssignExercise extends Component {
     return;
   };
 
+  handleIgnoreClick = (e) => {
+    if (!this.state.member_no) e.preventDefault();
+
+  }
+
 
   createViewExerciseListButton = () => {
     const exerciseList = ['상체', '하체', '전신', '코어', '유산소', '기타'];
@@ -1314,7 +1319,11 @@ class AssignExercise extends Component {
             </div>
             {this.createViewExerciseListTable()}
 
-            <Link
+            <button
+                className="btnSolid"
+                type="button"
+              > {this.state.member_no===''?'배정 확인하기':(
+              <Link
               to={{
                 pathname: '/assign/check',
                 state: {
@@ -1333,14 +1342,11 @@ class AssignExercise extends Component {
                 },
               }}
             >
-              <button
-                className="btnSolid"
-                type="button"
-                // onClick={this.handleOnClick}
-              >
-                배정 확인하기
-              </button>
-            </Link>
+              배정 확인하기
+        </Link>
+              )}
+            
+            </button>
           </section>
         </div>
         {/*.container */}
