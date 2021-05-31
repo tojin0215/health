@@ -252,112 +252,103 @@ class DefaultExercise extends Component {
     }
 
     cusFetch = () => {
-        let it = '';
-        let search = '';
         //customer 참고해서 검색기능 넣기
 
-        fetch(
-            
-                ip +
-                '/exercise?type=search' +
-                it +
-                '&search=' +
-                search +
-                '&fn=' +
-                this.props.userinfo.fitness_no,
-            {
+        const url = ip + '/exercise?type=search&search=&fn=' + this.props.userinfo.fitness_no
+        fetch(url, {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
                 },
             }
         )
-            .then((response) => response.json())
-            .then((res) => {
-                console.log(res);
-                let arr = [];
-                let arr_top = [];
-                let arr_bottom = [];
-                let arr_allbody = [];
-                let arr_core = [];
-                let arr_oxy = [];
-                let arr_etc = [];
+        .then((response) => response.json())
+        .then((res) => {
+            console.log(res);
+            let arr = [];
+            let arr_top = [];
+            let arr_bottom = [];
+            let arr_allbody = [];
+            let arr_core = [];
+            let arr_oxy = [];
+            let arr_etc = [];
 
-                for (let i = res.length - 1; i >= 0; i--) {
-                    let part = ', ';
-                    let part_num = Number(res[i].part);
-                    console.log(part_num);
-                    
-                    if (part_num == 32) {
-                        part = '기타, ' + part;
-                        part_num = 0;
-                        if (this.parserIsDefault(res[i], '기타')) {
-                            arr_etc.push(res[i].exercise_no);
-                        }
+            for (let i = res.length - 1; i >= 0; i--) {
+                let part = ', ';
+                let part_num = Number(res[i].part);
+                console.log(part_num);
+                
+                if (part_num == 32) {
+                    part = '기타, ' + part;
+                    part_num = 0;
+                    if (this.parserIsDefault(res[i], '기타')) {
+                        arr_etc.push(res[i].exercise_no);
                     }
-                    if (part_num >= 16) {
-                        part = '유산소, ' + part;
-                        part_num = part_num - 16;
-                        if (this.parserIsDefault(res[i], '유산소')) {
-                            arr_oxy.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num >= 8) {
-                        part = '코어, ' + part;
-                        part_num = part_num - 8;
-                        if (this.parserIsDefault(res[i], '코어')) {
-                            arr_core.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num >= 4) {
-                        part = '전신, ' + part;
-                        part_num = part_num - 4;
-                        if (this.parserIsDefault(res[i], '전신')) {
-                            arr_allbody.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num >= 2) {
-                        part = '하체, ' + part;
-                        part_num = part_num - 2;
-                        if (this.parserIsDefault(res[i], '하체')) {
-                            arr_bottom.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num === 1) {
-                        part = '상체, ' + part;
-                        if (this.parserIsDefault(res[i], '상체')) {
-                            arr_top.push(res[i].exercise_no);
-                        }
-                    }
-                    part = part.slice(0, -2);
-
-                    arr.push({
-                        no: res[i].exercise_no,
-                        name: res[i].name,
-                        tool: res[i].machine,
-                        aa: part,
-                        set: res[i].default_set_count,
-                        bb: res[i].default_data,
-                        cc: res[i].default_rest_second,
-                        link: res[i].url,
-                    });
                 }
-                this.setState({
-                    exerciseList: arr,
-                    select_top: arr_top,
-                    select_bottom: arr_bottom,
-                    select_allbody: arr_allbody,
-                    select_core: arr_core,
-                    select_oxy: arr_oxy,
-                    select_etc: arr_etc,
+                if (part_num >= 16) {
+                    part = '유산소, ' + part;
+                    part_num = part_num - 16;
+                    if (this.parserIsDefault(res[i], '유산소')) {
+                        arr_oxy.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num >= 8) {
+                    part = '코어, ' + part;
+                    part_num = part_num - 8;
+                    if (this.parserIsDefault(res[i], '코어')) {
+                        arr_core.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num >= 4) {
+                    part = '전신, ' + part;
+                    part_num = part_num - 4;
+                    if (this.parserIsDefault(res[i], '전신')) {
+                        arr_allbody.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num >= 2) {
+                    part = '하체, ' + part;
+                    part_num = part_num - 2;
+                    if (this.parserIsDefault(res[i], '하체')) {
+                        arr_bottom.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num === 1) {
+                    part = '상체, ' + part;
+                    if (this.parserIsDefault(res[i], '상체')) {
+                        arr_top.push(res[i].exercise_no);
+                    }
+                }
+                part = part.slice(0, -2);
+
+                arr.push({
+                    no: res[i].exercise_no,
+                    name: res[i].name,
+                    tool: res[i].machine,
+                    aa: part,
+                    set: res[i].default_set_count,
+                    bb: res[i].default_data,
+                    cc: res[i].default_rest_second,
+                    link: res[i].url,
                 });
+            }
+            this.setState({
+                exerciseList: arr,
+                select_top: arr_top,
+                select_bottom: arr_bottom,
+                select_allbody: arr_allbody,
+                select_core: arr_core,
+                select_oxy: arr_oxy,
+                select_etc: arr_etc,
             });
+        });
     };
 
     search = (part) => {
         let it = '2';
         let search = part;
         let v = 0;
+
         if (/상체/.test(search)) {
             search = search.replace('상체', '');
             v = v + 1;
@@ -389,106 +380,97 @@ class DefaultExercise extends Component {
         }
         search = v;
 
-        fetch(
-            
-                ip +
-                '/exercise?type=search' +
-                it +
-                '&search=' +
-                search +
-                '&fn=' +
-                this.props.userinfo.fitness_no,
-            {
-                method: 'GET',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-            }
-        )
-            .then((response) => response.json())
-            .then((res) => {
-                let arr = [];
-                let arr_top = [];
-                let arr_bottom = [];
-                let arr_allbody = [];
-                let arr_core = [];
-                let arr_oxy = [];
-                let arr_etc = [];
-                let arr2 = [];
-                for (let i = res.length - 1; i >= 0; i--) {
-                    let part = ', ';
-                    let part_num = Number(res[i].part);
-                    console.log('isD' + res[i].is_default);
-                    
-                    if (part_num === 32) {
-                        part = '기타, ' + part;
-                        part_num = 0;
-                        if (this.parserIsDefault(res[i], '기타')) {
-                            arr_etc.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num >= 16) {
-                        part = '유산소, ' + part;
-                        part_num = part_num - 16;
-                        if (this.parserIsDefault(res[i], '유산소')) {
-                            arr_oxy.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num >= 8) {
-                        part = '코어, ' + part;
-                        part_num = part_num - 8;
-                        if (this.parserIsDefault(res[i], '코어')) {
-                            arr_core.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num >= 4) {
-                        part = '전신, ' + part;
-                        part_num = part_num - 4;
-                        if (this.parserIsDefault(res[i], '전신')) {
-                            arr_allbody.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num >= 2) {
-                        part = '하체, ' + part;
-                        part_num = part_num - 2;
-                        if (this.parserIsDefault(res[i], '하체')) {
-                            arr_bottom.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num === 1) {
-                        part = '상체, ' + part;
-                        if (this.parserIsDefault(res[i], '상체')) {
-                            arr_top.push(res[i].exercise_no);
-                        }
-                    }
-                    part = part.slice(0, -2);
-
-                    arr.push({
-                        no: res[i].exercise_no,
-                        name: res[i].name,
-                        tool: res[i].machine,
-                        aa: part,
-                        set: res[i].default_set_count,
-                        bb: res[i].default_data,
-                        cc: res[i].default_rest_second,
-                        link: res[i].url,
-                    });
-                    if (this.parserIsDefault(res, part)) {
-                        arr2.push(res[i].exercise_no);
+        const url = ip + '/exercise?type=search' + it + '&search=' + search + '&fn=' + this.props.userinfo.fitness_no;
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+            },
+        })
+        .then((response) => response.json())
+        .then((res) => {
+            let arr = [];
+            let arr_top = [];
+            let arr_bottom = [];
+            let arr_allbody = [];
+            let arr_core = [];
+            let arr_oxy = [];
+            let arr_etc = [];
+            let arr2 = [];
+            for (let i = res.length - 1; i >= 0; i--) {
+                let part = ', ';
+                let part_num = Number(res[i].part);
+                console.log('isD' + res[i].is_default);
+                
+                if (part_num === 32) {
+                    part = '기타, ' + part;
+                    part_num = 0;
+                    if (this.parserIsDefault(res[i], '기타')) {
+                        arr_etc.push(res[i].exercise_no);
                     }
                 }
-                arr2.reverse();
-                this.setState({
-                    select_top: arr_top,
-                    select_bottom: arr_bottom,
-                    select_allbody: arr_allbody,
-                    select_core: arr_core,
-                    select_oxy: arr_oxy,
-                    select_etc: arr_etc,
-                    selectedListId: arr2,
-                    exerciseList: arr,
+                if (part_num >= 16) {
+                    part = '유산소, ' + part;
+                    part_num = part_num - 16;
+                    if (this.parserIsDefault(res[i], '유산소')) {
+                        arr_oxy.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num >= 8) {
+                    part = '코어, ' + part;
+                    part_num = part_num - 8;
+                    if (this.parserIsDefault(res[i], '코어')) {
+                        arr_core.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num >= 4) {
+                    part = '전신, ' + part;
+                    part_num = part_num - 4;
+                    if (this.parserIsDefault(res[i], '전신')) {
+                        arr_allbody.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num >= 2) {
+                    part = '하체, ' + part;
+                    part_num = part_num - 2;
+                    if (this.parserIsDefault(res[i], '하체')) {
+                        arr_bottom.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num === 1) {
+                    part = '상체, ' + part;
+                    if (this.parserIsDefault(res[i], '상체')) {
+                        arr_top.push(res[i].exercise_no);
+                    }
+                }
+                part = part.slice(0, -2);
+
+                arr.push({
+                    no: res[i].exercise_no,
+                    name: res[i].name,
+                    tool: res[i].machine,
+                    aa: part,
+                    set: res[i].default_set_count,
+                    bb: res[i].default_data,
+                    cc: res[i].default_rest_second,
+                    link: res[i].url,
                 });
+                if (this.parserIsDefault(res, part)) {
+                    arr2.push(res[i].exercise_no);
+                }
+            }
+            arr2.reverse();
+            this.setState({
+                select_top: arr_top,
+                select_bottom: arr_bottom,
+                select_allbody: arr_allbody,
+                select_core: arr_core,
+                select_oxy: arr_oxy,
+                select_etc: arr_etc,
+                selectedListId: arr2,
+                exerciseList: arr,
             });
+        });
     };
 
     handleChange = (e) => {
@@ -782,11 +764,11 @@ class DefaultExercise extends Component {
         let selectedList = [];
         let unSelectedList = [];
         let exerciseList = this.state.exerciseList.map((ex) => ex.no);
-        let top = this.state.show1;
-        let bottom = this.state.show2;
-        let allbody = this.state.show3;
-        let core = this.state.show4;
-        let oxy = this.state.show5;
+        const top = this.state.show1;
+        const bottom = this.state.show2;
+        const allbody = this.state.show3;
+        const core = this.state.show4;
+        const oxy = this.state.show5;
 
         let select_top = this.state.select_top;
         let select_bottom = this.state.select_bottom;
@@ -1038,6 +1020,8 @@ class DefaultExercise extends Component {
             });
         }
     };
+
+    viewTable
 
     render() {
         const { userinfo } = this.props;

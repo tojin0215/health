@@ -114,7 +114,7 @@ export function getExercise(callback, fitness_no) {
           t: t,
         });
         console.log(arr);
-        return arr;
+        // return arr;
         callback(arr);
       }
     });
