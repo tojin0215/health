@@ -19,6 +19,7 @@ import '../../styles/login/Register.css';
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
 
+const IdCheck = RegExp(/^[A-Za-z0-9_\-]{5,20}$/);
 
 class Register extends Component {
     
@@ -74,10 +75,14 @@ class Register extends Component {
                 console.log(response)
                 //console.log(response.length)
                 if(response.length == 0){
-                    alert('사용가능합니다.')
-                    this.setState({
-                        check:1
-                    })
+                    if(IdCheck.test(this.state.id)){
+                        alert('사용가능합니다.')
+                        this.setState({
+                            check:1
+                        })
+                    }else{
+                        alert('아이디는 5~20자 이내의 영문 숫자만 가능합니다. ')
+                    }
                 } else{
                     alert('존재하는 아이디입니다. 다시 입력해주세요.')
                     this.setState({

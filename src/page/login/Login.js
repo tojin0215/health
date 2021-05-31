@@ -65,7 +65,7 @@ class Login extends Component {
                   onLogin={this.handleLogin}/>
                   <div className="slide-container sectionGlass">
                     <h5>오마이짐 미리보기</h5>
-                    <Slideshow {...fadeProperties}></Slideshow>
+                    <Slideshow></Slideshow>
                   </div>
                 </div>
                 <div className='footer'>
@@ -101,7 +101,7 @@ const slideImages = [
   const Slideshow = () => {
     return (
       <div>
-        <Slide easing="ease">
+        <Slide easing="ease" {...fadeProperties}>
           <div className="each-slide">
             <div style={{'backgroundImage': `url(${slideImages[0]})`}}>
               <span>회원 관리</span>
