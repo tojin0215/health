@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "react-scripts": "0.2.3"
+    "react-scripts": "0.2.3",
+    "terser-brunch": "^4.0.0"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
