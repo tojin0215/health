@@ -14,7 +14,7 @@ import imgA from '../../images/mainVisual1.png';
 import imgB from '../../images/mainVisual2.png';
 //import imgC from '../../images/mainVisual1.png';
 
-import { Slide } from 'react-slideshow-image';
+// import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 
 const fadeProperties = {
