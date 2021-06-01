@@ -25,11 +25,33 @@
 	display: none;
 }
 
+.loginWrap .slide-container {
+	position: relative;
+}
+
 .loginWrap .slide-container h5 {
 	justify-content: center;
-	padding: 0 0 3rem 0;
 	color: #0f78ff;
-	font-size: 2.8rem;
+	padding: 0 0 5rem 0;
+	font-size: 3.4rem;
+	font-weight: 700;
+}
+
+.loginWrap .slide-container > .loginSample {
+	text-align: center;
+	position: absolute;
+	top: 30px;
+	right: 40px;
+	border-radius: 13px;
+	background: #ffffff;
+	box-shadow: inset 7px 7px 19px #ebebeb, inset -7px -7px 19px #ffffff;
+	padding: 1rem 2rem;
+	color: #555;
+	font-size: 1.6rem;
+	font-weight: 400;
+}
+
+.loginWrap .slide-container > .loginSample > p {
 }
 
 .each-slide > div {

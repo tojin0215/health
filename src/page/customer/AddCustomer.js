@@ -351,6 +351,7 @@ class AddCustomer extends Component {
                         onChange={ this.handleStartDateChange }
                         name="startDate"
                         dateFormat="yyyy-MM-dd"
+                        font-size="1.6rem"
                         />
                         <TextField
                             variant="outlined"

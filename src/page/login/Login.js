@@ -65,6 +65,11 @@ class Login extends Component {
                   onLogin={this.handleLogin}/>
                   <div className="slide-container sectionGlass">
                     <h5>오마이짐 미리보기</h5>
+                    <div className='loginSample'>
+                      <p>체험 아이디로 미리 이용해볼 수 있습니다.</p>
+                      <p>아이디 : sample</p>
+                      <p>비밀번호 : sample</p>
+                    </div>
                     <Slideshow></Slideshow>
                   </div>
                 </div>
