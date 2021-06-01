@@ -109,7 +109,7 @@ class AssignCheckExercise extends Component {
         this.props.history.push('/');
     };
 
-    componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+    componentDidMount = () => { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
         // get cookie by name
         function getCookie(name) {
             var value = "; " + document.cookie; 

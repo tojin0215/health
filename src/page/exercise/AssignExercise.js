@@ -253,36 +253,30 @@ class AssignExercise extends Component {
       })
       .then(response => response.json())
       .then(res => {
-          if (res.code === 200) {
-            for (let i = 0; i < res.length; i++) {
-              console.log(res)
-              fetch(
-                
-                  ip +
-                  '/customer?type=select' +
-                  '&member_no=' +
-                  res[i].customer_no +
-                  '&fn=' +
-                  this.props.userinfo.fitness_no,
-                {
-                  method: 'GET',
-                  headers: {
-                    'Content-type': 'application/json',
-                  },
-                }
-              )
-              .then(response => response.json())
-              .then(res => {
-                const cl = JSON.parse(JSON.stringify(this.state.customerList))
-                cl.append({
-                  no: res[0].member_no,
-                  userName: res[0].name,
-                  phone: res[0].phone
-                })
-                this.setState({ customerList: cl});
-              });
-            }
-          }
+        let arr = [];
+        res.forEach(item => {
+          const url = ip + '/customer?type=select' +
+          '&member_no=' + item.customer_no +
+          '&fn=' + this.props.userinfo.fitness_no;
+
+          console.log('url: ' + url);
+
+          if (arr.includes(item.member_no)) return;
+          else arr.push(item.member_no);
+
+          fetch(url, { method: 'GET', headers: { 'Content-type': 'application/json', }, })
+          .then(response => response.json())
+          .then(res => {
+            let cl = [...this.state.customerList];
+            cl.push({
+              no: res[0].member_no,
+              userName: res[0].name,
+              phone: res[0].phone
+            });
+            this.setState({ customerList: cl});
+          })
+
+        })
       })
   }
 

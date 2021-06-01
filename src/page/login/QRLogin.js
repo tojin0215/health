@@ -95,10 +95,10 @@ class QRLogin extends Component {
     render() {
         const previewStyle = {
             display: 'flex',
-            'alignItems': 'center',
-            'justifyContent': 'center',
-            height: 600,
-            width: 600,
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 800,
+            width: 800,
         }
         return (
             <div className='wrap loginWrap'>
