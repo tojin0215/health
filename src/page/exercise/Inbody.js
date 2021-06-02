@@ -495,7 +495,7 @@ class Inbody extends Component {
                             chartOptions: {
                                 ...this.state.chartOptions,
                                 chart: {
-                                    id:this.state.userName+'님, 인바디',
+                                    id:'인바디x'+this.state.userName,
                                     height: 600,
                                     type: 'line',
                                     zoom: {
