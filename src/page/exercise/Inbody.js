@@ -134,7 +134,7 @@ class Inbody extends Component {
               },
               tooltip: {
                 style: {
-                    color:'#000'
+                    color:'#37485b'
                   },
                 y: [
                   {
@@ -500,7 +500,9 @@ class Inbody extends Component {
                                     type: 'line',
                                     zoom: {
                                       enabled: true
-                                    }
+                                    },
+                                    background:'#37485b'
+                                    ,
                                 },
                                 xaxis: {
                                   categories: inbodyNum
