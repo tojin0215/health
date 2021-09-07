@@ -82,7 +82,7 @@ class Statistics extends Component {
                         <div className='container'>
                             <h2>
                                 <div className='parallelogram'></div>
-                                통계
+                                    통계
                                 <span>.</span>
                             </h2>
                             <div className='breadCrumb'>
@@ -94,7 +94,7 @@ class Statistics extends Component {
                     </div>{/*.localNavigation */}
                 </div>{/*.header */}
                 <div className="container">
-                     <h2>통계페이지</h2>
+                    <h2>통계페이지</h2>
                 </div>
                 <div className='footer'>
                     <Footer />
