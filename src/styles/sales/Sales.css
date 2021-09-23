@@ -75,3 +75,12 @@
 /*상품 매출 현황 페이지 전체 기록 상품이름 필터 크기 조절*/
 .sales .css-1wa3eu0-placeholder {
 }
+
+@media (max-width: 767px) {
+	.salesUtill {
+		justify-content: space-around;
+	}
+	.sales .salesStatus {
+		flex-wrap: wrap;
+	}
+}

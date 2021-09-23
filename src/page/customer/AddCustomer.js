@@ -479,15 +479,15 @@ class AddCustomer extends Component {
                         </div>{/*.payType */}
                         <div className='paymentAmount'>
                             <label>
-                                운동
+                                <span>운동</span>
                                 <NumberFormat thousandSeparator={true} id="exercisePrice" placeholder="0 원" onChange={this.handleChange}/>
                             </label>
                             <label>
-                                운동복
+                                <span>운동복</span>
                                 <NumberFormat thousandSeparator={true} id="sportswearPrice" placeholder="0 원" onChange={this.handleChange}/>
                             </label>
                             <label>
-                                개인 사물함
+                                <span>개인 사물함</span>
                                 <NumberFormat thousandSeparator={true} id="lockerPrice" placeholder="0 원" onChange={this.handleChange}/>
                             </label>
                         </div>{/*.paymentAmount */}

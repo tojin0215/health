@@ -15,8 +15,10 @@ import {getStatusRequest} from '../../action/authentication';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 import '../../styles/customer/Customer.css';
+// import  { PC, Mobile } from '../../component/MediaQuery';
 
 import {SERVER_URL} from '../../const/settings';
+import MegaMenu from '../../component/navigation/Menu';
 
 const ip = SERVER_URL;;
 //const ip = 'localhost:3000';
@@ -327,8 +329,9 @@ class Customer extends Component {
         return (
             <div className='customer'>
                 <header className='header'>
-                    <Header /> 
-                    <Navigation goLogin={this.goLogin}/>
+                <Header />
+                <Navigation goLogin={this.goLogin}/>
+                <MegaMenu />
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>

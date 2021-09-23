@@ -109,3 +109,22 @@
 	justify-content: center;
 	color: #000;
 }
+
+@media (max-width: 767px) {
+	.inbodyCustomer {
+		padding-top: 8rem;
+	}
+	.inbody .inbodyCustomer > div:first-child {
+		justify-content: center;
+	}
+	.inbody .inbodyCustomer > div:first-child > .btnSolid {
+		width: 70%;
+	}
+	.inbody .inbodyListUtill {
+		flex-wrap: wrap;
+	}
+	.inbody .inbodyListUtill .btnSolid {
+		width: 70%;
+		margin: 0 auto;
+	}
+}

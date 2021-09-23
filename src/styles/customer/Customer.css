@@ -155,3 +155,36 @@
 .customerSlide .react-bs-table {
 	font-size: 2rem;
 }
+
+@media (max-width: 767px) {
+	.customer .container {
+		margin-top: 2rem;
+	}
+	.SearchInput {
+		width: 100%;
+	}
+	.SearchInput .Dropdown-root {
+		width: calc(50% - 2rem);
+	}
+	.SearchInput .SearchInputIn {
+		width: 100%;
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+	.container .inputTextLine {
+		width: calc(50% - 2rem);
+	}
+	.btnCustomerNew {
+		margin: 0 auto;
+		/* position: absolute;
+		right: 0; */
+	}
+	.btnCustomerNew .btnSolid {
+		height: 4rem;
+		width: auto;
+	}
+
+	.customerTable {
+		overflow: auto;
+	}
+}

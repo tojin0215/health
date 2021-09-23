@@ -1132,7 +1132,6 @@ class AssignExercise extends Component {
   };
 
   render() {
-
     return (
       <div className="assignExercise">
         <div className="header">

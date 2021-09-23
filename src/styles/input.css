@@ -180,3 +180,26 @@ html .MuiInputLabel-outlined {
 .Dropdown-menu {
 	border-radius: 1rem;
 }
+
+@media (max-width: 767px) {
+	.container .dateSort {
+		width: calc(50% - 2rem);
+		margin: 1rem;
+	}
+	.react-datepicker-wrapper {
+		width: calc(50% - 7.55px);
+	}
+	.react-datepicker-wrapper > button {
+		width: 50%;
+	}
+	.salesStatus > button {
+		margin: 1rem auto;
+		width: 50%;
+	}
+	.sales .container > div:first-child {
+		overflow: auto;
+	}
+	.react-datepicker__input-container {
+		text-align: center;
+	}
+}

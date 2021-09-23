@@ -69,3 +69,9 @@
 .react-bs-table table th {
 	overflow: inherit;
 }
+
+@media (max-width: 767px) {
+	.react-bs-table-container {
+		min-width: 767px;
+	}
+}

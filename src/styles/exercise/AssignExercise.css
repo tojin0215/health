@@ -129,3 +129,28 @@
 .assignExercise h3 {
 	border: none;
 }
+
+@media (max-width: 767px) {
+	.assignExercise .CustomerInbody > div label {
+		margin-top: 0;
+		height: auto;
+		font-size: 2.2rem;
+		padding-bottom: 8px;
+	}
+	.assignExercise .CustomerInbody a {
+		margin: 2rem auto 1rem;
+	}
+	.assignExercise .exerciseSelectList .flexbetween {
+		flex-wrap: wrap;
+	}
+	.assignExercise .inputCheckRow > label {
+		width: 33.3%;
+	}
+	.assignExercise .exerciseSelectList .flexbetween > button {
+		width: calc(50% - 2rem);
+		height: 5rem;
+	}
+	.assignWorkout > div:nth-child(5) {
+		overflow: auto;
+	}
+}

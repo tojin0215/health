@@ -84,3 +84,18 @@
 	height: 4rem;
 	font-weight: 500;
 }
+
+@media (max-width: 767px) {
+	.label-description {
+		font-size: 1.8rem;
+	}
+	.exercisePart .part {
+		flex-direction: column;
+	}
+	.settingExerciseList .searchInputRow {
+		flex-wrap: wrap;
+	}
+	.addExercise .settingExerciseList {
+		padding-top: 14rem;
+	}
+}

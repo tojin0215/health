@@ -233,3 +233,64 @@
 	justify-content: center;
 	align-items: center;
 }
+
+@media (max-width: 767px) {
+	.formAddCustomer .customerName {
+		width: 100%;
+	}
+	.formAddCustomer .customerPeriod {
+		width: 100%;
+		justify-content: center;
+	}
+	.formAddCustomer input[type='text'] {
+		min-width: auto;
+	}
+	.formAddCustomer .customerPhone {
+		width: 100%;
+	}
+	.formAddCustomer .customerResi {
+		width: 100%;
+	}
+	.formAddCustomer .customerAddress {
+		width: 100%;
+	}
+	.formAddCustomer .customerIncharge {
+		width: 100%;
+	}
+	.formAddCustomer .customerRoute div label {
+		width: 50%;
+	}
+	.formAddCustomer .customerRoute div label input[type='text'] {
+		width: 80%;
+	}
+	.productPay .exerciseType {
+		padding-right: 0;
+	}
+	.productPay .exerciseType label {
+		width: 50%;
+	}
+	.productPay .exerciseType label input[type='text'] {
+		width: 70%;
+	}
+	.productPay .payType {
+		padding-right: 0;
+	}
+	.productPay .paymentAmount > label {
+		display: flex;
+		flex-direction: column;
+	}
+	.productPay .paymentAmount > label > span {
+		height: auto;
+		align-self: center;
+	}
+	.productPay .paymentAmount input[type='text'] {
+		width: auto;
+	}
+	.productPay .finalAmount .finalAmountOthers {
+		width: 100%;
+	}
+	.productPay .finalAmount .amountTotal {
+		width: 100%;
+		flex-direction: column;
+	}
+}

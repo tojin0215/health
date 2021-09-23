@@ -3,11 +3,16 @@ import { Link } from 'react-router-dom';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
+import MegaMenu from '../../component/navigation/Menu';
 import { connect } from 'react-redux';
 import {getStatusRequest} from '../../action/authentication';
 import '../../styles/home/home.css';
 
+// import  { PC, Mobile } from '../../component/MediaQuery';
+// import Menu from '../../component/navigation/Menu';
+
 import {SERVER_URL} from '../../const/settings';
+
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -170,8 +175,10 @@ class Home extends Component {
             <div className='header'>
                 <Header />
                 <Navigation goLogin={this.goLogin}/>
+                <MegaMenu />
                 <div className='localNavigation'>
                     <div className='container'>
+                    {/* <Menu /> */}
                         <div className='dashboard'>
                             <div className='homeDashLeft'>
                                 <label>

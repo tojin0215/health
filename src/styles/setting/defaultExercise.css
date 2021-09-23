@@ -26,3 +26,20 @@
 .defaultExercise .defaultKind button {
 	width: 20%;
 }
+
+@media (max-width: 767px) {
+	.defaultKind {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	.defaultExercise .defaultKind button {
+		width: 33.3%;
+	}
+	.react-bs-table-container {
+		width: 100%;
+		overflow: auto;
+	}
+	.react-bs-table-container .tableContainer {
+		min-width: 767px;
+	}
+}

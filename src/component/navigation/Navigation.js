@@ -34,7 +34,7 @@ class Navigation extends Component {
     }
     
     render() {
-        const { userinfo } = this.props;
+        const userinfo = this.props;
         return (
             <div className="Navigation">
                 <Navbar className={styles.navbar}>

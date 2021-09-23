@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Home, Customer, AddCustomer, AddExercise, Sales, AddSales, Login,Statistics, Inbody, AddInbody, UpdateCustomer, DefaultExercise, AssignExercise, AssignCheckExercise, AssignCustomer, Admin, QRLogin, Register} from '../page';
 
-
 class App extends Component {
   render() {
     return (
