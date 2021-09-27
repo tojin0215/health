@@ -20,3 +20,15 @@
 .addSales > .container > div > button {
 	width: 20rem;
 }
+
+@media (max-width: 767px) {
+	.productPay button {
+		width: auto;
+	}
+	.productPay .exerciseType label span {
+		padding: 0;
+	}
+	.addSales > .container > div {
+		text-align: center;
+	}
+}

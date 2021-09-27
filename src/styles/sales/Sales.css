@@ -77,10 +77,17 @@
 }
 
 @media (max-width: 767px) {
+	.sales .react-bs-table-container {
+		min-width: auto;
+	}
 	.salesUtill {
 		justify-content: space-around;
 	}
+	.salesUtill2 {
+		position: sticky;
+	}
 	.sales .salesStatus {
 		flex-wrap: wrap;
+		position: relative;
 	}
 }

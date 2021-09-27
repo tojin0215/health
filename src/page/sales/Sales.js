@@ -2,6 +2,7 @@ import React,{ Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
+import MegaMenu from '../../component/navigation/Menu';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
@@ -461,6 +462,7 @@ class Sales extends Component {
                 <div className='header'>
                     <Header />
                     <Navigation goLogin={this.goLogin}/>
+                    <MegaMenu />
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
@@ -509,7 +511,7 @@ class Sales extends Component {
                             </button>
                         </div>{/*.salesStatus */}
                     </div>{/*.salesUtill */}
-                    <div>
+                    <div className='tablewrap'>
                         <BootstrapTable data={ this.state.toolList } 
                             options={textOptions}
                             tableHeaderClass='tableHeader'
@@ -564,7 +566,7 @@ class Sales extends Component {
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='exerciseName'
-                            thStyle={ { 'textAlign': 'center','padding': '0.6rem 3rem' } }
+                            thStyle={ { 'textAlign': 'center' } }
                             tdStyle={ { 'textAlign': 'center' } }>
                                 <Select 
                                 menuPortalTarget={document.querySelector('body')}

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
+import MegaMenu from '../../component/navigation/Menu';
 import { connect } from 'react-redux';
 
 import Table from '@material-ui/core/Table';
@@ -192,6 +193,7 @@ class AssignCustomer extends Component {
                 <div className='header'>
                     <Header />
                     <Navigation goLogin={this.goLogin}/>
+                    <MegaMenu />
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
@@ -246,6 +248,7 @@ class AssignCustomer extends Component {
                                     조회하기
                                 </button>
                             </div>
+                            <div className='tablewrap'>
                             <BootstrapTable
                             data={ this.state.assignExerciseList }
                             options={textOptions}
@@ -303,6 +306,7 @@ class AssignCustomer extends Component {
                                     세트
                                 </TableHeaderColumn>
                             </BootstrapTable>
+                            </div>
                         </div> 
                 </div>
                 <div className='footer'>

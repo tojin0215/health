@@ -481,7 +481,7 @@ class Customer extends Component {
                                 <div className='circle'></div>
                                 상품 결제 내역
                             </h6>
-                            
+                            <div className='tablewrap'>
                             <BootstrapTable 
                                 data={ this.state.userSalesLists2 } 
                                 hover
@@ -504,6 +504,7 @@ class Customer extends Component {
                                     tdStyle={ { 'textAlign': 'center' } }
                                     >금액</TableHeaderColumn>
                             </BootstrapTable>
+                            </div>
                         </div>
                         :null
                         }

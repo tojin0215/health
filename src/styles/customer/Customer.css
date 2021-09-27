@@ -183,8 +183,29 @@
 		height: 4rem;
 		width: auto;
 	}
-
 	.customerTable {
 		overflow: auto;
+	}
+	.customerSlide {
+		width: 100%;
+		padding: 11rem 1rem;
+	}
+	.customerSlide ul li {
+		width: 100%;
+	}
+	.customerSlide .react-bs-table-container {
+		min-width: 40rem;
+		padding: 1.4rem 0;
+	}
+	.btnSlideClose {
+		width: 6rem;
+		background: transparent url(/src/images/btnCloseWhite.png) no-repeat center
+			center/25px auto;
+	}
+	.customerSlide .customerSlideUtill button {
+		height: 6rem;
+	}
+	.customerSlide .customerSlideUtill .btnCustomerNew button {
+		height: 4.6rem;
 	}
 }

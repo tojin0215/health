@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navigation from '../../component/navigation/Navigation';
+import MegaMenu from '../../component/navigation/Menu';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
@@ -551,6 +552,7 @@ class AddExercise extends Component {
                 <header className="header">
                     <Header />
                     <Navigation goLogin={this.goLogin} />
+                    <MegaMenu />
                     <div className="localNavigation">
                         <div className="container">
                             <h2>
@@ -795,6 +797,7 @@ class AddExercise extends Component {
                                 운동 검색
                             </button>
                         </div>
+                        <div className='tablewrap'>
                         <BootstrapTable
                             data={this.state.exerciseList}
                             hover
@@ -862,6 +865,7 @@ class AddExercise extends Component {
                                 링크
                             </TableHeaderColumn>
                         </BootstrapTable>
+                        </div>
                     </section>
                 </div>
                 {/*.container */}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
+import MegaMenu from '../../component/navigation/Menu';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -1137,6 +1138,7 @@ class AssignExercise extends Component {
         <div className="header">
           <Header />
           <Navigation goLogin={this.goLogin} />
+          <MegaMenu />
           <div className="localNavigation">
             <div className="container">
               <h2>

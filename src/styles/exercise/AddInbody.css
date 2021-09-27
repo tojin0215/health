@@ -1,40 +1,52 @@
 .addInbody h3 {
-  width:100%;
-  margin-bottom:1.6rem;
+	width: 100%;
+	margin-bottom: 1.6rem;
 }
 
 .addInbody .addInCustomerInfo {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: 2.4rem;
-  flex-wrap: wrap;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	font-size: 2.4rem;
+	flex-wrap: wrap;
 }
 
-.addInbody .addInCustomerInfo label { 
-  display:flex;
-  width:100%;
+.addInbody .addInCustomerInfo label {
+	display: flex;
+	width: 100%;
 }
 
 .addInbody .addInCustomerInfo label p {
-  text-align:center;
-  width:10%;
+	text-align: center;
+	width: 10%;
 }
 
 .addInbody .addInCustomerInfo label span {
-  text-align:center;
-  width:20%;
+	text-align: center;
+	width: 20%;
 }
 
 .inbodyMeasurementDate {
-  width:100%;
+	width: 100%;
 }
 
 .formAddCustomer {
-  position: relative;
+	position: relative;
 }
 
 .addInbody .btnOneCenter {
-  bottom:-10rem;
-  width:30rem
+	bottom: -10rem;
+	width: 30rem;
+}
+
+@media (max-width: 767px) {
+	.addInbody .addInCustomerInfo label p {
+		width: 100%;
+	}
+	.addInbody .addInCustomerInfo label span {
+		width: 100%;
+	}
+	.addInbody .react-datepicker__input-container input[type='text'] {
+		width: 100%;
+	}
 }

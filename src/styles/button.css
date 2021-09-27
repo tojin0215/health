@@ -26,7 +26,9 @@ button {
 	font-weight: 500;
 	font-size: 2.2rem;
 }
-
+.btnSolid > a {
+	color: #fff;
+}
 .btnSolid:hover {
 	background-color: #fff;
 	color: #0f78ff;

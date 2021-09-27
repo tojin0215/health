@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navigation from '../../component/navigation/Navigation';
+import MegaMenu from '../../component/navigation/Menu';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
@@ -1094,6 +1095,7 @@ class DefaultExercise extends Component {
             <header>
                 <Header />
                 <Navigation goLogin={this.goLogin}/>
+                <MegaMenu />
                 <div className='localNavigation'>
                     <div className='container'>
                         <h2>
@@ -1154,6 +1156,7 @@ class DefaultExercise extends Component {
                         <h3>
                             상체 운동 목록
                         </h3>
+                        <div className='tablewrap'>
                         <BootstrapTable
                         hover
                         data={this.state.exerciseList}
@@ -1222,6 +1225,7 @@ class DefaultExercise extends Component {
                                 링크
                             </TableHeaderColumn>
                         </BootstrapTable>{/*.table2 */}
+                        </div>
                     </div>
                 :null} 
                 {this.state.show2?
@@ -1229,6 +1233,7 @@ class DefaultExercise extends Component {
                         <h3>
                             하체 운동 목록
                         </h3>
+                        <div className='tablewrap'>
                         <BootstrapTable
                         hover
                         data={this.state.exerciseList}
@@ -1297,13 +1302,14 @@ class DefaultExercise extends Component {
                                 링크
                             </TableHeaderColumn>
                         </BootstrapTable>{/*.table2 */}
-
+                        </div>
                     
                         </div>
                      : null}
                     {this.state.show3 ? (
                         <div>
                             <h3>전신 운동 목록</h3>
+                            <div className='tablewrap'>
                             <BootstrapTable
                                 hover
                                 data={this.state.exerciseList}
@@ -1372,12 +1378,14 @@ class DefaultExercise extends Component {
                                     링크
                                 </TableHeaderColumn>
                             </BootstrapTable>
+                            </div>
                             {/*.table2 */}
                         </div>
                     ) : null}
                     {this.state.show4 ? (
                         <div>
                             <h3>코어 운동 목록</h3>
+                            <div className='tablewrap'>
                             <BootstrapTable
                                 hover
                                 data={this.state.exerciseList}
@@ -1446,12 +1454,14 @@ class DefaultExercise extends Component {
                                     링크
                                 </TableHeaderColumn>
                             </BootstrapTable>
+                            </div>
                             {/*.table2 */}
                         </div>
                     ) : null}
                     {this.state.show5 ? (
                         <div>
                             <h3>유산소 운동 목록</h3>
+                            <div className='tablewrap'>
                             <BootstrapTable
                                 hover
                                 data={this.state.exerciseList}
@@ -1520,6 +1530,7 @@ class DefaultExercise extends Component {
                                     링크
                                 </TableHeaderColumn>
                             </BootstrapTable>
+                            </div>
                             {/*.table2 */}
                         </div>
                     ) : null}

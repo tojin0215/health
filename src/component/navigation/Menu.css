@@ -29,81 +29,82 @@
 	clear: both;
 	display: block;
 }
-.search {
+.megamenu .search {
 	float: right;
 	padding: 30px;
 }
-input {
+.megamenu input {
 	border: none;
 	padding: 10px;
 	border-radius: 20px;
 }
-.logo {
+.megamenu .logo {
 	float: left;
-	padding: 26px 0 26px;
+	padding: 28px 0 0;
 }
-.logo a {
+.megamenu .logo a {
 	font-size: 28px;
 	display: block;
 	padding: 0 0 0 20px;
 }
-nav {
+.megamenu nav {
 	float: right;
 }
-nav > ul {
+.megamenu nav > ul {
 	float: left;
 	position: relative;
 }
-nav li {
+.megamenu nav li {
 	list-style: none;
 	float: left;
 }
-nav .dropdown {
+.megamenu nav .dropdown {
 	position: relative;
 }
-nav li a {
+.megamenu nav li a {
 	float: left;
 	padding: 35px;
 }
-nav li a:hover {
+.megamenu nav li a:hover {
 	background: #2c3e50;
 }
-nav li ul {
+.megamenu nav li ul {
 	display: none;
 }
-nav li:hover ul {
+.megamenu nav li:hover ul {
 	display: inline;
 }
-nav li li {
+.megamenu nav li li {
 	float: none;
 }
-nav .dropdown ul {
+.megamenu nav .dropdown ul {
 	position: absolute;
 	left: 0;
 	top: 100%;
-	background: #0f78ff;
+	background: #fff;
 	padding: 20px 0;
 	border-bottom: 3px solid #34495e;
 }
-nav .dropdown li {
+.megamenu nav .dropdown li {
 	white-space: nowrap;
 }
-nav .dropdown li a {
+.megamenu nav .dropdown li a {
 	padding: 10px 35px;
-	font-size: 13px;
+	font-size: 1.8rem;
+	font-weight: 400;
 	min-width: 200px;
 }
-nav .mega-dropdown {
+.megamenu nav .mega-dropdown {
 	width: 100%;
 	position: absolute;
 	top: 100%;
 	left: 0;
-	background: #0f78ff;
+	background: #fff;
 	overflow: hidden;
 	padding: 20px 35px;
 	border-bottom: 3px solid #34495e;
 }
-nav li li a {
+.megamenu nav li li a {
 	float: none;
 	color: #333;
 	display: block;
@@ -111,11 +112,11 @@ nav li li a {
 	border-radius: 3px;
 	font-size: 13px;
 }
-nav li li a:hover {
+.megamenu nav li li a:hover {
 	background: #0f78ff;
 	background: #0f78ff;
 }
-.mega-col {
+.megamenu .mega-col {
 	width: 25%;
 	float: left;
 }
@@ -137,12 +138,15 @@ nav li li a:hover {
 }
 
 @media only screen and (max-width: 1170px) {
-	nav > ul > li > a {
+	.megamenu nav > ul > li > a {
 		padding: 35px 15px;
 	}
 }
 @media only screen and (min-width: 768px) {
 	.megamenu {
+		display: none !important;
+	}
+	.megamenunav {
 		display: none !important;
 	}
 }
@@ -153,12 +157,12 @@ nav li li a:hover {
 	.header {
 		padding-top: 0;
 	}
-	nav {
+	.megamenu nav {
 		display: none;
 		width: 100%;
 		clear: both;
 		float: none;
-		max-height: 400px;
+		/* max-height: 400px; */
 		overflow-y: scroll;
 	}
 	#menu-icon {
@@ -180,25 +184,27 @@ nav li li a:hover {
 	#menu-icon.active .third {
 		display: none;
 	}
-	.search {
+	.megamenu .search {
 		float: none;
 	}
-	.search input {
+	.megamenu .search input {
 		width: 100%;
 	}
-	nav {
+	.megamenu nav {
 		padding: 10px;
 	}
-	nav ul {
+	.megamenu nav ul {
 		float: none;
 	}
-	nav li {
+	.megamenu nav li {
 		float: none;
 	}
-	nav ul li a {
+	.megamenu nav ul li a {
 		float: none;
 		padding: 8px;
 		display: block;
+		font-weight: 500;
+		font-size: 1.9rem;
 	}
 	.megamenu nav ul ul {
 		display: block;
@@ -219,7 +225,7 @@ nav li li a:hover {
 	.megamenu nav ul li li a:before {
 		content: '- ';
 	}
-	.mega-col {
+	.megamenu .mega-col {
 		width: 100%;
 	}
 }

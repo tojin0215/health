@@ -102,3 +102,32 @@
 .MuiDialog-paperWidthLg {
 	width: 56%;
 }
+
+@media (max-width: 767px) {
+	.customerSearch {
+		flex-direction: column;
+		position: sticky;
+		left: 0;
+		right: 0;
+	}
+	.MuiTable-root {
+		min-width: max-content;
+	}
+	.MuiDialog-root .Dropdown-root {
+		width: 80%;
+	}
+	.MuiDialog-root input[type='text'] {
+		width: 80%;
+	}
+	.MuiTable-root .MuiTableCell-head {
+		padding: 5px 0;
+	}
+	.customerSearch button {
+		width: 80%;
+		align-self: center;
+	}
+	.addsalesSearchTable .MuiTableCell-head:nth-child(3) {
+		width: auto;
+		padding: 0 5rem;
+	}
+}

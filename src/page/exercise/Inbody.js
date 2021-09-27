@@ -2,6 +2,7 @@ import React,{ Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
+import MegaMenu from '../../component/navigation/Menu';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
@@ -556,6 +557,7 @@ class Inbody extends Component {
                 <div className='header'>
                     <Header />
                     <Navigation goLogin={this.goLogin}/>
+                    <MegaMenu />
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
@@ -751,6 +753,7 @@ class Inbody extends Component {
                             조회하기
                         </button>
                     </div>
+                    <div className='tablewrap'>
                     <BootstrapTable
                     data={ this.state.inbodyList }
                     options={textOptions}
@@ -857,6 +860,7 @@ class Inbody extends Component {
                             체지방률
                         </TableHeaderColumn>
                     </BootstrapTable>
+                    </div>
                     {/*
                     <text>
                     </text>
@@ -895,6 +899,7 @@ class Inbody extends Component {
                             변화량을 조회하고 싶은 인바디 측정 회차를 선택해주세요.
                         </p>
                     </div>
+                    <div className='tablewrap'>
                     <section className='inbodyGraph'>
                         {this.state.showChart?
                             <Chart
@@ -905,6 +910,7 @@ class Inbody extends Component {
                             />
                         :null}
                     </section>
+                    </div>
                 </div>
             :null
             }

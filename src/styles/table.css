@@ -72,6 +72,16 @@
 
 @media (max-width: 767px) {
 	.react-bs-table-container {
-		min-width: 767px;
+		min-width: 1024px;
+		padding: 1.4rem 0 9rem;
+	}
+	.react-bs-table-pagination {
+		display: flex;
+		position: relative;
+		bottom: 0;
+	}
+	.react-bs-table-pagination .row {
+		flex-wrap: nowrap;
+		margin: 1rem;
 	}
 }

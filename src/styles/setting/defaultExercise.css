@@ -33,7 +33,7 @@
 		justify-content: center;
 	}
 	.defaultExercise .defaultKind button {
-		width: 33.3%;
+		width: calc(50% - 2rem);
 	}
 	.react-bs-table-container {
 		width: 100%;

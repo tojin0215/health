@@ -98,4 +98,18 @@
 	.addExercise .settingExerciseList {
 		padding-top: 14rem;
 	}
+	.addExercise .label-description {
+		width: 100%;
+		text-align: start;
+	}
+	.addExercise input[type='text'] {
+		width: 100%;
+	}
+	.addExercise .container .input-row {
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+	.settingExerciseList .searchInputRow {
+		justify-content: flex-end;
+	}
 }

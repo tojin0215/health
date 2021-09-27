@@ -110,8 +110,36 @@
 	color: #000;
 }
 
+.tablewrap {
+	width: 100%;
+	overflow: auto;
+}
+
 @media (max-width: 767px) {
-	.inbodyCustomer {
+	.inbodyCustomer .waySub {
+		width: 100%;
+		text-align: center;
+	}
+	.inbodyCustomer .waySub button {
+		margin: 1%;
+		font-size: 1.8rem;
+	}
+	.MuiDialog-container .MuiPaper-root {
+		width: 100%;
+		margin: 0;
+	}
+	.inbody .MuiDialogContent-root {
+		padding: 0 !important;
+	}
+	.MuiDialog-root button {
+		width: 45%;
+	}
+	.inbodySearchTable .MuiTableCell-head {
+		padding: 2px;
+		min-width: 8rem;
+		padding-bottom: 2rem;
+	}
+	.container .inbodyCustomer {
 		padding-top: 8rem;
 	}
 	.inbody .inbodyCustomer > div:first-child {
@@ -126,5 +154,23 @@
 	.inbody .inbodyListUtill .btnSolid {
 		width: 70%;
 		margin: 0 auto;
+	}
+	.inbody .react-datepicker__input-container input[type='text'] {
+		width: 13rem;
+	}
+	.inbody .inbodySlide {
+		width: 100%;
+		padding: 8rem 1.2rem;
+	}
+	.inbody .inbodySlide button:nth-child(2) {
+		top: 1rem;
+		right: 1rem;
+	}
+	.inbody .inbodySlide .inbodySlideUtill > button {
+		top: 60px;
+		right: 20px;
+	}
+	.inbody .inbodySlide .inbodySlideUtill > p {
+		padding-top: 6rem;
 	}
 }

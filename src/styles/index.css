@@ -39,6 +39,7 @@
 }
 .localNavigation .breadCrumb a {
 	padding: 0 1rem;
+	white-space: nowrap;
 }
 .localNavigation .breadCrumb a:last-child {
 	color: #000051;
@@ -62,4 +63,14 @@
 	background: #0f78ff;
 	border-radius: 50%;
 	margin-right: 1rem;
+}
+
+@media (max-width: 767px) {
+	.localNavigation .container {
+		flex-direction: column;
+		justify-content: center;
+	}
+	.localNavigation .breadCrumb {
+		justify-content: flex-end;
+	}
 }

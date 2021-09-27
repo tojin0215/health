@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
+import MegaMenu from '../../component/navigation/Menu';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
@@ -303,6 +304,7 @@ class AddSales extends Component {
             <div className='header'>
                 <Header />
                 <Navigation goLogin={this.goLogin}/>
+                <MegaMenu />
                 <div className='localNavigation'>
                     <div className='container'>
                         <h2>

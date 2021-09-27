@@ -131,11 +131,21 @@
 }
 
 @media (max-width: 767px) {
+	.assignExercise > .container {
+		padding-top: 10rem;
+	}
+	.assignExercise .waySub {
+		left: calc(50% - 75px);
+	}
+	.assignExercise .CustomerInbody h4 {
+		padding: 0 0 1rem 0;
+	}
 	.assignExercise .CustomerInbody > div label {
 		margin-top: 0;
 		height: auto;
 		font-size: 2.2rem;
 		padding-bottom: 8px;
+		width: 100%;
 	}
 	.assignExercise .CustomerInbody a {
 		margin: 2rem auto 1rem;

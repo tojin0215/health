@@ -202,4 +202,8 @@ html .MuiInputLabel-outlined {
 	.react-datepicker__input-container {
 		text-align: center;
 	}
+	.inputCheckRow > label > p {
+		width: 100%;
+		text-align: center;
+	}
 }

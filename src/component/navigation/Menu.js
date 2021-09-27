@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import {Nav, Navbar, Container} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { setFitness } from '../../action/userinfo';
 
@@ -20,10 +22,13 @@ class MegaMenu extends Component {
 		// 	$("nav").slideToggle();
 		// 	$(this).toggleClass("active");
 		// });
-		
-		$("#menu-icon").on("click", function(){
+
+		$("#menu-icon").off('click').on("click", function(){
 			$("nav").slideToggle();
 			$(this).toggleClass("active");
+			// $(".active").off('click').on('click', function(){
+			// 	$("nav").slideToggle();
+			// });
 		});
 
     return (
@@ -49,30 +54,72 @@ class MegaMenu extends Component {
 					<nav>
 						<ul>
 							<li>
-								<a href="/home">Home</a>
-							</li>
-							<li>
-								<a href="/customer">고객</a>
-								<ul class="mega-dropdown">
-									<li class="row">
-									</li>
-								</ul>        
+								<NavLink exact to="/home">
+									Home
+									</NavLink>
 							</li>
 							<li class="dropdown">
-								<a href="">Contact</a>
-									<ul>
-										<li><a href="#">About Version</a></li>
-										<li><a href="#">About Version</a></li>
-										<li><a href="#">Contact Us</a></li>
-										<li><a href="#">Contact Us</a></li>
-									</ul>        
+								<NavLink exact to="/customer">
+									고객
+								</NavLink>
+								<li>
+									<NavLink exact to="/customer">
+											회원 관리
+									</NavLink>
+								</li>
+								<li>
+									<NavLink exact to="/customer/add">
+											회원 등록
+									</NavLink>
+								</li>
+								<li>
+									<NavLink exact to=
+									{{ pathname: '/assign/inbody',
+											state:{member_no:0,a:true} }}>
+											인바디 정보
+									</NavLink>
+								</li>
 							</li>
-							<li>
-								<a href="">Portfolio</a>
+							<li class="dropdown">
+								<NavLink exact to="/sales">상품/매출</NavLink>
+									<li>
+										<NavLink exact to="/sales">
+												매출 현황
+										</NavLink>
+									</li>
+									<li>
+										<NavLink exact to="/sales/add">
+												결제 등록
+										</NavLink>
+									</li> 
 							</li>
-							<li>
-								<a href="">Team</a>
+							<li class="dropdown">
+								<NavLink exact to="/assign">운동</NavLink>
+									<li>
+										<NavLink exact to="/assign">
+												운동 배정
+										</NavLink>
+									</li>
+									<li>
+										<NavLink exact to="/exercise">
+												운동 설정
+										</NavLink>
+									</li>
 							</li>
+							{/* <li class="dropdown">
+								<NavLink exact to="/statistics">
+								</NavLink>
+							</li> */}
+							{/* <li>
+								{userinfo.fitness_no === 1?
+										<NavLink exact to="/admin">
+												<span className={styles.navitem}>
+														관리자
+												</span>
+										</NavLink>
+								:null
+								}
+							</li> */}
 						</ul>
 					</nav>
       </div>
