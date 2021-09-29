@@ -141,7 +141,7 @@ class Navigation extends Component {
                             </span>
                         </Nav.Item>
                         <Nav.Item>
-                            <button className='btnSolid' onClick={this.handleLogout}>
+                            <button className='btnSolid btnlogout' onClick={this.handleLogout}>
                                 LOG-OUT
                             </button>
                         </Nav.Item>

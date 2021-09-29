@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import {Nav, Navbar, Container} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { setFitness } from '../../action/userinfo';
+import {logoutRequest} from '../../action/authentication';
 
 import $ from 'jquery';
 
@@ -32,8 +33,6 @@ class MegaMenu extends Component {
 		});
 
     return (
-
-		
       <div class="megamenu">
 					<div class="logo">
 						<a href='/home'>
@@ -46,6 +45,9 @@ class MegaMenu extends Component {
 							/>{' '}
 						</a>
 					</div>
+					<button className='btnSolid' onClick={this.handleLogout}>
+						LOG-OUT
+					</button>
 					<div id='menu-icon'>
 						<span className='first'></span>
 						<span className='second'></span>

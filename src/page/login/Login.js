@@ -96,11 +96,16 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const slideImages = [
-    'src/images/slide_1.png',
-    'src/images/slide_2.png',
-    'src/images/slide_3.png',
-    'src/images/slide_4.png',
-    'src/images/slide_5.png'
+    // 'src/images/slide_1.png',
+    // 'src/images/slide_2.png',
+    // 'src/images/slide_3.png',
+    // 'src/images/slide_4.png',
+    // 'src/images/slide_5.png'
+    // '../../images/slide_1.png',
+    // '../../images/slide_2.png',
+    // '../../images/slide_3.png',
+    // '../../images/slide_4.png',
+    // '../../images/slide_5.png',
 ];
 
   const Slideshow = () => {
@@ -108,27 +113,32 @@ const slideImages = [
       <div>
         <Slide easing="ease" {...fadeProperties}>
           <div className="each-slide">
-            <div style={{'backgroundImage': `url(${slideImages[0]})`}}>
+            {/* <div style={{'backgroundImage': `url(${slideImages[0]})`}}> */}
+            <div>
               <span>회원 관리</span>
             </div>
           </div>
           <div className="each-slide">
-            <div style={{'backgroundImage': `url(${slideImages[1]})`}}>
+            <div>
+            {/* <div style={{'backgroundImage': `url(${slideImages[1]})`}}> */}
               <span>회원 인바디 체크</span>
             </div>
           </div>
           <div className="each-slide">
-            <div style={{'backgroundImage': `url(${slideImages[2]})`}}>
+            <div>
+            {/* <div style={{'backgroundImage': `url(${slideImages[2]})`}}> */}
               <span>결제 관리</span>
             </div>
           </div>
           <div className="each-slide">
-            <div style={{'backgroundImage': `url(${slideImages[3]})`}}>
+            <div>
+            {/* <div style={{'backgroundImage': `url(${slideImages[3]})`}}> */}
               <span>매출 현황</span>
             </div>
           </div>
           <div className="each-slide">
-            <div style={{'backgroundImage': `url(${slideImages[4]})`}}>
+            <div>
+            {/* <div style={{'backgroundImage': `url(${slideImages[4]})`}}> */}
               <span>운동 배정</span>
             </div>
           </div>

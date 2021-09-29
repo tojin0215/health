@@ -92,19 +92,19 @@
 }
 
 .assignExercise .inputCheckRow label:nth-child(2) .imageBox {
-	background-image: url(/src/images/assignUpper.png);
+	background-image: url(../../images/assignUpper.png);
 }
 .assignExercise .inputCheckRow label:nth-child(3) .imageBox {
-	background-image: url(/src/images/assignLower.png);
+	background-image: url(../../images/assignLower.png);
 }
 .assignExercise .inputCheckRow label:nth-child(4) .imageBox {
-	background-image: url(/src/images/assignEntire.png);
+	background-image: url(../../images/assignEntire.png);
 }
 .assignExercise .inputCheckRow label:nth-child(5) .imageBox {
-	background-image: url(/src/images/assignCore.png);
+	background-image: url(../../images/assignCore.png);
 }
 .assignExercise .inputCheckRow label:nth-child(6) .imageBox {
-	background-image: url(/src/images/assignAerobic.png);
+	background-image: url(../../images/assignAerobic.png);
 }
 
 .assignExercise .exerciseSelectList .flexbetween {
