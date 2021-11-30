@@ -2,18 +2,37 @@ import React, { Component } from 'react';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
+import MegaMenu from '../../component/navigation/Menu';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import '../../styles/exercise/AssignCheckExercise.css';
+import {getStatusRequest} from '../../action/authentication';
+import Setting from '../../const/settings';
+import CustomUtil from '../../const/utils'
 
-// const ip = '13.124.141.28:3003';
+// const ip = Setting.ip;
+import {SERVER_URL} from '../../const/settings';
 
-const ip = 'localhost:3000';
+const ip = SERVER_URL;;
+//const ip = 'localhost:3000';
+
+function isDefaultExercise(exercise_name, default_value) {
+    const value = default_value.toString().split('');//.map(v => Number(v));
+    console.log(exercise_name);
+    console.log(value);
+    if (exercise_name === 1) return (value.length > 0 && value.includes('1') && !value.includes('6')) 
+    else if (exercise_name === 2) return (value.length > 0 && value.includes('2')) 
+    else if (exercise_name === 4) return (value.length > 0 && value.includes('4')) 
+    else if (exercise_name === 8) return (value.length > 0 && value.includes('8')) 
+    else if (exercise_name === 16) return (value.length > 0 && value.includes('1') && value.includes('6')) 
+    else return false;
+};
 class AssignCheckExercise extends Component {
     constructor(props) {
         super(props);
 
-        const search = location.search;
+        const search = location.pathname;
 
         this.state = {
             fitness_no: this.props.userinfo.fitness_no, //Redux를 통해 받은 값
@@ -24,6 +43,7 @@ class AssignCheckExercise extends Component {
 
             exerciseList: [],
         };
+        console.log(this.props.location.state.assignDefault, this.props.location.state.assignCustom);
         if (this.props.location.state.assignDefault.length !== 0)
             this.getExerciseListDefault();
         else {
@@ -45,9 +65,20 @@ class AssignCheckExercise extends Component {
                     arr.push(v);
                 }
             }
-            this.state.exerciseList = arr;
+
+            let uniqueArr = [];
+
+            const result = [];
+            arr.forEach((element) => {
+                if (!uniqueArr.includes(element.exercise_no)) {
+                    uniqueArr.push(element.exercise_no);
+                    result.push(element);
+                }
+            })
+            this.state.exerciseList = result;
         }
     }
+
     getExerciseListDefault = () => {
         let exList = [];
         // let setState = this.setState;
@@ -55,9 +86,19 @@ class AssignCheckExercise extends Component {
 
         this.sendAssign(
             function (arr, n) {
+                let uniqueArr = [];
+
                 // arr.forEach((res) => {});
                 exList = [...arr];
-                setState({ exerciseList: exList });
+
+                const result = [];
+                exList.forEach((element) => {
+                    if (!uniqueArr.includes(element.no)) {
+                        uniqueArr.push(element.no);
+                        result.push(element);
+                    }
+                })
+                setState({ exerciseList: result });
             },
             this.procDefaultPackage,
             -1
@@ -69,13 +110,62 @@ class AssignCheckExercise extends Component {
         this.props.history.push('/');
     };
 
+    componentDidMount = () => { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+        // get cookie by name
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "="); 
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+   
+        // get loginData from cookie
+        let loginData = getCookie('key');
+        // if loginData is undefined, do nothing
+        if(typeof loginData === "undefined"){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // decode base64 & parse json
+        loginData = JSON.parse(atob(loginData));
+        // if not logged in, do nothing
+        if(!loginData.isLoggedIn){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // page refreshed & has a session in cookie,
+        // check whether this cookie is valid or not
+        this.props.getStatusRequest().then(
+            () => {
+                // if session is not valid
+                if(!this.props.status.valid) {
+                    // logout the session
+                    loginData = {
+                        isLoggedIn: false,
+                        id: ''
+                    };
+   
+                    document.cookie='key=' + btoa(JSON.stringify(loginData));
+   
+                    // and notify
+                    alert("Your session is expired, please log in again")
+                }
+                else{
+                    this.cusFetch();
+                }
+            }
+        );
+    }
+
     sendAssign2 = (arr, last_group_no) => {
-        let url = 'http://' + ip + '/assignexercise';
+        let url =  ip + '/assignexercise';
         arr.forEach((ex) => {
             fetch(url, {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
-                    'Content-type': 'application/json',
+                    'Content-type': 'application/json'
                 },
                 body: JSON.stringify(ex),
             }).then((response) => {
@@ -83,7 +173,10 @@ class AssignCheckExercise extends Component {
             });
         });
         alert('배정되었습니다.');
-        this.props.history.push("/assign")
+        
+        this.props.history.push(
+            {pathname:"/assign/customer",state:{member_no:this.state.member_no}}
+        )
     };
     procDefaultPackage = (
         next_func,
@@ -95,12 +188,22 @@ class AssignCheckExercise extends Component {
     ) => {
         let it = 2;
         let search = searchs.pop();
-        let url = 'http://' + ip + '/exercise';
+        let default_num = 0;
+
+        let url =  ip + '/exercise';
         url = url + '?type=search' + it;
         url = url + '&search=' + search;
         url = url + '&fn=' + fitness_no;
+
+        if (search==="상체") default_num = 1;
+        if (search==="하체") default_num = 20;
+        if (search==="전신") default_num = 400;
+        if (search==="코어") default_num = 8000;
+        if (search==="유산소") default_num = 160000;
+
         fetch(url, {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-type': 'application/json',
             },
@@ -113,6 +216,10 @@ class AssignCheckExercise extends Component {
                     idx = idx + 1;
                     let part = ', ';
                     let part_num = Number(res[i].part);
+                    if (part_num === 32) {
+                        part = '기타, ' + part;
+                        part_num = 0;
+                    }
                     if (part_num >= 16) {
                         part = '유산소, ' + part;
                         part_num = part_num - 16;
@@ -134,7 +241,9 @@ class AssignCheckExercise extends Component {
                     }
                     part = part.slice(0, -2);
 
-                    if (res[i].is_default) {
+                    if (isDefaultExercise(search, res[i].is_default)) {
+
+                    // if (res[i].is_default) {
                         res[i]['fitness_no'] = fitness_no;
                         res[i]['member_no'] = member_no;
                         res[i]['group_no'] = last_group_no + 1;
@@ -182,9 +291,10 @@ class AssignCheckExercise extends Component {
 
     sendAssign = (next_func, procDefaultPackage, last_group_no) => {
         const fitness_no = this.props.userinfo.fitness_no;
-        // const member_no = this.props.userinfo.member_no;
         const member_no = this.state.member_no;
+
         let v_arr = [];
+
         if (this.state.assignDefault.length > 0) {
             this.state.assignDefault.forEach((part) => {
                 let search = part;
@@ -213,6 +323,11 @@ class AssignCheckExercise extends Component {
                     search = search.replace('유산소', '');
                     v = v + 16;
                     v_arr.push(16);
+                }
+                if (/기타/.test(search)) {
+                    search = search.replace('기타', '');
+                    v = 32;
+                    v_arr.push(32);
                 }
                 if (v === 0) {
                     console.error('assignDefault:' + part);
@@ -254,7 +369,7 @@ class AssignCheckExercise extends Component {
 
     handleOnClick = () => {
         let url =
-            'http://' +
+            
             ip +
             '/assignexercise' +
             '?type=' +
@@ -266,6 +381,7 @@ class AssignCheckExercise extends Component {
 
         let inits = {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-type': 'application/json',
             },
@@ -301,10 +417,13 @@ class AssignCheckExercise extends Component {
             <div className='header'>
                 <Header />
                 <Navigation goLogin={this.goLogin}/>
+                <MegaMenu />
                 <div className='localNavigation'>
                     <div className='container'>
                         <h2>
+                            <div className='parallelogram'></div>
                             운동 배정 확인
+                            <span>.</span>
                         </h2>
                         <div className='breadCrumb'>
                             <Link to='/home'>HOME</Link>
@@ -323,100 +442,102 @@ class AssignCheckExercise extends Component {
                             운동 배정 설정
                         </button>
                     </NavLink>
-                    <Link to={{pathname:"/assign/inbody?member_no="+0}}>    
-                        <button type='button'>
-                            고객인바디
+                    <Link to={{pathname:"/assign/inbody", state:{member_no:this.state.member_no}}}            
+                        >
+                            <button type="button">고객인바디</button>
+                        </Link>
+                    </article>
+                    {/*.waySub */}
+                    <section className="checkExercise">
+                        <h3>
+                            <span>{this.props.location.state.userName}</span>
+                            님의 운동배정입니다.
+                        </h3>
+                        <BootstrapTable
+                            hover
+                            data={this.state.exerciseList}
+                            pagination={this.state.exerciseList > 1}
+                            options={options}
+                            tableHeaderClass="tableHeader"
+                            tableContainerClass="tableContainer"
+                            //selectRow={selectRowProp}
+                            className="table2"
+                        >
+                            <TableHeaderColumn
+                                dataField="no"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                                isKey
+                            >
+                                no
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="name"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                            >
+                                운동이름
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="tool"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                            >
+                                운동도구
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="aa"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                            >
+                                운동부위
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="set"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                            >
+                                세트
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="bb"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                            >
+                                횟수
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="cc"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                            >
+                                휴식시간
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="link"
+                                thStyle={{ textAlign: 'center' }}
+                                tdStyle={{ textAlign: 'center' }}
+                            >
+                                링크
+                            </TableHeaderColumn>
+                        </BootstrapTable>
+                        {/*.table2 */}
+                        <button
+                            className="btnSolid"
+                            type="button"
+                            onClick={this.handleOnClick}
+                        >
+                            배정하기
                         </button>
-                    </Link>
-                </article>{/*.waySub */}
-                <section className='checkExercise'>
-                    <h3>
-                        <span>
-                            {this.state.member_no}
-                        </span>
-                        님의 운동배정입니다.
-                    </h3>
-                    <BootstrapTable
-                    hover
-                    data={ List }  
-                    //pagination={ List.length > 1 }
-                    options={options}
-                    tableHeaderClass='tableHeader'  
-                    tableContainerClass='tableContainer'
-                    //selectRow={selectRowProp}
-                    className="table2"
-                    >
-                        <TableHeaderColumn
-                        dataField='no'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        isKey
-                        >
-                            no
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='name'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >
-                            운동이름
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='tool'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >
-                            운동도구
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='aa'
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >
-                            운동부위
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='set' 
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >
-                            세트
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='bb' 
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >
-                            횟수
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='cc' 
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >
-                            휴식시간
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                        dataField='link' 
-                        thStyle={ { 'textAlign': 'center' } }
-                        tdStyle={ { 'textAlign': 'center' } }
-                        >
-                            링크
-                        </TableHeaderColumn>
-                    </BootstrapTable>{/*.table2 */}
-                    <button
-                    className='btnOneCenter'
-                    type="button"
-                    onClick={this.handleOnClick}
-                    >
-                        배정하기
-                    </button>
-                </section>{/*.checkExercise */}
-            </div>{/*.container */}
-            <div className='footer'>
-                <Footer />
-            </div>{/*.footer */}
-        </div>/*.assignCheckExercise */
+                    </section>
+                    {/*.checkExercise */}
+                </div>
+                {/*.container */}
+                <div className="footer">
+                    <Footer />
+                </div>
+                {/*.footer */}
+            </div> /*.assignCheckExercise */
         );
     }
 }
@@ -424,12 +545,21 @@ class AssignCheckExercise extends Component {
 const AssignCheckExerciseStateToProps = (state) => {
     return {
         userinfo: state.authentication.userinfo,
+        status: state.authentication.status
+    };
+};
+
+const AssignCheckExerciseDispatchToProps = (dispatch) => {
+    return {
+        getStatusRequest: () => {
+            return dispatch(getStatusRequest());
+        },
     };
 };
 
 export default connect(
     AssignCheckExerciseStateToProps,
-    undefined
+    AssignCheckExerciseDispatchToProps
 )(AssignCheckExercise);
 //새 page 추가 시 guide : 이 폴더 안에 페이지 하나 더 만든 후, src/component/app.js && src/page/index 함께 변경해주세요
 //잘 모르겠으면 customer폴더 참고

@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import Navigation from '../../component/navigation/Navigation';
+import MegaMenu from '../../component/navigation/Menu';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import {getStatusRequest} from '../../action/authentication';
 import '../../styles/setting/defaultExercise.css';
 
+import {SERVER_URL} from '../../const/settings';
 
-// const ip = '13.124.141.28:3003';
-const ip = 'localhost:3000';
+const ip = SERVER_URL;
+//const ip = 'localhost:3000';
+
 const List = [
     {
         no: 1,
@@ -187,6 +191,8 @@ class DefaultExercise extends Component {
             select_core_data: {},
             select_oxy: [],
             select_oxy_data: {},
+            select_etc: [],
+            select_etc_data: {},
         };
         this.handleOnClick = this.handleOnClick.bind(this);
         this.onSelectRow = this.onSelectRow.bind(this);
@@ -198,103 +204,152 @@ class DefaultExercise extends Component {
         this.props.history.push('/');
     };
 
+    componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+        // get cookie by name
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "="); 
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+   
+        // get loginData from cookie
+        let loginData = getCookie('key');
+        // if loginData is undefined, do nothing
+        if(typeof loginData === "undefined"){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // decode base64 & parse json
+        loginData = JSON.parse(atob(loginData));
+        // if not logged in, do nothing
+        if(!loginData.isLoggedIn){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // page refreshed & has a session in cookie,
+        // check whether this cookie is valid or not
+        this.props.getStatusRequest().then(
+            () => {
+                // if session is not valid
+                if(!this.props.status.valid) {
+                    // logout the session
+                    loginData = {
+                        isLoggedIn: false,
+                        id: ''
+                    };
+   
+                    document.cookie='key=' + btoa(JSON.stringify(loginData));
+   
+                    // and notify
+                    alert("Your session is expired, please log in again")
+                }
+                else{
+                    this.cusFetch();
+                }
+            }
+        );
+    }
+
     cusFetch = () => {
-        let it = '';
-        let search = '';
         //customer 참고해서 검색기능 넣기
 
-        fetch(
-            'http://' +
-                ip +
-                '/exercise?type=search' +
-                it +
-                '&search=' +
-                search +
-                '&fn=' +
-                this.props.userinfo.fitness_no,
-            {
+        const url = ip + '/exercise?type=search&search=&fn=' + this.props.userinfo.fitness_no
+        fetch(url, {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
                 },
             }
         )
-            .then((response) => response.json())
-            .then((res) => {
-                console.log(res);
-                let arr = [];
-                let arr_top = [];
-                let arr_bottom = [];
-                let arr_allbody = [];
-                let arr_core = [];
-                let arr_oxy = [];
+        .then((response) => response.json())
+        .then((res) => {
+            console.log(res);
+            let arr = [];
+            let arr_top = [];
+            let arr_bottom = [];
+            let arr_allbody = [];
+            let arr_core = [];
+            let arr_oxy = [];
+            let arr_etc = [];
 
-                for (let i = res.length - 1; i >= 0; i--) {
-                    let part = ', ';
-                    let part_num = Number(res[i].part);
-                    console.log(part_num);
-                    if (part_num >= 16) {
-                        part = '유산소, ' + part;
-                        part_num = part_num - 16;
-                        if (this.parserIsDefault(res[i], '유산소')) {
-                            arr_oxy.push(res[i].exercise_no);
-                        }
+            for (let i = res.length - 1; i >= 0; i--) {
+                let part = ', ';
+                let part_num = Number(res[i].part);
+                console.log(part_num);
+                
+                if (part_num == 32) {
+                    part = '기타, ' + part;
+                    part_num = 0;
+                    if (this.parserIsDefault(res[i], '기타')) {
+                        arr_etc.push(res[i].exercise_no);
                     }
-                    if (part_num >= 8) {
-                        part = '코어, ' + part;
-                        part_num = part_num - 8;
-                        if (this.parserIsDefault(res[i], '코어')) {
-                            arr_core.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num >= 4) {
-                        part = '전신, ' + part;
-                        part_num = part_num - 4;
-                        if (this.parserIsDefault(res[i], '전신')) {
-                            arr_allbody.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num >= 2) {
-                        part = '하체, ' + part;
-                        part_num = part_num - 2;
-                        if (this.parserIsDefault(res[i], '하체')) {
-                            arr_bottom.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num === 1) {
-                        part = '상체, ' + part;
-                        if (this.parserIsDefault(res[i], '상체')) {
-                            arr_top.push(res[i].exercise_no);
-                        }
-                    }
-                    part = part.slice(0, -2);
-
-                    arr.push({
-                        no: res[i].exercise_no,
-                        name: res[i].name,
-                        tool: res[i].machine,
-                        aa: part,
-                        set: res[i].default_set_count,
-                        bb: res[i].default_data,
-                        cc: res[i].default_rest_second,
-                        link: res[i].url,
-                    });
                 }
-                this.setState({
-                    exerciseList: arr,
-                    select_top: arr_top,
-                    select_bottom: arr_bottom,
-                    select_allbody: arr_allbody,
-                    select_core: arr_core,
-                    select_oxy: arr_oxy,
+                if (part_num >= 16) {
+                    part = '유산소, ' + part;
+                    part_num = part_num - 16;
+                    if (this.parserIsDefault(res[i], '유산소')) {
+                        arr_oxy.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num >= 8) {
+                    part = '코어, ' + part;
+                    part_num = part_num - 8;
+                    if (this.parserIsDefault(res[i], '코어')) {
+                        arr_core.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num >= 4) {
+                    part = '전신, ' + part;
+                    part_num = part_num - 4;
+                    if (this.parserIsDefault(res[i], '전신')) {
+                        arr_allbody.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num >= 2) {
+                    part = '하체, ' + part;
+                    part_num = part_num - 2;
+                    if (this.parserIsDefault(res[i], '하체')) {
+                        arr_bottom.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num === 1) {
+                    part = '상체, ' + part;
+                    if (this.parserIsDefault(res[i], '상체')) {
+                        arr_top.push(res[i].exercise_no);
+                    }
+                }
+                part = part.slice(0, -2);
+
+                arr.push({
+                    no: res[i].exercise_no,
+                    name: res[i].name,
+                    tool: res[i].machine,
+                    aa: part,
+                    set: res[i].default_set_count,
+                    bb: res[i].default_data,
+                    cc: res[i].default_rest_second,
+                    link: res[i].url,
                 });
+            }
+            this.setState({
+                exerciseList: arr,
+                select_top: arr_top,
+                select_bottom: arr_bottom,
+                select_allbody: arr_allbody,
+                select_core: arr_core,
+                select_oxy: arr_oxy,
+                select_etc: arr_etc,
             });
+        });
     };
 
     search = (part) => {
         let it = '2';
         let search = part;
         let v = 0;
+
         if (/상체/.test(search)) {
             search = search.replace('상체', '');
             v = v + 1;
@@ -315,6 +370,10 @@ class DefaultExercise extends Component {
             search = search.replace('유산소', '');
             v = v + 16;
         }
+        if (/기타/.test(this.state.search)) {
+            search = search.replace('기타', '');
+            v = 32;
+        }
 
         if (v === 0) {
             alert('부위를 입력바랍니다.');
@@ -322,96 +381,97 @@ class DefaultExercise extends Component {
         }
         search = v;
 
-        fetch(
-            'http://' +
-                ip +
-                '/exercise?type=search' +
-                it +
-                '&search=' +
-                search +
-                '&fn=' +
-                this.props.userinfo.fitness_no,
-            {
-                method: 'GET',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-            }
-        )
-            .then((response) => response.json())
-            .then((res) => {
-                let arr = [];
-                let arr_top = [];
-                let arr_bottom = [];
-                let arr_allbody = [];
-                let arr_core = [];
-                let arr_oxy = [];
-                let arr2 = [];
-                for (let i = res.length - 1; i >= 0; i--) {
-                    let part = ', ';
-                    let part_num = Number(res[i].part);
-                    console.log('isD' + res[i].is_default);
-                    if (part_num >= 16) {
-                        part = '유산소, ' + part;
-                        part_num = part_num - 16;
-                        if (this.parserIsDefault(res[i], '유산소')) {
-                            arr_oxy.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num >= 8) {
-                        part = '코어, ' + part;
-                        part_num = part_num - 8;
-                        if (this.parserIsDefault(res[i], '코어')) {
-                            arr_core.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num >= 4) {
-                        part = '전신, ' + part;
-                        part_num = part_num - 4;
-                        if (this.parserIsDefault(res[i], '전신')) {
-                            arr_allbody.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num >= 2) {
-                        part = '하체, ' + part;
-                        part_num = part_num - 2;
-                        if (this.parserIsDefault(res[i], '하체')) {
-                            arr_bottom.push(res[i].exercise_no);
-                        }
-                    }
-                    if (part_num === 1) {
-                        part = '상체, ' + part;
-                        if (this.parserIsDefault(res[i], '상체')) {
-                            arr_top.push(res[i].exercise_no);
-                        }
-                    }
-                    part = part.slice(0, -2);
-
-                    arr.push({
-                        no: res[i].exercise_no,
-                        name: res[i].name,
-                        tool: res[i].machine,
-                        aa: part,
-                        set: res[i].default_set_count,
-                        bb: res[i].default_data,
-                        cc: res[i].default_rest_second,
-                        link: res[i].url,
-                    });
-                    if (this.parserIsDefault(res, part)) {
-                        arr2.push(res[i].exercise_no);
+        const url = ip + '/exercise?type=search' + it + '&search=' + search + '&fn=' + this.props.userinfo.fitness_no;
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+            },
+        })
+        .then((response) => response.json())
+        .then((res) => {
+            let arr = [];
+            let arr_top = [];
+            let arr_bottom = [];
+            let arr_allbody = [];
+            let arr_core = [];
+            let arr_oxy = [];
+            let arr_etc = [];
+            let arr2 = [];
+            for (let i = res.length - 1; i >= 0; i--) {
+                let part = ', ';
+                let part_num = Number(res[i].part);
+                console.log('isD' + res[i].is_default);
+                
+                if (part_num === 32) {
+                    part = '기타, ' + part;
+                    part_num = 0;
+                    if (this.parserIsDefault(res[i], '기타')) {
+                        arr_etc.push(res[i].exercise_no);
                     }
                 }
-                arr2.reverse();
-                this.setState({
-                    select_top: arr_top,
-                    select_bottom: arr_bottom,
-                    select_allbody: arr_allbody,
-                    select_core: arr_core,
-                    select_oxy: arr_oxy,
-                    selectedListId: arr2,
-                    exerciseList: arr,
+                if (part_num >= 16) {
+                    part = '유산소, ' + part;
+                    part_num = part_num - 16;
+                    if (this.parserIsDefault(res[i], '유산소')) {
+                        arr_oxy.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num >= 8) {
+                    part = '코어, ' + part;
+                    part_num = part_num - 8;
+                    if (this.parserIsDefault(res[i], '코어')) {
+                        arr_core.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num >= 4) {
+                    part = '전신, ' + part;
+                    part_num = part_num - 4;
+                    if (this.parserIsDefault(res[i], '전신')) {
+                        arr_allbody.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num >= 2) {
+                    part = '하체, ' + part;
+                    part_num = part_num - 2;
+                    if (this.parserIsDefault(res[i], '하체')) {
+                        arr_bottom.push(res[i].exercise_no);
+                    }
+                }
+                if (part_num === 1) {
+                    part = '상체, ' + part;
+                    if (this.parserIsDefault(res[i], '상체')) {
+                        arr_top.push(res[i].exercise_no);
+                    }
+                }
+                part = part.slice(0, -2);
+
+                arr.push({
+                    no: res[i].exercise_no,
+                    name: res[i].name,
+                    tool: res[i].machine,
+                    aa: part,
+                    set: res[i].default_set_count,
+                    bb: res[i].default_data,
+                    cc: res[i].default_rest_second,
+                    link: res[i].url,
                 });
+                if (this.parserIsDefault(res, part)) {
+                    arr2.push(res[i].exercise_no);
+                }
+            }
+            arr2.reverse();
+            this.setState({
+                select_top: arr_top,
+                select_bottom: arr_bottom,
+                select_allbody: arr_allbody,
+                select_core: arr_core,
+                select_oxy: arr_oxy,
+                select_etc: arr_etc,
+                selectedListId: arr2,
+                exerciseList: arr,
             });
+        });
     };
 
     handleChange = (e) => {
@@ -571,6 +631,30 @@ class DefaultExercise extends Component {
             this.setState(d);
         }
     };
+    onSelectRowEtc = (row, isSelected, e) => {
+        const exercise_no = row['no'];
+        const select_name = 'select_etc';
+        const select_data = 'select_etc_data';
+
+        let selected = this.state.select_etc;
+        let selected_data = JSON.parse(
+            JSON.stringify(this.state.select_etc_data)
+        );
+
+        if (isSelected) {
+            const d = {};
+            selected_data[exercise_no] = row;
+            d[select_name] = [...selected, exercise_no];
+            d[select_data] = selected_data;
+            this.setState(d);
+        } else {
+            const d = {};
+            delete selected_data[exercise_no];
+            d[select_name] = selected.filter((i) => i !== exercise_no);
+            d[select_data] = selected_data;
+            this.setState(d);
+        }
+    };
 
     click1 = (e) => {
         //상체
@@ -681,11 +765,11 @@ class DefaultExercise extends Component {
         let selectedList = [];
         let unSelectedList = [];
         let exerciseList = this.state.exerciseList.map((ex) => ex.no);
-        let top = this.state.show1;
-        let bottom = this.state.show2;
-        let allbody = this.state.show3;
-        let core = this.state.show4;
-        let oxy = this.state.show5;
+        const top = this.state.show1;
+        const bottom = this.state.show2;
+        const allbody = this.state.show3;
+        const core = this.state.show4;
+        const oxy = this.state.show5;
 
         let select_top = this.state.select_top;
         let select_bottom = this.state.select_bottom;
@@ -895,7 +979,7 @@ class DefaultExercise extends Component {
             });
         }
         fetch(
-            'http://' + ip + '/exercise?fn=' + this.props.userinfo.fitness_no,
+             ip + '/exercise?fn=' + this.props.userinfo.fitness_no,
             {
                 method: 'PUT',
                 headers: {
@@ -909,7 +993,7 @@ class DefaultExercise extends Component {
         )
             .then((res) => res.json())
             .then((res) => {
-                alert('저장됨');
+                alert('저장되었습니다.');
             })
             .catch((err) => console.error(err));
     }
@@ -937,6 +1021,8 @@ class DefaultExercise extends Component {
             });
         }
     };
+
+    viewTable
 
     render() {
         const { userinfo } = this.props;
@@ -1009,10 +1095,13 @@ class DefaultExercise extends Component {
             <header>
                 <Header />
                 <Navigation goLogin={this.goLogin}/>
+                <MegaMenu />
                 <div className='localNavigation'>
                     <div className='container'>
                         <h2>
+                            <div className='parallelogram'></div>
                             운동 기본묶음 설정
+                            <span>.</span>
                         </h2>
                         <div className='breadCrumb'>
                             <Link to='/home'>HOME</Link>
@@ -1061,26 +1150,27 @@ class DefaultExercise extends Component {
                     >
                         유산소
                     </button>{/*#5 */}
-                </div>
+                </div>{/*.defaultKind .flexbetween*/}
                 {this.state.show1?
                     <div>
                         <h3>
                             상체 운동 목록
                         </h3>
+                        <div className='tablewrap'>
                         <BootstrapTable
                         hover
-                        data={ List } 
-                        //pagination={ List.length > 1 }
+                        data={this.state.exerciseList}
+                        pagination={this.state.exerciseList > 1}
                         options={options1}
-                        tableHeaderClass='tableHeader'  
-                        tableContainerClass='tableContainer'
-                        selectRow={selectRowProp}
+                        tableHeaderClass="tableHeader"
+                        tableContainerClass="tableContainer"
+                        selectRow={selectRowProp_상체}
                         className="table2"
                         >
                             <TableHeaderColumn
                             dataField='no'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center','width': '6rem' } }
+                            tdStyle={ { 'textAlign': 'center','width': '6rem' } }
                             isKey
                             >
                                 no
@@ -1108,22 +1198,22 @@ class DefaultExercise extends Component {
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='set' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                             >
                                 세트
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='bb' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                             >
                                 횟수
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='cc' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                             >
                                 휴식시간
                             </TableHeaderColumn>
@@ -1135,6 +1225,7 @@ class DefaultExercise extends Component {
                                 링크
                             </TableHeaderColumn>
                         </BootstrapTable>{/*.table2 */}
+                        </div>
                     </div>
                 :null} 
                 {this.state.show2?
@@ -1142,20 +1233,21 @@ class DefaultExercise extends Component {
                         <h3>
                             하체 운동 목록
                         </h3>
+                        <div className='tablewrap'>
                         <BootstrapTable
                         hover
-                        data={ List }  
-                        //pagination={ List.length > 1 }
+                        data={this.state.exerciseList}
+                        pagination={this.state.exerciseList > 1}
                         options={options1}
-                        tableHeaderClass='tableHeader'  
-                        tableContainerClass='tableContainer'
-                        selectRow={selectRowProp}
+                        tableHeaderClass="tableHeader"
+                        tableContainerClass="tableContainer"
+                        selectRow={selectRowProp_하체}
                         className="table2"
                         >
                             <TableHeaderColumn
                             dataField='no'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center','width': '6rem' } }
+                            tdStyle={ { 'textAlign': 'center','width': '6rem' } }
                             isKey
                             >
                                 no
@@ -1183,22 +1275,22 @@ class DefaultExercise extends Component {
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='set' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                             >
                                 세트
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='bb' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                             >
                                 횟수
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='cc' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
                             >
                                 휴식시간
                             </TableHeaderColumn>
@@ -1210,244 +1302,252 @@ class DefaultExercise extends Component {
                                 링크
                             </TableHeaderColumn>
                         </BootstrapTable>{/*.table2 */}
-
-                    </div>
-                :null} 
-                {this.state.show3?
-                    <div>
-                        <h3>
-                            전신 운동 목록
-                        </h3>
-                        <BootstrapTable
-                        hover
-                        data={ List }  
-                        //pagination={ List.length > 1 }
-                        options={options1}
-                        tableHeaderClass='tableHeader'  
-                        tableContainerClass='tableContainer'
-                        selectRow={selectRowProp}
-                        className="table2">
-                            <TableHeaderColumn
-                            dataField='no'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            isKey
+                        </div>
+                    
+                        </div>
+                     : null}
+                    {this.state.show3 ? (
+                        <div>
+                            <h3>전신 운동 목록</h3>
+                            <div className='tablewrap'>
+                            <BootstrapTable
+                                hover
+                                data={this.state.exerciseList}
+                                pagination={this.state.exerciseList.length > 1}
+                                options={options1}
+                                tableHeaderClass="tableHeader"
+                                tableContainerClass="tableContainer"
+                                selectRow={selectRowProp_전신}
+                                className="table2"
                             >
-                                no
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='name'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                                <TableHeaderColumn
+                                    dataField="no"
+                                    thStyle={{ textAlign: 'center','width': '6rem' }}
+                                    tdStyle={{ textAlign: 'center','width': '6rem' }}
+                                    isKey
+                                >
+                                    no
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="name"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동이름
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="tool"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동도구
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="aa"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동부위
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                dataField='set' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                >
+                                    세트
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                dataField='bb' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                >
+                                    횟수
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                dataField='cc' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                >
+                                    휴식시간
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="link"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    링크
+                                </TableHeaderColumn>
+                            </BootstrapTable>
+                            </div>
+                            {/*.table2 */}
+                        </div>
+                    ) : null}
+                    {this.state.show4 ? (
+                        <div>
+                            <h3>코어 운동 목록</h3>
+                            <div className='tablewrap'>
+                            <BootstrapTable
+                                hover
+                                data={this.state.exerciseList}
+                                pagination={this.state.exerciseList.length > 1}
+                                options={options1}
+                                tableHeaderClass="tableHeader"
+                                tableContainerClass="tableContainer"
+                                selectRow={selectRowProp_코어}
+                                className="table2"
                             >
-                                운동이름
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='tool'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                                <TableHeaderColumn
+                                    dataField="no"
+                                    thStyle={{ textAlign: 'center','width': '6rem' }}
+                                    tdStyle={{ textAlign: 'center','width': '6rem' }}
+                                    isKey
+                                >
+                                    no
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="name"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동이름
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="tool"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동도구
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="aa"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동부위
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                dataField='set' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                >
+                                    세트
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                dataField='bb' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                >
+                                    횟수
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                dataField='cc' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                >
+                                    휴식시간
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="link"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    링크
+                                </TableHeaderColumn>
+                            </BootstrapTable>
+                            </div>
+                            {/*.table2 */}
+                        </div>
+                    ) : null}
+                    {this.state.show5 ? (
+                        <div>
+                            <h3>유산소 운동 목록</h3>
+                            <div className='tablewrap'>
+                            <BootstrapTable
+                                hover
+                                data={this.state.exerciseList}
+                                pagination={this.state.exerciseList.length > 1}
+                                options={options1}
+                                tableHeaderClass="tableHeader"
+                                tableContainerClass="tableContainer"
+                                selectRow={selectRowProp_유산소}
+                                className="table2"
                             >
-                                운동도구
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='aa'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                운동부위
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='set' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                세트
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='bb' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                횟수
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='cc' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                휴식시간
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='link' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                링크
-                            </TableHeaderColumn>
-                        </BootstrapTable>{/*.table2 */}
-                    </div>
-                :null}
-                {this.state.show4?
-                    <div>
-                        <h3>
-                            코어 운동 목록
-                        </h3>
-                        <BootstrapTable
-                        hover
-                        data={ List }  
-                        //pagination={ List.length > 1 }
-                        options={options1}
-                        tableHeaderClass='tableHeader'  
-                        tableContainerClass='tableContainer'
-                        selectRow={selectRowProp}
-                        className="table2"
-                        >
-                            <TableHeaderColumn
-                            dataField='no'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            isKey
-                            >
-                                no
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='name'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                운동이름
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='tool'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                운동도구
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='aa'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                운동부위
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='set' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                세트
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='bb' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                횟수
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='cc' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                휴식시간
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='link' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                링크
-                            </TableHeaderColumn>
-                        </BootstrapTable>{/*.table2 */}
-                    </div>
-                :null}
-                {this.state.show5?
-                    <div>
-                        <h3>
-                            유산소 운동 목록
-                        </h3>
-                        <BootstrapTable
-                        hover
-                        data={ List }  
-                        //pagination={ List.length > 1 }
-                        options={options1}
-                        tableHeaderClass='tableHeader'  
-                        tableContainerClass='tableContainer'
-                        selectRow={selectRowProp}
-                        className="table2">
-                            <TableHeaderColumn
-                            dataField='no'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            isKey
-                            >
-                                no
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='name'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                운동이름
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='tool'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                운동도구
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='aa'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                운동부위
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='set' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                세트
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='bb' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                횟수
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='cc' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                휴식시간
-                            </TableHeaderColumn>
-                            <TableHeaderColumn
-                            dataField='link' 
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
-                            >
-                                링크
-                            </TableHeaderColumn>
-                        </BootstrapTable>{/*.table2 */}
-                    </div>
-                :null}
-                <button
-                className='btnOneCenter'
-                type="button"
-                onClick={this.handleOnClick}
-                >
-                    저장하기
-                </button>
-            </div>{/*.container */}
-            <footer className='footer'>
-                <Footer />
-            </footer>{/*.footer */}
-        </div>
+                                <TableHeaderColumn
+                                    dataField="no"
+                                    thStyle={{ textAlign: 'center','width': '6rem' }}
+                                    tdStyle={{ textAlign: 'center','width': '6rem' }}
+                                    isKey
+                                >
+                                    no
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="name"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동이름
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="tool"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동도구
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="aa"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    운동부위
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                dataField='set' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                >
+                                    세트
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                dataField='bb' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                >
+                                    횟수
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                dataField='cc' 
+                                thStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                tdStyle={ { 'textAlign': 'center', 'width': '10rem' } }
+                                >
+                                    휴식시간
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="link"
+                                    thStyle={{ textAlign: 'center' }}
+                                    tdStyle={{ textAlign: 'center' }}
+                                >
+                                    링크
+                                </TableHeaderColumn>
+                            </BootstrapTable>
+                            </div>
+                            {/*.table2 */}
+                        </div>
+                    ) : null}
+                    <button
+                        className="btnSolid"
+                        type="button"
+                        onClick={this.handleOnClick}
+                    >
+                        저장하기
+                    </button>
+                </div>
+                {/*.container */}
+                <footer className="footer">
+                    <Footer />
+                </footer>
+                {/*.footer */}
+            </div>
         );
     }
 }
@@ -1455,9 +1555,18 @@ class DefaultExercise extends Component {
 const PackageStateToProps = (state) => {
     return {
         userinfo: state.authentication.userinfo,
+        status: state.authentication.status
     };
 };
 
-export default connect(PackageStateToProps, undefined)(DefaultExercise);
+const DefaultExerciseDispatchToProps = (dispatch) => {
+    return {
+        getStatusRequest: () => {
+            return dispatch(getStatusRequest());
+        },
+    };
+};
+
+export default connect(PackageStateToProps, DefaultExerciseDispatchToProps)(DefaultExercise);
 //새 page 추가 시 guide : 이 폴더 안에 페이지 하나 더 만든 후, src/component/app.js && src/page/index 함께 변경해주세요
 //잘 모르겠으면 customer폴더 참고

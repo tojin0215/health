@@ -1,18 +1,40 @@
 .updateCustomer .formAddCustomer .customerRoute {
-  padding-bottom:1rem;
+	padding-bottom: 1rem;
 }
 
 .updateCustomer .formAddCustomer .customerUpdateOther {
-  width:100%;
-  padding-bottom:4rem;
-  display:flex;
+	width: 100%;
+	padding-bottom: 4rem;
+	display: flex;
 }
 
 .updateCustomer .formAddCustomer .customerUpdateOther span {
-  padding:0 1rem 0 2.4rem;
-  text-align:center;
+	padding: 0 1rem 0 2.4rem;
+	text-align: center;
 }
 
 .updateCustomer .formAddCustomer .customerUpdateOther input {
-  width:82%;
+	width: 82%;
+}
+
+@media (max-width: 767px) {
+	.updateCustomer .formAddCustomer .customerRoute {
+		padding-bottom: 2rem;
+	}
+	.formAddCustomer .customerRoute > div > label > input {
+		height: auto;
+	}
+	.formAddCustomer .customerRoute div label input[type='text'] {
+		width: auto;
+	}
+	.updateCustomer .formAddCustomer .customerUpdateOther {
+		flex-wrap: wrap;
+	}
+	.updateCustomer .formAddCustomer .customerUpdateOther span {
+		width: 100%;
+		text-align: start;
+		font-size: 2.3rem;
+		font-weight: 700;
+		padding: 0;
+	}
 }

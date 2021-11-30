@@ -1,43 +1,59 @@
 .btn {
-  font-size:1.7rem;
+	font-size: 1.7rem;
 }
 
 button {
-  width:20rem;
-  height:4rem;
-  border:none;
-  border-radius:1rem;
-  padding:.4rem .8rem;
-  margin:1rem;
-  background-color:#000055;
-  color:#fff;
-  font-size:1.7rem;
-  text-align:center;
-  align-self:flex-end;
-  transition:.35s ease-in-out;
-  cursor:pointer;
+	width: auto;
+	height: 5rem;
+	border: none;
+	border-radius: 3rem;
+	padding: 0.4rem 2rem;
+	margin: 1rem;
+	background-color: #fff;
+	color: #0f78ff;
+	font-size: 2rem;
+	font-weight: 700;
+	text-align: center;
+	align-self: flex-end;
+	transition: 0.35s ease-in-out;
+	cursor: pointer;
+	box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
+}
+
+.btnSolid {
+	background-color: #0f78ff;
+	color: #fff;
+	font-weight: 500;
+	font-size: 2.2rem;
+}
+.btnSolid > a {
+	color: #fff;
+}
+.btnSolid:hover {
+	background-color: #fff;
+	color: #0f78ff;
 }
 
 button:hover {
-  color:#fff;
-  background-color:#0069d9;
-  text-decoration:none;
+	color: #fff;
+	background-color: #0069d9;
+	text-decoration: none;
 }
 /* 우측 상단 서브페이지 이동 버튼 위치*/
 .waySub {
-  position:absolute;
-  right:0;
-  top:3rem;
+	position: absolute;
+	right: 0;
+	top: 3rem;
 }
 /* 중앙 하단 1버튼 가운데 및 위치 정렬 */
 .btnOneCenter {
-  margin: 3rem auto 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.4rem 0 0.8rem;
-  position: absolute;
-  bottom: -5rem;
-  left: 50%;
-  transform: translateX(-50%);
+	margin: 3rem auto 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.4rem 0 0.8rem;
+	position: absolute;
+	bottom: -5rem;
+	left: 50%;
+	transform: translateX(-50%);
 }

@@ -2,6 +2,7 @@ import React,{ Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
+import MegaMenu from '../../component/navigation/Menu';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
@@ -13,12 +14,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import Select from 'react-select'
+import Select from 'react-select';
 
 import '../../styles/sales/Sales.css'
 
+import {getStatusRequest} from '../../action/authentication';
 
-const ip = '13.124.141.28';
+import {SERVER_URL} from '../../const/settings';
+
+const ip = SERVER_URL;
+//const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
@@ -59,20 +64,67 @@ class Sales extends Component {
             salesLists:[],
             salesLists2:[],
             salesLists3:[],
+            salesLists4:[],
             toolList:[],
             customerList:[],
             selectedOption: null,
             exerciseOptions : null
         };
+        this.cusFetch();
     };
     goLogin = () => {
         this.props.history.push("/");
     }
+    componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+        // get cookie by name
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "="); 
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+   
+        // get loginData from cookie
+        let loginData = getCookie('key');
+        // if loginData is undefined, do nothing
+        if(typeof loginData === "undefined"){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // decode base64 & parse json
+        loginData = JSON.parse(atob(loginData));
+        // if not logged in, do nothing
+        if(!loginData.isLoggedIn){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // page refreshed & has a session in cookie,
+        // check whether this cookie is valid or not
+        this.props.getStatusRequest().then(
+            () => {
+                // if session is not valid
+                if(!this.props.status.valid) {
+                    // logout the session
+                    loginData = {
+                        isLoggedIn: false,
+                        id: ''
+                    };
+   
+                    document.cookie='key=' + btoa(JSON.stringify(loginData));
+   
+                    // and notify
+                    alert("Your session is expired, please log in again")
+                }
+                else{
+                    this.cusFetch();
+                }
+            }
+        );
+    }
 
-    componentWillMount() {
-
-        //fetch("http://"+ip+":3001/customer?type=all&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+    cusFetch = () => {
+        fetch(ip+"/customer?type=all&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -87,8 +139,7 @@ class Sales extends Component {
                 this.setState({customerList : arr});
         });
         
-        //fetch('http://'+ip+':3001/sales?type=all&fn='+this.props.userinfo.fitness_no, {
-        fetch('http://localhost:3000/sales?type=all&fn='+this.props.userinfo.fitness_no, {
+        fetch(ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -104,6 +155,7 @@ class Sales extends Component {
                 let card = 0
                 let cash = 0
                 let transfer = 0
+                let lists=[];
                 this.state.salesLists.reverse().map((data) => {
                     let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
                     let time = moment(data.paymentDate).format("YYYY/MM/DD")
@@ -114,6 +166,8 @@ class Sales extends Component {
                             data = {...data, userName}
                         }
                     })
+                    lists = [...lists, data]
+                    
                     if(data.paymentTools === '카드'){
                         card = card + data.total
                     } else if(data.paymentTools === '현금'){
@@ -121,9 +175,9 @@ class Sales extends Component {
                     } else if(data.paymentTools === '계좌이체'){
                         transfer = transfer + data.total
                     } 
-                        
+                    
                     this.setState({
-                        salesLists2 : [...this.state.salesLists2, data],
+                        salesLists2 :lists,
                         toolList : [{'card':card, 'cash':cash,'transfer':transfer,'total':card+ cash+transfer}]
                     })
                 })
@@ -137,11 +191,9 @@ class Sales extends Component {
 
         let url = ''
         if(selectedOption.label === '전체'){
-            //url = 'http://'+ip+':3001/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
-            url = 'http://localhost:3000/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            url = ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
         } else{
-            //url = 'http://'+ip+':3001/sales?type=tools&paymentTools='+selectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
-            url = 'http://localhost:3000/sales?type=tools&paymentTools='+selectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            url = ip+'/sales?type=tools&paymentTools='+selectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
         }
         fetch(url, {
             method: "GET",
@@ -182,11 +234,9 @@ class Sales extends Component {
 
         let url = ''
         if(exerciseSelectedOption.label === '전체'){
-            //url = 'http://'+ip+':3001/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
-            url = 'http://localhost:3000/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+            url = ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
         }  else{
-           //url = 'http://'+ip+':3001/sales?type=exercise&exerciseName='+exerciseSelectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
-            url = 'http://localhost:3000/sales?type=exercise&exerciseName='+exerciseSelectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+           url = ip+'/sales?type=exercise&exerciseName='+exerciseSelectedOption.label+'&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
         }
         fetch(url, {
             method: "GET",
@@ -236,6 +286,92 @@ class Sales extends Component {
         })
     }
 
+    dateClick =(e)=>{
+
+        let today = new Date();
+        let url = ''
+        let startTime = new Date();
+        let endTime = new Date(today.getFullYear(),today.getMonth(),today.getDate())
+        if(e.target.value === '오늘'){
+            if(this.state.salesLists4.length != 0){            
+                this.setState({
+                    salesLists4:[],
+                    salesLists2:[],
+                    startDate : startTime,
+                    endDate : endTime
+                })
+            }
+            url = ip+'/sales?type=all&fn='+this.props.userinfo.fitness_no
+        } else if (e.target.value === '한달'){
+            if(this.state.salesLists4.length != 0){                 
+                this.setState({
+                    salesLists4:[],
+                    salesLists2:[],
+                    endDate : endTime
+                })
+            }
+            startTime = new Date(today.getFullYear(),today.getMonth()-1,today.getDate())
+            endTime = new Date(today.getFullYear(),today.getMonth(),(today.getDate()+1))
+            url = ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no
+        }
+        
+        fetch(url,{
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json'
+          },
+          })
+            .then(data => {
+                return data.json();
+            }).then(data => {
+                this.setState({
+                    salesLists4 : data,
+                })
+                if(this.state.salesLists4.length == 0){
+                    //alert('없음')                        
+                    this.setState({
+                        salesLists2:[],
+                        toolList:[]
+                    })
+                }else{
+                    //alert(this.state.salesLists4)
+                    let card = 0
+                    let cash = 0
+                    let transfer = 0
+                    let lists =[];
+                    this.state.salesLists4.reverse().map((data) => {
+                        let total = data.exercisePrice+data.lockerPrice+data.sportswearPrice;
+                        let time = moment(data.paymentDate).format("YYYY/MM/DD")
+                        data = {...data, total, time}
+                        this.state.customerList.map((c)=>{
+                            if(data.member_no === c.num){
+                                let userName = c.userName;
+                                data = {...data, userName}
+                            }
+                        })
+                        if(data.paymentTools === '카드'){
+                            card = card + data.total
+                        } else if(data.paymentTools === '현금'){
+                            cash = cash + data.total
+                        } else if(data.paymentTools === '계좌이체'){
+                            transfer = transfer + data.total
+                        } 
+                        
+                        lists = [...lists, data]
+                            
+                        
+                    })  
+                    this.setState({
+                        salesLists2 : lists,
+                        toolList : [{'card':card, 'cash':cash,'transfer':transfer,'total':card+ cash+transfer}],
+                        startDate : startTime,
+                    })
+                }
+                
+                
+            }); 
+    } 
+
     handleOnClick = (e) => {
         this.setState({
             exerciseSelectedOption: null,
@@ -245,8 +381,7 @@ class Sales extends Component {
         let startTime = new Date(this.state.startDate.getFullYear(), this.state.startDate.getMonth(), this.state.startDate.getDate())
         let endTime = new Date(this.state.endDate.getFullYear(), this.state.endDate.getMonth(), (this.state.endDate.getDate()+1))
 
-        //fetch('http://'+ip+':3001/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no, {
-        fetch('http://localhost:3000/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no, {
+        fetch(ip+'/sales?type=select&startDate='+startTime+'&endDate='+endTime+'&fn='+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -307,11 +442,19 @@ class Sales extends Component {
     render() {
         const { userinfo } = this.props;
         console.log("userinfo : ");
-        console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
+        console.log(userinfo); 
+
         const textOptions = {
             noDataText: '결제내역이 없습니다.',
             alwaysShowAllBtns: true,
-            hideSizePerPage:true
+            //hideSizePerPage:true
+            sizePerPageList: [{
+                text: '10개씩 보기', value: 10
+              }, {
+                text: '50개씩 보기', value: 50
+              }, {
+                text: '100개씩 보기', value: 100
+            }]
         };
 
         return (
@@ -319,10 +462,13 @@ class Sales extends Component {
                 <div className='header'>
                     <Header />
                     <Navigation goLogin={this.goLogin}/>
+                    <MegaMenu />
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
+                                <div className='parallelogram'></div>
                                 상품/매출
+                                <span>.</span>
                             </h2>
                             <div className='breadCrumb'>
                                 <Link to='/home'>HOME</Link>
@@ -335,12 +481,13 @@ class Sales extends Component {
                 <div className="container">
                     <h2>매출 현황</h2>
                     <div className="salesUtill">
-                        <Link to="/sales/add">
-                            <Button color="primary">
-                                결제 등록
-                            </Button>
-                        </Link>
                         <div className="salesStatus">
+                            <button className='dateSort' value='오늘' onClick={this.dateClick}>
+                                당일
+                            </button>
+                            <button className='dateSort' value='한달' onClick={this.dateClick}>
+                                1개월
+                            </button>
                             <DatePicker
                                 selected={ this.state.startDate }
                                 selectsStart
@@ -359,10 +506,12 @@ class Sales extends Component {
                                 name="endDate"
                                 dateFormat="MM/dd/yyyy"
                             />
-                            <button type="button" onClick={this.handleOnClick}> 조회하기 </button>
+                            <button type="button" onClick={this.handleOnClick}>
+                                조회하기
+                            </button>
                         </div>{/*.salesStatus */}
                     </div>{/*.salesUtill */}
-                    <div>
+                    <div className='tablewrap'>
                         <BootstrapTable data={ this.state.toolList } 
                             options={textOptions}
                             tableHeaderClass='tableHeader'
@@ -386,6 +535,13 @@ class Sales extends Component {
                             tdStyle={ { 'textAlign': 'center' } }
                             isKey>총 매출</TableHeaderColumn>
                         </BootstrapTable>
+                        <div className='salesUtill salesUtill2'>
+                            <Link to="/sales/add">
+                                <button className='btnSolid'>
+                                    결제 등록
+                                </button>
+                            </Link>
+                        </div>
                         <h5>전체 기록</h5>
                         <BootstrapTable 
                         data={ this.state.salesLists2 } 
@@ -397,8 +553,8 @@ class Sales extends Component {
                         className="table2">
                             <TableHeaderColumn
                             dataField='num'
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }
+                            thStyle={ { 'textAlign': 'center', 'width': '8rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '8rem' } }
                             isKey>
                                 No.
                             </TableHeaderColumn>
@@ -423,8 +579,8 @@ class Sales extends Component {
                             <TableHeaderColumn 
                             dataField='time'
                             dataFormat={dataFormatter}
-                            thStyle={ { 'textAlign': 'center' } }
-                            tdStyle={ { 'textAlign': 'center' } }>
+                            thStyle={ { 'textAlign': 'center', 'width': '12rem' } }
+                            tdStyle={ { 'textAlign': 'center', 'width': '12rem' } }>
                                 결제일
                             </TableHeaderColumn>
                             <TableHeaderColumn
@@ -436,8 +592,8 @@ class Sales extends Component {
                             </TableHeaderColumn>
                             <TableHeaderColumn
                             dataField='paymentTools'
-                            thStyle={ { 'textAlign': 'center'} }
-                            tdStyle={ { 'textAlign': 'center'} }>
+                            thStyle={ { 'textAlign': 'center','width': '16rem' } }
+                            tdStyle={ { 'textAlign': 'center','width': '16rem' } }>
                                 <Select 
                                 menuPortalTarget={document.querySelector('body')}
                                 placeholder = '결제도구' 
@@ -459,8 +615,18 @@ class Sales extends Component {
 
 const SalesStateToProps = (state) => {
     return {
-      userinfo: state.authentication.userinfo
+      userinfo: state.authentication.userinfo,
+      status: state.authentication.status
     }
 }
 
-export default connect(SalesStateToProps, undefined)(Sales);
+const SalesDispatchToProps = (dispatch) => {
+    return {
+        getStatusRequest: () => {
+            return dispatch(getStatusRequest());
+        },
+    };
+};
+
+
+export default connect(SalesStateToProps, SalesDispatchToProps)(Sales);

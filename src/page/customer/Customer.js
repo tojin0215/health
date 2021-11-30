@@ -10,11 +10,18 @@ import 'react-dropdown/style.css';
 
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import {getStatusRequest} from '../../action/authentication';
+
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 import '../../styles/customer/Customer.css';
+// import  { PC, Mobile } from '../../component/MediaQuery';
 
+import {SERVER_URL} from '../../const/settings';
+import MegaMenu from '../../component/navigation/Menu';
 
-const ip = '13.124.141.28';
+const ip = SERVER_URL;;
+//const ip = 'localhost:3000';
 
 require('moment-timezone');
 var moment = require('moment');
@@ -66,9 +73,55 @@ class Customer extends Component {
     goLogin = () => {
         this.props.history.push("/");
     }
+    componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+        // get cookie by name
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "="); 
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+   
+        // get loginData from cookie
+        let loginData = getCookie('key');
+        // if loginData is undefined, do nothing
+        if(typeof loginData === "undefined"){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // decode base64 & parse json
+        loginData = JSON.parse(atob(loginData));
+        // if not logged in, do nothing
+        if(!loginData.isLoggedIn){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // page refreshed & has a session in cookie,
+        // check whether this cookie is valid or not
+        this.props.getStatusRequest().then(
+            () => {
+                // if session is not valid
+                if(!this.props.status.valid) {
+                    // logout the session
+                    loginData = {
+                        isLoggedIn: false,
+                        id: ''
+                    };
+   
+                    document.cookie='key=' + btoa(JSON.stringify(loginData));
+   
+                    // and notify
+                    alert("Your session is expired, please log in again")
+                }
+                else{
+                    this.cusFetch();
+                }
+            }
+        );
+    }
     cusFetch = () => {
-        //fetch("http://"+ip+":3003/customer?type=all&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=all&fn="+this.props.userinfo.fitness_no, {
+        fetch(ip+"/customer?type=all&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -133,8 +186,7 @@ class Customer extends Component {
     onSelectRow=(row, isSelected, e)=> { //table row 클릭시
         if (isSelected) {
             //alert(row['no'])
-            //fetch("http://"+ip+":3003/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
-            fetch("http://localhost:3000/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
+            fetch(ip+"/customer?type=select&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -164,8 +216,7 @@ class Customer extends Component {
                     //alert('age : '+this.calAge(data.resi_no))
                 })
             });
-            //fetch("http://"+ip+":3003/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
-            fetch("http://localhost:3000/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
+            fetch(ip+"/sales?type=customer&member_no="+row['no']+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -209,8 +260,7 @@ class Customer extends Component {
         }else if(this.state.item === "주민번호(앞자리)"){
             it = '3'
         }
-        //fetch("http://"+ip+":3003/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch(ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -247,13 +297,22 @@ class Customer extends Component {
         const textOptions = {
             noDataText: '가입된 회원이 없습니다.',
             alwaysShowAllBtns: true,
-            hideSizePerPage:true
+            //hideSizePerPage:true
+            sizePerPageList: [{
+                text: '10명씩 보기', value: 10
+                //text: '5명씩 보기', value: 5
+              }, {
+                text: '50명씩 보기', value: 50
+                //text: '10명씩 보기', value: 10
+              }, {
+                text: '100명씩 보기', value: 100
+            }]
         };
 
         const options1 = {
             alwaysShowAllBtns: true,
             hideSizePerPage:true,
-            sizePerPage:5
+            sizePerPage:3
         };
 
 
@@ -263,24 +322,27 @@ class Customer extends Component {
             hideSelectColumn: true,  // enable hide selection column.
             clickToSelect: true , // you should enable clickToSelect, otherwise, you can't select column.
             onSelect: this.onSelectRow,
-          };
+        };
 
         console.log('table__',this.state.userSalesLists2)
         console.log('클릭,',this.state.show)
         return (
             <div className='customer'>
                 <header className='header'>
-                    <Header /> 
-                    <Navigation goLogin={this.goLogin}/>
+                <Header />
+                <Navigation goLogin={this.goLogin}/>
+                <MegaMenu />
                     <div className='localNavigation'>
                         <div className='container'>
                             <h2>
-                                회원 관리
+                                <div className='parallelogram'></div>
+                                회원관리
+                                <span>.</span>
                             </h2>
                             <div className='breadCrumb'>
                                 <Link to='/home'>HOME</Link>
                                 <span>&#62;</span>
-                                <Link to='/customer'>회원 관리</Link>
+                                <Link to='/customer'>고객</Link>
                             </div>{/*.breadCrumb */}
                         </div>{/*.container */}
                     </div>{/*.localNavigation */}
@@ -288,29 +350,35 @@ class Customer extends Component {
             <ClickAwayListener onClickAway={this.handleClickAway}>
                 <div className='container'>
                     <div className='SearchInput'>
-                        <Dropdown
-                        className='searchDrop'
-                        options={options}
-                        onChange={this.selectItem}
-                        value={this.state.item}
-                        placeholder="Select an option"
-                        />
                         <div className='SearchInputIn'>
+                            <Dropdown
+                            className='searchDrop'
+                            options={options}
+                            onChange={this.selectItem}
+                            value={this.state.item}
+                            placeholder="Select an option"
+                            />
                             <input
                             type="text"
                             id='search'
+                            className='inputTextLine'
                             checked={this.state.search}
                             onChange={this.handleChange}
                             />
-                            <button type="button" onClick={this.search}> 고객 검색
+                            <button className='btnSearch btnGhost' type="button" onClick={this.search}> 고객 검색
                             </button>
                         </div>
                     </div>
                     <Link to="/customer/add" className='btnCustomerNew'>
-                        신규회원 등록
+                        <button className='btnSolid'>
+                            신규회원 등록
+                        </button>
                     </Link>
-                    <div className='customerTable'>
-                        <h5>회원 목록</h5>
+                    <div className='customerTable sectionGlass'>
+                        <h5>
+                            <div className='circle'></div>
+                            회원 목록
+                        </h5>
                         <div>
                             <BootstrapTable
                             hover
@@ -322,16 +390,16 @@ class Customer extends Component {
                             selectRow={ selectRowProp }
                             className="table2">
                                 <TableHeaderColumn dataField='no'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
+                                    thStyle={ { 'textAlign': 'center', 'width' : '5.5rem' } }
+                                    tdStyle={ { 'textAlign': 'center', 'width' : '5.5rem'  } }
                                     isKey>No.</TableHeaderColumn>
                                 <TableHeaderColumn dataField='name'
                                     thStyle={ { 'textAlign': 'center' } }
                                     tdStyle={ { 'textAlign': 'center' } }
                                     >회원이름</TableHeaderColumn>
                                 <TableHeaderColumn dataField='sex'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
+                                    thStyle={ { 'textAlign': 'center', 'width' : '6rem' } }
+                                    tdStyle={ { 'textAlign': 'center', 'width' : '6rem' } }
                                     >성별</TableHeaderColumn>
                                 <TableHeaderColumn dataField='phone'
                                     thStyle={ { 'textAlign': 'center' } }
@@ -346,8 +414,8 @@ class Customer extends Component {
                                     tdStyle={ { 'textAlign': 'center' } }
                                     >강습시작일</TableHeaderColumn>
                                 <TableHeaderColumn dataField='resi_no'
-                                    thStyle={ { 'textAlign': 'center' } }
-                                    tdStyle={ { 'textAlign': 'center' } }
+                                    thStyle={ { 'textAlign': 'center', 'width' : '12rem' } }
+                                    tdStyle={ { 'textAlign': 'center', 'width' : '12rem' } }
                                     >주민번호</TableHeaderColumn>
                             </BootstrapTable>
                         </div>
@@ -356,12 +424,25 @@ class Customer extends Component {
                     {this.state.show?
                         <div className='customerSlide'>
                             <div className='customerSlideUtill'>
-                                <Link to={{pathname:"/customer/update?member_no="+this.state.member_no}} className='btnCustomerNew'>
-                                    수정하기
+                                <Link to={{
+                                    pathname:"/customer/update",
+                                    state:{member_no: this.state.member_no,}
+                                    }} className='btnCustomerNew'>
+                                        <button className='btnSolid'>
+                                            수정하기
+                                        </button>
                                 </Link>
-                                <button type="button" onClick={this.handleClickAway} className='btnCustomerClose'>X</button>
+                                <button
+                                type="button"
+                                onClick={this.handleClickAway} className='btnSlideClose btnsolid'
+                                >
+                                    닫기
+                                </button>
                             </div>
-                            <h5>회원 정보</h5>
+                            <h5>
+                                <div className='parallelogram'></div>
+                                회원 정보
+                            </h5>
                             <ul>
                                 <li>
                                     <label>이름</label>
@@ -396,7 +477,11 @@ class Customer extends Component {
                                     <label>{ this.state.note }</label>
                                 </li>
                             </ul>
-                            <h5>상품 결제 내역</h5>
+                            <h6>
+                                <div className='circle'></div>
+                                상품 결제 내역
+                            </h6>
+                            <div className='tablewrap'>
                             <BootstrapTable 
                                 data={ this.state.userSalesLists2 } 
                                 hover
@@ -419,6 +504,7 @@ class Customer extends Component {
                                     tdStyle={ { 'textAlign': 'center' } }
                                     >금액</TableHeaderColumn>
                             </BootstrapTable>
+                            </div>
                         </div>
                         :null
                         }
@@ -435,8 +521,17 @@ class Customer extends Component {
 
 const CustomerStateToProps = (state) => {
     return {
-      userinfo : state.authentication.userinfo
+      userinfo : state.authentication.userinfo,
+      status: state.authentication.status
     }
 }
 
-export default connect(CustomerStateToProps, undefined)(Customer);
+const CustomerDispatchToProps = (dispatch) => {
+    return {
+        getStatusRequest: () => {
+            return dispatch(getStatusRequest());
+        },
+    };
+};
+
+export default connect(CustomerStateToProps, CustomerDispatchToProps)(Customer);

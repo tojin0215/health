@@ -1,105 +1,211 @@
-.customer .container{
-  display:flex;
-  padding-top:10rem;
-  flex-wrap:wrap;
-  justify-content:space-between;
+.customer .container {
+	display: flex;
+	padding-top: 0;
+	margin-top: 10rem;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	position: relative;
 }
 
 .SearchInput {
-  display:flex;
-  flex-wrap:wrap;
-  width:41rem;
+	display: flex;
+	flex-wrap: wrap;
+	width: 41rem;
 }
 
 .SearchInput .Dropdown-root {
-  width:20rem;
-  margin:1rem;
+	width: 20rem;
+	margin: 1rem;
 }
 
 .SearchInput .Dropdown-control {
-  border-radius:1rem;
-  text-indent:1rem;
+	border-radius: 1rem;
+	text-indent: 1rem;
 }
 
 .SearchInput .SearchInputIn {
-  display: flex;
+	display: flex;
+	align-items: center;
 }
 
-.btnCustomerNew {
-  width:20rem;
-  height:4rem;
-  border-radius:1rem;
-  padding:.4rem .8rem;
-  margin:1rem;
-  background-color:#000055;
-  color:#fff;
-  text-align:center;
-  align-self:flex-end;
-  transition:.35s ease-in-out;
-  line-height:3rem;
+.SearchInput .SearchInputIn .btnGhost {
+	height: 4rem;
+	width: 16rem;
+	font-size: 2rem;
+	font-weight: 500;
+	align-self: auto;
 }
 
-.btnCustomerNew:hover {
-  color:#fff;
-  background-color:#0069d9;
-  text-decoration:none;
-}
-
+/* 50개씩 보기 드롭다운 메뉴*/
+/* .customer .customerTableSort {
+	border: 1px solid #005;
+	position: absolute;
+	top: 6rem;
+	right: 1rem;
+	padding: 0.6rem;
+} */
 .customerTable {
-  width:100%;
-  padding-top:2rem;
+	width: 100%;
+}
+
+.customerTable h5 {
+	display: flex;
+	align-items: center;
+	font-size: 2.3rem;
+	padding-bottom: 2rem;
+}
+
+.customerTable h5 .circle {
+	margin-right: 1rem;
 }
 
 .customerSlide {
-  background-color:rgba(0,0,0,.9);
-  width:60%;
-  height:100%;
-  padding:5rem;
-  position:fixed;
-  top:0;
-  right:0;
-  color:#fff;
+	background-color: rgba(33, 52, 73, 0.94);
+	width: 60%;
+	height: 100%;
+	overflow: auto;
+	padding: 5rem;
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: #fff;
+	z-index: 999;
 }
 
-.customerSlide button {
+.customerSlide h5 {
+	padding-bottom: 2.5rem;
+	border-bottom: 1px solid #bbb;
 }
 
 .customerSlide .tableContainer {
-  border-top:1px solid #999;
-  border-bottom:1px solid #999;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
 }
 
 .customerSlide .table2 .tableHeader {
-  border-bottom:1px solid #999;
+	border-bottom: 1px solid #bbb;
 }
 
 .customerSlide ul {
-  width:100%;
-  padding:2rem;
+	width: 100%;
+	padding: 2rem 2rem 3rem;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.customerSlide ul li {
+	width: 50%;
 }
 
 .customerSlide ul label {
-  padding:.3rem;
-  min-width:10rem;
+	padding: 0 0.6rem;
+	min-width: 10rem;
+	font-weight: 300;
+	font-size: 2rem;
 }
 
 .customerSlide ul li label:first-child {
-  text-align:center;
+	font-weight: 700;
+	font-size: 2.2rem;
+}
+
+.customerSlide ul li label:first-child {
+	text-align: center;
 }
 
 .customerSlide .customerSlideUtill {
-  display:flex;
-  justify-content:flex-end;
-  align-items:center;
+	position: absolute;
+	top: 3.4rem;
+	right: 3rem;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 }
 
-.customerSlide .btnCustomerNew {
-  margin:0;
-  width:12rem;
+.customerSlide .customerSlideUtill button {
+	height: 4rem;
 }
 
-.customerSlide .btnCustomerClose {
-  width:5rem;
-  height:4rem;
-  margin:0 2rem;
+.customerSlide .customerSlideUtill .btnCustomerNew button {
+	width: auto;
+	padding: 0 3rem;
+	font-weight: 400;
+	font-size: 1.8rem;
+}
+
+.btnSlideClose {
+	color: #fff;
+	background: transparent url(/src/images/btnCloseWhite.png) no-repeat center
+		center/15px auto;
+	box-shadow: none;
+	text-indent: -9999px;
+	width: 5rem;
+	padding: 0;
+}
+
+.customerSlide .btnSolid {
+	box-shadow: 5px 3px 5px rgba(22, 22, 22, 0.75);
+}
+
+.customerSlide h6 {
+	padding-bottom: 2.5rem;
+}
+
+.customerSlide .react-bs-table {
+	font-size: 2rem;
+}
+
+@media (max-width: 767px) {
+	.customer .container {
+		margin-top: 2rem;
+	}
+	.SearchInput {
+		width: 100%;
+	}
+	.SearchInput .Dropdown-root {
+		width: calc(50% - 2rem);
+	}
+	.SearchInput .SearchInputIn {
+		width: 100%;
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+	.container .inputTextLine {
+		width: calc(50% - 2rem);
+	}
+	.btnCustomerNew {
+		margin: 0 auto;
+		/* position: absolute;
+		right: 0; */
+	}
+	.btnCustomerNew .btnSolid {
+		height: 4rem;
+		width: auto;
+	}
+	.customerTable {
+		overflow: auto;
+	}
+	.customerSlide {
+		width: 100%;
+		padding: 11rem 1rem;
+	}
+	.customerSlide ul li {
+		width: 100%;
+	}
+	.customerSlide .react-bs-table-container {
+		min-width: 40rem;
+		padding: 1.4rem 0;
+	}
+	.btnSlideClose {
+		width: 6rem;
+		background: transparent url(/src/images/btnCloseWhite.png) no-repeat center
+			center/25px auto;
+	}
+	.customerSlide .customerSlideUtill button {
+		height: 6rem;
+	}
+	.customerSlide .customerSlideUtill .btnCustomerNew button {
+		height: 4.6rem;
+	}
 }

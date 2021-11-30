@@ -1,13 +1,17 @@
 export const AUTH_LOGIN = "AUTH_LOGIN";
 export const AUTH_LOGIN_SUCCESS = "AUTH_LOGIN_SUCCESS";
 export const AUTH_LOGIN_FAILURE = "AUTH_LOGIN_FAILURE";
+export const AUTH_LOGIN_WAITING = "AUTH_LOGIN_WAITING";
 // Check sessions
 export const AUTH_GET_STATUS = "AUTH_GET_STATUS";
 export const AUTH_GET_STATUS_SUCCESS = "AUTH_GET_STATUS_SUCCESS";
 export const AUTH_GET_STATUS_FAILURE = "AUTH_GET_STATUS_FAILURE";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
-const ip = '13.124.141.28';
+import {SERVER_URL} from '../const/settings';
+
+const ip = SERVER_URL;
+//const ip = 'localhost:3000';
 
 /* LOGIN */
 export function loginRequest(id, password) {
@@ -16,8 +20,7 @@ export function loginRequest(id, password) {
     dispatch(login());
 
     // API REQUEST
-    //return fetch("http://"+ip+":3003/manager", {
-    return fetch("http://localhost:3000/manager", {
+    return fetch(ip+"/manager?type=session", {
         method: "POST",
         credentials: 'include',
         headers: {
@@ -30,10 +33,14 @@ export function loginRequest(id, password) {
     .then(response => response.json())
     .then((response) => {
         console.log(response)
+        console.log(response.code)
         if(response.success){
             // SUCCEED
             dispatch(loginSuccess(response));
-        }else{
+        }else if(response.code == 5){
+            //alert('승인 대기중입니다.')   
+            dispatch(loginWaiting());
+        } else{
             // FAILED
             dispatch(loginFailure());
         }
@@ -63,13 +70,21 @@ export function loginFailure() {
     };
 }
 
+export function loginWaiting(){
+    return{
+        type:AUTH_LOGIN_WAITING
+    };
+}
+
 
 export function getStatusRequest() {
     return (dispatch) => {
         // inform Get Status API is starting
+
+        console.log('____getStatus', getStatus())
+
         dispatch(getStatus());
-        //return fetch("http://"+ip+":3003/manager", {
-        return fetch("http://localhost:3000/manager", {
+        return fetch(ip+"/manager?type=session", {
             method: "GET",
             headers: {
                 'Content-type': 'application/json'
@@ -113,8 +128,7 @@ export function getStatusFailure() {
 }
 export function logoutRequest() {
     return (dispatch) => {
-        //return fetch("http://"+ip+":3003/manager", {
-        return fetch("http://localhost:3000/manager", {
+        return fetch(ip+"/manager?type=session", {
             method: "DELETE",
             credentials: 'include'
         })

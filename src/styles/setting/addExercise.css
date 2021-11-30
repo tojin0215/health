@@ -1,66 +1,115 @@
 .addExercise form {
-  display: flex;
-  flex-wrap: wrap;
-  border-bottom: 1px solid #005;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .addExercise .container .input-row {
-  width:100%;
+	width: 100%;
+}
+/* 운동묶음설정 버튼 우측 상단 위치 조정 */
+.addExercise .waySub {
+	top: -8rem;
 }
 
-.settingInfoInput {
-  position:relative;
+.addExercise .settingInfoInput {
+	position: relative;
+	margin-top: 8rem;
 }
 
 .contHeader {
-  display:flex;
+	display: flex;
 }
 
 .label-description {
-  width:20%;
-  text-align: center;
+	width: 20%;
+	text-align: center;
+	font-size: 2rem;
+	font-weight: 700;
 }
 
 .exercisePart {
-  display:flex;
-  align-items:center;
+	display: flex;
+	align-items: center;
 }
 
 .exercisePart .part {
-  display:flex;
+	display: flex;
+	width: 80%;
+	justify-content: space-around;
+	font-size: 2rem;
+	font-weight: 400;
 }
 
 .exercisePart .part label {
-  display:flex;
-  align-items:center;
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.exercisePart .part label input[type='checkBox'] {
+	margin: 1rem;
 }
 
 .settingRoutin {
-  display:flex;
-  align-items:center;
+	display: flex;
+	align-items: center;
 }
 
 .settingRoutin > div {
-  display: flex;
-  width:80%;
-  justify-content: space-between;
+	display: flex;
+	width: 80%;
+	justify-content: space-between;
 }
 
 .settingInfoInput form button {
-  margin: 2rem auto;
+	margin: 2rem auto;
 }
 
 .settingExerciseList {
-  padding-top: 4rem;
-  position: relative;
+	padding-top: 4rem;
+	position: relative;
 }
 
 .settingExerciseList h3 {
-  border-bottom: none;
+	border-bottom: none;
 }
 
 .settingExerciseList .searchInputRow {
-  position: absolute;
-  top: 1rem;
-  right: 0;
+	position: absolute;
+	top: 1rem;
+	right: 2rem;
+}
+
+.settingExerciseList .searchInputRow button {
+	height: 4rem;
+	font-weight: 500;
+}
+
+@media (max-width: 767px) {
+	.label-description {
+		font-size: 1.8rem;
+	}
+	.exercisePart .part {
+		flex-direction: column;
+	}
+	.settingExerciseList .searchInputRow {
+		flex-wrap: wrap;
+	}
+	.addExercise .settingExerciseList {
+		padding-top: 14rem;
+	}
+	.addExercise .label-description {
+		width: 100%;
+		text-align: start;
+	}
+	.addExercise input[type='text'] {
+		width: 100%;
+	}
+	.addExercise .container .input-row {
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+	.settingExerciseList .searchInputRow {
+		justify-content: flex-end;
+	}
 }

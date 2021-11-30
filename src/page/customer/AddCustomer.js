@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
+import MegaMenu from '../../component/navigation/Menu';
 import { connect } from 'react-redux';
 
 import DatePicker from 'react-datepicker';
@@ -11,10 +12,15 @@ import "react-datepicker/dist/react-datepicker.css";
 import { TextField } from '@material-ui/core';
 import NumberFormat from 'react-number-format';
 
+import {getStatusRequest} from '../../action/authentication';
+
 import '../../styles/customer/AddCustomer.css';
 
 
-const ip = '13.124.141.28';
+import {SERVER_URL} from '../../const/settings';
+
+const ip = SERVER_URL;;
+//const ip = 'localhost:3000';
 
 class AddCustomer extends Component {
 
@@ -72,6 +78,50 @@ class AddCustomer extends Component {
     };
     goLogin = () => {
         this.props.history.push("/");
+    }
+    componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+        // get cookie by name
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "="); 
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+   
+        // get loginData from cookie
+        let loginData = getCookie('key');
+        // if loginData is undefined, do nothing
+        if(typeof loginData === "undefined"){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // decode base64 & parse json
+        loginData = JSON.parse(atob(loginData));
+        // if not logged in, do nothing
+        if(!loginData.isLoggedIn){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // page refreshed & has a session in cookie,
+        // check whether this cookie is valid or not
+        this.props.getStatusRequest().then(
+            () => {
+                // if session is not valid
+                if(!this.props.status.valid) {
+                    // logout the session
+                    loginData = {
+                        isLoggedIn: false,
+                        id: ''
+                    };
+   
+                    document.cookie='key=' + btoa(JSON.stringify(loginData));
+   
+                    // and notify
+                    alert("Your session is expired, please log in again")
+                }
+            }
+        );
     }
 
     handleChange = (e) => { 
@@ -139,8 +189,7 @@ class AddCustomer extends Component {
         }
         else{
             // 서버 연결하는 부분
-            //fetch("http://"+ip+":3003/customer", {
-            fetch("http://localhost:3000/customer", {
+            fetch(ip+"/customer", {
                 method: "POST",
                 headers: {
                 'Content-type': 'application/json'
@@ -170,8 +219,7 @@ class AddCustomer extends Component {
                         console.log('333___________',m_no)
                     }
                     // 서버에서 데이터 전달하면 여기서 json type으로 받게 됨
-                    //fetch("http://"+ip+":3003/sales", {
-                    fetch("http://localhost:3000/sales", {    
+                    fetch(ip+"/sales", {
                         method: "POST",
                         headers: {
                           'Content-type': 'application/json'
@@ -254,10 +302,13 @@ class AddCustomer extends Component {
             <header className='header'>
                 <Header />
                 <Navigation goLogin={this.goLogin}/>
+                <MegaMenu />
                 <div className='localNavigation'>
                     <div className='container'>
                         <h2>
-                          신규 회원 등록
+                            <div className='parallelogram'></div>
+                            신규 회원 등록
+                            <span>.</span>
                         </h2>
                         <div className='breadCrumb'>
                             <Link to='/home'>HOME</Link>
@@ -302,6 +353,7 @@ class AddCustomer extends Component {
                         onChange={ this.handleStartDateChange }
                         name="startDate"
                         dateFormat="yyyy-MM-dd"
+                        font-size="1.6rem"
                         />
                         <TextField
                             variant="outlined"
@@ -429,15 +481,15 @@ class AddCustomer extends Component {
                         </div>{/*.payType */}
                         <div className='paymentAmount'>
                             <label>
-                                운동
+                                <span>운동</span>
                                 <NumberFormat thousandSeparator={true} id="exercisePrice" placeholder="0 원" onChange={this.handleChange}/>
                             </label>
                             <label>
-                                운동복
+                                <span>운동복</span>
                                 <NumberFormat thousandSeparator={true} id="sportswearPrice" placeholder="0 원" onChange={this.handleChange}/>
                             </label>
                             <label>
-                                개인 사물함
+                                <span>개인 사물함</span>
                                 <NumberFormat thousandSeparator={true} id="lockerPrice" placeholder="0 원" onChange={this.handleChange}/>
                             </label>
                         </div>{/*.paymentAmount */}
@@ -461,7 +513,7 @@ class AddCustomer extends Component {
                                 <NumberFormat thousandSeparator={true} name="payment" id="TotalPayment" readOnly value={parseInt((this.state.exercisePrice).toString().replace(/[^(0-9)]/gi,""))+parseInt((this.state.sportswearPrice).toString().replace(/[^(0-9)]/gi,""))+parseInt((this.state.lockerPrice).toString().replace(/[^(0-9)]/gi,""))}/>
                             </label>{/*.amountTotal */}
                         </div>{/*.finalAmount */}
-                        <button type="button" onClick={this.handleOnClick}>
+                        <button className='btnSolid' type="button" onClick={this.handleOnClick}>
                             등록하기
                         </button>
                     </div>{/*.productPay */}
@@ -477,9 +529,18 @@ class AddCustomer extends Component {
 
 const CustomerStateToProps = (state) => {
     return {
-      userinfo : state.authentication.userinfo
+      userinfo : state.authentication.userinfo,
+      status: state.authentication.status
     }
 }
 
-export default connect(CustomerStateToProps, undefined)(AddCustomer);
+const AddCustomerDispatchToProps = (dispatch) => {
+    return {
+        getStatusRequest: () => {
+            return dispatch(getStatusRequest());
+        },
+    };
+};
+
+export default connect(CustomerStateToProps, AddCustomerDispatchToProps)(AddCustomer);
 

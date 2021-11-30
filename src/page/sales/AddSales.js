@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
+import MegaMenu from '../../component/navigation/Menu';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
@@ -24,8 +25,12 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import NumberFormat from 'react-number-format';
 
+import {getStatusRequest} from '../../action/authentication';
 
-const ip = '13.124.141.28';
+import {SERVER_URL} from '../../const/settings';
+
+const ip = SERVER_URL;
+//const ip = 'localhost:3000';
 
 const userList = [
     {'num':1, 'userName':'김투진','phone':'000-0000-0000'},
@@ -79,6 +84,53 @@ class AddSales extends Component {
     goLogin = () => {
         this.props.history.push("/");
     }
+    componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
+        // get cookie by name
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "="); 
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+   
+        // get loginData from cookie
+        let loginData = getCookie('key');
+        // if loginData is undefined, do nothing
+        if(typeof loginData === "undefined"){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // decode base64 & parse json
+        loginData = JSON.parse(atob(loginData));
+        // if not logged in, do nothing
+        if(!loginData.isLoggedIn){
+            this.props.history.push('/');
+            return;
+        } 
+   
+        // page refreshed & has a session in cookie,
+        // check whether this cookie is valid or not
+        this.props.getStatusRequest().then(
+            () => {
+                // if session is not valid
+                if(!this.props.status.valid) {
+                    // logout the session
+                    loginData = {
+                        isLoggedIn: false,
+                        id: ''
+                    };
+   
+                    document.cookie='key=' + btoa(JSON.stringify(loginData));
+   
+                    // and notify
+                    alert("Your session is expired, please log in again")
+                }
+                else{
+                    this.cusFetch();
+                }
+            }
+        );
+    }
     
     handleClickOpen() {
         this.setState({
@@ -101,16 +153,16 @@ class AddSales extends Component {
             this.setState({
                 exerciseName : [...this.state.exerciseName, this.state.exerciseName[value]]
             })
-            console.log('들어오는 값 )    ')
-            console.log(this.state.exerciseName)
+            //console.log('들어오는 값 )    ')
+            //console.log(this.state.exerciseName)
         }else {     
-            console.log('들어오니')
+            //console.log('들어오니')
             for(var i=0; i<this.state.exerciseName.length; i++){
                 if(this.state.exerciseName[i] === value){
                     this.state.exerciseName.splice(i, 1)
                 }
             }
-            console.log(this.state.exerciseName)
+            //console.log(this.state.exerciseName)
         }
 
         // this.setState({
@@ -167,29 +219,33 @@ class AddSales extends Component {
 
         console.log('***********paymentDate : ', this.state.paymentDate)
         console.log(this.state);
-        //fetch("http://"+ip+":3003/sales", {
-        fetch("http://localhost:3000/sales", {
-            method: "POST",
-            headers: {
-              'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                fitness_no:this.state.fitness_no,
-                member_no:this.state.member_no,
-                exerciseName:ex,
-                exercisePrice:exercisePrice1,
-                lockerPrice:lockerPrice1,
-                sportswearPrice:sportswearPrice1,
-                paymentTools:this.state.paymentTools,
-                paymentDate:this.state.paymentDate
-            })
-          })
-            .then(response => response.json())
-            .then(response => {
-                alert("등록되었습니다.");
-            });
+        if(this.state.userName === '회원'){
+            alert("회원을 선택해주세요.")
+        } else{
+            fetch(ip+"/sales", {
+                method: "POST",
+                headers: {
+                  'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fitness_no:this.state.fitness_no,
+                    member_no:this.state.member_no,
+                    exerciseName:ex,
+                    exercisePrice:exercisePrice1,
+                    lockerPrice:lockerPrice1,
+                    sportswearPrice:sportswearPrice1,
+                    paymentTools:this.state.paymentTools,
+                    paymentDate:this.state.paymentDate
+                })
+              })
+                .then(response => response.json())
+                .then(response => {
+                    alert("등록되었습니다.");
+                });
+            
+            this.props.history.push('/sales');
+        }
         
-        this.props.history.push('/sales');
     }
 
     choiceUser=(e)=>{
@@ -211,8 +267,7 @@ class AddSales extends Component {
         }else if(this.state.item === "핸드폰"){
             it = '1'
         }
-        //fetch("http://"+ip+":3003/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
-        fetch("http://localhost:3000/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
+        fetch(ip+"/customer?type=search"+it+"&search="+this.state.search+"&fn="+this.props.userinfo.fitness_no, {
             method: "GET",
             headers: {
               'Content-type': 'application/json'
@@ -249,10 +304,13 @@ class AddSales extends Component {
             <div className='header'>
                 <Header />
                 <Navigation goLogin={this.goLogin}/>
+                <MegaMenu />
                 <div className='localNavigation'>
                     <div className='container'>
                         <h2>
+                            <div className='parallelogram'></div>
                             결제 등록
+                            <span>.</span>
                         </h2>
                         <div className='breadCrumb'>
                             <Link to='/home'>HOME</Link>
@@ -283,14 +341,12 @@ class AddSales extends Component {
                                     value={this.state.item}
                                     placeholder="Select an option"
                                 />{/*.searchDrop */}
-                                <div className='customerSearchIn'>
-                                    <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />
-                                    <button type="button" onClick={this.search}>
-                                        고객 검색
-                                    </button>
-                                </div>{/*.customerSearchIn */}
+                                <input type="text" id='search' checked={this.state.search} onChange={this.handleChange} />
+                                <button type="button" onClick={this.search}>
+                                    고객 검색
+                                </button>
                             </div>{/*.customerSearch */}
-                            <Table>
+                            <Table className='addsalesSearchTable'>
                                 <TableHead>
                                     <TableRow>
                                     <TableCell>번호</TableCell>
@@ -417,7 +473,7 @@ class AddSales extends Component {
                         </label>{/*.amountTotal */}
                     </div>{/*.finalAmount */}
                     <button
-                        className="btn btn-lg btn-block" type="button" onClick={this.handleOnClick}>
+                        className="btnSolid" type="button" onClick={this.handleOnClick}>
                         등록하기
                     </button>
                 </form>{/*.AddSalesForm productPay */}
@@ -432,8 +488,17 @@ class AddSales extends Component {
 
 const SalesStateToProps = (state) => {
     return {
-      userinfo : state.authentication.userinfo
+      userinfo : state.authentication.userinfo,
+      status: state.authentication.status
     }
 }
+const AddSalesDispatchToProps = (dispatch) => {
+    return {
+        getStatusRequest: () => {
+            return dispatch(getStatusRequest());
+        },
+    };
+};
 
-export default connect(SalesStateToProps, undefined)(AddSales);
+
+export default connect(SalesStateToProps, AddSalesDispatchToProps)(AddSales);

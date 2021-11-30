@@ -1,0 +1,39 @@
+.loginWrap .Navigation:hover {
+	height: 8rem;
+}
+
+.loginWrap .dropdownNav {
+	display: none;
+}
+
+.loginWrap .navbar {
+	justify-content: center;
+}
+
+.loginWrap .navbar a {
+	display: none;
+}
+
+.loginWrap .navbar .navbar-brand {
+	display: flex;
+	width: auto; 
+	height: 100%;
+	margin: 0;
+}
+
+.loginWrap .navbar .navbar-nav {
+	display: none;
+}
+
+.container .qr-reader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	display: flex;
+	flex-basis: 31.8rem;
+	margin: 0 auto;
+	padding-top: 5rem;
+	padding-bottom: 15rem;
+	flex-direction: column;
+	align-items: center;
+}
