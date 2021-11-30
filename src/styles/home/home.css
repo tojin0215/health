@@ -261,13 +261,14 @@
 }
 
 .home .homeAbout .aboutList ul li:nth-child(1) div {
-	background-image: url(/src/images/aboutProduct.png);
+	/* background-image: url(./src/images/aboutProduct.png); */
+	background-image: url(../../images/aboutProduct.png);
 }
 .home .homeAbout .aboutList ul li:nth-child(2) div {
-	background-image: url(/src/images/aboutExercise.png);
+	background-image: url(../../images/aboutExercise.png);
 }
 .home .homeAbout .aboutList ul li:nth-child(3) div {
-	background-image: url(/src/images/aboutManage.png);
+	background-image: url(../../images/aboutManage.png);
 }
 
 .home .homeAbout .aboutList ul li button {
