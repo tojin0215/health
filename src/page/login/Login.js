@@ -90,11 +90,11 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-import slide1 from '../../images/slide_1.png';
-import slide2 from '../../images/slide_2.png';
-import slide3 from '../../images/slide_3.png';
-import slide4 from '../../images/slide_4.png';
-import slide5 from '../../images/slide_5.png';
+import slide1 from '/images/slide_1.png';
+import slide2 from '/images/slide_2.png';
+import slide3 from '/images/slide_3.png';
+import slide4 from '/images/slide_4.png';
+import slide5 from '/images/slide_5.png';
 
 const Slideshow = () => {
 	return (
