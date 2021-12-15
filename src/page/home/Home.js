@@ -226,13 +226,21 @@ class Home extends Component {
 				</div>
 				{/*.header */}
 				<div className="container">
-					<div className="mainVisual">메인 이미지</div>
+					<div
+						className="mainVisual"
+						style={{ backgroundImage: '/assets/mainVisual1.png' }}
+					>
+						메인 이미지
+					</div>
 					<div className="homeIcon">
 						<ul>
 							<li>
 								<Link
 									to="/customer"
 									className="btnCustomerNew btnCustomer"
+									style={{
+										backgroundImage: '/assets/btnCustomer.png',
+									}}
 								></Link>
 								<p>고객</p>
 							</li>
@@ -240,6 +248,9 @@ class Home extends Component {
 								<Link
 									to="/exercise"
 									className="btnCustomerNew btnSetting"
+									style={{
+										backgroundImage: '/assets/btnSetting.png',
+									}}
 								></Link>
 								<p>운동 설정</p>
 							</li>
@@ -247,17 +258,29 @@ class Home extends Component {
 								<Link
 									to="/assign"
 									className="btnCustomerNew btnExercise"
+									style={{
+										backgroundImage: '/assets/btnExercise.png',
+									}}
 								></Link>
 								<p>운동 배정</p>
 							</li>
 							<li>
-								<Link to="/sales" className="btnCustomerNew btnSales"></Link>
+								<Link
+									to="/sales"
+									className="btnCustomerNew btnSales"
+									style={{
+										backgroundImage: '/assets/btnSales.png',
+									}}
+								></Link>
 								<p>상품매출</p>
 							</li>
 							<li>
 								<Link
 									to="/statistics"
 									className="btnCustomerNew btnStatic"
+									style={{
+										backgroundImage: '/assets/btnStatic.png',
+									}}
 								></Link>
 								<p>통계</p>
 							</li>
@@ -265,6 +288,9 @@ class Home extends Component {
 								<Link
 									to="/statistics"
 									className="btnCustomerNew btnStatic"
+									style={{
+										backgroundImage: '/assets/aboutManage.png',
+									}}
 								></Link>
 								<p>관리자</p>
 							</li>
@@ -285,7 +311,12 @@ class Home extends Component {
 						<section className="aboutList">
 							<ul>
 								<li>
-									<div className="imageBox"></div>
+									<div
+										className="imageBox"
+										style={{
+											backgroundImage: '/assets/img/aboutProduct.png',
+										}}
+									></div>
 									<h5>상품</h5>
 									<p>
 										헬스, 필라테스 등의 운동상품과 함께 운동복, 사물함 등의
@@ -294,7 +325,12 @@ class Home extends Component {
 									<button>더보기</button>
 								</li>
 								<li>
-									<div className="imageBox"></div>
+									<div
+										className="imageBox"
+										style={{
+											backgroundImage: '/assets/img/aboutExercise.png',
+										}}
+									></div>
 									<h5>운동</h5>
 									<p>
 										센터의 전문가가 사용자와 상담하고 적합한 운동 리스트를
@@ -303,7 +339,12 @@ class Home extends Component {
 									<button>더보기</button>
 								</li>
 								<li>
-									<div className="imageBox"></div>
+									<div
+										className="imageBox"
+										style={{
+											backgroundImage: '/assets/img/aboutManage.png',
+										}}
+									></div>
 									<h5>회원관리</h5>
 									<p>
 										회원을 쉽게 등록하고 수정할 수 있으며, 회원의 인바디 정보,

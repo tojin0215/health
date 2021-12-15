@@ -52,8 +52,9 @@ input[type='password']:focus {
 	border: none;
 	border-bottom: 1px solid #000;
 	border-radius: 0;
-	background: url(../images/search.png) no-repeat right center/2rem auto;
+	background: url(/public/assets/search.png) no-repeat right center/2rem auto;
 }
+
 /*데이터피커 크기조절*/
 .react-datepicker {
 	font-size: 2rem;

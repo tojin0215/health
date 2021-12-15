@@ -136,8 +136,7 @@
 
 .btnSlideClose {
 	color: #fff;
-	background: transparent url(/src/images/btnCloseWhite.png) no-repeat center
-		center/15px auto;
+	background: transparent no-repeat center center/15px auto;
 	box-shadow: none;
 	text-indent: -9999px;
 	width: 5rem;
@@ -199,8 +198,7 @@
 	}
 	.btnSlideClose {
 		width: 6rem;
-		background: transparent url(/src/images/btnCloseWhite.png) no-repeat center
-			center/25px auto;
+		background: transparent no-repeat center center/25px auto;
 	}
 	.customerSlide .customerSlideUtill button {
 		height: 6rem;

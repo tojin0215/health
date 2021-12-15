@@ -26,7 +26,7 @@
 		padding-bottom: 0;
 	}
 	.home .container .mainVisual {
-		background: no-repeat top/cover url(/static/media/mainVisual1.6ec96832.png);
+		background: no-repeat top/cover;
 	}
 	.home .container .homeIcon ul {
 		padding: 0;
@@ -138,7 +138,7 @@
 	height: 46.4rem;
 	margin-top: 4.7rem;
 	/* background-image: url(${mainVisual1}); */
-	background: no-repeat top/contain url(../../images/mainVisual1.png);
+	background: no-repeat top/contain;
 	text-indent: -9999rem;
 }
 
@@ -183,26 +183,6 @@
 	font-weight: 300;
 	padding-top: 1rem;
 	text-align: center;
-}
-
-.home .homeIcon .btnCustomer {
-	background-image: url(../../images/btnCustomer.png);
-}
-
-.home .homeIcon .btnExercise {
-	background-image: url(../../images/btnExercise.png);
-}
-
-.home .homeIcon .btnSales {
-	background-image: url(../../images/btnSales.png);
-}
-
-.home .homeIcon .btnStatic {
-	background-image: url(../../images/btnStatic.png);
-}
-
-.home .homeIcon .btnSetting {
-	background-image: url(../../images/btnSetting.png);
 }
 
 .home .homeAbout {
@@ -258,17 +238,6 @@
 	height: 20rem;
 	background-repeat: no-repeat;
 	background-size: 12rem auto;
-}
-
-.home .homeAbout .aboutList ul li:nth-child(1) div {
-	/* background-image: url(./src/images/aboutProduct.png); */
-	background-image: url(../../images/aboutProduct.png);
-}
-.home .homeAbout .aboutList ul li:nth-child(2) div {
-	background-image: url(../../images/aboutExercise.png);
-}
-.home .homeAbout .aboutList ul li:nth-child(3) div {
-	background-image: url(../../images/aboutManage.png);
 }
 
 .home .homeAbout .aboutList ul li button {

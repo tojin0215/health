@@ -6,7 +6,7 @@
 	top: 3rem;
 }
 .assignExercise .customerSearch .btnAssignCusSearch {
-	/* background-image: url(/src/images/search.png);
+	/* background-image: url(img/search.png);
 	background-repeat: no-repeat;
 	background-size: 2rem auto;
 	background-position: 14.5rem center; */
@@ -89,22 +89,6 @@
 	width: 100%;
 	height: 15rem;
 	background: no-repeat center/70% auto;
-}
-
-.assignExercise .inputCheckRow label:nth-child(2) .imageBox {
-	background-image: url(/src/images/assignUpper.png);
-}
-.assignExercise .inputCheckRow label:nth-child(3) .imageBox {
-	background-image: url(/src/images/assignLower.png);
-}
-.assignExercise .inputCheckRow label:nth-child(4) .imageBox {
-	background-image: url(/src/images/assignEntire.png);
-}
-.assignExercise .inputCheckRow label:nth-child(5) .imageBox {
-	background-image: url(/src/images/assignCore.png);
-}
-.assignExercise .inputCheckRow label:nth-child(6) .imageBox {
-	background-image: url(/src/images/assignAerobic.png);
 }
 
 .assignExercise .exerciseSelectList .flexbetween {

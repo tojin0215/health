@@ -45,7 +45,7 @@ const Menu = () => {
         <PC>
           <div className='logo'>
               <img
-                src={ '../../images/logo-text.png' }
+                src={ 'assets/logo-text.png' }
                 width='50'
                 height='50'
                 alt='오마이짐'
@@ -55,7 +55,7 @@ const Menu = () => {
         <Mobile>
           <div className='logo w-24'>
               <img 
-                src={ '../../images/logo-text.png' }
+                src={ 'assets/logo-text.png' }
                 width='40'
                 height='40'
                 alt='오마이짐'

@@ -7,9 +7,6 @@ import { logoutRequest } from '../../action/authentication';
 import 'bootstrap/dist/css/bootstrap.css';
 import styles from './Navigation.css';
 
-import imgLogo from '../../images/logo-text.png';
-import imgLogoFull from '../../images/logo-text.png';
-
 class Navigation extends Component {
 	constructor(props) {
 		super(props);
@@ -34,39 +31,39 @@ class Navigation extends Component {
 	render() {
 		const userinfo = this.props;
 		return (
-			<div className="Navigation">
+			<div className='Navigation'>
 				<Navbar className={styles.navbar}>
-					<Navbar.Brand href="/home">
+					<Navbar.Brand href='/home'>
 						<img
-							alt="투진컴퍼니"
-							src={imgLogo}
-							width="auto"
-							height="30"
-							className="d-inline-block align-top"
+							alt='투진컴퍼니'
+							src='/assets/logo-text.png'
+							width='auto'
+							height='30'
+							className='d-inline-block align-top'
 						/>{' '}
 						<span className={styles.navitem}>{userinfo.fitness_name}</span>
 					</Navbar.Brand>
-					<Nav className="mr-auto dropdownNav navitem">
-						<NavLink exact to="/home">
+					<Nav className='mr-auto dropdownNav navitem'>
+						<NavLink exact to='/home'>
 							<span className={styles.navitem}>Home</span>
 							<ul>
 								<li>
-									<NavLink exact to="/home">
+									<NavLink exact to='/home'>
 										Home
 									</NavLink>
 								</li>
 							</ul>
 						</NavLink>
-						<NavLink exact to="/customer">
+						<NavLink exact to='/customer'>
 							<span className={styles.navitem}>고객</span>
 							<ul>
 								<li>
-									<NavLink exact to="/customer">
+									<NavLink exact to='/customer'>
 										회원 관리
 									</NavLink>
 								</li>
 								<li>
-									<NavLink exact to="/customer/add">
+									<NavLink exact to='/customer/add'>
 										회원 등록
 									</NavLink>
 								</li>
@@ -83,41 +80,41 @@ class Navigation extends Component {
 								</li>
 							</ul>
 						</NavLink>
-						<NavLink exact to="/sales">
+						<NavLink exact to='/sales'>
 							<span className={styles.navitem}>상품/매출</span>
 							<ul>
 								<li>
-									<NavLink exact to="/sales">
+									<NavLink exact to='/sales'>
 										매출 현황
 									</NavLink>
 								</li>
 								<li>
-									<NavLink exact to="/sales/add">
+									<NavLink exact to='/sales/add'>
 										결제 등록
 									</NavLink>
 								</li>
 							</ul>
 						</NavLink>
-						<NavLink exact to="/assign">
+						<NavLink exact to='/assign'>
 							<span className={styles.navitem}>운동</span>
 							<ul>
 								<li>
-									<NavLink exact to="/assign">
+									<NavLink exact to='/assign'>
 										운동 배정
 									</NavLink>
 								</li>
 								<li>
-									<NavLink exact to="/exercise">
+									<NavLink exact to='/exercise'>
 										운동 설정
 									</NavLink>
 								</li>
 							</ul>
 						</NavLink>
-						<NavLink exact to="/statistics">
+						<NavLink exact to='/statistics'>
 							<span className={styles.navitem}></span>
 						</NavLink>
 						{userinfo.fitness_no === 1 ? (
-							<NavLink exact to="/admin">
+							<NavLink exact to='/admin'>
 								<span className={styles.navitem}>관리자</span>
 							</NavLink>
 						) : null}
@@ -127,7 +124,7 @@ class Navigation extends Component {
 							<span className={styles.navitem}>{userinfo.manager_name}님</span>
 						</Nav.Item>
 						<Nav.Item>
-							<button className="btnSolid" onClick={this.handleLogout}>
+							<button className='btnSolid' onClick={this.handleLogout}>
 								LOG-OUT
 							</button>
 						</Nav.Item>

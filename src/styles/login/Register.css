@@ -1,7 +1,6 @@
 .register .resigterVisual {
 	width: 100%;
 	height: 11rem;
-	background-image: url(/src/images/resiVisual.jpeg);
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;

@@ -42,25 +42,25 @@ class Login extends Component {
 
 	render() {
 		return (
-			<div className="wrap loginWrap">
-				<div className="header">
+			<div className='wrap loginWrap'>
+				<div className='header'>
 					<Header />
 					<Navigation />
 				</div>
-				<div className="localNavigation">
-					<div className="container">
+				<div className='localNavigation'>
+					<div className='container'>
 						<h2>
-							<div className="parallelogram"></div>
+							<div className='parallelogram'></div>
 							로그인
 							<span>.</span>
 						</h2>
 					</div>
 				</div>
-				<div className="container">
+				<div className='container'>
 					<Authentication mode={true} onLogin={this.handleLogin} />
-					<div className="slide-container sectionGlass">
+					<div className='slide-container sectionGlass'>
 						<h5>오마이짐 미리보기</h5>
-						<div className="loginSample">
+						<div className='loginSample'>
 							<p>체험 아이디로 미리 이용해볼 수 있습니다.</p>
 							<p>아이디 : sample</p>
 							<p>비밀번호 : sample</p>
@@ -68,7 +68,7 @@ class Login extends Component {
 						<Slideshow></Slideshow>
 					</div>
 				</div>
-				<div className="footer">
+				<div className='footer'>
 					<Footer />
 				</div>
 			</div>
@@ -90,38 +90,43 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-import slide1 from '/images/slide_1.png';
-import slide2 from '/images/slide_2.png';
-import slide3 from '/images/slide_3.png';
-import slide4 from '/images/slide_4.png';
-import slide5 from '/images/slide_5.png';
+// import slide1 from 'img/slide_1.png';
+// import slide2 from 'img/slide_2.png';
+// import slide3 from 'img/slide_3.png';
+// import slide4 from 'img/slide_4.png';
+// import slide5 from 'img/slide_5.png';
 
 const Slideshow = () => {
+	// const slide1 = '/assets/slide_1.png' + slide_1 + '.png';
+	// const slide2 = '/assets/slide_2.png' + slide_2 + '.png';
+	// const slide3 = '/assets/slide_3.png' + slide_3 + '.png';
+	// const slide4 = '/assets/slide_4.png' + slide_4 + '.png';
+	// const slide5 = '/assets/slide_5.png' + slide_5 + '.png';
 	return (
 		<div>
-			<Slide easing="ease" {...fadeProperties}>
-				<div className="each-slide">
-					<div style={{ backgroundImage: `url(${slide1})` }}>
+			<Slide easing='ease' {...fadeProperties}>
+				<div className='each-slide'>
+					<div style={{ backgroundImage: 'url(/assets/slide_1.png)' }}>
 						<span>회원 관리</span>
 					</div>
 				</div>
-				<div className="each-slide">
-					<div style={{ backgroundImage: `url(${slide2})` }}>
+				<div className='each-slide'>
+					<div style={{ backgroundImage: '/assets/slide_1.png' }}>
 						<span>회원 인바디 체크</span>
 					</div>
 				</div>
-				<div className="each-slide">
-					<div style={{ backgroundImage: `url(${slide3})` }}>
+				<div className='each-slide'>
+					<div style={{ backgroundImage: '/assets/slide_1.png' }}>
 						<span>결제 관리</span>
 					</div>
 				</div>
-				<div className="each-slide">
-					<div style={{ backgroundImage: `url(${slide4})` }}>
+				<div className='each-slide'>
+					<div style={{ backgroundImage: '/assets/slide_1.png' }}>
 						<span>매출 현황</span>
 					</div>
 				</div>
-				<div className="each-slide">
-					<div style={{ backgroundImage: `url(${slide5})` }}>
+				<div className='each-slide'>
+					<div style={{ backgroundImage: '/assets/slide_1.png' }}>
 						<span>운동 배정</span>
 					</div>
 				</div>
