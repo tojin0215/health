@@ -3,11 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { setFitness } from '../../action/userinfo';
+import { logoutRequest } from '../../action/authentication';
 
-import $ from 'jquery';
-
-// import jQuery from "jquery";
-// window.$ = window.jQuery = jQuery;
+import Collapse from '@kunukn/react-collapse';
 
 import { MdMenu } from 'react-icons/md';
 
