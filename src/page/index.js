@@ -16,3 +16,4 @@ export { default as Statistics } from './statistics/Statistics';
 export { default as Admin } from './admin/Admin';
 export { default as QRLogin } from './login/QRLogin';
 export { default as Register } from './login/Register';
+export { default as CustomerCalendar } from './customer/TestCustomerCalendar';

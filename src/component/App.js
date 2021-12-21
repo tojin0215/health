@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { Home, Customer, AddCustomer, AddExercise, Sales, AddSales, Login,Statistics, Inbody, AddInbody, UpdateCustomer, DefaultExercise, AssignExercise, AssignCheckExercise, AssignCustomer, Admin, QRLogin, Register} from '../page';
+import { Home, Customer, AddCustomer, AddExercise, Sales, AddSales, Login,Statistics, Inbody, AddInbody, UpdateCustomer, DefaultExercise, AssignExercise, AssignCheckExercise, AssignCustomer, Admin, QRLogin, Register, CustomerCalendar} from '../page';
 
 class App extends Component {
   render() {
@@ -24,6 +24,7 @@ class App extends Component {
             <Route exact path="/admin" component={Admin}/>
             <Route exact path="/qr" component={QRLogin}/>
             <Route exact path="/register" component={Register}/>
+            <Route exact path="/test" component={CustomerCalendar}/>
         </div>
     );
   }
