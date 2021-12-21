@@ -8,6 +8,16 @@ import { connect } from 'react-redux';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import ModalDialog from 'react-bootstrap/ModalDialog';
+import ModalHeader from 'react-bootstrap/ModalHeader';
+import ModalTitle from 'react-bootstrap/ModalTitle';
+import ModalBody from 'react-bootstrap/ModalBody';
+import ModalFooter from 'react-bootstrap/ModalFooter';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { getStatusRequest } from '../../action/authentication';
@@ -393,22 +403,22 @@ class Customer extends Component {
 		console.log('table__', this.state.userSalesLists2);
 		console.log('클릭,', this.state.show);
 		return (
-			<div className="customer">
-				<header className="header">
+			<div className='customer'>
+				<header className='header'>
 					<Header />
 					<Navigation goLogin={this.goLogin} />
 					<MegaMenu />
-					<div className="localNavigation">
-						<div className="container">
+					<div className='localNavigation'>
+						<div className='container'>
 							<h2>
-								<div className="parallelogram"></div>
+								<div className='parallelogram'></div>
 								회원관리
 								<span>.</span>
 							</h2>
-							<div className="breadCrumb">
-								<Link to="/home">HOME</Link>
+							<div className='breadCrumb'>
+								<Link to='/home'>HOME</Link>
 								<span>&#62;</span>
-								<Link to="/customer">고객</Link>
+								<Link to='/customer'>고객</Link>
 							</div>
 							{/*.breadCrumb */}
 						</div>
@@ -417,26 +427,45 @@ class Customer extends Component {
 					{/*.localNavigation */}
 				</header>
 				<ClickAwayListener onClickAway={this.handleClickAway}>
-					<div className="container">
-						<div className="SearchInput">
-							<div className="SearchInputIn">
+					<div className='container'>
+						<div>
+							<Button variant='primary'>Modal</Button>
+							<Modal
+								// show={show}
+								// onHide={() => setShow(false)}
+								dialogClassName='modal-90w'
+								aria-labelledby='example-modal'
+							>
+								<Modal.Header closeButton>
+									<Modal.Title id='example-modal'>모달 테스트</Modal.Title>
+								</Modal.Header>
+								<Modal.Body>
+									<Row>
+										<Col xs={6}></Col>
+										<Col xs={6}></Col>
+									</Row>
+								</Modal.Body>
+							</Modal>
+						</div>
+						<div className='SearchInput'>
+							<div className='SearchInputIn'>
 								<Dropdown
-									className="searchDrop"
+									className='searchDrop'
 									options={options}
 									onChange={this.selectItem}
 									value={this.state.item}
-									placeholder="Select an option"
+									placeholder='Select an option'
 								/>
 								<input
-									type="text"
-									id="search"
-									className="inputTextLine"
+									type='text'
+									id='search'
+									className='inputTextLine'
 									checked={this.state.search}
 									onChange={this.handleChange}
 								/>
 								<button
-									className="btnSearch btnGhost"
-									type="button"
+									className='btnSearch btnGhost'
+									type='button'
 									onClick={this.search}
 								>
 									{' '}
@@ -444,12 +473,12 @@ class Customer extends Component {
 								</button>
 							</div>
 						</div>
-						<Link to="/customer/add" className="btnCustomerNew">
-							<button className="btnSolid">신규회원 등록</button>
+						<Link to='/customer/add' className='btnCustomerNew'>
+							<button className='btnSolid'>신규회원 등록</button>
 						</Link>
-						<div className="customerTable sectionGlass">
+						<div className='customerTable sectionGlass'>
 							<h5>
-								<div className="circle"></div>
+								<div className='circle'></div>
 								회원 목록
 							</h5>
 							<div>
@@ -457,14 +486,14 @@ class Customer extends Component {
 									hover
 									data={this.state.customerList}
 									options={textOptions}
-									tableHeaderClass="tableHeader"
-									tableContainerClass="tableContainer"
+									tableHeaderClass='tableHeader'
+									tableContainerClass='tableContainer'
 									pagination={this.state.customerList.length > 1}
 									selectRow={selectRowProp}
-									className="table2"
+									className='table2'
 								>
 									<TableHeaderColumn
-										dataField="no"
+										dataField='no'
 										thStyle={{ textAlign: 'center', width: '5.5rem' }}
 										tdStyle={{ textAlign: 'center', width: '5.5rem' }}
 										isKey
@@ -472,42 +501,42 @@ class Customer extends Component {
 										No.
 									</TableHeaderColumn>
 									<TableHeaderColumn
-										dataField="name"
+										dataField='name'
 										thStyle={{ textAlign: 'center' }}
 										tdStyle={{ textAlign: 'center' }}
 									>
 										회원이름
 									</TableHeaderColumn>
 									<TableHeaderColumn
-										dataField="sex"
+										dataField='sex'
 										thStyle={{ textAlign: 'center', width: '6rem' }}
 										tdStyle={{ textAlign: 'center', width: '6rem' }}
 									>
 										성별
 									</TableHeaderColumn>
 									<TableHeaderColumn
-										dataField="phone"
+										dataField='phone'
 										thStyle={{ textAlign: 'center' }}
 										tdStyle={{ textAlign: 'center' }}
 									>
 										핸드폰
 									</TableHeaderColumn>
 									<TableHeaderColumn
-										dataField="in_charge"
+										dataField='in_charge'
 										thStyle={{ textAlign: 'center' }}
 										tdStyle={{ textAlign: 'center' }}
 									>
 										담당자
 									</TableHeaderColumn>
 									<TableHeaderColumn
-										dataField="start_date"
+										dataField='start_date'
 										thStyle={{ textAlign: 'center' }}
 										tdStyle={{ textAlign: 'center' }}
 									>
 										강습시작일
 									</TableHeaderColumn>
 									<TableHeaderColumn
-										dataField="resi_no"
+										dataField='resi_no'
 										thStyle={{ textAlign: 'center', width: '12rem' }}
 										tdStyle={{ textAlign: 'center', width: '12rem' }}
 									>
@@ -518,112 +547,117 @@ class Customer extends Component {
 						</div>
 						{/* ------ 클릭하면 나와야하는 부분 ------ */}
 						{this.state.show ? (
-							<div className="customerSlide">
-								<div className="customerSlideUtill">
-									<Link
-										to={{
-											pathname: '/customer/update',
-											state: { member_no: this.state.member_no },
-										}}
-										className="btnCustomerNew"
-									>
-										<button className="btnSolid">수정하기</button>
-									</Link>
-									<button
-										type="button"
-										onClick={this.handleClickAway}
-										className="btnSlideClose btnsolid"
-										style={{
-											backgroundImage: '/assets/btnCloseWhite.png',
-										}}
-									>
-										닫기
-									</button>
-								</div>
-								<h5>
-									<div className="parallelogram"></div>
-									회원 정보
-								</h5>
-								<ul>
-									<li>
-										<label>이름</label>
-										<label>{this.state.name}</label>
-									</li>
-									<li>
-										<label>고객번호</label>
-										<label>{this.state.member_no}</label>
-									</li>
-									<li>
-										<label>정보</label>
-										<label>{this.state.info}</label>
-									</li>
-									<li>
-										<label>연락처</label>
-										<label>{this.state.phone}</label>
-									</li>
-									<li>
-										<label>주소</label>
-										<label>{this.state.addr}</label>
-									</li>
-									<li>
-										<label>등록일</label>
-										<label>{this.state.startDate}</label>
-									</li>
-									<li>
-										<label>담당자</label>
-										<label>{this.state.trainer}</label>
-									</li>
-									<li>
-										<label>비고</label>
-										<label>{this.state.note}</label>
-									</li>
-								</ul>
-								<h6>
-									<div className="circle"></div>
-									상품 결제 내역
-								</h6>
-								<div className="tablewrap">
-									<BootstrapTable
-										data={this.state.userSalesLists2}
-										hover
-										pagination={this.state.customerList.length > 1}
-										options={options1}
-										tableHeaderClass="tableHeader"
-										tableContainerClass="tableContainer"
-										className="table2"
-									>
-										<TableHeaderColumn
-											dataField="product"
-											thStyle={{ textAlign: 'center' }}
-											tdStyle={{ textAlign: 'center' }}
-											isKey
+							<Row className='customerSlideUtill'>
+								{/* 캘린더 시작 */}
+								<Col xs={6} className='bg-dark'></Col>
+								{/* 캘린더 끝 */}
+								<Col xs={6} className='customerSlide'>
+									<div>
+										<Link
+											to={{
+												pathname: '/customer/update',
+												state: { member_no: this.state.member_no },
+											}}
+											className='btnCustomerNew'
 										>
-											상품
-										</TableHeaderColumn>
-										<TableHeaderColumn
-											dataField="date"
-											dataFormat={dataFormatter}
-											thStyle={{ textAlign: 'center' }}
-											tdStyle={{ textAlign: 'center' }}
+											<button className='btnSolid'>수정하기</button>
+										</Link>
+										<button
+											type='button'
+											onClick={this.handleClickAway}
+											className='btnSlideClose btnsolid'
+											style={{
+												backgroundImage: '/assets/btnCloseWhite.png',
+											}}
 										>
-											결제일자
-										</TableHeaderColumn>
-										<TableHeaderColumn
-											dataField="payment"
-											dataFormat={PriceFormatter}
-											thStyle={{ textAlign: 'center' }}
-											tdStyle={{ textAlign: 'center' }}
+											닫기
+										</button>
+									</div>
+									<h5>
+										<div className='parallelogram'></div>
+										회원 정보
+									</h5>
+									<ul>
+										<li>
+											<label>이름</label>
+											<label>{this.state.name}</label>
+										</li>
+										<li>
+											<label>고객번호</label>
+											<label>{this.state.member_no}</label>
+										</li>
+										<li>
+											<label>정보</label>
+											<label>{this.state.info}</label>
+										</li>
+										<li>
+											<label>연락처</label>
+											<label>{this.state.phone}</label>
+										</li>
+										<li>
+											<label>주소</label>
+											<label>{this.state.addr}</label>
+										</li>
+										<li>
+											<label>등록일</label>
+											<label>{this.state.startDate}</label>
+										</li>
+										<li>
+											<label>담당자</label>
+											<label>{this.state.trainer}</label>
+										</li>
+										<li>
+											<label>비고</label>
+											<label>{this.state.note}</label>
+										</li>
+									</ul>
+									<h6>
+										<div className='circle'></div>
+										상품 결제 내역
+									</h6>
+									<div className='tablewrap'>
+										<BootstrapTable
+											data={this.state.userSalesLists2}
+											hover
+											pagination={this.state.customerList.length > 1}
+											options={options1}
+											tableHeaderClass='tableHeader'
+											tableContainerClass='tableContainer'
+											className='table2'
 										>
-											금액
-										</TableHeaderColumn>
-									</BootstrapTable>
-								</div>
-							</div>
+											<TableHeaderColumn
+												dataField='product'
+												thStyle={{ textAlign: 'center' }}
+												tdStyle={{ textAlign: 'center' }}
+												isKey
+											>
+												상품
+											</TableHeaderColumn>
+											<TableHeaderColumn
+												dataField='date'
+												dataFormat={dataFormatter}
+												thStyle={{ textAlign: 'center' }}
+												tdStyle={{ textAlign: 'center' }}
+											>
+												결제일자
+											</TableHeaderColumn>
+											<TableHeaderColumn
+												dataField='payment'
+												dataFormat={PriceFormatter}
+												thStyle={{ textAlign: 'center' }}
+												tdStyle={{ textAlign: 'center' }}
+											>
+												금액
+											</TableHeaderColumn>
+										</BootstrapTable>
+									</div>
+								</Col>
+							</Row>
 						) : null}
 						{/* ------ 클릭하면 나와야하는 부분 ------ */}
 					</div>
 				</ClickAwayListener>
-				<div className="footer">
+				<div className='footer'>
 					<Footer />
 				</div>
 			</div>
