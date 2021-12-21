@@ -1,50 +1,9 @@
-.sales .container {
-	padding-top: 6rem;
-	padding-bottom: 8rem;
-}
-/* 날짜 검색창 가로 100% 채우기 */
-.sales .salesStatus {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-}
-
-.salesUtill {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-end;
-	padding: 2rem 0 1rem;
-}
-
-.dateSort {
-	height: 4rem;
-	width: auto;
-	font-weight: 400;
-}
 /*결제 등록 버튼 위치*/
-.salesUtill2 {
-	justify-content: flex-end;
-}
-
-.addPr {
-	font-size: 1.5rem;
-}
-
-.tableBody {
-	text-align: center;
-}
-
 .tableContainer {
 	border-radius: 0;
 	border: none;
-	border-top: 1px solid rgb(0, 0, 82);
+	border-top: 1px solid rgb(211, 211, 218);
 	border-bottom: 1px solid rgb(0, 0, 82);
-}
-
-.table thead th {
-	border: none;
-	height: 4rem;
 }
 
 .table-bordered td,
@@ -59,6 +18,7 @@
 }
 전체기록 표의 행에 하버시 css 적용
 */
+
 .table2 .tableHeader {
 	border-bottom: 1px solid rgb(0, 0, 82);
 }
