@@ -33,17 +33,10 @@ class Navigation extends Component {
 		return (
 			<div className='Navigation'>
 				<Navbar className={styles.navbar}>
-					<Navbar.Brand href='/home'>
-						<img
-							alt='투진컴퍼니'
-							src='/assets/logo-text.png'
-							width='auto'
-							height='30'
-							className='d-inline-block align-top'
-						/>{' '}
-						<span className={styles.navitem}>{userinfo.fitness_name}</span>
-					</Navbar.Brand>
 					<Nav className='mr-auto dropdownNav navitem'>
+						<Nav.Item>
+							<span className={styles.navitem}>{userinfo.manager_name}</span>
+						</Nav.Item>
 						<NavLink exact to='/home'>
 							<span className={styles.navitem}>Home</span>
 							<ul>
@@ -120,9 +113,16 @@ class Navigation extends Component {
 						) : null}
 					</Nav>
 					<Nav className={styles.navUtill}>
-						<Nav.Item>
-							<span className={styles.navitem}>{userinfo.manager_name}님</span>
-						</Nav.Item>
+						<Navbar.Brand href='/home'>
+							<img
+								alt='투진컴퍼니'
+								src='/assets/logo-text.png'
+								width='auto'
+								height='30'
+								className='d-inline-block align-top'
+							/>{' '}
+							<span className={styles.navitem}>{userinfo.fitness_name}</span>
+						</Navbar.Brand>
 						<Nav.Item>
 							<button className='btnSolid' onClick={this.handleLogout}>
 								LOG-OUT

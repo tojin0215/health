@@ -188,16 +188,16 @@ class Home extends Component {
 		console.log('오늘매출', this.state.todaySales);
 
 		return (
-			<div className="wrap home">
-				<div className="header">
+			<div className='wrap home'>
+				<div className='header'>
 					<Header />
 					<Navigation goLogin={this.goLogin} />
 					<MegaMenu />
-					<div className="localNavigation">
-						<div className="container">
+					<div className='localNavigation'>
+						<div className='container'>
 							{/* <Menu /> */}
-							<div className="dashboard">
-								<div className="homeDashLeft">
+							<div className='dashboard'>
+								<div className='homeDashLeft'>
 									<label>
 										<p>오늘 방문고객</p>
 										<span>{this.fommat(this.state.todayCustomer)}</span>
@@ -207,7 +207,7 @@ class Home extends Component {
 										<span>{this.fommat(this.state.totalCustomer)}</span>
 									</label>
 								</div>
-								<div className="homeDashRight">
+								<div className='homeDashRight'>
 									<label>
 										<p>일매출</p>
 										<span>{this.fommat(this.state.todaySales)}</span>
@@ -225,19 +225,19 @@ class Home extends Component {
 					{/*.localNavigation */}
 				</div>
 				{/*.header */}
-				<div className="container">
+				<div className='container'>
 					<div
-						className="mainVisual"
+						className='mainVisual'
 						style={{ backgroundImage: '/assets/mainVisual1.png' }}
 					>
 						메인 이미지
 					</div>
-					<div className="homeIcon">
+					<div className='homeIcon'>
 						<ul>
 							<li>
 								<Link
-									to="/customer"
-									className="btnCustomerNew btnCustomer"
+									to='/customer'
+									className='btnCustomerNew btnCustomer'
 									style={{
 										backgroundImage: '/assets/btnCustomer.png',
 									}}
@@ -246,8 +246,8 @@ class Home extends Component {
 							</li>
 							<li>
 								<Link
-									to="/exercise"
-									className="btnCustomerNew btnSetting"
+									to='/exercise'
+									className='btnCustomerNew btnSetting'
 									style={{
 										backgroundImage: '/assets/btnSetting.png',
 									}}
@@ -256,8 +256,8 @@ class Home extends Component {
 							</li>
 							<li>
 								<Link
-									to="/assign"
-									className="btnCustomerNew btnExercise"
+									to='/assign'
+									className='btnCustomerNew btnExercise'
 									style={{
 										backgroundImage: '/assets/btnExercise.png',
 									}}
@@ -266,8 +266,8 @@ class Home extends Component {
 							</li>
 							<li>
 								<Link
-									to="/sales"
-									className="btnCustomerNew btnSales"
+									to='/sales'
+									className='btnCustomerNew btnSales'
 									style={{
 										backgroundImage: '/assets/btnSales.png',
 									}}
@@ -276,8 +276,8 @@ class Home extends Component {
 							</li>
 							<li>
 								<Link
-									to="/statistics"
-									className="btnCustomerNew btnStatic"
+									to='/statistics'
+									className='btnCustomerNew btnStatic'
 									style={{
 										backgroundImage: '/assets/btnStatic.png',
 									}}
@@ -286,8 +286,8 @@ class Home extends Component {
 							</li>
 							<li>
 								<Link
-									to="/statistics"
-									className="btnCustomerNew btnStatic"
+									to='/statistics'
+									className='btnCustomerNew btnStatic'
 									style={{
 										backgroundImage: '/assets/aboutManage.png',
 									}}
@@ -296,23 +296,23 @@ class Home extends Component {
 							</li>
 						</ul>
 					</div>
-					<section className="homeAbout">
+					<section className='homeAbout'>
 						<h3>
-							<div className="parallelogram"></div>
+							<div className='parallelogram'></div>
 							About 오마이짐
 						</h3>
-						<section className="aboutExplain">
+						<section className='aboutExplain'>
 							<p>
 								헬스 회원 스마트 관리 시스템으로 기존 회원 관리 방식에서
 								탈피하여 쉬운 회원관리, 스마트한 서비스를 제공합니다.
 							</p>
 							<button>자세히보기</button>
 						</section>
-						<section className="aboutList">
+						<section className='aboutList'>
 							<ul>
 								<li>
 									<div
-										className="imageBox"
+										className='imageBox'
 										style={{
 											backgroundImage: '/assets/img/aboutProduct.png',
 										}}
@@ -326,7 +326,7 @@ class Home extends Component {
 								</li>
 								<li>
 									<div
-										className="imageBox"
+										className='imageBox'
 										style={{
 											backgroundImage: '/assets/img/aboutExercise.png',
 										}}
@@ -340,7 +340,7 @@ class Home extends Component {
 								</li>
 								<li>
 									<div
-										className="imageBox"
+										className='imageBox'
 										style={{
 											backgroundImage: '/assets/img/aboutManage.png',
 										}}
@@ -356,7 +356,7 @@ class Home extends Component {
 						</section>
 					</section>
 				</div>
-				<div className="footer">
+				<div className='footer'>
 					<Footer />
 				</div>
 			</div>
