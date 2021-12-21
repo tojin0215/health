@@ -428,11 +428,11 @@ class Customer extends Component {
 				</header>
 				<ClickAwayListener onClickAway={this.handleClickAway}>
 					<div className='container'>
-						<div>
+						{/* <div>
 							<Button variant='primary'>Modal</Button>
 							<Modal
-								// show={show}
-								// onHide={() => setShow(false)}
+								show={show}
+								onHide={() => setShow(false)}
 								dialogClassName='modal-90w'
 								aria-labelledby='example-modal'
 							>
@@ -446,7 +446,7 @@ class Customer extends Component {
 									</Row>
 								</Modal.Body>
 							</Modal>
-						</div>
+						</div> */}
 						<div className='SearchInput'>
 							<div className='SearchInputIn'>
 								<Dropdown
