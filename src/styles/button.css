@@ -1,5 +1,5 @@
 .btn {
-	font-size: 1.7rem;
+	font-size: 2rem;
 }
 
 .customercalendar button {
@@ -14,8 +14,6 @@ button {
 	height: 5rem;
 	border: none;
 	border-radius: 3rem;
-	padding: 0.4rem 2rem;
-	margin: 1rem;
 	background-color: #fff;
 	color: #0f78ff;
 	font-size: 2rem;
@@ -24,6 +22,7 @@ button {
 	align-self: flex-end;
 	transition: 0.35s ease-in-out;
 	cursor: pointer;
+	padding: 0 2rem;
 	box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
 }
 

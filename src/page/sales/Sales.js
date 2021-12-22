@@ -607,14 +607,14 @@ class Sales extends Component {
 					<div className='salesUtill'>
 						<div className='salesStatus'>
 							<button
-								className='dateSort'
+								className='dateSort mr-3'
 								value='오늘'
 								onClick={this.dateClick}
 							>
 								당일
 							</button>
 							<button
-								className='dateSort'
+								className='dateSort mr-3'
 								value='한달'
 								onClick={this.dateClick}
 							>
@@ -689,7 +689,7 @@ class Sales extends Component {
 						</BootstrapTable>
 						<div className='salesUtill salesUtill2 d-flex flex-row-reverse'>
 							<Link to='/sales/add'>
-								<button className='btnSolid'>결제 등록</button>
+								<button className='btnSolid mx-4'>결제 등록</button>
 							</Link>
 						</div>
 						<h5>전체 기록</h5>

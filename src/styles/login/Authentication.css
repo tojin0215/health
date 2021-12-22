@@ -59,19 +59,7 @@
 	text-indent: 1rem;
 	color: #777;
 }
-.auth .card .row .btn {
-	margin-top: 2rem;
-	display: block;
-	border-radius: 1rem;
-	font-size: 1.6rem;
-	color: #fff;
-}
-
-.auth .card .row .btn button {
-	width: 31.8rem;
-}
 
 .loginCard button {
 	width: 31.8rem;
-	margin: 0.4rem;
 }

@@ -17,10 +17,6 @@
 	padding: 0;
 }
 
-.assignExercise .inputCheckRow {
-	padding: 2rem 0;
-}
-
 .assignExercise .CustomerInbody > div {
 	display: flex;
 	flex-wrap: wrap;
@@ -80,15 +76,38 @@
 	margin: 5rem 0 0.6rem auto;
 }
 
-.assignExercise .inputCheckRow > label {
-	display: flex;
-	flex-wrap: wrap;
+.assignExercise .inputCheckRow {
+	padding: 2rem 0;
 }
 
-.assignExercise .inputCheckRow > label .imageBox {
+.assignExercise .inputCheckRow > div > label {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+	font-size: 2.2rem;
+}
+
+.assignExercise .inputCheckRow > div > label .imageBox {
 	width: 100%;
 	height: 15rem;
 	background: no-repeat center/70% auto;
+}
+
+.assignExercise .inputCheckRow > div > label:nth-child(1) .imageBox {
+	background-image: url(/src/img/assignUpper.png);
+}
+.assignExercise .inputCheckRow > div > label:nth-child(2) .imageBox {
+	background-image: url(/src/img/assignLower.png);
+}
+.assignExercise .inputCheckRow > div > label:nth-child(3) > .imageBox {
+	background-image: url(/src/img/assignEntire.png);
+}
+.assignExercise .inputCheckRow > div > label:nth-child(4) > .imageBox {
+	background-image: url(/src/img/assignCore.png);
+}
+.assignExercise .inputCheckRow > div > label:nth-child(5) > .imageBox {
+	background-image: url(/src/img/assignAerobic.png);
 }
 
 .assignExercise .exerciseSelectList .flexbetween {
@@ -136,9 +155,6 @@
 	}
 	.assignExercise .exerciseSelectList .flexbetween {
 		flex-wrap: wrap;
-	}
-	.assignExercise .inputCheckRow > label {
-		width: 33.3%;
 	}
 	.assignExercise .exerciseSelectList .flexbetween > button {
 		width: calc(50% - 2rem);

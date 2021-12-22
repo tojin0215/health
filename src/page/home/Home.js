@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 import '../../styles/home/home.css';
 
+import Button from 'react-bootstrap/Button';
 // import  { PC, Mobile } from '../../component/MediaQuery';
 // import Menu from '../../component/navigation/Menu';
 
@@ -310,7 +311,7 @@ class Home extends Component {
 								헬스 회원 스마트 관리 시스템으로 기존 회원 관리 방식에서
 								탈피하여 쉬운 회원관리, 스마트한 서비스를 제공합니다.
 							</p>
-							<button>자세히보기</button>
+							<Button variant='outline-primary'>자세히보기</Button>
 						</section>
 						<section className='aboutList'>
 							<ul>
@@ -326,7 +327,7 @@ class Home extends Component {
 										헬스, 필라테스 등의 운동상품과 함께 운동복, 사물함 등의
 										상품도 함께 등록하고 매출을 관리할 수 있습니다.
 									</p>
-									<button>더보기</button>
+									<Button variant='outline-primary'>더보기</Button>
 								</li>
 								<li>
 									<div
@@ -340,7 +341,7 @@ class Home extends Component {
 										센터의 전문가가 사용자와 상담하고 적합한 운동 리스트를
 										배정해 줄 수 있습니다.
 									</p>
-									<button>더보기</button>
+									<Button variant='outline-primary'>더보기</Button>
 								</li>
 								<li>
 									<div
@@ -354,7 +355,7 @@ class Home extends Component {
 										회원을 쉽게 등록하고 수정할 수 있으며, 회원의 인바디 정보,
 										운동 정보 등도 함께 관리할 수 있습니다.
 									</p>
-									<button>더보기</button>
+									<Button variant='outline-primary'>더보기</Button>
 								</li>
 							</ul>
 						</section>

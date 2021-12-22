@@ -6,7 +6,6 @@ import MegaMenu from '../../component/navigation/Menu';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
 
 import { getStatusRequest } from '../../action/authentication';
 
@@ -1065,6 +1064,12 @@ class AssignExercise extends Component {
 			afterSaveCell: this.afterSaveCell,
 		};
 
+		const renderTooltip = (props) => (
+			<Tooltip id='button-tooltip' {...props}>
+				Simple tooltip
+			</Tooltip>
+		);
+
 		return (
 			<div>
 				<h3>{exercise_name} 운동 목록</h3>
@@ -1311,7 +1316,12 @@ class AssignExercise extends Component {
 								<div className='circle'></div>
 								운동 묶음 선택 (기본 설정)
 							</h5>
-							{this.createViewDefaultExerciseButton()}
+							<p className='mb-3 w-100 fs-3'>
+								부위 별로 미리 설정한 운동 묶음을 간편하게 배정할 수 있습니다.
+							</p>
+							<div className='d-flex w-100'>
+								{this.createViewDefaultExerciseButton()}
+							</div>
 						</div>
 						<h5>
 							<div className='circle'></div>

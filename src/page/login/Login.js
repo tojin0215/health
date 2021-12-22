@@ -126,7 +126,7 @@ const Slideshow = () => {
 					</div>
 				</div>
 				<div className='each-slide'>
-					<div style={{ backgroundImage: '/src/img/slide_1.png' }}>
+					<div style={{ backgroundImage: 'url(/src/img/slide_1.png)' }}>
 						<span>운동 배정</span>
 					</div>
 				</div>
