@@ -989,7 +989,7 @@ class AssignExercise extends Component {
 		const exerciseList = ['상체', '하체', '전신', '코어', '유산소', '기타'];
 		return exerciseList.map((name, index) => (
 			<button
-				type="button"
+				type='button'
 				key={'createViewExerciseListButton.' + index}
 				value={name}
 				onClick={this.handleOnClick}
@@ -1001,20 +1001,20 @@ class AssignExercise extends Component {
 	createViewDefaultExerciseButton = () => {
 		const exerciseList = ['상체', '하체', '전신', '코어', '유산소'];
 		// const imagenumber = [
-		// 	'/assets/assignUpper.png',
-		// 	'/assets/assignLower.png',
-		// 	'/assets/assignEntire.png',
-		// 	'/assets/assignCore.png',
-		// 	'/assets/assignAerobic.png',
+		// 	'url(/src/img/assignUpper.png)',
+		// 	'url(/src/img/assignLower.png)',
+		// 	'url(/src/img/assignEntire.png)',
+		// 	'url(/src/img/assignCore.png)',
+		// 	'url(/src/img/assignAerobic.png)',
 		// ];
 		return exerciseList.map((name, index) => (
 			<label>
 				<div
-					className="imageBox"
+					className='imageBox'
 					// style={{ backgroundImage: 'url(' + imagenumber + ')' }}
 				></div>
 				<input
-					type="checkBox"
+					type='checkBox'
 					name={'assignDefault|' + name}
 					key={'createViewDefaultExerciseButton' + index}
 					onChange={this.selectHandleOnClick}
@@ -1073,14 +1073,14 @@ class AssignExercise extends Component {
 					data={this.state.exerciseList}
 					pagination={this.state.exerciseList.length > 1}
 					options={options}
-					tableHeaderClass="tableHeader"
-					tableContainerClass="tableContainer"
+					tableHeaderClass='tableHeader'
+					tableContainerClass='tableContainer'
 					selectRow={selectRowProp}
 					cellEdit={cellEdit}
-					className="table2"
+					className='table2'
 				>
 					<TableHeaderColumn
-						dataField="no"
+						dataField='no'
 						thStyle={{ textAlign: 'center' }}
 						tdStyle={{ textAlign: 'center' }}
 						isKey
@@ -1088,49 +1088,49 @@ class AssignExercise extends Component {
 						no
 					</TableHeaderColumn>
 					<TableHeaderColumn
-						dataField="name"
+						dataField='name'
 						thStyle={{ textAlign: 'center' }}
 						tdStyle={{ textAlign: 'center' }}
 					>
 						운동이름
 					</TableHeaderColumn>
 					<TableHeaderColumn
-						dataField="tool"
+						dataField='tool'
 						thStyle={{ textAlign: 'center' }}
 						tdStyle={{ textAlign: 'center' }}
 					>
 						운동도구
 					</TableHeaderColumn>
 					<TableHeaderColumn
-						dataField="aa"
+						dataField='aa'
 						thStyle={{ textAlign: 'center' }}
 						tdStyle={{ textAlign: 'center' }}
 					>
 						운동부위
 					</TableHeaderColumn>
 					<TableHeaderColumn
-						dataField="set"
+						dataField='set'
 						thStyle={{ textAlign: 'center' }}
 						tdStyle={{ textAlign: 'center' }}
 					>
 						세트
 					</TableHeaderColumn>
 					<TableHeaderColumn
-						dataField="bb"
+						dataField='bb'
 						thStyle={{ textAlign: 'center' }}
 						tdStyle={{ textAlign: 'center' }}
 					>
 						횟수
 					</TableHeaderColumn>
 					<TableHeaderColumn
-						dataField="cc"
+						dataField='cc'
 						thStyle={{ textAlign: 'center' }}
 						tdStyle={{ textAlign: 'center' }}
 					>
 						휴식시간
 					</TableHeaderColumn>
 					<TableHeaderColumn
-						dataField="link"
+						dataField='link'
 						thStyle={{ textAlign: 'center' }}
 						tdStyle={{ textAlign: 'center' }}
 					>
@@ -1144,22 +1144,22 @@ class AssignExercise extends Component {
 
 	render() {
 		return (
-			<div className="assignExercise">
-				<div className="header">
+			<div className='assignExercise'>
+				<div className='header'>
 					<Header />
 					<Navigation goLogin={this.goLogin} />
 					<MegaMenu />
-					<div className="localNavigation">
-						<div className="container">
+					<div className='localNavigation'>
+						<div className='container'>
 							<h2>
-								<div className="parallelogram"></div>
+								<div className='parallelogram'></div>
 								운동 배정
 								<span>.</span>
 							</h2>
-							<div className="breadCrumb">
-								<Link to="/home">HOME</Link>
+							<div className='breadCrumb'>
+								<Link to='/home'>HOME</Link>
 								<span>&#62;</span>
-								<Link to="/assign">운동 배정</Link>
+								<Link to='/assign'>운동 배정</Link>
 							</div>
 							{/*.breadCrumb */}
 						</div>
@@ -1168,23 +1168,23 @@ class AssignExercise extends Component {
 					{/*.localNavigation */}
 				</div>
 				{/*.header */}
-				<div className="container">
-					<article className="waySub">
+				<div className='container'>
+					<article className='waySub'>
 						<Link
 							to={{
 								pathname: '/assign/inbody',
 								state: { member_no: this.state.member_no, a: false },
 							}}
 						>
-							<button className="btnSolid" type="button">
+							<button className='btnSolid' type='button'>
 								고객인바디
 							</button>
 						</Link>
 					</article>
-					<section className="customerSearch">
+					<section className='customerSearch'>
 						<button
-							className="btnAssignCusSearch"
-							type="button"
+							className='btnAssignCusSearch'
+							type='button'
 							onClick={this.handleClickOpen}
 						>
 							회원검색
@@ -1192,32 +1192,32 @@ class AssignExercise extends Component {
 						<Dialog
 							open={this.state.open}
 							onClose={this.handleClose}
-							maxWidth="lg"
+							maxWidth='lg'
 						>
 							<DialogTitle>고객 검색</DialogTitle>
 							<DialogContent>
-								<div className="customerSearch">
+								<div className='customerSearch'>
 									<Dropdown
-										className="searchDrop"
+										className='searchDrop'
 										options={options}
 										onChange={this.selectItem}
 										value={this.state.item}
-										placeholder="Select an option"
+										placeholder='Select an option'
 									/>
 									{/*.searchDrop */}
 									<input
-										type="text"
-										id="search"
+										type='text'
+										id='search'
 										checked={this.state.search}
 										onChange={this.handleChange}
 									/>
 									{/*#search */}
-									<button type="button" onClick={this.search}>
+									<button type='button' onClick={this.search}>
 										고객 검색
 									</button>
 								</div>
 								{/*.customerSearch */}
-								<Table className="addsalesSearchTable">
+								<Table className='addsalesSearchTable'>
 									<TableHead>
 										<TableRow>
 											<TableCell>번호</TableCell>
@@ -1237,7 +1237,7 @@ class AssignExercise extends Component {
 													<TableCell>
 														<DialogActions>
 															<button
-																type="button"
+																type='button'
 																onClick={this.choiceUser}
 																id={c.no}
 																value={[c.userName, c.phone]}
@@ -1251,20 +1251,20 @@ class AssignExercise extends Component {
 											))
 										) : (
 											<TableRow>
-												<TableCell colSpan="6" align="center"></TableCell>
+												<TableCell colSpan='6' align='center'></TableCell>
 											</TableRow>
 										)}
 									</TableBody>
 								</Table>
 							</DialogContent>
 							<DialogActions>
-								<button type="button" onClick={this.handleClose}>
+								<button type='button' onClick={this.handleClose}>
 									닫기
 								</button>
 							</DialogActions>
 						</Dialog>
 					</section>
-					<section className="CustomerInbody sectionGlass">
+					<section className='CustomerInbody sectionGlass'>
 						<h3>
 							<span>{this.state.userName}</span>님 운동배정
 						</h3>
@@ -1298,35 +1298,35 @@ class AssignExercise extends Component {
 								state: { member_no: this.state.member_no },
 							}}
 						>
-							<button className="btnSolid" type="button">
+							<button className='btnSolid' type='button'>
 								운동 배정 확인
 							</button>
 						</Link>
 					</section>
 					{/*.CustomerInbody */}
-					<section className="assignWorkout">
+					<section className='assignWorkout'>
 						<h3>운동 목록</h3>
-						<div className="inputCheckRow">
+						<div className='inputCheckRow'>
 							<h5>
-								<div className="circle"></div>
+								<div className='circle'></div>
 								운동 묶음 선택 (기본 설정)
 							</h5>
 							{this.createViewDefaultExerciseButton()}
 						</div>
 						<h5>
-							<div className="circle"></div>
+							<div className='circle'></div>
 							운동 개별 선택
 						</h5>
-						<div className="exerciseSelectList">
-							<div className="flexbetween">
+						<div className='exerciseSelectList'>
+							<div className='flexbetween'>
 								{this.createViewExerciseListButton()}
 							</div>
 						</div>
 						{this.createViewExerciseListTable()}
 
 						<button
-							className="btnSolid"
-							type="button"
+							className='btnSolid'
+							type='button'
 							onClick={this.handleIgnoreClick}
 						>
 							{' '}
@@ -1359,7 +1359,7 @@ class AssignExercise extends Component {
 					</section>
 				</div>
 				{/*.container */}
-				<div className="footer">
+				<div className='footer'>
 					<Footer />
 				</div>
 				{/*.footer */}

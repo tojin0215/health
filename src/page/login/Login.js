@@ -97,36 +97,36 @@ const mapDispatchToProps = (dispatch) => {
 // import slide5 from 'img/slide_5.png';
 
 const Slideshow = () => {
-	// const slide1 = '/assets/slide_1.png' + slide_1 + '.png';
-	// const slide2 = '/assets/slide_2.png' + slide_2 + '.png';
-	// const slide3 = '/assets/slide_3.png' + slide_3 + '.png';
-	// const slide4 = '/assets/slide_4.png' + slide_4 + '.png';
-	// const slide5 = '/assets/slide_5.png' + slide_5 + '.png';
+	// const slide1 = '/src/img/slide_1.png' + slide_1 + '.png';
+	// const slide2 = '/src/img/slide_2.png' + slide_2 + '.png';
+	// const slide3 = '/src/img/slide_3.png' + slide_3 + '.png';
+	// const slide4 = '/src/img/slide_4.png' + slide_4 + '.png';
+	// const slide5 = '/src/img/slide_5.png' + slide_5 + '.png';
 	return (
 		<div>
 			<Slide easing='ease' {...fadeProperties}>
 				<div className='each-slide'>
-					<div style={{ backgroundImage: 'url(/assets/slide_1.png)' }}>
+					<div style={{ backgroundImage: 'url(/src/img/slide_1.png)' }}>
 						<span>회원 관리</span>
 					</div>
 				</div>
 				<div className='each-slide'>
-					<div style={{ backgroundImage: '/assets/slide_1.png' }}>
+					<div style={{ backgroundImage: 'url(/src/img/slide_1.png)' }}>
 						<span>회원 인바디 체크</span>
 					</div>
 				</div>
 				<div className='each-slide'>
-					<div style={{ backgroundImage: '/assets/slide_1.png' }}>
+					<div style={{ backgroundImage: 'url(/src/img/slide_1.png)' }}>
 						<span>결제 관리</span>
 					</div>
 				</div>
 				<div className='each-slide'>
-					<div style={{ backgroundImage: '/assets/slide_1.png' }}>
+					<div style={{ backgroundImage: 'url(/src/img/slide_1.png)' }}>
 						<span>매출 현황</span>
 					</div>
 				</div>
 				<div className='each-slide'>
-					<div style={{ backgroundImage: '/assets/slide_1.png' }}>
+					<div style={{ backgroundImage: '/src/img/slide_1.png' }}>
 						<span>운동 배정</span>
 					</div>
 				</div>

@@ -193,44 +193,44 @@ class Register extends Component {
 		console.log(userinfo);
 
 		return (
-			<div className="wrap loginWrap register">
-				<div className="header">
+			<div className='wrap loginWrap register'>
+				<div className='header'>
 					<Header />
 					<Navigation />
 				</div>
-				<div className="localNavigation">
-					<div className="container">
+				<div className='localNavigation'>
+					<div className='container'>
 						<h2>
-							<div className="parallelogram"></div>
+							<div className='parallelogram'></div>
 							회원가입
 							<span>.</span>
 						</h2>
 					</div>
 				</div>
-				<div className="container">
-					<form className="AddSalesForm productPay sectionGlass">
+				<div className='container'>
+					<form className='AddSalesForm productPay sectionGlass'>
 						{/* <div className='registerId'> */}
 						<div
-							className="resigterVisual"
-							style={{ backgroundImage: 'assets/resiVisual.jpeg' }}
+							className='resigterVisual'
+							style={{ backgroundImage: 'src/img/resiVisual.jpeg' }}
 						></div>
 						<ul>
 							<li>
 								<TextField
 									value={this.state.id}
 									onChange={this.handleChange}
-									id="id"
-									label="아이디"
+									id='id'
+									label='아이디'
 									error={this.state.id_err}
-									color="blue"
+									color='blue'
 									required
 									autoFocus
 								/>
 							</li>
-							<li className="overlapCheck">
+							<li className='overlapCheck'>
 								<button
-									className="btnSolid"
-									type="button"
+									className='btnSolid'
+									type='button'
 									onClick={this.idCheck}
 								>
 									중복확인
@@ -245,9 +245,9 @@ class Register extends Component {
 								<TextField
 									value={this.state.password}
 									onChange={this.handleChange}
-									type="password"
-									id="password"
-									label="비밀번호"
+									type='password'
+									id='password'
+									label='비밀번호'
 									error={this.state.password_err}
 									required
 								/>
@@ -256,9 +256,9 @@ class Register extends Component {
 								<TextField
 									value={this.state.password_confirm}
 									onChange={this.handleChange}
-									type="password"
-									id="password_confirm"
-									label="비밀번호확인"
+									type='password'
+									id='password_confirm'
+									label='비밀번호확인'
 									error={this.state.password_confirm_err}
 									required
 								/>
@@ -267,8 +267,8 @@ class Register extends Component {
 								<TextField
 									value={this.state.fitness_name}
 									onChange={this.handleChange}
-									id="fitness_name"
-									label="헬스장 이름"
+									id='fitness_name'
+									label='헬스장 이름'
 									error={this.state.fitness_name_err}
 									required
 								/>
@@ -277,8 +277,8 @@ class Register extends Component {
 								<TextField
 									value={this.state.fitness_addr}
 									onChange={this.handleChange}
-									id="fitness_addr"
-									label="헬스장 주소"
+									id='fitness_addr'
+									label='헬스장 주소'
 									error={this.state.fitness_addr_err}
 									required
 								/>
@@ -287,8 +287,8 @@ class Register extends Component {
 								<TextField
 									value={this.state.manager_name}
 									onChange={this.handleChange}
-									id="manager_name"
-									label="대표 이름"
+									id='manager_name'
+									label='대표 이름'
 									error={this.state.manager_name_err}
 									required
 								/>
@@ -297,8 +297,8 @@ class Register extends Component {
 								<TextField
 									value={this.state.phone}
 									onChange={this.handleChange}
-									id="phone"
-									label="대표 연락처(-제외)"
+									id='phone'
+									label='대표 연락처(-제외)'
 									error={this.state.phone_err}
 									required
 								/>
@@ -307,8 +307,8 @@ class Register extends Component {
 								<TextField
 									value={this.state.business_number}
 									onChange={this.handleChange}
-									id="business_number"
-									label="사업자 등록번호"
+									id='business_number'
+									label='사업자 등록번호'
 									error={this.state.business_number_err}
 									required
 								/>
@@ -317,16 +317,16 @@ class Register extends Component {
 								<TextField
 									value={this.state.business_phone}
 									onChange={this.handleChange}
-									id="business_phone"
-									label="사업장 연락처(-제외)"
+									id='business_phone'
+									label='사업장 연락처(-제외)'
 									error={this.state.business_phone_err}
 									required
 								/>
 							</li>
 						</ul>
 						<button
-							className="btnSolid"
-							type="button"
+							className='btnSolid'
+							type='button'
 							onClick={this.handleOnClick}
 						>
 							등록하기
@@ -334,7 +334,7 @@ class Register extends Component {
 					</form>
 					{/*.AddSalesForm productPay */}
 				</div>
-				<div className="footer">
+				<div className='footer'>
 					<Footer />
 				</div>
 			</div>

@@ -35,7 +35,7 @@ class MegaMenu extends Component {
 					<a href='/home'>
 						<img
 							alt='투진컴퍼니'
-							src='/assets/logo-text.png'
+							src='url(/src/img/logo-text.png)'
 							width='auto'
 							height='30'
 							className='d-inline-block align-top'

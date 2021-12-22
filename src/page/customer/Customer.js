@@ -567,7 +567,7 @@ class Customer extends Component {
 											onClick={this.handleClickAway}
 											className='btnSlideClose btnsolid'
 											style={{
-												backgroundImage: '/assets/btnCloseWhite.png',
+												backgroundImage: 'url(/src/img/btnCloseWhite.png)',
 											}}
 										>
 											닫기

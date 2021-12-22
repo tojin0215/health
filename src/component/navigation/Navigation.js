@@ -114,13 +114,13 @@ class Navigation extends Component {
 					</Nav>
 					<Nav className={styles.navUtill}>
 						<Navbar.Brand href='/home'>
-							<img
+							{/* <img
 								alt='투진컴퍼니'
-								src='/assets/logo-text.png'
+								src='%PUBLIC_URL%/assets/logo-text.png'
 								width='auto'
 								height='30'
 								className='d-inline-block align-top'
-							/>{' '}
+							/>{' '} */}
 							<span className={styles.navitem}>{userinfo.fitness_name}</span>
 						</Navbar.Brand>
 						<Nav.Item>

@@ -11,6 +11,8 @@ import '../../styles/home/home.css';
 // import  { PC, Mobile } from '../../component/MediaQuery';
 // import Menu from '../../component/navigation/Menu';
 
+// import MainVisual1 from 'url(/src/img/mainVisual1.png)';
+
 import { SERVER_URL } from '../../const/settings';
 
 const ip = SERVER_URL;
@@ -228,7 +230,9 @@ class Home extends Component {
 				<div className='container'>
 					<div
 						className='mainVisual'
-						style={{ backgroundImage: '/assets/mainVisual1.png' }}
+						style={{
+							backgroundImage: 'url(src/img/mainVisual1.png)',
+						}}
 					>
 						메인 이미지
 					</div>
@@ -239,7 +243,7 @@ class Home extends Component {
 									to='/customer'
 									className='btnCustomerNew btnCustomer'
 									style={{
-										backgroundImage: '/assets/btnCustomer.png',
+										backgroundImage: 'url(src/img/btnCustomer.png)',
 									}}
 								></Link>
 								<p>고객</p>
@@ -249,7 +253,7 @@ class Home extends Component {
 									to='/exercise'
 									className='btnCustomerNew btnSetting'
 									style={{
-										backgroundImage: '/assets/btnSetting.png',
+										backgroundImage: 'url(/src/img/btnSetting.png)',
 									}}
 								></Link>
 								<p>운동 설정</p>
@@ -259,7 +263,7 @@ class Home extends Component {
 									to='/assign'
 									className='btnCustomerNew btnExercise'
 									style={{
-										backgroundImage: '/assets/btnExercise.png',
+										backgroundImage: 'url(/src/img/btnExercise.png)',
 									}}
 								></Link>
 								<p>운동 배정</p>
@@ -269,7 +273,7 @@ class Home extends Component {
 									to='/sales'
 									className='btnCustomerNew btnSales'
 									style={{
-										backgroundImage: '/assets/btnSales.png',
+										backgroundImage: 'url(/src/img/btnSales.png)',
 									}}
 								></Link>
 								<p>상품매출</p>
@@ -279,7 +283,7 @@ class Home extends Component {
 									to='/statistics'
 									className='btnCustomerNew btnStatic'
 									style={{
-										backgroundImage: '/assets/btnStatic.png',
+										backgroundImage: 'url(/src/img/btnStatic.png)',
 									}}
 								></Link>
 								<p>통계</p>
@@ -289,7 +293,7 @@ class Home extends Component {
 									to='/statistics'
 									className='btnCustomerNew btnStatic'
 									style={{
-										backgroundImage: '/assets/aboutManage.png',
+										backgroundImage: 'url(/src/img/aboutManage.png)',
 									}}
 								></Link>
 								<p>관리자</p>
@@ -314,7 +318,7 @@ class Home extends Component {
 									<div
 										className='imageBox'
 										style={{
-											backgroundImage: '/assets/img/aboutProduct.png',
+											backgroundImage: 'url(/src/img/aboutProduct.png)',
 										}}
 									></div>
 									<h5>상품</h5>
@@ -328,7 +332,7 @@ class Home extends Component {
 									<div
 										className='imageBox'
 										style={{
-											backgroundImage: '/assets/img/aboutExercise.png',
+											backgroundImage: 'url(/src/img/aboutExercise.png)',
 										}}
 									></div>
 									<h5>운동</h5>
@@ -342,7 +346,7 @@ class Home extends Component {
 									<div
 										className='imageBox'
 										style={{
-											backgroundImage: '/assets/img/aboutManage.png',
+											backgroundImage: 'url(/src/img/aboutManage.png)',
 										}}
 									></div>
 									<h5>회원관리</h5>
