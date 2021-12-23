@@ -29,6 +29,7 @@ import '../../styles/customer/Customer.css';
 
 import { SERVER_URL } from '../../const/settings';
 import MegaMenu from '../../component/navigation/Menu';
+import CustomerCalendarComponent from '../../component/customer/CustomerCalendarComponent';
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -549,7 +550,9 @@ class Customer extends Component {
 						{this.state.show ? (
 							<Row className='customerSlideUtill'>
 								{/* 캘린더 시작 */}
-								<Col xs={6} className='bg-dark'></Col>
+								<Col xs={6} className='bg-dark'>
+									<CustomerCalendarComponent />
+								</Col>
 								{/* 캘린더 끝 */}
 								<Col xs={6} className='customerSlide'>
 									<div>

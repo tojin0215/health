@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import CustomerCalendarComponent from '../../component/customer/CustomerCalendarComponent';
 
 // Setup the localizer by providing the moment (or globalize) Object
 // to the correct localizer.
@@ -183,18 +184,7 @@ const events = [
 
 class CustomerCalendar extends Component {
 	render() {
-		return (
-			<div className='customercalendar' style={{ height: 700 }}>
-				<Calendar
-					localizer={localizer}
-					events={events}
-					startAccessor='start'
-					endAccessor='end'
-					// defaultView={"month"}
-					defaultDate={new Date(2015, 3, 12)}
-				/>
-			</div>
-		);
+		return <CustomerCalendarComponent />
 	}
 }
 
