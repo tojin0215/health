@@ -21,6 +21,8 @@ import btnSales from '../../../src/img/btnSales.png';
 import btnStatic from '../../../src/img/btnStatic.png';
 import aboutManage from '../../../src/img/aboutManage.png';
 
+import aboutProduct from '../../../src/img/aboutProduct.png';
+import aboutExercise from '../../../src/img/aboutExercise.png';
 
 import { SERVER_URL } from '../../const/settings';
 
@@ -328,7 +330,7 @@ class Home extends Component {
 									<div
 										className='imageBox'
 										style={{
-											backgroundImage: 'url(/src/img/aboutProduct.png)',
+											backgroundImage: `url(${aboutProduct})`,
 										}}
 									></div>
 									<h5>상품</h5>
@@ -342,7 +344,7 @@ class Home extends Component {
 									<div
 										className='imageBox'
 										style={{
-											backgroundImage: 'url(/src/img/aboutExercise.png)',
+											backgroundImage: `url(${aboutExercise})`,
 										}}
 									></div>
 									<h5>운동</h5>
@@ -356,7 +358,7 @@ class Home extends Component {
 									<div
 										className='imageBox'
 										style={{
-											backgroundImage: 'url(/src/img/aboutManage.png)',
+											backgroundImage: `url(${aboutManage})`,
 										}}
 									></div>
 									<h5>회원관리</h5>
