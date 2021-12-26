@@ -403,6 +403,9 @@ class Customer extends Component {
 
 		console.log('table__', this.state.userSalesLists2);
 		console.log('클릭,', this.state.show);
+
+		// const [show, setShow] = useState(false);
+
 		return (
 			<div className='customer'>
 				<header className='header'>
@@ -429,25 +432,154 @@ class Customer extends Component {
 				</header>
 				<ClickAwayListener onClickAway={this.handleClickAway}>
 					<div className='container'>
-						{/* <div>
+						<div>
 							<Button variant='primary'>Modal</Button>
 							<Modal
-								show={show}
+								show={this.state.show}
+								// show={true}
 								onHide={() => setShow(false)}
-								dialogClassName='modal-90w'
+								dialogClassName='modal-90w mw-100'
 								aria-labelledby='example-modal'
 							>
 								<Modal.Header closeButton>
-									<Modal.Title id='example-modal'>모달 테스트</Modal.Title>
+									<Modal.Title id='example-modal' className='fs-1'>
+										상세 회원정보
+									</Modal.Title>
 								</Modal.Header>
 								<Modal.Body>
-									<Row>
-										<Col xs={6}></Col>
-										<Col xs={6}></Col>
+									<Row className=''>
+										{/* 캘린더 시작 */}
+										<Col xs={12} md={8} className=''>
+											<CustomerCalendarComponent />
+										</Col>
+										{/* 캘린더 끝 */}
+										<Col xs={12} md={4} className=''>
+											<div>
+												<button
+													type='button'
+													onClick={this.handleClickAway}
+													className='btnSlideClose btnsolid'
+													style={{
+														backgroundImage: 'url(/src/img/btnCloseWhite.png)',
+													}}
+												>
+													닫기
+												</button>
+											</div>
+											<h5>
+												<div className='parallelogram'></div>
+												회원 정보
+											</h5>
+											<div className='pb-5 fs-3'>
+												<Row className='pb-2'>
+													<Col className='fw-bold fs-2' xs={12} md={4}>
+														이름
+													</Col>
+													<Col>{this.state.name}</Col>
+												</Row>
+												<Row className='pb-2'>
+													<Col className='fw-bold fs-2' xs={12} md={4}>
+														고객번호
+													</Col>
+													<Col>{this.state.member_no}</Col>
+												</Row>
+												<Row className='pb-2'>
+													<Col className='fw-bold fs-2' xs={12} md={4}>
+														정보
+													</Col>
+													<Col>{this.state.info}</Col>
+												</Row>
+												<Row className='pb-2'>
+													<Col className='fw-bold fs-2' xs={12} md={4}>
+														연락처
+													</Col>
+													<Col>{this.state.phone}</Col>
+												</Row>
+												<Row className='pb-2'>
+													<Col className='fw-bold fs-2' xs={12} md={4}>
+														주소
+													</Col>
+													<Col>{this.state.addr}</Col>
+												</Row>
+												<Row className='pb-2'>
+													<Col className='fw-bold fs-2' xs={12} md={4}>
+														등록일
+													</Col>
+													<Col>{this.state.startDate}</Col>
+												</Row>
+												<Row className='pb-2'>
+													<Col className='fw-bold fs-2' xs={12} md={4}>
+														담당자
+													</Col>
+													<Col>{this.state.trainer}</Col>
+												</Row>
+												<Row className='pb-2'>
+													<Col className='fw-bold fs-2' xs={12} md={4}>
+														비고
+													</Col>
+													<Col>{this.state.note}</Col>
+												</Row>
+												<Row>
+													<Col className='text-center'>
+														<Link
+															to={{
+																pathname: '/customer/update',
+																state: { member_no: this.state.member_no },
+															}}
+															className='btnCustomerNew '
+														>
+															<button className='btnSolid fs-3'>
+																수정하기
+															</button>
+														</Link>
+													</Col>
+												</Row>
+											</div>
+											<h6>
+												<div className='circle'></div>
+												상품 결제 내역
+											</h6>
+											<div className='tablewrap'>
+												<BootstrapTable
+													data={this.state.userSalesLists2}
+													hover
+													pagination={this.state.customerList.length > 1}
+													options={options1}
+													tableHeaderClass='tableHeader'
+													tableContainerClass='tableContainer'
+													className='table2'
+												>
+													<TableHeaderColumn
+														dataField='product'
+														thStyle={{ textAlign: 'center' }}
+														tdStyle={{ textAlign: 'center' }}
+														isKey
+													>
+														상품
+													</TableHeaderColumn>
+													<TableHeaderColumn
+														dataField='date'
+														dataFormat={dataFormatter}
+														thStyle={{ textAlign: 'center' }}
+														tdStyle={{ textAlign: 'center' }}
+													>
+														결제일자
+													</TableHeaderColumn>
+													<TableHeaderColumn
+														dataField='payment'
+														dataFormat={PriceFormatter}
+														thStyle={{ textAlign: 'center' }}
+														tdStyle={{ textAlign: 'center' }}
+													>
+														금액
+													</TableHeaderColumn>
+												</BootstrapTable>
+											</div>
+										</Col>
 									</Row>
 								</Modal.Body>
 							</Modal>
-						</div> */}
+						</div>
 						<div className='SearchInput'>
 							<div className='SearchInputIn'>
 								<Dropdown
@@ -547,116 +679,7 @@ class Customer extends Component {
 							</div>
 						</div>
 						{/* ------ 클릭하면 나와야하는 부분 ------ */}
-						{this.state.show ? (
-							<Row className='customerSlideUtill'>
-								{/* 캘린더 시작 */}
-								<Col xs={6} className=''>
-									<CustomerCalendarComponent />
-								</Col>
-								{/* 캘린더 끝 */}
-								<Col xs={6} className='customerSlide'>
-									<div>
-										<Link
-											to={{
-												pathname: '/customer/update',
-												state: { member_no: this.state.member_no },
-											}}
-											className='btnCustomerNew'
-										>
-											<button className='btnSolid'>수정하기</button>
-										</Link>
-										<button
-											type='button'
-											onClick={this.handleClickAway}
-											className='btnSlideClose btnsolid'
-											style={{
-												backgroundImage: 'url(/src/img/btnCloseWhite.png)',
-											}}
-										>
-											닫기
-										</button>
-									</div>
-									<h5>
-										<div className='parallelogram'></div>
-										회원 정보
-									</h5>
-									<ul>
-										<li>
-											<label>이름</label>
-											<label>{this.state.name}</label>
-										</li>
-										<li>
-											<label>고객번호</label>
-											<label>{this.state.member_no}</label>
-										</li>
-										<li>
-											<label>정보</label>
-											<label>{this.state.info}</label>
-										</li>
-										<li>
-											<label>연락처</label>
-											<label>{this.state.phone}</label>
-										</li>
-										<li>
-											<label>주소</label>
-											<label>{this.state.addr}</label>
-										</li>
-										<li>
-											<label>등록일</label>
-											<label>{this.state.startDate}</label>
-										</li>
-										<li>
-											<label>담당자</label>
-											<label>{this.state.trainer}</label>
-										</li>
-										<li>
-											<label>비고</label>
-											<label>{this.state.note}</label>
-										</li>
-									</ul>
-									<h6>
-										<div className='circle'></div>
-										상품 결제 내역
-									</h6>
-									<div className='tablewrap'>
-										<BootstrapTable
-											data={this.state.userSalesLists2}
-											hover
-											pagination={this.state.customerList.length > 1}
-											options={options1}
-											tableHeaderClass='tableHeader'
-											tableContainerClass='tableContainer'
-											className='table2'
-										>
-											<TableHeaderColumn
-												dataField='product'
-												thStyle={{ textAlign: 'center' }}
-												tdStyle={{ textAlign: 'center' }}
-												isKey
-											>
-												상품
-											</TableHeaderColumn>
-											<TableHeaderColumn
-												dataField='date'
-												dataFormat={dataFormatter}
-												thStyle={{ textAlign: 'center' }}
-												tdStyle={{ textAlign: 'center' }}
-											>
-												결제일자
-											</TableHeaderColumn>
-											<TableHeaderColumn
-												dataField='payment'
-												dataFormat={PriceFormatter}
-												thStyle={{ textAlign: 'center' }}
-												tdStyle={{ textAlign: 'center' }}
-											>
-												금액
-											</TableHeaderColumn>
-										</BootstrapTable>
-									</div>
-								</Col>
-							</Row>
-						) : null}
+						{/* {this.state.show ? <div></div> : null} */}
 						{/* ------ 클릭하면 나와야하는 부분 ------ */}
 					</div>
 				</ClickAwayListener>

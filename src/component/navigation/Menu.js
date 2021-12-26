@@ -4,6 +4,8 @@ import { Nav, Navbar, Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { setFitness } from '../../action/userinfo';
 
+import { textlogo } from '../../../src/img/logo-text.png';
+
 import $ from 'jquery';
 
 // import { MdMenu } from 'react-icons/md';
@@ -35,11 +37,11 @@ class MegaMenu extends Component {
 					<a href='/home'>
 						<img
 							alt='투진컴퍼니'
-							src='url(/src/img/logo-text.png)'
+							src={textlogo}
 							width='auto'
 							height='30'
 							className='d-inline-block align-top'
-						/>{' '}
+						/>
 					</a>
 				</div>
 				<div id='menu-icon'>
