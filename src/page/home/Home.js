@@ -13,6 +13,16 @@ import Button from 'react-bootstrap/Button';
 // import Menu from '../../component/navigation/Menu';
 
 // import MainVisual1 from 'url(/src/img/mainVisual1.png)';
+import MainVisual1 from '../../../src/img/mainVisual1.png';
+import btnCustomer from '../../../src/img/btnCustomer.png';
+import btnSetting from '../../../src/img/btnSetting.png';
+import btnExercise from '../../../src/img/btnExercise.png';
+import btnSales from '../../../src/img/btnSales.png';
+import btnStatic from '../../../src/img/btnStatic.png';
+import aboutManage from '../../../src/img/aboutManage.png';
+
+import aboutProduct from '../../../src/img/aboutProduct.png';
+import aboutExercise from '../../../src/img/aboutExercise.png';
 
 import { SERVER_URL } from '../../const/settings';
 
@@ -35,6 +45,7 @@ class Home extends Component {
 			admin: this.props.userinfo.manager_name,
 		};
 		this.cusFetch();
+		console.log(`${MainVisual1}`)
 	}
 
 	goLogin = () => {
@@ -232,7 +243,7 @@ class Home extends Component {
 					<div
 						className='mainVisual'
 						style={{
-							backgroundImage: 'url(src/img/mainVisual1.png)',
+							backgroundImage: `url(${MainVisual1})`,
 						}}
 					>
 						메인 이미지
@@ -244,7 +255,7 @@ class Home extends Component {
 									to='/customer'
 									className='btnCustomerNew btnCustomer'
 									style={{
-										backgroundImage: 'url(src/img/btnCustomer.png)',
+										backgroundImage: `url(${btnCustomer})`,
 									}}
 								></Link>
 								<p>고객</p>
@@ -254,7 +265,7 @@ class Home extends Component {
 									to='/exercise'
 									className='btnCustomerNew btnSetting'
 									style={{
-										backgroundImage: 'url(/src/img/btnSetting.png)',
+										backgroundImage: `url(${btnSetting})`,
 									}}
 								></Link>
 								<p>운동 설정</p>
@@ -264,7 +275,7 @@ class Home extends Component {
 									to='/assign'
 									className='btnCustomerNew btnExercise'
 									style={{
-										backgroundImage: 'url(/src/img/btnExercise.png)',
+										backgroundImage: `url(${btnExercise})`,
 									}}
 								></Link>
 								<p>운동 배정</p>
@@ -274,7 +285,7 @@ class Home extends Component {
 									to='/sales'
 									className='btnCustomerNew btnSales'
 									style={{
-										backgroundImage: 'url(/src/img/btnSales.png)',
+										backgroundImage: `url(${btnSales})`,
 									}}
 								></Link>
 								<p>상품매출</p>
@@ -284,7 +295,7 @@ class Home extends Component {
 									to='/statistics'
 									className='btnCustomerNew btnStatic'
 									style={{
-										backgroundImage: 'url(/src/img/btnStatic.png)',
+										backgroundImage: `url(${btnStatic})`,
 									}}
 								></Link>
 								<p>통계</p>
@@ -294,7 +305,7 @@ class Home extends Component {
 									to='/statistics'
 									className='btnCustomerNew btnStatic'
 									style={{
-										backgroundImage: 'url(/src/img/aboutManage.png)',
+										backgroundImage: `url(${aboutManage})`,
 									}}
 								></Link>
 								<p>관리자</p>
@@ -321,7 +332,7 @@ class Home extends Component {
 									<div
 										className='imageBox'
 										style={{
-											backgroundImage: 'url(/src/img/aboutProduct.png)',
+											backgroundImage: `url(${aboutProduct})`,
 										}}
 									></div>
 									<h5>상품</h5>
@@ -337,7 +348,7 @@ class Home extends Component {
 									<div
 										className='imageBox'
 										style={{
-											backgroundImage: 'url(/src/img/aboutExercise.png)',
+											backgroundImage: `url(${aboutExercise})`,
 										}}
 									></div>
 									<h5>운동</h5>
@@ -353,7 +364,7 @@ class Home extends Component {
 									<div
 										className='imageBox'
 										style={{
-											backgroundImage: 'url(/src/img/aboutManage.png)',
+											backgroundImage: `url(${aboutManage})`,
 										}}
 									></div>
 									<h5>회원관리</h5>

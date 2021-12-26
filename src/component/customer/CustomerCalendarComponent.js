@@ -214,6 +214,7 @@ class CustomerCalendarComponent extends Component {
                     const created = moment(item.createdAt);
                     const d = created.format("YYYY-MM-DD");
                     console.log(`${item.createdAt} => ${d} => ${created.get("year")}-${created.get("month")}-${created.get("date")}`);
+                    console.log(`${item.createdAt} => ${d} => ${created.add(1, "day").get("year")}-${created.add(1, "day").get("month")}-${created.add(1, "day").get("date")}`);
 
                     if (added_date.indexOf(d) >= 0) return;
                     else added_date.push(d);
@@ -238,7 +239,7 @@ class CustomerCalendarComponent extends Component {
                         start: start,
                         end: end,
                         allDay: true,
-                        title: `[헬스] ${created.format("hh:mm")}`,
+                        title: `[헬스 운동배정]`,
                     }
                 }).filter(item => item != undefined)
             })
@@ -298,7 +299,7 @@ class CustomerCalendarComponent extends Component {
 					startAccessor='start'
 					endAccessor='end'
 					// defaultView={"month"}
-					defaultDate={new Date(2015, 3, 12)}
+					defaultDate={new Date(2021, 11, 12)}
 				/>
 			</div>
 		);
