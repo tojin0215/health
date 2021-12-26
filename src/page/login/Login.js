@@ -43,10 +43,10 @@ class Login extends Component {
 	render() {
 		return (
 			<div className='wrap loginWrap'>
-				<div className='header'>
+				{/* <div className='header'>
 					<Header />
 					<Navigation />
-				</div>
+				</div> */}
 				<div className='localNavigation'>
 					<div className='container'>
 						<h2>
@@ -61,7 +61,7 @@ class Login extends Component {
 					<div className='slide-container sectionGlass'>
 						<h5>오마이짐 미리보기</h5>
 						<div className='loginSample'>
-							<p>체험 아이디로 미리 이용해볼 수 있습니다.</p>
+							<p>체험 아이디로 미리 둘러볼 수 있습니다.</p>
 							<p>아이디 : sample</p>
 							<p>비밀번호 : sample</p>
 						</div>

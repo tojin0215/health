@@ -62,7 +62,7 @@ class Authentication extends Component {
 					<input
 						name='id'
 						type='text'
-						className='validate'
+						className='validate mx-0 my-3'
 						onChange={this.handleChange}
 						value={this.state.id}
 					/>
@@ -72,7 +72,7 @@ class Authentication extends Component {
 					<input
 						name='password'
 						type='password'
-						className='validate'
+						className='validate mx-0 my-3'
 						onChange={this.handleChange}
 						value={this.state.password}
 						onKeyPress={this.handleKeyPress}
@@ -95,7 +95,9 @@ class Authentication extends Component {
 							</Button>
 						</a>
 						<Link to='/register'>
-							<Button variant='outline-secondary'>회원가입</Button>
+							<Button className='border-0' variant='outline-secondary'>
+								회원가입
+							</Button>
 						</Link>
 					</div>
 				</div>
@@ -123,8 +125,8 @@ class Authentication extends Component {
 			<div className='container auth'>
 				<div className='welcomeMent'>
 					<p>Hello,</p>
-					<p>안녕하세요</p>
-					<p>헬스짐 관리자 로그인입니다</p>
+					<p>안녕하세요!</p>
+					<p>헬스짐 관리자 오마이짐입니다.</p>
 				</div>
 				<Link className='logo' to='/'>
 					헬스 웹

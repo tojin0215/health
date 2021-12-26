@@ -550,7 +550,7 @@ class Customer extends Component {
 						{this.state.show ? (
 							<Row className='customerSlideUtill'>
 								{/* 캘린더 시작 */}
-								<Col xs={6} className='bg-dark'>
+								<Col xs={6} className=''>
 									<CustomerCalendarComponent />
 								</Col>
 								{/* 캘린더 끝 */}
