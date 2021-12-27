@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { getAssginExercise, getEnter } from '../../api/user';
+import { getAssginExercise, getEnter, getReservation } from '../../api/user';
 
 // Setup the localizer by providing the moment (or globalize) Object
 // to the correct localizer.
@@ -182,10 +182,22 @@ const events = [
 	},
 ];
 
+const demo_reservation = [{
+	res_no: 0,
+	date: moment().format("YYYY-MM-DD"),
+	time: moment().format("hh:mm:ss"),
+	exercise_name: "PT기구",
+	customer_name: "이회원",
+	customer_id: 6,
+	isCancel: null,
+	cancelComment: null,
+}]
+
 class CustomerCalendarComponent extends Component {
     state = {
         enters: [],
         assigned_exercise: [],
+        reservations: [],
         fitness_no: 2,
         customer_no: 2,
     }
@@ -195,6 +207,7 @@ class CustomerCalendarComponent extends Component {
         this.state = {
             enters: [],
             assigned_exercise: [],
+			reservations: [],
             fitness_no: props.fitness_no? props.fitness_no : 2,
             customer_no: props.customer_no? props.customer_no : 2,
         }
@@ -203,7 +216,35 @@ class CustomerCalendarComponent extends Component {
     componentDidMount() {
         this.fetchEnter();
         this.fetchAssignExercise();
+		this.fetchReservation();
     }
+
+	fetchReservation = () => {
+		// getReservation()
+		// .then(result => {
+		// 	console.log(result);
+		// })
+		this.setState({
+			reservations: demo_reservation.map(item => {
+				const created = moment(item.date);
+				const start_m = moment(created.format("YYYY-MM-DD"));
+				const ent_m = moment(created.format("YYYY-MM-DD")).add(1, "day");
+
+				const start = new Date(start_m.get("year"), start_m.get("month"), start_m.get("date"));
+				const end = new Date(ent_m.get("year"), ent_m.get("month"), ent_m.get("date"));
+				
+				return {
+					id: item.res_no,
+					customer_no: item.customer_id,
+					created: created,
+					start: start,
+					end: end,
+					allDay: true,
+					title: `[${item.exercise_name}] ${item.customer_name} ${item.time}`,
+				}
+			}).filter(item => item != undefined)
+		})
+	}
 
     fetchAssignExercise = () => {
         getAssginExercise(this.state.fitness_no, this.state.customer_no)
@@ -212,24 +253,18 @@ class CustomerCalendarComponent extends Component {
             this.setState({
                 assigned_exercise: result.map(item => {
                     const created = moment(item.createdAt);
+					const start_m = moment(created.format("YYYY-MM-DD"));
+					const ent_m = moment(created.format("YYYY-MM-DD")).add(1, "day");
                     const d = created.format("YYYY-MM-DD");
-                    console.log(`${item.createdAt} => ${d} => ${created.get("year")}-${created.get("month")}-${created.get("date")}`);
-                    console.log(`${item.createdAt} => ${d} => ${created.add(1, "day").get("year")}-${created.add(1, "day").get("month")}-${created.add(1, "day").get("date")}`);
+					
+                    console.debug(`start: ${item.createdAt} => ${d} => ${start_m.get("year")}-${start_m.get("month")}-${start_m.get("date")}`);
+                    console.debug(`end: ${item.createdAt} => ${d} => ${ent_m.get("year")}-${ent_m.get("month")}-${ent_m.get("date")}`);
 
                     if (added_date.indexOf(d) >= 0) return;
                     else added_date.push(d);
 
-                    const start = new Date(
-                        created.get("year"),
-                        created.get("month"),
-                        created.get("date")
-                    );
-                    const end = new Date(
-                        created.add(1, "day").get("year"),
-                        created.add(1, "day").get("month"),
-                        created.add(1, "day").get("date"),
-                    );
-                    console.log(start)
+                    const start = new Date(start_m.get("year"), start_m.get("month"), start_m.get("date"));
+                    const end = new Date(ent_m.get("year"), ent_m.get("month"), ent_m.get("date"));
 
                     return {
                         id: item.assign_exercise_no,
@@ -254,21 +289,18 @@ class CustomerCalendarComponent extends Component {
             this.setState({
                 enters: result.map(item => {
                     const created = moment(item.created);
+					const start_m = moment(created.format("YYYY-MM-DD"));
+					const ent_m = moment(created.format("YYYY-MM-DD")).add(1, "day");
                     const d = created.format("YYYY-MM-DD");
-                    console.log(`${item.createdAt} => ${d} => ${created.get("year")}-${created.get("month")}-${created.get("date")}`);
+					
+                    console.debug(`start: ${item.createdAt} => ${d} => ${start_m.get("year")}-${start_m.get("month")}-${start_m.get("date")}`);
+                    console.debug(`end: ${item.createdAt} => ${d} => ${ent_m.get("year")}-${ent_m.get("month")}-${ent_m.get("date")}`);
                     if (added_date.indexOf(d) >= 0) return;
                     else added_date.push(d);
 
-                    const start = new Date(
-                        created.get("year"),
-                        created.get("month"),
-                        created.get("date")
-                    );
-                    const end = new Date(
-                        created.add(1, "day").get("year"),
-                        created.add(1, "day").get("month"),
-                        created.add(1, "day").get("date"),
-                    );
+                    const start = new Date(start_m.get("year"), start_m.get("month"), start_m.get("date"));
+                    const end = new Date(ent_m.get("year"), ent_m.get("month"), ent_m.get("date"));
+
                     return {
                         id: item.customer_enter_no,
                         customer_enter_no: item.customer_enter_no,
@@ -285,8 +317,12 @@ class CustomerCalendarComponent extends Component {
         })
     }
 
+	handleOnSelectEvent = event => {
+		alert(event.title)
+	}
+
 	render() {
-        const complexData = [...this.state.enters, ...this.state.assigned_exercise]
+        const complexData = [...this.state.enters, ...this.state.assigned_exercise, ...this.state.reservations]
         const events = complexData.map((value, index) => {
             value['id'] = index;
             return value;
@@ -298,7 +334,8 @@ class CustomerCalendarComponent extends Component {
 					events={events}
 					startAccessor='start'
 					endAccessor='end'
-					// defaultView={"month"}
+					views={['month']}
+					onSelectEvent={this.handleOnSelectEvent}
 					defaultDate={new Date(2021, 11, 12)}
 				/>
 			</div>
