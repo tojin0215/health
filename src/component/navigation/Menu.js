@@ -71,6 +71,11 @@ class MegaMenu extends Component {
 								</NavLink>
 							</li>
 							<li>
+								<NavLink exact to='/reservation'>
+									예약페이지(가제)
+								</NavLink>
+							</li>
+							<li>
 								<NavLink
 									exact
 									to={{
