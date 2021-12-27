@@ -10,3 +10,7 @@ export const getAssginExercise = (fitness_no, customer_no) => {
     return axios.get(SERVER_URL + "/assignexercise", {params:{
         fitness_no: fitness_no, member_no: customer_no, type: "member"}}).then(response => response.data)
 }
+
+export const getReservation = () => {
+    return axios.get(SERVER_URL + "/reservation/select").then(response => response.data)
+}
