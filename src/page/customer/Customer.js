@@ -436,8 +436,7 @@ class Customer extends Component {
 							<Button variant='primary'>Modal</Button>
 							<Modal
 								show={this.state.show}
-								// show={true}
-								onHide={() => setShow(false)}
+								onHide={this.handleClickAway}
 								dialogClassName='modal-90w mw-100'
 								aria-labelledby='example-modal'
 							>
