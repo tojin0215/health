@@ -75,5 +75,6 @@
   },
   "eslintConfig": {
     "extends": "./node_modules/react-scripts/config/eslint.js"
-  }
+  },
+  "proxy": "https://ohmygym.kr/"
 }
