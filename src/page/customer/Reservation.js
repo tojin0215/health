@@ -27,115 +27,115 @@ import 'react-dropdown/style.css';
 import { SERVER_URL } from '../../const/settings';
 const ip = SERVER_URL;
 
-const getSearchUser = (type, search, fitness_no) => (
-    axios.get("/api/customer", {
-        params: {
-            type: type,
-            search: search,
-            fn: fitness_no,
-        }
-    }).then(response => response.data)
-)
+// const getSearchUser = (type, search, fitness_no) => (
+//     axios.get("/api/customer", {
+//         params: {
+//             type: type,
+//             search: search,
+//             fn: fitness_no,
+//         }
+//     }).then(response => response.data)
+// )
 
 
-const CustomerFindAndSelect = (show, setShow, fitness_no, setCustomer) => {
-    const search_type_options = ['이름', '핸드폰'];
-    const [search_type, setSearchType] = useState(search_type_options[0])
-    const [search, setSearch] = useState("")
-    const [customers, setCustomers] = useState([]);
+// const CustomerFindAndSelect = (show, setShow, fitness_no, setCustomer) => {
+//     const search_type_options = ['이름', '핸드폰'];
+//     const [search_type, setSearchType] = useState(search_type_options[0])
+//     const [search, setSearch] = useState("")
+//     const [customers, setCustomers] = useState([]);
 
-    const handleSearch = () => {
-        let type = '0';
-        if (search_type === '이름') {
-            type = '0';
-        } else if (search_type === '핸드폰') {
-            type = '1';
-        }
-        getSearchUser(type, search, fitness_no)
-            .then(result => {
-                setCustomers(result.map(value => {
-                    return {
-                        no: value.member_no,
-                        member_no: value.member_no,
-                        userName: value.name,
-                        phone: value.phone,
-                    }
-                }))
-            });
-    }
+//     const handleSearch = () => {
+//         let type = '0';
+//         if (search_type === '이름') {
+//             type = '0';
+//         } else if (search_type === '핸드폰') {
+//             type = '1';
+//         }
+//         getSearchUser(type, search, fitness_no)
+//             .then(result => {
+//                 setCustomers(result.map(value => {
+//                     return {
+//                         no: value.member_no,
+//                         member_no: value.member_no,
+//                         userName: value.name,
+//                         phone: value.phone,
+//                     }
+//                 }))
+//             });
+//     }
 
-    return (<Dialog
-        open={show}
-        onClose={() => setShow(false)}
-        maxWidth='lg'>
-        <DialogTitle>고객 검색</DialogTitle>
-        <DialogContent>
-            <div className='customerSearch'>
-                <Dropdown
-                    className='searchDrop'
-                    options={search_type_options}
-                    onChange={e => setSearchType(e.value)}
-                    value={search_type}
-                />
-                {/*.searchDrop */}
-                <input
-                    type='text'
-                    id='search'
-                    checked={search}
-                    onChange={e => setSearch(e.target.value)}
-                />
-                {/*#search */}
-                <button type='button' onClick={handleSearch}>
-                    고객 검색
-                </button>
-            </div>
-            {/*.customerSearch */}
-            <Table className='addsalesSearchTable'>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>번호</TableCell>
-                        <TableCell>이름</TableCell>
-                        <TableCell>폰번호</TableCell>
-                        <TableCell>선택</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {customers ? (
-                        customers.map((c) => (
-                            <TableRow>
-                                <TableCell>{c.no}</TableCell>
-                                <TableCell>{c.userName}</TableCell>
-                                <TableCell>{c.phone}</TableCell>
-                                <TableCell>
-                                    <DialogActions>
-                                        <button
-                                            type='button'
-                                            onClick={() => setCustomer(c)}
-                                            id={c.no}
-                                            value={[c.userName, c.phone]}
-                                        >
-                                            선택
-                                        </button>
-                                        {/*#{c.no} */}
-                                    </DialogActions>
-                                </TableCell>
-                            </TableRow>
-                        ))
-                    ) : (
-                        <TableRow>
-                            <TableCell colSpan='6' align='center'></TableCell>
-                        </TableRow>
-                    )}
-                </TableBody>
-            </Table>
-        </DialogContent>
-        <DialogActions>
-            <button type='button' onClick={() => setShow(false)}>
-                닫기
-            </button>
-        </DialogActions>
-    </Dialog>)
-}
+//     return (<Dialog
+//         open={show}
+//         onClose={() => setShow(false)}
+//         maxWidth='lg'>
+//         <DialogTitle>고객 검색</DialogTitle>
+//         <DialogContent>
+//             <div className='customerSearch'>
+//                 <Dropdown
+//                     className='searchDrop'
+//                     options={search_type_options}
+//                     onChange={e => setSearchType(e.value)}
+//                     value={search_type}
+//                 />
+//                 {/*.searchDrop */}
+//                 <input
+//                     type='text'
+//                     id='search'
+//                     checked={search}
+//                     onChange={e => setSearch(e.target.value)}
+//                 />
+//                 {/*#search */}
+//                 <button type='button' onClick={handleSearch}>
+//                     고객 검색
+//                 </button>
+//             </div>
+//             {/*.customerSearch */}
+//             <Table className='addsalesSearchTable'>
+//                 <TableHead>
+//                     <TableRow>
+//                         <TableCell>번호</TableCell>
+//                         <TableCell>이름</TableCell>
+//                         <TableCell>폰번호</TableCell>
+//                         <TableCell>선택</TableCell>
+//                     </TableRow>
+//                 </TableHead>
+//                 <TableBody>
+//                     {customers ? (
+//                         customers.map((c) => (
+//                             <TableRow>
+//                                 <TableCell>{c.no}</TableCell>
+//                                 <TableCell>{c.userName}</TableCell>
+//                                 <TableCell>{c.phone}</TableCell>
+//                                 <TableCell>
+//                                     <DialogActions>
+//                                         <button
+//                                             type='button'
+//                                             onClick={() => setCustomer(c)}
+//                                             id={c.no}
+//                                             value={[c.userName, c.phone]}
+//                                         >
+//                                             선택
+//                                         </button>
+//                                         {/*#{c.no} */}
+//                                     </DialogActions>
+//                                 </TableCell>
+//                             </TableRow>
+//                         ))
+//                     ) : (
+//                         <TableRow>
+//                             <TableCell colSpan='6' align='center'></TableCell>
+//                         </TableRow>
+//                     )}
+//                 </TableBody>
+//             </Table>
+//         </DialogContent>
+//         <DialogActions>
+//             <button type='button' onClick={() => setShow(false)}>
+//                 닫기
+//             </button>
+//         </DialogActions>
+//     </Dialog>)
+// }
 
 
 class Reservation extends Component {
@@ -156,6 +156,7 @@ class Reservation extends Component {
             cancel_comment: "",
         },
             this.reservationSelect();
+        this.reservationInsert();
     }
 
     reservationSelect = () => {
@@ -168,10 +169,70 @@ class Reservation extends Component {
             })
             .then((result) => result.json())
             .then((result) => {
-                this.setState({ reservation: result })
+                this.setState({
+                    reservation: result
+                })
 
             })
     }
+    reservationInsert = () => {
+        fetch(ip + '/reservation/insert',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    date: this.state.date,
+                    time: this.state.time,
+                    exercise_name: this.state.exercise_name,
+                    customer_name: this.state.customer_name,
+                    customer_id: this.state.customer_id,
+                    isCancel: this.state.isCancel,
+                    cancelComment: this.state.cancelComment
+                })
+            }
+        )
+            .then((result) => result.json())
+            .then((result) => {
+                this.setState({
+                    reservation: result
+                })
+
+            })
+    }
+    reservationUpdate = () => {
+        fetch(ip + '/reservation/update',
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    res_no: this.state.res_no,
+                    date: this.state.date,
+                    time: this.state.time,
+                    exercise_name: this.state.exercise_name,
+                    isCancel: this.state.isCancel,
+                    cancelComment: this.state.cancelComment
+                })
+            })
+    }
+
+    reservationDelete = () => {
+        fetch(ip + '/reservation/delete',
+            {
+                method: 'DELETE',
+                body: JSON.stringify({
+                    res_no: this.state.res_no
+                })
+            })
+            .then((result) => {
+                alert('삭제')
+                this.reservationSelect()
+            })
+    }
+
 
 
     render() {
@@ -183,12 +244,12 @@ class Reservation extends Component {
                     <Navigation goLogin={this.goLogin} />
                     <MegaMenu />
                 </header>
-                <CustomerFindAndSelect
+                {/* <CustomerFindAndSelect
                     show={this.state.show}
                     setShow={value => this.setState({ show: value })}
                     fitness_no={this.state.fitness_no}
                     setCustomer={c => this.setState({ customer: c })}
-                />
+                /> */}
                 <Container>
                     <Row><Col>회원이름:</Col><Col>{this.state.customer_name}</Col></Row>
                     <Row><Col>날짜:</Col><Col>{this.state.reservation_date.format("YYYY-MM-DD")}</Col></Row>
