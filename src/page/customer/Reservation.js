@@ -21,14 +21,20 @@ import Footer from '../../component/footer/Footer';
 import MegaMenu from '../../component/navigation/Menu';
 import moment from 'moment';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import 'react-dropdown/style.css';
 
+import { SERVER_URL } from '../../const/settings';
+const ip = SERVER_URL;
 
 const getSearchUser = (type, search, fitness_no) => (
-    axios.get("/api/customer", {params: {
-        type: type,
-        search: search,
-        fn: fitness_no,
-    }}).then(response => response.data)
+    axios.get("/api/customer", {
+        params: {
+            type: type,
+            search: search,
+            fn: fitness_no,
+        }
+    }).then(response => response.data)
 )
 
 
@@ -40,28 +46,28 @@ const CustomerFindAndSelect = (show, setShow, fitness_no, setCustomer) => {
 
     const handleSearch = () => {
         let type = '0';
-		if (search_type === '이름') {
-			type = '0';
-		} else if (search_type === '핸드폰') {
-			type = '1';
-		}
+        if (search_type === '이름') {
+            type = '0';
+        } else if (search_type === '핸드폰') {
+            type = '1';
+        }
         getSearchUser(type, search, fitness_no)
-        .then(result => {
-            setCustomers(result.map(value => {
-                return {
-                    no: value.member_no,
-                    member_no: value.member_no,
-                    userName: value.name,
-                    phone: value.phone,
-                }
-            }))
-        });
+            .then(result => {
+                setCustomers(result.map(value => {
+                    return {
+                        no: value.member_no,
+                        member_no: value.member_no,
+                        userName: value.name,
+                        phone: value.phone,
+                    }
+                }))
+            });
     }
-    
+
     return (<Dialog
-    open={show}
-    onClose={() => setShow(false)}
-    maxWidth='lg'>
+        open={show}
+        onClose={() => setShow(false)}
+        maxWidth='lg'>
         <DialogTitle>고객 검색</DialogTitle>
         <DialogContent>
             <div className='customerSearch'>
@@ -140,6 +146,7 @@ class Reservation extends Component {
             show: false,
             fitness_no: 1,
             customer: null,
+            reservation: [],
 
             customer_name: "홍길동",
             reservation_date: moment(),
@@ -147,9 +154,28 @@ class Reservation extends Component {
             exercise_name: "PT기구",
             is_cancel: false,
             cancel_comment: "",
-        }
+        },
+            this.reservationSelect();
     }
+
+    reservationSelect = () => {
+        fetch(ip + '/reservation/select',
+            {
+                method: 'GET',
+                headers: {
+                    'Content-type': 'application/json',
+                }
+            })
+            .then((result) => result.json())
+            .then((result) => {
+                this.setState({ reservation: result })
+
+            })
+    }
+
+
     render() {
+        console.log(this.state.reservation)
         return (
             <div className='addCustomer'>
                 <header className='header'>
@@ -158,17 +184,17 @@ class Reservation extends Component {
                     <MegaMenu />
                 </header>
                 <CustomerFindAndSelect
-                show={this.state.show}
-                setShow={value => this.setState({show: value})}
-                fitness_no={this.state.fitness_no}
-                setCustomer={c => this.setState({customer: c})}
+                    show={this.state.show}
+                    setShow={value => this.setState({ show: value })}
+                    fitness_no={this.state.fitness_no}
+                    setCustomer={c => this.setState({ customer: c })}
                 />
                 <Container>
                     <Row><Col>회원이름:</Col><Col>{this.state.customer_name}</Col></Row>
                     <Row><Col>날짜:</Col><Col>{this.state.reservation_date.format("YYYY-MM-DD")}</Col></Row>
                     <Row><Col>시간:</Col><Col>{this.state.reservation_time.format("hh:mm")}</Col></Row>
                     <Row><Col>운동이름:</Col><Col>{this.state.exercise_name}</Col></Row>
-                    <Row><Col>취소유무:</Col><Col>{this.state.is_cancel? "취소됨" : "예약됨"}</Col></Row>
+                    <Row><Col>취소유무:</Col><Col>{this.state.is_cancel ? "취소됨" : "예약됨"}</Col></Row>
                     <Row><Col>취소사유:</Col><Col>{this.state.is_cancel && this.state.cancel_comment}</Col></Row>
                 </Container>
             </div>
