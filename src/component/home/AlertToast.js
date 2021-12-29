@@ -30,7 +30,7 @@ const AlertItem =({value}) => {
     <Toast show={show} onClose={handleClose}>
         <Toast.Header>
         <strong className="mr-auto">호출</strong>
-        <small>{moment(value.createdAt).add(9, 'hours').format("hh:mm:ss")}</small>
+        <small>{moment(value.createdAt).format("HH:mm:ss")}</small>
         </Toast.Header>
         <Toast.Body>{value.text}</Toast.Body>
     </Toast>)
