@@ -433,7 +433,6 @@ class Customer extends Component {
 				<ClickAwayListener onClickAway={this.handleClickAway}>
 					<div className='container'>
 						<div>
-							<Button variant='primary'>Modal</Button>
 							<Modal
 								show={this.state.show}
 								onHide={this.handleClickAway}

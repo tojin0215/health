@@ -8,13 +8,16 @@ body {
 	height: 100%;
 }
 
-#root {
+#root > div > div {
 	position: relative;
 	padding-bottom: 100px;
 }
 
 .wrap {
 	width: 100%;
+	height: auto;
+	min-height: 100%;
+	padding-bottom: 150px;
 }
 
 .container {

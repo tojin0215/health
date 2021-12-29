@@ -25,7 +25,7 @@ const AlertItem = ({ value }) => {
 	};
 
 	return (
-		<Toast show={show} onClose={handleClose}>
+		<Toast className='mh-100 overflow-hidden' show={show} onClose={handleClose}>
 			<Toast.Header className='d-flex justify-content-between align-items-center'>
 				<h3 className='mr-auto fw-bold fs-2 p-3 border-0'>
 					호출

@@ -1,0 +1,65 @@
+.reservationWrap .row .MuiInputLabel-formControl {
+	font-size: 1.8rem;
+	top: 11px;
+	left: 22px;
+}
+
+.reservationWrap .react-datepicker__tab-loop {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.reservationWrap .customerResi {
+	font-size: 2.2rem;
+	padding: 0 32px;
+}
+
+.reservationWrap .react-datepicker__input-container input[type='text'] {
+	width: 20rem;
+}
+.reservationWrap .list-group-item .table tr td {
+	text-align: center;
+}
+.reservationWrap .list-group-item .table tr th {
+	width: auto;
+	text-align: center;
+}
+.reservationWrap .list-group-item .table tr th:nth-child(1) {
+	width: 14rem;
+}
+.reservationWrap .list-group-item .table tr th:nth-child(2) {
+	width: 14rem;
+}
+.reservationWrap .list-group-item .table tr th:nth-child(3) {
+	width: 9rem;
+}
+.reservationWrap .list-group-item .table tr th:nth-child(4) {
+	width: 5rem;
+}
+.reservationWrap .list-group-item .table tr th:nth-child(5) {
+	width: 14rem;
+}
+.reservationWrap .list-group-item .table tr th:nth-child(6) {
+	width: 6rem;
+}
+
+@media screen and (max-width: 767px) {
+	.reservationWrap .customerResi {
+		padding: 0;
+	}
+	.reservationWrap .react-datepicker__input-container input[type='text'] {
+		width: 13rem;
+	}
+	.reservationWrap .react-datepicker-wrapper {
+		width: auto;
+	}
+	.reservationWrap > .row > div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.reservationWrap > .row > div:nth-child(3) {
+		display: block;
+	}
+}
