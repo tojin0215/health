@@ -1,9 +1,10 @@
 import React, { Component, useState } from 'react';
+
 import { render } from 'react-dom';
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import { getStatusRequest } from '../../action/authentication';
-
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 // import Dropdown from 'react-dropdown';
 
@@ -31,6 +32,8 @@ import 'react-dropdown/style.css';
 import { SERVER_URL } from '../../const/settings';
 import { TextField } from '@material-ui/core';
 const ip = SERVER_URL;
+
+
 
 // const getSearchUser = (type, search, fitness_no) => (
 //     axios.get("/api/customer", {
@@ -147,17 +150,42 @@ const ReservationItem = ({ reserv_date, reserv_time, exercise_name, customer_nam
 
 
     return (
-        <ListGroup.Item>
 
-            <ul class="list-group">
+        <ListGroup.Item>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">회원이름</th>
+                        <th scope="col">회원아이디</th>
+                        <th scope="col">날짜</th>
+                        <th scope="col">시간</th>
+                        <th scope="col">운동이름</th>
+                        <th scope="col">취소유무</th>
+                        <th scope="col">취소사유</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{customer_name}</td>
+                        <td> {customer_name}</td>
+                        <td> {customer_id}</td>
+                        <td> {reserv_date}</td>
+                        <td> {reserv_time}:00</td>
+                        <td> {exercise_name}</td>
+                        <td> {isCancel == null ? "예약됨" : "취소됨"}</td>
+                        <td> {cancelComment}</td>
+                    </tr>
+                </tbody>
+            </table>
+            {/* <ul class="list-group">
                 <li class="list-group-item">회원이름: {customer_name}</li>
                 <li class="list-group-item">회원아이디: {customer_id}</li>
                 <li class="list-group-item">날짜: {reserv_date}</li>
                 <li class="list-group-item">시간: {reserv_time}:00</li>
                 <li class="list-group-item">운동이름: {exercise_name}</li>
-                <li class="list-group-item">취소유무: {isCancel == 0 ? "취소됨" : "예약됨"}</li>
+                <li class="list-group-item">취소유무: {isCancel == 1 ? "취소됨" : "예약됨"}</li>
                 <li class="list-group-item">취소사유: {cancelComment}</li>
-            </ul>
+            </ul> */}
         </ListGroup.Item>
     )
 }
@@ -393,6 +421,8 @@ class Reservation extends Component {
                                 : this.state.reservation}
                         </p>
                     </ListGroup>
+
+
                     <TextField
                         id='exercise_name'
                         value={this.state.exercise_name}
