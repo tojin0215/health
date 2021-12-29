@@ -1,4 +1,5 @@
 .toast-header > button {
+	font-weight: 500;
 	height: 32px;
 	margin: 7px 0 !important;
 }
