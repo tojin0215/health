@@ -25,6 +25,7 @@ import { connect } from 'react-redux';
 import 'react-dropdown/style.css';
 
 import { SERVER_URL } from '../../const/settings';
+import { TextField } from '@material-ui/core';
 const ip = SERVER_URL;
 
 // const getSearchUser = (type, search, fitness_no) => (
@@ -156,7 +157,6 @@ class Reservation extends Component {
             cancel_comment: "",
         },
             this.reservationSelect();
-        this.reservationInsert();
     }
 
     reservationSelect = () => {
@@ -165,34 +165,11 @@ class Reservation extends Component {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
-                }
-            })
-            .then((result) => result.json())
-            .then((result) => {
-                this.setState({
-                    reservation: result
-                })
-
-            })
-    }
-    reservationInsert = () => {
-        fetch(ip + '/reservation/insert',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
                 },
                 body: JSON.stringify({
-                    date: this.state.date,
-                    time: this.state.time,
-                    exercise_name: this.state.exercise_name,
-                    customer_name: this.state.customer_name,
-                    customer_id: this.state.customer_id,
-                    isCancel: this.state.isCancel,
-                    cancelComment: this.state.cancelComment
+                    fitness_no: this.props.userinfo.fitness_no
                 })
-            }
-        )
+            })
             .then((result) => result.json())
             .then((result) => {
                 this.setState({
@@ -201,6 +178,35 @@ class Reservation extends Component {
 
             })
     }
+
+    handleOnClick = () => {
+        reservationInsert = () => {
+            fetch(ip + '/reservation/insert',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        date: this.state.date,
+                        time: this.state.time,
+                        exercise_name: this.state.exercise_name,
+                        customer_name: this.state.customer_name,
+                        customer_id: this.state.customer_id
+                    })
+                }
+            )
+                .then((result) => result.json())
+                .then((result) => {
+                    this.setState({
+                        reservationInsert: result
+                    })
+
+                })
+        }
+    }
+
+
     reservationUpdate = () => {
         fetch(ip + '/reservation/update',
             {
@@ -232,11 +238,18 @@ class Reservation extends Component {
                 this.reservationSelect()
             })
     }
+    handleStartDateChange(date) {
+        this.setState({
+            date: date
+        })
+    }
+
 
 
 
     render() {
-        console.log(this.state.reservation)
+        // console.log(this.state.reservation)
+        console.log(this.props.userinfo.fitness_no)
         return (
             <div className='addCustomer'>
                 <header className='header'>
@@ -251,12 +264,33 @@ class Reservation extends Component {
                     setCustomer={c => this.setState({ customer: c })}
                 /> */}
                 <Container>
-                    <Row><Col>회원이름:</Col><Col>{this.state.customer_name}</Col></Row>
+                    <button type="button" onClick={this.handleOnClick}>예약하기</button>
+                    {/* <Row><Col>회원이름:</Col><Col>{this.state.customer_name}</Col></Row>
                     <Row><Col>날짜:</Col><Col>{this.state.reservation_date.format("YYYY-MM-DD")}</Col></Row>
                     <Row><Col>시간:</Col><Col>{this.state.reservation_time.format("hh:mm")}</Col></Row>
                     <Row><Col>운동이름:</Col><Col>{this.state.exercise_name}</Col></Row>
                     <Row><Col>취소유무:</Col><Col>{this.state.is_cancel ? "취소됨" : "예약됨"}</Col></Row>
-                    <Row><Col>취소사유:</Col><Col>{this.state.is_cancel && this.state.cancel_comment}</Col></Row>
+                    <Row><Col>취소사유:</Col><Col>{this.state.is_cancel && this.state.cancel_comment}</Col></Row> */}
+                </Container>
+                <Container>
+                    <DatePicker
+                        selected={this.state.date}
+                        onChange={this.handleStartDateChange}
+                        name="date"
+                        dateFormat="yyyy-MM-dd"
+                        font-size="1.6rem"
+                    />
+                    <input id='time' />
+                    <TextField
+                        id='exercise_name'
+                    />
+                    <TextField
+                        id='customer_name'
+                    />
+                    <TextField
+                        id='customer_id'
+                    />
+
                 </Container>
             </div>
         )
