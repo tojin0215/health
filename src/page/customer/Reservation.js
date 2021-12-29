@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import { render } from 'react-dom';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import { getStatusRequest } from '../../action/authentication';
 
@@ -142,6 +142,28 @@ const ip = SERVER_URL;
 //     </Dialog>)
 // }
 
+const ReservationItem = ({ reserv_date, reserv_time, exercise_name, customer_name, customer_id, isCancel, cancelComment }) => {
+
+
+
+    return (
+        <ListGroup.Item>
+
+            <ul class="list-group">
+                <li class="list-group-item">회원이름: {customer_name}</li>
+                <li class="list-group-item">회원아이디: {customer_id}</li>
+                <li class="list-group-item">날짜: {reserv_date}</li>
+                <li class="list-group-item">시간: {reserv_time}:00</li>
+                <li class="list-group-item">운동이름: {exercise_name}</li>
+                <li class="list-group-item">취소유무: {isCancel == 0 ? "취소됨" : "예약됨"}</li>
+                <li class="list-group-item">취소사유: {cancelComment}</li>
+            </ul>
+        </ListGroup.Item>
+    )
+}
+
+
+
 
 class Reservation extends Component {
     constructor(props) {
@@ -156,12 +178,21 @@ class Reservation extends Component {
             customer_name: "홍길동",
             customer_id: "홍길동",
             isCancel: 1,
-            reserv_date: moment(),
+            reserv_date: new Date(),
             reserv_time: moment(),
             exercise_name: "PT기구",
             cancelComment: "",
+
+            radioGroup: {
+                ten: true,
+                eleven: false,
+                twelve: false,
+                thirteen: false,
+            }
+
         },
-            this.reservationSelect()
+            this.handleDateChange = this.handleDateChange.bind(this);
+        this.reservationSelect();
         // ,
         // this.reservationUpdate(),
         // this.reservationDelete(),
@@ -226,39 +257,56 @@ class Reservation extends Component {
             })
             .then((result) => result.json())
             .then((result) => {
-                this.setState({
-                    reservation: result
+                const items = result.map((data, index, array) => {
+                    return (
+                        <ReservationItem
+                            reserv_date={data.date.split("T")[0]}
+                            reserv_time={data.time}
+                            exercise_name={data.exercise_name}
+                            customer_name={data.customer_name}
+                            customer_id={data.customer_id}
+                            isCancel={data.isCancel}
+                            cancelComment={data.cancelComment}
+                        />
+                    )
                 })
+
+                this.setState({ reservation: items });
+                console.log(result);
+
 
             })
     }
 
     handleOnClick = () => {
-        reservationInsert = () => {
-            fetch(ip + '/reservation/insert',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        date: this.state.date,
-                        time: this.state.time,
-                        exercise_name: this.state.exercise_name,
-                        customer_name: this.state.customer_name,
-                        customer_id: this.state.customer_id
-                    })
-                }
-            )
-                .then((result) => result.json())
-                .then((result) => {
-                    alert("asdasd")
-                    this.setState({
-                        reservationInsert: result
-                    })
 
+        fetch(ip + '/reservation/insert',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fitness_no: this.props.userinfo.fitness_no,
+                    name: this.state.name,
+                    date: this.state.reserv_date,
+                    time: this.state.radioGroup.ten == true ? '10' :
+                        this.state.radioGroup.eleven == true ? '11' :
+                            this.state.radioGroup.twelve == true ? '12' :
+                                this.state.radioGroup.thirteen == true ? '13' :
+                                    '00',
+                    exercise_name: this.state.exercise_name,
+                    customer_name: this.state.customer_name,
+                    customer_id: this.state.customer_id
                 })
-        }
+            }
+        )
+            .then((result) => result.json())
+            .then((result) => {
+                alert("등록")
+                this.props.history.push('/reservation');
+            })
+
     }
 
 
@@ -295,7 +343,7 @@ class Reservation extends Component {
     }
     handleDateChange(date) {
         this.setState({
-            date: date
+            reserv_date: date
         })
     }
 
@@ -306,10 +354,24 @@ class Reservation extends Component {
         })
     }
 
+    handleRadio = (event) => {
+        let obj = {
+            ten: false,
+            eleven: false,
+            twelve: false,
+            thirteen: false,
+        }
+        obj[event.target.id] = event.target.checked // true
+        console.log(obj);
+        this.setState({
+            radioGroup: obj
+        })
+    }
+
 
     render() {
         console.log(this.state.reservation)
-        console.log(this.props.userinfo.fitness_no)
+        console.log(this.state.reserv_date)
         return (
             <div className='addCustomer'>
                 <header className='header'>
@@ -324,26 +386,13 @@ class Reservation extends Component {
                     setCustomer={c => this.setState({ customer: c })}
                 /> */}
                 <Container>
-                    <Row><Col>회원이름:</Col><Col>{this.state.customer_name}</Col></Row>
-                    <Row><Col>날짜:</Col><Col>{this.state.reserv_date.format("YYYY-MM-DD")}</Col></Row>
-                    <Row><Col>시간:</Col><Col>{this.state.reserv_time.format("hh:mm")}</Col></Row>
-                    <Row><Col>운동이름:</Col><Col>{this.state.exercise_name}</Col></Row>
-                    <Row><Col>취소유무:</Col><Col>{this.state.isCancel == 0 ? "취소됨" : "예약됨"}</Col></Row>
-                    <Row><Col>취소사유:</Col><Col>{this.state.cancelComment}</Col></Row>
-                </Container>
-                <Container>
-                    <button type="button" onClick={this.handleOnClick}>예약하기</button>
-                    <DatePicker
-                        selected={this.state.date}
-                        onChange={this.handleDateChange}
-                        name="date"
-                        dateFormat="yyyy-MM-dd"
-                        font-size="1.6rem"
-                    />
-                    {/* <button type={button} id='time' />
-                    <button type={button} id='time' />
-                    <button type={button} id='time' />
-                    <button type={button} id='time' /> */}
+                    <ListGroup>
+                        <p>
+                            {this.state.reservation.length == 0
+                                ? '예약된 회원이 없습니다.'
+                                : this.state.reservation}
+                        </p>
+                    </ListGroup>
                     <TextField
                         id='exercise_name'
                         value={this.state.exercise_name}
@@ -362,7 +411,41 @@ class Reservation extends Component {
                         onChange={this.handleChange}
                         label='회원아이디'
                     />
+                    <label className='customerResi'>
+                        <span>운동시간</span>
+                        <label className='labelCheck'>
+                            <input className='btnRadio' type="radio" name="radioGroup" id='ten'
+                                checked={this.state.radioGroup['ten']} onChange={this.handleRadio} />
+                            <span>10:00</span>
+                        </label>
+                        <label className='labelCheck'>
+                            <input className='btnRadio' type="radio" name="radioGroup" id='eleven'
+                                checked={this.state.radioGroup['eleven']} onChange={this.handleRadio} />
+                            <span>11:00</span>
+                        </label>
+                        <label className='labelCheck'>
+                            <input className='btnRadio' type="radio" name="radioGroup" id='twelve'
+                                checked={this.state.radioGroup['twelve']} onChange={this.handleRadio} />
+                            <span>12:00</span>
+                        </label>
+                        <label className='labelCheck'>
+                            <input className='btnRadio' type="radio" name="radioGroup" id='thirteen'
+                                checked={this.state.radioGroup['thirteen']} onChange={this.handleRadio} />
+                            <span>13:00</span>
+                        </label>
+                    </label>
+                    <br />
+                    <DatePicker
+                        selected={this.state.reserv_date}
+                        onChange={this.handleDateChange}
+                        name="reserv_date"
+                        dateFormat="yyyy-MM-dd"
+                        font-size="1.6rem"
+                    />
+                    <br />
+                    <button type="button" onClick={this.handleOnClick}>예약하기</button>
                 </Container>
+
                 <div className='footer'>
                     <Footer />
                 </div>
