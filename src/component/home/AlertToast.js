@@ -34,7 +34,7 @@ const AlertItem = ({ value }) => {
 					</span>
 				</h3>
 			</Toast.Header>
-			<Toast.Body className='p-5 fs-4'>{value.text}</Toast.Body>
+			<Toast.Body className='px-5 py-4 fs-3'>{value.text}</Toast.Body>
 		</Toast>
 	);
 };
