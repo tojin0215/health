@@ -220,29 +220,29 @@ class CustomerCalendarComponent extends Component {
     }
 
 	fetchReservation = () => {
-		// getReservation()
-		// .then(result => {
-		// 	console.log(result);
-		// })
-		this.setState({
-			reservations: demo_reservation.map(item => {
-				const created = moment(item.date);
-				const start_m = moment(created.format("YYYY-MM-DD"));
-				const ent_m = moment(created.format("YYYY-MM-DD")).add(1, "day");
+		getReservation(-1)
+		.then(result => {
+			this.setState({
+				reservations: result.map(value => {
+					const created = moment(value.date);
+					const start_m = moment(created.format("YYYY-MM-DD"));
+					const ent_m = moment(created.format("YYYY-MM-DD")).add(1, "day");
 
-				const start = new Date(start_m.get("year"), start_m.get("month"), start_m.get("date"));
-				const end = new Date(ent_m.get("year"), ent_m.get("month"), ent_m.get("date"));
-				
-				return {
-					id: item.res_no,
-					customer_no: item.customer_id,
-					created: created,
-					start: start,
-					end: end,
-					allDay: true,
-					title: `[${item.exercise_name}] ${item.customer_name} ${item.time}`,
-				}
-			}).filter(item => item != undefined)
+					const start = new Date(start_m.get("year"), start_m.get("month"), start_m.get("date"));
+					const end = new Date(ent_m.get("year"), ent_m.get("month"), ent_m.get("date"));
+
+					return {
+						...value,
+						id: value.res_no,
+						date: moment(value.date).format("YYYY-MM-DD"),
+						customer_id: Number(value.customer_id),
+						start: start,
+						end: end,
+						allDay: true,
+						title: `[${value.time}] ${value.customer_name} - ${value.exercise_name}`
+					}
+				})
+			})
 		})
 	}
 

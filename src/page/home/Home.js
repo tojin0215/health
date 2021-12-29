@@ -25,6 +25,7 @@ import aboutProduct from '../../../src/img/aboutProduct.png';
 import aboutExercise from '../../../src/img/aboutExercise.png';
 
 import { SERVER_URL } from '../../const/settings';
+import AlertToastComponent from '../../component/home/AlertToast';
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -240,6 +241,13 @@ class Home extends Component {
 				</div>
 				{/*.header */}
 				<div className='container'>
+					<div
+						style={{
+							position: "absolute", left: "50%", transform: "translateX(-50%)"
+						}}
+					>
+						{<AlertToastComponent fitness_no={this.props.userinfo.fitness_no} />}
+					</div>
 					<div
 						className='mainVisual'
 						style={{
