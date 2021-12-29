@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-
+import { Link } from 'react-router-dom';
 import { render } from 'react-dom';
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
@@ -167,7 +167,6 @@ const ReservationItem = ({ reserv_date, reserv_time, exercise_name, customer_nam
                 <tbody>
                     <tr>
                         <td>{customer_name}</td>
-                        <td> {customer_name}</td>
                         <td> {customer_id}</td>
                         <td> {reserv_date}</td>
                         <td> {reserv_time}:00</td>
@@ -406,6 +405,23 @@ class Reservation extends Component {
                     <Header />
                     <Navigation goLogin={this.goLogin} />
                     <MegaMenu />
+                    <div className='localNavigation'>
+                        <div className='container'>
+                            <h2>
+                                <div className='parallelogram'></div>
+                                예약
+                                <span>.</span>
+                            </h2>
+                            <div className='breadCrumb'>
+                                <Link to='/home'>HOME</Link>
+                                <span>&#62;</span>
+                                <Link to='/reservation'>예약</Link>
+                            </div>
+                            {/*.breadCrumb */}
+                        </div>
+                        {/*.container */}
+                    </div>
+                    {/*.localNavigation */}
                 </header>
                 {/* <CustomerFindAndSelect
                     show={this.state.show}
