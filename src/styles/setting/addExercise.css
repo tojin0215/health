@@ -83,6 +83,7 @@
 .settingExerciseList .searchInputRow button {
 	height: 4rem;
 	font-weight: 500;
+	margin: 1rem;
 }
 
 @media (max-width: 767px) {
