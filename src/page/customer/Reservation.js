@@ -328,7 +328,8 @@ class Reservation extends Component {
             .then((result) => result.json())
             .then((result) => {
                 alert('등록');
-                this.props.history.push('/reservation');
+                this.reservationSelect();
+                // this.props.history.push('/reservation');
             });
     };
 
