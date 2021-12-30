@@ -80,7 +80,8 @@ class AssignExercise extends Component {
 		this.handleClickOpen = this.handleClickOpen.bind(this);
 		this.handleClose = this.handleClose.bind(this);
 		//this.handleChange = this.handleChange.bind(this);
-		this.prefetchQRLogin();
+		// this.prefetchQRLogin();
+		this.search();
 	}
 
 	goLogin = () => {
