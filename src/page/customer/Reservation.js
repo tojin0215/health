@@ -1,29 +1,18 @@
 import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { render } from 'react-dom';
-import { Container, Row, Col, ListGroup } from 'react-bootstrap';
-import DatePicker from 'react-datepicker';
+import { Container, Row, Col, Table } from 'react-bootstrap';
+
+import DatePicker, { registerLocale } from "react-datepicker";
+import ko from "date-fns/locale/ko"
+registerLocale("ko", ko);
 import { getStatusRequest } from '../../action/authentication';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-// import Dropdown from 'react-dropdown';
 
-// import Dialog from '@material-ui/core/Dialog';
-// import DialogActions from '@material-ui/core/DialogActions';
-// import DialogContent from '@material-ui/core/DialogContent';
-// import DialogTitle from '@material-ui/core/DialogTitle';
-
-// import Table from '@material-ui/core/Table';
-// import TableHead from '@material-ui/core/TableHead';
-// import TableBody from '@material-ui/core/TableBody';
-// import TableRow from '@material-ui/core/TableRow';
-// import TableCell from '@material-ui/core/TableCell';
-// import axios from 'axios';
 
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import MegaMenu from '../../component/navigation/Menu';
-import moment from 'moment';
 
 import { connect } from 'react-redux';
 import 'react-dropdown/style.css';
@@ -31,116 +20,9 @@ import styles from '../../styles/customer/reservation.css';
 
 import { SERVER_URL } from '../../const/settings';
 import { TextField } from '@material-ui/core';
+import moment from 'moment';
 const ip = SERVER_URL;
 
-// const getSearchUser = (type, search, fitness_no) => (
-//     axios.get("/api/customer", {
-//         params: {
-//             type: type,
-//             search: search,
-//             fn: fitness_no,
-//         }
-//     }).then(response => response.data)
-// )
-
-// const CustomerFindAndSelect = (show, setShow, fitness_no, setCustomer) => {
-//     const search_type_options = ['이름', '핸드폰'];
-//     const [search_type, setSearchType] = useState(search_type_options[0])
-//     const [search, setSearch] = useState("")
-//     const [customers, setCustomers] = useState([]);
-
-//     const handleSearch = () => {
-//         let type = '0';
-//         if (search_type === '이름') {
-//             type = '0';
-//         } else if (search_type === '핸드폰') {
-//             type = '1';
-//         }
-//         getSearchUser(type, search, fitness_no)
-//             .then(result => {
-//                 setCustomers(result.map(value => {
-//                     return {
-//                         no: value.member_no,
-//                         member_no: value.member_no,
-//                         userName: value.name,
-//                         phone: value.phone,
-//                     }
-//                 }))
-//             });
-//     }
-
-//     return (<Dialog
-//         open={show}
-//         onClose={() => setShow(false)}
-//         maxWidth='lg'>
-//         <DialogTitle>고객 검색</DialogTitle>
-//         <DialogContent>
-//             <div className='customerSearch'>
-//                 <Dropdown
-//                     className='searchDrop'
-//                     options={search_type_options}
-//                     onChange={e => setSearchType(e.value)}
-//                     value={search_type}
-//                 />
-//                 {/*.searchDrop */}
-//                 <input
-//                     type='text'
-//                     id='search'
-//                     checked={search}
-//                     onChange={e => setSearch(e.target.value)}
-//                 />
-//                 {/*#search */}
-//                 <button type='button' onClick={handleSearch}>
-//                     고객 검색
-//                 </button>
-//             </div>
-//             {/*.customerSearch */}
-//             <Table className='addsalesSearchTable'>
-//                 <TableHead>
-//                     <TableRow>
-//                         <TableCell>번호</TableCell>
-//                         <TableCell>이름</TableCell>
-//                         <TableCell>폰번호</TableCell>
-//                         <TableCell>선택</TableCell>
-//                     </TableRow>
-//                 </TableHead>
-//                 <TableBody>
-//                     {customers ? (
-//                         customers.map((c) => (
-//                             <TableRow>
-//                                 <TableCell>{c.no}</TableCell>
-//                                 <TableCell>{c.userName}</TableCell>
-//                                 <TableCell>{c.phone}</TableCell>
-//                                 <TableCell>
-//                                     <DialogActions>
-//                                         <button
-//                                             type='button'
-//                                             onClick={() => setCustomer(c)}
-//                                             id={c.no}
-//                                             value={[c.userName, c.phone]}
-//                                         >
-//                                             선택
-//                                         </button>
-//                                         {/*#{c.no} */}
-//                                     </DialogActions>
-//                                 </TableCell>
-//                             </TableRow>
-//                         ))
-//                     ) : (
-//                         <TableRow>
-//                             <TableCell colSpan='6' align='center'></TableCell>
-//                         </TableRow>
-//                     )}
-//                 </TableBody>
-//             </Table>
-//         </DialogContent>
-//         <DialogActions>
-//             <button type='button' onClick={() => setShow(false)}>
-//                 닫기
-//             </button>
-//         </DialogActions>
-//     </Dialog>)
-// }
 
 const ReservationItem = ({
     reserv_date,
@@ -152,41 +34,19 @@ const ReservationItem = ({
     cancelComment,
 }) => {
     return (
-        <ListGroup.Item>
-            <table class='table'>
-                <thead>
-                    <tr>
-                        <th scope='col'>회원이름</th>
-                        <th scope='col'>회원아이디</th>
-                        <th scope='col'>날짜</th>
-                        <th scope='col'>시간</th>
-                        <th scope='col'>운동이름</th>
-                        <th scope='col'>상태</th>
-                        <th scope='col'>취소사유</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{customer_name}</td>
-                        <td> {customer_id}</td>
-                        <td> {reserv_date}</td>
-                        <td> {reserv_time}:00</td>
-                        <td> {exercise_name}</td>
-                        <td> {isCancel == null ? '예약됨' : '취소됨'}</td>
-                        <td> {cancelComment}</td>
-                    </tr>
-                </tbody>
-            </table>
-            {/* <ul class="list-group">
-                <li class="list-group-item">회원이름: {customer_name}</li>
-                <li class="list-group-item">회원아이디: {customer_id}</li>
-                <li class="list-group-item">날짜: {reserv_date}</li>
-                <li class="list-group-item">시간: {reserv_time}:00</li>
-                <li class="list-group-item">운동이름: {exercise_name}</li>
-                <li class="list-group-item">취소유무: {isCancel == 1 ? "취소됨" : "예약됨"}</li>
-                <li class="list-group-item">취소사유: {cancelComment}</li>
-            </ul> */}
-        </ListGroup.Item>
+        <Table>
+            <tbody>
+                <tr>
+                    <td>{customer_name}</td>
+                    <td> {customer_id}</td>
+                    <td> {reserv_date}</td>
+                    <td> {reserv_time}:00</td>
+                    <td> {exercise_name}</td>
+                    <td> {isCancel == null ? '예약됨' : '취소됨'}</td>
+                    <td> {cancelComment}</td>
+                </tr>
+            </tbody>
+        </Table >
     );
 };
 
@@ -201,10 +61,10 @@ class Reservation extends Component {
             reservation: [],
 
             customer_name: '홍길동',
-            customer_id: '홍길동',
+            customer_id: 'xcv',
             isCancel: 1,
             reserv_date: new Date(),
-            reserv_time: "xcv",
+            reserv_time: "00",
             exercise_name: 'PT기구',
             cancelComment: '',
 
@@ -282,9 +142,10 @@ class Reservation extends Component {
             .then((result) => result.json())
             .then((result) => {
                 const items = result.map((data, index, array) => {
+                    const date = moment(data.date).format("YYYY년 MM월 DD일")
                     return (
                         <ReservationItem
-                            reserv_date={data.date.split('T')[0]}
+                            reserv_date={date}
                             reserv_time={data.time}
                             exercise_name={data.exercise_name}
                             customer_name={data.customer_name}
@@ -388,7 +249,7 @@ class Reservation extends Component {
     };
 
     render() {
-        console.log(this.state.reservation);
+        // console.log(this.state.reservation);
         console.log(this.state.reserv_date);
         return (
             <div className='addCustomer'>
@@ -447,8 +308,9 @@ class Reservation extends Component {
                                 selected={this.state.reserv_date}
                                 onChange={this.handleDateChange}
                                 name='reserv_date'
-                                dateFormat='yyyy-MM-dd'
+                                dateFormat='yyyy-MM-dd(eee)'
                                 font-size='1.6rem'
+                                locale="ko"
                             />
                             <label className='customerResi'>
                                 <label className='labelCheck'>
@@ -507,18 +369,30 @@ class Reservation extends Component {
                             </button>
                         </Col>
                     </Row>
-                    <ListGroup>
-                        <p>
-                            {this.state.reservation.length == 0
-                                ? '예약된 회원이 없습니다.'
-                                : this.state.reservation}
-                        </p>
-                    </ListGroup>
+
+                    <table class='table'>
+                        <thead>
+                            <tr>
+                                <th scope='col'>회원이름</th>
+                                <th scope='col'>회원아이디</th>
+                                <th scope='col'>날짜</th>
+                                <th scope='col'>시간</th>
+                                <th scope='col'>운동이름</th>
+                                <th scope='col'>상태</th>
+                                <th scope='col'>취소사유</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    {this.state.reservation.length == 0
+                        ? <p>'예약된 회원이 없습니다.'</p>
+                        : this.state.reservation}
+
+
                 </Container>
                 <div className='footer'>
                     <Footer />
                 </div>
-            </div>
+            </div >
         );
     }
 }
