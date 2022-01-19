@@ -23,6 +23,26 @@ import { TextField } from '@material-ui/core';
 import moment from 'moment';
 const ip = SERVER_URL;
 
+const ReservationClassItem = ({ exercise_class }) => {
+
+    const [input, setInput] = useState('');
+    const handleChange = () => {
+        alert('값이 변경되었습니다')
+    };
+
+    const handleClick = () => {
+        setInput(exercise_class);
+    };
+
+    return (
+        <tr>
+            <td><input type="text" value={input} onChange={handleChange} id='exercise_name' label='운동명' /></td>
+            <td><button onClick={handleClick}>{exercise_class}</button></td>
+        </tr>
+
+    );
+
+};
 
 const ReservationItem = ({
     reserv_date,
@@ -34,19 +54,17 @@ const ReservationItem = ({
     cancelComment,
 }) => {
     return (
-        <Table>
-            <tbody>
-                <tr>
-                    <td>{customer_name}</td>
-                    <td> {customer_id}</td>
-                    <td> {reserv_date}</td>
-                    <td> {reserv_time}:00</td>
-                    <td> {exercise_name}</td>
-                    <td> {isCancel == null ? '예약됨' : '취소됨'}</td>
-                    <td> {cancelComment}</td>
-                </tr>
-            </tbody>
-        </Table >
+        <tr>
+            <td>{customer_name}</td>
+            <td> {customer_id}</td>
+            <td> {reserv_date}</td>
+            <td> {reserv_time}:00</td>
+            <td> {exercise_name}</td>
+            <td> {isCancel == null ? '예약 완료' : '예약 취소'}</td>
+            <td> {cancelComment}</td>
+        </tr>
+
+
     );
 };
 
@@ -59,13 +77,14 @@ class Reservation extends Component {
             fitness_no: 1,
             customer: null,
             reservation: [],
-
+            reservationClass: [],
             customer_name: '홍길동',
             customer_id: 'xcv',
             isCancel: 1,
             reserv_date: new Date(),
             reserv_time: "00",
             exercise_name: 'PT기구',
+
             cancelComment: '',
 
             radioGroup: {
@@ -77,10 +96,8 @@ class Reservation extends Component {
         });
         this.handleDateChange = this.handleDateChange.bind(this);
         this.reservationSelect();
-        // ,
-        // this.reservationUpdate(),
-        // this.reservationDelete(),
-        // this.reservationInsert()
+        this.reservationClassSelect();
+
     }
 
     componentDidMount() {
@@ -229,6 +246,7 @@ class Reservation extends Component {
     }
 
     handleChange = (e) => {
+
         this.setState({
             [e.target.id]: e.target.value,
         });
@@ -247,6 +265,36 @@ class Reservation extends Component {
             radioGroup: obj,
         });
     };
+
+    classHandleOnClick = (event) => {
+        this.reservationClassSelect()
+    }
+    reservationClassSelect = () => {
+        fetch(
+            ip + '/reservationClass/select?fitness_no=' + this.props.userinfo.fitness_no,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+            }
+        )
+            .then((result) => result.json())
+            .then((result) => {
+                const items = result.map((data, index, array) => {
+                    return (
+                        <ReservationClassItem
+                            exercise_class={data.exercise_class}
+                        />
+                    );
+                });
+
+                this.setState({ reservationClass: items });
+                console.log(result);
+            });
+    };
+
+
 
     render() {
         // console.log(this.state.reservation);
@@ -290,6 +338,23 @@ class Reservation extends Component {
                                 onChange={this.handleChange}
                                 label='운동명'
                             />
+
+                            <button
+                                type='button'
+                                onClick={this.classHandleOnClick}
+                            >
+                                설정된 운동 목록
+                            </button>
+                            <button>
+                                <Link to='/reservationClass'>운동설정하러 가기</Link>
+                            </button>
+                            <table class='table'>
+                                <tbody>
+                                    {this.state.reservationClass.length == 0
+                                        ? <p>'설정된 운동이 없습니다.'</p>
+                                        : this.state.reservationClass}
+                                </tbody>
+                            </table>
                             <TextField
                                 id='customer_name'
                                 value={this.state.customer_name}
@@ -382,12 +447,12 @@ class Reservation extends Component {
                                 <th scope='col'>취소사유</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            {this.state.reservation.length == 0
+                                ? <p>'예약된 회원이 없습니다.'</p>
+                                : this.state.reservation}
+                        </tbody>
                     </table>
-                    {this.state.reservation.length == 0
-                        ? <p>'예약된 회원이 없습니다.'</p>
-                        : this.state.reservation}
-
-
                 </Container>
                 <div className='footer'>
                     <Footer />
