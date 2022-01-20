@@ -22,12 +22,21 @@ import { TextField } from '@material-ui/core';
 import moment from 'moment';
 const ip = SERVER_URL;
 
-const ReservationClassItem = ({
-    exercise_class
-}) => {
+const ReservationClassItem = ({ exercise_class, no, number_of_people }) => {
+
+    const reservationClassDelete = (no) => {
+        fetch(ip + '/reservationClass/delete?no=' + no, {
+            method: 'DELETE',
+
+        }).then((result) => {
+            alert('삭제');
+        });
+    };
     return (
         <tr>
-            <td>{exercise_class}</td>
+            <td>{exercise_class}  </td>
+            <td>asd{number_of_people}</td>
+            <td><button onClick={() => reservationClassDelete(no)}>삭제</button></td>
         </tr>
     );
 };
@@ -38,6 +47,7 @@ class ReservationClass extends Component {
         (this.state = {
             exercise_class: '요가',
             fitness_no: 1,
+            number_of_people: 10,
             reservationClass: []
         });
         this.reservationClassSelect();
@@ -106,6 +116,8 @@ class ReservationClass extends Component {
                     return (
                         <ReservationClassItem
                             exercise_class={data.exercise_class}
+                            no={data.no}
+                            number_of_people={data.number_of_people}
                         />
                     );
                 });
@@ -138,6 +150,18 @@ class ReservationClass extends Component {
         });
     };
 
+
+    reservationDelete = () => {
+        fetch(ip + '/reservationClass/delete', {
+            method: 'DELETE',
+            body: JSON.stringify({
+                no: this.state.no,
+            }),
+        }).then((result) => {
+            alert('삭제');
+            this.reservationSelect();
+        });
+    };
 
 
 
@@ -177,6 +201,8 @@ class ReservationClass extends Component {
                             <thead>
                                 <tr>
                                     <th scope='col'>설정된 운동명</th>
+                                    <th scope='col'>인원 제한</th>
+                                    <th scope='col'></th>
                                 </tr>
                             </thead>
                             <tbody>

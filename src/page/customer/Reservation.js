@@ -44,15 +44,14 @@ const ReservationClassItem = ({ exercise_class }) => {
 
 };
 
-const ReservationItem = ({
-    reserv_date,
-    reserv_time,
-    exercise_name,
-    customer_name,
-    customer_id,
-    isCancel,
-    cancelComment,
-}) => {
+const ReservationItem = ({ reserv_date, reserv_time, exercise_name, customer_name, customer_id, isCancel, cancelComment, res_no }) => {
+    const reservationDelete = (res_no) => {
+        fetch(ip + '/reservation/delete?res_no=' + res_no, {
+            method: 'DELETE',
+        }).then((result) => {
+            alert('삭제');
+        });
+    };
     return (
         <tr>
             <td>{customer_name}</td>
@@ -62,6 +61,8 @@ const ReservationItem = ({
             <td> {exercise_name}</td>
             <td> {isCancel == null ? '예약 완료' : '예약 취소'}</td>
             <td> {cancelComment}</td>
+            <td> 5/10</td>
+            <td> <button onClick={() => reservationDelete(res_no)}>삭제</button></td>
         </tr>
 
 
@@ -169,6 +170,7 @@ class Reservation extends Component {
                             customer_id={data.customer_id}
                             isCancel={data.isCancel}
                             cancelComment={data.cancelComment}
+                            res_no={data.res_no}
                         />
                     );
                 });
@@ -228,17 +230,7 @@ class Reservation extends Component {
         });
     };
 
-    reservationDelete = () => {
-        fetch(ip + '/reservation/delete', {
-            method: 'DELETE',
-            body: JSON.stringify({
-                res_no: this.state.res_no,
-            }),
-        }).then((result) => {
-            alert('삭제');
-            this.reservationSelect();
-        });
-    };
+
     handleDateChange(date) {
         this.setState({
             reserv_date: date,
@@ -346,7 +338,7 @@ class Reservation extends Component {
                                 설정된 운동 목록
                             </button>
                             <button>
-                                <Link to='/reservationClass'>운동설정하러 가기</Link>
+                                <Link to='/reservationClass'>운동설정하기</Link>
                             </button>
                             <table class='table'>
                                 <tbody>
@@ -445,6 +437,8 @@ class Reservation extends Component {
                                 <th scope='col'>운동이름</th>
                                 <th scope='col'>상태</th>
                                 <th scope='col'>취소사유</th>
+                                <th scope='col'>인원</th>
+                                <th scope='col'>---</th>
                             </tr>
                         </thead>
                         <tbody>
