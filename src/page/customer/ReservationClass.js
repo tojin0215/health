@@ -30,12 +30,14 @@ const ReservationClassItem = ({ exercise_class, no, number_of_people }) => {
 
         }).then((result) => {
             alert('삭제');
+            //새로고침 수정필요
+            window.location.replace("/reservationClass")
         });
     };
     return (
         <tr>
             <td>{exercise_class}  </td>
-            <td>asd{number_of_people}</td>
+            <td>{number_of_people}</td>
             <td><button onClick={() => reservationClassDelete(no)}>삭제</button></td>
         </tr>
     );
@@ -135,6 +137,7 @@ class ReservationClass extends Component {
             body: JSON.stringify({
                 fitness_no: this.props.userinfo.fitness_no,
                 exercise_class: this.state.exercise_class,
+                number_of_people: this.state.number_of_people
             }),
         })
             .then((result) => result.json())
@@ -194,9 +197,9 @@ class ReservationClass extends Component {
 
                 <Container >
                     <Row className='pb-5'>
-                        <button>
+                        <div >
                             <Link to='/reservation'>예약</Link>
-                        </button>
+                        </div>
                         <table class='table'>
                             <thead>
                                 <tr>
@@ -211,12 +214,20 @@ class ReservationClass extends Component {
                                     : this.state.reservationClass}
                             </tbody>
                         </table>
-                        <TextField
-                            id='exercise_class'
-                            value={this.state.exercise_class}
-                            onChange={this.handleChange}
-                            label='운동명'
-                        />
+                        <Col className='text-center py-2' xs={12}>
+                            <TextField
+                                id='exercise_class'
+                                value={this.state.exercise_class}
+                                onChange={this.handleChange}
+                                label='운동명'
+                            />
+                            <TextField
+                                id='number_of_people'
+                                value={this.state.number_of_people}
+                                onChange={this.handleChange}
+                                label='제한 인원 수'
+                            />
+                        </Col>
                         <button
                             className='mx-4'
                             type='button'
