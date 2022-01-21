@@ -7,7 +7,8 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import ko from "date-fns/locale/ko"
 registerLocale("ko", ko);
 import { getStatusRequest } from '../../action/authentication';
-
+import Modal from 'react-bootstrap/Modal';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
@@ -48,7 +49,9 @@ const ReservationClassItem = ({ exercise_class, number_of_people }) => {
 
 };
 
-const ReservationItem = ({ reserv_date, reserv_time, exercise_name, customer_name, customer_id, isCancel, cancelComment, res_no, number_of_peopleFountain }) => {
+const ReservationItem = ({ reserv_date, reserv_time, exercise_name, customer_name, customer_id,
+    isCancel, cancelComment, res_no, number_of_peopleFountain, number_of_people = 10 }) => {
+    //exercise_name, number_of_people을 가져와야하는데...
     const reservationDelete = (res_no) => {
         fetch(ip + '/reservation/delete?res_no=' + res_no, {
             method: 'DELETE',
@@ -67,7 +70,7 @@ const ReservationItem = ({ reserv_date, reserv_time, exercise_name, customer_nam
             <td> {exercise_name}</td>
             <td> {isCancel == null ? '예약 완료' : '예약 취소'}</td>
             <td> {cancelComment}</td>
-            <td> {number_of_peopleFountain}</td>
+            <td> {number_of_peopleFountain == 0 ? "제한없음" : number_of_peopleFountain + "/" + number_of_people}</td>
             <td> <button onClick={() => reservationDelete(res_no)}>삭제</button></td>
         </tr>
 
@@ -92,11 +95,12 @@ class Reservation extends Component {
             reserv_time: "00",
             exercise_name: 'PT기구',
             cancelComment: '',
-            number_of_peopleFountain: '1/10',
+            number_of_peopleFountain: '1',
 
             customer_name_err: false,
             exercise_name_err: false,
 
+            show: false,
             radioGroup: {
                 ten: true,
                 eleven: false,
@@ -248,6 +252,7 @@ class Reservation extends Component {
                 exercise_name: this.state.exercise_name,
                 isCancel: this.state.isCancel,
                 cancelComment: this.state.cancelComment,
+                number_of_peopleFountain: this.state.number_of_peopleFountain
             }),
         });
     };
@@ -280,7 +285,7 @@ class Reservation extends Component {
         });
     };
 
-    classHandleOnClick = (event) => {
+    classHandleOnClick = () => {
         this.reservationClassSelect()
     }
     reservationClassSelect = () => {
@@ -309,7 +314,11 @@ class Reservation extends Component {
             });
     };
 
-
+    handleClickAway = () => {
+        this.setState({
+            show: false,
+        });
+    };
 
     render() {
         // console.log(this.state.reservation);
@@ -357,7 +366,6 @@ class Reservation extends Component {
                                 <Link to='/reservationClass'>운동설정하기</Link>
                             </div>
                             <table class='table'>
-
                                 <tbody>
                                     {this.state.reservationClass.length == 0
                                         ? <p>'설정된 운동이 없습니다.'</p>
@@ -455,9 +463,47 @@ class Reservation extends Component {
                             >
                                 예약하기
                             </button>
+                            <button
+                                className='mx-4'
+                                type='button2'
+                                onClick={this.handleOnClick2}
+                            >
+                                예약변경
+                            </button>
                         </Col>
                     </Row>
+                    {/* <ClickAwayListener onClickAway={this.handleClickAway}> */}
+                    {/* <div className='container'>
+                            <div>
+                                <Modal
+                                    show={this.state.show}
+                                    onHide={this.handleClickAway}
+                                    dialogClassName='modal-90w mw-100'
+                                    aria-labelledby='example-modal'
+                                >
+                                </Modal>
+                                <Modal.Header closeButton>
+                                    <Modal.Title id='example-modal' className='fs-1'>
+                                        예약 변경
+                                    </Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <TextField
+                                        label='운동명' />
+                                    <TextField
+                                        label='인원수' />
+                                    <TextField
+                                        label='회원이름' />
+                                    <TextField
+                                        label='인원수' />
+                                    <TextField
+                                        label='시간' />
+                                    <TextField
+                                        label='날짜' />
 
+                                </Modal.Body>
+                            </div>
+                        </div> */}
                     <table class='table'>
                         <thead>
                             <tr>
@@ -478,6 +524,7 @@ class Reservation extends Component {
                                 : this.state.reservation}
                         </tbody>
                     </table>
+                    {/* </ClickAwayListener> */}
                 </Container>
                 <div className='footer'>
                     <Footer />
