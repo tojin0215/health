@@ -24,25 +24,28 @@ import { TextField } from '@material-ui/core';
 import moment from 'moment';
 const ip = SERVER_URL;
 
-const ReservationClassItem = ({ exercise_class, number_of_people }) => {
+const ReservationClassItem = ({ exercise_class, number_of_people, reserv_time, handleClick }) => {
 
     const [input, setInput] = useState('');
     const [input2, setInput2] = useState('');
-    const handleChange = () => {
-        alert('값이 변경되었습니다')
-    };
+    const [input3, setInput3] = useState('');
 
-    const handleClick = () => {
+
+
+    handleClick = () => {
         setInput(exercise_class)
         setInput2(number_of_people)
+        setInput3(reserv_time)
     };
 
 
     return (
         <tr>
-            <td>운동명<input type="text" value={input} onChange={handleChange} id='exercise_name' /></td>
-            <td>제한 인원 수<input type="text" value={input2 == "" ? '제한없음' : input2} onChange={handleChange} id='number_of_people' /></td>
+            <td>운동명<input type="text" value={input} id='exercise_name' /></td>
+            <td>시간<input type="text" value={input3} id='reserv_time' /></td>
+            <td>제한 인원 수<input type="text" value={input2 == "" ? '제한없음' : input2} id='number_of_people' /></td>
             <td><button onClick={handleClick}>{exercise_class}</button></td>
+
         </tr>
 
     );
@@ -50,17 +53,18 @@ const ReservationClassItem = ({ exercise_class, number_of_people }) => {
 };
 
 const ReservationItem = ({ reserv_date, reserv_time, exercise_name, customer_name, customer_id,
-    isCancel, cancelComment, res_no, number_of_peopleFountain, number_of_people = 10 }) => {
+    isCancel, cancelComment, res_no, maxNumber_of_people, length = 1, exercise_length,
+    reservationSelect }) => {
     //exercise_name, number_of_people을 가져와야하는데...
     const reservationDelete = (res_no) => {
         fetch(ip + '/reservation/delete?res_no=' + res_no, {
             method: 'DELETE',
         }).then((result) => {
             alert('삭제');
-            //새로고침 수정필요
-            window.location.replace("/reservation")
+            reservationSelect();
         });
     };
+
     return (
         <tr>
             <td>{customer_name}</td>
@@ -70,7 +74,8 @@ const ReservationItem = ({ reserv_date, reserv_time, exercise_name, customer_nam
             <td> {exercise_name}</td>
             <td> {isCancel == null ? '예약 완료' : '예약 취소'}</td>
             <td> {cancelComment}</td>
-            <td> {number_of_peopleFountain == 0 ? "제한없음" : number_of_peopleFountain + "/" + number_of_people}</td>
+            <td> {exercise_length == 0 ? "제한없음" : exercise_length + "/" + maxNumber_of_people}</td>
+
             <td> <button onClick={() => reservationDelete(res_no)}>삭제</button></td>
         </tr>
 
@@ -92,21 +97,16 @@ class Reservation extends Component {
             customer_id: 'xcv',
             isCancel: 1,
             reserv_date: new Date(),
-            reserv_time: "00",
+            time: "00",
             exercise_name: 'PT기구',
             cancelComment: '',
-            number_of_peopleFountain: '1',
-
+            number_of_people: '10',
+            exercise_length: '0',
             customer_name_err: false,
             exercise_name_err: false,
 
             show: false,
-            radioGroup: {
-                ten: true,
-                eleven: false,
-                twelve: false,
-                thirteen: false,
-            },
+
         });
         this.handleDateChange = this.handleDateChange.bind(this);
         this.reservationSelect();
@@ -156,6 +156,7 @@ class Reservation extends Component {
                 alert('Your session is expired, please log in again');
             } else {
                 this.reservationSelect();
+                this.reservationClassSelect();
             }
         });
     }
@@ -174,8 +175,18 @@ class Reservation extends Component {
             .then((result) => {
                 const items = result.map((data, index, array) => {
                     const date = moment(data.date).format("YYYY년 MM월 DD일")
+
+                    let exercise_length2 = 0;
+                    for (exercise_length2 = 0; exercise_length2 < result.length; exercise_length2++) {
+                        if (result[data.exercise_name] === data.exercise_name
+                            // exercise_class로 바꾸면 되긋는디
+                        ) {
+                            exercise_length++;
+                        }
+                    }
                     return (
                         <ReservationItem
+                            exercise_length={exercise_length2}
                             reserv_date={date}
                             reserv_time={data.time}
                             exercise_name={data.exercise_name}
@@ -184,13 +195,15 @@ class Reservation extends Component {
                             isCancel={data.isCancel}
                             cancelComment={data.cancelComment}
                             res_no={data.res_no}
-                            number_of_peopleFountain={data.number_of_peopleFountain}
+                            maxNumber_of_people={data.number_of_people}
+                            reservationSelect={this.reservationSelect}
+                            handleChange={this.handleChange}
                         />
                     );
                 });
 
                 this.setState({ reservation: items });
-                console.log(result);
+
             });
     };
 
@@ -214,27 +227,17 @@ class Reservation extends Component {
                 body: JSON.stringify({
                     fitness_no: this.props.userinfo.fitness_no,
                     date: this.state.reserv_date,
-                    time:
-                        this.state.radioGroup.ten == true
-                            ? '10'
-                            : this.state.radioGroup.eleven == true
-                                ? '11'
-                                : this.state.radioGroup.twelve == true
-                                    ? '12'
-                                    : this.state.radioGroup.thirteen == true
-                                        ? '13'
-                                        : '00',
                     exercise_name: this.state.exercise_name,
                     customer_name: this.state.customer_name,
                     // customer_id: this.state.customer_id,
-                    number_of_peopleFountain: this.state.number_of_peopleFountain
+                    number_of_people: this.state.number_of_people,
+                    time: this.state.time,
                 }),
             })
                 .then((result) => result.json())
                 .then((result) => {
                     alert('등록');
                     this.reservationSelect();
-                    // this.props.history.push('/reservation');
                 });
         }
     };
@@ -252,7 +255,7 @@ class Reservation extends Component {
                 exercise_name: this.state.exercise_name,
                 isCancel: this.state.isCancel,
                 cancelComment: this.state.cancelComment,
-                number_of_peopleFountain: this.state.number_of_peopleFountain
+                number_of_people: this.state.number_of_people
             }),
         });
     };
@@ -265,29 +268,12 @@ class Reservation extends Component {
     }
 
     handleChange = (e) => {
-
         this.setState({
             [e.target.id]: e.target.value,
         });
     };
 
-    handleRadio = (event) => {
-        let obj = {
-            ten: false,
-            eleven: false,
-            twelve: false,
-            thirteen: false,
-        };
-        obj[event.target.id] = event.target.checked; // true
-        console.log(obj);
-        this.setState({
-            radioGroup: obj,
-        });
-    };
 
-    classHandleOnClick = () => {
-        this.reservationClassSelect()
-    }
     reservationClassSelect = () => {
         fetch(
             ip + '/reservationClass/select?fitness_no=' + this.props.userinfo.fitness_no,
@@ -305,6 +291,7 @@ class Reservation extends Component {
                         <ReservationClassItem
                             exercise_class={data.exercise_class}
                             number_of_people={data.number_of_people}
+                            reserv_time={data.time}
                         />
                     );
                 });
@@ -321,8 +308,6 @@ class Reservation extends Component {
     };
 
     render() {
-        // console.log(this.state.reservation);
-        console.log(this.state.reserv_date);
         return (
             <div className='addCustomer'>
                 <header className='header'>
@@ -356,12 +341,7 @@ class Reservation extends Component {
                 <Container className='reservationWrap'>
                     <Row className='pb-5'>
                         <Col className='text-center py-2' xs={12}>
-                            <button
-                                type='button'
-                                onClick={this.classHandleOnClick}
-                            >
-                                설정된 운동 목록
-                            </button>
+
                             <div>
                                 <Link to='/reservationClass'>운동설정하기</Link>
                             </div>
@@ -380,10 +360,17 @@ class Reservation extends Component {
                                 err={this.state.exercise_name_err}
                             />
                             <TextField
-                                id='number_of_peopleFountain'
-                                value={this.state.number_of_peopleFountain}
+                                id='time'
+                                value={this.state.time}
                                 onChange={this.handleChange}
-                                label='인원수'
+                                label='시간'
+                            />
+
+                            <TextField
+                                id='number_of_people'
+                                value={this.state.number_of_people}
+                                onChange={this.handleChange}
+                                label='최대 인원수'
                             />
                             <TextField
                                 id='customer_name'
@@ -408,52 +395,6 @@ class Reservation extends Component {
                                 font-size='1.6rem'
                                 locale="ko"
                             />
-                            <label className='customerResi'>
-                                <label className='labelCheck'>
-                                    <input
-                                        className='btnRadio'
-                                        type='radio'
-                                        name='radioGroup'
-                                        id='ten'
-                                        checked={this.state.radioGroup['ten']}
-                                        onChange={this.handleRadio}
-                                    />
-                                    <span>10:00</span>
-                                </label>
-                                <label className='labelCheck'>
-                                    <input
-                                        className='btnRadio'
-                                        type='radio'
-                                        name='radioGroup'
-                                        id='eleven'
-                                        checked={this.state.radioGroup['eleven']}
-                                        onChange={this.handleRadio}
-                                    />
-                                    <span>11:00</span>
-                                </label>
-                                <label className='labelCheck'>
-                                    <input
-                                        className='btnRadio'
-                                        type='radio'
-                                        name='radioGroup'
-                                        id='twelve'
-                                        checked={this.state.radioGroup['twelve']}
-                                        onChange={this.handleRadio}
-                                    />
-                                    <span>12:00</span>
-                                </label>
-                                <label className='labelCheck'>
-                                    <input
-                                        className='btnRadio'
-                                        type='radio'
-                                        name='radioGroup'
-                                        id='thirteen'
-                                        checked={this.state.radioGroup['thirteen']}
-                                        onChange={this.handleRadio}
-                                    />
-                                    <span>13:00</span>
-                                </label>
-                            </label>
                         </Col>
                         <Col className='text-center' xs={12}>
                             <button
