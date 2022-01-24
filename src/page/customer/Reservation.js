@@ -22,6 +22,9 @@ import styles from '../../styles/customer/reservation.css';
 import { SERVER_URL } from '../../const/settings';
 import { TextField } from '@material-ui/core';
 import moment from 'moment';
+import ReservationPresetList from '../../component/reservation/ReservationPresetList';
+import ReservationList from '../../component/reservation/ReservationList';
+
 const ip = SERVER_URL;
 
 const ReservationClassItem = ({ exercise_class, number_of_people }) => {
@@ -172,25 +175,7 @@ class Reservation extends Component {
         )
             .then((result) => result.json())
             .then((result) => {
-                const items = result.map((data, index, array) => {
-                    const date = moment(data.date).format("YYYY년 MM월 DD일")
-                    return (
-                        <ReservationItem
-                            reserv_date={date}
-                            reserv_time={data.time}
-                            exercise_name={data.exercise_name}
-                            customer_name={data.customer_name}
-                            customer_id={data.customer_id}
-                            isCancel={data.isCancel}
-                            cancelComment={data.cancelComment}
-                            res_no={data.res_no}
-                            number_of_peopleFountain={data.number_of_peopleFountain}
-                        />
-                    );
-                });
-
-                this.setState({ reservation: items });
-                console.log(result);
+                this.setState({ reservation: result });
             });
     };
 
@@ -300,16 +285,16 @@ class Reservation extends Component {
         )
             .then((result) => result.json())
             .then((result) => {
-                const items = result.map((data, index, array) => {
-                    return (
-                        <ReservationClassItem
-                            exercise_class={data.exercise_class}
-                            number_of_people={data.number_of_people}
-                        />
-                    );
-                });
+                // const items = result.map((data, index, array) => {
+                //     return (
+                //         <ReservationClassItem
+                //             exercise_class={data.exercise_class}
+                //             number_of_people={data.number_of_people}
+                //         />
+                //     );
+                // });
 
-                this.setState({ reservationClass: items });
+                this.setState({ reservationClass: result });
                 console.log(result);
             });
     };
@@ -365,13 +350,16 @@ class Reservation extends Component {
                             <div>
                                 <Link to='/reservationClass'>운동설정하기</Link>
                             </div>
-                            <table class='table'>
+                            <ReservationPresetList
+                                reservationClass={this.state.reservationClass}
+                            />
+                            {/* <table class='table'>
                                 <tbody>
                                     {this.state.reservationClass.length == 0
                                         ? <p>'설정된 운동이 없습니다.'</p>
                                         : this.state.reservationClass}
                                 </tbody>
-                            </table>
+                            </table> */}
                             <TextField
                                 id='exercise_name'
                                 value={this.state.exercise_name}
@@ -504,11 +492,14 @@ class Reservation extends Component {
                                 </Modal.Body>
                             </div>
                         </div> */}
-                    <table class='table'>
+                    
+                    <ReservationList
+                        reservation={this.state.reservation}
+                    />
+                    {/* <table class='table'>
                         <thead>
                             <tr>
                                 <th scope='col'>회원이름</th>
-                                {/* <th scope='col'>회원아이디</th> */}
                                 <th scope='col'>날짜</th>
                                 <th scope='col'>시간</th>
                                 <th scope='col'>운동명</th>
@@ -523,7 +514,7 @@ class Reservation extends Component {
                                 ? <p>'예약된 회원이 없습니다.'</p>
                                 : this.state.reservation}
                         </tbody>
-                    </table>
+                    </table> */}
                     {/* </ClickAwayListener> */}
                 </Container>
                 <div className='footer'>
