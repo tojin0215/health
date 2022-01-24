@@ -10,6 +10,10 @@ const columns = [
         name: '제한 인원 수',
         selector: row => row.number_of_people,
     },
+    {
+        name: ' ',
+        selector: row => <button>{row.exercise_class}</button>,
+    },
 ];
 
 

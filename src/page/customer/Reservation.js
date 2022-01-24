@@ -27,31 +27,6 @@ import ReservationList from '../../component/reservation/ReservationList';
 
 const ip = SERVER_URL;
 
-const ReservationClassItem = ({ exercise_class, number_of_people }) => {
-
-    const [input, setInput] = useState('');
-    const [input2, setInput2] = useState('');
-    const handleChange = () => {
-        alert('값이 변경되었습니다')
-    };
-
-    const handleClick = () => {
-        setInput(exercise_class)
-        setInput2(number_of_people)
-    };
-
-
-    return (
-        <tr>
-            <td>운동명<input type="text" value={input} onChange={handleChange} id='exercise_name' /></td>
-            <td>제한 인원 수<input type="text" value={input2 == "" ? '제한없음' : input2} onChange={handleChange} id='number_of_people' /></td>
-            <td><button onClick={handleClick}>{exercise_class}</button></td>
-        </tr>
-
-    );
-
-};
-
 const ReservationItem = ({ reserv_date, reserv_time, exercise_name, customer_name, customer_id,
     isCancel, cancelComment, res_no, number_of_peopleFountain, number_of_people = 10 }) => {
     //exercise_name, number_of_people을 가져와야하는데...
@@ -174,6 +149,7 @@ class Reservation extends Component {
             }
         )
             .then((result) => result.json())
+            .then(result => result.map(value => {value.number_of_peopleFountain = this.state.number_of_peopleFountain; return value}))
             .then((result) => {
                 this.setState({ reservation: result });
             });
@@ -285,15 +261,6 @@ class Reservation extends Component {
         )
             .then((result) => result.json())
             .then((result) => {
-                // const items = result.map((data, index, array) => {
-                //     return (
-                //         <ReservationClassItem
-                //             exercise_class={data.exercise_class}
-                //             number_of_people={data.number_of_people}
-                //         />
-                //     );
-                // });
-
                 this.setState({ reservationClass: result });
                 console.log(result);
             });
