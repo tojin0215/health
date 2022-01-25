@@ -22,7 +22,8 @@ import { TextField } from '@material-ui/core';
 import moment from 'moment';
 const ip = SERVER_URL;
 
-const ReservationClassItem = ({ exercise_class, no, number_of_people, reserv_time, reservationClassSelect }) => {
+const ReservationClassItem = ({ exercise_class, no, number_of_people, reserv_time, reservationClassSelect, fitness_no,
+    hour, minute }) => {
 
     const reservationClassDelete = (no) => {
         fetch(ip + '/reservationClass/delete?no=' + no, {
@@ -32,13 +33,86 @@ const ReservationClassItem = ({ exercise_class, no, number_of_people, reserv_tim
             reservationClassSelect()
         });
     };
+    const [showResults, setShowResults] = React.useState(false)
+
+    const [input, setInput] = useState('');
+    const [input2, setInput2] = useState('');
+    const [input3, setInput3] = useState('');
+    const [input4, setInput4] = useState('');
+    const updateOnClick = () => {
+        setShowResults(true)
+        setInput(exercise_class)
+        setInput2(number_of_people)
+        setInput3(hour)
+        setInput4(minute)
+    }
+    const updateClose = () => {
+        setShowResults(false)
+        console.log(showResults)
+    }
+    const updateChange = (e) => {
+        setInput(e.target.value)
+    }
+    const updateChange2 = (e) => {
+        setInput2(e.target.value)
+    }
+    const updateChange3 = (e) => {
+        setInput3(e.target.value)
+    }
+    const updateChange4 = (e) => {
+        setInput4(e.target.value)
+    }
+    const reservationClassUpdate = (no) => {
+        fetch(ip + '/reservationClass/update?no=' + no, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                fitness_no: fitness_no,
+                exercise_class: input,
+                number_of_people: input2,
+                hour: input3,
+                minute: input4
+            })
+        })
+            .then((result) => result.json())
+            .then((result) => {
+                console.log(result)
+                alert('변경 완료');
+                updateClose()
+                reservationClassSelect()
+            });
+    };
+
     return (
+
         <tr>
-            <td>{exercise_class}  </td>
-            <td>{number_of_people}</td>
-            <td>{reserv_time}:00</td>
+            {showResults ?
+                <td><input value={input} id='exercise_class' onChange={updateChange} /></td>
+                :
+                <td>{exercise_class}</td>
+            }
+            {showResults ?
+                <td><input value={input2} id='number_of_people' onChange={updateChange2} /></td>
+                :
+                <td>{number_of_people}</td>
+            }
+            {showResults ?
+                <td><input value={input3} id='hour' onChange={updateChange3} />:<input value={input4} id='minute' onChange={updateChange4} /></td>
+                :
+                <td>{hour}:{minute}</td>
+            }
+
+
             <td><button onClick={() => reservationClassDelete(no)}>삭제</button></td>
-        </tr>
+            {showResults ?
+                <td><button onClick={() => reservationClassUpdate(no)}>.변경하기.</button></td>
+                :
+                <td><button onClick={() => updateOnClick()}>변경하기</button></td>
+            }
+
+        </tr >
     );
 };
 
@@ -46,18 +120,19 @@ class ReservationClass extends Component {
     constructor(props) {
         super(props);
         (this.state = {
-            exercise_class: '요가',
-            fitness_no: 1,
-            number_of_people: 10,
+            exercise_class: '',
+            fitness_no: 2,
+            number_of_people: '',
             reservationClass: [],
-            time: 10,
+            hour: '',
+            minute: '',
 
-            radioGroup: {
-                ten: true,
-                eleven: false,
-                twelve: false,
-                thirteen: false,
-            },
+            // radioGroup: {
+            //     ten: true,
+            //     eleven: false,
+            //     twelve: false,
+            //     thirteen: false,
+            // },
         });
         this.reservationClassSelect();
 
@@ -124,11 +199,13 @@ class ReservationClass extends Component {
                 const items = result.map((data, index, array) => {
                     return (
                         <ReservationClassItem
+                            fitness_no={this.props.userinfo.fitness_no}
                             reservationClassSelect={this.reservationClassSelect}
                             exercise_class={data.exercise_class}
                             no={data.no}
                             number_of_people={data.number_of_people}
-                            reserv_time={data.time}
+                            hour={data.hour}
+                            minute={data.minute}
                         />
                     );
                 });
@@ -147,16 +224,17 @@ class ReservationClass extends Component {
                 fitness_no: this.props.userinfo.fitness_no,
                 exercise_class: this.state.exercise_class,
                 number_of_people: this.state.number_of_people,
-                time:
-                    this.state.radioGroup.ten == true
-                        ? '10'
-                        : this.state.radioGroup.eleven == true
-                            ? '11'
-                            : this.state.radioGroup.twelve == true
-                                ? '12'
-                                : this.state.radioGroup.thirteen == true
-                                    ? '13'
-                                    : '00'
+                hour: this.state.hour,
+                minute: this.state.minute
+                // this.state.radioGroup.ten == true
+                //     ? '10'
+                //     : this.state.radioGroup.eleven == true
+                //         ? '11'
+                //         : this.state.radioGroup.twelve == true
+                //             ? '12'
+                //             : this.state.radioGroup.thirteen == true
+                //                 ? '13'
+                //                 : '00'
             }),
         })
             .then((result) => result.json())
@@ -240,7 +318,19 @@ class ReservationClass extends Component {
                                 onChange={this.handleChange}
                                 label='제한 인원 수'
                             />
-                            <label className='customerResi'>
+                            <TextField
+                                id='hour'
+                                value={this.state.hour}
+                                onChange={this.handleChange}
+                                label='시'
+                            />
+                            <TextField
+                                id='minute'
+                                value={this.state.minute}
+                                onChange={this.handleChange}
+                                label='분'
+                            />
+                            {/* <label className='customerResi'>
                                 <label className='labelCheck'>
                                     <input
                                         className='btnRadio'
@@ -285,7 +375,7 @@ class ReservationClass extends Component {
                                     />
                                     <span>13:00</span>
                                 </label>
-                            </label>
+                            </label> */}
                         </Col>
                         <button
                             className='mx-4'
