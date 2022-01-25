@@ -47,7 +47,9 @@ const ReservationClassItem = ({ exercise_class, number_of_people, hour, minute, 
         <tr>
             <td><button onClick={handleClick2}>{exercise_class}</button></td>
             <td>{number_of_people}</td>
-            <td>{hour}:{minute}</td>
+            <td>{hour == 1 ? '01' : hour == 2 ? '02' : hour == 3 ? '03' : hour == 4 ? '04' : hour == 5 ? '05' : minute == 6 ? '06' : hour == 7 ? '07' : hour == 8 ? '09' : hour == 0 ? '00' : hour
+            }:{minute == 1 ? '01' : minute == 2 ? '02' : minute == 3 ? '03' : minute == 4 ? '04' : minute == 5 ? '05' : minute == 6 ? '06' : minute == 7 ? '07' : minute == 8 ? '09' : minute == 0 ? '00' : minute}</td>
+
         </tr>
     );
 };
@@ -67,7 +69,7 @@ class Reservation extends Component {
             customer_id: 'xcv',
             isCancel: 1,
             reserv_date: new Date(),
-            time: " : ",
+            time: "07:00",
             exercise_name: '',
             cancelComment: '',
             number_of_people: '',
@@ -167,6 +169,10 @@ class Reservation extends Component {
             this.setState({ customer_name_err: true });
             alert("이름을 확인해 주세요")
         }
+        // else if (this.state.exercise_name === this.state.exercise_name && this.state.customer_name === this.state.customer_name) {
+        //     this.setState({ exercise_name_err: true });
+        //     alert("같은운동 중복등록 불가능")
+        // }
         else {
             fetch(ip + '/reservation/insert', {
                 method: 'POST',
@@ -201,11 +207,11 @@ class Reservation extends Component {
         });
     }
 
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value,
-        });
-    };
+    // handleChange = (e) => {
+    //     this.setState({
+    //         [e.target.id]: e.target.value,
+    //     });
+    // };
 
     reservationClassSelect = () => {
         fetch(
@@ -227,10 +233,17 @@ class Reservation extends Component {
                             hour={data.hour}
                             minute={data.minute}
                             handleClick={
-                                (reuslt_exercise_name, reuslt_hour, reuslt_minute, reuslt_number_of_people) => this.setState({
-                                    exercise_name: reuslt_exercise_name,
-                                    time: reuslt_hour + ':' + reuslt_minute,
-                                    number_of_people: reuslt_number_of_people
+                                (result_exercise_name, result_hour, result_minute, result_number_of_people) => this.setState({
+                                    exercise_name: result_exercise_name,
+                                    time:
+                                        // result_hour + ":" + result_minute
+                                        (result_hour == 1 ? '01' : result_hour == 2 ? '02' : result_hour == 3 ? '03' : result_hour == 4 ? '04' : result_hour == 5 ? '05' :
+                                            result_hour == 6 ? '06' : result_hour == 7 ? '07' : result_hour == 8 ? '09' : result_hour == 0 ? '00' : result_hour)
+                                        + ':' +
+                                        (result_minute == 1 ? '01' : result_minute == 2 ? '02' : result_minute == 3 ? '03' : result_minute == 4 ? '04' : result_minute == 5 ? '05' :
+                                            result_minute == 6 ? '06' : result_minute == 7 ? '07' : result_minute == 8 ? '09' : result_minute == 0 ? '00' : result_minute)
+                                    ,
+                                    number_of_people: result_number_of_people
                                 })
                             }
                         />
@@ -344,7 +357,7 @@ class Reservation extends Component {
                             <TextField
                                 id='customer_name'
                                 value={this.state.customer_name}
-                                onChange={this.handleChange}
+                                // onChange={this.handleChange}
                                 label='회원이름'
                                 error={this.state.customer_name_err}
                             />

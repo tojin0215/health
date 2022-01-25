@@ -63,26 +63,48 @@ const ReservationClassItem = ({ exercise_class, no, number_of_people, reserv_tim
         setInput4(e.target.value)
     }
     const reservationClassUpdate = (no) => {
-        fetch(ip + '/reservationClass/update?no=' + no, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                fitness_no: fitness_no,
-                exercise_class: input,
-                number_of_people: input2,
-                hour: input3,
-                minute: input4
+        if (input == "") {
+            this.setState({ exercise_class_err: true });
+            alert("운동명을 써주세요.")
+        } else if (this.state.number_of_people == "", this.state.number_of_people == 0) {
+            this.setState({ number_of_people_err: true });
+            alert("인원을 확인해 주세요.(숫자만, 0입력불가)")
+        }
+        else if (this.state.hour >= 24) {
+            this.setState({ hour_err: true });
+            alert("00~23시까지 설정 가능합니다.")
+        } else if (this.state.minute >= 59) {
+            this.setState({ minute_err: true });
+            alert("0~59분까지 설정 가능합니다.")
+        }
+        else if (this.state.hour == "") {
+            this.setState({ hour_err: true });
+            alert("시를 확인해 주세요.(0~24)")
+        } else if (this.state.minute == "") {
+            this.setState({ minute_err: true });
+            alert("분을 확인해 주세요.(0~59)")
+        } else {
+            fetch(ip + '/reservationClass/update?no=' + no, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fitness_no: fitness_no,
+                    exercise_class: input,
+                    number_of_people: input2,
+                    hour: input3,
+                    minute: input4
+                })
             })
-        })
-            .then((result) => result.json())
-            .then((result) => {
-                console.log(result)
-                alert('변경 완료');
-                updateClose()
-                reservationClassSelect()
-            });
+                .then((result) => result.json())
+                .then((result) => {
+                    console.log(result)
+                    alert('변경 완료');
+                    updateClose()
+                    reservationClassSelect()
+                });
+        }
     };
 
     return (
@@ -101,7 +123,9 @@ const ReservationClassItem = ({ exercise_class, no, number_of_people, reserv_tim
             {showResults ?
                 <td><input value={input3} id='hour' onChange={updateChange3} />:<input value={input4 == 0 ? '00' : input4} id='minute' onChange={updateChange4} /></td>
                 :
-                <td>{hour}:{minute == 0 ? '00' : minute}</td>
+                <td>{hour == 1 ? '01' : hour == 2 ? '02' : hour == 3 ? '03' : hour == 4 ? '04' : hour == 5 ? '05' : minute == 6 ? '06' : hour == 7 ? '07' : hour == 8 ? '09' : hour == 0 ? '00' : hour
+
+                }:{minute == 1 ? '01' : minute == 2 ? '02' : minute == 3 ? '03' : minute == 4 ? '04' : minute == 5 ? '05' : minute == 6 ? '06' : minute == 7 ? '07' : minute == 8 ? '09' : minute == 0 ? '00' : minute}</td>
             }
 
 
@@ -126,7 +150,10 @@ class ReservationClass extends Component {
             reservationClass: [],
             hour: '',
             minute: '',
-
+            hour_err: false,
+            minute_err: false,
+            exercise_class_err: false,
+            number_of_people_err: false,
             // radioGroup: {
             //     ten: true,
             //     eleven: false,
@@ -215,33 +242,61 @@ class ReservationClass extends Component {
     };
 
     handleOnClick = () => {
-        fetch(ip + '/reservationClass/insert', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                fitness_no: this.props.userinfo.fitness_no,
-                exercise_class: this.state.exercise_class,
-                number_of_people: this.state.number_of_people,
-                hour: this.state.hour,
-                minute: this.state.minute
-                // this.state.radioGroup.ten == true
-                //     ? '10'
-                //     : this.state.radioGroup.eleven == true
-                //         ? '11'
-                //         : this.state.radioGroup.twelve == true
-                //             ? '12'
-                //             : this.state.radioGroup.thirteen == true
-                //                 ? '13'
-                //                 : '00'
-            }),
+        this.setState({
+            exercise_class_err: false,
+            number_of_people_err: false,
+            hour_err: false,
+            minute_err: false
         })
-            .then((result) => result.json())
-            .then((result) => {
-                alert('운동 설정');
-                this.reservationClassSelect();
-            });
+        if (this.state.exercise_class == "") {
+            this.setState({ exercise_class_err: true });
+            alert("운동명을 써주세요.")
+        } else if (this.state.number_of_people == "", this.state.number_of_people == 0) {
+            this.setState({ number_of_people_err: true });
+            alert("인원을 확인해 주세요.(숫자만, 0입력불가)")
+        }
+        else if (this.state.hour >= 24) {
+            this.setState({ hour_err: true });
+            alert("00~23시까지 설정 가능합니다.")
+        } else if (this.state.minute >= 59) {
+            this.setState({ minute_err: true });
+            alert("0~59분까지 설정 가능합니다.")
+        }
+        else if (this.state.hour == "") {
+            this.setState({ hour_err: true });
+            alert("시를 확인해 주세요.(0~24)")
+        } else if (this.state.minute == "") {
+            this.setState({ minute_err: true });
+            alert("분을 확인해 주세요.(0~59)")
+        } else {
+            fetch(ip + '/reservationClass/insert', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fitness_no: this.props.userinfo.fitness_no,
+                    exercise_class: this.state.exercise_class,
+                    number_of_people: this.state.number_of_people,
+                    hour: this.state.hour,
+                    minute: this.state.minute
+                    // this.state.radioGroup.ten == true
+                    //     ? '10'
+                    //     : this.state.radioGroup.eleven == true
+                    //         ? '11'
+                    //         : this.state.radioGroup.twelve == true
+                    //             ? '12'
+                    //             : this.state.radioGroup.thirteen == true
+                    //                 ? '13'
+                    //                 : '00'
+                }),
+            })
+                .then((result) => result.json())
+                .then((result) => {
+                    alert('운동 설정');
+                    this.reservationClassSelect();
+                });
+        }
     };
     handleRadio = (event) => {
         let obj = {
@@ -311,24 +366,31 @@ class ReservationClass extends Component {
                                 value={this.state.exercise_class}
                                 onChange={this.handleChange}
                                 label='운동명'
+                                error={this.stateexercise_class_err}
                             />
                             <TextField
+                                type='number'
                                 id='number_of_people'
                                 value={this.state.number_of_people}
                                 onChange={this.handleChange}
                                 label='제한 인원 수'
+                                error={this.state.number_of_people_err}
                             />
                             <TextField
+                                type='number'
                                 id='hour'
                                 value={this.state.hour}
                                 onChange={this.handleChange}
                                 label='시'
+                                error={this.state.hour_err}
                             />
                             <TextField
+                                type='number'
                                 id='minute'
                                 value={this.state.minute}
                                 onChange={this.handleChange}
                                 label='분'
+                                error={this.state.minute_err}
                             />
                             {/* <label className='customerResi'>
                                 <label className='labelCheck'>
