@@ -24,6 +24,7 @@ import { TextField } from '@material-ui/core';
 import moment from 'moment';
 import ReservationPresetList from '../../component/reservation/ReservationPresetList';
 import ReservationList from '../../component/reservation/ReservationList';
+import UserSearch from '../../component/customer/UserSearch';
 
 const ip = SERVER_URL;
 
@@ -85,6 +86,8 @@ class Reservation extends Component {
                 twelve: false,
                 thirteen: false,
             },
+
+            open: false,
         });
         this.handleDateChange = this.handleDateChange.bind(this);
         this.reservationSelect();
@@ -272,6 +275,16 @@ class Reservation extends Component {
         });
     };
 
+    handleUser = (customer) => {
+        const {member_no, name} = customer;
+        this.setState({
+            customer: customer,
+            customer_name: name,
+            customer_id: member_no,
+            open: false,
+        })
+    }
+
     render() {
         // console.log(this.state.reservation);
         console.log(this.state.reserv_date);
@@ -307,6 +320,21 @@ class Reservation extends Component {
                 /> */}
                 <Container className='reservationWrap'>
                     <Row className='pb-5'>
+                        <Col className='text-center py-2' xs={12}>
+                            {
+                                this.state.customer&&(
+                                    <span>[{this.state.customer_id}]{this.state.customer_name} 님</span>
+                                )
+                            }
+                            {
+                                this.state.open?(
+                                    <UserSearch open={this.state.open} setOpen={o => this.setState({open: o})} fitness_no={this.props.userinfo.fitness_no} handleUser={this.handleUser} />
+                                ): (
+                                    <button type='button' onClick={() => this.setState({open: true})}>사용자 검색</button>
+                                )
+                            }
+                            
+                        </Col>
                         <Col className='text-center py-2' xs={12}>
                             <button
                                 type='button'
