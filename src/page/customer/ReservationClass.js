@@ -35,53 +35,58 @@ const ReservationClassItem = ({ exercise_class, no, number_of_people, reserv_tim
     };
     const [showResults, setShowResults] = React.useState(false)
 
-    const [input, setInput] = useState('');
-    const [input2, setInput2] = useState('');
-    const [input3, setInput3] = useState('');
-    const [input4, setInput4] = useState('');
+    const [exercise_class_err, setExercise_class_err] = useState(false);
+    const [number_of_people_err, setNumber_of_people_err] = useState(false);
+    const [hour_err, setHour_err] = useState(false);
+    const [minute_err, setMinute_err] = useState(false);
+
+    const [exercise_class_input, setExercise_class_input] = useState('');
+    const [number_of_people_input, setNumber_of_people_input] = useState('');
+    const [hour_input, setHour_input] = useState('');
+    const [minute_input, setMinute_input] = useState('');
     const updateOnClick = () => {
         setShowResults(true)
-        setInput(exercise_class)
-        setInput2(number_of_people)
-        setInput3(hour)
-        setInput4(minute)
+        setExercise_class_input(exercise_class)
+        setNumber_of_people_input(number_of_people)
+        setHour_input(hour)
+        setMinute_input(minute)
     }
     const updateClose = () => {
         setShowResults(false)
         console.log(showResults)
     }
     const updateChange = (e) => {
-        setInput(e.target.value)
+        setExercise_class_input(e.target.value)
     }
     const updateChange2 = (e) => {
-        setInput2(e.target.value)
+        setNumber_of_people_input(e.target.value)
     }
     const updateChange3 = (e) => {
-        setInput3(e.target.value)
+        setHour_input(e.target.value)
     }
     const updateChange4 = (e) => {
-        setInput4(e.target.value)
+        setMinute_input(e.target.value)
     }
     const reservationClassUpdate = (no) => {
-        if (input == "") {
-            this.setState({ exercise_class_err: true });
+        if (exercise_class_input == "") {
+            setExercise_class_err(true)
             alert("운동명을 써주세요.")
-        } else if (this.state.number_of_people == "", this.state.number_of_people == 0) {
-            this.setState({ number_of_people_err: true });
+        } else if (number_of_people_input == "", number_of_people_input == 0) {
+            setNumber_of_people_err(true)
             alert("인원을 확인해 주세요.(숫자만, 0입력불가)")
         }
-        else if (this.state.hour >= 24) {
-            this.setState({ hour_err: true });
+        else if (hour_input >= 24) {
+            setHour_err(true)
             alert("00~23시까지 설정 가능합니다.")
-        } else if (this.state.minute >= 59) {
-            this.setState({ minute_err: true });
+        } else if (minute_input >= 59) {
+            setMinute_err(true)
             alert("0~59분까지 설정 가능합니다.")
         }
-        else if (this.state.hour == "") {
-            this.setState({ hour_err: true });
+        else if (hour_input == "") {
+            setHour_err(true)
             alert("시를 확인해 주세요.(0~24)")
-        } else if (this.state.minute == "") {
-            this.setState({ minute_err: true });
+        } else if (minute_input == "") {
+            setMinute_err(true)
             alert("분을 확인해 주세요.(0~59)")
         } else {
             fetch(ip + '/reservationClass/update?no=' + no, {
@@ -91,10 +96,10 @@ const ReservationClassItem = ({ exercise_class, no, number_of_people, reserv_tim
                 },
                 body: JSON.stringify({
                     fitness_no: fitness_no,
-                    exercise_class: input,
-                    number_of_people: input2,
-                    hour: input3,
-                    minute: input4
+                    exercise_class: exercise_class_input,
+                    number_of_people: number_of_people_input,
+                    hour: hour_input,
+                    minute: minute_input
                 })
             })
                 .then((result) => result.json())
@@ -111,17 +116,17 @@ const ReservationClassItem = ({ exercise_class, no, number_of_people, reserv_tim
 
         <tr>
             {showResults ?
-                <td><input value={input} id='exercise_class' onChange={updateChange} /></td>
+                <td><input value={exercise_class_input} id='exercise_class' onChange={updateChange} error={exercise_class_err} /></td>
                 :
                 <td>{exercise_class}</td>
             }
             {showResults ?
-                <td><input value={input2} id='number_of_people' onChange={updateChange2} /></td>
+                <td><input type='number' value={number_of_people_input} id='number_of_people' onChange={updateChange2} /></td>
                 :
                 <td>{number_of_people}</td>
             }
             {showResults ?
-                <td><input value={input3} id='hour' onChange={updateChange3} />:<input value={input4 == 0 ? '00' : input4} id='minute' onChange={updateChange4} /></td>
+                <td><input value={hour_input} type='number' id='hour' onChange={updateChange3} />:<input type='number' value={minute_input == 0 ? '00' : minute_input} id='minute' onChange={updateChange4} /></td>
                 :
                 <td>{hour == 1 ? '01' : hour == 2 ? '02' : hour == 3 ? '03' : hour == 4 ? '04' : hour == 5 ? '05' : minute == 6 ? '06' : hour == 7 ? '07' : hour == 8 ? '09' : hour == 0 ? '00' : hour
 

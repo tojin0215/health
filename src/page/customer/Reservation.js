@@ -157,6 +157,7 @@ class Reservation extends Component {
     };
 
     handleOnClick = () => {
+        let filter_exercise_name = this.state.reservation.filter(filterData => filterData.exercise_name === this.state.reservation.exercise_name);
         this.setState({
             customer_name_err: false,
             exercise_name_err: false
@@ -169,8 +170,7 @@ class Reservation extends Component {
             this.setState({ customer_name_err: true });
             alert("이름을 확인해 주세요")
         }
-        // else if (this.state.exercise_name === this.state.exercise_name && this.state.customer_name === this.state.customer_name) {
-        //     this.setState({ exercise_name_err: true });
+        // else if (filter_exercise_name) {
         //     alert("같은운동 중복등록 불가능")
         // }
         else {
