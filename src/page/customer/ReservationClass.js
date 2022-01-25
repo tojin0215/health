@@ -36,7 +36,7 @@ const ReservationClassItem = ({ exercise_class, no, number_of_people, reserv_tim
         <tr>
             <td>{exercise_class}  </td>
             <td>{number_of_people}</td>
-            <td>{reserv_time}</td>
+            <td>{reserv_time}:00</td>
             <td><button onClick={() => reservationClassDelete(no)}>삭제</button></td>
         </tr>
     );
@@ -184,10 +184,6 @@ class ReservationClass extends Component {
         });
     };
 
-
-
-
-
     render() {
         return (
             <div className='addCustomer'>
@@ -216,11 +212,9 @@ class ReservationClass extends Component {
 
                 <Container >
                     <Row className='pb-5'>
-                        <div >
-                            <Link to='/reservation'>예약</Link>
-                        </div>
                         <table class='table'>
                             <thead>
+                                <Link to='/reservation'>예약</Link>
                                 <tr>
                                     <th scope='col'>설정된 운동명</th>
                                     <th scope='col'>인원 제한</th>
