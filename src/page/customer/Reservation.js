@@ -76,6 +76,7 @@ class Reservation extends Component {
             exercise_length: '0',
             customer_name_err: false,
             exercise_name_err: false,
+            reserv_date: '',
 
             show: false,
 
@@ -157,8 +158,25 @@ class Reservation extends Component {
             });
     };
 
+    dateFormat = (reserv_date) => {
+        let month = reserv_date.getMonth() + 1;
+        let day = reserv_date.getDate();
+        let hour = reserv_date.getHours();
+        let minute = reserv_date.getMinutes();
+        let second = reserv_date.getSeconds();
+
+        month = month >= 10 ? month : '0' + month;
+        day = day >= 10 ? day : '0' + day;
+        hour = hour >= 10 ? hour : '0' + hour;
+        minute = minute >= 10 ? minute : '0' + minute;
+        second = second >= 10 ? second : '0' + second;
+
+        return reserv_date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+    }
+
     handleOnClick = () => {
-        let filter_exercise_name = this.state.reservation.filter(filterData => filterData.exercise_name === this.state.reservation.exercise_name);
+        let canRegist = this.state.reservation.filter(filterData => filterData.exercise_name === this.state.exercise_name &&
+            filterData.time === this.state.time && filterData.date.split('T')[0] === this.state.reserv_date.split('T')[0]).length > 0;
         this.setState({
             customer_name_err: false,
             exercise_name_err: false
@@ -171,9 +189,9 @@ class Reservation extends Component {
             this.setState({ customer_name_err: true });
             alert("이름을 확인해 주세요")
         }
-        // else if (filter_exercise_name) {
-        //     alert("같은운동 중복등록 불가능")
-        // }
+        else if (canRegist) {
+            alert("같은운동 중복등록 불가능")
+        }
         else {
             fetch(ip + '/reservation/insert', {
                 method: 'POST',
@@ -296,6 +314,7 @@ class Reservation extends Component {
     }
 
     render() {
+        console.log(this.state.reserv_date)
         return (
             <div className='addCustomer'>
                 <header className='header'>
