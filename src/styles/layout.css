@@ -1,3 +1,127 @@
+body {
+	/* background-color: rgb(222, 234, 246) !important; */
+}
+
+#root > div {
+	padding-bottom: 2rem;
+	margin-bottom: 2rem;
+}
+
+.morpback {
+	background-color: rgb(222, 234, 246);
+}
+
+.boxmorpin {
+	box-shadow: rgb(190, 203, 216) 9px 9px 18px 0px inset,
+		rgb(243, 249, 255) -9px -9px 18px 0px inset;
+	-webkit-box-shadow: rgb(190, 203, 216) 9px 9px 18px 0px inset,
+		rgb(243, 249, 255) -9px -9px 18px 0px inset;
+	border-radius: 22px;
+	-webkit-border-radius: 22px;
+}
+
+.boxmorpinsm {
+	box-shadow: rgb(190, 203, 216) 5px 5px 10px 0px inset,
+		rgb(243, 249, 255) -5px -5px 10px 0px inset;
+	-webkit-box-shadow: rgb(190, 203, 216) 5px 5px 10px 0px inset,
+		rgb(243, 249, 255) -5px -5px 10px 0px inset;
+	border-radius: 13px !important;
+	-webkit-border-radius: 13px !important;
+	border: 0 !important;
+}
+
+.boxmorp {
+	box-shadow: rgb(190, 203, 216) 9px 9px 18px 0px,
+		rgb(243, 249, 255) -9px -9px 18px 0px;
+	-webkit-box-shadow: rgb(190, 203, 216) 9px 9px 18px 0px,
+		rgb(243, 249, 255) -9px -9px 18px 0px;
+	border-radius: 22px;
+	-webkit-border-radius: 22px;
+}
+
+.boxmorpsm {
+	box-shadow: rgb(190, 203, 216) 5px 5px 10px 0px,
+		rgb(243, 249, 255) -5px -5px 10px 0px;
+	-webkit-box-shadow: rgb(190, 203, 216) 5px 5px 10px 0px,
+		rgb(243, 249, 255) -5px -5px 10px 0px;
+	border-radius: 13px !important;
+	-webkit-border-radius: 13px !important;
+}
+
+.redboxmorp {
+	box-shadow: rgb(255, 138, 138) 9px 9px 18px 0px,
+		rgb(255, 192, 192) -9px -9px 18px 0px;
+	-webkit-box-shadow: rgb(255, 138, 138) 9px 9px 18px 0px,
+		rgb(255, 192, 192) -9px -9px 18px 0px;
+	border-radius: 22px;
+	-webkit-border-radius: 22px;
+}
+.redboxmorpsm:active {
+	/* background-color: rgb(240, 244, 248); */
+	box-shadow: rgba(255, 138, 138, 0.5) 5px 5px 10px 0px inset,
+		rgb(255, 192, 192) -5px -5px 10px 0px inset;
+	-webkit-box-shadow: rgba(255, 138, 138, 0.5) 5px 5px 10px 0px inset,
+		rgb(255, 192, 192) -5px -5px 10px 0px inset;
+	border-radius: 16px !important;
+	-webkit-border-radius: 16px !important;
+}
+
+.redboxmorpsm {
+	box-shadow: rgb(255, 138, 138) 5px 5px 10px 0px,
+		rgb(255, 192, 192) -5px -5px 10px 0px;
+	-webkit-box-shadow: rgb(255, 138, 138) 5px 5px 10px 0px,
+		rgb(255, 192, 192) -5px -5px 10px 0px;
+	border-radius: 13px !important;
+	-webkit-border-radius: 13px !important;
+}
+
+.primorpsm {
+	box-shadow: rgb(125, 169, 216) 5px 5px 10px 0px,
+		rgb(217, 236, 255) -5px -5px 10px 0px;
+	-webkit-box-shadow: rgb(125, 169, 216) 5px 5px 10px 0px,
+		rgb(217, 236, 255) -5px -5px 10px 0px;
+	border-radius: 13px;
+	-webkit-border-radius: 13px;
+	border: 0 !important;
+}
+
+.primorpinsm {
+	box-shadow: rgb(125, 169, 216) 5px 5px 10px 0px inset,
+		rgb(217, 236, 255) -5px -5px 10px 0px inset;
+	-webkit-box-shadow: rgb(125, 169, 216) 5px 5px 10px 0px inset,
+		rgb(217, 236, 255) -5px -5px 10px 0px inset;
+	border-radius: 13px;
+	-webkit-border-radius: 13px;
+	border: 0 !important;
+}
+
+.complemorp {
+	box-shadow: rgb(190, 203, 216) 6px 6px 12px 0px inset,
+		rgb(243, 249, 255) -6px -6px 12px 0px inset;
+	-webkit-box-shadow: rgb(190, 203, 216) 6px 6px 12px 0px inset,
+		rgb(243, 249, 255) -6px -6px 12px 0px inset;
+	border-radius: 13px !important;
+	-webkit-border-radius: 13px !important;
+}
+
+.boxmorpsm:active {
+	/* background-color: rgb(240, 244, 248); */
+	box-shadow: rgba(173, 187, 208, 0.5) 5px 5px 10px 0px inset,
+		rgb(255, 255, 255) -5px -5px 10px 0px inset;
+	-webkit-box-shadow: rgba(173, 187, 208, 0.5) 5px 5px 10px 0px inset,
+		rgb(255, 255, 255) -5px -5px 10px 0px inset;
+	border-radius: 16px !important;
+	-webkit-border-radius: 16px !important;
+}
+
+.circlemorp {
+	border-radius: 50%;
+	text-align: center;
+	background-color: #e0e5ec;
+	box-shadow: 9px 9px 16px rgb(163, 177, 198, 0.6),
+		-9px -9px 16px rgba(255, 255, 255, 0.5);
+}
+
 @media (max-width: 767px) {
 	.container section {
 		padding: 2rem;

@@ -1,0 +1,92 @@
+.reservationWrap .MuiInput-underline:before {
+	border-bottom: none;
+}
+
+.reservationWrap label + .MuiInput-formControl {
+	margin-top: 0;
+}
+
+.reservationWrap .MuiInputLabel-formControl {
+	left: 21px;
+	font-size: 2.2rem;
+	font-weight: bold;
+	color: #0f78ff;
+}
+
+/* .reservationWrap .usersearchButton #customer_name {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+.reservationWrap .usersearchButton .MuiFormControl-root {
+	display: block;
+}
+
+.reservationWrap .usersearchButton label + .MuiInput-formControl {
+	height: 100%;
+} */
+
+.reservationWrap .usersearchButton {
+	min-height: 7.4rem;
+}
+.reservationWrap .usersearchButton label + .MuiInput-formControl {
+	height: 100%;
+}
+.reservationWrap .usersearchButton #customer_name {
+	border: 0;
+	margin: 0;
+	height: 100%;
+	text-align: center;
+	font-size: 2.4rem;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.reservationWrap .usersearchButton .MuiFormControl-root:hover {
+	background-color: #e0efff;
+	transition: all linear 0.2s;
+}
+
+.reservationWrap .datepickerButton .react-datepicker-wrapper {
+	height: 100%;
+	width: 100%;
+}
+.reservationWrap .datepickerButton .react-datepicker__input-container {
+	height: 100%;
+}
+.reservationWrap .datepickerButton .react-datepicker__input-container > input {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	border: 0;
+	cursor: pointer;
+	text-align: center;
+	font-size: 2.2rem;
+	font-weight: bold;
+	color: #0f78ff;
+}
+
+.reservationWrap
+	.datepickerButton
+	.react-datepicker__input-container
+	> input:hover {
+	background-color: #e0efff;
+	transition: all linear 0.2s;
+}
+
+.reservationWrap .deleteButton {
+	font-size: 1.8rem;
+	margin: 6px;
+	height: 34px;
+	padding: 0 24px;
+	font-weight: normal;
+	color: white;
+	background-color: tomato;
+}
+.reservationWrap .rdt_TableCol {
+	justify-content: center;
+}
+
+.reservationWrap .rdt_TableCell {
+	justify-content: center;
+}
