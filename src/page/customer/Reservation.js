@@ -76,7 +76,6 @@ class Reservation extends Component {
             exercise_length: '0',
             customer_name_err: false,
             exercise_name_err: false,
-            reserv_date: '',
 
             show: false,
 
@@ -171,12 +170,12 @@ class Reservation extends Component {
         minute = minute >= 10 ? minute : '0' + minute;
         second = second >= 10 ? second : '0' + second;
 
-        return reserv_date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+        return reserv_date.getFullYear() + '-' + month + '-' + day + 'T' + hour + ':' + minute + ':' + second;
     }
 
     handleOnClick = () => {
         let canRegist = this.state.reservation.filter(filterData => filterData.exercise_name === this.state.exercise_name &&
-            filterData.time === this.state.time && filterData.date.split('T')[0] === this.state.reserv_date.split('T')[0]).length > 0;
+            filterData.time === this.state.time && filterData.date.split('T')[0] === this.dateFormat(this.state.reserv_date).split('T')[0]).length > 0;
         this.setState({
             customer_name_err: false,
             exercise_name_err: false
