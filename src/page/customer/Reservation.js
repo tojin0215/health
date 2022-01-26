@@ -313,7 +313,6 @@ class Reservation extends Component {
     }
 
     render() {
-        console.log(this.state.reserv_date)
         return (
             <div className='addCustomer'>
                 <header className='header'>

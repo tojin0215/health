@@ -5,8 +5,21 @@ import React, { Component } from 'react';
 
 const ReservationList = ({ reservation, reservationDelete, reservationUpdate }) => {
 
-    const columns = [
+    const [showResults, setShowResults] = React.useState(false)
+    const [data, setData] = React.useState(reservation)
+    const updateOnClick = () => {
+        setShowResults(true)
+        // setData([])
+        setData(reservation)
+        console.log(showResults)
+    }
 
+    const updateClose = () => {
+        setShowResults(false)
+        setData(reservation)
+    }
+
+    const columns = [
         {
             name: '회원이름',
             selector: row => row.customer_name,
@@ -39,27 +52,17 @@ const ReservationList = ({ reservation, reservationDelete, reservationUpdate }) 
             name: '삭제',
             selector: row => <button onClick={() => reservationDelete(row)}>삭제</button>
         },
-        showResults ?
-            {
-                name: '예약변경',
-                selector: row =>
-                    <button onClick={() => reservationUpdate(row), updateClose()}>변경</button>
-            }
-            : {
-                name: '예약변경',
-                selector: row =>
+        {
+            name: '예약변경',
+            selector: row =>
+                showResults ?
+                    <button onClick={() => reservationUpdate(row)}>변경</button>
+                    :
                     <button onClick={() => updateOnClick()}>변경하기</button>
-            }
+        }
 
     ];
-    const [showResults, setShowResults] = React.useState(false)
-    const updateOnClick = () => {
-        setShowResults(true)
-        console.log(showResults)
-    }
-    const updateClose = () => {
-        setShowResults(false)
-    }
+
     return (
         <DataTable
             columns={columns}
