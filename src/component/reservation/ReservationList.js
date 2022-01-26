@@ -1,17 +1,12 @@
-import React from "react";
+
 import DataTable from 'react-data-table-component';
 import moment from 'moment';
+import React, { Component } from 'react';
 
-
-
-// const { reservationDelete } = props;
-
-
-
-
-const ReservationList = ({ reservation, reservationDelete }) => {
+const ReservationList = ({ reservation, reservationDelete, reservationUpdate }) => {
 
     const columns = [
+
         {
             name: '회원이름',
             selector: row => row.customer_name,
@@ -43,9 +38,28 @@ const ReservationList = ({ reservation, reservationDelete }) => {
         {
             name: '삭제',
             selector: row => <button onClick={() => reservationDelete(row)}>삭제</button>
-        }
-    ];
+        },
+        showResults ?
+            {
+                name: '예약변경',
+                selector: row =>
+                    <button onClick={() => reservationUpdate(row), updateClose()}>변경</button>
+            }
+            : {
+                name: '예약변경',
+                selector: row =>
+                    <button onClick={() => updateOnClick()}>변경하기</button>
+            }
 
+    ];
+    const [showResults, setShowResults] = React.useState(false)
+    const updateOnClick = () => {
+        setShowResults(true)
+        console.log(showResults)
+    }
+    const updateClose = () => {
+        setShowResults(false)
+    }
     return (
         <DataTable
             columns={columns}

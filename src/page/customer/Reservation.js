@@ -147,7 +147,8 @@ class Reservation extends Component {
         )
             .then((result) => result.json())
             .then(result => result.map(value => {
-                let exercise_length = result.filter(filterData => filterData.exercise_name === value.exercise_name).length;
+                let exercise_length = result.filter(filterData => filterData.exercise_name === value.exercise_name && filterData.time === value.time &&
+                    filterData.date.split('T')[0] === value.date.split('T')[0]).length;
                 value.number_of_peopleFountain = exercise_length
                 return value
             }))
@@ -261,6 +262,28 @@ class Reservation extends Component {
             this.reservationSelect();
         });
     };
+    reservationUpdate = (reservation) => {
+        fetch(ip + '/reserv_time/update?res_no=' + reservation.res_no, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                time: this.state.time,
+                exercise_name: this.state.exercise_name,
+                number_of_people: this.state.number_of_people,
+
+                date: this.state.date,
+                isCancel: this.state.isCancel,
+                cancelComment: this.state.cancelComment
+            })
+        })
+            .then((result) => result.json())
+            .then((result) => {
+                alert('예약변경완료');
+                this.reservationSelect();
+            })
+    }
 
     handleUser = (customer) => {
         const { member_no, name } = customer;
@@ -393,6 +416,7 @@ class Reservation extends Component {
                     <ReservationList
                         reservation={this.state.reservation}
                         reservationDelete={this.reservationDelete}
+                        reservationUpdate={this.reservationUpdate}
                     />
                 </Container >
                 <div className='footer'>
