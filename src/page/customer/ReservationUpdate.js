@@ -24,22 +24,50 @@ import { SERVER_URL } from '../../const/settings';
 import { TextField } from '@material-ui/core';
 const ip = SERVER_URL;
 
+const ReservationClassItem = ({ exercise_class, number_of_people, hour, minute, handleClick, canRegist }) => {
+
+    const [input, setInput] = useState('');
+    const [input2, setInput2] = useState('');
+    const [input3, setInput3] = useState('');
+    const [input4, setInput4] = useState('');
+    const handleClick2 = () => {
+        setInput(exercise_class)
+        setInput2(number_of_people)
+        setInput3(hour)
+        setInput4(minute)
+        handleClick(exercise_class, hour, minute, number_of_people)
+    };
+
+    return (
+        <tr>
+            <td><button onClick={handleClick2}>선택</button></td>
+            <td><button onClick={handleClick2}>{exercise_class}</button></td>
+            <td>{canRegist}/{number_of_people}</td>
+            <td>{hour == 1 ? '01' : hour == 2 ? '02' : hour == 3 ? '03' : hour == 4 ? '04' : hour == 5 ? '05' : minute == 6 ? '06' : hour == 7 ? '07' : hour == 8 ? '09' : hour == 0 ? '00' : hour
+            }:{minute == 1 ? '01' : minute == 2 ? '02' : minute == 3 ? '03' : minute == 4 ? '04' : minute == 5 ? '05' : minute == 6 ? '06' : minute == 7 ? '07' : minute == 8 ? '09' : minute == 0 ? '00' : minute}</td>
+
+        </tr>
+    );
+};
+
+
+
+
 const ReservationItem = ({ res_no, date, exercise_name, fitness_no, customer_name,
     isCancel, cancelComment, number_of_people, time, date2, exercise_length,
-    exercise_class, no, number_of_people_class, hour, minute, joiner, reservationSelect }) => {
+    exercise_class, no, number_of_people_class, hour, minute, joiner, reservationSelect, reservationClass }) => {
     const [showResults, setShowResults] = React.useState(false)
-    const [customer_name_input, setCustomer_name_input] = useState('');
-    const [date_input, setDate_input] = useState(new Date());
+    const [date_input, setDate_input] = useState('');
     const [time_input, setTime_input] = useState('');
     const [exercise_name_input, setExercise_name_input] = useState('');
     const [isCancel_input, setIsCancel_input] = useState('');
     const [cancelComment_input, setCancelComment_input] = useState('');
     const [number_of_people_input, setNumber_of_people_input] = useState('');
+
     const [show, setShow] = useState(false);
 
     const updateOnClick = () => {
         setShowResults(true)
-        setCustomer_name_input(customer_name)
         setDate_input(date2)
         setTime_input(time)
         setExercise_name_input(exercise_name)
@@ -62,6 +90,7 @@ const ReservationItem = ({ res_no, date, exercise_name, fitness_no, customer_nam
     }
     const reservationClassSelectOnClick = () => {
         setShow(true)
+        console.log(reservationClass)
     }
     const handleClose = () => {
         setShow(false)
@@ -93,21 +122,20 @@ const ReservationItem = ({ res_no, date, exercise_name, fitness_no, customer_nam
 
     return (
         <tr>
-            {showResults ?
-                <td><input value={customer_name_input} id='customer_name' /></td>
-                :
-                <td>{customer_name}</td>}
+
+            <td>{customer_name}</td>
             {showResults ?
                 <td>
-                    <DatePicker
-                        // seleted={date_input}
+                    <input value={date_input} id='date' onChange={handleChangeDate} />
+                    {/* <DatePicker
                         value={date_input}
-                        onChange={handleChangeDate}
+                        seleted={date_input}
                         id='date'
+                        onChange={handleChangeDate}
                         dateFormat='yyyy-MM-dd(eee)'
                         font-size='1.6rem'
                         locale="ko"
-                    />
+                    /> */}
 
                 </td>
                 :
@@ -125,13 +153,20 @@ const ReservationItem = ({ res_no, date, exercise_name, fitness_no, customer_nam
                             <Modal.Title>운동목록</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-
-                            <table>
+                            <table class='table'>
                                 <thead>
-                                    <th>운동명</th>
+                                    <tr>
+                                        <th scope='col'>선택</th>
+                                        <th scope='col'>운동명</th>
+                                        <th scope='col'>인원수</th>
+                                        <th scope='col'>시간</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>{joiner}</tr>
+                                    {reservationClass}
+                                    {/* {reservationClass.length == 0
+                                        ? <p>'설정된 운동이 없습니다.'</p>
+                                        : reservationClass} */}
                                 </tbody>
                             </table>
                         </Modal.Body>
@@ -171,8 +206,11 @@ class ReservationUpdate extends Component {
         (this.state = {
             fitness_no: 2,
             reservation: [],
+            reservationClass: []
+
         });
         this.reservationSelect();
+        this.reservationClassSelect();
         // this.reservationTogether();
     }
 
@@ -219,6 +257,7 @@ class ReservationUpdate extends Component {
             } else {
                 // this.reservationTogether();
                 this.reservationSelect();
+                this.reservationClassSelect();
             }
         });
     }
@@ -254,6 +293,7 @@ class ReservationUpdate extends Component {
                             exercise_length={exercise_length}
                             time={data.time}
                             reservationSelect={this.reservationSelect}
+                            reservationClass={this.state.reservationClass}
                         />
                     );
                 });
@@ -322,9 +362,50 @@ class ReservationUpdate extends Component {
     // }
 
 
+    reservationClassSelect = () => {
+        fetch(
+            ip + '/reservationClass/select?fitness_no=' + this.props.userinfo.fitness_no,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+            }
+        )
+            .then((result) => result.json())
+            .then((result) => {
+                const items = result.map((data, index, array) => {
+
+                    return (
+                        <ReservationClassItem
+                            exercise_class={data.exercise_class}
+                            number_of_people={data.number_of_people}
+                            hour={data.hour}
+                            minute={data.minute}
+                            handleClick={
+                                (result_exercise_name, result_hour, result_minute, result_number_of_people) => this.setState({
+                                    exercise_name_input: result_exercise_name,
+                                    time_input:
+                                        // result_hour + ":" + result_minute
+                                        (result_hour == 1 ? '01' : result_hour == 2 ? '02' : result_hour == 3 ? '03' : result_hour == 4 ? '04' : result_hour == 5 ? '05' :
+                                            result_hour == 6 ? '06' : result_hour == 7 ? '07' : result_hour == 8 ? '09' : result_hour == 0 ? '00' : result_hour)
+                                        + ':' +
+                                        (result_minute == 1 ? '01' : result_minute == 2 ? '02' : result_minute == 3 ? '03' : result_minute == 4 ? '04' : result_minute == 5 ? '05' :
+                                            result_minute == 6 ? '06' : result_minute == 7 ? '07' : result_minute == 8 ? '09' : result_minute == 0 ? '00' : result_minute)
+                                    ,
+                                    number_of_people_input: result_number_of_people
+                                })
+                            }
+                        />
+                    );
+                });
+                this.setState({ reservationClass: items });
+            });
+    };
+
 
     render() {
-
+        console.log(this.state.reservationClass)
         return (
             <div className='addCustomer'>
                 <header className='header'>
@@ -374,6 +455,23 @@ class ReservationUpdate extends Component {
 
                             </tbody>
                         </table>
+
+                        <table class='table'>
+                            <thead>
+                                <tr>
+                                    <th scope='col'>선택</th>
+                                    <th scope='col'>운동명</th>
+                                    <th scope='col'>인원수</th>
+                                    <th scope='col'>시간</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.reservationClass.length == 0
+                                    ? <p>'설정된 운동이 없습니다.'</p>
+                                    : this.state.reservationClass}
+                            </tbody>
+                        </table>
+
                     </Row>
                 </Container>
                 <div className='footer'>

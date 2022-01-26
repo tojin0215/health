@@ -296,7 +296,7 @@ class Reservation extends Component {
     }
 
     render() {
-        console.log(this.state.reservation)
+        console.log(this.state.reservationClass)
         return (
             <div className='addCustomer'>
                 <header className='header'>
@@ -363,29 +363,27 @@ class Reservation extends Component {
                                 // onChange={this.handleChange}
                                 label='최대 인원수'
                             />
+                            {/* 
+                            {
+                                this.state.customer && (
+                                    <span>[{this.state.customer_id}]{this.state.customer_name} 님</span>
+                                )
+                            } */}
+                            {
+                                this.state.open ? (
+                                    <UserSearch open={this.state.open} setOpen={o => this.setState({ open: o })} fitness_no={this.props.userinfo.fitness_no} handleUser={this.handleUser} />
+                                ) : (
+                                    <TextField
+                                        onClick={() => this.setState({ open: true })}
+                                        id='customer_name'
+                                        value={this.state.customer_name}
+                                        // onChange={this.handleChange}
+                                        label='회원 검색'
+                                        error={this.state.customer_name_err}
+                                    />
 
-                            <Col className='text-center py-2' xs={12}>
-                                {
-                                    this.state.customer && (
-                                        <span>[{this.state.customer_id}]{this.state.customer_name} 님</span>
-                                    )
-                                }
-                                {
-                                    this.state.open ? (
-                                        <UserSearch open={this.state.open} setOpen={o => this.setState({ open: o })} fitness_no={this.props.userinfo.fitness_no} handleUser={this.handleUser} />
-                                    ) : (
-                                        <TextField
-                                            onClick={() => this.setState({ open: true })}
-                                            id='customer_name'
-                                            value={this.state.customer_name}
-                                            // onChange={this.handleChange}
-                                            label='회원 검색'
-                                            error={this.state.customer_name_err}
-                                        />
-
-                                    )
-                                }
-                            </Col >
+                                )
+                            }
                             {/* <TextField
                                 id='customer_name'
                                 value={this.state.customer_name}
