@@ -29,7 +29,7 @@ import UserSearch from '../../component/customer/UserSearch';
 
 const ip = SERVER_URL;
 
-const ReservationClassItem = ({ exercise_class, number_of_people, hour, minute, handleClick }) => {
+const ReservationClassItem = ({ exercise_class, number_of_people, hour, minute, handleClick, canRegist }) => {
 
     const [input, setInput] = useState('');
     const [input2, setInput2] = useState('');
@@ -45,8 +45,9 @@ const ReservationClassItem = ({ exercise_class, number_of_people, hour, minute, 
 
     return (
         <tr>
+            <td><button onClick={handleClick2}>선택</button></td>
             <td><button onClick={handleClick2}>{exercise_class}</button></td>
-            <td>{number_of_people}</td>
+            <td>{canRegist}/{number_of_people}</td>
             <td>{hour == 1 ? '01' : hour == 2 ? '02' : hour == 3 ? '03' : hour == 4 ? '04' : hour == 5 ? '05' : minute == 6 ? '06' : hour == 7 ? '07' : hour == 8 ? '09' : hour == 0 ? '00' : hour
             }:{minute == 1 ? '01' : minute == 2 ? '02' : minute == 3 ? '03' : minute == 4 ? '04' : minute == 5 ? '05' : minute == 6 ? '06' : minute == 7 ? '07' : minute == 8 ? '09' : minute == 0 ? '00' : minute}</td>
 
@@ -151,7 +152,9 @@ class Reservation extends Component {
                     filterData.date.split('T')[0] === value.date.split('T')[0]).length;
                 value.number_of_peopleFountain = exercise_length
                 return value
-            }))
+            })
+            )
+
             .then((result) => {
                 this.setState({ reservation: result });
             });
@@ -188,9 +191,6 @@ class Reservation extends Component {
             this.setState({ customer_name_err: true });
             alert("이름을 확인해 주세요")
         }
-        else if (canRegist) {
-            alert("같은운동 중복등록 불가능")
-        }
         else {
             fetch(ip + '/reservation/insert', {
                 method: 'POST',
@@ -211,6 +211,9 @@ class Reservation extends Component {
                 .then((result) => {
                     if (result.message == 'false') {
                         alert('예약이 다 찼습니다.')
+                    }
+                    else if (canRegist) {
+                        alert("같은운동 중복등록 불가능")
                     } else {
                         alert('등록');
                         this.reservationSelect();
@@ -244,6 +247,7 @@ class Reservation extends Component {
             .then((result) => result.json())
             .then((result) => {
                 const items = result.map((data, index, array) => {
+
                     return (
                         <ReservationClassItem
                             exercise_class={data.exercise_class}
@@ -279,28 +283,7 @@ class Reservation extends Component {
             this.reservationSelect();
         });
     };
-    reservationUpdate = (reservation) => {
-        fetch(ip + '/reserv_time/update?res_no=' + reservation.res_no, {
-            method: 'PUT',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                time: this.state.time,
-                exercise_name: this.state.exercise_name,
-                number_of_people: this.state.number_of_people,
 
-                date: this.state.date,
-                isCancel: this.state.isCancel,
-                cancelComment: this.state.cancelComment
-            })
-        })
-            .then((result) => result.json())
-            .then((result) => {
-                alert('예약변경완료');
-                this.reservationSelect();
-            })
-    }
 
     handleUser = (customer) => {
         const { member_no, name } = customer;
@@ -313,6 +296,7 @@ class Reservation extends Component {
     }
 
     render() {
+        console.log(this.state.reservation)
         return (
             <div className='addCustomer'>
                 <header className='header'>
@@ -340,21 +324,6 @@ class Reservation extends Component {
                 <Container className='reservationWrap'>
                     <Row className='pb-5'>
                         <Col className='text-center py-2' xs={12}>
-                            {
-                                this.state.customer && (
-                                    <span>[{this.state.customer_id}]{this.state.customer_name} 님</span>
-                                )
-                            }
-                            {
-                                this.state.open ? (
-                                    <UserSearch open={this.state.open} setOpen={o => this.setState({ open: o })} fitness_no={this.props.userinfo.fitness_no} handleUser={this.handleUser} />
-                                ) : (
-                                    <button type='button' onClick={() => this.setState({ open: true })}>사용자 검색</button>
-                                )
-                            }
-
-                        </Col >
-                        <Col className='text-center py-2' xs={12}>
 
                             <div>
                                 <Link to='/reservationClass'>운동설정하기</Link>
@@ -362,9 +331,10 @@ class Reservation extends Component {
                             <table class='table'>
                                 <thead>
                                     <tr>
-                                        <td>운동명</td>
-                                        <td>인원수</td>
-                                        <td>시간</td>
+                                        <th scope='col'>선택</th>
+                                        <th scope='col'>운동명</th>
+                                        <th scope='col'>인원수</th>
+                                        <th scope='col'>시간</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -394,13 +364,35 @@ class Reservation extends Component {
                                 label='최대 인원수'
                             />
 
-                            <TextField
+                            <Col className='text-center py-2' xs={12}>
+                                {
+                                    this.state.customer && (
+                                        <span>[{this.state.customer_id}]{this.state.customer_name} 님</span>
+                                    )
+                                }
+                                {
+                                    this.state.open ? (
+                                        <UserSearch open={this.state.open} setOpen={o => this.setState({ open: o })} fitness_no={this.props.userinfo.fitness_no} handleUser={this.handleUser} />
+                                    ) : (
+                                        <TextField
+                                            onClick={() => this.setState({ open: true })}
+                                            id='customer_name'
+                                            value={this.state.customer_name}
+                                            // onChange={this.handleChange}
+                                            label='회원 검색'
+                                            error={this.state.customer_name_err}
+                                        />
+
+                                    )
+                                }
+                            </Col >
+                            {/* <TextField
                                 id='customer_name'
                                 value={this.state.customer_name}
                                 // onChange={this.handleChange}
                                 label='회원이름'
                                 error={this.state.customer_name_err}
-                            />
+                            /> */}
                             {/* <TextField
                                 id='customer_id'
                                 value={this.state.customer_id}
@@ -428,12 +420,14 @@ class Reservation extends Component {
                             </button>
                         </Col>
                     </Row >
-
-
+                    <Col className='text-center' xs={12}>
+                        <div>
+                            <Link to='/reservation/update'>예약 수정하기</Link>
+                        </div>
+                    </Col>
                     <ReservationList
                         reservation={this.state.reservation}
                         reservationDelete={this.reservationDelete}
-                        reservationUpdate={this.reservationUpdate}
                     />
                 </Container >
                 <div className='footer'>

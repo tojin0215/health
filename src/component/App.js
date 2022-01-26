@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { Home, Customer, AddCustomer, AddExercise, Sales, AddSales, Login, Statistics, Inbody, AddInbody, UpdateCustomer, DefaultExercise, AssignExercise, AssignCheckExercise, AssignCustomer, Admin, QRLogin, Register, CustomerCalendar, Reservation, ReservationClass } from '../page';
+import { Home, Customer, AddCustomer, AddExercise, Sales, AddSales, Login, Statistics, Inbody, AddInbody, UpdateCustomer, DefaultExercise, AssignExercise, AssignCheckExercise, AssignCustomer, Admin, QRLogin, Register, CustomerCalendar, Reservation, ReservationClass, ReservationUpdate } from '../page';
 
 
 class App extends Component {
@@ -28,6 +28,8 @@ class App extends Component {
         <Route exact path="/test" component={CustomerCalendar} />
         <Route exact path="/reservation" component={Reservation} />
         <Route exact path="/reservationClass" component={ReservationClass} />
+        <Route exact path="/reservation/update" component={ReservationUpdate} />
+
       </div>
     );
   }

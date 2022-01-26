@@ -53,7 +53,6 @@ const ReservationClassItem = ({ exercise_class, no, number_of_people, reserv_tim
     }
     const updateClose = () => {
         setShowResults(false)
-        console.log(showResults)
     }
     const updateChange = (e) => {
         setExercise_class_input(e.target.value)
@@ -82,13 +81,7 @@ const ReservationClassItem = ({ exercise_class, no, number_of_people, reserv_tim
             setMinute_err(true)
             alert("0~59분까지 설정 가능합니다.")
         }
-        else if (hour_input == "") {
-            setHour_err(true)
-            alert("시를 확인해 주세요.(0~24)")
-        } else if (minute_input == "") {
-            setMinute_err(true)
-            alert("분을 확인해 주세요.(0~59)")
-        } else {
+        else {
             fetch(ip + '/reservationClass/update?no=' + no, {
                 method: 'POST',
                 headers: {
@@ -241,12 +234,13 @@ class ReservationClass extends Component {
                         />
                     );
                 });
-                console.log(result)
                 this.setState({ reservationClass: items });
             });
     };
 
     handleOnClick = () => {
+        let canRegist = this.state.reservationClass.filter(filterData => filterData.exercise_class === this.state.exercise_class &&
+            filterData.hour === this.state.hour && filterData.minute === this.state.minute).length > 0;
         this.setState({
             exercise_class_err: false,
             number_of_people_err: false,
@@ -273,7 +267,10 @@ class ReservationClass extends Component {
         } else if (this.state.minute == "") {
             this.setState({ minute_err: true });
             alert("분을 확인해 주세요.(0~59)")
-        } else {
+        } else if (canRegist) {
+            alert("운동명, 시간 중복")
+        }
+        else {
             fetch(ip + '/reservationClass/insert', {
                 method: 'POST',
                 headers: {

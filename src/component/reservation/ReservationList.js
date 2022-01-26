@@ -1,28 +1,17 @@
 
 import DataTable from 'react-data-table-component';
 import moment from 'moment';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
+import { SERVER_URL } from '../../const/settings';
 
-const ReservationList = ({ reservation, reservationDelete, reservationUpdate }) => {
 
-    const [showResults, setShowResults] = React.useState(false)
-    const [data, setData] = React.useState(reservation)
-    const updateOnClick = () => {
-        setShowResults(true)
-        // setData([])
-        setData(reservation)
-        console.log(showResults)
-    }
+const ReservationList = ({ reservation, reservationDelete }) => {
 
-    const updateClose = () => {
-        setShowResults(false)
-        setData(reservation)
-    }
 
     const columns = [
         {
             name: '회원이름',
-            selector: row => row.customer_name,
+            selector: row => row.customer_name
         },
         {
             name: '날짜',
@@ -51,14 +40,6 @@ const ReservationList = ({ reservation, reservationDelete, reservationUpdate }) 
         {
             name: '삭제',
             selector: row => <button onClick={() => reservationDelete(row)}>삭제</button>
-        },
-        {
-            name: '예약변경',
-            selector: row =>
-                showResults ?
-                    <button onClick={() => reservationUpdate(row)}>변경</button>
-                    :
-                    <button onClick={() => updateOnClick()}>변경하기</button>
         }
 
     ];
