@@ -320,6 +320,7 @@ class ReservationClass extends Component {
 					filterData.hour === this.state.hour &&
 					filterData.minute === this.state.minute
 			).length > 0;
+
 		this.setState({
 			exercise_class_err: false,
 			number_of_people_err: false,
@@ -373,8 +374,11 @@ class ReservationClass extends Component {
 			})
 				.then((result) => result.json())
 				.then((result) => {
-					// alert('운동 설정');
-					alert(result.message);
+					if (result.message == 'ok') {
+						alert('운동 설정이 완료되었습니다.');
+					} else {
+						alert(result.message);
+					}
 					this.reservationClassSelect();
 				});
 		}
