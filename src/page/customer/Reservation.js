@@ -51,12 +51,7 @@ const ReservationClassItem = ({
 
 	return (
 		<tr>
-			<td>
-				<button onClick={handleClick2}>선택</button>
-			</td>
-			<td>
-				<button onClick={handleClick2}>{exercise_class}</button>
-			</td>
+			<td>{exercise_class}</td>
 			<td>
 				{canRegist}/{number_of_people}
 			</td>
@@ -100,6 +95,11 @@ const ReservationClassItem = ({
 					: minute == 0
 					? '00'
 					: minute}
+			</td>
+			<td>
+				<button className='selectButton btnSolid fs-4' onClick={handleClick2}>
+					선택
+				</button>
 			</td>
 		</tr>
 	);
@@ -446,13 +446,13 @@ class Reservation extends Component {
 							</Link>
 						</Col>
 						<Col className='text-center py-2' xs={12}>
-							<table class='table'>
+							<table class='table classListTable'>
 								<thead>
 									<tr>
-										<th scope='col'>선택</th>
 										<th scope='col'>운동명</th>
 										<th scope='col'>인원수</th>
 										<th scope='col'>시간</th>
+										<th scope='col'>선택</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -543,6 +543,7 @@ class Reservation extends Component {
 									onClick={() => this.setState({ open: true })}
 									id='customer_name'
 									className='boxmorpsm h-100 w-100'
+									InputProps={{ disableUnderline: true }}
 									value={this.state.customer_name}
 									// onChange={this.handleChange}
 									label='회원 검색'
