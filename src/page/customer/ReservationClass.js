@@ -373,7 +373,8 @@ class ReservationClass extends Component {
 			})
 				.then((result) => result.json())
 				.then((result) => {
-					alert('운동 설정');
+					// alert('운동 설정');
+					alert(result.message);
 					this.reservationClassSelect();
 				});
 		}

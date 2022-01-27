@@ -30,31 +30,31 @@ import UserSearch from '../../component/customer/UserSearch';
 const ip = SERVER_URL;
 
 const dateFormat = (reserv_date) => {
-    let month = reserv_date.getMonth() + 1;
-    let day = reserv_date.getDate();
-    let hour = reserv_date.getHours();
-    let minute = reserv_date.getMinutes();
-    let second = reserv_date.getSeconds();
+	let month = reserv_date.getMonth() + 1;
+	let day = reserv_date.getDate();
+	let hour = reserv_date.getHours();
+	let minute = reserv_date.getMinutes();
+	let second = reserv_date.getSeconds();
 
-    month = month >= 10 ? month : '0' + month;
-    day = day >= 10 ? day : '0' + day;
-    hour = hour >= 10 ? hour : '0' + hour;
-    minute = minute >= 10 ? minute : '0' + minute;
-    second = second >= 10 ? second : '0' + second;
+	month = month >= 10 ? month : '0' + month;
+	day = day >= 10 ? day : '0' + day;
+	hour = hour >= 10 ? hour : '0' + hour;
+	minute = minute >= 10 ? minute : '0' + minute;
+	second = second >= 10 ? second : '0' + second;
 
-    return (
-        reserv_date.getFullYear() +
-        '-' +
-        month +
-        '-' +
-        day +
-        'T' +
-        hour +
-        ':' +
-        minute +
-        ':' +
-        second
-    );
+	return (
+		reserv_date.getFullYear() +
+		'-' +
+		month +
+		'-' +
+		day +
+		'T' +
+		hour +
+		':' +
+		minute +
+		':' +
+		second
+	);
 };
 
 const ReservationClassItem = ({
@@ -237,7 +237,9 @@ class Reservation extends Component {
 			)
 
 			.then((result) => {
-				this.setState({ reservation: result },() => this.reservationClassSelect());
+				this.setState({ reservation: result }, () =>
+					this.reservationClassSelect()
+				);
 			});
 	};
 
@@ -306,14 +308,8 @@ class Reservation extends Component {
 			})
 				.then((result) => result.json())
 				.then((result) => {
-					if (result.message == 'false') {
-						alert('예약이 다 찼습니다.');
-					} else if (canRegist) {
-						alert('같은운동 중복등록 불가능');
-					} else {
-						alert('등록');
-						this.reservationSelect();
-					}
+					alert(result.message);
+					this.reservationSelect();
 				});
 		}
 	};
@@ -345,8 +341,14 @@ class Reservation extends Component {
 			.then((result) => result.json())
 			.then((result) => {
 				const items = result.map((data, index, array) => {
-                    const time = `${data.hour}`.padStart(2, "0") + ":" + `${data.minute}`.padStart(2, "0");
-					let canRegist = this.state.reservation.filter((item) => item.exercise_name === data.exercise_class && item.time === time).length;
+					const time =
+						`${data.hour}`.padStart(2, '0') +
+						':' +
+						`${data.minute}`.padStart(2, '0');
+					let canRegist = this.state.reservation.filter(
+						(item) =>
+							item.exercise_name === data.exercise_class && item.time === time
+					).length;
 					return (
 						<ReservationClassItem
 							exercise_class={data.exercise_class}
