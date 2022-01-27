@@ -30,6 +30,7 @@ const ReservationClassItem = ({
 	fitness_no,
 	hour,
 	minute,
+	trainer
 }) => {
 	const reservationClassDelete = (no) => {
 		fetch(ip + '/reservationClass/delete?no=' + no, {
@@ -45,8 +46,10 @@ const ReservationClassItem = ({
 	const [number_of_people_err, setNumber_of_people_err] = useState(false);
 	const [hour_err, setHour_err] = useState(false);
 	const [minute_err, setMinute_err] = useState(false);
+	const [trainer_err, setTrainer_err] = useState(false);
 
 	const [exercise_class_input, setExercise_class_input] = useState('');
+	const [trainer_input, setTrainer_input] = useState('');
 	const [number_of_people_input, setNumber_of_people_input] = useState('');
 	const [hour_input, setHour_input] = useState('');
 	const [minute_input, setMinute_input] = useState('');
@@ -56,6 +59,7 @@ const ReservationClassItem = ({
 		setNumber_of_people_input(number_of_people);
 		setHour_input(hour);
 		setMinute_input(minute);
+		setTrainer_input(trainer)
 	};
 	const updateClose = () => {
 		setShowResults(false);
@@ -72,10 +76,17 @@ const ReservationClassItem = ({
 	const updateChange4 = (e) => {
 		setMinute_input(e.target.value);
 	};
+	const updateChange5 = (e) => {
+		setTrainer_input(e.target.value);
+	};
 	const reservationClassUpdate = (no) => {
 		if (exercise_class_input == '') {
 			setExercise_class_err(true);
 			alert('운동명을 써주세요.');
+		}
+		else if (trainer_input == '') {
+			setTrainer_err(true);
+			alert('트레이너명을 써주세요.');
 		} else if ((number_of_people_input == '', number_of_people_input == 0)) {
 			setNumber_of_people_err(true);
 			alert('인원을 확인해 주세요.(숫자만, 0입력불가)');
@@ -97,6 +108,7 @@ const ReservationClassItem = ({
 					number_of_people: number_of_people_input,
 					hour: hour_input,
 					minute: minute_input,
+					trainer: trainer_input
 				}),
 			})
 				.then((result) => result.json())
@@ -126,10 +138,23 @@ const ReservationClassItem = ({
 			{showResults ? (
 				<td>
 					<input
+						value={trainer_input}
+						id='trainer_input'
+						onChange={updateChange5}
+						error={trainer_input_err}
+					/>
+				</td>
+			) : (
+				<td>{trainer}</td>
+			)}
+			{showResults ? (
+				<td>
+					<input
 						type='number'
 						value={number_of_people_input}
 						id='number_of_people'
 						onChange={updateChange2}
+						error={number_of_people_err}
 					/>
 				</td>
 			) : (
@@ -138,10 +163,11 @@ const ReservationClassItem = ({
 			{showResults ? (
 				<td>
 					<input
-						value={hour_input}
+						value={hour_input == 0 ? '00' : hour_input}
 						type='number'
 						id='hour'
 						onChange={updateChange3}
+						error={hour_err}
 					/>
 					:
 					<input
@@ -149,6 +175,7 @@ const ReservationClassItem = ({
 						value={minute_input == 0 ? '00' : minute_input}
 						id='minute'
 						onChange={updateChange4}
+						error={minute_err}
 					/>
 				</td>
 			) : (
@@ -156,42 +183,42 @@ const ReservationClassItem = ({
 					{hour == 1
 						? '01'
 						: hour == 2
-						? '02'
-						: hour == 3
-						? '03'
-						: hour == 4
-						? '04'
-						: hour == 5
-						? '05'
-						: minute == 6
-						? '06'
-						: hour == 7
-						? '07'
-						: hour == 8
-						? '09'
-						: hour == 0
-						? '00'
-						: hour}
+							? '02'
+							: hour == 3
+								? '03'
+								: hour == 4
+									? '04'
+									: hour == 5
+										? '05'
+										: minute == 6
+											? '06'
+											: hour == 7
+												? '07'
+												: hour == 8
+													? '09'
+													: hour == 0
+														? '00'
+														: hour}
 					:
 					{minute == 1
 						? '01'
 						: minute == 2
-						? '02'
-						: minute == 3
-						? '03'
-						: minute == 4
-						? '04'
-						: minute == 5
-						? '05'
-						: minute == 6
-						? '06'
-						: minute == 7
-						? '07'
-						: minute == 8
-						? '09'
-						: minute == 0
-						? '00'
-						: minute}
+							? '02'
+							: minute == 3
+								? '03'
+								: minute == 4
+									? '04'
+									: minute == 5
+										? '05'
+										: minute == 6
+											? '06'
+											: minute == 7
+												? '07'
+												: minute == 8
+													? '09'
+													: minute == 0
+														? '00'
+														: minute}
 				</td>
 			)}
 
@@ -221,10 +248,13 @@ class ReservationClass extends Component {
 			reservationClass: [],
 			hour: '',
 			minute: '',
+			trainer: '',
+
 			hour_err: false,
 			minute_err: false,
 			exercise_class_err: false,
 			number_of_people_err: false,
+			trainer_err: false,
 			// radioGroup: {
 			//     ten: true,
 			//     eleven: false,
@@ -284,8 +314,8 @@ class ReservationClass extends Component {
 	reservationClassSelect = () => {
 		fetch(
 			ip +
-				'/reservationClass/select?fitness_no=' +
-				this.props.userinfo.fitness_no,
+			'/reservationClass/select?fitness_no=' +
+			this.props.userinfo.fitness_no,
 			{
 				method: 'GET',
 				headers: {
@@ -305,6 +335,7 @@ class ReservationClass extends Component {
 							number_of_people={data.number_of_people}
 							hour={data.hour}
 							minute={data.minute}
+							trainer={data.trainer}
 						/>
 					);
 				});
@@ -313,24 +344,21 @@ class ReservationClass extends Component {
 	};
 
 	handleOnClick = () => {
-		let canRegist =
-			this.state.reservationClass.filter(
-				(filterData) =>
-					filterData.exercise_class === this.state.exercise_class &&
-					filterData.hour === this.state.hour &&
-					filterData.minute === this.state.minute
-			).length > 0;
-
 		this.setState({
 			exercise_class_err: false,
 			number_of_people_err: false,
 			hour_err: false,
 			minute_err: false,
+			trainer_err: false
 		});
 		if (this.state.exercise_class == '') {
 			this.setState({ exercise_class_err: true });
 			alert('운동명을 써주세요.');
-		} else if (
+		} else if (this.state.trainer == '') {
+			this.setState({ trainer_err: true });
+			alert('트레이너명을 써주세요.');
+		}
+		else if (
 			(this.state.number_of_people == '', this.state.number_of_people == 0)
 		) {
 			this.setState({ number_of_people_err: true });
@@ -347,8 +375,6 @@ class ReservationClass extends Component {
 		} else if (this.state.minute == '') {
 			this.setState({ minute_err: true });
 			alert('분을 확인해 주세요.(0~59)');
-		} else if (canRegist) {
-			alert('운동명, 시간 중복');
 		} else {
 			fetch(ip + '/reservationClass/insert', {
 				method: 'POST',
@@ -361,6 +387,7 @@ class ReservationClass extends Component {
 					number_of_people: this.state.number_of_people,
 					hour: this.state.hour,
 					minute: this.state.minute,
+					trainer: this.state.trainer
 					// this.state.radioGroup.ten == true
 					//     ? '10'
 					//     : this.state.radioGroup.eleven == true
@@ -383,19 +410,19 @@ class ReservationClass extends Component {
 				});
 		}
 	};
-	handleRadio = (event) => {
-		let obj = {
-			ten: false,
-			eleven: false,
-			twelve: false,
-			thirteen: false,
-		};
-		obj[event.target.id] = event.target.checked; // true
-		console.debug(obj);
-		this.setState({
-			radioGroup: obj,
-		});
-	};
+	// handleRadio = (event) => {
+	// 	let obj = {
+	// 		ten: false,
+	// 		eleven: false,
+	// 		twelve: false,
+	// 		thirteen: false,
+	// 	};
+	// 	obj[event.target.id] = event.target.checked; // true
+	// 	console.debug(obj);
+	// 	this.setState({
+	// 		radioGroup: obj,
+	// 	});
+	// };
 	handleChange = (e) => {
 		this.setState({
 			[e.target.id]: e.target.value,
@@ -439,7 +466,8 @@ class ReservationClass extends Component {
 							<thead>
 								<tr>
 									<th scope='col'>설정된 운동명</th>
-									<th scope='col'>인원 제한</th>
+									<th scope='col'>배정된 트레이너명</th>
+									<th scope='col'>제한 인원</th>
 									<th scope='col'>시간</th>
 								</tr>
 							</thead>
@@ -458,8 +486,17 @@ class ReservationClass extends Component {
 								onChange={this.handleChange}
 								InputProps={{ disableUnderline: true }}
 								label='운동명'
-								error={this.stateexercise_class_err}
+								error={this.state.exercise_class_err}
 							/>
+							<TextField
+								id='trainer'
+								value={this.state.trainer}
+								onChange={this.handleChange}
+								InputProps={{ disableUnderline: true }}
+								label='트레이너명'
+								error={this.state.trainer_err}
+							/>
+
 							<TextField
 								type='number'
 								id='number_of_people'
