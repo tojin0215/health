@@ -386,7 +386,7 @@ class ReservationClass extends Component {
 			thirteen: false,
 		};
 		obj[event.target.id] = event.target.checked; // true
-		console.log(obj);
+		console.debug(obj);
 		this.setState({
 			radioGroup: obj,
 		});
