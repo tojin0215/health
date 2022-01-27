@@ -97,7 +97,7 @@ const ReservationClassItem = ({ exercise_class, no, number_of_people, reserv_tim
             })
                 .then((result) => result.json())
                 .then((result) => {
-                    console.log(result)
+                    console.debug(result)
                     alert('변경 완료');
                     updateClose()
                     reservationClassSelect()
@@ -308,7 +308,7 @@ class ReservationClass extends Component {
             thirteen: false,
         };
         obj[event.target.id] = event.target.checked; // true
-        console.log(obj);
+        console.debug(obj);
         this.setState({
             radioGroup: obj,
         });
