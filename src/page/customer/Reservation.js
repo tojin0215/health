@@ -308,7 +308,12 @@ class Reservation extends Component {
 			})
 				.then((result) => result.json())
 				.then((result) => {
-					alert(result.message);
+					if (result.message == 'ok') {
+						alert('예약이 완료되었습니다.');
+					} else {
+						alert(result.message);
+					}
+
 					this.reservationSelect();
 				});
 		}
