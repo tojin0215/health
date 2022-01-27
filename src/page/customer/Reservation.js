@@ -247,13 +247,15 @@ class Reservation extends Component {
             .then((result) => result.json())
             .then((result) => {
                 const items = result.map((data, index, array) => {
-
+                    let canRegist = this.state.reservation.filter(filterData => filterData.exercise_name === this.state.exercise_name &&
+                        filterData.time === this.state.time && filterData.date.split('T')[0] === this.dateFormat(this.state.reserv_date).split('T')[0]).length;
                     return (
                         <ReservationClassItem
                             exercise_class={data.exercise_class}
                             number_of_people={data.number_of_people}
                             hour={data.hour}
                             minute={data.minute}
+                            canRegist={canRegist}
                             handleClick={
                                 (result_exercise_name, result_hour, result_minute, result_number_of_people) => this.setState({
                                     exercise_name: result_exercise_name,
