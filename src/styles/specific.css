@@ -3,8 +3,13 @@
 .customerSearch {
 	width: 100%;
 	display: flex;
+	justify-content: space-around;
 	align-items: center;
+
 	padding-bottom: 2rem;
+}
+.customerSearch button {
+	align-self: center;
 }
 /* 선택창 레이아웃 */
 .MuiDialog-root .Dropdown-root {

@@ -7,6 +7,8 @@
 }
 
 .reservationWrap .MuiInputLabel-formControl {
+	/* position: relative; */
+	top: 8px;
 	left: 21px;
 	font-size: 2.2rem;
 	font-weight: bold;
@@ -30,7 +32,7 @@
 	min-height: 7.4rem;
 }
 .reservationWrap .usersearchButton label + .MuiInput-formControl {
-	height: 100%;
+	height: 9rem;
 }
 .reservationWrap .usersearchButton #customer_name {
 	border: 0;
@@ -89,4 +91,10 @@
 
 .reservationWrap .rdt_TableCell {
 	justify-content: center;
+}
+
+.reservationWrap .rdt_TableCell > div {
+	padding: 0;
+	width: 100%;
+	text-align: center;
 }

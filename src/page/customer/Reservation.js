@@ -18,7 +18,7 @@ import MegaMenu from '../../component/navigation/Menu';
 
 import { connect } from 'react-redux';
 import 'react-dropdown/style.css';
-import styles from '../../styles/reservation/reservation.css';
+import styles from '../../styles/customer/reservation.css';
 
 import { SERVER_URL } from '../../const/settings';
 import { TextField } from '@material-ui/core';
@@ -432,7 +432,7 @@ class Reservation extends Component {
 						<Col xs={9}>
 							<h4 className='fs-1'>운동 클래스</h4>
 						</Col>
-						<Col xs={3}>
+						<Col xs={3} className='text-center'>
 							<Link to='/reservationClass'>
 								<button>운동 클래스 만들기</button>
 							</Link>
@@ -494,7 +494,7 @@ class Reservation extends Component {
 							/>
 						</Col>
 						<Col className='text-center my-3' xs={12} sm={4}>
-							<div className='boxmorpinsm py-3'>
+							<div className='boxmorpinsm py-3 h-100'>
 								<p className='fs-3'>시간</p>
 								<p className='fs-2 fw-bold'>{this.state.time}</p>
 							</div>
@@ -507,7 +507,7 @@ class Reservation extends Component {
 							/>
 						</Col>
 						<Col className='text-center my-3' xs={12} sm={4}>
-							<div className='boxmorpinsm py-3'>
+							<div className='boxmorpinsm py-3 h-100'>
 								<p className='fs-3'>최대 인원수</p>
 								<p className='fs-2'>
 									<span className='fw-bold'>{this.state.number_of_people}</span>{' '}
