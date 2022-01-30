@@ -22,13 +22,17 @@ const ReservationList = ({ reservation, reservationDelete }) => {
 			selector: (row) => row.exercise_name,
 		},
 		{
-			name: '상태',
-			selector: (row) => (row.isCancel == null ? '예약 완료' : '예약 취소'),
+			name: '트레이너명',
+			selector: (row) => row.trainer,
 		},
-		{
-			name: '취소사유',
-			selector: (row) => row.cancelComment,
-		},
+		// {
+		// 	name: '상태',
+		// 	selector: (row) => (row.isCancel == null ? '예약 완료' : '예약 취소'),
+		// },
+		// {
+		// 	name: '취소사유',
+		// 	selector: (row) => row.cancelComment,
+		// },
 		{
 			name: '인원수',
 			selector: (row) =>

@@ -70,14 +70,14 @@ const ReservationClassItem = ({
     const [input2, setInput2] = useState('');
     const [input3, setInput3] = useState('');
     const [input4, setInput4] = useState('');
-    // const [input5, setInput5] = useState('');
+    const [input5, setInput5] = useState('');
     const handleClick2 = () => {
         setInput(exercise_class);
         setInput2(number_of_people);
         setInput3(hour);
         setInput4(minute);
-        // setInput5(trainer);
-        handleClick(exercise_class, hour, minute, number_of_people);
+        setInput5(trainer);
+        handleClick(exercise_class, hour, minute, number_of_people, trainer);
     };
 
     return (
@@ -151,10 +151,11 @@ class Reservation extends Component {
             customer_id: 'xcv',
             isCancel: 1,
             reserv_date: new Date(),
-            time: '07:00',
+            time: '',
             exercise_name: '',
             cancelComment: '',
             number_of_people: '',
+            trainer: '',
             exercise_length: '0',
             customer_name_err: false,
             exercise_name_err: false,
@@ -304,6 +305,7 @@ class Reservation extends Component {
                     fitness_no: this.props.userinfo.fitness_no,
                     date: this.state.reserv_date,
                     exercise_name: this.state.exercise_name,
+                    trainer: this.state.trainer,
                     customer_name: this.state.customer_name,
                     // customer_id: this.state.customer_id,
                     number_of_people: this.state.number_of_people,
@@ -370,7 +372,8 @@ class Reservation extends Component {
                                 result_exercise_name,
                                 result_hour,
                                 result_minute,
-                                result_number_of_people
+                                result_number_of_people,
+                                result_trainer
                             ) =>
                                 this.setState({
                                     exercise_name: result_exercise_name,
@@ -416,6 +419,7 @@ class Reservation extends Component {
                                                                             ? '00'
                                                                             : result_minute),
                                     number_of_people: result_number_of_people,
+                                    trainer: result_trainer
                                 })
                             }
                         />
@@ -535,6 +539,20 @@ class Reservation extends Component {
                                 // onChange={this.handleChange}
                                 label='운동명'
                                 err={this.state.exercise_name_err}
+                            />
+                        </Col>
+                        <Col className='text-center my-3' xs={12} sm={4}>
+                            <div className='boxmorpinsm py-3 h-100'>
+                                <p className='fs-3'>트레이너명</p>
+                                <p className='fs-2 fw-bold'>{this.state.trainer}</p>
+                            </div>
+                            <TextField
+                                id='trainer'
+                                className='d-none'
+                                value={this.state.trainer}
+                                // onChange={this.handleChange}
+                                label='트레이너명'
+                            // err={this.state.trainer_err}
                             />
                         </Col>
                         <Col className='text-center my-3' xs={12} sm={4}>
