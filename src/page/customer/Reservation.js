@@ -280,7 +280,12 @@ const ReservationItem = ({
                 <td>{cancelComment}</td>} */}
 
 			<td>
-				<button onClick={() => reservationDelete(res_no)}>삭제</button>
+				<button
+					className='deleteButton'
+					onClick={() => reservationDelete(res_no)}
+				>
+					삭제
+				</button>
 			</td>
 			{/* {showResults ?
                 <td><button onClick={() => reservationUpdate(res_no)}>수정하기...</button></td>
@@ -757,7 +762,10 @@ class Reservation extends Component {
                         reservation={this.state.reservation}
                         reservationDelete={this.reservationDelete}
                     /> */}
-					<table class='table'>
+					<Col xs={12}>
+						<h4 className='fs-1'>예약 현황</h4>
+					</Col>
+					<table class='table text-center reservationListTable mt-5'>
 						<thead>
 							<tr>
 								<th scope='col'>[회원번호]회원이름</th>
@@ -768,8 +776,7 @@ class Reservation extends Component {
 								<th scope='col'>시간</th>
 								{/* <th scope='col'>상태</th>
                                     <th scope='col'>취소사유</th> */}
-								<th scope='col'>--- </th>
-								{/* <th scope='col'>----</th> */}
+								<th scope='col'>삭제</th>
 							</tr>
 						</thead>
 						<tbody>

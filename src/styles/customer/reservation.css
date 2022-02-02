@@ -25,7 +25,7 @@
 	width: auto;
 	text-align: center;
 }
-.reservationWrap .list-group-item .table tr th:nth-child(1) {
+/* .reservationWrap .list-group-item .table tr th:nth-child(1) {
 	width: 14rem;
 }
 .reservationWrap .list-group-item .table tr th:nth-child(2) {
@@ -42,7 +42,7 @@
 }
 .reservationWrap .list-group-item .table tr th:nth-child(6) {
 	width: 6rem;
-}
+} */
 
 .reservationWrap label + .MuiInput-formControl {
 	margin-top: 0;
@@ -123,15 +123,6 @@
 	transition: all linear 0.2s;
 }
 
-.reservationWrap .deleteButton {
-	font-size: 1.8rem;
-	margin: 6px;
-	height: 34px;
-	padding: 0 24px;
-	font-weight: normal;
-	color: white;
-	background-color: tomato;
-}
 .reservationWrap .rdt_TableCol {
 	justify-content: center;
 }
@@ -145,11 +136,14 @@
 	width: 100%;
 	text-align: center;
 }
-.reservationWrap .classListTable tr td {
+.reservationWrap .table tr td {
 	vertical-align: middle;
 }
+.reservationWrap .classListTable tr th:nth-child(1) {
+	width: fit-content;
+}
 .reservationWrap .classListTable tr th:nth-child(2) {
-	width: 100px;
+	width: fit-content;
 }
 .reservationWrap .classListTable tr th:nth-child(3) {
 	width: 120px;
@@ -157,6 +151,31 @@
 .reservationWrap .classListTable tr th:nth-child(4) {
 	width: 120px;
 }
+.reservationWrap .classListTable tr th:nth-child(5) {
+	width: 100px;
+}
+.reservationWrap .reservationListTable tr td:nth-child(1) {
+	width: fit-content;
+}
+.reservationWrap .reservationListTable tr td:nth-child(2) {
+	width: 120px;
+}
+.reservationWrap .reservationListTable tr td:nth-child(3) {
+	width: fit-content;
+}
+.reservationWrap .reservationListTable tr td:nth-child(4) {
+	width: fit-content;
+}
+.reservationWrap .reservationListTable tr td:nth-child(5) {
+	width: 100px;
+}
+.reservationWrap .reservationListTable tr td:nth-child(6) {
+	width: 6rem;
+}
+.reservationWrap .reservationListTable tr td:nth-child(7) {
+	width: 100px;
+}
+
 .reservationClassWrap table tr {
 	text-align: center;
 }

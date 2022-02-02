@@ -26,6 +26,15 @@ button {
 	box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
 }
 
+.deleteButton {
+	font-size: 1.8rem;
+	margin: 6px;
+	height: 34px;
+	padding: 0 24px;
+	font-weight: normal;
+	color: white;
+	background-color: tomato;
+}
 .btnSolid {
 	background-color: #0f78ff;
 	color: #fff;
