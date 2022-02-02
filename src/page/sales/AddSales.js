@@ -72,8 +72,7 @@ class AddSales extends Component {
 			customerList: [],
 			search: '',
 			item: options[0],
-			paidMembership: ''
-
+			paidMembership: '',
 		};
 		this.handleDateChange = this.handleDateChange.bind(this);
 		this.toggleChange = this.toggleChange.bind(this);
@@ -243,7 +242,7 @@ class AddSales extends Component {
 					sportswearPrice: sportswearPrice1,
 					paymentTools: this.state.paymentTools,
 					paymentDate: this.state.paymentDate,
-					paidMembership: this.state.paidMembership
+					paidMembership: this.state.paidMembership,
 				}),
 			})
 				.then((response) => response.json())
@@ -276,12 +275,12 @@ class AddSales extends Component {
 		}
 		fetch(
 			ip +
-			'/customer?type=search' +
-			it +
-			'&search=' +
-			this.state.search +
-			'&fn=' +
-			this.props.userinfo.fitness_no,
+				'/customer?type=search' +
+				it +
+				'&search=' +
+				this.state.search +
+				'&fn=' +
+				this.props.userinfo.fitness_no,
 			{
 				method: 'GET',
 				headers: {
@@ -527,8 +526,8 @@ class AddSales extends Component {
 								/>
 							</label>
 						</Row> */}
-						<Row xs={2} className=' m-1 my-3'>
-							<label className='boxmorpinsm d-flex align-items-center justify-content-between'>
+						<Row xs={2} className=' m-1 my-3 justify-content-start'>
+							<label className='boxmorpinsm d-flex align-items-center justify-content-between px-5'>
 								<label>
 									{/* <input
 										type='radio'
@@ -537,7 +536,7 @@ class AddSales extends Component {
 										value='4'
 										onChange={this.handleChange}
 									/> */}
-									횟수제
+									횟수제 이용권
 								</label>
 								<TextField
 									variant='outlined'
@@ -546,7 +545,7 @@ class AddSales extends Component {
 									type='number'
 									name='paidMembership'
 									id='paidMembership'
-									label='OO 회'
+									label='숫자만 입력하세요'
 									required
 								/>
 							</label>
