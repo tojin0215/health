@@ -141,7 +141,7 @@ const ReservationClassItem = ({
 						value={trainer_input}
 						id='trainer_input'
 						onChange={updateChange5}
-						error={trainer_input_err}
+						error={trainer_err}
 					/>
 				</td>
 			) : (
@@ -469,6 +469,7 @@ class ReservationClass extends Component {
 									<th scope='col'>배정된 트레이너명</th>
 									<th scope='col'>제한 인원</th>
 									<th scope='col'>시간</th>
+									<th scope='col'>----</th>
 								</tr>
 							</thead>
 							<tbody>

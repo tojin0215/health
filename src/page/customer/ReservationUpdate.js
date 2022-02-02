@@ -106,8 +106,9 @@ const ReservationItem = ({ res_no, date, exercise_name, fitness_no, customer_nam
                 exercise_name: exercise_name_input,
                 number_of_people: number_of_people_input,
                 date: date_input,
-                isCancel: isCancel_input,
-                cancelComment: cancelComment_input
+                trainer: trainer_input
+                // isCancel: isCancel_input,
+                // cancelComment: cancelComment_input
             })
         })
             .then((result) => {
@@ -120,7 +121,6 @@ const ReservationItem = ({ res_no, date, exercise_name, fitness_no, customer_nam
 
     return (
         <tr>
-
             <td>{customer_name}</td>
             {showResults ?
                 <td>
@@ -397,10 +397,10 @@ class ReservationUpdate extends Component {
                                     : this.state.reservationClass}
                             </tbody>
                         </table>
-                        <input id='exercise_name' value={this.state.exercise_name} />
-                        <input id='trainer' value={this.state.trainer} />
-                        <input id='time' value={this.state.time} />
-                        <input id='number_of_people' value={this.state.number_of_people} />
+                        시간<input id='time' value={this.state.time} />
+                        운동명<input id='exercise_name' value={this.state.exercise_name} />
+                        트레이너명<input id='trainer' value={this.state.trainer} />
+                        제한인원수<input id='number_of_people' value={this.state.number_of_people} />
                     </Row>
                 </Container>
                 <div className='footer'>
