@@ -170,10 +170,13 @@
 	width: 80px;
 }
 .reservationClassWrap table tr td:nth-child(4) {
-	width: 100px;
+	width: 80px;
 }
 
 .reservationClassWrap table tr td:nth-child(5) {
+	width: 120px;
+}
+.reservationClassWrap table tr td:nth-child(6) {
 	width: 120px;
 }
 .reservationClassWrap .classModifyTable td:nth-child(1) input {
@@ -187,9 +190,16 @@
 	text-align: center;
 }
 .reservationClassWrap .classModifyTable td:nth-child(3) {
-	width: 160px;
+	width: 80px;
 }
 .reservationClassWrap .classModifyTable td:nth-child(3) input {
+	width: 60px;
+	text-align: center;
+}
+.reservationClassWrap .classModifyTable td:nth-child(4) {
+	width: 150px;
+}
+.reservationClassWrap .classModifyTable td:nth-child(4) input {
 	width: 50px;
 	text-align: center;
 }

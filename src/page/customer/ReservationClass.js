@@ -30,7 +30,7 @@ const ReservationClassItem = ({
 	fitness_no,
 	hour,
 	minute,
-	trainer
+	trainer,
 }) => {
 	const reservationClassDelete = (no) => {
 		fetch(ip + '/reservationClass/delete?no=' + no, {
@@ -59,7 +59,7 @@ const ReservationClassItem = ({
 		setNumber_of_people_input(number_of_people);
 		setHour_input(hour);
 		setMinute_input(minute);
-		setTrainer_input(trainer)
+		setTrainer_input(trainer);
 	};
 	const updateClose = () => {
 		setShowResults(false);
@@ -83,8 +83,7 @@ const ReservationClassItem = ({
 		if (exercise_class_input == '') {
 			setExercise_class_err(true);
 			alert('운동명을 써주세요.');
-		}
-		else if (trainer_input == '') {
+		} else if (trainer_input == '') {
 			setTrainer_err(true);
 			alert('트레이너명을 써주세요.');
 		} else if ((number_of_people_input == '', number_of_people_input == 0)) {
@@ -108,7 +107,7 @@ const ReservationClassItem = ({
 					number_of_people: number_of_people_input,
 					hour: hour_input,
 					minute: minute_input,
-					trainer: trainer_input
+					trainer: trainer_input,
 				}),
 			})
 				.then((result) => result.json())
@@ -183,42 +182,42 @@ const ReservationClassItem = ({
 					{hour == 1
 						? '01'
 						: hour == 2
-							? '02'
-							: hour == 3
-								? '03'
-								: hour == 4
-									? '04'
-									: hour == 5
-										? '05'
-										: minute == 6
-											? '06'
-											: hour == 7
-												? '07'
-												: hour == 8
-													? '09'
-													: hour == 0
-														? '00'
-														: hour}
+						? '02'
+						: hour == 3
+						? '03'
+						: hour == 4
+						? '04'
+						: hour == 5
+						? '05'
+						: minute == 6
+						? '06'
+						: hour == 7
+						? '07'
+						: hour == 8
+						? '09'
+						: hour == 0
+						? '00'
+						: hour}
 					:
 					{minute == 1
 						? '01'
 						: minute == 2
-							? '02'
-							: minute == 3
-								? '03'
-								: minute == 4
-									? '04'
-									: minute == 5
-										? '05'
-										: minute == 6
-											? '06'
-											: minute == 7
-												? '07'
-												: minute == 8
-													? '09'
-													: minute == 0
-														? '00'
-														: minute}
+						? '02'
+						: minute == 3
+						? '03'
+						: minute == 4
+						? '04'
+						: minute == 5
+						? '05'
+						: minute == 6
+						? '06'
+						: minute == 7
+						? '07'
+						: minute == 8
+						? '09'
+						: minute == 0
+						? '00'
+						: minute}
 				</td>
 			)}
 
@@ -314,8 +313,8 @@ class ReservationClass extends Component {
 	reservationClassSelect = () => {
 		fetch(
 			ip +
-			'/reservationClass/select?fitness_no=' +
-			this.props.userinfo.fitness_no,
+				'/reservationClass/select?fitness_no=' +
+				this.props.userinfo.fitness_no,
 			{
 				method: 'GET',
 				headers: {
@@ -349,7 +348,7 @@ class ReservationClass extends Component {
 			number_of_people_err: false,
 			hour_err: false,
 			minute_err: false,
-			trainer_err: false
+			trainer_err: false,
 		});
 		if (this.state.exercise_class == '') {
 			this.setState({ exercise_class_err: true });
@@ -357,8 +356,7 @@ class ReservationClass extends Component {
 		} else if (this.state.trainer == '') {
 			this.setState({ trainer_err: true });
 			alert('트레이너명을 써주세요.');
-		}
-		else if (
+		} else if (
 			(this.state.number_of_people == '', this.state.number_of_people == 0)
 		) {
 			this.setState({ number_of_people_err: true });
@@ -387,7 +385,7 @@ class ReservationClass extends Component {
 					number_of_people: this.state.number_of_people,
 					hour: this.state.hour,
 					minute: this.state.minute,
-					trainer: this.state.trainer
+					trainer: this.state.trainer,
 					// this.state.radioGroup.ten == true
 					//     ? '10'
 					//     : this.state.radioGroup.eleven == true
@@ -465,11 +463,12 @@ class ReservationClass extends Component {
 						<table class='table'>
 							<thead>
 								<tr>
-									<th scope='col'>설정된 운동명</th>
-									<th scope='col'>배정된 트레이너명</th>
-									<th scope='col'>제한 인원</th>
+									<th scope='col'>운동 클래스</th>
+									<th scope='col'>강사</th>
+									<th scope='col'>수강 인원</th>
 									<th scope='col'>시간</th>
-									<th scope='col'>----</th>
+									<th scope='col'>삭제</th>
+									<th scope='col'>변경</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -504,7 +503,7 @@ class ReservationClass extends Component {
 								value={this.state.number_of_people}
 								onChange={this.handleChange}
 								InputProps={{ disableUnderline: true }}
-								label='제한 인원 수'
+								label='수강 인원'
 								error={this.state.number_of_people_err}
 							/>
 							<TextField
