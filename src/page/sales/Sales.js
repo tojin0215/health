@@ -55,6 +55,11 @@ function PriceFormatter(cell, row) {
 		` ${cell}`.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') + '원'
 	);
 }
+function membershipFormatter(cell, row) {
+	return (
+		` ${cell}` + '회'
+	);
+}//회원권 회(단위)
 
 class Sales extends Component {
 	constructor(props) {
@@ -164,8 +169,7 @@ class Sales extends Component {
 					this.state.customerList.map((c) => {
 						if (data.member_no === c.num) {
 							let userName = c.userName;
-							let paidMembership = c.paidMembership;
-							data = { ...data, userName, paidMembership };
+							data = { ...data, userName };
 						}
 					});
 					lists = [...lists, data];
@@ -249,8 +253,8 @@ class Sales extends Component {
 					this.state.customerList.map((c) => {
 						if (data.member_no === c.num) {
 							let userName = c.userName;
-							let paidMembership = c.paidMembership;
-							data = { ...data, userName, paidMembership };
+
+							data = { ...data, userName };
 						}
 					});
 					list = [...list, data];
@@ -323,8 +327,8 @@ class Sales extends Component {
 					this.state.customerList.map((c) => {
 						if (data.member_no === c.num) {
 							let userName = c.userName;
-							let paidMembership = c.paidMembership;
-							data = { ...data, userName, paidMembership };
+
+							data = { ...data, userName };
 						}
 					});
 					list = [...list, data];
@@ -434,8 +438,8 @@ class Sales extends Component {
 						this.state.customerList.map((c) => {
 							if (data.member_no === c.num) {
 								let userName = c.userName;
-								let paidMembership = c.paidMembership;
-								data = { ...data, userName, paidMembership };
+
+								data = { ...data, userName };
 							}
 						});
 						if (data.paymentTools === '카드') {
@@ -525,8 +529,8 @@ class Sales extends Component {
 						this.state.customerList.map((c) => {
 							if (data.member_no === c.num) {
 								let userName = c.userName;
-								let paidMembership = c.paidMembership;
-								data = { ...data, userName, paidMembership };
+
+								data = { ...data, userName };
 							}
 						});
 						lists = [...lists, data];
@@ -755,6 +759,7 @@ class Sales extends Component {
 							</TableHeaderColumn>
 
 							<TableHeaderColumn
+								dataFormat={membershipFormatter}
 								dataField='paidMembership'
 								thStyle={{ textAlign: 'center' }}
 								tdStyle={{ textAlign: 'center' }}
