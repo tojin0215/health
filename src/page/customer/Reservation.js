@@ -672,8 +672,7 @@ class Reservation extends Component {
                             <div className='boxmorpinsm py-3 h-100'>
                                 <p className='fs-3'>최대 인원수</p>
                                 <p className='fs-2'>
-                                    <span className='fw-bold'>{this.state.number_of_people}</span>{' '}
-                                    명
+                                    <span className='fw-bold'>{this.state.number_of_people == "" ? '' : this.state.number_of_people + "명"}</span>{' '}
                                 </p>
                             </div>
                             <TextField
