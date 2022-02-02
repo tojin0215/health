@@ -29,7 +29,7 @@ class Navigation extends Component {
 	};
 
 	render() {
-		const userinfo = this.props;
+		const {userinfo} = this.props;
 		return (
 			<div className='Navigation'>
 				<Navbar className={styles.navbar}>
@@ -127,11 +127,13 @@ class Navigation extends Component {
 								className='d-inline-block align-top'
 							/>{' '} */}
 							<span className={styles.navitem}>{userinfo.fitness_name}</span>
+							{/* <span>{(userinfo && userinfo.fitness_no) && parseInt(`${userinfo.fitness_no}`, 16)}</span> */}
 						</Navbar.Brand>
 						<Nav.Item>
 							<button className='btnSolid' onClick={this.handleLogout}>
 								LOG-OUT
 							</button>
+							<span>센터 코드{(userinfo && userinfo.fitness_no) && parseInt(`${userinfo.fitness_no}`, 16)}</span>
 						</Nav.Item>
 					</Nav>
 				</Navbar>
