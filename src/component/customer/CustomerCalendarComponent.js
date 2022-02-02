@@ -203,13 +203,13 @@ class CustomerCalendarComponent extends Component {
     }
     constructor(props) {
         super(props);
-
+		
         this.state = {
             enters: [],
             assigned_exercise: [],
 			reservations: [],
             fitness_no: props.fitness_no? props.fitness_no : 2,
-            customer_no: props.customer_no? props.customer_no : 2,
+            customer_no: props.customer_no? props.customer_no : null,
         }
     }
 
@@ -225,6 +225,8 @@ class CustomerCalendarComponent extends Component {
 			console.log("fetchReservation::", result);
 			this.setState({
 				reservations: result.map(value => {
+					if (this.state.customer_no !== null && this.state.customer_no !== Number(value.customer_id)) return
+
 					const created = moment(value.date);
 					const start_m = moment(created.format("YYYY-MM-DD"));
 					const ent_m = moment(created.format("YYYY-MM-DD")).add(1, "day");
@@ -255,6 +257,8 @@ class CustomerCalendarComponent extends Component {
             const added_date = [];
             this.setState({
                 assigned_exercise: result.map(item => {
+					if (this.state.customer_no !== null && this.state.customer_no !== Number(item.customer_id)) return
+
                     const created = moment(item.createdAt);
 					const start_m = moment(created.format("YYYY-MM-DD"));
 					const ent_m = moment(created.format("YYYY-MM-DD")).add(1, "day");
@@ -291,6 +295,8 @@ class CustomerCalendarComponent extends Component {
             const added_date = [];
             this.setState({
                 enters: result.map(item => {
+					if (this.state.customer_no !== null && this.state.customer_no !== Number(item.customer_id)) return
+
                     const created = moment(item.created);
 					const start_m = moment(created.format("YYYY-MM-DD"));
 					const ent_m = moment(created.format("YYYY-MM-DD")).add(1, "day");
@@ -325,7 +331,7 @@ class CustomerCalendarComponent extends Component {
 	}
 
 	render() {
-        const complexData = [...this.state.enters, ...this.state.assigned_exercise, ...this.state.reservations]
+        const complexData = [...this.state.enters, ...this.state.assigned_exercise, ...this.state.reservations].filter(value => value !== undefined)
         const events = complexData.map((value, index) => {
             value['id'] = index;
             return value;
@@ -339,7 +345,7 @@ class CustomerCalendarComponent extends Component {
 					endAccessor='end'
 					views={['month']}
 					onSelectEvent={this.handleOnSelectEvent}
-					defaultDate={new Date(2021, 11, 12)}
+					defaultDate={new Date()}
 				/>
 			</div>
 		);
