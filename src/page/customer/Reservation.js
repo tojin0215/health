@@ -282,6 +282,7 @@ class Reservation extends Component {
             fitness_no: 1,
             customer: null,
             reservation: [],
+			reservation_data: [],
             reservationClass: [],
             customer_name: '',
             customer_id: 'xcv',
@@ -303,7 +304,7 @@ class Reservation extends Component {
         };
         this.handleDateChange = this.handleDateChange.bind(this);
         this.reservationSelect();
-        this.reservationClassSelect();
+        // this.reservationClassSelect();
     }
 
     componentDidMount() {
@@ -388,7 +389,7 @@ class Reservation extends Component {
                     );
                 });
                 console.log(result)
-                this.setState({ reservation: items });
+                this.setState({ reservation: items, reservation_data: result });
                 this.reservationClassSelect();
             });
     };
@@ -501,7 +502,7 @@ class Reservation extends Component {
                         `${data.hour}`.padStart(2, '0') +
                         ':' +
                         `${data.minute}`.padStart(2, '0');
-                    let canRegist = this.state.reservation.filter(
+                    let canRegist = this.state.reservation_data.filter(
                         (item) =>
                             item.exercise_name === data.exercise_class && item.time === time
                     ).length;
@@ -522,47 +523,7 @@ class Reservation extends Component {
                             ) =>
                                 this.setState({
                                     exercise_name: result_exercise_name,
-                                    time:
-                                        // result_hour + ":" + result_minute
-                                        (result_hour == 1
-                                            ? '01'
-                                            : result_hour == 2
-                                                ? '02'
-                                                : result_hour == 3
-                                                    ? '03'
-                                                    : result_hour == 4
-                                                        ? '04'
-                                                        : result_hour == 5
-                                                            ? '05'
-                                                            : result_hour == 6
-                                                                ? '06'
-                                                                : result_hour == 7
-                                                                    ? '07'
-                                                                    : result_hour == 8
-                                                                        ? '09'
-                                                                        : result_hour == 0
-                                                                            ? '00'
-                                                                            : result_hour) +
-                                        ':' +
-                                        (result_minute == 1
-                                            ? '01'
-                                            : result_minute == 2
-                                                ? '02'
-                                                : result_minute == 3
-                                                    ? '03'
-                                                    : result_minute == 4
-                                                        ? '04'
-                                                        : result_minute == 5
-                                                            ? '05'
-                                                            : result_minute == 6
-                                                                ? '06'
-                                                                : result_minute == 7
-                                                                    ? '07'
-                                                                    : result_minute == 8
-                                                                        ? '09'
-                                                                        : result_minute == 0
-                                                                            ? '00'
-                                                                            : result_minute),
+                                    time: time,
                                     number_of_people: result_number_of_people,
                                     trainer: result_trainer
                                 })

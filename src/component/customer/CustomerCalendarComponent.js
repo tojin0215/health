@@ -220,8 +220,9 @@ class CustomerCalendarComponent extends Component {
     }
 
 	fetchReservation = () => {
-		getReservation(-1)
+		getReservation(this.state.fitness_no)
 		.then(result => {
+			console.log("fetchReservation::", result);
 			this.setState({
 				reservations: result.map(value => {
 					const created = moment(value.date);
@@ -231,11 +232,13 @@ class CustomerCalendarComponent extends Component {
 					const start = new Date(start_m.get("year"), start_m.get("month"), start_m.get("date"));
 					const end = new Date(ent_m.get("year"), ent_m.get("month"), ent_m.get("date"));
 
+					console.log("start::", start, "end::", end)
+
 					return {
 						...value,
 						id: value.res_no,
 						date: moment(value.date).format("YYYY-MM-DD"),
-						customer_id: Number(value.customer_id),
+						customer_no: Number(value.customer_id),
 						start: start,
 						end: end,
 						allDay: true,
@@ -257,8 +260,8 @@ class CustomerCalendarComponent extends Component {
 					const ent_m = moment(created.format("YYYY-MM-DD")).add(1, "day");
                     const d = created.format("YYYY-MM-DD");
 					
-                    console.debug(`start: ${item.createdAt} => ${d} => ${start_m.get("year")}-${start_m.get("month")}-${start_m.get("date")}`);
-                    console.debug(`end: ${item.createdAt} => ${d} => ${ent_m.get("year")}-${ent_m.get("month")}-${ent_m.get("date")}`);
+                    // console.debug(`start: ${item.createdAt} => ${d} => ${start_m.get("year")}-${start_m.get("month")}-${start_m.get("date")}`);
+                    // console.debug(`end: ${item.createdAt} => ${d} => ${ent_m.get("year")}-${ent_m.get("month")}-${ent_m.get("date")}`);
 
                     if (added_date.indexOf(d) >= 0) return;
                     else added_date.push(d);
