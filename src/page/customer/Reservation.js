@@ -66,7 +66,6 @@ const ReservationClassItem = ({
     canRegist,
     trainer,
     reservationSelect
-
 }) => {
 
 
@@ -142,7 +141,7 @@ const ReservationClassItem = ({
 };
 
 const ReservationItem = ({ res_no, date, exercise_name, fitness_no, customer_name,
-    isCancel, cancelComment, number_of_people, time, date2, exercise_length,
+    isCancel, cancelComment, number_of_people, time, date2, exercise_length, customer_id,
     reservationSelect, trainer }) => {
 
     const [showResults, setShowResults] = React.useState(false)
@@ -215,7 +214,7 @@ const ReservationItem = ({ res_no, date, exercise_name, fitness_no, customer_nam
 
     return (
         <tr>
-            <td>{customer_name}</td>
+            <td>[{customer_id}]{customer_name}</td>
 
             {showResults ?
                 <td>
@@ -282,7 +281,7 @@ class Reservation extends Component {
             fitness_no: 1,
             customer: null,
             reservation: [],
-			reservation_data: [],
+            reservation_data: [],
             reservationClass: [],
             customer_name: '',
             customer_id: 'xcv',
@@ -385,6 +384,8 @@ class Reservation extends Component {
                             time={data.time}
                             reservationSelect={this.reservationSelect}
                             trainer={data.trainer}
+
+                            customer_id={data.customer_id}
                         />
                     );
                 });
@@ -453,7 +454,7 @@ class Reservation extends Component {
                     exercise_name: this.state.exercise_name,
                     trainer: this.state.trainer,
                     customer_name: this.state.customer_name,
-                    // customer_id: this.state.customer_id,
+                    customer_id: this.state.customer_id,
                     number_of_people: this.state.number_of_people,
                     time: this.state.time,
                 }),
@@ -588,7 +589,7 @@ class Reservation extends Component {
                                 <thead>
                                     <tr>
                                         <th scope='col'>운동명</th>
-                                        <th scope='col'>트레이너명</th>
+                                        <th scope='col'>강사명</th>
                                         <th scope='col'>인원수</th>
                                         <th scope='col'>시간</th>
                                         <th scope='col'>선택</th>
@@ -642,7 +643,7 @@ class Reservation extends Component {
                         </Col>
                         <Col className='text-center my-3' xs={12} sm={4}>
                             <div className='boxmorpinsm py-3 h-100'>
-                                <p className='fs-3'>트레이너명</p>
+                                <p className='fs-3'>강사명</p>
                                 <p className='fs-2 fw-bold'>{this.state.trainer}</p>
                             </div>
                             <TextField
@@ -650,7 +651,7 @@ class Reservation extends Component {
                                 className='d-none'
                                 value={this.state.trainer}
                                 // onChange={this.handleChange}
-                                label='트레이너명'
+                                label='강사명'
                             // err={this.state.trainer_err}
                             />
                         </Col>
@@ -714,7 +715,7 @@ class Reservation extends Component {
                                 locale='ko'
                             />
                         </Col>
-                        {/* <Col className='text-center w-100 mt-3' xs={12}>
+                        <Col className='text-center w-100 mt-3' xs={12}>
                             <button
                                 className='btnSolid mx-4 px-5'
                                 type='button'
@@ -722,7 +723,7 @@ class Reservation extends Component {
                             >
                                 예약하기
                             </button>
-                        </Col> */}
+                        </Col>
                     </Row>
                     <Row xs={1} sm={3}></Row>
                     {/* <Col className='text-end m-3' xs={12}>
@@ -737,10 +738,10 @@ class Reservation extends Component {
                     <table class='table'>
                         <thead>
                             <tr>
-                                <th scope='col'>회원이름</th>
+                                <th scope='col'>[회원번호]회원이름</th>
                                 <th scope='col'>날짜</th>
                                 <th scope='col'>운동명</th>
-                                <th scope='col'>트레이너명</th>
+                                <th scope='col'>강사명</th>
                                 <th scope='col'>인원수</th>
                                 <th scope='col'>시간</th>
                                 {/* <th scope='col'>상태</th>

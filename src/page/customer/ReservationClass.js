@@ -356,7 +356,7 @@ class ReservationClass extends Component {
 			alert('운동명을 써주세요.');
 		} else if (this.state.trainer == '') {
 			this.setState({ trainer_err: true });
-			alert('트레이너명을 써주세요.');
+			alert('강사명을 써주세요.');
 		}
 		else if (
 			(this.state.number_of_people == '', this.state.number_of_people == 0)
@@ -466,7 +466,7 @@ class ReservationClass extends Component {
 							<thead>
 								<tr>
 									<th scope='col'>설정된 운동명</th>
-									<th scope='col'>배정된 트레이너명</th>
+									<th scope='col'>강사명</th>
 									<th scope='col'>제한 인원</th>
 									<th scope='col'>시간</th>
 									<th scope='col'>----</th>
