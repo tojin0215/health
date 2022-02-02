@@ -222,7 +222,12 @@ const ReservationClassItem = ({
 			)}
 
 			<td>
-				<button onClick={() => reservationClassDelete(no)}>삭제</button>
+				<button
+					className='deleteButton'
+					onClick={() => reservationClassDelete(no)}
+				>
+					삭제
+				</button>
 			</td>
 			{showResults ? (
 				<td>
@@ -496,7 +501,6 @@ class ReservationClass extends Component {
 								label='트레이너명'
 								error={this.state.trainer_err}
 							/>
-
 							<TextField
 								type='number'
 								id='number_of_people'
@@ -515,6 +519,7 @@ class ReservationClass extends Component {
 								label='시'
 								error={this.state.hour_err}
 							/>
+							<span>:</span>
 							<TextField
 								type='number'
 								id='minute'

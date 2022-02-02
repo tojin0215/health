@@ -182,18 +182,21 @@
 .reservationClassWrap table tr td {
 	vertical-align: middle;
 }
+.reservationClassWrap table tr td:nth-child(1) {
+	width: fit-content;
+}
 .reservationClassWrap table tr td:nth-child(2) {
-	width: 100px;
+	width: fit-content;
 }
 .reservationClassWrap table tr td:nth-child(3) {
-	width: 80px;
+	width: 10rem;
 }
 .reservationClassWrap table tr td:nth-child(4) {
-	width: 80px;
+	width: 17rem;
 }
 
 .reservationClassWrap table tr td:nth-child(5) {
-	width: 120px;
+	width: 100px;
 }
 .reservationClassWrap table tr td:nth-child(6) {
 	width: 120px;
@@ -205,18 +208,14 @@
 	text-align: center;
 }
 .reservationClassWrap .classModifyTable td:nth-child(2) input {
-	width: 70px;
+	width: 100%;
+	border-radius: 10px;
+	height: 36px;
 	text-align: center;
-}
-.reservationClassWrap .classModifyTable td:nth-child(3) {
-	width: 80px;
 }
 .reservationClassWrap .classModifyTable td:nth-child(3) input {
 	width: 60px;
 	text-align: center;
-}
-.reservationClassWrap .classModifyTable td:nth-child(4) {
-	width: 150px;
 }
 .reservationClassWrap .classModifyTable td:nth-child(4) input {
 	width: 50px;
@@ -234,13 +233,21 @@
 	width: 100%;
 }
 .reservationClassWrap .classInputRow .MuiFormControl-root:nth-child(2) {
-	width: 130px;
+	width: fit-content;
 }
 .reservationClassWrap .classInputRow .MuiFormControl-root:nth-child(3) {
-	width: 70px;
+	width: 116px;
 }
 .reservationClassWrap .classInputRow .MuiFormControl-root:nth-child(4) {
 	width: 70px;
+}
+.reservationClassWrap .classInputRow .MuiFormControl-root:nth-child(6) {
+	width: 70px;
+}
+.reservationClassWrap .classInputRow {
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
 }
 .reservationClassWrap .btnSolid {
 	max-width: 20rem;
