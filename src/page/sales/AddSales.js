@@ -72,7 +72,7 @@ class AddSales extends Component {
 			customerList: [],
 			search: '',
 			item: options[0],
-			paidMembership: 0
+			paidMembership: ''
 
 		};
 		this.handleDateChange = this.handleDateChange.bind(this);
@@ -529,17 +529,16 @@ class AddSales extends Component {
 						</Row> */}
 						<Row xs={2} className=' m-1 my-3'>
 							<label className='boxmorpinsm d-flex align-items-center justify-content-between'>
-								{/* <label>
-									<input
+								<label>
+									{/* <input
 										type='radio'
 										id=''
 										name='voucher'
 										value='4'
 										onChange={this.handleChange}
-									/>
+									/> */}
 									횟수제
-								</label> */}
-								횟수제
+								</label>
 								<TextField
 									variant='outlined'
 									value={this.state.paidMembership}
