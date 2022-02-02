@@ -553,7 +553,6 @@ class Sales extends Component {
 							exerciseSelectedOption: '전체',
 							selectedOption: '전체',
 						});
-						console.log('asd', toolLists)
 					});
 				}
 			});
@@ -565,8 +564,6 @@ class Sales extends Component {
 		console.log(userinfo);
 		console.log('customerList', this.state.customerList);
 		console.log('salesLists2', this.state.salesLists2);
-
-
 
 		const textOptions = {
 			noDataText: '결제내역이 없습니다.',
@@ -756,6 +753,7 @@ class Sales extends Component {
 							>
 								결제 금액
 							</TableHeaderColumn>
+
 							<TableHeaderColumn
 								dataField='paidMembership'
 								thStyle={{ textAlign: 'center' }}
@@ -763,6 +761,7 @@ class Sales extends Component {
 							>
 								결제된 회원권
 							</TableHeaderColumn>
+
 							<TableHeaderColumn
 								dataField='paymentTools'
 								thStyle={{ textAlign: 'center', width: '16rem' }}
