@@ -355,7 +355,7 @@ class ReservationClass extends Component {
 			alert('운동명을 써주세요.');
 		} else if (this.state.trainer == '') {
 			this.setState({ trainer_err: true });
-			alert('트레이너명을 써주세요.');
+			alert('강사명을 써주세요.');
 		} else if (
 			(this.state.number_of_people == '', this.state.number_of_people == 0)
 		) {
