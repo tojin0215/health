@@ -72,6 +72,8 @@ class AddSales extends Component {
 			customerList: [],
 			search: '',
 			item: options[0],
+			paidMembership: ''
+
 		};
 		this.handleDateChange = this.handleDateChange.bind(this);
 		this.toggleChange = this.toggleChange.bind(this);
@@ -241,6 +243,7 @@ class AddSales extends Component {
 					sportswearPrice: sportswearPrice1,
 					paymentTools: this.state.paymentTools,
 					paymentDate: this.state.paymentDate,
+					paidMembership: this.state.paidMembership
 				}),
 			})
 				.then((response) => response.json())
@@ -273,12 +276,12 @@ class AddSales extends Component {
 		}
 		fetch(
 			ip +
-				'/customer?type=search' +
-				it +
-				'&search=' +
-				this.state.search +
-				'&fn=' +
-				this.props.userinfo.fitness_no,
+			'/customer?type=search' +
+			it +
+			'&search=' +
+			this.state.search +
+			'&fn=' +
+			this.props.userinfo.fitness_no,
 			{
 				method: 'GET',
 				headers: {
@@ -492,7 +495,7 @@ class AddSales extends Component {
 						</div>
 						{/*.exerciseType */}
 						<h3>이용권 종류</h3>
-						<Row xs={2} className='m-1 my-3'>
+						{/* <Row xs={2} className='m-1 my-3'>
 							<label className='boxmorpinsm d-flex align-items-center justify-content-between'>
 								<label>
 									<input
@@ -523,27 +526,27 @@ class AddSales extends Component {
 									required
 								/>
 							</label>
-						</Row>
+						</Row> */}
 						<Row xs={2} className=' m-1 my-3'>
 							<label className='boxmorpinsm d-flex align-items-center justify-content-between'>
 								<label>
-									<input
+									{/* <input
 										type='radio'
 										id=''
 										name='voucher'
 										value='4'
 										onChange={this.handleChange}
-									/>
+									/> */}
 									횟수제
 								</label>
 								<TextField
 									variant='outlined'
-									// value={this.state.period}
-									// onChange={this.handleChange}
+									value={this.state.paidMembership}
+									onChange={this.handleChange}
 									type='number'
-									id=''
+									name='paidMembership'
+									id='paidMembership'
 									label='OO 회'
-									// error={this.state.period_err}
 									required
 								/>
 							</label>

@@ -55,6 +55,11 @@ function PriceFormatter(cell, row) {
 		` ${cell}`.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') + '원'
 	);
 }
+function membershipFormatter(cell, row) {
+	return (
+		` ${cell}` + '회'
+	);
+}//회원권 회(단위)
 
 class Sales extends Component {
 	constructor(props) {
@@ -133,7 +138,7 @@ class Sales extends Component {
 			.then((res) => {
 				let arr = [];
 				for (let i = 0; i < res.length; i++) {
-					arr.push({ num: res[i].member_no, userName: res[i].name });
+					arr.push({ num: res[i].member_no, userName: res[i].name, paidMembership: res[i].paidMembership });
 				}
 				this.setState({ customerList: arr });
 			});
@@ -248,6 +253,7 @@ class Sales extends Component {
 					this.state.customerList.map((c) => {
 						if (data.member_no === c.num) {
 							let userName = c.userName;
+
 							data = { ...data, userName };
 						}
 					});
@@ -321,6 +327,7 @@ class Sales extends Component {
 					this.state.customerList.map((c) => {
 						if (data.member_no === c.num) {
 							let userName = c.userName;
+
 							data = { ...data, userName };
 						}
 					});
@@ -431,6 +438,7 @@ class Sales extends Component {
 						this.state.customerList.map((c) => {
 							if (data.member_no === c.num) {
 								let userName = c.userName;
+
 								data = { ...data, userName };
 							}
 						});
@@ -479,12 +487,12 @@ class Sales extends Component {
 
 		fetch(
 			ip +
-				'/sales?type=select&startDate=' +
-				startTime +
-				'&endDate=' +
-				endTime +
-				'&fn=' +
-				this.props.userinfo.fitness_no,
+			'/sales?type=select&startDate=' +
+			startTime +
+			'&endDate=' +
+			endTime +
+			'&fn=' +
+			this.props.userinfo.fitness_no,
 			{
 				method: 'GET',
 				headers: {
@@ -521,6 +529,7 @@ class Sales extends Component {
 						this.state.customerList.map((c) => {
 							if (data.member_no === c.num) {
 								let userName = c.userName;
+
 								data = { ...data, userName };
 							}
 						});
@@ -557,6 +566,8 @@ class Sales extends Component {
 		const { userinfo } = this.props;
 		console.log('userinfo : ');
 		console.log(userinfo);
+		console.log('customerList', this.state.customerList);
+		console.log('salesLists2', this.state.salesLists2);
 
 		const textOptions = {
 			noDataText: '결제내역이 없습니다.',
@@ -746,6 +757,16 @@ class Sales extends Component {
 							>
 								결제 금액
 							</TableHeaderColumn>
+
+							<TableHeaderColumn
+								dataFormat={membershipFormatter}
+								dataField='paidMembership'
+								thStyle={{ textAlign: 'center' }}
+								tdStyle={{ textAlign: 'center' }}
+							>
+								결제된 회원권
+							</TableHeaderColumn>
+
 							<TableHeaderColumn
 								dataField='paymentTools'
 								thStyle={{ textAlign: 'center', width: '16rem' }}
