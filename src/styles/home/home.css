@@ -1,255 +1,256 @@
 @media (max-width: 767px) {
-  .home .header .localNavigation {
-    height: auto;
-  }
-  .home .dashboard {
-    flex-direction: column;
-    padding-left: 40px;
-  }
-  .home .header .dashboard > div {
-    width: 100%;
-  }
-  .home .header .dashboard .homeDashRight {
-    padding-right: 0;
-    border: 0;
-  }
-  .home .header .dashboard .homeDashLeft {
-    padding-left: 0;
-    border: 0;
-  }
-  .home .header .dashboard label p {
-    padding: 0 1rem;
-  }
+	.home .header .localNavigation {
+		height: auto;
+	}
+	.home .dashboard {
+		flex-direction: column;
+		padding-left: 40px;
+	}
+	.home .header .dashboard > div {
+		width: 100%;
+	}
+	.home .header .dashboard .homeDashRight {
+		padding-right: 0;
+		border: 0;
+	}
+	.home .header .dashboard .homeDashLeft {
+		padding-left: 0;
+		border: 0;
+	}
+	.home .header .dashboard label p {
+		padding: 0 1rem;
+	}
 
-  div > .home > .container {
-    padding: 0;
-    padding-bottom: 0;
-  }
-  .home .container .mainVisual {
-    background: no-repeat top/cover;
-  }
-  .home .container .homeIcon ul {
-    padding: 0;
-  }
-  .home .container .homeIcon ul li {
-    width: 33.3%;
-    padding: 1rem;
-  }
+	div > .home > .container {
+		padding: 0;
+		padding-bottom: 0;
+	}
+	.home .container .mainVisual {
+		background: no-repeat top/cover;
+	}
+	.home .container .homeIcon ul {
+		padding: 0;
+	}
+	.home .container .homeIcon ul li {
+		width: 33.3%;
+		padding: 1rem;
+	}
 
-  .home .homeAbout .aboutExplain button {
-    display: none;
-  }
-  .home .homeAbout .aboutList ul {
-    flex-direction: column;
-  }
-  .home .container .homeAbout h3 {
-    font-size: 4rem;
-  }
-  .home .container .homeAbout .aboutList ul li {
-    width: 100%;
-    height: auto;
-    margin-bottom: 3rem;
-  }
-  .home .container .homeAbout .aboutList ul li div {
-    height: 13rem;
-  }
-  .home .homeAbout .aboutList ul li button {
-    display: none;
-  }
+	.home .homeAbout .aboutExplain button {
+		display: none;
+	}
+	.home .homeAbout .aboutList ul {
+		flex-direction: column;
+	}
+	.home .container .homeAbout h3 {
+		font-size: 4rem;
+	}
+	.home .container .homeAbout .aboutList ul li {
+		width: 100%;
+		height: auto;
+		margin-bottom: 3rem;
+	}
+	.home .container .homeAbout .aboutList ul li div {
+		height: 13rem;
+	}
+	.home .homeAbout .aboutList ul li button {
+		display: none;
+	}
 }
 
 .home > .container {
-  margin: 0rem auto 16rem;
-  padding-bottom: 15rem;
-  padding-top: 0;
-  display: flex;
-  flex-wrap: wrap;
+	margin: 0rem auto 16rem;
+	padding-bottom: 15rem;
+	padding-top: 0;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .home .localNavigation {
-  height: 8rem;
+	height: 8rem;
 }
 
 .home .dashboard {
-  padding: 0;
-  width: 100%;
-  /* position: absolute;
+	padding: 0;
+	width: 100%;
+	/* position: absolute;
 	top: 0;
 	left: 0;
 	right: 0; */
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	white-space: nowrap;
 }
 
 .home .dashboard > div {
-  width: 50%;
-  display: flex;
-  flex-wrap: nowrap;
+	width: 50%;
+	display: flex;
+	flex-wrap: nowrap;
 }
 
 .home .dashboard > div label:last-child span {
-  color: #000;
+	color: #000;
 }
 
 .home .dashboard .homeDashLeft {
-  padding-left: 15%;
-  border-right: 1px solid #bbb;
-  align-items: center;
+	padding-left: 15%;
+	border-right: 1px solid #bbb;
+	align-items: center;
 }
 
 .home .dashboard .homeDashRight {
-  padding-right: 15%;
+	padding-right: 15%;
 }
 
 .home .dashboard .homeDashLeft label {
-  justify-content: center;
-  flex-direction: column;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .home .dashboard .homeDashRight label {
-  justify-content: center;
-  flex-direction: column;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .home .dashboard label {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  flex-wrap: wrap;
-  font-size: 2rem;
-  margin: 0;
+	display: flex;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	flex-wrap: wrap;
+	font-size: 2rem;
+	margin: 0;
 }
 
 .home .dashboard label p {
-  text-align: end;
-  font-weight: 100;
-  padding: 0.4rem 0.5rem 0;
+	text-align: end;
+	font-weight: 100;
+	padding: 0.4rem 0.5rem 0;
 }
 
 .home .dashboard label span {
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: #0f78ff;
-  text-align: end;
-  padding: 0 0.5rem;
+	font-size: 2.6rem;
+	font-weight: 700;
+	color: #0f78ff;
+	text-align: end;
+	padding: 0 0.5rem;
 }
 
 .home .mainVisual {
-  width: 100%;
-  height: 46.4rem;
-  margin-top: 4.7rem;
-  /* background-image: url(${mainVisual1}); */
-  background: no-repeat top/contain;
-  text-indent: -9999rem;
+	width: 100%;
+	height: 46.4rem;
+	margin-top: 4.7rem;
+	/* background-image: url(${mainVisual1}); */
+	background: no-repeat top/contain;
+	text-indent: -9999rem;
 }
 
 .home .homeIcon {
-  width: 100%;
-  /* position: absolute;
+	width: 100%;
+	/* position: absolute;
 	top: 66rem;
 	left: 0; */
-  margin-top: 7.8rem;
+	margin-top: 7.8rem;
 }
 
 .home .homeIcon ul {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 0 10rem;
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	width: 100%;
+	padding: 0 10rem;
 }
 
 .home .homeIcon ul li {
-  width: 16%;
+	width: 16%;
 }
 
 .home .homeIcon a {
-  display: flex;
-  width: 10rem;
-  height: 10rem;
-  border-radius: 1rem;
-  background: no-repeat center/90%;
-  box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
-  /* height:100px; */
-  color: #005;
-  padding: 1rem;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: flex-end;
+	display: flex;
+	width: 10rem;
+	height: 10rem;
+	border-radius: 1rem;
+	background: no-repeat center/90%;
+	box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
+	/* height:100px; */
+	color: #005;
+	padding: 1rem;
+	margin: 0 auto;
+	justify-content: center;
+	align-items: flex-end;
 }
 
 .home .homeIcon p {
-  font-size: 2rem;
-  color: #333;
-  font-weight: 300;
-  padding-top: 1rem;
-  text-align: center;
+	font-size: 2rem;
+	color: #333;
+	font-weight: 300;
+	padding-top: 1rem;
+	text-align: center;
 }
 
 .home .homeAbout {
-  margin-top: 4.7rem;
-  width: 100%;
+	margin-top: 4.7rem;
+	width: 100%;
 }
 
 .home .homeAbout h3 {
-  display: flex;
-  flex-direction: row;
-  font-size: 5rem;
-  font-weight: 700;
-  line-height: 5rem;
-  color: #213449;
-  border: none;
-  margin-bottom: 2rem;
+	display: flex;
+	flex-direction: row;
+	font-size: 5rem;
+	font-weight: 700;
+	line-height: 5rem;
+	color: #213449;
+	border: none;
+	margin-bottom: 2rem;
 }
 
 .home .homeAbout h3 .parallelogram {
-  margin: 0.7rem 2rem 0 1rem;
+	margin: 0.7rem 2rem 0 1rem;
 }
 
 .home .homeAbout section {
-  position: relative;
+	position: relative;
 }
 
 .home .homeAbout section > p {
-  font-size: 1.9rem;
-  font-weight: 300;
+	font-size: 1.9rem;
+	font-weight: 300;
 }
 
 .home .homeAbout .aboutExplain button {
-  position: absolute;
-  top: 4rem;
-  right: 0;
+	position: absolute;
+	top: 4rem;
+	right: 0;
 }
 
 .home .homeAbout .aboutList ul {
-  display: flex;
-  justify-content: space-around;
+	display: flex;
+	justify-content: space-around;
 }
 
 .home .homeAbout .aboutList ul li {
-  width: 30rem;
-  height: 41rem;
-  box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
-  border-radius: 25px;
-  padding: 2rem;
-  position: relative;
+	width: 30rem;
+	height: 41rem;
+	box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
+	border-radius: 25px;
+	padding: 2rem;
+	position: relative;
 }
 
 .home .homeAbout .aboutList ul li div {
-  height: 20rem;
-  background-repeat: no-repeat;
-  background-size: 12rem auto;
+	height: 20rem;
+	background-repeat: no-repeat;
+	background-size: 12rem auto;
 }
 
 .home .homeAbout .aboutList ul li button {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 1rem;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 1rem;
 }
 
 .home .homeAbout .aboutList ul li p {
-  word-break: keep-all;
+	word-break: keep-all;
 }
