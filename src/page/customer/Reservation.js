@@ -222,7 +222,7 @@ const ReservationItem = ({
 	return (
 		<tr>
 			<td>
-				[{customer_id === 'undefined' ? '모바일회원' : customer_id}]{customer_name}
+				[{customer_id}]{customer_name}
 			</td>
 
 			{showResults ? (
