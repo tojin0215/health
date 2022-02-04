@@ -104,10 +104,12 @@ const ReservationClassItem = ({
 										: hour == 7
 											? '07'
 											: hour == 8
-												? '09'
-												: hour == 0
-													? '00'
-													: hour}
+												? '08'
+												: hour == 9
+													? '09'
+													: hour == 0
+														? '00'
+														: hour}
 				:
 				{minute == 1
 					? '01'
@@ -124,10 +126,12 @@ const ReservationClassItem = ({
 										: minute == 7
 											? '07'
 											: minute == 8
-												? '09'
-												: minute == 0
-													? '00'
-													: minute}
+												? '08'
+												: minute == 9
+													? '09'
+													: minute == 0
+														? '00'
+														: minute}
 			</td>
 			<td>
 				<button className='selectButton btnSolid fs-4' onClick={handleClick2}>
