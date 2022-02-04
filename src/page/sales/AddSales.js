@@ -432,7 +432,7 @@ class AddSales extends Component {
 							<span>{this.state.userName}</span>님 반갑습니다.
 						</label>
 						<h3 className='AddSalesHeader'>운동 종목</h3>
-						<div className='exerciseType'>
+						<div className='exerciseType boxmorpinsm p-4 mb-5'>
 							<label>
 								<input
 									type='radio'
@@ -526,8 +526,11 @@ class AddSales extends Component {
 								/>
 							</label>
 						</Row> */}
-						<Row xs={2} className=' m-1 my-3 justify-content-start'>
-							<label className='boxmorpinsm d-flex align-items-center justify-content-between px-5'>
+						<Row
+							xs={2}
+							className='boxmorpinsm w-100 justify-content-start m-0 p-4 mb-4'
+						>
+							<label className='d-flex align-items-center justify-content-between'>
 								<label>
 									{/* <input
 										type='radio'
@@ -551,7 +554,7 @@ class AddSales extends Component {
 							</label>
 						</Row>
 						<h3>결제 금액</h3>
-						<div className='payType'>
+						<div className='payType boxmorpinsm p-4 mb-2'>
 							<label>
 								<input
 									type='radio'
@@ -581,7 +584,7 @@ class AddSales extends Component {
 							</label>
 						</div>
 						{/*.payType */}
-						<div className='paymentAmount'>
+						<div className='paymentAmount boxmorpinsm p-4 mb-4'>
 							<label>
 								운동
 								<NumberFormat
