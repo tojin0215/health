@@ -55,11 +55,21 @@ function PriceFormatter(cell, row) {
 		` ${cell}`.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') + '원'
 	);
 }
+/**회원권 회(단위) */
 function membershipFormatter(cell, row) {
 	return (
 		` ${cell}` + '회'
 	);
-}//회원권 회(단위)
+}
+/**기간제날짜 */
+function salesdateFormatter(cell, row) {
+	return ` ${cell}`.split('T')[0];
+}
+
+/**기간제 일수 */
+function daysFormatter(cell, row) {
+	return ` ${cell}` + '일';
+}
 
 class Sales extends Component {
 	constructor(props) {
@@ -138,7 +148,13 @@ class Sales extends Component {
 			.then((res) => {
 				let arr = [];
 				for (let i = 0; i < res.length; i++) {
-					arr.push({ num: res[i].member_no, userName: res[i].name, paidMembership: res[i].paidMembership });
+					arr.push({
+						num: res[i].member_no, userName: res[i].name,
+						paidMembership: res[i].paidMembership == null ? '---' : res[i].paidMembership,
+						salesStart_date: res[i].salesStart_date == null ? '---' : res[i].salesStart_date,
+						salesDays: res[i].salesDays == null ? '---' : res[i].salesDays
+						//null이면 '---' d아니면 데이터값 넣기
+					});
 				}
 				this.setState({ customerList: arr });
 			});
@@ -766,6 +782,22 @@ class Sales extends Component {
 							>
 								결제된 회원권
 							</TableHeaderColumn>
+							{/* <TableHeaderColumn
+								dataFormat={salesdateFormatter}
+								dataField='salesStart_date'
+								thStyle={{ textAlign: 'center' }}
+								tdStyle={{ textAlign: 'center' }}
+							>
+								기간권 시작일
+							</TableHeaderColumn>
+							<TableHeaderColumn
+								dataFormat={daysFormatter}
+								dataField='salesDays'
+								thStyle={{ textAlign: 'center' }}
+								tdStyle={{ textAlign: 'center' }}
+							>
+								기간권 일수
+							</TableHeaderColumn> */}
 
 							<TableHeaderColumn
 								dataField='paymentTools'

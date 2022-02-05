@@ -92,42 +92,46 @@ const ReservationClassItem = ({
 				{hour == 1
 					? '01'
 					: hour == 2
-					? '02'
-					: hour == 3
-					? '03'
-					: hour == 4
-					? '04'
-					: hour == 5
-					? '05'
-					: minute == 6
-					? '06'
-					: hour == 7
-					? '07'
-					: hour == 8
-					? '09'
-					: hour == 0
-					? '00'
-					: hour}
+						? '02'
+						: hour == 3
+							? '03'
+							: hour == 4
+								? '04'
+								: hour == 5
+									? '05'
+									: minute == 6
+										? '06'
+										: hour == 7
+											? '07'
+											: hour == 8
+												? '08'
+												: hour == 9
+													? '09'
+													: hour == 0
+														? '00'
+														: hour}
 				:
 				{minute == 1
 					? '01'
 					: minute == 2
-					? '02'
-					: minute == 3
-					? '03'
-					: minute == 4
-					? '04'
-					: minute == 5
-					? '05'
-					: minute == 6
-					? '06'
-					: minute == 7
-					? '07'
-					: minute == 8
-					? '09'
-					: minute == 0
-					? '00'
-					: minute}
+						? '02'
+						: minute == 3
+							? '03'
+							: minute == 4
+								? '04'
+								: minute == 5
+									? '05'
+									: minute == 6
+										? '06'
+										: minute == 7
+											? '07'
+											: minute == 8
+												? '08'
+												: minute == 9
+													? '09'
+													: minute == 0
+														? '00'
+														: minute}
 			</td>
 			<td>
 				<button className='selectButton btnSolid fs-4' onClick={handleClick2}>
@@ -210,13 +214,14 @@ const ReservationItem = ({
 	};
 
 	const reservationDelete = (res_no) => {
+
 		fetch(ip + '/reservation/delete?res_no=' + res_no, {
 			method: 'DELETE',
 		}).then((result) => {
-			alert('삭제');
 			reservationSelect();
 		});
 	};
+
 
 	return (
 		<tr>
@@ -282,7 +287,10 @@ const ReservationItem = ({
 			<td>
 				<button
 					className='deleteButton'
-					onClick={() => reservationDelete(res_no)}
+					onClick={() =>
+						confirm("정말 삭제하시겠습니까??") == true ?
+							reservationDelete(res_no)
+							: alert("삭제가 취소 되었습니다.")}
 				>
 					삭제
 				</button>
@@ -292,7 +300,7 @@ const ReservationItem = ({
                 :
                 <td><button onClick={() => updateOnClick()}>수정하기</button></td>
             } */}
-		</tr>
+		</tr >
 	);
 };
 
@@ -415,7 +423,7 @@ class Reservation extends Component {
 						/>
 					);
 				});
-				console.log(result);
+				console.log("reservationSelect", result);
 				this.setState({ reservation: items, reservation_data: result });
 				this.reservationClassSelect();
 			});
@@ -456,7 +464,7 @@ class Reservation extends Component {
 					filterData.exercise_name === this.state.exercise_name &&
 					filterData.time === this.state.time &&
 					filterData.date.split('T')[0] ===
-						this.dateFormat(this.state.reserv_date).split('T')[0]
+					this.dateFormat(this.state.reserv_date).split('T')[0]
 			).length > 0;
 		this.setState({
 			customer_name_err: false,
@@ -513,8 +521,8 @@ class Reservation extends Component {
 	reservationClassSelect = () => {
 		fetch(
 			ip +
-				'/reservationClass/select?fitness_no=' +
-				this.props.userinfo.fitness_no,
+			'/reservationClass/select?fitness_no=' +
+			this.props.userinfo.fitness_no,
 			{
 				method: 'GET',
 				headers: {
@@ -676,7 +684,7 @@ class Reservation extends Component {
 								value={this.state.trainer}
 								// onChange={this.handleChange}
 								label='강사명'
-								// err={this.state.trainer_err}
+							// err={this.state.trainer_err}
 							/>
 						</Col>
 						<Col className='text-center my-3' xs={12} sm={4}>

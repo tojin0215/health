@@ -448,7 +448,9 @@ class Customer extends Component {
 									<Row className=''>
 										{/* 캘린더 시작 */}
 										<Col xs={12} md={8} className=''>
-											<CustomerCalendarComponent customer_no={this.state.member_no} />
+											<CustomerCalendarComponent
+												customer_no={this.state.member_no}
+											/>
 										</Col>
 										{/* 캘린더 끝 */}
 										<Col xs={12} md={4} className=''>
@@ -671,7 +673,7 @@ class Customer extends Component {
 										thStyle={{ textAlign: 'center', width: '12rem' }}
 										tdStyle={{ textAlign: 'center', width: '12rem' }}
 									>
-										주민번호
+										생년월일
 									</TableHeaderColumn>
 								</BootstrapTable>
 							</div>

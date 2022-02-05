@@ -36,7 +36,6 @@ const ReservationClassItem = ({
 		fetch(ip + '/reservationClass/delete?no=' + no, {
 			method: 'DELETE',
 		}).then((result) => {
-			alert('삭제');
 			reservationClassSelect();
 		});
 	};
@@ -189,49 +188,56 @@ const ReservationClassItem = ({
 					{hour == 1
 						? '01'
 						: hour == 2
-						? '02'
-						: hour == 3
-						? '03'
-						: hour == 4
-						? '04'
-						: hour == 5
-						? '05'
-						: minute == 6
-						? '06'
-						: hour == 7
-						? '07'
-						: hour == 8
-						? '09'
-						: hour == 0
-						? '00'
-						: hour}
+							? '02'
+							: hour == 3
+								? '03'
+								: hour == 4
+									? '04'
+									: hour == 5
+										? '05'
+										: minute == 6
+											? '06'
+											: hour == 7
+												? '07'
+												: hour == 8
+													? '08'
+													: hour == 9
+														? '09'
+														: hour == 0
+															? '00'
+															: hour}
 					:
 					{minute == 1
 						? '01'
 						: minute == 2
-						? '02'
-						: minute == 3
-						? '03'
-						: minute == 4
-						? '04'
-						: minute == 5
-						? '05'
-						: minute == 6
-						? '06'
-						: minute == 7
-						? '07'
-						: minute == 8
-						? '09'
-						: minute == 0
-						? '00'
-						: minute}
+							? '02'
+							: minute == 3
+								? '03'
+								: minute == 4
+									? '04'
+									: minute == 5
+										? '05'
+										: minute == 6
+											? '06'
+											: minute == 7
+												? '07'
+												: minute == 8
+													? '08'
+													: minute == 9
+														? '09'
+														: minute == 0
+															? '00'
+															: minute}
 				</td>
 			)}
 
 			<td>
 				<button
 					className='deleteButton'
-					onClick={() => reservationClassDelete(no)}
+					onClick={() =>
+						confirm("정말 삭제하시겠습니까??") == true ?
+							reservationClassDelete(no)
+							: alert("삭제가 취소 되었습니다.")}
 				>
 					삭제
 				</button>
@@ -325,8 +331,8 @@ class ReservationClass extends Component {
 	reservationClassSelect = () => {
 		fetch(
 			ip +
-				'/reservationClass/select?fitness_no=' +
-				this.props.userinfo.fitness_no,
+			'/reservationClass/select?fitness_no=' +
+			this.props.userinfo.fitness_no,
 			{
 				method: 'GET',
 				headers: {

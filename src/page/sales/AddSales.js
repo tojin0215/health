@@ -73,6 +73,8 @@ class AddSales extends Component {
 			search: '',
 			item: options[0],
 			paidMembership: '',
+			salesStart_date: '',
+			salesDays: ''
 		};
 		this.handleDateChange = this.handleDateChange.bind(this);
 		this.toggleChange = this.toggleChange.bind(this);
@@ -243,6 +245,8 @@ class AddSales extends Component {
 					paymentTools: this.state.paymentTools,
 					paymentDate: this.state.paymentDate,
 					paidMembership: this.state.paidMembership,
+					// salesStart_date: this.state.salesStart_date,
+					// salesDays: this.state.salesDays
 				}),
 			})
 				.then((response) => response.json())
@@ -275,12 +279,12 @@ class AddSales extends Component {
 		}
 		fetch(
 			ip +
-				'/customer?type=search' +
-				it +
-				'&search=' +
-				this.state.search +
-				'&fn=' +
-				this.props.userinfo.fitness_no,
+			'/customer?type=search' +
+			it +
+			'&search=' +
+			this.state.search +
+			'&fn=' +
+			this.props.userinfo.fitness_no,
 			{
 				method: 'GET',
 				headers: {
@@ -432,7 +436,7 @@ class AddSales extends Component {
 							<span>{this.state.userName}</span>님 반갑습니다.
 						</label>
 						<h3 className='AddSalesHeader'>운동 종목</h3>
-						<div className='exerciseType'>
+						<div className='exerciseType boxmorpinsm p-4 mb-5'>
 							<label>
 								<input
 									type='radio'
@@ -493,9 +497,10 @@ class AddSales extends Component {
 							</label>
 						</div>
 						{/*.exerciseType */}
-						<h3>이용권 종류</h3>
-						{/* <Row xs={2} className='m-1 my-3'>
-							<label className='boxmorpinsm d-flex align-items-center justify-content-between'>
+
+						{/* <h3>이용권 종류</h3>
+						<Row xs={2} className='boxmorpinsm w-100 justify-content-start m-0 p-4 mb-4'>
+							<label className='d-flex align-items-center justify-content-between'>
 								<label>
 									<input
 										type='radio'
@@ -506,36 +511,40 @@ class AddSales extends Component {
 									/>
 									기간제
 								</label>
+								기간시작일
 								<DatePicker
-									// selected={this.state.startDate}
-									// onChange={this.handleStartDateChange}
+									selected={this.state.salesStart_date}
+									onChange={this.handleChange}
 									placeholder='기간시작일'
-									name='startDate'
+									name='salesStart_date'
 									dateFormat='yyyy-MM-dd'
 									font-size='1.6rem'
 								/>
+								일수
 								<TextField
 									variant='outlined'
-									// value={this.state.period}
-									// onChange={this.handleChange}
+									value={this.state.salesDays}
+									onChange={this.handleChange}
 									type='number'
-									id='period'
-									label='개월'
-									// error={this.state.period_err}
+									id='salesDays'
+									label='일'
 									required
 								/>
 							</label>
 						</Row> */}
-						<Row xs={2} className=' m-1 my-3 justify-content-start'>
-							<label className='boxmorpinsm d-flex align-items-center justify-content-between px-5'>
+						<Row
+							xs={2}
+							className='boxmorpinsm w-100 justify-content-start m-0 p-4 mb-4'
+						>
+							<label className='d-flex align-items-center justify-content-between'>
 								<label>
-									{/* <input
+									<input
 										type='radio'
 										id=''
 										name='voucher'
 										value='4'
 										onChange={this.handleChange}
-									/> */}
+									/>
 									횟수제 이용권
 								</label>
 								<TextField
@@ -550,8 +559,9 @@ class AddSales extends Component {
 								/>
 							</label>
 						</Row>
+
 						<h3>결제 금액</h3>
-						<div className='payType'>
+						<div className='payType boxmorpinsm p-4 mb-2'>
 							<label>
 								<input
 									type='radio'
@@ -581,7 +591,7 @@ class AddSales extends Component {
 							</label>
 						</div>
 						{/*.payType */}
-						<div className='paymentAmount'>
+						<div className='paymentAmount boxmorpinsm p-4 mb-4'>
 							<label>
 								운동
 								<NumberFormat
