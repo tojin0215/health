@@ -9,58 +9,79 @@ import '../../styles/login/QRLogin.css';
 import QrReader from 'react-qr-scanner';
 import {SERVER_URL} from '../../const/settings';
 import QRCode from "react-qr-code";
+import axios from 'axios';
+import { Modal } from 'react-bootstrap';
 
 
 const ip = SERVER_URL;
+const TIMER_SUCCESS = 2500;
+const TIMER_FAIL = 1500;
+
+const postCustomerEnter = (fitness_no, token) => {
+    return axios.get(`${SERVER_URL}/customerenter`, {params: {fitness_no, token}}).then(response => response.data)
+}
+
 class QRLogin extends Component {
     
     constructor(props) {
         super(props);
         this.state = {
-            fitness_no: this.props.userinfo? this.props.userinfo.fitness_no:1, //Redux를 통해 받은 값
+            fitness_no: props.userinfo? props.userinfo.fitness_no: 2, //Redux를 통해 받은 값
             member_no: this.props.location.state?Number(this.props.location.state.member_no):1,
             token: '',
             is_checking: false,
+            modal_show: false,
+            modal_title: "",
+            modal_body: "",
         };
-        this.getTestCustomerQRCode();
     };
+
     handleScan = (data) => {
-        console.log(data);
         if (data === null) {
             return;
         }
         else if (this.state.is_checking) {
-            console.log('is_checking');
+            // console.log('is_checking');
             return;
-        } else {this.setState({is_checking: true})}
+        }
+        else {
+            this.setState({is_checking: true});
+        }
         try {
-            fetch(ip+'/customerenter?token='+data.text,
-            {
-                method: 'GET',
-                credential: 'include',
-            })
-            .then(response => response.json())
-            .then(response => {
-                if (response.code !== 200) {
-                    alert(response.message);
-                }
-                else {
-                    alert(response.user.name+' 님 반갑습니다.');
-                }
-                this.setState({is_checking: false})
+
+            postCustomerEnter(this.state.fitness_no, data.text)
+            .then(result => {
+                this.setState({
+                    modal_title: "반갑습니다",
+                    modal_body: result.user.name+' 님 반갑습니다.',
+                    is_checking: false,
+                    modal_show: true,
+                }, () => {
+                    setTimeout(() => {
+                        this.setState({
+                            modal_show: false,
+                        })
+                    }, TIMER_SUCCESS)
+                })
+                .catch(error => console.log(error))
             })
             .catch(error => {
-                if (data.text === '1') {
-                    alert('김하늘 님 반갑습니다.');
-                }
-                else if (data.text === '2') {
-                    alert('QR을 다시 인식바랍니다.');
-                }
-                this.setState({is_checking: false})
+                this.setState({
+                    modal_title: "에러 발생",
+                    modal_body: error.response.data.message,
+                    is_checking: false,
+                    modal_show: true,
+                }, () => {
+                    setTimeout(() => {
+                        this.setState({
+                            modal_show: false,
+                        })
+                    }, TIMER_FAIL)
+                })
             })
         } catch (e) {
             console.error(e);
-            this.setState({is_checking: false})
+            this.setState({is_checking: false, modal_show: false})
         }
     }
     handleError(err) {
@@ -97,16 +118,16 @@ class QRLogin extends Component {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            height: 800,
-            width: 800,
+            height: '75%',
+            width: '95%',
         }
         return (
             <div className='wrap loginWrap'>
-                <div className='header'>
+                {/* <div className='header'>
                     <Header />
                     <Navigation />
-                </div>
-                <div className='localNavigation'>
+                </div> */}
+                {/* <div className='localNavigation'>
                     <div className='container'>
                         <h2>
                             <div className='parallelogram'></div>
@@ -114,7 +135,7 @@ class QRLogin extends Component {
                             <span>.</span>
                         </h2>
                     </div>
-                </div>
+                </div> */}
                 <div className='container'>
                 <QrReader
                     delay={500}
@@ -124,7 +145,8 @@ class QRLogin extends Component {
                     onScan={this.handleScan}
                     />
                 </div>
-                <div className='container'>
+
+                {/* <div className='container'>
                     <div>
                     <h1>
                         테스트를 위한 QR입니다.
@@ -134,10 +156,18 @@ class QRLogin extends Component {
                     <div>
                         <QRCode value={this.state.token} />
                     </div>
-                </div>
+                </div> */}
                 <div className='footer'>
                     <Footer />
                 </div>
+                <Modal show={this.state.modal_show}>
+                    <Modal.Header>
+                        {this.state.modal_title}
+                    </Modal.Header>
+                    <Modal.Body>
+                        {this.state.modal_body}
+                    </Modal.Body>
+                </Modal>
             </div>
         );
     }
@@ -145,6 +175,7 @@ class QRLogin extends Component {
  
 const mapStateToProps = (state) => {
     return {
+		userinfo: state.authentication.userinfo,
         status: state.authentication.login.status
     };
 };

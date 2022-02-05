@@ -45,6 +45,11 @@ class Navigation extends Component {
 										Home
 									</NavLink>
 								</li>
+								<li>
+									<NavLink exact to='/qr'>
+										QR
+									</NavLink>
+								</li>
 							</ul>
 						</NavLink>
 						<NavLink exact to='/customer'>

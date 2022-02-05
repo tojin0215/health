@@ -79,6 +79,13 @@ const ReservationClassItem = ({
 	const updateChange5 = (e) => {
 		setTrainer_input(e.target.value);
 	};
+
+	/**
+	 * 
+	 * @param {number} no 사용자가 선택한 운동 id
+	 * 
+	 * 예약 클래스를 업데이트 합니다.
+	 */
 	const reservationClassUpdate = (no) => {
 		if (exercise_class_input == '') {
 			setExercise_class_err(true);

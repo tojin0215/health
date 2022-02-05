@@ -51,10 +51,15 @@ class MegaMenu extends Component {
 				</div>
 				<nav>
 					<ul>
-						<li>
+						<li class='dropdown'>
 							<NavLink exact to='/home'>
 								Home
 							</NavLink>
+							<li>
+									<NavLink exact to='/qr'>
+										QR
+									</NavLink>
+							</li>
 						</li>
 						<li class='dropdown'>
 							<NavLink exact to='/customer'>
