@@ -153,7 +153,6 @@ class Sales extends Component {
 						paidMembership: res[i].paidMembership,
 						salesStart_date: res[i].salesStart_date,
 						salesDays: res[i].salesDays
-						//null이면 '---' d아니면 데이터값 넣기
 					});
 				}
 				this.setState({ customerList: arr });
@@ -798,7 +797,7 @@ class Sales extends Component {
 							>
 								기간권 일수
 							</TableHeaderColumn>
-
+							{/* 값이 null이면 나오기 숨기기 */}
 							<TableHeaderColumn
 								dataField='paymentTools'
 								thStyle={{ textAlign: 'center', width: '16rem' }}

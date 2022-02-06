@@ -7,7 +7,9 @@ import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 
-import DatePicker from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import ko from 'date-fns/locale/ko';
+registerLocale('ko', ko);
 import { TextField } from '@material-ui/core';
 import 'react-datepicker/dist/react-datepicker.css';
 import Dropdown from 'react-dropdown';
@@ -73,7 +75,7 @@ class AddSales extends Component {
 			search: '',
 			item: options[0],
 			paidMembership: '',
-			salesStart_date: '',
+			salesStart_date: new Date(),
 			salesDays: '',
 			checkboxGroup: {
 				salesDaysCheckbox: true,
@@ -196,6 +198,7 @@ class AddSales extends Component {
 	handleDateChange(date) {
 		this.setState({
 			paymentDate: date,
+			salesStart_date: date
 		});
 	}
 
@@ -248,13 +251,14 @@ class AddSales extends Component {
 					sportswearPrice: sportswearPrice1,
 					paymentTools: this.state.paymentTools,
 					paymentDate: this.state.paymentDate,
-					paidMembership: this.state.checkboxGroup['paidMembershipCheckbox'] == false ? null :
+					paidMembership: this.state.checkboxGroup['paidMembershipCheckbox'] == false ? "0" :
 						this.state.paidMembership,
+					// "null"
 					salesStart_date:
-						this.state.checkboxGroup['salesDaysCheckbox'] == false ? null :
+						this.state.checkboxGroup['salesDaysCheckbox'] == false ? "0000-00-00" :
 							this.state.salesStart_date,
 					salesDays:
-						this.state.checkboxGroup['salesDaysCheckbox'] == false ? null :
+						this.state.checkboxGroup['salesDaysCheckbox'] == false ? "0" :
 							this.state.salesDays
 				}),
 			})
@@ -263,7 +267,6 @@ class AddSales extends Component {
 					alert('등록되었습니다.');
 					console.log(response)
 				});
-
 			this.props.history.push('/sales');
 		}
 	};
@@ -539,11 +542,18 @@ class AddSales extends Component {
 								<DatePicker
 									selected={this.state.salesStart_date}
 									onChange={this.handleDateChange}
-									placeholder='기간시작일'
 									name='salesStart_date'
 									dateFormat='yyyy-MM-dd'
 									font-size='1.6rem'
+									locale='ko'
 								/>
+								{/* <DatePicker
+										selected={this.state.paymentDate}
+										onChange={this.handleDateChange}
+										name='paymentDate'
+										dateFormat='yyyy-MM-dd'
+										locale='ko'
+									/> */}
 								일수
 								<TextField
 									variant='outlined'
@@ -654,7 +664,8 @@ class AddSales extends Component {
 										selected={this.state.paymentDate}
 										onChange={this.handleDateChange}
 										name='paymentDate'
-										dateFormat='MM/dd/yyyy'
+										dateFormat='yyyy-MM-dd'
+										locale='ko'
 									/>
 								</label>
 								{/*.amountDay */}
