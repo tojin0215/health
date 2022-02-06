@@ -74,7 +74,11 @@ class AddSales extends Component {
 			item: options[0],
 			paidMembership: '',
 			salesStart_date: '',
-			salesDays: ''
+			salesDays: '',
+			checkboxGroup: {
+				salesDaysCheckbox: true,
+				paidMembershipCheckbox: false
+			},
 		};
 		this.handleDateChange = this.handleDateChange.bind(this);
 		this.toggleChange = this.toggleChange.bind(this);
@@ -244,14 +248,20 @@ class AddSales extends Component {
 					sportswearPrice: sportswearPrice1,
 					paymentTools: this.state.paymentTools,
 					paymentDate: this.state.paymentDate,
-					paidMembership: this.state.paidMembership,
-					// salesStart_date: this.state.salesStart_date,
-					// salesDays: this.state.salesDays
+					paidMembership: this.state.checkboxGroup['paidMembershipCheckbox'] == false ? null :
+						this.state.paidMembership,
+					salesStart_date:
+						this.state.checkboxGroup['salesDaysCheckbox'] == false ? null :
+							this.state.salesStart_date,
+					salesDays:
+						this.state.checkboxGroup['salesDaysCheckbox'] == false ? null :
+							this.state.salesDays
 				}),
 			})
 				.then((response) => response.json())
 				.then((response) => {
 					alert('등록되었습니다.');
+					console.log(response)
 				});
 
 			this.props.history.push('/sales');
@@ -313,6 +323,19 @@ class AddSales extends Component {
 			this.setState({ item: '핸드폰' });
 		}
 	};
+
+	handleCheckbox = (e) => {
+		let obj = {
+			paidMembershipCheckbox: false,
+			salesDaysCheckbox: false
+		};
+		obj[e.target.id] = e.target.checked;
+		console.log(obj);
+		this.setState({
+			checkboxGroup: obj,
+		});
+	};
+
 
 	render() {
 		console.log('___', this.state.customerList);
@@ -498,23 +521,24 @@ class AddSales extends Component {
 						</div>
 						{/*.exerciseType */}
 
-						{/* <h3>이용권 종류</h3>
+						<h3>이용권 종류</h3>
 						<Row xs={2} className='boxmorpinsm w-100 justify-content-start m-0 p-4 mb-4'>
 							<label className='d-flex align-items-center justify-content-between'>
 								<label>
 									<input
 										type='radio'
-										id=''
+										id='salesDaysCheckbox'
 										name='voucher'
 										value='4'
-										onChange={this.handleChange}
+										onChange={this.handleCheckbox}
+										checked={this.state.checkboxGroup['salesDaysCheckbox']}
 									/>
 									기간제
 								</label>
 								기간시작일
 								<DatePicker
 									selected={this.state.salesStart_date}
-									onChange={this.handleChange}
+									onChange={this.handleDateChange}
 									placeholder='기간시작일'
 									name='salesStart_date'
 									dateFormat='yyyy-MM-dd'
@@ -531,7 +555,7 @@ class AddSales extends Component {
 									required
 								/>
 							</label>
-						</Row> */}
+						</Row>
 						<Row
 							xs={2}
 							className='boxmorpinsm w-100 justify-content-start m-0 p-4 mb-4'
@@ -540,10 +564,11 @@ class AddSales extends Component {
 								<label>
 									<input
 										type='radio'
-										id=''
+										id='paidMembershipCheckbox'
 										name='voucher'
 										value='4'
-										onChange={this.handleChange}
+										onChange={this.handleCheckbox}
+										checked={this.state.checkboxGroup['paidMembershipCheckbox']}
 									/>
 									횟수제 이용권
 								</label>

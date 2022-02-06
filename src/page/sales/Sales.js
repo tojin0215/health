@@ -150,9 +150,9 @@ class Sales extends Component {
 				for (let i = 0; i < res.length; i++) {
 					arr.push({
 						num: res[i].member_no, userName: res[i].name,
-						paidMembership: res[i].paidMembership == null ? '---' : res[i].paidMembership,
-						salesStart_date: res[i].salesStart_date == null ? '---' : res[i].salesStart_date,
-						salesDays: res[i].salesDays == null ? '---' : res[i].salesDays
+						paidMembership: res[i].paidMembership,
+						salesStart_date: res[i].salesStart_date,
+						salesDays: res[i].salesDays
 						//null이면 '---' d아니면 데이터값 넣기
 					});
 				}
@@ -782,7 +782,7 @@ class Sales extends Component {
 							>
 								결제된 회원권
 							</TableHeaderColumn>
-							{/* <TableHeaderColumn
+							<TableHeaderColumn
 								dataFormat={salesdateFormatter}
 								dataField='salesStart_date'
 								thStyle={{ textAlign: 'center' }}
@@ -797,7 +797,7 @@ class Sales extends Component {
 								tdStyle={{ textAlign: 'center' }}
 							>
 								기간권 일수
-							</TableHeaderColumn> */}
+							</TableHeaderColumn>
 
 							<TableHeaderColumn
 								dataField='paymentTools'
