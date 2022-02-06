@@ -222,7 +222,7 @@ class CustomerCalendarComponent extends Component {
 	fetchReservation = () => {
 		getReservation(this.state.fitness_no)
 		.then(result => {
-			console.log("fetchReservation::", result);
+			console.debug("fetchReservation::", result);
 			this.setState({
 				reservations: result.map(value => {
 					if (this.state.customer_no !== null && this.state.customer_no !== Number(value.customer_id)) return
@@ -234,7 +234,7 @@ class CustomerCalendarComponent extends Component {
 					const start = new Date(start_m.get("year"), start_m.get("month"), start_m.get("date"));
 					const end = new Date(ent_m.get("year"), ent_m.get("month"), ent_m.get("date"));
 
-					console.log("start::", start, "end::", end)
+					console.debug("start::", start, "end::", end)
 
 					return {
 						...value,
