@@ -255,7 +255,7 @@ class AddSales extends Component {
 						this.state.paidMembership,
 					// "null"
 					salesStart_date:
-						this.state.checkboxGroup['salesDaysCheckbox'] == false ? "0000-00-00" :
+						this.state.checkboxGroup['salesDaysCheckbox'] == false ? new Date() :
 							this.state.salesStart_date,
 					salesDays:
 						this.state.checkboxGroup['salesDaysCheckbox'] == false ? "0" :
