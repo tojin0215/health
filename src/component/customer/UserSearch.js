@@ -17,7 +17,11 @@ import axios from "axios";
 import { SERVER_URL } from "../../const/settings";
 
 
-const options = ['이름', '핸드폰'];
+const options = [
+    '이름',
+    '핸드폰',
+    // '프로필',
+];
 
 
 const UserSearch = ({open, setOpen, fitness_no, handleUser}) => {
@@ -36,6 +40,7 @@ const UserSearch = ({open, setOpen, fitness_no, handleUser}) => {
         }
         if (searchOption === "이름") body.type += "0"
         else if (searchOption === "핸드폰") body.type += "1"
+        else if (searchOption === "프로필") body.type += "2"
 
         axios.get(`${SERVER_URL}/customer`, {params: body})
         .then(response => response.data)
@@ -45,6 +50,17 @@ const UserSearch = ({open, setOpen, fitness_no, handleUser}) => {
     const handleSelectUser = (e) => {
         handleUser(customers.filter(item => item.member_no === Number(e.target.id))[0]);
     }
+
+    useEffect(() => {
+        const body = {
+            type: "search0",
+            search: search,
+            fn: fitness_no
+        }
+        axios.get(`${SERVER_URL}/customer`, {params: body})
+        .then(response => response.data)
+        .then(result => setCustomers(result))
+    }, [])
 
     return (<Dialog
     open={open}
