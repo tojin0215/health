@@ -33,7 +33,6 @@ export const getSalesTypeCustomerByMemberNo = (member_no, fn) => {
     return axios.get(`${SERVER_URL}/sales`, {params: {type: "customer", member_no: member_no, fn: fn}}).then(response => response.data)
 }
 
-
 export const getReservationClassBy = (fitness_no) => {
     return axios.get(SERVER_URL + "/reservationClass/select", {params:{fitness_no: fitness_no}}).then(response => response.data)
 }
