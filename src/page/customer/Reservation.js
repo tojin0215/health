@@ -26,6 +26,7 @@ import moment from 'moment';
 import ReservationPresetList from '../../component/reservation/ReservationPresetList';
 import ReservationList from '../../component/reservation/ReservationList';
 import UserSearch from '../../component/customer/UserSearch';
+import { getReservation, getReservationClassBy } from '../../api/user';
 
 const ip = SERVER_URL;
 
@@ -67,19 +68,9 @@ const ReservationClassItem = ({
 	trainer,
 	reservationSelect,
 }) => {
-	const [input, setInput] = useState('');
-	const [input2, setInput2] = useState('');
-	const [input3, setInput3] = useState('');
-	const [input4, setInput4] = useState('');
-	const [input5, setInput5] = useState('');
-	const handleClick2 = () => {
-		setInput(exercise_class);
-		setInput2(number_of_people);
-		setInput3(hour);
-		setInput4(minute);
-		setInput5(trainer);
+	const handleInnerOnClick = () => {
 		handleClick(exercise_class, hour, minute, number_of_people, trainer);
-	};
+	}
 
 	return (
 		<tr>
@@ -88,53 +79,9 @@ const ReservationClassItem = ({
 			<td>
 				{canRegist}/{number_of_people}
 			</td>
+			<td>{`${hour}`.padStart(2, "0")}:{`${minute}`.padStart(2, "0")}</td>
 			<td>
-				{hour == 1
-					? '01'
-					: hour == 2
-						? '02'
-						: hour == 3
-							? '03'
-							: hour == 4
-								? '04'
-								: hour == 5
-									? '05'
-									: minute == 6
-										? '06'
-										: hour == 7
-											? '07'
-											: hour == 8
-												? '08'
-												: hour == 9
-													? '09'
-													: hour == 0
-														? '00'
-														: hour}
-				:
-				{minute == 1
-					? '01'
-					: minute == 2
-						? '02'
-						: minute == 3
-							? '03'
-							: minute == 4
-								? '04'
-								: minute == 5
-									? '05'
-									: minute == 6
-										? '06'
-										: minute == 7
-											? '07'
-											: minute == 8
-												? '08'
-												: minute == 9
-													? '09'
-													: minute == 0
-														? '00'
-														: minute}
-			</td>
-			<td>
-				<button className='selectButton btnSolid fs-4' onClick={handleClick2}>
+				<button className='selectButton btnSolid fs-4' onClick={handleInnerOnClick}>
 					선택
 				</button>
 			</td>
@@ -385,48 +332,46 @@ class Reservation extends Component {
 	}
 
 	reservationSelect = () => {
-		fetch(
-			ip + '/reservation/select?fitness_no=' + this.props.userinfo.fitness_no,
-			{
-				method: 'GET',
-				headers: {
-					'Content-type': 'application/json',
-				},
-			}
-		)
-			.then((result) => result.json())
-			.then((result) => {
-				const items = result.map((data, index, array) => {
-					const date = moment(data.date).format('YYYY년 MM월 DD일');
-					let exercise_length = result.filter(
-						(filterData) =>
-							filterData.exercise_name === data.exercise_name &&
-							filterData.time === data.time &&
-							filterData.date.split('T')[0] === data.date.split('T')[0]
-					).length;
-					return (
-						<ReservationItem
-							res_no={data.res_no}
-							date={date}
-							date2={data.date}
-							exercise_name={data.exercise_name}
-							fitness_no={data.fitness_no}
-							customer_name={data.customer_name}
-							isCancel={data.isCancel}
-							cancelComment={data.cancelComment}
-							number_of_people={data.number_of_people}
-							exercise_length={exercise_length}
-							time={data.time}
-							reservationSelect={this.reservationSelect}
-							trainer={data.trainer}
-							customer_id={data.customer_id}
-						/>
-					);
-				});
-				console.log("reservationSelect", result);
-				this.setState({ reservation: items, reservation_data: result });
-				this.reservationClassSelect();
+		const fitness_no = this.props.userinfo.fitness_no;
+
+		getReservation(fitness_no)
+		.then(result => {
+			const now = moment();
+
+			const items = result.map((data, index, array) => {
+				const date_value = (data.date)?moment(data.date.split("T")[0]): moment()
+				// if (date_value.isBefore(now, "day")) return
+
+				const date = date_value.format('YYYY년 MM월 DD일');
+				let exercise_length = result.filter(
+					(filterData) =>
+						filterData.exercise_name === data.exercise_name &&
+						filterData.time === data.time &&
+						filterData.date.split('T')[0] === data.date.split('T')[0]
+				).length;
+				return (
+					<ReservationItem
+						res_no={data.res_no}
+						date={date}
+						date2={data.date}
+						exercise_name={data.exercise_name}
+						fitness_no={data.fitness_no}
+						customer_name={data.customer_name}
+						isCancel={data.isCancel}
+						cancelComment={data.cancelComment}
+						number_of_people={data.number_of_people}
+						exercise_length={exercise_length}
+						time={data.time}
+						reservationSelect={this.reservationSelect}
+						trainer={data.trainer}
+						customer_id={data.customer_id}
+					/>
+				);
 			});
+			this.setState(
+				{ reservation: items, reservation_data: result },
+				() => this.reservationClassSelect());
+		})
 	};
 
 	dateFormat = (reserv_date) => {
@@ -519,55 +464,96 @@ class Reservation extends Component {
 	// };
 
 	reservationClassSelect = () => {
-		fetch(
-			ip +
-			'/reservationClass/select?fitness_no=' +
-			this.props.userinfo.fitness_no,
-			{
-				method: 'GET',
-				headers: {
-					'Content-type': 'application/json',
-				},
-			}
-		)
-			.then((result) => result.json())
-			.then((result) => {
-				const items = result.map((data, index, array) => {
-					const time =
-						`${data.hour}`.padStart(2, '0') +
-						':' +
-						`${data.minute}`.padStart(2, '0');
-					let canRegist = this.state.reservation_data.filter(
-						(item) =>
-							item.exercise_name === data.exercise_class && item.time === time
-					).length;
-					return (
-						<ReservationClassItem
-							exercise_class={data.exercise_class}
-							number_of_people={data.number_of_people}
-							hour={data.hour}
-							minute={data.minute}
-							trainer={data.trainer}
-							canRegist={canRegist}
-							handleClick={(
-								result_exercise_name,
-								result_hour,
-								result_minute,
-								result_number_of_people,
-								result_trainer
-							) =>
-								this.setState({
-									exercise_name: result_exercise_name,
-									time: time,
-									number_of_people: result_number_of_people,
-									trainer: result_trainer,
-								})
-							}
-						/>
-					);
-				});
-				this.setState({ reservationClass: items });
+		const fitness_no = this.props.userinfo.fitness_no;
+
+		getReservationClassBy(fitness_no)
+		.then(result => {
+			const items = result.map((data, index, array) => {
+				const time =
+					`${data.hour}`.padStart(2, '0') +
+					':' +
+					`${data.minute}`.padStart(2, '0');
+				let canRegist = this.state.reservation_data.filter(
+					(item) =>
+						item.exercise_name === data.exercise_class && item.time === time
+				).length;
+				return (
+					<ReservationClassItem
+						exercise_class={data.exercise_class}
+						number_of_people={data.number_of_people}
+						hour={data.hour}
+						minute={data.minute}
+						trainer={data.trainer}
+						canRegist={canRegist}
+						handleClick={(
+							result_exercise_name,
+							result_hour,
+							result_minute,
+							result_number_of_people,
+							result_trainer
+						) =>
+							this.setState({
+								exercise_name: result_exercise_name,
+								time: time,
+								number_of_people: result_number_of_people,
+								trainer: result_trainer,
+							})
+						}
+					/>
+				);
 			});
+			this.setState({ reservationClass: items });
+		})
+
+		// fetch(
+		// 	ip +
+		// 	'/reservationClass/select?fitness_no=' +
+		// 	this.props.userinfo.fitness_no,
+		// 	{
+		// 		method: 'GET',
+		// 		headers: {
+		// 			'Content-type': 'application/json',
+		// 		},
+		// 	}
+		// )
+		// 	.then((result) => result.json())
+		// 	.then((result) => {
+		// 		const items = result.map((data, index, array) => {
+		// 			const time =
+		// 				`${data.hour}`.padStart(2, '0') +
+		// 				':' +
+		// 				`${data.minute}`.padStart(2, '0');
+		// 			let canRegist = this.state.reservation_data.filter(
+		// 				(item) =>
+		// 					item.exercise_name === data.exercise_class && item.time === time
+		// 			).length;
+		// 			return (
+		// 				<ReservationClassItem
+		// 					exercise_class={data.exercise_class}
+		// 					number_of_people={data.number_of_people}
+		// 					hour={data.hour}
+		// 					minute={data.minute}
+		// 					trainer={data.trainer}
+		// 					canRegist={canRegist}
+		// 					handleClick={(
+		// 						result_exercise_name,
+		// 						result_hour,
+		// 						result_minute,
+		// 						result_number_of_people,
+		// 						result_trainer
+		// 					) =>
+		// 						this.setState({
+		// 							exercise_name: result_exercise_name,
+		// 							time: time,
+		// 							number_of_people: result_number_of_people,
+		// 							trainer: result_trainer,
+		// 						})
+		// 					}
+		// 				/>
+		// 			);
+		// 		});
+		// 		this.setState({ reservationClass: items });
+		// 	});
 	};
 
 	handleUser = (customer) => {
