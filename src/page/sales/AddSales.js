@@ -253,12 +253,11 @@ class AddSales extends Component {
 					paymentDate: this.state.paymentDate,
 					paidMembership: this.state.checkboxGroup['paidMembershipCheckbox'] == false ? "0" :
 						this.state.paidMembership,
-					// "null"
 					salesStart_date:
-						this.state.checkboxGroup['salesDaysCheckbox'] == false ? new Date() :
+						this.state.checkboxGroup['salesDaysCheckbox'] == false ? "null" :
 							this.state.salesStart_date,
 					salesDays:
-						this.state.checkboxGroup['salesDaysCheckbox'] == false ? "0" :
+						this.state.checkboxGroup['salesDaysCheckbox'] == false ? "null" :
 							this.state.salesDays
 				}),
 			})
