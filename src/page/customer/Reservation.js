@@ -153,7 +153,7 @@ const ReservationItem = ({
 				// cancelComment: cancelComment_input
 			}),
 		}).then((result) => {
-			console.log(result);
+			// console.log(result);
 			alert('예약변경완료');
 			reservationSelect();
 			updateClose();
@@ -280,7 +280,7 @@ class Reservation extends Component {
 			reservationArray: [],
 		};
 		this.handleDateChange = this.handleDateChange.bind(this);
-		this.reservationSelect();
+		// this.reservationSelect();
 		// this.reservationClassSelect();
 	}
 
@@ -337,7 +337,9 @@ class Reservation extends Component {
 		.then(result => {
 			const now = moment();
 
-			const items = result.map((data, index, array) => {
+			const items = result
+			.filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
+			.map((data, index, array) => {
 				const date_value = (data.date)?moment(data.date.split("T")[0]): moment()
 				// if (date_value.isBefore(now, "day")) return
 
@@ -453,7 +455,7 @@ class Reservation extends Component {
 	handleDateChange(date) {
 		this.setState({
 			reserv_date: date,
-		});
+		}, () => this.reservationClassSelect());
 	}
 
 	// handleChange = (e) => {
@@ -474,7 +476,7 @@ class Reservation extends Component {
 					`${data.minute}`.padStart(2, '0');
 				let canRegist = this.state.reservation_data.filter(
 					(item) =>
-						item.exercise_name === data.exercise_class && item.time === time
+						item.exercise_name === data.exercise_class && item.time === time &&  moment(this.state.reserv_date).isSame(moment(item.date.split('T')[0]), "day")
 				).length;
 				return (
 					<ReservationClassItem
@@ -516,7 +518,7 @@ class Reservation extends Component {
 	};
 
 	render() {
-		console.log(this.state.reservationClass);
+		// console.log(this.state.reservationClass);
 		return (
 			<div className='reservationWrap'>
 				<header className='header'>
