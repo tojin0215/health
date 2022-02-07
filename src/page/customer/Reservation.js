@@ -161,14 +161,12 @@ const ReservationItem = ({
 	};
 
 	const reservationDelete = (res_no) => {
-
 		fetch(ip + '/reservation/delete?res_no=' + res_no, {
 			method: 'DELETE',
 		}).then((result) => {
 			reservationSelect();
 		});
 	};
-
 
 	return (
 		<tr>
@@ -235,9 +233,10 @@ const ReservationItem = ({
 				<button
 					className='deleteButton'
 					onClick={() =>
-						confirm("정말 삭제하시겠습니까??") == true ?
-							reservationDelete(res_no)
-							: alert("삭제가 취소 되었습니다.")}
+						confirm('정말 삭제하시겠습니까??') == true
+							? reservationDelete(res_no)
+							: alert('삭제가 취소 되었습니다.')
+					}
 				>
 					삭제
 				</button>
@@ -247,7 +246,7 @@ const ReservationItem = ({
                 :
                 <td><button onClick={() => updateOnClick()}>수정하기</button></td>
             } */}
-		</tr >
+		</tr>
 	);
 };
 
@@ -409,7 +408,7 @@ class Reservation extends Component {
 					filterData.exercise_name === this.state.exercise_name &&
 					filterData.time === this.state.time &&
 					filterData.date.split('T')[0] ===
-					this.dateFormat(this.state.reserv_date).split('T')[0]
+						this.dateFormat(this.state.reserv_date).split('T')[0]
 			).length > 0;
 		this.setState({
 			customer_name_err: false,
@@ -504,56 +503,6 @@ class Reservation extends Component {
 			});
 			this.setState({ reservationClass: items });
 		})
-
-		// fetch(
-		// 	ip +
-		// 	'/reservationClass/select?fitness_no=' +
-		// 	this.props.userinfo.fitness_no,
-		// 	{
-		// 		method: 'GET',
-		// 		headers: {
-		// 			'Content-type': 'application/json',
-		// 		},
-		// 	}
-		// )
-		// 	.then((result) => result.json())
-		// 	.then((result) => {
-		// 		const items = result.map((data, index, array) => {
-		// 			const time =
-		// 				`${data.hour}`.padStart(2, '0') +
-		// 				':' +
-		// 				`${data.minute}`.padStart(2, '0');
-		// 			let canRegist = this.state.reservation_data.filter(
-		// 				(item) =>
-		// 					item.exercise_name === data.exercise_class && item.time === time
-		// 			).length;
-		// 			return (
-		// 				<ReservationClassItem
-		// 					exercise_class={data.exercise_class}
-		// 					number_of_people={data.number_of_people}
-		// 					hour={data.hour}
-		// 					minute={data.minute}
-		// 					trainer={data.trainer}
-		// 					canRegist={canRegist}
-		// 					handleClick={(
-		// 						result_exercise_name,
-		// 						result_hour,
-		// 						result_minute,
-		// 						result_number_of_people,
-		// 						result_trainer
-		// 					) =>
-		// 						this.setState({
-		// 							exercise_name: result_exercise_name,
-		// 							time: time,
-		// 							number_of_people: result_number_of_people,
-		// 							trainer: result_trainer,
-		// 						})
-		// 					}
-		// 				/>
-		// 			);
-		// 		});
-		// 		this.setState({ reservationClass: items });
-		// 	});
 	};
 
 	handleUser = (customer) => {
@@ -593,16 +542,19 @@ class Reservation extends Component {
 					{/*.localNavigation */}
 				</header>
 				<Container className='reservationWrap'>
-					<Row className='pb-5'>
+					<Row className='pb-5 justify-content-center'>
 						<Col xs={9}>
 							<h4 className='fs-1'>운동 클래스</h4>
 						</Col>
-						<Col xs={3} className='text-center'>
+						<Col xs={3} className='text-center w-auto'>
 							<Link to='/reservationClass'>
 								<button>운동 클래스 만들기</button>
 							</Link>
 						</Col>
-						<Col className='text-center py-2' xs={12}>
+						<Col
+							className='text-center py-2 w-100 overflow-auto justify-content-center'
+							xs={12}
+						>
 							<table class='table classListTable'>
 								<thead>
 									<tr>
@@ -646,7 +598,7 @@ class Reservation extends Component {
 					</Row>
 					<Row lg={6}>
 						<Col className='text-center my-3' xs={12} sm={4}>
-							<div className='boxmorpinsm py-3 h-100'>
+							<div className='boxmorpinsm py-3 h-100 w-100'>
 								<p className='fs-3'>운동명</p>
 								<p className='fs-2 fw-bold'>{this.state.exercise_name}</p>
 							</div>
@@ -660,7 +612,7 @@ class Reservation extends Component {
 							/>
 						</Col>
 						<Col className='text-center my-3' xs={12} sm={4}>
-							<div className='boxmorpinsm py-3 h-100'>
+							<div className='boxmorpinsm py-3 h-100 w-100'>
 								<p className='fs-3'>강사명</p>
 								<p className='fs-2 fw-bold'>{this.state.trainer}</p>
 							</div>
@@ -670,7 +622,7 @@ class Reservation extends Component {
 								value={this.state.trainer}
 								// onChange={this.handleChange}
 								label='강사명'
-							// err={this.state.trainer_err}
+								// err={this.state.trainer_err}
 							/>
 						</Col>
 						<Col className='text-center my-3' xs={12} sm={4}>
@@ -687,7 +639,7 @@ class Reservation extends Component {
 							/>
 						</Col>
 						<Col className='text-center my-3' xs={12} sm={4}>
-							<div className='boxmorpinsm py-3 h-100'>
+							<div className='boxmorpinsm py-3 h-100 w-100'>
 								<p className='fs-3'>최대 인원수</p>
 								<p className='fs-2'>
 									<span className='fw-bold'>
@@ -746,41 +698,44 @@ class Reservation extends Component {
 							</button>
 						</Col>
 					</Row>
-					<Row xs={1} sm={3}></Row>
-					{/* <Col className='text-end m-3' xs={12}>
+					<Row xs={1} sm={3}>
+						{/* <Col className='text-end m-3' xs={12}>
                         <Link to='/reservation/update'>
                             <button className=''>예약 수정하기</button>
                         </Link>
                     </Col> */}
-					{/* <ReservationList
+						{/* <ReservationList
                         reservation={this.state.reservation}
                         reservationDelete={this.reservationDelete}
                     /> */}
-					<Col xs={12}>
-						<h4 className='fs-1'>예약 현황</h4>
-					</Col>
-					<table class='table text-center reservationListTable mt-5'>
-						<thead>
-							<tr>
-								<th scope='col'>[회원번호]회원이름</th>
-								<th scope='col'>날짜</th>
-								<th scope='col'>운동</th>
-								<th scope='col'>강사</th>
-								<th scope='col'>인원수</th>
-								<th scope='col'>시간</th>
-								{/* <th scope='col'>상태</th>
+						<Col xs={12}>
+							<h4 className='fs-1'>예약 현황</h4>
+						</Col>
+						<Col xs={12} className='w-100 overflow-auto'>
+							<table class='table text-center reservationListTable mt-5'>
+								<thead>
+									<tr>
+										<th scope='col'>[회원번호]회원이름</th>
+										<th scope='col'>날짜</th>
+										<th scope='col'>운동</th>
+										<th scope='col'>강사</th>
+										<th scope='col'>인원수</th>
+										<th scope='col'>시간</th>
+										{/* <th scope='col'>상태</th>
                                     <th scope='col'>취소사유</th> */}
-								<th scope='col'>삭제</th>
-							</tr>
-						</thead>
-						<tbody>
-							{this.state.reservation.length == 0 ? (
-								<p>'설정된 운동이 없습니다.'</p>
-							) : (
-								this.state.reservation
-							)}
-						</tbody>
-					</table>
+										<th scope='col'>삭제</th>
+									</tr>
+								</thead>
+								<tbody>
+									{this.state.reservation.length == 0 ? (
+										<p>'설정된 운동이 없습니다.'</p>
+									) : (
+										this.state.reservation
+									)}
+								</tbody>
+							</table>
+						</Col>
+					</Row>
 				</Container>
 				<div className='footer'>
 					<Footer />
