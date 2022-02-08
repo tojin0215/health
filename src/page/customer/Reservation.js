@@ -1,7 +1,7 @@
 import React, { Component, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { render } from 'react-dom';
-import { Container, Row, Col, Table } from 'react-bootstrap';
+import { Container, Row, Col, Table, Tabs, Tab } from 'react-bootstrap';
 
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
@@ -224,6 +224,7 @@ const ReservationItem = ({
 
 
 	return (
+
 		<tr>
 			<td>
 				[{customer_id}]{customer_name}
@@ -606,6 +607,7 @@ class Reservation extends Component {
 					</div>
 					{/*.localNavigation */}
 				</header>
+
 				<Container className='reservationWrap'>
 					<Row className='pb-5'>
 						<Col xs={9}>
@@ -773,28 +775,42 @@ class Reservation extends Component {
 					<Col xs={12}>
 						<h4 className='fs-1'>예약 현황</h4>
 					</Col>
-					<table class='table text-center reservationListTable mt-5'>
-						<thead>
-							<tr>
-								<th scope='col'>[회원번호]회원이름</th>
-								<th scope='col'>날짜</th>
-								<th scope='col'>운동</th>
-								<th scope='col'>강사</th>
-								<th scope='col'>인원수</th>
-								<th scope='col'>시간</th>
-								{/* <th scope='col'>상태</th>
+					<Tabs
+						id="controlled-tab-example"
+						className="mb-3"
+					>
+						<Tab eventKey="home" title="날짜정렬">
+							<table class='table text-center reservationListTable mt-5'>
+								<thead>
+									<tr>
+										<th scope='col'>[회원번호]회원이름</th>
+										<th scope='col'>날짜</th>
+										<th scope='col'>운동</th>
+										<th scope='col'>강사</th>
+										<th scope='col'>인원수</th>
+										<th scope='col'>시간</th>
+										{/* <th scope='col'>상태</th>
                                     <th scope='col'>취소사유</th> */}
-								<th scope='col'>삭제</th>
-							</tr>
-						</thead>
-						<tbody>
-							{this.state.reservation.length == 0 ? (
-								<p>'설정된 운동이 없습니다.'</p>
-							) : (
-								this.state.reservation
-							)}
-						</tbody>
-					</table>
+										<th scope='col'>삭제</th>
+									</tr>
+								</thead>
+								<tbody>
+									{this.state.reservation.length == 0 ? (
+										<p>'설정된 운동이 없습니다.'</p>
+									) : (
+										this.state.reservation
+									)}
+								</tbody>
+							</table>
+							<th scope='col'>날짜</th>
+						</Tab>
+						<Tab eventKey="profile" title="운동정렬">
+							<th scope='col'>운동</th>
+						</Tab>
+						<Tab eventKey="Set" title="강사정렬">
+							<th scope='col'>강사</th>
+						</Tab>
+					</Tabs>
 				</Container>
 				<div className='footer'>
 					<Footer />
