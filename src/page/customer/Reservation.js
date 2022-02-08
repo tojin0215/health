@@ -89,6 +89,9 @@ const ReservationClassItem = ({
 	);
 };
 
+/**
+ * 예약테이블 안에 data
+ */
 const ReservationItem = ({
 	res_no,
 	date,
@@ -330,20 +333,19 @@ class Reservation extends Component {
 			}
 		});
 	}
-
+	/**
+	 * 예약테이블 보여주기
+	 */
 	reservationSelect = () => {
 		const fitness_no = this.props.userinfo.fitness_no;
-
 		getReservation(fitness_no)
 			.then(result => {
 				const now = moment();
-
 				const items = result
 					.filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
 					.map((data, index, array) => {
 						const date_value = (data.date) ? moment(data.date.split("T")[0]) : moment()
 						// if (date_value.isBefore(now, "day")) return
-
 						const date = date_value.format('YYYY년 MM월 DD일');
 						let exercise_length = result.filter(
 							(filterData) =>
@@ -368,7 +370,7 @@ class Reservation extends Component {
 								trainer={data.trainer}
 								customer_id={data.customer_id}
 							/>
-						);
+						)
 					});
 				this.setState(
 					{ reservation: items, reservation_data: result },
@@ -376,34 +378,9 @@ class Reservation extends Component {
 			})
 	};
 
-	dateFormat = (reserv_date) => {
-		let month = reserv_date.getMonth() + 1;
-		let day = reserv_date.getDate();
-		let hour = reserv_date.getHours();
-		let minute = reserv_date.getMinutes();
-		let second = reserv_date.getSeconds();
-
-		month = month >= 10 ? month : '0' + month;
-		day = day >= 10 ? day : '0' + day;
-		hour = hour >= 10 ? hour : '0' + hour;
-		minute = minute >= 10 ? minute : '0' + minute;
-		second = second >= 10 ? second : '0' + second;
-
-		return (
-			reserv_date.getFullYear() +
-			'-' +
-			month +
-			'-' +
-			day +
-			'T' +
-			hour +
-			':' +
-			minute +
-			':' +
-			second
-		);
-	};
-
+	/**
+	* 예약 입력
+	*/
 	handleOnClick = () => {
 		let canRegist =
 			this.state.reservation.filter(
@@ -464,7 +441,9 @@ class Reservation extends Component {
 	//         [e.target.id]: e.target.value,
 	//     });
 	// };
-
+	/**
+	 * 운동클래스 보여주기
+	 */
 	reservationClassSelect = () => {
 		const fitness_no = this.props.userinfo.fitness_no;
 
@@ -519,7 +498,7 @@ class Reservation extends Component {
 	};
 
 	render() {
-		// console.log(this.state.reservationClass);
+		// console.log(this.state.reservation);
 		return (
 			<div className='reservationWrap'>
 				<header className='header'>
@@ -716,28 +695,84 @@ class Reservation extends Component {
 							<h4 className='fs-1'>예약 현황</h4>
 						</Col>
 						<Col xs={12} className='w-100 overflow-auto'>
-							<table class='table text-center reservationListTable mt-5'>
-								<thead>
-									<tr>
-										<th scope='col'>[회원번호]회원이름</th>
-										<th scope='col'>날짜</th>
-										<th scope='col'>운동</th>
-										<th scope='col'>강사</th>
-										<th scope='col'>인원수</th>
-										<th scope='col'>시간</th>
-										{/* <th scope='col'>상태</th>
+							<Tabs
+								id="controlled-tab-example"
+								className="mb-3"
+							>
+								<Tab eventKey="all" title="전체">
+									<table class='table text-center reservationListTable mt-5'>
+										<thead>
+											<tr>
+												<th scope='col'>[회원번호]회원이름</th>
+												<th scope='col'>날짜</th>
+												<th scope='col'>운동</th>
+												<th scope='col'>강사</th>
+												<th scope='col'>인원수</th>
+												<th scope='col'>시간</th>
+												{/* <th scope='col'>상태</th>
                                     <th scope='col'>취소사유</th> */}
-										<th scope='col'>삭제</th>
-									</tr>
-								</thead>
-								<tbody>
-									{this.state.reservation.length == 0 ? (
-										<p>'설정된 운동이 없습니다.'</p>
-									) : (
-										this.state.reservation
-									)}
-								</tbody>
-							</table>
+												<th scope='col'>삭제</th>
+											</tr>
+										</thead>
+										<tbody>
+											{this.state.reservation.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservation
+											)}
+										</tbody>
+									</table>
+								</Tab>
+								<Tab eventKey="profile" title="운동정렬">
+									<table class='table text-center reservationListTable mt-5'>
+										<thead>
+											<tr>
+												<th scope='col'>[회원번호]회원이름</th>
+												<th scope='col'>날짜</th>
+												<th scope='col'>운동</th>
+												<th scope='col'>강사</th>
+												<th scope='col'>인원수</th>
+												<th scope='col'>시간</th>
+												{/* <th scope='col'>상태</th>
+                                    <th scope='col'>취소사유</th> */}
+												<th scope='col'>삭제</th>
+											</tr>
+										</thead>
+										<tbody>
+											{this.state.reservation.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservation
+											)}
+										</tbody>
+									</table>
+								</Tab>
+								<Tab eventKey="profile2" title="강사정렬" >
+									<table class='table text-center reservationListTable mt-5'>
+										<thead>
+											<tr>
+												<th scope='col'>[회원번호]회원이름</th>
+												<th scope='col'>날짜</th>
+												<th scope='col'>운동</th>
+												<th scope='col'>강사</th>
+												<th scope='col'>인원수</th>
+												<th scope='col'>시간</th>
+												{/* <th scope='col'>상태</th>
+                                    <th scope='col'>취소사유</th> */}
+												<th scope='col'>삭제</th>
+											</tr>
+										</thead>
+										<tbody>
+											{this.state.reservation.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservation
+											)}
+										</tbody>
+									</table>
+								</Tab>
+							</Tabs>
+
 						</Col>
 					</Row>
 				</Container>
