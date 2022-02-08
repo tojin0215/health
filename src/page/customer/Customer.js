@@ -30,6 +30,7 @@ import '../../styles/customer/Customer.css';
 import { SERVER_URL } from '../../const/settings';
 import MegaMenu from '../../component/navigation/Menu';
 import CustomerCalendarComponent from '../../component/customer/CustomerCalendarComponent';
+import { getCustomerByAll, getCustomerByManager, getCustomerByMemberNo, getCustomerByName, getCustomerByPhone, getCustomerByProfileName, getCustomerByResiNo, getSalesTypeCustomerByMemberNo } from '../../api/user';
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -38,7 +39,13 @@ require('moment-timezone');
 var moment = require('moment');
 
 moment.tz.setDefault('Asia/Seoul');
-const options = ['이름', '핸드폰', '담당자', '주민번호(앞자리)'];
+const options = [
+	'이름',
+	'핸드폰',
+	'담당자',
+	'주민번호(앞자리)',
+	'프로필(미지원)',
+];
 const defaultOption = options[0];
 
 function dataFormatter(cell, row) {
@@ -78,7 +85,6 @@ class Customer extends Component {
 		this.closePopup = this.closePopup.bind(this);
 		this.handleClickAway = this.handleClickAway.bind(this);
 		this.onSelectRow = this.onSelectRow.bind(this);
-		this.cusFetch();
 	}
 	goLogin = () => {
 		this.props.history.push('/');
@@ -128,35 +134,27 @@ class Customer extends Component {
 			}
 		});
 	}
+	
+	updateCustomerData = result => {
+		const customerList = result.map(value => {
+			const sor = value.solar_or_lunar === true ? '양' : '음';
+			return {
+				no: value.member_no,
+				name: value.name,
+				sex: value.sex === true ? '남' : '여',
+				phone: value.phone,
+				in_charge: value.in_charge,
+				start_date: moment(value.start_date).format('YYYY/MM/DD') + `~ (${value.period}개월)`,
+				resi_no: `${value.resi_no}(${sor})`,
+			}
+		}).sort((a, b) => (a.no === b.no)?0:(a.no - b.no))
+		
+		this.setState({customerList});
+	}
+
 	cusFetch = () => {
-		fetch(ip + '/customer?type=all&fn=' + this.props.userinfo.fitness_no, {
-			method: 'GET',
-			headers: {
-				'Content-type': 'application/json',
-			},
-		})
-			.then((response) => response.json())
-			.then((res) => {
-				let arr = [];
-				for (let i = res.length - 1; i >= 0; i--) {
-					let sor = res[i].solar_or_lunar === true ? '양' : '음';
-					let s = res[i].sex === true ? '남' : '여';
-					arr.push({
-						no: res[i].member_no,
-						name: res[i].name,
-						sex: s,
-						phone: res[i].phone,
-						in_charge: res[i].in_charge,
-						start_date:
-							moment(res[i].start_date).format('YYYY/MM/DD') +
-							'~ (' +
-							res[i].period +
-							'개월)',
-						resi_no: res[i].resi_no + ' (' + sor + ')',
-					});
-				}
-				this.setState({ customerList: arr });
-			});
+		const fitness_no = this.props.userinfo.fitness_no;
+		getCustomerByAll(fitness_no).then(this.updateCustomerData)
 	};
 	openPopup = () => {
 		this.setState({
@@ -203,167 +201,91 @@ class Customer extends Component {
 	}
 
 	onSelectRow = (row, isSelected, e) => {
+		if (!isSelected) return
+
 		//table row 클릭시
-		if (isSelected) {
-			//alert(row['no'])
-			fetch(
-				ip +
-					'/customer?type=select&member_no=' +
-					row['no'] +
-					'&fn=' +
-					this.props.userinfo.fitness_no,
-				{
-					method: 'GET',
-					headers: {
-						'Content-type': 'application/json',
-					},
-				}
-			)
-				.then((response) => response.json())
-				.then((res) => {
-					this.setState({ userLists: res });
-					this.state.userLists.map((data) => {
-						let age = this.calAge(data.resi_no); // 만나이
-						let sex = data.sex === true ? '남' : '여';
-						let info = sex + '/만' + age + '세/' + data.resi_no;
-						let phone =
-							data.phone.substring(0, 3) +
-							'-' +
-							data.phone.substring(3, 7) +
-							'-' +
-							data.phone.substring(7, 11);
-						let date = moment(data.start_date).format('YYYY/MM/DD');
-						data = { ...data, age };
-						this.setState({
-							//userLists2:data,
-							name: data.name,
-							member_no: data.member_no,
-							info: info,
-							addr: data.address,
-							phone: phone,
-							startDate: date,
-							trainer: data.in_charge,
-							note: data.note,
-						});
-						//alert('age : '+this.calAge(data.resi_no))
-					});
-				});
-			fetch(
-				ip +
-					'/sales?type=customer&member_no=' +
-					row['no'] +
-					'&fn=' +
-					this.props.userinfo.fitness_no,
-				{
-					method: 'GET',
-					headers: {
-						'Content-type': 'application/json',
-					},
-				}
-			)
-				.then((response) => response.json())
-				.then((res) => {
-					this.setState({ userSalesLists: res });
+		const member_no = row.no;
+		const fitness_no = this.props.userinfo.fitness_no;
 
-					let arr = [];
-					this.state.userSalesLists.map((data) => {
-						let locker = '';
-						let sportswear = '';
-						if (data.lockerPrice !== 0) {
-							locker = '개인 사물함';
-							arr.push({
-								product: locker,
-								date: data.paymentDate,
-								payment: data.lockerPrice,
-							});
-						}
-						if (data.sportswearPrice !== 0) {
-							sportswear = '운동복';
-							arr.push({
-								product: sportswear,
-								date: data.paymentDate,
-								payment: data.sportswearPrice,
-							});
-						}
-						arr.push({
-							product: data.exerciseName,
-							date: data.paymentDate,
-							payment: data.exercisePrice,
-						});
-					});
+		getCustomerByMemberNo(member_no, fitness_no)
+		.then(result => {
+			if (result.length < 1) return this.setState({ userLists: [] });
+			const data = result[0];
+			
+			const age = this.calAge(data.resi_no); // 만나이
+			const sex = data.sex === true ? '남' : '여';
+			const info = sex + '/만' + age + '세/' + data.resi_no;
+			const phone = `${data.phone.substring(0, 3)}-${data.phone.substring(3, 7)}-${data.phone.substring(7, 11)}`;
+			const date = moment(data.start_date).format('YYYY/MM/DD');
 
-					this.setState({
-						userSalesLists2: arr,
-						show: true,
+			this.setState({
+				userLists: result,
+				name: data.name,
+				member_no: data.member_no,
+				info: info,
+				addr: data.address,
+				phone: phone,
+				startDate: date,
+				trainer: data.in_charge,
+				note: data.note,
+			});
+		})
+
+		getSalesTypeCustomerByMemberNo(member_no, fitness_no)
+		.then(result => {
+
+			let arr = [];
+			result.map(value => {
+				if (value.lockerPrice !== 0) {
+					arr.push({
+						product: '개인 사물함',
+						date: value.paymentDate,
+						payment: value.lockerPrice,
+					})
+				}
+				if (value.sportswearPrice !== 0) {
+					arr.push({
+						product: '운동복',
+						date: value.paymentDate,
+						payment: value.sportswearPrice,
 					});
+				}
+				arr.push({
+					product: value.exerciseName,
+					date: value.paymentDate,
+					payment: value.exercisePrice,
 				});
-		}
+			})
+
+			this.setState({
+				userSalesLists: result,
+				userSalesLists2: arr,
+				show: true,
+			})
+		})
 	};
 
 	search = () => {
-		let it = '0';
-		if (this.state.item === '이름') {
-			it = '0';
-		} else if (this.state.item === '핸드폰') {
-			it = '1';
-		} else if (this.state.item === '담당자') {
-			it = '2';
-		} else if (this.state.item === '주민번호(앞자리)') {
-			it = '3';
-		}
-		fetch(
-			ip +
-				'/customer?type=search' +
-				it +
-				'&search=' +
-				this.state.search +
-				'&fn=' +
-				this.props.userinfo.fitness_no,
-			{
-				method: 'GET',
-				headers: {
-					'Content-type': 'application/json',
-				},
-			}
-		)
-			.then((response) => response.json())
-			.then((res) => {
-				let arr = [];
-				for (let i = res.length - 1; i >= 0; i--) {
-					let sor = res[i].solar_or_lunar === true ? '양' : '음';
-					let s = res[i].sex === true ? '남' : '여';
-					arr.push({
-						no: res[i].member_no,
-						name: res[i].name,
-						sex: s,
-						phone: res[i].phone,
-						in_charge: res[i].in_charge,
-						start_date:
-							moment(res[i].start_date).format('YYYY/MM/DD') +
-							'~ (' +
-							res[i].period +
-							'개월)',
-						resi_no: res[i].resi_no + ' (' + sor + ')',
-					});
-				}
-				this.setState({ customerList: arr });
-			});
-	};
-	selectItem = (e) => {
-		if (e.value == '이름') {
-			this.setState({ item: '이름' });
-		} else if (e.value == '핸드폰') {
-			this.setState({ item: '핸드폰' });
-		} else if (e.value == '담당자') {
-			this.setState({ item: '담당자' });
-		} else if (e.value == '주민번호(앞자리)') {
-			this.setState({ item: '주민번호(앞자리)' });
+		const search = this.state.search;
+		const fitness_no = this.props.userinfo.fitness_no;
+		const selected_option = this.state.item;
+
+		switch (selected_option) {
+			case "이름":
+				return getCustomerByName(search, fitness_no).then(this.updateCustomerData);
+			case "핸드폰":
+				return getCustomerByPhone(search, fitness_no).then(this.updateCustomerData);
+			case "담당자":
+				return getCustomerByManager(search, fitness_no).then(this.updateCustomerData);
+			case "주민번호(앞자리)":
+				return getCustomerByResiNo(search, fitness_no).then(this.updateCustomerData);
+			case "프로필":
+				return getCustomerByProfileName(search, fitness_no).then(this.updateCustomerData);
 		}
 	};
+	selectItem = (e) => this.setState({item: e.value});
 	render() {
-		const { userinfo } = this.props;
-		console.log('userinfo : ');
-		console.log(userinfo);
+		// const { userinfo } = this.props;
 
 		const textOptions = {
 			noDataText: '가입된 회원이 없습니다.',
@@ -401,8 +323,8 @@ class Customer extends Component {
 			onSelect: this.onSelectRow,
 		};
 
-		console.log('table__', this.state.userSalesLists2);
-		console.log('클릭,', this.state.show);
+		// console.log('table__', this.state.userSalesLists2);
+		// console.log('클릭,', this.state.show);
 
 		// const [show, setShow] = useState(false);
 

@@ -13,11 +13,43 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import axios from "axios";
-import { SERVER_URL } from "../../const/settings";
+import { getCustomerByName, getCustomerByPhone, getCustomerByProfileName } from "../../api/user";
 
 
-const options = ['이름', '핸드폰'];
+const options = [
+    '이름',
+    '핸드폰',
+    '프로필(미지원)',
+];
+
+const UserSearchTableHeader = () => (
+<TableHead>
+    <TableRow>
+        <TableCell>번호</TableCell>
+        <TableCell>이름</TableCell>
+        <TableCell>폰번호</TableCell>
+        <TableCell>선택</TableCell>
+    </TableRow>
+</TableHead>)
+
+const UserSearchTableItem = ({c, handleSelectUser}) => (
+<TableRow>
+    <TableCell>{c.member_no}</TableCell>
+    <TableCell>{c.name}</TableCell>
+    <TableCell>{c.phone}</TableCell>
+    <TableCell>
+        <DialogActions>
+            <button
+                type='button'
+                onClick={handleSelectUser}
+                id={c.member_no}
+                value={[c.name, c.phone]}
+            >
+                선택
+            </button>
+        </DialogActions>
+    </TableCell>
+</TableRow>)
 
 
 const UserSearch = ({open, setOpen, fitness_no, handleUser}) => {
@@ -29,22 +61,27 @@ const UserSearch = ({open, setOpen, fitness_no, handleUser}) => {
     const handleOnChangeSearchOption = (e) => setSearchOption(e.value);
 
     const handleOnSearch = () => {
-        const body = {
-            type: "search",
-            search: search,
-            fn: fitness_no
-        }
-        if (searchOption === "이름") body.type += "0"
-        else if (searchOption === "핸드폰") body.type += "1"
-
-        axios.get(`${SERVER_URL}/customer`, {params: body})
-        .then(response => response.data)
-        .then(result => setCustomers(result))
+		switch (searchOption) {
+			case "이름":
+				return getCustomerByName(search, fitness_no).then(result => setCustomers(result));
+			case "핸드폰":
+				return getCustomerByPhone(search, fitness_no).then(result => setCustomers(result));
+			case "담당자":
+				return getCustomerByManager(search, fitness_no).then(result => setCustomers(result));
+			case "주민번호(앞자리)":
+				return getCustomerByResiNo(search, fitness_no).then(result => setCustomers(result));
+			case "프로필":
+				return getCustomerByProfileName(search, fitness_no).then(result => setCustomers(result));
+		}
     }
 
     const handleSelectUser = (e) => {
         handleUser(customers.filter(item => item.member_no === Number(e.target.id))[0]);
     }
+
+    useEffect(() => {
+        getCustomerByName(search, fitness_no).then(result => setCustomers(result));
+    }, [])
 
     return (<Dialog
     open={open}
@@ -75,35 +112,10 @@ const UserSearch = ({open, setOpen, fitness_no, handleUser}) => {
             </div>
             {/*.customerSearch */}
             <Table className='addsalesSearchTable'>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>번호</TableCell>
-                        <TableCell>이름</TableCell>
-                        <TableCell>폰번호</TableCell>
-                        <TableCell>선택</TableCell>
-                    </TableRow>
-                </TableHead>
+                <UserSearchTableHeader />
                 <TableBody>
                     {customers ? (
-                        customers.map((c) => (
-                            <TableRow>
-                                <TableCell>{c.member_no}</TableCell>
-                                <TableCell>{c.name}</TableCell>
-                                <TableCell>{c.phone}</TableCell>
-                                <TableCell>
-                                    <DialogActions>
-                                        <button
-                                            type='button'
-                                            onClick={handleSelectUser}
-                                            id={c.member_no}
-                                            value={[c.name, c.phone]}
-                                        >
-                                            선택
-                                        </button>
-                                    </DialogActions>
-                                </TableCell>
-                            </TableRow>
-                        ))
+                        customers.map((c) => (<UserSearchTableItem c={c} handleSelectUser={handleSelectUser} />))
                     ) : (
                         <TableRow>
                             <TableCell colSpan='6' align='center'></TableCell>

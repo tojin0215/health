@@ -26,6 +26,7 @@ import moment from 'moment';
 import ReservationPresetList from '../../component/reservation/ReservationPresetList';
 import ReservationList from '../../component/reservation/ReservationList';
 import UserSearch from '../../component/customer/UserSearch';
+import { getReservation, getReservationClassBy } from '../../api/user';
 
 const ip = SERVER_URL;
 
@@ -67,19 +68,9 @@ const ReservationClassItem = ({
 	trainer,
 	reservationSelect,
 }) => {
-	const [input, setInput] = useState('');
-	const [input2, setInput2] = useState('');
-	const [input3, setInput3] = useState('');
-	const [input4, setInput4] = useState('');
-	const [input5, setInput5] = useState('');
-	const handleClick2 = () => {
-		setInput(exercise_class);
-		setInput2(number_of_people);
-		setInput3(hour);
-		setInput4(minute);
-		setInput5(trainer);
+	const handleInnerOnClick = () => {
 		handleClick(exercise_class, hour, minute, number_of_people, trainer);
-	};
+	}
 
 	return (
 		<tr>
@@ -88,53 +79,9 @@ const ReservationClassItem = ({
 			<td>
 				{canRegist}/{number_of_people}
 			</td>
+			<td>{`${hour}`.padStart(2, "0")}:{`${minute}`.padStart(2, "0")}</td>
 			<td>
-				{hour == 1
-					? '01'
-					: hour == 2
-						? '02'
-						: hour == 3
-							? '03'
-							: hour == 4
-								? '04'
-								: hour == 5
-									? '05'
-									: minute == 6
-										? '06'
-										: hour == 7
-											? '07'
-											: hour == 8
-												? '08'
-												: hour == 9
-													? '09'
-													: hour == 0
-														? '00'
-														: hour}
-				:
-				{minute == 1
-					? '01'
-					: minute == 2
-						? '02'
-						: minute == 3
-							? '03'
-							: minute == 4
-								? '04'
-								: minute == 5
-									? '05'
-									: minute == 6
-										? '06'
-										: minute == 7
-											? '07'
-											: minute == 8
-												? '08'
-												: minute == 9
-													? '09'
-													: minute == 0
-														? '00'
-														: minute}
-			</td>
-			<td>
-				<button className='selectButton btnSolid fs-4' onClick={handleClick2}>
+				<button className='selectButton btnSolid fs-4' onClick={handleInnerOnClick}>
 					선택
 				</button>
 			</td>
@@ -206,7 +153,7 @@ const ReservationItem = ({
 				// cancelComment: cancelComment_input
 			}),
 		}).then((result) => {
-			console.log(result);
+			// console.log(result);
 			alert('예약변경완료');
 			reservationSelect();
 			updateClose();
@@ -214,14 +161,12 @@ const ReservationItem = ({
 	};
 
 	const reservationDelete = (res_no) => {
-
 		fetch(ip + '/reservation/delete?res_no=' + res_no, {
 			method: 'DELETE',
 		}).then((result) => {
 			reservationSelect();
 		});
 	};
-
 
 	return (
 
@@ -289,9 +234,10 @@ const ReservationItem = ({
 				<button
 					className='deleteButton'
 					onClick={() =>
-						confirm("정말 삭제하시겠습니까??") == true ?
-							reservationDelete(res_no)
-							: alert("삭제가 취소 되었습니다.")}
+						confirm('정말 삭제하시겠습니까??') == true
+							? reservationDelete(res_no)
+							: alert('삭제가 취소 되었습니다.')
+					}
 				>
 					삭제
 				</button>
@@ -301,7 +247,7 @@ const ReservationItem = ({
                 :
                 <td><button onClick={() => updateOnClick()}>수정하기</button></td>
             } */}
-		</tr >
+		</tr>
 	);
 };
 
@@ -335,7 +281,7 @@ class Reservation extends Component {
 			reservationArray: [],
 		};
 		this.handleDateChange = this.handleDateChange.bind(this);
-		this.reservationSelect();
+		// this.reservationSelect();
 		// this.reservationClassSelect();
 	}
 
@@ -386,48 +332,48 @@ class Reservation extends Component {
 	}
 
 	reservationSelect = () => {
-		fetch(
-			ip + '/reservation/select?fitness_no=' + this.props.userinfo.fitness_no,
-			{
-				method: 'GET',
-				headers: {
-					'Content-type': 'application/json',
-				},
-			}
-		)
-			.then((result) => result.json())
-			.then((result) => {
-				const items = result.map((data, index, array) => {
-					const date = moment(data.date).format('YYYY년 MM월 DD일');
-					let exercise_length = result.filter(
-						(filterData) =>
-							filterData.exercise_name === data.exercise_name &&
-							filterData.time === data.time &&
-							filterData.date.split('T')[0] === data.date.split('T')[0]
-					).length;
-					return (
-						<ReservationItem
-							res_no={data.res_no}
-							date={date}
-							date2={data.date}
-							exercise_name={data.exercise_name}
-							fitness_no={data.fitness_no}
-							customer_name={data.customer_name}
-							isCancel={data.isCancel}
-							cancelComment={data.cancelComment}
-							number_of_people={data.number_of_people}
-							exercise_length={exercise_length}
-							time={data.time}
-							reservationSelect={this.reservationSelect}
-							trainer={data.trainer}
-							customer_id={data.customer_id}
-						/>
-					);
-				});
-				console.log("reservationSelect", result);
-				this.setState({ reservation: items, reservation_data: result });
-				this.reservationClassSelect();
-			});
+		const fitness_no = this.props.userinfo.fitness_no;
+
+		getReservation(fitness_no)
+			.then(result => {
+				const now = moment();
+
+				const items = result
+					.filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
+					.map((data, index, array) => {
+						const date_value = (data.date) ? moment(data.date.split("T")[0]) : moment()
+						// if (date_value.isBefore(now, "day")) return
+
+						const date = date_value.format('YYYY년 MM월 DD일');
+						let exercise_length = result.filter(
+							(filterData) =>
+								filterData.exercise_name === data.exercise_name &&
+								filterData.time === data.time &&
+								filterData.date.split('T')[0] === data.date.split('T')[0]
+						).length;
+						return (
+							<ReservationItem
+								res_no={data.res_no}
+								date={date}
+								date2={data.date}
+								exercise_name={data.exercise_name}
+								fitness_no={data.fitness_no}
+								customer_name={data.customer_name}
+								isCancel={data.isCancel}
+								cancelComment={data.cancelComment}
+								number_of_people={data.number_of_people}
+								exercise_length={exercise_length}
+								time={data.time}
+								reservationSelect={this.reservationSelect}
+								trainer={data.trainer}
+								customer_id={data.customer_id}
+							/>
+						);
+					});
+				this.setState(
+					{ reservation: items, reservation_data: result },
+					() => this.reservationClassSelect());
+			})
 	};
 
 	dateFormat = (reserv_date) => {
@@ -510,7 +456,7 @@ class Reservation extends Component {
 	handleDateChange(date) {
 		this.setState({
 			reserv_date: date,
-		});
+		}, () => this.reservationClassSelect());
 	}
 
 	// handleChange = (e) => {
@@ -520,19 +466,10 @@ class Reservation extends Component {
 	// };
 
 	reservationClassSelect = () => {
-		fetch(
-			ip +
-			'/reservationClass/select?fitness_no=' +
-			this.props.userinfo.fitness_no,
-			{
-				method: 'GET',
-				headers: {
-					'Content-type': 'application/json',
-				},
-			}
-		)
-			.then((result) => result.json())
-			.then((result) => {
+		const fitness_no = this.props.userinfo.fitness_no;
+
+		getReservationClassBy(fitness_no)
+			.then(result => {
 				const items = result.map((data, index, array) => {
 					const time =
 						`${data.hour}`.padStart(2, '0') +
@@ -540,7 +477,7 @@ class Reservation extends Component {
 						`${data.minute}`.padStart(2, '0');
 					let canRegist = this.state.reservation_data.filter(
 						(item) =>
-							item.exercise_name === data.exercise_class && item.time === time
+							item.exercise_name === data.exercise_class && item.time === time && moment(this.state.reserv_date).isSame(moment(item.date.split('T')[0]), "day")
 					).length;
 					return (
 						<ReservationClassItem
@@ -568,7 +505,7 @@ class Reservation extends Component {
 					);
 				});
 				this.setState({ reservationClass: items });
-			});
+			})
 	};
 
 	handleUser = (customer) => {
@@ -582,7 +519,7 @@ class Reservation extends Component {
 	};
 
 	render() {
-		console.log(this.state.reservationClass);
+		// console.log(this.state.reservationClass);
 		return (
 			<div className='reservationWrap'>
 				<header className='header'>
@@ -609,16 +546,19 @@ class Reservation extends Component {
 				</header>
 
 				<Container className='reservationWrap'>
-					<Row className='pb-5'>
+					<Row className='pb-5 justify-content-center'>
 						<Col xs={9}>
 							<h4 className='fs-1'>운동 클래스</h4>
 						</Col>
-						<Col xs={3} className='text-center'>
+						<Col xs={3} className='text-center w-auto'>
 							<Link to='/reservationClass'>
 								<button>운동 클래스 만들기</button>
 							</Link>
 						</Col>
-						<Col className='text-center py-2' xs={12}>
+						<Col
+							className='text-center py-2 w-100 overflow-auto justify-content-center'
+							xs={12}
+						>
 							<table class='table classListTable'>
 								<thead>
 									<tr>
@@ -662,7 +602,7 @@ class Reservation extends Component {
 					</Row>
 					<Row lg={6}>
 						<Col className='text-center my-3' xs={12} sm={4}>
-							<div className='boxmorpinsm py-3 h-100'>
+							<div className='boxmorpinsm py-3 h-100 w-100'>
 								<p className='fs-3'>운동명</p>
 								<p className='fs-2 fw-bold'>{this.state.exercise_name}</p>
 							</div>
@@ -676,7 +616,7 @@ class Reservation extends Component {
 							/>
 						</Col>
 						<Col className='text-center my-3' xs={12} sm={4}>
-							<div className='boxmorpinsm py-3 h-100'>
+							<div className='boxmorpinsm py-3 h-100 w-100'>
 								<p className='fs-3'>강사명</p>
 								<p className='fs-2 fw-bold'>{this.state.trainer}</p>
 							</div>
@@ -703,7 +643,7 @@ class Reservation extends Component {
 							/>
 						</Col>
 						<Col className='text-center my-3' xs={12} sm={4}>
-							<div className='boxmorpinsm py-3 h-100'>
+							<div className='boxmorpinsm py-3 h-100 w-100'>
 								<p className='fs-3'>최대 인원수</p>
 								<p className='fs-2'>
 									<span className='fw-bold'>
@@ -762,24 +702,20 @@ class Reservation extends Component {
 							</button>
 						</Col>
 					</Row>
-					<Row xs={1} sm={3}></Row>
-					{/* <Col className='text-end m-3' xs={12}>
+					<Row xs={1} sm={3}>
+						{/* <Col className='text-end m-3' xs={12}>
                         <Link to='/reservation/update'>
                             <button className=''>예약 수정하기</button>
                         </Link>
                     </Col> */}
-					{/* <ReservationList
+						{/* <ReservationList
                         reservation={this.state.reservation}
                         reservationDelete={this.reservationDelete}
                     /> */}
-					<Col xs={12}>
-						<h4 className='fs-1'>예약 현황</h4>
-					</Col>
-					<Tabs
-						id="controlled-tab-example"
-						className="mb-3"
-					>
-						<Tab eventKey="home" title="날짜정렬">
+						<Col xs={12}>
+							<h4 className='fs-1'>예약 현황</h4>
+						</Col>
+						<Col xs={12} className='w-100 overflow-auto'>
 							<table class='table text-center reservationListTable mt-5'>
 								<thead>
 									<tr>
@@ -802,15 +738,8 @@ class Reservation extends Component {
 									)}
 								</tbody>
 							</table>
-							<th scope='col'>날짜</th>
-						</Tab>
-						<Tab eventKey="profile" title="운동정렬">
-							<th scope='col'>운동</th>
-						</Tab>
-						<Tab eventKey="Set" title="강사정렬">
-							<th scope='col'>강사</th>
-						</Tab>
-					</Tabs>
+						</Col>
+					</Row>
 				</Container>
 				<div className='footer'>
 					<Footer />

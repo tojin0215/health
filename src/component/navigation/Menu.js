@@ -13,7 +13,12 @@ import $ from 'jquery';
 import './Menu.css';
 
 class MegaMenu extends Component {
+	// constructor(props) {
+	// 	super(props);
+	// 	console.log(this.props.userinfo);
+	// }
 	render() {
+		// const { userinfo } = this.props;
 		// $('.megamenu').prepend('<div id="menu-icon"><span class="first"></span><span class="second"></span><span class="third"></span></div>');
 
 		// $("#menu-icon").on("click", function(){
@@ -35,13 +40,16 @@ class MegaMenu extends Component {
 			<div class='megamenu'>
 				<div class='logo'>
 					<a href='/home'>
-						<img
-							alt='투진컴퍼니'
-							src={textlogo}
-							width='auto'
-							height='30'
-							className='d-inline-block align-top'
-						/>
+						<p> </p>
+						{/**
+						 * 센터 이름 및 센터 코드 연동하기
+						 */}
+						{/* <p className='fs-1'>{userinfo.fitness_name}</p>
+						<p className='fs-4'>센터코드: 
+							{userinfo &&
+								userinfo.fitness_no &&
+								parseInt(`${userinfo.fitness_no}`, 16)}
+						</p> */}
 					</a>
 				</div>
 				<div id='menu-icon'>
@@ -56,9 +64,9 @@ class MegaMenu extends Component {
 								Home
 							</NavLink>
 							<li>
-									<NavLink exact to='/qr'>
-										QR
-									</NavLink>
+								<NavLink exact to='/qr'>
+									QR
+								</NavLink>
 							</li>
 						</li>
 						<li class='dropdown'>

@@ -57,18 +57,30 @@ function PriceFormatter(cell, row) {
 }
 /**회원권 회(단위) */
 function membershipFormatter(cell, row) {
-	return (
-		` ${cell}` + '회'
-	);
+	if (cell == "null" || cell == "0" || !cell) {
+		return '-';
+	} else {
+		return `${cell}` + '회';
+	}
+
 }
 /**기간제날짜 */
 function salesdateFormatter(cell, row) {
-	return ` ${cell}`.split('T')[0];
+	if (cell) {
+		return `${cell}`.split('T')[0];
+	} else {
+		return '-';
+	}
+
 }
 
 /**기간제 일수 */
 function daysFormatter(cell, row) {
-	return ` ${cell}` + '일';
+	if (cell == "null" || cell == "0" || !cell) {
+		return '-';
+	} else {
+		return ` ${cell}` + '일';
+	}
 }
 
 class Sales extends Component {

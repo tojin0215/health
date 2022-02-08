@@ -154,6 +154,7 @@
 .reservationWrap .classListTable tr th:nth-child(5) {
 	width: 100px;
 }
+
 .reservationWrap .reservationListTable tr td:nth-child(1) {
 	width: fit-content;
 }
@@ -173,9 +174,8 @@
 	width: 6rem;
 }
 .reservationWrap .reservationListTable tr td:nth-child(7) {
-	width: 100px;
+	width: 110px;
 }
-
 .reservationClassWrap table tr {
 	text-align: center;
 }
@@ -262,6 +262,10 @@
 	.reservationWrap .react-datepicker-wrapper {
 		width: auto;
 	}
+	.reservationWrap .classListTable {
+		width: max-content;
+		margin: 0 auto;
+	}
 	.reservationWrap > .row > div {
 		display: flex;
 		flex-direction: column;
@@ -269,6 +273,9 @@
 	}
 	.reservationWrap > .row > div:nth-child(3) {
 		display: block;
+	}
+	.reservationWrap .reservationListTable {
+		width: max-content;
 	}
 	.reservationWrap .classListTable tr th:nth-child(2) {
 		width: 80px;
