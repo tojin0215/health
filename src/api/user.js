@@ -15,6 +15,10 @@ export const getReservation = (fitness_no) => {
     return axios.get(SERVER_URL + "/reservation/select", {params:{fitness_no: fitness_no}}).then(response => response.data)
 }
 
+export const getReservation_exercise = (fitness_no) => {
+    return axios.get(SERVER_URL + "/reservation/select", {params:{fitness_no: fitness_no,type:"exercise_ASC"}}).then(response => response.data)
+}
+
 const getCustomerBy = (type, search, fn) => {
     return axios.get(`${SERVER_URL}/customer`, {params: {type, search, fn}}).then(response => response.data)
 }
