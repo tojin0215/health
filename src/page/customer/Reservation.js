@@ -245,11 +245,11 @@ const ReservationItem = ({
 					삭제
 				</button>
 			</td>
-			{/* {showResults ?
+			{showResults ?
                 <td><button onClick={() => reservationUpdate(res_no)}>수정하기...</button></td>
                 :
                 <td><button onClick={() => updateOnClick()}>수정하기</button></td>
-            } */}
+            }
 		</tr>
 	);
 };
