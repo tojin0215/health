@@ -140,7 +140,6 @@ class Navigation extends Component {
 										parseInt(`${userinfo.fitness_no}`, 16)}
 								</p>
 							</p>
-							{/* <span>{(userinfo && userinfo.fitness_no) && parseInt(`${userinfo.fitness_no}`, 16)}</span> */}
 						</Navbar.Brand>
 						<Nav.Item>
 							<button className='btnSolid' onClick={this.handleLogout}>
