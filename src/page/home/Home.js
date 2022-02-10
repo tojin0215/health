@@ -4,6 +4,7 @@ import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import MegaMenu from '../../component/navigation/Menu';
+import NewMenu from '../../component/navigation/NewMenu';
 import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 import '../../styles/home/home.css';
@@ -211,6 +212,7 @@ class Home extends Component {
 					<Header />
 					<Navigation goLogin={this.goLogin} />
 					<MegaMenu />
+					<NewMenu />
 					<div className='localNavigation'>
 						<div className='container'>
 							{/* <Menu /> */}
@@ -318,16 +320,18 @@ class Home extends Component {
 								></Link>
 								<p>통계</p>
 							</li>
-							<li>
-								<Link
-									to='/statistics'
-									className='btnCustomerNew btnStatic'
-									style={{
-										backgroundImage: `url(${aboutManage})`,
-									}}
-								></Link>
-								<p>관리자</p>
-							</li>
+							{userinfo.fitness_no === 1 ? (
+								<li>
+									<Link
+										to='/statistics'
+										className='btnCustomerNew btnStatic'
+										style={{
+											backgroundImage: `url(${aboutManage})`,
+										}}
+									></Link>
+									<p>관리자</p>
+								</li>
+							) : null}
 						</ul>
 					</div>
 					<section className='homeAbout'>

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { setFitness } from '../../action/userinfo';
+import { logoutRequest } from '../../action/authentication';
 
 import { textlogo } from '../../../src/img/logo-text.png';
 
@@ -13,18 +14,31 @@ import $ from 'jquery';
 import './Menu.css';
 
 class MegaMenu extends Component {
+	constructor(props) {
+		super(props);
+		console.log(this.props.userinfo);
+	}
+	handleLogout = () => {
+		this.props.logoutRequest().then(() => {
+			alert('로그아웃 되었습니다.');
+
+			// EMPTIES THE SESSION
+			let loginData = {
+				isLoggedIn: false,
+				username: '',
+			};
+
+			document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+
+			this.props.goLogin();
+		});
+	};
 	// constructor(props) {
 	// 	super(props);
 	// 	console.log(this.props.userinfo);
 	// }
 	render() {
-		// const { userinfo } = this.props;
-		// $('.megamenu').prepend('<div id="menu-icon"><span class="first"></span><span class="second"></span><span class="third"></span></div>');
-
-		// $("#menu-icon").on("click", function(){
-		// 	$("nav").slideToggle();
-		// 	$(this).toggleClass("active");
-		// });
+		const { userinfo } = this.props;
 
 		$('#menu-icon')
 			.off('click')
@@ -40,16 +54,13 @@ class MegaMenu extends Component {
 			<div class='megamenu'>
 				<div class='logo'>
 					<a href='/home'>
-						<p> </p>
-						{/**
-						 * 센터 이름 및 센터 코드 연동하기
-						 */}
-						{/* <p className='fs-1'>{userinfo.fitness_name}</p>
-						<p className='fs-4'>센터코드: 
+						{/* <p className='fs-1'>{userinfo.fitness_name}</p> */}
+						<p className='fs-4'>
+							{/* 센터코드: */}
 							{userinfo &&
 								userinfo.fitness_no &&
 								parseInt(`${userinfo.fitness_no}`, 16)}
-						</p> */}
+						</p>
 					</a>
 				</div>
 				<div id='menu-icon'>
@@ -150,5 +161,11 @@ class MegaMenu extends Component {
 		);
 	}
 }
+
+const navigationStateToProps = (state) => {
+	return {
+		userinfo: state.authentication.userinfo,
+	};
+};
 
 export default MegaMenu;
