@@ -79,7 +79,7 @@ class AddSales extends Component {
 			salesDays: '',
 			checkboxGroup: {
 				salesDaysCheckbox: true,
-				paidMembershipCheckbox: false
+				paidMembershipCheckbox: false,
 			},
 		};
 		this.handleDateChange = this.handleDateChange.bind(this);
@@ -198,7 +198,7 @@ class AddSales extends Component {
 	handleDateChange(date) {
 		this.setState({
 			paymentDate: date,
-			salesStart_date: date
+			salesStart_date: date,
 		});
 	}
 
@@ -251,20 +251,24 @@ class AddSales extends Component {
 					sportswearPrice: sportswearPrice1,
 					paymentTools: this.state.paymentTools,
 					paymentDate: this.state.paymentDate,
-					paidMembership: this.state.checkboxGroup['paidMembershipCheckbox'] == false ? "0" :
-						this.state.paidMembership,
+					paidMembership:
+						this.state.checkboxGroup['paidMembershipCheckbox'] == false
+							? '0'
+							: this.state.paidMembership,
 					salesStart_date:
-						this.state.checkboxGroup['salesDaysCheckbox'] == false ? "null" :
-							this.state.salesStart_date,
+						this.state.checkboxGroup['salesDaysCheckbox'] == false
+							? 'null'
+							: this.state.salesStart_date,
 					salesDays:
-						this.state.checkboxGroup['salesDaysCheckbox'] == false ? "null" :
-							this.state.salesDays
+						this.state.checkboxGroup['salesDaysCheckbox'] == false
+							? 'null'
+							: this.state.salesDays,
 				}),
 			})
 				.then((response) => response.json())
 				.then((response) => {
 					alert('등록되었습니다.');
-					console.log(response)
+					console.log(response);
 				});
 			this.props.history.push('/sales');
 		}
@@ -291,12 +295,12 @@ class AddSales extends Component {
 		}
 		fetch(
 			ip +
-			'/customer?type=search' +
-			it +
-			'&search=' +
-			this.state.search +
-			'&fn=' +
-			this.props.userinfo.fitness_no,
+				'/customer?type=search' +
+				it +
+				'&search=' +
+				this.state.search +
+				'&fn=' +
+				this.props.userinfo.fitness_no,
 			{
 				method: 'GET',
 				headers: {
@@ -329,7 +333,7 @@ class AddSales extends Component {
 	handleCheckbox = (e) => {
 		let obj = {
 			paidMembershipCheckbox: false,
-			salesDaysCheckbox: false
+			salesDaysCheckbox: false,
 		};
 		obj[e.target.id] = e.target.checked;
 		console.log(obj);
@@ -337,7 +341,6 @@ class AddSales extends Component {
 			checkboxGroup: obj,
 		});
 	};
-
 
 	render() {
 		console.log('___', this.state.customerList);
@@ -524,9 +527,12 @@ class AddSales extends Component {
 						{/*.exerciseType */}
 
 						<h3>이용권 종류</h3>
-						<Row xs={2} className='boxmorpinsm w-100 justify-content-start m-0 p-4 mb-4'>
-							<label className='d-flex align-items-center justify-content-between'>
-								<label>
+						<Row
+							xs={2}
+							className='boxmorpinsm w-100 justify-content-start m-0 p-4 mb-4'
+						>
+							<label className='d-flex align-items-center justify-content-start w-100'>
+								<label className='d-flex align-items-center pe-4'>
 									<input
 										type='radio'
 										id='salesDaysCheckbox'
@@ -537,15 +543,17 @@ class AddSales extends Component {
 									/>
 									기간제
 								</label>
-								기간시작일
-								<DatePicker
-									selected={this.state.salesStart_date}
-									onChange={this.handleDateChange}
-									name='salesStart_date'
-									dateFormat='yyyy-MM-dd'
-									font-size='1.6rem'
-									locale='ko'
-								/>
+								<label className='d-flex align-items-center px-4'>
+									기간시작일
+									<DatePicker
+										selected={this.state.salesStart_date}
+										onChange={this.handleDateChange}
+										name='salesStart_date'
+										dateFormat='yyyy-MM-dd'
+										font-size='1.6rem'
+										locale='ko'
+									/>
+								</label>
 								{/* <DatePicker
 										selected={this.state.paymentDate}
 										onChange={this.handleDateChange}
@@ -553,16 +561,18 @@ class AddSales extends Component {
 										dateFormat='yyyy-MM-dd'
 										locale='ko'
 									/> */}
-								일수
-								<TextField
-									variant='outlined'
-									value={this.state.salesDays}
-									onChange={this.handleChange}
-									type='number'
-									id='salesDays'
-									label='일'
-									required
-								/>
+								<label className='d-flex align-items-center px-4'>
+									<p>일수</p>
+									<TextField
+										variant='outlined'
+										value={this.state.salesDays}
+										onChange={this.handleChange}
+										type='number'
+										id='salesDays'
+										label='일'
+										required
+									/>
+								</label>
 							</label>
 						</Row>
 						<Row
