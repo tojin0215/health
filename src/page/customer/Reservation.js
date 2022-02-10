@@ -1,7 +1,7 @@
 import React, { Component, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { render } from 'react-dom';
-import { Container, Row, Col, Table } from 'react-bootstrap';
+import { Container, Row, Col, Table, Tabs, Tab } from 'react-bootstrap';
 
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
@@ -26,7 +26,7 @@ import moment from 'moment';
 import ReservationPresetList from '../../component/reservation/ReservationPresetList';
 import ReservationList from '../../component/reservation/ReservationList';
 import UserSearch from '../../component/customer/UserSearch';
-import { getReservation, getReservationClassBy } from '../../api/user';
+import { getReservation, getReservationClassBy, getReservation_exercise, getReservation_trainer } from '../../api/user';
 
 const ip = SERVER_URL;
 
@@ -57,7 +57,10 @@ const dateFormat = (reserv_date) => {
 		second
 	);
 };
-
+/**
+ * 
+ * 운동클래스테이블
+ */
 const ReservationClassItem = ({
 	exercise_class,
 	number_of_people,
@@ -89,6 +92,9 @@ const ReservationClassItem = ({
 	);
 };
 
+/**
+ * 예약테이블 data 전체
+ */
 const ReservationItem = ({
 	res_no,
 	date,
@@ -169,6 +175,7 @@ const ReservationItem = ({
 	};
 
 	return (
+
 		<tr>
 			<td>
 				[{customer_id}]{customer_name}
@@ -250,6 +257,113 @@ const ReservationItem = ({
 	);
 };
 
+/**
+ * 예약테이블 data 운동
+ */
+const ReservationItem_exercise = ({ res_no, date, exercise_name, fitness_no, customer_name, isCancel, cancelComment, number_of_people,
+	time, date2, exercise_length, customer_id, reservationSelect, trainer,
+}) => {
+
+	const reservationDelete = (res_no) => {
+		fetch(ip + '/reservation/delete?res_no=' + res_no, {
+			method: 'DELETE',
+		}).then((result) => {
+			reservationSelect();
+		});
+	};
+
+	return (
+
+		<tr>
+			<td>
+				[{customer_id}]{customer_name}
+			</td>
+
+			<td>{date}</td>
+
+
+			<td>{exercise_name}</td>
+
+
+			<td>{trainer}</td>
+
+
+			<td>{exercise_length + '/' + number_of_people}</td>
+
+
+			<td>{time}</td>
+
+
+			<td>
+				<button
+					className='deleteButton'
+					onClick={() =>
+						confirm('정말 삭제하시겠습니까??') == true
+							? reservationDelete(res_no)
+							: alert('삭제가 취소 되었습니다.')
+					}
+				>
+					삭제
+				</button>
+			</td>
+		</tr>
+	);
+};
+/**
+ * 예약테이블 data 강사
+ */
+const ReservationItem_trainer = ({ res_no, date, exercise_name, fitness_no, customer_name, isCancel, cancelComment, number_of_people,
+	time, date2, exercise_length, customer_id, reservationSelect, trainer,
+}) => {
+
+	const reservationDelete = (res_no) => {
+		fetch(ip + '/reservation/delete?res_no=' + res_no, {
+			method: 'DELETE',
+		}).then((result) => {
+			reservationSelect();
+		});
+	};
+
+	return (
+
+		<tr>
+			<td>
+				[{customer_id}]{customer_name}
+			</td>
+
+			<td>{date}</td>
+
+
+			<td>{exercise_name}</td>
+
+
+			<td>{trainer}</td>
+
+
+			<td>{exercise_length + '/' + number_of_people}</td>
+
+
+			<td>{time}</td>
+
+
+			<td>
+				<button
+					className='deleteButton'
+					onClick={() =>
+						confirm('정말 삭제하시겠습니까??') == true
+							? reservationDelete(res_no)
+							: alert('삭제가 취소 되었습니다.')
+					}
+				>
+					삭제
+				</button>
+			</td>
+
+		</tr>
+	);
+};
+
+
 class Reservation extends Component {
 	constructor(props) {
 		super(props);
@@ -259,6 +373,8 @@ class Reservation extends Component {
 			fitness_no: 1,
 			customer: null,
 			reservation: [],
+			reservation_trainer: [],
+			reservation_exercise: [],
 			reservation_data: [],
 			reservationClass: [],
 			customer_name: '',
@@ -280,8 +396,6 @@ class Reservation extends Component {
 			reservationArray: [],
 		};
 		this.handleDateChange = this.handleDateChange.bind(this);
-		// this.reservationSelect();
-		// this.reservationClassSelect();
 	}
 
 	componentDidMount() {
@@ -329,80 +443,148 @@ class Reservation extends Component {
 			}
 		});
 	}
-
+	/**
+	 * 예약테이블 보여주기
+	 */
 	reservationSelect = () => {
 		const fitness_no = this.props.userinfo.fitness_no;
-
 		getReservation(fitness_no)
-		.then(result => {
-			const now = moment();
-
-			const items = result
-			.filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
-			.map((data, index, array) => {
-				const date_value = (data.date)?moment(data.date.split("T")[0]): moment()
-				// if (date_value.isBefore(now, "day")) return
-
-				const date = date_value.format('YYYY년 MM월 DD일');
-				let exercise_length = result.filter(
-					(filterData) =>
-						filterData.exercise_name === data.exercise_name &&
-						filterData.time === data.time &&
-						filterData.date.split('T')[0] === data.date.split('T')[0]
-				).length;
-				return (
-					<ReservationItem
-						res_no={data.res_no}
-						date={date}
-						date2={data.date}
-						exercise_name={data.exercise_name}
-						fitness_no={data.fitness_no}
-						customer_name={data.customer_name}
-						isCancel={data.isCancel}
-						cancelComment={data.cancelComment}
-						number_of_people={data.number_of_people}
-						exercise_length={exercise_length}
-						time={data.time}
-						reservationSelect={this.reservationSelect}
-						trainer={data.trainer}
-						customer_id={data.customer_id}
-					/>
+			.then(result => {
+				const now = moment();
+				const items = result
+					.filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
+					.map((data, index, array) => {
+						const date_value = (data.date) ? moment(data.date.split("T")[0]) : moment()
+						// if (date_value.isBefore(now, "day")) return
+						const date = date_value.format('YYYY년 MM월 DD일');
+						let exercise_length = result.filter(
+							(filterData) =>
+								filterData.exercise_name === data.exercise_name &&
+								filterData.time === data.time &&
+								filterData.date.split('T')[0] === data.date.split('T')[0]
+						).length;
+						return (
+							<ReservationItem
+								res_no={data.res_no}
+								date={date}
+								date2={data.date}
+								exercise_name={data.exercise_name}
+								fitness_no={data.fitness_no}
+								customer_name={data.customer_name}
+								isCancel={data.isCancel}
+								cancelComment={data.cancelComment}
+								number_of_people={data.number_of_people}
+								exercise_length={exercise_length}
+								time={data.time}
+								reservationSelect={this.reservationSelect}
+								trainer={data.trainer}
+								customer_id={data.customer_id}
+							/>
+						)
+					});
+				this.setState(
+					{ reservation: items, reservation_data: result },
+					() => this.reservationClassSelect()
 				);
-			});
-			this.setState(
-				{ reservation: items, reservation_data: result },
-				() => this.reservationClassSelect());
-		})
+			})
 	};
-
-	dateFormat = (reserv_date) => {
-		let month = reserv_date.getMonth() + 1;
-		let day = reserv_date.getDate();
-		let hour = reserv_date.getHours();
-		let minute = reserv_date.getMinutes();
-		let second = reserv_date.getSeconds();
-
-		month = month >= 10 ? month : '0' + month;
-		day = day >= 10 ? day : '0' + day;
-		hour = hour >= 10 ? hour : '0' + hour;
-		minute = minute >= 10 ? minute : '0' + minute;
-		second = second >= 10 ? second : '0' + second;
-
-		return (
-			reserv_date.getFullYear() +
-			'-' +
-			month +
-			'-' +
-			day +
-			'T' +
-			hour +
-			':' +
-			minute +
-			':' +
-			second
-		);
+	/**
+	 * 예약 운동정렬
+	 */
+	reservationSelect_exercise = () => {
+		const fitness_no = this.props.userinfo.fitness_no;
+		getReservation_exercise(fitness_no)
+			.then(result => {
+				const now = moment();
+				const items = result
+					.filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
+					.map((data, index, array) => {
+						const date_value = (data.date) ? moment(data.date.split("T")[0]) : moment()
+						// if (date_value.isBefore(now, "day")) return
+						const date = date_value.format('YYYY년 MM월 DD일');
+						let exercise_length = result.filter(
+							(filterData) =>
+								filterData.exercise_name === data.exercise_name &&
+								filterData.time === data.time &&
+								filterData.date.split('T')[0] === data.date.split('T')[0]
+						).length;
+						return (
+							<ReservationItem_exercise
+								res_no={data.res_no}
+								date={date}
+								date2={data.date}
+								exercise_name={data.exercise_name}
+								fitness_no={data.fitness_no}
+								customer_name={data.customer_name}
+								isCancel={data.isCancel}
+								cancelComment={data.cancelComment}
+								number_of_people={data.number_of_people}
+								// exercise_length={exercise_length}
+								time={data.time}
+								reservationSelect={this.reservationSelect_exercise}
+								trainer={data.trainer}
+								customer_id={data.customer_id}
+							/>
+						)
+					});
+				this.setState(
+					{ reservation_exercise: items, reservation_data: result },
+					() => this.reservationClassSelect());
+			})
 	};
-
+	/**
+	 * 예약 강사정렬
+	 */
+	reservationSelect_trainer = () => {
+		const fitness_no = this.props.userinfo.fitness_no;
+		getReservation_trainer(fitness_no)
+			.then(result => {
+				const now = moment();
+				const items = result
+					.filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
+					.map((data, index, array) => {
+						const date_value = (data.date) ? moment(data.date.split("T")[0]) : moment()
+						// if (date_value.isBefore(now, "day")) return
+						const date = date_value.format('YYYY년 MM월 DD일');
+						let exercise_length = result.filter(
+							(filterData) =>
+								filterData.exercise_name === data.exercise_name &&
+								filterData.time === data.time &&
+								filterData.date.split('T')[0] === data.date.split('T')[0]
+						).length;
+						return (
+							<ReservationItem_trainer
+								res_no={data.res_no}
+								date={date}
+								date2={data.date}
+								exercise_name={data.exercise_name}
+								fitness_no={data.fitness_no}
+								customer_name={data.customer_name}
+								isCancel={data.isCancel}
+								cancelComment={data.cancelComment}
+								number_of_people={data.number_of_people}
+								// exercise_length={exercise_length}
+								time={data.time}
+								reservationSelect={this.reservationSelect_trainer}
+								trainer={data.trainer}
+								customer_id={data.customer_id}
+							/>
+						)
+					});
+				this.setState(
+					{ reservation_trainer: items, reservation_data: result },
+					() => this.reservationClassSelect());
+			})
+	};
+	handleTabs = () => {
+		this.setState(
+			this.reservationSelect_exercise(),
+			this.reservationSelect_trainer()
+		)
+	}
+	/**
+	* 예약 입력
+	*/
 	handleOnClick = () => {
 		let canRegist =
 			this.state.reservation.filter(
@@ -410,7 +592,7 @@ class Reservation extends Component {
 					filterData.exercise_name === this.state.exercise_name &&
 					filterData.time === this.state.time &&
 					filterData.date.split('T')[0] ===
-						this.dateFormat(this.state.reserv_date).split('T')[0]
+					this.dateFormat(this.state.reserv_date).split('T')[0]
 			).length > 0;
 		this.setState({
 			customer_name_err: false,
@@ -463,48 +645,50 @@ class Reservation extends Component {
 	//         [e.target.id]: e.target.value,
 	//     });
 	// };
-
+	/**
+	 * 운동클래스 보여주기
+	 */
 	reservationClassSelect = () => {
 		const fitness_no = this.props.userinfo.fitness_no;
 
 		getReservationClassBy(fitness_no)
-		.then(result => {
-			const items = result.map((data, index, array) => {
-				const time =
-					`${data.hour}`.padStart(2, '0') +
-					':' +
-					`${data.minute}`.padStart(2, '0');
-				let canRegist = this.state.reservation_data.filter(
-					(item) =>
-						item.exercise_name === data.exercise_class && item.time === time &&  moment(this.state.reserv_date).isSame(moment(item.date.split('T')[0]), "day")
-				).length;
-				return (
-					<ReservationClassItem
-						exercise_class={data.exercise_class}
-						number_of_people={data.number_of_people}
-						hour={data.hour}
-						minute={data.minute}
-						trainer={data.trainer}
-						canRegist={canRegist}
-						handleClick={(
-							result_exercise_name,
-							result_hour,
-							result_minute,
-							result_number_of_people,
-							result_trainer
-						) =>
-							this.setState({
-								exercise_name: result_exercise_name,
-								time: time,
-								number_of_people: result_number_of_people,
-								trainer: result_trainer,
-							})
-						}
-					/>
-				);
-			});
-			this.setState({ reservationClass: items });
-		})
+			.then(result => {
+				const items = result.map((data, index, array) => {
+					const time =
+						`${data.hour}`.padStart(2, '0') +
+						':' +
+						`${data.minute}`.padStart(2, '0');
+					let canRegist = this.state.reservation_data.filter(
+						(item) =>
+							item.exercise_name === data.exercise_class && item.time === time && moment(this.state.reserv_date).isSame(moment(item.date.split('T')[0]), "day")
+					).length;
+					return (
+						<ReservationClassItem
+							exercise_class={data.exercise_class}
+							number_of_people={data.number_of_people}
+							hour={data.hour}
+							minute={data.minute}
+							trainer={data.trainer}
+							canRegist={canRegist}
+							handleClick={(
+								result_exercise_name,
+								result_hour,
+								result_minute,
+								result_number_of_people,
+								result_trainer
+							) =>
+								this.setState({
+									exercise_name: result_exercise_name,
+									time: time,
+									number_of_people: result_number_of_people,
+									trainer: result_trainer,
+								})
+							}
+						/>
+					);
+				});
+				this.setState({ reservationClass: items });
+			})
 	};
 
 	handleUser = (customer) => {
@@ -517,8 +701,12 @@ class Reservation extends Component {
 		});
 	};
 
+
+
 	render() {
-		// console.log(this.state.reservationClass);
+		console.log(this.state.reservation);
+		console.log("exercise", this.state.reservation_exercise);
+		console.log("trainer", this.state.reservation_trainer);
 		return (
 			<div className='reservationWrap'>
 				<header className='header'>
@@ -543,6 +731,7 @@ class Reservation extends Component {
 					</div>
 					{/*.localNavigation */}
 				</header>
+
 				<Container className='reservationWrap'>
 					<Row className='pb-5 justify-content-center'>
 						<Col xs={9}>
@@ -624,7 +813,7 @@ class Reservation extends Component {
 								value={this.state.trainer}
 								// onChange={this.handleChange}
 								label='강사명'
-								// err={this.state.trainer_err}
+							// err={this.state.trainer_err}
 							/>
 						</Col>
 						<Col className='text-center my-3' xs={12} sm={4}>
@@ -714,28 +903,86 @@ class Reservation extends Component {
 							<h4 className='fs-1'>예약 현황</h4>
 						</Col>
 						<Col xs={12} className='w-100 overflow-auto'>
-							<table class='table text-center reservationListTable mt-5'>
-								<thead>
-									<tr>
-										<th scope='col'>[회원번호]회원이름</th>
-										<th scope='col'>날짜</th>
-										<th scope='col'>운동</th>
-										<th scope='col'>강사</th>
-										<th scope='col'>인원수</th>
-										<th scope='col'>시간</th>
-										{/* <th scope='col'>상태</th>
+							<Tabs
+								id="controlled-tab-example"
+								className="mb-3"
+								onSelect={this.handleTabs}
+
+							>
+								<Tab eventKey="all" title="전체">
+									<table class='table text-center reservationListTable mt-5' >
+										<thead>
+											<tr>
+												<th scope='col'>[회원번호]회원이름</th>
+												<th scope='col'>날짜</th>
+												<th scope='col'>운동</th>
+												<th scope='col'>강사</th>
+												<th scope='col'>인원수</th>
+												<th scope='col'>시간</th>
+												{/* <th scope='col'>상태</th>
                                     <th scope='col'>취소사유</th> */}
-										<th scope='col'>삭제</th>
-									</tr>
-								</thead>
-								<tbody>
-									{this.state.reservation.length == 0 ? (
-										<p>'설정된 운동이 없습니다.'</p>
-									) : (
-										this.state.reservation
-									)}
-								</tbody>
-							</table>
+												<th scope='col'>삭제</th>
+											</tr>
+										</thead>
+										<tbody>
+											{this.state.reservation.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservation
+											)}
+										</tbody>
+									</table>
+								</Tab>
+								<Tab eventKey="exercise" title="운동정렬">
+									<table class='table text-center reservationListTable mt-5'>
+										<thead>
+											<tr>
+												<th scope='col'>[회원번호]회원이름</th>
+												<th scope='col'>날짜</th>
+												<th scope='col'>운동</th>
+												<th scope='col'>강사</th>
+												<th scope='col'>인원수</th>
+												<th scope='col'>시간</th>
+												{/* <th scope='col'>상태</th>
+                                    <th scope='col'>취소사유</th> */}
+												<th scope='col'>삭제</th>
+											</tr>
+										</thead>
+										<tbody>
+											{this.state.reservation_exercise.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservation_exercise
+											)}
+										</tbody>
+									</table>
+								</Tab>
+								<Tab eventKey="trainer" title="강사정렬" >
+									<table class='table text-center reservationListTable mt-5'>
+										<thead>
+											<tr>
+												<th scope='col'>[회원번호]회원이름</th>
+												<th scope='col'>날짜</th>
+												<th scope='col'>운동</th>
+												<th scope='col'>강사</th>
+												<th scope='col'>인원수</th>
+												<th scope='col'>시간</th>
+												{/* <th scope='col'>상태</th>
+                                    <th scope='col'>취소사유</th> */}
+												<th scope='col'>삭제</th>
+											</tr>
+										</thead>
+										<tbody>
+											{this.state.reservation_trainer.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservation_trainer
+											)}
+										</tbody>
+									</table>
+								</Tab>
+							</Tabs>
+
 						</Col>
 					</Row>
 				</Container>
