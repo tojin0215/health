@@ -45,8 +45,9 @@
 }
 .megamenu .logo {
 	float: left;
-	padding: 28px 0 0;
+	padding: 16px 10px 0;
 	height: 7rem;
+	font-weight: 900;
 }
 .megamenu .logo a {
 	font-size: 28px;
@@ -234,5 +235,15 @@
 	}
 	.megamenu .mega-col {
 		width: 100%;
+	}
+	.megamenu .menuCenterCode {
+		text-align: end;
+		padding: 20px 74px 0;
+	}
+	.megamenu .btnSolid {
+		height: auto;
+		margin: 2rem;
+		padding: 0.4rem 2rem;
+		background-color: orangered;
 	}
 }

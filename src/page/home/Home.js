@@ -211,7 +211,7 @@ class Home extends Component {
 				<div className='header'>
 					<Header />
 					<Navigation goLogin={this.goLogin} />
-					<MegaMenu />
+					<MegaMenu goLogin={this.goLogin} />
 					<NewMenu />
 					<div className='localNavigation'>
 						<div className='container'>

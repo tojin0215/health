@@ -17,6 +17,8 @@ class MegaMenu extends Component {
 	constructor(props) {
 		super(props);
 		console.log(this.props.userinfo);
+		console.log('AAAA');
+		console.log(this.props);
 	}
 	handleLogout = () => {
 		this.props.logoutRequest().then(() => {
@@ -39,6 +41,7 @@ class MegaMenu extends Component {
 	// }
 	render() {
 		const { userinfo } = this.props;
+		console.log(userinfo);
 
 		$('#menu-icon')
 			.off('click')
@@ -54,15 +57,15 @@ class MegaMenu extends Component {
 			<div class='megamenu'>
 				<div class='logo'>
 					<a href='/home'>
-						{/* <p className='fs-1'>{userinfo.fitness_name}</p> */}
-						<p className='fs-4'>
-							{/* 센터코드: */}
-							{userinfo &&
-								userinfo.fitness_no &&
-								parseInt(`${userinfo.fitness_no}`, 16)}
-						</p>
+						<p className='fs-1'>{userinfo.fitness_name}</p>
 					</a>
 				</div>
+				<p className='menuCenterCode fs-2'>
+					센터코드{' '}
+					{userinfo &&
+						userinfo.fitness_no &&
+						parseInt(`${userinfo.fitness_no}`, 16)}
+				</p>
 				<div id='menu-icon'>
 					<span className='first'></span>
 					<span className='second'></span>
@@ -141,6 +144,11 @@ class MegaMenu extends Component {
 								</NavLink>
 							</li>
 						</li>
+						<li className='text-center'>
+							<button className='btnSolid' onClick={this.handleLogout}>
+								LOG-OUT
+							</button>
+						</li>
 						{/* <li class="dropdown">
 								<NavLink exact to="/statistics">
 								</NavLink>
@@ -162,10 +170,17 @@ class MegaMenu extends Component {
 	}
 }
 
-const navigationStateToProps = (state) => {
+const megaStateToProps = (state) => {
 	return {
 		userinfo: state.authentication.userinfo,
 	};
 };
 
-export default MegaMenu;
+const megaDispatchToProps = (dispatch) => {
+	return {
+		logoutRequest: () => {
+			return dispatch(logoutRequest());
+		},
+	};
+};
+export default connect(megaStateToProps, megaDispatchToProps)(MegaMenu);

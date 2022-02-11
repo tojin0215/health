@@ -1,63 +1,3 @@
-@media (max-width: 767px) {
-	.home .header .localNavigation {
-		height: auto;
-	}
-	.home .dashboard {
-		flex-direction: column;
-		padding-left: 40px;
-	}
-	.home .header .dashboard > div {
-		width: 100%;
-	}
-	.home .header .dashboard .homeDashRight {
-		padding-right: 0;
-		border: 0;
-	}
-	.home .header .dashboard .homeDashLeft {
-		padding-left: 0;
-		border: 0;
-	}
-	.home .header .dashboard label p {
-		padding: 0 1rem;
-	}
-
-	div > .home > .container {
-		padding: 0;
-		padding-bottom: 0;
-	}
-	.home .container .mainVisual {
-		background: no-repeat top/cover;
-	}
-	.home .container .homeIcon ul {
-		padding: 0;
-	}
-	.home .container .homeIcon ul li {
-		width: 33.3%;
-		padding: 1rem;
-	}
-
-	.home .homeAbout .aboutExplain button {
-		display: none;
-	}
-	.home .homeAbout .aboutList ul {
-		flex-direction: column;
-	}
-	.home .container .homeAbout h3 {
-		font-size: 4rem;
-	}
-	.home .container .homeAbout .aboutList ul li {
-		width: 100%;
-		height: auto;
-		margin-bottom: 3rem;
-	}
-	.home .container .homeAbout .aboutList ul li div {
-		height: 13rem;
-	}
-	.home .homeAbout .aboutList ul li button {
-		display: none;
-	}
-}
-
 .home > .container {
 	margin: 0rem auto 16rem;
 	padding-bottom: 15rem;
@@ -253,4 +193,65 @@
 
 .home .homeAbout .aboutList ul li p {
 	word-break: keep-all;
+}
+
+@media only screen and (max-width: 767px) {
+	.home .header .localNavigation {
+		height: auto;
+	}
+	.home .dashboard {
+		padding: 0 0 8px 0;
+		flex-direction: column;
+		margin: 0;
+	}
+	.home .header .dashboard > div {
+		width: 100%;
+	}
+	.home .header .dashboard .homeDashRight {
+		padding: 0;
+		border: 0;
+	}
+	.home .header .dashboard .homeDashLeft {
+		padding: 0;
+		border: 0;
+	}
+	.home .header .dashboard label p {
+		padding: 0 1rem;
+	}
+
+	div > .home > .container {
+		padding: 0;
+		padding-bottom: 0;
+	}
+	.home .container .mainVisual {
+		background: no-repeat top/cover;
+	}
+	.home .container .homeIcon ul {
+		padding: 0;
+	}
+	.home .container .homeIcon ul li {
+		width: 33.3%;
+		padding: 1rem;
+	}
+
+	.home .homeAbout .aboutExplain button {
+		display: none;
+	}
+	.home .homeAbout .aboutList ul {
+		flex-direction: column;
+	}
+	.home .container .homeAbout h3 {
+		font-size: 4rem;
+	}
+	.home .container .homeAbout .aboutList ul li {
+		width: 100%;
+		height: auto;
+		margin-bottom: 3rem;
+	}
+	.home .container .homeAbout .aboutList ul li div {
+		height: 13rem;
+	}
+	.home .homeAbout .aboutList ul li button {
+		display: none;
+	}
 }
