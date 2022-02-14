@@ -389,9 +389,7 @@ class Reservation extends Component {
 			exercise_length: '0',
 			customer_name_err: false,
 			exercise_name_err: false,
-
 			show: false,
-
 			open: false,
 			reservationArray: [],
 		};
@@ -710,9 +708,9 @@ class Reservation extends Component {
 
 
 	render() {
-		console.log(this.state.reservation);
-		console.log("exercise", this.state.reservation_exercise);
-		console.log("trainer", this.state.reservation_trainer);
+		// console.log(this.state.reservation);
+		// console.log("exercise", this.state.reservation_exercise);
+		// console.log("trainer", this.state.reservation_trainer);
 		return (
 			<div className='reservationWrap'>
 				<header className='header'>
@@ -914,8 +912,8 @@ class Reservation extends Component {
 									<tr>
 										<th scope='col'>[회원번호]회원이름</th>
 										<th scope='col'>날짜</th>
-										<th scope='col'>운동<button onClick={() => this.handleExercise()}>정렬키</button></th>
-										<th scope='col'>강사<button onClick={() => this.handleTrainer()}>정렬키</button></th>
+										<th scope='col'>운동<button onClick={() => this.handleExercise()}>V</button></th>
+										<th scope='col'>강사<button onClick={() => this.handleTrainer()}>V</button></th>
 										<th scope='col'>인원수</th>
 										<th scope='col'>시간</th>
 										{/* <th scope='col'>상태</th>
@@ -923,7 +921,7 @@ class Reservation extends Component {
 										<th scope='col'>삭제</th>
 									</tr>
 								</thead>
-								{this.handleExercise == true  ?
+								{this.handleExercise == true ?
 									<tbody>
 										{this.state.reservation_exercise.length == 0 ? (
 											<p>'설정된 운동이 없습니다.'</p>
@@ -949,6 +947,12 @@ class Reservation extends Component {
 										</tbody>
 								}
 							</table>
+							<Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+								<Tab eventKey="home" title="Home">
+								</Tab>
+								<Tab eventKey="profile" title="Profile">
+								</Tab>
+							</Tabs>
 
 
 						</Col>
