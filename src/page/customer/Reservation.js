@@ -364,6 +364,7 @@ const ReservationItem_trainer = ({ res_no, date, exercise_name, fitness_no, cust
 };
 
 
+
 class Reservation extends Component {
 	constructor(props) {
 		super(props);
@@ -907,52 +908,55 @@ class Reservation extends Component {
 							<h4 className='fs-1'>예약 현황</h4>
 						</Col>
 						<Col xs={12} className='w-100 overflow-auto'>
-							<table class='table text-center reservationListTable mt-5' >
-								<thead>
-									<tr>
-										<th scope='col'>[회원번호]회원이름</th>
-										<th scope='col'>날짜</th>
-										<th scope='col'>운동<button onClick={() => this.handleExercise()}>V</button></th>
-										<th scope='col'>강사<button onClick={() => this.handleTrainer()}>V</button></th>
-										<th scope='col'>인원수</th>
-										<th scope='col'>시간</th>
-										{/* <th scope='col'>상태</th>
+							<Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
+								<Tab eventKey="home" title="기본">
+									<table class='table text-center reservationListTable mt-5' >
+										<thead>
+											<tr>
+												<th scope='col'>[회원번호]회원이름</th>
+												<th scope='col'>날짜</th>
+												<th scope='col'>운동<button onClick={() => this.handleExercise()}>V</button></th>
+												<th scope='col'>강사<button onClick={() => this.handleTrainer()}>V</button></th>
+												<th scope='col'>인원수</th>
+												<th scope='col'>시간</th>
+												{/* <th scope='col'>상태</th>
 										<th scope='col'>취소사유</th> */}
-										<th scope='col'>삭제</th>
-									</tr>
-								</thead>
-								{this.handleExercise == true ?
-									<tbody>
-										{this.state.reservation_exercise.length == 0 ? (
-											<p>'설정된 운동이 없습니다.'</p>
-										) : (
-											this.state.reservation_exercise
-										)}
-									</tbody> :
-									this.handleTrainer == true ?
-										<tbody>
-											{this.state.reservation_trainer.length == 0 ? (
-												<p>'설정된 운동이 없습니다.'</p>
-											) : (
-												this.state.reservation_trainer
-											)}
-										</tbody>
-										:
-										<tbody>
-											{this.state.reservation.length == 0 ? (
-												<p>'설정된 운동이 없습니다.'</p>
-											) : (
-												this.state.reservation
-											)}
-										</tbody>
-								}
-							</table>
-							<Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
-								<Tab eventKey="home" title="Home">
+												<th scope='col'>삭제</th>
+											</tr>
+										</thead>
+										{this.handleExercise == true ?
+											<tbody>
+												{this.state.reservation_exercise.length == 0 ? (
+													<p>'설정된 운동이 없습니다.'</p>
+												) : (
+													this.state.reservation_exercise
+												)}
+											</tbody> :
+											this.handleTrainer == true ?
+												<tbody>
+													{this.state.reservation_trainer.length == 0 ? (
+														<p>'설정된 운동이 없습니다.'</p>
+													) : (
+														this.state.reservation_trainer
+													)}
+												</tbody>
+												:
+												<tbody>
+													{this.state.reservation.length == 0 ? (
+														<p>'설정된 운동이 없습니다.'</p>
+													) : (
+														this.state.reservation
+													)}
+												</tbody>
+										}
+									</table>
 								</Tab>
-								<Tab eventKey="profile" title="Profile">
+								<Tab eventKey="trainer" title="강사명">
 								</Tab>
 							</Tabs>
+
+
+
 
 
 						</Col>
