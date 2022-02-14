@@ -576,9 +576,13 @@ class Reservation extends Component {
 					() => this.reservationClassSelect());
 			})
 	};
-	handleTabs = () => {
+	handleExercise = () => {
 		this.setState(
-			this.reservationSelect_exercise(),
+			this.reservationSelect_exercise()
+		)
+	}
+	handleTrainer = () => {
+		this.setState(
 			this.reservationSelect_trainer()
 		)
 	}
@@ -903,14 +907,32 @@ class Reservation extends Component {
 							<h4 className='fs-1'>예약 현황</h4>
 						</Col>
 						<Col xs={12} className='w-100 overflow-auto'>
-							<Tabs
-								id="controlled-tab-example"
-								className="mb-3"
-								onSelect={this.handleTabs}
+							<table class='table text-center reservationListTable mt-5' >
+								<thead>
+									<tr>
+										<th scope='col'>[회원번호]회원이름</th>
+										<th scope='col'>날짜</th>
+										<th scope='col'>운동</th>
+										<th scope='col'>강사</th>
+										<th scope='col'>인원수</th>
+										<th scope='col'>시간</th>
+										{/* <th scope='col'>상태</th>
+										<th scope='col'>취소사유</th> */}
+										<th scope='col'>삭제</th>
+									</tr>
+								</thead>
+								<tbody>
+									{this.state.reservation.length == 0 ? (
+										<p>'설정된 운동이 없습니다.'</p>
+									) : (
+										this.state.reservation
+									)}
+								</tbody>
+							</table>
 
-							>
-								<Tab eventKey="all" title="전체">
-									<table class='table text-center reservationListTable mt-5' >
+
+
+							{/* <table class='table text-center reservationListTable mt-5'>
 										<thead>
 											<tr>
 												<th scope='col'>[회원번호]회원이름</th>
@@ -919,32 +941,6 @@ class Reservation extends Component {
 												<th scope='col'>강사</th>
 												<th scope='col'>인원수</th>
 												<th scope='col'>시간</th>
-												{/* <th scope='col'>상태</th>
-                                    <th scope='col'>취소사유</th> */}
-												<th scope='col'>삭제</th>
-											</tr>
-										</thead>
-										<tbody>
-											{this.state.reservation.length == 0 ? (
-												<p>'설정된 운동이 없습니다.'</p>
-											) : (
-												this.state.reservation
-											)}
-										</tbody>
-									</table>
-								</Tab>
-								<Tab eventKey="exercise" title="운동정렬">
-									<table class='table text-center reservationListTable mt-5'>
-										<thead>
-											<tr>
-												<th scope='col'>[회원번호]회원이름</th>
-												<th scope='col'>날짜</th>
-												<th scope='col'>운동</th>
-												<th scope='col'>강사</th>
-												<th scope='col'>인원수</th>
-												<th scope='col'>시간</th>
-												{/* <th scope='col'>상태</th>
-                                    <th scope='col'>취소사유</th> */}
 												<th scope='col'>삭제</th>
 											</tr>
 										</thead>
@@ -956,8 +952,7 @@ class Reservation extends Component {
 											)}
 										</tbody>
 									</table>
-								</Tab>
-								<Tab eventKey="trainer" title="강사정렬" >
+								
 									<table class='table text-center reservationListTable mt-5'>
 										<thead>
 											<tr>
@@ -967,8 +962,6 @@ class Reservation extends Component {
 												<th scope='col'>강사</th>
 												<th scope='col'>인원수</th>
 												<th scope='col'>시간</th>
-												{/* <th scope='col'>상태</th>
-                                    <th scope='col'>취소사유</th> */}
 												<th scope='col'>삭제</th>
 											</tr>
 										</thead>
@@ -979,9 +972,8 @@ class Reservation extends Component {
 												this.state.reservation_trainer
 											)}
 										</tbody>
-									</table>
-								</Tab>
-							</Tabs>
+									</table> */}
+
 
 						</Col>
 					</Row>
