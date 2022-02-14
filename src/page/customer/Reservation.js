@@ -519,7 +519,7 @@ class Reservation extends Component {
 								isCancel={data.isCancel}
 								cancelComment={data.cancelComment}
 								number_of_people={data.number_of_people}
-								// exercise_length={exercise_length}
+								exercise_length={exercise_length}
 								time={data.time}
 								reservationSelect={this.reservationSelect_exercise}
 								trainer={data.trainer}
@@ -563,7 +563,7 @@ class Reservation extends Component {
 								isCancel={data.isCancel}
 								cancelComment={data.cancelComment}
 								number_of_people={data.number_of_people}
-								// exercise_length={exercise_length}
+								exercise_length={exercise_length}
 								time={data.time}
 								reservationSelect={this.reservationSelect_trainer}
 								trainer={data.trainer}
@@ -634,6 +634,8 @@ class Reservation extends Component {
 					}
 
 					this.reservationSelect();
+					this.reservationSelect_exercise();
+					this.reservationSelect_trainer();
 				});
 		}
 	};
@@ -912,8 +914,8 @@ class Reservation extends Component {
 									<tr>
 										<th scope='col'>[회원번호]회원이름</th>
 										<th scope='col'>날짜</th>
-										<th scope='col'>운동</th>
-										<th scope='col'>강사</th>
+										<th scope='col'>운동<button onClick={() => this.handleExercise()}>정렬키</button></th>
+										<th scope='col'>강사<button onClick={() => this.handleTrainer()}>정렬키</button></th>
 										<th scope='col'>인원수</th>
 										<th scope='col'>시간</th>
 										{/* <th scope='col'>상태</th>
@@ -921,50 +923,15 @@ class Reservation extends Component {
 										<th scope='col'>삭제</th>
 									</tr>
 								</thead>
-								<tbody>
-									{this.state.reservation.length == 0 ? (
-										<p>'설정된 운동이 없습니다.'</p>
-									) : (
-										this.state.reservation
-									)}
-								</tbody>
-							</table>
-
-
-
-							{/* <table class='table text-center reservationListTable mt-5'>
-										<thead>
-											<tr>
-												<th scope='col'>[회원번호]회원이름</th>
-												<th scope='col'>날짜</th>
-												<th scope='col'>운동</th>
-												<th scope='col'>강사</th>
-												<th scope='col'>인원수</th>
-												<th scope='col'>시간</th>
-												<th scope='col'>삭제</th>
-											</tr>
-										</thead>
-										<tbody>
-											{this.state.reservation_exercise.length == 0 ? (
-												<p>'설정된 운동이 없습니다.'</p>
-											) : (
-												this.state.reservation_exercise
-											)}
-										</tbody>
-									</table>
-								
-									<table class='table text-center reservationListTable mt-5'>
-										<thead>
-											<tr>
-												<th scope='col'>[회원번호]회원이름</th>
-												<th scope='col'>날짜</th>
-												<th scope='col'>운동</th>
-												<th scope='col'>강사</th>
-												<th scope='col'>인원수</th>
-												<th scope='col'>시간</th>
-												<th scope='col'>삭제</th>
-											</tr>
-										</thead>
+								{this.handleExercise == true  ?
+									<tbody>
+										{this.state.reservation_exercise.length == 0 ? (
+											<p>'설정된 운동이 없습니다.'</p>
+										) : (
+											this.state.reservation_exercise
+										)}
+									</tbody> :
+									this.handleTrainer == true ?
 										<tbody>
 											{this.state.reservation_trainer.length == 0 ? (
 												<p>'설정된 운동이 없습니다.'</p>
@@ -972,7 +939,16 @@ class Reservation extends Component {
 												this.state.reservation_trainer
 											)}
 										</tbody>
-									</table> */}
+										:
+										<tbody>
+											{this.state.reservation.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservation
+											)}
+										</tbody>
+								}
+							</table>
 
 
 						</Col>
