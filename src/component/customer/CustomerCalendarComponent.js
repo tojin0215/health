@@ -41,7 +41,8 @@ class CustomerCalendarComponent extends Component {
 		.then(result => {
 			console.debug("fetchReservation::", result);
 			this.setState({
-				reservations: result.map(value => {
+				reservations: result.filter(value => Number(value.customer_id) === this.props.customer_no)
+                .map(value => {
 					if (this.state.customer_no !== null && this.state.customer_no !== Number(value.customer_id)) return
 
 					const created = moment(value.date);
