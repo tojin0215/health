@@ -21,9 +21,17 @@ export const getReservation = (fitness_no) => {
 export const getReservation_exercise = (fitness_no) => {
     return axios.get(SERVER_URL + "/reservation/select", { params: { fitness_no: fitness_no, type: "exercise_ASC" } }).then(response => response.data)
 }
-
+/**
+ * 강사정렬
+ */
 export const getReservation_trainer = (fitness_no) => {
     return axios.get(SERVER_URL + "/reservation/select", { params: { fitness_no: fitness_no, type: "trainer_ASC" } }).then(response => response.data)
+}
+/**
+ *강사별 예약테이블
+ */
+export const getReservation_contact_trainer = (fitness_no) => {
+    return axios.get(SERVER_URL + "/reservation/select", { params: { fitness_no: fitness_no, trainer: trainer, type: "trainer" } }).then(response => response.data)
 }
 
 const getCustomerBy = (type, search, fn) => {

@@ -26,7 +26,7 @@ import moment from 'moment';
 import ReservationPresetList from '../../component/reservation/ReservationPresetList';
 import ReservationList from '../../component/reservation/ReservationList';
 import UserSearch from '../../component/customer/UserSearch';
-import { getReservation, getReservationClassBy, getReservation_exercise, getReservation_trainer } from '../../api/user';
+import { getReservation, getReservationClassBy, getReservation_exercise, getReservation_trainer, getReservation_contact_trainer } from '../../api/user';
 
 const ip = SERVER_URL;
 
@@ -330,22 +330,11 @@ const ReservationItem_trainer = ({ res_no, date, exercise_name, fitness_no, cust
 			<td>
 				[{customer_id}]{customer_name}
 			</td>
-
 			<td>{date}</td>
-
-
 			<td>{exercise_name}</td>
-
-
 			<td>{trainer}</td>
-
-
 			<td>{exercise_length + '/' + number_of_people}</td>
-
-
 			<td>{time}</td>
-
-
 			<td>
 				<button
 					className='deleteButton'
@@ -358,11 +347,50 @@ const ReservationItem_trainer = ({ res_no, date, exercise_name, fitness_no, cust
 					삭제
 				</button>
 			</td>
-
 		</tr>
 	);
 };
 
+/**
+ * 강사별 예약테이블
+ */
+const ReservationContactTrainerItem = ({ res_no, date, exercise_name, fitness_no, customer_name, isCancel, cancelComment, number_of_people,
+	time, date2, exercise_length, customer_id, reservationSelect, trainer, }) => {
+
+	const reservationDelete = (res_no) => {
+		fetch(ip + '/reservation/delete?res_no=' + res_no, {
+			method: 'DELETE',
+		}).then((result) => {
+			reservationSelect();
+		});
+	};
+
+	return (
+
+		<tr>
+			<td>
+				[{customer_id}]{customer_name}
+			</td>
+			<td>{date}</td>
+			<td>{exercise_name}</td>
+			<td>{trainer}</td>
+			<td>{exercise_length + '/' + number_of_people}</td>
+			<td>{time}</td>
+			<td>
+				<button
+					className='deleteButton'
+					onClick={() =>
+						confirm('정말 삭제하시겠습니까??') == true
+							? reservationDelete(res_no)
+							: alert('삭제가 취소 되었습니다.')
+					}
+				>
+					삭제
+				</button>
+			</td>
+		</tr>
+	);
+};
 
 
 class Reservation extends Component {
@@ -376,6 +404,7 @@ class Reservation extends Component {
 			reservation: [],
 			reservation_trainer: [],
 			reservation_exercise: [],
+			reservation_contact_trainer: [],
 			reservation_data: [],
 			reservationClass: [],
 			customer_name: '',
@@ -443,7 +472,7 @@ class Reservation extends Component {
 		});
 	}
 	/**
-	 * 예약테이블 보여주기
+	 * 예약테이블
 	 */
 	reservationSelect = () => {
 		const fitness_no = this.props.userinfo.fitness_no;
@@ -586,6 +615,55 @@ class Reservation extends Component {
 		)
 	}
 	/**
+	 * 강사별 예약테이블
+	 */
+	reservationContactTrainer = () => {
+		const fitness_no = this.props.userinfo.fitness_no;
+		const trainer = "난";
+		getReservation_contact_trainer(fitness_no, trainer)
+			.then(result => {
+				const now = moment();
+				const items = result
+					.filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
+					.map((data, index, array) => {
+						const date_value = (data.date) ? moment(data.date.split("T")[0]) : moment()
+						// if (date_value.isBefore(now, "day")) return
+						const date = date_value.format('YYYY년 MM월 DD일');
+						let exercise_length = result.filter(
+							(filterData) =>
+								filterData.exercise_name === data.exercise_name &&
+								filterData.time === data.time &&
+								filterData.date.split('T')[0] === data.date.split('T')[0]
+						).length;
+						return (
+							<ReservationContactTrainerItem
+								res_no={data.res_no}
+								date={date}
+								date2={data.date}
+								exercise_name={data.exercise_name}
+								fitness_no={data.fitness_no}
+								customer_name={data.customer_name}
+								isCancel={data.isCancel}
+								cancelComment={data.cancelComment}
+								number_of_people={data.number_of_people}
+								exercise_length={exercise_length}
+								time={data.time}
+								reservationSelect={this.reservationSelect}
+								trainer={data.trainer}
+								customer_id={data.customer_id}
+							/>
+						)
+					});
+				this.setState(
+					{ reservation_contact_trainer: items, reservation_data: result },
+					() => this.reservationClassSelect()
+				);
+			})
+	};
+
+
+
+	/**
 	* 예약 입력
 	*/
 	handleOnClick = () => {
@@ -631,7 +709,6 @@ class Reservation extends Component {
 					} else {
 						alert(result.message);
 					}
-
 					this.reservationSelect();
 					this.reservationSelect_exercise();
 					this.reservationSelect_trainer();
@@ -651,7 +728,7 @@ class Reservation extends Component {
 	//     });
 	// };
 	/**
-	 * 운동클래스 보여주기
+	 * 운동클래스
 	 */
 	reservationClassSelect = () => {
 		const fitness_no = this.props.userinfo.fitness_no;
@@ -712,6 +789,8 @@ class Reservation extends Component {
 		// console.log(this.state.reservation);
 		// console.log("exercise", this.state.reservation_exercise);
 		// console.log("trainer", this.state.reservation_trainer);
+		console.log("reservation_contact_trainer", this.state.reservation_contact_trainer);
+
 		return (
 			<div className='reservationWrap'>
 				<header className='header'>
@@ -952,6 +1031,28 @@ class Reservation extends Component {
 									</table>
 								</Tab>
 								<Tab eventKey="trainer" title="강사명">
+									<table class='table text-center reservationListTable mt-5' >
+										<thead>
+											<tr>
+												<th scope='col'>[회원번호]회원이름</th>
+												<th scope='col'>날짜</th>
+												<th scope='col'>운동</th>
+												<th scope='col'>강사</th>
+												<th scope='col'>인원수</th>
+												<th scope='col'>시간</th>
+												{/* <th scope='col'>상태</th>
+										<th scope='col'>취소사유</th> */}
+												<th scope='col'>삭제</th>
+											</tr>
+										</thead>
+										<tbody>
+											{this.state.reservation_contact_trainer.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservation_contact_trainer
+											)}
+										</tbody>
+									</table>
 								</Tab>
 							</Tabs>
 
