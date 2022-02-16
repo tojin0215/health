@@ -599,8 +599,7 @@ class Reservation extends Component {
 	 */
 	reservationChoiceTrainer = (trainer_choice) => {
 		const fitness_no = this.props.userinfo.fitness_no;
-		const trainer = trainer_choice;
-		getReservation_choice_trainer(fitness_no, trainer)
+		getReservation_choice_trainer(fitness_no, trainer_choice)
 			.then(result => {
 				const now = moment();
 				const items = result
