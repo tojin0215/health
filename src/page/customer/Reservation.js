@@ -729,6 +729,8 @@ class Reservation extends Component {
 							handleClick={(
 								result_exercise_name,
 								result_number_of_people,
+								result_hour,
+								result_minute,
 								result_trainer
 							) =>
 								this.setState({
