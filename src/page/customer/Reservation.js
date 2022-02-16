@@ -357,10 +357,11 @@ const ReservationChoiceTrainerItem = ({ res_no, date, exercise_name, fitness_no,
 /**
  * 강사 선택 운동클래스
  */
-const ReservationClassItem_choice = ({ trainer_choice, handleClick_choice }) => {
+const ReservationClassItem_choice = ({ trainer_choice, handleClick_choice, reservationChoiceTrainer }) => {
 
 	const handleInnerOnClick_choice = () => {
 		handleClick_choice(trainer_choice);
+		reservationChoiceTrainer(trainer_choice);
 	}
 
 	return (
@@ -596,9 +597,9 @@ class Reservation extends Component {
 	/**
 	 * 강사별 예약테이블
 	 */
-	reservationChoiceTrainer = () => {
+	reservationChoiceTrainer = (trainer_choice) => {
 		const fitness_no = this.props.userinfo.fitness_no;
-		const trainer = this.state.trainer_choice;
+		const trainer = trainer_choice;
 		getReservation_choice_trainer(fitness_no, trainer)
 			.then(result => {
 				const now = moment();
@@ -764,6 +765,7 @@ class Reservation extends Component {
 								this.setState({
 									trainer_choice: result_trainer_choice
 								})}
+							reservationChoiceTrainer={this.reservationChoiceTrainer}
 						/>
 					);
 				});
@@ -787,8 +789,8 @@ class Reservation extends Component {
 		// console.log(this.state.reservation);
 		// console.log("exercise", this.state.reservation_exercise);
 		// console.log("trainer", this.state.reservation_trainer);
-		// console.log("reservation_choice_trainer", this.state.reservation_choice_trainer);
-		console.log("reservationClass_choice", this.state.reservationClass_choice);
+		console.log("reservation_choice_trainer", this.state.reservation_choice_trainer);
+		// console.log("reservationClass_choice", this.state.reservationClass_choice);
 
 		return (
 			<div className='reservationWrap'>
