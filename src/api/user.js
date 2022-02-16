@@ -30,7 +30,7 @@ export const getReservation_trainer = (fitness_no) => {
 /**
  *강사별 예약테이블
  */
-export const getReservation_contact_trainer = (fitness_no) => {
+export const getReservation_choice_trainer = (fitness_no, trainer) => {
     return axios.get(SERVER_URL + "/reservation/select", { params: { fitness_no: fitness_no, trainer: trainer, type: "trainer" } }).then(response => response.data)
 }
 

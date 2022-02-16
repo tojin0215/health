@@ -26,7 +26,7 @@ import moment from 'moment';
 import ReservationPresetList from '../../component/reservation/ReservationPresetList';
 import ReservationList from '../../component/reservation/ReservationList';
 import UserSearch from '../../component/customer/UserSearch';
-import { getReservation, getReservationClassBy, getReservation_exercise, getReservation_trainer, getReservation_contact_trainer } from '../../api/user';
+import { getReservation, getReservationClassBy, getReservation_exercise, getReservation_trainer, getReservation_choice_trainer } from '../../api/user';
 
 const ip = SERVER_URL;
 
@@ -59,17 +59,10 @@ const dateFormat = (reserv_date) => {
 };
 /**
  * 
- * 운동클래스테이블
+ * 운동클래스 테이블
  */
-const ReservationClassItem = ({
-	exercise_class,
-	number_of_people,
-	hour,
-	minute,
-	handleClick,
-	canRegist,
-	trainer,
-	reservationSelect,
+const ReservationClassItem = ({ exercise_class, number_of_people, hour, minute,
+	handleClick, canRegist, trainer, reservationSelect,
 }) => {
 	const handleInnerOnClick = () => {
 		handleClick(exercise_class, hour, minute, number_of_people, trainer);
@@ -95,21 +88,8 @@ const ReservationClassItem = ({
 /**
  * 예약테이블 data 전체
  */
-const ReservationItem = ({
-	res_no,
-	date,
-	exercise_name,
-	fitness_no,
-	customer_name,
-	isCancel,
-	cancelComment,
-	number_of_people,
-	time,
-	date2,
-	exercise_length,
-	customer_id,
-	reservationSelect,
-	trainer,
+const ReservationItem = ({ res_no, date, exercise_name, fitness_no, customer_name, isCancel,
+	cancelComment, number_of_people, time, date2, exercise_length, customer_id, reservationSelect, trainer,
 }) => {
 	const [showResults, setShowResults] = React.useState(false);
 	const [date_input, setDate_input] = useState('');
@@ -175,12 +155,10 @@ const ReservationItem = ({
 	};
 
 	return (
-
 		<tr>
 			<td>
 				[{customer_id}]{customer_name}
 			</td>
-
 			{showResults ? (
 				<td>
 					{/* <input value={date_input} id='date' onChange={handleChangeDate} /> */}
@@ -263,7 +241,6 @@ const ReservationItem = ({
 const ReservationItem_exercise = ({ res_no, date, exercise_name, fitness_no, customer_name, isCancel, cancelComment, number_of_people,
 	time, date2, exercise_length, customer_id, reservationSelect, trainer,
 }) => {
-
 	const reservationDelete = (res_no) => {
 		fetch(ip + '/reservation/delete?res_no=' + res_no, {
 			method: 'DELETE',
@@ -271,29 +248,16 @@ const ReservationItem_exercise = ({ res_no, date, exercise_name, fitness_no, cus
 			reservationSelect();
 		});
 	};
-
 	return (
-
 		<tr>
 			<td>
 				[{customer_id}]{customer_name}
 			</td>
-
 			<td>{date}</td>
-
-
 			<td>{exercise_name}</td>
-
-
 			<td>{trainer}</td>
-
-
 			<td>{exercise_length + '/' + number_of_people}</td>
-
-
 			<td>{time}</td>
-
-
 			<td>
 				<button
 					className='deleteButton'
@@ -325,7 +289,6 @@ const ReservationItem_trainer = ({ res_no, date, exercise_name, fitness_no, cust
 	};
 
 	return (
-
 		<tr>
 			<td>
 				[{customer_id}]{customer_name}
@@ -354,19 +317,18 @@ const ReservationItem_trainer = ({ res_no, date, exercise_name, fitness_no, cust
 /**
  * 강사별 예약테이블
  */
-const ReservationContactTrainerItem = ({ res_no, date, exercise_name, fitness_no, customer_name, isCancel, cancelComment, number_of_people,
-	time, date2, exercise_length, customer_id, reservationSelect, trainer, }) => {
+const ReservationChoiceTrainerItem = ({ res_no, date, exercise_name, fitness_no, customer_name, isCancel, cancelComment, number_of_people,
+	time, date2, exercise_length, customer_id, reservationChoiceTrainer, trainer, }) => {
 
 	const reservationDelete = (res_no) => {
 		fetch(ip + '/reservation/delete?res_no=' + res_no, {
 			method: 'DELETE',
 		}).then((result) => {
-			reservationSelect();
+			reservationChoiceTrainer();
 		});
 	};
 
 	return (
-
 		<tr>
 			<td>
 				[{customer_id}]{customer_name}
@@ -392,6 +354,20 @@ const ReservationContactTrainerItem = ({ res_no, date, exercise_name, fitness_no
 	);
 };
 
+/**
+ * 강사 선택 운동클래스
+ */
+const ReservationClassItem_choice = ({ trainer_choice, handleClick_choice }) => {
+
+	const handleInnerOnClick_choice = () => {
+		handleClick_choice(trainer_choice);
+	}
+
+	return (
+		<li><button onClick={handleInnerOnClick_choice}>{trainer_choice}</button></li>
+	);
+}
+
 
 class Reservation extends Component {
 	constructor(props) {
@@ -404,9 +380,10 @@ class Reservation extends Component {
 			reservation: [],
 			reservation_trainer: [],
 			reservation_exercise: [],
-			reservation_contact_trainer: [],
+			reservation_choice_trainer: [],
 			reservation_data: [],
 			reservationClass: [],
+			reservationClass_choice: [],
 			customer_name: '',
 			customer_id: 'xcv',
 			isCancel: 1,
@@ -468,6 +445,8 @@ class Reservation extends Component {
 				alert('Your session is expired, please log in again');
 			} else {
 				this.reservationSelect();
+				this.reservationChoiceTrainer();
+				this.reservationClassSelect_choice();
 			}
 		});
 	}
@@ -617,10 +596,10 @@ class Reservation extends Component {
 	/**
 	 * 강사별 예약테이블
 	 */
-	reservationContactTrainer = () => {
+	reservationChoiceTrainer = () => {
 		const fitness_no = this.props.userinfo.fitness_no;
-		const trainer = "난";
-		getReservation_contact_trainer(fitness_no, trainer)
+		const trainer = this.state.trainer_choice;
+		getReservation_choice_trainer(fitness_no, trainer)
 			.then(result => {
 				const now = moment();
 				const items = result
@@ -636,7 +615,7 @@ class Reservation extends Component {
 								filterData.date.split('T')[0] === data.date.split('T')[0]
 						).length;
 						return (
-							<ReservationContactTrainerItem
+							<ReservationChoiceTrainerItem
 								res_no={data.res_no}
 								date={date}
 								date2={data.date}
@@ -648,14 +627,14 @@ class Reservation extends Component {
 								number_of_people={data.number_of_people}
 								exercise_length={exercise_length}
 								time={data.time}
-								reservationSelect={this.reservationSelect}
+								reservationChoiceTrainer={this.reservationChoiceTrainer}
 								trainer={data.trainer}
 								customer_id={data.customer_id}
 							/>
 						)
 					});
 				this.setState(
-					{ reservation_contact_trainer: items, reservation_data: result },
+					{ reservation_choice_trainer: items, reservation_data: result },
 					() => this.reservationClassSelect()
 				);
 			})
@@ -667,7 +646,6 @@ class Reservation extends Component {
 	* 예약 입력
 	*/
 	handleOnClick = () => {
-
 		this.setState({
 			customer_name_err: false,
 			exercise_name_err: false,
@@ -706,6 +684,8 @@ class Reservation extends Component {
 					this.reservationSelect();
 					this.reservationSelect_exercise();
 					this.reservationSelect_trainer();
+					this.reservationChoiceTrainer();
+					this.reservationClassSelect_choice();
 				});
 		}
 	};
@@ -748,8 +728,6 @@ class Reservation extends Component {
 							canRegist={canRegist}
 							handleClick={(
 								result_exercise_name,
-								result_hour,
-								result_minute,
 								result_number_of_people,
 								result_trainer
 							) =>
@@ -764,6 +742,32 @@ class Reservation extends Component {
 					);
 				});
 				this.setState({ reservationClass: items });
+			})
+	};
+
+
+	/**
+	 * 강사 선택 운동클래스
+	 */
+	reservationClassSelect_choice = () => {
+		const fitness_no = this.props.userinfo.fitness_no;
+
+		getReservationClassBy(fitness_no)
+			.then(result => {
+				const items = result.map((data, index, array) => {
+					return (
+						<ReservationClassItem_choice
+							trainer_choice={data.trainer}
+							handleClick_choice={(
+								result_trainer_choice
+							) =>
+								this.setState({
+									trainer_choice: result_trainer_choice
+								})}
+						/>
+					);
+				});
+				this.setState({ reservationClass_choice: items });
 			})
 	};
 
@@ -783,7 +787,8 @@ class Reservation extends Component {
 		// console.log(this.state.reservation);
 		// console.log("exercise", this.state.reservation_exercise);
 		// console.log("trainer", this.state.reservation_trainer);
-		console.log("reservation_contact_trainer", this.state.reservation_contact_trainer);
+		// console.log("reservation_choice_trainer", this.state.reservation_choice_trainer);
+		console.log("reservationClass_choice", this.state.reservationClass_choice);
 
 		return (
 			<div className='reservationWrap'>
@@ -1025,6 +1030,7 @@ class Reservation extends Component {
 									</table>
 								</Tab>
 								<Tab eventKey="trainer" title="강사명">
+									<p>{this.state.reservationClass_choice}</p>
 									<table class='table text-center reservationListTable mt-5' >
 										<thead>
 											<tr>
@@ -1040,10 +1046,10 @@ class Reservation extends Component {
 											</tr>
 										</thead>
 										<tbody>
-											{this.state.reservation_contact_trainer.length == 0 ? (
+											{this.state.reservation_choice_trainer.length == 0 ? (
 												<p>'설정된 운동이 없습니다.'</p>
 											) : (
-												this.state.reservation_contact_trainer
+												this.state.reservation_choice_trainer
 											)}
 										</tbody>
 									</table>
