@@ -667,14 +667,7 @@ class Reservation extends Component {
 	* 예약 입력
 	*/
 	handleOnClick = () => {
-		let canRegist =
-			this.state.reservation.filter(
-				(filterData) =>
-					filterData.exercise_name === this.state.exercise_name &&
-					filterData.time === this.state.time &&
-					filterData.date.split('T')[0] ===
-					this.dateFormat(this.state.reserv_date).split('T')[0]
-			).length > 0;
+
 		this.setState({
 			customer_name_err: false,
 			exercise_name_err: false,
@@ -706,6 +699,7 @@ class Reservation extends Component {
 				.then((result) => {
 					if (result.message == 'ok') {
 						alert('예약이 완료되었습니다.');
+						console.log(this.state.reserv_date)
 					} else {
 						alert(result.message);
 					}
