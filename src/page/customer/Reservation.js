@@ -400,6 +400,7 @@ class Reservation extends Component {
 			show: false,
 			open: false,
 			reservationArray: [],
+			show_exercise_table: false,
 		};
 		this.handleDateChange = this.handleDateChange.bind(this);
 	}
@@ -505,7 +506,7 @@ class Reservation extends Component {
 			.then(result => {
 				const now = moment();
 				const items = result
-					.filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
+					.filter(value => moment(value.date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment(), "day"))
 					.map((data, index, array) => {
 						const date_value = (data.date) ? moment(data.date.split("T")[0]) : moment()
 						// if (date_value.isBefore(now, "day")) return
@@ -585,9 +586,8 @@ class Reservation extends Component {
 			})
 	};
 	handleExercise = () => {
-		this.setState(
-			this.reservationSelect_exercise()
-		)
+		this.reservationSelect_exercise()
+		this.setState({ show_exercise_table: true })
 	}
 	handleTrainer = () => {
 		this.setState(
@@ -657,6 +657,8 @@ class Reservation extends Component {
 			this.setState({ customer_name_err: true });
 			alert('이름을 확인해 주세요');
 		} else {
+			const date = (moment(this.state.reserv_date).format('YYYY-MM-DD') + "T00:00:00.000Z");
+			console.log(date)
 			fetch(ip + '/reservation/insert', {
 				method: 'POST',
 				headers: {
@@ -664,7 +666,7 @@ class Reservation extends Component {
 				},
 				body: JSON.stringify({
 					fitness_no: this.props.userinfo.fitness_no,
-					date: this.state.reserv_date,
+					date: date,
 					exercise_name: this.state.exercise_name,
 					trainer: this.state.trainer,
 					customer_name: this.state.customer_name,
@@ -691,6 +693,7 @@ class Reservation extends Component {
 	};
 
 	handleDateChange(date) {
+		console.log("date", moment(date).format('YYYY-MM-DD'))
 		this.setState({
 			reserv_date: date,
 		}, () => this.reservationClassSelect());
@@ -1005,7 +1008,7 @@ class Reservation extends Component {
 												<th scope='col'>삭제</th>
 											</tr>
 										</thead>
-										{this.handleExercise == true ?
+										{this.state.show_exercise_table ?
 											<tbody>
 												{this.state.reservation_exercise.length == 0 ? (
 													<p>'설정된 운동이 없습니다.'</p>
