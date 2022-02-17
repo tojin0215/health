@@ -401,6 +401,7 @@ class Reservation extends Component {
 			open: false,
 			reservationArray: [],
 			show_exercise_table: false,
+			show_trainer_table: false
 		};
 		this.handleDateChange = this.handleDateChange.bind(this);
 	}
@@ -587,12 +588,17 @@ class Reservation extends Component {
 	};
 	handleExercise = () => {
 		this.reservationSelect_exercise()
-		this.setState({ show_exercise_table: true })
+		this.setState({
+			show_exercise_table: true,
+			show_trainer_table: false
+		})
 	}
 	handleTrainer = () => {
-		this.setState(
-			this.reservationSelect_trainer()
-		)
+		this.reservationSelect_trainer()
+		this.setState({
+			show_trainer_table: true,
+			show_exercise_table: false
+		})
 	}
 	/**
 	 * 강사별 예약테이블
@@ -993,7 +999,7 @@ class Reservation extends Component {
 						</Col>
 						<Col xs={12} className='w-100 overflow-auto'>
 							<Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
-								<Tab eventKey="home" title="기본">
+								<Tab eventKey="home" title="전체보기">
 									<table class='table text-center reservationListTable mt-5' >
 										<thead>
 											<tr>
@@ -1008,34 +1014,38 @@ class Reservation extends Component {
 												<th scope='col'>삭제</th>
 											</tr>
 										</thead>
-										{this.state.show_exercise_table ?
-											<tbody>
+										{(this.state.show_exercise_table && !this.state.show_trainer_table)
+											? <tbody>
 												{this.state.reservation_exercise.length == 0 ? (
 													<p>'설정된 운동이 없습니다.'</p>
 												) : (
 													this.state.reservation_exercise
 												)}
+											</tbody>
+											: null}
+
+										{(this.state.show_trainer_table && !this.state.show_exercise_table)
+											? <tbody>
+												{this.state.reservation_trainer.length == 0 ? (
+													<p>'설정된 운동이 없습니다.'</p>
+												) : (
+													this.state.reservation_trainer
+												)}
+											</tbody>
+											: null}
+										{!this.state.show_exercise_table && !this.state.show_trainer_table ?
+											<tbody>
+												{this.state.reservation.length == 0 ? (
+													<p>'설정된 운동이 없습니다.'</p>
+												) : (
+													this.state.reservation
+												)}
 											</tbody> :
-											this.handleTrainer == true ?
-												<tbody>
-													{this.state.reservation_trainer.length == 0 ? (
-														<p>'설정된 운동이 없습니다.'</p>
-													) : (
-														this.state.reservation_trainer
-													)}
-												</tbody>
-												:
-												<tbody>
-													{this.state.reservation.length == 0 ? (
-														<p>'설정된 운동이 없습니다.'</p>
-													) : (
-														this.state.reservation
-													)}
-												</tbody>
+											null
 										}
 									</table>
 								</Tab>
-								<Tab eventKey="trainer" title="강사명">
+								<Tab eventKey="trainer" title="강사별조회">
 									<p>{this.state.reservationClass_choice}</p>
 									<table class='table text-center reservationListTable mt-5' >
 										<thead>
