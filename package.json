@@ -80,5 +80,5 @@
   "eslintConfig": {
     "extends": "./node_modules/react-scripts/config/eslint.js"
   },
-  "proxy": "https://ohmygym.kr/"
+  "proxy": "http://13.124.141.28:3002/"
 }
