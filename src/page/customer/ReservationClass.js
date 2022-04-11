@@ -31,6 +31,7 @@ const ReservationClassItem = ({
 	hour,
 	minute,
 	trainer,
+	class_date
 }) => {
 	const reservationClassDelete = (no) => {
 		fetch(ip + '/reservationClass/delete?no=' + no, {
@@ -140,6 +141,7 @@ const ReservationClassItem = ({
 			) : (
 				<td>{exercise_class}</td>
 			)}
+			<td>{class_date}</td>
 			{showResults ? (
 				<td>
 					<input
@@ -266,6 +268,7 @@ class ReservationClass extends Component {
 			hour: '',
 			minute: '',
 			trainer: '',
+			class_date: '',
 
 			hour_err: false,
 			minute_err: false,
@@ -353,6 +356,7 @@ class ReservationClass extends Component {
 							hour={data.hour}
 							minute={data.minute}
 							trainer={data.trainer}
+							class_date={data.class_date}
 						/>
 					);
 				});
@@ -367,6 +371,7 @@ class ReservationClass extends Component {
 			hour_err: false,
 			minute_err: false,
 			trainer_err: false,
+			class_date: false
 		});
 		if (this.state.exercise_class == '') {
 			this.setState({ exercise_class_err: true });
@@ -404,15 +409,7 @@ class ReservationClass extends Component {
 					hour: this.state.hour,
 					minute: this.state.minute,
 					trainer: this.state.trainer,
-					// this.state.radioGroup.ten == true
-					//     ? '10'
-					//     : this.state.radioGroup.eleven == true
-					//         ? '11'
-					//         : this.state.radioGroup.twelve == true
-					//             ? '12'
-					//             : this.state.radioGroup.thirteen == true
-					//                 ? '13'
-					//                 : '00'
+					class_date: this.state.class_date
 				}),
 			})
 				.then((result) => result.json())
@@ -426,19 +423,7 @@ class ReservationClass extends Component {
 				});
 		}
 	};
-	// handleRadio = (event) => {
-	// 	let obj = {
-	// 		ten: false,
-	// 		eleven: false,
-	// 		twelve: false,
-	// 		thirteen: false,
-	// 	};
-	// 	obj[event.target.id] = event.target.checked; // true
-	// 	console.debug(obj);
-	// 	this.setState({
-	// 		radioGroup: obj,
-	// 	});
-	// };
+
 	handleChange = (e) => {
 		this.setState({
 			[e.target.id]: e.target.value,
@@ -482,6 +467,7 @@ class ReservationClass extends Component {
 							<thead>
 								<tr>
 									<th scope='col'>운동 클래스</th>
+									<th scope='col'>신청날짜</th>
 									<th scope='col'>강사</th>
 									<th scope='col'>수강 인원</th>
 									<th scope='col'>시간</th>
@@ -542,52 +528,16 @@ class ReservationClass extends Component {
 								label='분'
 								error={this.state.minute_err}
 							/>
-							{/* <label className='customerResi'>
-                                <label className='labelCheck'>
-                                    <input
-                                        className='btnRadio'
-                                        type='radio'
-                                        name='radioGroup'
-                                        id='ten'
-                                        checked={this.state.radioGroup['ten']}
-                                        onChange={this.handleRadio}
-                                    />
-                                    <span>10:00</span>
-                                </label>
-                                <label className='labelCheck'>
-                                    <input
-                                        className='btnRadio'
-                                        type='radio'
-                                        name='radioGroup'
-                                        id='eleven'
-                                        checked={this.state.radioGroup['eleven']}
-                                        onChange={this.handleRadio}
-                                    />
-                                    <span>11:00</span>
-                                </label>
-                                <label className='labelCheck'>
-                                    <input
-                                        className='btnRadio'
-                                        type='radio'
-                                        name='radioGroup'
-                                        id='twelve'
-                                        checked={this.state.radioGroup['twelve']}
-                                        onChange={this.handleRadio}
-                                    />
-                                    <span>12:00</span>
-                                </label>
-                                <label className='labelCheck'>
-                                    <input
-                                        className='btnRadio'
-                                        type='radio'
-                                        name='radioGroup'
-                                        id='thirteen'
-                                        checked={this.state.radioGroup['thirteen']}
-                                        onChange={this.handleRadio}
-                                    />
-                                    <span>13:00</span>
-                                </label>
-                            </label> */}
+							<TextField
+								type='date'
+								id='class_date'
+								value={this.state.class_date}
+								onChange={this.handleChange}
+							// InputProps={{ disableUnderline: true }}
+							// label='날짜'
+							// error={this.state.class_date_err}
+							/>
+
 						</Col>
 						<button
 							className='mx-4 btnSolid'
