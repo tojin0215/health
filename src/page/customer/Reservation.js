@@ -510,7 +510,6 @@ class Reservation extends Component {
 					.filter(value => moment(value.date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment(), "day"))
 					.map((data, index, array) => {
 						const date_value = (data.date) ? moment(data.date.split("T")[0]) : moment()
-						// if (date_value.isBefore(now, "day")) return
 						const date = date_value.format('YYYY년 MM월 DD일');
 						let exercise_length = result.filter(
 							(filterData) =>
@@ -799,7 +798,7 @@ class Reservation extends Component {
 		// console.log(this.state.reservation);
 		// console.log("exercise", this.state.reservation_exercise);
 		// console.log("trainer", this.state.reservation_trainer);
-		console.log("reservation_choice_trainer", this.state.reservation_choice_trainer);
+		// console.log("reservation_choice_trainer", this.state.reservation_choice_trainer);
 		// console.log("reservationClass_choice", this.state.reservationClass_choice);
 
 		return (

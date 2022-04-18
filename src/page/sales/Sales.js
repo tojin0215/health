@@ -664,7 +664,7 @@ class Sales extends Component {
 								maxDate={new Date()}
 								onChange={(date) => this.setState({ startDate: date })}
 								name='startDate'
-								dateFormat='MM/dd/yyyy'
+								dateFormat='yyyy/MM/dd'
 							/>
 							<text> ~ </text>
 							<DatePicker
@@ -674,7 +674,7 @@ class Sales extends Component {
 								maxDate={new Date()}
 								onChange={(date) => this.setState({ endDate: date })}
 								name='endDate'
-								dateFormat='MM/dd/yyyy'
+								dateFormat='yyyy/MM/dd'
 							/>
 							<button type='button' onClick={this.handleOnClick}>
 								조회하기

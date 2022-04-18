@@ -268,7 +268,7 @@ class ReservationClass extends Component {
 			hour: '',
 			minute: '',
 			trainer: '',
-			class_date: '',
+			class_date: new Date(),
 
 			hour_err: false,
 			minute_err: false,
@@ -283,6 +283,7 @@ class ReservationClass extends Component {
 			// },
 		};
 		this.reservationClassSelect();
+		this.handleDateChange = this.handleDateChange.bind(this);
 	}
 
 	componentDidMount() {
@@ -345,21 +346,30 @@ class ReservationClass extends Component {
 		)
 			.then((result) => result.json())
 			.then((result) => {
-				const items = result.map((data, index, array) => {
-					return (
-						<ReservationClassItem
-							fitness_no={this.props.userinfo.fitness_no}
-							reservationClassSelect={this.reservationClassSelect}
-							exercise_class={data.exercise_class}
-							no={data.no}
-							number_of_people={data.number_of_people}
-							hour={data.hour}
-							minute={data.minute}
-							trainer={data.trainer}
-							class_date={data.class_date}
-						/>
-					);
-				});
+				const items = result
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment(), "day"))
+					.map((data, index, array) => {
+						const date_value = (data.class_date) ? moment(data.class_date.split("T")[0]) : moment()
+						const date_split = date_value.format('YYYY년 MM월 DD일')
+						let exercise_length = result.filter(
+							(filterData) =>
+
+								filterData.class_date.split('T')[0] === data.class_date.split('T')[0]
+						).length;
+						return (
+							<ReservationClassItem
+								fitness_no={this.props.userinfo.fitness_no}
+								reservationClassSelect={this.reservationClassSelect}
+								exercise_class={data.exercise_class}
+								no={data.no}
+								number_of_people={data.number_of_people}
+								hour={data.hour}
+								minute={data.minute}
+								trainer={data.trainer}
+								class_date={date_split}
+							/>
+						);
+					});
 				this.setState({ reservationClass: items });
 			});
 	};
@@ -397,6 +407,8 @@ class ReservationClass extends Component {
 			this.setState({ minute_err: true });
 			alert('분을 확인해 주세요.(0~59)');
 		} else {
+			const date = (moment(this.state.class_date).format('YYYY-MM-DD') + "T00:00:00.000Z");
+
 			fetch(ip + '/reservationClass/insert', {
 				method: 'POST',
 				headers: {
@@ -409,7 +421,7 @@ class ReservationClass extends Component {
 					hour: this.state.hour,
 					minute: this.state.minute,
 					trainer: this.state.trainer,
-					class_date: this.state.class_date
+					class_date: date
 				}),
 			})
 				.then((result) => result.json())
@@ -429,6 +441,13 @@ class ReservationClass extends Component {
 			[e.target.id]: e.target.value,
 		});
 	};
+
+	handleDateChange(date) {
+		console.log("date", moment(date).format('YYYY-MM-DD'))
+		this.setState({
+			class_date: date,
+		}, () => this.reservationClassSelect());
+	}
 
 	render() {
 		return (
@@ -492,6 +511,14 @@ class ReservationClass extends Component {
 								label='운동명'
 								error={this.state.exercise_class_err}
 							/>
+							<DatePicker
+								selected={this.state.class_date}
+								onChange={this.handleDateChange}
+								name='class_date'
+								dateFormat='yyyy-MM-dd(eee)'
+								font-size='1.6rem'
+								locale='ko'
+							/>
 							<TextField
 								id='trainer'
 								value={this.state.trainer}
@@ -528,15 +555,7 @@ class ReservationClass extends Component {
 								label='분'
 								error={this.state.minute_err}
 							/>
-							<TextField
-								type='date'
-								id='class_date'
-								value={this.state.class_date}
-								onChange={this.handleChange}
-							// InputProps={{ disableUnderline: true }}
-							// label='날짜'
-							// error={this.state.class_date_err}
-							/>
+
 
 						</Col>
 						<button
