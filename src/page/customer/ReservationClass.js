@@ -31,7 +31,8 @@ const ReservationClassItem = ({
 	hour,
 	minute,
 	trainer,
-	class_date
+	class_date,
+	class_date_update
 }) => {
 	const reservationClassDelete = (no) => {
 		fetch(ip + '/reservationClass/delete?no=' + no, {
@@ -47,12 +48,15 @@ const ReservationClassItem = ({
 	const [hour_err, setHour_err] = useState(false);
 	const [minute_err, setMinute_err] = useState(false);
 	const [trainer_err, setTrainer_err] = useState(false);
+	const [class_date_err, setClass_date_err] = useState(false);
 
 	const [exercise_class_input, setExercise_class_input] = useState('');
+	const [class_date_input, setClass_date_input] = useState('');
 	const [trainer_input, setTrainer_input] = useState('');
 	const [number_of_people_input, setNumber_of_people_input] = useState('');
 	const [hour_input, setHour_input] = useState('');
 	const [minute_input, setMinute_input] = useState('');
+
 	const updateOnClick = () => {
 		setShowResults(true);
 		setExercise_class_input(exercise_class);
@@ -60,6 +64,7 @@ const ReservationClassItem = ({
 		setHour_input(hour);
 		setMinute_input(minute);
 		setTrainer_input(trainer);
+		setClass_date_input(class_date);
 	};
 	const updateClose = () => {
 		setShowResults(false);
@@ -79,6 +84,10 @@ const ReservationClassItem = ({
 	const updateChange5 = (e) => {
 		setTrainer_input(e.target.value);
 	};
+	const updateChange6 = (e) => {
+		setClass_date_input(e.target.value);
+	};
+
 
 	/**
 	 * 
@@ -90,6 +99,9 @@ const ReservationClassItem = ({
 		if (exercise_class_input == '') {
 			setExercise_class_err(true);
 			alert('운동명을 써주세요.');
+		} else if (class_date_input == class_date) {
+			setClass_date_err(true);
+			alert('날짜를 써주세요.');
 		} else if (trainer_input == '') {
 			setTrainer_err(true);
 			alert('트레이너명을 써주세요.');
@@ -115,11 +127,11 @@ const ReservationClassItem = ({
 					hour: hour_input,
 					minute: minute_input,
 					trainer: trainer_input,
+					class_date: class_date_input
 				}),
 			})
 				.then((result) => result.json())
 				.then((result) => {
-					console.log(result);
 					alert('변경 완료');
 					updateClose();
 					reservationClassSelect();
@@ -141,12 +153,27 @@ const ReservationClassItem = ({
 			) : (
 				<td>{exercise_class}</td>
 			)}
-			<td>{class_date}</td>
+			{showResults ? (
+				<td>
+					<input
+						type='date'
+						selected={setClass_date_input}
+						// value={class_date_update.split("T")[0]}
+						id='class_date'
+						onChange={updateChange6}
+						error={class_date_err}
+					/>
+				</td>
+			) : (
+				<td>{class_date}</td>
+			)}
+
+
 			{showResults ? (
 				<td>
 					<input
 						value={trainer_input}
-						id='trainer_input'
+						id='trainer'
 						onChange={updateChange5}
 						error={trainer_err}
 					/>
@@ -197,7 +224,7 @@ const ReservationClassItem = ({
 									? '04'
 									: hour == 5
 										? '05'
-										: minute == 6
+										: hour == 6
 											? '06'
 											: hour == 7
 												? '07'
@@ -275,6 +302,7 @@ class ReservationClass extends Component {
 			exercise_class_err: false,
 			number_of_people_err: false,
 			trainer_err: false,
+			class_date_err: false,
 			// radioGroup: {
 			//     ten: true,
 			//     eleven: false,
@@ -331,7 +359,7 @@ class ReservationClass extends Component {
 			}
 		});
 	}
-
+	//전날 표시안됨 과거일 표시안됨
 	reservationClassSelect = () => {
 		fetch(
 			ip +
@@ -353,7 +381,6 @@ class ReservationClass extends Component {
 						const date_split = date_value.format('YYYY년 MM월 DD일')
 						let exercise_length = result.filter(
 							(filterData) =>
-
 								filterData.class_date.split('T')[0] === data.class_date.split('T')[0]
 						).length;
 						return (
@@ -367,6 +394,7 @@ class ReservationClass extends Component {
 								minute={data.minute}
 								trainer={data.trainer}
 								class_date={date_split}
+								class_date_update={data.class_date}
 							/>
 						);
 					});
@@ -381,11 +409,14 @@ class ReservationClass extends Component {
 			hour_err: false,
 			minute_err: false,
 			trainer_err: false,
-			class_date: false
+			class_date_err: false
 		});
 		if (this.state.exercise_class == '') {
 			this.setState({ exercise_class_err: true });
 			alert('운동명을 써주세요.');
+		} else if (this.state.class_date == '') {
+			this.setState({ class_date_err: true });
+			alert('날짜를 써주세요.');
 		} else if (this.state.trainer == '') {
 			this.setState({ trainer_err: true });
 			alert('강사명을 써주세요.');
@@ -428,6 +459,7 @@ class ReservationClass extends Component {
 				.then((result) => {
 					if (result.message == 'ok') {
 						alert('운동 설정이 완료되었습니다.');
+						console.log(this.state.class_date)
 					} else {
 						alert(result.message);
 					}
@@ -443,7 +475,7 @@ class ReservationClass extends Component {
 	};
 
 	handleDateChange(date) {
-		console.log("date", moment(date).format('YYYY-MM-DD'))
+		console.log("date", date)
 		this.setState({
 			class_date: date,
 		}, () => this.reservationClassSelect());
@@ -518,6 +550,7 @@ class ReservationClass extends Component {
 								dateFormat='yyyy-MM-dd(eee)'
 								font-size='1.6rem'
 								locale='ko'
+								error={this.state.class_date_err}
 							/>
 							<TextField
 								id='trainer'

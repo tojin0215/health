@@ -801,13 +801,15 @@ class Sales extends Component {
 							>
 								기간권 시작일
 							</TableHeaderColumn>
+							{/* date값으로 변경하기 */}
 							<TableHeaderColumn
 								dataFormat={daysFormatter}
 								dataField='salesDays'
 								thStyle={{ textAlign: 'center' }}
 								tdStyle={{ textAlign: 'center' }}
 							>
-								기간권 일수
+
+								기간권 일수(마감일로변경)
 							</TableHeaderColumn>
 							{/* 값이 null이면 나오기 숨기기 */}
 							<TableHeaderColumn

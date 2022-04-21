@@ -154,12 +154,12 @@ class Home extends Component {
 		//alert(today)
 		fetch(
 			ip +
-				'/sales?type=select&startDate=' +
-				startTime +
-				'&endDate=' +
-				endTime +
-				'&fn=' +
-				this.props.userinfo.fitness_no,
+			'/sales?type=select&startDate=' +
+			startTime +
+			'&endDate=' +
+			endTime +
+			'&fn=' +
+			this.props.userinfo.fitness_no,
 			{
 				method: 'GET',
 				headers: {
@@ -202,9 +202,9 @@ class Home extends Component {
 
 	render() {
 		const { userinfo } = this.props;
-		console.log('userinfo : ');
-		console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
-		console.log('오늘매출', this.state.todaySales);
+		// console.log('userinfo : ');
+		// console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
+		// console.log('오늘매출', this.state.todaySales);
 
 		return (
 			<div className='wrap home'>
