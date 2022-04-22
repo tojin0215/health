@@ -65,8 +65,8 @@ const ReservationClassItem = ({ exercise_class, number_of_people, hour, minute,
 	handleClick, canRegist, trainer, reservationSelect, class_date
 }) => {
 	const handleInnerOnClick = () => {
-		handleClick(exercise_class, hour, minute, number_of_people, trainer, class_date);
-		console.log(class_date)
+		handleClick(exercise_class, number_of_people, hour, minute, trainer, class_date);
+		console.log(number_of_people)
 	}
 
 	return (
@@ -510,7 +510,7 @@ class Reservation extends Component {
 			.then(result => {
 				const now = moment();
 				const items = result
-					.filter(value => moment(value.date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment(), "day"))
+					// .filter(value => moment(value.date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment(), "day"))
 					.map((data, index, array) => {
 						const date_value = (data.date) ? moment(data.date.split("T")[0]) : moment()
 						const date = date_value.format('YYYY년 MM월 DD일');
@@ -553,7 +553,7 @@ class Reservation extends Component {
 			.then(result => {
 				const now = moment();
 				const items = result
-					.filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
+					// .filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
 					.map((data, index, array) => {
 						const date_value = (data.date) ? moment(data.date.split("T")[0]) : moment()
 						// if (date_value.isBefore(now, "day")) return
@@ -727,7 +727,7 @@ class Reservation extends Component {
 						`${data.minute}`.padStart(2, '0');
 					let canRegist = this.state.reservation_data.filter(
 						(item) =>
-							item.exercise_name === data.exercise_class && item.time === time && moment(this.state.reserv_date).isSame(moment(item.date.split('T')[0]), "day")
+							item.exercise_name === data.exercise_class && item.time === time && moment(this.state.class_date).isSame(moment(item.date.split('T')[0]), "day")
 					).length;
 					return (
 						<ReservationClassItem
