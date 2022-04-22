@@ -153,21 +153,6 @@ const ReservationClassItem = ({
 			) : (
 				<td>{exercise_class}</td>
 			)}
-			{showResults ? (
-				<td>
-					<input
-						type='date'
-						selected={setClass_date_input}
-						// value={class_date_update.split("T")[0]}
-						id='class_date'
-						onChange={updateChange6}
-						error={class_date_err}
-					/>
-				</td>
-			) : (
-				<td>{class_date}</td>
-			)}
-
 
 			{showResults ? (
 				<td>
@@ -181,21 +166,17 @@ const ReservationClassItem = ({
 			) : (
 				<td>{trainer}</td>
 			)}
+
 			{showResults ? (
 				<td>
 					<input
-						type='number'
-						value={number_of_people_input}
-						id='number_of_people'
-						onChange={updateChange2}
-						error={number_of_people_err}
+						type='date'
+						selected={setClass_date_input}
+						// value={class_date_update.split("T")[0]}
+						id='class_date'
+						onChange={updateChange6}
+						error={class_date_err}
 					/>
-				</td>
-			) : (
-				<td>{number_of_people}</td>
-			)}
-			{showResults ? (
-				<td>
 					<input
 						value={hour_input == 0 ? '00' : hour_input}
 						type='number'
@@ -213,28 +194,27 @@ const ReservationClassItem = ({
 					/>
 				</td>
 			) : (
-				<td>
-					{hour == 1
-						? '01'
-						: hour == 2
-							? '02'
-							: hour == 3
-								? '03'
-								: hour == 4
-									? '04'
-									: hour == 5
-										? '05'
-										: hour == 6
-											? '06'
-											: hour == 7
-												? '07'
-												: hour == 8
-													? '08'
-													: hour == 9
-														? '09'
-														: hour == 0
-															? '00'
-															: hour}
+				<td>{class_date} {hour == 1
+					? '01'
+					: hour == 2
+						? '02'
+						: hour == 3
+							? '03'
+							: hour == 4
+								? '04'
+								: hour == 5
+									? '05'
+									: hour == 6
+										? '06'
+										: hour == 7
+											? '07'
+											: hour == 8
+												? '08'
+												: hour == 9
+													? '09'
+													: hour == 0
+														? '00'
+														: hour}
 					:
 					{minute == 1
 						? '01'
@@ -256,9 +236,25 @@ const ReservationClassItem = ({
 														? '09'
 														: minute == 0
 															? '00'
-															: minute}
-				</td>
+															: minute}</td>
 			)}
+
+
+
+			{showResults ? (
+				<td>
+					<input
+						type='number'
+						value={number_of_people_input}
+						id='number_of_people'
+						onChange={updateChange2}
+						error={number_of_people_err}
+					/>
+				</td>
+			) : (
+				<td>{number_of_people}</td>
+			)}
+
 
 			<td>
 				<button
@@ -519,10 +515,9 @@ class ReservationClass extends Component {
 							<thead>
 								<tr>
 									<th scope='col'>운동 클래스</th>
-									<th scope='col'>신청날짜</th>
 									<th scope='col'>강사</th>
+									<th scope='col'>수업일시</th>
 									<th scope='col'>수강 인원</th>
-									<th scope='col'>시간</th>
 									<th scope='col'>삭제</th>
 									<th scope='col'>변경</th>
 								</tr>
@@ -544,15 +539,6 @@ class ReservationClass extends Component {
 								label='운동명'
 								error={this.state.exercise_class_err}
 							/>
-							<DatePicker
-								selected={this.state.class_date}
-								onChange={this.handleDateChange}
-								name='class_date'
-								dateFormat='yyyy-MM-dd(eee)'
-								font-size='1.6rem'
-								locale='ko'
-								error={this.state.class_date_err}
-							/>
 							<TextField
 								id='trainer'
 								value={this.state.trainer}
@@ -561,14 +547,14 @@ class ReservationClass extends Component {
 								label='트레이너명'
 								error={this.state.trainer_err}
 							/>
-							<TextField
-								type='number'
-								id='number_of_people'
-								value={this.state.number_of_people}
-								onChange={this.handleChange}
-								InputProps={{ disableUnderline: true }}
-								label='수강 인원'
-								error={this.state.number_of_people_err}
+							<DatePicker
+								selected={this.state.class_date}
+								onChange={this.handleDateChange}
+								name='class_date'
+								dateFormat='yyyy-MM-dd(eee)'
+								font-size='1.6rem'
+								locale='ko'
+								error={this.state.class_date_err}
 							/>
 							<TextField
 								type='number'
@@ -588,6 +574,15 @@ class ReservationClass extends Component {
 								InputProps={{ disableUnderline: true }}
 								label='분'
 								error={this.state.minute_err}
+							/>
+							<TextField
+								type='number'
+								id='number_of_people'
+								value={this.state.number_of_people}
+								onChange={this.handleChange}
+								InputProps={{ disableUnderline: true }}
+								label='수강 인원'
+								error={this.state.number_of_people_err}
 							/>
 
 

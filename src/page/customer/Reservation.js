@@ -65,18 +65,19 @@ const ReservationClassItem = ({ exercise_class, number_of_people, hour, minute,
 	handleClick, canRegist, trainer, reservationSelect, class_date
 }) => {
 	const handleInnerOnClick = () => {
-		handleClick(exercise_class, hour, minute, number_of_people, trainer);
+		handleClick(exercise_class, hour, minute, number_of_people, trainer, class_date);
+		console.log(class_date)
 	}
 
 	return (
 		<tr>
 			<td>{exercise_class}</td>
-			<td>{moment(class_date).format('YYYY년 MM월 DD일')}</td>
 			<td>{trainer}</td>
+			<td>{moment(class_date).format('YYYY년 MM월 DD일')}{`${hour}`.padStart(2, "0")}:{`${minute}`.padStart(2, "0")}</td>
 			<td>
 				{canRegist}/{number_of_people}
 			</td>
-			<td>{`${hour}`.padStart(2, "0")}:{`${minute}`.padStart(2, "0")}</td>
+
 			<td>
 				<button className='selectButton btnSolid fs-4' onClick={handleInnerOnClick}>
 					선택
@@ -464,7 +465,7 @@ class Reservation extends Component {
 			.then(result => {
 				const now = moment();
 				const items = result
-					.filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
+					// .filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
 					.map((data, index, array) => {
 						const date_value = (data.date) ? moment(data.date.split("T")[0]) : moment()
 						// if (date_value.isBefore(now, "day")) return
@@ -664,7 +665,7 @@ class Reservation extends Component {
 			this.setState({ customer_name_err: true });
 			alert('이름을 확인해 주세요');
 		} else {
-			const date = (moment(this.state.reserv_date).format('YYYY-MM-DD') + "T00:00:00.000Z");
+			const date = (moment(this.state.class_date).format('YYYY-MM-DD') + "T00:00:00.000Z");
 			console.log(date)
 			fetch(ip + '/reservation/insert', {
 				method: 'POST',
@@ -699,12 +700,12 @@ class Reservation extends Component {
 		}
 	};
 
-	// handleDateChange(date) {
-	// 	console.log("date", moment(date).format('YYYY-MM-DD'))
-	// 	this.setState({
-	// 		reserv_date: date,
-	// 	}, () => this.reservationClassSelect());
-	// }
+	handleDateChange(date) {
+		console.log("date", moment(date).format('YYYY-MM-DD'))
+		this.setState({
+			reserv_date: date,
+		}, () => this.reservationClassSelect());
+	}
 
 	// handleChange = (e) => {
 	//     this.setState({
@@ -742,7 +743,8 @@ class Reservation extends Component {
 								result_number_of_people,
 								result_hour,
 								result_minute,
-								result_trainer
+								result_trainer,
+								result_class_date
 							) =>
 								this.setState({
 									exercise_name: result_exercise_name,
@@ -765,7 +767,6 @@ class Reservation extends Component {
 	 */
 	reservationClassSelect_choice = () => {
 		const fitness_no = this.props.userinfo.fitness_no;
-
 		getReservationClassBy(fitness_no)
 			.then(result => {
 				const items = result.map((data, index, array) => {
@@ -848,10 +849,9 @@ class Reservation extends Component {
 								<thead>
 									<tr>
 										<th scope='col'>운동 클래스</th>
-										<th scope='col'>배정된 날짜</th>
 										<th scope='col'>강사</th>
-										<th scope='col'>인원</th>
-										<th scope='col'>시간</th>
+										<th scope='col'>수업일시</th>
+										<th scope='col'>현재 수강 인원/최대 수강 인원</th>
 										<th scope='col'>선택</th>
 									</tr>
 								</thead>
@@ -947,11 +947,19 @@ class Reservation extends Component {
 								label='최대 인원수'
 							/>
 						</Col>
-						<Col className='text-center boxmorpsm p-0 datepickerButton my-3'>
+						<Col className='text-center my-3' xs={12} sm={4}>
+							<div className='boxmorpinsm py-3 h-100'>
+								<p className='fs-3'>배정된 날짜</p>
+								<p className='fs-2 fw-bold'>{moment(this.state.class_date).format('yyyy-MM-DD') == 'Invalid date' ?
+									'' :
+									moment(this.state.class_date).format('yyyy-MM-DD')
+								}</p>
+							</div>
 							<TextField
-								id='reserv_date'
+								id='class_date'
 								className='d-none'
-								value={this.state.reserv_date}
+								name='class_date'
+								value={this.state.class_date}
 								label='배정된 날짜'
 							/>
 							{/* <DatePicker
