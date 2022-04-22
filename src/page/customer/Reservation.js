@@ -62,7 +62,7 @@ const dateFormat = (reserv_date) => {
  * 운동클래스 테이블
  */
 const ReservationClassItem = ({ exercise_class, number_of_people, hour, minute,
-	handleClick, canRegist, trainer, reservationSelect,
+	handleClick, canRegist, trainer, reservationSelect, class_date
 }) => {
 	const handleInnerOnClick = () => {
 		handleClick(exercise_class, hour, minute, number_of_people, trainer);
@@ -71,6 +71,7 @@ const ReservationClassItem = ({ exercise_class, number_of_people, hour, minute,
 	return (
 		<tr>
 			<td>{exercise_class}</td>
+			<td>{moment(class_date).format('YYYY년 MM월 DD일')}</td>
 			<td>{trainer}</td>
 			<td>
 				{canRegist}/{number_of_people}
@@ -394,6 +395,7 @@ class Reservation extends Component {
 			cancelComment: '',
 			number_of_people: '',
 			trainer: '',
+			class_date: '',
 			exercise_length: '0',
 			customer_name_err: false,
 			exercise_name_err: false,
@@ -684,7 +686,7 @@ class Reservation extends Component {
 				.then((result) => {
 					if (result.message == 'ok') {
 						alert('예약이 완료되었습니다.');
-						console.log(this.state.reserv_date)
+						// console.log(this.state.reserv_date)
 					} else {
 						alert(result.message);
 					}
@@ -697,12 +699,12 @@ class Reservation extends Component {
 		}
 	};
 
-	handleDateChange(date) {
-		console.log("date", moment(date).format('YYYY-MM-DD'))
-		this.setState({
-			reserv_date: date,
-		}, () => this.reservationClassSelect());
-	}
+	// handleDateChange(date) {
+	// 	console.log("date", moment(date).format('YYYY-MM-DD'))
+	// 	this.setState({
+	// 		reserv_date: date,
+	// 	}, () => this.reservationClassSelect());
+	// }
 
 	// handleChange = (e) => {
 	//     this.setState({
@@ -734,6 +736,7 @@ class Reservation extends Component {
 							minute={data.minute}
 							trainer={data.trainer}
 							canRegist={canRegist}
+							class_date={data.class_date}
 							handleClick={(
 								result_exercise_name,
 								result_number_of_people,
@@ -746,6 +749,7 @@ class Reservation extends Component {
 									time: time,
 									number_of_people: result_number_of_people,
 									trainer: result_trainer,
+									class_date: result_class_date
 								})
 							}
 						/>
@@ -844,6 +848,7 @@ class Reservation extends Component {
 								<thead>
 									<tr>
 										<th scope='col'>운동 클래스</th>
+										<th scope='col'>배정된 날짜</th>
 										<th scope='col'>강사</th>
 										<th scope='col'>인원</th>
 										<th scope='col'>시간</th>
@@ -942,6 +947,22 @@ class Reservation extends Component {
 								label='최대 인원수'
 							/>
 						</Col>
+						<Col className='text-center boxmorpsm p-0 datepickerButton my-3'>
+							<TextField
+								id='reserv_date'
+								className='d-none'
+								value={this.state.reserv_date}
+								label='배정된 날짜'
+							/>
+							{/* <DatePicker
+								selected={this.state.reserv_date}
+								onChange={this.handleDateChange}
+								name='reserv_date'
+								dateFormat='yyyy-MM-dd(eee)'
+								font-size='1.6rem'
+								locale='ko'
+							/> */}
+						</Col>
 						<Col className='text-center usersearchButton my-3'>
 							{this.state.open ? (
 								<UserSearch
@@ -962,16 +983,6 @@ class Reservation extends Component {
 									error={this.state.customer_name_err}
 								/>
 							)}
-						</Col>
-						<Col className='text-center boxmorpsm p-0 datepickerButton my-3'>
-							<DatePicker
-								selected={this.state.reserv_date}
-								onChange={this.handleDateChange}
-								name='reserv_date'
-								dateFormat='yyyy-MM-dd(eee)'
-								font-size='1.6rem'
-								locale='ko'
-							/>
 						</Col>
 						<Col className='text-center w-100 mt-3' xs={12}>
 							<button

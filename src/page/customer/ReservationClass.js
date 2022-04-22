@@ -375,7 +375,8 @@ class ReservationClass extends Component {
 			.then((result) => result.json())
 			.then((result) => {
 				const items = result
-					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment(), "day"))
+					// .filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment(), "day"))
+					//오늘날짜만 조회하게 하는것
 					.map((data, index, array) => {
 						const date_value = (data.class_date) ? moment(data.class_date.split("T")[0]) : moment()
 						const date_split = date_value.format('YYYY년 MM월 DD일')
