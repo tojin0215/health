@@ -305,9 +305,13 @@ class ReservationClass extends Component {
 			//     twelve: false,
 			//     thirteen: false,
 			// },
+			dayIncreament: 0
 		};
 		this.reservationClassSelect();
 		this.handleDateChange = this.handleDateChange.bind(this);
+		this.handleWeekClick = this.handleWeekClick.bind(this);
+
+
 	}
 
 	componentDidMount() {
@@ -355,7 +359,6 @@ class ReservationClass extends Component {
 			}
 		});
 	}
-	//전날 표시안됨 과거일 표시안됨
 	reservationClassSelect = () => {
 		fetch(
 			ip +
@@ -370,9 +373,11 @@ class ReservationClass extends Component {
 		)
 			.then((result) => result.json())
 			.then((result) => {
+				// console.log("dayIncreament", this.state.dayIncreament)
 				const items = result
-					// .filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment(), "day"))
-					//오늘날짜만 조회하게 하는것
+					//오늘 날짜에 해당하는 주간만 조회
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(0 + this.state.dayIncreament), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(6 + this.state.dayIncreament), "day"))
 					.map((data, index, array) => {
 						const date_value = (data.class_date) ? moment(data.class_date.split("T")[0]) : moment()
 						const date_split = date_value.format('YYYY년 MM월 DD일')
@@ -398,6 +403,22 @@ class ReservationClass extends Component {
 				this.setState({ reservationClass: items });
 			});
 	};
+
+	handleWeekClick = (w) => {
+		const dayIncreament = 0;
+		const name = w.target.name
+		if (name === "next") {
+			this.setState({
+				dayIncreament: this.state.dayIncreament + 7
+			}), this.reservationClassSelect();
+
+		} else if (name === "prev") {
+			this.setState({
+				dayIncreament: this.state.dayIncreament - 7
+			}), this.reservationClassSelect();
+		}
+	}
+
 
 	handleOnClick = () => {
 		this.setState({
@@ -505,11 +526,19 @@ class ReservationClass extends Component {
 				</header>
 
 				<Container>
+
+
 					<Row className='pb-5 justify-content-center'>
 						<Col className='text-end'>
 							<Link to='/reservation'>
 								<button>돌아가기</button>
 							</Link>
+							<button name="prev" onClick={this.handleWeekClick}>
+								이전주
+							</button>
+							<button name="next" onClick={this.handleWeekClick}>
+								다음주
+							</button>
 						</Col>
 						<table class='table'>
 							<thead>

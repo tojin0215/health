@@ -611,7 +611,7 @@ class Reservation extends Component {
 			.then(result => {
 				const now = moment();
 				const items = result
-					.filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
+					// .filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
 					.map((data, index, array) => {
 						const date_value = (data.date) ? moment(data.date.split("T")[0]) : moment()
 						// if (date_value.isBefore(now, "day")) return
@@ -720,43 +720,47 @@ class Reservation extends Component {
 
 		getReservationClassBy(fitness_no)
 			.then(result => {
-				const items = result.map((data, index, array) => {
-					const time =
-						`${data.hour}`.padStart(2, '0') +
-						':' +
-						`${data.minute}`.padStart(2, '0');
-					let canRegist = this.state.reservation_data.filter(
-						(item) =>
-							item.exercise_name === data.exercise_class && item.time === time && moment(this.state.class_date).isSame(moment(item.date.split('T')[0]), "day")
-					).length;
-					return (
-						<ReservationClassItem
-							exercise_class={data.exercise_class}
-							number_of_people={data.number_of_people}
-							hour={data.hour}
-							minute={data.minute}
-							trainer={data.trainer}
-							canRegist={canRegist}
-							class_date={data.class_date}
-							handleClick={(
-								result_exercise_name,
-								result_number_of_people,
-								result_hour,
-								result_minute,
-								result_trainer,
-								result_class_date
-							) =>
-								this.setState({
-									exercise_name: result_exercise_name,
-									time: time,
-									number_of_people: result_number_of_people,
-									trainer: result_trainer,
-									class_date: result_class_date
-								})
-							}
-						/>
-					);
-				});
+				const items = result
+					//오늘 날짜에 해당하는 주간만 조회
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(0), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(7), "day"))
+					.map((data, index, array) => {
+						const time =
+							`${data.hour}`.padStart(2, '0') +
+							':' +
+							`${data.minute}`.padStart(2, '0');
+						let canRegist = this.state.reservation_data.filter(
+							(item) =>
+								item.exercise_name === data.exercise_class && item.time === time && moment(this.state.class_date).isSame(moment(item.date.split('T')[0]), "day")
+						).length;
+						return (
+							<ReservationClassItem
+								exercise_class={data.exercise_class}
+								number_of_people={data.number_of_people}
+								hour={data.hour}
+								minute={data.minute}
+								trainer={data.trainer}
+								canRegist={canRegist}
+								class_date={data.class_date}
+								handleClick={(
+									result_exercise_name,
+									result_number_of_people,
+									result_hour,
+									result_minute,
+									result_trainer,
+									result_class_date
+								) =>
+									this.setState({
+										exercise_name: result_exercise_name,
+										time: time,
+										number_of_people: result_number_of_people,
+										trainer: result_trainer,
+										class_date: result_class_date
+									})
+								}
+							/>
+						);
+					});
 				this.setState({ reservationClass: items });
 			})
 	};
