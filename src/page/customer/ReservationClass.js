@@ -303,8 +303,6 @@ class ReservationClass extends Component {
 			//     thirteen: false,
 			// },
 			dayIncreament: 0,
-
-
 		};
 		this.reservationClassSelect();
 		this.handleDateChange = this.handleDateChange.bind(this);
@@ -570,7 +568,7 @@ class ReservationClass extends Component {
 								<tr>
 									<th scope='col'>운동 클래스</th>
 									<th scope='col'>강사</th>
-									<th scope='col'>수업일시</th>
+									<th scope='col'>수강날짜</th>
 									<th scope='col'>수강 인원</th>
 									<th scope='col'>삭제</th>
 									<th scope='col'>수정</th>
