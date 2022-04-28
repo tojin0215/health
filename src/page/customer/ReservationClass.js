@@ -20,7 +20,6 @@ import { SERVER_URL } from '../../const/settings';
 import { TextField } from '@material-ui/core';
 import moment from 'moment';
 const ip = SERVER_URL;
-
 const ReservationClassItem = ({
 	exercise_class,
 	no,
@@ -90,10 +89,7 @@ const ReservationClassItem = ({
 
 
 	/**
-	 * 
-	 * @param {number} no 사용자가 선택한 운동 id
-	 * 
-	 * 예약 클래스를 업데이트 합니다.
+	 *목록 
 	 */
 	const reservationClassUpdate = (no) => {
 		if (exercise_class_input == '') {
@@ -132,7 +128,7 @@ const ReservationClassItem = ({
 			})
 				.then((result) => result.json())
 				.then((result) => {
-					alert('변경 완료');
+					alert('수정 완료');
 					updateClose();
 					reservationClassSelect();
 				});
@@ -269,16 +265,17 @@ const ReservationClassItem = ({
 			</td>
 			{showResults ? (
 				<td>
-					<button onClick={() => reservationClassUpdate(no)}>변경하기</button>
+					<button onClick={() => reservationClassUpdate(no)}>수정하기</button>
 				</td>
 			) : (
 				<td>
-					<button onClick={() => updateOnClick()}>변경하기</button>
+					<button onClick={() => updateOnClick()}>수정하기</button>
 				</td>
 			)}
 		</tr>
 	);
 };
+
 
 class ReservationClass extends Component {
 	constructor(props) {
@@ -305,7 +302,9 @@ class ReservationClass extends Component {
 			//     twelve: false,
 			//     thirteen: false,
 			// },
-			dayIncreament: 0
+			dayIncreament: 0,
+
+
 		};
 		this.reservationClassSelect();
 		this.handleDateChange = this.handleDateChange.bind(this);
@@ -359,6 +358,9 @@ class ReservationClass extends Component {
 			}
 		});
 	}
+	/*
+	원래 있던것 reservationClass
+	*/
 	reservationClassSelect = () => {
 		fetch(
 			ip +
@@ -403,6 +405,9 @@ class ReservationClass extends Component {
 				this.setState({ reservationClass: items });
 			});
 	};
+
+
+
 
 	handleWeekClick = (w) => {
 		const dayIncreament = 0;
@@ -543,12 +548,32 @@ class ReservationClass extends Component {
 						<table class='table'>
 							<thead>
 								<tr>
+									<th scope='col'>{(moment(this.state.class_date).day(0).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}</th>
+									<th scope='col'>{(moment(this.state.class_date).day(1).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}</th>
+									<th scope='col'>{(moment(this.state.class_date).day(2).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}</th>
+									<th scope='col'>{(moment(this.state.class_date).day(3).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}</th>
+									<th scope='col'>{(moment(this.state.class_date).day(4).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}</th>
+									<th scope='col'>{(moment(this.state.class_date).day(5).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}</th>
+									<th scope='col'>{(moment(this.state.class_date).day(6).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						{/* {this.state.reservationClass.length == 0 ? (
+							<p>'설정된 운동이 없습니다.'</p>
+						) : (
+							this.state.reservationClass
+						)} */}
+						<table class='table'>
+							<thead>
+								<tr>
 									<th scope='col'>운동 클래스</th>
 									<th scope='col'>강사</th>
 									<th scope='col'>수업일시</th>
 									<th scope='col'>수강 인원</th>
 									<th scope='col'>삭제</th>
-									<th scope='col'>변경</th>
+									<th scope='col'>수정</th>
 								</tr>
 							</thead>
 							<tbody>
