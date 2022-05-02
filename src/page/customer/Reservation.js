@@ -57,9 +57,8 @@ const dateFormat = (reserv_date) => {
 		second
 	);
 };
-/**
- * 
- * 운동클래스 테이블
+/*
+ * 운동클래스 body
  */
 const ReservationClassItem = ({ exercise_class, number_of_people, hour, minute,
 	handleClick, canRegist, trainer, reservationSelect, class_date
@@ -68,22 +67,25 @@ const ReservationClassItem = ({ exercise_class, number_of_people, hour, minute,
 		handleClick(exercise_class, number_of_people, hour, minute, trainer, class_date);
 		console.log(number_of_people)
 	}
-
+	const hourArray = (hour == 1 ? '01' : hour == 2 ? '02' : hour == 3 ? '03' : hour == 4 ? '04'
+		: hour == 5 ? '05' : hour == 6 ? '06' : hour == 7 ? '07' : hour == 8 ? '08' : hour == 9 ? '09'
+			: hour == 0 ? '00' : hour)
+	const minuteArray = (minute == 1 ? '01' : minute == 2 ? '02' : minute == 3 ? '03' : minute == 4 ? '04'
+		: minute == 5 ? '05' : minute == 6 ? '06' : minute == 7 ? '07' : minute == 8 ? '08' : minute == 9 ? '09'
+			: minute == 0 ? '00' : minute)
 	return (
-		<tr>
-			<td>{exercise_class}</td>
-			<td>{trainer}</td>
-			<td>{moment(class_date).format('YYYY년 MM월 DD일')}{`${hour}`.padStart(2, "0")}:{`${minute}`.padStart(2, "0")}</td>
-			<td>
-				{canRegist}/{number_of_people}
-			</td>
+		<div className='border py-2 my-1 ' onClick={handleInnerOnClick}>
+			<p>
+				운동명: {exercise_class}</p>
+			<p>
+				강사명: {trainer}</p>
+			<p>
+				시간: {hourArray}시{minuteArray}분</p>
+			<p>
+				인원: {canRegist}/{number_of_people}</p>
+		</div>
 
-			<td>
-				<button className='selectButton btnSolid fs-4' onClick={handleInnerOnClick}>
-					선택
-				</button>
-			</td>
-		</tr>
+
 	);
 };
 
@@ -359,15 +361,22 @@ const ReservationChoiceTrainerItem = ({ res_no, date, exercise_name, fitness_no,
 /**
  * 강사 선택 운동클래스
  */
-const ReservationClassItem_choice = ({ trainer_choice, handleClick_choice, reservationChoiceTrainer }) => {
+const ReservationClassItem_choice = ({ trainer_choice, handleClick_choice, reservationChoiceTrainer, class_date, hour, minute }) => {
 
 	const handleInnerOnClick_choice = () => {
 		handleClick_choice(trainer_choice);
 		reservationChoiceTrainer(trainer_choice);
 	}
-
+	const date = moment(class_date).format('YYYY년 MM월 DD일');
+	const hourArray = (hour == 1 ? '01' : hour == 2 ? '02' : hour == 3 ? '03' : hour == 4 ? '04'
+		: hour == 5 ? '05' : hour == 6 ? '06' : hour == 7 ? '07' : hour == 8 ? '08' : hour == 9 ? '09'
+			: hour == 0 ? '00' : hour)
+	const minuteArray = (minute == 1 ? '01' : minute == 2 ? '02' : minute == 3 ? '03' : minute == 4 ? '04'
+		: minute == 5 ? '05' : minute == 6 ? '06' : minute == 7 ? '07' : minute == 8 ? '08' : minute == 9 ? '09'
+			: minute == 0 ? '00' : minute)
 	return (
-		<li><button onClick={handleInnerOnClick_choice}>{trainer_choice}</button></li>
+		<li><button onClick={handleInnerOnClick_choice}>
+			{date}{hourArray}시{minuteArray}분/강사{trainer_choice}</button></li>
 	);
 }
 
@@ -381,11 +390,18 @@ class Reservation extends Component {
 			fitness_no: 1,
 			customer: null,
 			reservation: [],
+
 			reservation_trainer: [],
 			reservation_exercise: [],
 			reservation_choice_trainer: [],
 			reservation_data: [],
 			reservationClass: [],
+			reservationClass1: [],
+			reservationClass2: [],
+			reservationClass3: [],
+			reservationClass4: [],
+			reservationClass5: [],
+			reservationClass6: [],
 			reservationClass_choice: [],
 			customer_name: '',
 			customer_id: 'xcv',
@@ -396,7 +412,7 @@ class Reservation extends Component {
 			cancelComment: '',
 			number_of_people: '',
 			trainer: '',
-			class_date: '',
+			class_date: new Date(),
 			exercise_length: '0',
 			customer_name_err: false,
 			exercise_name_err: false,
@@ -406,7 +422,7 @@ class Reservation extends Component {
 			show_exercise_table: false,
 			show_trainer_table: false
 		};
-		this.handleDateChange = this.handleDateChange.bind(this);
+		// this.handleDateChange = this.handleDateChange.bind(this);
 	}
 
 	componentDidMount() {
@@ -497,7 +513,13 @@ class Reservation extends Component {
 					});
 				this.setState(
 					{ reservation: items, reservation_data: result },
-					() => this.reservationClassSelect()
+					() => this.reservationClassSelect(),
+					this.reservationClassSelect1(),
+					this.reservationClassSelect2(),
+					this.reservationClassSelect3(),
+					this.reservationClassSelect4(),
+					this.reservationClassSelect5(),
+					this.reservationClassSelect6(),
 				);
 			})
 	};
@@ -700,12 +722,13 @@ class Reservation extends Component {
 		}
 	};
 
-	handleDateChange(date) {
-		console.log("date", moment(date).format('YYYY-MM-DD'))
-		this.setState({
-			reserv_date: date,
-		}, () => this.reservationClassSelect());
-	}
+	// handleDateChange(date) {
+	// 	console.log("date", moment(date).format('YYYY-MM-DD'))
+	// 	this.setState({
+	// 		reserv_date: date,
+	// 	}, () => this.reservationClassSelect()
+	// 	);
+	// }
 
 	// handleChange = (e) => {
 	//     this.setState({
@@ -713,7 +736,7 @@ class Reservation extends Component {
 	//     });
 	// };
 	/**
-	 * 운동클래스
+	 * 운동클래스 일요일
 	 */
 	reservationClassSelect = () => {
 		const fitness_no = this.props.userinfo.fitness_no;
@@ -723,7 +746,7 @@ class Reservation extends Component {
 				const items = result
 					//오늘 날짜에 해당하는 주간만 조회
 					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(0), "day")
-						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(7), "day"))
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(0), "day"))
 					.map((data, index, array) => {
 						const time =
 							`${data.hour}`.padStart(2, '0') +
@@ -764,7 +787,312 @@ class Reservation extends Component {
 				this.setState({ reservationClass: items });
 			})
 	};
-
+	/**
+	 * 운동클래스 월요일
+	 */
+	reservationClassSelect1 = () => {
+		const fitness_no = this.props.userinfo.fitness_no;
+		getReservationClassBy(fitness_no)
+			.then(result => {
+				const items = result
+					//오늘 날짜에 해당하는 주간만 조회
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(1), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(1), "day"))
+					.map((data, index, array) => {
+						const time =
+							`${data.hour}`.padStart(2, '0') +
+							':' +
+							`${data.minute}`.padStart(2, '0');
+						let canRegist = this.state.reservation_data.filter(
+							(item) =>
+								item.exercise_name === data.exercise_class && item.time === time && moment(this.state.class_date).isSame(moment(item.date.split('T')[0]), "day")
+						).length;
+						return (
+							<ReservationClassItem
+								exercise_class={data.exercise_class}
+								number_of_people={data.number_of_people}
+								hour={data.hour}
+								minute={data.minute}
+								trainer={data.trainer}
+								canRegist={canRegist}
+								class_date={data.class_date}
+								handleClick={(
+									result_exercise_name,
+									result_number_of_people,
+									result_hour,
+									result_minute,
+									result_trainer,
+									result_class_date
+								) =>
+									this.setState({
+										exercise_name: result_exercise_name,
+										time: time,
+										number_of_people: result_number_of_people,
+										trainer: result_trainer,
+										class_date: result_class_date
+									})
+								}
+							/>
+						);
+					});
+				this.setState({ reservationClass1: items });
+			})
+	};
+	/**
+	 * 운동클래스 화요일
+	 */
+	reservationClassSelect2 = () => {
+		const fitness_no = this.props.userinfo.fitness_no;
+		getReservationClassBy(fitness_no)
+			.then(result => {
+				const items = result
+					//오늘 날짜에 해당하는 주간만 조회
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(2), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(2), "day"))
+					.map((data, index, array) => {
+						const time =
+							`${data.hour}`.padStart(2, '0') +
+							':' +
+							`${data.minute}`.padStart(2, '0');
+						let canRegist = this.state.reservation_data.filter(
+							(item) =>
+								item.exercise_name === data.exercise_class && item.time === time && moment(this.state.class_date).isSame(moment(item.date.split('T')[0]), "day")
+						).length;
+						return (
+							<ReservationClassItem
+								exercise_class={data.exercise_class}
+								number_of_people={data.number_of_people}
+								hour={data.hour}
+								minute={data.minute}
+								trainer={data.trainer}
+								canRegist={canRegist}
+								class_date={data.class_date}
+								handleClick={(
+									result_exercise_name,
+									result_number_of_people,
+									result_hour,
+									result_minute,
+									result_trainer,
+									result_class_date
+								) =>
+									this.setState({
+										exercise_name: result_exercise_name,
+										time: time,
+										number_of_people: result_number_of_people,
+										trainer: result_trainer,
+										class_date: result_class_date
+									})
+								}
+							/>
+						);
+					});
+				this.setState({ reservationClass2: items });
+			})
+	};
+	/**
+	 * 운동클래스 수요일
+	 */
+	reservationClassSelect3 = () => {
+		const fitness_no = this.props.userinfo.fitness_no;
+		getReservationClassBy(fitness_no)
+			.then(result => {
+				const items = result
+					//오늘 날짜에 해당하는 주간만 조회
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(3), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(3), "day"))
+					.map((data, index, array) => {
+						const time =
+							`${data.hour}`.padStart(2, '0') +
+							':' +
+							`${data.minute}`.padStart(2, '0');
+						let canRegist = this.state.reservation_data.filter(
+							(item) =>
+								item.exercise_name === data.exercise_class && item.time === time && moment(this.state.class_date).isSame(moment(item.date.split('T')[0]), "day")
+						).length;
+						return (
+							<ReservationClassItem
+								exercise_class={data.exercise_class}
+								number_of_people={data.number_of_people}
+								hour={data.hour}
+								minute={data.minute}
+								trainer={data.trainer}
+								canRegist={canRegist}
+								class_date={data.class_date}
+								handleClick={(
+									result_exercise_name,
+									result_number_of_people,
+									result_hour,
+									result_minute,
+									result_trainer,
+									result_class_date
+								) =>
+									this.setState({
+										exercise_name: result_exercise_name,
+										time: time,
+										number_of_people: result_number_of_people,
+										trainer: result_trainer,
+										class_date: result_class_date
+									})
+								}
+							/>
+						);
+					});
+				this.setState({ reservationClass3: items });
+			})
+	};
+	/**
+	 * 운동클래스 목요일
+	 */
+	reservationClassSelect4 = () => {
+		const fitness_no = this.props.userinfo.fitness_no;
+		getReservationClassBy(fitness_no)
+			.then(result => {
+				const items = result
+					//오늘 날짜에 해당하는 주간만 조회
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(4), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(4), "day"))
+					.map((data, index, array) => {
+						const time =
+							`${data.hour}`.padStart(2, '0') +
+							':' +
+							`${data.minute}`.padStart(2, '0');
+						let canRegist = this.state.reservation_data.filter(
+							(item) =>
+								item.exercise_name === data.exercise_class && item.time === time && moment(this.state.class_date).isSame(moment(item.date.split('T')[0]), "day")
+						).length;
+						return (
+							<ReservationClassItem
+								exercise_class={data.exercise_class}
+								number_of_people={data.number_of_people}
+								hour={data.hour}
+								minute={data.minute}
+								trainer={data.trainer}
+								canRegist={canRegist}
+								class_date={data.class_date}
+								handleClick={(
+									result_exercise_name,
+									result_number_of_people,
+									result_hour,
+									result_minute,
+									result_trainer,
+									result_class_date
+								) =>
+									this.setState({
+										exercise_name: result_exercise_name,
+										time: time,
+										number_of_people: result_number_of_people,
+										trainer: result_trainer,
+										class_date: result_class_date
+									})
+								}
+							/>
+						);
+					});
+				this.setState({ reservationClass4: items });
+			})
+	};
+	/**
+	 * 운동클래스 금요일
+	 */
+	reservationClassSelect5 = () => {
+		const fitness_no = this.props.userinfo.fitness_no;
+		getReservationClassBy(fitness_no)
+			.then(result => {
+				const items = result
+					//오늘 날짜에 해당하는 주간만 조회
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(5), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(5), "day"))
+					.map((data, index, array) => {
+						const time =
+							`${data.hour}`.padStart(2, '0') +
+							':' +
+							`${data.minute}`.padStart(2, '0');
+						let canRegist = this.state.reservation_data.filter(
+							(item) =>
+								item.exercise_name === data.exercise_class && item.time === time && moment(this.state.class_date).isSame(moment(item.date.split('T')[0]), "day")
+						).length;
+						return (
+							<ReservationClassItem
+								exercise_class={data.exercise_class}
+								number_of_people={data.number_of_people}
+								hour={data.hour}
+								minute={data.minute}
+								trainer={data.trainer}
+								canRegist={canRegist}
+								class_date={data.class_date}
+								handleClick={(
+									result_exercise_name,
+									result_number_of_people,
+									result_hour,
+									result_minute,
+									result_trainer,
+									result_class_date
+								) =>
+									this.setState({
+										exercise_name: result_exercise_name,
+										time: time,
+										number_of_people: result_number_of_people,
+										trainer: result_trainer,
+										class_date: result_class_date
+									})
+								}
+							/>
+						);
+					});
+				this.setState({ reservationClass5: items });
+			})
+	};
+	/**
+	 * 운동클래스 토요일
+	 */
+	reservationClassSelect6 = () => {
+		const fitness_no = this.props.userinfo.fitness_no;
+		getReservationClassBy(fitness_no)
+			.then(result => {
+				const items = result
+					//오늘 날짜에 해당하는 주간만 조회
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(6), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(6), "day"))
+					.map((data, index, array) => {
+						const time =
+							`${data.hour}`.padStart(2, '0') +
+							':' +
+							`${data.minute}`.padStart(2, '0');
+						let canRegist = this.state.reservation_data.filter(
+							(item) =>
+								item.exercise_name === data.exercise_class && item.time === time && moment(this.state.class_date).isSame(moment(item.date.split('T')[0]), "day")
+						).length;
+						return (
+							<ReservationClassItem
+								exercise_class={data.exercise_class}
+								number_of_people={data.number_of_people}
+								hour={data.hour}
+								minute={data.minute}
+								trainer={data.trainer}
+								canRegist={canRegist}
+								class_date={data.class_date}
+								handleClick={(
+									result_exercise_name,
+									result_number_of_people,
+									result_hour,
+									result_minute,
+									result_trainer,
+									result_class_date
+								) =>
+									this.setState({
+										exercise_name: result_exercise_name,
+										time: time,
+										number_of_people: result_number_of_people,
+										trainer: result_trainer,
+										class_date: result_class_date
+									})
+								}
+							/>
+						);
+					});
+				this.setState({ reservationClass6: items });
+			})
+	};
 
 	/**
 	 * 강사 선택 운동클래스
@@ -777,6 +1105,9 @@ class Reservation extends Component {
 					return (
 						<ReservationClassItem_choice
 							trainer_choice={data.trainer}
+							class_date={data.class_date}
+							hour={data.hour}
+							minute={data.minute}
 							handleClick_choice={(
 								result_trainer_choice
 							) =>
@@ -787,6 +1118,7 @@ class Reservation extends Component {
 						/>
 					);
 				});
+				console.log(result)
 				this.setState({ reservationClass_choice: items });
 			})
 	};
@@ -845,6 +1177,10 @@ class Reservation extends Component {
 								<button>운동 클래스 만들기</button>
 							</Link>
 						</Col>
+						<div> {(moment(this.state.class_date).day(0).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}
+							~
+							{(moment(this.state.class_date).day(6).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}
+						</div>
 						<Col
 							className='text-center py-2 w-100 overflow-auto justify-content-center'
 							xs={12}
@@ -852,19 +1188,68 @@ class Reservation extends Component {
 							<table class='table classListTable'>
 								<thead>
 									<tr>
-										<th scope='col'>운동 클래스</th>
-										<th scope='col'>강사</th>
-										<th scope='col'>수업일시</th>
-										<th scope='col'>현재 수강 인원/최대 수강 인원</th>
-										<th scope='col'>선택</th>
+										<th scope='col'> {(moment(this.state.class_date).day(0).add(this.state.dayIncreament, 'days').format('(dd)'))}</th>
+										<th scope='col'> {(moment(this.state.class_date).day(1).add(this.state.dayIncreament, 'days').format('(dd)'))}</th>
+										<th scope='col'> {(moment(this.state.class_date).day(2).add(this.state.dayIncreament, 'days').format('(dd)'))}</th>
+										<th scope='col'> {(moment(this.state.class_date).day(3).add(this.state.dayIncreament, 'days').format('(dd)'))}</th>
+										<th scope='col'> {(moment(this.state.class_date).day(4).add(this.state.dayIncreament, 'days').format('(dd)'))}</th>
+										<th scope='col'> {(moment(this.state.class_date).day(5).add(this.state.dayIncreament, 'days').format('(dd)'))}</th>
+										<th scope='col'> {(moment(this.state.class_date).day(6).add(this.state.dayIncreament, 'days').format('(dd)'))}</th>
 									</tr>
 								</thead>
 								<tbody>
-									{this.state.reservationClass.length == 0 ? (
-										<p>'설정된 운동이 없습니다.'</p>
-									) : (
-										this.state.reservationClass
-									)}
+									<tr>
+										<td>
+											{this.state.reservationClass.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservationClass
+											)}
+										</td>
+										<td name='mon'>
+											{this.state.reservationClass1.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservationClass1
+											)}
+										</td>
+										<td name='tue'>
+											{this.state.reservationClass2.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservationClass2
+											)}
+										</td>
+										<td name='wed'>
+											{this.state.reservationClass3.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservationClass3
+											)}
+										</td>
+										<td name='thu'>
+											{this.state.reservationClass4.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservationClass4
+											)}
+										</td>
+										<td name='fri'>
+											{this.state.reservationClass5.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservationClass5
+											)}
+										</td>
+										<td name='sat'>
+											{this.state.reservationClass6.length == 0 ? (
+												<p>'설정된 운동이 없습니다.'</p>
+											) : (
+												this.state.reservationClass6
+											)}
+										</td>
+									</tr>
+
 								</tbody>
 							</table>
 

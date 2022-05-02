@@ -174,52 +174,16 @@ const ReservationClassItem = ({
 	const modalClose = () => {
 		setShowModal(false);
 	}
+	const hourArray = (hour == 1 ? '01' : hour == 2 ? '02' : hour == 3 ? '03' : hour == 4 ? '04'
+		: hour == 5 ? '05' : hour == 6 ? '06' : hour == 7 ? '07' : hour == 8 ? '08' : hour == 9 ? '09'
+			: hour == 0 ? '00' : hour)
+	const minuteArray = (minute == 1 ? '01' : minute == 2 ? '02' : minute == 3 ? '03' : minute == 4 ? '04'
+		: minute == 5 ? '05' : minute == 6 ? '06' : minute == 7 ? '07' : minute == 8 ? '08' : minute == 9 ? '09'
+			: minute == 0 ? '00' : minute)
 	return (
 		<div>
-			{hour == 1
-				? '01'
-				: hour == 2
-					? '02'
-					: hour == 3
-						? '03'
-						: hour == 4
-							? '04'
-							: hour == 5
-								? '05'
-								: hour == 6
-									? '06'
-									: hour == 7
-										? '07'
-										: hour == 8
-											? '08'
-											: hour == 9
-												? '09'
-												: hour == 0
-													? '00'
-													: hour}
-
-			시
-			{minute == 1
-				? '01'
-				: minute == 2
-					? '02'
-					: minute == 3
-						? '03'
-						: minute == 4
-							? '04'
-							: minute == 5
-								? '05'
-								: minute == 6
-									? '06'
-									: minute == 7
-										? '07'
-										: minute == 8
-											? '08'
-											: minute == 9
-												? '09'
-												: minute == 0
-													? '00'
-													: minute}분
+			{hourArray}시
+			{minuteArray}분
 			운동명:
 			{exercise_class}
 			, {trainer}, 수강인원:{number_of_people}
@@ -741,7 +705,7 @@ class ReservationClass extends Component {
 						);
 					});
 				this.setState({ reservationClass6: items });
-				console.log(this.state.updateOpen)
+				// console.log(this.state.updateOpen)
 			});
 	}
 
@@ -880,7 +844,7 @@ class ReservationClass extends Component {
 			this.reservationClassSelect5(),
 			this.reservationClassSelect6()
 		)
-		console.log("수정하기", this.state.updateOpen)
+		// console.log("수정하기", this.state.updateOpen)
 	}
 
 	render() {
@@ -926,16 +890,20 @@ class ReservationClass extends Component {
 								수정하기 및 삭제하기
 							</button>
 						</Col>
+						<div> {(moment(this.state.class_date).day(0).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}
+							~
+							{(moment(this.state.class_date).day(6).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}
+						</div>
 						<table class='table' name='classTable'>
 							<thead>
 								<tr>
-									<th scope='col'>{(moment(this.state.class_date).day(0).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}</th>
-									<th scope='col'>{(moment(this.state.class_date).day(1).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}</th>
-									<th scope='col'>{(moment(this.state.class_date).day(2).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}</th>
-									<th scope='col'>{(moment(this.state.class_date).day(3).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}</th>
-									<th scope='col'>{(moment(this.state.class_date).day(4).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}</th>
-									<th scope='col'>{(moment(this.state.class_date).day(5).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}</th>
-									<th scope='col'>{(moment(this.state.class_date).day(6).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}</th>
+									<th scope='col'>{(moment(this.state.class_date).day(0).add(this.state.dayIncreament, 'days').format('dd'))}</th>
+									<th scope='col'>{(moment(this.state.class_date).day(1).add(this.state.dayIncreament, 'days').format('dd'))}</th>
+									<th scope='col'>{(moment(this.state.class_date).day(2).add(this.state.dayIncreament, 'days').format('dd'))}</th>
+									<th scope='col'>{(moment(this.state.class_date).day(3).add(this.state.dayIncreament, 'days').format('dd'))}</th>
+									<th scope='col'>{(moment(this.state.class_date).day(4).add(this.state.dayIncreament, 'days').format('dd'))}</th>
+									<th scope='col'>{(moment(this.state.class_date).day(5).add(this.state.dayIncreament, 'days').format('dd'))}</th>
+									<th scope='col'>{(moment(this.state.class_date).day(6).add(this.state.dayIncreament, 'days').format('dd'))}</th>
 								</tr>
 							</thead>
 							<tbody>
