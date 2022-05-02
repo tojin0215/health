@@ -26,7 +26,7 @@ import moment from 'moment';
 import ReservationPresetList from '../../component/reservation/ReservationPresetList';
 import ReservationList from '../../component/reservation/ReservationList';
 import UserSearch from '../../component/customer/UserSearch';
-import { getReservation, getReservationClassBy, getReservation_exercise, getReservation_trainer, getReservation_choice_trainer } from '../../api/user';
+import { getReservation, getReservationClassBy, getReservation_exercise, getReservation_trainer, getReservation_choice_trainer, getReservation_date } from '../../api/user';
 
 const ip = SERVER_URL;
 
@@ -319,7 +319,48 @@ const ReservationItem_trainer = ({ res_no, date, exercise_name, fitness_no, cust
 };
 
 /**
- * 강사별 예약테이블
+ * 예약테이블 data 날짜
+ */
+const ReservationItem_date = ({ res_no, date, exercise_name, fitness_no, customer_name, isCancel, cancelComment, number_of_people,
+	time, date2, exercise_length, customer_id, reservationSelect, trainer,
+}) => {
+
+	const reservationDelete = (res_no) => {
+		fetch(ip + '/reservation/delete?res_no=' + res_no, {
+			method: 'DELETE',
+		}).then((result) => {
+			reservationSelect();
+		});
+	};
+
+	return (
+		<tr>
+			<td>
+				[{customer_id}]{customer_name}
+			</td>
+			<td>{date}</td>
+			<td>{exercise_name}</td>
+			<td>{trainer}</td>
+			<td>{exercise_length + '/' + number_of_people}</td>
+			<td>{time}</td>
+			<td>
+				<button
+					className='deleteButton'
+					onClick={() =>
+						confirm('정말 삭제하시겠습니까??') == true
+							? reservationDelete(res_no)
+							: alert('삭제가 취소 되었습니다.')
+					}
+				>
+					삭제
+				</button>
+			</td>
+		</tr>
+	);
+};
+
+/**
+ * 강사별조회 예약테이블
  */
 const ReservationChoiceTrainerItem = ({ res_no, date, exercise_name, fitness_no, customer_name, isCancel, cancelComment, number_of_people,
 	time, date2, exercise_length, customer_id, reservationChoiceTrainer, trainer, }) => {
@@ -359,7 +400,7 @@ const ReservationChoiceTrainerItem = ({ res_no, date, exercise_name, fitness_no,
 };
 
 /**
- * 강사 선택 운동클래스
+ * 강사별조회 탭 예약현황
  */
 const ReservationClassItem_choice = ({ trainer_choice, handleClick_choice, reservationChoiceTrainer, class_date, hour, minute }) => {
 
@@ -373,10 +414,15 @@ const ReservationClassItem_choice = ({ trainer_choice, handleClick_choice, reser
 			: hour == 0 ? '00' : hour)
 	const minuteArray = (minute == 1 ? '01' : minute == 2 ? '02' : minute == 3 ? '03' : minute == 4 ? '04'
 		: minute == 5 ? '05' : minute == 6 ? '06' : minute == 7 ? '07' : minute == 8 ? '08' : minute == 9 ? '09'
-			: minute == 0 ? '00' : minute)
+			: minute == 0 ? '00' : minute);
+
+
 	return (
-		<li><button onClick={handleInnerOnClick_choice}>
-			{date}{hourArray}시{minuteArray}분/강사{trainer_choice}</button></li>
+		<button onClick={handleInnerOnClick_choice}>
+			강사:{trainer_choice}
+		</button>
+
+
 	);
 }
 
@@ -393,6 +439,7 @@ class Reservation extends Component {
 
 			reservation_trainer: [],
 			reservation_exercise: [],
+			reservation_date: [],
 			reservation_choice_trainer: [],
 			reservation_data: [],
 			reservationClass: [],
@@ -420,8 +467,11 @@ class Reservation extends Component {
 			open: false,
 			reservationArray: [],
 			show_exercise_table: false,
-			show_trainer_table: false
+			show_trainer_table: false,
+			show_date_table: false,
+			dayIncreament: 0,
 		};
+		this.handleWeekClick = this.handleWeekClick.bind(this);
 		// this.handleDateChange = this.handleDateChange.bind(this);
 	}
 
@@ -610,18 +660,74 @@ class Reservation extends Component {
 					() => this.reservationClassSelect());
 			})
 	};
+	/**
+	 * 예약 날짜정렬
+	 */
+	reservationSelect_date = () => {
+		const fitness_no = this.props.userinfo.fitness_no;
+		getReservation_date(fitness_no)
+			.then(result => {
+				const now = moment();
+				const items = result
+					// .filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
+					.map((data, index, array) => {
+						const date_value = (data.date) ? moment(data.date.split("T")[0]) : moment()
+						// if (date_value.isBefore(now, "day")) return
+						const date = date_value.format('YYYY년 MM월 DD일');
+						let exercise_length = result.filter(
+							(filterData) =>
+								filterData.exercise_name === data.exercise_name &&
+								filterData.time === data.time &&
+								filterData.date.split('T')[0] === data.date.split('T')[0]
+						).length;
+						return (
+							<ReservationItem_date
+								res_no={data.res_no}
+								date={date}
+								date2={data.date}
+								exercise_name={data.exercise_name}
+								fitness_no={data.fitness_no}
+								customer_name={data.customer_name}
+								isCancel={data.isCancel}
+								cancelComment={data.cancelComment}
+								number_of_people={data.number_of_people}
+								exercise_length={exercise_length}
+								time={data.time}
+								reservationSelect={this.reservationSelect_trainer}
+								trainer={data.trainer}
+								customer_id={data.customer_id}
+							/>
+						)
+					});
+				this.setState(
+					{ reservation_date: items, reservation_data: result },
+					() => this.reservationClassSelect());
+			})
+	};
+
+
 	handleExercise = () => {
 		this.reservationSelect_exercise()
 		this.setState({
 			show_exercise_table: true,
-			show_trainer_table: false
+			show_trainer_table: false,
+			show_date_table: false
 		})
 	}
 	handleTrainer = () => {
 		this.reservationSelect_trainer()
 		this.setState({
+			show_exercise_table: false,
 			show_trainer_table: true,
-			show_exercise_table: false
+			show_date_table: false
+		})
+	}
+	handleDate = () => {
+		this.reservationSelect_date()
+		this.setState({
+			show_exercise_table: false,
+			show_trainer_table: false,
+			show_date_table: true
 		})
 	}
 	/**
@@ -745,8 +851,8 @@ class Reservation extends Component {
 			.then(result => {
 				const items = result
 					//오늘 날짜에 해당하는 주간만 조회
-					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(0), "day")
-						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(0), "day"))
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(0 + this.state.dayIncreament), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(0 + this.state.dayIncreament), "day"))
 					.map((data, index, array) => {
 						const time =
 							`${data.hour}`.padStart(2, '0') +
@@ -796,8 +902,8 @@ class Reservation extends Component {
 			.then(result => {
 				const items = result
 					//오늘 날짜에 해당하는 주간만 조회
-					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(1), "day")
-						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(1), "day"))
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(1 + this.state.dayIncreament), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(1 + this.state.dayIncreament), "day"))
 					.map((data, index, array) => {
 						const time =
 							`${data.hour}`.padStart(2, '0') +
@@ -847,8 +953,8 @@ class Reservation extends Component {
 			.then(result => {
 				const items = result
 					//오늘 날짜에 해당하는 주간만 조회
-					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(2), "day")
-						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(2), "day"))
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(2 + this.state.dayIncreament), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(2 + this.state.dayIncreament), "day"))
 					.map((data, index, array) => {
 						const time =
 							`${data.hour}`.padStart(2, '0') +
@@ -898,8 +1004,8 @@ class Reservation extends Component {
 			.then(result => {
 				const items = result
 					//오늘 날짜에 해당하는 주간만 조회
-					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(3), "day")
-						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(3), "day"))
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(3 + this.state.dayIncreament), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(3 + this.state.dayIncreament), "day"))
 					.map((data, index, array) => {
 						const time =
 							`${data.hour}`.padStart(2, '0') +
@@ -949,8 +1055,8 @@ class Reservation extends Component {
 			.then(result => {
 				const items = result
 					//오늘 날짜에 해당하는 주간만 조회
-					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(4), "day")
-						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(4), "day"))
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(4 + this.state.dayIncreament), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(4 + this.state.dayIncreament), "day"))
 					.map((data, index, array) => {
 						const time =
 							`${data.hour}`.padStart(2, '0') +
@@ -1000,8 +1106,8 @@ class Reservation extends Component {
 			.then(result => {
 				const items = result
 					//오늘 날짜에 해당하는 주간만 조회
-					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(5), "day")
-						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(5), "day"))
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(5 + this.state.dayIncreament), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(5 + this.state.dayIncreament), "day"))
 					.map((data, index, array) => {
 						const time =
 							`${data.hour}`.padStart(2, '0') +
@@ -1051,8 +1157,8 @@ class Reservation extends Component {
 			.then(result => {
 				const items = result
 					//오늘 날짜에 해당하는 주간만 조회
-					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(6), "day")
-						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(6), "day"))
+					.filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(6 + this.state.dayIncreament), "day")
+						&& moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(6 + this.state.dayIncreament), "day"))
 					.map((data, index, array) => {
 						const time =
 							`${data.hour}`.padStart(2, '0') +
@@ -1095,29 +1201,34 @@ class Reservation extends Component {
 	};
 
 	/**
-	 * 강사 선택 운동클래스
+	 * 강사별조회 예약현황
 	 */
 	reservationClassSelect_choice = () => {
 		const fitness_no = this.props.userinfo.fitness_no;
 		getReservationClassBy(fitness_no)
 			.then(result => {
-				const items = result.map((data, index, array) => {
-					return (
-						<ReservationClassItem_choice
-							trainer_choice={data.trainer}
-							class_date={data.class_date}
-							hour={data.hour}
-							minute={data.minute}
-							handleClick_choice={(
-								result_trainer_choice
-							) =>
-								this.setState({
-									trainer_choice: result_trainer_choice
-								})}
-							reservationChoiceTrainer={this.reservationChoiceTrainer}
-						/>
-					);
-				});
+				const items = result
+					//오늘 날짜에 해당하는 주간만 조회
+					// .filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(0 + this.state.dayIncreament), "day")
+					// 	// && moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(6 + this.state.dayIncreament), "day")
+					// )					
+					.map((data, index, array) => {
+						return (
+							<ReservationClassItem_choice
+								trainer_choice={data.trainer}
+								class_date={data.class_date}
+								hour={data.hour}
+								minute={data.minute}
+								handleClick_choice={(
+									result_trainer_choice
+								) =>
+									this.setState({
+										trainer_choice: result_trainer_choice
+									})}
+								reservationChoiceTrainer={this.reservationChoiceTrainer}
+							/>
+						);
+					});
 				console.log(result)
 				this.setState({ reservationClass_choice: items });
 			})
@@ -1132,6 +1243,35 @@ class Reservation extends Component {
 			open: false,
 		});
 	};
+
+	handleWeekClick = (w) => {
+		const dayIncreament = 0;
+		const name = w.target.name
+		if (name === "next") {
+			this.setState({
+				dayIncreament: this.state.dayIncreament + 7
+			}),
+				this.reservationClassSelect(),
+				this.reservationClassSelect1(),
+				this.reservationClassSelect2(),
+				this.reservationClassSelect3(),
+				this.reservationClassSelect4(),
+				this.reservationClassSelect5(),
+				this.reservationClassSelect6()
+
+		} else if (name === "prev") {
+			this.setState({
+				dayIncreament: this.state.dayIncreament - 7
+			}),
+				this.reservationClassSelect(),
+				this.reservationClassSelect1(),
+				this.reservationClassSelect2(),
+				this.reservationClassSelect3(),
+				this.reservationClassSelect4(),
+				this.reservationClassSelect5(),
+				this.reservationClassSelect6()
+		}
+	}
 
 
 
@@ -1177,10 +1317,16 @@ class Reservation extends Component {
 								<button>운동 클래스 만들기</button>
 							</Link>
 						</Col>
+						<button name="prev" onClick={this.handleWeekClick}>
+							이전주
+						</button>
 						<div> {(moment(this.state.class_date).day(0).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}
 							~
 							{(moment(this.state.class_date).day(6).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}
 						</div>
+						<button name="next" onClick={this.handleWeekClick}>
+							다음주
+						</button>
 						<Col
 							className='text-center py-2 w-100 overflow-auto justify-content-center'
 							xs={12}
@@ -1411,7 +1557,7 @@ class Reservation extends Component {
 										<thead>
 											<tr>
 												<th scope='col'>[회원번호]회원이름</th>
-												<th scope='col'>날짜</th>
+												<th scope='col'>날짜<button onClick={() => this.handleDate()}>V</button></th>
 												<th scope='col'>운동<button onClick={() => this.handleExercise()}>V</button></th>
 												<th scope='col'>강사<button onClick={() => this.handleTrainer()}>V</button></th>
 												<th scope='col'>인원수</th>
@@ -1421,7 +1567,7 @@ class Reservation extends Component {
 												<th scope='col'>삭제</th>
 											</tr>
 										</thead>
-										{(this.state.show_exercise_table && !this.state.show_trainer_table)
+										{(this.state.show_exercise_table && !this.state.show_trainer_table && !this.state.show_date_table)
 											? <tbody>
 												{this.state.reservation_exercise.length == 0 ? (
 													<p>'설정된 운동이 없습니다.'</p>
@@ -1431,7 +1577,7 @@ class Reservation extends Component {
 											</tbody>
 											: null}
 
-										{(this.state.show_trainer_table && !this.state.show_exercise_table)
+										{(this.state.show_trainer_table && !this.state.show_exercise_table && !this.state.show_date_table)
 											? <tbody>
 												{this.state.reservation_trainer.length == 0 ? (
 													<p>'설정된 운동이 없습니다.'</p>
@@ -1440,7 +1586,18 @@ class Reservation extends Component {
 												)}
 											</tbody>
 											: null}
-										{!this.state.show_exercise_table && !this.state.show_trainer_table ?
+
+										{(this.state.show_date_table && !this.state.show_exercise_table && !this.state.show_trainer_table)
+											? <tbody>
+												{this.state.reservation_date.length == 0 ? (
+													<p>'설정된 운동이 없습니다.'</p>
+												) : (
+													this.state.reservation_date
+												)}
+											</tbody>
+											: null}
+
+										{!this.state.show_exercise_table && !this.state.show_trainer_table && !this.state.show_date_table ?
 											<tbody>
 												{this.state.reservation.length == 0 ? (
 													<p>'설정된 운동이 없습니다.'</p>

@@ -880,20 +880,20 @@ class ReservationClass extends Component {
 							<Link to='/reservation'>
 								<button>돌아가기</button>
 							</Link>
-							<button name="prev" onClick={this.handleWeekClick}>
-								이전주
-							</button>
-							<button name="next" onClick={this.handleWeekClick}>
-								다음주
-							</button>
 							<button onClick={this.handleUpdate}>
 								수정하기 및 삭제하기
 							</button>
 						</Col>
+						<button name="prev" onClick={this.handleWeekClick}>
+							이전주
+						</button>
 						<div> {(moment(this.state.class_date).day(0).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}
 							~
 							{(moment(this.state.class_date).day(6).add(this.state.dayIncreament, 'days').format('YYYY-MM-DD(dd)'))}
 						</div>
+						<button name="next" onClick={this.handleWeekClick}>
+							다음주
+						</button>
 						<table class='table' name='classTable'>
 							<thead>
 								<tr>

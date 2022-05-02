@@ -28,6 +28,12 @@ export const getReservation_trainer = (fitness_no) => {
     return axios.get(SERVER_URL + "/reservation/select", { params: { fitness_no: fitness_no, type: "trainer_ASC" } }).then(response => response.data)
 }
 /**
+ * 날짜정렬
+ */
+export const getReservation_date = (fitness_no) => {
+    return axios.get(SERVER_URL + "/reservation/select", { params: { fitness_no: fitness_no, type: "date_ASC" } }).then(response => response.data)
+}
+/**
  *강사별 예약테이블
  */
 export const getReservation_choice_trainer = (fitness_no, trainer) => {
