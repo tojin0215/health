@@ -1,7 +1,3 @@
-.btn {
-	font-size: 2rem;
-}
-
 .customercalendar button {
 	height: inherit;
 	font-size: inherit;
@@ -10,19 +6,8 @@
 }
 
 button {
-	width: auto;
-	height: 5rem;
-	border: none;
-	border-radius: 3rem;
-	background-color: #fff;
-	color: #0f78ff;
-	font-size: 2rem;
-	font-weight: 700;
-	text-align: center;
-	align-self: flex-end;
 	transition: 0.35s ease-in-out;
 	cursor: pointer;
-	padding: 0 2rem;
 	box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
 }
 
