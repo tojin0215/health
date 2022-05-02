@@ -98,11 +98,6 @@ class MegaMenu extends Component {
 								</NavLink>
 							</li>
 							<li>
-								<NavLink exact to='/reservation'>
-									예약
-								</NavLink>
-							</li>
-							<li>
 								<NavLink
 									exact
 									to={{
@@ -115,17 +110,17 @@ class MegaMenu extends Component {
 							</li>
 						</li>
 						<li class='dropdown'>
-							<NavLink exact to='/sales'>
-								상품/매출
+							<NavLink exact to='/reservation'>
+								수업
 							</NavLink>
 							<li>
-								<NavLink exact to='/sales'>
-									매출 현황
+								<NavLink exact to='/reservation'>
+									수업
 								</NavLink>
 							</li>
 							<li>
-								<NavLink exact to='/sales/add'>
-									결제 등록
+								<NavLink exact to='/reservationClass'>
+									수업 설정
 								</NavLink>
 							</li>
 						</li>
@@ -144,6 +139,22 @@ class MegaMenu extends Component {
 								</NavLink>
 							</li>
 						</li>
+						<li class='dropdown'>
+							<NavLink exact to='/sales'>
+								매출
+							</NavLink>
+							<li>
+								<NavLink exact to='/sales'>
+									매출 현황
+								</NavLink>
+							</li>
+							<li>
+								<NavLink exact to='/sales/add'>
+									결제 등록
+								</NavLink>
+							</li>
+						</li>
+
 						<li className='text-center'>
 							<button className='btnSolid' onClick={this.handleLogout}>
 								LOG-OUT
