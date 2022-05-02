@@ -421,6 +421,7 @@ class ReservationClass extends Component {
 							(filterData) =>
 								filterData.class_date.split('T')[0] === data.class_date.split('T')[0]
 						).length;
+						const handling = this.state.updateOpen ? true : false;
 						return (
 							<ReservationClassItem
 								fitness_no={this.props.userinfo.fitness_no}
@@ -433,6 +434,7 @@ class ReservationClass extends Component {
 								trainer={data.trainer}
 								class_date={date_split}
 								class_date_update={data.class_date}
+								updateOpen={handling}
 							/>
 						);
 					});
@@ -469,6 +471,7 @@ class ReservationClass extends Component {
 							(filterData) =>
 								filterData.class_date.split('T')[0] === data.class_date.split('T')[0]
 						).length;
+						const handling = this.state.updateOpen ? true : false;
 						return (
 							<ReservationClassItem
 								fitness_no={this.props.userinfo.fitness_no}
@@ -481,6 +484,7 @@ class ReservationClass extends Component {
 								trainer={data.trainer}
 								class_date={date_split}
 								class_date_update={data.class_date}
+								updateOpen={handling}
 							/>
 						);
 					});
@@ -517,6 +521,7 @@ class ReservationClass extends Component {
 							(filterData) =>
 								filterData.class_date.split('T')[0] === data.class_date.split('T')[0]
 						).length;
+						const handling = this.state.updateOpen ? true : false;
 						return (
 							<ReservationClassItem
 								fitness_no={this.props.userinfo.fitness_no}
@@ -529,6 +534,7 @@ class ReservationClass extends Component {
 								trainer={data.trainer}
 								class_date={date_split}
 								class_date_update={data.class_date}
+								updateOpen={handling}
 							/>
 						);
 					});
@@ -565,6 +571,7 @@ class ReservationClass extends Component {
 							(filterData) =>
 								filterData.class_date.split('T')[0] === data.class_date.split('T')[0]
 						).length;
+						const handling = this.state.updateOpen ? true : false;
 						return (
 							<ReservationClassItem
 								fitness_no={this.props.userinfo.fitness_no}
@@ -577,6 +584,7 @@ class ReservationClass extends Component {
 								trainer={data.trainer}
 								class_date={date_split}
 								class_date_update={data.class_date}
+								updateOpen={handling}
 							/>
 						);
 					});
@@ -613,6 +621,7 @@ class ReservationClass extends Component {
 							(filterData) =>
 								filterData.class_date.split('T')[0] === data.class_date.split('T')[0]
 						).length;
+						const handling = this.state.updateOpen ? true : false;
 						return (
 							<ReservationClassItem
 								fitness_no={this.props.userinfo.fitness_no}
@@ -625,6 +634,7 @@ class ReservationClass extends Component {
 								trainer={data.trainer}
 								class_date={date_split}
 								class_date_update={data.class_date}
+								updateOpen={handling}
 							/>
 						);
 					});
@@ -661,6 +671,8 @@ class ReservationClass extends Component {
 							(filterData) =>
 								filterData.class_date.split('T')[0] === data.class_date.split('T')[0]
 						).length;
+						const handling = this.state.updateOpen ? true : false;
+
 						return (
 							<ReservationClassItem
 								fitness_no={this.props.userinfo.fitness_no}
@@ -673,6 +685,7 @@ class ReservationClass extends Component {
 								trainer={data.trainer}
 								class_date={date_split}
 								class_date_update={data.class_date}
+								updateOpen={handling}
 							/>
 						);
 					});
@@ -710,6 +723,7 @@ class ReservationClass extends Component {
 								filterData.class_date.split('T')[0] === data.class_date.split('T')[0]
 						).length;
 						const handling = this.state.updateOpen ? true : false;
+
 						return (
 							<ReservationClassItem
 								fitness_no={this.props.userinfo.fitness_no}
@@ -908,7 +922,6 @@ class ReservationClass extends Component {
 							<button name="next" onClick={this.handleWeekClick}>
 								다음주
 							</button>
-							{this.state.updateOpen ? 'on' : 'off'}
 							<button onClick={this.handleUpdate}>
 								수정하기 및 삭제하기
 							</button>
