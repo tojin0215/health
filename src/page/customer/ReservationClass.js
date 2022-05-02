@@ -40,7 +40,8 @@ const ReservationClassItem = ({
 	minute,
 	trainer,
 	class_date,
-	class_date_update
+	class_date_update,
+	updateOpen
 }) => {
 	/*
 	운동클래스 delete
@@ -49,6 +50,7 @@ const ReservationClassItem = ({
 		fetch(ip + '/reservationClass/delete?no=' + no, {
 			method: 'DELETE',
 		}).then((result) => {
+			modalClose();
 			if (reservationClassSelect) {
 				reservationClassSelect()
 			} else if (reservationClassSelect1) {
@@ -92,12 +94,6 @@ const ReservationClassItem = ({
 	*/
 	const updateOnClick = () => {
 		setShowResults(true);
-		setExercise_class_input(exercise_class);
-		setNumber_of_people_input(number_of_people);
-		setHour_input(hour);
-		setMinute_input(minute);
-		setTrainer_input(trainer);
-		setClass_date_input(class_date);
 	};
 	const updateClose = () => {
 		setShowResults(false);
@@ -179,7 +175,7 @@ const ReservationClassItem = ({
 		setShowModal(false);
 	}
 	return (
-		<p>
+		<div>
 			{hour == 1
 				? '01'
 				: hour == 2
@@ -227,8 +223,10 @@ const ReservationClassItem = ({
 			운동명:
 			{exercise_class}
 			, {trainer}, 수강인원:{number_of_people}
+			{updateOpen ? <button onClick={modalOnClick}>수정 및 삭제하기2</button>
+				: ""}
+			{/* < button onClick={modalOnClick}>수정 및 삭제하기2</button> */}
 
-			<button onClick={modalOnClick}>수정모달</button>
 			<div>
 				<Modal
 					show={showModal}
@@ -283,11 +281,13 @@ const ReservationClassItem = ({
 					>
 						삭제
 					</button>
-					<button onClick={() => reservationClassUpdate(no)}>수정완료하기</button>
+					<button onClick={() => reservationClassUpdate(no)}>수정하기</button>
+					<button onClick={modalClose}>닫기</button>
+
 				</Modal>
 
 			</div>
-		</p>
+		</div>
 	);
 };
 
@@ -324,6 +324,7 @@ class ReservationClass extends Component {
 			//     thirteen: false,
 			// },
 			dayIncreament: 0,
+			updateOpen: false
 		};
 		this.reservationClassSelect();
 		this.reservationClassSelect1();
@@ -334,9 +335,10 @@ class ReservationClass extends Component {
 		this.reservationClassSelect6();
 		this.handleDateChange = this.handleDateChange.bind(this);
 		this.handleWeekClick = this.handleWeekClick.bind(this);
-
-
+		this.handleUpdate = this.handleUpdate.bind(this);
 	}
+
+
 
 	componentDidMount() {
 		//컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
@@ -707,6 +709,7 @@ class ReservationClass extends Component {
 							(filterData) =>
 								filterData.class_date.split('T')[0] === data.class_date.split('T')[0]
 						).length;
+						const handling = this.state.updateOpen ? true : false;
 						return (
 							<ReservationClassItem
 								fitness_no={this.props.userinfo.fitness_no}
@@ -719,10 +722,12 @@ class ReservationClass extends Component {
 								trainer={data.trainer}
 								class_date={date_split}
 								class_date_update={data.class_date}
+								updateOpen={handling}
 							/>
 						);
 					});
 				this.setState({ reservationClass6: items });
+				console.log(this.state.updateOpen)
 			});
 	}
 
@@ -849,6 +854,20 @@ class ReservationClass extends Component {
 		);
 
 	}
+	handleUpdate = () => {
+		this.setState({
+			updateOpen: !this.state.updateOpen
+		},
+			this.reservationClassSelect(),
+			this.reservationClassSelect1(),
+			this.reservationClassSelect2(),
+			this.reservationClassSelect3(),
+			this.reservationClassSelect4(),
+			this.reservationClassSelect5(),
+			this.reservationClassSelect6()
+		)
+		console.log("수정하기", this.state.updateOpen)
+	}
 
 	render() {
 		return (
@@ -888,6 +907,10 @@ class ReservationClass extends Component {
 							</button>
 							<button name="next" onClick={this.handleWeekClick}>
 								다음주
+							</button>
+							{this.state.updateOpen ? 'on' : 'off'}
+							<button onClick={this.handleUpdate}>
+								수정하기 및 삭제하기
 							</button>
 						</Col>
 						<table class='table' name='classTable'>
