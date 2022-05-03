@@ -3,6 +3,7 @@ import Authentication from '../login/Authentication';
 import Navigation from '../../component/navigation/Navigation';
 import { Slide } from 'react-slideshow-image';
 
+
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
@@ -58,15 +59,6 @@ class Login extends Component {
 				</div>
 				<div className='container'>
 					<Authentication mode={true} onLogin={this.handleLogin} />
-					<div className='slide-container sectionGlass'>
-						<h5>오마이짐 미리보기</h5>
-						<div className='loginSample'>
-							<p>체험 아이디로 미리 둘러볼 수 있습니다.</p>
-							<p>아이디 : sample</p>
-							<p>비밀번호 : sample</p>
-						</div>
-						<Slideshow></Slideshow>
-					</div>
 				</div>
 				<div className='footer'>
 					<Footer />
@@ -88,51 +80,6 @@ const mapDispatchToProps = (dispatch) => {
 			return dispatch(loginRequest(id, pw));
 		},
 	};
-};
-
-// import slide1 from 'img/slide_1.png';
-// import slide2 from 'img/slide_2.png';
-// import slide3 from 'img/slide_3.png';
-// import slide4 from 'img/slide_4.png';
-// import slide5 from 'img/slide_5.png';
-
-const Slideshow = () => {
-	// const slide1 = '/src/img/slide_1.png' + slide_1 + '.png';
-	// const slide2 = '/src/img/slide_2.png' + slide_2 + '.png';
-	// const slide3 = '/src/img/slide_3.png' + slide_3 + '.png';
-	// const slide4 = '/src/img/slide_4.png' + slide_4 + '.png';
-	// const slide5 = '/src/img/slide_5.png' + slide_5 + '.png';
-	return (
-		<div>
-			<Slide easing='ease' {...fadeProperties}>
-				<div className='each-slide'>
-					<div style={{ backgroundImage: 'url(/src/img/slide_1.png)' }}>
-						<span>회원 관리</span>
-					</div>
-				</div>
-				<div className='each-slide'>
-					<div style={{ backgroundImage: 'url(/src/img/slide_1.png)' }}>
-						<span>회원 인바디 체크</span>
-					</div>
-				</div>
-				<div className='each-slide'>
-					<div style={{ backgroundImage: 'url(/src/img/slide_1.png)' }}>
-						<span>결제 관리</span>
-					</div>
-				</div>
-				<div className='each-slide'>
-					<div style={{ backgroundImage: 'url(/src/img/slide_1.png)' }}>
-						<span>매출 현황</span>
-					</div>
-				</div>
-				<div className='each-slide'>
-					<div style={{ backgroundImage: 'url(/src/img/slide_1.png)' }}>
-						<span>운동 배정</span>
-					</div>
-				</div>
-			</Slide>
-		</div>
-	);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

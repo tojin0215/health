@@ -1,161 +1,169 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Card from 'react-bootstrap/Card'
+import FormCheck from "react-bootstrap/FormCheck";
 
-import '../../styles/login/Authentication.css';
+import "../../styles/login/Authentication.css";
 
 class Authentication extends Component {
-	state = {
-		id: '',
-		password: '',
-	};
+  state = {
+    id: "",
+    password: "",
+  };
 
-	handleChange = (e) => {
-		let nextState = {};
-		nextState[e.target.name] = e.target.value;
-		this.setState(nextState);
-	};
+  handleChange = (e) => {
+    let nextState = {};
+    nextState[e.target.name] = e.target.value;
+    this.setState(nextState);
+  };
 
-	handleRegister = () => {
-		let id = this.state.id;
-		let pw = this.state.password;
+  handleRegister = () => {
+    let id = this.state.id;
+    let pw = this.state.password;
 
-		this.props.onRegister(id, pw).then((result) => {
-			if (!result) {
-				this.setState({
-					id: '',
-					password: '',
-				});
-			}
-		});
-	};
+    this.props.onRegister(id, pw).then((result) => {
+      if (!result) {
+        this.setState({
+          id: "",
+          password: "",
+        });
+      }
+    });
+  };
 
-	handleLogin = () => {
-		let id = this.state.id;
-		let pw = this.state.password;
+  handleLogin = () => {
+    let id = this.state.id;
+    let pw = this.state.password;
 
-		this.props.onLogin(id, pw).then((success) => {
-			if (!success) {
-				this.setState({
-					password: '',
-				});
-			}
-		});
-	};
-	handleKeyPress = (e) => {
-		if (e.charCode == 13) {
-			if (this.props.mode) {
-				this.handleLogin();
-			} else {
-				this.handleRegister();
-			}
-		}
-	};
-	render() {
-		const inputBoxes = (
-			<div>
-				<div className='input-field col s12 id'>
-					<label>아이디</label>
-					<input
-						name='id'
-						type='text'
-						className='validate mx-0 my-3'
-						onChange={this.handleChange}
-						value={this.state.id}
-					/>
-				</div>
-				<div className='input-field col s12'>
-					<label>비밀번호</label>
-					<input
-						name='password'
-						type='password'
-						className='validate mx-0 my-3'
-						onChange={this.handleChange}
-						value={this.state.password}
-						onKeyPress={this.handleKeyPress}
-					/>
-				</div>
-			</div>
-		);
+    this.props.onLogin(id, pw).then((success) => {
+      if (!success) {
+        this.setState({
+          password: "",
+        });
+      }
+    });
+  };
+  handleKeyPress = (e) => {
+    if (e.charCode == 13) {
+      if (this.props.mode) {
+        this.handleLogin();
+      } else {
+        this.handleRegister();
+      }
+    }
+  };
+  render() {
+    const inputBoxes = (
+      <div>
+        <Form key="loginGroup">
+          <Form.Check
+            inline
+            type="radio"
+            id="loginGroup-1"
+            name="group1"
+            label="사업주"
+          />
+          <Form.Check
+            inline
+            type="radio"
+            id="loginGroup-2"
+            name="group1"
+            label="강사"
+          />
+          <Form.Check
+            inline
+            type="radio"
+            id="loginGroup-3"
+            name="group1"
+            label="회원"
+          />
+          <Form.Group className="mb-3" controlId="formBasicId">
+            <Form.Label>아이디</Form.Label>
+            <Form.Control
+            	name="id"
+              type="text"
+              className="validate"
+              placeholder="Enter id"
+              onChange={this.handleChange}
+              value={this.state.id}
+            />
+            <Form.Text className="text-muted">
+            </Form.Text>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control 
+              name="password"
+              type="password"
+              className="validate"
+              onChange={this.handleChange}
+              value={this.state.password}
+              onKeyPress={this.handleKeyPress}
+              placeholder="Password" />
+          </Form.Group>
+        </Form>
+      </div>
+    );
 
-		const loginView = (
-			<div className='loginCard'>
-				<div className='card-content'>
-					<div className='row'>
-						{inputBoxes}
-						<a
-							className='waves-effect waves-light btn'
-							onClick={this.handleLogin}
-						>
-							<Button className='' variant='primary'>
-								LOGIN
-							</Button>
-						</a>
-						<Link to='/register'>
-							<Button className='border-0' variant='outline-secondary'>
-								회원가입
-							</Button>
-						</Link>
-					</div>
-				</div>
+    const loginView = (
+		<div>
+			<Card className="text-center">
+				<Card.Body>
+          {inputBoxes}
+          <Button 
+          onClick={this.handleLogin} className="" variant="primary">
+            LOGIN
+          </Button>
+          <Button className="border-0 bg-white" variant="outline-secondary" href="/register">
+            회원가입
+          </Button>
+        </Card.Body>
+			</Card>
+    </div>
+    );
 
-				{/*<div className="footer">
-                    <div className="card-content">
-                        <div className="right" >
-                        New Here? <Link to="/register">Create an account</Link>
-                        </div>
-                    </div>
-                </div>*/}
-			</div>
-		);
-
-		// const registerView = (
-		//     <div className="card-content">
-		//         <div className="row">
-		//             {inputBoxes}
-		//             <a className="waves-effect waves-light btn"
-		//               onClick={this.handleRegister}>회원가입</a>
-		//         </div>
-		//     </div>
-		// );
-		return (
-			<div className='container auth'>
-				<div className='welcomeMent'>
-					<p>Hello,</p>
-					<p>안녕하세요!</p>
-					<p>헬스짐 관리자 오마이짐입니다.</p>
-				</div>
-				<Link className='logo' to='/'>
-					헬스 웹
-				</Link>
-				<div className='card'>
-					{/*<div className="header blue white-text center">
-                      <div className="card-content">{this.props.mode ? "LOGIN" : "REGISTER"}</div>
-                    </div>*/}
-					{this.props.mode ? loginView : registerView}
-				</div>
-			</div>
-		);
-	}
+    // const registerView = (
+    //     <div className="card-content">
+    //         <div className="row">
+    //             {inputBoxes}
+    //             <a className="waves-effect waves-light btn"
+    //               onClick={this.handleRegister}>회원가입</a>
+    //         </div>
+    //     </div>
+    // );
+    return (
+      <div className="container auth">
+        <div className="welcomeMent">
+          <p>Hello,</p>
+          <p>안녕하세요!</p>
+          <p>헬스짐 관리자 오마이짐입니다.</p>
+        </div>
+        <div className="card">
+          {this.props.mode ? loginView : registerView}
+        </div>
+      </div>
+    );
+  }
 }
 
 Authentication.propTypes = {
-	mode: PropTypes.bool,
-	onRegister: PropTypes.func,
-	onLogin: PropTypes.func,
+  mode: PropTypes.bool,
+  onRegister: PropTypes.func,
+  onLogin: PropTypes.func,
 };
 
 Authentication.defaultProps = {
-	mode: true,
-	onRegister: (id, pw) => {
-		console.error('register function is not defined');
-	},
-	onLogin: (id, pw) => {
-		console.error('login function not defined');
-	},
+  mode: true,
+  onRegister: (id, pw) => {
+    console.error("register function is not defined");
+  },
+  onLogin: (id, pw) => {
+    console.error("login function not defined");
+  },
 };
 
 export default Authentication;

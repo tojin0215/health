@@ -194,10 +194,10 @@ class Register extends Component {
 
 		return (
 			<div className='wrap loginWrap register'>
-				<div className='header'>
+				{/* <div className='header d-none'>
 					<Header />
 					<Navigation />
-				</div>
+				</div> */}
 				<div className='localNavigation'>
 					<div className='container'>
 						<h2>
