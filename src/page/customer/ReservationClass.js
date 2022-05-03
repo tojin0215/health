@@ -213,7 +213,7 @@ const ReservationClassItem = ({
       ? "00"
       : minute;
   return (
-    <div>
+    <div className="border py-2 my-1 ">
       {hourArray}시{minuteArray}분 운동명:
       {exercise_class}, {trainer}, 수강인원:{number_of_people}
       {updateOpen ? (
@@ -323,13 +323,6 @@ class ReservationClass extends Component {
       dayIncreament: 0,
       updateOpen: false,
     };
-    this.reservationClassSelect();
-    this.reservationClassSelect1();
-    this.reservationClassSelect2();
-    this.reservationClassSelect3();
-    this.reservationClassSelect4();
-    this.reservationClassSelect5();
-    this.reservationClassSelect6();
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleWeekClick = this.handleWeekClick.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -377,12 +370,6 @@ class ReservationClass extends Component {
         alert("Your session is expired, please log in again");
       } else {
         this.reservationClassSelect();
-        this.reservationClassSelect1();
-        this.reservationClassSelect2();
-        this.reservationClassSelect3();
-        this.reservationClassSelect4();
-        this.reservationClassSelect5();
-        this.reservationClassSelect6();
       }
     });
   }
@@ -449,7 +436,13 @@ class ReservationClass extends Component {
               />
             );
           });
-        this.setState({ reservationClass: items });
+        this.setState({ reservationClass: items }),
+          this.reservationClassSelect1(),
+          this.reservationClassSelect2(),
+          this.reservationClassSelect3(),
+          this.reservationClassSelect4(),
+          this.reservationClassSelect5(),
+          this.reservationClassSelect6();
       });
   };
 
@@ -859,24 +852,12 @@ class ReservationClass extends Component {
       this.setState({
         dayIncreament: this.state.dayIncreament + 7,
       }),
-        this.reservationClassSelect(),
-        this.reservationClassSelect1(),
-        this.reservationClassSelect2(),
-        this.reservationClassSelect3(),
-        this.reservationClassSelect4(),
-        this.reservationClassSelect5(),
-        this.reservationClassSelect6();
+        this.reservationClassSelect();
     } else if (name === "prev") {
       this.setState({
         dayIncreament: this.state.dayIncreament - 7,
       }),
-        this.reservationClassSelect(),
-        this.reservationClassSelect1(),
-        this.reservationClassSelect2(),
-        this.reservationClassSelect3(),
-        this.reservationClassSelect4(),
-        this.reservationClassSelect5(),
-        this.reservationClassSelect6();
+        this.reservationClassSelect();
     }
   };
 
@@ -943,12 +924,6 @@ class ReservationClass extends Component {
             alert(result.message);
           }
           this.reservationClassSelect();
-          this.reservationClassSelect1();
-          this.reservationClassSelect2();
-          this.reservationClassSelect3();
-          this.reservationClassSelect4();
-          this.reservationClassSelect5();
-          this.reservationClassSelect6();
         });
     }
   };
@@ -965,13 +940,7 @@ class ReservationClass extends Component {
       {
         class_date: date,
       },
-      () => this.reservationClassSelect(),
-      this.reservationClassSelect1(),
-      this.reservationClassSelect2(),
-      this.reservationClassSelect3(),
-      this.reservationClassSelect4(),
-      this.reservationClassSelect5(),
-      this.reservationClassSelect6()
+      () => this.reservationClassSelect()
     );
   }
   handleUpdate = () => {
@@ -979,13 +948,7 @@ class ReservationClass extends Component {
       {
         updateOpen: !this.state.updateOpen,
       },
-      this.reservationClassSelect(),
-      this.reservationClassSelect1(),
-      this.reservationClassSelect2(),
-      this.reservationClassSelect3(),
-      this.reservationClassSelect4(),
-      this.reservationClassSelect5(),
-      this.reservationClassSelect6()
+      this.reservationClassSelect()
     );
     // console.log("수정하기", this.state.updateOpen)
   };

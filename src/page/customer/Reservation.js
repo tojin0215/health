@@ -149,7 +149,7 @@ const ReservationClassItem = ({
 };
 
 /**
- * 예약테이블 data 전체
+ * 예약테이블 data 전체보기 탭
  */
 const ReservationItem = ({
   res_no,
@@ -679,6 +679,13 @@ class Reservation extends Component {
         this.reservationSelect();
         this.reservationChoiceTrainer();
         this.reservationClassSelect_choice();
+        this.reservationClassSelect();
+        this.reservationClassSelect1();
+        this.reservationClassSelect2();
+        this.reservationClassSelect3();
+        this.reservationClassSelect4();
+        this.reservationClassSelect5();
+        this.reservationClassSelect6();
       }
     });
   }
@@ -725,6 +732,7 @@ class Reservation extends Component {
       this.setState(
         { reservation: items, reservation_data: result },
         () => this.reservationClassSelect(),
+        this.reservationClassSelect(),
         this.reservationClassSelect1(),
         this.reservationClassSelect2(),
         this.reservationClassSelect3(),
@@ -985,10 +993,17 @@ class Reservation extends Component {
             alert(result.message);
           }
           this.reservationSelect();
+          this.reservationClassSelect1();
+          this.reservationClassSelect2();
+          this.reservationClassSelect3();
+          this.reservationClassSelect4();
+          this.reservationClassSelect5();
+          this.reservationClassSelect6();
           this.reservationSelect_exercise();
           this.reservationSelect_trainer();
           this.reservationChoiceTrainer();
           this.reservationClassSelect_choice();
+          this.reservationSelect_date();
         });
     }
   };
@@ -1512,24 +1527,24 @@ class Reservation extends Component {
       this.setState({
         dayIncreament: this.state.dayIncreament + 7,
       }),
-        this.reservationClassSelect(),
-        this.reservationClassSelect1(),
-        this.reservationClassSelect2(),
-        this.reservationClassSelect3(),
-        this.reservationClassSelect4(),
-        this.reservationClassSelect5(),
-        this.reservationClassSelect6();
+        this.reservationClassSelect();
+      this.reservationClassSelect1();
+      this.reservationClassSelect2();
+      this.reservationClassSelect3();
+      this.reservationClassSelect4();
+      this.reservationClassSelect5();
+      this.reservationClassSelect6();
     } else if (name === "prev") {
       this.setState({
         dayIncreament: this.state.dayIncreament - 7,
       }),
-        this.reservationClassSelect(),
-        this.reservationClassSelect1(),
-        this.reservationClassSelect2(),
-        this.reservationClassSelect3(),
-        this.reservationClassSelect4(),
-        this.reservationClassSelect5(),
-        this.reservationClassSelect6();
+        this.reservationClassSelect();
+      this.reservationClassSelect1();
+      this.reservationClassSelect2();
+      this.reservationClassSelect3();
+      this.reservationClassSelect4();
+      this.reservationClassSelect5();
+      this.reservationClassSelect6();
     }
   };
 
@@ -1572,7 +1587,7 @@ class Reservation extends Component {
             </Col>
             <Col xs={3} className="text-center w-auto">
               <Link to="/reservationClass">
-                <button>수업 </button>
+                <button>운동 설정하기</button>
               </Link>
             </Col>
             <button name="prev" onClick={this.handleWeekClick}>
