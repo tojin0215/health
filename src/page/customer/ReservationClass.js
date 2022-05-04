@@ -168,50 +168,9 @@ const ReservationClassItem = ({
   const modalClose = () => {
     setShowModal(false);
   };
-  const hourArray =
-    hour == 1
-      ? "01"
-      : hour == 2
-      ? "02"
-      : hour == 3
-      ? "03"
-      : hour == 4
-      ? "04"
-      : hour == 5
-      ? "05"
-      : hour == 6
-      ? "06"
-      : hour == 7
-      ? "07"
-      : hour == 8
-      ? "08"
-      : hour == 9
-      ? "09"
-      : hour == 0
-      ? "00"
-      : hour;
-  const minuteArray =
-    minute == 1
-      ? "01"
-      : minute == 2
-      ? "02"
-      : minute == 3
-      ? "03"
-      : minute == 4
-      ? "04"
-      : minute == 5
-      ? "05"
-      : minute == 6
-      ? "06"
-      : minute == 7
-      ? "07"
-      : minute == 8
-      ? "08"
-      : minute == 9
-      ? "09"
-      : minute == 0
-      ? "00"
-      : minute;
+  const hourArray = hour >= 10 ? hour : "0" + hour;
+  const minuteArray = minute >= 10 ? minute : "0" + minute;
+
   return (
     <div className="border py-2 my-1 ">
       {hourArray}시{minuteArray}분 운동명:
@@ -841,7 +800,6 @@ class ReservationClass extends Component {
             );
           });
         this.setState({ reservationClass6: items });
-        // console.log(this.state.updateOpen)
       });
   };
 
@@ -945,6 +903,10 @@ class ReservationClass extends Component {
     );
   }
   handleUpdate = () => {
+    // alert("오늘 이전에 설정한 운동은 수정 및 삭제가 불가합니다.");
+    // if (condition) {
+    // } else {
+    // }
     this.setState(
       {
         updateOpen: !this.state.updateOpen,
@@ -1152,6 +1114,7 @@ class ReservationClass extends Component {
                 font-size="1.6rem"
                 locale="ko"
                 error={this.state.class_date_err}
+                minDate={this.state.class_date}
               />
               <TextField
                 type="number"

@@ -90,50 +90,8 @@ const ReservationClassItem = ({
     // console.log(number_of_people);
   };
 
-  const hourArray =
-    hour == 1
-      ? "01"
-      : hour == 2
-      ? "02"
-      : hour == 3
-      ? "03"
-      : hour == 4
-      ? "04"
-      : hour == 5
-      ? "05"
-      : hour == 6
-      ? "06"
-      : hour == 7
-      ? "07"
-      : hour == 8
-      ? "08"
-      : hour == 9
-      ? "09"
-      : hour == 0
-      ? "00"
-      : hour;
-  const minuteArray =
-    minute == 1
-      ? "01"
-      : minute == 2
-      ? "02"
-      : minute == 3
-      ? "03"
-      : minute == 4
-      ? "04"
-      : minute == 5
-      ? "05"
-      : minute == 6
-      ? "06"
-      : minute == 7
-      ? "07"
-      : minute == 8
-      ? "08"
-      : minute == 9
-      ? "09"
-      : minute == 0
-      ? "00"
-      : minute;
+  const hourArray = hour >= 10 ? hour : "0" + hour;
+  const minuteArray = minute >= 10 ? minute : "0" + minute;
   return (
     <div className="border py-2 my-1 " onClick={handleInnerOnClick}>
       <p>운동명: {exercise_class}</p>
@@ -486,12 +444,16 @@ const ReservationChoiceTrainerItem = ({
   customer_id,
   reservationChoiceTrainer,
   trainer,
+  reservationSelect,
 }) => {
   const reservationDelete = (res_no) => {
     fetch(ip + "/reservation/delete?res_no=" + res_no, {
       method: "DELETE",
     }).then((result) => {
-      reservationChoiceTrainer();
+      // reservationChoiceTrainer();
+      // trainer를 못가져와서 화면 새로고침함
+      // window.location.replace("/reservation");
+      reservationSelect();
     });
   };
 
@@ -690,7 +652,7 @@ class Reservation extends Component {
     });
   }
   /**
-   * 예약테이블
+   * 예약테이블 전체보기
    */
   reservationSelect = () => {
     const fitness_no = this.props.userinfo.fitness_no;
@@ -732,7 +694,6 @@ class Reservation extends Component {
       this.setState(
         { reservation: items, reservation_data: result },
         () => this.reservationClassSelect(),
-        this.reservationClassSelect(),
         this.reservationClassSelect1(),
         this.reservationClassSelect2(),
         this.reservationClassSelect3(),
@@ -740,6 +701,7 @@ class Reservation extends Component {
         this.reservationClassSelect5(),
         this.reservationClassSelect6()
       );
+      // console.log("reservation_data", result);
     });
   };
   /**
@@ -957,10 +919,10 @@ class Reservation extends Component {
     const date =
       moment(this.state.class_date).format("YYYY-MM-DD") + "T00:00:00.000Z";
 
-    // const dateYesterday =
-    //   moment(this.state.reserv_date)
-    //     .subtract({ days: 1 })
-    //     .format("YYYY-MM-DD") + "T00:00:00.000Z";
+    const dateYesterday =
+      moment(this.state.reserv_date)
+        .subtract({ days: 1 })
+        .format("YYYY-MM-DD") + "T00:00:00.000Z";
 
     // console.log("yesterday", dateYesterday);
     this.setState({
@@ -970,11 +932,9 @@ class Reservation extends Component {
     if (this.state.exercise_name == "") {
       this.setState({ exercise_name_err: true });
       alert("운동을 선택해 주세요");
-    }
-    //  else if (date == dateYesterday) {
-    //   alert("오늘 이후 만 예약이 가능합니다.");
-    // }
-    else if (this.state.customer_name == "") {
+    } else if (date <= dateYesterday) {
+      alert("오늘 이후 만 예약이 가능합니다.");
+    } else if (this.state.customer_name == "") {
       this.setState({ customer_name_err: true });
       alert("회원을 선택해 주세요");
     } else {
@@ -1512,6 +1472,7 @@ class Reservation extends Component {
                 })
               }
               reservationChoiceTrainer={this.reservationChoiceTrainer}
+              reservationSelect={this.reservationSelect}
             />
           );
         });

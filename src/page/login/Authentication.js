@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Card from 'react-bootstrap/Card'
+import Card from "react-bootstrap/Card";
 import FormCheck from "react-bootstrap/FormCheck";
 
 import "../../styles/login/Authentication.css";
@@ -56,6 +56,9 @@ class Authentication extends Component {
       }
     }
   };
+  onClickTrainerCustomer = () => {
+    alert("asd");
+  };
   render() {
     const inputBoxes = (
       <div>
@@ -73,6 +76,7 @@ class Authentication extends Component {
             id="loginGroup-2"
             name="group1"
             label="강사"
+            onClick={this.onClickTrainerCustomer}
           />
           <Form.Check
             inline
@@ -80,50 +84,54 @@ class Authentication extends Component {
             id="loginGroup-3"
             name="group1"
             label="회원"
+            onClick={this.onClickTrainerCustomer}
           />
           <Form.Group className="mb-3" controlId="formBasicId">
             <Form.Label>아이디</Form.Label>
             <Form.Control
-            	name="id"
+              name="id"
               type="text"
               className="validate"
               placeholder="Enter id"
               onChange={this.handleChange}
               value={this.state.id}
             />
-            <Form.Text className="text-muted">
-            </Form.Text>
+            <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control 
+            <Form.Control
               name="password"
               type="password"
               className="validate"
               onChange={this.handleChange}
               value={this.state.password}
               onKeyPress={this.handleKeyPress}
-              placeholder="Password" />
+              placeholder="Password"
+            />
           </Form.Group>
         </Form>
       </div>
     );
 
     const loginView = (
-		<div>
-			<Card className="text-center">
-				<Card.Body>
-          {inputBoxes}
-          <Button 
-          onClick={this.handleLogin} className="" variant="primary">
-            LOGIN
-          </Button>
-          <Button className="border-0 bg-white" variant="outline-secondary" href="/register">
-            회원가입
-          </Button>
-        </Card.Body>
-			</Card>
-    </div>
+      <div>
+        <Card className="text-center">
+          <Card.Body>
+            {inputBoxes}
+            <Button onClick={this.handleLogin} className="" variant="primary">
+              LOGIN
+            </Button>
+            <Button
+              className="border-0 bg-white"
+              variant="outline-secondary"
+              href="/register"
+            >
+              회원가입
+            </Button>
+          </Card.Body>
+        </Card>
+      </div>
     );
 
     // const registerView = (
@@ -142,9 +150,7 @@ class Authentication extends Component {
           <p>안녕하세요!</p>
           <p>헬스짐 관리자 오마이짐입니다.</p>
         </div>
-        <div className="card">
-          {this.props.mode ? loginView : registerView}
-        </div>
+        <div className="card">{this.props.mode ? loginView : registerView}</div>
       </div>
     );
   }
