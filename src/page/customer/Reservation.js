@@ -87,7 +87,7 @@ const ReservationClassItem = ({
       trainer,
       class_date
     );
-    console.log(number_of_people);
+    // console.log(number_of_people);
   };
 
   const hourArray =
@@ -954,6 +954,15 @@ class Reservation extends Component {
    * 예약 입력
    */
   handleOnClick = () => {
+    const date =
+      moment(this.state.class_date).format("YYYY-MM-DD") + "T00:00:00.000Z";
+
+    // const dateYesterday =
+    //   moment(this.state.reserv_date)
+    //     .subtract({ days: 1 })
+    //     .format("YYYY-MM-DD") + "T00:00:00.000Z";
+
+    // console.log("yesterday", dateYesterday);
     this.setState({
       customer_name_err: false,
       exercise_name_err: false,
@@ -961,13 +970,14 @@ class Reservation extends Component {
     if (this.state.exercise_name == "") {
       this.setState({ exercise_name_err: true });
       alert("운동을 선택해 주세요");
-    } else if (this.state.customer_name == "") {
+    }
+    //  else if (date == dateYesterday) {
+    //   alert("오늘 이후 만 예약이 가능합니다.");
+    // }
+    else if (this.state.customer_name == "") {
       this.setState({ customer_name_err: true });
-      alert("이름을 확인해 주세요");
+      alert("회원을 선택해 주세요");
     } else {
-      const date =
-        moment(this.state.class_date).format("YYYY-MM-DD") + "T00:00:00.000Z";
-      console.log(date);
       fetch(ip + "/reservation/insert", {
         method: "POST",
         headers: {
@@ -1505,7 +1515,7 @@ class Reservation extends Component {
             />
           );
         });
-      console.log(result);
+      // console.log(result);
       this.setState({ reservationClass_choice: items });
     });
   };

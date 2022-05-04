@@ -898,7 +898,8 @@ class ReservationClass extends Component {
       alert("분을 확인해 주세요.(0~59)");
     } else {
       const date =
-        moment(this.state.class_date).format("YYYY-MM-DD") + "T00:00:00.000Z";
+        moment(this.state.class_date).add({ hour: 9 }).format("YYYY-MM-DD") +
+        "T00:00:00.000Z";
 
       fetch(ip + "/reservationClass/insert", {
         method: "POST",
@@ -994,12 +995,12 @@ class ReservationClass extends Component {
               {" "}
               {moment(this.state.class_date)
                 .day(0)
-                .add(this.state.dayIncreament, "days")
+                .add({ days: this.state.dayIncreament, hour: 9 })
                 .format("YYYY-MM-DD(dd)")}
               ~
               {moment(this.state.class_date)
                 .day(6)
-                .add(this.state.dayIncreament, "days")
+                .add({ days: this.state.dayIncreament, hour: 9 })
                 .format("YYYY-MM-DD(dd)")}
             </div>
             <button name="next" onClick={this.handleWeekClick}>
@@ -1011,43 +1012,43 @@ class ReservationClass extends Component {
                   <th scope="col">
                     {moment(this.state.class_date)
                       .day(0)
-                      .add(this.state.dayIncreament, "days")
+                      .add({ days: this.state.dayIncreament, hour: 9 })
                       .format("dd")}
                   </th>
                   <th scope="col">
                     {moment(this.state.class_date)
                       .day(1)
-                      .add(this.state.dayIncreament, "days")
+                      .add({ days: this.state.dayIncreament, hour: 9 })
                       .format("dd")}
                   </th>
                   <th scope="col">
                     {moment(this.state.class_date)
                       .day(2)
-                      .add(this.state.dayIncreament, "days")
+                      .add({ days: this.state.dayIncreament, hour: 9 })
                       .format("dd")}
                   </th>
                   <th scope="col">
                     {moment(this.state.class_date)
                       .day(3)
-                      .add(this.state.dayIncreament, "days")
+                      .add({ days: this.state.dayIncreament, hour: 9 })
                       .format("dd")}
                   </th>
                   <th scope="col">
                     {moment(this.state.class_date)
                       .day(4)
-                      .add(this.state.dayIncreament, "days")
+                      .add({ days: this.state.dayIncreament, hour: 9 })
                       .format("dd")}
                   </th>
                   <th scope="col">
                     {moment(this.state.class_date)
                       .day(5)
-                      .add(this.state.dayIncreament, "days")
+                      .add({ days: this.state.dayIncreament, hour: 9 })
                       .format("dd")}
                   </th>
                   <th scope="col">
                     {moment(this.state.class_date)
                       .day(6)
-                      .add(this.state.dayIncreament, "days")
+                      .add({ days: this.state.dayIncreament, hour: 9 })
                       .format("dd")}
                   </th>
                 </tr>
