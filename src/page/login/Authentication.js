@@ -13,6 +13,11 @@ class Authentication extends Component {
   state = {
     id: "",
     password: "",
+    radioGroup: {
+      fitness: true,
+      trainer: false,
+      customer: false,
+    },
   };
 
   handleChange = (e) => {
@@ -56,10 +61,21 @@ class Authentication extends Component {
       }
     }
   };
-  onClickCheck = () => {
-    alert("asd");
+  handleRadio = (rad) => {
+    let obj = {
+      fitness: false,
+      trainer: false,
+      customer: false,
+    };
+    obj[rad.target.id] = rad.target.checked;
+    // console.log(obj);
+    this.setState({
+      radioGroup: obj,
+    });
   };
   render() {
+    console.log(this.state.radioGroup["fitness"]);
+    //강사, 회원은 사업주가 승인하여야만 회원가입이 가능합니다.
     const inputBoxes = (
       <div>
         <Form key="loginGroup">
@@ -67,19 +83,28 @@ class Authentication extends Component {
             inline
             type="radio"
             id="fitness"
+            name="radioGroup"
+            checked={this.state.radioGroup["fitness"]}
             label="사업주"
+            onClick={this.handleRadio}
           />
           <Form.Check
             inline
             type="radio"
             id="trainer"
+            name="radioGroup"
+            checked={this.state.radioGroup["trainer"]}
             label="강사"
+            onClick={this.handleRadio}
           />
           <Form.Check
             inline
             type="radio"
             id="customer"
+            name="radioGroup"
+            checked={this.state.radioGroup["customer"]}
             label="회원"
+            onClick={this.handleRadio}
           />
           <Form.Group className="mb-3" controlId="formBasicId">
             <Form.Label>아이디</Form.Label>
@@ -145,7 +170,27 @@ class Authentication extends Component {
           <p>안녕하세요!</p>
           <p>헬스짐 관리자 오마이짐입니다.</p>
         </div>
-        <div className="card">{this.props.mode ? loginView : registerView}</div>
+        {this.state.radioGroup["fitness"] ? (
+          <div className="card">
+            {this.props.mode ? loginView : registerView}
+          </div>
+        ) : (
+          ""
+        )}
+        {this.state.radioGroup["trainer"] ? (
+          <div className="card">
+            {this.props.mode ? loginView : registerView}2
+          </div>
+        ) : (
+          ""
+        )}
+        {this.state.radioGroup["customer"] ? (
+          <div className="card">
+            {this.props.mode ? loginView : registerView}3
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
