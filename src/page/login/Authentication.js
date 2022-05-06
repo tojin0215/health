@@ -56,7 +56,7 @@ class Authentication extends Component {
       }
     }
   };
-  onClickTrainerCustomer = () => {
+  onClickCheck = () => {
     alert("asd");
   };
   render() {
@@ -66,25 +66,20 @@ class Authentication extends Component {
           <Form.Check
             inline
             type="radio"
-            id="loginGroup-1"
-            name="group1"
+            id="fitness"
             label="사업주"
           />
           <Form.Check
             inline
             type="radio"
-            id="loginGroup-2"
-            name="group1"
+            id="trainer"
             label="강사"
-            onClick={this.onClickTrainerCustomer}
           />
           <Form.Check
             inline
             type="radio"
-            id="loginGroup-3"
-            name="group1"
+            id="customer"
             label="회원"
-            onClick={this.onClickTrainerCustomer}
           />
           <Form.Group className="mb-3" controlId="formBasicId">
             <Form.Label>아이디</Form.Label>
