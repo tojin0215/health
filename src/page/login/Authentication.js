@@ -111,7 +111,7 @@ class Authentication extends Component {
 
     const loginView = (
 		<div>
-			<Card className="text-center">
+			<Card className="text-center"  >
 				<Card.Body>
           {inputBoxes}
           <Button 
