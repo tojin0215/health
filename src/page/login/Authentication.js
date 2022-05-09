@@ -8,7 +8,7 @@ import Card from "react-bootstrap/Card";
 import FormCheck from "react-bootstrap/FormCheck";
 
 import "../../styles/login/Authentication.css";
-
+import { trainerLogin } from "../../api/user";
 class Authentication extends Component {
   state = {
     id: "",
@@ -17,6 +17,7 @@ class Authentication extends Component {
       fitness: true,
       trainer: false,
       customer: false,
+      trainerList: [],
     },
   };
 
@@ -73,6 +74,18 @@ class Authentication extends Component {
       radioGroup: obj,
     });
   };
+  trainerLoginSelect = (phone) => {
+    trainerLogin(1).then((result) => {
+      this.setState({ trainerList: items });
+    });
+  };
+  handleLoginTrainer = () => {
+    alert("강사로그인");
+  };
+  handleLoginCustomer = () => {
+    alert("회원로그인");
+    console.log(this.state.trainerList);
+  };
   render() {
     console.log(this.state.radioGroup["fitness"]);
     //강사, 회원은 사업주가 승인하여야만 회원가입이 가능합니다.
@@ -106,39 +119,71 @@ class Authentication extends Component {
             label="회원"
             onClick={this.handleRadio}
           />
-          <Form.Group className="mb-3" controlId="formBasicId">
-            <Form.Label>아이디</Form.Label>
-            <Form.Control
-              name="id"
-              type="text"
-              className="validate"
-              placeholder="Enter id"
-              onChange={this.handleChange}
-              value={this.state.id}
-            />
-            <Form.Text className="text-muted"></Form.Text>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              name="password"
-              type="password"
-              className="validate"
-              onChange={this.handleChange}
-              value={this.state.password}
-              onKeyPress={this.handleKeyPress}
-              placeholder="Password"
-            />
-          </Form.Group>
         </Form>
       </div>
     );
-
+    const loginBox = (
+      <div>
+        <Form.Group className="mb-3" controlId="formBasicId">
+          <Form.Label>아이디</Form.Label>
+          <Form.Control
+            name="id"
+            type="text"
+            className="validate"
+            placeholder="Enter id"
+            onChange={this.handleChange}
+            value={this.state.id}
+          />
+          <Form.Text className="text-muted"></Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            name="password"
+            type="password"
+            className="validate"
+            onChange={this.handleChange}
+            value={this.state.password}
+            onKeyPress={this.handleKeyPress}
+            placeholder="Password"
+          />
+        </Form.Group>
+      </div>
+    );
+    const trainerLoginBox = (
+      <div>
+        <Form.Group className="mb-3" controlId="formBasicId">
+          <Form.Label>핸드폰번호</Form.Label>
+          <Form.Control
+            name="id"
+            type="text"
+            className="validate"
+            placeholder="Enter phone number"
+            onChange={this.handleChange}
+            value={this.state.id}
+          />
+          <Form.Text className="text-muted"></Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>생년월일</Form.Label>
+          <Form.Control
+            name="password"
+            type="password"
+            className="validate"
+            onChange={this.handleChange}
+            value={this.state.password}
+            onKeyPress={this.handleKeyPress}
+            placeholder="birth"
+          />
+        </Form.Group>
+      </div>
+    );
     const loginView = (
       <div>
         <Card className="text-center">
           <Card.Body>
             {inputBoxes}
+            {loginBox}
             <Button onClick={this.handleLogin} className="" variant="primary">
               LOGIN
             </Button>
@@ -149,6 +194,43 @@ class Authentication extends Component {
             >
               회원가입
             </Button>
+          </Card.Body>
+        </Card>
+      </div>
+    );
+    const loginViewTrainer = (
+      <div>
+        <Card className="text-center">
+          <Card.Body>
+            {inputBoxes}
+            {trainerLoginBox}
+            <Button
+              onClick={this.handleLoginTrainer}
+              className=""
+              variant="primary"
+            >
+              LOGIN
+            </Button>
+            <br />
+            강사는 헬스장에서 등록가능합니다.
+          </Card.Body>
+        </Card>
+      </div>
+    );
+    const loginViewCustomer = (
+      <div>
+        <Card className="text-center">
+          <Card.Body>
+            {inputBoxes}
+            <Button
+              onClick={this.handleLoginCustomer}
+              className=""
+              variant="primary"
+            >
+              LOGIN
+            </Button>
+            <br />
+            회원은 헬스장에서 등록가능합니다.
           </Card.Body>
         </Card>
       </div>
@@ -179,14 +261,14 @@ class Authentication extends Component {
         )}
         {this.state.radioGroup["trainer"] ? (
           <div className="card">
-            {this.props.mode ? loginView : registerView}2
+            {this.props.mode ? loginViewTrainer : registerView}
           </div>
         ) : (
           ""
         )}
         {this.state.radioGroup["customer"] ? (
           <div className="card">
-            {this.props.mode ? loginView : registerView}3
+            {this.props.mode ? loginViewCustomer : registerView}
           </div>
         ) : (
           ""

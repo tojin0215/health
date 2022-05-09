@@ -106,3 +106,12 @@ export const getReservationClassBy = (fitness_no) => {
     })
     .then((response) => response.data);
 };
+
+//강사
+export const trainerLogin = (phone) => {
+  return axios
+    .post(SERVER_URL + "/trainerLogin", {
+      params: { phone: phone },
+    })
+    .then((respone) => respone.data);
+};
