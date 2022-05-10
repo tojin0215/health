@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Card from 'react-bootstrap/Card'
-import FormCheck from "react-bootstrap/FormCheck";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+import FormCheck from 'react-bootstrap/FormCheck';
 
-import "../../styles/login/Authentication.css";
+import '../../styles/login/Authentication.css';
 
 class Authentication extends Component {
   state = {
-    id: "",
-    password: "",
+    id: '',
+    password: '',
   };
 
   handleChange = (e) => {
@@ -28,8 +28,8 @@ class Authentication extends Component {
     this.props.onRegister(id, pw).then((result) => {
       if (!result) {
         this.setState({
-          id: "",
-          password: "",
+          id: '',
+          password: '',
         });
       }
     });
@@ -42,7 +42,7 @@ class Authentication extends Component {
     this.props.onLogin(id, pw).then((success) => {
       if (!success) {
         this.setState({
-          password: "",
+          password: '',
         });
       }
     });
@@ -84,46 +84,43 @@ class Authentication extends Component {
           <Form.Group className="mb-3" controlId="formBasicId">
             <Form.Label>아이디</Form.Label>
             <Form.Control
-            	name="id"
+              name="id"
               type="text"
               className="validate"
               placeholder="Enter id"
               onChange={this.handleChange}
               value={this.state.id}
             />
-            <Form.Text className="text-muted">
-            </Form.Text>
+            <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control 
+            <Form.Control
               name="password"
               type="password"
               className="validate"
               onChange={this.handleChange}
               value={this.state.password}
               onKeyPress={this.handleKeyPress}
-              placeholder="Password" />
+              placeholder="Password"
+            />
           </Form.Group>
+          <Button onClick={this.handleLogin} className="" variant="primary">
+            LOGIN
+          </Button>
+          <Button className="" variant="secondary" href="/register">
+            회원가입
+          </Button>
         </Form>
       </div>
     );
 
     const loginView = (
-		<div>
-			<Card className="text-center"  >
-				<Card.Body>
-          {inputBoxes}
-          <Button 
-          onClick={this.handleLogin} className="" variant="primary">
-            LOGIN
-          </Button>
-          <Button className="border-0 bg-white" variant="outline-secondary" href="/register">
-            회원가입
-          </Button>
-        </Card.Body>
-			</Card>
-    </div>
+      <div>
+        <Card className="text-center">
+          <Card.Body>{inputBoxes}</Card.Body>
+        </Card>
+      </div>
     );
 
     // const registerView = (
@@ -137,14 +134,7 @@ class Authentication extends Component {
     // );
     return (
       <div className="container auth">
-        <div className="welcomeMent">
-          <p>Hello,</p>
-          <p>안녕하세요!</p>
-          <p>헬스짐 관리자 오마이짐입니다.</p>
-        </div>
-        <div className="card">
-          {this.props.mode ? loginView : registerView}
-        </div>
+        <div className="card">{this.props.mode ? loginView : registerView}</div>
       </div>
     );
   }
@@ -159,10 +149,10 @@ Authentication.propTypes = {
 Authentication.defaultProps = {
   mode: true,
   onRegister: (id, pw) => {
-    console.error("register function is not defined");
+    console.error('register function is not defined');
   },
   onLogin: (id, pw) => {
-    console.error("login function not defined");
+    console.error('login function not defined');
   },
 };
 
