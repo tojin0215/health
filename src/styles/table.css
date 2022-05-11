@@ -1,84 +1,82 @@
 /* 운동개별선택 테이블 체크박스 크기 조절 */
 .exerciseSelectList input[type='checkbox'] {
-	width: 1.5rem;
-	height: 1.5rem;
-	margin: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
 }
 /* 운동 개별선택 테이블 제목 보더 제거 */
 .exerciseSelectList h3 {
-	border-bottom: none;
+  border-bottom: none;
 }
 /* 10명씩 보기 드롭다운 css */
 #pageDropDown {
-	background-color: #fff;
-	border-radius: 0.83rem;
-	color: #6c757d;
-	width: 15rem;
-	height: 3.5rem;
-	box-shadow: none;
-	margin: 0;
-	border-color: #bbb;
+  background-color: #fff;
+  border-radius: 0.83rem;
+  color: #6c757d;
+  width: 15rem;
+  height: 3.5rem;
+  box-shadow: none;
+  margin: 0;
+  border-color: #bbb;
 }
 /* .dropdown-toggle::after {
 	margin-left: 2rem;
 } */
 .react-bs-table-sizePerPage-dropdown .dropdown-menu {
-	top: 126%;
-	font-size: 1.6rem;
-	border-radius: 0.83rem;
+  top: 126%;
+  border-radius: 0.83rem;
 }
 .react-bs-table-sizePerPage-dropdown .dropdown-item {
-	padding: 0.25rem 3.15rem;
+  padding: 0.25rem 3.15rem;
 }
 /* 페이저 */
 .pagination li a {
-	padding: 0.7rem 1.4rem;
+  padding: 0.7rem 1.4rem;
 }
 /* 회원목록 테이블 */
 .react-bs-table .table-bordered > thead > tr:first-child > th {
-	font-size: 2rem;
 }
 .tableContainer {
-	border-top: 1px solid #bbb;
-	border-bottom: 1px solid #bbb;
+  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
 }
 .table2 .tableHeader {
-	border-bottom: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
 }
 .react-bs-table-container {
-	position: relative;
-	padding: 1.4rem 0;
+  position: relative;
+  padding: 1.4rem 0;
 }
 .react-bs-table-pagination {
-	position: absolute;
-	bottom: -10rem;
-	right: 1rem;
+  position: absolute;
+  bottom: -10rem;
+  right: 1rem;
 }
 .react-bs-table-pagination ul {
-	flex-wrap: nowrap;
+  flex-wrap: nowrap;
 }
 .react-bs-table-pagination ul li {
-	width: 100%;
+  width: 100%;
 }
 /**/
 
 .react-bs-table table td,
 .react-bs-table table th {
-	overflow: inherit;
+  overflow: inherit;
 }
 
 @media (max-width: 767px) {
-	.react-bs-table-container {
-		min-width: 1024px;
-		padding: 1.4rem 0 9rem;
-	}
-	.react-bs-table-pagination {
-		display: flex;
-		position: relative;
-		bottom: 0;
-	}
-	.react-bs-table-pagination .row {
-		flex-wrap: nowrap;
-		margin: 1rem;
-	}
+  .react-bs-table-container {
+    min-width: 1024px;
+    padding: 1.4rem 0 9rem;
+  }
+  .react-bs-table-pagination {
+    display: flex;
+    position: relative;
+    bottom: 0;
+  }
+  .react-bs-table-pagination .row {
+    flex-wrap: nowrap;
+    margin: 1rem;
+  }
 }

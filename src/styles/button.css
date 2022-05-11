@@ -1,6 +1,5 @@
 .customercalendar button {
   height: inherit;
-  font-size: inherit;
   font-weight: inherit;
   box-shadow: inherit;
 }
@@ -19,24 +18,7 @@ button {
   color: white;
   background-color: tomato;
 }
-.btnSolid {
-  background-color: #0f78ff;
-  color: #fff;
-  font-weight: 500;
-}
-.btnSolid > a {
-  color: #fff;
-}
-.btnSolid:hover {
-  background-color: #fff;
-  color: #0f78ff;
-}
 
-button:hover {
-  color: #fff;
-  background-color: #0069d9;
-  text-decoration: none;
-}
 /* 우측 상단 서브페이지 이동 버튼 위치*/
 .waySub {
   position: absolute;

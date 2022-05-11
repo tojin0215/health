@@ -1,66 +1,64 @@
 .admin .btnSolid {
-	width: 10rem;
-	height: 4rem;
+  width: 10rem;
+  height: 4rem;
 }
 
 .admin td button {
-	margin: -0.7rem 0 0.3rem 0;
-	height: auto;
-	font-size: 1.6rem;
-	padding: 0.4rem 3rem;
+  margin: -0.7rem 0 0.3rem 0;
+  height: auto;
+  padding: 0.4rem 3rem;
 }
 
 .react-confirm-alert .react-confirm-alert-body > h1 {
-	margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .react-confirm-alert .react-confirm-alert-button-group {
-	justify-content: center;
+  justify-content: center;
 }
 
 .react-confirm-alert .react-confirm-alert-button-group > button {
-	padding: 1rem 4rem;
+  padding: 1rem 4rem;
 }
 
 .formAddAdmin {
-	display: flex;
-	flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .formAddAdmin label {
-	width: 50%;
-	justify-content: center;
+  width: 50%;
+  justify-content: center;
 }
 
 .MuiDialog-root .formAddAdmin button {
-	width: 29rem;
-	justify-content: center;
-	align-self: center;
-	margin-bottom: 1.6rem;
-	font-size: 1.8rem;
-	font-weight: 400;
-	height: 3.6rem;
+  width: 29rem;
+  justify-content: center;
+  align-self: center;
+  margin-bottom: 1.6rem;
+  font-weight: 400;
+  height: 3.6rem;
 }
 
 .formAddAdmin .MuiFormControl-root {
-	width: 100%;
+  width: 100%;
 }
 
 .formAddAdmin label input[type='text'] {
-	width: 100%;
+  width: 100%;
 }
 .formAddAdmin label #phone {
-	width: 100%;
+  width: 100%;
 }
 .formAddAdmin label input[type='number'] {
-	width: 100%;
+  width: 100%;
 }
 .formAddAdmin label input[type='password'] {
-	width: 100%;
+  width: 100%;
 }
 .MuiDialogActions-root {
-	flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 .MuiDialogContent-root {
-	overflow-y: unset;
+  overflow-y: unset;
 }

@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
-import { Nav, Navbar, Container } from "react-bootstrap";
-import { logoutRequest } from "../../action/authentication";
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Nav, Navbar, Container } from 'react-bootstrap';
+import { logoutRequest } from '../../action/authentication';
 
-import "bootstrap/dist/css/bootstrap.css";
-import styles from "./Navigation.css";
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.css';
+import styles from './Navigation.css';
 
 class Navigation extends Component {
   constructor(props) {
@@ -14,15 +15,15 @@ class Navigation extends Component {
   }
   handleLogout = () => {
     this.props.logoutRequest().then(() => {
-      alert("로그아웃 되었습니다.");
+      alert('로그아웃 되었습니다.');
 
       // EMPTIES THE SESSION
       let loginData = {
         isLoggedIn: false,
-        username: "",
+        username: '',
       };
 
-      document.cookie = "key=" + btoa(JSON.stringify(loginData));
+      document.cookie = 'key=' + btoa(JSON.stringify(loginData));
 
       this.props.goLogin();
     });
@@ -69,7 +70,7 @@ class Navigation extends Component {
                   <NavLink
                     exact
                     to={{
-                      pathname: "/assign/inbody",
+                      pathname: '/assign/inbody',
                       state: { member_no: 0, a: true },
                     }}
                   >
@@ -143,20 +144,20 @@ class Navigation extends Component {
 								height='30'
 								className='d-inline-block align-top'
 							/>{' '} */}
-              <p className="fs-2 px-2">{userinfo.fitness_name} </p>
-              <p className="fs-5">
+              <p className="px-2 fs-6">{userinfo.fitness_name} </p>
+              <p className="fs-6">
                 센터 코드
-                <p className="fs-2 fw-bold">
+                <p className="fw-bold">
                   {userinfo &&
                     userinfo.fitness_no &&
                     parseInt(`${userinfo.fitness_no}`, 16)}
                 </p>
               </p>
             </Navbar.Brand>
-            <Nav.Item>
-              <button className="btnSolid" onClick={this.handleLogout}>
+            <Nav.Item className="align-self-center">
+              <Button variant="outline-secondary" onClick={this.handleLogout}>
                 LOG-OUT
-              </button>
+              </Button>
             </Nav.Item>
           </Nav>
         </Navbar>
