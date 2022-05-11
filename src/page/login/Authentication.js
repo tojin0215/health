@@ -8,16 +8,17 @@ import Card from "react-bootstrap/Card";
 import FormCheck from "react-bootstrap/FormCheck";
 
 import "../../styles/login/Authentication.css";
-import { trainerLogin } from "../../api/user";
+
 class Authentication extends Component {
   state = {
     id: "",
     password: "",
+    phone: "",
+    birth: "",
     radioGroup: {
       fitness: true,
       trainer: false,
       customer: false,
-      trainerList: [],
     },
   };
 
@@ -53,6 +54,19 @@ class Authentication extends Component {
       }
     });
   };
+  handleLoginTrainer = () => {
+    let phone = this.state.phone;
+    let birth = this.state.birth;
+
+    this.props.onTrainer(phone, birth).then((success) => {
+      if (!success) {
+        this.setState({
+          birth: "",
+        });
+      }
+    });
+  };
+
   handleKeyPress = (e) => {
     if (e.charCode == 13) {
       if (this.props.mode) {
@@ -74,17 +88,9 @@ class Authentication extends Component {
       radioGroup: obj,
     });
   };
-  trainerLoginSelect = (phone) => {
-    trainerLogin(1).then((result) => {
-      this.setState({ trainerList: items });
-    });
-  };
-  handleLoginTrainer = () => {
-    alert("강사로그인");
-  };
+
   handleLoginCustomer = () => {
     alert("회원로그인");
-    console.log(this.state.trainerList);
   };
   render() {
     console.log(this.state.radioGroup["fitness"]);
@@ -155,23 +161,23 @@ class Authentication extends Component {
         <Form.Group className="mb-3" controlId="formBasicId">
           <Form.Label>핸드폰번호</Form.Label>
           <Form.Control
-            name="id"
+            name="phone"
             type="text"
             className="validate"
             placeholder="Enter phone number"
             onChange={this.handleChange}
-            value={this.state.id}
+            value={this.state.phone}
           />
           <Form.Text className="text-muted"></Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>생년월일</Form.Label>
           <Form.Control
-            name="password"
+            name="birth"
             type="password"
             className="validate"
             onChange={this.handleChange}
-            value={this.state.password}
+            value={this.state.birth}
             onKeyPress={this.handleKeyPress}
             placeholder="birth"
           />
@@ -282,6 +288,7 @@ Authentication.propTypes = {
   mode: PropTypes.bool,
   onRegister: PropTypes.func,
   onLogin: PropTypes.func,
+  onTrainer: PropTypes.func,
 };
 
 Authentication.defaultProps = {
@@ -291,6 +298,9 @@ Authentication.defaultProps = {
   },
   onLogin: (id, pw) => {
     console.error("login function not defined");
+  },
+  onTrainer: (phone, birth) => {
+    console.error("trainer login no");
   },
 };
 

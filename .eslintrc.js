@@ -24,4 +24,11 @@ module.exports = {
   rules: {
     // 추가하고 싶은 rule을 더 추가해줍니다.
   },
+  eslintConfig: {
+    parserOptions: {
+      parser: "babel-eslint",
+      sourceType: "module",
+      allowImportExportEverywhere: true,
+    },
+  },
 };
