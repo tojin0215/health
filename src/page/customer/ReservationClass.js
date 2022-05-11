@@ -1,26 +1,26 @@
-import React, { Component, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { render } from 'react-dom';
-import { Container, Row, Col, Table } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
-import DatePicker, { registerLocale } from 'react-datepicker';
-import ko from 'date-fns/locale/ko';
-registerLocale('ko', ko);
-import { getStatusRequest } from '../../action/authentication';
+import React, { Component, useState } from "react";
+import { Link } from "react-router-dom";
+import { render } from "react-dom";
+import { Container, Row, Col, Table } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
+import DatePicker, { registerLocale } from "react-datepicker";
+import ko from "date-fns/locale/ko";
+registerLocale("ko", ko);
+import { getStatusRequest } from "../../action/authentication";
 
-import Navigation from '../../component/navigation/Navigation';
-import Header from '../../component/header/Header';
-import Footer from '../../component/footer/Footer';
-import MegaMenu from '../../component/navigation/Menu';
+import Navigation from "../../component/navigation/Navigation";
+import Header from "../../component/header/Header";
+import Footer from "../../component/footer/Footer";
+import MegaMenu from "../../component/navigation/Menu";
 
-import { connect } from 'react-redux';
-import 'react-dropdown/style.css';
+import { connect } from "react-redux";
+import "react-dropdown/style.css";
 
-import styles from '../../styles/reservation/reservationClass.css';
+import styles from "../../styles/reservation/reservationClass.css";
 
-import { SERVER_URL } from '../../const/settings';
-import { TextField } from '@material-ui/core';
-import moment from 'moment';
+import { SERVER_URL } from "../../const/settings";
+import { TextField } from "@material-ui/core";
+import moment from "moment";
 const ip = SERVER_URL;
 /*
 운동클래스 body
@@ -49,8 +49,8 @@ const ReservationClassItem = ({
 	운동클래스 delete
 	*/
   const reservationClassDelete = (no) => {
-    fetch(ip + '/reservationClass/delete?no=' + no, {
-      method: 'DELETE',
+    fetch(ip + "/reservationClass/delete?no=" + no, {
+      method: "DELETE",
     }).then((result) => {
       modalClose();
       if (reservationClassSelect) {
@@ -80,12 +80,12 @@ const ReservationClassItem = ({
   const [trainer_err, setTrainer_err] = useState(false);
   const [class_date_err, setClass_date_err] = useState(false);
 
-  const [exercise_class_input, setExercise_class_input] = useState('');
-  const [class_date_input, setClass_date_input] = useState('');
-  const [trainer_input, setTrainer_input] = useState('');
-  const [number_of_people_input, setNumber_of_people_input] = useState('');
-  const [hour_input, setHour_input] = useState('');
-  const [minute_input, setMinute_input] = useState('');
+  const [exercise_class_input, setExercise_class_input] = useState("");
+  const [class_date_input, setClass_date_input] = useState("");
+  const [trainer_input, setTrainer_input] = useState("");
+  const [number_of_people_input, setNumber_of_people_input] = useState("");
+  const [hour_input, setHour_input] = useState("");
+  const [minute_input, setMinute_input] = useState("");
   /*
 	운동클래스 update
 	*/
@@ -115,29 +115,29 @@ const ReservationClassItem = ({
   };
 
   const reservationClassUpdate = (no) => {
-    if (exercise_class_input == '') {
+    if (exercise_class_input == "") {
       setExercise_class_err(true);
-      alert('운동명을 써주세요.');
+      alert("운동명을 써주세요.");
     } else if (class_date_input == class_date) {
       setClass_date_err(true);
-      alert('날짜를 써주세요.');
-    } else if (trainer_input == '') {
+      alert("날짜를 써주세요.");
+    } else if (trainer_input == "") {
       setTrainer_err(true);
-      alert('트레이너명을 써주세요.');
-    } else if ((number_of_people_input == '', number_of_people_input == 0)) {
+      alert("트레이너명을 써주세요.");
+    } else if ((number_of_people_input == "", number_of_people_input == 0)) {
       setNumber_of_people_err(true);
-      alert('인원을 확인해 주세요.(숫자만, 0입력불가)');
+      alert("인원을 확인해 주세요.(숫자만, 0입력불가)");
     } else if (hour_input >= 24) {
       setHour_err(true);
-      alert('00~23시까지 설정 가능합니다.');
+      alert("00~23시까지 설정 가능합니다.");
     } else if (minute_input >= 59) {
       setMinute_err(true);
-      alert('0~59분까지 설정 가능합니다.');
+      alert("0~59분까지 설정 가능합니다.");
     } else {
-      fetch(ip + '/reservationClass/update?no=' + no, {
-        method: 'POST',
+      fetch(ip + "/reservationClass/update?no=" + no, {
+        method: "POST",
         headers: {
-          'Content-type': 'application/json',
+          "Content-type": "application/json",
         },
         body: JSON.stringify({
           fitness_no: fitness_no,
@@ -151,9 +151,9 @@ const ReservationClassItem = ({
       })
         .then((result) => result.json())
         .then((result) => {
-          alert('수정 완료');
+          alert("수정 완료");
           modalClose();
-          window.location.replace('/reservationClass');
+          window.location.replace("/reservationClass");
         });
     }
   };
@@ -172,47 +172,47 @@ const ReservationClassItem = ({
   };
   const hourArray =
     hour == 1
-      ? '01'
+      ? "01"
       : hour == 2
-      ? '02'
+      ? "02"
       : hour == 3
-      ? '03'
+      ? "03"
       : hour == 4
-      ? '04'
+      ? "04"
       : hour == 5
-      ? '05'
+      ? "05"
       : hour == 6
-      ? '06'
+      ? "06"
       : hour == 7
-      ? '07'
+      ? "07"
       : hour == 8
-      ? '08'
+      ? "08"
       : hour == 9
-      ? '09'
+      ? "09"
       : hour == 0
-      ? '00'
+      ? "00"
       : hour;
   const minuteArray =
     minute == 1
-      ? '01'
+      ? "01"
       : minute == 2
-      ? '02'
+      ? "02"
       : minute == 3
-      ? '03'
+      ? "03"
       : minute == 4
-      ? '04'
+      ? "04"
       : minute == 5
-      ? '05'
+      ? "05"
       : minute == 6
-      ? '06'
+      ? "06"
       : minute == 7
-      ? '07'
+      ? "07"
       : minute == 8
-      ? '08'
+      ? "08"
       : minute == 9
-      ? '09'
+      ? "09"
       : minute == 0
-      ? '00'
+      ? "00"
       : minute;
   return (
     <div className="border py-2 my-1 ">
@@ -221,14 +221,14 @@ const ReservationClassItem = ({
       {updateOpen ? (
         <button onClick={modalOnClick}>수정 및 삭제하기2</button>
       ) : (
-        ''
+        ""
       )}
       {/* < button onClick={modalOnClick}>수정 및 삭제하기2</button> */}
       <div>
         <Modal show={showModal}>
           시간:
           <input
-            value={hour_input == 0 ? '00' : hour_input}
+            value={hour_input == 0 ? "00" : hour_input}
             type="number"
             id="hour"
             onChange={updateChange3}
@@ -237,7 +237,7 @@ const ReservationClassItem = ({
           시
           <input
             type="number"
-            value={minute_input == 0 ? '00' : minute_input}
+            value={minute_input == 0 ? "00" : minute_input}
             id="minute"
             onChange={updateChange4}
             error={minute_err}
@@ -276,9 +276,9 @@ const ReservationClassItem = ({
           <button
             className="deleteButton"
             onClick={() =>
-              confirm('정말 삭제하시겠습니까??') == true
+              confirm("정말 삭제하시겠습니까??") == true
                 ? reservationClassDelete(no)
-                : alert('삭제가 취소 되었습니다.')
+                : alert("삭제가 취소 되었습니다.")
             }
           >
             삭제
@@ -295,9 +295,9 @@ class ReservationClass extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      exercise_class: '',
+      exercise_class: "",
       fitness_no: 2,
-      number_of_people: '',
+      number_of_people: "",
       reservationClass: [],
       reservationClass1: [],
       reservationClass2: [],
@@ -305,9 +305,9 @@ class ReservationClass extends Component {
       reservationClass4: [],
       reservationClass5: [],
       reservationClass6: [],
-      hour: '',
-      minute: '',
-      trainer: '',
+      hour: "",
+      minute: "",
+      trainer: "",
       class_date: new Date(),
 
       hour_err: false,
@@ -334,16 +334,16 @@ class ReservationClass extends Component {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
     // get cookie by name
     function getCookie(name) {
-      var value = '; ' + document.cookie;
-      var parts = value.split('; ' + name + '=');
-      if (parts.length == 2) return parts.pop().split(';').shift();
+      var value = "; " + document.cookie;
+      var parts = value.split("; " + name + "=");
+      if (parts.length == 2) return parts.pop().split(";").shift();
     }
 
     // get loginData from cookie
-    let loginData = getCookie('key');
+    let loginData = getCookie("key");
     // if loginData is undefined, do nothing
-    if (typeof loginData === 'undefined') {
-      this.props.history.push('/');
+    if (typeof loginData === "undefined") {
+      this.props.history.push("/");
       return;
     }
 
@@ -351,7 +351,7 @@ class ReservationClass extends Component {
     loginData = JSON.parse(atob(loginData));
     // if not logged in, do nothing
     if (!loginData.isLoggedIn) {
-      this.props.history.push('/');
+      this.props.history.push("/");
       return;
     }
 
@@ -363,13 +363,13 @@ class ReservationClass extends Component {
         // logout the session
         loginData = {
           isLoggedIn: false,
-          id: '',
+          id: "",
         };
 
-        document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+        document.cookie = "key=" + btoa(JSON.stringify(loginData));
 
         // and notify
-        alert('Your session is expired, please log in again');
+        alert("Your session is expired, please log in again");
       } else {
         this.reservationClassSelect();
       }
@@ -382,12 +382,12 @@ class ReservationClass extends Component {
   reservationClassSelect = () => {
     fetch(
       ip +
-        '/reservationClass/select?fitness_no=' +
+        "/reservationClass/select?fitness_no=" +
         this.props.userinfo.fitness_no,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-type': 'application/json',
+          "Content-type": "application/json",
         },
       }
     )
@@ -398,28 +398,28 @@ class ReservationClass extends Component {
           //오늘 날짜에 해당하는 주간만 조회
           .filter(
             (value) =>
-              moment(value.class_date.split('T')[0])
-                .add(9, 'hour')
+              moment(value.class_date.split("T")[0])
+                .add(9, "hour")
                 .isSameOrAfter(
                   moment().day(0 + this.state.dayIncreament),
-                  'day'
+                  "day"
                 ) &&
-              moment(value.class_date.split('T')[0])
-                .add(9, 'hour')
+              moment(value.class_date.split("T")[0])
+                .add(9, "hour")
                 .isSameOrBefore(
                   moment().day(0 + this.state.dayIncreament),
-                  'day'
+                  "day"
                 )
           )
           .map((data, index, array) => {
             const date_value = data.class_date
-              ? moment(data.class_date.split('T')[0])
+              ? moment(data.class_date.split("T")[0])
               : moment();
-            const date_split = date_value.format('YYYY년 MM월 DD일');
+            const date_split = date_value.format("YYYY년 MM월 DD일");
             let exercise_length = result.filter(
               (filterData) =>
-                filterData.class_date.split('T')[0] ===
-                data.class_date.split('T')[0]
+                filterData.class_date.split("T")[0] ===
+                data.class_date.split("T")[0]
             ).length;
             const handling = this.state.updateOpen ? true : false;
             return (
@@ -454,12 +454,12 @@ class ReservationClass extends Component {
   reservationClassSelect1 = () => {
     fetch(
       ip +
-        '/reservationClass/select?fitness_no=' +
+        "/reservationClass/select?fitness_no=" +
         this.props.userinfo.fitness_no,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-type': 'application/json',
+          "Content-type": "application/json",
         },
       }
     )
@@ -470,28 +470,28 @@ class ReservationClass extends Component {
           //오늘 날짜에 해당하는 주간만 조회
           .filter(
             (value) =>
-              moment(value.class_date.split('T')[0])
-                .add(9, 'hour')
+              moment(value.class_date.split("T")[0])
+                .add(9, "hour")
                 .isSameOrAfter(
                   moment().day(1 + this.state.dayIncreament),
-                  'day'
+                  "day"
                 ) &&
-              moment(value.class_date.split('T')[0])
-                .add(9, 'hour')
+              moment(value.class_date.split("T")[0])
+                .add(9, "hour")
                 .isSameOrBefore(
                   moment().day(1 + this.state.dayIncreament),
-                  'day'
+                  "day"
                 )
           )
           .map((data, index, array) => {
             const date_value = data.class_date
-              ? moment(data.class_date.split('T')[0])
+              ? moment(data.class_date.split("T")[0])
               : moment();
-            const date_split = date_value.format('YYYY년 MM월 DD일');
+            const date_split = date_value.format("YYYY년 MM월 DD일");
             let exercise_length = result.filter(
               (filterData) =>
-                filterData.class_date.split('T')[0] ===
-                data.class_date.split('T')[0]
+                filterData.class_date.split("T")[0] ===
+                data.class_date.split("T")[0]
             ).length;
             const handling = this.state.updateOpen ? true : false;
             return (
@@ -520,12 +520,12 @@ class ReservationClass extends Component {
   reservationClassSelect2 = () => {
     fetch(
       ip +
-        '/reservationClass/select?fitness_no=' +
+        "/reservationClass/select?fitness_no=" +
         this.props.userinfo.fitness_no,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-type': 'application/json',
+          "Content-type": "application/json",
         },
       }
     )
@@ -536,28 +536,28 @@ class ReservationClass extends Component {
           //오늘 날짜에 해당하는 주간만 조회
           .filter(
             (value) =>
-              moment(value.class_date.split('T')[0])
-                .add(9, 'hour')
+              moment(value.class_date.split("T")[0])
+                .add(9, "hour")
                 .isSameOrAfter(
                   moment().day(2 + this.state.dayIncreament),
-                  'day'
+                  "day"
                 ) &&
-              moment(value.class_date.split('T')[0])
-                .add(9, 'hour')
+              moment(value.class_date.split("T")[0])
+                .add(9, "hour")
                 .isSameOrBefore(
                   moment().day(2 + this.state.dayIncreament),
-                  'day'
+                  "day"
                 )
           )
           .map((data, index, array) => {
             const date_value = data.class_date
-              ? moment(data.class_date.split('T')[0])
+              ? moment(data.class_date.split("T")[0])
               : moment();
-            const date_split = date_value.format('YYYY년 MM월 DD일');
+            const date_split = date_value.format("YYYY년 MM월 DD일");
             let exercise_length = result.filter(
               (filterData) =>
-                filterData.class_date.split('T')[0] ===
-                data.class_date.split('T')[0]
+                filterData.class_date.split("T")[0] ===
+                data.class_date.split("T")[0]
             ).length;
             const handling = this.state.updateOpen ? true : false;
             return (
@@ -586,12 +586,12 @@ class ReservationClass extends Component {
   reservationClassSelect3 = () => {
     fetch(
       ip +
-        '/reservationClass/select?fitness_no=' +
+        "/reservationClass/select?fitness_no=" +
         this.props.userinfo.fitness_no,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-type': 'application/json',
+          "Content-type": "application/json",
         },
       }
     )
@@ -602,28 +602,28 @@ class ReservationClass extends Component {
           //오늘 날짜에 해당하는 주간만 조회
           .filter(
             (value) =>
-              moment(value.class_date.split('T')[0])
-                .add(9, 'hour')
+              moment(value.class_date.split("T")[0])
+                .add(9, "hour")
                 .isSameOrAfter(
                   moment().day(3 + this.state.dayIncreament),
-                  'day'
+                  "day"
                 ) &&
-              moment(value.class_date.split('T')[0])
-                .add(9, 'hour')
+              moment(value.class_date.split("T")[0])
+                .add(9, "hour")
                 .isSameOrBefore(
                   moment().day(3 + this.state.dayIncreament),
-                  'day'
+                  "day"
                 )
           )
           .map((data, index, array) => {
             const date_value = data.class_date
-              ? moment(data.class_date.split('T')[0])
+              ? moment(data.class_date.split("T")[0])
               : moment();
-            const date_split = date_value.format('YYYY년 MM월 DD일');
+            const date_split = date_value.format("YYYY년 MM월 DD일");
             let exercise_length = result.filter(
               (filterData) =>
-                filterData.class_date.split('T')[0] ===
-                data.class_date.split('T')[0]
+                filterData.class_date.split("T")[0] ===
+                data.class_date.split("T")[0]
             ).length;
             const handling = this.state.updateOpen ? true : false;
             return (
@@ -652,12 +652,12 @@ class ReservationClass extends Component {
   reservationClassSelect4 = () => {
     fetch(
       ip +
-        '/reservationClass/select?fitness_no=' +
+        "/reservationClass/select?fitness_no=" +
         this.props.userinfo.fitness_no,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-type': 'application/json',
+          "Content-type": "application/json",
         },
       }
     )
@@ -668,28 +668,28 @@ class ReservationClass extends Component {
           //오늘 날짜에 해당하는 주간만 조회
           .filter(
             (value) =>
-              moment(value.class_date.split('T')[0])
-                .add(9, 'hour')
+              moment(value.class_date.split("T")[0])
+                .add(9, "hour")
                 .isSameOrAfter(
                   moment().day(4 + this.state.dayIncreament),
-                  'day'
+                  "day"
                 ) &&
-              moment(value.class_date.split('T')[0])
-                .add(9, 'hour')
+              moment(value.class_date.split("T")[0])
+                .add(9, "hour")
                 .isSameOrBefore(
                   moment().day(4 + this.state.dayIncreament),
-                  'day'
+                  "day"
                 )
           )
           .map((data, index, array) => {
             const date_value = data.class_date
-              ? moment(data.class_date.split('T')[0])
+              ? moment(data.class_date.split("T")[0])
               : moment();
-            const date_split = date_value.format('YYYY년 MM월 DD일');
+            const date_split = date_value.format("YYYY년 MM월 DD일");
             let exercise_length = result.filter(
               (filterData) =>
-                filterData.class_date.split('T')[0] ===
-                data.class_date.split('T')[0]
+                filterData.class_date.split("T")[0] ===
+                data.class_date.split("T")[0]
             ).length;
             const handling = this.state.updateOpen ? true : false;
             return (
@@ -718,12 +718,12 @@ class ReservationClass extends Component {
   reservationClassSelect5 = () => {
     fetch(
       ip +
-        '/reservationClass/select?fitness_no=' +
+        "/reservationClass/select?fitness_no=" +
         this.props.userinfo.fitness_no,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-type': 'application/json',
+          "Content-type": "application/json",
         },
       }
     )
@@ -734,28 +734,28 @@ class ReservationClass extends Component {
           //오늘 날짜에 해당하는 주간만 조회
           .filter(
             (value) =>
-              moment(value.class_date.split('T')[0])
-                .add(9, 'hour')
+              moment(value.class_date.split("T")[0])
+                .add(9, "hour")
                 .isSameOrAfter(
                   moment().day(5 + this.state.dayIncreament),
-                  'day'
+                  "day"
                 ) &&
-              moment(value.class_date.split('T')[0])
-                .add(9, 'hour')
+              moment(value.class_date.split("T")[0])
+                .add(9, "hour")
                 .isSameOrBefore(
                   moment().day(5 + this.state.dayIncreament),
-                  'day'
+                  "day"
                 )
           )
           .map((data, index, array) => {
             const date_value = data.class_date
-              ? moment(data.class_date.split('T')[0])
+              ? moment(data.class_date.split("T")[0])
               : moment();
-            const date_split = date_value.format('YYYY년 MM월 DD일');
+            const date_split = date_value.format("YYYY년 MM월 DD일");
             let exercise_length = result.filter(
               (filterData) =>
-                filterData.class_date.split('T')[0] ===
-                data.class_date.split('T')[0]
+                filterData.class_date.split("T")[0] ===
+                data.class_date.split("T")[0]
             ).length;
             const handling = this.state.updateOpen ? true : false;
 
@@ -785,12 +785,12 @@ class ReservationClass extends Component {
   reservationClassSelect6 = () => {
     fetch(
       ip +
-        '/reservationClass/select?fitness_no=' +
+        "/reservationClass/select?fitness_no=" +
         this.props.userinfo.fitness_no,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-type': 'application/json',
+          "Content-type": "application/json",
         },
       }
     )
@@ -801,28 +801,28 @@ class ReservationClass extends Component {
           //오늘 날짜에 해당하는 주간만 조회
           .filter(
             (value) =>
-              moment(value.class_date.split('T')[0])
-                .add(9, 'hour')
+              moment(value.class_date.split("T")[0])
+                .add(9, "hour")
                 .isSameOrAfter(
                   moment().day(6 + this.state.dayIncreament),
-                  'day'
+                  "day"
                 ) &&
-              moment(value.class_date.split('T')[0])
-                .add(9, 'hour')
+              moment(value.class_date.split("T")[0])
+                .add(9, "hour")
                 .isSameOrBefore(
                   moment().day(6 + this.state.dayIncreament),
-                  'day'
+                  "day"
                 )
           )
           .map((data, index, array) => {
             const date_value = data.class_date
-              ? moment(data.class_date.split('T')[0])
+              ? moment(data.class_date.split("T")[0])
               : moment();
-            const date_split = date_value.format('YYYY년 MM월 DD일');
+            const date_split = date_value.format("YYYY년 MM월 DD일");
             let exercise_length = result.filter(
               (filterData) =>
-                filterData.class_date.split('T')[0] ===
-                data.class_date.split('T')[0]
+                filterData.class_date.split("T")[0] ===
+                data.class_date.split("T")[0]
             ).length;
             const handling = this.state.updateOpen ? true : false;
 
@@ -850,12 +850,12 @@ class ReservationClass extends Component {
   handleWeekClick = (w) => {
     const dayIncreament = 0;
     const name = w.target.name;
-    if (name === 'next') {
+    if (name === "next") {
       this.setState({
         dayIncreament: this.state.dayIncreament + 7,
       }),
         this.reservationClassSelect();
-    } else if (name === 'prev') {
+    } else if (name === "prev") {
       this.setState({
         dayIncreament: this.state.dayIncreament - 7,
       }),
@@ -872,41 +872,40 @@ class ReservationClass extends Component {
       trainer_err: false,
       class_date_err: false,
     });
-    if (this.state.exercise_class == '') {
+    if (this.state.exercise_class == "") {
       this.setState({ exercise_class_err: true });
-      alert('운동명을 써주세요.');
-    } else if (this.state.class_date == '') {
+      alert("운동명을 써주세요.");
+    } else if (this.state.class_date == "") {
       this.setState({ class_date_err: true });
-      alert('날짜를 써주세요.');
-    } else if (this.state.trainer == '') {
+      alert("날짜를 써주세요.");
+    } else if (this.state.trainer == "") {
       this.setState({ trainer_err: true });
-      alert('강사명을 써주세요.');
+      alert("강사명을 써주세요.");
     } else if (
-      (this.state.number_of_people == '', this.state.number_of_people == 0)
+      (this.state.number_of_people == "", this.state.number_of_people == 0)
     ) {
       this.setState({ number_of_people_err: true });
-      alert('인원을 확인해 주세요.(숫자만, 0입력불가)');
+      alert("인원을 확인해 주세요.(숫자만, 0입력불가)");
     } else if (this.state.hour >= 24) {
       this.setState({ hour_err: true });
-      alert('00~23시까지 설정 가능합니다.');
+      alert("00~23시까지 설정 가능합니다.");
     } else if (this.state.minute >= 59) {
       this.setState({ minute_err: true });
-      alert('0~59분까지 설정 가능합니다.');
-    } else if (this.state.hour == '') {
+      alert("0~59분까지 설정 가능합니다.");
+    } else if (this.state.hour == "") {
       this.setState({ hour_err: true });
-      alert('시를 확인해 주세요.(0~24)');
-    } else if (this.state.minute == '') {
+      alert("시를 확인해 주세요.(0~24)");
+    } else if (this.state.minute == "") {
       this.setState({ minute_err: true });
-      alert('분을 확인해 주세요.(0~59)');
+      alert("분을 확인해 주세요.(0~59)");
     } else {
       const date =
-        moment(this.state.class_date).add({ hour: 9 }).format('YYYY-MM-DD') +
-        'T00:00:00.000Z';
+        moment(this.state.class_date).format("YYYY-MM-DD") + "T00:00:00.000Z";
 
-      fetch(ip + '/reservationClass/insert', {
-        method: 'POST',
+      fetch(ip + "/reservationClass/insert", {
+        method: "POST",
         headers: {
-          'Content-type': 'application/json',
+          "Content-type": "application/json",
         },
         body: JSON.stringify({
           fitness_no: this.props.userinfo.fitness_no,
@@ -920,8 +919,8 @@ class ReservationClass extends Component {
       })
         .then((result) => result.json())
         .then((result) => {
-          if (result.message == 'ok') {
-            alert('운동 설정이 완료되었습니다.');
+          if (result.message == "ok") {
+            alert("운동 설정이 완료되었습니다.");
             console.log(this.state.class_date);
           } else {
             alert(result.message);
@@ -938,7 +937,7 @@ class ReservationClass extends Component {
   };
 
   handleDateChange(date) {
-    console.log('date', date);
+    console.log("date", date);
     this.setState(
       {
         class_date: date,
@@ -994,16 +993,16 @@ class ReservationClass extends Component {
               이전주
             </button>
             <div>
-              {' '}
+              {" "}
               {moment(this.state.class_date)
                 .day(0)
-                .add({ days: this.state.dayIncreament, hour: 9 })
-                .format('YYYY-MM-DD(dd)')}
+                .add({ days: this.state.dayIncreament })
+                .format("YYYY-MM-DD(dd)")}
               ~
               {moment(this.state.class_date)
                 .day(6)
-                .add({ days: this.state.dayIncreament, hour: 9 })
-                .format('YYYY-MM-DD(dd)')}
+                .add({ days: this.state.dayIncreament })
+                .format("YYYY-MM-DD(dd)")}
             </div>
             <button name="next" onClick={this.handleWeekClick}>
               다음주
@@ -1014,44 +1013,44 @@ class ReservationClass extends Component {
                   <th scope="col">
                     {moment(this.state.class_date)
                       .day(0)
-                      .add({ days: this.state.dayIncreament, hour: 9 })
-                      .format('dd')}
+                      .add({ days: this.state.dayIncreament })
+                      .format("dd")}
                   </th>
                   <th scope="col">
                     {moment(this.state.class_date)
                       .day(1)
-                      .add({ days: this.state.dayIncreament, hour: 9 })
-                      .format('dd')}
+                      .add({ days: this.state.dayIncreament })
+                      .format("dd")}
                   </th>
                   <th scope="col">
                     {moment(this.state.class_date)
                       .day(2)
-                      .add({ days: this.state.dayIncreament, hour: 9 })
-                      .format('dd')}
+                      .add({ days: this.state.dayIncreament })
+                      .format("dd")}
                   </th>
                   <th scope="col">
                     {moment(this.state.class_date)
                       .day(3)
-                      .add({ days: this.state.dayIncreament, hour: 9 })
-                      .format('dd')}
+                      .add({ days: this.state.dayIncreament })
+                      .format("dd")}
                   </th>
                   <th scope="col">
                     {moment(this.state.class_date)
                       .day(4)
-                      .add({ days: this.state.dayIncreament, hour: 9 })
-                      .format('dd')}
+                      .add({ days: this.state.dayIncreament })
+                      .format("dd")}
                   </th>
                   <th scope="col">
                     {moment(this.state.class_date)
                       .day(5)
-                      .add({ days: this.state.dayIncreament, hour: 9 })
-                      .format('dd')}
+                      .add({ days: this.state.dayIncreament })
+                      .format("dd")}
                   </th>
                   <th scope="col">
                     {moment(this.state.class_date)
                       .day(6)
-                      .add({ days: this.state.dayIncreament, hour: 9 })
-                      .format('dd')}
+                      .add({ days: this.state.dayIncreament })
+                      .format("dd")}
                   </th>
                 </tr>
               </thead>
@@ -1154,6 +1153,7 @@ class ReservationClass extends Component {
                 font-size="1.6rem"
                 locale="ko"
                 error={this.state.class_date_err}
+                minDate={this.state.class_date}
               />
               <TextField
                 type="number"
