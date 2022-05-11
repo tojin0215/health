@@ -1,306 +1,302 @@
 .addCustomer .customerPhone input[type='number']::-webkit-outer-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 .addCustomer .customerPhone input[type='number']::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .addCustomer .customerResi input[type='number']::-webkit-outer-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 .addCustomer .customerResi input[type='number']::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .addCustomer .container {
-	padding-top: 10rem;
-	padding-bottom: 20rem;
-	white-space: nowrap;
+  padding-top: 10rem;
+  padding-bottom: 20rem;
+  white-space: nowrap;
 }
 
 .addCustomer h3 {
-	width: 100%;
-	font-size: 2.7rem;
-	font-weight: 600;
-	padding-bottom: 0.5rem;
-	border-bottom: 1px solid #000055;
+  width: 100%;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #000055;
 }
 
 .formAddCustomer h5 {
-	width: 100%;
-	padding-top: 1.2rem;
+  width: 100%;
+  padding-top: 1.2rem;
 }
 
 .container .formAddCustomer {
-	display: flex;
-	flex-flow: row wrap;
-	padding: 1rem 0 0 0;
-	font-size: 2rem;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 1rem 0 0 0;
 }
 
 .formAddCustomer > label {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 .formAddCustomer > label input {
-	margin: 1rem;
-	border: 1px solid #999;
-	border-radius: 15px;
-	height: 4.4rem;
+  margin: 1rem;
+  border: 1px solid #999;
+  border-radius: 15px;
+  height: 4.4rem;
 }
 
 .formAddCustomer input[type='text'] {
-	min-width: 23.1rem;
+  min-width: 23.1rem;
 }
 
 .formAddCustomer .labelCheck {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .formAddCustomer .customerName {
-	width: 50%;
+  width: 50%;
 }
 .formAddCustomer .customerPeriod {
-	width: 50%;
-	justify-content: flex-start;
+  width: 50%;
+  justify-content: flex-start;
 }
 .formAddCustomer .customerPeriod input[type='number'] {
-	width: 8rem;
+  width: 8rem;
 }
 
 .formAddCustomer .customerPhone {
-	width: 50%;
+  width: 50%;
 }
 
 .formAddCustomer .customerResi {
-	width: 50%;
-	justify-content: flex-start;
+  width: 50%;
+  justify-content: flex-start;
 }
 
 .formAddCustomer .customerResi .labelCheck {
-	display: none;
+  display: none;
 }
 
 .formAddCustomer .customerResi #resiNumber {
-	min-width: 23.1rem;
+  min-width: 23.1rem;
 }
 
 .formAddCustomer #phone {
-	width: 23.1rem;
+  width: 23.1rem;
 }
 
 .formAddCustomer .customerAddress {
-	width: 50%;
+  width: 50%;
 }
 .formAddCustomer #address {
-	width: 46.2rem;
+  width: 46.2rem;
 }
 .formAddCustomer .customerIncharge {
-	width: 50%;
+  width: 50%;
 }
 
 .formAddCustomer .customerRoute {
-	width: 100%;
-	display: flex;
-	flex-flow: row wrap;
-	padding-bottom: 6rem;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  padding-bottom: 6rem;
 }
 
 .formAddCustomer .customerRoute div {
-	display: flex;
-	flex-flow: wrap;
-	width: 100%;
-	justify-content: space-between;
+  display: flex;
+  flex-flow: wrap;
+  width: 100%;
+  justify-content: space-between;
 }
 .formAddCustomer .customerRoute div label {
-	display: flex;
-	width: 20%;
-	height: 4rem;
-	flex-direction: row;
-	align-items: center;
+  display: flex;
+  width: 20%;
+  height: 4rem;
+  flex-direction: row;
+  align-items: center;
 }
 .formAddCustomer .customerRoute div label input[type='text'] {
-	width: 40%;
+  width: 40%;
 }
 .formAddCustomer .customerRoute div label:last-child {
-	width: 100%;
+  width: 100%;
 }
 
 .productPay {
-	width: 100%;
-	font-size: 2rem;
+  width: 100%;
 }
 
 .productPay > div {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .productPay .exerciseType {
-	padding-right: 20%;
+  padding-right: 20%;
 }
 
 .productPay .exerciseType label {
-	display: flex;
-	width: 25%;
-	align-items: center;
+  display: flex;
+  width: 25%;
+  align-items: center;
 }
 
 .productPay .exerciseType label span {
-	padding-right: 1rem;
+  padding-right: 1rem;
 }
 
 .productPay .exerciseType label input[type='text'] {
-	width: 50%;
+  width: 50%;
 }
 
 .productPay .exerciseType label:last-child {
-	width: 100%;
+  width: 100%;
 }
 
 .productPay .payType {
-	display: flex;
-	padding-right: 40%;
+  display: flex;
+  padding-right: 40%;
 }
 
 .productPay .payType label {
-	display: flex;
-	align-items: center;
-	width: 33.3%;
+  display: flex;
+  align-items: center;
+  width: 33.3%;
 }
 
 .productPay .paymentAmount {
-	justify-content: space-evenly;
-	padding-bottom: 6rem;
-	padding-top: 2rem;
+  justify-content: space-evenly;
+  padding-bottom: 6rem;
+  padding-top: 2rem;
 }
 
 .productPay .paymentAmount input[type='text'] {
-	text-align: center;
+  text-align: center;
 }
 
 .productPay .finalAmount {
-	padding-top: 1rem;
-	border-top: 1px solid #000055;
-	padding-bottom: 4rem;
+  padding-top: 1rem;
+  border-top: 1px solid #000055;
+  padding-bottom: 4rem;
 }
 
 .productPay .finalAmount .finalAmountOthers {
-	display: flex;
-	flex-direction: column;
-	width: 50%;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
 
 .productPay .finalAmountOthers .amountOther {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .productPay .finalAmountOthers .amountOther span {
-	padding: 0 0.7rem;
+  padding: 0 0.7rem;
 }
 
 .productPay .finalAmountOthers .amountOther input {
-	width: 70%;
+  width: 70%;
 }
 
 .productPay .finalAmount .amountTotal {
-	width: 50%;
-	display: flex;
-	align-items: center;
+  width: 50%;
+  display: flex;
+  align-items: center;
 }
 
 .productPay .finalAmount #TotalPayment {
-	width: 80%;
-	height: 10rem;
-	text-align: center;
-	color: #2d3791;
-	font-size: 4rem;
-	border: 1px solid #2d3791;
+  width: 80%;
+  height: 10rem;
+  text-align: center;
+  color: #2d3791;
+  border: 1px solid #2d3791;
 }
 
 .formAddCustomer button {
-	margin: 0 auto;
-	display: flex;
-	width: 20rem;
-	justify-content: center;
-	align-items: center;
+  margin: 0 auto;
+  display: flex;
+  width: 20rem;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 767px) {
-	.addCustomer .container {
-		padding-top: 6rem;
-	}
-	.formAddCustomer .customerName {
-		width: 100%;
-	}
-	.formAddCustomer .customerPeriod {
-		width: 100%;
-		justify-content: center;
-		white-space: nowrap;
-	}
-	.formAddCustomer input[type='text'] {
-		min-width: auto;
-	}
-	.formAddCustomer .customerPhone {
-		width: 100%;
-	}
-	.formAddCustomer .customerResi {
-		width: 100%;
-	}
-	.formAddCustomer .customerAddress {
-		width: 100%;
-	}
-	.formAddCustomer .customerIncharge {
-		width: 100%;
-	}
-	.formAddCustomer .customerRoute div label {
-		width: 50%;
-	}
-	.formAddCustomer .customerRoute div label input[type='text'] {
-		width: 100%;
-	}
-	.productPay {
-		padding-top: 5rem;
-	}
-	.productPay .exerciseType {
-		padding-right: 0;
-	}
-	.productPay .exerciseType label {
-		width: 50%;
-	}
-	.productPay .exerciseType label input[type='text'] {
-		width: 70%;
-	}
-	.productPay .payType {
-		padding-right: 0;
-	}
-	.productPay .paymentAmount > label {
-		display: flex;
-		flex-direction: column;
-	}
-	.productPay .paymentAmount > label > span {
-		height: auto;
-		align-self: center;
-	}
-	.productPay .paymentAmount input[type='text'] {
-		width: auto;
-	}
-	.productPay .finalAmount .finalAmountOthers {
-		width: 100%;
-	}
-	.productPay .finalAmount .amountTotal {
-		width: 100%;
-		flex-direction: column;
-	}
-	.formAddCustomer .customerRoute div label:last-child {
-		flex-wrap: wrap;
-	}
+  .addCustomer .container {
+    padding-top: 6rem;
+  }
+  .formAddCustomer .customerName {
+    width: 100%;
+  }
+  .formAddCustomer .customerPeriod {
+    width: 100%;
+    justify-content: center;
+    white-space: nowrap;
+  }
+  .formAddCustomer input[type='text'] {
+    min-width: auto;
+  }
+  .formAddCustomer .customerPhone {
+    width: 100%;
+  }
+  .formAddCustomer .customerResi {
+    width: 100%;
+  }
+  .formAddCustomer .customerAddress {
+    width: 100%;
+  }
+  .formAddCustomer .customerIncharge {
+    width: 100%;
+  }
+  .formAddCustomer .customerRoute div label {
+    width: 50%;
+  }
+  .formAddCustomer .customerRoute div label input[type='text'] {
+    width: 100%;
+  }
+  .productPay {
+    padding-top: 5rem;
+  }
+  .productPay .exerciseType {
+    padding-right: 0;
+  }
+  .productPay .exerciseType label {
+    width: 50%;
+  }
+  .productPay .exerciseType label input[type='text'] {
+    width: 70%;
+  }
+  .productPay .payType {
+    padding-right: 0;
+  }
+  .productPay .paymentAmount > label {
+    display: flex;
+    flex-direction: column;
+  }
+  .productPay .paymentAmount > label > span {
+    height: auto;
+    align-self: center;
+  }
+  .productPay .paymentAmount input[type='text'] {
+    width: auto;
+  }
+  .productPay .finalAmount .finalAmountOthers {
+    width: 100%;
+  }
+  .productPay .finalAmount .amountTotal {
+    width: 100%;
+    flex-direction: column;
+  }
+  .formAddCustomer .customerRoute div label:last-child {
+    flex-wrap: wrap;
+  }
 }

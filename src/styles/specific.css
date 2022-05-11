@@ -1,138 +1,135 @@
 /*------ 고객 검색창 ------*/
 /* 전체 창 가로 값*/
 .customerSearch {
-	width: 100%;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
-	padding-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 .customerSearch button {
-	align-self: center;
+  align-self: center;
 }
 /* 선택창 레이아웃 */
 .MuiDialog-root .Dropdown-root {
-	width: calc(33.33% - 1rem);
-	padding: 1rem;
-	margin: 0;
+  width: calc(33.33% - 1rem);
+  padding: 1rem;
+  margin: 0;
 }
 /* 버튼, 인풋창 크기 */
 .MuiDialog-root input[type='text'] {
-	width: calc(33.33% - 1rem);
+  width: calc(33.33% - 1rem);
 }
 .MuiDialog-root button {
-	width: 30%;
-	height: 4rem;
+  width: 30%;
+  height: 4rem;
 }
 /* 고객 이름 등 셀렉트 */
 .MuiDialog-root .Dropdown-root .Dropdown-control {
-	/* width: 100%; */
+  /* width: 100%; */
 }
 /* 타이틀 폰트 */
 .MuiDialog-root .MuiTypography-h6 {
-	font-size: 2rem;
 }
 /* 검색창 div 크기 */
 .MuiDialog-root .customerSearch .customerSearchIn {
-	width: 100%;
+  width: 100%;
 }
 /* 텍스트 인풋 크기 */
 .MuiDialog-root .customerSearch .customerSearchIn #search {
-	width: 50%;
+  width: 50%;
 }
 /* 고객 검색 버튼크기 */
 .MuiDialog-root .customerSearch .customerSearchIn button {
-	width: 50%;
+  width: 50%;
 }
 /* 테이블 폰트 크기 */
 .MuiTable-root .MuiTableCell-root {
-	font-size: 1.6rem;
-	width: auto;
+  width: auto;
 }
 /* 버튼 크기 */
 .MuiTable-root button {
-	width: auto;
+  width: auto;
 }
 /* 테이블 헤더 */
 .MuiTable-root .MuiTableCell-head {
-	text-align: center;
+  text-align: center;
 }
 
 .inbodySearchTable .MuiTableCell-head:nth-child(1) {
-	width: 7rem;
+  width: 7rem;
 }
 .inbodySearchTable .MuiTableCell-head:nth-child(3) {
-	width: 13rem;
+  width: 13rem;
 }
 .inbodySearchTable .MuiTableCell-head:nth-child(4) {
-	width: 7rem;
+  width: 7rem;
 }
 .inbodySearchTable .MuiTableCell-head:nth-child(5) {
-	width: 10rem;
+  width: 10rem;
 }
 .inbodySearchTable .MuiTableCell-head:nth-child(6) {
-	width: 13rem;
+  width: 13rem;
 }
 
 .addsalesSearchTable .MuiTableCell-head:nth-child(1) {
-	width: 8rem;
+  width: 8rem;
 }
 .addsalesSearchTable .MuiTableCell-head:nth-child(3) {
-	width: 25rem;
+  width: 25rem;
 }
 .addsalesSearchTable .MuiTableCell-head:nth-child(4) {
-	width: 12rem;
+  width: 12rem;
 }
 
 /* 테이블 셀 사이즈 */
 .MuiTable-root .MuiTableCell-body {
-	padding: 0;
-	text-align: center;
+  padding: 0;
+  text-align: center;
 }
 .MuiTable-root .MuiTableCell-body button {
-	height: 3rem;
-	font-size: 1.8rem;
-	font-weight: 500;
+  height: 3rem;
+  font-weight: 500;
 }
 
 /* 상품/매출 테이블 필터 크기 조절 */
 .sales .css-b8ldur-Input input[type='text'] {
-	height: 0.2rem;
+  height: 0.2rem;
 }
 /* 닫기 버튼 */
 .MuiPaper-root .MuiDialogActions-spacing {
-	justify-content: center;
+  justify-content: center;
 }
 .MuiDialog-paperWidthLg {
-	width: 56%;
+  width: 56%;
 }
 
 @media (max-width: 767px) {
-	.customerSearch {
-		flex-direction: column;
-		position: sticky;
-		left: 0;
-		right: 0;
-	}
-	.MuiTable-root {
-		min-width: max-content;
-	}
-	.MuiDialog-root .Dropdown-root {
-		width: 80%;
-	}
-	.MuiDialog-root input[type='text'] {
-		width: 80%;
-	}
-	.MuiTable-root .MuiTableCell-head {
-		padding: 5px 0;
-	}
-	.customerSearch button {
-		width: 80%;
-		align-self: center;
-	}
-	.addsalesSearchTable .MuiTableCell-head:nth-child(3) {
-		width: auto;
-		padding: 0 5rem;
-	}
+  .customerSearch {
+    flex-direction: column;
+    position: sticky;
+    left: 0;
+    right: 0;
+  }
+  .MuiTable-root {
+    min-width: max-content;
+  }
+  .MuiDialog-root .Dropdown-root {
+    width: 80%;
+  }
+  .MuiDialog-root input[type='text'] {
+    width: 80%;
+  }
+  .MuiTable-root .MuiTableCell-head {
+    padding: 5px 0;
+  }
+  .customerSearch button {
+    width: 80%;
+    align-self: center;
+  }
+  .addsalesSearchTable .MuiTableCell-head:nth-child(3) {
+    width: auto;
+    padding: 0 5rem;
+  }
 }
