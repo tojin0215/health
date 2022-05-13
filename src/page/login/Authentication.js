@@ -13,8 +13,6 @@ class Authentication extends Component {
   state = {
     id: "",
     password: "",
-    phone: "",
-    birth: "",
     radioGroup: {
       fitness: true,
       trainer: false,
@@ -50,18 +48,6 @@ class Authentication extends Component {
       if (!success) {
         this.setState({
           password: "",
-        });
-      }
-    });
-  };
-  handleLoginTrainer = () => {
-    let phone = this.state.phone;
-    let birth = this.state.birth;
-
-    this.props.onTrainer(phone, birth).then((success) => {
-      if (!success) {
-        this.setState({
-          birth: "",
         });
       }
     });
@@ -298,9 +284,6 @@ Authentication.defaultProps = {
   },
   onLogin: (id, pw) => {
     console.error("login function not defined");
-  },
-  onTrainer: (phone, birth) => {
-    console.error("trainer login no");
   },
 };
 

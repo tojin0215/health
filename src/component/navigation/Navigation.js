@@ -52,6 +52,22 @@ class Navigation extends Component {
                 </li>
               </ul>
             </NavLink>
+            {/* 강사페이지만들어 */}
+            <NavLink exact to="/customer">
+              <span className={styles.navitem}>강사</span>
+              <ul>
+                <li>
+                  <NavLink exact to="/customer">
+                    강사 관리
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink exact to="/customer/add">
+                    강사 등록
+                  </NavLink>
+                </li>
+              </ul>
+            </NavLink>
             <NavLink exact to="/customer">
               <span className={styles.navitem}>고객</span>
               <ul>

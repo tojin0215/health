@@ -7,7 +7,6 @@ import Header from "../../component/header/Header";
 import Footer from "../../component/footer/Footer";
 import { connect } from "react-redux";
 import { loginRequest } from "../../action/authentication";
-import { trainerLogin } from "../../api/user";
 import "react-slideshow-image/dist/styles.css";
 import "../../styles/login/Login.css";
 
@@ -40,27 +39,6 @@ class Login extends Component {
       }
     });
   };
-  handleLoginTrainer = (phone, birth) => {
-    return this.props.trainerLogin(phone, birth).then(() => {
-      if (this.props.status === "SUCCESS") {
-        // create session data
-        let loginData = {
-          isLoggedIn: true,
-          phone: phone,
-        };
-        document.cookie = "key=" + btoa(JSON.stringify(loginData));
-        alert(phone + "님 반갑습니다.");
-        this.props.history.push("/home");
-        return true;
-      } else if (this.props.status === "PERMITWAITING") {
-        alert("승인 대기 중입니다.");
-        return false;
-      } else {
-        alert("ID나 비밀번호를 확인해주세요.");
-        return false;
-      }
-    });
-  };
 
   render() {
     return (
@@ -79,11 +57,7 @@ class Login extends Component {
           </div>
         </div>
         <div className="container">
-          <Authentication
-            mode={true}
-            onLogin={this.handleLogin}
-            onTrainer={this.handleLoginTrainer}
-          />
+          <Authentication mode={true} onLogin={this.handleLogin} />
         </div>
         <div className="footer">
           <Footer />
@@ -103,9 +77,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loginRequest: (id, pw) => {
       return dispatch(loginRequest(id, pw));
-    },
-    trainerLogin: (phone, birth) => {
-      return dispatch(trainerLogin(phone, birth));
     },
   };
 };
