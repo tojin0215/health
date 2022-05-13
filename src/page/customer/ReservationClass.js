@@ -215,66 +215,66 @@ const ReservationClassItem = ({
       ? '00'
       : minute;
   return (
-    <div className="border py-2 my-1 ">
-      {hourArray}시{minuteArray}분 운동명:
-      {exercise_class}, {trainer}, 수강인원:{number_of_people}
-      {updateOpen ? (
-        <button onClick={modalOnClick}>수정 및 삭제하기2</button>
-      ) : (
-        ''
-      )}
-      {/* < button onClick={modalOnClick}>수정 및 삭제하기2</button> */}
+    <div className='border py-2 my-1 text-center'>
+      <p className='fw-bold'>{exercise_class}</p>
+      <p>{trainer}</p>
+      <p>
+        {hourArray}시{minuteArray}분
+      </p>
+      <p>정원: {number_of_people}명</p>
+      {updateOpen ? <button onClick={modalOnClick}>수정하기</button> : ''}
+      {/* <button onClick={modalOnClick}>수정 및 삭제하기2</button> */}
       <div>
         <Modal show={showModal}>
           시간:
           <input
             value={hour_input == 0 ? '00' : hour_input}
-            type="number"
-            id="hour"
+            type='number'
+            id='hour'
             onChange={updateChange3}
             error={hour_err}
           />
           시
           <input
-            type="number"
+            type='number'
             value={minute_input == 0 ? '00' : minute_input}
-            id="minute"
+            id='minute'
             onChange={updateChange4}
             error={minute_err}
           />
           분 운동명:
           <input
             value={exercise_class_input}
-            id="exercise_class"
+            id='exercise_class'
             onChange={updateChange}
             error={exercise_class_err}
           />
           강사명:
           <input
             value={trainer_input}
-            id="trainer"
+            id='trainer'
             onChange={updateChange5}
             error={trainer_err}
           />
           수강인원:
           <input
-            type="number"
+            type='number'
             value={number_of_people_input}
-            id="number_of_people"
+            id='number_of_people'
             onChange={updateChange2}
             error={number_of_people_err}
           />
           날짜:
           <input
-            type="date"
+            type='date'
             selected={setClass_date_input}
             // value={class_date_update.split("T")[0]}
-            id="class_date"
+            id='class_date'
             onChange={updateChange6}
             error={class_date_err}
           />
           <button
-            className="deleteButton"
+            className='deleteButton'
             onClick={() =>
               confirm('정말 삭제하시겠습니까??') == true
                 ? reservationClassDelete(no)
@@ -900,8 +900,7 @@ class ReservationClass extends Component {
       alert('분을 확인해 주세요.(0~59)');
     } else {
       const date =
-        moment(this.state.class_date).add({ hour: 9 }).format('YYYY-MM-DD') +
-        'T00:00:00.000Z';
+        moment(this.state.class_date).format('YYYY-MM-DD') + 'T00:00:00.000Z';
 
       fetch(ip + '/reservationClass/insert', {
         method: 'POST',
@@ -958,22 +957,22 @@ class ReservationClass extends Component {
 
   render() {
     return (
-      <div className="reservationClassWrap">
-        <header className="header">
+      <div className='reservationClassWrap'>
+        <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
           <MegaMenu />
-          <div className="localNavigation">
-            <div className="container">
+          <div className='localNavigation'>
+            <div className='container'>
               <h2>
-                <div className="parallelogram"></div>
+                <div className='parallelogram'></div>
                 운동 설정하기
                 <span>.</span>
               </h2>
-              <div className="breadCrumb">
-                <Link to="/home">HOME</Link>
+              <div className='breadCrumb'>
+                <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to="/reservationClass">운동 설정하기</Link>
+                <Link to='/reservationClass'>운동 설정하기</Link>
               </div>
               {/*.breadCrumb */}
             </div>
@@ -983,74 +982,74 @@ class ReservationClass extends Component {
         </header>
 
         <Container>
-          <Row className="pb-5 justify-content-center">
-            <Col className="text-end">
-              <Link to="/reservation">
+          <Row className='pb-5 justify-content-center'>
+            <Col className='text-end'>
+              <Link to='/reservation'>
                 <button>돌아가기</button>
               </Link>
-              <button onClick={this.handleUpdate}>수정하기 및 삭제하기</button>
+              <button onClick={this.handleUpdate}>수정하기</button>
             </Col>
-            <button name="prev" onClick={this.handleWeekClick}>
+            <button name='prev' onClick={this.handleWeekClick}>
               이전주
             </button>
             <div>
               {' '}
               {moment(this.state.class_date)
                 .day(0)
-                .add({ days: this.state.dayIncreament, hour: 9 })
+                .add({ days: this.state.dayIncreament })
                 .format('YYYY-MM-DD(dd)')}
               ~
               {moment(this.state.class_date)
                 .day(6)
-                .add({ days: this.state.dayIncreament, hour: 9 })
+                .add({ days: this.state.dayIncreament })
                 .format('YYYY-MM-DD(dd)')}
             </div>
-            <button name="next" onClick={this.handleWeekClick}>
+            <button name='next' onClick={this.handleWeekClick}>
               다음주
             </button>
-            <table class="table" name="classTable">
+            <table class='table' name='classTable'>
               <thead>
                 <tr>
-                  <th scope="col">
+                  <th scope='col'>
                     {moment(this.state.class_date)
                       .day(0)
-                      .add({ days: this.state.dayIncreament, hour: 9 })
+                      .add({ days: this.state.dayIncreament })
                       .format('dd')}
                   </th>
-                  <th scope="col">
+                  <th scope='col'>
                     {moment(this.state.class_date)
                       .day(1)
-                      .add({ days: this.state.dayIncreament, hour: 9 })
+                      .add({ days: this.state.dayIncreament })
                       .format('dd')}
                   </th>
-                  <th scope="col">
+                  <th scope='col'>
                     {moment(this.state.class_date)
                       .day(2)
-                      .add({ days: this.state.dayIncreament, hour: 9 })
+                      .add({ days: this.state.dayIncreament })
                       .format('dd')}
                   </th>
-                  <th scope="col">
+                  <th scope='col'>
                     {moment(this.state.class_date)
                       .day(3)
-                      .add({ days: this.state.dayIncreament, hour: 9 })
+                      .add({ days: this.state.dayIncreament })
                       .format('dd')}
                   </th>
-                  <th scope="col">
+                  <th scope='col'>
                     {moment(this.state.class_date)
                       .day(4)
-                      .add({ days: this.state.dayIncreament, hour: 9 })
+                      .add({ days: this.state.dayIncreament })
                       .format('dd')}
                   </th>
-                  <th scope="col">
+                  <th scope='col'>
                     {moment(this.state.class_date)
                       .day(5)
-                      .add({ days: this.state.dayIncreament, hour: 9 })
+                      .add({ days: this.state.dayIncreament })
                       .format('dd')}
                   </th>
-                  <th scope="col">
+                  <th scope='col'>
                     {moment(this.state.class_date)
                       .day(6)
-                      .add({ days: this.state.dayIncreament, hour: 9 })
+                      .add({ days: this.state.dayIncreament })
                       .format('dd')}
                   </th>
                 </tr>
@@ -1064,42 +1063,42 @@ class ReservationClass extends Component {
                       this.state.reservationClass
                     )}
                   </td>
-                  <td name="mon">
+                  <td name='mon'>
                     {this.state.reservationClass1.length == 0 ? (
                       <p>'설정된 운동이 없습니다.'</p>
                     ) : (
                       this.state.reservationClass1
                     )}
                   </td>
-                  <td name="tue">
+                  <td name='tue'>
                     {this.state.reservationClass2.length == 0 ? (
                       <p>'설정된 운동이 없습니다.'</p>
                     ) : (
                       this.state.reservationClass2
                     )}
                   </td>
-                  <td name="wed">
+                  <td name='wed'>
                     {this.state.reservationClass3.length == 0 ? (
                       <p>'설정된 운동이 없습니다.'</p>
                     ) : (
                       this.state.reservationClass3
                     )}
                   </td>
-                  <td name="thu">
+                  <td name='thu'>
                     {this.state.reservationClass4.length == 0 ? (
                       <p>'설정된 운동이 없습니다.'</p>
                     ) : (
                       this.state.reservationClass4
                     )}
                   </td>
-                  <td name="fri">
+                  <td name='fri'>
                     {this.state.reservationClass5.length == 0 ? (
                       <p>'설정된 운동이 없습니다.'</p>
                     ) : (
                       this.state.reservationClass5
                     )}
                   </td>
-                  <td name="sat">
+                  <td name='sat'>
                     {this.state.reservationClass6.length == 0 ? (
                       <p>'설정된 운동이 없습니다.'</p>
                     ) : (
@@ -1129,71 +1128,72 @@ class ReservationClass extends Component {
 								)}
 							</tbody>
 						</table> */}
-            <Col className="classInputRow text-center py-2" xs={12}>
+            <Col className='classInputRow text-center py-2' xs={12}>
               <TextField
-                id="exercise_class"
+                id='exercise_class'
                 value={this.state.exercise_class}
                 onChange={this.handleChange}
                 InputProps={{ disableUnderline: true }}
-                label="운동명"
+                label='운동명'
                 error={this.state.exercise_class_err}
               />
               <TextField
-                id="trainer"
+                id='trainer'
                 value={this.state.trainer}
                 onChange={this.handleChange}
                 InputProps={{ disableUnderline: true }}
-                label="트레이너명"
+                label='트레이너명'
                 error={this.state.trainer_err}
               />
               <DatePicker
                 selected={this.state.class_date}
                 onChange={this.handleDateChange}
-                name="class_date"
-                dateFormat="yyyy-MM-dd(eee)"
-                font-size="1.6rem"
-                locale="ko"
+                name='class_date'
+                dateFormat='yyyy-MM-dd(eee)'
+                font-size='1.6rem'
+                locale='ko'
                 error={this.state.class_date_err}
+                minDate={this.state.class_date}
               />
               <TextField
-                type="number"
-                id="hour"
+                type='number'
+                id='hour'
                 value={this.state.hour}
                 onChange={this.handleChange}
                 InputProps={{ disableUnderline: true }}
-                label="시"
+                label='시'
                 error={this.state.hour_err}
               />
               <span>:</span>
               <TextField
-                type="number"
-                id="minute"
+                type='number'
+                id='minute'
                 value={this.state.minute}
                 onChange={this.handleChange}
                 InputProps={{ disableUnderline: true }}
-                label="분"
+                label='분'
                 error={this.state.minute_err}
               />
               <TextField
-                type="number"
-                id="number_of_people"
+                type='number'
+                id='number_of_people'
                 value={this.state.number_of_people}
                 onChange={this.handleChange}
                 InputProps={{ disableUnderline: true }}
-                label="수강 인원"
+                label='수강 인원'
                 error={this.state.number_of_people_err}
               />
             </Col>
             <button
-              className="mx-4 btnSolid"
-              type="button"
+              className='mx-4 btnSolid'
+              type='button'
               onClick={this.handleOnClick}
             >
               운동 설정하기
             </button>
           </Row>
         </Container>
-        <div className="footer">
+        <div className='footer'>
           <Footer />
         </div>
       </div>
