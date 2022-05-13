@@ -1,30 +1,31 @@
-.reservationWrap .MuiInputBase-input {
-  border: 1px solid #999;
-}
-
 .reservationWrap .MuiInput-underline:before {
   border-bottom: none;
 }
 
 .reservationWrap label + .MuiInput-formControl {
-  margin-top: 0;
+  margin-top: 16px;
+  font-size: 1.6rem;
 }
 
 .reservationWrap .MuiInputLabel-formControl {
   /* position: relative; */
-  top: 8px;
-  left: 21px;
+  /* top: -2px;
+  left: 46px; */
+  width: 100%;
   font-weight: bold;
   color: #0f78ff;
 }
 
-.reservationWrap .usersearchButton {
-  min-height: 7.4rem;
+.reservationWrap .MuiInputBase-input {
+  text-align: center;
+  font-weight: bold;
 }
-.reservationWrap .usersearchButton label + .MuiInput-formControl {
-  height: 9rem;
-}
-.reservationWrap .usersearchButton #customer_name {
+
+.reservationWrap
+  .MuiInputLabel-formControl
+  .reservationWrap
+  .usersearchButton
+  #customer_name {
   border: 0;
   margin: 0;
   height: 100%;

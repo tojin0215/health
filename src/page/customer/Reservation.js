@@ -136,15 +136,15 @@ const ReservationClassItem = ({
       : minute;
   return (
     <div className='border py-2 my-1 ' onClick={handleInnerOnClick}>
-      <p>운동명</p>
+      {/* <p>운동명</p> */}
       <p className='fw-bold'>{exercise_class}</p>
-      <p>강사명</p>
+      {/* <p>강사명</p> */}
       <p className='fw-bold'>{trainer}</p>
-      <p>시간</p>
+      {/* <p>시간</p> */}
       <p className='fw-bold'>
         {hourArray}시{minuteArray}분
       </p>
-      <p>인원</p>
+      {/* <p>인원</p> */}
       <p className='fw-bold'>
         {canRegist}/{number_of_people}
       </p>
@@ -1601,27 +1601,42 @@ class Reservation extends Component {
             </Col>
             <Col xs={3} className='text-center w-auto'>
               <Link to='/reservationClass'>
-                <button>새로운 수업 만들기</button>
+                <Button>새로운 수업 만들기</Button>
               </Link>
             </Col>
-            <button name='prev' onClick={this.handleWeekClick}>
-              이전주
-            </button>
-            <div>
-              {' '}
+          </Row>
+          <Row xs={3}>
+            <Col className='text-end'>
+              <Button
+                name='prev'
+                variant='outline-secondary'
+                onClick={this.handleWeekClick}
+              >
+                이전주
+              </Button>
+            </Col>
+            <Col className='text-center align-self-center fs-5'>
               {moment(this.state.reserv_date)
                 .day(0)
                 .add(this.state.dayIncreament, 'days')
-                .format('YYYY-MM-DD(dd)')}
-              ~
+                .format('YYYY-MM-DD(dd)')}{' '}
+              ~{' '}
               {moment(this.state.reserv_date)
                 .day(6)
                 .add(this.state.dayIncreament, 'days')
                 .format('YYYY-MM-DD(dd)')}
-            </div>
-            <button name='next' onClick={this.handleWeekClick}>
-              다음주
-            </button>
+            </Col>
+            <Col className='text-start'>
+              <Button
+                name='next'
+                variant='outline-secondary'
+                onClick={this.handleWeekClick}
+              >
+                다음주
+              </Button>
+            </Col>
+          </Row>
+          <Row>
             <Col
               className='text-center py-2 w-100 overflow-auto justify-content-center'
               xs={12}
@@ -1757,12 +1772,12 @@ class Reservation extends Component {
             </Col>
             <Col></Col>
           </Row>
-          <Row lg={6}>
+          <Row className='' lg={6}>
             <Col lg={12}>
               <h5>선택된 수업</h5>
             </Col>
-            <Col className='text-center my-3' xs={12} sm={4}>
-              <div className='boxmorpinsm py-3 h-100 w-100'>
+            <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
+              <div className='boxmorpinsm py-3 h-100 w-100 '>
                 <p className=''>운동명</p>
                 <p className='fw-bold'>{this.state.exercise_name}</p>
               </div>
@@ -1775,7 +1790,7 @@ class Reservation extends Component {
                 err={this.state.exercise_name_err}
               />
             </Col>
-            <Col className='text-center my-3' xs={12} sm={4}>
+            <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
               <div className='boxmorpinsm py-3 h-100 w-100'>
                 <p className=''>강사명</p>
                 <p className='fw-bold'>{this.state.trainer}</p>
@@ -1789,7 +1804,7 @@ class Reservation extends Component {
                 // err={this.state.trainer_err}
               />
             </Col>
-            <Col className='text-center my-3' xs={12} sm={4}>
+            <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
               <div className='boxmorpinsm py-3 h-100'>
                 <p className=''>시간</p>
                 <p className='fw-bold'>{this.state.time}</p>
@@ -1802,7 +1817,7 @@ class Reservation extends Component {
                 label='시간'
               />
             </Col>
-            <Col className='text-center my-3' xs={12} sm={4}>
+            <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
               <div className='boxmorpinsm py-3 h-100 w-100'>
                 <p className=''>최대 인원수</p>
                 <p className=''>
@@ -1822,7 +1837,7 @@ class Reservation extends Component {
               />
             </Col>
             <Col className='text-center my-3' xs={12} sm={4}>
-              <div className='boxmorpinsm py-3 h-100'>
+              <div className='boxmorpinsm py-3'>
                 <p className=''>배정된 날짜</p>
                 <p className='fw-bold'>
                   {moment(this.state.class_date).format('yyyy-MM-DD') ==
