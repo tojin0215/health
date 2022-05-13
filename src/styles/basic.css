@@ -1,5 +1,5 @@
 html {
-  font-size: 18px;
+  font-size: 16px;
   word-break: break-word;
   letter-spacing: -0.05rem;
 }
@@ -8,9 +8,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Noto Sans KR', sans-serif, 'Nanum Gothic', sans-serif;
-}
-
-h2 {
 }
 
 h3 {
@@ -39,4 +36,8 @@ a:hover {
 
 p {
   margin: 0;
+}
+
+.height-fit-content {
+  height: fit-content;
 }
