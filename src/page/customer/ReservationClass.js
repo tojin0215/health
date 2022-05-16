@@ -11,6 +11,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
+import { AiFillTool } from 'react-icons/ai';
+
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
@@ -225,7 +227,13 @@ const ReservationClassItem = ({
         {hourArray}시{minuteArray}분
       </p>
       <p>정원: {number_of_people}명</p>
-      {updateOpen ? <button onClick={modalOnClick}>수정하기</button> : ''}
+      {updateOpen ? (
+        <Button variant='outline-success mt-2' onClick={modalOnClick}>
+          <AiFillTool className='align-baseline' />
+        </Button>
+      ) : (
+        ''
+      )}
       {/* <button onClick={modalOnClick}>수정 및 삭제하기2</button> */}
       <div>
         <Modal show={showModal}>
