@@ -11,6 +11,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
+import { ImSortAlphaAsc } from 'react-icons/im';
+
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
@@ -1649,49 +1651,49 @@ class Reservation extends Component {
                       {moment(this.state.reserv_date)
                         .day(0)
                         .add(this.state.dayIncreament, 'days')
-                        .format('(dd)')}
+                        .format('dd')}
                     </th>
                     <th scope='col'>
                       {' '}
                       {moment(this.state.reserv_date)
                         .day(1)
                         .add(this.state.dayIncreament, 'days')
-                        .format('(dd)')}
+                        .format('dd')}
                     </th>
                     <th scope='col'>
                       {' '}
                       {moment(this.state.reserv_date)
                         .day(2)
                         .add(this.state.dayIncreament, 'days')
-                        .format('(dd)')}
+                        .format('dd')}
                     </th>
                     <th scope='col'>
                       {' '}
                       {moment(this.state.reserv_date)
                         .day(3)
                         .add(this.state.dayIncreament, 'days')
-                        .format('(dd)')}
+                        .format('dd')}
                     </th>
                     <th scope='col'>
                       {' '}
                       {moment(this.state.reserv_date)
                         .day(4)
                         .add(this.state.dayIncreament, 'days')
-                        .format('(dd)')}
+                        .format('dd')}
                     </th>
                     <th scope='col'>
                       {' '}
                       {moment(this.state.reserv_date)
                         .day(5)
                         .add(this.state.dayIncreament, 'days')
-                        .format('(dd)')}
+                        .format('dd')}
                     </th>
                     <th scope='col'>
                       {' '}
                       {moment(this.state.reserv_date)
                         .day(6)
                         .add(this.state.dayIncreament, 'days')
-                        .format('(dd)')}
+                        .format('dd')}
                     </th>
                   </tr>
                 </thead>
@@ -1884,13 +1886,13 @@ class Reservation extends Component {
               )}
             </Col>
             <Col className='text-center w-100 mt-3' xs={12}>
-              <button
+              <Button
                 className='btnSolid mx-4 px-5'
                 type='button'
                 onClick={this.handleOnClick}
               >
                 예약하기
-              </button>
+              </Button>
             </Col>
           </Row>
           <Row xs={1} sm={3}>
@@ -1918,8 +1920,13 @@ class Reservation extends Component {
                       <tr>
                         <th scope='col'>[회원번호]회원이름</th>
                         <th scope='col'>
-                          수강 날짜
-                          <button onClick={() => this.handleDate()}>V</button>
+                          <Button
+                            variant='ouline-ligth'
+                            className='w-100 fw-bold'
+                            onClick={() => this.handleDate()}
+                          >
+                            수강 날짜 <ImSortAlphaAsc />
+                          </Button>
                         </th>
                         <th scope='col'>
                           운동

@@ -1,12 +1,15 @@
 import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { render } from 'react-dom';
-import { Container, Row, Col, Table } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
 registerLocale('ko', ko);
 import { getStatusRequest } from '../../action/authentication';
+
+import { Container, Row, Col, Table, FloatingLabel } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
@@ -983,133 +986,158 @@ class ReservationClass extends Component {
 
         <Container>
           <Row className='pb-5 justify-content-center'>
+            <Col>
+              <h4>수업 만들기</h4>
+            </Col>
             <Col className='text-end'>
               <Link to='/reservation'>
-                <button>돌아가기</button>
+                <Button variant='outline-secondary me-2'>돌아가기</Button>
               </Link>
-              <button onClick={this.handleUpdate}>수정하기</button>
+              <Button onClick={this.handleUpdate}>수정하기</Button>
             </Col>
-            <button name='prev' onClick={this.handleWeekClick}>
-              이전주
-            </button>
-            <div>
-              {' '}
-              {moment(this.state.class_date)
-                .day(0)
-                .add({ days: this.state.dayIncreament })
-                .format('YYYY-MM-DD(dd)')}
-              ~
-              {moment(this.state.class_date)
-                .day(6)
-                .add({ days: this.state.dayIncreament })
-                .format('YYYY-MM-DD(dd)')}
-            </div>
-            <button name='next' onClick={this.handleWeekClick}>
-              다음주
-            </button>
-            <table class='table' name='classTable'>
-              <thead>
-                <tr>
-                  <th scope='col'>
-                    {moment(this.state.class_date)
-                      .day(0)
-                      .add({ days: this.state.dayIncreament })
-                      .format('dd')}
-                  </th>
-                  <th scope='col'>
-                    {moment(this.state.class_date)
-                      .day(1)
-                      .add({ days: this.state.dayIncreament })
-                      .format('dd')}
-                  </th>
-                  <th scope='col'>
-                    {moment(this.state.class_date)
-                      .day(2)
-                      .add({ days: this.state.dayIncreament })
-                      .format('dd')}
-                  </th>
-                  <th scope='col'>
-                    {moment(this.state.class_date)
-                      .day(3)
-                      .add({ days: this.state.dayIncreament })
-                      .format('dd')}
-                  </th>
-                  <th scope='col'>
-                    {moment(this.state.class_date)
-                      .day(4)
-                      .add({ days: this.state.dayIncreament })
-                      .format('dd')}
-                  </th>
-                  <th scope='col'>
-                    {moment(this.state.class_date)
-                      .day(5)
-                      .add({ days: this.state.dayIncreament })
-                      .format('dd')}
-                  </th>
-                  <th scope='col'>
-                    {moment(this.state.class_date)
-                      .day(6)
-                      .add({ days: this.state.dayIncreament })
-                      .format('dd')}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    {this.state.reservationClass.length == 0 ? (
-                      <p>'설정된 운동이 없습니다.'</p>
-                    ) : (
-                      this.state.reservationClass
-                    )}
-                  </td>
-                  <td name='mon'>
-                    {this.state.reservationClass1.length == 0 ? (
-                      <p>'설정된 운동이 없습니다.'</p>
-                    ) : (
-                      this.state.reservationClass1
-                    )}
-                  </td>
-                  <td name='tue'>
-                    {this.state.reservationClass2.length == 0 ? (
-                      <p>'설정된 운동이 없습니다.'</p>
-                    ) : (
-                      this.state.reservationClass2
-                    )}
-                  </td>
-                  <td name='wed'>
-                    {this.state.reservationClass3.length == 0 ? (
-                      <p>'설정된 운동이 없습니다.'</p>
-                    ) : (
-                      this.state.reservationClass3
-                    )}
-                  </td>
-                  <td name='thu'>
-                    {this.state.reservationClass4.length == 0 ? (
-                      <p>'설정된 운동이 없습니다.'</p>
-                    ) : (
-                      this.state.reservationClass4
-                    )}
-                  </td>
-                  <td name='fri'>
-                    {this.state.reservationClass5.length == 0 ? (
-                      <p>'설정된 운동이 없습니다.'</p>
-                    ) : (
-                      this.state.reservationClass5
-                    )}
-                  </td>
-                  <td name='sat'>
-                    {this.state.reservationClass6.length == 0 ? (
-                      <p>'설정된 운동이 없습니다.'</p>
-                    ) : (
-                      this.state.reservationClass6
-                    )}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          </Row>
+          <Row xs={3}>
+            <Col className='text-end'>
+              <Button
+                name='prev'
+                variant='outline-secondary'
+                onClick={this.handleWeekClick}
+              >
+                이전주
+              </Button>
+            </Col>
+            <Col className='text-center align-self-center fs-5'>
+              <div>
+                {' '}
+                {moment(this.state.class_date)
+                  .day(0)
+                  .add({ days: this.state.dayIncreament })
+                  .format('YYYY-MM-DD(dd)')}{' '}
+                ~{' '}
+                {moment(this.state.class_date)
+                  .day(6)
+                  .add({ days: this.state.dayIncreament })
+                  .format('YYYY-MM-DD(dd)')}
+              </div>
+            </Col>
+            <Col className='text-start'>
+              <Button
+                name='next'
+                variant='outline-secondary'
+                onClick={this.handleWeekClick}
+              >
+                다음주
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col
+              className='text-center py-2 w-100 overflow-auto justify-content-center'
+              xs={12}
+            >
+              <table class='table' name='classTable'>
+                <thead>
+                  <tr>
+                    <th scope='col'>
+                      {moment(this.state.class_date)
+                        .day(0)
+                        .add({ days: this.state.dayIncreament })
+                        .format('dd')}
+                    </th>
+                    <th scope='col'>
+                      {moment(this.state.class_date)
+                        .day(1)
+                        .add({ days: this.state.dayIncreament })
+                        .format('dd')}
+                    </th>
+                    <th scope='col'>
+                      {moment(this.state.class_date)
+                        .day(2)
+                        .add({ days: this.state.dayIncreament })
+                        .format('dd')}
+                    </th>
+                    <th scope='col'>
+                      {moment(this.state.class_date)
+                        .day(3)
+                        .add({ days: this.state.dayIncreament })
+                        .format('dd')}
+                    </th>
+                    <th scope='col'>
+                      {moment(this.state.class_date)
+                        .day(4)
+                        .add({ days: this.state.dayIncreament })
+                        .format('dd')}
+                    </th>
+                    <th scope='col'>
+                      {moment(this.state.class_date)
+                        .day(5)
+                        .add({ days: this.state.dayIncreament })
+                        .format('dd')}
+                    </th>
+                    <th scope='col'>
+                      {moment(this.state.class_date)
+                        .day(6)
+                        .add({ days: this.state.dayIncreament })
+                        .format('dd')}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      {this.state.reservationClass.length == 0 ? (
+                        <p>'설정된 운동이 없습니다.'</p>
+                      ) : (
+                        this.state.reservationClass
+                      )}
+                    </td>
+                    <td name='mon'>
+                      {this.state.reservationClass1.length == 0 ? (
+                        <p>'설정된 운동이 없습니다.'</p>
+                      ) : (
+                        this.state.reservationClass1
+                      )}
+                    </td>
+                    <td name='tue'>
+                      {this.state.reservationClass2.length == 0 ? (
+                        <p>'설정된 운동이 없습니다.'</p>
+                      ) : (
+                        this.state.reservationClass2
+                      )}
+                    </td>
+                    <td name='wed'>
+                      {this.state.reservationClass3.length == 0 ? (
+                        <p>'설정된 운동이 없습니다.'</p>
+                      ) : (
+                        this.state.reservationClass3
+                      )}
+                    </td>
+                    <td name='thu'>
+                      {this.state.reservationClass4.length == 0 ? (
+                        <p>'설정된 운동이 없습니다.'</p>
+                      ) : (
+                        this.state.reservationClass4
+                      )}
+                    </td>
+                    <td name='fri'>
+                      {this.state.reservationClass5.length == 0 ? (
+                        <p>'설정된 운동이 없습니다.'</p>
+                      ) : (
+                        this.state.reservationClass5
+                      )}
+                    </td>
+                    <td name='sat'>
+                      {this.state.reservationClass6.length == 0 ? (
+                        <p>'설정된 운동이 없습니다.'</p>
+                      ) : (
+                        this.state.reservationClass6
+                      )}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
-            {/* <table class='table'>
+              {/* <table class='table'>
 							<thead>
 								<tr>
 									<th scope='col'>운동 클래스</th>
@@ -1128,69 +1156,117 @@ class ReservationClass extends Component {
 								)}
 							</tbody>
 						</table> */}
-            <Col className='classInputRow text-center py-2' xs={12}>
-              <TextField
-                id='exercise_class'
-                value={this.state.exercise_class}
-                onChange={this.handleChange}
-                InputProps={{ disableUnderline: true }}
-                label='운동명'
-                error={this.state.exercise_class_err}
-              />
-              <TextField
-                id='trainer'
-                value={this.state.trainer}
-                onChange={this.handleChange}
-                InputProps={{ disableUnderline: true }}
-                label='트레이너명'
-                error={this.state.trainer_err}
-              />
-              <DatePicker
-                selected={this.state.class_date}
-                onChange={this.handleDateChange}
-                name='class_date'
-                dateFormat='yyyy-MM-dd(eee)'
-                font-size='1.6rem'
-                locale='ko'
-                error={this.state.class_date_err}
-                minDate={this.state.class_date}
-              />
-              <TextField
-                type='number'
-                id='hour'
-                value={this.state.hour}
-                onChange={this.handleChange}
-                InputProps={{ disableUnderline: true }}
-                label='시'
-                error={this.state.hour_err}
-              />
-              <span>:</span>
-              <TextField
-                type='number'
-                id='minute'
-                value={this.state.minute}
-                onChange={this.handleChange}
-                InputProps={{ disableUnderline: true }}
-                label='분'
-                error={this.state.minute_err}
-              />
-              <TextField
-                type='number'
-                id='number_of_people'
-                value={this.state.number_of_people}
-                onChange={this.handleChange}
-                InputProps={{ disableUnderline: true }}
-                label='수강 인원'
-                error={this.state.number_of_people_err}
-              />
             </Col>
-            <button
-              className='mx-4 btnSolid'
-              type='button'
-              onClick={this.handleOnClick}
+          </Row>
+          <Row lg={6}>
+            <Col
+              className='text-center height-fit-content fs-2'
+              xs={12}
+              sm={3}
+              lg={3}
             >
-              운동 설정하기
-            </button>
+              <label className='boxmorpinsm d-block w-100'>
+                <TextField
+                  className=''
+                  id='exercise_class'
+                  value={this.state.exercise_class}
+                  onChange={this.handleChange}
+                  InputProps={{ disableUnderline: true }}
+                  label='운동명'
+                  error={this.state.exercise_class_err}
+                />
+              </label>
+            </Col>
+            <Col
+              className='text-center height-fit-content'
+              xs={12}
+              sm={3}
+              lg={3}
+            >
+              <label className='boxmorpinsm d-block w-100'>
+                <TextField
+                  className=''
+                  id='trainer'
+                  value={this.state.trainer}
+                  onChange={this.handleChange}
+                  InputProps={{ disableUnderline: true }}
+                  label='트레이너명'
+                  error={this.state.trainer_err}
+                />
+              </label>
+            </Col>
+            <Col className='text-center height-fit-content' xs={12} sm={4}>
+              <label className='d-block w-100'>
+                <DatePicker
+                  className='boxmorpinsm text-center w-100 border-0'
+                  selected={this.state.class_date}
+                  onChange={this.handleDateChange}
+                  name='class_date'
+                  dateFormat='yyyy-MM-dd(eee)'
+                  font-size='1.6rem'
+                  locale='ko'
+                  error={this.state.class_date_err}
+                  minDate={new Date()}
+                />
+              </label>
+            </Col>
+            <Col className=' px-1' xs={12} sm={2} lg={2}>
+              <Row className=''>
+                <Col className='pe-0 height-fit-content'>
+                  <label className='d-block w-100 boxmorpinsm'>
+                    <TextField
+                      className=''
+                      type='number'
+                      id='hour'
+                      value={this.state.hour}
+                      onChange={this.handleChange}
+                      InputProps={{ disableUnderline: true }}
+                      label='시'
+                      error={this.state.hour_err}
+                    />
+                  </label>
+                </Col>
+                <Col
+                  className='p-0 d-flex justify-content-center align-items-center'
+                  xs={1}
+                >
+                  <span className='fs-5 fw-bold'>:</span>
+                </Col>
+                <Col className='text-center ps-0 height-fit-content'>
+                  <label className='d-block w-100 boxmorpinsm'>
+                    <TextField
+                      className=''
+                      type='number'
+                      id='minute'
+                      value={this.state.minute}
+                      onChange={this.handleChange}
+                      InputProps={{ disableUnderline: true }}
+                      label='분'
+                      error={this.state.minute_err}
+                    />
+                  </label>
+                </Col>
+              </Row>
+            </Col>
+            <Col className='text-center height-fit-content' xs={12} sm={4}>
+              <label className='boxmorpinsm d-block w-100'>
+                <TextField
+                  className=''
+                  type='number'
+                  id='number_of_people'
+                  value={this.state.number_of_people}
+                  onChange={this.handleChange}
+                  InputProps={{ disableUnderline: true }}
+                  label='수강 인원'
+                  error={this.state.number_of_people_err}
+                />
+              </label>
+            </Col>
+            <Col xs={12} lg={12} className='text-center'>
+              <Button className='my-4 px-5' onClick={this.handleOnClick}>
+                수업 만들기
+              </Button>
+            </Col>
           </Row>
         </Container>
         <div className='footer'>
