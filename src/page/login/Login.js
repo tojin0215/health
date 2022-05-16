@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import Authentication from '../login/Authentication';
-import Navigation from '../../component/navigation/Navigation';
-import { Slide } from 'react-slideshow-image';
+import React, { Component } from "react";
+import Authentication from "../login/Authentication";
+import Navigation from "../../component/navigation/Navigation";
+import { Slide } from "react-slideshow-image";
 
-import Header from '../../component/header/Header';
-import Footer from '../../component/footer/Footer';
-import { connect } from 'react-redux';
-import { loginRequest } from '../../action/authentication';
-import 'react-slideshow-image/dist/styles.css';
-import '../../styles/login/Login.css';
+import Header from "../../component/header/Header";
+import Footer from "../../component/footer/Footer";
+import { connect } from "react-redux";
+import { loginRequest } from "../../action/authentication";
+import "react-slideshow-image/dist/styles.css";
+import "../../styles/login/Login.css";
 
-import 'react-slideshow-image/dist/styles.css';
+import "react-slideshow-image/dist/styles.css";
 
 const fadeProperties = {
   duration: 2000,
@@ -20,21 +20,21 @@ const fadeProperties = {
 class Login extends Component {
   handleLogin = (id, pw) => {
     return this.props.loginRequest(id, pw).then(() => {
-      if (this.props.status === 'SUCCESS') {
+      if (this.props.status === "SUCCESS") {
         // create session data
         let loginData = {
           isLoggedIn: true,
           id: id,
         };
-        document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-        alert(id + '님 반갑습니다.');
-        this.props.history.push('/home');
+        document.cookie = "key=" + btoa(JSON.stringify(loginData));
+        alert(id + "님 반갑습니다.");
+        this.props.history.push("/home");
         return true;
-      } else if (this.props.status === 'PERMITWAITING') {
-        alert('승인 대기 중입니다.');
+      } else if (this.props.status === "PERMITWAITING") {
+        alert("승인 대기 중입니다.");
         return false;
       } else {
-        alert('ID나 비밀번호를 확인해주세요.');
+        alert("ID나 비밀번호를 확인해주세요.");
         return false;
       }
     });
