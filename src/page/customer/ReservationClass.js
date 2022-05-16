@@ -914,7 +914,9 @@ class ReservationClass extends Component {
     );
     // console.log("수정하기", this.state.updateOpen)
   };
-
+  goLogin = () => {
+    this.props.history.push("/");
+  };
   render() {
     return (
       <div className="reservationClassWrap">
@@ -1113,7 +1115,7 @@ class ReservationClass extends Component {
                 font-size="1.6rem"
                 locale="ko"
                 error={this.state.class_date_err}
-                minDate={this.state.class_date}
+                minDate={new Date()}
               />
               <TextField
                 type="number"

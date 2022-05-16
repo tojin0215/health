@@ -1518,7 +1518,9 @@ class Reservation extends Component {
       this.reservationClassSelect6();
     }
   };
-
+  goLogin = () => {
+    this.props.history.push("/");
+  };
   render() {
     // console.log(this.state.reservation);
     // console.log("exercise", this.state.reservation_exercise);

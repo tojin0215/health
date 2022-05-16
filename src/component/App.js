@@ -1,7 +1,31 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import { Home, Customer, AddCustomer, AddExercise, Sales, AddSales, Login, Statistics, Inbody, AddInbody, UpdateCustomer, DefaultExercise, AssignExercise, AssignCheckExercise, AssignCustomer, Admin, QRLogin, Register, CustomerCalendar, Reservation, ReservationClass, ReservationUpdate } from '../page';
-
+import React, { Component } from "react";
+import { Route } from "react-router-dom";
+import {
+  Home,
+  Customer,
+  AddCustomer,
+  AddExercise,
+  Sales,
+  AddSales,
+  Login,
+  Statistics,
+  Inbody,
+  AddInbody,
+  UpdateCustomer,
+  DefaultExercise,
+  AssignExercise,
+  AssignCheckExercise,
+  AssignCustomer,
+  Admin,
+  QRLogin,
+  Register,
+  CustomerCalendar,
+  Reservation,
+  ReservationClass,
+  ReservationUpdate,
+  Trainer,
+  AddTrainer,
+} from "../page";
 
 class App extends Component {
   render() {
@@ -29,7 +53,8 @@ class App extends Component {
         <Route exact path="/reservation" component={Reservation} />
         <Route exact path="/reservationClass" component={ReservationClass} />
         <Route exact path="/reservation/update" component={ReservationUpdate} />
-
+        <Route exact path="/trainer" component={Trainer} />
+        <Route exact path="/trainer/add" component={AddTrainer} />
       </div>
     );
   }

@@ -106,3 +106,33 @@ export const getReservationClassBy = (fitness_no) => {
     })
     .then((response) => response.data);
 };
+
+//강사테이블에 insert
+export const insertTrainer = (
+  phone,
+  birth,
+  trainer_name,
+  fitness_no,
+  ment,
+  history,
+  sex
+) => {
+  return axios.post(`${SERVER_URL}/trainer`, {
+    phone,
+    birth,
+    trainer_name,
+    fitness_no,
+    ment,
+    history,
+    sex,
+  });
+};
+//매니저테이블에 trainer insert(trainer login)
+export const trainerManager = (id, password, manager_name, fitness_no) => {
+  return axios.post(`${SERVER_URL}/manager?type=trainer`, {
+    id,
+    password,
+    manager_name,
+    fitness_no,
+  });
+};

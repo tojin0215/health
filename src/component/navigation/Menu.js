@@ -111,16 +111,16 @@ class MegaMenu extends Component {
             </li>
             {/* 강사페이지만들어 */}
             <li class="dropdown">
-              <NavLink exact to="/customer">
+              <NavLink exact to="/trainer">
                 강사
               </NavLink>
               <li>
-                <NavLink exact to="/customer">
+                <NavLink exact to="/trainer">
                   강사 관리
                 </NavLink>
               </li>
               <li>
-                <NavLink exact to="/customer/add">
+                <NavLink exact to="/trainer/add">
                   강사 등록
                 </NavLink>
               </li>
