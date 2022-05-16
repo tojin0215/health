@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import { Container, Row, Col, FloatingLabel } from "react-bootstrap";
+
 import Navigation from "../../component/navigation/Navigation";
 import Header from "../../component/header/Header";
 import Footer from "../../component/footer/Footer";
@@ -89,7 +91,9 @@ class Trainer extends Component {
           </div>
           {/*.localNavigation */}
         </header>
-        <div></div>
+        <Container>
+          <div></div>
+        </Container>
         <div className="footer">
           <Footer />
         </div>

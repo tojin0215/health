@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import { Container, Row, Col, FloatingLabel } from "react-bootstrap";
+
 import Navigation from "../../component/navigation/Navigation";
 import Header from "../../component/header/Header";
 import Footer from "../../component/footer/Footer";
@@ -129,82 +131,87 @@ class AddTrainer extends Component {
           </div>
           {/*.localNavigation */}
         </header>
-
-        <div>
-          <h3>강사 정보 입력</h3>
-        </div>
-        <form>
-          <label>
-            헬스장 번호:
-            <TextField value={this.state.fitness_no} />
-          </label>
-          <br />
-          <label>
-            핸드폰번호:
-            <TextField
-              type="number"
-              variant="outlined"
-              value={this.state.phone}
-              id="phone"
-              onChange={this.handleChange}
-              required
-            />
-          </label>
-          <br />
-          <label>
-            생년월일:
-            <TextField
-              type="text"
-              value={this.state.birth}
-              id="birth"
-              onChange={this.handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            이름:
-            <TextField
-              type="text"
-              value={this.state.trainer_name}
-              id="trainer_name"
-              onChange={this.handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            자기소개:
-            <TextField
-              type="text"
-              value={this.state.ment}
-              id="ment"
-              onChange={this.handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            수상이력:
-            <TextField
-              type="text"
-              value={this.state.history}
-              id="history"
-              onChange={this.handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            성별
-            <TextField
-              value={this.state.sex}
-              id="sex"
-              onChange={this.handleChange}
-              type="text"
-            />
-          </label>
-          <br />
-          <button className="btnSolid" type="button" onClick={this.handleTotal}>
-            등록하기
-          </button>
-        </form>
+        <Container>
+          <div>
+            <h3>강사 정보 입력</h3>
+          </div>
+          <form>
+            <label>
+              헬스장 번호:
+              <TextField value={this.state.fitness_no} />
+            </label>
+            <br />
+            <label>
+              핸드폰번호:
+              <TextField
+                type="number"
+                variant="outlined"
+                value={this.state.phone}
+                id="phone"
+                onChange={this.handleChange}
+                required
+              />
+            </label>
+            <br />
+            <label>
+              생년월일:
+              <TextField
+                type="text"
+                value={this.state.birth}
+                id="birth"
+                onChange={this.handleChange}
+              />
+            </label>
+            <br />
+            <label>
+              이름:
+              <TextField
+                type="text"
+                value={this.state.trainer_name}
+                id="trainer_name"
+                onChange={this.handleChange}
+              />
+            </label>
+            <br />
+            <label>
+              자기소개:
+              <TextField
+                type="text"
+                value={this.state.ment}
+                id="ment"
+                onChange={this.handleChange}
+              />
+            </label>
+            <br />
+            <label>
+              수상이력:
+              <TextField
+                type="text"
+                value={this.state.history}
+                id="history"
+                onChange={this.handleChange}
+              />
+            </label>
+            <br />
+            <label>
+              성별
+              <TextField
+                value={this.state.sex}
+                id="sex"
+                onChange={this.handleChange}
+                type="text"
+              />
+            </label>
+            <br />
+            <button
+              className="btnSolid"
+              type="button"
+              onClick={this.handleTotal}
+            >
+              등록하기
+            </button>
+          </form>
+        </Container>
         <div className="footer">
           <Footer />
         </div>
