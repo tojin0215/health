@@ -1651,49 +1651,49 @@ class Reservation extends Component {
                       {moment(this.state.reserv_date)
                         .day(0)
                         .add(this.state.dayIncreament, 'days')
-                        .format('(dd)')}
+                        .format('dd')}
                     </th>
                     <th scope='col'>
                       {' '}
                       {moment(this.state.reserv_date)
                         .day(1)
                         .add(this.state.dayIncreament, 'days')
-                        .format('(dd)')}
+                        .format('dd')}
                     </th>
                     <th scope='col'>
                       {' '}
                       {moment(this.state.reserv_date)
                         .day(2)
                         .add(this.state.dayIncreament, 'days')
-                        .format('(dd)')}
+                        .format('dd')}
                     </th>
                     <th scope='col'>
                       {' '}
                       {moment(this.state.reserv_date)
                         .day(3)
                         .add(this.state.dayIncreament, 'days')
-                        .format('(dd)')}
+                        .format('dd')}
                     </th>
                     <th scope='col'>
                       {' '}
                       {moment(this.state.reserv_date)
                         .day(4)
                         .add(this.state.dayIncreament, 'days')
-                        .format('(dd)')}
+                        .format('dd')}
                     </th>
                     <th scope='col'>
                       {' '}
                       {moment(this.state.reserv_date)
                         .day(5)
                         .add(this.state.dayIncreament, 'days')
-                        .format('(dd)')}
+                        .format('dd')}
                     </th>
                     <th scope='col'>
                       {' '}
                       {moment(this.state.reserv_date)
                         .day(6)
                         .add(this.state.dayIncreament, 'days')
-                        .format('(dd)')}
+                        .format('dd')}
                     </th>
                   </tr>
                 </thead>

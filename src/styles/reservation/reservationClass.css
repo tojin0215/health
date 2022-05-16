@@ -1,3 +1,19 @@
-.reservationClass_wrap .MuiInputBase-input {
+.reservationClassWrap .MuiInputBase-input {
   text-align: center;
+}
+
+/*
+* 텍스트 인풋 라벨 위치 조정
+*/
+.reservationClassWrap .MuiInputBase-input {
+  padding-bottom: 16px;
+}
+
+.reservationClassWrap .MuiFormLabel-root {
+  padding-left: 50px;
+}
+
+.reservationClassWrap .react-datepicker__input-container input[type='text'] {
+  padding-top: 17px;
+  padding-bottom: 17px;
 }
