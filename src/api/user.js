@@ -73,8 +73,8 @@ const getCustomerBy = (type, search, fn) => {
 
 export const getCustomerByAll = (fitness_no) =>
   getCustomerBy("all", undefined, fitness_no);
-// export const getCustomerByName = (search, fitness_no) =>
-//   getCustomerBy("search0", search, fitness_no);
+export const getCustomerByName = (search, fitness_no) =>
+  getCustomerBy("search0", search, fitness_no);
 export const getCustomerByPhone = (search, fitness_no) =>
   getCustomerBy("search1", search, fitness_no);
 export const getCustomerByManager = (search, fitness_no) =>
