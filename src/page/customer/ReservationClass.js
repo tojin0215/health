@@ -987,7 +987,7 @@ class ReservationClass extends Component {
         <Container>
           <Row className='pb-5 justify-content-center'>
             <Col>
-              <h4>개설된 수업</h4>
+              <h4>수업 만들기</h4>
             </Col>
             <Col className='text-end'>
               <Link to='/reservation'>
@@ -1248,7 +1248,7 @@ class ReservationClass extends Component {
                 </Col>
               </Row>
             </Col>
-            <Col className='text-center  height-fit-content' xs={12} sm={4}>
+            <Col className='text-center height-fit-content' xs={12} sm={4}>
               <label className='boxmorpinsm d-block w-100'>
                 <TextField
                   className=''
@@ -1263,8 +1263,8 @@ class ReservationClass extends Component {
               </label>
             </Col>
             <Col xs={12} lg={12} className='text-center'>
-              <Button className='mx-4 btnSolid' onClick={this.handleOnClick}>
-                운동 설정하기
+              <Button className='my-4 px-5' onClick={this.handleOnClick}>
+                수업 만들기
               </Button>
             </Col>
           </Row>
