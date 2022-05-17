@@ -70,6 +70,7 @@ class AddTrainer extends Component {
 
         // and notify
         alert("Your session is expired, please log in again");
+      } else {
       }
     });
   }
@@ -84,7 +85,7 @@ class AddTrainer extends Component {
       this.state.sex
     ).then((res) => {
       console.log(res);
-      alert("asdasd");
+      alert("trainer Table");
     });
   };
   handleManagerLogin = () => {
@@ -95,7 +96,7 @@ class AddTrainer extends Component {
       this.state.fitness_no
     ).then((res) => {
       console.log(res);
-      alert("asdgggg");
+      alert("manager Table");
     });
   };
   handleTotal = () => {

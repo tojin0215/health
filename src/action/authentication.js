@@ -60,7 +60,6 @@ export function loginSuccess(info) {
     type: AUTH_LOGIN_SUCCESS,
     id: info.id,
     fitness_no: info.fitness_no,
-    fitness_name: info.fitness_name,
     manager_name: info.manager_name,
   };
 }
@@ -115,7 +114,6 @@ export function getStatusSuccess(info) {
     type: AUTH_GET_STATUS_SUCCESS,
     id: info.id,
     fitness_no: info.fitness_no,
-    fitness_name: info.fitness_name,
     manager_name: info.manager_name,
   };
 }

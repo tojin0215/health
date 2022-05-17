@@ -72,11 +72,8 @@ class AddCustomer extends Component {
     this.handleDateChange = this.handleDateChange.bind(this);
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleStartDateChange = this.handleStartDateChange.bind(this);
+    // this.handleStartDateChange = this.handleStartDateChange.bind(this);
   }
-  goLogin = () => {
-    this.props.history.push("/");
-  };
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
     // get cookie by name
@@ -120,7 +117,9 @@ class AddCustomer extends Component {
       }
     });
   }
-
+  goLogin = () => {
+    this.props.history.push("/");
+  };
   handleChange = (e) => {
     if (
       e.target.name === "paymentTools" ||
@@ -222,11 +221,11 @@ class AddCustomer extends Component {
       })
         .then((response) => response.json())
         .then((response) => {
-          console.log("111___________", response);
+          // console.log("111___________", response);
           let m_no = "";
           for (let i = 0; i < response.length; i++) {
             m_no = response[i].member_no;
-            console.log("333___________", m_no);
+            // console.log("333___________", m_no);
           }
           // 서버에서 데이터 전달하면 여기서 json type으로 받게 됨
           fetch(ip + "/sales", {
@@ -254,11 +253,11 @@ class AddCustomer extends Component {
     }
   };
 
-  handleStartDateChange(date) {
-    this.setState({
-      startDate: date,
-    });
-  }
+  // handleStartDateChange(date) {
+  //   this.setState({
+  //     startDate: date,
+  //   });
+  // }
 
   handleRadio = (event) => {
     let obj = {
@@ -304,7 +303,7 @@ class AddCustomer extends Component {
 
   render() {
     // console.log('11111', this.state.exercisePrice);
-    console.log(this.state.fitness_no);
+    // console.log(this.state.fitness_no);
     return (
       <div className="addCustomer">
         <header className="header">
@@ -644,7 +643,7 @@ class AddCustomer extends Component {
   }
 }
 
-const CustomerStateToProps = (state) => {
+const AddCustomerStateToProps = (state) => {
   return {
     userinfo: state.authentication.userinfo,
     status: state.authentication.status,
@@ -660,6 +659,6 @@ const AddCustomerDispatchToProps = (dispatch) => {
 };
 
 export default connect(
-  CustomerStateToProps,
+  AddCustomerStateToProps,
   AddCustomerDispatchToProps
 )(AddCustomer);

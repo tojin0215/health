@@ -57,15 +57,10 @@ class MegaMenu extends Component {
       <div class="megamenu">
         <div class="logo">
           <a href="/home">
-            <p className="fs-1">{userinfo.fitness_name}</p>
+            <p className="fs-1">{userinfo.manager_name}</p>
           </a>
         </div>
-        <p className="menuCenterCode fs-2">
-          센터코드{" "}
-          {userinfo &&
-            userinfo.fitness_no &&
-            parseInt(`${userinfo.fitness_no}`, 16)}
-        </p>
+        <p className="menuCenterCode fs-2">센터코드 {userinfo.fitness_no}</p>
         <div id="menu-icon">
           <span className="first"></span>
           <span className="second"></span>
