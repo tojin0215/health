@@ -557,7 +557,12 @@ const ReservationClassItem_choice = ({
       : minute;
 
   return (
-    <button onClick={handleInnerOnClick_choice}>강사:{trainer_choice}</button>
+    <Button
+      variant='oultline-secondary m-1'
+      onClick={handleInnerOnClick_choice}
+    >
+      {trainer_choice}
+    </Button>
   );
 };
 
