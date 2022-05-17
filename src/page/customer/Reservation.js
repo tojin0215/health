@@ -1,33 +1,34 @@
-import React, { Component, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { render } from "react-dom";
-import { Container, Row, Col, Table, Tabs, Tab } from "react-bootstrap";
+import React, { Component, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { render } from 'react-dom';
+import { Container, Row, Col, Table, Tabs, Tab } from 'react-bootstrap';
 
-import DatePicker, { registerLocale } from "react-datepicker";
-import ko from "date-fns/locale/ko";
-registerLocale("ko", ko);
-import { getStatusRequest } from "../../action/authentication";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import DatePicker, { registerLocale } from 'react-datepicker';
+import ko from 'date-fns/locale/ko';
+registerLocale('ko', ko);
+import { getStatusRequest } from '../../action/authentication';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
-import { ImSortAlphaAsc } from "react-icons/im";
+import { ImSortAlphaAsc } from 'react-icons/im';
+import { RiDeleteBin5Fill } from 'react-icons/ri';
 
-import Navigation from "../../component/navigation/Navigation";
-import Header from "../../component/header/Header";
-import Footer from "../../component/footer/Footer";
-import MegaMenu from "../../component/navigation/Menu";
+import Navigation from '../../component/navigation/Navigation';
+import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
+import MegaMenu from '../../component/navigation/Menu';
 
-import { connect } from "react-redux";
-import "react-dropdown/style.css";
-import styles from "../../styles/reservation/reservation.css";
+import { connect } from 'react-redux';
+import 'react-dropdown/style.css';
+import styles from '../../styles/reservation/reservation.css';
 
-import { SERVER_URL } from "../../const/settings";
-import { TextField } from "@material-ui/core";
-import moment from "moment";
-import ReservationPresetList from "../../component/reservation/ReservationPresetList";
-import ReservationList from "../../component/reservation/ReservationList";
-import UserSearch from "../../component/customer/UserSearch";
+import { SERVER_URL } from '../../const/settings';
+import { TextField } from '@material-ui/core';
+import moment from 'moment';
+import ReservationPresetList from '../../component/reservation/ReservationPresetList';
+import ReservationList from '../../component/reservation/ReservationList';
+import UserSearch from '../../component/customer/UserSearch';
 import {
   getReservation,
   getReservationClassBy,
@@ -35,7 +36,7 @@ import {
   getReservation_trainer,
   getReservation_choice_trainer,
   getReservation_date,
-} from "../../api/user";
+} from '../../api/user';
 
 const ip = SERVER_URL;
 
@@ -46,23 +47,23 @@ const dateFormat = (reserv_date) => {
   let minute = reserv_date.getMinutes();
   let second = reserv_date.getSeconds();
 
-  month = month >= 10 ? month : "0" + month;
-  day = day >= 10 ? day : "0" + day;
-  hour = hour >= 10 ? hour : "0" + hour;
-  minute = minute >= 10 ? minute : "0" + minute;
-  second = second >= 10 ? second : "0" + second;
+  month = month >= 10 ? month : '0' + month;
+  day = day >= 10 ? day : '0' + day;
+  hour = hour >= 10 ? hour : '0' + hour;
+  minute = minute >= 10 ? minute : '0' + minute;
+  second = second >= 10 ? second : '0' + second;
 
   return (
     reserv_date.getFullYear() +
-    "-" +
+    '-' +
     month +
-    "-" +
+    '-' +
     day +
-    "T" +
+    'T' +
     hour +
-    ":" +
+    ':' +
     minute +
-    ":" +
+    ':' +
     second
   );
 };
@@ -92,20 +93,20 @@ const ReservationClassItem = ({
     // console.log(number_of_people);
   };
 
-  const hourArray = hour >= 10 ? hour : "0" + hour;
-  const minuteArray = minute >= 10 ? minute : "0" + minute;
+  const hourArray = hour >= 10 ? hour : '0' + hour;
+  const minuteArray = minute >= 10 ? minute : '0' + minute;
   return (
-    <div className="border py-2 my-1 " onClick={handleInnerOnClick}>
+    <div className='border py-2 my-1 ' onClick={handleInnerOnClick}>
       {/* <p>운동명</p> */}
-      <p className="fw-bold">{exercise_class}</p>
+      <p className='fw-bold'>{exercise_class}</p>
       {/* <p>강사명</p> */}
-      <p className="fw-bold">{trainer}</p>
+      <p className='fw-bold'>{trainer}</p>
       {/* <p>시간</p> */}
-      <p className="fw-bold">
+      <p className='fw-bold'>
         {hourArray}시{minuteArray}분
       </p>
       {/* <p>인원</p> */}
-      <p className="fw-bold">
+      <p className='fw-bold'>
         {canRegist}/{number_of_people}
       </p>
     </div>
@@ -132,13 +133,13 @@ const ReservationItem = ({
   trainer,
 }) => {
   const [showResults, setShowResults] = React.useState(false);
-  const [date_input, setDate_input] = useState("");
-  const [time_input, setTime_input] = useState("");
-  const [exercise_name_input, setExercise_name_input] = useState("");
-  const [trainer_input, setTrainer_input] = useState("");
+  const [date_input, setDate_input] = useState('');
+  const [time_input, setTime_input] = useState('');
+  const [exercise_name_input, setExercise_name_input] = useState('');
+  const [trainer_input, setTrainer_input] = useState('');
   // const [isCancel_input, setIsCancel_input] = useState('');
   // const [cancelComment_input, setCancelComment_input] = useState('');
-  const [number_of_people_input, setNumber_of_people_input] = useState("");
+  const [number_of_people_input, setNumber_of_people_input] = useState('');
 
   const updateOnClick = () => {
     setShowResults(true);
@@ -164,10 +165,10 @@ const ReservationItem = ({
   };
 
   const reservationUpdate = (res_no) => {
-    fetch(ip + "/reservation/update?res_no=" + res_no, {
-      method: "PUT",
+    fetch(ip + '/reservation/update?res_no=' + res_no, {
+      method: 'PUT',
       headers: {
-        "Content-type": "application/json",
+        'Content-type': 'application/json',
       },
       body: JSON.stringify({
         time: time,
@@ -180,15 +181,15 @@ const ReservationItem = ({
       }),
     }).then((result) => {
       // console.log(result);
-      alert("예약변경완료");
+      alert('예약변경완료');
       reservationSelect();
       updateClose();
     });
   };
 
   const reservationDelete = (res_no) => {
-    fetch(ip + "/reservation/delete?res_no=" + res_no, {
-      method: "DELETE",
+    fetch(ip + '/reservation/delete?res_no=' + res_no, {
+      method: 'DELETE',
     }).then((result) => {
       reservationSelect();
     });
@@ -205,11 +206,11 @@ const ReservationItem = ({
           <DatePicker
             value={date_input}
             seleted={date_input}
-            id="date"
+            id='date'
             onChange={handleChangeDate}
-            dateFormat="yyyy-MM-dd(eee)"
-            font-size="1.6rem"
-            locale="ko"
+            dateFormat='yyyy-MM-dd(eee)'
+            font-size='1.6rem'
+            locale='ko'
           />
         </td>
       ) : (
@@ -217,29 +218,29 @@ const ReservationItem = ({
       )}
       {showResults ? (
         <td>
-          <input value={exercise_name_input} id="exercise_name" />
+          <input value={exercise_name_input} id='exercise_name' />
         </td>
       ) : (
         <td>{exercise_name}</td>
       )}
       {showResults ? (
         <td>
-          <input value={trainer_input} id="trainer" />
+          <input value={trainer_input} id='trainer' />
         </td>
       ) : (
         <td>{trainer}</td>
       )}
       {showResults ? (
         <td>
-          {exercise_length + "/"}
-          <input value={number_of_people_input} id="number_of_people" />
+          {exercise_length + '/'}
+          <input value={number_of_people_input} id='number_of_people' />
         </td>
       ) : (
-        <td>{exercise_length + "/" + number_of_people}</td>
+        <td>{exercise_length + '/' + number_of_people}</td>
       )}
       {showResults ? (
         <td>
-          <input value={time_input} id="time" />
+          <input value={time_input} id='time' />
         </td>
       ) : (
         <td>{time}</td>
@@ -255,16 +256,17 @@ const ReservationItem = ({
                 <td>{cancelComment}</td>} */}
 
       <td>
-        <button
-          className="deleteButton"
+        <Button
+          className='py-1 px-2'
+          variant='outline-danger'
           onClick={() =>
-            confirm("정말 삭제하시겠습니까??") == true
+            confirm('정말 삭제하시겠습니까??') == true
               ? reservationDelete(res_no)
-              : alert("삭제가 취소 되었습니다.")
+              : alert('삭제가 취소 되었습니다.')
           }
         >
-          삭제
-        </button>
+          <RiDeleteBin5Fill className='align-baseline' />
+        </Button>
       </td>
       {/* {showResults ?
                 <td><button onClick={() => reservationUpdate(res_no)}>수정하기...</button></td>
@@ -295,8 +297,8 @@ const ReservationItem_exercise = ({
   trainer,
 }) => {
   const reservationDelete = (res_no) => {
-    fetch(ip + "/reservation/delete?res_no=" + res_no, {
-      method: "DELETE",
+    fetch(ip + '/reservation/delete?res_no=' + res_no, {
+      method: 'DELETE',
     }).then((result) => {
       reservationSelect();
     });
@@ -309,19 +311,20 @@ const ReservationItem_exercise = ({
       <td>{date}</td>
       <td>{exercise_name}</td>
       <td>{trainer}</td>
-      <td>{exercise_length + "/" + number_of_people}</td>
+      <td>{exercise_length + '/' + number_of_people}</td>
       <td>{time}</td>
       <td>
-        <button
-          className="deleteButton"
+        <Button
+          className='py-1 px-2'
+          variant='outline-danger'
           onClick={() =>
-            confirm("정말 삭제하시겠습니까??") == true
+            confirm('정말 삭제하시겠습니까??') == true
               ? reservationDelete(res_no)
-              : alert("삭제가 취소 되었습니다.")
+              : alert('삭제가 취소 되었습니다.')
           }
         >
-          삭제
-        </button>
+          <RiDeleteBin5Fill className='align-baseline' />
+        </Button>
       </td>
     </tr>
   );
@@ -346,8 +349,8 @@ const ReservationItem_trainer = ({
   trainer,
 }) => {
   const reservationDelete = (res_no) => {
-    fetch(ip + "/reservation/delete?res_no=" + res_no, {
-      method: "DELETE",
+    fetch(ip + '/reservation/delete?res_no=' + res_no, {
+      method: 'DELETE',
     }).then((result) => {
       reservationSelect();
     });
@@ -361,19 +364,20 @@ const ReservationItem_trainer = ({
       <td>{date}</td>
       <td>{exercise_name}</td>
       <td>{trainer}</td>
-      <td>{exercise_length + "/" + number_of_people}</td>
+      <td>{exercise_length + '/' + number_of_people}</td>
       <td>{time}</td>
       <td>
-        <button
-          className="deleteButton"
+        <Button
+          className='py-1 px-2'
+          variant='outline-danger'
           onClick={() =>
-            confirm("정말 삭제하시겠습니까??") == true
+            confirm('정말 삭제하시겠습니까??') == true
               ? reservationDelete(res_no)
-              : alert("삭제가 취소 되었습니다.")
+              : alert('삭제가 취소 되었습니다.')
           }
         >
-          삭제
-        </button>
+          <RiDeleteBin5Fill className='align-baseline' />
+        </Button>
       </td>
     </tr>
   );
@@ -399,8 +403,8 @@ const ReservationItem_date = ({
   trainer,
 }) => {
   const reservationDelete = (res_no) => {
-    fetch(ip + "/reservation/delete?res_no=" + res_no, {
-      method: "DELETE",
+    fetch(ip + '/reservation/delete?res_no=' + res_no, {
+      method: 'DELETE',
     }).then((result) => {
       reservationSelect();
     });
@@ -414,19 +418,20 @@ const ReservationItem_date = ({
       <td>{date}</td>
       <td>{exercise_name}</td>
       <td>{trainer}</td>
-      <td>{exercise_length + "/" + number_of_people}</td>
+      <td>{exercise_length + '/' + number_of_people}</td>
       <td>{time}</td>
       <td>
-        <button
-          className="deleteButton"
+        <Button
+          className='py-1 px-2'
+          variant='outline-danger'
           onClick={() =>
-            confirm("정말 삭제하시겠습니까??") == true
+            confirm('정말 삭제하시겠습니까??') == true
               ? reservationDelete(res_no)
-              : alert("삭제가 취소 되었습니다.")
+              : alert('삭제가 취소 되었습니다.')
           }
         >
-          삭제
-        </button>
+          <RiDeleteBin5Fill className='align-baseline' />
+        </Button>
       </td>
     </tr>
   );
@@ -453,8 +458,8 @@ const ReservationChoiceTrainerItem = ({
   reservationSelect,
 }) => {
   const reservationDelete = (res_no) => {
-    fetch(ip + "/reservation/delete?res_no=" + res_no, {
-      method: "DELETE",
+    fetch(ip + '/reservation/delete?res_no=' + res_no, {
+      method: 'DELETE',
     }).then((result) => {
       // reservationChoiceTrainer();
       // trainer를 못가져와서 화면 새로고침함
@@ -471,19 +476,20 @@ const ReservationChoiceTrainerItem = ({
       <td>{date}</td>
       <td>{exercise_name}</td>
       <td>{trainer}</td>
-      <td>{exercise_length + "/" + number_of_people}</td>
+      <td>{exercise_length + '/' + number_of_people}</td>
       <td>{time}</td>
       <td>
-        <button
-          className="deleteButton"
+        <Button
+          className='py-1 px-2'
+          variant='outline-danger'
           onClick={() =>
-            confirm("정말 삭제하시겠습니까??") == true
+            confirm('정말 삭제하시겠습니까??') == true
               ? reservationDelete(res_no)
-              : alert("삭제가 취소 되었습니다.")
+              : alert('삭제가 취소 되었습니다.')
           }
         >
-          삭제
-        </button>
+          <RiDeleteBin5Fill className='align-baseline' />
+        </Button>
       </td>
     </tr>
   );
@@ -504,54 +510,59 @@ const ReservationClassItem_choice = ({
     handleClick_choice(trainer_choice);
     reservationChoiceTrainer(trainer_choice);
   };
-  const date = moment(class_date).format("YYYY년 MM월 DD일");
+  const date = moment(class_date).format('YYYY년 MM월 DD일');
   const hourArray =
     hour == 1
-      ? "01"
+      ? '01'
       : hour == 2
-      ? "02"
+      ? '02'
       : hour == 3
-      ? "03"
+      ? '03'
       : hour == 4
-      ? "04"
+      ? '04'
       : hour == 5
-      ? "05"
+      ? '05'
       : hour == 6
-      ? "06"
+      ? '06'
       : hour == 7
-      ? "07"
+      ? '07'
       : hour == 8
-      ? "08"
+      ? '08'
       : hour == 9
-      ? "09"
+      ? '09'
       : hour == 0
-      ? "00"
+      ? '00'
       : hour;
   const minuteArray =
     minute == 1
-      ? "01"
+      ? '01'
       : minute == 2
-      ? "02"
+      ? '02'
       : minute == 3
-      ? "03"
+      ? '03'
       : minute == 4
-      ? "04"
+      ? '04'
       : minute == 5
-      ? "05"
+      ? '05'
       : minute == 6
-      ? "06"
+      ? '06'
       : minute == 7
-      ? "07"
+      ? '07'
       : minute == 8
-      ? "08"
+      ? '08'
       : minute == 9
-      ? "09"
+      ? '09'
       : minute == 0
-      ? "00"
+      ? '00'
       : minute;
 
   return (
-    <button onClick={handleInnerOnClick_choice}>강사:{trainer_choice}</button>
+    <Button
+      variant='oultline-secondary m-1'
+      onClick={handleInnerOnClick_choice}
+    >
+      {trainer_choice}
+    </Button>
   );
 };
 
@@ -578,17 +589,17 @@ class Reservation extends Component {
       reservationClass5: [],
       reservationClass6: [],
       reservationClass_choice: [],
-      customer_name: "",
-      customer_id: "xcv",
+      customer_name: '',
+      customer_id: 'xcv',
       isCancel: 1,
       reserv_date: new Date(),
-      time: "",
-      exercise_name: "",
-      cancelComment: "",
-      number_of_people: "",
-      trainer: "",
-      class_date: "",
-      exercise_length: "0",
+      time: '',
+      exercise_name: '',
+      cancelComment: '',
+      number_of_people: '',
+      trainer: '',
+      class_date: '',
+      exercise_length: '0',
       customer_name_err: false,
       exercise_name_err: false,
       show: false,
@@ -607,16 +618,16 @@ class Reservation extends Component {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
     // get cookie by name
     function getCookie(name) {
-      var value = "; " + document.cookie;
-      var parts = value.split("; " + name + "=");
-      if (parts.length == 2) return parts.pop().split(";").shift();
+      var value = '; ' + document.cookie;
+      var parts = value.split('; ' + name + '=');
+      if (parts.length == 2) return parts.pop().split(';').shift();
     }
 
     // get loginData from cookie
-    let loginData = getCookie("key");
+    let loginData = getCookie('key');
     // if loginData is undefined, do nothing
-    if (typeof loginData === "undefined") {
-      this.props.history.push("/");
+    if (typeof loginData === 'undefined') {
+      this.props.history.push('/');
       return;
     }
 
@@ -624,7 +635,7 @@ class Reservation extends Component {
     loginData = JSON.parse(atob(loginData));
     // if not logged in, do nothing
     if (!loginData.isLoggedIn) {
-      this.props.history.push("/");
+      this.props.history.push('/');
       return;
     }
 
@@ -636,13 +647,13 @@ class Reservation extends Component {
         // logout the session
         loginData = {
           isLoggedIn: false,
-          id: "",
+          id: '',
         };
 
-        document.cookie = "key=" + btoa(JSON.stringify(loginData));
+        document.cookie = 'key=' + btoa(JSON.stringify(loginData));
 
         // and notify
-        alert("Your session is expired, please log in again");
+        alert('Your session is expired, please log in again');
       } else {
         this.reservationSelect();
         this.reservationChoiceTrainer();
@@ -668,15 +679,15 @@ class Reservation extends Component {
         // .filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
         .map((data, index, array) => {
           const date_value = data.date
-            ? moment(data.date.split("T")[0])
+            ? moment(data.date.split('T')[0])
             : moment();
           // if (date_value.isBefore(now, "day")) return
-          const date = date_value.format("YYYY년 MM월 DD일");
+          const date = date_value.format('YYYY년 MM월 DD일');
           let exercise_length = result.filter(
             (filterData) =>
               filterData.exercise_name === data.exercise_name &&
               filterData.time === data.time &&
-              filterData.date.split("T")[0] === data.date.split("T")[0]
+              filterData.date.split('T')[0] === data.date.split('T')[0]
           ).length;
           return (
             <ReservationItem
@@ -721,14 +732,14 @@ class Reservation extends Component {
         // .filter(value => moment(value.date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment(), "day"))
         .map((data, index, array) => {
           const date_value = data.date
-            ? moment(data.date.split("T")[0])
+            ? moment(data.date.split('T')[0])
             : moment();
-          const date = date_value.format("YYYY년 MM월 DD일");
+          const date = date_value.format('YYYY년 MM월 DD일');
           let exercise_length = result.filter(
             (filterData) =>
               filterData.exercise_name === data.exercise_name &&
               filterData.time === data.time &&
-              filterData.date.split("T")[0] === data.date.split("T")[0]
+              filterData.date.split('T')[0] === data.date.split('T')[0]
           ).length;
           return (
             <ReservationItem_exercise
@@ -766,15 +777,15 @@ class Reservation extends Component {
         // .filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
         .map((data, index, array) => {
           const date_value = data.date
-            ? moment(data.date.split("T")[0])
+            ? moment(data.date.split('T')[0])
             : moment();
           // if (date_value.isBefore(now, "day")) return
-          const date = date_value.format("YYYY년 MM월 DD일");
+          const date = date_value.format('YYYY년 MM월 DD일');
           let exercise_length = result.filter(
             (filterData) =>
               filterData.exercise_name === data.exercise_name &&
               filterData.time === data.time &&
-              filterData.date.split("T")[0] === data.date.split("T")[0]
+              filterData.date.split('T')[0] === data.date.split('T')[0]
           ).length;
           return (
             <ReservationItem_trainer
@@ -812,15 +823,15 @@ class Reservation extends Component {
         // .filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
         .map((data, index, array) => {
           const date_value = data.date
-            ? moment(data.date.split("T")[0])
+            ? moment(data.date.split('T')[0])
             : moment();
           // if (date_value.isBefore(now, "day")) return
-          const date = date_value.format("YYYY년 MM월 DD일");
+          const date = date_value.format('YYYY년 MM월 DD일');
           let exercise_length = result.filter(
             (filterData) =>
               filterData.exercise_name === data.exercise_name &&
               filterData.time === data.time &&
-              filterData.date.split("T")[0] === data.date.split("T")[0]
+              filterData.date.split('T')[0] === data.date.split('T')[0]
           ).length;
           return (
             <ReservationItem_date
@@ -882,15 +893,15 @@ class Reservation extends Component {
         // .filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
         .map((data, index, array) => {
           const date_value = data.date
-            ? moment(data.date.split("T")[0])
+            ? moment(data.date.split('T')[0])
             : moment();
           // if (date_value.isBefore(now, "day")) return
-          const date = date_value.format("YYYY년 MM월 DD일");
+          const date = date_value.format('YYYY년 MM월 DD일');
           let exercise_length = result.filter(
             (filterData) =>
               filterData.exercise_name === data.exercise_name &&
               filterData.time === data.time &&
-              filterData.date.split("T")[0] === data.date.split("T")[0]
+              filterData.date.split('T')[0] === data.date.split('T')[0]
           ).length;
           return (
             <ReservationChoiceTrainerItem
@@ -923,31 +934,31 @@ class Reservation extends Component {
    */
   handleOnClick = () => {
     const date =
-      moment(this.state.class_date).format("YYYY-MM-DD") + "T00:00:00.000Z";
+      moment(this.state.class_date).format('YYYY-MM-DD') + 'T00:00:00.000Z';
 
     const dateYesterday =
       moment(this.state.reserv_date)
         .subtract({ days: 1 })
-        .format("YYYY-MM-DD") + "T00:00:00.000Z";
+        .format('YYYY-MM-DD') + 'T00:00:00.000Z';
 
     // console.log("yesterday", dateYesterday);
     this.setState({
       customer_name_err: false,
       exercise_name_err: false,
     });
-    if (this.state.exercise_name == "") {
+    if (this.state.exercise_name == '') {
       this.setState({ exercise_name_err: true });
-      alert("운동을 선택해 주세요");
+      alert('운동을 선택해 주세요');
     } else if (date <= dateYesterday) {
-      alert("오늘 이후 만 예약이 가능합니다.");
-    } else if (this.state.customer_name == "") {
+      alert('오늘 이후 만 예약이 가능합니다.');
+    } else if (this.state.customer_name == '') {
       this.setState({ customer_name_err: true });
-      alert("회원을 선택해 주세요");
+      alert('회원을 선택해 주세요');
     } else {
-      fetch(ip + "/reservation/insert", {
-        method: "POST",
+      fetch(ip + '/reservation/insert', {
+        method: 'POST',
         headers: {
-          "Content-type": "application/json",
+          'Content-type': 'application/json',
         },
         body: JSON.stringify({
           fitness_no: this.props.userinfo.fitness_no,
@@ -962,8 +973,8 @@ class Reservation extends Component {
       })
         .then((result) => result.json())
         .then((result) => {
-          if (result.message == "ok") {
-            alert("예약이 완료되었습니다.");
+          if (result.message == 'ok') {
+            alert('예약이 완료되었습니다.');
             // console.log(this.state.reserv_date)
           } else {
             alert(result.message);
@@ -1008,28 +1019,28 @@ class Reservation extends Component {
         //오늘 날짜에 해당하는 주간만 조회
         .filter(
           (value) =>
-            moment(value.class_date.split("T")[0])
-              .add(9, "hour")
+            moment(value.class_date.split('T')[0])
+              .add(9, 'hour')
               .isSameOrAfter(
                 moment().day(0 + this.state.dayIncreament),
-                "day"
+                'day'
               ) &&
-            moment(value.class_date.split("T")[0])
-              .add(9, "hour")
-              .isSameOrBefore(moment().day(0 + this.state.dayIncreament), "day")
+            moment(value.class_date.split('T')[0])
+              .add(9, 'hour')
+              .isSameOrBefore(moment().day(0 + this.state.dayIncreament), 'day')
         )
         .map((data, index, array) => {
           const time =
-            `${data.hour}`.padStart(2, "0") +
-            ":" +
-            `${data.minute}`.padStart(2, "0");
+            `${data.hour}`.padStart(2, '0') +
+            ':' +
+            `${data.minute}`.padStart(2, '0');
           let canRegist = this.state.reservation_data.filter(
             (item) =>
               item.exercise_name === data.exercise_class &&
               item.time === time &&
               moment(this.state.class_date).isSame(
-                moment(item.date.split("T")[0]),
-                "day"
+                moment(item.date.split('T')[0]),
+                'day'
               )
           ).length;
           return (
@@ -1073,28 +1084,28 @@ class Reservation extends Component {
         //오늘 날짜에 해당하는 주간만 조회
         .filter(
           (value) =>
-            moment(value.class_date.split("T")[0])
-              .add(9, "hour")
+            moment(value.class_date.split('T')[0])
+              .add(9, 'hour')
               .isSameOrAfter(
                 moment().day(1 + this.state.dayIncreament),
-                "day"
+                'day'
               ) &&
-            moment(value.class_date.split("T")[0])
-              .add(9, "hour")
-              .isSameOrBefore(moment().day(1 + this.state.dayIncreament), "day")
+            moment(value.class_date.split('T')[0])
+              .add(9, 'hour')
+              .isSameOrBefore(moment().day(1 + this.state.dayIncreament), 'day')
         )
         .map((data, index, array) => {
           const time =
-            `${data.hour}`.padStart(2, "0") +
-            ":" +
-            `${data.minute}`.padStart(2, "0");
+            `${data.hour}`.padStart(2, '0') +
+            ':' +
+            `${data.minute}`.padStart(2, '0');
           let canRegist = this.state.reservation_data.filter(
             (item) =>
               item.exercise_name === data.exercise_class &&
               item.time === time &&
               moment(this.state.class_date).isSame(
-                moment(item.date.split("T")[0]),
-                "day"
+                moment(item.date.split('T')[0]),
+                'day'
               )
           ).length;
           return (
@@ -1138,28 +1149,28 @@ class Reservation extends Component {
         //오늘 날짜에 해당하는 주간만 조회
         .filter(
           (value) =>
-            moment(value.class_date.split("T")[0])
-              .add(9, "hour")
+            moment(value.class_date.split('T')[0])
+              .add(9, 'hour')
               .isSameOrAfter(
                 moment().day(2 + this.state.dayIncreament),
-                "day"
+                'day'
               ) &&
-            moment(value.class_date.split("T")[0])
-              .add(9, "hour")
-              .isSameOrBefore(moment().day(2 + this.state.dayIncreament), "day")
+            moment(value.class_date.split('T')[0])
+              .add(9, 'hour')
+              .isSameOrBefore(moment().day(2 + this.state.dayIncreament), 'day')
         )
         .map((data, index, array) => {
           const time =
-            `${data.hour}`.padStart(2, "0") +
-            ":" +
-            `${data.minute}`.padStart(2, "0");
+            `${data.hour}`.padStart(2, '0') +
+            ':' +
+            `${data.minute}`.padStart(2, '0');
           let canRegist = this.state.reservation_data.filter(
             (item) =>
               item.exercise_name === data.exercise_class &&
               item.time === time &&
               moment(this.state.class_date).isSame(
-                moment(item.date.split("T")[0]),
-                "day"
+                moment(item.date.split('T')[0]),
+                'day'
               )
           ).length;
           return (
@@ -1203,28 +1214,28 @@ class Reservation extends Component {
         //오늘 날짜에 해당하는 주간만 조회
         .filter(
           (value) =>
-            moment(value.class_date.split("T")[0])
-              .add(9, "hour")
+            moment(value.class_date.split('T')[0])
+              .add(9, 'hour')
               .isSameOrAfter(
                 moment().day(3 + this.state.dayIncreament),
-                "day"
+                'day'
               ) &&
-            moment(value.class_date.split("T")[0])
-              .add(9, "hour")
-              .isSameOrBefore(moment().day(3 + this.state.dayIncreament), "day")
+            moment(value.class_date.split('T')[0])
+              .add(9, 'hour')
+              .isSameOrBefore(moment().day(3 + this.state.dayIncreament), 'day')
         )
         .map((data, index, array) => {
           const time =
-            `${data.hour}`.padStart(2, "0") +
-            ":" +
-            `${data.minute}`.padStart(2, "0");
+            `${data.hour}`.padStart(2, '0') +
+            ':' +
+            `${data.minute}`.padStart(2, '0');
           let canRegist = this.state.reservation_data.filter(
             (item) =>
               item.exercise_name === data.exercise_class &&
               item.time === time &&
               moment(this.state.class_date).isSame(
-                moment(item.date.split("T")[0]),
-                "day"
+                moment(item.date.split('T')[0]),
+                'day'
               )
           ).length;
           return (
@@ -1268,28 +1279,28 @@ class Reservation extends Component {
         //오늘 날짜에 해당하는 주간만 조회
         .filter(
           (value) =>
-            moment(value.class_date.split("T")[0])
-              .add(9, "hour")
+            moment(value.class_date.split('T')[0])
+              .add(9, 'hour')
               .isSameOrAfter(
                 moment().day(4 + this.state.dayIncreament),
-                "day"
+                'day'
               ) &&
-            moment(value.class_date.split("T")[0])
-              .add(9, "hour")
-              .isSameOrBefore(moment().day(4 + this.state.dayIncreament), "day")
+            moment(value.class_date.split('T')[0])
+              .add(9, 'hour')
+              .isSameOrBefore(moment().day(4 + this.state.dayIncreament), 'day')
         )
         .map((data, index, array) => {
           const time =
-            `${data.hour}`.padStart(2, "0") +
-            ":" +
-            `${data.minute}`.padStart(2, "0");
+            `${data.hour}`.padStart(2, '0') +
+            ':' +
+            `${data.minute}`.padStart(2, '0');
           let canRegist = this.state.reservation_data.filter(
             (item) =>
               item.exercise_name === data.exercise_class &&
               item.time === time &&
               moment(this.state.class_date).isSame(
-                moment(item.date.split("T")[0]),
-                "day"
+                moment(item.date.split('T')[0]),
+                'day'
               )
           ).length;
           return (
@@ -1333,28 +1344,28 @@ class Reservation extends Component {
         //오늘 날짜에 해당하는 주간만 조회
         .filter(
           (value) =>
-            moment(value.class_date.split("T")[0])
-              .add(9, "hour")
+            moment(value.class_date.split('T')[0])
+              .add(9, 'hour')
               .isSameOrAfter(
                 moment().day(5 + this.state.dayIncreament),
-                "day"
+                'day'
               ) &&
-            moment(value.class_date.split("T")[0])
-              .add(9, "hour")
-              .isSameOrBefore(moment().day(5 + this.state.dayIncreament), "day")
+            moment(value.class_date.split('T')[0])
+              .add(9, 'hour')
+              .isSameOrBefore(moment().day(5 + this.state.dayIncreament), 'day')
         )
         .map((data, index, array) => {
           const time =
-            `${data.hour}`.padStart(2, "0") +
-            ":" +
-            `${data.minute}`.padStart(2, "0");
+            `${data.hour}`.padStart(2, '0') +
+            ':' +
+            `${data.minute}`.padStart(2, '0');
           let canRegist = this.state.reservation_data.filter(
             (item) =>
               item.exercise_name === data.exercise_class &&
               item.time === time &&
               moment(this.state.class_date).isSame(
-                moment(item.date.split("T")[0]),
-                "day"
+                moment(item.date.split('T')[0]),
+                'day'
               )
           ).length;
           return (
@@ -1398,28 +1409,28 @@ class Reservation extends Component {
         //오늘 날짜에 해당하는 주간만 조회
         .filter(
           (value) =>
-            moment(value.class_date.split("T")[0])
-              .add(9, "hour")
+            moment(value.class_date.split('T')[0])
+              .add(9, 'hour')
               .isSameOrAfter(
                 moment().day(6 + this.state.dayIncreament),
-                "day"
+                'day'
               ) &&
-            moment(value.class_date.split("T")[0])
-              .add(9, "hour")
-              .isSameOrBefore(moment().day(6 + this.state.dayIncreament), "day")
+            moment(value.class_date.split('T')[0])
+              .add(9, 'hour')
+              .isSameOrBefore(moment().day(6 + this.state.dayIncreament), 'day')
         )
         .map((data, index, array) => {
           const time =
-            `${data.hour}`.padStart(2, "0") +
-            ":" +
-            `${data.minute}`.padStart(2, "0");
+            `${data.hour}`.padStart(2, '0') +
+            ':' +
+            `${data.minute}`.padStart(2, '0');
           let canRegist = this.state.reservation_data.filter(
             (item) =>
               item.exercise_name === data.exercise_class &&
               item.time === time &&
               moment(this.state.class_date).isSame(
-                moment(item.date.split("T")[0]),
-                "day"
+                moment(item.date.split('T')[0]),
+                'day'
               )
           ).length;
           return (
@@ -1500,7 +1511,7 @@ class Reservation extends Component {
   handleWeekClick = (w) => {
     const dayIncreament = 0;
     const name = w.target.name;
-    if (name === "next") {
+    if (name === 'next') {
       this.setState({
         dayIncreament: this.state.dayIncreament + 7,
       }),
@@ -1511,7 +1522,7 @@ class Reservation extends Component {
       this.reservationClassSelect4();
       this.reservationClassSelect5();
       this.reservationClassSelect6();
-    } else if (name === "prev") {
+    } else if (name === 'prev') {
       this.setState({
         dayIncreament: this.state.dayIncreament - 7,
       }),
@@ -1525,7 +1536,7 @@ class Reservation extends Component {
     }
   };
   goLogin = () => {
-    this.props.history.push("/");
+    this.props.history.push('/');
   };
   render() {
     // console.log(this.state.reservation);
@@ -1535,22 +1546,22 @@ class Reservation extends Component {
     // console.log("reservationClass_choice", this.state.reservationClass_choice);
 
     return (
-      <div className="reservationWrap">
-        <header className="header">
+      <div className='reservationWrap'>
+        <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
           <MegaMenu />
-          <div className="localNavigation">
-            <div className="container">
+          <div className='localNavigation'>
+            <div className='container'>
               <h2>
-                <div className="parallelogram"></div>
+                <div className='parallelogram'></div>
                 수업
                 <span>.</span>
               </h2>
-              <div className="breadCrumb">
-                <Link to="/home">HOME</Link>
+              <div className='breadCrumb'>
+                <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to="/reservation">수업</Link>
+                <Link to='/reservation'>수업</Link>
               </div>
               {/*.breadCrumb */}
             </div>
@@ -1559,42 +1570,42 @@ class Reservation extends Component {
           {/*.localNavigation */}
         </header>
 
-        <Container className="reservationWrap">
-          <Row className="pb-5 justify-content-center">
+        <Container className='reservationWrap'>
+          <Row className='pb-5 justify-content-center'>
             <Col xs={9}>
-              <h4 className="">진행중인 수업</h4>
+              <h4 className=''>진행중인 수업</h4>
             </Col>
-            <Col xs={3} className="text-center w-auto">
-              <Link to="/reservationClass">
+            <Col xs={3} className='text-center w-auto'>
+              <Link to='/reservationClass'>
                 <Button>새로운 수업 만들기</Button>
               </Link>
             </Col>
           </Row>
           <Row xs={3}>
-            <Col className="text-end">
+            <Col className='text-end'>
               <Button
-                name="prev"
-                variant="outline-secondary"
+                name='prev'
+                variant='outline-secondary'
                 onClick={this.handleWeekClick}
               >
                 이전주
               </Button>
             </Col>
-            <Col className="text-center align-self-center fs-5">
+            <Col className='text-center align-self-center fs-5'>
               {moment(this.state.reserv_date)
                 .day(0)
-                .add(this.state.dayIncreament, "days")
-                .format("YYYY-MM-DD(dd)")}{" "}
-              ~{" "}
+                .add(this.state.dayIncreament, 'days')
+                .format('YYYY-MM-DD(dd)')}{' '}
+              ~{' '}
               {moment(this.state.reserv_date)
                 .day(6)
-                .add(this.state.dayIncreament, "days")
-                .format("YYYY-MM-DD(dd)")}
+                .add(this.state.dayIncreament, 'days')
+                .format('YYYY-MM-DD(dd)')}
             </Col>
-            <Col className="text-start">
+            <Col className='text-start'>
               <Button
-                name="next"
-                variant="outline-secondary"
+                name='next'
+                variant='outline-secondary'
                 onClick={this.handleWeekClick}
               >
                 다음주
@@ -1603,60 +1614,60 @@ class Reservation extends Component {
           </Row>
           <Row>
             <Col
-              className="text-center py-2 w-100 overflow-auto justify-content-center"
+              className='text-center py-2 w-100 overflow-auto justify-content-center'
               xs={12}
             >
-              <table class="table classListTable">
+              <table class='table classListTable'>
                 <thead>
                   <tr>
-                    <th scope="col">
-                      {" "}
+                    <th scope='col'>
+                      {' '}
                       {moment(this.state.reserv_date)
                         .day(0)
-                        .add(this.state.dayIncreament, "days")
-                        .format("dd")}
+                        .add(this.state.dayIncreament, 'days')
+                        .format('dd')}
                     </th>
-                    <th scope="col">
-                      {" "}
+                    <th scope='col'>
+                      {' '}
                       {moment(this.state.reserv_date)
                         .day(1)
-                        .add(this.state.dayIncreament, "days")
-                        .format("dd")}
+                        .add(this.state.dayIncreament, 'days')
+                        .format('dd')}
                     </th>
-                    <th scope="col">
-                      {" "}
+                    <th scope='col'>
+                      {' '}
                       {moment(this.state.reserv_date)
                         .day(2)
-                        .add(this.state.dayIncreament, "days")
-                        .format("dd")}
+                        .add(this.state.dayIncreament, 'days')
+                        .format('dd')}
                     </th>
-                    <th scope="col">
-                      {" "}
+                    <th scope='col'>
+                      {' '}
                       {moment(this.state.reserv_date)
                         .day(3)
-                        .add(this.state.dayIncreament, "days")
-                        .format("dd")}
+                        .add(this.state.dayIncreament, 'days')
+                        .format('dd')}
                     </th>
-                    <th scope="col">
-                      {" "}
+                    <th scope='col'>
+                      {' '}
                       {moment(this.state.reserv_date)
                         .day(4)
-                        .add(this.state.dayIncreament, "days")
-                        .format("dd")}
+                        .add(this.state.dayIncreament, 'days')
+                        .format('dd')}
                     </th>
-                    <th scope="col">
-                      {" "}
+                    <th scope='col'>
+                      {' '}
                       {moment(this.state.reserv_date)
                         .day(5)
-                        .add(this.state.dayIncreament, "days")
-                        .format("dd")}
+                        .add(this.state.dayIncreament, 'days')
+                        .format('dd')}
                     </th>
-                    <th scope="col">
-                      {" "}
+                    <th scope='col'>
+                      {' '}
                       {moment(this.state.reserv_date)
                         .day(6)
-                        .add(this.state.dayIncreament, "days")
-                        .format("dd")}
+                        .add(this.state.dayIncreament, 'days')
+                        .format('dd')}
                     </th>
                   </tr>
                 </thead>
@@ -1669,42 +1680,42 @@ class Reservation extends Component {
                         this.state.reservationClass
                       )}
                     </td>
-                    <td name="mon">
+                    <td name='mon'>
                       {this.state.reservationClass1.length == 0 ? (
                         <p>'설정된 운동이 없습니다.'</p>
                       ) : (
                         this.state.reservationClass1
                       )}
                     </td>
-                    <td name="tue">
+                    <td name='tue'>
                       {this.state.reservationClass2.length == 0 ? (
                         <p>'설정된 운동이 없습니다.'</p>
                       ) : (
                         this.state.reservationClass2
                       )}
                     </td>
-                    <td name="wed">
+                    <td name='wed'>
                       {this.state.reservationClass3.length == 0 ? (
                         <p>'설정된 운동이 없습니다.'</p>
                       ) : (
                         this.state.reservationClass3
                       )}
                     </td>
-                    <td name="thu">
+                    <td name='thu'>
                       {this.state.reservationClass4.length == 0 ? (
                         <p>'설정된 운동이 없습니다.'</p>
                       ) : (
                         this.state.reservationClass4
                       )}
                     </td>
-                    <td name="fri">
+                    <td name='fri'>
                       {this.state.reservationClass5.length == 0 ? (
                         <p>'설정된 운동이 없습니다.'</p>
                       ) : (
                         this.state.reservationClass5
                       )}
                     </td>
-                    <td name="sat">
+                    <td name='sat'>
                       {this.state.reservationClass6.length == 0 ? (
                         <p>'설정된 운동이 없습니다.'</p>
                       ) : (
@@ -1737,86 +1748,86 @@ class Reservation extends Component {
             </Col>
             <Col></Col>
           </Row>
-          <Row className="" lg={6}>
+          <Row className='' lg={6}>
             <Col lg={12}>
               <h5>선택된 수업</h5>
             </Col>
-            <Col className="text-center my-3 height-fit-content" xs={12} sm={4}>
-              <div className="boxmorpinsm py-3 h-100 w-100 ">
-                <p className="">운동명</p>
-                <p className="fw-bold">{this.state.exercise_name}</p>
+            <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
+              <div className='boxmorpinsm py-3 h-100 w-100 '>
+                <p className=''>운동명</p>
+                <p className='fw-bold'>{this.state.exercise_name}</p>
               </div>
               <TextField
-                id="exercise_name"
-                className="d-none"
+                id='exercise_name'
+                className='d-none'
                 value={this.state.exercise_name}
                 // onChange={this.handleChange}
-                label="운동명"
+                label='운동명'
                 err={this.state.exercise_name_err}
               />
             </Col>
-            <Col className="text-center my-3 height-fit-content" xs={12} sm={4}>
-              <div className="boxmorpinsm py-3 h-100 w-100">
-                <p className="">강사명</p>
-                <p className="fw-bold">{this.state.trainer}</p>
+            <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
+              <div className='boxmorpinsm py-3 h-100 w-100'>
+                <p className=''>강사명</p>
+                <p className='fw-bold'>{this.state.trainer}</p>
               </div>
               <TextField
-                id="trainer"
-                className="d-none"
+                id='trainer'
+                className='d-none'
                 value={this.state.trainer}
                 // onChange={this.handleChange}
-                label="강사명"
+                label='강사명'
                 // err={this.state.trainer_err}
               />
             </Col>
-            <Col className="text-center my-3 height-fit-content" xs={12} sm={4}>
-              <div className="boxmorpinsm py-3 h-100">
-                <p className="">시간</p>
-                <p className="fw-bold">{this.state.time}</p>
+            <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
+              <div className='boxmorpinsm py-3 h-100'>
+                <p className=''>시간</p>
+                <p className='fw-bold'>{this.state.time}</p>
               </div>
               <TextField
-                id="time"
-                className="d-none"
+                id='time'
+                className='d-none'
                 value={this.state.time}
                 // onChange={this.handleChange}
-                label="시간"
+                label='시간'
               />
             </Col>
-            <Col className="text-center my-3 height-fit-content" xs={12} sm={4}>
-              <div className="boxmorpinsm py-3 h-100 w-100">
-                <p className="">최대 인원수</p>
-                <p className="">
-                  <span className="fw-bold">
-                    {this.state.number_of_people == ""
-                      ? ""
-                      : this.state.number_of_people + "명"}
-                  </span>{" "}
+            <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
+              <div className='boxmorpinsm py-3 h-100 w-100'>
+                <p className=''>최대 인원수</p>
+                <p className=''>
+                  <span className='fw-bold'>
+                    {this.state.number_of_people == ''
+                      ? ''
+                      : this.state.number_of_people + '명'}
+                  </span>{' '}
                 </p>
               </div>
               <TextField
-                id="number_of_people"
-                className="d-none"
+                id='number_of_people'
+                className='d-none'
                 value={this.state.number_of_people}
                 // onChange={this.handleChange}
-                label="최대 인원수"
+                label='최대 인원수'
               />
             </Col>
-            <Col className="text-center my-3" xs={12} sm={4}>
-              <div className="boxmorpinsm py-3">
-                <p className="">배정된 날짜</p>
-                <p className="fw-bold">
-                  {moment(this.state.class_date).format("yyyy-MM-DD") ==
-                  "Invalid date"
-                    ? ""
-                    : moment(this.state.class_date).format("yyyy-MM-DD")}
+            <Col className='text-center my-3' xs={12} sm={4}>
+              <div className='boxmorpinsm py-3'>
+                <p className=''>배정된 날짜</p>
+                <p className='fw-bold'>
+                  {moment(this.state.class_date).format('yyyy-MM-DD') ==
+                  'Invalid date'
+                    ? ''
+                    : moment(this.state.class_date).format('yyyy-MM-DD')}
                 </p>
               </div>
               <TextField
-                id="class_date"
-                className="d-none"
-                name="class_date"
+                id='class_date'
+                className='d-none'
+                name='class_date'
                 value={this.state.class_date}
-                label="배정된 날짜"
+                label='배정된 날짜'
               />
               {/* <DatePicker
 								selected={this.state.reserv_date}
@@ -1827,7 +1838,7 @@ class Reservation extends Component {
 								locale='ko'
 							/> */}
             </Col>
-            <Col className="text-center usersearchButton my-3">
+            <Col className='text-center usersearchButton my-3'>
               {this.state.open ? (
                 <UserSearch
                   open={this.state.open}
@@ -1838,20 +1849,20 @@ class Reservation extends Component {
               ) : (
                 <TextField
                   onClick={() => this.setState({ open: true })}
-                  id="customer_name"
-                  className="boxmorpsm h-100 w-100"
+                  id='customer_name'
+                  className='boxmorpsm h-100 w-100'
                   InputProps={{ disableUnderline: true }}
                   value={this.state.customer_name}
                   // onChange={this.handleChange}
-                  label="회원 검색"
+                  label='회원 검색'
                   error={this.state.customer_name_err}
                 />
               )}
             </Col>
-            <Col className="text-center w-100 mt-3" xs={12}>
+            <Col className='text-center w-100 mt-3' xs={12}>
               <Button
-                className="btnSolid mx-4 px-5"
-                type="button"
+                className='btnSolid mx-4 px-5'
+                type='button'
                 onClick={this.handleOnClick}
               >
                 예약하기
@@ -1869,45 +1880,51 @@ class Reservation extends Component {
                         reservationDelete={this.reservationDelete}
                     /> */}
             <Col xs={12}>
-              <h4 className="">예약 현황</h4>
+              <h4 className=''>예약 현황</h4>
             </Col>
-            <Col xs={12} className="w-100 overflow-auto">
+            <Col xs={12} className='w-100 overflow-auto'>
               <Tabs
-                defaultActiveKey="home"
-                id="uncontrolled-tab-example"
-                className="mb-3"
+                defaultActiveKey='home'
+                id='uncontrolled-tab-example'
+                className='mb-3'
               >
-                <Tab eventKey="home" title="전체보기">
-                  <table class="table text-center reservationListTable mt-5">
+                <Tab eventKey='home' title='전체보기'>
+                  <table class='table text-center reservationListTable mt-5'>
                     <thead>
                       <tr>
-                        <th scope="col">[회원번호]회원이름</th>
-                        <th scope="col">
+                        <th scope='col'>[회원번호]회원이름</th>
+                        <th scope='col'>
                           <Button
-                            variant="ouline-ligth"
-                            className="w-100 fw-bold"
+                            variant='ouline-ligth'
+                            className='w-100 fw-bold'
                             onClick={() => this.handleDate()}
                           >
                             수강 날짜 <ImSortAlphaAsc />
                           </Button>
                         </th>
-                        <th scope="col">
-                          운동
-                          <button onClick={() => this.handleExercise()}>
-                            V
-                          </button>
+                        <th scope='col'>
+                          <Button
+                            variant='ouline-ligth'
+                            className='w-100 fw-bold'
+                            onClick={() => this.handleExercise()}
+                          >
+                            운동 <ImSortAlphaAsc />
+                          </Button>
                         </th>
-                        <th scope="col">
-                          강사
-                          <button onClick={() => this.handleTrainer()}>
-                            V
-                          </button>
+                        <th scope='col'>
+                          <Button
+                            variant='ouline-ligth'
+                            className='w-100 fw-bold'
+                            onClick={() => this.handleTrainer()}
+                          >
+                            강사 <ImSortAlphaAsc />
+                          </Button>
                         </th>
-                        <th scope="col">인원수</th>
-                        <th scope="col">시간</th>
+                        <th scope='col'>인원수</th>
+                        <th scope='col'>시간</th>
                         {/* <th scope='col'>상태</th>
 										<th scope='col'>취소사유</th> */}
-                        <th scope="col">삭제</th>
+                        <th scope='col'>삭제</th>
                       </tr>
                     </thead>
                     {this.state.show_exercise_table &&
@@ -1959,20 +1976,20 @@ class Reservation extends Component {
                     ) : null}
                   </table>
                 </Tab>
-                <Tab eventKey="trainer" title="강사별조회">
+                <Tab eventKey='trainer' title='강사별조회'>
                   <p>{this.state.reservationClass_choice}</p>
-                  <table class="table text-center reservationListTable mt-5">
+                  <table class='table text-center reservationListTable mt-5'>
                     <thead>
                       <tr>
-                        <th scope="col">[회원번호]회원이름</th>
-                        <th scope="col">날짜</th>
-                        <th scope="col">운동</th>
-                        <th scope="col">강사</th>
-                        <th scope="col">인원수</th>
-                        <th scope="col">시간</th>
+                        <th scope='col'>[회원번호]회원이름</th>
+                        <th scope='col'>날짜</th>
+                        <th scope='col'>운동</th>
+                        <th scope='col'>강사</th>
+                        <th scope='col'>인원수</th>
+                        <th scope='col'>시간</th>
                         {/* <th scope='col'>상태</th>
 										<th scope='col'>취소사유</th> */}
-                        <th scope="col">삭제</th>
+                        <th scope='col'>삭제</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1988,7 +2005,7 @@ class Reservation extends Component {
             </Col>
           </Row>
         </Container>
-        <div className="footer">
+        <div className='footer'>
           <Footer />
         </div>
       </div>
