@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
+import { Container, Row, Col } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
@@ -24,7 +27,7 @@ const options = ['이름', '핸드폰', '프로필(미지원)'];
 const UserSearchTableHeader = () => (
   <TableHead>
     <TableRow>
-      <TableCell>번호</TableCell>
+      <TableCell align='center'>번호</TableCell>
       <TableCell>이름</TableCell>
       <TableCell>폰번호</TableCell>
       <TableCell>선택</TableCell>
@@ -34,19 +37,23 @@ const UserSearchTableHeader = () => (
 
 const UserSearchTableItem = ({ c, handleSelectUser }) => (
   <TableRow>
-    <TableCell>{c.member_no}</TableCell>
+    <TableCell align='center'>{c.member_no}</TableCell>
     <TableCell>{c.name}</TableCell>
-    <TableCell>{c.phone}</TableCell>
     <TableCell>
-      <DialogActions>
-        <button
+      {/* {c.phone} */}
+      {c.phone.slice(0, 3) + '-' + c.phone.slice(3, 7) + '-' + c.phone.slice(7)}
+    </TableCell>
+    <TableCell>
+      <DialogActions className='p-0'>
+        <Button
           type='button'
           onClick={handleSelectUser}
           id={c.member_no}
           value={[c.name, c.phone]}
+          variant='outline-primary'
         >
           선택
-        </button>
+        </Button>
       </DialogActions>
     </TableCell>
   </TableRow>
@@ -101,28 +108,36 @@ const UserSearch = ({ open, setOpen, fitness_no, handleUser }) => {
     <Dialog open={open} onClose={handleClose} maxWidth='lg'>
       <DialogTitle>고객 검색</DialogTitle>
       <DialogContent>
-        <div className='customerSearch'>
-          <Dropdown
-            className='searchDrop'
-            options={options}
-            onChange={handleOnChangeSearchOption}
-            value={searchOption}
-            placeholder='검색 대상을 선택하세요.'
-          />
-          {/*.searchDrop */}
-          <input
-            type='text'
-            id='search'
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          {/*#search */}
-          <button type='button' onClick={handleOnSearch}>
-            고객 검색
-          </button>
-        </div>
-        {/*.customerSearch */}
-        <Table className='addsalesSearchTable'>
+        <Row>
+          <Col xs={3}>
+            <Dropdown
+              className='searchDrop'
+              options={options}
+              onChange={handleOnChangeSearchOption}
+              value={searchOption}
+              placeholder='검색 대상을 선택하세요.'
+            />
+          </Col>
+          <Col xs={6}>
+            <input
+              className='w-100 h-100'
+              type='text'
+              id='search'
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </Col>
+          <Col xs={3}>
+            <Button
+              className='w-100 h-100'
+              type='button'
+              onClick={handleOnSearch}
+            >
+              고객 검색
+            </Button>
+          </Col>
+        </Row>
+        <Table size='small' className='addsalesSearchTable'>
           <UserSearchTableHeader />
           <TableBody>
             {customers ? (
@@ -134,16 +149,21 @@ const UserSearch = ({ open, setOpen, fitness_no, handleUser }) => {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan='6' align='center'></TableCell>
+                <TableCell colSpan='6'></TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </DialogContent>
       <DialogActions>
-        <button type='button' onClick={handleClose}>
+        <Button
+          type='button'
+          onClick={handleClose}
+          variant='secondary'
+          className='px-5'
+        >
           닫기
-        </button>
+        </Button>
       </DialogActions>
     </Dialog>
   );
