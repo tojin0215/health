@@ -14,7 +14,6 @@ const {
 const authentication = (
   state = {
     userinfo: {
-      member_no: -1,
       manager_name: "",
       fitness_no: -1,
     },
@@ -79,7 +78,6 @@ const authentication = (
         userinfo: {
           id: action.id,
           fitness_no: action.fitness_no,
-
           manager_name: action.manager_name,
         },
         status: {

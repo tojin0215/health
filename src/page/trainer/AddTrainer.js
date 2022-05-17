@@ -14,6 +14,7 @@ import { SERVER_URL } from "../../const/settings";
 import MegaMenu from "../../component/navigation/Menu";
 import { TextField } from "@material-ui/core";
 import { insertTrainer, trainerManager } from "../../api/user";
+import { userInfo } from "os";
 
 class AddTrainer extends Component {
   constructor(props) {
@@ -79,7 +80,7 @@ class AddTrainer extends Component {
       this.state.phone,
       this.state.birth,
       this.state.trainer_name,
-      this.state.fitness_no,
+      this.props.userinfo.fitness_no,
       this.state.ment,
       this.state.history,
       this.state.sex
@@ -93,7 +94,7 @@ class AddTrainer extends Component {
       this.state.phone,
       this.state.birth,
       this.state.trainer_name,
-      this.state.fitness_no
+      this.props.userinfo.fitness_no
     ).then((res) => {
       console.log(res);
       alert("manager Table");
@@ -102,6 +103,7 @@ class AddTrainer extends Component {
   handleTotal = () => {
     this.handleTrainer();
     this.handleManagerLogin();
+    this.props.history.push("/trainer");
   };
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
@@ -139,7 +141,7 @@ class AddTrainer extends Component {
           <form>
             <label>
               헬스장 번호:
-              <TextField value={this.state.fitness_no} />
+              <TextField value={this.props.userinfo.fitness_no} />
             </label>
             <br />
             <label>

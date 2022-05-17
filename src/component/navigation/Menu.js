@@ -16,9 +16,9 @@ import "./Menu.css";
 class MegaMenu extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.userinfo);
-    console.log("AAAA");
-    console.log(this.props);
+    // console.log(this.props.userinfo);
+    // console.log("AAAA");
+    // console.log(this.props);
   }
   handleLogout = () => {
     this.props.logoutRequest().then(() => {
