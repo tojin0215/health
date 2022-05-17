@@ -93,8 +93,7 @@ class AddTrainer extends Component {
     trainerManager(
       this.state.phone,
       this.state.birth,
-      this.state.trainer_name,
-      this.props.userinfo.fitness_no
+      this.state.trainer_name
     ).then((res) => {
       console.log(res);
       alert("manager Table");
@@ -139,11 +138,11 @@ class AddTrainer extends Component {
             <h3>강사 정보 입력</h3>
           </div>
           <form>
-            <label>
+            {/* <label>
               헬스장 번호:
               <TextField value={this.props.userinfo.fitness_no} />
             </label>
-            <br />
+            <br /> */}
             <label>
               핸드폰번호:
               <TextField
