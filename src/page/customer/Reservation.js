@@ -1576,7 +1576,7 @@ class Reservation extends Component {
               </Button>
             </Col>
           </Row>
-          <Row className='d-none'>
+          <Row>
             <Col
               className='text-center py-2 w-100 overflow-auto justify-content-center'
               xs={12}
