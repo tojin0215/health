@@ -12,11 +12,38 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import { SERVER_URL } from "../../const/settings";
 import MegaMenu from "../../component/navigation/Menu";
-
+import { selectTrainer } from "../../api/user";
+const VieWTrainerItem = ({
+  trainer_name,
+  phone,
+  birth,
+  ment,
+  history,
+  sex,
+}) => {
+  return (
+    <tr>
+      <td>{trainer_name}</td>
+      <td>{phone}</td>
+      <td>{birth}</td>
+      <td>{ment}</td>
+      <td>{history}</td>
+      <td>{sex}</td>
+    </tr>
+  );
+};
 class Trainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      viewTrainerList: [],
+      trainer_name: "",
+      phone: "",
+      birth: "",
+      ment: "",
+      history: "",
+      sex: "",
+    };
   }
   goLogin = () => {
     this.props.history.push("/");
@@ -62,11 +89,33 @@ class Trainer extends Component {
         // and notify
         alert("Your session is expired, please log in again");
       } else {
-        this.cusFetch();
+        this.vieWTrainer();
       }
     });
   }
+  vieWTrainer = () => {
+    const fitness_no = this.props.userinfo.fitness_no;
+    console.log(fitness_no);
+    selectTrainer(fitness_no).then((result) => {
+      const items = result.data.map((data, index, array) => {
+        return (
+          <VieWTrainerItem
+            trainer_name={data.trainer_name}
+            phone={data.phone}
+            birth={data.birth}
+            ment={data.ment}
+            history={data.history}
+            sex={data.sex}
+          />
+        );
+      });
+      this.setState({ viewTrainerList: items });
+      console.log("items");
+    });
+  };
   render() {
+    console.log(this.props.userinfo.fitness_no);
+    console.log(this.state.viewTrainerList);
     return (
       <div>
         <header className="header">
@@ -92,7 +141,19 @@ class Trainer extends Component {
           {/*.localNavigation */}
         </header>
         <Container>
-          <div></div>
+          <table>
+            <thead>
+              <tr>
+                <th>이름/</th>
+                <th>폰번호/</th>
+                <th>생년월일/</th>
+                <th>자기소개/</th>
+                <th>연혁/</th>
+                <th>성별</th>
+              </tr>
+            </thead>
+            <tbody>{this.state.viewTrainerList}</tbody>
+          </table>
         </Container>
         <div className="footer">
           <Footer />

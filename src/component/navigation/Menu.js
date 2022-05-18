@@ -16,9 +16,9 @@ import "./Menu.css";
 class MegaMenu extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.userinfo);
-    console.log("AAAA");
-    console.log(this.props);
+    // console.log(this.props.userinfo);
+    // console.log("AAAA");
+    // console.log(this.props);
   }
   handleLogout = () => {
     this.props.logoutRequest().then(() => {
@@ -41,7 +41,7 @@ class MegaMenu extends Component {
   // }
   render() {
     const { userinfo } = this.props;
-    console.log(userinfo);
+    // console.log(userinfo);
 
     $("#menu-icon")
       .off("click")
@@ -57,15 +57,10 @@ class MegaMenu extends Component {
       <div class="megamenu">
         <div class="logo">
           <a href="/home">
-            <p className="fs-1">{userinfo.fitness_name}</p>
+            <p className="fs-1">{userinfo.manager_name}</p>
           </a>
         </div>
-        <p className="menuCenterCode fs-2">
-          센터코드{" "}
-          {userinfo &&
-            userinfo.fitness_no &&
-            parseInt(`${userinfo.fitness_no}`, 16)}
-        </p>
+        <p className="menuCenterCode fs-2">센터코드 {userinfo.fitness_no}</p>
         <div id="menu-icon">
           <span className="first"></span>
           <span className="second"></span>
