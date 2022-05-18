@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Container, Row, Col, FloatingLabel } from "react-bootstrap";
-
+import Modal from "react-bootstrap/Modal";
 import Navigation from "../../component/navigation/Navigation";
 import Header from "../../component/header/Header";
 import Footer from "../../component/footer/Footer";
@@ -21,14 +21,31 @@ const VieWTrainerItem = ({
   history,
   sex,
 }) => {
+  const [showModal, setShowModal] = useState(false);
+  const modalClose = () => {
+    setShowModal(false);
+  };
+  const modalOnClick = () => {
+    setShowModal(true);
+  };
+
+  console.log(showModal);
   return (
-    <tr>
+    <tr onClick={modalOnClick}>
       <td>{trainer_name}</td>
       <td>{phone}</td>
       <td>{birth}</td>
       <td>{ment}</td>
       <td>{history}</td>
       <td>{sex}</td>
+      <div>
+        <Modal show={showModal}>
+          <input />
+          <input />
+          <input />
+          <button onClick={modalClose}>닫기</button>
+        </Modal>
+      </div>
     </tr>
   );
 };
@@ -110,12 +127,11 @@ class Trainer extends Component {
         );
       });
       this.setState({ viewTrainerList: items });
-      console.log("items");
     });
   };
   render() {
-    console.log(this.props.userinfo.fitness_no);
-    console.log(this.state.viewTrainerList);
+    //console.log(this.props.userinfo.fitness_no);
+    //console.log(this.state.viewTrainerList);
     return (
       <div>
         <header className="header">
