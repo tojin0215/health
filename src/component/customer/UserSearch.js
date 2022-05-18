@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
 import Table from '@material-ui/core/Table';
@@ -104,8 +104,10 @@ const UserSearch = ({ open, setOpen, fitness_no, handleUser }) => {
     );
   }, []);
 
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth='lg'>
+    <Dialog open={open} onClose={handleClose} fullScreen={fullScreen}>
       <DialogTitle>고객 검색</DialogTitle>
       <DialogContent>
         <Row>

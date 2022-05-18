@@ -1058,49 +1058,63 @@ class ReservationClass extends Component {
                   <tr>
                     <td>
                       {this.state.reservationClass.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
                       ) : (
                         this.state.reservationClass
                       )}
                     </td>
                     <td name='mon'>
                       {this.state.reservationClass1.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
                       ) : (
                         this.state.reservationClass1
                       )}
                     </td>
                     <td name='tue'>
                       {this.state.reservationClass2.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
                       ) : (
                         this.state.reservationClass2
                       )}
                     </td>
                     <td name='wed'>
                       {this.state.reservationClass3.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
                       ) : (
                         this.state.reservationClass3
                       )}
                     </td>
                     <td name='thu'>
                       {this.state.reservationClass4.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
                       ) : (
                         this.state.reservationClass4
                       )}
                     </td>
                     <td name='fri'>
                       {this.state.reservationClass5.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
                       ) : (
                         this.state.reservationClass5
                       )}
                     </td>
                     <td name='sat'>
                       {this.state.reservationClass6.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
                       ) : (
                         this.state.reservationClass6
                       )}
