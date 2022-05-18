@@ -9,7 +9,8 @@ registerLocale('ko', ko);
 import { getStatusRequest } from '../../action/authentication';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
+import ClickAwayListener from '@mui/base/ClickAwayListener';
 
 import { ImSortAlphaAsc } from 'react-icons/im';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
@@ -23,8 +24,9 @@ import { connect } from 'react-redux';
 import 'react-dropdown/style.css';
 import styles from '../../styles/reservation/reservation.css';
 
+import TextField from '@mui/material/TextField';
+
 import { SERVER_URL } from '../../const/settings';
-import { TextField } from '@material-ui/core';
 import moment from 'moment';
 import ReservationPresetList from '../../component/reservation/ReservationPresetList';
 import ReservationList from '../../component/reservation/ReservationList';

@@ -1,14 +1,14 @@
-export const AUTH_LOGIN = "AUTH_LOGIN";
-export const AUTH_LOGIN_SUCCESS = "AUTH_LOGIN_SUCCESS";
-export const AUTH_LOGIN_FAILURE = "AUTH_LOGIN_FAILURE";
-export const AUTH_LOGIN_WAITING = "AUTH_LOGIN_WAITING";
-// Check sessions
-export const AUTH_GET_STATUS = "AUTH_GET_STATUS";
-export const AUTH_GET_STATUS_SUCCESS = "AUTH_GET_STATUS_SUCCESS";
-export const AUTH_GET_STATUS_FAILURE = "AUTH_GET_STATUS_FAILURE";
-export const AUTH_LOGOUT = "AUTH_LOGOUT";
+import { SERVER_URL } from '../const/settings';
 
-import { SERVER_URL } from "../const/settings";
+export const AUTH_LOGIN = 'AUTH_LOGIN';
+export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS';
+export const AUTH_LOGIN_FAILURE = 'AUTH_LOGIN_FAILURE';
+export const AUTH_LOGIN_WAITING = 'AUTH_LOGIN_WAITING';
+// Check sessions
+export const AUTH_GET_STATUS = 'AUTH_GET_STATUS';
+export const AUTH_GET_STATUS_SUCCESS = 'AUTH_GET_STATUS_SUCCESS';
+export const AUTH_GET_STATUS_FAILURE = 'AUTH_GET_STATUS_FAILURE';
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -20,11 +20,11 @@ export function loginRequest(id, password) {
     dispatch(login());
 
     // API REQUEST
-    return fetch(ip + "/manager?type=session", {
-      method: "POST",
-      credentials: "include",
+    return fetch(ip + '/manager?type=session', {
+      method: 'POST',
+      credentials: 'include',
       headers: {
-        "Content-type": "application/json",
+        'Content-type': 'application/json',
       },
       body: JSON.stringify({
         id,
@@ -84,12 +84,12 @@ export function getStatusRequest() {
     // console.log('____getStatus', getStatus())
 
     dispatch(getStatus());
-    return fetch(ip + "/manager?type=session", {
-      method: "GET",
+    return fetch(ip + '/manager?type=session', {
+      method: 'GET',
       headers: {
-        "Content-type": "application/json",
+        'Content-type': 'application/json',
       },
-      credentials: "include",
+      credentials: 'include',
     })
       .then((response) => response.json())
       .then((response) => {
@@ -127,9 +127,9 @@ export function getStatusFailure() {
 }
 export function logoutRequest() {
   return (dispatch) => {
-    return fetch(ip + "/manager?type=session", {
-      method: "DELETE",
-      credentials: "include",
+    return fetch(ip + '/manager?type=session', {
+      method: 'DELETE',
+      credentials: 'include',
     }).then((response) => {
       dispatch(logout());
     });

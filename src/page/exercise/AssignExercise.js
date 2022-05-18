@@ -13,16 +13,16 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import '../../styles/exercise/AssignExercise.css';
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
 
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
 
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
@@ -229,7 +229,7 @@ class AssignExercise extends Component {
         headers: {
           'Content-type': 'application/json',
         },
-      },
+      }
     )
       .then((response) => response.json())
       .then((res) => {
@@ -360,7 +360,7 @@ class AssignExercise extends Component {
 
     let selected = this.state.select_bottom;
     let selected_data = JSON.parse(
-      JSON.stringify(this.state.select_bottom_data),
+      JSON.stringify(this.state.select_bottom_data)
     );
 
     if (isSelected) {
@@ -408,7 +408,7 @@ class AssignExercise extends Component {
 
     let selected = this.state.select_allbody;
     let selected_data = JSON.parse(
-      JSON.stringify(this.state.select_allbody_data),
+      JSON.stringify(this.state.select_allbody_data)
     );
 
     if (isSelected) {
@@ -677,7 +677,7 @@ class AssignExercise extends Component {
         headers: {
           'Content-type': 'application/json',
         },
-      },
+      }
     )
       .then((response) => response.json())
       .then((res) => {
@@ -865,7 +865,7 @@ class AssignExercise extends Component {
             headers: {
               'Content-type': 'application/json',
             },
-          },
+          }
         )
           .then((response) => response.json())
           .then((res) => {
@@ -947,7 +947,7 @@ class AssignExercise extends Component {
         headers: {
           'Content-type': 'application/json',
         },
-      },
+      }
     )
       .then((response) => response.json())
       .then((response) => {
@@ -989,7 +989,7 @@ class AssignExercise extends Component {
     const exerciseList = ['상체', '하체', '전신', '코어', '유산소', '기타'];
     return exerciseList.map((name, index) => (
       <button
-        type="button"
+        type='button'
         key={'createViewExerciseListButton.' + index}
         value={name}
         onClick={this.handleOnClick}
@@ -1010,11 +1010,11 @@ class AssignExercise extends Component {
     return exerciseList.map((name, index) => (
       <label>
         <div
-          className="imageBox"
+          className='imageBox'
           // style={{ backgroundImage: 'url(' + imagenumber + ')' }}
         ></div>
         <input
-          type="checkBox"
+          type='checkBox'
           name={'assignDefault|' + name}
           key={'createViewDefaultExerciseButton' + index}
           onChange={this.selectHandleOnClick}
@@ -1066,7 +1066,7 @@ class AssignExercise extends Component {
     };
 
     const renderTooltip = (props) => (
-      <Tooltip id="button-tooltip" {...props}>
+      <Tooltip id='button-tooltip' {...props}>
         Simple tooltip
       </Tooltip>
     );
@@ -1079,14 +1079,14 @@ class AssignExercise extends Component {
           data={this.state.exerciseList}
           pagination={this.state.exerciseList.length > 1}
           options={options}
-          tableHeaderClass="tableHeader"
-          tableContainerClass="tableContainer"
+          tableHeaderClass='tableHeader'
+          tableContainerClass='tableContainer'
           selectRow={selectRowProp}
           cellEdit={cellEdit}
-          className="table2"
+          className='table2'
         >
           <TableHeaderColumn
-            dataField="no"
+            dataField='no'
             thStyle={{ textAlign: 'center' }}
             tdStyle={{ textAlign: 'center' }}
             isKey
@@ -1094,49 +1094,49 @@ class AssignExercise extends Component {
             no
           </TableHeaderColumn>
           <TableHeaderColumn
-            dataField="name"
+            dataField='name'
             thStyle={{ textAlign: 'center' }}
             tdStyle={{ textAlign: 'center' }}
           >
             운동이름
           </TableHeaderColumn>
           <TableHeaderColumn
-            dataField="tool"
+            dataField='tool'
             thStyle={{ textAlign: 'center' }}
             tdStyle={{ textAlign: 'center' }}
           >
             운동도구
           </TableHeaderColumn>
           <TableHeaderColumn
-            dataField="aa"
+            dataField='aa'
             thStyle={{ textAlign: 'center' }}
             tdStyle={{ textAlign: 'center' }}
           >
             운동부위
           </TableHeaderColumn>
           <TableHeaderColumn
-            dataField="set"
+            dataField='set'
             thStyle={{ textAlign: 'center' }}
             tdStyle={{ textAlign: 'center' }}
           >
             세트
           </TableHeaderColumn>
           <TableHeaderColumn
-            dataField="bb"
+            dataField='bb'
             thStyle={{ textAlign: 'center' }}
             tdStyle={{ textAlign: 'center' }}
           >
             횟수
           </TableHeaderColumn>
           <TableHeaderColumn
-            dataField="cc"
+            dataField='cc'
             thStyle={{ textAlign: 'center' }}
             tdStyle={{ textAlign: 'center' }}
           >
             휴식시간
           </TableHeaderColumn>
           <TableHeaderColumn
-            dataField="link"
+            dataField='link'
             thStyle={{ textAlign: 'center' }}
             tdStyle={{ textAlign: 'center' }}
           >
@@ -1150,22 +1150,22 @@ class AssignExercise extends Component {
 
   render() {
     return (
-      <div className="assignExercise">
-        <div className="header">
+      <div className='assignExercise'>
+        <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
           <MegaMenu />
-          <div className="localNavigation">
-            <div className="container">
+          <div className='localNavigation'>
+            <div className='container'>
               <h2>
-                <div className="parallelogram"></div>
+                <div className='parallelogram'></div>
                 운동 배정
                 <span>.</span>
               </h2>
-              <div className="breadCrumb">
-                <Link to="/home">HOME</Link>
+              <div className='breadCrumb'>
+                <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to="/assign">운동 배정</Link>
+                <Link to='/assign'>운동 배정</Link>
               </div>
               {/*.breadCrumb */}
             </div>
@@ -1174,23 +1174,23 @@ class AssignExercise extends Component {
           {/*.localNavigation */}
         </div>
         {/*.header */}
-        <div className="container">
-          <article className="waySub">
+        <div className='container'>
+          <article className='waySub'>
             <Link
               to={{
                 pathname: '/assign/inbody',
                 state: { member_no: this.state.member_no, a: false },
               }}
             >
-              <button className="btnSolid" type="button">
+              <button className='btnSolid' type='button'>
                 고객인바디
               </button>
             </Link>
           </article>
-          <section className="customerSearch">
+          <section className='customerSearch'>
             <button
-              className="btnAssignCusSearch"
-              type="button"
+              className='btnAssignCusSearch'
+              type='button'
               onClick={this.handleClickOpen}
             >
               회원검색
@@ -1198,32 +1198,32 @@ class AssignExercise extends Component {
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
-              maxWidth="lg"
+              maxWidth='lg'
             >
               <DialogTitle>고객 검색</DialogTitle>
               <DialogContent>
-                <div className="customerSearch">
+                <div className='customerSearch'>
                   <Dropdown
-                    className="searchDrop"
+                    className='searchDrop'
                     options={options}
                     onChange={this.selectItem}
                     value={this.state.item}
-                    placeholder="Select an option"
+                    placeholder='Select an option'
                   />
                   {/*.searchDrop */}
                   <input
-                    type="text"
-                    id="search"
+                    type='text'
+                    id='search'
                     checked={this.state.search}
                     onChange={this.handleChange}
                   />
                   {/*#search */}
-                  <button type="button" onClick={this.search}>
+                  <button type='button' onClick={this.search}>
                     고객 검색
                   </button>
                 </div>
                 {/*.customerSearch */}
-                <Table className="addsalesSearchTable">
+                <Table className='addsalesSearchTable'>
                   <TableHead>
                     <TableRow>
                       <TableCell>번호</TableCell>
@@ -1243,7 +1243,7 @@ class AssignExercise extends Component {
                           <TableCell>
                             <DialogActions>
                               <button
-                                type="button"
+                                type='button'
                                 onClick={this.choiceUser}
                                 id={c.no}
                                 value={[c.userName, c.phone]}
@@ -1257,20 +1257,20 @@ class AssignExercise extends Component {
                       ))
                     ) : (
                       <TableRow>
-                        <TableCell colSpan="6" align="center"></TableCell>
+                        <TableCell colSpan='6' align='center'></TableCell>
                       </TableRow>
                     )}
                   </TableBody>
                 </Table>
               </DialogContent>
               <DialogActions>
-                <button type="button" onClick={this.handleClose}>
+                <button type='button' onClick={this.handleClose}>
                   닫기
                 </button>
               </DialogActions>
             </Dialog>
           </section>
-          <section className="CustomerInbody sectionGlass">
+          <section className='CustomerInbody sectionGlass'>
             <h3>
               <span>{this.state.userName}</span>님 운동배정
             </h3>
@@ -1304,40 +1304,40 @@ class AssignExercise extends Component {
                 state: { member_no: this.state.member_no },
               }}
             >
-              <button className="btnSolid" type="button">
+              <button className='btnSolid' type='button'>
                 운동 배정 확인
               </button>
             </Link>
           </section>
           {/*.CustomerInbody */}
-          <section className="assignWorkout">
+          <section className='assignWorkout'>
             <h3>운동 목록</h3>
-            <div className="inputCheckRow">
+            <div className='inputCheckRow'>
               <h5>
-                <div className="circle"></div>
+                <div className='circle'></div>
                 운동 묶음 선택 (기본 설정)
               </h5>
-              <p className="mb-3 w-100 fs-3">
+              <p className='mb-3 w-100 fs-3'>
                 부위 별로 미리 설정한 운동 묶음을 간편하게 배정할 수 있습니다.
               </p>
-              <div className="d-flex w-100">
+              <div className='d-flex w-100'>
                 {this.createViewDefaultExerciseButton()}
               </div>
             </div>
             <h5>
-              <div className="circle"></div>
+              <div className='circle'></div>
               운동 개별 선택
             </h5>
-            <div className="exerciseSelectList">
-              <div className="flexbetween">
+            <div className='exerciseSelectList'>
+              <div className='flexbetween'>
                 {this.createViewExerciseListButton()}
               </div>
             </div>
             {this.createViewExerciseListTable()}
 
             <button
-              className="btnSolid"
-              type="button"
+              className='btnSolid'
+              type='button'
               onClick={this.handleIgnoreClick}
             >
               {' '}
@@ -1370,7 +1370,7 @@ class AssignExercise extends Component {
           </section>
         </div>
         {/*.container */}
-        <div className="footer">
+        <div className='footer'>
           <Footer />
         </div>
         {/*.footer */}
@@ -1396,7 +1396,7 @@ const AssignExerciseDispatchToProps = (dispatch) => {
 
 export default connect(
   AssignExerciseStateToProps,
-  AssignExerciseDispatchToProps,
+  AssignExerciseDispatchToProps
 )(AssignExercise);
 //새 page 추가 시 guide : 이 폴더 안에 페이지 하나 더 만든 후, src/component/app.js && src/page/index 함께 변경해주세요
 //잘 모르겠으면 customer폴더 참고

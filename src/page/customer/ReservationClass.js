@@ -24,8 +24,11 @@ import 'react-dropdown/style.css';
 import styles from '../../styles/reservation/reservationClass.css';
 
 import { SERVER_URL } from '../../const/settings';
-import { TextField } from '@material-ui/core';
+
 import moment from 'moment';
+
+import TextField from '@mui/material/TextField';
+
 const ip = SERVER_URL;
 /*
 운동클래스 body

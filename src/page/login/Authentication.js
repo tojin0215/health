@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Card from "react-bootstrap/Card";
-import FormCheck from "react-bootstrap/FormCheck";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+import FormCheck from 'react-bootstrap/FormCheck';
 
-import "../../styles/login/Authentication.css";
+import '../../styles/login/Authentication.css';
 
 class Authentication extends Component {
   state = {
-    id: "",
-    password: "",
+    id: '',
+    password: '',
     radioGroup: {
       fitness: true,
       trainer: false,
@@ -33,8 +33,8 @@ class Authentication extends Component {
     this.props.onRegister(id, pw).then((result) => {
       if (!result) {
         this.setState({
-          id: "",
-          password: "",
+          id: '',
+          password: '',
         });
       }
     });
@@ -47,7 +47,7 @@ class Authentication extends Component {
     this.props.onLogin(id, pw).then((success) => {
       if (!success) {
         this.setState({
-          password: "",
+          password: '',
         });
       }
     });
@@ -76,39 +76,39 @@ class Authentication extends Component {
   };
 
   handleLoginCustomer = () => {
-    alert("회원로그인");
+    alert('회원로그인');
   };
   render() {
-    console.log(this.state.radioGroup["fitness"]);
+    console.log(this.state.radioGroup['fitness']);
     //강사, 회원은 사업주가 승인하여야만 회원가입이 가능합니다.
     const inputBoxes = (
       <div>
-        <Form key="loginGroup">
+        <Form key='loginGroup'>
           <Form.Check
             inline
-            type="radio"
-            id="fitness"
-            name="radioGroup"
-            checked={this.state.radioGroup["fitness"]}
-            label="사업주"
+            type='radio'
+            id='fitness'
+            name='radioGroup'
+            checked={this.state.radioGroup['fitness']}
+            label='사업주'
             onClick={this.handleRadio}
           />
           <Form.Check
             inline
-            type="radio"
-            id="trainer"
-            name="radioGroup"
-            checked={this.state.radioGroup["trainer"]}
-            label="강사"
+            type='radio'
+            id='trainer'
+            name='radioGroup'
+            checked={this.state.radioGroup['trainer']}
+            label='강사'
             onClick={this.handleRadio}
           />
           <Form.Check
             inline
-            type="radio"
-            id="customer"
-            name="radioGroup"
-            checked={this.state.radioGroup["customer"]}
-            label="회원"
+            type='radio'
+            id='customer'
+            name='radioGroup'
+            checked={this.state.radioGroup['customer']}
+            label='회원'
             onClick={this.handleRadio}
           />
         </Form>
@@ -116,73 +116,73 @@ class Authentication extends Component {
     );
     const loginBox = (
       <div>
-        <Form.Group className="mb-3" controlId="formBasicId">
+        <Form.Group className='mb-3' controlId='formBasicId'>
           <Form.Label>아이디</Form.Label>
           <Form.Control
-            name="id"
-            type="text"
-            className="validate"
-            placeholder="Enter id"
+            name='id'
+            type='text'
+            className='validate'
+            placeholder='Enter id'
             onChange={this.handleChange}
             value={this.state.id}
           />
-          <Form.Text className="text-muted"></Form.Text>
+          <Form.Text className='text-muted'></Form.Text>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className='mb-3' controlId='formBasicPassword'>
           <Form.Label>Password</Form.Label>
           <Form.Control
-            name="password"
-            type="password"
-            className="validate"
+            name='password'
+            type='password'
+            className='validate'
             onChange={this.handleChange}
             value={this.state.password}
             onKeyPress={this.handleKeyPress}
-            placeholder="Password"
+            placeholder='Password'
           />
         </Form.Group>
       </div>
     );
     const trainerLoginBox = (
       <div>
-        <Form.Group className="mb-3" controlId="formBasicId">
+        <Form.Group className='mb-3' controlId='formBasicId'>
           <Form.Label>핸드폰번호</Form.Label>
           <Form.Control
-            name="phone"
-            type="text"
-            className="validate"
-            placeholder="Enter phone number"
+            name='phone'
+            type='text'
+            className='validate'
+            placeholder='Enter phone number'
             onChange={this.handleChange}
             value={this.state.phone}
           />
-          <Form.Text className="text-muted"></Form.Text>
+          <Form.Text className='text-muted'></Form.Text>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className='mb-3' controlId='formBasicPassword'>
           <Form.Label>생년월일</Form.Label>
           <Form.Control
-            name="birth"
-            type="password"
-            className="validate"
+            name='birth'
+            type='password'
+            className='validate'
             onChange={this.handleChange}
             value={this.state.birth}
             onKeyPress={this.handleKeyPress}
-            placeholder="birth"
+            placeholder='birth'
           />
         </Form.Group>
       </div>
     );
     const loginView = (
       <div>
-        <Card className="text-center">
+        <Card className='text-center'>
           <Card.Body>
             {inputBoxes}
             {loginBox}
-            <Button onClick={this.handleLogin} className="" variant="primary">
+            <Button onClick={this.handleLogin} className='' variant='primary'>
               LOGIN
             </Button>
             <Button
-              className="border-0 bg-white"
-              variant="outline-secondary"
-              href="/register"
+              className='border-0 bg-white'
+              variant='outline-secondary'
+              href='/register'
             >
               회원가입
             </Button>
@@ -192,14 +192,14 @@ class Authentication extends Component {
     );
     const loginViewTrainer = (
       <div>
-        <Card className="text-center">
+        <Card className='text-center'>
           <Card.Body>
             {inputBoxes}
             {trainerLoginBox}
             <Button
               onClick={this.handleLoginTrainer}
-              className=""
-              variant="primary"
+              className=''
+              variant='primary'
             >
               LOGIN
             </Button>
@@ -211,13 +211,13 @@ class Authentication extends Component {
     );
     const loginViewCustomer = (
       <div>
-        <Card className="text-center">
+        <Card className='text-center'>
           <Card.Body>
             {inputBoxes}
             <Button
               onClick={this.handleLoginCustomer}
-              className=""
-              variant="primary"
+              className=''
+              variant='primary'
             >
               LOGIN
             </Button>
@@ -239,32 +239,26 @@ class Authentication extends Component {
     // );
 
     return (
-      <div className="container auth">
-        <div className="welcomeMent">
+      <div className='container auth'>
+        <div className='welcomeMent'>
           <p>Hello,</p>
           <p>안녕하세요!</p>
           <p>헬스짐 관리자 오마이짐입니다.</p>
         </div>
-        {this.state.radioGroup["fitness"] ? (
-          <div className="card">
-            {this.props.mode ? loginView : registerView}
-          </div>
+        {this.state.radioGroup['fitness'] ? (
+          <div className='card'>{this.props.mode ? loginView : ''}</div>
         ) : (
-          ""
+          ''
         )}
-        {this.state.radioGroup["trainer"] ? (
-          <div className="card">
-            {this.props.mode ? loginViewTrainer : registerView}
-          </div>
+        {this.state.radioGroup['trainer'] ? (
+          <div className='card'>{this.props.mode ? loginViewTrainer : ''}</div>
         ) : (
-          ""
+          ''
         )}
-        {this.state.radioGroup["customer"] ? (
-          <div className="card">
-            {this.props.mode ? loginViewCustomer : registerView}
-          </div>
+        {this.state.radioGroup['customer'] ? (
+          <div className='card'>{this.props.mode ? loginViewCustomer : ''}</div>
         ) : (
-          ""
+          ''
         )}
       </div>
     );
@@ -281,10 +275,10 @@ Authentication.propTypes = {
 Authentication.defaultProps = {
   mode: true,
   onRegister: (id, pw) => {
-    console.error("register function is not defined");
+    console.error('register function is not defined');
   },
   onLogin: (id, pw) => {
-    console.error("login function not defined");
+    console.error('login function not defined');
   },
 };
 
