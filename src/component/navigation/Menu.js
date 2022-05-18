@@ -41,7 +41,7 @@ class MegaMenu extends Component {
   // }
   render() {
     const { userinfo } = this.props;
-    console.log(userinfo);
+    // console.log(userinfo);
 
     $("#menu-icon")
       .off("click")

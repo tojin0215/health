@@ -37,6 +37,12 @@ class Trainer extends Component {
     super(props);
     this.state = {
       viewTrainerList: [],
+      trainer_name: "",
+      phone: "",
+      birth: "",
+      ment: "",
+      history: "",
+      sex: "",
     };
   }
   goLogin = () => {
@@ -91,7 +97,7 @@ class Trainer extends Component {
     const fitness_no = this.props.userinfo.fitness_no;
     console.log(fitness_no);
     selectTrainer(fitness_no).then((result) => {
-      const items = result.map((data, index, array) => {
+      const items = result.data.map((data, index, array) => {
         return (
           <VieWTrainerItem
             trainer_name={data.trainer_name}
