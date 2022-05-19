@@ -1,4 +1,4 @@
-import authenticationAction from "../action/index";
+import authenticationAction from '../action/index';
 
 const {
   AUTH_LOGIN,
@@ -14,11 +14,11 @@ const {
 const authentication = (
   state = {
     userinfo: {
-      manager_name: "",
+      manager_name: '',
       fitness_no: -1,
     },
     login: {
-      status: "FAILURE",
+      status: 'FAILURE',
     },
     status: {},
   },
@@ -29,7 +29,7 @@ const authentication = (
       return {
         ...state,
         login: {
-          status: "WAITING",
+          status: 'WAITING',
         },
       };
     case AUTH_LOGIN_SUCCESS:
@@ -39,9 +39,10 @@ const authentication = (
           id: action.id,
           fitness_no: action.fitness_no,
           manager_name: action.manager_name,
+          loginWheter: action.loginWheter,
         },
         login: {
-          status: "SUCCESS",
+          status: 'SUCCESS',
         },
         status: {
           ...state.status,
@@ -53,7 +54,7 @@ const authentication = (
       return {
         ...state,
         login: {
-          status: "FAILURE",
+          status: 'FAILURE',
         },
       };
 
@@ -61,7 +62,7 @@ const authentication = (
       return {
         ...state,
         login: {
-          status: "PERMITWAITING",
+          status: 'PERMITWAITING',
         },
       };
     case AUTH_GET_STATUS:
@@ -79,6 +80,7 @@ const authentication = (
           id: action.id,
           fitness_no: action.fitness_no,
           manager_name: action.manager_name,
+          loginWheter: action.loginWheter,
         },
         status: {
           ...state.status,
@@ -90,9 +92,9 @@ const authentication = (
       return {
         ...state,
         userinfo: {
-          id: "",
+          id: '',
           fitness_no: -1,
-          manager_name: "",
+          manager_name: '',
         },
         status: {
           ...state.status,
@@ -104,14 +106,14 @@ const authentication = (
       return {
         ...state,
         userinfo: {
-          id: "",
+          id: '',
           fitness_no: -1,
-          manager_name: "",
+          manager_name: '',
         },
         status: {
           ...state.status,
           isLoggedIn: false,
-          currentUser: "",
+          currentUser: '',
         },
       };
 

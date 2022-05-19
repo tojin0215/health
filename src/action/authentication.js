@@ -34,7 +34,8 @@ export function loginRequest(id, password) {
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
-        console.log(response.code);
+        // console.log(response.loginWhether);
+        // console.log(response.code);
         if (response.success) {
           // SUCCEED
           dispatch(loginSuccess(response));
@@ -61,6 +62,7 @@ export function loginSuccess(info) {
     id: info.id,
     fitness_no: info.fitness_no,
     manager_name: info.manager_name,
+    loginWheter: info.loginWheter,
   };
 }
 
@@ -115,6 +117,7 @@ export function getStatusSuccess(info) {
     id: info.id,
     fitness_no: info.fitness_no,
     manager_name: info.manager_name,
+    loginWheter: info.loginWheter,
   };
 }
 

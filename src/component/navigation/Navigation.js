@@ -1,29 +1,29 @@
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
-import { Nav, Navbar, Container } from "react-bootstrap";
-import { logoutRequest } from "../../action/authentication";
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Nav, Navbar, Container } from 'react-bootstrap';
+import { logoutRequest } from '../../action/authentication';
 
-import Button from "react-bootstrap/Button";
-import "bootstrap/dist/css/bootstrap.css";
-import styles from "./Navigation.css";
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.css';
+import styles from './Navigation.css';
 
 class Navigation extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.userinfo);
+    // console.log(this.props.userinfo);
   }
   handleLogout = () => {
     this.props.logoutRequest().then(() => {
-      alert("로그아웃 되었습니다.");
+      alert('로그아웃 되었습니다.');
 
       // EMPTIES THE SESSION
       let loginData = {
         isLoggedIn: false,
-        username: "",
+        username: '',
       };
 
-      document.cookie = "key=" + btoa(JSON.stringify(loginData));
+      document.cookie = 'key=' + btoa(JSON.stringify(loginData));
 
       this.props.goLogin();
     });
@@ -31,54 +31,56 @@ class Navigation extends Component {
 
   render() {
     const { userinfo } = this.props;
+    // console.log(userinfo);
+    // console.log(this.props.userinfo);
     return (
-      <div className="Navigation">
+      <div className='Navigation'>
         <Navbar className={styles.navbar}>
-          <Nav className="mr-auto dropdownNav navitem">
+          <Nav className='mr-auto dropdownNav navitem'>
             <Nav.Item>
               <span className={styles.navitem}>{userinfo.manager_name}</span>
             </Nav.Item>
-            <NavLink exact to="/home">
+            <NavLink exact to='/home'>
               <span className={styles.navitem}>Home</span>
               <ul>
                 <li>
-                  <NavLink exact to="/home">
+                  <NavLink exact to='/home'>
                     Home
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink exact to="/qr">
+                  <NavLink exact to='/qr'>
                     QR
                   </NavLink>
                 </li>
               </ul>
             </NavLink>
 
-            <NavLink exact to="/trainer">
+            <NavLink exact to='/trainer'>
               <span className={styles.navitem}>강사</span>
               <ul>
                 <li>
-                  <NavLink exact to="/trainer">
+                  <NavLink exact to='/trainer'>
                     강사 관리
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink exact to="/trainer/add">
+                  <NavLink exact to='/trainer/add'>
                     강사 등록
                   </NavLink>
                 </li>
               </ul>
             </NavLink>
-            <NavLink exact to="/customer">
+            <NavLink exact to='/customer'>
               <span className={styles.navitem}>고객</span>
               <ul>
                 <li>
-                  <NavLink exact to="/customer">
+                  <NavLink exact to='/customer'>
                     회원 관리
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink exact to="/customer/add">
+                  <NavLink exact to='/customer/add'>
                     회원 등록
                   </NavLink>
                 </li>
@@ -86,7 +88,7 @@ class Navigation extends Component {
                   <NavLink
                     exact
                     to={{
-                      pathname: "/assign/inbody",
+                      pathname: '/assign/inbody',
                       state: { member_no: 0, a: true },
                     }}
                   >
@@ -95,64 +97,64 @@ class Navigation extends Component {
                 </li>
               </ul>
             </NavLink>
-            <NavLink exact to="/reservation">
+            <NavLink exact to='/reservation'>
               <span className={styles.navitem}>수업관리</span>
               <ul>
-                <li class="dropdown">
-                  <NavLink exact to="/reservation">
+                <li class='dropdown'>
+                  <NavLink exact to='/reservation'>
                     수업
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink exact to="/reservationClass">
+                  <NavLink exact to='/reservationClass'>
                     수업 설정
                     {/* (강사,회원 hide) */}
                   </NavLink>
                 </li>
               </ul>
             </NavLink>
-            <NavLink exact to="/assign">
+            <NavLink exact to='/assign'>
               <span className={styles.navitem}>운동</span>
               <ul>
                 <li>
-                  <NavLink exact to="/assign">
+                  <NavLink exact to='/assign'>
                     운동 배정
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink exact to="/exercise">
+                  <NavLink exact to='/exercise'>
                     운동 설정
                   </NavLink>
                 </li>
               </ul>
             </NavLink>
-            <NavLink exact to="/sales">
+            <NavLink exact to='/sales'>
               <span className={styles.navitem}>매출</span>
               <ul>
                 <li>
-                  <NavLink exact to="/sales">
+                  <NavLink exact to='/sales'>
                     매출 현황
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink exact to="/sales/add">
+                  <NavLink exact to='/sales/add'>
                     결제 등록
                   </NavLink>
                 </li>
               </ul>
             </NavLink>
 
-            <NavLink exact to="/statistics">
+            <NavLink exact to='/statistics'>
               <span className={styles.navitem}></span>
             </NavLink>
             {userinfo.fitness_no === 1 ? (
-              <NavLink exact to="/admin">
+              <NavLink exact to='/admin'>
                 <span className={styles.navitem}>관리자</span>
               </NavLink>
             ) : null}
           </Nav>
           <Nav className={styles.navUtill}>
-            <Navbar.Brand className="" href="/home">
+            <Navbar.Brand className='' href='/home'>
               {/* <img
 								alt='투진컴퍼니'
 								src='%PUBLIC_URL%/assets/logo-text.png'
@@ -160,14 +162,14 @@ class Navigation extends Component {
 								height='30'
 								className='d-inline-block align-top'
 							/>{' '} */}
-              <p className="px-2 fs-6">{userinfo.manager_name} </p>
-              <p className="fs-6">
+              <p className='px-2 fs-6'>{userinfo.manager_name} </p>
+              <p className='fs-6'>
                 센터 코드
-                <p className="fw-bold">{userinfo.fitness_no}</p>
+                <p className='fw-bold'>{userinfo.fitness_no}</p>
               </p>
             </Navbar.Brand>
-            <Nav.Item className="align-self-center">
-              <Button variant="outline-secondary" onClick={this.handleLogout}>
+            <Nav.Item className='align-self-center'>
+              <Button variant='outline-secondary' onClick={this.handleLogout}>
                 LOG-OUT
               </Button>
             </Nav.Item>

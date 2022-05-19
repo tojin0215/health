@@ -72,7 +72,7 @@ class Home extends Component {
       this.props.history.push('/');
       return;
     }
-    console.log('get cookie by name / get loginData from cookie : ', loginData);
+    // console.log('get cookie by name / get loginData from cookie : ', loginData);
     //eyJpc0xvZ2dlZEluIjp0cnVlLCJpZCI6InRvamluIn0=
 
     // decode base64 & parse json
