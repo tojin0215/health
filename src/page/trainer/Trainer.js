@@ -9,19 +9,22 @@ import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 
+import { Button } from 'react-bootstrap';
+// MUI 테이블
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
+import Paper from '@mui/material/Paper';
 
 import 'react-dropdown/style.css';
 
 import MegaMenu from '../../component/navigation/Menu';
 import { deleteTrainer, selectTrainer, updateTrainer } from '../../api/user';
+import { confirmAlert } from 'react-confirm-alert';
+
 const VieWTrainerItem = ({
   fitness_no,
   trainer_name,
@@ -78,42 +81,61 @@ const VieWTrainerItem = ({
   };
   // console.log(showModal);
   return (
-    <tr>
-      <td>{trainer_name}</td>
-      <td>{phone}</td>
-      <td>{birth}</td>
-      <td>{ment}</td>
-      <td>{history}</td>
-      <td>{sex == 1 ? '남' : '여'}</td>
-      <td onClick={modalOnClick}> 수정하기</td>
-      <div>
-        <Modal show={showModal}>
-          폰번호:{phone}(변경불가)
-          <br />
-          성별:{sex == 1 ? '남' : '여'}(변경불가)
-          <br />
-          이름:
-          <input
-            value={trainer_name_input}
-            id='trainer_name'
-            onChange={updateChange1}
-          />
-          자기소개:
-          <input value={ment_input} id='ment' onChange={updateChange3} />
-          연혁:
-          <input value={history_input} id='history' onChange={updateChange4} />
-          <button onClick={() => updateCompleted(phone, fitness_no)}>
-            수정하기
-          </button>
-          <button onClick={() => deleteCompleted(phone, fitness_no)}>
-            삭제하기(강사자르기)
-          </button>
-          <button onClick={modalClose}>닫기</button>
-        </Modal>
-      </div>
-    </tr>
+    <TableRow>
+      <TableCell>{trainer_name}</TableCell>
+      <TableCell>{sex == 1 ? '남' : '여'}</TableCell>
+      <TableCell>{phone}</TableCell>
+      <TableCell>{birth}</TableCell>
+      <TableCell>{history}</TableCell>
+      <TableCell>{ment}</TableCell>
+      <TableCell onClick={modalOnClick}>
+        <Button className='' variant='outline-secondary' size='sm'>
+          수정하기
+        </Button>
+      </TableCell>
+      <Modal show={showModal}>
+        <Row></Row>
+        폰번호:{phone}(변경불가)
+        <br />
+        성별:{sex == 1 ? '남' : '여'}(변경불가)
+        <br />
+        이름:
+        <input
+          value={trainer_name_input}
+          id='trainer_name'
+          onChange={updateChange1}
+        />
+        자기소개:
+        <input value={ment_input} id='ment' onChange={updateChange3} />
+        연혁:
+        <input value={history_input} id='history' onChange={updateChange4} />
+        <Row xs={2}>
+          <Col className='pe-0'>
+            <Button
+              className='w-100'
+              onClick={() => updateCompleted(phone, fitness_no)}
+            >
+              수정하기
+            </Button>
+          </Col>
+          <Col className='ps-0'>
+            <Button
+              className='w-100'
+              onClick={() => deleteCompleted(phone, fitness_no)}
+              variant='outline-danger'
+            >
+              제거하기
+            </Button>
+          </Col>
+        </Row>
+        <Button onClick={modalClose} variant='outline-secondary'>
+          닫기
+        </Button>
+      </Modal>
+    </TableRow>
   );
 };
+
 class Trainer extends Component {
   constructor(props) {
     super(props);
@@ -226,24 +248,22 @@ class Trainer extends Component {
           {/*.localNavigation */}
         </header>
         <Container>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby='tableTitle'
-            size='medium'
-          ></Table>
-          <table>
-            <thead>
-              <tr>
-                <th>이름/</th>
-                <th>폰번호/</th>
-                <th>생년월일/</th>
-                <th>자기소개/</th>
-                <th>연혁/</th>
-                <th>성별</th>
-              </tr>
-            </thead>
-            <tbody>{this.state.viewTrainerList}</tbody>
-          </table>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+              <TableHead>
+                <TableRow>
+                  <TableCell>이름</TableCell>
+                  <TableCell>성별</TableCell>
+                  <TableCell>연락처</TableCell>
+                  <TableCell>생년월일</TableCell>
+                  <TableCell>연혁</TableCell>
+                  <TableCell>자기소개</TableCell>
+                  <TableCell>수정하기</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{this.state.viewTrainerList}</TableBody>
+            </Table>
+          </TableContainer>
         </Container>
         <div className='footer'>
           <Footer />
