@@ -106,11 +106,38 @@ export const getReservationClassBy = (fitness_no) => {
     })
     .then((response) => response.data);
 };
-//강사테이블에 select
+//강사테이블 delete
+export const deleteTrainer = (phone, fitness_no) => {
+  return axios
+    .delete(
+      `${SERVER_URL}/trainer?phone=` + phone + `&fitness_no=` + fitness_no,
+      {}
+    )
+    .then((response) => response.data);
+};
+//강사테이블 update
+export const updateTrainer = (
+  phone,
+  fitness_no,
+  trainer_name,
+  ment,
+  history
+) => {
+  return axios
+    .put(`${SERVER_URL}/trainer?phone=` + phone + `&fitness_no=` + fitness_no, {
+      trainer_name: trainer_name,
+      ment: ment,
+      history: history,
+    })
+    .then((response) => response.data);
+};
+//강사테이블 select
 export const selectTrainer = (fitness_no) => {
-  return axios.get(`${SERVER_URL}/trainer`, {
-    params: { fitness_no: fitness_no },
-  });
+  return axios
+    .get(`${SERVER_URL}/trainer`, {
+      params: { fitness_no: fitness_no },
+    })
+    .then((response) => response.data);
 };
 //강사테이블에 insert
 export const insertTrainer = (
@@ -134,9 +161,11 @@ export const insertTrainer = (
 };
 //매니저테이블에 trainer insert(trainer login)
 export const trainerManager = (id, password, manager_name) => {
-  return axios.post(`${SERVER_URL}/manager?type=trainer`, {
-    id,
-    password,
-    manager_name,
-  });
+  return axios
+    .post(`${SERVER_URL}/manager?type=trainer`, {
+      id,
+      password,
+      manager_name,
+    })
+    .then((response) => response.data);
 };

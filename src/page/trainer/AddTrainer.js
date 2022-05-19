@@ -14,7 +14,6 @@ import { SERVER_URL } from "../../const/settings";
 import MegaMenu from "../../component/navigation/Menu";
 import { TextField } from "@material-ui/core";
 import { insertTrainer, trainerManager } from "../../api/user";
-import { userInfo } from "os";
 
 class AddTrainer extends Component {
   constructor(props) {
@@ -27,6 +26,10 @@ class AddTrainer extends Component {
       ment: "",
       history: "",
       sex: "",
+      radioGroup: {
+        male: true,
+        female: false,
+      },
     };
   }
   goLogin = () => {
@@ -83,9 +86,9 @@ class AddTrainer extends Component {
       this.props.userinfo.fitness_no,
       this.state.ment,
       this.state.history,
-      this.state.sex
+      this.state.radioGroup.male ? 1 : 2
     ).then((res) => {
-      console.log(res);
+      // console.log(res);
       alert("trainer Table");
     });
   };
@@ -95,7 +98,7 @@ class AddTrainer extends Component {
       this.state.birth,
       this.state.trainer_name
     ).then((res) => {
-      console.log(res);
+      // console.log(res);
       alert("manager Table");
     });
   };
@@ -107,8 +110,18 @@ class AddTrainer extends Component {
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
+  handleRadio = (s) => {
+    let obj = {
+      male: false,
+      female: false,
+    };
+    obj[s.target.id] = s.target.checked;
+    this.setState({
+      radioGroup: obj,
+    });
+  };
   render() {
-    console.log(this.state.fitness_no);
+    // console.log(this.state.fitness_no);
     return (
       <div>
         <header className="header">
@@ -197,12 +210,28 @@ class AddTrainer extends Component {
             <br />
             <label>
               성별
-              <TextField
+              <input
+                type="radio"
+                name="radioGroup"
+                id="male"
+                checked={this.state.radioGroup["male"]}
+                onChange={this.handleRadio}
+              />
+              <span>남</span>
+              <input
+                type="radio"
+                name="radioGroup"
+                id="female"
+                checked={this.state.radioGroup["female"]}
+                onChange={this.handleRadio}
+              />
+              <span>여</span>
+              {/* <TextField
                 value={this.state.sex}
                 id="sex"
                 onChange={this.handleChange}
                 type="text"
-              />
+              /> */}
             </label>
             <br />
             <button
