@@ -19,6 +19,8 @@ import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+
 import { MdOutlineClose } from 'react-icons/md';
 
 import DatePicker from 'react-datepicker';

@@ -826,11 +826,15 @@ class ReservationClass extends Component {
     const dayIncreament = 0;
     const name = w.target.name;
     if (name === 'next') {
+      // 룰 에러 내용 : Expected an assignment or function call and instead saw an expression
+      // eslint-disable-next-line no-unused-expressions
       this.setState({
         dayIncreament: this.state.dayIncreament + 7,
       }),
         this.reservationClassSelect();
     } else if (name === 'prev') {
+      // 룰 에러 내용 : Expected an assignment or function call and instead saw an expression
+      // eslint-disable-next-line no-unused-expressions
       this.setState({
         dayIncreament: this.state.dayIncreament - 7,
       }),

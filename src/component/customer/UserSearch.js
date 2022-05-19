@@ -78,10 +78,13 @@ const UserSearch = ({ open, setOpen, fitness_no, handleUser }) => {
           setCustomers(result)
         );
       case '담당자':
+        // eslint-disable-next-line no-undef
         return getCustomerByManager(search, fitness_no).then((result) =>
           setCustomers(result)
         );
       case '주민번호(앞자리)':
+        // 'getCustomerByResiNo' is not defined  no-undef
+        // eslint-disable-next-line no-undef
         return getCustomerByResiNo(search, fitness_no).then((result) =>
           setCustomers(result)
         );
@@ -104,6 +107,8 @@ const UserSearch = ({ open, setOpen, fitness_no, handleUser }) => {
     );
   }, []);
 
+  // 'useMediaQuery' is not defined  no-undef
+  // eslint-disable-next-line no-undef
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
