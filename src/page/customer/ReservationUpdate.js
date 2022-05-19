@@ -18,9 +18,11 @@ import { render } from 'react-dom';
 import { Container, Row, Col, Table } from 'react-bootstrap';
 import ReservationPresetList from '../../component/reservation/ReservationPresetList';
 
-import DatePicker, { registerLocale } from 'react-datepicker';
-import ko from 'date-fns/locale/ko';
-registerLocale('ko', ko);
+import DatePicker from 'react-datepicker';
+// locale 오류로 임시 삭제
+// import DatePicker, { registerLocale } from 'react-datepicker';
+// import ko from 'date-fns/locale/ko';
+// registerLocale('ko', ko);
 
 const ip = SERVER_URL;
 
@@ -185,7 +187,8 @@ const ReservationItem = ({
             onChange={handleChangeDate}
             dateFormat='yyyy-MM-dd(eee)'
             font-size='1.6rem'
-            locale='ko'
+            // locale 오류로 임시 삭제
+            // locale='ko'
           />
         </td>
       ) : (

@@ -32,9 +32,11 @@ import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 
-import DatePicker, { registerLocale } from 'react-datepicker';
-import ko from 'date-fns/locale/ko';
-registerLocale('ko', ko);
+import DatePicker from 'react-datepicker';
+// locale 오류로 임시 삭제
+// import DatePicker, { registerLocale } from 'react-datepicker';
+// import ko from 'date-fns/locale/ko';
+// registerLocale('ko', ko);
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -553,7 +555,8 @@ class AddSales extends Component {
                     name='salesStart_date'
                     dateFormat='yyyy-MM-dd'
                     font-size='1.6rem'
-                    locale='ko'
+                    // locale 오류로 임시 삭제
+                    // locale='ko'
                   />
                 </label>
                 {/* <DatePicker
@@ -676,7 +679,8 @@ class AddSales extends Component {
                     onChange={this.handleDateChange}
                     name='paymentDate'
                     dateFormat='yyyy-MM-dd'
-                    locale='ko'
+                    // locale 오류로 임시 삭제
+                    // locale='ko'
                   />
                 </label>
                 {/*.amountDay */}

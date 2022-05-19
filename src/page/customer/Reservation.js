@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { render } from 'react-dom';
 import { Container, Row, Col, Tabs, Tab } from 'react-bootstrap';
 
-import DatePicker, { registerLocale } from 'react-datepicker';
-import ko from 'date-fns/locale/ko';
+import DatePicker from 'react-datepicker';
+// locale 오류로 임시 삭제
+// import DatePicker, { registerLocale } from 'react-datepicker';
+// import ko from 'date-fns/locale/ko';
+
 import { getStatusRequest } from '../../action/authentication';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -39,7 +42,8 @@ import {
   getReservation_date,
 } from '../../api/user';
 
-registerLocale('ko', ko);
+// locale 오류로 임시 삭제
+// registerLocale('ko', ko);
 
 const ip = SERVER_URL;
 
@@ -215,7 +219,8 @@ const ReservationItem = ({
             onChange={handleChangeDate}
             dateFormat='yyyy-MM-dd(eee)'
             font-size='1.6rem'
-            locale='ko'
+            // locale 오류로 임시 삭제
+            // locale='ko'
           />
         </td>
       ) : (

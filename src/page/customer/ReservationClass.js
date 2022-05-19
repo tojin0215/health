@@ -1,8 +1,12 @@
 import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { render } from 'react-dom';
-import DatePicker, { registerLocale } from 'react-datepicker';
-import ko from 'date-fns/locale/ko';
+
+import DatePicker from 'react-datepicker';
+// locale 오류로 임시 삭제
+// import DatePicker, { registerLocale } from 'react-datepicker';
+// import ko from 'date-fns/locale/ko';
+
 import { getStatusRequest } from '../../action/authentication';
 
 import { Container, Row, Col, Table, FloatingLabel } from 'react-bootstrap';
@@ -28,7 +32,8 @@ import moment from 'moment';
 
 import TextField from '@mui/material/TextField';
 
-registerLocale('ko', ko);
+// locale 오류로 임시 삭제
+// registerLocale('ko', ko);
 
 const ip = SERVER_URL;
 /*
@@ -1228,7 +1233,8 @@ class ReservationClass extends Component {
                   name='class_date'
                   dateFormat='yyyy-MM-dd(eee)'
                   font-size='1.6rem'
-                  locale='ko'
+                  // locale 오류로 임시 삭제
+                  // locale='ko'
                   error={this.state.class_date_err}
                   minDate={new Date()}
                 />

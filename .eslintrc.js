@@ -2,22 +2,43 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    // node: true, // 'module' is not defined. 에러가 발생하면 기입
+    node: true, // 'module' is not defined. 에러가 발생하면 기입
   },
   extends: [
     'eslint:recommended',
-    'plugin:eslint/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:prettier/recommended',
+    // 'plugin:eslint/recommended',
+    // 'plugin:import/errors',
+    // 'plugin:import/warnings',
+    // 'plugin:prettier/recommended',
     'plugin:react/recommended',
     'prettier',
   ],
   plugins: ['react'],
+  /**
+   * rules : 에러 또는 경고 규칙을 설정할 수 있다.
+   * 0: 끄기, 1: 경고 출력, 2: 에러 출력
+   */
   rules: {
+    'no-unused-vars': 1,
+    'no-dupe-class-members': 1,
+    'no-dupe-keys': 1,
+    'no-prototype-builtins': 1,
+    'no-empty': 1,
+    'no-useless-escape': 1,
+    'no-unreachable': 1,
+    'no-constant-condition': 1,
+    'no-self-assign': 1,
+
+    //plugin:react/recommended
+    'react/prop-types': 1,
+    'react/jsx-key': 1,
+    'react/no-unknown-property': 1,
+    'react/no-unescaped-entities': 1,
+    'react/no-direct-mutation-state': 1,
+
+    /*
     'no-restricted-globals': 1,
     'eslint-plugin/require-meta-docs-description': 'error',
-    'react/prop-types': 0,
     'no-extra-semi': 'error', // 확장자로 js와 jsx 둘다 허용하도록 수정
     'react/jsx-filename-extension': [1, { extensions: ['js', 'jsx'] }], // 화살표 함수의 파라미터가 하나일때 괄호 생략
     'arrow-parens': ['warn', 'as-needed'], // 사용하지 않는 변수가 있을때 빌드에러가 나던 규칙 해제
@@ -28,5 +49,6 @@ module.exports = {
     'react/jsx-props-no-spreading': [1, { custom: 'ignore' }],
     'no-restricted-globals': 1,
     'react/jsx-no-undef': 1,
+    */
   },
 };
