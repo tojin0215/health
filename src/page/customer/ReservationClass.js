@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
 import { render } from "react-dom";
@@ -5,6 +6,14 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import ko from "date-fns/locale/ko";
 registerLocale("ko", ko);
 import { getStatusRequest } from "../../action/authentication";
+=======
+import React, { Component, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { render } from 'react-dom';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import ko from 'date-fns/locale/ko';
+import { getStatusRequest } from '../../action/authentication';
+>>>>>>> 32528ffc6635286d804a78846bd2afbd15a7ddab
 
 import { Container, Row, Col, Table, FloatingLabel } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
@@ -23,9 +32,20 @@ import "react-dropdown/style.css";
 
 import styles from "../../styles/reservation/reservationClass.css";
 
+<<<<<<< HEAD
 import { SERVER_URL } from "../../const/settings";
 import { TextField } from "@material-ui/core";
 import moment from "moment";
+=======
+import { SERVER_URL } from '../../const/settings';
+
+import moment from 'moment';
+
+import TextField from '@mui/material/TextField';
+
+registerLocale('ko', ko);
+
+>>>>>>> 32528ffc6635286d804a78846bd2afbd15a7ddab
 const ip = SERVER_URL;
 /*
 운동클래스 body
@@ -246,7 +266,12 @@ const ReservationClassItem = ({
           <button
             className="deleteButton"
             onClick={() =>
+<<<<<<< HEAD
               confirm("정말 삭제하시겠습니까??") == true
+=======
+              // eslint-disable-next-line no-restricted-globals
+              confirm('정말 삭제하시겠습니까??') == true
+>>>>>>> 32528ffc6635286d804a78846bd2afbd15a7ddab
                 ? reservationClassDelete(no)
                 : alert("삭제가 취소 되었습니다.")
             }
@@ -408,6 +433,7 @@ class ReservationClass extends Component {
               />
             );
           });
+        // eslint-disable-next-line no-unused-expressions
         this.setState({ reservationClass: items }),
           this.reservationClassSelect1(),
           this.reservationClassSelect2(),
@@ -1086,49 +1112,63 @@ class ReservationClass extends Component {
                   <tr>
                     <td>
                       {this.state.reservationClass.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
                       ) : (
                         this.state.reservationClass
                       )}
                     </td>
                     <td name="mon">
                       {this.state.reservationClass1.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
                       ) : (
                         this.state.reservationClass1
                       )}
                     </td>
                     <td name="tue">
                       {this.state.reservationClass2.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
                       ) : (
                         this.state.reservationClass2
                       )}
                     </td>
                     <td name="wed">
                       {this.state.reservationClass3.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
                       ) : (
                         this.state.reservationClass3
                       )}
                     </td>
                     <td name="thu">
                       {this.state.reservationClass4.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
                       ) : (
                         this.state.reservationClass4
                       )}
                     </td>
                     <td name="fri">
                       {this.state.reservationClass5.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
                       ) : (
                         this.state.reservationClass5
                       )}
                     </td>
                     <td name="sat">
                       {this.state.reservationClass6.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
                       ) : (
                         this.state.reservationClass6
                       )}
