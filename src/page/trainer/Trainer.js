@@ -1,18 +1,27 @@
-import React, { Component, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { Component, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { Container, Row, Col, FloatingLabel } from "react-bootstrap";
-import Modal from "react-bootstrap/Modal";
-import Navigation from "../../component/navigation/Navigation";
-import Header from "../../component/header/Header";
-import Footer from "../../component/footer/Footer";
-import { connect } from "react-redux";
-import { getStatusRequest } from "../../action/authentication";
+import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
+import Navigation from '../../component/navigation/Navigation';
+import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
+import { connect } from 'react-redux';
+import { getStatusRequest } from '../../action/authentication';
 
-import "react-dropdown/style.css";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import TableSortLabel from '@mui/material/TableSortLabel';
 
-import MegaMenu from "../../component/navigation/Menu";
-import { deleteTrainer, selectTrainer, updateTrainer } from "../../api/user";
+import 'react-dropdown/style.css';
+
+import MegaMenu from '../../component/navigation/Menu';
+import { deleteTrainer, selectTrainer, updateTrainer } from '../../api/user';
 const VieWTrainerItem = ({
   fitness_no,
   trainer_name,
@@ -24,9 +33,9 @@ const VieWTrainerItem = ({
   vieWTrainer,
 }) => {
   const [showModal, setShowModal] = useState(false);
-  const [trainer_name_input, setTrainer_name_input] = useState("");
-  const [ment_input, setMent_input] = useState("");
-  const [history_input, setHistory_input] = useState("");
+  const [trainer_name_input, setTrainer_name_input] = useState('');
+  const [ment_input, setMent_input] = useState('');
+  const [history_input, setHistory_input] = useState('');
 
   const modalClose = () => {
     setShowModal(false);
@@ -55,14 +64,14 @@ const VieWTrainerItem = ({
       ment_input,
       history_input
     ).then(() => {
-      alert("수정완료");
+      alert('수정완료');
       modalClose();
       vieWTrainer();
     });
   };
   const deleteCompleted = (phone, fitness_no) => {
     deleteTrainer(phone, fitness_no).then(() => {
-      alert("삭제완료");
+      alert('삭제완료');
       modalClose();
       vieWTrainer();
     });
@@ -75,24 +84,24 @@ const VieWTrainerItem = ({
       <td>{birth}</td>
       <td>{ment}</td>
       <td>{history}</td>
-      <td>{sex == 1 ? "남" : "여"}</td>
+      <td>{sex == 1 ? '남' : '여'}</td>
       <td onClick={modalOnClick}> 수정하기</td>
       <div>
         <Modal show={showModal}>
           폰번호:{phone}(변경불가)
           <br />
-          성별:{sex == 1 ? "남" : "여"}(변경불가)
+          성별:{sex == 1 ? '남' : '여'}(변경불가)
           <br />
           이름:
           <input
             value={trainer_name_input}
-            id="trainer_name"
+            id='trainer_name'
             onChange={updateChange1}
           />
           자기소개:
-          <input value={ment_input} id="ment" onChange={updateChange3} />
+          <input value={ment_input} id='ment' onChange={updateChange3} />
           연혁:
-          <input value={history_input} id="history" onChange={updateChange4} />
+          <input value={history_input} id='history' onChange={updateChange4} />
           <button onClick={() => updateCompleted(phone, fitness_no)}>
             수정하기
           </button>
@@ -110,32 +119,32 @@ class Trainer extends Component {
     super(props);
     this.state = {
       viewTrainerList: [],
-      trainer_name: "",
-      phone: "",
-      birth: "",
-      ment: "",
-      history: "",
-      sex: "",
+      trainer_name: '',
+      phone: '',
+      birth: '',
+      ment: '',
+      history: '',
+      sex: '',
     };
   }
   goLogin = () => {
-    this.props.history.push("/");
+    this.props.history.push('/');
   };
 
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
     // get cookie by name
     function getCookie(name) {
-      var value = "; " + document.cookie;
-      var parts = value.split("; " + name + "=");
-      if (parts.length == 2) return parts.pop().split(";").shift();
+      var value = '; ' + document.cookie;
+      var parts = value.split('; ' + name + '=');
+      if (parts.length == 2) return parts.pop().split(';').shift();
     }
 
     // get loginData from cookie
-    let loginData = getCookie("key");
+    let loginData = getCookie('key');
     // if loginData is undefined, do nothing
-    if (typeof loginData === "undefined") {
-      this.props.history.push("/");
+    if (typeof loginData === 'undefined') {
+      this.props.history.push('/');
       return;
     }
 
@@ -143,7 +152,7 @@ class Trainer extends Component {
     loginData = JSON.parse(atob(loginData));
     // if not logged in, do nothing
     if (!loginData.isLoggedIn) {
-      this.props.history.push("/");
+      this.props.history.push('/');
       return;
     }
 
@@ -155,13 +164,13 @@ class Trainer extends Component {
         // logout the session
         loginData = {
           isLoggedIn: false,
-          id: "",
+          id: '',
         };
 
-        document.cookie = "key=" + btoa(JSON.stringify(loginData));
+        document.cookie = 'key=' + btoa(JSON.stringify(loginData));
 
         // and notify
-        alert("Your session is expired, please log in again");
+        alert('Your session is expired, please log in again');
       } else {
         this.vieWTrainer();
       }
@@ -188,26 +197,27 @@ class Trainer extends Component {
       this.setState({ viewTrainerList: items });
     });
   };
+
   render() {
     console.log(this.props.userinfo.fitness_no);
     console.log(this.state.viewTrainerList[0]);
     return (
       <div>
-        <header className="header">
+        <header className='header'>
           {/* <Header /> */}
           <Navigation goLogin={this.goLogin} />
           <MegaMenu />
-          <div className="localNavigation">
-            <div className="container">
+          <div className='localNavigation'>
+            <div className='container'>
               <h2>
-                <div className="parallelogram"></div>
+                <div className='parallelogram'></div>
                 강사관리
                 <span>.</span>
               </h2>
-              <div className="breadCrumb">
-                <Link to="/home">HOME</Link>
+              <div className='breadCrumb'>
+                <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to="/trainer">강사</Link>
+                <Link to='/trainer'>강사</Link>
               </div>
               {/*.breadCrumb */}
             </div>
@@ -216,6 +226,11 @@ class Trainer extends Component {
           {/*.localNavigation */}
         </header>
         <Container>
+          <Table
+            sx={{ minWidth: 750 }}
+            aria-labelledby='tableTitle'
+            size='medium'
+          ></Table>
           <table>
             <thead>
               <tr>
@@ -230,7 +245,7 @@ class Trainer extends Component {
             <tbody>{this.state.viewTrainerList}</tbody>
           </table>
         </Container>
-        <div className="footer">
+        <div className='footer'>
           <Footer />
         </div>
       </div>
