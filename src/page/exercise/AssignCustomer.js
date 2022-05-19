@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+
 import { getStatusRequest } from '../../action/authentication';
 
 // import Setting from '../../const/settings';

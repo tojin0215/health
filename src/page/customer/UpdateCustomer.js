@@ -23,7 +23,7 @@ const ip = SERVER_URL;
 class UpdateCustomer extends Component {
   constructor(props) {
     super(props);
-
+    // eslint-disable-next-line no-restricted-globals
     const search = location.pathname;
     //alert(search)
 

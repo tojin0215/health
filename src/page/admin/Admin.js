@@ -13,6 +13,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+
 import Dropdown from 'react-dropdown';
 import '../../styles/admin/Admin.css';
 import 'react-dropdown/style.css';

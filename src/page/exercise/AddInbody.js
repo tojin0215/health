@@ -25,6 +25,7 @@ class AddInbody extends Component {
   constructor(props) {
     super(props);
 
+    // eslint-disable-next-line no-restricted-globals
     const search = location.pathname;
     //alert(search+'   '+search.split('/')[3])
 

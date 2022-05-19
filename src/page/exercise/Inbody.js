@@ -46,6 +46,7 @@ class Inbody extends Component {
   constructor(props) {
     super(props);
 
+    // eslint-disable-next-line no-restricted-globals
     const search1 = location.pathname;
     //num = (search1.split('/'))[3];
     num = Number(this.props.location.state.member_no);

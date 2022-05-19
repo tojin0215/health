@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { render } from 'react-dom';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
-registerLocale('ko', ko);
 import { getStatusRequest } from '../../action/authentication';
 
 import { Container, Row, Col, Table, FloatingLabel } from 'react-bootstrap';
@@ -28,6 +27,8 @@ import { SERVER_URL } from '../../const/settings';
 import moment from 'moment';
 
 import TextField from '@mui/material/TextField';
+
+registerLocale('ko', ko);
 
 const ip = SERVER_URL;
 /*
@@ -249,6 +250,7 @@ const ReservationClassItem = ({
           <button
             className='deleteButton'
             onClick={() =>
+              // eslint-disable-next-line no-restricted-globals
               confirm('정말 삭제하시겠습니까??') == true
                 ? reservationClassDelete(no)
                 : alert('삭제가 취소 되었습니다.')
@@ -411,6 +413,7 @@ class ReservationClass extends Component {
               />
             );
           });
+        // eslint-disable-next-line no-unused-expressions
         this.setState({ reservationClass: items }),
           this.reservationClassSelect1(),
           this.reservationClassSelect2(),

@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    // node: true, // 'module' is not defined. 에러가 발생하면 기입
   },
   extends: [
     'eslint:recommended',
@@ -14,6 +15,7 @@ module.exports = {
   ],
   plugins: ['react'],
   rules: {
+    'no-restricted-globals': 1,
     'eslint-plugin/require-meta-docs-description': 'error',
     'react/prop-types': 0,
     'no-extra-semi': 'error', // 확장자로 js와 jsx 둘다 허용하도록 수정
@@ -24,5 +26,7 @@ module.exports = {
     'import/prefer-default-export': ['off'], // hooks의 의존성배열이 충분하지 않을때 강제로 의존성을 추가하는 규칙을 완화
     'react-hooks/exhaustive-deps': ['warn'], // props spreading을 허용하지 않는 규칙 해제
     'react/jsx-props-no-spreading': [1, { custom: 'ignore' }],
+    'no-restricted-globals': 1,
+    'react/jsx-no-undef': 1,
   },
 };

@@ -614,6 +614,7 @@ class AssignExercise extends Component {
     };
 
     fetch(url, inits).then((res) => {
+      // eslint-disable-next-line no-undef
       last_group_id = res[res.length - 1].group_id;
 
       let arr = [];
@@ -1065,11 +1066,12 @@ class AssignExercise extends Component {
       afterSaveCell: this.afterSaveCell,
     };
 
-    const renderTooltip = (props) => (
-      <Tooltip id='button-tooltip' {...props}>
-        Simple tooltip
-      </Tooltip>
-    );
+    // 사용되지 않으므로 주석처리함
+    // const renderTooltip = (props) => (
+    //   <Tooltip id='button-tooltip' {...props}>
+    //     Simple tooltip
+    //   </Tooltip>
+    // );
 
     return (
       <div>

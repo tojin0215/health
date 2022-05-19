@@ -5,7 +5,6 @@ import { Container, Row, Col, Tabs, Tab } from 'react-bootstrap';
 
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
-registerLocale('ko', ko);
 import { getStatusRequest } from '../../action/authentication';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -39,6 +38,8 @@ import {
   getReservation_choice_trainer,
   getReservation_date,
 } from '../../api/user';
+
+registerLocale('ko', ko);
 
 const ip = SERVER_URL;
 
@@ -160,9 +161,11 @@ const ReservationItem = ({
     setDate_input(e.target.value);
   };
   const handleChangeIsCancel = (e) => {
+    // eslint-disable-next-line no-undef
     setIsCancel_input(e.target.value);
   };
   const handleChangeCancelComment = (e) => {
+    // eslint-disable-next-line no-undef
     setCancelComment_input(e.target.value);
   };
 
@@ -262,6 +265,7 @@ const ReservationItem = ({
           className='py-1 px-2'
           variant='outline-danger'
           onClick={() =>
+            // eslint-disable-next-line no-restricted-globals
             confirm('정말 삭제하시겠습니까??') == true
               ? reservationDelete(res_no)
               : alert('삭제가 취소 되었습니다.')
@@ -320,6 +324,7 @@ const ReservationItem_exercise = ({
           className='py-1 px-2'
           variant='outline-danger'
           onClick={() =>
+            // eslint-disable-next-line no-restricted-globals
             confirm('정말 삭제하시겠습니까??') == true
               ? reservationDelete(res_no)
               : alert('삭제가 취소 되었습니다.')
@@ -373,6 +378,7 @@ const ReservationItem_trainer = ({
           className='py-1 px-2'
           variant='outline-danger'
           onClick={() =>
+            // eslint-disable-next-line no-restricted-globals
             confirm('정말 삭제하시겠습니까??') == true
               ? reservationDelete(res_no)
               : alert('삭제가 취소 되었습니다.')
@@ -427,6 +433,7 @@ const ReservationItem_date = ({
           className='py-1 px-2'
           variant='outline-danger'
           onClick={() =>
+            // eslint-disable-next-line no-restricted-globals
             confirm('정말 삭제하시겠습니까??') == true
               ? reservationDelete(res_no)
               : alert('삭제가 취소 되었습니다.')
@@ -485,6 +492,7 @@ const ReservationChoiceTrainerItem = ({
           className='py-1 px-2'
           variant='outline-danger'
           onClick={() =>
+            // eslint-disable-next-line no-restricted-globals
             confirm('정말 삭제하시겠습니까??') == true
               ? reservationDelete(res_no)
               : alert('삭제가 취소 되었습니다.')
@@ -1478,6 +1486,7 @@ class Reservation extends Component {
     const dayIncreament = 0;
     const name = w.target.name;
     if (name === 'next') {
+      // eslint-disable-next-line no-unused-expressions
       this.setState({
         dayIncreament: this.state.dayIncreament + 7,
       }),
@@ -1489,6 +1498,7 @@ class Reservation extends Component {
       this.reservationClassSelect5();
       this.reservationClassSelect6();
     } else if (name === 'prev') {
+      // eslint-disable-next-line no-unused-expressions
       this.setState({
         dayIncreament: this.state.dayIncreament - 7,
       }),
