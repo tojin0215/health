@@ -216,7 +216,6 @@ class Register extends Component {
                   id='id'
                   label='아이디/헬스장이름'
                   error={this.state.id_err}
-                  color='blue'
                   required
                   autoFocus
                 />

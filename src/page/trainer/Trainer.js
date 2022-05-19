@@ -1,15 +1,17 @@
 import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
+
 import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 
-import { Button } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+// BootStrap Modal
+import Modal from 'react-bootstrap/Modal';
+
 // MUI 테이블
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -23,7 +25,6 @@ import 'react-dropdown/style.css';
 
 import MegaMenu from '../../component/navigation/Menu';
 import { deleteTrainer, selectTrainer, updateTrainer } from '../../api/user';
-import { confirmAlert } from 'react-confirm-alert';
 
 const VieWTrainerItem = ({
   fitness_no,
@@ -93,44 +94,66 @@ const VieWTrainerItem = ({
           수정하기
         </Button>
       </TableCell>
-      <Modal show={showModal}>
-        <Row></Row>
-        폰번호:{phone}(변경불가)
-        <br />
-        성별:{sex == 1 ? '남' : '여'}(변경불가)
-        <br />
-        이름:
-        <input
-          value={trainer_name_input}
-          id='trainer_name'
-          onChange={updateChange1}
-        />
-        자기소개:
-        <input value={ment_input} id='ment' onChange={updateChange3} />
-        연혁:
-        <input value={history_input} id='history' onChange={updateChange4} />
-        <Row xs={2}>
-          <Col className='pe-0'>
-            <Button
-              className='w-100'
-              onClick={() => updateCompleted(phone, fitness_no)}
-            >
-              수정하기
-            </Button>
-          </Col>
-          <Col className='ps-0'>
-            <Button
-              className='w-100'
-              onClick={() => deleteCompleted(phone, fitness_no)}
-              variant='outline-danger'
-            >
-              제거하기
-            </Button>
-          </Col>
-        </Row>
-        <Button onClick={modalClose} variant='outline-secondary'>
-          닫기
-        </Button>
+      <Modal show={showModal} onHide={modalClose}>
+        <Modal.Header>
+          <Modal.Title>강사 정보 수정</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Row xs={1}>
+            <Col>폰번호:{phone}(변경불가)</Col>
+            <Col>성별:{sex == 1 ? '남' : '여'}(변경불가)</Col>
+            <Col>
+              이름:
+              <input
+                value={trainer_name_input}
+                id='trainer_name'
+                onChange={updateChange1}
+              />
+            </Col>
+            <Col>
+              자기소개:
+              <input value={ment_input} id='ment' onChange={updateChange3} />
+            </Col>
+            <Col>
+              연혁:
+              <input
+                value={history_input}
+                id='history'
+                onChange={updateChange4}
+              />
+            </Col>
+          </Row>
+        </Modal.Body>
+        <Modal.Footer>
+          <Row className='w-100'>
+            <Col className='pe-1' xs={8}>
+              <Button
+                className='w-100'
+                onClick={() => updateCompleted(phone, fitness_no)}
+              >
+                수정하기
+              </Button>
+            </Col>
+            <Col className='ps-1' xs={4}>
+              <Button
+                className='w-100'
+                onClick={() => deleteCompleted(phone, fitness_no)}
+                variant='outline-danger'
+              >
+                제거하기
+              </Button>
+            </Col>
+            <Col className='mt-2'>
+              <Button
+                className='w-100'
+                onClick={modalClose}
+                variant='outline-secondary'
+              >
+                닫기
+              </Button>
+            </Col>
+          </Row>
+        </Modal.Footer>
       </Modal>
     </TableRow>
   );
