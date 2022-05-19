@@ -6,12 +6,17 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
+    /**
+     * Failed to load plugin 'eslint' declared in '.eslintrc.js': Cannot find module 'eslint-plugin-eslint' 에러로 인한 제거
+     * 제거 항목 : 'plugin:eslint/recommended',
+     */
     // 'plugin:eslint/recommended',
-    // 'plugin:import/errors',
-    // 'plugin:import/warnings',
-    // 'plugin:prettier/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:prettier/recommended',
     'plugin:react/recommended',
     'prettier',
+    'eslint-config-prettier',
   ],
   plugins: ['react'],
   /**
@@ -36,7 +41,15 @@ module.exports = {
     'react/no-unescaped-entities': 1,
     'react/no-direct-mutation-state': 1,
 
+    //plugin:import/errors
+    'import/named': 1,
+    'import/default': 1,
+
+    //plugin:prettier/recommended
+    'prettier/prettier': ['warn', { singleQuote: true }],
+
     /*
+    외부 소스로 가져왔으므로 오류 확인 및 기능 적합 확인 후 적용
     'no-restricted-globals': 1,
     'eslint-plugin/require-meta-docs-description': 'error',
     'no-extra-semi': 'error', // 확장자로 js와 jsx 둘다 허용하도록 수정
