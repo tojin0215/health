@@ -8,41 +8,97 @@ import Header from "../../component/header/Header";
 import Footer from "../../component/footer/Footer";
 import { connect } from "react-redux";
 import { getStatusRequest } from "../../action/authentication";
-import Dropdown from "react-dropdown";
+
 import "react-dropdown/style.css";
-import { SERVER_URL } from "../../const/settings";
+
 import MegaMenu from "../../component/navigation/Menu";
-import { selectTrainer } from "../../api/user";
+import { deleteTrainer, selectTrainer, updateTrainer } from "../../api/user";
 const VieWTrainerItem = ({
+  fitness_no,
   trainer_name,
   phone,
   birth,
   ment,
   history,
   sex,
+  vieWTrainer,
 }) => {
   const [showModal, setShowModal] = useState(false);
+  const [trainer_name_input, setTrainer_name_input] = useState("");
+  const [ment_input, setMent_input] = useState("");
+  const [history_input, setHistory_input] = useState("");
+
   const modalClose = () => {
     setShowModal(false);
   };
   const modalOnClick = () => {
     setShowModal(true);
+    setTrainer_name_input(trainer_name);
+    setMent_input(ment);
+    setHistory_input(history);
+  };
+  const updateChange1 = (e) => {
+    setTrainer_name_input(e.target.value);
+  };
+  const updateChange3 = (e) => {
+    setMent_input(e.target.value);
+  };
+  const updateChange4 = (e) => {
+    setHistory_input(e.target.value);
   };
 
-  console.log(showModal);
+  const updateCompleted = (phone, fitness_no) => {
+    updateTrainer(
+      phone,
+      fitness_no,
+      trainer_name_input,
+      ment_input,
+      history_input
+    ).then(() => {
+      alert("수정완료");
+      modalClose();
+      vieWTrainer();
+    });
+  };
+  const deleteCompleted = (phone, fitness_no) => {
+    deleteTrainer(phone, fitness_no).then(() => {
+      alert("삭제완료");
+      modalClose();
+      vieWTrainer();
+    });
+  };
+  // console.log(showModal);
   return (
-    <tr onClick={modalOnClick}>
+    <tr>
       <td>{trainer_name}</td>
       <td>{phone}</td>
       <td>{birth}</td>
       <td>{ment}</td>
       <td>{history}</td>
-      <td>{sex}</td>
+      <td>{sex == 1 ? "남" : "여"}</td>
+      <td onClick={modalOnClick}> 수정하기</td>
       <div>
         <Modal show={showModal}>
-          <input />
-          <input />
-          <input />
+          폰번호:{phone}(변경불가)
+          <br />
+          성별:{sex == 1 ? "남" : "여"}(변경불가)
+          <br />
+          이름:
+          <input
+            value={trainer_name_input}
+            id="trainer_name"
+            onChange={updateChange1}
+          />
+          자기소개:
+          <input value={ment_input} id="ment" onChange={updateChange3} />
+          연혁:
+          <input value={history_input} id="history" onChange={updateChange4} />
+          <button onClick={() => updateCompleted(phone, fitness_no)}>
+            수정하기
+          </button>
+          <button onClick={() => deleteCompleted(phone, fitness_no)}>
+            삭제하기(강사자르기)
+          </button>
           <button onClick={modalClose}>닫기</button>
         </Modal>
       </div>
@@ -65,6 +121,7 @@ class Trainer extends Component {
   goLogin = () => {
     this.props.history.push("/");
   };
+
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
     // get cookie by name
@@ -110,19 +167,21 @@ class Trainer extends Component {
       }
     });
   }
+
   vieWTrainer = () => {
     const fitness_no = this.props.userinfo.fitness_no;
-    console.log(fitness_no);
     selectTrainer(fitness_no).then((result) => {
-      const items = result.data.map((data, index, array) => {
+      const items = result.map((data, index, array) => {
         return (
           <VieWTrainerItem
+            fitness_no={data.fitness_no}
             trainer_name={data.trainer_name}
             phone={data.phone}
             birth={data.birth}
             ment={data.ment}
             history={data.history}
             sex={data.sex}
+            vieWTrainer={this.vieWTrainer}
           />
         );
       });
@@ -130,12 +189,12 @@ class Trainer extends Component {
     });
   };
   render() {
-    //console.log(this.props.userinfo.fitness_no);
-    //console.log(this.state.viewTrainerList);
+    console.log(this.props.userinfo.fitness_no);
+    console.log(this.state.viewTrainerList[0]);
     return (
       <div>
         <header className="header">
-          <Header />
+          {/* <Header /> */}
           <Navigation goLogin={this.goLogin} />
           <MegaMenu />
           <div className="localNavigation">

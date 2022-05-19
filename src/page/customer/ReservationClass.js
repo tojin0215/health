@@ -940,7 +940,7 @@ class ReservationClass extends Component {
       },
       this.reservationClassSelect()
     );
-    // console.log("수정하기", this.state.updateOpen)
+    // console.log("수정하기", this.state.updateOpen);
   };
   goLogin = () => {
     this.props.history.push('/');
