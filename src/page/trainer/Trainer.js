@@ -204,7 +204,7 @@ class Trainer extends Component {
     return (
       <div>
         <header className='header'>
-          {/* <Header /> */}
+          <Header />
           <Navigation goLogin={this.goLogin} />
           <MegaMenu />
           <div className='localNavigation'>
