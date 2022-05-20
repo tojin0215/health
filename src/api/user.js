@@ -131,6 +131,14 @@ export const updateTrainer = (
     })
     .then((response) => response.data);
 };
+//강사테이블 select reservation에 fitness_no 가져오기 위해
+export const selectReservation = (trainer_name) => {
+  return axios
+    .get(`${SERVER_URL}/trainer`, {
+      params: { type: 'reservation', trainer_name: trainer_name },
+    })
+    .then((response) => response.data);
+};
 //강사테이블 select
 export const selectTrainer = (fitness_no) => {
   return axios

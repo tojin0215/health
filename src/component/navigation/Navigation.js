@@ -66,12 +66,6 @@ class Navigation extends Component {
                       수업
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink exact to='/reservationClass'>
-                      수업 설정
-                      {/* (강사,회원 hide) */}
-                    </NavLink>
-                  </li>
                 </ul>
               </NavLink>
             </Nav>

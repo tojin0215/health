@@ -64,9 +64,9 @@ class MegaMenu extends Component {
                 <p className='fs-1'>회원</p>
               </a>
             </div>
-            <p className='menuCenterCode fs-2'>
+            {/* <p className='menuCenterCode fs-2'>
               센터코드 {userinfo.fitness_no}
-            </p>
+            </p> */}
             <div id='menu-icon'>
               <span className='first'></span>
               <span className='second'></span>
@@ -92,11 +92,6 @@ class MegaMenu extends Component {
                   <li>
                     <NavLink exact to='/reservation'>
                       수업
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/reservationClass'>
-                      수업 설정
                     </NavLink>
                   </li>
                 </li>
@@ -130,9 +125,9 @@ class MegaMenu extends Component {
                 <p className='fs-1'>강사</p>
               </a>
             </div>
-            <p className='menuCenterCode fs-2'>
+            {/* <p className='menuCenterCode fs-2'>
               센터코드 {userinfo.fitness_no}
-            </p>
+            </p> */}
             <div id='menu-icon'>
               <span className='first'></span>
               <span className='second'></span>
@@ -236,9 +231,9 @@ class MegaMenu extends Component {
                 <p className='fs-1'>헬스장</p>
               </a>
             </div>
-            <p className='menuCenterCode fs-2'>
+            {/* <p className='menuCenterCode fs-2'>
               센터코드 {userinfo.fitness_no}
-            </p>
+            </p> */}
             <div id='menu-icon'>
               <span className='first'></span>
               <span className='second'></span>
