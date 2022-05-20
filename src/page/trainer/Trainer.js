@@ -9,9 +9,10 @@ import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 
 import { Container, Row, Col, Button } from 'react-bootstrap';
-// BootStrap Modal
+// Bootstrap Modal
 import Modal from 'react-bootstrap/Modal';
-
+// Bootstrap Form Text
+import Form from 'react-bootstrap/Form';
 // MUI 테이블
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -87,8 +88,12 @@ const VieWTrainerItem = ({
       <TableCell>{sex == 1 ? '남' : '여'}</TableCell>
       <TableCell>{phone}</TableCell>
       <TableCell>{birth}</TableCell>
-      <TableCell>{history}</TableCell>
-      <TableCell>{ment}</TableCell>
+      <TableCell>
+        <p className='text-wrap text-break'>{history}</p>
+      </TableCell>
+      <TableCell className=''>
+        <span>{ment}</span>
+      </TableCell>
       <TableCell onClick={modalOnClick}>
         <Button className='' variant='outline-secondary' size='sm'>
           수정하기
@@ -100,27 +105,58 @@ const VieWTrainerItem = ({
         </Modal.Header>
         <Modal.Body>
           <Row xs={1}>
-            <Col>폰번호:{phone}(변경불가)</Col>
-            <Col>성별:{sex == 1 ? '남' : '여'}(변경불가)</Col>
             <Col>
-              이름:
-              <input
-                value={trainer_name_input}
-                id='trainer_name'
-                onChange={updateChange1}
-              />
+              <Form.Group className='mb-3'>
+                <Form.Label htmlFor='disabledTextInput'>이름</Form.Label>
+                <Form.Control
+                  id='trainer_name'
+                  value={trainer_name_input}
+                  onChange={updateChange1}
+                />
+              </Form.Group>
+            </Col>
+            <Col xs={10}>
+              <Form.Group className='mb-3'>
+                <Form.Label>생년월일</Form.Label>
+                <Form.Control value={birth} disabled />
+              </Form.Group>
+            </Col>
+            <Col xs={2}>
+              <Form.Group className='mb-3'>
+                <Form.Label>성별</Form.Label>
+                <Form.Control value={sex == 1 ? '남' : '여'} disabled />
+              </Form.Group>
             </Col>
             <Col>
-              자기소개:
-              <input value={ment_input} id='ment' onChange={updateChange3} />
+              <Form.Group className='mb-3'>
+                <Form.Label htmlFor='disabledTextInput'>연락처</Form.Label>
+                <Form.Control id='disabledTextInput' value={phone} disabled />
+                <Form.Text>
+                  연락처는 아이디와 연동되어 변경할 수 없습니다.
+                </Form.Text>
+              </Form.Group>
             </Col>
             <Col>
-              연혁:
-              <input
-                value={history_input}
-                id='history'
-                onChange={updateChange4}
-              />
+              <Form.Group className='mb-3'>
+                <Form.Label htmlFor='TextInput'>연혁</Form.Label>
+                <Form.Control
+                  id='history'
+                  onChange={updateChange4}
+                  as='textarea'
+                  value={history_input}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group className='mb-3'>
+                <Form.Label htmlFor='TextInput'>자기소개</Form.Label>
+                <Form.Control
+                  id='ment'
+                  onChange={updateChange3}
+                  as='textarea'
+                  value={ment_input}
+                />
+              </Form.Group>
             </Col>
           </Row>
         </Modal.Body>
