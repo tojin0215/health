@@ -892,7 +892,12 @@ class ReservationClass extends Component {
           'Content-type': 'application/json',
         },
         body: JSON.stringify({
-          fitness_no: this.props.userinfo.fitness_no,
+          fitness_no:
+            this.props.userinfo.loginWhether === 2
+              ? ''
+              : this.props.userinfo.loginWhether == 1
+              ? 10
+              : this.props.userinfo.fitness_no,
           exercise_class: this.state.exercise_class,
           number_of_people: this.state.number_of_people,
           hour: this.state.hour,
@@ -946,6 +951,7 @@ class ReservationClass extends Component {
     this.props.history.push('/');
   };
   render() {
+    console.log(this.props.userinfo.loginWhether);
     return (
       <div className='reservationClassWrap'>
         <header className='header'>
