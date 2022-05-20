@@ -17,7 +17,24 @@ module.exports = {
     'plugin:react/recommended',
     'prettier',
     'eslint-config-prettier',
+    // 'standard',
+    'plugin:react/jsx-runtime',
+    'plugin:testing-library/react',
+    // 'plugin:jest/all',
   ],
+  //   parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+  parserOptions: {
+    requireConfigFile: 'false',
+    sourceType: 'module',
+    allowImportExportEverywhere: true,
+    babelOptions: { configFile: './.babelrc' },
+  },
   plugins: ['react'],
   /**
    * rules : 에러 또는 경고 규칙을 설정할 수 있다.
@@ -46,7 +63,7 @@ module.exports = {
     'import/default': 1,
 
     //plugin:prettier/recommended
-    'prettier/prettier': ['warn', { singleQuote: true }],
+    'prettier/prettier': 0,
 
     /*
     외부 소스로 가져왔으므로 오류 확인 및 기능 적합 확인 후 적용
