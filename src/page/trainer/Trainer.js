@@ -14,13 +14,19 @@ import Modal from 'react-bootstrap/Modal';
 // Bootstrap Form Text
 import Form from 'react-bootstrap/Form';
 // MUI 테이블
+import Box from '@mui/material/Box';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import 'react-dropdown/style.css';
 
@@ -82,18 +88,24 @@ const VieWTrainerItem = ({
     });
   };
   // console.log(showModal);
+  const [open, setOpen] = React.useState(false);
   return (
-    <TableRow>
+    <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableCell>
+        <IconButton
+          aria-label='expand row'
+          size='small'
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        </IconButton>
+      </TableCell>
       <TableCell>{trainer_name}</TableCell>
       <TableCell>{sex == 1 ? '남' : '여'}</TableCell>
       <TableCell>{phone}</TableCell>
       <TableCell>{birth}</TableCell>
-      <TableCell>
-        <p className='text-wrap text-break'>{history}</p>
-      </TableCell>
-      <TableCell className=''>
-        <span>{ment}</span>
-      </TableCell>
+      <TableCell>{history}</TableCell>
+      <TableCell className=''>{ment}</TableCell>
       <TableCell onClick={modalOnClick}>
         <Button className='' variant='outline-secondary' size='sm'>
           수정하기
@@ -311,6 +323,7 @@ class Trainer extends Component {
             <Table sx={{ minWidth: 650 }} aria-label='simple table'>
               <TableHead>
                 <TableRow>
+                  <TableCell> </TableCell>
                   <TableCell>이름</TableCell>
                   <TableCell>성별</TableCell>
                   <TableCell>연락처</TableCell>
