@@ -75,11 +75,8 @@ class Authentication extends Component {
     });
   };
 
-  handleLoginCustomer = () => {
-    alert('회원로그인');
-  };
   render() {
-    console.log(this.state.radioGroup['fitness']);
+    // console.log(this.state.radioGroup['fitness']);
     //강사, 회원은 사업주가 승인하여야만 회원가입이 가능합니다.
     const inputBoxes = (
       <div>
@@ -147,23 +144,23 @@ class Authentication extends Component {
         <Form.Group className='mb-3' controlId='formBasicId'>
           <Form.Label>핸드폰번호</Form.Label>
           <Form.Control
-            name='phone'
+            name='id'
             type='text'
             className='validate'
             placeholder='Enter phone number'
             onChange={this.handleChange}
-            value={this.state.phone}
+            value={this.state.id}
           />
           <Form.Text className='text-muted'></Form.Text>
         </Form.Group>
         <Form.Group className='mb-3' controlId='formBasicPassword'>
           <Form.Label>생년월일</Form.Label>
           <Form.Control
-            name='birth'
+            name='password'
             type='password'
             className='validate'
             onChange={this.handleChange}
-            value={this.state.birth}
+            value={this.state.password}
             onKeyPress={this.handleKeyPress}
             placeholder='birth'
           />
@@ -196,11 +193,7 @@ class Authentication extends Component {
           <Card.Body>
             {inputBoxes}
             {trainerLoginBox}
-            <Button
-              onClick={this.handleLoginTrainer}
-              className=''
-              variant='primary'
-            >
+            <Button onClick={this.handleLogin} className='' variant='primary'>
               LOGIN
             </Button>
             <br />
@@ -214,11 +207,8 @@ class Authentication extends Component {
         <Card className='text-center'>
           <Card.Body>
             {inputBoxes}
-            <Button
-              onClick={this.handleLoginCustomer}
-              className=''
-              variant='primary'
-            >
+            {trainerLoginBox}
+            <Button onClick={this.handleLogin} className='' variant='primary'>
               LOGIN
             </Button>
             <br />
@@ -269,7 +259,6 @@ Authentication.propTypes = {
   mode: PropTypes.bool,
   onRegister: PropTypes.func,
   onLogin: PropTypes.func,
-  onTrainer: PropTypes.func,
 };
 
 Authentication.defaultProps = {

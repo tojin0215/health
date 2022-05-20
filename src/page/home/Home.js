@@ -72,7 +72,7 @@ class Home extends Component {
       this.props.history.push('/');
       return;
     }
-    console.log('get cookie by name / get loginData from cookie : ', loginData);
+    // console.log('get cookie by name / get loginData from cookie : ', loginData);
     //eyJpc0xvZ2dlZEluIjp0cnVlLCJpZCI6InRvamluIn0=
 
     // decode base64 & parse json
@@ -91,8 +91,8 @@ class Home extends Component {
     // page refreshed & has a session in cookie,
     // check whether this cookie is valid or not
     this.props.getStatusRequest().then(() => {
-      console.log('????', this.props.status.valid);
-      // if session is not valid
+      // console.log('????', this.props.status.valid);
+      // if session is not valid -->logout
       if (!this.props.status.valid) {
         // logout the session
         loginData = {
@@ -101,7 +101,6 @@ class Home extends Component {
         };
 
         document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-
         // and notify
         alert('Your session is expired, please log in again');
       } else {
@@ -220,7 +219,7 @@ class Home extends Component {
                 <Col className='homeDashLeft h-100' xs={2}>
                   <label>
                     <p>오늘 방문고객</p>
-                    <span>{this.fommat(this.state.todayCustomer)}</span>
+                    {/* <span>{this.fommat(this.state.todayCustomer)}</span> */}
                   </label>
                   <label>
                     <p>전체고객</p>
