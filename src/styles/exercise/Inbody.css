@@ -1,176 +1,176 @@
 .inbodyCustomer {
-	position: relative;
-	padding-bottom: 5rem;
+  position: relative;
+  padding-bottom: 5rem;
 }
 
 .inbodyCustomer .waySub {
-	top: 0;
-	right: 0;
+  top: 0;
+  right: 0;
 }
 .inbodyCustomer .waySub button {
 }
 
 .inbody {
-	position: relative;
+  position: relative;
 }
 
 .inbody .inbodyCustomer > div {
-	display: flex;
-	flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .inbody .inbodyCustomer > div > label {
-	font-size: 2rem;
-	padding-left: 1rem;
+  font-size: 2rem;
+  padding-left: 1rem;
 }
 
 .inbody .inbodyCustomer > div > h3 {
-	/* border-bottom:none; */
+  /* border-bottom:none; */
 }
 
 .inbody .inbodyCustomer h3 span {
-	font-size: 3rem;
+  font-size: 3rem;
 }
 
 .inbody .inbodyCustomer > div label {
-	width: 100%;
+  width: 100%;
 }
 
 .inbody .inbodyListUtill {
-	justify-content: flex-end;
-	display: flex;
-	align-items: center;
+  justify-content: flex-end;
+  display: flex;
+  align-items: center;
 }
 
 .inbody .inbodyListUtill .btnSolid {
-	height: 4rem;
+  height: 4rem;
 }
 
 .inbody .inbodySlide {
-	position: absolute;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	width: 70%;
-	height: 100%;
-	background-color: rgba(33, 52, 73, 0.9);
-	color: #fff;
-	padding: 10rem 6rem;
-	z-index: 999;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 70%;
+  height: 100%;
+  background-color: rgba(33, 52, 73, 0.9);
+  color: #fff;
+  padding: 10rem 6rem;
+  z-index: 999;
 }
 
 .inbody .inbodySlide > label {
-	font-size: 1.75rem;
+  font-size: 1.75rem;
 }
 
 .inbody .inbodySlide > label > span {
-	font-size: 3rem;
-	font-weight: 500;
-	padding: 3px;
+  font-size: 3rem;
+  font-weight: 500;
+  padding: 3px;
 }
 
 .inbody .inbodySlide button:nth-child(2) {
-	position: absolute;
-	top: 2rem;
-	right: 6rem;
+  position: absolute;
+  top: 2rem;
+  right: 6rem;
 }
 
 .inbody .inbodySlide .inbodySlideUtill {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border: 1px solid #fff;
-	position: relative;
-	padding: 2rem;
-	flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fff;
+  position: relative;
+  padding: 2rem;
+  flex-wrap: wrap;
 }
 
 .inbody .inbodySlide .inbodySlideUtill > label {
-	padding: 0 1.6rem;
-	font-size: 3rem;
-	font-weight: 700;
+  padding: 0 1.6rem;
+  font-size: 3rem;
+  font-weight: 700;
 }
 
 .inbody .inbodySlide .inbodySlideUtill > button {
-	height: 4rem;
-	position: absolute;
-	top: 14px;
-	right: 30px;
-	box-shadow: inherit;
+  height: 4rem;
+  position: absolute;
+  top: 14px;
+  right: 30px;
+  box-shadow: inherit;
 }
 
 .inbody .inbodySlide .inbodySlideUtill > p {
-	width: 100%;
-	text-align: center;
+  width: 100%;
+  text-align: center;
 }
 
 .inbody .inbodySlide .inbodyGraph {
-	display: flex;
-	justify-content: center;
-	color: #000;
+  display: flex;
+  justify-content: center;
+  color: #000;
 }
 
 .tablewrap {
-	width: 100%;
-	overflow: auto;
+  width: 100%;
+  overflow: auto;
 }
 
 @media (max-width: 767px) {
-	.inbodyCustomer .waySub {
-		width: 100%;
-		text-align: center;
-	}
-	.inbodyCustomer .waySub button {
-		margin: 1%;
-		font-size: 1.8rem;
-	}
-	.MuiDialog-container .MuiPaper-root {
-		width: 100%;
-		margin: 0;
-	}
-	.inbody .MuiDialogContent-root {
-		padding: 0 !important;
-	}
-	.MuiDialog-root button {
-		width: 45%;
-	}
-	.inbodySearchTable .MuiTableCell-head {
-		padding: 2px;
-		min-width: 8rem;
-		padding-bottom: 2rem;
-	}
-	.container .inbodyCustomer {
-		padding-top: 8rem;
-	}
-	.inbody .inbodyCustomer > div:first-child {
-		justify-content: center;
-	}
-	.inbody .inbodyCustomer > div:first-child > .btnSolid {
-		width: 70%;
-	}
-	.inbody .inbodyListUtill {
-		flex-wrap: wrap;
-	}
-	.inbody .inbodyListUtill .btnSolid {
-		width: 70%;
-		margin: 0 auto;
-	}
-	.inbody .react-datepicker__input-container input[type='text'] {
-		width: 13rem;
-	}
-	.inbody .inbodySlide {
-		width: 100%;
-		padding: 8rem 1.2rem;
-	}
-	.inbody .inbodySlide button:nth-child(2) {
-		top: 1rem;
-		right: 1rem;
-	}
-	.inbody .inbodySlide .inbodySlideUtill > button {
-		top: 60px;
-		right: 20px;
-	}
-	.inbody .inbodySlide .inbodySlideUtill > p {
-		padding-top: 6rem;
-	}
+  .inbodyCustomer .waySub {
+    width: 100%;
+    text-align: center;
+  }
+  .inbodyCustomer .waySub button {
+    margin: 1%;
+    font-size: 1.8rem;
+  }
+  .MuiDialog-container .MuiPaper-root {
+    width: 100%;
+    margin: 0;
+  }
+  .inbody .MuiDialogContent-root {
+    padding: 0 !important;
+  }
+  .MuiDialog-root button {
+    width: 45%;
+  }
+  .inbodySearchTable .MuiTableCell-head {
+    padding: 2px;
+    min-width: 8rem;
+    padding-bottom: 2rem;
+  }
+  .container .inbodyCustomer {
+    padding-top: 8rem;
+  }
+  .inbody .inbodyCustomer > div:first-child {
+    justify-content: center;
+  }
+  .inbody .inbodyCustomer > div:first-child > .btnSolid {
+    width: 70%;
+  }
+  .inbody .inbodyListUtill {
+    flex-wrap: wrap;
+  }
+  .inbody .inbodyListUtill .btnSolid {
+    width: 70%;
+    margin: 0 auto;
+  }
+  .inbody .react-datepicker__input-container input[type='text'] {
+    width: 13rem;
+  }
+  .inbody .inbodySlide {
+    width: 100%;
+    padding: 8rem 1.2rem;
+  }
+  .inbody .inbodySlide button:nth-child(2) {
+    top: 1rem;
+    right: 1rem;
+  }
+  .inbody .inbodySlide .inbodySlideUtill > button {
+    top: 60px;
+    right: 20px;
+  }
+  .inbody .inbodySlide .inbodySlideUtill > p {
+    padding-top: 6rem;
+  }
 }
