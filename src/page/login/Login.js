@@ -25,14 +25,8 @@ class Login extends Component {
         let loginData = {
           isLoggedIn: true,
           id: id,
-          // loginWhether: loginWhether,
         };
         document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-        // if (loginWhether) {
-
-        // } else {
-
-        // }
         alert(id + '님 반갑습니다.');
         this.props.history.push('/home');
         return true;
@@ -47,6 +41,7 @@ class Login extends Component {
   };
 
   render() {
+    console.log('Login', this.props.status);
     return (
       <div className=''>
         {/* <div className='header'>

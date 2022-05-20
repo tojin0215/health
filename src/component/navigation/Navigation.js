@@ -34,147 +34,284 @@ class Navigation extends Component {
     // console.log(userinfo);
     // console.log(this.props.userinfo);
     return (
+      //2:회원, 1:강사, else(0):헬스장
       <div className='Navigation'>
-        <Navbar className={styles.navbar}>
-          <Nav className='mr-auto dropdownNav navitem'>
-            <Nav.Item>
-              <span className={styles.navitem}>{userinfo.manager_name}</span>
-            </Nav.Item>
-            <NavLink exact to='/home'>
-              <span className={styles.navitem}>Home</span>
-              <ul>
-                <li>
-                  <NavLink exact to='/home'>
-                    Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to='/qr'>
-                    QR
-                  </NavLink>
-                </li>
-              </ul>
-            </NavLink>
-
-            <NavLink exact to='/trainer'>
-              <span className={styles.navitem}>강사</span>
-              <ul>
-                <li>
-                  <NavLink exact to='/trainer'>
-                    강사 관리
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to='/trainer/add'>
-                    강사 등록
-                  </NavLink>
-                </li>
-              </ul>
-            </NavLink>
-            <NavLink exact to='/customer'>
-              <span className={styles.navitem}>고객</span>
-              <ul>
-                <li>
-                  <NavLink exact to='/customer'>
-                    회원 관리
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to='/customer/add'>
-                    회원 등록
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    exact
-                    to={{
-                      pathname: '/assign/inbody',
-                      state: { member_no: 0, a: true },
-                    }}
-                  >
-                    인바디 정보
-                  </NavLink>
-                </li>
-              </ul>
-            </NavLink>
-            <NavLink exact to='/reservation'>
-              <span className={styles.navitem}>수업관리</span>
-              <ul>
-                <li class='dropdown'>
-                  <NavLink exact to='/reservation'>
-                    수업
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to='/reservationClass'>
-                    수업 설정
-                    {/* (강사,회원 hide) */}
-                  </NavLink>
-                </li>
-              </ul>
-            </NavLink>
-            <NavLink exact to='/assign'>
-              <span className={styles.navitem}>운동</span>
-              <ul>
-                <li>
-                  <NavLink exact to='/assign'>
-                    운동 배정
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to='/exercise'>
-                    운동 설정
-                  </NavLink>
-                </li>
-              </ul>
-            </NavLink>
-            <NavLink exact to='/sales'>
-              <span className={styles.navitem}>매출</span>
-              <ul>
-                <li>
-                  <NavLink exact to='/sales'>
-                    매출 현황
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to='/sales/add'>
-                    결제 등록
-                  </NavLink>
-                </li>
-              </ul>
-            </NavLink>
-
-            <NavLink exact to='/statistics'>
-              <span className={styles.navitem}></span>
-            </NavLink>
-            {userinfo.fitness_no === 1 ? (
-              <NavLink exact to='/admin'>
-                <span className={styles.navitem}>관리자</span>
+        {userinfo.loginWhether === 2 ? (
+          <Navbar className={styles.navbar}>
+            <Nav className='mr-auto dropdownNav navitem'>
+              <Nav.Item>
+                <span className={styles.navitem}>회원</span>
+              </Nav.Item>
+              <NavLink exact to='/home'>
+                <span className={styles.navitem}>Home</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/home'>
+                      Home
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/qr'>
+                      QR
+                    </NavLink>
+                  </li>
+                </ul>
               </NavLink>
-            ) : null}
-          </Nav>
-          <Nav className={styles.navUtill}>
-            <Navbar.Brand className='' href='/home'>
-              {/* <img
-								alt='투진컴퍼니'
-								src='%PUBLIC_URL%/assets/logo-text.png'
-								width='auto'
-								height='30'
-								className='d-inline-block align-top'
-							/>{' '} */}
-              <p className='px-2 fs-6'>{userinfo.manager_name} </p>
-              <p className='fs-6'>
-                센터 코드
-                <p className='fw-bold'>{userinfo.fitness_no}</p>
-              </p>
-            </Navbar.Brand>
-            <Nav.Item className='align-self-center'>
-              <Button variant='outline-secondary' onClick={this.handleLogout}>
-                LOG-OUT
-              </Button>
-            </Nav.Item>
-          </Nav>
-        </Navbar>
+
+              <NavLink exact to='/reservation'>
+                <span className={styles.navitem}>수업관리</span>
+                <ul>
+                  <li class='dropdown'>
+                    <NavLink exact to='/reservation'>
+                      수업
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/reservationClass'>
+                      수업 설정
+                      {/* (강사,회원 hide) */}
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
+            </Nav>
+            <Nav className={styles.navUtill}>
+              <Navbar.Brand className='' href='/home'>
+                {userinfo.manager_name}
+              </Navbar.Brand>
+              <Nav.Item className='align-self-center'>
+                <Button variant='outline-secondary' onClick={this.handleLogout}>
+                  LOG-OUT
+                </Button>
+              </Nav.Item>
+            </Nav>
+          </Navbar>
+        ) : userinfo.loginWhether === 1 ? (
+          <Navbar className={styles.navbar}>
+            <Nav className='mr-auto dropdownNav navitem'>
+              <Nav.Item>
+                <span className={styles.navitem}>강사</span>
+              </Nav.Item>
+              <NavLink exact to='/home'>
+                <span className={styles.navitem}>Home</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/home'>
+                      Home
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/qr'>
+                      QR
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
+
+              <NavLink exact to='/customer'>
+                <span className={styles.navitem}>고객</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/customer'>
+                      회원 관리
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/customer/add'>
+                      회원 등록
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      exact
+                      to={{
+                        pathname: '/assign/inbody',
+                        state: { member_no: 0, a: true },
+                      }}
+                    >
+                      인바디 정보
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
+              <NavLink exact to='/reservation'>
+                <span className={styles.navitem}>수업관리</span>
+                <ul>
+                  <li class='dropdown'>
+                    <NavLink exact to='/reservation'>
+                      수업
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/reservationClass'>
+                      수업 설정
+                      {/* (강사,회원 hide) */}
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
+              <NavLink exact to='/assign'>
+                <span className={styles.navitem}>운동</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/assign'>
+                      운동 배정
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/exercise'>
+                      운동 설정
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
+
+              <NavLink exact to='/statistics'>
+                <span className={styles.navitem}></span>
+              </NavLink>
+            </Nav>
+            <Nav className={styles.navUtill}>
+              <Navbar.Brand className='' href='/home'>
+                {userinfo.manager_name}
+              </Navbar.Brand>
+              <Nav.Item className='align-self-center'>
+                <Button variant='outline-secondary' onClick={this.handleLogout}>
+                  LOG-OUT
+                </Button>
+              </Nav.Item>
+            </Nav>
+          </Navbar>
+        ) : (
+          <Navbar className={styles.navbar}>
+            <Nav className='mr-auto dropdownNav navitem'>
+              <Nav.Item>
+                <span className={styles.navitem}>헬스장</span>
+              </Nav.Item>
+              <NavLink exact to='/home'>
+                <span className={styles.navitem}>Home</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/home'>
+                      Home
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/qr'>
+                      QR
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
+
+              <NavLink exact to='/trainer'>
+                <span className={styles.navitem}>강사</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/trainer'>
+                      강사 관리
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/trainer/add'>
+                      강사 등록
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
+              <NavLink exact to='/customer'>
+                <span className={styles.navitem}>고객</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/customer'>
+                      회원 관리
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/customer/add'>
+                      회원 등록
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      exact
+                      to={{
+                        pathname: '/assign/inbody',
+                        state: { member_no: 0, a: true },
+                      }}
+                    >
+                      인바디 정보
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
+              <NavLink exact to='/reservation'>
+                <span className={styles.navitem}>수업관리</span>
+                <ul>
+                  <li class='dropdown'>
+                    <NavLink exact to='/reservation'>
+                      수업
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/reservationClass'>
+                      수업 설정
+                      {/* (강사,회원 hide) */}
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
+              <NavLink exact to='/assign'>
+                <span className={styles.navitem}>운동</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/assign'>
+                      운동 배정
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/exercise'>
+                      운동 설정
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
+              <NavLink exact to='/sales'>
+                <span className={styles.navitem}>매출</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/sales'>
+                      매출 현황
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/sales/add'>
+                      결제 등록
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
+
+              <NavLink exact to='/statistics'>
+                <span className={styles.navitem}></span>
+              </NavLink>
+              {/* {userinfo.fitness_no === 1 ? (
+                <NavLink exact to='/admin'>
+                  <span className={styles.navitem}>관리자</span>
+                </NavLink>
+              ) : null} */}
+            </Nav>
+            <Nav className={styles.navUtill}>
+              <Navbar.Brand className='' href='/home'>
+                {userinfo.manager_name}
+              </Navbar.Brand>
+              <Nav.Item className='align-self-center'>
+                <Button variant='outline-secondary' onClick={this.handleLogout}>
+                  LOG-OUT
+                </Button>
+              </Nav.Item>
+            </Nav>
+          </Navbar>
+        )}
       </div>
     );
   }

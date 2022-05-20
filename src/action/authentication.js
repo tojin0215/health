@@ -34,7 +34,6 @@ export function loginRequest(id, password) {
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
-        // console.log(response.loginWhether);
         // console.log(response.code);
         if (response.success) {
           // SUCCEED
@@ -62,7 +61,7 @@ export function loginSuccess(info) {
     id: info.id,
     fitness_no: info.fitness_no,
     manager_name: info.manager_name,
-    loginWheter: info.loginWheter,
+    loginWhether: info.loginWhether,
   };
 }
 
@@ -94,9 +93,18 @@ export function getStatusRequest() {
     })
       .then((response) => response.json())
       .then((response) => {
+        // console.log(response.info);
+        // console.log(response.info.loginWhether);
         if (response.err == undefined) {
           // SUCCEED
           dispatch(getStatusSuccess(response.info));
+          if (response.info.loginWhether === 2) {
+            console.log('회원');
+          } else if (response.info.loginWhether === 1) {
+            console.log('트레이너');
+          } else {
+            console.log('헬스장');
+          }
         } else {
           // FAILED
           dispatch(getStatusFailure());
@@ -117,7 +125,7 @@ export function getStatusSuccess(info) {
     id: info.id,
     fitness_no: info.fitness_no,
     manager_name: info.manager_name,
-    loginWheter: info.loginWheter,
+    loginWhether: info.loginWhether,
   };
 }
 

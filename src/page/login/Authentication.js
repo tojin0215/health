@@ -76,7 +76,7 @@ class Authentication extends Component {
   };
 
   render() {
-    console.log(this.state.radioGroup['fitness']);
+    // console.log(this.state.radioGroup['fitness']);
     //강사, 회원은 사업주가 승인하여야만 회원가입이 가능합니다.
     const inputBoxes = (
       <div>

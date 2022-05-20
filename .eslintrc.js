@@ -18,6 +18,12 @@ module.exports = {
     'prettier',
     'eslint-config-prettier',
   ],
+  // parserOptions: {
+  parser: 'babel-eslint',
+  //   sourceType: 'module',
+  //   allowImportExportEverywhere: true,
+  //   ecmaVersion: 2015,
+  // },
   plugins: ['react'],
   /**
    * rules : 에러 또는 경고 규칙을 설정할 수 있다.
