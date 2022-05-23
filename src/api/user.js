@@ -177,3 +177,43 @@ export const trainerManager = (id, password, manager_name) => {
     })
     .then((response) => response.data);
 };
+
+//Client select
+export const clientSelect = (fitness_no) => {
+  return axios
+    .get(`${SERVER_URL}/client`, {
+      params: { fitness_no: fitness_no },
+    })
+    .then((response) => response.data);
+};
+
+//매니저 테이블에 client insert(client login)
+export const clientManager = (id, password, manager_name) => {
+  return axios
+    .post(`${SERVER_URL}/manager?type=client`, {
+      id,
+      password,
+      manager_name,
+    })
+    .then((response) => response.data);
+};
+//회원테이블(client)에 insert
+export const insertClient = (
+  fitness_no,
+  client_name,
+  phone,
+  birth,
+  sex,
+  join_route,
+  address
+) => {
+  return axios.post(`${SERVER_URL}/client`, {
+    fitness_no,
+    client_name,
+    phone,
+    birth,
+    sex,
+    join_route,
+    address,
+  });
+};

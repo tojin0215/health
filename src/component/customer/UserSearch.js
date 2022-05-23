@@ -107,12 +107,8 @@ const UserSearch = ({ open, setOpen, fitness_no, handleUser }) => {
     );
   }, []);
 
-  // 'useMediaQuery' is not defined  no-undef
-  // eslint-disable-next-line no-undef
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-
   return (
-    <Dialog open={open} onClose={handleClose} fullScreen={fullScreen}>
+    <Dialog open={open} onClose={handleClose}>
       <DialogTitle>고객 검색</DialogTitle>
       <DialogContent>
         <Row>
