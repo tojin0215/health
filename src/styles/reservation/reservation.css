@@ -8,9 +8,6 @@
 }
 
 .reservationWrap .MuiInputLabel-formControl {
-  /* position: relative; */
-  /* top: -2px;
-  left: 46px; */
   width: 100%;
   font-weight: bold;
   color: #0f78ff;
@@ -35,7 +32,7 @@
 }
 
 .reservationWrap .usersearchButton .MuiFormControl-root:hover {
-  background-color: #e0efff;
+  background-color: #9dcdff;
   transition: all linear 0.2s;
 }
 

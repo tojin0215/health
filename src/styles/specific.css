@@ -82,9 +82,11 @@
   justify-content: center;
 }
 .MuiDialog-paperWidthLg {
-  width: 56%;
+  /* width: 56%; */
 }
-
+.MuiDialogContent-root {
+  min-width: 550px;
+}
 @media (max-width: 767px) {
   .customerSearch {
     flex-direction: column;

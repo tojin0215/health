@@ -98,12 +98,9 @@
 html .MuiOutlinedInput-notchedOutline {
   border: none;
 }
-html .MuiInputBase-root {
-}
-html .MuiFormLabel-root {
-}
+
 html .MuiInputLabel-outlined {
-  transform: translate(2.3rem, 2.3rem) scale(1);
+  transform: translate(0.3rem, 1.3rem) scale(1);
 }
 
 /*신규회원등록*/

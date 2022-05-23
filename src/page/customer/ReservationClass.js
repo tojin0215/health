@@ -1062,12 +1062,12 @@ class ReservationClass extends Component {
                 {moment(this.state.class_date)
                   .day(0)
                   .add({ days: this.state.dayIncreament })
-                  .format('YYYY-MM-DD(dd)')}{' '}
+                  .format('YYYY-MM-DD (dd)')}{' '}
                 ~{' '}
                 {moment(this.state.class_date)
                   .day(6)
                   .add({ days: this.state.dayIncreament })
-                  .format('YYYY-MM-DD(dd)')}
+                  .format('YYYY-MM-DD (dd)')}
               </div>
             </Col>
             <Col className='text-start'>
@@ -1092,71 +1092,43 @@ class ReservationClass extends Component {
                       {moment(this.state.class_date)
                         .day(0)
                         .add({ days: this.state.dayIncreament })
-                        .format('dd')}
-                      {moment(this.state.class_date)
-                        .day(0)
-                        .add({ days: this.state.dayIncreament })
-                        .format('YYYY-MM-DD')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.class_date)
                         .day(1)
                         .add({ days: this.state.dayIncreament })
-                        .format('dd')}
-                      {moment(this.state.class_date)
-                        .day(1)
-                        .add({ days: this.state.dayIncreament })
-                        .format('YYYY-MM-DD')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.class_date)
                         .day(2)
                         .add({ days: this.state.dayIncreament })
-                        .format('dd')}
-                      {moment(this.state.class_date)
-                        .day(2)
-                        .add({ days: this.state.dayIncreament })
-                        .format('YYYY-MM-DD')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.class_date)
                         .day(3)
                         .add({ days: this.state.dayIncreament })
-                        .format('dd')}
-                      {moment(this.state.class_date)
-                        .day(3)
-                        .add({ days: this.state.dayIncreament })
-                        .format('YYYY-MM-DD')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.class_date)
                         .day(4)
                         .add({ days: this.state.dayIncreament })
-                        .format('dd')}
-                      {moment(this.state.class_date)
-                        .day(4)
-                        .add({ days: this.state.dayIncreament })
-                        .format('YYYY-MM-DD')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.class_date)
                         .day(5)
                         .add({ days: this.state.dayIncreament })
-                        .format('dd')}
-                      {moment(this.state.class_date)
-                        .day(5)
-                        .add({ days: this.state.dayIncreament })
-                        .format('YYYY-MM-DD')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.class_date)
                         .day(6)
                         .add({ days: this.state.dayIncreament })
-                        .format('dd')}
-                      {moment(this.state.class_date)
-                        .day(6)
-                        .add({ days: this.state.dayIncreament })
-                        .format('YYYY-MM-DD')}
+                        .format('MM-DD (dd)')}
                     </th>
                   </tr>
                 </thead>
@@ -1259,8 +1231,8 @@ class ReservationClass extends Component {
             >
               <label className='boxmorpinsm d-block w-100'>
                 <TextField
-                  className=''
                   id='exercise_class'
+                  variant='standard'
                   value={this.state.exercise_class}
                   onChange={this.handleChange}
                   InputProps={{ disableUnderline: true }}
@@ -1279,6 +1251,7 @@ class ReservationClass extends Component {
                 <TextField
                   className=''
                   id='trainer'
+                  variant='standard'
                   value={
                     this.props.userinfo.loginWhether === 1
                       ? this.props.userinfo.manager_name
@@ -1315,6 +1288,7 @@ class ReservationClass extends Component {
                       className=''
                       type='number'
                       id='hour'
+                      variant='standard'
                       value={this.state.hour}
                       onChange={this.handleChange}
                       InputProps={{ disableUnderline: true }}
@@ -1335,6 +1309,7 @@ class ReservationClass extends Component {
                       className=''
                       type='number'
                       id='minute'
+                      variant='standard'
                       value={this.state.minute}
                       onChange={this.handleChange}
                       InputProps={{ disableUnderline: true }}
@@ -1351,6 +1326,7 @@ class ReservationClass extends Component {
                   className=''
                   type='number'
                   id='number_of_people'
+                  variant='standard'
                   value={this.state.number_of_people}
                   onChange={this.handleChange}
                   InputProps={{ disableUnderline: true }}
