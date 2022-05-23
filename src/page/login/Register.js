@@ -208,6 +208,7 @@ class Register extends Component {
               className='resigterVisual'
               style={{ backgroundImage: 'src/img/resiVisual.jpeg' }}
             ></div>
+            강사, 회원은 사업주가 승인하여야만 회원가입이 가능합니다.
             <ul>
               <li>
                 <TextField

@@ -78,39 +78,39 @@ class Authentication extends Component {
   render() {
     // console.log(this.state.radioGroup['fitness']);
     //강사, 회원은 사업주가 승인하여야만 회원가입이 가능합니다.
-    const inputBoxes = (
-      <div>
-        <Form key='loginGroup'>
-          <Form.Check
-            inline
-            type='radio'
-            id='fitness'
-            name='radioGroup'
-            checked={this.state.radioGroup['fitness']}
-            label='사업주'
-            onClick={this.handleRadio}
-          />
-          <Form.Check
-            inline
-            type='radio'
-            id='trainer'
-            name='radioGroup'
-            checked={this.state.radioGroup['trainer']}
-            label='강사'
-            onClick={this.handleRadio}
-          />
-          <Form.Check
-            inline
-            type='radio'
-            id='customer'
-            name='radioGroup'
-            checked={this.state.radioGroup['customer']}
-            label='회원'
-            onClick={this.handleRadio}
-          />
-        </Form>
-      </div>
-    );
+    // const inputBoxes = (
+    //   <div>
+    //     <Form key='loginGroup'>
+    //       <Form.Check
+    //         inline
+    //         type='radio'
+    //         id='fitness'
+    //         name='radioGroup'
+    //         checked={this.state.radioGroup['fitness']}
+    //         label='사업주'
+    //         onClick={this.handleRadio}
+    //       />
+    //       <Form.Check
+    //         inline
+    //         type='radio'
+    //         id='trainer'
+    //         name='radioGroup'
+    //         checked={this.state.radioGroup['trainer']}
+    //         label='강사'
+    //         onClick={this.handleRadio}
+    //       />
+    //       <Form.Check
+    //         inline
+    //         type='radio'
+    //         id='customer'
+    //         name='radioGroup'
+    //         checked={this.state.radioGroup['customer']}
+    //         label='회원'
+    //         onClick={this.handleRadio}
+    //       />
+    //     </Form>
+    //   </div>
+    // );
     const loginBox = (
       <div>
         <Form.Group className='mb-3' controlId='formBasicId'>
@@ -171,7 +171,7 @@ class Authentication extends Component {
       <div>
         <Card className='text-center'>
           <Card.Body>
-            {inputBoxes}
+            {/* {inputBoxes} */}
             {loginBox}
             <Button onClick={this.handleLogin} className='' variant='primary'>
               LOGIN
@@ -191,7 +191,7 @@ class Authentication extends Component {
       <div>
         <Card className='text-center'>
           <Card.Body>
-            {inputBoxes}
+            {/* {inputBoxes} */}
             {trainerLoginBox}
             <Button onClick={this.handleLogin} className='' variant='primary'>
               LOGIN
@@ -206,7 +206,7 @@ class Authentication extends Component {
       <div>
         <Card className='text-center'>
           <Card.Body>
-            {inputBoxes}
+            {/* {inputBoxes} */}
             {trainerLoginBox}
             <Button onClick={this.handleLogin} className='' variant='primary'>
               LOGIN
@@ -234,6 +234,7 @@ class Authentication extends Component {
           <p>Hello,</p>
           <p>안녕하세요!</p>
           <p>헬스짐 관리자 오마이짐입니다.</p>
+          <p>강사, 회원은 사업주가 승인하여야만 회원가입이 가능합니다.</p>
         </div>
         {this.state.radioGroup['fitness'] ? (
           <div className='card'>{this.props.mode ? loginView : ''}</div>
