@@ -1259,8 +1259,8 @@ class ReservationClass extends Component {
             >
               <label className='boxmorpinsm d-block w-100'>
                 <TextField
-                  className=''
                   id='exercise_class'
+                  variant='standard'
                   value={this.state.exercise_class}
                   onChange={this.handleChange}
                   InputProps={{ disableUnderline: true }}
@@ -1279,6 +1279,7 @@ class ReservationClass extends Component {
                 <TextField
                   className=''
                   id='trainer'
+                  variant='standard'
                   value={
                     this.props.userinfo.loginWhether === 1
                       ? this.props.userinfo.manager_name
@@ -1315,6 +1316,7 @@ class ReservationClass extends Component {
                       className=''
                       type='number'
                       id='hour'
+                      variant='standard'
                       value={this.state.hour}
                       onChange={this.handleChange}
                       InputProps={{ disableUnderline: true }}
@@ -1335,6 +1337,7 @@ class ReservationClass extends Component {
                       className=''
                       type='number'
                       id='minute'
+                      variant='standard'
                       value={this.state.minute}
                       onChange={this.handleChange}
                       InputProps={{ disableUnderline: true }}
@@ -1351,6 +1354,7 @@ class ReservationClass extends Component {
                   className=''
                   type='number'
                   id='number_of_people'
+                  variant='standard'
                   value={this.state.number_of_people}
                   onChange={this.handleChange}
                   InputProps={{ disableUnderline: true }}
