@@ -1733,71 +1733,43 @@ class Reservation extends Component {
                       {moment(this.state.reserv_date)
                         .day(0)
                         .add(this.state.dayIncreament, 'days')
-                        .format('MM-DD')}
-                      {moment(this.state.reserv_date)
-                        .day(0)
-                        .add(this.state.dayIncreament, 'days')
-                        .format(' (dd)')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.reserv_date)
                         .day(1)
                         .add(this.state.dayIncreament, 'days')
-                        .format('MM-DD')}
-                      {moment(this.state.reserv_date)
-                        .day(1)
-                        .add(this.state.dayIncreament, 'days')
-                        .format(' (dd)')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.reserv_date)
                         .day(2)
                         .add(this.state.dayIncreament, 'days')
-                        .format('MM-DD')}
-                      {moment(this.state.reserv_date)
-                        .day(2)
-                        .add(this.state.dayIncreament, 'days')
-                        .format(' (dd)')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.reserv_date)
                         .day(3)
                         .add(this.state.dayIncreament, 'days')
-                        .format('MM-DD')}
-                      {moment(this.state.reserv_date)
-                        .day(3)
-                        .add(this.state.dayIncreament, 'days')
-                        .format(' (dd)')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.reserv_date)
                         .day(4)
                         .add(this.state.dayIncreament, 'days')
-                        .format('MM-DD')}
-                      {moment(this.state.reserv_date)
-                        .day(4)
-                        .add(this.state.dayIncreament, 'days')
-                        .format(' (dd)')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.reserv_date)
                         .day(5)
                         .add(this.state.dayIncreament, 'days')
-                        .format('MM-DD')}
-                      {moment(this.state.reserv_date)
-                        .day(5)
-                        .add(this.state.dayIncreament, 'days')
-                        .format(' (dd)')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.reserv_date)
                         .day(6)
                         .add(this.state.dayIncreament, 'days')
-                        .format('MM-DD')}
-                      {moment(this.state.reserv_date)
-                        .day(6)
-                        .add(this.state.dayIncreament, 'days')
-                        .format(' (dd)')}
+                        .format('MM-DD (dd)')}
                     </th>
                   </tr>
                 </thead>

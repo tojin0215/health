@@ -1062,12 +1062,12 @@ class ReservationClass extends Component {
                 {moment(this.state.class_date)
                   .day(0)
                   .add({ days: this.state.dayIncreament })
-                  .format('YYYY-MM-DD(dd)')}{' '}
+                  .format('YYYY-MM-DD (dd)')}{' '}
                 ~{' '}
                 {moment(this.state.class_date)
                   .day(6)
                   .add({ days: this.state.dayIncreament })
-                  .format('YYYY-MM-DD(dd)')}
+                  .format('YYYY-MM-DD (dd)')}
               </div>
             </Col>
             <Col className='text-start'>
@@ -1092,71 +1092,43 @@ class ReservationClass extends Component {
                       {moment(this.state.class_date)
                         .day(0)
                         .add({ days: this.state.dayIncreament })
-                        .format('dd')}
-                      {moment(this.state.class_date)
-                        .day(0)
-                        .add({ days: this.state.dayIncreament })
-                        .format('YYYY-MM-DD')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.class_date)
                         .day(1)
                         .add({ days: this.state.dayIncreament })
-                        .format('dd')}
-                      {moment(this.state.class_date)
-                        .day(1)
-                        .add({ days: this.state.dayIncreament })
-                        .format('YYYY-MM-DD')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.class_date)
                         .day(2)
                         .add({ days: this.state.dayIncreament })
-                        .format('dd')}
-                      {moment(this.state.class_date)
-                        .day(2)
-                        .add({ days: this.state.dayIncreament })
-                        .format('YYYY-MM-DD')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.class_date)
                         .day(3)
                         .add({ days: this.state.dayIncreament })
-                        .format('dd')}
-                      {moment(this.state.class_date)
-                        .day(3)
-                        .add({ days: this.state.dayIncreament })
-                        .format('YYYY-MM-DD')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.class_date)
                         .day(4)
                         .add({ days: this.state.dayIncreament })
-                        .format('dd')}
-                      {moment(this.state.class_date)
-                        .day(4)
-                        .add({ days: this.state.dayIncreament })
-                        .format('YYYY-MM-DD')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.class_date)
                         .day(5)
                         .add({ days: this.state.dayIncreament })
-                        .format('dd')}
-                      {moment(this.state.class_date)
-                        .day(5)
-                        .add({ days: this.state.dayIncreament })
-                        .format('YYYY-MM-DD')}
+                        .format('MM-DD (dd)')}
                     </th>
                     <th scope='col'>
                       {moment(this.state.class_date)
                         .day(6)
                         .add({ days: this.state.dayIncreament })
-                        .format('dd')}
-                      {moment(this.state.class_date)
-                        .day(6)
-                        .add({ days: this.state.dayIncreament })
-                        .format('YYYY-MM-DD')}
+                        .format('MM-DD (dd)')}
                     </th>
                   </tr>
                 </thead>
