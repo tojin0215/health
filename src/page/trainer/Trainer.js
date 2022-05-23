@@ -9,17 +9,24 @@ import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 
 import { Container, Row, Col, Button } from 'react-bootstrap';
-// BootStrap Modal
+// Bootstrap Modal
 import Modal from 'react-bootstrap/Modal';
-
+// Bootstrap Form Text
+import Form from 'react-bootstrap/Form';
 // MUI 테이블
+import Box from '@mui/material/Box';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import 'react-dropdown/style.css';
 
@@ -81,81 +88,151 @@ const VieWTrainerItem = ({
     });
   };
   // console.log(showModal);
+  const [open, setOpen] = React.useState(false);
   return (
-    <TableRow>
-      <TableCell>{trainer_name}</TableCell>
-      <TableCell>{sex == 1 ? '남' : '여'}</TableCell>
-      <TableCell>{phone}</TableCell>
-      <TableCell>{birth}</TableCell>
-      <TableCell>{history}</TableCell>
-      <TableCell>{ment}</TableCell>
-      <TableCell onClick={modalOnClick}>
-        <Button className='' variant='outline-secondary' size='sm'>
-          수정하기
-        </Button>
-      </TableCell>
-      <Modal show={showModal} onHide={modalClose}>
-        <Modal.Header>
-          <Modal.Title>강사 정보 수정</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Row xs={1}>
-            <Col>폰번호:{phone}(변경불가)</Col>
-            <Col>성별:{sex == 1 ? '남' : '여'}(변경불가)</Col>
-            <Col>
-              이름:
-              <input
-                value={trainer_name_input}
-                id='trainer_name'
-                onChange={updateChange1}
-              />
-            </Col>
-            <Col>
-              자기소개:
-              <input value={ment_input} id='ment' onChange={updateChange3} />
-            </Col>
-            <Col>
-              연혁:
-              <input
-                value={history_input}
-                id='history'
-                onChange={updateChange4}
-              />
-            </Col>
-          </Row>
-        </Modal.Body>
-        <Modal.Footer>
-          <Row className='w-100'>
-            <Col className='pe-1' xs={8}>
-              <Button
-                className='w-100'
-                onClick={() => updateCompleted(phone, fitness_no)}
-              >
-                수정하기
-              </Button>
-            </Col>
-            <Col className='ps-1' xs={4}>
-              <Button
-                className='w-100'
-                onClick={() => deleteCompleted(phone, fitness_no)}
-                variant='outline-danger'
-              >
-                제거하기
-              </Button>
-            </Col>
-            <Col className='mt-2'>
-              <Button
-                className='w-100'
-                onClick={modalClose}
-                variant='outline-secondary'
-              >
-                닫기
-              </Button>
-            </Col>
-          </Row>
-        </Modal.Footer>
-      </Modal>
-    </TableRow>
+    <React.Fragment>
+      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+        <TableCell>
+          <IconButton
+            aria-label='expand row'
+            size='small'
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+        <TableCell>{trainer_name}</TableCell>
+        <TableCell>{sex == 1 ? '남' : '여'}</TableCell>
+        <TableCell>{phone}</TableCell>
+        <TableCell>{birth}</TableCell>
+        <TableCell onClick={modalOnClick}>
+          <Button className='' variant='outline-secondary' size='sm'>
+            수정하기
+          </Button>
+        </TableCell>
+        <Modal show={showModal} onHide={modalClose}>
+          <Modal.Header>
+            <Modal.Title>강사 정보 수정</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Row xs={1}>
+              <Col>
+                <Form.Group className='mb-3'>
+                  <Form.Label htmlFor='disabledTextInput'>이름</Form.Label>
+                  <Form.Control
+                    id='trainer_name'
+                    value={trainer_name_input}
+                    onChange={updateChange1}
+                  />
+                </Form.Group>
+              </Col>
+              <Col xs={10}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>생년월일</Form.Label>
+                  <Form.Control value={birth} disabled />
+                </Form.Group>
+              </Col>
+              <Col xs={2}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>성별</Form.Label>
+                  <Form.Control value={sex == 1 ? '남' : '여'} disabled />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className='mb-3'>
+                  <Form.Label htmlFor='disabledTextInput'>연락처</Form.Label>
+                  <Form.Control id='disabledTextInput' value={phone} disabled />
+                  <Form.Text>
+                    연락처는 아이디와 연동되어 변경할 수 없습니다.
+                  </Form.Text>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className='mb-3'>
+                  <Form.Label htmlFor='TextInput'>이력</Form.Label>
+                  <Form.Control
+                    id='history'
+                    onChange={updateChange4}
+                    as='textarea'
+                    rows={5}
+                    value={history_input}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className='mb-3'>
+                  <Form.Label htmlFor='TextInput'>자기소개</Form.Label>
+                  <Form.Control
+                    id='ment'
+                    onChange={updateChange3}
+                    as='textarea'
+                    rows={6}
+                    value={ment_input}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+          </Modal.Body>
+          <Modal.Footer>
+            <Row className='w-100'>
+              <Col className='p-0' xs={8}>
+                <Button
+                  className='w-100'
+                  onClick={() => updateCompleted(phone, fitness_no)}
+                >
+                  수정하기
+                </Button>
+              </Col>
+              <Col className='p-0 ps-2' xs={4}>
+                <Button
+                  className='w-100'
+                  onClick={() => deleteCompleted(phone, fitness_no)}
+                  variant='outline-danger'
+                >
+                  제거하기
+                </Button>
+              </Col>
+              <Col className='mt-2 p-0'>
+                <Button
+                  className='w-100'
+                  onClick={modalClose}
+                  variant='outline-secondary'
+                >
+                  닫기
+                </Button>
+              </Col>
+            </Row>
+          </Modal.Footer>
+        </Modal>
+      </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout='auto' unmountOnExit>
+            <Box sx={{ margin: 1 }}>
+              <Typography variant='h6' gutterBottom component='div'>
+                강사 소개
+              </Typography>
+              <Table size='small' aria-label='purchases'>
+                <TableHead>
+                  <TableRow>
+                    <TableCell style={{ width: '40%' }}>이력</TableCell>
+                    <TableCell>자기소개</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell component='th' scope='row'>
+                      {history}
+                    </TableCell>
+                    <TableCell>{ment}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
   );
 };
 
@@ -275,12 +352,11 @@ class Trainer extends Component {
             <Table sx={{ minWidth: 650 }} aria-label='simple table'>
               <TableHead>
                 <TableRow>
+                  <TableCell></TableCell>
                   <TableCell>이름</TableCell>
                   <TableCell>성별</TableCell>
                   <TableCell>연락처</TableCell>
                   <TableCell>생년월일</TableCell>
-                  <TableCell>연혁</TableCell>
-                  <TableCell>자기소개</TableCell>
                   <TableCell>수정하기</TableCell>
                 </TableRow>
               </TableHead>

@@ -65,6 +65,10 @@
   overflow: inherit;
 }
 
+.MuiTable-root .MuiTableCell-root {
+  white-space: break-spaces;
+}
+
 @media (max-width: 767px) {
   .react-bs-table-container {
     min-width: 1024px;
