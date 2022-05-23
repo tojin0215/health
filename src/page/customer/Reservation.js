@@ -3,19 +3,7 @@ import { Link } from 'react-router-dom';
 import { render } from 'react-dom';
 import { Container, Row, Col, Tabs, Tab } from 'react-bootstrap';
 
-import DatePicker from 'react-datepicker';
-// locale 오류로 임시 삭제
-// import DatePicker, { registerLocale } from 'react-datepicker';
-// import ko from 'date-fns/locale/ko';
-
 import { getStatusRequest } from '../../action/authentication';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-
-import ClickAwayListener from '@mui/base/ClickAwayListener';
-
-import { ImSortAlphaAsc } from 'react-icons/im';
-import { RiDeleteBin5Fill } from 'react-icons/ri';
 
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
@@ -25,11 +13,21 @@ import MegaMenu from '../../component/navigation/Menu';
 import { connect } from 'react-redux';
 import 'react-dropdown/style.css';
 import styles from '../../styles/reservation/reservation.css';
-
+// 데이터피커
+import DatePicker from 'react-datepicker';
+// 부트스트랩
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+// 리액트 아이콘
+import { ImSortAlphaAsc } from 'react-icons/im';
+import { RiDeleteBin5Fill } from 'react-icons/ri';
+// MUI
+import ClickAwayListener from '@mui/base/ClickAwayListener';
+import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
 import { SERVER_URL } from '../../const/settings';
-import moment from 'moment';
+
 import ReservationPresetList from '../../component/reservation/ReservationPresetList';
 import ReservationList from '../../component/reservation/ReservationList';
 import UserSearch from '../../component/customer/UserSearch';
@@ -45,6 +43,12 @@ import {
 
 // locale 오류로 임시 삭제
 // registerLocale('ko', ko);
+// import DatePicker, { registerLocale } from 'react-datepicker';
+// import ko from 'date-fns/locale/ko';
+import moment from 'moment';
+import 'moment/locale/ko';
+moment.locale('ko'); // en - 영어
+// moment().format();
 
 const ip = SERVER_URL;
 
@@ -1700,12 +1704,12 @@ class Reservation extends Component {
               {moment(this.state.reserv_date)
                 .day(0)
                 .add(this.state.dayIncreament, 'days')
-                .format('YYYY-MM-DD(dd)')}{' '}
+                .format('YYYY-MM-DD (ddd)')}{' '}
               ~{' '}
               {moment(this.state.reserv_date)
                 .day(6)
                 .add(this.state.dayIncreament, 'days')
-                .format('YYYY-MM-DD(dd)')}
+                .format('YYYY-MM-DD (ddd)')}
             </Col>
             <Col className='text-start'>
               <Button
@@ -1726,81 +1730,74 @@ class Reservation extends Component {
                 <thead>
                   <tr>
                     <th scope='col'>
-                      {' '}
                       {moment(this.state.reserv_date)
                         .day(0)
                         .add(this.state.dayIncreament, 'days')
-                        .format('dd')}
+                        .format('MM-DD')}
                       {moment(this.state.reserv_date)
                         .day(0)
                         .add(this.state.dayIncreament, 'days')
-                        .format('YYYY-MM-DD')}
+                        .format(' (dd)')}
                     </th>
                     <th scope='col'>
-                      {' '}
                       {moment(this.state.reserv_date)
                         .day(1)
                         .add(this.state.dayIncreament, 'days')
-                        .format('dd')}
+                        .format('MM-DD')}
                       {moment(this.state.reserv_date)
                         .day(1)
                         .add(this.state.dayIncreament, 'days')
-                        .format('YYYY-MM-DD')}
+                        .format(' (dd)')}
                     </th>
                     <th scope='col'>
-                      {' '}
                       {moment(this.state.reserv_date)
                         .day(2)
                         .add(this.state.dayIncreament, 'days')
-                        .format('dd')}
+                        .format('MM-DD')}
                       {moment(this.state.reserv_date)
                         .day(2)
                         .add(this.state.dayIncreament, 'days')
-                        .format('YYYY-MM-DD')}
+                        .format(' (dd)')}
                     </th>
                     <th scope='col'>
-                      {' '}
                       {moment(this.state.reserv_date)
                         .day(3)
                         .add(this.state.dayIncreament, 'days')
-                        .format('dd')}
+                        .format('MM-DD')}
                       {moment(this.state.reserv_date)
                         .day(3)
                         .add(this.state.dayIncreament, 'days')
-                        .format('YYYY-MM-DD')}
+                        .format(' (dd)')}
                     </th>
                     <th scope='col'>
-                      {' '}
                       {moment(this.state.reserv_date)
                         .day(4)
                         .add(this.state.dayIncreament, 'days')
-                        .format('dd')}
+                        .format('MM-DD')}
                       {moment(this.state.reserv_date)
                         .day(4)
                         .add(this.state.dayIncreament, 'days')
-                        .format('YYYY-MM-DD')}
+                        .format(' (dd)')}
                     </th>
                     <th scope='col'>
-                      {' '}
                       {moment(this.state.reserv_date)
                         .day(5)
                         .add(this.state.dayIncreament, 'days')
-                        .format('dd')}
+                        .format('MM-DD')}
                       {moment(this.state.reserv_date)
                         .day(5)
                         .add(this.state.dayIncreament, 'days')
-                        .format('YYYY-MM-DD')}
+                        .format(' (dd)')}
                     </th>
                     <th scope='col'>
-                      {' '}
                       {moment(this.state.reserv_date)
                         .day(6)
                         .add(this.state.dayIncreament, 'days')
-                        .format('dd')}
+                        .format('MM-DD')}
                       {moment(this.state.reserv_date)
                         .day(6)
                         .add(this.state.dayIncreament, 'days')
-                        .format('YYYY-MM-DD')}
+                        .format(' (dd)')}
                     </th>
                   </tr>
                 </thead>
@@ -1985,7 +1982,7 @@ class Reservation extends Component {
 								locale='ko'
 							/> */}
             </Col>
-            <Col className='text-center usersearchButton my-3'>
+            {/* <Col className='text-center usersearchButton my-3'>
               {this.state.open ? (
                 <UserSearch
                   open={this.state.open}
@@ -1995,13 +1992,35 @@ class Reservation extends Component {
                 />
               ) : (
                 <TextField
-                  onClick={() => this.setState({ open: true })}
                   id='customer_name'
+                  label='회원 검색'
+                  onClick={() => this.setState({ open: true })}
                   className='boxmorpsm h-100 w-100'
                   InputProps={{ disableUnderline: true }}
                   value={this.state.customer_name}
                   // onChange={this.handleChange}
+                  error={this.state.customer_name_err}
+                />
+              )}
+            </Col> */}
+            <Col className='text-center my-3'>
+              {this.state.open ? (
+                <UserSearch
+                  open={this.state.open}
+                  setOpen={(o) => this.setState({ open: o })}
+                  fitness_no={this.props.userinfo.fitness_no}
+                  handleUser={this.handleUser}
+                />
+              ) : (
+                <TextField
+                  id='customer_name'
                   label='회원 검색'
+                  variant='standard'
+                  onClick={() => this.setState({ open: true })}
+                  className='boxmorpsm h-100 w-100'
+                  InputProps={{ disableUnderline: true }}
+                  value={this.state.customer_name}
+                  // onChange={this.handleChange}
                   error={this.state.customer_name_err}
                 />
               )}
