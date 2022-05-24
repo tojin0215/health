@@ -88,7 +88,7 @@ const ViewClientItem = ({
         </Modal.Header>
         <Modal.Body>
           <CustomerCalendarComponent customer_no={idc} />
-          이름:{' '}
+          이름(변경불가):{' '}
           {showUpdate ? (
             <input value={client_name_input} onChange={updateChange1} />
           ) : (
