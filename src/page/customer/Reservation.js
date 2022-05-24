@@ -1648,6 +1648,7 @@ class Reservation extends Component {
     this.props.history.push('/');
   };
   render() {
+    // console.log(this.props.userinfo.loginWhether);
     // console.log(this.state.reservation);
     // console.log("exercise", this.state.reservation_exercise);
     // console.log("trainer", this.state.reservation_trainer);
@@ -1684,11 +1685,15 @@ class Reservation extends Component {
             <Col xs={9}>
               <h4 className=''>진행중인 수업</h4>
             </Col>
-            <Col xs={3} className='text-center w-auto'>
-              <Link to='/reservationClass'>
-                <Button>새로운 수업 만들기</Button>
-              </Link>
-            </Col>
+            {this.props.userinfo.loginWhether === 2 ? (
+              '      '
+            ) : (
+              <Col xs={3} className='text-center w-auto'>
+                <Link to='/reservationClass'>
+                  <Button>새로운 수업 만들기</Button>
+                </Link>
+              </Col>
+            )}
           </Row>
           <Row xs={3}>
             <Col className='text-end'>
@@ -2017,130 +2022,138 @@ class Reservation extends Component {
                         reservation={this.state.reservation}
                         reservationDelete={this.reservationDelete}
                     /> */}
-            <Col xs={12}>
-              <h4 className=''>예약 현황</h4>
-            </Col>
-            <Col xs={12} className='w-100 overflow-auto'>
-              <Tabs
-                defaultActiveKey='home'
-                id='uncontrolled-tab-example'
-                className='mb-3'
-              >
-                <Tab eventKey='home' title='전체보기'>
-                  <table class='table text-center reservationListTable mt-5'>
-                    <thead>
-                      <tr>
-                        <th scope='col'>[회원번호]회원이름</th>
-                        <th scope='col'>
-                          <Button
-                            variant='ouline-ligth'
-                            className='w-100 fw-bold'
-                            onClick={() => this.handleDate()}
-                          >
-                            수강 날짜 <ImSortAlphaAsc />
-                          </Button>
-                        </th>
-                        <th scope='col'>
-                          <Button
-                            variant='ouline-ligth'
-                            className='w-100 fw-bold'
-                            onClick={() => this.handleExercise()}
-                          >
-                            운동 <ImSortAlphaAsc />
-                          </Button>
-                        </th>
-                        <th scope='col'>
-                          <Button
-                            variant='ouline-ligth'
-                            className='w-100 fw-bold'
-                            onClick={() => this.handleTrainer()}
-                          >
-                            강사 <ImSortAlphaAsc />
-                          </Button>
-                        </th>
-                        <th scope='col'>인원수</th>
-                        <th scope='col'>시간</th>
-                        {/* <th scope='col'>상태</th>
+            {this.props.userinfo.loginWhether === 2 ? (
+              ''
+            ) : (
+              <Col xs={12}>
+                <h4 className=''>예약 현황</h4>
+              </Col>
+            )}
+            {this.props.userinfo.loginWhether === 2 ? (
+              ''
+            ) : (
+              <Col xs={12} className='w-100 overflow-auto'>
+                <Tabs
+                  defaultActiveKey='home'
+                  id='uncontrolled-tab-example'
+                  className='mb-3'
+                >
+                  <Tab eventKey='home' title='전체보기'>
+                    <table class='table text-center reservationListTable mt-5'>
+                      <thead>
+                        <tr>
+                          <th scope='col'>[회원번호]회원이름</th>
+                          <th scope='col'>
+                            <Button
+                              variant='ouline-ligth'
+                              className='w-100 fw-bold'
+                              onClick={() => this.handleDate()}
+                            >
+                              수강 날짜 <ImSortAlphaAsc />
+                            </Button>
+                          </th>
+                          <th scope='col'>
+                            <Button
+                              variant='ouline-ligth'
+                              className='w-100 fw-bold'
+                              onClick={() => this.handleExercise()}
+                            >
+                              운동 <ImSortAlphaAsc />
+                            </Button>
+                          </th>
+                          <th scope='col'>
+                            <Button
+                              variant='ouline-ligth'
+                              className='w-100 fw-bold'
+                              onClick={() => this.handleTrainer()}
+                            >
+                              강사 <ImSortAlphaAsc />
+                            </Button>
+                          </th>
+                          <th scope='col'>인원수</th>
+                          <th scope='col'>시간</th>
+                          {/* <th scope='col'>상태</th>
 										<th scope='col'>취소사유</th> */}
-                        <th scope='col'>삭제</th>
-                      </tr>
-                    </thead>
-                    {this.state.show_exercise_table &&
-                    !this.state.show_trainer_table &&
-                    !this.state.show_date_table ? (
-                      <tbody>
-                        {this.state.reservation_exercise.length == 0 ? (
-                          <p>'설정된 운동이 없습니다.'</p>
-                        ) : (
-                          this.state.reservation_exercise
-                        )}
-                      </tbody>
-                    ) : null}
+                          <th scope='col'>삭제</th>
+                        </tr>
+                      </thead>
+                      {this.state.show_exercise_table &&
+                      !this.state.show_trainer_table &&
+                      !this.state.show_date_table ? (
+                        <tbody>
+                          {this.state.reservation_exercise.length == 0 ? (
+                            <p>'설정된 운동이 없습니다.'</p>
+                          ) : (
+                            this.state.reservation_exercise
+                          )}
+                        </tbody>
+                      ) : null}
 
-                    {this.state.show_trainer_table &&
-                    !this.state.show_exercise_table &&
-                    !this.state.show_date_table ? (
-                      <tbody>
-                        {this.state.reservation_trainer.length == 0 ? (
-                          <p>'설정된 운동이 없습니다.'</p>
-                        ) : (
-                          this.state.reservation_trainer
-                        )}
-                      </tbody>
-                    ) : null}
+                      {this.state.show_trainer_table &&
+                      !this.state.show_exercise_table &&
+                      !this.state.show_date_table ? (
+                        <tbody>
+                          {this.state.reservation_trainer.length == 0 ? (
+                            <p>'설정된 운동이 없습니다.'</p>
+                          ) : (
+                            this.state.reservation_trainer
+                          )}
+                        </tbody>
+                      ) : null}
 
-                    {this.state.show_date_table &&
-                    !this.state.show_exercise_table &&
-                    !this.state.show_trainer_table ? (
-                      <tbody>
-                        {this.state.reservation_date.length == 0 ? (
-                          <p>'설정된 운동이 없습니다.'</p>
-                        ) : (
-                          this.state.reservation_date
-                        )}
-                      </tbody>
-                    ) : null}
+                      {this.state.show_date_table &&
+                      !this.state.show_exercise_table &&
+                      !this.state.show_trainer_table ? (
+                        <tbody>
+                          {this.state.reservation_date.length == 0 ? (
+                            <p>'설정된 운동이 없습니다.'</p>
+                          ) : (
+                            this.state.reservation_date
+                          )}
+                        </tbody>
+                      ) : null}
 
-                    {!this.state.show_exercise_table &&
-                    !this.state.show_trainer_table &&
-                    !this.state.show_date_table ? (
-                      <tbody>
-                        {this.state.reservation.length == 0 ? (
-                          <p>'설정된 운동이 없습니다.'</p>
-                        ) : (
-                          this.state.reservation
-                        )}
-                      </tbody>
-                    ) : null}
-                  </table>
-                </Tab>
-                <Tab eventKey='trainer' title='강사별조회'>
-                  <p>{this.state.reservationClass_choice}</p>
-                  <table class='table text-center reservationListTable mt-5'>
-                    <thead>
-                      <tr>
-                        <th scope='col'>[회원번호]회원이름</th>
-                        <th scope='col'>날짜</th>
-                        <th scope='col'>운동</th>
-                        <th scope='col'>강사</th>
-                        <th scope='col'>인원수</th>
-                        <th scope='col'>시간</th>
-                        {/* <th scope='col'>상태</th>
+                      {!this.state.show_exercise_table &&
+                      !this.state.show_trainer_table &&
+                      !this.state.show_date_table ? (
+                        <tbody>
+                          {this.state.reservation.length == 0 ? (
+                            <p>'설정된 운동이 없습니다.'</p>
+                          ) : (
+                            this.state.reservation
+                          )}
+                        </tbody>
+                      ) : null}
+                    </table>
+                  </Tab>
+                  <Tab eventKey='trainer' title='강사별조회'>
+                    <p>{this.state.reservationClass_choice}</p>
+                    <table class='table text-center reservationListTable mt-5'>
+                      <thead>
+                        <tr>
+                          <th scope='col'>[회원번호]회원이름</th>
+                          <th scope='col'>날짜</th>
+                          <th scope='col'>운동</th>
+                          <th scope='col'>강사</th>
+                          <th scope='col'>인원수</th>
+                          <th scope='col'>시간</th>
+                          {/* <th scope='col'>상태</th>
 										<th scope='col'>취소사유</th> */}
-                        <th scope='col'>삭제</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.state.reservation_choice_trainer.length == 0 ? (
-                        <p>'설정된 운동이 없습니다.'</p>
-                      ) : (
-                        this.state.reservation_choice_trainer
-                      )}
-                    </tbody>
-                  </table>
-                </Tab>
-              </Tabs>
-            </Col>
+                          <th scope='col'>삭제</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {this.state.reservation_choice_trainer.length == 0 ? (
+                          <p>'설정된 운동이 없습니다.'</p>
+                        ) : (
+                          this.state.reservation_choice_trainer
+                        )}
+                      </tbody>
+                    </table>
+                  </Tab>
+                </Tabs>
+              </Col>
+            )}
           </Row>
         </Container>
         <div className='footer'>
