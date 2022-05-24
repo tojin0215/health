@@ -383,6 +383,17 @@ class ReservationClass extends Component {
           .then((result) => {
             // console.log("dayIncreament", this.state.dayIncreament)
             const items = result
+              .sort((a, b) => {
+                if ((a['hour'] = b['hour'])) {
+                  a['minute'] > b['minute']
+                    ? 1
+                    : a['minute'] < b['minute']
+                    ? -1
+                    : 0;
+                } else {
+                  a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+                }
+              })
               //오늘 날짜에 해당하는 주간만 조회
               .filter(
                 (value) =>
@@ -463,6 +474,17 @@ class ReservationClass extends Component {
           .then((result) => {
             // console.log("dayIncreament", this.state.dayIncreament)
             const items = result
+              .sort((a, b) => {
+                if ((a['hour'] = b['hour'])) {
+                  a['minute'] > b['minute']
+                    ? 1
+                    : a['minute'] < b['minute']
+                    ? -1
+                    : 0;
+                } else {
+                  a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+                }
+              })
               //오늘 날짜에 해당하는 주간만 조회
               .filter(
                 (value) =>
@@ -536,6 +558,17 @@ class ReservationClass extends Component {
           .then((result) => {
             // console.log("dayIncreament", this.state.dayIncreament)
             const items = result
+              .sort((a, b) => {
+                if ((a['hour'] = b['hour'])) {
+                  a['minute'] > b['minute']
+                    ? 1
+                    : a['minute'] < b['minute']
+                    ? -1
+                    : 0;
+                } else {
+                  a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+                }
+              })
               //오늘 날짜에 해당하는 주간만 조회
               .filter(
                 (value) =>
@@ -609,6 +642,17 @@ class ReservationClass extends Component {
           .then((result) => {
             // console.log("dayIncreament", this.state.dayIncreament)
             const items = result
+              .sort((a, b) => {
+                if ((a['hour'] = b['hour'])) {
+                  a['minute'] > b['minute']
+                    ? 1
+                    : a['minute'] < b['minute']
+                    ? -1
+                    : 0;
+                } else {
+                  a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+                }
+              })
               //오늘 날짜에 해당하는 주간만 조회
               .filter(
                 (value) =>
@@ -682,6 +726,17 @@ class ReservationClass extends Component {
           .then((result) => {
             // console.log("dayIncreament", this.state.dayIncreament)
             const items = result
+              .sort((a, b) => {
+                if ((a['hour'] = b['hour'])) {
+                  a['minute'] > b['minute']
+                    ? 1
+                    : a['minute'] < b['minute']
+                    ? -1
+                    : 0;
+                } else {
+                  a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+                }
+              })
               //오늘 날짜에 해당하는 주간만 조회
               .filter(
                 (value) =>
@@ -755,6 +810,17 @@ class ReservationClass extends Component {
           .then((result) => {
             // console.log("dayIncreament", this.state.dayIncreament)
             const items = result
+              .sort((a, b) => {
+                if ((a['hour'] = b['hour'])) {
+                  a['minute'] > b['minute']
+                    ? 1
+                    : a['minute'] < b['minute']
+                    ? -1
+                    : 0;
+                } else {
+                  a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+                }
+              })
               //오늘 날짜에 해당하는 주간만 조회
               .filter(
                 (value) =>
@@ -829,6 +895,17 @@ class ReservationClass extends Component {
           .then((result) => {
             // console.log("dayIncreament", this.state.dayIncreament)
             const items = result
+              .sort((a, b) => {
+                if ((a['hour'] = b['hour'])) {
+                  a['minute'] > b['minute']
+                    ? 1
+                    : a['minute'] < b['minute']
+                    ? -1
+                    : 0;
+                } else {
+                  a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+                }
+              })
               //오늘 날짜에 해당하는 주간만 조회
               .filter(
                 (value) =>

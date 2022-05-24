@@ -236,3 +236,11 @@ export const deleteClient = (phone, fitness_no) => {
     )
     .then((response) => response.data);
 };
+//회원테이블 select reservation에 fitness_no 가져오기 위해
+export const selectClientReservation = (client_name) => {
+  return axios
+    .get(`${SERVER_URL}/client`, {
+      params: { type: 'reservation', client_name: client_name },
+    })
+    .then((response) => response.data);
+};

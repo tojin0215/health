@@ -39,6 +39,7 @@ import {
   getReservation_choice_trainer,
   getReservation_date,
   selectReservation,
+  selectClientReservation,
 } from '../../api/user';
 
 // locale 오류로 임시 삭제
@@ -1044,6 +1045,17 @@ class Reservation extends Component {
 
         getReservationClassBy(fitness_no).then((result) => {
           const items = result
+            .sort((a, b) => {
+              if ((a['hour'] = b['hour'])) {
+                a['minute'] > b['minute']
+                  ? 1
+                  : a['minute'] < b['minute']
+                  ? -1
+                  : 0;
+              } else {
+                a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+              }
+            })
             //오늘 날짜에 해당하는 주간만 조회
             .filter(
               (value) =>
@@ -1120,6 +1132,17 @@ class Reservation extends Component {
             : this.props.userinfo.fitness_no;
         getReservationClassBy(fitness_no).then((result) => {
           const items = result
+            .sort((a, b) => {
+              if ((a['hour'] = b['hour'])) {
+                a['minute'] > b['minute']
+                  ? 1
+                  : a['minute'] < b['minute']
+                  ? -1
+                  : 0;
+              } else {
+                a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+              }
+            })
             //오늘 날짜에 해당하는 주간만 조회
             .filter(
               (value) =>
@@ -1196,6 +1219,17 @@ class Reservation extends Component {
             : this.props.userinfo.fitness_no;
         getReservationClassBy(fitness_no).then((result) => {
           const items = result
+            .sort((a, b) => {
+              if ((a['hour'] = b['hour'])) {
+                a['minute'] > b['minute']
+                  ? 1
+                  : a['minute'] < b['minute']
+                  ? -1
+                  : 0;
+              } else {
+                a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+              }
+            })
             //오늘 날짜에 해당하는 주간만 조회
             .filter(
               (value) =>
@@ -1272,7 +1306,29 @@ class Reservation extends Component {
             : this.props.userinfo.fitness_no;
         getReservationClassBy(fitness_no).then((result) => {
           const items = result
+            .sort((a, b) => {
+              if ((a['hour'] = b['hour'])) {
+                a['minute'] > b['minute']
+                  ? 1
+                  : a['minute'] < b['minute']
+                  ? -1
+                  : 0;
+              } else {
+                a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+              }
+            })
             //오늘 날짜에 해당하는 주간만 조회
+            .sort((a, b) => {
+              if ((a['hour'] = b['hour'])) {
+                a['minute'] > b['minute']
+                  ? 1
+                  : a['minute'] < b['minute']
+                  ? -1
+                  : 0;
+              } else {
+                a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+              }
+            })
             .filter(
               (value) =>
                 moment(value.class_date.split('T')[0])
@@ -1288,6 +1344,7 @@ class Reservation extends Component {
                     'day'
                   )
             )
+
             .map((data, index, array) => {
               const time =
                 `${data.hour}`.padStart(2, '0') +
@@ -1348,6 +1405,17 @@ class Reservation extends Component {
             : this.props.userinfo.fitness_no;
         getReservationClassBy(fitness_no).then((result) => {
           const items = result
+            .sort((a, b) => {
+              if ((a['hour'] = b['hour'])) {
+                a['minute'] > b['minute']
+                  ? 1
+                  : a['minute'] < b['minute']
+                  ? -1
+                  : 0;
+              } else {
+                a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+              }
+            })
             //오늘 날짜에 해당하는 주간만 조회
             .filter(
               (value) =>
@@ -1424,6 +1492,17 @@ class Reservation extends Component {
             : this.props.userinfo.fitness_no;
         getReservationClassBy(fitness_no).then((result) => {
           const items = result
+            .sort((a, b) => {
+              if ((a['hour'] = b['hour'])) {
+                a['minute'] > b['minute']
+                  ? 1
+                  : a['minute'] < b['minute']
+                  ? -1
+                  : 0;
+              } else {
+                a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+              }
+            })
             //오늘 날짜에 해당하는 주간만 조회
             .filter(
               (value) =>
@@ -1488,18 +1567,31 @@ class Reservation extends Component {
       }
     );
   };
+
   /**
    * 운동클래스 토요일
    */
   reservationClassSelect6 = () => {
     selectReservation(this.props.userinfo.manager_name).then(
       (trainerResult) => {
+        console.log(trainerResult[0].fitness_no);
         const fitness_no =
           this.props.userinfo.loginWhether === 1
             ? trainerResult[0].fitness_no
             : this.props.userinfo.fitness_no;
         getReservationClassBy(fitness_no).then((result) => {
           const items = result
+            .sort((a, b) => {
+              if ((a['hour'] = b['hour'])) {
+                a['minute'] > b['minute']
+                  ? 1
+                  : a['minute'] < b['minute']
+                  ? -1
+                  : 0;
+              } else {
+                a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
+              }
+            })
             //오늘 날짜에 해당하는 주간만 조회
             .filter(
               (value) =>
