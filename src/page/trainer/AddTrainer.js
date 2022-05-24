@@ -12,7 +12,13 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { SERVER_URL } from '../../const/settings';
 import MegaMenu from '../../component/navigation/Menu';
+
+// Bootstrap
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+// MUI
 import TextField from '@mui/material/TextField';
+
 import { insertTrainer, trainerManager } from '../../api/user';
 
 class AddTrainer extends Component {
@@ -145,102 +151,112 @@ class AddTrainer extends Component {
           </div>
           {/*.localNavigation */}
         </header>
-        <Container>
-          <div>
-            <h3>강사 정보 입력</h3>
-          </div>
-          <form>
+        <Container className='sectionGlass'>
+          <h3>강사 정보 입력</h3>
+          <Form>
             {/* <label>
               헬스장 번호:
               <TextField value={this.props.userinfo.fitness_no} />
-            </label>
-            <br /> */}
-            <label>
-              핸드폰번호:
-              <TextField
-                type='number'
-                variant='outlined'
-                value={this.state.phone}
-                id='phone'
-                onChange={this.handleChange}
-                required
-              />
-            </label>
-            <br />
-            <label>
-              생년월일:
-              <TextField
-                type='text'
-                value={this.state.birth}
-                id='birth'
-                onChange={this.handleChange}
-              />
-            </label>
-            <br />
-            <label>
-              이름:
-              <TextField
-                type='text'
-                value={this.state.trainer_name}
-                id='trainer_name'
-                onChange={this.handleChange}
-              />
-            </label>
-            <br />
-            <label>
-              자기소개:
-              <TextField
-                type='text'
-                value={this.state.ment}
-                id='ment'
-                onChange={this.handleChange}
-              />
-            </label>
-            <br />
-            <label>
-              수상이력:
-              <TextField
-                type='text'
-                value={this.state.history}
-                id='history'
-                onChange={this.handleChange}
-              />
-            </label>
-            <br />
-            <label>
-              성별
-              <input
-                type='radio'
-                name='radioGroup'
-                id='male'
-                checked={this.state.radioGroup['male']}
-                onChange={this.handleRadio}
-              />
-              <span>남</span>
-              <input
-                type='radio'
-                name='radioGroup'
-                id='female'
-                checked={this.state.radioGroup['female']}
-                onChange={this.handleRadio}
-              />
-              <span>여</span>
-              {/* <TextField
-                value={this.state.sex}
-                id='sex'
-                onChange={this.handleChange}
-                type="text"
-              /> */}
-            </label>
-            <br />
-            <button
-              className='btnSolid'
+            </label> */}
+            <Row>
+              <Col xs='4'>
+                <Form.Group>
+                  <Form.Label>이름</Form.Label>
+                  <Form.Control
+                    type='text'
+                    value={this.state.trainer_name}
+                    id='trainer_name'
+                    onChange={this.handleChange}
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col xs='4'>
+                <Form.Group>
+                  <Form.Label>핸드폰번호</Form.Label>
+                  <Form.Control
+                    type='number'
+                    variant='outlined'
+                    value={this.state.phone}
+                    id='phone'
+                    onChange={this.handleChange}
+                    required
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col xs='3'>
+                <Form.Group>
+                  <Form.Label>생년월일</Form.Label>
+                  <Form.Control
+                    type='text'
+                    value={this.state.birth}
+                    id='birth'
+                    onChange={this.handleChange}
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col xs='1'>
+                <Form.Group className=''>
+                  <Form.Label>성별</Form.Label>
+                  <Form.Check>
+                    <Form.Check.Input
+                      type='radio'
+                      name='radioGroup'
+                      id='male'
+                      checked={this.state.radioGroup['male']}
+                      onChange={this.handleRadio}
+                    />
+                    <Form.Check.Label htmlFor='male'>남</Form.Check.Label>
+                  </Form.Check>
+                  <Form.Check>
+                    <Form.Check.Input
+                      type='radio'
+                      name='radioGroup'
+                      id='female'
+                      checked={this.state.radioGroup['female']}
+                      onChange={this.handleRadio}
+                    />
+                    <Form.Check.Label htmlFor='female'>여</Form.Check.Label>
+                  </Form.Check>
+                </Form.Group>
+              </Col>
+              <Col xs='12'>
+                <Form.Group>
+                  <Form.Label>수상이력</Form.Label>
+                  <Form.Control
+                    type='text'
+                    value={this.state.history}
+                    id='history'
+                    onChange={this.handleChange}
+                    as='textarea'
+                    rows={5}
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col xs='12'>
+                <Form.Group>
+                  <Form.Label>자기소개</Form.Label>
+                  <Form.Control
+                    type='text'
+                    value={this.state.ment}
+                    id='ment'
+                    onChange={this.handleChange}
+                    as='textarea'
+                    rows={5}
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+            </Row>
+            <Button
+              className='w-100 mt-3'
               type='button'
               onClick={this.handleTotal}
             >
               등록하기
-            </button>
-          </form>
+            </Button>
+            <Row>
+              <Col></Col>
+            </Row>
+          </Form>
         </Container>
         <div className='footer'>
           <Footer />

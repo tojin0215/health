@@ -1,3 +1,17 @@
+/**
+* 연락처 입력 input 에 숫자 조작 화살표가 보이지 않게 만든다.
+*/
+/* Chrome, Safari, Edge, Opera */
+input[id='phone']::-webkit-outer-spin-button,
+input[id='phone']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[id='phone'][type='number'] {
+  -moz-appearance: textfield;
+}
+
 /*데이터피커 크기조절*/
 .react-datepicker {
 }
