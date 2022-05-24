@@ -20,6 +20,18 @@ class AddClient extends Component {
       sex: '',
       join_route: '',
       address: '',
+      radioGroup: {
+        male: true,
+        female: false,
+      },
+      radioGroup2: {
+        route1: true,
+        route2: false,
+        route3: false,
+        route4: false,
+        route5: false,
+        route6: false,
+      },
     };
   }
   goLogin = () => {
@@ -73,12 +85,49 @@ class AddClient extends Component {
       this.state.client_name,
       this.state.phone,
       this.state.birth,
-      this.state.sex,
-      this.state.join_route,
+      this.state.radioGroup.male ? 1 : 2,
+      this.state.radioGroup2.route1
+        ? '간판'
+        : this.state.radioGroup2.route2
+        ? '홈페이지'
+        : this.state.radioGroup2.route3
+        ? '전단지'
+        : this.state.radioGroup2.route4
+        ? '지인소개'
+        : this.state.radioGroup2.route5
+        ? 'SNS'
+        : this.state.radioGroup2.route6
+        ? this.state.join_route
+        : '간판',
       this.state.address
     ).then((res) => {
       // console.log(res);
       alert('client Table');
+    });
+  };
+  handleRadio = (s) => {
+    let obj = {
+      male: false,
+      female: false,
+    };
+    obj[s.target.id] = s.target.checked;
+    this.setState({
+      radioGroup: obj,
+    });
+  };
+
+  handleRouteRadio = (r) => {
+    let obj = {
+      route1: false,
+      route2: false,
+      route3: false,
+      route4: false,
+      route5: false,
+      route6: false,
+    };
+    obj[r.target.id] = r.target.checked;
+    this.setState({
+      radioGroup2: obj,
     });
   };
 
@@ -94,6 +143,11 @@ class AddClient extends Component {
   };
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
+  };
+  handleTotal = () => {
+    this.handleClient();
+    this.handleManagerLogin();
+    this.props.history.push('/client');
   };
   render() {
     return (
@@ -159,19 +213,76 @@ class AddClient extends Component {
             </label>
             <br />
             <label>
-              {/* 라디오로 */}
               성별:
-              <TextField
-                type='text'
-                id='sex'
-                onChange={this.handleChange}
-                value={this.state.sex}
+              <input
+                type='radio'
+                name='radioGroup'
+                id='male'
+                checked={this.state.radioGroup['male']}
+                onChange={this.handleRadio}
               />
+              <span>남</span>
+              <input
+                type='radio'
+                name='radioGroup'
+                id='female'
+                checked={this.state.radioGroup['female']}
+                onChange={this.handleRadio}
+              />
+              <span>여</span>
             </label>
             <br />
             <label>
               {/* 라디오로 */}
               가입경로:
+              <span>간판</span>
+              <input
+                type='radio'
+                name='radioGroup2'
+                id='route1'
+                checked={this.state.radioGroup2['route1']}
+                onChange={this.handleRouteRadio}
+              />
+              <span>홈페이지</span>
+              <input
+                type='radio'
+                name='radioGroup2'
+                id='route2'
+                checked={this.state.radioGroup2['route2']}
+                onChange={this.handleRouteRadio}
+              />
+              <span>전단지</span>
+              <input
+                type='radio'
+                name='radioGroup2'
+                id='route3'
+                checked={this.state.radioGroup2['route3']}
+                onChange={this.handleRouteRadio}
+              />
+              <span>지인소개</span>
+              <input
+                type='radio'
+                name='radioGroup2'
+                id='route4'
+                checked={this.state.radioGroup2['route4']}
+                onChange={this.handleRouteRadio}
+              />
+              <span>SNS</span>
+              <input
+                type='radio'
+                name='radioGroup2'
+                id='route5'
+                checked={this.state.radioGroup2['route5']}
+                onChange={this.handleRouteRadio}
+              />
+              <span>기타</span>
+              <input
+                type='radio'
+                name='radioGroup2'
+                id='route6'
+                checked={this.state.radioGroup2['route6']}
+                onChange={this.handleRouteRadio}
+              />
               <TextField
                 type='text'
                 id='join_route'
@@ -190,7 +301,11 @@ class AddClient extends Component {
               />
             </label>
             <br />
-            <button className='btnSolid' type='button'>
+            <button
+              className='btnSolid'
+              type='button'
+              onClick={this.handleTotal}
+            >
               등록하기
             </button>
           </form>
