@@ -110,9 +110,12 @@ const UserSearch = ({ open, setOpen, fitness_no, handleUser }) => {
     );
   }, []);
 
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>고객 검색</DialogTitle>
+    <Dialog open={open} onClose={handleClose} fullScreen={fullScreen}>
+      <DialogTitle>회원 검색</DialogTitle>
       <DialogContent>
         <Row>
           <Col xs={3}>
