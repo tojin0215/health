@@ -7,7 +7,7 @@ import { logoutRequest } from '../../action/authentication';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.css';
 import styles from './Navigation.css';
-
+//web
 class Navigation extends Component {
   constructor(props) {
     super(props);
@@ -208,6 +208,21 @@ class Navigation extends Component {
                   <li>
                     <NavLink exact to='/trainer/add'>
                       강사 등록
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
+              <NavLink exact to='/client'>
+                <span className={styles.navitem}>클라이언트</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/client'>
+                      클라 관리
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/client/add'>
+                      클라 등록
                     </NavLink>
                   </li>
                 </ul>

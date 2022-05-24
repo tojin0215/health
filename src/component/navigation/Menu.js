@@ -8,7 +8,7 @@ import { logoutRequest } from '../../action/authentication';
 import { textlogo } from '../../../src/img/logo-text.png';
 
 import $ from 'jquery';
-
+//app
 // import { MdMenu } from 'react-icons/md';
 
 import './Menu.css';
@@ -248,6 +248,21 @@ class MegaMenu extends Component {
                   <li>
                     <NavLink exact to='/qr'>
                       QR
+                    </NavLink>
+                  </li>
+                </li>
+                <li class='dropdown'>
+                  <NavLink exact to='/client'>
+                    클라이언트
+                  </NavLink>
+                  <li>
+                    <NavLink exact to='/client'>
+                      클라 관리
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/client/add'>
+                      클라 등록
                     </NavLink>
                   </li>
                 </li>

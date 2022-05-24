@@ -222,6 +222,7 @@ class Customer extends Component {
     const fitness_no = this.props.userinfo.fitness_no;
 
     getCustomerByMemberNo(member_no, fitness_no).then((result) => {
+      console.log(fitness_no);
       if (result.length < 1) return this.setState({ userLists: [] });
       const data = result[0];
 
@@ -309,6 +310,7 @@ class Customer extends Component {
   };
   selectItem = (e) => this.setState({ item: e.value });
   render() {
+    console.log(this.props.userinfo.fitness_no);
     // const { userinfo } = this.props;
 
     const textOptions = {

@@ -25,6 +25,8 @@ import {
   Statistics,
   AddTrainer,
   Trainer,
+  Client,
+  AddClient,
 } from '../page';
 
 class App extends Component {
@@ -55,6 +57,8 @@ class App extends Component {
         <Route exact path='/reservation/update' component={ReservationUpdate} />
         <Route exact path='/trainer' component={Trainer} />
         <Route exact path='/trainer/add' component={AddTrainer} />
+        <Route exact path='/client' component={Client} />
+        <Route exact path='/client/add' component={AddClient} />
       </div>
     );
   }

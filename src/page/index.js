@@ -22,3 +22,5 @@ export { default as ReservationClass } from './customer/ReservationClass';
 export { default as ReservationUpdate } from './customer/ReservationUpdate';
 export { default as Trainer } from './trainer/Trainer';
 export { default as AddTrainer } from './trainer/AddTrainer';
+export { default as Client } from './client/Client';
+export { default as AddClient } from './client/AddClient';
