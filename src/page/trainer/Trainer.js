@@ -34,7 +34,7 @@ const VieWTrainerItem = ({
   ment,
   history,
   sex,
-  vieWTrainer,
+  viewTrainer,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [trainer_name_input, setTrainer_name_input] = useState('');
@@ -70,14 +70,14 @@ const VieWTrainerItem = ({
     ).then(() => {
       alert('수정완료');
       modalClose();
-      vieWTrainer();
+      viewTrainer();
     });
   };
   const deleteCompleted = (phone, fitness_no) => {
     deleteTrainer(phone, fitness_no).then(() => {
       alert('삭제완료');
       modalClose();
-      vieWTrainer();
+      viewTrainer();
     });
   };
   // console.log(showModal);
@@ -217,12 +217,12 @@ class Trainer extends Component {
         // and notify
         alert('Your session is expired, please log in again');
       } else {
-        this.vieWTrainer();
+        this.viewTrainer();
       }
     });
   }
 
-  vieWTrainer = () => {
+  viewTrainer = () => {
     const fitness_no = this.props.userinfo.fitness_no;
     selectTrainer(fitness_no).then((result) => {
       const items = result.map((data, index, array) => {
@@ -235,7 +235,7 @@ class Trainer extends Component {
             ment={data.ment}
             history={data.history}
             sex={data.sex}
-            vieWTrainer={this.vieWTrainer}
+            viewTrainer={this.viewTrainer}
           />
         );
       });

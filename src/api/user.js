@@ -217,3 +217,22 @@ export const insertClient = (
     address,
   });
 };
+//client update
+export const updateClient = (phone, fitness_no, client_name, address) => {
+  return axios.put(
+    `${SERVER_URL}/client?phone=` + phone + `&fitness_no=` + fitness_no,
+    {
+      client_name,
+      address,
+    }
+  );
+};
+// client delete
+export const deleteClient = (phone, fitness_no) => {
+  return axios
+    .delete(
+      `${SERVER_URL}/client?phone=` + phone + `&fitness_no=` + fitness_no,
+      {}
+    )
+    .then((response) => response.data);
+};

@@ -1,13 +1,13 @@
-import { Component } from 'react';
+import { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
 import MegaMenu from '../../component/navigation/Menu';
-import { Container } from 'react-bootstrap';
+import { Container, Modal } from 'react-bootstrap';
 import Footer from '../../component/footer/Footer';
-import { clientSelect } from '../../api/user';
+import { clientSelect, deleteClient, updateClient } from '../../api/user';
 import moment from 'moment';
 // MUI 테이블
 import Table from '@mui/material/Table';
@@ -17,6 +17,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import CustomerCalendarComponent from '../../component/customer/CustomerCalendarComponent';
 
 const ViewClientItem = ({
   fitness_no,
@@ -27,17 +28,96 @@ const ViewClientItem = ({
   join_route,
   address,
   start_date,
+  idc,
+  viewClient,
 }) => {
   const newDate = moment(start_date).format('YYYY년 MM월 DD일');
+  const [showModal, setShowModal] = useState(false);
+  const [showUpdate, setShowUpdate] = useState(false);
+  const [client_name_input, setClient_name_input] = useState('');
+  const [address_input, setAddress_input] = useState('');
+
+  const modalClose = () => {
+    setShowModal(false);
+  };
+  const modalOnClick = () => {
+    setShowModal(true);
+  };
+  const modalUpdate = () => {
+    setShowUpdate(true);
+    setClient_name_input(client_name);
+    setAddress_input(address);
+  };
+
+  const deleteCompleted = (phone, fitness_no) => {
+    deleteClient(phone, fitness_no).then(() => {
+      alert('삭제완료');
+      modalClose();
+      viewClient();
+    });
+  };
+
+  const updateCompleted = (phone, fitness_no) => {
+    updateClient(phone, fitness_no, client_name_input, address_input).then(
+      () => {
+        alert('수정완료');
+        modalClose();
+        setShowUpdate(false);
+        viewClient();
+      }
+    );
+  };
+  const updateChange1 = (e) => {
+    setClient_name_input(e.target.value);
+  };
+  const updateChange2 = (e) => {
+    setAddress_input(e.target.value);
+  };
   return (
     <TableRow>
-      <TableCell>{client_name}</TableCell>
-      <TableCell>{phone}</TableCell>
-      <TableCell>{birth}</TableCell>
-      <TableCell>{sex == 1 ? '남' : '여'}</TableCell>
-      <TableCell>{join_route}</TableCell>
-      <TableCell>{address}</TableCell>
-      <TableCell>{newDate}</TableCell>
+      <TableCell onClick={modalOnClick}>{client_name}</TableCell>
+      <TableCell onClick={modalOnClick}>{phone}</TableCell>
+      <TableCell onClick={modalOnClick}>{sex == 1 ? '남' : '여'}</TableCell>
+      <TableCell onClick={modalOnClick}>{newDate}</TableCell>
+      {/* <TableCell>
+        <button onClick={modalOnClick}>수정</button>
+      </TableCell> */}
+      <Modal show={showModal} onHide={modalClose}>
+        <Modal.Header>
+          <Modal.Title>회원 상세 정보</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <CustomerCalendarComponent customer_no={idc} />
+          이름:{' '}
+          {showUpdate ? (
+            <input value={client_name_input} onChange={updateChange1} />
+          ) : (
+            client_name
+          )}
+          주소:{' '}
+          {showUpdate ? (
+            <input value={address_input} onChange={updateChange2} />
+          ) : (
+            address
+          )}
+          생년월일(변경불가): {birth}
+          가입경로(변경불가): {join_route}
+        </Modal.Body>
+        <Modal.Footer>
+          {showUpdate ? (
+            <button onClick={() => updateCompleted(phone, fitness_no)}>
+              회원 정보 수정2
+            </button>
+          ) : (
+            <button onClick={modalUpdate}>회원 정보 수정1</button>
+          )}
+
+          <button onClick={() => deleteCompleted(phone, fitness_no)}>
+            회원삭제
+          </button>
+          <button onClick={modalClose}>닫기</button>
+        </Modal.Footer>
+      </Modal>
     </TableRow>
   );
 };
@@ -109,6 +189,8 @@ class Client extends Component {
             join_route={data.join_route}
             address={data.address}
             start_date={data.start_date}
+            idc={data.idc}
+            viewClient={this.viewClient}
           />
         );
       });
@@ -149,10 +231,7 @@ class Client extends Component {
                 <TableRow>
                   <TableCell>회원이름</TableCell>
                   <TableCell>폰번호</TableCell>
-                  <TableCell>생년월일</TableCell>
                   <TableCell>성별</TableCell>
-                  <TableCell>가입경로</TableCell>
-                  <TableCell>주소</TableCell>
                   <TableCell>가입일</TableCell>
                 </TableRow>
               </TableHead>
