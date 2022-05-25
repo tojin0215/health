@@ -993,70 +993,74 @@ class ReservationClass extends Component {
       trainer_err: false,
       class_date_err: false,
     });
-    if (this.state.exercise_class == '') {
-      this.setState({ exercise_class_err: true });
-      alert('운동명을 써주세요.');
-    } else if (this.state.class_date == '') {
-      this.setState({ class_date_err: true });
-      alert('날짜를 써주세요.');
-    } else if (
-      this.props.userinfo.loginWhether === 1 ? '' : this.state.trainer == ''
-    ) {
-      this.setState({ trainer_err: true });
-      alert('강사명을 써주세요.');
-    } else if (
-      (this.state.number_of_people == '', this.state.number_of_people == 0)
-    ) {
-      this.setState({ number_of_people_err: true });
-      alert('인원을 확인해 주세요.(숫자만, 0입력불가)');
-    } else if (this.state.hour >= 24) {
-      this.setState({ hour_err: true });
-      alert('00~23시까지 설정 가능합니다.');
-    } else if (this.state.minute >= 59) {
-      this.setState({ minute_err: true });
-      alert('0~59분까지 설정 가능합니다.');
-    } else if (this.state.hour == '') {
-      this.setState({ hour_err: true });
-      alert('시를 확인해 주세요.(0~24)');
-    } else if (this.state.minute == '') {
-      this.setState({ minute_err: true });
-      alert('분을 확인해 주세요.(0~59)');
-    } else {
-      const date =
-        moment(this.state.class_date).format('YYYY-MM-DD') + 'T00:00:00.000Z';
+    selectReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      if (this.state.exercise_class == '') {
+        this.setState({ exercise_class_err: true });
+        alert('운동명을 써주세요.');
+      } else if (this.state.class_date == '') {
+        this.setState({ class_date_err: true });
+        alert('날짜를 써주세요.');
+      } else if (
+        this.props.userinfo.loginWhether === 1 ? '' : this.state.trainer == ''
+      ) {
+        this.setState({ trainer_err: true });
+        alert('강사명을 써주세요.');
+      } else if (
+        (this.state.number_of_people == '', this.state.number_of_people == 0)
+      ) {
+        this.setState({ number_of_people_err: true });
+        alert('인원을 확인해 주세요.(숫자만, 0입력불가)');
+      } else if (this.state.hour >= 24) {
+        this.setState({ hour_err: true });
+        alert('00~23시까지 설정 가능합니다.');
+      } else if (this.state.minute >= 59) {
+        this.setState({ minute_err: true });
+        alert('0~59분까지 설정 가능합니다.');
+      } else if (this.state.hour == '') {
+        this.setState({ hour_err: true });
+        alert('시를 확인해 주세요.(0~24)');
+      } else if (this.state.minute == '') {
+        this.setState({ minute_err: true });
+        alert('분을 확인해 주세요.(0~59)');
+      } else {
+        const date =
+          moment(this.state.class_date).format('YYYY-MM-DD') + 'T00:00:00.000Z';
 
-      fetch(ip + '/reservationClass/insert', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          fitness_no:
-            this.props.userinfo.loginWhether === 1
-              ? 10
-              : this.props.userinfo.fitness_no,
-          exercise_class: this.state.exercise_class,
-          number_of_people: this.state.number_of_people,
-          hour: this.state.hour,
-          minute: this.state.minute,
-          trainer:
-            this.props.userinfo.loginWhether === 1
-              ? this.props.userinfo.manager_name
-              : this.state.trainer,
-          class_date: date,
-        }),
-      })
-        .then((result) => result.json())
-        .then((result) => {
-          if (result.message == 'ok') {
-            alert('운동 설정이 완료되었습니다.');
-            console.log(this.state.class_date);
-          } else {
-            alert(result.message);
-          }
-          this.reservationClassSelect();
-        });
-    }
+        fetch(ip + '/reservationClass/insert', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            fitness_no:
+              this.props.userinfo.loginWhether === 1
+                ? trainerResult[0].fitness_no
+                : this.props.userinfo.fitness_no,
+            exercise_class: this.state.exercise_class,
+            number_of_people: this.state.number_of_people,
+            hour: this.state.hour,
+            minute: this.state.minute,
+            trainer:
+              this.props.userinfo.loginWhether === 1
+                ? this.props.userinfo.manager_name
+                : this.state.trainer,
+            class_date: date,
+          }),
+        })
+          .then((result) => result.json())
+          .then((result) => {
+            if (result.message == 'ok') {
+              alert('운동 설정이 완료되었습니다.');
+              console.log(this.state.class_date);
+            } else {
+              alert(result.message);
+            }
+            this.reservationClassSelect();
+          });
+      }
+    });
   };
 
   handleChange = (e) => {
