@@ -191,12 +191,13 @@ export const clientSelect = (fitness_no) => {
 };
 
 //매니저 테이블에 client insert(client login)
-export const clientManager = (id, password, manager_name) => {
+export const clientManager = (id, password, manager_name, joinNo) => {
   return axios
     .post(`${SERVER_URL}/manager?type=client`, {
       id,
       password,
       manager_name,
+      joinNo,
     })
     .then((response) => response.data);
 };

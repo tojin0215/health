@@ -2067,28 +2067,40 @@ class Reservation extends Component {
                 />
               )}
             </Col> */}
-            <Col className='text-center my-3'>
-              {this.state.open ? (
-                <UserSearch
-                  open={this.state.open}
-                  setOpen={(o) => this.setState({ open: o })}
-                  fitness_no={this.props.userinfo.fitness_no}
-                  handleUser={this.handleUser}
-                />
-              ) : (
+            {this.props.userinfo.loginWhether === 2 ? (
+              <Col className='text-center my-3'>
                 <TextField
                   id='customer_name'
-                  label='회원 검색'
                   variant='standard'
-                  onClick={() => this.setState({ open: true })}
-                  className='boxmorpsm h-100 w-100'
-                  InputProps={{ disableUnderline: true }}
-                  value={this.state.customer_name}
+                  value={this.props.userinfo.manager_name}
                   // onChange={this.handleChange}
-                  error={this.state.customer_name_err}
                 />
-              )}
-            </Col>
+              </Col>
+            ) : (
+              <Col className='text-center my-3'>
+                {this.state.open ? (
+                  <UserSearch
+                    open={this.state.open}
+                    setOpen={(o) => this.setState({ open: o })}
+                    fitness_no={this.props.userinfo.fitness_no}
+                    handleUser={this.handleUser}
+                  />
+                ) : (
+                  <TextField
+                    id='customer_name'
+                    label='회원 검색'
+                    variant='standard'
+                    onClick={() => this.setState({ open: true })}
+                    className='boxmorpsm h-100 w-100'
+                    InputProps={{ disableUnderline: true }}
+                    value={this.state.customer_name}
+                    // onChange={this.handleChange}
+                    error={this.state.customer_name_err}
+                  />
+                )}
+              </Col>
+            )}
+
             <Col className='text-center w-100 mt-3' xs={12}>
               <Button
                 className='btnSolid mx-4 px-5'

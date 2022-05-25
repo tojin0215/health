@@ -8,7 +8,7 @@ import { Container } from 'react-bootstrap';
 import Footer from '../../component/footer/Footer';
 import { getStatusRequest } from '../../action/authentication';
 import TextField from '@mui/material/TextField';
-import { clientManager, insertClient } from '../../api/user';
+import { clientManager, clientSelect, insertClient } from '../../api/user';
 
 class AddClient extends Component {
   constructor(props) {
@@ -103,6 +103,22 @@ class AddClient extends Component {
     ).then((res) => {
       // console.log(res);
       alert('client Table');
+      clientSelect(this.props.userinfo.fitness_no).then((result) => {
+        const items = result.filter(
+          (value) => value.client_name === this.state.client_name
+        );
+        this.setState(items);
+        clientManager(
+          this.state.phone,
+          this.state.birth,
+          this.state.client_name,
+          items[0].idc
+        ).then((res) => {
+          // console.log(res);
+        });
+        alert('manager Table');
+        this.props.history.push('/client');
+      });
     });
   };
   handleRadio = (s) => {
@@ -130,25 +146,10 @@ class AddClient extends Component {
       radioGroup2: obj,
     });
   };
-
-  handleManagerLogin = () => {
-    clientManager(
-      this.state.phone,
-      this.state.birth,
-      this.state.client_name
-    ).then((res) => {
-      // console.log(res);
-      alert('manager Table');
-    });
-  };
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
-  handleTotal = () => {
-    this.handleClient();
-    this.handleManagerLogin();
-    this.props.history.push('/client');
-  };
+
   render() {
     return (
       <div>
@@ -304,7 +305,7 @@ class AddClient extends Component {
             <button
               className='btnSolid'
               type='button'
-              onClick={this.handleTotal}
+              onClick={this.handleClient}
             >
               등록하기
             </button>
