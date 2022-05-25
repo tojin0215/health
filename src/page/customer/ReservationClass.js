@@ -186,6 +186,7 @@ const ReservationClassItem = ({
     setShowModal(false);
   };
   const hourArray = hour >= 10 ? hour : '0' + hour;
+
   const minuteArray = minute >= 10 ? minute : '0' + minute;
 
   return (
@@ -363,597 +364,604 @@ class ReservationClass extends Component {
 	추후 .filter [0123456] 
 	*/
   reservationClassSelect = () => {
-    selectReservation(this.props.userinfo.manager_name).then(
-      (trainerResult) => {
-        // console.log(trainerResult[0].fitness_no);
-        fetch(
-          ip +
-            '/reservationClass/select?fitness_no=' +
-            (this.props.userinfo.loginWhether === 1
-              ? trainerResult[0].fitness_no
-              : this.props.userinfo.fitness_no),
-          {
-            method: 'GET',
-            headers: {
-              'Content-type': 'application/json',
-            },
-          }
-        )
-          .then((result) => result.json())
-          .then((result) => {
-            // console.log("dayIncreament", this.state.dayIncreament)
-            const items = result
-              .sort((a, b) => {
-                if ((a['hour'] = b['hour'])) {
-                  a['minute'] > b['minute']
-                    ? 1
-                    : a['minute'] < b['minute']
-                    ? -1
-                    : 0;
-                } else {
-                  a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
-                }
-              })
-              //오늘 날짜에 해당하는 주간만 조회
-              .filter(
-                (value) =>
-                  moment(value.class_date.split('T')[0])
-                    .add(9, 'hour')
-                    .isSameOrAfter(
-                      moment().day(0 + this.state.dayIncreament),
-                      'day'
-                    ) &&
-                  moment(value.class_date.split('T')[0])
-                    .add(9, 'hour')
-                    .isSameOrBefore(
-                      moment().day(0 + this.state.dayIncreament),
-                      'day'
-                    )
-              )
-              .map((data, index, array) => {
-                const date_value = data.class_date
-                  ? moment(data.class_date.split('T')[0])
-                  : moment();
-                const date_split = date_value.format('YYYY년 MM월 DD일');
-                let exercise_length = result.filter(
-                  (filterData) =>
-                    filterData.class_date.split('T')[0] ===
-                    data.class_date.split('T')[0]
-                ).length;
-                const handling = this.state.updateOpen ? true : false;
-                return (
-                  <ReservationClassItem
-                    fitness_no={this.props.userinfo.fitness_no}
-                    reservationClassSelect={this.reservationClassSelect}
-                    exercise_class={data.exercise_class}
-                    no={data.no}
-                    number_of_people={data.number_of_people}
-                    hour={data.hour}
-                    minute={data.minute}
-                    trainer={data.trainer}
-                    class_date={date_split}
-                    class_date_update={data.class_date}
-                    updateOpen={handling}
-                  />
-                );
-              });
-            // eslint-disable-next-line no-unused-expressions
-            this.setState({ reservationClass: items }),
-              this.reservationClassSelect1(),
-              this.reservationClassSelect2(),
-              this.reservationClassSelect3(),
-              this.reservationClassSelect4(),
-              this.reservationClassSelect5(),
-              this.reservationClassSelect6();
-          });
-      }
-    );
+    selectReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      // console.log(trainerResult[0].fitness_no);
+      fetch(
+        ip +
+          '/reservationClass/select?fitness_no=' +
+          (this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no),
+        {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }
+      )
+        .then((result) => result.json())
+        .then((result) => {
+          // console.log("dayIncreament", this.state.dayIncreament)
+          const items = result
+            //오늘 날짜에 해당하는 주간만 조회
+            .filter(
+              (value) =>
+                moment(value.class_date.split('T')[0])
+                  .add(9, 'hour')
+                  .isSameOrAfter(
+                    moment().day(0 + this.state.dayIncreament),
+                    'day'
+                  ) &&
+                moment(value.class_date.split('T')[0])
+                  .add(9, 'hour')
+                  .isSameOrBefore(
+                    moment().day(0 + this.state.dayIncreament),
+                    'day'
+                  )
+            )
+            .sort((a, b) => {
+              a['hour'] > b['hour']
+                ? 1
+                : a['hour'] < b['hour']
+                ? -1
+                : a['minute'] > b['minute']
+                ? 1
+                : a['minute'] < b['minute']
+                ? -1
+                : 0;
+            })
+            .map((data, index, array) => {
+              const date_value = data.class_date
+                ? moment(data.class_date.split('T')[0])
+                : moment();
+              const date_split = date_value.format('YYYY년 MM월 DD일');
+              let exercise_length = result.filter(
+                (filterData) =>
+                  filterData.class_date.split('T')[0] ===
+                  data.class_date.split('T')[0]
+              ).length;
+              const handling = this.state.updateOpen ? true : false;
+              return (
+                <ReservationClassItem
+                  fitness_no={this.props.userinfo.fitness_no}
+                  reservationClassSelect={this.reservationClassSelect}
+                  exercise_class={data.exercise_class}
+                  no={data.no}
+                  number_of_people={data.number_of_people}
+                  hour={data.hour}
+                  minute={data.minute}
+                  trainer={data.trainer}
+                  class_date={date_split}
+                  class_date_update={data.class_date}
+                  updateOpen={handling}
+                />
+              );
+            });
+          // eslint-disable-next-line no-unused-expressions
+          this.setState({ reservationClass: items }),
+            this.reservationClassSelect1(),
+            this.reservationClassSelect2(),
+            this.reservationClassSelect3(),
+            this.reservationClassSelect4(),
+            this.reservationClassSelect5(),
+            this.reservationClassSelect6();
+        });
+    });
   };
 
   /*
 	월요일 운동클래쓰	
 	*/
   reservationClassSelect1 = () => {
-    selectReservation(this.props.userinfo.manager_name).then(
-      (trainerResult) => {
-        // console.log(trainerResult[0].fitness_no);
-        fetch(
-          ip +
-            '/reservationClass/select?fitness_no=' +
-            (this.props.userinfo.loginWhether === 1
-              ? trainerResult[0].fitness_no
-              : this.props.userinfo.fitness_no),
-          {
-            method: 'GET',
-            headers: {
-              'Content-type': 'application/json',
-            },
-          }
-        )
-          .then((result) => result.json())
-          .then((result) => {
-            // console.log("dayIncreament", this.state.dayIncreament)
-            const items = result
-              .sort((a, b) => {
-                if ((a['hour'] = b['hour'])) {
-                  a['minute'] > b['minute']
-                    ? 1
-                    : a['minute'] < b['minute']
-                    ? -1
-                    : 0;
-                } else {
-                  a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
-                }
-              })
-              //오늘 날짜에 해당하는 주간만 조회
-              .filter(
-                (value) =>
-                  moment(value.class_date.split('T')[0])
-                    .add(9, 'hour')
-                    .isSameOrAfter(
-                      moment().day(1 + this.state.dayIncreament),
-                      'day'
-                    ) &&
-                  moment(value.class_date.split('T')[0])
-                    .add(9, 'hour')
-                    .isSameOrBefore(
-                      moment().day(1 + this.state.dayIncreament),
-                      'day'
-                    )
-              )
-              .map((data, index, array) => {
-                const date_value = data.class_date
-                  ? moment(data.class_date.split('T')[0])
-                  : moment();
-                const date_split = date_value.format('YYYY년 MM월 DD일');
-                let exercise_length = result.filter(
-                  (filterData) =>
-                    filterData.class_date.split('T')[0] ===
-                    data.class_date.split('T')[0]
-                ).length;
-                const handling = this.state.updateOpen ? true : false;
-                return (
-                  <ReservationClassItem
-                    fitness_no={this.props.userinfo.fitness_no}
-                    reservationClassSelect1={this.reservationClassSelect1}
-                    exercise_class={data.exercise_class}
-                    no={data.no}
-                    number_of_people={data.number_of_people}
-                    hour={data.hour}
-                    minute={data.minute}
-                    trainer={data.trainer}
-                    class_date={date_split}
-                    class_date_update={data.class_date}
-                    updateOpen={handling}
-                  />
-                );
-              });
-            this.setState({ reservationClass1: items });
-          });
-      }
-    );
+    selectReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      // console.log(trainerResult[0].fitness_no);
+      fetch(
+        ip +
+          '/reservationClass/select?fitness_no=' +
+          (this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no),
+        {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }
+      )
+        .then((result) => result.json())
+        .then((result) => {
+          // console.log("dayIncreament", this.state.dayIncreament)
+          const items = result
+
+            //오늘 날짜에 해당하는 주간만 조회
+            .filter(
+              (value) =>
+                moment(value.class_date.split('T')[0])
+                  .add(9, 'hour')
+                  .isSameOrAfter(
+                    moment().day(1 + this.state.dayIncreament),
+                    'day'
+                  ) &&
+                moment(value.class_date.split('T')[0])
+                  .add(9, 'hour')
+                  .isSameOrBefore(
+                    moment().day(1 + this.state.dayIncreament),
+                    'day'
+                  )
+            )
+            .sort((a, b) => {
+              a['hour'] > b['hour']
+                ? 1
+                : a['hour'] < b['hour']
+                ? -1
+                : a['minute'] > b['minute']
+                ? 1
+                : a['minute'] < b['minute']
+                ? -1
+                : 0;
+            })
+            .map((data, index, array) => {
+              const date_value = data.class_date
+                ? moment(data.class_date.split('T')[0])
+                : moment();
+              const date_split = date_value.format('YYYY년 MM월 DD일');
+              let exercise_length = result.filter(
+                (filterData) =>
+                  filterData.class_date.split('T')[0] ===
+                  data.class_date.split('T')[0]
+              ).length;
+              const handling = this.state.updateOpen ? true : false;
+              return (
+                <ReservationClassItem
+                  fitness_no={this.props.userinfo.fitness_no}
+                  reservationClassSelect1={this.reservationClassSelect1}
+                  exercise_class={data.exercise_class}
+                  no={data.no}
+                  number_of_people={data.number_of_people}
+                  hour={data.hour}
+                  minute={data.minute}
+                  trainer={data.trainer}
+                  class_date={date_split}
+                  class_date_update={data.class_date}
+                  updateOpen={handling}
+                />
+              );
+            });
+          this.setState({ reservationClass1: items });
+        });
+    });
   };
 
   /*
 	화요일 운동클래쓰	
 	*/
   reservationClassSelect2 = () => {
-    selectReservation(this.props.userinfo.manager_name).then(
-      (trainerResult) => {
-        // console.log(trainerResult[0].fitness_no);
-        fetch(
-          ip +
-            '/reservationClass/select?fitness_no=' +
-            (this.props.userinfo.loginWhether === 1
-              ? trainerResult[0].fitness_no
-              : this.props.userinfo.fitness_no),
-          {
-            method: 'GET',
-            headers: {
-              'Content-type': 'application/json',
-            },
-          }
-        )
-          .then((result) => result.json())
-          .then((result) => {
-            // console.log("dayIncreament", this.state.dayIncreament)
-            const items = result
-              .sort((a, b) => {
-                if ((a['hour'] = b['hour'])) {
-                  a['minute'] > b['minute']
-                    ? 1
-                    : a['minute'] < b['minute']
-                    ? -1
-                    : 0;
-                } else {
-                  a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
-                }
-              })
-              //오늘 날짜에 해당하는 주간만 조회
-              .filter(
-                (value) =>
-                  moment(value.class_date.split('T')[0])
-                    .add(9, 'hour')
-                    .isSameOrAfter(
-                      moment().day(2 + this.state.dayIncreament),
-                      'day'
-                    ) &&
-                  moment(value.class_date.split('T')[0])
-                    .add(9, 'hour')
-                    .isSameOrBefore(
-                      moment().day(2 + this.state.dayIncreament),
-                      'day'
-                    )
-              )
-              .map((data, index, array) => {
-                const date_value = data.class_date
-                  ? moment(data.class_date.split('T')[0])
-                  : moment();
-                const date_split = date_value.format('YYYY년 MM월 DD일');
-                let exercise_length = result.filter(
-                  (filterData) =>
-                    filterData.class_date.split('T')[0] ===
-                    data.class_date.split('T')[0]
-                ).length;
-                const handling = this.state.updateOpen ? true : false;
-                return (
-                  <ReservationClassItem
-                    fitness_no={this.props.userinfo.fitness_no}
-                    reservationClassSelect2={this.reservationClassSelect2}
-                    exercise_class={data.exercise_class}
-                    no={data.no}
-                    number_of_people={data.number_of_people}
-                    hour={data.hour}
-                    minute={data.minute}
-                    trainer={data.trainer}
-                    class_date={date_split}
-                    class_date_update={data.class_date}
-                    updateOpen={handling}
-                  />
-                );
-              });
-            this.setState({ reservationClass2: items });
-          });
-      }
-    );
+    selectReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      // console.log(trainerResult[0].fitness_no);
+      fetch(
+        ip +
+          '/reservationClass/select?fitness_no=' +
+          (this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no),
+        {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }
+      )
+        .then((result) => result.json())
+        .then((result) => {
+          // console.log("dayIncreament", this.state.dayIncreament)
+          const items = result
+            //오늘 날짜에 해당하는 주간만 조회
+            .filter(
+              (value) =>
+                moment(value.class_date.split('T')[0])
+                  .add(9, 'hour')
+                  .isSameOrAfter(
+                    moment().day(2 + this.state.dayIncreament),
+                    'day'
+                  ) &&
+                moment(value.class_date.split('T')[0])
+                  .add(9, 'hour')
+                  .isSameOrBefore(
+                    moment().day(2 + this.state.dayIncreament),
+                    'day'
+                  )
+            )
+            .sort((a, b) => {
+              a['hour'] > b['hour']
+                ? 1
+                : a['hour'] < b['hour']
+                ? -1
+                : a['minute'] > b['minute']
+                ? 1
+                : a['minute'] < b['minute']
+                ? -1
+                : 0;
+            })
+            .map((data, index, array) => {
+              const date_value = data.class_date
+                ? moment(data.class_date.split('T')[0])
+                : moment();
+              const date_split = date_value.format('YYYY년 MM월 DD일');
+              let exercise_length = result.filter(
+                (filterData) =>
+                  filterData.class_date.split('T')[0] ===
+                  data.class_date.split('T')[0]
+              ).length;
+              const handling = this.state.updateOpen ? true : false;
+              return (
+                <ReservationClassItem
+                  fitness_no={this.props.userinfo.fitness_no}
+                  reservationClassSelect2={this.reservationClassSelect2}
+                  exercise_class={data.exercise_class}
+                  no={data.no}
+                  number_of_people={data.number_of_people}
+                  hour={data.hour}
+                  minute={data.minute}
+                  trainer={data.trainer}
+                  class_date={date_split}
+                  class_date_update={data.class_date}
+                  updateOpen={handling}
+                />
+              );
+            });
+          this.setState({ reservationClass2: items });
+        });
+    });
   };
 
   /*
 	수요일 운동클래쓰	
 	*/
   reservationClassSelect3 = () => {
-    selectReservation(this.props.userinfo.manager_name).then(
-      (trainerResult) => {
-        // console.log(trainerResult[0].fitness_no);
-        fetch(
-          ip +
-            '/reservationClass/select?fitness_no=' +
-            (this.props.userinfo.loginWhether === 1
-              ? trainerResult[0].fitness_no
-              : this.props.userinfo.fitness_no),
-          {
-            method: 'GET',
-            headers: {
-              'Content-type': 'application/json',
-            },
-          }
-        )
-          .then((result) => result.json())
-          .then((result) => {
-            // console.log("dayIncreament", this.state.dayIncreament)
-            const items = result
-              .sort((a, b) => {
-                if ((a['hour'] = b['hour'])) {
-                  a['minute'] > b['minute']
-                    ? 1
-                    : a['minute'] < b['minute']
-                    ? -1
-                    : 0;
-                } else {
-                  a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
-                }
-              })
-              //오늘 날짜에 해당하는 주간만 조회
-              .filter(
-                (value) =>
-                  moment(value.class_date.split('T')[0])
-                    .add(9, 'hour')
-                    .isSameOrAfter(
-                      moment().day(3 + this.state.dayIncreament),
-                      'day'
-                    ) &&
-                  moment(value.class_date.split('T')[0])
-                    .add(9, 'hour')
-                    .isSameOrBefore(
-                      moment().day(3 + this.state.dayIncreament),
-                      'day'
-                    )
-              )
-              .map((data, index, array) => {
-                const date_value = data.class_date
-                  ? moment(data.class_date.split('T')[0])
-                  : moment();
-                const date_split = date_value.format('YYYY년 MM월 DD일');
-                let exercise_length = result.filter(
-                  (filterData) =>
-                    filterData.class_date.split('T')[0] ===
-                    data.class_date.split('T')[0]
-                ).length;
-                const handling = this.state.updateOpen ? true : false;
-                return (
-                  <ReservationClassItem
-                    fitness_no={this.props.userinfo.fitness_no}
-                    reservationClassSelect3={this.reservationClassSelect3}
-                    exercise_class={data.exercise_class}
-                    no={data.no}
-                    number_of_people={data.number_of_people}
-                    hour={data.hour}
-                    minute={data.minute}
-                    trainer={data.trainer}
-                    class_date={date_split}
-                    class_date_update={data.class_date}
-                    updateOpen={handling}
-                  />
-                );
-              });
-            this.setState({ reservationClass3: items });
-          });
-      }
-    );
+    selectReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      // console.log(trainerResult[0].fitness_no);
+      fetch(
+        ip +
+          '/reservationClass/select?fitness_no=' +
+          (this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no),
+        {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }
+      )
+        .then((result) => result.json())
+        .then((result) => {
+          // console.log("dayIncreament", this.state.dayIncreament)
+
+          const items = result
+            //오늘 날짜에 해당하는 주간만 조회
+
+            .filter(
+              (value) =>
+                moment(value.class_date.split('T')[0])
+                  .add(9, 'hour')
+                  .isSameOrAfter(
+                    moment().day(3 + this.state.dayIncreament),
+                    'day'
+                  ) &&
+                moment(value.class_date.split('T')[0])
+                  .add(9, 'hour')
+                  .isSameOrBefore(
+                    moment().day(3 + this.state.dayIncreament),
+                    'day'
+                  )
+            )
+            //sort 보류
+            .sort((a, b) => {
+              console.log('----------------------------------');
+              console.log('b', b['exercise_class'], b['hour']);
+              console.log('a', a['exercise_class'], a['hour']);
+              a['hour'] > b['hour']
+                ? 1
+                : a['hour'] < b['hour']
+                ? -1
+                : a['minute'] > b['minute']
+                ? 1
+                : a['minute'] < b['minute']
+                ? -1
+                : 0;
+            })
+
+            .map((data, index, array) => {
+              const date_value = data.class_date
+                ? moment(data.class_date.split('T')[0])
+                : moment();
+              const date_split = date_value.format('YYYY년 MM월 DD일');
+              let exercise_length = result.filter(
+                (filterData) =>
+                  filterData.class_date.split('T')[0] ===
+                  data.class_date.split('T')[0]
+              ).length;
+              const handling = this.state.updateOpen ? true : false;
+              return (
+                <ReservationClassItem
+                  fitness_no={this.props.userinfo.fitness_no}
+                  reservationClassSelect3={this.reservationClassSelect3}
+                  exercise_class={data.exercise_class}
+                  no={data.no}
+                  number_of_people={data.number_of_people}
+                  hour={data.hour}
+                  minute={data.minute}
+                  trainer={data.trainer}
+                  class_date={date_split}
+                  class_date_update={data.class_date}
+                  updateOpen={handling}
+                />
+              );
+            });
+          this.setState({ reservationClass3: items });
+        });
+    });
   };
 
   /*
 	목요일 운동클래쓰	
 	*/
   reservationClassSelect4 = () => {
-    selectReservation(this.props.userinfo.manager_name).then(
-      (trainerResult) => {
-        // console.log(trainerResult[0].fitness_no);
-        fetch(
-          ip +
-            '/reservationClass/select?fitness_no=' +
-            (this.props.userinfo.loginWhether === 1
-              ? trainerResult[0].fitness_no
-              : this.props.userinfo.fitness_no),
-          {
-            method: 'GET',
-            headers: {
-              'Content-type': 'application/json',
-            },
-          }
-        )
-          .then((result) => result.json())
-          .then((result) => {
-            // console.log("dayIncreament", this.state.dayIncreament)
-            const items = result
-              .sort((a, b) => {
-                if ((a['hour'] = b['hour'])) {
-                  a['minute'] > b['minute']
-                    ? 1
-                    : a['minute'] < b['minute']
-                    ? -1
-                    : 0;
-                } else {
-                  a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
-                }
-              })
-              //오늘 날짜에 해당하는 주간만 조회
-              .filter(
-                (value) =>
-                  moment(value.class_date.split('T')[0])
-                    .add(9, 'hour')
-                    .isSameOrAfter(
-                      moment().day(4 + this.state.dayIncreament),
-                      'day'
-                    ) &&
-                  moment(value.class_date.split('T')[0])
-                    .add(9, 'hour')
-                    .isSameOrBefore(
-                      moment().day(4 + this.state.dayIncreament),
-                      'day'
-                    )
-              )
-              .map((data, index, array) => {
-                const date_value = data.class_date
-                  ? moment(data.class_date.split('T')[0])
-                  : moment();
-                const date_split = date_value.format('YYYY년 MM월 DD일');
-                let exercise_length = result.filter(
-                  (filterData) =>
-                    filterData.class_date.split('T')[0] ===
-                    data.class_date.split('T')[0]
-                ).length;
-                const handling = this.state.updateOpen ? true : false;
-                return (
-                  <ReservationClassItem
-                    fitness_no={this.props.userinfo.fitness_no}
-                    reservationClassSelect4={this.reservationClassSelect4}
-                    exercise_class={data.exercise_class}
-                    no={data.no}
-                    number_of_people={data.number_of_people}
-                    hour={data.hour}
-                    minute={data.minute}
-                    trainer={data.trainer}
-                    class_date={date_split}
-                    class_date_update={data.class_date}
-                    updateOpen={handling}
-                  />
-                );
-              });
-            this.setState({ reservationClass4: items });
-          });
-      }
-    );
+    selectReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      // console.log(trainerResult[0].fitness_no);
+      fetch(
+        ip +
+          '/reservationClass/select?fitness_no=' +
+          (this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no),
+        {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }
+      )
+        .then((result) => result.json())
+        .then((result) => {
+          // console.log("dayIncreament", this.state.dayIncreament)
+          const items = result
+            //오늘 날짜에 해당하는 주간만 조회
+            .filter(
+              (value) =>
+                moment(value.class_date.split('T')[0])
+                  .add(9, 'hour')
+                  .isSameOrAfter(
+                    moment().day(4 + this.state.dayIncreament),
+                    'day'
+                  ) &&
+                moment(value.class_date.split('T')[0])
+                  .add(9, 'hour')
+                  .isSameOrBefore(
+                    moment().day(4 + this.state.dayIncreament),
+                    'day'
+                  )
+            )
+            .sort((a, b) => {
+              a['hour'] > b['hour']
+                ? 1
+                : a['hour'] < b['hour']
+                ? -1
+                : a['minute'] > b['minute']
+                ? 1
+                : a['minute'] < b['minute']
+                ? -1
+                : 0;
+            })
+            .map((data, index, array) => {
+              const date_value = data.class_date
+                ? moment(data.class_date.split('T')[0])
+                : moment();
+              const date_split = date_value.format('YYYY년 MM월 DD일');
+              let exercise_length = result.filter(
+                (filterData) =>
+                  filterData.class_date.split('T')[0] ===
+                  data.class_date.split('T')[0]
+              ).length;
+              const handling = this.state.updateOpen ? true : false;
+              return (
+                <ReservationClassItem
+                  fitness_no={this.props.userinfo.fitness_no}
+                  reservationClassSelect4={this.reservationClassSelect4}
+                  exercise_class={data.exercise_class}
+                  no={data.no}
+                  number_of_people={data.number_of_people}
+                  hour={data.hour}
+                  minute={data.minute}
+                  trainer={data.trainer}
+                  class_date={date_split}
+                  class_date_update={data.class_date}
+                  updateOpen={handling}
+                />
+              );
+            });
+          this.setState({ reservationClass4: items });
+        });
+    });
   };
 
   /*
 	금요일 운동클래쓰	
 	*/
   reservationClassSelect5 = () => {
-    selectReservation(this.props.userinfo.manager_name).then(
-      (trainerResult) => {
-        // console.log(trainerResult[0].fitness_no);
-        fetch(
-          ip +
-            '/reservationClass/select?fitness_no=' +
-            (this.props.userinfo.loginWhether === 1
-              ? trainerResult[0].fitness_no
-              : this.props.userinfo.fitness_no),
-          {
-            method: 'GET',
-            headers: {
-              'Content-type': 'application/json',
-            },
-          }
-        )
-          .then((result) => result.json())
-          .then((result) => {
-            // console.log("dayIncreament", this.state.dayIncreament)
-            const items = result
-              .sort((a, b) => {
-                if ((a['hour'] = b['hour'])) {
-                  a['minute'] > b['minute']
-                    ? 1
-                    : a['minute'] < b['minute']
-                    ? -1
-                    : 0;
-                } else {
-                  a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
-                }
-              })
-              //오늘 날짜에 해당하는 주간만 조회
-              .filter(
-                (value) =>
-                  moment(value.class_date.split('T')[0])
-                    .add(9, 'hour')
-                    .isSameOrAfter(
-                      moment().day(5 + this.state.dayIncreament),
-                      'day'
-                    ) &&
-                  moment(value.class_date.split('T')[0])
-                    .add(9, 'hour')
-                    .isSameOrBefore(
-                      moment().day(5 + this.state.dayIncreament),
-                      'day'
-                    )
-              )
-              .map((data, index, array) => {
-                const date_value = data.class_date
-                  ? moment(data.class_date.split('T')[0])
-                  : moment();
-                const date_split = date_value.format('YYYY년 MM월 DD일');
-                let exercise_length = result.filter(
-                  (filterData) =>
-                    filterData.class_date.split('T')[0] ===
-                    data.class_date.split('T')[0]
-                ).length;
-                const handling = this.state.updateOpen ? true : false;
+    selectReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      // console.log(trainerResult[0].fitness_no);
+      fetch(
+        ip +
+          '/reservationClass/select?fitness_no=' +
+          (this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no),
+        {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }
+      )
+        .then((result) => result.json())
+        .then((result) => {
+          // console.log("dayIncreament", this.state.dayIncreament)
+          const items = result
+            //오늘 날짜에 해당하는 주간만 조회
+            .filter(
+              (value) =>
+                moment(value.class_date.split('T')[0])
+                  .add(9, 'hour')
+                  .isSameOrAfter(
+                    moment().day(5 + this.state.dayIncreament),
+                    'day'
+                  ) &&
+                moment(value.class_date.split('T')[0])
+                  .add(9, 'hour')
+                  .isSameOrBefore(
+                    moment().day(5 + this.state.dayIncreament),
+                    'day'
+                  )
+            )
+            .sort((a, b) => {
+              a['hour'] > b['hour']
+                ? 1
+                : a['hour'] < b['hour']
+                ? -1
+                : a['minute'] > b['minute']
+                ? 1
+                : a['minute'] < b['minute']
+                ? -1
+                : 0;
+            })
+            .map((data, index, array) => {
+              const date_value = data.class_date
+                ? moment(data.class_date.split('T')[0])
+                : moment();
+              const date_split = date_value.format('YYYY년 MM월 DD일');
+              let exercise_length = result.filter(
+                (filterData) =>
+                  filterData.class_date.split('T')[0] ===
+                  data.class_date.split('T')[0]
+              ).length;
+              const handling = this.state.updateOpen ? true : false;
 
-                return (
-                  <ReservationClassItem
-                    fitness_no={this.props.userinfo.fitness_no}
-                    reservationClassSelect5={this.reservationClassSelect5}
-                    exercise_class={data.exercise_class}
-                    no={data.no}
-                    number_of_people={data.number_of_people}
-                    hour={data.hour}
-                    minute={data.minute}
-                    trainer={data.trainer}
-                    class_date={date_split}
-                    class_date_update={data.class_date}
-                    updateOpen={handling}
-                  />
-                );
-              });
-            this.setState({ reservationClass5: items });
-          });
-      }
-    );
+              return (
+                <ReservationClassItem
+                  fitness_no={this.props.userinfo.fitness_no}
+                  reservationClassSelect5={this.reservationClassSelect5}
+                  exercise_class={data.exercise_class}
+                  no={data.no}
+                  number_of_people={data.number_of_people}
+                  hour={data.hour}
+                  minute={data.minute}
+                  trainer={data.trainer}
+                  class_date={date_split}
+                  class_date_update={data.class_date}
+                  updateOpen={handling}
+                />
+              );
+            });
+          this.setState({ reservationClass5: items });
+        });
+    });
   };
 
   /*
 	토요일 운동클래쓰	
 	*/
   reservationClassSelect6 = () => {
-    selectReservation(this.props.userinfo.manager_name).then(
-      (trainerResult) => {
-        // console.log(trainerResult[0].fitness_no);
-        fetch(
-          ip +
-            '/reservationClass/select?fitness_no=' +
-            (this.props.userinfo.loginWhether === 1
-              ? trainerResult[0].fitness_no
-              : this.props.userinfo.fitness_no),
-          {
-            method: 'GET',
-            headers: {
-              'Content-type': 'application/json',
-            },
-          }
-        )
-          .then((result) => result.json())
-          .then((result) => {
-            // console.log("dayIncreament", this.state.dayIncreament)
-            const items = result
-              .sort((a, b) => {
-                if ((a['hour'] = b['hour'])) {
-                  a['minute'] > b['minute']
-                    ? 1
-                    : a['minute'] < b['minute']
-                    ? -1
-                    : 0;
-                } else {
-                  a['hour'] > b['hour'] ? 1 : a['hour'] < b['hour'] ? -1 : 0;
-                }
-              })
-              //오늘 날짜에 해당하는 주간만 조회
-              .filter(
-                (value) =>
-                  moment(value.class_date.split('T')[0])
-                    .add(9, 'hour')
-                    .isSameOrAfter(
-                      moment().day(6 + this.state.dayIncreament),
-                      'day'
-                    ) &&
-                  moment(value.class_date.split('T')[0])
-                    .add(9, 'hour')
-                    .isSameOrBefore(
-                      moment().day(6 + this.state.dayIncreament),
-                      'day'
-                    )
-              )
-              .map((data, index, array) => {
-                const date_value = data.class_date
-                  ? moment(data.class_date.split('T')[0])
-                  : moment();
-                const date_split = date_value.format('YYYY년 MM월 DD일');
-                let exercise_length = result.filter(
-                  (filterData) =>
-                    filterData.class_date.split('T')[0] ===
-                    data.class_date.split('T')[0]
-                ).length;
-                const handling = this.state.updateOpen ? true : false;
+    selectReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      fetch(
+        ip +
+          '/reservationClass/select?fitness_no=' +
+          (this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no),
+        {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }
+      )
+        .then((result) => result.json())
+        .then((result) => {
+          // console.log("dayIncreament", this.state.dayIncreament)
+          const items = result
+            //오늘 날짜에 해당하는 주간만 조회
+            .filter(
+              (value) =>
+                moment(value.class_date.split('T')[0])
+                  .add(9, 'hour')
+                  .isSameOrAfter(
+                    moment().day(6 + this.state.dayIncreament),
+                    'day'
+                  ) &&
+                moment(value.class_date.split('T')[0])
+                  .add(9, 'hour')
+                  .isSameOrBefore(
+                    moment().day(6 + this.state.dayIncreament),
+                    'day'
+                  )
+            )
+            .sort((a, b) => {
+              a['hour'] > b['hour']
+                ? 1
+                : a['hour'] < b['hour']
+                ? -1
+                : a['minute'] > b['minute']
+                ? 1
+                : a['minute'] < b['minute']
+                ? -1
+                : 0;
+            })
+            .map((data, index, array) => {
+              const date_value = data.class_date
+                ? moment(data.class_date.split('T')[0])
+                : moment();
+              const date_split = date_value.format('YYYY년 MM월 DD일');
+              let exercise_length = result.filter(
+                (filterData) =>
+                  filterData.class_date.split('T')[0] ===
+                  data.class_date.split('T')[0]
+              ).length;
+              const handling = this.state.updateOpen ? true : false;
 
-                return (
-                  <ReservationClassItem
-                    fitness_no={this.props.userinfo.fitness_no}
-                    reservationClassSelect6={this.reservationClassSelect6}
-                    exercise_class={data.exercise_class}
-                    no={data.no}
-                    number_of_people={data.number_of_people}
-                    hour={data.hour}
-                    minute={data.minute}
-                    trainer={data.trainer}
-                    class_date={date_split}
-                    class_date_update={data.class_date}
-                    updateOpen={handling}
-                  />
-                );
-              });
-            this.setState({ reservationClass6: items });
-          });
-      }
-    );
+              return (
+                <ReservationClassItem
+                  fitness_no={this.props.userinfo.fitness_no}
+                  reservationClassSelect6={this.reservationClassSelect6}
+                  exercise_class={data.exercise_class}
+                  no={data.no}
+                  number_of_people={data.number_of_people}
+                  hour={data.hour}
+                  minute={data.minute}
+                  trainer={data.trainer}
+                  class_date={date_split}
+                  class_date_update={data.class_date}
+                  updateOpen={handling}
+                />
+              );
+            });
+          this.setState({ reservationClass6: items });
+        });
+    });
   };
 
   handleWeekClick = (w) => {
@@ -1084,8 +1092,6 @@ class ReservationClass extends Component {
   };
   render() {
     // console.log(this.props.userinfo.loginWhether);
-    console.log('trainer', this.state.trainerTable);
-    console.log(this.state.trainerTable[0]);
     return (
       <div className='reservationClassWrap'>
         <header className='header'>
