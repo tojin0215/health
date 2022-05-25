@@ -5,10 +5,12 @@ import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
 import MegaMenu from '../../component/navigation/Menu';
-import { Container, Modal } from 'react-bootstrap';
 import Footer from '../../component/footer/Footer';
 import { clientSelect, deleteClient, updateClient } from '../../api/user';
 import moment from 'moment';
+
+// Bootstrap
+import { Container, Modal, Row, Col, FloatingLabel } from 'react-bootstrap';
 // MUI 테이블
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -87,6 +89,7 @@ const ViewClientItem = ({
           <Modal.Title>회원 상세 정보</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <Row></Row>
           <CustomerCalendarComponent customer_no={idc} />
           이름(변경불가):{' '}
           {showUpdate ? (
