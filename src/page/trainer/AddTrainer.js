@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
-
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
@@ -14,6 +12,7 @@ import { SERVER_URL } from '../../const/settings';
 import MegaMenu from '../../component/navigation/Menu';
 
 // Bootstrap
+import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 // MUI
@@ -177,18 +176,18 @@ class AddTrainer extends Component {
               <TextField value={this.props.userinfo.fitness_no} />
             </label> */}
             <Row>
-              <Col xs='4'>
+              <Col xs={4}>
                 <Form.Group>
                   <Form.Label>이름</Form.Label>
                   <Form.Control
+                    id='trainer_name'
                     type='text'
                     value={this.state.trainer_name}
-                    id='trainer_name'
                     onChange={this.handleChange}
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs='4'>
+              <Col xs={4}>
                 <Form.Group>
                   <Form.Label>핸드폰번호</Form.Label>
                   <Form.Control
@@ -201,7 +200,7 @@ class AddTrainer extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs='3'>
+              <Col xs={3}>
                 <Form.Group>
                   <Form.Label>생년월일</Form.Label>
                   <Form.Control
@@ -212,8 +211,8 @@ class AddTrainer extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs='1'>
-                <Form.Group className=''>
+              <Col xs={1}>
+                <Form.Group>
                   <Form.Label>성별</Form.Label>
                   <Form.Check>
                     <Form.Check.Input
@@ -241,7 +240,7 @@ class AddTrainer extends Component {
                   </Form.Check>
                 </Form.Group>
               </Col>
-              <Col xs='12'>
+              <Col xs={12}>
                 <Form.Group>
                   <Form.Label>수상이력</Form.Label>
                   <Form.Control
@@ -254,7 +253,7 @@ class AddTrainer extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs='12'>
+              <Col xs={12}>
                 <Form.Group>
                   <Form.Label>자기소개</Form.Label>
                   <Form.Control
@@ -275,9 +274,6 @@ class AddTrainer extends Component {
             >
               등록하기
             </Button>
-            <Row>
-              <Col></Col>
-            </Row>
           </Form>
         </Container>
         <div className='footer'>
