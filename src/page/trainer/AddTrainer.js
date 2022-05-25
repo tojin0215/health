@@ -108,9 +108,9 @@ class AddTrainer extends Component {
           items[0].idx
         ).then((res) => {
           // console.log(res);
-          alert('manager Table');
-          this.props.history.push('/trainer');
         });
+        alert('manager Table');
+        this.props.history.push('/trainer');
       });
     });
   };
