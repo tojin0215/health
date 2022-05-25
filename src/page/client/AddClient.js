@@ -4,11 +4,17 @@ import { Link } from 'react-router-dom';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
 import MegaMenu from '../../component/navigation/Menu';
-import { Container } from 'react-bootstrap';
 import Footer from '../../component/footer/Footer';
 import { getStatusRequest } from '../../action/authentication';
-import TextField from '@mui/material/TextField';
 import { clientManager, insertClient } from '../../api/user';
+
+// Bootstrap
+import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Button from 'react-bootstrap/Button';
+// MUI
+import TextField from '@mui/material/TextField';
 
 class AddClient extends Component {
   constructor(props) {
@@ -177,138 +183,181 @@ class AddClient extends Component {
           </div>
           {/*.localNavigation */}
         </header>
-        <Container>
-          <div>
-            <h3>회원 정보 입력</h3>
-          </div>
-          <form>
-            <label>
-              이름:
-              <TextField
-                type='text'
-                id='client_name'
-                onChange={this.handleChange}
-                value={this.state.client_name}
-              />
-            </label>
-            <br />
-            <label>
-              핸드폰번호:
-              <TextField
-                type='number'
-                id='phone'
-                onChange={this.handleChange}
-                value={this.state.phone}
-              />
-            </label>
-            <br />
-            <label>
-              생년월일:
-              <TextField
-                type='text'
-                id='birth'
-                onChange={this.handleChange}
-                value={this.state.birth}
-              />
-            </label>
-            <br />
-            <label>
-              성별:
-              <input
-                type='radio'
-                name='radioGroup'
-                id='male'
-                checked={this.state.radioGroup['male']}
-                onChange={this.handleRadio}
-              />
-              <span>남</span>
-              <input
-                type='radio'
-                name='radioGroup'
-                id='female'
-                checked={this.state.radioGroup['female']}
-                onChange={this.handleRadio}
-              />
-              <span>여</span>
-            </label>
-            <br />
-            <label>
-              {/* 라디오로 */}
-              가입경로:
-              <span>간판</span>
-              <input
-                type='radio'
-                name='radioGroup2'
-                id='route1'
-                checked={this.state.radioGroup2['route1']}
-                onChange={this.handleRouteRadio}
-              />
-              <span>홈페이지</span>
-              <input
-                type='radio'
-                name='radioGroup2'
-                id='route2'
-                checked={this.state.radioGroup2['route2']}
-                onChange={this.handleRouteRadio}
-              />
-              <span>전단지</span>
-              <input
-                type='radio'
-                name='radioGroup2'
-                id='route3'
-                checked={this.state.radioGroup2['route3']}
-                onChange={this.handleRouteRadio}
-              />
-              <span>지인소개</span>
-              <input
-                type='radio'
-                name='radioGroup2'
-                id='route4'
-                checked={this.state.radioGroup2['route4']}
-                onChange={this.handleRouteRadio}
-              />
-              <span>SNS</span>
-              <input
-                type='radio'
-                name='radioGroup2'
-                id='route5'
-                checked={this.state.radioGroup2['route5']}
-                onChange={this.handleRouteRadio}
-              />
-              <span>기타</span>
-              <input
-                type='radio'
-                name='radioGroup2'
-                id='route6'
-                checked={this.state.radioGroup2['route6']}
-                onChange={this.handleRouteRadio}
-              />
-              <TextField
-                type='text'
-                id='join_route'
-                onChange={this.handleChange}
-                value={this.state.join_route}
-              />
-            </label>
-            <br />
-            <label>
-              주소:
-              <TextField
-                type='text'
-                id='address'
-                onChange={this.handleChange}
-                value={this.state.address}
-              />
-            </label>
-            <br />
-            <button
-              className='btnSolid'
-              type='button'
-              onClick={this.handleTotal}
-            >
-              등록하기
-            </button>
-          </form>
+        <Container className='sectionGlass'>
+          <h3>회원 정보 입력</h3>
+          <Form>
+            <Row>
+              <Col xs={4}>
+                <Form.Group>
+                  <Form.Label>이름</Form.Label>
+                  <Form.Control
+                    id='client_name'
+                    type='text'
+                    value={this.state.client_name}
+                    onChange={this.handleChange}
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col xs={4}>
+                <Form.Group>
+                  <Form.Label>핸드폰번호</Form.Label>
+                  <Form.Control
+                    id='phone'
+                    type='number'
+                    value={this.state.phone}
+                    onChange={this.handleChange}
+                    variant='outlined'
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col xs={3}>
+                <Form.Group>
+                  <Form.Label>생년월일</Form.Label>
+                  <Form.Control
+                    id='birth'
+                    type='text'
+                    value={this.state.birth}
+                    onChange={this.handleChange}
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col xs={1}>
+                <Form.Group>
+                  <Form.Label>성별</Form.Label>
+                  <Form.Check>
+                    <Form.Check.Input
+                      type='radio'
+                      name='radioGroup'
+                      id='male'
+                      checked={this.state.radioGroup['male']}
+                      onChange={this.handleRadio}
+                    />
+                    <Form.Check.Label htmlFor='male' className='w-100'>
+                      남
+                    </Form.Check.Label>
+                  </Form.Check>
+                  <Form.Check>
+                    <Form.Check.Input
+                      type='radio'
+                      name='radioGroup'
+                      id='female'
+                      checked={this.state.radioGroup['female']}
+                      onChange={this.handleRadio}
+                    />
+                    <Form.Check.Label htmlFor='female' className='w-100'>
+                      여
+                    </Form.Check.Label>
+                  </Form.Check>
+                </Form.Group>
+              </Col>
+              <Col xs={12}>
+                <Form.Group className=''>
+                  <Form.Label className='w-100'>가입경로</Form.Label>
+                  <Form.Check inline>
+                    <Form.Check.Label htmlFor='route1' className='w-100'>
+                      간판
+                    </Form.Check.Label>
+                    <Form.Check.Input
+                      type='radio'
+                      name='radioGroup2'
+                      id='route1'
+                      checked={this.state.radioGroup2['route1']}
+                      onChange={this.handleRouteRadio}
+                    />
+                  </Form.Check>
+                  <Form.Check inline>
+                    <Form.Check.Label htmlFor='route2' className='w-100'>
+                      홈페이지
+                    </Form.Check.Label>
+                    <Form.Check.Input
+                      type='radio'
+                      name='radioGroup2'
+                      id='route2'
+                      checked={this.state.radioGroup2['route2']}
+                      onChange={this.handleRouteRadio}
+                    />
+                  </Form.Check>
+                  <Form.Check inline>
+                    <Form.Check.Label htmlFor='route3' className='w-100'>
+                      전단지
+                    </Form.Check.Label>
+                    <Form.Check.Input
+                      type='radio'
+                      name='radioGroup2'
+                      id='route3'
+                      checked={this.state.radioGroup2['route3']}
+                      onChange={this.handleRouteRadio}
+                    />
+                  </Form.Check>
+                  <Form.Check inline>
+                    <Form.Check.Label htmlFor='route4' className='w-100'>
+                      지인소개
+                    </Form.Check.Label>
+                    <Form.Check.Input
+                      type='radio'
+                      name='radioGroup2'
+                      id='route4'
+                      checked={this.state.radioGroup2['route4']}
+                      onChange={this.handleRouteRadio}
+                    />
+                  </Form.Check>
+                  <Form.Check inline>
+                    <Form.Check.Label htmlFor='route5' className='w-100'>
+                      SNS
+                    </Form.Check.Label>
+                    <Form.Check.Input
+                      type='radio'
+                      name='radioGroup2'
+                      id='route5'
+                      checked={this.state.radioGroup2['route5']}
+                      onChange={this.handleRouteRadio}
+                    />
+                  </Form.Check>
+                  <Form.Check inline className='me-1'>
+                    <Form.Check.Label htmlFor='route6' className='w-100'>
+                      기타
+                    </Form.Check.Label>
+                    <Form.Check.Input
+                      type='radio'
+                      name='radioGroup2'
+                      id='route6'
+                      checked={this.state.radioGroup2['route6']}
+                      onChange={this.handleRouteRadio}
+                    />
+                  </Form.Check>
+                  <Form.Check inline className='p-0'>
+                    <Form.Control
+                      className=''
+                      id='join_route'
+                      type='text'
+                      value={this.state.join_route}
+                      onChange={this.handleChange}
+                    ></Form.Control>
+                  </Form.Check>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>주소</Form.Label>
+                  <Form.Control
+                    id='address'
+                    type='text'
+                    value={this.state.address}
+                    onChange={this.handleChange}
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col xs={12} className='mt-4'>
+                <Button
+                  type='button'
+                  onClick={this.handleTotal}
+                  className='w-100'
+                >
+                  등록하기
+                </Button>
+              </Col>
+            </Row>
+          </Form>
         </Container>
         <div className='footer'>
           <Footer />
