@@ -40,6 +40,7 @@ const authentication = (
           fitness_no: action.fitness_no,
           manager_name: action.manager_name,
           loginWhether: action.loginWhether,
+          joinNo: action.joinNo,
         },
         login: {
           status: 'SUCCESS',
@@ -81,6 +82,7 @@ const authentication = (
           fitness_no: action.fitness_no,
           manager_name: action.manager_name,
           loginWhether: action.loginWhether,
+          joinNo: action.joinNo,
         },
         status: {
           ...state.status,

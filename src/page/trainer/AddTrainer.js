@@ -19,7 +19,7 @@ import Button from 'react-bootstrap/Button';
 // MUI
 import TextField from '@mui/material/TextField';
 
-import { insertTrainer, trainerManager } from '../../api/user';
+import { insertTrainer, selectTrainer, trainerManager } from '../../api/user';
 
 class AddTrainer extends Component {
   constructor(props) {
@@ -36,6 +36,7 @@ class AddTrainer extends Component {
         male: true,
         female: false,
       },
+      joinNo: '',
     };
   }
   goLogin = () => {
@@ -95,23 +96,40 @@ class AddTrainer extends Component {
     ).then((res) => {
       // console.log(res);
       alert('trainer Table');
+      selectTrainer(this.props.userinfo.fitness_no).then((result) => {
+        const items = result.filter(
+          (value) => value.trainer_name === this.state.trainer_name
+        );
+        this.setState(items);
+        trainerManager(
+          this.state.phone,
+          this.state.birth,
+          this.state.trainer_name,
+          items[0].idx
+        ).then((res) => {
+          // console.log(res);
+          alert('manager Table');
+          this.props.history.push('/trainer');
+        });
+      });
     });
   };
-  handleManagerLogin = () => {
-    trainerManager(
-      this.state.phone,
-      this.state.birth,
-      this.state.trainer_name
-    ).then((res) => {
-      // console.log(res);
-      alert('manager Table');
-    });
-  };
-  handleTotal = () => {
-    this.handleTrainer();
-    this.handleManagerLogin();
-    this.props.history.push('/trainer');
-  };
+  // handleManagerLogin = () => {
+  //   trainerManager(
+  //     this.state.phone,
+  //     this.state.birth,
+  //     this.state.trainer_name,
+  //     this.state.joinNo
+  //   ).then((res) => {
+  //     // console.log(res);
+  //     alert('manager Table');
+  //   });
+  // };
+  // handleTotal = () => {
+  //   this.handleTrainer();
+  //   this.handleManagerLogin();
+  //   this.props.history.push('/trainer');
+  // };
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
@@ -249,7 +267,7 @@ class AddTrainer extends Component {
             <Button
               className='w-100 mt-3'
               type='button'
-              onClick={this.handleTotal}
+              onClick={this.handleTrainer}
             >
               등록하기
             </Button>

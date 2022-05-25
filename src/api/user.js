@@ -155,7 +155,8 @@ export const insertTrainer = (
   fitness_no,
   ment,
   history,
-  sex
+  sex,
+  joinNo
 ) => {
   return axios.post(`${SERVER_URL}/trainer`, {
     phone,
@@ -165,15 +166,17 @@ export const insertTrainer = (
     ment,
     history,
     sex,
+    joinNo,
   });
 };
 //매니저테이블에 trainer insert(trainer login)
-export const trainerManager = (id, password, manager_name) => {
+export const trainerManager = (id, password, manager_name, joinNo) => {
   return axios
     .post(`${SERVER_URL}/manager?type=trainer`, {
       id,
       password,
       manager_name,
+      joinNo,
     })
     .then((response) => response.data);
 };

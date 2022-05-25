@@ -62,6 +62,7 @@ export function loginSuccess(info) {
     fitness_no: info.fitness_no,
     manager_name: info.manager_name,
     loginWhether: info.loginWhether,
+    joinNo: info.joinNo,
   };
 }
 
@@ -126,6 +127,7 @@ export function getStatusSuccess(info) {
     fitness_no: info.fitness_no,
     manager_name: info.manager_name,
     loginWhether: info.loginWhether,
+    joinNo: info.joinNo,
   };
 }
 
