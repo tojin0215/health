@@ -223,7 +223,9 @@ class AddTrainer extends Component {
                       checked={this.state.radioGroup['male']}
                       onChange={this.handleRadio}
                     />
-                    <Form.Check.Label htmlFor='male'>남</Form.Check.Label>
+                    <Form.Check.Label htmlFor='male' className='w-100'>
+                      남
+                    </Form.Check.Label>
                   </Form.Check>
                   <Form.Check>
                     <Form.Check.Input
@@ -233,7 +235,9 @@ class AddTrainer extends Component {
                       checked={this.state.radioGroup['female']}
                       onChange={this.handleRadio}
                     />
-                    <Form.Check.Label htmlFor='female'>여</Form.Check.Label>
+                    <Form.Check.Label htmlFor='female' className='w-100'>
+                      여
+                    </Form.Check.Label>
                   </Form.Check>
                 </Form.Group>
               </Col>
