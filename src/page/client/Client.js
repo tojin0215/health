@@ -2,15 +2,22 @@ import { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
+
+import { clientSelect, deleteClient, updateClient } from '../../api/user';
+
+// 컴포넌트
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
 import MegaMenu from '../../component/navigation/Menu';
 import Footer from '../../component/footer/Footer';
-import { clientSelect, deleteClient, updateClient } from '../../api/user';
-import moment from 'moment';
+import CustomerCalendarComponent from '../../component/customer/CustomerCalendarComponent';
 
+// moment
+import moment from 'moment';
 // Bootstrap
+import Form from 'react-bootstrap/Form';
 import { Container, Modal, Row, Col, FloatingLabel } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 // MUI 테이블
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -19,7 +26,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import CustomerCalendarComponent from '../../component/customer/CustomerCalendarComponent';
+import TextField from '@mui/material/TextField';
 
 const ViewClientItem = ({
   fitness_no,
@@ -84,41 +91,93 @@ const ViewClientItem = ({
       {/* <TableCell>
         <button onClick={modalOnClick}>수정</button>
       </TableCell> */}
-      <Modal show={showModal} onHide={modalClose}>
+      <Modal
+        className='client_modal'
+        show={showModal}
+        onHide={modalClose}
+        size='lg'
+      >
         <Modal.Header>
           <Modal.Title>회원 상세 정보</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Row></Row>
-          <CustomerCalendarComponent customer_no={idc} />
-          이름(변경불가):{' '}
-          {showUpdate ? (
-            <input value={client_name_input} onChange={updateChange1} />
-          ) : (
-            client_name
-          )}
-          주소:{' '}
-          {showUpdate ? (
-            <input value={address_input} onChange={updateChange2} />
-          ) : (
-            address
-          )}
-          생년월일(변경불가): {birth}
-          가입경로(변경불가): {join_route}
+        <Modal.Body className='mw-100'>
+          <Row>
+            <Col xs={8}>
+              <CustomerCalendarComponent customer_no={idc} />
+            </Col>
+            <Col xs={4}>
+              <Col className='mb-2'>
+                <h5 className='mb-1'>이름</h5>
+              </Col>
+              <Col className='mb-2'>
+                {showUpdate ? (
+                  <Form.Control
+                    value={client_name_input}
+                    onChange={updateChange1}
+                  />
+                ) : (
+                  <p>{client_name}</p>
+                )}
+              </Col>
+              <Col className='mb-2'>
+                <h5 className='mb-1'>주소</h5>
+                {showUpdate ? (
+                  <Form.Control
+                    value={address_input}
+                    onChange={updateChange2}
+                  />
+                ) : (
+                  <p>{address}</p>
+                )}
+              </Col>
+              <Col className='mb-2'>
+                <h5 className='mb-1'>생년월일</h5>
+                <p>{birth}</p>
+              </Col>
+              <Col className='mb-2'>
+                <h5 className='mb-1'>가입경로</h5>
+                <p>{join_route}</p>
+              </Col>
+              <Col className='text-center mt-4'>
+                {showUpdate ? (
+                  <div>
+                    <Button
+                      variant='danger'
+                      onClick={() => deleteCompleted(phone, fitness_no)}
+                    >
+                      회원삭제
+                    </Button>
+                    <p className='text-danger fs-6 fw-lighter fst-italic'>
+                      회원 삭제시 되돌릴 수 없습니다.
+                      <br /> 한번 더 확인해주세요.
+                    </p>
+                  </div>
+                ) : (
+                  ''
+                )}
+              </Col>
+            </Col>
+          </Row>
         </Modal.Body>
         <Modal.Footer>
           {showUpdate ? (
-            <button onClick={() => updateCompleted(phone, fitness_no)}>
-              회원 정보 수정2
-            </button>
+            <Button onClick={() => updateCompleted(phone, fitness_no)}>
+              수정 완료
+            </Button>
           ) : (
-            <button onClick={modalUpdate}>회원 정보 수정1</button>
+            <Button onClick={modalUpdate} variant='outline-primary'>
+              정보 수정
+            </Button>
           )}
-
-          <button onClick={() => deleteCompleted(phone, fitness_no)}>
-            회원삭제
-          </button>
-          <button onClick={modalClose}>닫기</button>
+          {showUpdate ? (
+            <Button onClick={modalClose} variant='outline-secondary'>
+              닫기
+            </Button>
+          ) : (
+            <Button onClick={modalClose} variant='secondary'>
+              닫기
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
     </TableRow>

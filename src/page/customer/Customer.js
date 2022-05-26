@@ -384,7 +384,6 @@ class Customer extends Component {
               <Modal
                 show={this.state.show}
                 onHide={this.handleClickAway}
-                dialogClassName='modal-90w mw-100'
                 aria-labelledby='example-modal'
               >
                 <Modal.Header closeButton>
