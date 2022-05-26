@@ -251,14 +251,9 @@ export const selectClientReservation = (idc) => {
 //client search phone
 export const searchPhone = (fitness_no, phone) => {
   return axios
-    .get(
-      `${SERVER_URL}/client?type=searchPhone` +
-        `&fitness_no=` +
-        fitness_no +
-        `&phone=` +
-        phone,
-      {}
-    )
+    .get(`${SERVER_URL}/client`, {
+      params: { type: 'searchPhone', fitness_no: fitness_no, phone: phone },
+    })
     .then((response) => response.data);
 };
 

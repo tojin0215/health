@@ -1756,10 +1756,10 @@ class Reservation extends Component {
   };
 
   handleUser = (customer) => {
-    const { idc, name } = customer;
+    const { idc, client_name } = customer;
     this.setState({
       customer: customer,
-      customer_name: name,
+      customer_name: client_name,
       customer_id: idc,
       open: false,
     });

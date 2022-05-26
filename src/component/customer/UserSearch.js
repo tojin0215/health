@@ -17,6 +17,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {
+  clientSelect,
   getCustomerByName,
   getCustomerByPhone,
   getCustomerByProfileName,
@@ -110,27 +111,34 @@ const UserSearch = ({
   const handleOnSearch = () => {
     switch (searchOption) {
       case '핸드폰':
-        return searchPhone(fitness_no, search).then((result) =>
-          setCustomers(result)
-        );
+        return selectReservation(joinNo ? joinNo : '').then((trainerResult) => {
+          searchPhone(
+            loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no,
+            search
+          ).then((result) => setCustomers(result));
+        });
       case '이름':
-        return searchClientname(fitness_no, search).then(
-          (result) => setCustomers(result),
-          console.log(customers)
-        );
+        return selectReservation(joinNo ? joinNo : '').then((trainerResult) => {
+          searchClientname(
+            loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no,
+            search
+          ).then((result) => setCustomers(result), console.log(customers));
+        });
     }
   };
 
   const handleSelectUser = (e) => {
     handleUser(customers.filter((item) => item.idc === Number(e.target.id))[0]);
-    console.log('handleUser', customers);
+    console.log(
+      'handleUser',
+      customers.filter((item) => item.idc === Number(e.target.id))[0]
+    );
   };
 
   useEffect(() => {
     selectReservation(joinNo ? joinNo : '').then((trainerResult) => {
-      searchClientname(
-        loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no,
-        search
+      clientSelect(
+        loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no
       ).then((result) => setCustomers(result));
     });
   }, []);
@@ -167,7 +175,7 @@ const UserSearch = ({
               type='button'
               onClick={handleOnSearch}
             >
-              고객 검색
+              검색
             </Button>
           </Col>
         </Row>
