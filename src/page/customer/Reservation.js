@@ -979,56 +979,62 @@ class Reservation extends Component {
       this.setState({ customer_name_err: true });
       alert('회원을 선택해 주세요');
     } else {
-      selectClientReservation(
+      selectReservation(
         this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-      ).then((clientResult) => {
-        const fitness_no =
-          this.props.userinfo.loginWhether === 2
-            ? clientResult[0].fitness_no
-            : this.props.userinfo.fitness_no;
-        fetch(ip + '/reservation/insert', {
-          method: 'POST',
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: JSON.stringify({
-            fitness_no: fitness_no,
-            date: date,
-            exercise_name: this.state.exercise_name,
-            trainer: this.state.trainer,
-            customer_name:
-              this.props.userinfo.loginWhether === 2
-                ? this.props.userinfo.manager_name
-                : this.state.customer_name,
-            customer_id:
-              this.props.userinfo.loginWhether === 2
-                ? this.props.userinfo.id
-                : this.state.customer_id,
-            number_of_people: this.state.number_of_people,
-            time: this.state.time,
-          }),
-        })
-          .then((result) => result.json())
-          .then((result) => {
-            if (result.message == 'ok') {
-              alert('예약이 완료되었습니다.');
-              // console.log(this.state.reserv_date)
-            } else {
-              alert(result.message);
-            }
-            this.reservationSelect();
-            this.reservationClassSelect1();
-            this.reservationClassSelect2();
-            this.reservationClassSelect3();
-            this.reservationClassSelect4();
-            this.reservationClassSelect5();
-            this.reservationClassSelect6();
-            this.reservationSelect_exercise();
-            this.reservationSelect_trainer();
-            this.reservationChoiceTrainer();
-            this.reservationClassSelect_choice();
-            this.reservationSelect_date();
-          });
+      ).then((trainerResult) => {
+        selectClientReservation(
+          this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+        ).then((clientResult) => {
+          const fitness_no =
+            this.props.userinfo.loginWhether === 1
+              ? trainerResult[0].fitness_no
+              : this.props.userinfo.loginWhether === 2
+              ? clientResult[0].fitness_no
+              : this.props.userinfo.fitness_no;
+          fetch(ip + '/reservation/insert', {
+            method: 'POST',
+            headers: {
+              'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+              fitness_no: fitness_no,
+              date: date,
+              exercise_name: this.state.exercise_name,
+              trainer: this.state.trainer,
+              customer_name:
+                this.props.userinfo.loginWhether === 2
+                  ? this.props.userinfo.manager_name
+                  : this.state.customer_name,
+              customer_id:
+                this.props.userinfo.loginWhether === 2
+                  ? this.props.userinfo.id
+                  : this.state.customer_id,
+              number_of_people: this.state.number_of_people,
+              time: this.state.time,
+            }),
+          })
+            .then((result) => result.json())
+            .then((result) => {
+              if (result.message == 'ok') {
+                alert('예약이 완료되었습니다.');
+                // console.log(this.state.reserv_date)
+              } else {
+                alert(result.message);
+              }
+              this.reservationSelect();
+              this.reservationClassSelect1();
+              this.reservationClassSelect2();
+              this.reservationClassSelect3();
+              this.reservationClassSelect4();
+              this.reservationClassSelect5();
+              this.reservationClassSelect6();
+              this.reservationSelect_exercise();
+              this.reservationSelect_trainer();
+              this.reservationChoiceTrainer();
+              this.reservationClassSelect_choice();
+              this.reservationSelect_date();
+            });
+        });
       });
     }
   };
@@ -1750,11 +1756,11 @@ class Reservation extends Component {
   };
 
   handleUser = (customer) => {
-    const { member_no, name } = customer;
+    const { idc, name } = customer;
     this.setState({
       customer: customer,
       customer_name: name,
-      customer_id: member_no,
+      customer_id: idc,
       open: false,
     });
   };
@@ -2141,6 +2147,8 @@ class Reservation extends Component {
                     open={this.state.open}
                     setOpen={(o) => this.setState({ open: o })}
                     fitness_no={this.props.userinfo.fitness_no}
+                    loginWhether={this.props.userinfo.loginWhether}
+                    joinNo={this.props.userinfo.joinNo}
                     handleUser={this.handleUser}
                   />
                 ) : (

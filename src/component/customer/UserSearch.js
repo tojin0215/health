@@ -20,12 +20,15 @@ import {
   getCustomerByName,
   getCustomerByPhone,
   getCustomerByProfileName,
+  searchClientname,
+  searchPhone,
+  selectReservation,
 } from '../../api/user';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-const options = ['이름', '핸드폰', '프로필(미지원)'];
+const options = ['이름', '핸드폰'];
 
 const UserSearchTableHeader = () => (
   <TableHead>
@@ -40,8 +43,8 @@ const UserSearchTableHeader = () => (
 
 const UserSearchTableItem = ({ c, handleSelectUser }) => (
   <TableRow>
-    <TableCell align='center'>{c.member_no}</TableCell>
-    <TableCell>{c.name}</TableCell>
+    <TableCell align='center'>{c.idc}</TableCell>
+    <TableCell>{c.client_name}</TableCell>
     <TableCell>
       {/* {c.phone} */}
       {c.phone.slice(0, 3) + '-' + c.phone.slice(3, 7) + '-' + c.phone.slice(7)}
@@ -51,8 +54,8 @@ const UserSearchTableItem = ({ c, handleSelectUser }) => (
         <Button
           type='button'
           onClick={handleSelectUser}
-          id={c.member_no}
-          value={[c.name, c.phone]}
+          id={c.idc}
+          value={[c.client_name, c.phone]}
           variant='outline-primary'
         >
           선택
@@ -62,7 +65,14 @@ const UserSearchTableItem = ({ c, handleSelectUser }) => (
   </TableRow>
 );
 
-const UserSearch = ({ open, setOpen, fitness_no, handleUser }) => {
+const UserSearch = ({
+  open,
+  setOpen,
+  fitness_no,
+  handleUser,
+  loginWhether,
+  joinNo,
+}) => {
   const [searchOption, setSearchOption] = useState(options[0]);
   const [search, setSearch] = useState('');
   const [customers, setCustomers] = useState([]);
@@ -70,44 +80,59 @@ const UserSearch = ({ open, setOpen, fitness_no, handleUser }) => {
   const handleClose = () => setOpen(false);
   const handleOnChangeSearchOption = (e) => setSearchOption(e.value);
 
+  // const handleOnSearch = () => {
+  //   switch (searchOption) {
+  //     case '이름':
+  //       return getCustomerByName(search, fitness_no).then((result) =>
+  //         setCustomers(result)
+  //       );
+  //     case '핸드폰':
+  //       return getCustomerByPhone(search, fitness_no).then((result) =>
+  //         setCustomers(result)
+  //       );
+  //     case '담당자':
+  //       // eslint-disable-next-line no-undef
+  //       return getCustomerByManager(search, fitness_no).then((result) =>
+  //         setCustomers(result)
+  //       );
+  //     case '주민번호(앞자리)':
+  //       // 'getCustomerByResiNo' is not defined  no-undef
+  //       // eslint-disable-next-line no-undef
+  //       return getCustomerByResiNo(search, fitness_no).then((result) =>
+  //         setCustomers(result)
+  //       );
+  //     case '프로필':
+  //       return getCustomerByProfileName(search, fitness_no).then((result) =>
+  //         setCustomers(result)
+  //       );
+  //   }
+  // };
   const handleOnSearch = () => {
     switch (searchOption) {
-      case '이름':
-        return getCustomerByName(search, fitness_no).then((result) =>
-          setCustomers(result)
-        );
       case '핸드폰':
-        return getCustomerByPhone(search, fitness_no).then((result) =>
+        return searchPhone(fitness_no, search).then((result) =>
           setCustomers(result)
         );
-      case '담당자':
-        // eslint-disable-next-line no-undef
-        return getCustomerByManager(search, fitness_no).then((result) =>
-          setCustomers(result)
-        );
-      case '주민번호(앞자리)':
-        // 'getCustomerByResiNo' is not defined  no-undef
-        // eslint-disable-next-line no-undef
-        return getCustomerByResiNo(search, fitness_no).then((result) =>
-          setCustomers(result)
-        );
-      case '프로필':
-        return getCustomerByProfileName(search, fitness_no).then((result) =>
-          setCustomers(result)
+      case '이름':
+        return searchClientname(fitness_no, search).then(
+          (result) => setCustomers(result),
+          console.log(customers)
         );
     }
   };
 
   const handleSelectUser = (e) => {
-    handleUser(
-      customers.filter((item) => item.member_no === Number(e.target.id))[0]
-    );
+    handleUser(customers.filter((item) => item.idc === Number(e.target.id))[0]);
+    console.log('handleUser', customers);
   };
 
   useEffect(() => {
-    getCustomerByName(search, fitness_no).then((result) =>
-      setCustomers(result)
-    );
+    selectReservation(joinNo ? joinNo : '').then((trainerResult) => {
+      searchClientname(
+        loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no,
+        search
+      ).then((result) => setCustomers(result));
+    });
   }, []);
 
   const theme = useTheme();

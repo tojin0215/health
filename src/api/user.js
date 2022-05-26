@@ -248,3 +248,30 @@ export const selectClientReservation = (idc) => {
     })
     .then((response) => response.data);
 };
+//client search phone
+export const searchPhone = (fitness_no, phone) => {
+  return axios
+    .get(
+      `${SERVER_URL}/client?type=searchPhone` +
+        `&fitness_no=` +
+        fitness_no +
+        `&phone=` +
+        phone,
+      {}
+    )
+    .then((response) => response.data);
+};
+
+//client search client_name
+export const searchClientname = (fitness_no, client_name) => {
+  return axios
+    .get(
+      `${SERVER_URL}/client?type=searchName` +
+        `&fitness_no=` +
+        fitness_no +
+        `&client_name=` +
+        client_name,
+      {}
+    )
+    .then((response) => response.data);
+};
