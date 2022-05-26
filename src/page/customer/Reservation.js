@@ -648,59 +648,65 @@ class Reservation extends Component {
    * 예약테이블 전체보기
    */
   reservationSelect = () => {
-    selectReservation(
+    selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-    ).then((trainerResult) => {
-      const fitness_no =
-        this.props.userinfo.loginWhether === 1
-          ? trainerResult[0].fitness_no
-          : this.props.userinfo.fitness_no;
-      getReservation(fitness_no).then((result) => {
-        const now = moment();
-        const items = result
-          // .filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
-          .map((data, index, array) => {
-            const date_value = data.date
-              ? moment(data.date.split('T')[0])
-              : moment();
-            // if (date_value.isBefore(now, "day")) return
-            const date = date_value.format('YYYY년 MM월 DD일');
-            let exercise_length = result.filter(
-              (filterData) =>
-                filterData.exercise_name === data.exercise_name &&
-                filterData.time === data.time &&
-                filterData.date.split('T')[0] === data.date.split('T')[0]
-            ).length;
-            return (
-              <ReservationItem
-                res_no={data.res_no}
-                date={date}
-                date2={data.date}
-                exercise_name={data.exercise_name}
-                fitness_no={data.fitness_no}
-                customer_name={data.customer_name}
-                isCancel={data.isCancel}
-                cancelComment={data.cancelComment}
-                number_of_people={data.number_of_people}
-                exercise_length={exercise_length}
-                time={data.time}
-                reservationSelect={this.reservationSelect}
-                trainer={data.trainer}
-                customer_id={data.customer_id}
-              />
-            );
-          });
-        this.setState(
-          { reservation: items, reservation_data: result },
-          () => this.reservationClassSelect(),
-          this.reservationClassSelect1(),
-          this.reservationClassSelect2(),
-          this.reservationClassSelect3(),
-          this.reservationClassSelect4(),
-          this.reservationClassSelect5(),
-          this.reservationClassSelect6()
-        );
-        // console.log("reservation_data", result);
+    ).then((clientResult) => {
+      selectReservation(
+        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+      ).then((trainerResult) => {
+        const fitness_no =
+          this.props.userinfo.loginWhether === 2
+            ? clientResult[0].fitness_no
+            : this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no;
+        getReservation(fitness_no).then((result) => {
+          const now = moment();
+          const items = result
+            // .filter(value => moment(value.date.split('T')[0]).isSameOrAfter(moment(), "day"))
+            .map((data, index, array) => {
+              const date_value = data.date
+                ? moment(data.date.split('T')[0])
+                : moment();
+              // if (date_value.isBefore(now, "day")) return
+              const date = date_value.format('YYYY년 MM월 DD일');
+              let exercise_length = result.filter(
+                (filterData) =>
+                  filterData.exercise_name === data.exercise_name &&
+                  filterData.time === data.time &&
+                  filterData.date.split('T')[0] === data.date.split('T')[0]
+              ).length;
+              return (
+                <ReservationItem
+                  res_no={data.res_no}
+                  date={date}
+                  date2={data.date}
+                  exercise_name={data.exercise_name}
+                  fitness_no={data.fitness_no}
+                  customer_name={data.customer_name}
+                  isCancel={data.isCancel}
+                  cancelComment={data.cancelComment}
+                  number_of_people={data.number_of_people}
+                  exercise_length={exercise_length}
+                  time={data.time}
+                  reservationSelect={this.reservationSelect}
+                  trainer={data.trainer}
+                  customer_id={data.customer_id}
+                />
+              );
+            });
+          this.setState(
+            { reservation: items, reservation_data: result },
+            () => this.reservationClassSelect(),
+            this.reservationClassSelect1(),
+            this.reservationClassSelect2(),
+            this.reservationClassSelect3(),
+            this.reservationClassSelect4(),
+            this.reservationClassSelect5(),
+            this.reservationClassSelect6()
+          );
+          // console.log("reservation_data", result);
+        });
       });
     });
   };
