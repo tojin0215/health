@@ -10,7 +10,10 @@ import QrReader from 'react-qr-scanner';
 import { SERVER_URL } from '../../const/settings';
 import QRCode from 'react-qr-code';
 import axios from 'axios';
-import { Modal } from 'react-bootstrap';
+
+// Bootstrap
+import { Container, Modal, Row, Col, FloatingLabel } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
 
 const ip = SERVER_URL;
 const TIMER_SUCCESS = 2500;
@@ -137,15 +140,25 @@ class QRLogin extends Component {
                         </h2>
                     </div>
                 </div> */}
-        <div className='container'>
-          <QrReader
-            delay={500}
-            style={previewStyle}
-            className='qr-reader'
-            onError={this.handleError}
-            onScan={this.handleScan}
-          />
-        </div>
+        <Container>
+          <Row>
+            <Col>
+              <Card>
+                <Card.Header>QR 인증</Card.Header>
+                <Card.Body>
+                  <QrReader
+                    delay={500}
+                    style={previewStyle}
+                    className='qr-reader'
+                    onError={this.handleError}
+                    onScan={this.handleScan}
+                  />
+                </Card.Body>
+                <Card.Footer>현재 테스트 진행중입니다.</Card.Footer>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
 
         {/* <div className='container'>
                     <div>
