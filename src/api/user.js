@@ -65,6 +65,21 @@ export const getReservation_choice_trainer = (fitness_no, trainer) => {
     .then((response) => response.data);
 };
 
+/**
+ *회원별 예약테이블
+ */
+export const getReservation_choice_client = (fitness_no, customer_name) => {
+  return axios
+    .get(SERVER_URL + '/reservation/select', {
+      params: {
+        fitness_no: fitness_no,
+        customer_name: customer_name,
+        type: 'client',
+      },
+    })
+    .then((response) => response.data);
+};
+
 const getCustomerBy = (type, search, fn) => {
   return axios
     .get(`${SERVER_URL}/customer`, { params: { type, search, fn } })

@@ -40,6 +40,8 @@ import {
   getReservation_date,
   selectReservation,
   selectClientReservation,
+  selectTrainer,
+  clientSelect,
 } from '../../api/user';
 
 // locale 오류로 임시 삭제
@@ -488,9 +490,7 @@ const ReservationChoiceTrainerItem = ({
 
   return (
     <tr>
-      <td>
-        [{customer_id}]{customer_name}
-      </td>
+      <td>{customer_name}</td>
       <td>{date}</td>
       <td>{exercise_name}</td>
       <td>{trainer}</td>
@@ -515,23 +515,19 @@ const ReservationChoiceTrainerItem = ({
 };
 
 /**
- * 강사별조회 탭 예약현황
+ * 강사별조회 탭에서 강사이름만 나오는 테이블
+ * 강사이름 누르면 강사이름으로 된 테이블 조회
  */
 const ReservationClassItem_choice = ({
   trainer_choice,
   handleClick_choice,
   reservationChoiceTrainer,
-  class_date,
-  hour,
-  minute,
 }) => {
   const handleInnerOnClick_choice = () => {
     handleClick_choice(trainer_choice);
     reservationChoiceTrainer(trainer_choice);
   };
-  const date = moment(class_date).format('YYYY년 MM월 DD일');
-  const hourArray = hour >= 10 ? hour : '0' + hour;
-  const minuteArray = minute >= 10 ? minute : '0' + minute;
+
   return (
     <Button
       variant='oultline-secondary m-1'
@@ -540,6 +536,13 @@ const ReservationClassItem_choice = ({
       {trainer_choice}
     </Button>
   );
+};
+/**
+ * 회원별조회 탭에서 회원이름만 나오는 테이블
+ * 회원이름 누르면 회원이름으로 된 테이블 조회
+ */
+const ReservationClassItem_choice2 = ({ client_choice }) => {
+  return <Button variant='oultline-secondary m-1'>{client_choice}</Button>;
 };
 
 class Reservation extends Component {
@@ -565,6 +568,7 @@ class Reservation extends Component {
       reservationClass5: [],
       reservationClass6: [],
       reservationClass_choice: [],
+      reservationClass_choice2: [],
       customer_name: '',
       customer_id: '',
       isCancel: 1,
@@ -634,6 +638,7 @@ class Reservation extends Component {
         this.reservationSelect();
         this.reservationChoiceTrainer();
         this.reservationClassSelect_choice();
+        this.reservationClassSelect_choice2();
         this.reservationClassSelect();
         this.reservationClassSelect1();
         this.reservationClassSelect2();
@@ -894,7 +899,7 @@ class Reservation extends Component {
     });
   };
   /**
-   * 강사별 예약테이블
+   * 강사별 예약테이블(탭)
    */
   reservationChoiceTrainer = (trainer_choice) => {
     selectReservation(
@@ -1032,6 +1037,7 @@ class Reservation extends Component {
               this.reservationSelect_trainer();
               this.reservationChoiceTrainer();
               this.reservationClassSelect_choice();
+              this.reservationClassSelect_choice2();
               this.reservationSelect_date();
             });
         });
@@ -1087,18 +1093,6 @@ class Reservation extends Component {
                     'day'
                   )
             )
-            //sort 보류
-            .sort((a, b) => {
-              a['hour'] > b['hour']
-                ? 1
-                : a['hour'] < b['hour']
-                ? -1
-                : a['minute'] > b['minute']
-                ? 1
-                : a['minute'] < b['minute']
-                ? -1
-                : 0;
-            })
             .map((data, index, array) => {
               const time =
                 `${data.hour}`.padStart(2, '0') +
@@ -1181,18 +1175,7 @@ class Reservation extends Component {
                     'day'
                   )
             )
-            //sort 보류
-            .sort((a, b) => {
-              a['hour'] > b['hour']
-                ? 1
-                : a['hour'] < b['hour']
-                ? -1
-                : a['minute'] > b['minute']
-                ? 1
-                : a['minute'] < b['minute']
-                ? -1
-                : 0;
-            })
+
             .map((data, index, array) => {
               const time =
                 `${data.hour}`.padStart(2, '0') +
@@ -1275,18 +1258,7 @@ class Reservation extends Component {
                     'day'
                   )
             )
-            //sort 보류
-            .sort((a, b) => {
-              a['hour'] > b['hour']
-                ? 1
-                : a['hour'] < b['hour']
-                ? -1
-                : a['minute'] > b['minute']
-                ? 1
-                : a['minute'] < b['minute']
-                ? -1
-                : 0;
-            })
+
             .map((data, index, array) => {
               const time =
                 `${data.hour}`.padStart(2, '0') +
@@ -1370,19 +1342,6 @@ class Reservation extends Component {
                     'day'
                   )
             )
-            //sort 보류
-            .sort((a, b) => {
-              a['hour'] > b['hour']
-                ? 1
-                : a['hour'] < b['hour']
-                ? -1
-                : a['minute'] > b['minute']
-                ? 1
-                : a['minute'] < b['minute']
-                ? -1
-                : 0;
-            })
-
             .map((data, index, array) => {
               const time =
                 `${data.hour}`.padStart(2, '0') +
@@ -1465,18 +1424,6 @@ class Reservation extends Component {
                     'day'
                   )
             )
-            //sort 보류
-            .sort((a, b) => {
-              a['hour'] > b['hour']
-                ? 1
-                : a['hour'] < b['hour']
-                ? -1
-                : a['minute'] > b['minute']
-                ? 1
-                : a['minute'] < b['minute']
-                ? -1
-                : 0;
-            })
             .map((data, index, array) => {
               const time =
                 `${data.hour}`.padStart(2, '0') +
@@ -1559,18 +1506,6 @@ class Reservation extends Component {
                     'day'
                   )
             )
-            //sort 보류
-            .sort((a, b) => {
-              a['hour'] > b['hour']
-                ? 1
-                : a['hour'] < b['hour']
-                ? -1
-                : a['minute'] > b['minute']
-                ? 1
-                : a['minute'] < b['minute']
-                ? -1
-                : 0;
-            })
             .map((data, index, array) => {
               const time =
                 `${data.hour}`.padStart(2, '0') +
@@ -1654,18 +1589,6 @@ class Reservation extends Component {
                     'day'
                   )
             )
-            //sort 보류
-            .sort((a, b) => {
-              a['hour'] > b['hour']
-                ? 1
-                : a['hour'] < b['hour']
-                ? -1
-                : a['minute'] > b['minute']
-                ? 1
-                : a['minute'] < b['minute']
-                ? -1
-                : 0;
-            })
             .map((data, index, array) => {
               const time =
                 `${data.hour}`.padStart(2, '0') +
@@ -1726,31 +1649,45 @@ class Reservation extends Component {
         this.props.userinfo.loginWhether === 1
           ? trainerResult[0].fitness_no
           : this.props.userinfo.fitness_no;
-      getReservationClassBy(fitness_no).then((result) => {
-        const items = result
-          //오늘 날짜에 해당하는 주간만 조회
-          // .filter(value => moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrAfter(moment().day(0 + this.state.dayIncreament), "day")
-          // 	// && moment(value.class_date.split('T')[0]).add(9, 'hour').isSameOrBefore(moment().day(6 + this.state.dayIncreament), "day")
-          // )
-          .map((data, index, array) => {
-            return (
-              <ReservationClassItem_choice
-                trainer_choice={data.trainer}
-                class_date={data.class_date}
-                hour={data.hour}
-                minute={data.minute}
-                handleClick_choice={(result_trainer_choice) =>
-                  this.setState({
-                    trainer_choice: result_trainer_choice,
-                  })
-                }
-                reservationChoiceTrainer={this.reservationChoiceTrainer}
-                reservationSelect={this.reservationSelect}
-              />
-            );
-          });
-        // console.log(result);
+      selectTrainer(fitness_no).then((result) => {
+        const items = result.map((data, index, array) => {
+          return (
+            <ReservationClassItem_choice
+              trainer_choice={data.trainer_name}
+              handleClick_choice={(result_trainer_choice) =>
+                this.setState({
+                  trainer_choice: result_trainer_choice,
+                })
+              }
+              reservationChoiceTrainer={this.reservationChoiceTrainer}
+              reservationSelect={this.reservationSelect}
+            />
+          );
+        });
+        // console.log('강사별조회', result);
         this.setState({ reservationClass_choice: items });
+      });
+    });
+  };
+  /**
+   * 회원별조회 예약현황(탭)
+   */
+  reservationClassSelect_choice2 = () => {
+    selectReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      const fitness_no =
+        this.props.userinfo.loginWhether === 1
+          ? trainerResult[0].fitness_no
+          : this.props.userinfo.fitness_no;
+      clientSelect(fitness_no).then((result) => {
+        const items = result.map((data, index, array) => {
+          return (
+            <ReservationClassItem_choice2 client_choice={data.client_name} />
+          );
+        });
+        // console.log('회원별조회', result);
+        this.setState({ reservationClass_choice2: items });
       });
     });
   };
@@ -1804,7 +1741,7 @@ class Reservation extends Component {
     // console.log("exercise", this.state.reservation_exercise);
     // console.log("trainer", this.state.reservation_trainer);
     // console.log("reservation_choice_trainer", this.state.reservation_choice_trainer);
-    // console.log("reservationClass_choice", this.state.reservationClass_choice);
+    // console.log('reservationClass_choice', this.state.reservationClass_choice);
 
     return (
       <div className='reservationWrap'>
@@ -2207,7 +2144,7 @@ class Reservation extends Component {
                     <table class='table text-center reservationListTable mt-5'>
                       <thead>
                         <tr>
-                          <th scope='col'>[회원번호]회원이름</th>
+                          <th scope='col'>회원이름</th>
                           <th scope='col'>
                             <Button
                               variant='ouline-ligth'
@@ -2296,7 +2233,7 @@ class Reservation extends Component {
                     <table class='table text-center reservationListTable mt-5'>
                       <thead>
                         <tr>
-                          <th scope='col'>[회원번호]회원이름</th>
+                          <th scope='col'>회원이름</th>
                           <th scope='col'>날짜</th>
                           <th scope='col'>운동</th>
                           <th scope='col'>강사</th>
@@ -2313,6 +2250,29 @@ class Reservation extends Component {
                         ) : (
                           this.state.reservation_choice_trainer
                         )}
+                      </tbody>
+                    </table>
+                  </Tab>
+                  <Tab eventKey='client' title='회원별조회'>
+                    <p>{this.state.reservationClass_choice2}</p>
+                    <table class='table text-center reservationListTable mt-5'>
+                      <thead>
+                        <tr>
+                          <th scope='col'>회원이름</th>
+                          <th scope='col'>날짜</th>
+                          <th scope='col'>운동</th>
+                          <th scope='col'>강사</th>
+                          <th scope='col'>인원수</th>
+                          <th scope='col'>시간</th>
+                          <th scope='col'>삭제</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {/* {this.state.reservation_choice_trainer.length == 0 ? (
+                          <p>'설정된 운동이 없습니다.'</p>
+                        ) : (
+                          this.state.reservation_choice_trainer
+                        )} */}
                       </tbody>
                     </table>
                   </Tab>
