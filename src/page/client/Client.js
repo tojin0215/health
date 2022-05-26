@@ -106,10 +106,10 @@ const ViewClientItem = ({
               <CustomerCalendarComponent customer_no={idc} />
             </Col>
             <Col xs={4}>
-              <Col className='m-2'>
-                <h5>이름</h5>
+              <Col className='mb-2'>
+                <h5 className='mb-1'>이름</h5>
               </Col>
-              <Col className='m-2'>
+              <Col className='mb-2'>
                 {showUpdate ? (
                   <Form.Control
                     value={client_name_input}
@@ -119,8 +119,8 @@ const ViewClientItem = ({
                   <p>{client_name}</p>
                 )}
               </Col>
-              <Col className='m-2'>
-                <h5>주소</h5>
+              <Col className='mb-2'>
+                <h5 className='mb-1'>주소</h5>
                 {showUpdate ? (
                   <Form.Control
                     value={address_input}
@@ -130,13 +130,31 @@ const ViewClientItem = ({
                   <p>{address}</p>
                 )}
               </Col>
-              <Col className='m-2'>
-                <h5>생년월일</h5>
+              <Col className='mb-2'>
+                <h5 className='mb-1'>생년월일</h5>
                 <p>{birth}</p>
               </Col>
-              <Col className='mt-2'>
-                <h5>가입경로</h5>
+              <Col className='mb-2'>
+                <h5 className='mb-1'>가입경로</h5>
                 <p>{join_route}</p>
+              </Col>
+              <Col className='text-center mt-4'>
+                {showUpdate ? (
+                  <div>
+                    <Button
+                      variant='danger'
+                      onClick={() => deleteCompleted(phone, fitness_no)}
+                    >
+                      회원삭제
+                    </Button>
+                    <p className='text-danger fs-6 fw-lighter fst-italic'>
+                      회원 삭제시 되돌릴 수 없습니다.
+                      <br /> 한번 더 확인해주세요.
+                    </p>
+                  </div>
+                ) : (
+                  ''
+                )}
               </Col>
             </Col>
           </Row>
@@ -144,16 +162,22 @@ const ViewClientItem = ({
         <Modal.Footer>
           {showUpdate ? (
             <Button onClick={() => updateCompleted(phone, fitness_no)}>
-              회원 정보 수정2
+              수정 완료
             </Button>
           ) : (
-            <Button onClick={modalUpdate}>회원 정보 수정1</Button>
+            <Button onClick={modalUpdate} variant='outline-primary'>
+              정보 수정
+            </Button>
           )}
-
-          <Button onClick={() => deleteCompleted(phone, fitness_no)}>
-            회원삭제
-          </Button>
-          <Button onClick={modalClose}>닫기</Button>
+          {showUpdate ? (
+            <Button onClick={modalClose} variant='outline-secondary'>
+              닫기
+            </Button>
+          ) : (
+            <Button onClick={modalClose} variant='secondary'>
+              닫기
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
     </TableRow>
