@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import { Container, Modal, Row, Col, FloatingLabel } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
@@ -168,54 +169,58 @@ class Authentication extends Component {
       </div>
     );
     const loginView = (
-      <div>
-        <Card className='text-center'>
-          <Card.Body>
-            {/* {inputBoxes} */}
-            {loginBox}
-            <Button onClick={this.handleLogin} className='' variant='primary'>
-              LOGIN
-            </Button>
-            <Button
-              className='border-0 bg-white'
-              variant='outline-secondary'
-              href='/register'
-            >
-              회원가입
-            </Button>
-          </Card.Body>
-        </Card>
-      </div>
+      <Card className='text-center'>
+        <Card.Body>
+          {/* {inputBoxes} */}
+          {loginBox}
+          <Row xs={1}>
+            <Col>
+              <Button
+                onClick={this.handleLogin}
+                className='px-5'
+                variant='primary'
+              >
+                LOGIN
+              </Button>
+            </Col>
+            <Col className='mt-2'>
+              <Button
+                href='/register'
+                variant='outline-secondary fw-bold'
+                className='px-5 border-0'
+              >
+                회원가입
+              </Button>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
     );
     const loginViewTrainer = (
-      <div>
-        <Card className='text-center'>
-          <Card.Body>
-            {/* {inputBoxes} */}
-            {trainerLoginBox}
-            <Button onClick={this.handleLogin} className='' variant='primary'>
-              LOGIN
-            </Button>
-            <br />
-            강사는 헬스장에서 등록가능합니다.
-          </Card.Body>
-        </Card>
-      </div>
+      <Card className='text-center'>
+        <Card.Body>
+          {/* {inputBoxes} */}
+          {trainerLoginBox}
+          <Button onClick={this.handleLogin} className='' variant='primary'>
+            LOGIN
+          </Button>
+          <br />
+          강사는 헬스장에서 등록가능합니다.
+        </Card.Body>
+      </Card>
     );
     const loginViewCustomer = (
-      <div>
-        <Card className='text-center'>
-          <Card.Body>
-            {/* {inputBoxes} */}
-            {trainerLoginBox}
-            <Button onClick={this.handleLogin} className='' variant='primary'>
-              LOGIN
-            </Button>
-            <br />
-            회원은 헬스장에서 등록가능합니다.
-          </Card.Body>
-        </Card>
-      </div>
+      <Card className='text-center'>
+        <Card.Body>
+          {/* {inputBoxes} */}
+          {trainerLoginBox}
+          <Button onClick={this.handleLogin} className='' variant='primary'>
+            LOGIN
+          </Button>
+          <br />
+          회원은 헬스장에서 등록가능합니다.
+        </Card.Body>
+      </Card>
     );
 
     // const registerView = (
@@ -230,27 +235,27 @@ class Authentication extends Component {
 
     return (
       <div className='container auth'>
-        <div className='welcomeMent'>
-          <p>Hello,</p>
-          <p>안녕하세요!</p>
-          <p>헬스짐 관리자 오마이짐입니다.</p>
-          <p>강사, 회원은 사업주가 승인하여야만 회원가입이 가능합니다.</p>
-        </div>
-        {this.state.radioGroup['fitness'] ? (
-          <div className='card'>{this.props.mode ? loginView : ''}</div>
-        ) : (
-          ''
-        )}
-        {this.state.radioGroup['trainer'] ? (
-          <div className='card'>{this.props.mode ? loginViewTrainer : ''}</div>
-        ) : (
-          ''
-        )}
-        {this.state.radioGroup['customer'] ? (
-          <div className='card'>{this.props.mode ? loginViewCustomer : ''}</div>
-        ) : (
-          ''
-        )}
+        <Card>
+          {/* <Card.Header></Card.Header> */}
+          <Card.Body className='bg-primary bg-gradient bg-opacity-10 py-5'>
+            {this.state.radioGroup['fitness'] ? (
+              <div>{this.props.mode ? loginView : ''}</div>
+            ) : (
+              ''
+            )}
+            {this.state.radioGroup['trainer'] ? (
+              <div>{this.props.mode ? loginViewTrainer : ''}</div>
+            ) : (
+              ''
+            )}
+            {this.state.radioGroup['customer'] ? (
+              <div>{this.props.mode ? loginViewCustomer : ''}</div>
+            ) : (
+              ''
+            )}
+          </Card.Body>
+          {/* <Card.Footer></Card.Footer> */}
+        </Card>
       </div>
     );
   }
