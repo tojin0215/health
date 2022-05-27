@@ -285,3 +285,26 @@ export const searchClientname = (fitness_no, client_name) => {
     )
     .then((response) => response.data);
 };
+
+//trainer search phone
+export const searchTrainerPhone = (fitness_no, phone) => {
+  return axios
+    .get(`${SERVER_URL}/trainer`, {
+      params: { type: 'searchPhone', fitness_no: fitness_no, phone: phone },
+    })
+    .then((response) => response.data);
+};
+
+//trainer search trainer_name
+export const searchTrainername = (fitness_no, trainer_name) => {
+  return axios
+    .get(
+      `${SERVER_URL}/trainer?type=searchName` +
+        `&fitness_no=` +
+        fitness_no +
+        `&trainer_name=` +
+        trainer_name,
+      {}
+    )
+    .then((response) => response.data);
+};

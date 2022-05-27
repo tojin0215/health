@@ -310,7 +310,6 @@ const ReservationItem_exercise = ({
   time,
   date2,
   exercise_length,
-  customer_id,
   reservationSelect,
   trainer,
 }) => {
@@ -323,9 +322,7 @@ const ReservationItem_exercise = ({
   };
   return (
     <tr>
-      <td>
-        [{customer_id}]{customer_name}
-      </td>
+      <td>{customer_name}</td>
       <td>{date}</td>
       <td>{exercise_name}</td>
       <td>{trainer}</td>
@@ -363,7 +360,6 @@ const ReservationItem_trainer = ({
   time,
   date2,
   exercise_length,
-  customer_id,
   reservationSelect,
   trainer,
 }) => {
@@ -377,9 +373,7 @@ const ReservationItem_trainer = ({
 
   return (
     <tr>
-      <td>
-        [{customer_id}]{customer_name}
-      </td>
+      <td>{customer_name}</td>
       <td>{date}</td>
       <td>{exercise_name}</td>
       <td>{trainer}</td>
@@ -418,7 +412,6 @@ const ReservationItem_date = ({
   time,
   date2,
   exercise_length,
-  customer_id,
   reservationSelect,
   trainer,
 }) => {
@@ -432,9 +425,7 @@ const ReservationItem_date = ({
 
   return (
     <tr>
-      <td>
-        [{customer_id}]{customer_name}
-      </td>
+      <td>{customer_name}</td>
       <td>{date}</td>
       <td>{exercise_name}</td>
       <td>{trainer}</td>
@@ -756,7 +747,6 @@ class Reservation extends Component {
                   time={data.time}
                   reservationSelect={this.reservationSelect}
                   trainer={data.trainer}
-                  customer_id={data.customer_id}
                 />
               );
             });
@@ -816,7 +806,6 @@ class Reservation extends Component {
                 time={data.time}
                 reservationSelect={this.reservationSelect_exercise}
                 trainer={data.trainer}
-                customer_id={data.customer_id}
               />
             );
           });
@@ -869,7 +858,6 @@ class Reservation extends Component {
                 time={data.time}
                 reservationSelect={this.reservationSelect_trainer}
                 trainer={data.trainer}
-                customer_id={data.customer_id}
               />
             );
           });
@@ -922,7 +910,6 @@ class Reservation extends Component {
                 time={data.time}
                 reservationSelect={this.reservationSelect_trainer}
                 trainer={data.trainer}
-                customer_id={data.customer_id}
               />
             );
           });
@@ -1001,7 +988,6 @@ class Reservation extends Component {
                   time={data.time}
                   reservationChoiceTrainer={this.reservationChoiceTrainer}
                   trainer={data.trainer}
-                  customer_id={data.customer_id}
                 />
               );
             });
@@ -1085,7 +1071,7 @@ class Reservation extends Component {
       alert('오늘 이후 만 예약이 가능합니다.');
     } else if (
       this.props.userinfo.loginWhether === 2
-        ? this.state.customer_name == '절대 있을 수 없는 조건 喝'
+        ? ''
         : this.state.customer_name == ''
     ) {
       this.setState({ customer_name_err: true });
