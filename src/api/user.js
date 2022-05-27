@@ -65,6 +65,21 @@ export const getReservation_choice_trainer = (fitness_no, trainer) => {
     .then((response) => response.data);
 };
 
+/**
+ *회원별 예약테이블
+ */
+export const getReservation_choice_client = (fitness_no, customer_name) => {
+  return axios
+    .get(SERVER_URL + '/reservation/select', {
+      params: {
+        fitness_no: fitness_no,
+        customer_name: customer_name,
+        type: 'client',
+      },
+    })
+    .then((response) => response.data);
+};
+
 const getCustomerBy = (type, search, fn) => {
   return axios
     .get(`${SERVER_URL}/customer`, { params: { type, search, fn } })
@@ -241,10 +256,55 @@ export const deleteClient = (phone, fitness_no) => {
     .then((response) => response.data);
 };
 //회원테이블 select reservation에 fitness_no 가져오기 위해
-export const selectClientReservation = (client_name) => {
+export const selectClientReservation = (idc) => {
   return axios
     .get(`${SERVER_URL}/client`, {
-      params: { type: 'reservation', client_name: client_name },
+      params: { type: 'reservation', idc: idc },
     })
+    .then((response) => response.data);
+};
+//client search phone
+export const searchPhone = (fitness_no, phone) => {
+  return axios
+    .get(`${SERVER_URL}/client`, {
+      params: { type: 'searchPhone', fitness_no: fitness_no, phone: phone },
+    })
+    .then((response) => response.data);
+};
+
+//client search client_name
+export const searchClientname = (fitness_no, client_name) => {
+  return axios
+    .get(
+      `${SERVER_URL}/client?type=searchName` +
+        `&fitness_no=` +
+        fitness_no +
+        `&client_name=` +
+        client_name,
+      {}
+    )
+    .then((response) => response.data);
+};
+
+//trainer search phone
+export const searchTrainerPhone = (fitness_no, phone) => {
+  return axios
+    .get(`${SERVER_URL}/trainer`, {
+      params: { type: 'searchPhone', fitness_no: fitness_no, phone: phone },
+    })
+    .then((response) => response.data);
+};
+
+//trainer search trainer_name
+export const searchTrainername = (fitness_no, trainer_name) => {
+  return axios
+    .get(
+      `${SERVER_URL}/trainer?type=searchName` +
+        `&fitness_no=` +
+        fitness_no +
+        `&trainer_name=` +
+        trainer_name,
+      {}
+    )
     .then((response) => response.data);
 };
