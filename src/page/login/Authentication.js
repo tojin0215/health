@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import FormCheck from 'react-bootstrap/FormCheck';
+import Image from 'react-bootstrap/Image';
 
 import '../../styles/login/Authentication.css';
 
@@ -237,7 +238,11 @@ class Authentication extends Component {
       <div className='container auth'>
         <Card>
           {/* <Card.Header></Card.Header> */}
-          <Card.Body className='bg-primary bg-gradient bg-opacity-10 py-5'>
+          <Card.Body className='bg-primary bg-gradient bg-opacity-10 py-5 text-center'>
+            <Image
+              src='/divvylogo500200.png'
+              className='text-center login_logo'
+            />
             {this.state.radioGroup['fitness'] ? (
               <div>{this.props.mode ? loginView : ''}</div>
             ) : (
