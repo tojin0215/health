@@ -42,6 +42,7 @@ import {
   selectClientReservation,
   selectTrainer,
   clientSelect,
+  getReservation_choice_client,
 } from '../../api/user';
 
 // locale 오류로 임시 삭제
@@ -475,16 +476,12 @@ const ReservationChoiceTrainerItem = ({
   customer_id,
   reservationChoiceTrainer,
   trainer,
-  reservationSelect,
 }) => {
   const reservationDelete = (res_no) => {
     fetch(ip + '/reservation/delete?res_no=' + res_no, {
       method: 'DELETE',
     }).then((result) => {
-      // reservationChoiceTrainer();
-      // trainer를 못가져와서 화면 새로고침함
-      // window.location.replace("/reservation");
-      reservationSelect();
+      window.location.replace('/reservation');
     });
   };
 
@@ -538,11 +535,73 @@ const ReservationClassItem_choice = ({
   );
 };
 /**
+ * 회원별조회 예약테이블
+ */
+const ReservationChoiceClientItem = ({
+  res_no,
+  date,
+  exercise_name,
+  fitness_no,
+  customer_name,
+  number_of_people,
+  time,
+  exercise_length,
+  trainer,
+}) => {
+  const reservationDelete = (res_no) => {
+    fetch(ip + '/reservation/delete?res_no=' + res_no, {
+      method: 'DELETE',
+    }).then((result) => {
+      window.location.replace('/reservation');
+    });
+  };
+  return (
+    <tr>
+      <td>{customer_name}</td>
+      <td>{date}</td>
+      <td>{exercise_name}</td>
+      <td>{trainer}</td>
+      <td>{exercise_length + '/' + number_of_people}</td>
+      <td>{time}</td>
+      <td>
+        <Button
+          className='py-1 px-2'
+          variant='outline-danger'
+          onClick={() =>
+            // eslint-disable-next-line no-restricted-globals
+            confirm('정말 삭제하시겠습니까??') == true
+              ? reservationDelete(res_no)
+              : alert('삭제가 취소 되었습니다.')
+          }
+        >
+          <RiDeleteBin5Fill className='align-baseline' />
+        </Button>
+      </td>
+    </tr>
+  );
+};
+
+/**
  * 회원별조회 탭에서 회원이름만 나오는 테이블
  * 회원이름 누르면 회원이름으로 된 테이블 조회
  */
-const ReservationClassItem_choice2 = ({ client_choice }) => {
-  return <Button variant='oultline-secondary m-1'>{client_choice}</Button>;
+const ReservationClassItem_choice2 = ({
+  client_choice,
+  handleClick_choice,
+  reservationChoiceClient,
+}) => {
+  const handleInnerOnClick_choice = () => {
+    handleClick_choice(client_choice);
+    reservationChoiceClient(client_choice);
+  };
+  return (
+    <Button
+      variant='oultline-secondary m-1'
+      onClick={handleInnerOnClick_choice}
+    >
+      {client_choice}
+    </Button>
+  );
 };
 
 class Reservation extends Component {
@@ -559,6 +618,7 @@ class Reservation extends Component {
       reservation_exercise: [],
       reservation_date: [],
       reservation_choice_trainer: [],
+      reservation_choice_client: [],
       reservation_data: [],
       reservationClass: [],
       reservationClass1: [],
@@ -951,6 +1011,53 @@ class Reservation extends Component {
           );
         }
       );
+    });
+  };
+
+  /**
+   * 회원별 예약테이블(탭)
+   */
+  reservationChoiceClient = (client_choice) => {
+    selectReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((clientResult) => {
+      const fitness_no =
+        this.props.userinfo.loginWhether === 1
+          ? clientResult[0].fitness_no
+          : this.props.userinfo.fitness_no;
+      getReservation_choice_client(fitness_no, client_choice).then((result) => {
+        const items = result.map((data, index, array) => {
+          const date_value = data.date
+            ? moment(data.date.split('T')[0])
+            : moment();
+          const date = date_value.format('YYYY년 MM월 DD일');
+          let exercise_length = result.filter(
+            (filterData) =>
+              filterData.exercise_name === data.exercise_name &&
+              filterData.time === data.time &&
+              filterData.date.split('T')[0] === data.date.split('T')[0]
+          ).length;
+          return (
+            <ReservationChoiceClientItem
+              res_no={data.res_no}
+              date={date}
+              exercise_name={data.exercise_name}
+              customer_name={data.customer_name}
+              number_of_people={data.number_of_people}
+              exercise_length={exercise_length}
+              time={data.time}
+              trainer={data.trainer}
+            />
+          );
+        });
+        this.setState(
+          {
+            reservation_choice_client: items,
+            reservation_data: result,
+          },
+          () => this.reservationClassSelect()
+        );
+      });
     });
   };
 
@@ -1683,7 +1790,15 @@ class Reservation extends Component {
       clientSelect(fitness_no).then((result) => {
         const items = result.map((data, index, array) => {
           return (
-            <ReservationClassItem_choice2 client_choice={data.client_name} />
+            <ReservationClassItem_choice2
+              client_choice={data.client_name}
+              handleClick_choice={(result_client_choice) =>
+                this.setState({
+                  trainer_choice: result_client_choice,
+                })
+              }
+              reservationChoiceClient={this.reservationChoiceClient}
+            />
           );
         });
         // console.log('회원별조회', result);
@@ -2268,11 +2383,11 @@ class Reservation extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        {/* {this.state.reservation_choice_trainer.length == 0 ? (
+                        {this.state.reservation_choice_client.length == 0 ? (
                           <p>'설정된 운동이 없습니다.'</p>
                         ) : (
-                          this.state.reservation_choice_trainer
-                        )} */}
+                          this.state.reservation_choice_client
+                        )}
                       </tbody>
                     </table>
                   </Tab>
