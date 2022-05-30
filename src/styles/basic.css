@@ -10,6 +10,11 @@ body {
   font-family: 'Noto Sans KR', sans-serif, 'Nanum Gothic', sans-serif;
 }
 
+h2 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
 h3 {
   border-bottom: 1px solid #000055;
   padding-bottom: 0.6rem;
