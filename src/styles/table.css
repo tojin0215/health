@@ -83,27 +83,31 @@
     flex-wrap: nowrap;
     margin: 1rem;
   }
-  .table--block {
-    /* min-width: max-content; */
-  }
-  .table--block thead {
+  .trainer_wrap .table--block thead {
     display: none;
   }
-  .table--block tr {
+  .trainer_wrap .table--block tr {
     display: block;
     margin-bottom: 10px;
     border-top: none;
   }
-  .table--block th,
-  .table--block td {
+  .trainer_wrap .table--block th,
+  .trainer_wrap .table--block td {
     display: block;
     position: relative;
     padding: 10px;
     padding-left: 35%;
     border-width: 0 0 1px 0;
     min-height: 40px;
+    /* overflow: hidden; */
   }
-  .table--block td:before {
+  .trainer_wrap .table--block td:nth-child(5) {
+    max-width: fit-content;
+  }
+  .trainer_wrap .table--block td:nth-child(6) {
+    max-width: fit-content;
+  }
+  .trainer_wrap .table--block td:before {
     display: block;
     position: absolute;
     left: 0;
@@ -112,16 +116,30 @@
     padding: 10px;
     background: #ccc;
   }
-  .table--block td:nth-child(1):before {
+  .trainer_wrap .table--block .trainer_table_row td:before {
+    width: 90px;
+    height: 100%;
+    text-align: center;
+  }
+  .trainer_wrap .table--block .trainer_table_row td:nth-child(1):before {
     content: '회원이름';
   }
-  .table--block td:nth-child(2):before {
-    content: '연락처';
-  }
-  .table--block td:nth-child(3):before {
+  .trainer_wrap .table--block .trainer_table_row td:nth-child(2):before {
     content: '성별';
   }
-  .table--block td:nth-child(4):before {
-    content: '가입일';
+  .trainer_wrap .table--block .trainer_table_row td:nth-child(3):before {
+    content: '연락처';
+  }
+  .trainer_wrap .table--block .trainer_table_row td:nth-child(4):before {
+    content: '생년월일';
+  }
+  .trainer_wrap .table--block .trainer_table_row td:nth-child(5):before {
+    content: '이력';
+  }
+  .trainer_wrap .table--block .trainer_table_row td:nth-child(6):before {
+    content: '자기소개';
+  }
+  .trainer_wrap .table--block .trainer_table_row td:nth-child(7):before {
+    content: '';
   }
 }

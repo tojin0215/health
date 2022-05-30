@@ -8,10 +8,11 @@ import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 
+// react-responsive
+import { useMediaQuery } from 'react-responsive';
+// Bootstrap
 import { Container, Row, Col, Button } from 'react-bootstrap';
-// Bootstrap Modal
 import Modal from 'react-bootstrap/Modal';
-// Bootstrap Form Text
 import Form from 'react-bootstrap/Form';
 // MUI 테이블
 import Box from '@mui/material/Box';
@@ -32,6 +33,23 @@ import 'react-dropdown/style.css';
 
 import MegaMenu from '../../component/navigation/Menu';
 import { deleteTrainer, selectTrainer, updateTrainer } from '../../api/user';
+
+const Desktop = ({ children }) => {
+  const isDesktop = useMediaQuery({ minWidth: 992 });
+  return isDesktop ? children : null;
+};
+const Tablet = ({ children }) => {
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 });
+  return isTablet ? children : null;
+};
+const Mobile = ({ children }) => {
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  return isMobile ? children : null;
+};
+const Default = ({ children }) => {
+  const isNotMobile = useMediaQuery({ minWidth: 768 });
+  return isNotMobile ? children : null;
+};
 
 const VieWTrainerItem = ({
   fitness_no,
@@ -91,20 +109,29 @@ const VieWTrainerItem = ({
   const [open, setOpen] = React.useState(false);
   return (
     <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-        <TableCell>
-          <IconButton
-            aria-label='expand row'
-            size='small'
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
+      <TableRow
+        sx={{ '& > *': { borderBottom: 'unset' } }}
+        className='trainer_table_row'
+      >
+        <Default>
+          <TableCell>
+            <IconButton
+              aria-label='expand row'
+              size='small'
+              onClick={() => setOpen(!open)}
+            >
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+        </Default>
         <TableCell>{trainer_name}</TableCell>
         <TableCell>{sex == 1 ? '남' : '여'}</TableCell>
         <TableCell>{phone}</TableCell>
         <TableCell>{birth}</TableCell>
+        <Mobile>
+          <TableCell>{history}</TableCell>
+          <TableCell>{ment}</TableCell>
+        </Mobile>
         <TableCell onClick={modalOnClick}>
           <Button className='' variant='outline-secondary' size='sm'>
             수정하기
@@ -205,33 +232,35 @@ const VieWTrainerItem = ({
           </Modal.Footer>
         </Modal>
       </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout='auto' unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant='h6' gutterBottom component='div'>
-                강사 소개
-              </Typography>
-              <Table size='small' aria-label='purchases'>
-                <TableHead>
-                  <TableRow>
-                    <TableCell style={{ width: '40%' }}>이력</TableCell>
-                    <TableCell>자기소개</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableRow>
-                    <TableCell component='th' scope='row'>
-                      {history}
-                    </TableCell>
-                    <TableCell>{ment}</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
+      <Default>
+        <TableRow className='trainer_table_collapse'>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+            <Collapse in={open} timeout='auto' unmountOnExit>
+              <Box sx={{ margin: 1 }}>
+                <Typography variant='h6' gutterBottom component='div'>
+                  강사 소개
+                </Typography>
+                <Table size='small' aria-label='purchases'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell style={{ width: '40%' }}>이력</TableCell>
+                      <TableCell>자기소개</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell component='th' scope='row'>
+                        {history}
+                      </TableCell>
+                      <TableCell>{ment}</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      </Default>
     </React.Fragment>
   );
 };
@@ -324,7 +353,7 @@ class Trainer extends Component {
     console.log(this.props.userinfo.fitness_no);
     console.log(this.state.viewTrainerList[0]);
     return (
-      <div>
+      <div className='trainer_wrap'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -349,14 +378,20 @@ class Trainer extends Component {
         </header>
         <Container>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+            <Table aria-label='simple table' className='table--block'>
               <TableHead>
                 <TableRow>
-                  <TableCell></TableCell>
+                  <Default>
+                    <TableCell></TableCell>
+                  </Default>
                   <TableCell>이름</TableCell>
                   <TableCell>성별</TableCell>
                   <TableCell>연락처</TableCell>
                   <TableCell>생년월일</TableCell>
+                  <Mobile>
+                    <TableCell>이력</TableCell>
+                    <TableCell>자기소개</TableCell>\
+                  </Mobile>
                   <TableCell>수정하기</TableCell>
                 </TableRow>
               </TableHead>
