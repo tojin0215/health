@@ -71,7 +71,7 @@
 
 @media (max-width: 767px) {
   .react-bs-table-container {
-    min-width: 1024px;
+    /* min-width: 1024px; */
     padding: 1.4rem 0 9rem;
   }
   .react-bs-table-pagination {
@@ -82,5 +82,46 @@
   .react-bs-table-pagination .row {
     flex-wrap: nowrap;
     margin: 1rem;
+  }
+  .table--block {
+    /* min-width: max-content; */
+  }
+  .table--block thead {
+    display: none;
+  }
+  .table--block tr {
+    display: block;
+    margin-bottom: 10px;
+    border-top: none;
+  }
+  .table--block th,
+  .table--block td {
+    display: block;
+    position: relative;
+    padding: 10px;
+    padding-left: 35%;
+    border-width: 0 0 1px 0;
+    min-height: 40px;
+  }
+  .table--block td:before {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30%;
+    padding: 10px;
+    background: #ccc;
+  }
+  .table--block td:nth-child(1):before {
+    content: '회원이름';
+  }
+  .table--block td:nth-child(2):before {
+    content: '연락처';
+  }
+  .table--block td:nth-child(3):before {
+    content: '성별';
+  }
+  .table--block td:nth-child(4):before {
+    content: '가입일';
   }
 }

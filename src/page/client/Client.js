@@ -28,6 +28,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 
+// css
+import '../../styles/client/client.css';
+
 const ViewClientItem = ({
   fitness_no,
   client_name,
@@ -263,7 +266,7 @@ class Client extends Component {
     // console.log(this.props.userinfo.fitness_no);
     console.log(this.state.viewClientList);
     return (
-      <div>
+      <div className='client_wrap'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -288,7 +291,7 @@ class Client extends Component {
         </header>
         <Container>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+            <Table className='table--block' aria-label='simple table'>
               <TableHead>
                 <TableRow>
                   <TableCell>회원이름</TableCell>
