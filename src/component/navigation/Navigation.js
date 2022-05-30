@@ -57,7 +57,16 @@ class Navigation extends Component {
                   </li>
                 </ul>
               </NavLink>
-
+              <NavLink exact to='/introduce'>
+                <span className={styles.navitem}>헬스장 소개</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/introduce'>
+                      헬스장 소개
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
               <NavLink exact to='/reservation'>
                 <span className={styles.navitem}>수업관리</span>
                 <ul>
@@ -101,7 +110,16 @@ class Navigation extends Component {
                   </li>
                 </ul>
               </NavLink>
-
+              <NavLink exact to='/introduce'>
+                <span className={styles.navitem}>헬스장 소개</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/introduce'>
+                      헬스장 소개
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
               <NavLink exact to='/customer'>
                 <span className={styles.navitem}>고객</span>
                 <ul>
@@ -192,6 +210,21 @@ class Navigation extends Component {
                   <li>
                     <NavLink exact to='/qr'>
                       QR
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
+              <NavLink exact to='/introduce'>
+                <span className={styles.navitem}>헬스장 소개</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/introduce'>
+                      헬스장 소개
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/introduce/add'>
+                      헬스장 소개 등록
                     </NavLink>
                   </li>
                 </ul>

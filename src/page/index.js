@@ -24,3 +24,5 @@ export { default as Trainer } from './trainer/Trainer';
 export { default as AddTrainer } from './trainer/AddTrainer';
 export { default as Client } from './client/Client';
 export { default as AddClient } from './client/AddClient';
+export { default as Introduce } from './introduce/Introduce';
+export { default as AddIntroduce } from './introduce/AddIntroduce';
