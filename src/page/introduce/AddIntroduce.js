@@ -71,7 +71,7 @@ class AddIntroduce extends Component {
     insertIntroduce(
       this.state.fitness_no,
       this.state.manager_name,
-      this.state.picture,
+      this.state.file,
       this.state.story
     ).then((res) => {
       console.log(res);
@@ -84,10 +84,13 @@ class AddIntroduce extends Component {
   };
   handleFileChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
-    this.setState({ [e.target.name]: e.target.files[0] });
+    this.setState({ file: e.target.files[0] });
   };
 
   render() {
+    console.log(this.state.file);
+    console.log(this.state.picture);
+
     return (
       <div>
         {''}
@@ -131,7 +134,6 @@ class AddIntroduce extends Component {
             <input
               id='picture'
               type='file'
-              name='file'
               value={this.state.picture}
               onChange={this.handleFileChange}
               accept='image/*'

@@ -12,6 +12,7 @@ import {
   selectIntroduce,
   selectReservation,
 } from '../../api/user';
+import { SERVER_URL } from '../../const/settings';
 
 const ViewIntroduceItem = ({
   idi,
@@ -22,7 +23,13 @@ const ViewIntroduceItem = ({
 }) => {
   return (
     <div>
-      {idi},{fitness_no},{manager_name},{picture},{story},
+      {idi},<br />
+      {fitness_no},<br />
+      {manager_name},<br />
+      사진: <img src={SERVER_URL + picture} />
+      {picture}
+      <br />
+      {story},
     </div>
   );
 };

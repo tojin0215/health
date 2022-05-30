@@ -328,7 +328,6 @@ export const insertIntroduce = (fitness_no, manager_name, picture, story) => {
   return axios.post(`${SERVER_URL}/introduce`, formData, {
     fitness_no,
     manager_name,
-    picture,
     story,
   });
 };
