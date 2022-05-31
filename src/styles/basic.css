@@ -1,7 +1,3 @@
-.imgtest img {
-  max-width: 200px;
-}
-
 html {
   font-size: 16px;
   word-break: break-word;
@@ -46,4 +42,12 @@ p {
 
 .height-fit-content {
   height: fit-content;
+}
+
+.width-inherit {
+  width: inherit;
+}
+
+.white-space-break-spaces {
+  white-space: break-spaces;
 }

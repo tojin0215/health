@@ -58,11 +58,11 @@ class Navigation extends Component {
                 </ul>
               </NavLink>
               <NavLink exact to='/introduce'>
-                <span className={styles.navitem}>헬스장 소개</span>
+                <span className={styles.navitem}>센터 소개</span>
                 <ul>
                   <li>
                     <NavLink exact to='/introduce'>
-                      헬스장 소개
+                      센터 소개
                     </NavLink>
                   </li>
                 </ul>
@@ -111,11 +111,11 @@ class Navigation extends Component {
                 </ul>
               </NavLink>
               <NavLink exact to='/introduce'>
-                <span className={styles.navitem}>헬스장 소개</span>
+                <span className={styles.navitem}>센터 소개</span>
                 <ul>
                   <li>
                     <NavLink exact to='/introduce'>
-                      헬스장 소개
+                      센터 소개
                     </NavLink>
                   </li>
                 </ul>
@@ -197,7 +197,7 @@ class Navigation extends Component {
           <Navbar className={styles.navbar}>
             <Nav className='mr-auto dropdownNav navitem'>
               <Nav.Item>
-                <span className={styles.navitem}>헬스장</span>
+                <span className={styles.navitem}>센터</span>
               </Nav.Item>
               <NavLink exact to='/home'>
                 <span className={styles.navitem}>Home</span>
@@ -215,16 +215,16 @@ class Navigation extends Component {
                 </ul>
               </NavLink>
               <NavLink exact to='/introduce'>
-                <span className={styles.navitem}>헬스장 소개</span>
+                <span className={styles.navitem}>센터 소개</span>
                 <ul>
                   <li>
                     <NavLink exact to='/introduce'>
-                      헬스장 소개
+                      센터 소개
                     </NavLink>
                   </li>
                   <li>
                     <NavLink exact to='/introduce/add'>
-                      헬스장 소개 등록
+                      센터 소개 등록
                     </NavLink>
                   </li>
                 </ul>

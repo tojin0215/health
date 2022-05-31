@@ -208,7 +208,7 @@ class Register extends Component {
                   value={this.state.id}
                   onChange={this.handleChange}
                   id='id'
-                  label='아이디/헬스장이름'
+                  label='아이디/센터이름'
                   error={this.state.id_err}
                   required
                   autoFocus

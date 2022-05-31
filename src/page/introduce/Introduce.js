@@ -6,7 +6,11 @@ import Navigation from '../../component/navigation/Navigation';
 import MegaMenu from '../../component/navigation/Menu';
 import { Link } from 'react-router-dom';
 import Footer from '../../component/footer/Footer';
-import { Container, Modal } from 'react-bootstrap';
+
+//bootstrap
+import { Container, Row, Col, Modal } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+
 import {
   deleteIntroduce,
   selectClientReservation,
@@ -58,30 +62,50 @@ const ViewIntroduceItem = ({
   };
 
   return (
-    <div className='imgtest'>
-      사진: <img src={picture} />
-      <br />
-      스토리: {story}
+    <Row className='sectionGlass' xs={1}>
+      <Col className='text-center mb-5'>
+        <h1>{manager_name}</h1>
+      </Col>
+      <Col className='text-center'>
+        <img className='width-inherit' src={picture} />
+      </Col>
+      <Col className='my-3 white-space-break-spaces text-center'>
+        <p>{story}</p>
+      </Col>
       {loginWhether == 2 ? (
         ''
       ) : loginWhether == 1 ? (
         ''
       ) : (
-        <div>
-          <button onClick={modalOnClick}>수정하기</button>
+        <Col className='text-center'>
+          <Button onClick={modalOnClick}>수정하기</Button>
           <Modal show={showModal}>
-            {idi}
-            사진: <img src={picture} />
-            <br />
-            <input type='file' onChange={updateChange1} />
-            스토리: <input value={story_input} onChange={updateChange2} />
-            <button onClick={() => handleUpdate(idi)}>수정하기</button>
-            <button onClick={() => setShowModal(false)}>닫기</button>
+            <Row xs={1}>
+              <Col>
+                <img className='width-inherit' src={picture} />
+              </Col>
+              <Col>
+                <input type='file' onChange={updateChange1} />
+              </Col>
+              <Col>
+                <input value={story_input} onChange={updateChange2} />
+              </Col>
+              <Col>
+                <Button onClick={() => handleUpdate(idi)}>수정하기</Button>
+              </Col>
+              <Col>
+                <Button onClick={() => handleDelete(idi)} variant='danger'>
+                  삭제하기
+                </Button>
+              </Col>
+              <Col>
+                <Button onClick={() => setShowModal(false)}>닫기</Button>
+              </Col>
+            </Row>
           </Modal>
-          <button onClick={() => handleDelete(idi)}>삭제하기</button>
-        </div>
+        </Col>
       )}
-    </div>
+    </Row>
   );
 };
 
@@ -179,7 +203,6 @@ class Introduce extends Component {
     // console.log(this.state.viewIntroduceList);
     return (
       <div>
-        {''}
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -188,16 +211,16 @@ class Introduce extends Component {
             <div className='container'>
               <h2>
                 <div className='parallelogram'></div>
-                헬스장 소개
+                센터 소개
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/introduce'>헬스장 소개</Link>
+                <Link to='/introduce'>센터 소개</Link>
                 <span>&#62;</span>
                 {this.props.userinfo.loginWhether === 0 ? (
-                  <Link to='/introduce/add'>헬스장 소개 등록</Link>
+                  <Link to='/introduce/add'>센터 소개 등록</Link>
                 ) : (
                   ''
                 )}
