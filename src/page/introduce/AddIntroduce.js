@@ -70,7 +70,7 @@ class AddIntroduce extends Component {
   handleIntroduce = () => {
     insertIntroduce(
       this.state.fitness_no,
-      this.state.manager_name,
+      this.props.userinfo.manager_name,
       this.state.file,
       this.state.story
     ).then((res) => {
@@ -124,11 +124,7 @@ class AddIntroduce extends Component {
         </header>
         <Container>
           <div>
-            <input
-              id='manager_name'
-              value={this.state.manager_name}
-              onChange={this.handleChange}
-            />
+            <input id='manager_name' value={this.props.userinfo.manager_name} />
           </div>
           <div>
             <input

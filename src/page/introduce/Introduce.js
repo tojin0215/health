@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
@@ -6,11 +6,13 @@ import Navigation from '../../component/navigation/Navigation';
 import MegaMenu from '../../component/navigation/Menu';
 import { Link } from 'react-router-dom';
 import Footer from '../../component/footer/Footer';
-import { Container } from 'react-bootstrap';
+import { Container, Modal } from 'react-bootstrap';
 import {
+  deleteIntroduce,
   selectClientReservation,
   selectIntroduce,
   selectReservation,
+  updateIntroduce,
 } from '../../api/user';
 import { SERVER_URL } from '../../const/settings';
 
@@ -20,16 +22,57 @@ const ViewIntroduceItem = ({
   manager_name,
   picture,
   story,
+  viewIntroduce,
 }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [story_input, setStory_input] = useState('');
+  const [file_input, setFile_input] = useState(null);
+  const [picture_input, setPicture_input] = useState('');
+  const [open, setOpen] = React.useState(false);
+
+  const handleUpdate = () => {
+    updateIntroduce(file_input, story_input, idi).then(() => {
+      alert('수정완료');
+      setShowModal(false);
+      viewIntroduce();
+    });
+  };
+  const handleDelete = (idi) => {
+    console.log(idi);
+    deleteIntroduce(idi).then(() => {
+      alert('삭제완료');
+      viewIntroduce();
+    });
+  };
+
+  const modalOnClick = () => {
+    setShowModal(true);
+    setStory_input(story);
+  };
+  const updateChange1 = (e) => {
+    setPicture_input(e.target.value);
+    setFile_input(e.target.files[0]);
+  };
+  const updateChange2 = (e) => {
+    setStory_input(e.target.value);
+  };
+
   return (
-    <div>
-      {idi},<br />
-      {fitness_no},<br />
-      {manager_name},<br />
-      사진: <img src={SERVER_URL + picture} />
-      {picture}
+    <div className='imgtest'>
+      사진: <img src={picture} />
       <br />
-      {story},
+      스토리: {story}
+      <button onClick={modalOnClick}>수정하기</button>
+      <Modal show={showModal}>
+        {idi}
+        사진: <img src={picture} />
+        <br />
+        <input type='file' onChange={updateChange1} />
+        스토리: <input value={story_input} onChange={updateChange2} />
+        <button onClick={() => handleUpdate(idi)}>수정하기</button>
+        <button onClick={() => setShowModal(false)}>닫기</button>
+      </Modal>
+      <button onClick={() => handleDelete(idi)}>삭제하기</button>
     </div>
   );
 };
@@ -113,6 +156,7 @@ class Introduce extends Component {
                 manager_name={data.manager_name}
                 picture={data.picture}
                 story={data.story}
+                viewIntroduce={this.viewIntroduce}
               />
             );
           });
@@ -156,6 +200,7 @@ class Introduce extends Component {
           {/*.localNavigation */}
         </header>
         <Container>
+          헬스장이름:{this.props.userinfo.manager_name}
           <div>{this.state.viewIntroduceList}</div>
         </Container>
         <div className='footer'>

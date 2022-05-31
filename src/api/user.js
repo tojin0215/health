@@ -331,3 +331,18 @@ export const insertIntroduce = (fitness_no, manager_name, picture, story) => {
     story,
   });
 };
+
+//update introduce
+export const updateIntroduce = (picture, story, idi) => {
+  const formData = new FormData();
+  formData.append('picture', picture);
+  formData.append('story', story);
+  return axios.put(`${SERVER_URL}/introduce?idi=` + idi, formData, {
+    story,
+  });
+};
+
+//delete introduce
+export const deleteIntroduce = (idi) => {
+  return axios.delete(`${SERVER_URL}/introduce?idi=` + idi, {});
+};
