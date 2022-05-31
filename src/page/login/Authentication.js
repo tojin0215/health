@@ -206,7 +206,7 @@ class Authentication extends Component {
             LOGIN
           </Button>
           <br />
-          강사는 헬스장에서 등록가능합니다.
+          강사는 센터에서 등록가능합니다.
         </Card.Body>
       </Card>
     );
@@ -219,7 +219,7 @@ class Authentication extends Component {
             LOGIN
           </Button>
           <br />
-          회원은 헬스장에서 등록가능합니다.
+          회원은 센터에서 등록가능합니다.
         </Card.Body>
       </Card>
     );

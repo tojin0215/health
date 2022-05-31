@@ -6,8 +6,11 @@ import Navigation from '../../component/navigation/Navigation';
 import MegaMenu from '../../component/navigation/Menu';
 import { Link } from 'react-router-dom';
 import Footer from '../../component/footer/Footer';
-import { Button, Container } from 'react-bootstrap';
 import { insertIntroduce } from '../../api/user';
+
+// bootstrap
+import { Button, Container, Row, Col } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
 
 class AddIntroduce extends Component {
   constructor(props) {
@@ -101,16 +104,16 @@ class AddIntroduce extends Component {
             <div className='container'>
               <h2>
                 <div className='parallelogram'></div>
-                헬스장 소개 등록
+                센터 소개 등록
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/introduce'>헬스장 소개</Link>
+                <Link to='/introduce'>센터 소개</Link>
                 <span>&#62;</span>
                 {this.props.userinfo.loginWhether === 0 ? (
-                  <Link to='/introduce/add'>헬스장 소개 등록</Link>
+                  <Link to='/introduce/add'>센터 소개 등록</Link>
                 ) : (
                   ''
                 )}
@@ -122,29 +125,48 @@ class AddIntroduce extends Component {
           {/*.localNavigation */}
         </header>
         <Container>
-          <div>
-            <input id='manager_name' value={this.props.userinfo.manager_name} />
-          </div>
-          <div>
-            <input
-              id='picture'
-              type='file'
-              value={this.state.picture}
-              onChange={this.handleFileChange}
-              accept='image/*'
-            />
-          </div>
-          <div>
-            <input
-              id='story'
-              value={this.state.story}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            <Button type='button' onClick={this.handleIntroduce}>
-              등록하기
-            </Button>
+          <div className='sectionGlass'>
+            <Row>
+              <Col xs={6}>
+                <h5>사업장</h5>
+                <Form.Control
+                  id='manager_name'
+                  value={this.props.userinfo.manager_name}
+                ></Form.Control>
+              </Col>
+              <Col xs={6}>
+                <Form.Group>
+                  <h5>사진</h5>
+                  <Form.Control
+                    id='picture'
+                    type='file'
+                    value={this.state.picture}
+                    onChange={this.handleFileChange}
+                    accept='image/*'
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col xs={12} className='mt-3'>
+                <h5>내용</h5>
+                <Form.Control
+                  id='story'
+                  value={this.state.story}
+                  onChange={this.handleChange}
+                  type='text'
+                  as='textarea'
+                  rows={5}
+                ></Form.Control>
+              </Col>
+              <Col className='text-center mt-4'>
+                <Button
+                  type='button'
+                  onClick={this.handleIntroduce}
+                  className='w-100'
+                >
+                  등록하기
+                </Button>
+              </Col>
+            </Row>
           </div>
         </Container>
         <div className='footer'>

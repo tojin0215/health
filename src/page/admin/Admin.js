@@ -477,7 +477,7 @@ class Admin extends Component {
         <div className='container'>
           <div>
             <button type='button' onClick={this.handleClickOpen}>
-              헬스장 추가하기
+              센터 추가하기
             </button>
             <Dialog
               open={this.state.open}
@@ -530,7 +530,7 @@ class Admin extends Component {
                       value={this.state.fitness_name}
                       onChange={this.handleChange}
                       id='fitness_name'
-                      label='헬스장이름'
+                      label='센터 이름'
                       error={this.state.fitness_name_err}
                       required
                     />
@@ -541,7 +541,7 @@ class Admin extends Component {
                       value={this.state.fitness_addr}
                       onChange={this.handleChange}
                       id='fitness_addr'
-                      label='헬스장 주소'
+                      label='센터 주소'
                       error={this.state.fitness_addr_err}
                       required
                     />
@@ -653,7 +653,7 @@ class Admin extends Component {
                 thStyle={{ textAlign: 'center', width: '100px' }}
                 tdStyle={{ textAlign: 'center', width: '100px' }}
               >
-                헬스장이름
+                센터 이름
               </TableHeaderColumn>
               <TableHeaderColumn
                 dataField='manager_name'

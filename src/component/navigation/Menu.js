@@ -86,11 +86,11 @@ class MegaMenu extends Component {
                 </li>
                 <li class='dropdown'>
                   <NavLink exact to='/introduce'>
-                    헬스장 소개
+                    센터 소개
                   </NavLink>
                   <li>
                     <NavLink exact to='/introduce'>
-                      헬스장 소개
+                      센터 소개
                     </NavLink>
                   </li>
                 </li>
@@ -156,11 +156,11 @@ class MegaMenu extends Component {
                 </li>
                 <li class='dropdown'>
                   <NavLink exact to='/introduce'>
-                    헬스장 소개
+                    센터 소개
                   </NavLink>
                   <li>
                     <NavLink exact to='/introduce'>
-                      헬스장 소개
+                      센터 소개
                     </NavLink>
                   </li>
                 </li>
@@ -247,7 +247,7 @@ class MegaMenu extends Component {
           <div class='megamenu'>
             <div class='logo'>
               <a href='/home'>
-                <p className='fs-1'>헬스장</p>
+                <p className='fs-1'>센터</p>
               </a>
             </div>
             {/* <p className='menuCenterCode fs-2'>
@@ -272,16 +272,16 @@ class MegaMenu extends Component {
                 </li>
                 <li class='dropdown'>
                   <NavLink exact to='/introduce'>
-                    헬스장 소개
+                    센터 소개
                   </NavLink>
                   <li>
                     <NavLink exact to='/introduce'>
-                      헬스장 소개
+                      센터 소개
                     </NavLink>
                   </li>
                   <li>
                     <NavLink exact to='/introduce/add'>
-                      헬스장 소개 등록
+                      센터 소개 등록
                     </NavLink>
                   </li>
                 </li>
