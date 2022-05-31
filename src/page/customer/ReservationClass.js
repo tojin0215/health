@@ -299,12 +299,6 @@ class ReservationClass extends Component {
       number_of_people_err: false,
       trainer_err: false,
       class_date_err: false,
-      // radioGroup: {
-      //     ten: true,
-      //     eleven: false,
-      //     twelve: false,
-      //     thirteen: false,
-      // },
       dayIncreament: 0,
       updateOpen: false,
       trainerTable: [],
@@ -975,7 +969,7 @@ class ReservationClass extends Component {
             minute: this.state.minute,
             trainer:
               this.props.userinfo.loginWhether === 1
-                ? this.props.userinfo.manager_name
+                ? trainerResult[0].trainer_name
                 : this.state.trainer_name,
             class_date: date,
           }),

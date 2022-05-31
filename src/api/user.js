@@ -308,3 +308,41 @@ export const searchTrainername = (fitness_no, trainer_name) => {
     )
     .then((response) => response.data);
 };
+
+//select introduce
+export const selectIntroduce = (fitness_no) => {
+  return axios
+    .get(`${SERVER_URL}/introduce`, {
+      params: { fitness_no: fitness_no },
+    })
+    .then((response) => response.data);
+};
+
+//insert introduce
+export const insertIntroduce = (fitness_no, manager_name, picture, story) => {
+  const formData = new FormData();
+  formData.append('fitness_no', fitness_no);
+  formData.append('manager_name', manager_name);
+  formData.append('picture', picture);
+  formData.append('story', story);
+  return axios.post(`${SERVER_URL}/introduce`, formData, {
+    fitness_no,
+    manager_name,
+    story,
+  });
+};
+
+//update introduce
+export const updateIntroduce = (picture, story, idi) => {
+  const formData = new FormData();
+  formData.append('picture', picture);
+  formData.append('story', story);
+  return axios.put(`${SERVER_URL}/introduce?idi=` + idi, formData, {
+    story,
+  });
+};
+
+//delete introduce
+export const deleteIntroduce = (idi) => {
+  return axios.delete(`${SERVER_URL}/introduce?idi=` + idi, {});
+};

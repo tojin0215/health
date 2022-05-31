@@ -43,7 +43,7 @@ class MegaMenu extends Component {
   // }
   render() {
     const { userinfo } = this.props;
-    console.log(userinfo.loginWhether);
+    // console.log(userinfo.loginWhether);
 
     $('#menu-icon')
       .off('click')
@@ -54,7 +54,7 @@ class MegaMenu extends Component {
         // 	$("nav").slideToggle();
         // });
       });
-    console.log(userinfo);
+    // console.log(userinfo);
     return (
       <div>
         {userinfo.loginWhether === 2 ? (
@@ -84,7 +84,16 @@ class MegaMenu extends Component {
                     </NavLink>
                   </li>
                 </li>
-
+                <li class='dropdown'>
+                  <NavLink exact to='/introduce'>
+                    헬스장 소개
+                  </NavLink>
+                  <li>
+                    <NavLink exact to='/introduce'>
+                      헬스장 소개
+                    </NavLink>
+                  </li>
+                </li>
                 <li class='dropdown'>
                   <NavLink exact to='/reservation'>
                     수업
@@ -142,6 +151,16 @@ class MegaMenu extends Component {
                   <li>
                     <NavLink exact to='/qr'>
                       QR
+                    </NavLink>
+                  </li>
+                </li>
+                <li class='dropdown'>
+                  <NavLink exact to='/introduce'>
+                    헬스장 소개
+                  </NavLink>
+                  <li>
+                    <NavLink exact to='/introduce'>
+                      헬스장 소개
                     </NavLink>
                   </li>
                 </li>
@@ -248,6 +267,21 @@ class MegaMenu extends Component {
                   <li>
                     <NavLink exact to='/qr'>
                       QR
+                    </NavLink>
+                  </li>
+                </li>
+                <li class='dropdown'>
+                  <NavLink exact to='/introduce'>
+                    헬스장 소개
+                  </NavLink>
+                  <li>
+                    <NavLink exact to='/introduce'>
+                      헬스장 소개
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/introduce/add'>
+                      헬스장 소개 등록
                     </NavLink>
                   </li>
                 </li>

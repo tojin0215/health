@@ -27,6 +27,8 @@ import {
   Trainer,
   Client,
   AddClient,
+  Introduce,
+  AddIntroduce,
 } from '../page';
 
 class App extends Component {
@@ -59,6 +61,8 @@ class App extends Component {
         <Route exact path='/trainer/add' component={AddTrainer} />
         <Route exact path='/client' component={Client} />
         <Route exact path='/client/add' component={AddClient} />
+        <Route exact path='/introduce' component={Introduce} />
+        <Route exact path='/introduce/add' component={AddIntroduce} />
       </div>
     );
   }
