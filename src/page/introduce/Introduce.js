@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../../component/footer/Footer';
 
 //bootstrap
-import { Container, Row, Col, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Modal, Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
 import {
@@ -45,6 +45,7 @@ const ViewIntroduceItem = ({
     console.log(idi);
     deleteIntroduce(idi).then(() => {
       alert('삭제완료');
+      setShowModal(false);
       viewIntroduce();
     });
   };
@@ -79,27 +80,57 @@ const ViewIntroduceItem = ({
       ) : (
         <Col className='text-center'>
           <Button onClick={modalOnClick}>수정하기</Button>
-          <Modal show={showModal}>
-            <Row xs={1}>
-              <Col>
+          <Modal show={showModal} size='lg' onHide={() => setShowModal(false)}>
+            {/* <Modal show={true} className=''> */}
+            <Row xs={1} className='p-4'>
+              <Col className='py-3 text-center'>
+                <h2>{manager_name}</h2>
+              </Col>
+              <Col className='py-3 text-center'>
                 <img className='width-inherit' src={picture} />
               </Col>
-              <Col>
-                <input type='file' onChange={updateChange1} />
+              <Col className='py-2'>
+                <h5>사진 선택</h5>
+                <Form.Group className='border'>
+                  <Form.Control
+                    type='file'
+                    onChange={updateChange1}
+                    className='w-100'
+                  ></Form.Control>
+                </Form.Group>
               </Col>
-              <Col>
-                <input value={story_input} onChange={updateChange2} />
+              <Col className='py-2'>
+                <h5>내용</h5>
+                <Form.Control
+                  value={story_input}
+                  onChange={updateChange2}
+                  type='text'
+                  as='textarea'
+                  rows={5}
+                ></Form.Control>
               </Col>
-              <Col>
-                <Button onClick={() => handleUpdate(idi)}>수정하기</Button>
+              <Col xs={12} sm={8} className='pb-2'>
+                <Button onClick={() => handleUpdate(idi)} className='w-100'>
+                  수정하기
+                </Button>
               </Col>
-              <Col>
-                <Button onClick={() => handleDelete(idi)} variant='danger'>
+              <Col xs={12} sm={4}>
+                <Button
+                  onClick={() => handleDelete(idi)}
+                  variant='outline-danger'
+                  className='w-100'
+                >
                   삭제하기
                 </Button>
               </Col>
               <Col>
-                <Button onClick={() => setShowModal(false)}>닫기</Button>
+                <Button
+                  onClick={() => setShowModal(false)}
+                  variant='outline-secondary'
+                  className='w-100 mt-2'
+                >
+                  닫기
+                </Button>
               </Col>
             </Row>
           </Modal>
