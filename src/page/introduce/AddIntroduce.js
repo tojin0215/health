@@ -88,15 +88,14 @@ class AddIntroduce extends Component {
   };
 
   render() {
-    console.log(this.state.file);
-    console.log(this.state.picture);
-
+    // console.log(this.state.file);
+    // console.log(this.state.picture);
     return (
       <div>
         {''}
         <header className='header'>
           <Header />
-          <Navigation />
+          <Navigation goLogin={this.goLogin} />
           <MegaMenu />
           <div className='localNavigation'>
             <div className='container'>

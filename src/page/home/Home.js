@@ -30,6 +30,7 @@ import aboutExercise from '../../../src/img/aboutExercise.png';
 
 import { SERVER_URL } from '../../const/settings';
 import AlertToastComponent from '../../component/home/AlertToast';
+import { clientSelect } from '../../api/user';
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -44,6 +45,7 @@ class Home extends Component {
     super(props);
     this.state = {
       totalCustomer: 0,
+      totalClient: 0,
       todayCustomer: 0,
       monthSales: 0,
       todaySales: 0,
@@ -110,24 +112,27 @@ class Home extends Component {
   }
 
   cusFetch = () => {
-    fetch(ip + '/customer?type=all&fn=' + this.props.userinfo.fitness_no, {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        //alert(res.length)
-        this.setState({ totalCustomer: res.length });
-        // let arr = [];
-        // for(let i=(res.length-1) ; i>=0 ; i--){
-        //     let sor = res[i].solar_or_lunar===true?"양":"음";
-        //     let s = res[i].sex===true?"남":"여";
-        //     arr.push({"no":res[i].member_no, "name":res[i].name, "sex":s, "phone":res[i].phone, "in_charge":res[i].in_charge,"start_date":moment(res[i].start_date).format("YYYY/MM/DD")+"~ ("+res[i].period+"개월)", "resi_no":res[i].resi_no+ " ("+sor+")" })
-        // }
-        // this.setState({customerList : arr});
-      });
+    // fetch(ip + '/customer?type=all&fn=' + this.props.userinfo.fitness_no, {
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-type': 'application/json',
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((res) => {
+    //     //alert(res.length)
+    //     this.setState({ totalCustomer: res.length });
+    //     // let arr = [];
+    //     // for(let i=(res.length-1) ; i>=0 ; i--){
+    //     //     let sor = res[i].solar_or_lunar===true?"양":"음";
+    //     //     let s = res[i].sex===true?"남":"여";
+    //     //     arr.push({"no":res[i].member_no, "name":res[i].name, "sex":s, "phone":res[i].phone, "in_charge":res[i].in_charge,"start_date":moment(res[i].start_date).format("YYYY/MM/DD")+"~ ("+res[i].period+"개월)", "resi_no":res[i].resi_no+ " ("+sor+")" })
+    //     // }
+    //     // this.setState({customerList : arr});
+    //   });
+    clientSelect(this.props.userinfo.fitness_no).then((result) => {
+      this.setState({ totalClient: result.length });
+    });
     fetch(ip + '/sales?type=all&fn=' + this.props.userinfo.fitness_no, {
       method: 'GET',
       headers: {
@@ -218,12 +223,12 @@ class Home extends Component {
               <Row className='dashboard' xs={2}>
                 <Col className='homeDashLeft h-100' xs={2}>
                   <label>
-                    <p>오늘 방문고객</p>
+                    {/* <p>오늘 방문고객</p> */}
                     {/* <span>{this.fommat(this.state.todayCustomer)}</span> */}
                   </label>
                   <label>
-                    <p>전체고객</p>
-                    <span>{this.fommat(this.state.totalCustomer)}</span>
+                    <p>등록된 회원</p>
+                    <span>{this.fommat(this.state.totalClient)}</span>
                   </label>
                 </Col>
                 <Col className='homeDashRight' xs={2}>

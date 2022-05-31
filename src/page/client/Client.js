@@ -3,7 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
 
-import { clientSelect, deleteClient, updateClient } from '../../api/user';
+import {
+  clientSelect,
+  deleteClient,
+  selectClientReservation,
+  selectReservation,
+  updateClient,
+} from '../../api/user';
 
 // 컴포넌트
 import Header from '../../component/header/Header';
@@ -42,6 +48,7 @@ const ViewClientItem = ({
   start_date,
   idc,
   viewClient,
+  loginWhether,
 }) => {
   const newDate = moment(start_date).format('YYYY년 MM월 DD일');
   const [showModal, setShowModal] = useState(false);
@@ -143,18 +150,22 @@ const ViewClientItem = ({
               </Col>
               <Col className='text-center mt-4'>
                 {showUpdate ? (
-                  <div>
-                    <Button
-                      variant='danger'
-                      onClick={() => deleteCompleted(phone, fitness_no)}
-                    >
-                      회원삭제
-                    </Button>
-                    <p className='text-danger fs-6 fw-lighter fst-italic'>
-                      회원 삭제시 되돌릴 수 없습니다.
-                      <br /> 한번 더 확인해주세요.
-                    </p>
-                  </div>
+                  loginWhether === 1 ? (
+                    ''
+                  ) : (
+                    <div>
+                      <Button
+                        variant='danger'
+                        onClick={() => deleteCompleted(phone, fitness_no)}
+                      >
+                        회원삭제
+                      </Button>
+                      <p className='text-danger fs-6 fw-lighter fst-italic'>
+                        회원 삭제시 되돌릴 수 없습니다.
+                        <br /> 한번 더 확인해주세요.
+                      </p>
+                    </div>
+                  )
                 ) : (
                   ''
                 )}
@@ -241,25 +252,33 @@ class Client extends Component {
     });
   }
   viewClient = () => {
-    const fitness_no = this.props.userinfo.fitness_no;
-    clientSelect(fitness_no).then((result) => {
-      const items = result.map((data, index, array) => {
-        return (
-          <ViewClientItem
-            fitness_no={data.fitness_no}
-            client_name={data.client_name}
-            phone={data.phone}
-            birth={data.birth}
-            sex={data.sex}
-            join_route={data.join_route}
-            address={data.address}
-            start_date={data.start_date}
-            idc={data.idc}
-            viewClient={this.viewClient}
-          />
-        );
+    selectReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      const fitness_no =
+        this.props.userinfo.loginWhether === 1
+          ? trainerResult[0].fitness_no
+          : this.props.userinfo.fitness_no;
+      clientSelect(fitness_no).then((result) => {
+        const items = result.map((data, index, array) => {
+          return (
+            <ViewClientItem
+              fitness_no={data.fitness_no}
+              client_name={data.client_name}
+              phone={data.phone}
+              birth={data.birth}
+              sex={data.sex}
+              join_route={data.join_route}
+              address={data.address}
+              start_date={data.start_date}
+              idc={data.idc}
+              viewClient={this.viewClient}
+              loginWhether={this.props.userinfo.loginWhether}
+            />
+          );
+        });
+        this.setState({ viewClientList: items });
       });
-      this.setState({ viewClientList: items });
     });
   };
   render() {

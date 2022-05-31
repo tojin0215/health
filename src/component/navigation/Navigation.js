@@ -120,16 +120,16 @@ class Navigation extends Component {
                   </li>
                 </ul>
               </NavLink>
-              <NavLink exact to='/customer'>
-                <span className={styles.navitem}>고객</span>
+              <NavLink exact to='/client'>
+                <span className={styles.navitem}>회원</span>
                 <ul>
                   <li>
-                    <NavLink exact to='/customer'>
+                    <NavLink exact to='/client'>
                       회원 관리
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to='/customer/add'>
+                    <NavLink exact to='/client/add'>
                       회원 등록
                     </NavLink>
                   </li>
@@ -246,30 +246,15 @@ class Navigation extends Component {
                 </ul>
               </NavLink>
               <NavLink exact to='/client'>
-                <span className={styles.navitem}>클라이언트</span>
+                <span className={styles.navitem}>회원</span>
                 <ul>
                   <li>
                     <NavLink exact to='/client'>
-                      클라 관리
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/client/add'>
-                      클라 등록
-                    </NavLink>
-                  </li>
-                </ul>
-              </NavLink>
-              <NavLink exact to='/customer'>
-                <span className={styles.navitem}>고객</span>
-                <ul>
-                  <li>
-                    <NavLink exact to='/customer'>
                       회원 관리
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to='/customer/add'>
+                    <NavLink exact to='/client/add'>
                       회원 등록
                     </NavLink>
                   </li>

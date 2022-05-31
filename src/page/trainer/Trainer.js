@@ -270,12 +270,6 @@ class Trainer extends Component {
     super(props);
     this.state = {
       viewTrainerList: [],
-      trainer_name: '',
-      phone: '',
-      birth: '',
-      ment: '',
-      history: '',
-      sex: '',
     };
   }
   goLogin = () => {
@@ -350,8 +344,8 @@ class Trainer extends Component {
   };
 
   render() {
-    console.log(this.props.userinfo.fitness_no);
-    console.log(this.state.viewTrainerList[0]);
+    // console.log(this.props.userinfo.fitness_no);
+    // console.log(this.state.viewTrainerList[0]);
     return (
       <div className='trainer_wrap'>
         <header className='header'>

@@ -165,16 +165,16 @@ class MegaMenu extends Component {
                   </li>
                 </li>
                 <li class='dropdown'>
-                  <NavLink exact to='/customer'>
-                    고객
+                  <NavLink exact to='/client'>
+                    회원
                   </NavLink>
                   <li>
-                    <NavLink exact to='/customer'>
+                    <NavLink exact to='/client'>
                       회원 관리
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to='/customer/add'>
+                    <NavLink exact to='/client/add'>
                       회원 등록
                     </NavLink>
                   </li>
@@ -287,34 +287,17 @@ class MegaMenu extends Component {
                 </li>
                 <li class='dropdown'>
                   <NavLink exact to='/client'>
-                    클라이언트
+                    회원
                   </NavLink>
                   <li>
                     <NavLink exact to='/client'>
-                      클라 관리
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/client/add'>
-                      클라 등록
-                    </NavLink>
-                  </li>
-                </li>
-                <li class='dropdown'>
-                  <NavLink exact to='/customer'>
-                    고객
-                  </NavLink>
-                  <li>
-                    <NavLink exact to='/customer'>
                       회원 관리
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to='/customer/add'>
+                    <NavLink exact to='/client/add'>
                       회원 등록
                     </NavLink>
-                  </li>
-                  <li>
                     <NavLink
                       exact
                       to={{

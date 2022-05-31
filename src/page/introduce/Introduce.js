@@ -14,7 +14,6 @@ import {
   selectReservation,
   updateIntroduce,
 } from '../../api/user';
-import { SERVER_URL } from '../../const/settings';
 
 const ViewIntroduceItem = ({
   idi,
@@ -23,6 +22,7 @@ const ViewIntroduceItem = ({
   picture,
   story,
   viewIntroduce,
+  loginWhether,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [story_input, setStory_input] = useState('');
@@ -62,17 +62,25 @@ const ViewIntroduceItem = ({
       사진: <img src={picture} />
       <br />
       스토리: {story}
-      <button onClick={modalOnClick}>수정하기</button>
-      <Modal show={showModal}>
-        {idi}
-        사진: <img src={picture} />
-        <br />
-        <input type='file' onChange={updateChange1} />
-        스토리: <input value={story_input} onChange={updateChange2} />
-        <button onClick={() => handleUpdate(idi)}>수정하기</button>
-        <button onClick={() => setShowModal(false)}>닫기</button>
-      </Modal>
-      <button onClick={() => handleDelete(idi)}>삭제하기</button>
+      {loginWhether == 2 ? (
+        ''
+      ) : loginWhether == 1 ? (
+        ''
+      ) : (
+        <div>
+          <button onClick={modalOnClick}>수정하기</button>
+          <Modal show={showModal}>
+            {idi}
+            사진: <img src={picture} />
+            <br />
+            <input type='file' onChange={updateChange1} />
+            스토리: <input value={story_input} onChange={updateChange2} />
+            <button onClick={() => handleUpdate(idi)}>수정하기</button>
+            <button onClick={() => setShowModal(false)}>닫기</button>
+          </Modal>
+          <button onClick={() => handleDelete(idi)}>삭제하기</button>
+        </div>
+      )}
     </div>
   );
 };
@@ -87,6 +95,7 @@ class Introduce extends Component {
   goLogin = () => {
     this.props.history.push('/');
   };
+
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
     // get cookie by name
@@ -147,7 +156,6 @@ class Introduce extends Component {
             ? trainerResult[0].fitness_no
             : this.props.userinfo.fitness_no;
         selectIntroduce(fitness_no).then((result) => {
-          console.log('result');
           const items = result.map((data, index, array) => {
             return (
               <ViewIntroduceItem
@@ -157,6 +165,7 @@ class Introduce extends Component {
                 picture={data.picture}
                 story={data.story}
                 viewIntroduce={this.viewIntroduce}
+                loginWhether={this.props.userinfo.loginWhether}
               />
             );
           });
@@ -167,13 +176,13 @@ class Introduce extends Component {
   };
 
   render() {
-    console.log(this.state.viewIntroduceList);
+    // console.log(this.state.viewIntroduceList);
     return (
       <div>
         {''}
         <header className='header'>
           <Header />
-          <Navigation />
+          <Navigation goLogin={this.goLogin} />
           <MegaMenu />
           <div className='localNavigation'>
             <div className='container'>
@@ -200,7 +209,6 @@ class Introduce extends Component {
           {/*.localNavigation */}
         </header>
         <Container>
-          헬스장이름:{this.props.userinfo.manager_name}
           <div>{this.state.viewIntroduceList}</div>
         </Container>
         <div className='footer'>
