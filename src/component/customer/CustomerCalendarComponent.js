@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { getAssginExercise, getEnter, getReservation } from '../../api/user';
+import {
+  getAssginExercise,
+  getEnter,
+  getReservation,
+  selectReservation,
+} from '../../api/user';
 import { connect } from 'react-redux';
 
 // Setup the localizer by providing the moment (or globalize) Object
@@ -39,48 +44,56 @@ class CustomerCalendarComponent extends Component {
   }
 
   fetchReservation = () => {
-    getReservation(this.state.fitness_no).then((result) => {
-      console.debug('fetchReservation::', result);
-      this.setState({
-        reservations: result
-          .filter(
-            (value) => Number(value.customer_id) === this.props.customer_no
-          )
-          .map((value) => {
-            if (
-              this.state.customer_no !== null &&
-              this.state.customer_no !== Number(value.customer_id)
+    selectReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      const fitness_no =
+        this.props.userinfo.loginWhether === 1
+          ? trainerResult[0].fitness_no
+          : this.props.userinfo.fitness_no;
+      getReservation(fitness_no).then((result) => {
+        console.debug('fetchReservation::', result);
+        this.setState({
+          reservations: result
+            .filter(
+              (value) => Number(value.customer_id) === this.props.customer_no
             )
-              return;
+            .map((value) => {
+              if (
+                this.state.customer_no !== null &&
+                this.state.customer_no !== Number(value.customer_id)
+              )
+                return;
 
-            const created = moment(value.date);
-            const start_m = moment(created.format('YYYY-MM-DD'));
-            const ent_m = moment(created.format('YYYY-MM-DD')).add(1, 'day');
+              const created = moment(value.date);
+              const start_m = moment(created.format('YYYY-MM-DD'));
+              const ent_m = moment(created.format('YYYY-MM-DD')).add(1, 'day');
 
-            const start = new Date(
-              start_m.get('year'),
-              start_m.get('month'),
-              start_m.get('date')
-            );
-            const end = new Date(
-              ent_m.get('year'),
-              ent_m.get('month'),
-              ent_m.get('date')
-            );
+              const start = new Date(
+                start_m.get('year'),
+                start_m.get('month'),
+                start_m.get('date')
+              );
+              const end = new Date(
+                ent_m.get('year'),
+                ent_m.get('month'),
+                ent_m.get('date')
+              );
 
-            console.debug('start::', start, 'end::', end);
+              console.debug('start::', start, 'end::', end);
 
-            return {
-              ...value,
-              id: value.res_no,
-              date: moment(value.date).format('YYYY-MM-DD'),
-              customer_no: Number(value.customer_id),
-              start: start,
-              end: end,
-              allDay: true,
-              title: `[${value.time}] ${value.customer_name} - ${value.exercise_name}`,
-            };
-          }),
+              return {
+                ...value,
+                id: value.res_no,
+                date: moment(value.date).format('YYYY-MM-DD'),
+                customer_no: Number(value.customer_id),
+                start: start,
+                end: end,
+                allDay: true,
+                title: `[${value.time}] ${value.customer_name} - ${value.exercise_name}`,
+              };
+            }),
+        });
       });
     });
   };

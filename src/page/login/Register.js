@@ -102,23 +102,17 @@ class Register extends Component {
 
     if (this.state.id === '') {
       this.setState({ id_err: true });
-    }
-    if (this.state.password === '') {
+    } else if (this.state.password === '') {
       this.setState({ password_err: true });
-    }
-    if (this.state.password_confirm === '') {
+    } else if (this.state.password_confirm === '') {
       this.setState({ password_confirmm_err: true });
-    }
-    if (this.state.manager_name === '') {
+    } else if (this.state.manager_name === '') {
       this.setState({ manager_name_err: true });
-    }
-    if (this.state.phone === '') {
+    } else if (this.state.phone === '') {
       this.setState({ phone_err: true });
-    }
-    if (this.state.business_number === '') {
+    } else if (this.state.business_number === '') {
       this.setState({ business_number_err: true });
-    }
-    if (this.state.business_phone === '') {
+    } else if (this.state.business_phone === '') {
       this.setState({ business_phone_err: true });
     }
 
@@ -132,8 +126,7 @@ class Register extends Component {
       this.state.business_phone === ''
     ) {
       alert('빈칸을 채워주세요.');
-    }
-    if (this.state.password != this.state.password_confirm) {
+    } else if (this.state.password != this.state.password_confirm) {
       alert('비밀번호가 다릅니다. 다시 입력해주세요.');
     } else if (this.state.check == 0) {
       alert('아이디 중복체크 해주세요.');
@@ -269,6 +262,7 @@ class Register extends Component {
               </li>
               <li>
                 <TextField
+                  type='number'
                   value={this.state.phone}
                   onChange={this.handleChange}
                   id='phone'

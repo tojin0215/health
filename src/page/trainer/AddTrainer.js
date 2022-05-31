@@ -84,34 +84,46 @@ class AddTrainer extends Component {
     });
   }
   handleTrainer = () => {
-    insertTrainer(
-      this.state.phone,
-      this.state.birth,
-      this.state.trainer_name,
-      this.props.userinfo.fitness_no,
-      this.state.ment,
-      this.state.history,
-      this.state.radioGroup.male ? 1 : 2
-    ).then((res) => {
-      // console.log(res);
-      alert('trainer Table');
-      selectTrainer(this.props.userinfo.fitness_no).then((result) => {
-        const items = result.filter(
-          (value) => value.trainer_name === this.state.trainer_name
-        );
-        this.setState(items);
-        trainerManager(
-          this.state.phone,
-          this.state.birth,
-          this.state.trainer_name,
-          items[0].idx
-        ).then((res) => {
-          // console.log(res);
+    if (this.state.trainer_name === '') {
+      alert('No');
+    } else if (this.state.phone === '') {
+      alert('No');
+    } else if (this.state.birth === '') {
+      alert('No');
+    } else if (this.state.ment === '') {
+      alert('No');
+    } else if (this.state.history === '') {
+      alert('No');
+    } else {
+      insertTrainer(
+        this.state.phone,
+        this.state.birth,
+        this.state.trainer_name,
+        this.props.userinfo.fitness_no,
+        this.state.ment,
+        this.state.history,
+        this.state.radioGroup.male ? 1 : 2
+      ).then((res) => {
+        // console.log(res);
+        alert('trainer Table');
+        selectTrainer(this.props.userinfo.fitness_no).then((result) => {
+          const items = result.filter(
+            (value) => value.trainer_name === this.state.trainer_name
+          );
+          this.setState(items);
+          trainerManager(
+            this.state.phone,
+            this.state.birth,
+            this.state.trainer_name,
+            items[0].idx
+          ).then((res) => {
+            // console.log(res);
+          });
+          alert('manager Table');
+          this.props.history.push('/trainer');
         });
-        alert('manager Table');
-        this.props.history.push('/trainer');
       });
-    });
+    }
   };
   // handleManagerLogin = () => {
   //   trainerManager(
@@ -204,7 +216,7 @@ class AddTrainer extends Component {
                 <Form.Group>
                   <Form.Label>생년월일</Form.Label>
                   <Form.Control
-                    type='text'
+                    type='number'
                     value={this.state.birth}
                     id='birth'
                     onChange={this.handleChange}

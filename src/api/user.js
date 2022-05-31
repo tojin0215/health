@@ -131,16 +131,11 @@ export const deleteTrainer = (phone, fitness_no) => {
     .then((response) => response.data);
 };
 //강사테이블 update
-export const updateTrainer = (
-  phone,
-  fitness_no,
-  trainer_name,
-  ment,
-  history
-) => {
+export const updateTrainer = (idx, trainer_name, phone, ment, history) => {
   return axios
-    .put(`${SERVER_URL}/trainer?phone=` + phone + `&fitness_no=` + fitness_no, {
+    .put(`${SERVER_URL}/trainer?idx=` + idx, {
       trainer_name: trainer_name,
+      phone: phone,
       ment: ment,
       history: history,
     })
@@ -237,22 +232,25 @@ export const insertClient = (
   });
 };
 //client update
-export const updateClient = (phone, fitness_no, client_name, address) => {
-  return axios.put(
-    `${SERVER_URL}/client?phone=` + phone + `&fitness_no=` + fitness_no,
-    {
-      client_name,
-      address,
-    }
-  );
+export const updateClient = (idc, client_name, phone, address) => {
+  return axios.put(`${SERVER_URL}/client?idc=` + idc, {
+    client_name,
+    phone,
+    address,
+  });
 };
+// client, trainer update manager table phone, manager_name change
+export const updateManagerClientTrainer = (joinNo, manager_name, id) => {
+  return axios.put(`${SERVER_URL}/manager?joinNo=` + joinNo, {
+    manager_name,
+    id,
+  });
+};
+
 // client delete
-export const deleteClient = (phone, fitness_no) => {
+export const deleteClient = (idc) => {
   return axios
-    .delete(
-      `${SERVER_URL}/client?phone=` + phone + `&fitness_no=` + fitness_no,
-      {}
-    )
+    .delete(`${SERVER_URL}/client?idc=` + idc, {})
     .then((response) => response.data);
 };
 //회원테이블 select reservation에 fitness_no 가져오기 위해

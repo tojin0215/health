@@ -9,6 +9,7 @@ import {
   selectClientReservation,
   selectReservation,
   updateClient,
+  updateManagerClientTrainer,
 } from '../../api/user';
 
 // 컴포넌트
@@ -55,6 +56,7 @@ const ViewClientItem = ({
   const [showUpdate, setShowUpdate] = useState(false);
   const [client_name_input, setClient_name_input] = useState('');
   const [address_input, setAddress_input] = useState('');
+  const [phone_input, setPhone_input] = useState('');
 
   const modalClose = () => {
     setShowModal(false);
@@ -66,31 +68,47 @@ const ViewClientItem = ({
     setShowUpdate(true);
     setClient_name_input(client_name);
     setAddress_input(address);
+    setPhone_input(phone);
   };
 
-  const deleteCompleted = (phone, fitness_no) => {
-    deleteClient(phone, fitness_no).then(() => {
+  const deleteCompleted = (idc) => {
+    deleteClient(idc).then(() => {
       alert('삭제완료');
       modalClose();
       viewClient();
     });
   };
 
-  const updateCompleted = (phone, fitness_no) => {
-    updateClient(phone, fitness_no, client_name_input, address_input).then(
-      () => {
-        alert('수정완료');
-        modalClose();
-        setShowUpdate(false);
-        viewClient();
-      }
-    );
+  const updateCompleted = (idc) => {
+    if (client_name_input === '') {
+      alert('!!!');
+    } else if (phone_input === '') {
+      alert('!!!');
+    } else if (address_input === '') {
+      alert('!!!');
+    } else {
+      updateClient(idc, client_name_input, phone_input, address_input).then(
+        () => {
+          updateManagerClientTrainer(idc, client_name_input, phone_input).then(
+            () => {}
+          );
+          alert('수정완료');
+          modalClose();
+          setShowUpdate(false);
+          viewClient();
+        }
+      );
+    }
   };
+
   const updateChange1 = (e) => {
     setClient_name_input(e.target.value);
   };
   const updateChange2 = (e) => {
     setAddress_input(e.target.value);
+  };
+  const updateChange3 = (e) => {
+    setPhone_input(e.target.value);
   };
   return (
     <TableRow>
@@ -141,6 +159,14 @@ const ViewClientItem = ({
                 )}
               </Col>
               <Col className='mb-2'>
+                <h5 className='mb-1'>연락처</h5>
+                {showUpdate ? (
+                  <Form.Control value={phone_input} onChange={updateChange3} />
+                ) : (
+                  <p>{phone}</p>
+                )}
+              </Col>
+              <Col className='mb-2'>
                 <h5 className='mb-1'>생년월일</h5>
                 <p>{birth}</p>
               </Col>
@@ -156,7 +182,7 @@ const ViewClientItem = ({
                     <div>
                       <Button
                         variant='danger'
-                        onClick={() => deleteCompleted(phone, fitness_no)}
+                        onClick={() => deleteCompleted(idc)}
                       >
                         회원삭제
                       </Button>
@@ -175,9 +201,7 @@ const ViewClientItem = ({
         </Modal.Body>
         <Modal.Footer>
           {showUpdate ? (
-            <Button onClick={() => updateCompleted(phone, fitness_no)}>
-              수정 완료
-            </Button>
+            <Button onClick={() => updateCompleted(idc)}>수정 완료</Button>
           ) : (
             <Button onClick={modalUpdate} variant='outline-primary'>
               정보 수정
@@ -283,7 +307,7 @@ class Client extends Component {
   };
   render() {
     // console.log(this.props.userinfo.fitness_no);
-    console.log(this.state.viewClientList);
+    // console.log(this.state.viewClientList);
     return (
       <div className='client_wrap'>
         <header className='header'>
@@ -314,7 +338,7 @@ class Client extends Component {
               <TableHead>
                 <TableRow>
                   <TableCell>회원이름</TableCell>
-                  <TableCell>폰번호</TableCell>
+                  <TableCell>연락처</TableCell>
                   <TableCell>성별</TableCell>
                   <TableCell>가입일</TableCell>
                 </TableRow>

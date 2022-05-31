@@ -32,7 +32,12 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import 'react-dropdown/style.css';
 
 import MegaMenu from '../../component/navigation/Menu';
-import { deleteTrainer, selectTrainer, updateTrainer } from '../../api/user';
+import {
+  deleteTrainer,
+  selectTrainer,
+  updateManagerClientTrainer,
+  updateTrainer,
+} from '../../api/user';
 
 const Desktop = ({ children }) => {
   const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -52,6 +57,7 @@ const Default = ({ children }) => {
 };
 
 const VieWTrainerItem = ({
+  idx,
   fitness_no,
   trainer_name,
   phone,
@@ -63,6 +69,7 @@ const VieWTrainerItem = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [trainer_name_input, setTrainer_name_input] = useState('');
+  const [phone_input, setPhone_input] = useState('');
   const [ment_input, setMent_input] = useState('');
   const [history_input, setHistory_input] = useState('');
 
@@ -72,11 +79,15 @@ const VieWTrainerItem = ({
   const modalOnClick = () => {
     setShowModal(true);
     setTrainer_name_input(trainer_name);
+    setPhone_input(phone);
     setMent_input(ment);
     setHistory_input(history);
   };
   const updateChange1 = (e) => {
     setTrainer_name_input(e.target.value);
+  };
+  const updateChange2 = (e) => {
+    setPhone_input(e.target.value);
   };
   const updateChange3 = (e) => {
     setMent_input(e.target.value);
@@ -85,21 +96,34 @@ const VieWTrainerItem = ({
     setHistory_input(e.target.value);
   };
 
-  const updateCompleted = (phone, fitness_no) => {
-    updateTrainer(
-      phone,
-      fitness_no,
-      trainer_name_input,
-      ment_input,
-      history_input
-    ).then(() => {
-      alert('수정완료');
-      modalClose();
-      viewTrainer();
-    });
+  const updateCompleted = (idx) => {
+    if (trainer_name_input === '') {
+      alert('안됨');
+    } else if (phone_input === '') {
+      alert('안됨2');
+    } else if (ment_input === '') {
+      alert('안됨');
+    } else if (history_input === '') {
+      alert('안됨');
+    } else {
+      updateTrainer(
+        idx,
+        trainer_name_input,
+        phone_input,
+        ment_input,
+        history_input
+      ).then(() => {
+        updateManagerClientTrainer(idx, trainer_name_input, phone_input).then(
+          () => {}
+        );
+        alert('수정완료');
+        modalClose();
+        viewTrainer();
+      });
+    }
   };
-  const deleteCompleted = (phone, fitness_no) => {
-    deleteTrainer(phone, fitness_no).then(() => {
+  const deleteCompleted = (idx) => {
+    deleteTrainer(idx).then(() => {
       alert('삭제완료');
       modalClose();
       viewTrainer();
@@ -168,10 +192,12 @@ const VieWTrainerItem = ({
               <Col>
                 <Form.Group className='mb-3'>
                   <Form.Label htmlFor='disabledTextInput'>연락처</Form.Label>
-                  <Form.Control id='disabledTextInput' value={phone} disabled />
-                  <Form.Text>
-                    연락처는 아이디와 연동되어 변경할 수 없습니다.
-                  </Form.Text>
+                  <Form.Control
+                    type='number'
+                    id='disabledTextInput'
+                    value={phone_input}
+                    onChange={updateChange2}
+                  />
                 </Form.Group>
               </Col>
               <Col>
@@ -203,17 +229,14 @@ const VieWTrainerItem = ({
           <Modal.Footer>
             <Row className='w-100'>
               <Col className='p-0' xs={8}>
-                <Button
-                  className='w-100'
-                  onClick={() => updateCompleted(phone, fitness_no)}
-                >
+                <Button className='w-100' onClick={() => updateCompleted(idx)}>
                   수정하기
                 </Button>
               </Col>
               <Col className='p-0 ps-2' xs={4}>
                 <Button
                   className='w-100'
-                  onClick={() => deleteCompleted(phone, fitness_no)}
+                  onClick={() => deleteCompleted(idx)}
                   variant='outline-danger'
                 >
                   제거하기
@@ -328,6 +351,7 @@ class Trainer extends Component {
       const items = result.map((data, index, array) => {
         return (
           <VieWTrainerItem
+            idx={data.idx}
             fitness_no={data.fitness_no}
             trainer_name={data.trainer_name}
             phone={data.phone}

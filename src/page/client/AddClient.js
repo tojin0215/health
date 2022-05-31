@@ -86,46 +86,56 @@ class AddClient extends Component {
     });
   }
   handleClient = () => {
-    insertClient(
-      this.props.userinfo.fitness_no,
-      this.state.client_name,
-      this.state.phone,
-      this.state.birth,
-      this.state.radioGroup.male ? 1 : 2,
-      this.state.radioGroup2.route1
-        ? '간판'
-        : this.state.radioGroup2.route2
-        ? '홈페이지'
-        : this.state.radioGroup2.route3
-        ? '전단지'
-        : this.state.radioGroup2.route4
-        ? '지인소개'
-        : this.state.radioGroup2.route5
-        ? 'SNS'
-        : this.state.radioGroup2.route6
-        ? this.state.join_route
-        : '간판',
-      this.state.address
-    ).then((res) => {
-      // console.log(res);
-      alert('client Table');
-      clientSelect(this.props.userinfo.fitness_no).then((result) => {
-        const items = result.filter(
-          (value) => value.client_name === this.state.client_name
-        );
-        this.setState(items);
-        clientManager(
-          this.state.phone,
-          this.state.birth,
-          this.state.client_name,
-          items[0].idc
-        ).then((res) => {
-          // console.log(res);
+    if (this.state.client_name === '') {
+      alert('!!!');
+    } else if (this.state.phone === '') {
+      alert('!!!');
+    } else if (this.state.birth === '') {
+      alert('!!!');
+    } else if (this.state.address === '') {
+      alert('!!!');
+    } else {
+      insertClient(
+        this.props.userinfo.fitness_no,
+        this.state.client_name,
+        this.state.phone,
+        this.state.birth,
+        this.state.radioGroup.male ? 1 : 2,
+        this.state.radioGroup2.route1
+          ? '간판'
+          : this.state.radioGroup2.route2
+          ? '홈페이지'
+          : this.state.radioGroup2.route3
+          ? '전단지'
+          : this.state.radioGroup2.route4
+          ? '지인소개'
+          : this.state.radioGroup2.route5
+          ? 'SNS'
+          : this.state.radioGroup2.route6
+          ? this.state.join_route
+          : '간판',
+        this.state.address
+      ).then((res) => {
+        // console.log(res);
+        alert('client Table');
+        clientSelect(this.props.userinfo.fitness_no).then((result) => {
+          const items = result.filter(
+            (value) => value.client_name === this.state.client_name
+          );
+          this.setState(items);
+          clientManager(
+            this.state.phone,
+            this.state.birth,
+            this.state.client_name,
+            items[0].idc
+          ).then((res) => {
+            // console.log(res);
+          });
+          alert('manager Table');
+          this.props.history.push('/client');
         });
-        alert('manager Table');
-        this.props.history.push('/client');
       });
-    });
+    }
   };
   handleRadio = (s) => {
     let obj = {
