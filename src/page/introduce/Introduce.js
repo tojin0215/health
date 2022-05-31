@@ -80,15 +80,28 @@ const ViewIntroduceItem = ({
         <Col className='text-center'>
           <Button onClick={modalOnClick}>수정하기</Button>
           <Modal show={showModal}>
-            {idi}
-            사진: <img className='width-inherit' src={picture} />
-            <input type='file' onChange={updateChange1} />
-            스토리: <input value={story_input} onChange={updateChange2} />
-            <Button onClick={() => handleUpdate(idi)}>수정하기</Button>
-            <Button onClick={() => handleDelete(idi)} variant='danger'>
-              삭제하기
-            </Button>
-            <Button onClick={() => setShowModal(false)}>닫기</Button>
+            <Row xs={1}>
+              <Col>
+                <img className='width-inherit' src={picture} />
+              </Col>
+              <Col>
+                <input type='file' onChange={updateChange1} />
+              </Col>
+              <Col>
+                <input value={story_input} onChange={updateChange2} />
+              </Col>
+              <Col>
+                <Button onClick={() => handleUpdate(idi)}>수정하기</Button>
+              </Col>
+              <Col>
+                <Button onClick={() => handleDelete(idi)} variant='danger'>
+                  삭제하기
+                </Button>
+              </Col>
+              <Col>
+                <Button onClick={() => setShowModal(false)}>닫기</Button>
+              </Col>
+            </Row>
           </Modal>
         </Col>
       )}
