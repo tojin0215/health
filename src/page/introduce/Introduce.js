@@ -6,7 +6,11 @@ import Navigation from '../../component/navigation/Navigation';
 import MegaMenu from '../../component/navigation/Menu';
 import { Link } from 'react-router-dom';
 import Footer from '../../component/footer/Footer';
-import { Container, Modal } from 'react-bootstrap';
+
+//bootstrap
+import { Container, Row, Col, Modal } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+
 import {
   deleteIntroduce,
   selectClientReservation,
@@ -58,30 +62,37 @@ const ViewIntroduceItem = ({
   };
 
   return (
-    <div className='imgtest'>
-      사진: <img src={picture} />
-      <br />
-      스토리: {story}
+    <Row className='sectionGlass' xs={1}>
+      <Col className='text-center mb-5'>
+        <h1>{manager_name}</h1>
+      </Col>
+      <Col className='text-center'>
+        <img className='width-inherit' src={picture} />
+      </Col>
+      <Col className='my-3 white-space-break-spaces text-center'>
+        <p>{story}</p>
+      </Col>
       {loginWhether == 2 ? (
         ''
       ) : loginWhether == 1 ? (
         ''
       ) : (
-        <div>
-          <button onClick={modalOnClick}>수정하기</button>
+        <Col className='text-center'>
+          <Button onClick={modalOnClick}>수정하기</Button>
           <Modal show={showModal}>
             {idi}
-            사진: <img src={picture} />
-            <br />
+            사진: <img className='width-inherit' src={picture} />
             <input type='file' onChange={updateChange1} />
             스토리: <input value={story_input} onChange={updateChange2} />
-            <button onClick={() => handleUpdate(idi)}>수정하기</button>
-            <button onClick={() => setShowModal(false)}>닫기</button>
+            <Button onClick={() => handleUpdate(idi)}>수정하기</Button>
+            <Button onClick={() => handleDelete(idi)} variant='danger'>
+              삭제하기
+            </Button>
+            <Button onClick={() => setShowModal(false)}>닫기</Button>
           </Modal>
-          <button onClick={() => handleDelete(idi)}>삭제하기</button>
-        </div>
+        </Col>
       )}
-    </div>
+    </Row>
   );
 };
 
@@ -179,7 +190,6 @@ class Introduce extends Component {
     // console.log(this.state.viewIntroduceList);
     return (
       <div>
-        {''}
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
