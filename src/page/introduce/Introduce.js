@@ -15,7 +15,7 @@ import {
   deleteIntroduce,
   selectClientReservation,
   selectIntroduce,
-  selectReservation,
+  selectTrainerReservation,
   updateIntroduce,
 } from '../../api/user';
 
@@ -201,7 +201,7 @@ class Introduce extends Component {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
-      selectReservation(
+      selectTrainerReservation(
         this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
       ).then((trainerResult) => {
         const fitness_no =

@@ -31,7 +31,7 @@ import { SERVER_URL } from '../../const/settings';
 import moment from 'moment';
 
 import TextField from '@mui/material/TextField';
-import { selectReservation } from '../../api/user';
+import { selectTrainerReservation } from '../../api/user';
 import TrainerSearch from '../../component/customer/TrainerSearch';
 
 // locale 오류로 임시 삭제
@@ -370,7 +370,7 @@ class ReservationClass extends Component {
 	추후 .filter [0123456] 
 	*/
   reservationClassSelect = () => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       // console.log(trainerResult[0].fitness_no);
@@ -450,7 +450,7 @@ class ReservationClass extends Component {
 	월요일 운동클래쓰	
 	*/
   reservationClassSelect1 = () => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       // console.log(trainerResult[0].fitness_no);
@@ -525,7 +525,7 @@ class ReservationClass extends Component {
 	화요일 운동클래쓰	
 	*/
   reservationClassSelect2 = () => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       // console.log(trainerResult[0].fitness_no);
@@ -598,7 +598,7 @@ class ReservationClass extends Component {
 	수요일 운동클래쓰	
 	*/
   reservationClassSelect3 = () => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       // console.log(trainerResult[0].fitness_no);
@@ -673,7 +673,7 @@ class ReservationClass extends Component {
 	목요일 운동클래쓰	
 	*/
   reservationClassSelect4 = () => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       // console.log(trainerResult[0].fitness_no);
@@ -746,7 +746,7 @@ class ReservationClass extends Component {
 	금요일 운동클래쓰	
 	*/
   reservationClassSelect5 = () => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       // console.log(trainerResult[0].fitness_no);
@@ -820,7 +820,7 @@ class ReservationClass extends Component {
 	토요일 운동클래쓰	
 	*/
   reservationClassSelect6 = () => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       fetch(
@@ -918,7 +918,7 @@ class ReservationClass extends Component {
       trainer_err: false,
       class_date_err: false,
     });
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       if (this.state.exercise_class == '') {

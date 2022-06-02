@@ -38,7 +38,7 @@ import {
   getReservation_trainer,
   getReservation_choice_trainer,
   getReservation_date,
-  selectReservation,
+  selectTrainerReservation,
   selectClientReservation,
   selectTrainer,
   clientSelect,
@@ -707,7 +707,7 @@ class Reservation extends Component {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
-      selectReservation(
+      selectTrainerReservation(
         this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
       ).then((trainerResult) => {
         const fitness_no =
@@ -769,7 +769,7 @@ class Reservation extends Component {
    * 예약 운동정렬
    */
   reservationSelect_exercise = () => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       const fitness_no =
@@ -820,7 +820,7 @@ class Reservation extends Component {
    * 예약 강사정렬
    */
   reservationSelect_trainer = () => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       const fitness_no =
@@ -872,7 +872,7 @@ class Reservation extends Component {
    * 예약 날짜정렬
    */
   reservationSelect_date = () => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       const fitness_no =
@@ -949,7 +949,7 @@ class Reservation extends Component {
    * 강사별 예약테이블(탭)
    */
   reservationChoiceTrainer = (trainer_choice) => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       const fitness_no =
@@ -1004,7 +1004,7 @@ class Reservation extends Component {
    * 회원별 예약테이블(탭)
    */
   reservationChoiceClient = (client_choice) => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
       const fitness_no =
@@ -1077,7 +1077,7 @@ class Reservation extends Component {
       this.setState({ customer_name_err: true });
       alert('회원을 선택해 주세요');
     } else {
-      selectReservation(
+      selectTrainerReservation(
         this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
       ).then((trainerResult) => {
         selectClientReservation(
@@ -1158,7 +1158,7 @@ class Reservation extends Component {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
-      selectReservation(
+      selectTrainerReservation(
         this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
       ).then((trainerResult) => {
         const fitness_no =
@@ -1241,7 +1241,7 @@ class Reservation extends Component {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
-      selectReservation(
+      selectTrainerReservation(
         this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
       ).then((trainerResult) => {
         const fitness_no =
@@ -1324,7 +1324,7 @@ class Reservation extends Component {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
-      selectReservation(
+      selectTrainerReservation(
         this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
       ).then((trainerResult) => {
         const fitness_no =
@@ -1407,7 +1407,7 @@ class Reservation extends Component {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
-      selectReservation(
+      selectTrainerReservation(
         this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
       ).then((trainerResult) => {
         const fitness_no =
@@ -1490,7 +1490,7 @@ class Reservation extends Component {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
-      selectReservation(
+      selectTrainerReservation(
         this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
       ).then((trainerResult) => {
         const fitness_no =
@@ -1572,7 +1572,7 @@ class Reservation extends Component {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
-      selectReservation(
+      selectTrainerReservation(
         this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
       ).then((trainerResult) => {
         const fitness_no =
@@ -1655,7 +1655,7 @@ class Reservation extends Component {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
-      selectReservation(
+      selectTrainerReservation(
         this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
       ).then((trainerResult) => {
         const fitness_no =
@@ -1735,7 +1735,7 @@ class Reservation extends Component {
    * 강사별조회 예약현황(탭)
    */
   reservationClassSelect_choice = () => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       const fitness_no =
@@ -1766,7 +1766,7 @@ class Reservation extends Component {
    * 회원별조회 예약현황(탭)
    */
   reservationClassSelect_choice2 = () => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       const fitness_no =

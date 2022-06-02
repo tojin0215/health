@@ -29,6 +29,7 @@ import {
   AddClient,
   Introduce,
   AddIntroduce,
+  ChoiceLogin,
 } from '../page';
 
 class App extends Component {
@@ -63,6 +64,7 @@ class App extends Component {
         <Route exact path='/client/add' component={AddClient} />
         <Route exact path='/introduce' component={Introduce} />
         <Route exact path='/introduce/add' component={AddIntroduce} />
+        <Route exact path='/choiceLogin' component={ChoiceLogin} />
       </div>
     );
   }

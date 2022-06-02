@@ -185,6 +185,8 @@ class Navigation extends Component {
             <Nav className={styles.navUtill}>
               <Navbar.Brand className='' href='/home'>
                 {userinfo.manager_name}
+                <br />
+                번호: {userinfo.joinNo}
               </Navbar.Brand>
               <Nav.Item className='align-self-center'>
                 <Button variant='outline-secondary' onClick={this.handleLogout}>

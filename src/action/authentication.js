@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { SERVER_URL } from '../const/settings';
 
 export const AUTH_LOGIN = 'AUTH_LOGIN';
@@ -46,6 +47,15 @@ export function loginRequest(id, password) {
           dispatch(loginFailure());
         }
       });
+  };
+}
+//choiceLogin
+export function choiceLogin() {
+  return (dispatch) => {
+    dispatch(login());
+    return axios
+      .get(`${SERVER_URL}/manager?type='session`, {})
+      .then((response) => response.data);
   };
 }
 

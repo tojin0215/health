@@ -23,7 +23,7 @@ import {
   getCustomerByProfileName,
   searchClientname,
   searchPhone,
-  selectReservation,
+  selectTrainerReservation,
 } from '../../api/user';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -113,19 +113,23 @@ const UserSearch = ({
   const handleOnSearch = () => {
     switch (searchOption) {
       case '핸드폰':
-        return selectReservation(joinNo ? joinNo : '').then((trainerResult) => {
-          searchPhone(
-            loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no,
-            search
-          ).then((result) => setCustomers(result));
-        });
+        return selectTrainerReservation(joinNo ? joinNo : '').then(
+          (trainerResult) => {
+            searchPhone(
+              loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no,
+              search
+            ).then((result) => setCustomers(result));
+          }
+        );
       case '이름':
-        return selectReservation(joinNo ? joinNo : '').then((trainerResult) => {
-          searchClientname(
-            loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no,
-            search
-          ).then((result) => setCustomers(result), console.log(customers));
-        });
+        return selectTrainerReservation(joinNo ? joinNo : '').then(
+          (trainerResult) => {
+            searchClientname(
+              loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no,
+              search
+            ).then((result) => setCustomers(result), console.log(customers));
+          }
+        );
     }
   };
 
@@ -138,7 +142,7 @@ const UserSearch = ({
   };
 
   useEffect(() => {
-    selectReservation(joinNo ? joinNo : '').then((trainerResult) => {
+    selectTrainerReservation(joinNo ? joinNo : '').then((trainerResult) => {
       clientSelect(
         loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no
       ).then((result) => setCustomers(result));

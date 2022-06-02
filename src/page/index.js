@@ -26,3 +26,4 @@ export { default as Client } from './client/Client';
 export { default as AddClient } from './client/AddClient';
 export { default as Introduce } from './introduce/Introduce';
 export { default as AddIntroduce } from './introduce/AddIntroduce';
+export { default as ChoiceLogin } from './login/ChoiceLogin';

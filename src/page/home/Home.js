@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
@@ -30,7 +30,7 @@ import aboutExercise from '../../../src/img/aboutExercise.png';
 
 import { SERVER_URL } from '../../const/settings';
 import AlertToastComponent from '../../component/home/AlertToast';
-import { clientSelect } from '../../api/user';
+import { choiceTest, clientSelect } from '../../api/user';
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -52,7 +52,7 @@ class Home extends Component {
       admin: this.props.userinfo.manager_name,
     };
     this.cusFetch();
-    console.log(`${MainVisual1}`);
+    // console.log(`${MainVisual1}`);
   }
 
   goLogin = () => {
@@ -84,10 +84,10 @@ class Home extends Component {
       this.props.history.push('/');
       return;
     }
-    console.log(
-      'get loginData from cookie / decode base64 & parse json : ',
-      loginData
-    );
+    // console.log(
+    //   'get loginData from cookie / decode base64 & parse json : ',
+    //   loginData
+    // );
     //{isLoggedIn:true, id:"tojin"}
 
     // page refreshed & has a session in cookie,
@@ -209,7 +209,8 @@ class Home extends Component {
     // console.log('userinfo : ');
     // console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
     // console.log('오늘매출', this.state.todaySales);
-
+    // console.log(userinfo.joinNo);
+    console.log(this.props.userinfo);
     return (
       <div className='wrap home'>
         <div className='header'>
@@ -217,36 +218,42 @@ class Home extends Component {
           <Navigation goLogin={this.goLogin} />
           <MegaMenu goLogin={this.goLogin} />
           <NewMenu />
-          <div className='localNavigation'>
-            <div className='container'>
-              {/* <Menu /> */}
-              <Row className='dashboard' xs={2}>
-                <Col className='homeDashLeft h-100' xs={2}>
-                  <label>
-                    {/* <p>오늘 방문고객</p> */}
-                    {/* <span>{this.fommat(this.state.todayCustomer)}</span> */}
-                  </label>
-                  <label>
-                    <p>등록된 회원</p>
-                    <span>{this.fommat(this.state.totalClient)}</span>
-                  </label>
-                </Col>
-                <Col className='homeDashRight' xs={2}>
-                  <label>
-                    <p className=''>당일 매출</p>
-                    <span>{this.fommat(this.state.todaySales)}</span>
-                  </label>
-                  <label>
-                    <p className=''>월 매출</p>
-                    <span>{this.fommat(this.state.monthSales)}</span>
-                  </label>
-                </Col>
-              </Row>
-              <div></div>
-              {/*.dashboard */}
+          {this.props.userinfo.loginWhether === 2 ? (
+            ''
+          ) : this.props.userinfo.loginWhether === 1 ? (
+            ''
+          ) : (
+            <div className='localNavigation'>
+              <div className='container'>
+                {/* <Menu /> */}
+                <Row className='dashboard' xs={2}>
+                  <Col className='homeDashLeft h-100' xs={2}>
+                    <label>
+                      {/* <p>오늘 방문고객</p> */}
+                      {/* <span>{this.fommat(this.state.todayCustomer)}</span> */}
+                    </label>
+                    <label>
+                      <p>등록된 회원</p>
+                      <span>{this.fommat(this.state.totalClient)}</span>
+                    </label>
+                  </Col>
+                  <Col className='homeDashRight' xs={2}>
+                    <label>
+                      <p className=''>당일 매출</p>
+                      <span>{this.fommat(this.state.todaySales)}</span>
+                    </label>
+                    <label>
+                      <p className=''>월 매출</p>
+                      <span>{this.fommat(this.state.monthSales)}</span>
+                    </label>
+                  </Col>
+                </Row>
+                <div></div>
+                {/*.dashboard */}
+              </div>
+              {/*.container */}
             </div>
-            {/*.container */}
-          </div>
+          )}
           {/*.localNavigation */}
         </div>
         {/*.header */}

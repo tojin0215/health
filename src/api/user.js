@@ -142,7 +142,7 @@ export const updateTrainer = (idx, trainer_name, phone, ment, history) => {
     .then((response) => response.data);
 };
 //강사테이블 select reservation에 fitness_no 가져오기 위해
-export const selectReservation = (idx) => {
+export const selectTrainerReservation = (idx) => {
   return axios
     .get(`${SERVER_URL}/trainer`, {
       params: { type: 'reservation', idx: idx },
@@ -343,4 +343,20 @@ export const updateIntroduce = (picture, story, idi) => {
 //delete introduce
 export const deleteIntroduce = (idi) => {
   return axios.delete(`${SERVER_URL}/introduce?idi=` + idi, {});
+};
+
+//choiceLogin manager update
+export const choiceLoginManager = (id, joinNo) => {
+  return axios.put(`${SERVER_URL}/manager?type=choiceLogin` + `&id=` + id, {
+    joinNo: joinNo,
+  });
+};
+
+//choiceLogin trainer select
+export const choiceLoginTrainer = (phone) => {
+  return axios
+    .get(`${SERVER_URL}/trainer`, {
+      params: { type: 'choiceLogin', phone: phone },
+    })
+    .then((response) => response.data);
 };

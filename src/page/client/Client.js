@@ -7,7 +7,7 @@ import {
   clientSelect,
   deleteClient,
   selectClientReservation,
-  selectReservation,
+  selectTrainerReservation,
   updateClient,
   updateManagerClientTrainer,
 } from '../../api/user';
@@ -276,7 +276,7 @@ class Client extends Component {
     });
   }
   viewClient = () => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       const fitness_no =

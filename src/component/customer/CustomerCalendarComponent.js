@@ -6,7 +6,7 @@ import {
   getAssginExercise,
   getEnter,
   getReservation,
-  selectReservation,
+  selectTrainerReservation,
 } from '../../api/user';
 import { connect } from 'react-redux';
 
@@ -44,7 +44,7 @@ class CustomerCalendarComponent extends Component {
   }
 
   fetchReservation = () => {
-    selectReservation(
+    selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       const fitness_no =

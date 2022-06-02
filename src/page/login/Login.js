@@ -27,9 +27,15 @@ class Login extends Component {
           id: id,
         };
         document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-        alert(id + '님 반갑습니다.');
-        this.props.history.push('/home');
-        return true;
+        if (this.props.userinfo.loginWhether === 1) {
+          alert('강사 로그인 선택');
+          this.props.history.push('/choiceLogin');
+          return true;
+        } else {
+          alert(id + '님 반갑습니다.');
+          this.props.history.push('/home');
+          return true;
+        }
       } else if (this.props.status === 'PERMITWAITING') {
         alert('승인 대기 중입니다.');
         return false;
@@ -41,7 +47,9 @@ class Login extends Component {
   };
 
   render() {
-    console.log('Login', this.props.status);
+    console.log(this.props.userinfo);
+    console.log(this.props.status.valid);
+    // console.log('Login', this.props.status);
     return (
       <div className=''>
         {/* <div className='header'>
@@ -70,6 +78,7 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    userinfo: state.authentication.userinfo,
     status: state.authentication.login.status,
   };
 };
