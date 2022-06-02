@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginRequest, logoutRequest } from '../../action/authentication';
+import { loginRequest } from '../../action/authentication';
 import { choiceLoginManager, choiceLoginTrainer } from '../../api/user';
 import Footer from '../../component/footer/Footer';
 
@@ -103,9 +103,6 @@ const ChoiceLoginDispatchToProps = (dispatch) => {
   return {
     loginRequest: (id, pw) => {
       return dispatch(loginRequest(id, pw));
-    },
-    logoutRequest: () => {
-      return dispatch(logoutRequest());
     },
   };
 };
