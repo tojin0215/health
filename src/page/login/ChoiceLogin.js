@@ -28,7 +28,7 @@ const TrainerList = ({
     <div className='sectionGlass'>
       <Row xs={5} className='border p-4'>
         <Col>
-          <h5>아이디</h5>
+          <h5>idx</h5>
           {idx}
         </Col>
         <Col>
