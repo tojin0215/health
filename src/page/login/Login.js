@@ -42,7 +42,7 @@ class Login extends Component {
               this.props.history.push('/choiceLogin');
               return true;
             } else {
-              alert(id + '님 반갑습니다.');
+              // alert(id + '님 반갑습니다.');
               this.props.history.push('/home');
               return true;
             }
