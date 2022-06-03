@@ -369,3 +369,12 @@ export const choiceLoginClient = (phone) => {
     })
     .then((response) => response.data);
 };
+
+//choiceFitness manager select
+export const choiceFitness = (fitness_no) => {
+  return axios
+    .get(`${SERVER_URL}/manager`, {
+      params: { type: 'choiceFitness', fitness_no: fitness_no },
+    })
+    .then((response) => response.data);
+};
