@@ -34,7 +34,7 @@ export function loginRequest(id, password) {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         // console.log(response.code);
         if (response.success) {
           // SUCCEED

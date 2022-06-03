@@ -40,28 +40,14 @@ const TrainerList = ({
     <div className='sectionGlass'>
       <Row xs={5} className='border p-4'>
         <Col>
-          <h5>idx</h5>
-          {idx}
-        </Col>
-        <Col>
-          <h5>연락처</h5>
-          {phone}
-        </Col>
-        <Col>
           <h5>피트니스 넘버</h5>
           {fitness_no}
-        </Col>
-        <Col>
-          <h5>생년월일</h5>
-          {birth}
         </Col>
         <Col>
           <Button
             onClick={() => handleClick(phone, idx)}
             className='w-100 h-100'
           >
-            {trainer_name}
-            <br />
             {fitness_no_input}
           </Button>
         </Col>
@@ -97,28 +83,14 @@ const ClientList = ({
     <div className='sectionGlass'>
       <Row className='border p-4'>
         <Col>
-          <h5>아이디</h5>
-          {idc}
-        </Col>
-        <Col>
-          <h5>연락처</h5>
-          {phone}
-        </Col>
-        <Col>
           <h5>피트니스 넘버</h5>
           {fitness_no}
-        </Col>
-        <Col>
-          <h5>생년월일</h5>
-          {birth}
         </Col>
         <Col>
           <Button
             onClick={() => handleClick(phone, idc)}
             className='w-100 h-100'
           >
-            {client_name}
-            <br />
             {fitness_no_input}
           </Button>
         </Col>
@@ -193,6 +165,7 @@ class ChoiceLogin extends Component {
 
   render() {
     // console.log(this.props.userinfo.loginWhether);
+    // console.log(this.props.userinfo);
     return (
       <div className=''>
         <div className='localNavigation'>
@@ -205,6 +178,7 @@ class ChoiceLogin extends Component {
           </div>
         </div>
         <Container className='container'>
+          <div>{this.props.userinfo.manager_name}</div>
           {this.props.userinfo.loginWhether == 2
             ? this.state.clientList
             : this.state.trainerList}
