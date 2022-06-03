@@ -31,14 +31,14 @@ class Login extends Component {
         choiceLoginTrainer(id).then((trainer) => {
           choiceLoginClient(id).then((client) => {
             if (this.props.userinfo.loginWhether === 1 && trainer.length > 1) {
-              alert('강사 로그인 선택');
+              // alert('강사 로그인 선택');
               this.props.history.push('/choiceLogin');
               return true;
             } else if (
               this.props.userinfo.loginWhether === 2 &&
               client.length > 1
             ) {
-              alert('회원 로그인 선택');
+              // alert('회원 로그인 선택');
               this.props.history.push('/choiceLogin');
               return true;
             } else {

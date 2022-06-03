@@ -1,7 +1,12 @@
-import { Component } from 'react';
+import { Component, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { loginRequest } from '../../action/authentication';
-import { choiceLoginManager, choiceLoginTrainer } from '../../api/user';
+import {
+  choiceFitness,
+  choiceLoginClient,
+  choiceLoginManager,
+  choiceLoginTrainer,
+} from '../../api/user';
 import Footer from '../../component/footer/Footer';
 
 //bootstrap
@@ -19,16 +24,23 @@ const TrainerList = ({
   const handleClick = () => {
     choiceLoginManager(phone, idx).then(() => {
       handleLogin(phone, birth);
-      alert(fitness_no + '로그인');
+      // alert(fitness_no + '로그인');
       window.location.replace('/home');
     });
   };
+  const [fitness_no_input, setFitness_no_input] = useState('');
 
+  useEffect(() => {
+    choiceFitness(fitness_no).then((res) => {
+      setFitness_no_input(res[0].manager_name);
+      console.log(res[0].manager_name);
+    });
+  });
   return (
     <div className='sectionGlass'>
       <Row className='border p-4'>
         <Col>
-          <h5>아이디</h5>
+          <h5>idx</h5>
           {idx}
         </Col>
         <Col>
@@ -49,6 +61,65 @@ const TrainerList = ({
             className='w-100 h-100'
           >
             {trainer_name}
+            <br />
+            {fitness_no_input}
+          </Button>
+        </Col>
+      </Row>
+    </div>
+  );
+};
+
+const ClientList = ({
+  idc,
+  client_name,
+  fitness_no,
+  phone,
+  birth,
+  handleLogin,
+}) => {
+  const handleClick = () => {
+    choiceLoginManager(phone, idc).then(() => {
+      handleLogin(phone, birth);
+      // alert(fitness_no + '로그인');
+      window.location.replace('/home');
+    });
+  };
+  const [fitness_no_input, setFitness_no_input] = useState('');
+
+  useEffect(() => {
+    choiceFitness(fitness_no).then((res) => {
+      setFitness_no_input(res[0].manager_name);
+      console.log(res[0].manager_name);
+    });
+  });
+  return (
+    <div className='sectionGlass'>
+      <Row className='border p-4'>
+        <Col>
+          <h5>아이디</h5>
+          {idc}
+        </Col>
+        <Col>
+          <h5>연락처</h5>
+          {phone}
+        </Col>
+        <Col>
+          <h5>피트니스 넘버</h5>
+          {fitness_no}
+        </Col>
+        <Col>
+          <h5>생년월일</h5>
+          {birth}
+        </Col>
+        <Col>
+          <Button
+            onClick={() => handleClick(phone, idc)}
+            className='w-100 h-100'
+          >
+            {client_name}
+            <br />
+            {fitness_no_input}
           </Button>
         </Col>
       </Row>
@@ -61,8 +132,10 @@ class ChoiceLogin extends Component {
     this.state = {
       joinNo: '',
       trainerList: [],
+      clientList: [],
     };
     this.selectTrainer();
+    this.selectClient();
   }
 
   selectTrainer = () => {
@@ -72,8 +145,8 @@ class ChoiceLogin extends Component {
           <TrainerList
             idx={data.idx}
             trainer_name={data.trainer_name}
-            phone={data.phone}
             fitness_no={data.fitness_no}
+            phone={data.phone}
             birth={data.birth}
             handleLogin={this.handleLogin}
           />
@@ -82,6 +155,25 @@ class ChoiceLogin extends Component {
       this.setState({ trainerList: items });
     });
   };
+
+  selectClient = () => {
+    choiceLoginClient(this.props.userinfo.id).then((res) => {
+      const items = res.map((data, index, array) => {
+        return (
+          <ClientList
+            idc={data.idc}
+            client_name={data.client_name}
+            fitness_no={data.fitness_no}
+            phone={data.phone}
+            birth={data.birth}
+            handleLogin={this.handleLogin}
+          />
+        );
+      });
+      this.setState({ clientList: items });
+    });
+  };
+
   handleLogin = (id, pw) => {
     return this.props.loginRequest(id, pw).then(() => {
       if (this.props.status === 'SUCCESS') {
@@ -90,7 +182,7 @@ class ChoiceLogin extends Component {
           id: id,
         };
         document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-        alert('되나');
+        // alert('되나');
         return true;
       } else {
         alert('ID나 비밀번호를 확인해주세요.');
@@ -100,6 +192,7 @@ class ChoiceLogin extends Component {
   };
 
   render() {
+    // console.log(this.props.userinfo.loginWhether);
     return (
       <div className=''>
         <div className='localNavigation'>
@@ -111,7 +204,11 @@ class ChoiceLogin extends Component {
             </h2>
           </div>
         </div>
-        <Container className='container'>{this.state.trainerList}</Container>
+        <Container className='container'>
+          {this.props.userinfo.loginWhether == 2
+            ? this.state.clientList
+            : this.state.trainerList}
+        </Container>
         <div className='footer'>
           <Footer />
         </div>
