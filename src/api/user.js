@@ -360,3 +360,12 @@ export const choiceLoginTrainer = (phone) => {
     })
     .then((response) => response.data);
 };
+
+//choiceLogin client select
+export const choiceLoginClient = (phone) => {
+  return axios
+    .get(`${SERVER_URL}/client`, {
+      params: { type: 'choiceLogin', phone: phone },
+    })
+    .then((response) => response.data);
+};

@@ -11,6 +11,7 @@ import 'react-slideshow-image/dist/styles.css';
 import '../../styles/login/Login.css';
 
 import 'react-slideshow-image/dist/styles.css';
+import { choiceLoginClient, choiceLoginTrainer } from '../../api/user';
 
 const fadeProperties = {
   duration: 2000,
@@ -27,15 +28,26 @@ class Login extends Component {
           id: id,
         };
         document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-        if (this.props.userinfo.loginWhether === 1) {
-          alert('강사 로그인 선택');
-          this.props.history.push('/choiceLogin');
-          return true;
-        } else {
-          alert(id + '님 반갑습니다.');
-          this.props.history.push('/home');
-          return true;
-        }
+        choiceLoginTrainer(id).then((trainer) => {
+          choiceLoginClient(id).then((client) => {
+            if (this.props.userinfo.loginWhether === 1 && trainer.length > 1) {
+              alert('강사 로그인 선택');
+              this.props.history.push('/choiceLogin');
+              return true;
+            } else if (
+              this.props.userinfo.loginWhether === 2 &&
+              client.length > 1
+            ) {
+              alert('회원 로그인 선택');
+              this.props.history.push('/choiceLogin');
+              return true;
+            } else {
+              alert(id + '님 반갑습니다.');
+              this.props.history.push('/home');
+              return true;
+            }
+          });
+        });
       } else if (this.props.status === 'PERMITWAITING') {
         alert('승인 대기 중입니다.');
         return false;
@@ -46,9 +58,23 @@ class Login extends Component {
     });
   };
 
+  // loginWhetherhow = (id) => {
+  //   this.props.userinfo.loginWhether === 1
+  //     ? choiceLoginTrainer(id).then((trainer) => {
+  //         trainer.length > 1;
+  //         return true;
+  //       })
+  //     : this.props.userinfo.loginWhether === 2
+  //     ? choiceLoginClient(id).then((client) => {
+  //         client.length > 1;
+  //         return true;
+  //       })
+  //     : true;
+  // };
+
   render() {
-    console.log(this.props.userinfo);
-    console.log(this.props.status.valid);
+    // console.log(this.props.userinfo);
+    // console.log(this.props.status.valid);
     // console.log('Login', this.props.status);
     return (
       <div className=''>
