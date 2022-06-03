@@ -4,6 +4,10 @@ import { loginRequest } from '../../action/authentication';
 import { choiceLoginManager, choiceLoginTrainer } from '../../api/user';
 import Footer from '../../component/footer/Footer';
 
+//bootstrap
+import { Container, Row, Col, Modal, Form } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+
 const TrainerList = ({
   idx,
   trainer_name,
@@ -21,9 +25,33 @@ const TrainerList = ({
   };
 
   return (
-    <div>
-      {idx}/{phone}/{fitness_no}/{birth}
-      <button onClick={() => handleClick(phone, idx)}>{trainer_name}</button>
+    <div className='sectionGlass'>
+      <Row className='border p-4'>
+        <Col>
+          <h5>아이디</h5>
+          {idx}
+        </Col>
+        <Col>
+          <h5>연락처</h5>
+          {phone}
+        </Col>
+        <Col>
+          <h5>피트니스 넘버</h5>
+          {fitness_no}
+        </Col>
+        <Col>
+          <h5>생년월일</h5>
+          {birth}
+        </Col>
+        <Col>
+          <Button
+            onClick={() => handleClick(phone, idx)}
+            className='w-100 h-100'
+          >
+            {trainer_name}
+          </Button>
+        </Col>
+      </Row>
     </div>
   );
 };
@@ -83,7 +111,7 @@ class ChoiceLogin extends Component {
             </h2>
           </div>
         </div>
-        <div className='container'>{this.state.trainerList}</div>
+        <Container className='container'>{this.state.trainerList}</Container>
         <div className='footer'>
           <Footer />
         </div>
