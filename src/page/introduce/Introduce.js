@@ -78,7 +78,7 @@ const ViewIntroduceItem = ({
       ) : loginWhether == 1 ? (
         ''
       ) : (
-        <Col className='text-center'>
+        <Col className='text-end'>
           <Button onClick={modalOnClick}>수정하기</Button>
           <Modal show={showModal} size='lg' onHide={() => setShowModal(false)}>
             {/* <Modal show={true} className=''> */}
@@ -109,11 +109,6 @@ const ViewIntroduceItem = ({
                   rows={5}
                 ></Form.Control>
               </Col>
-              <Col xs={12} sm={8} className='pb-2'>
-                <Button onClick={() => handleUpdate(idi)} className='w-100'>
-                  수정하기
-                </Button>
-              </Col>
               <Col xs={12} sm={4}>
                 <Button
                   onClick={() => handleDelete(idi)}
@@ -121,6 +116,11 @@ const ViewIntroduceItem = ({
                   className='w-100'
                 >
                   삭제하기
+                </Button>
+              </Col>
+              <Col xs={12} sm={8} className='pb-2'>
+                <Button onClick={() => handleUpdate(idi)} className='w-100'>
+                  수정하기
                 </Button>
               </Col>
               <Col>

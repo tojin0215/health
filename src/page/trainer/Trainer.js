@@ -395,6 +395,7 @@ class Trainer extends Component {
           {/*.localNavigation */}
         </header>
         <Container>
+          <h3>강사 목록</h3>
           <TableContainer component={Paper}>
             <Table aria-label='simple table' className='table--block'>
               <TableHead>
