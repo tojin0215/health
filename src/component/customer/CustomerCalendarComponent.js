@@ -90,7 +90,8 @@ class CustomerCalendarComponent extends Component {
                 start: start,
                 end: end,
                 allDay: true,
-                title: `[${value.time}] ${value.customer_name} - ${value.exercise_name}`,
+                title: `${value.exercise_name} [${value.time}]`,
+                // title: `[${value.time}] ${value.customer_name} - ${value.exercise_name}`,
               };
             }),
         });

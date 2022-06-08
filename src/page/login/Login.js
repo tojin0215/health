@@ -53,6 +53,7 @@ class Login extends Component {
         return false;
       } else {
         alert('ID나 비밀번호를 확인해주세요.');
+        alert('ID나 비밀번호를 확인해주세요.');
         return false;
       }
     });

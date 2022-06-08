@@ -123,7 +123,7 @@ const ViewClientItem = ({
         className='client_modal'
         show={showModal}
         onHide={modalClose}
-        size='lg'
+        size='xl'
       >
         <Modal.Header>
           <Modal.Title>회원 상세 정보</Modal.Title>
