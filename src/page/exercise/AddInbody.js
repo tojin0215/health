@@ -62,7 +62,7 @@ class AddInbody extends Component {
       age: 0,
       name: '',
       customerList: [],
-      resiNumber: '',
+      birth: '',
 
       height_err: false,
       bodyMoisture_err: false,
@@ -79,7 +79,7 @@ class AddInbody extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
-    this.cusFetch();
+    // this.cusFetch();
   }
 
   goLogin = () => {
@@ -132,20 +132,20 @@ class AddInbody extends Component {
   }
 
   cusFetch = () => {
-    if (this.state.member_no == '0') {
+    if (this.state.member_no == 0) {
       alert('선택된 회원이 없습니다. 회원을 선택 해주세요.');
-      this.props.history.push({
-        //pathname: "/assign/inbody?member_no="+0
-        pathname: '/assign/inbody',
-        state: { member_no: 0, a: true },
-      });
+      this.props.history.push('/inbodies');
+      // this.props.history.push({
+      //   pathname: '/assign/inbody',
+      //   state: { member_no: 0, a: true },
+      // });
     }
 
     fetch(
       ip +
-        '/customer?type=select&member_no=' +
+        '/client?type=select&idc=' +
         this.state.member_no +
-        '&fn=' +
+        '&fitness_no=' +
         this.props.userinfo.fitness_no,
       {
         method: 'GET',
@@ -161,12 +161,12 @@ class AddInbody extends Component {
         });
 
         this.state.customerList.map((c) => {
-          let s = c.sex === true ? '남' : '여';
+          let s = c.sex == 1 ? '남' : '여';
           this.setState({
-            name: c.name,
+            name: c.client_name,
             sex: s,
             phone: c.phone,
-            resiNumber: c.resi_no,
+            birth: c.birth,
           });
         });
       });
@@ -289,20 +289,21 @@ class AddInbody extends Component {
         .then((response) => response.json())
         .then((response) => {
           alert('인바디 등록되었습니다.');
-          this.props.history.push({
-            //pathname: "/assign/inbody?member_no="+this.state.member_no
-            pathname: '/assign/inbody',
-            state: { member_no: this.state.member_no },
-          });
+          // this.props.history.push({
+          //   //pathname: "/assign/inbody?member_no="+this.state.member_no
+          //   pathname: '/assign/inbody',
+          //   state: { member_no: this.state.member_no },
+          // });
+          this.props.history.push('/inbodies');
         });
     }
   };
 
   render() {
     const { userinfo } = this.props;
-    console.log('userinfo : ');
-    console.log(userinfo);
-    console.log('___', this.state.member_no);
+    // console.log('userinfo : ');
+    // console.log(userinfo);
+    // console.log('member_no=idc', this.state.member_no);
 
     return (
       <div className='addInbody'>
@@ -341,7 +342,7 @@ class AddInbody extends Component {
             </label>
             <label>
               <p>생년월일</p>
-              <span>{this.state.resiNumber}</span>
+              <span>{this.state.birth}</span>
             </label>
             <label>
               <p>성별</p>

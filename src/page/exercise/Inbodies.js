@@ -6,11 +6,15 @@ import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
 import MegaMenu from '../../component/navigation/Menu';
 import UserSearch from '../../component/customer/UserSearch';
-import { Col, Container, Tabs, Tab } from 'react-bootstrap';
+import { Col, Container, Tabs, Tab, Dropdown } from 'react-bootstrap';
 import { TextField } from '@mui/material';
 import Footer from '../../component/footer/Footer';
-import { inbodiesSelect } from '../../api/user';
+import { clandarInbodies, inbodiesSelect } from '../../api/user';
+import Chart from 'react-apexcharts';
+import { MdOutlineClose } from 'react-icons/md';
 import moment from 'moment';
+import { SERVER_URL } from '../../const/settings';
+
 const InbodiesView = ({
   num,
   fitness_no,
@@ -136,12 +140,44 @@ const InbodiesView4 = ({
     </tr>
   );
 };
+
 class Inbodies extends Component {
   constructor(props) {
     super(props);
     this.state = {
       inbodiesList: [],
+      series: [],
+      inbodiesListChart: {
+        chart: { type: 'line' },
+        series: [{ name: '인바디', data: [0, 1, 2, 3, 4, 5, 6, 7] }],
+        xaxis: {
+          categories: [
+            '체중',
+            '체수분',
+            '단백질',
+            '무기질',
+            '체지방',
+            '근육량',
+            '체지방량1',
+            '골격근량',
+            '체지방량2',
+            'BMI',
+            '체지방률',
+          ],
+        },
+        legend: {
+          tooltipHoverFormatter: function (val, opts) {
+            return val; //+ ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
+          },
+          fontSize: '2rem',
+          labels: {
+            colors: '#fff',
+            useSeriesColors: false,
+          },
+        },
+      },
       open: false,
+      openChart: false,
     };
   }
   goLogin = () => {
@@ -219,7 +255,7 @@ class Inbodies extends Component {
           />
         );
       });
-      this.setState({ inbodiesList: items });
+      this.setState({ inbodiesList: items.reverse() });
     });
   };
   inbodiesView2 = (idc) => {
@@ -249,7 +285,7 @@ class Inbodies extends Component {
           />
         );
       });
-      this.setState({ inbodiesList2: items });
+      this.setState({ inbodiesList2: items.reverse() });
     });
   };
   inbodiesView3 = (idc) => {
@@ -279,7 +315,7 @@ class Inbodies extends Component {
           />
         );
       });
-      this.setState({ inbodiesList3: items });
+      this.setState({ inbodiesList3: items.reverse() });
     });
   };
   inbodiesView4 = (idc) => {
@@ -309,7 +345,68 @@ class Inbodies extends Component {
           />
         );
       });
-      this.setState({ inbodiesList4: items });
+      this.setState({ inbodiesList4: items.reverse() });
+    });
+  };
+  inbodiesViewChart = (idc) => {
+    inbodiesSelect(
+      this.props.userinfo.fitness_no,
+      idc === undefined ? '' : idc
+    ).then((res) => {
+      let inbodyNum = [];
+
+      let weight = [];
+      let height = [];
+      let bodyMoisture = [];
+      let protein = [];
+      let mineral = [];
+      let bodyFat = [];
+      let muscleMass = [];
+      let bodyFatMass1 = [];
+      let skeletalMuscleMass = [];
+      let bodyFatMass2 = [];
+      let BMI = [];
+      let PercentBodyFat = [];
+      for (let i = 0; i < res.length; i++) {
+        inbodyNum.push(res[i].inbody_no + '회, ');
+
+        height.push(res[i].height);
+        weight.push(res[i].weight);
+        bodyMoisture.push(res[i].bodyMoisture);
+        protein.push(res[i].protein);
+        mineral.push(res[i].mineral);
+        bodyFat.push(res[i].bodyFat);
+        muscleMass.push(res[i].muscleMass);
+        bodyFatMass1.push(res[i].bodyFatMass1);
+        skeletalMuscleMass.push(res[i].skeletalMuscleMass);
+        bodyFatMass2.push(res[i].bodyFatMass2);
+        BMI.push(res[i].BMI);
+        PercentBodyFat.push(res[i].PercentBodyFat);
+      }
+      let chartData = [
+        { name: '체중', data: weight },
+        // { name: '키', data: height },
+        { name: '체수분', data: bodyMoisture },
+        { name: '단백질', data: protein },
+        { name: '무기질', data: mineral },
+        { name: '체지방', data: bodyFat },
+        { name: '근육량', data: muscleMass },
+        { name: '체지방량1', data: bodyFatMass1 },
+        { name: '골격근량', data: skeletalMuscleMass },
+        { name: '체지방량2', data: bodyFatMass2 },
+        { name: 'BMI', data: BMI },
+        { name: '체지방률', data: PercentBodyFat },
+      ];
+      this.setState({
+        series: chartData.reverse(),
+        inbodiesListChart: {
+          chart: { type: 'line' },
+          series: chartData,
+          xaxis: {
+            categories: inbodyNum.reverse(),
+          },
+        },
+      });
     });
   };
   handleUser = (client) => {
@@ -325,11 +422,19 @@ class Inbodies extends Component {
     this.inbodiesView2(idc);
     this.inbodiesView3(idc);
     this.inbodiesView4(idc);
+    this.inbodiesViewChart(idc);
   };
 
+  clickOpen = () => {
+    this.setState({ openChart: true });
+  };
+  clickclose = () => {
+    this.setState({ openChart: false });
+  };
   render() {
-    console.log(this.props.userinfo);
-    console.log(this.state.idc);
+    // console.log(this.props.userinfo);
+    // console.log(this.state.idc);
+    console.log(this.state.inbodiesListChart);
     return (
       <div className='inbody'>
         <div className='header'>
@@ -346,7 +451,7 @@ class Inbodies extends Component {
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='#'>새인바디</Link>
+                <Link to='#'>새 인바디</Link>
               </div>
               {/*.breadCrumb */}
             </div>
@@ -356,6 +461,33 @@ class Inbodies extends Component {
         </div>
         {/*.header */}
         <Container>
+          <Link
+            to={{
+              pathname: '/assign/add',
+              state: {
+                inbody_no: this.state.inbody_no,
+                member_no: this.state.idc === undefined ? 0 : this.state.idc,
+              },
+            }}
+          >
+            <button className=''>인바디정보추가</button>
+          </Link>
+          {/*.btnCustomerNew */}
+          <button className='mx-4' onClick={this.clickOpen}>
+            인바디변화보기
+          </button>
+          {this.state.openChart ? (
+            <div className='inbodySlide'>
+              {this.state.client_name}님의 변화 그래프
+              <Chart
+                options={this.state.inbodiesListChart}
+                series={this.state.series}
+                type='line'
+              />
+              <button onClick={this.clickclose}>닫기</button>
+            </div>
+          ) : null}
+
           <Col classNvame='text-center my-3'>
             {this.state.open ? (
               <UserSearch
