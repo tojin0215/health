@@ -6,14 +6,26 @@ import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
 import MegaMenu from '../../component/navigation/Menu';
 import UserSearch from '../../component/customer/UserSearch';
-import { Col, Container, Tabs, Tab, Dropdown } from 'react-bootstrap';
-import { TextField } from '@mui/material';
 import Footer from '../../component/footer/Footer';
 import { clandarInbodies, inbodiesSelect } from '../../api/user';
-import Chart from 'react-apexcharts';
-import { MdOutlineClose } from 'react-icons/md';
 import moment from 'moment';
 import { SERVER_URL } from '../../const/settings';
+
+// react-bootstrap
+import { Row, Col, Container, Tabs, Tab, Button } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+// mui
+import TextField from '@mui/material/TextField';
+import TableContainer from '@mui/material/TableContainer';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+// react-icons
+import { MdOutlineClose } from 'react-icons/md';
+// react-apexcharts
+import Chart from 'react-apexcharts';
 
 const InbodiesView = ({
   num,
@@ -36,14 +48,24 @@ const InbodiesView = ({
 }) => {
   const date = moment(measurementDate).format('yyyy년MM월DD일');
   return (
-    <tr>
-      <td>{date}</td>
-      <td>{height}cm</td>
-      <td>{weight}kg</td>
-      <td>{bodyMoisture}kg</td>
-      <td>{protein}kg</td>
-      <td>{mineral}kg</td>
-    </tr>
+    <TableRow>
+      <TableCell>{date}</TableCell>
+      <TableCell>
+        <b>{height}</b> cm
+      </TableCell>
+      <TableCell>
+        <b>{weight}</b> kg
+      </TableCell>
+      <TableCell>
+        <b>{bodyMoisture}</b> kg
+      </TableCell>
+      <TableCell>
+        <b>{protein}</b> kg
+      </TableCell>
+      <TableCell>
+        <b>{mineral}</b> kg
+      </TableCell>
+    </TableRow>
   );
 };
 const InbodiesView2 = ({
@@ -67,17 +89,33 @@ const InbodiesView2 = ({
 }) => {
   const date = moment(measurementDate).format('yyyy년MM월DD일');
   return (
-    <tr>
-      <td>{date}</td>
-      <td>{height}cm</td>
-      <td>{weight}kg</td>
-      <td>{bodyMoisture}kg</td>
-      <td>{protein}kg</td>
-      <td>{mineral}kg</td>
-      <td>{bodyFat}kg</td>
-      <td>{muscleMass}kg</td>
-      <td>{bodyFatMass1}kg</td>
-    </tr>
+    <TableRow>
+      <TableCell>{date}</TableCell>
+      <TableCell>
+        <b>{height}</b> cm
+      </TableCell>
+      <TableCell>
+        <b>{weight}</b> kg
+      </TableCell>
+      <TableCell>
+        <b>{bodyMoisture}</b> kg
+      </TableCell>
+      <TableCell>
+        <b>{protein}</b> kg
+      </TableCell>
+      <TableCell>
+        <b>{mineral}</b> kg
+      </TableCell>
+      <TableCell>
+        <b>{bodyFat}</b> kg
+      </TableCell>
+      <TableCell>
+        <b>{muscleMass}</b> kg
+      </TableCell>
+      <TableCell>
+        <b>{bodyFatMass1}</b> kg
+      </TableCell>
+    </TableRow>
   );
 };
 const InbodiesView3 = ({
@@ -101,13 +139,21 @@ const InbodiesView3 = ({
 }) => {
   const date = moment(measurementDate).format('yyyy년MM월DD일');
   return (
-    <tr>
-      <td>{date}</td>
-      <td>{height}</td>
-      <td>{weight}</td>
-      <td>{skeletalMuscleMass}</td>
-      <td>{bodyFatMass2}</td>
-    </tr>
+    <TableRow>
+      <TableCell>{date}</TableCell>
+      <TableCell>
+        <b>{height}</b> cm
+      </TableCell>
+      <TableCell>
+        <b>{weight}</b> kg
+      </TableCell>
+      <TableCell>
+        <b>{skeletalMuscleMass}</b> kg
+      </TableCell>
+      <TableCell>
+        <b>{bodyFatMass2}</b> kg
+      </TableCell>
+    </TableRow>
   );
 };
 const InbodiesView4 = ({
@@ -131,13 +177,21 @@ const InbodiesView4 = ({
 }) => {
   const date = moment(measurementDate).format('yyyy년MM월DD일');
   return (
-    <tr>
-      <td>{date}</td>
-      <td>{height}</td>
-      <td>{weight}</td>
-      <td>{BMI}</td>
-      <td>{PercentBodyFat}</td>
-    </tr>
+    <TableRow>
+      <TableCell>{date}</TableCell>
+      <TableCell>
+        <b>{height}</b> cm
+      </TableCell>
+      <TableCell>
+        <b>{weight}</b> kg
+      </TableCell>
+      <TableCell>
+        <b>{BMI}</b> %
+      </TableCell>
+      <TableCell>
+        <b>{PercentBodyFat}</b> %
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -475,44 +529,53 @@ class Inbodies extends Component {
         </div>
         {/*.header */}
         <Container>
-          <Col classNvame='text-center my-3'>
-            {this.state.open ? (
-              <UserSearch
-                open={this.state.open}
-                setOpen={(o) => this.setState({ open: o })}
-                fitness_no={this.props.userinfo.fitness_no}
-                loginWhether={this.props.userinfo.loginWhether}
-                joinNo={this.props.userinfo.joinNo}
-                handleUser={this.handleUser}
-              />
-            ) : (
-              <TextField
-                id='customer_name'
-                label='회원 검색'
-                variant='standard'
-                onClick={() => this.setState({ open: true })}
-                className='boxmorpsm h-100 w-100'
-                InputProps={{ disableUnderline: true }}
-                value={this.state.client_name}
-                // onChange={this.handleChange}
-              />
-            )}
-          </Col>
-          <Link
-            to={{
-              pathname: '/assign/add',
-              state: {
-                inbody_no: this.state.inbody_no,
-                member_no: this.state.idc === undefined ? 0 : this.state.idc,
-              },
-            }}
-          >
-            <button className=''>인바디정보추가</button>
-          </Link>
-          {/*.btnCustomerNew */}
-          <button className='mx-4' onClick={this.clickOpen}>
-            인바디변화보기
-          </button>
+          <Row className=''>
+            <Col md={6} className='text-center mb-2'>
+              {this.state.open ? (
+                <UserSearch
+                  open={this.state.open}
+                  setOpen={(o) => this.setState({ open: o })}
+                  fitness_no={this.props.userinfo.fitness_no}
+                  loginWhether={this.props.userinfo.loginWhether}
+                  joinNo={this.props.userinfo.joinNo}
+                  handleUser={this.handleUser}
+                  className=' '
+                />
+              ) : (
+                <TextField
+                  id='customer_name'
+                  label='회원 선택'
+                  variant='standard'
+                  onClick={() => this.setState({ open: true })}
+                  className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
+                  InputProps={{ disableUnderline: true }}
+                  value={this.state.client_name}
+                  onChange={this.handleChange}
+                />
+              )}
+            </Col>
+            <Col md={4} className='mb-2'>
+              <Button className='w-100 h-100' onClick={this.clickOpen}>
+                인바디 변화 보기
+              </Button>
+            </Col>
+            <Col md={2} className='mb-2'>
+              <Link
+                to={{
+                  pathname: '/assign/add',
+                  state: {
+                    inbody_no: this.state.inbody_no,
+                    member_no:
+                      this.state.idc === undefined ? 0 : this.state.idc,
+                  },
+                }}
+              >
+                <Button className='w-100 h-100' variant='outline-primary'>
+                  인바디 추가
+                </Button>
+              </Link>
+            </Col>
+          </Row>
           {this.state.openChart ? (
             <div>
               {this.state.client_name}님의 변화 그래프
@@ -533,81 +596,89 @@ class Inbodies extends Component {
               {this.state.inbodiesList.length == 0 ? (
                 <p>등록된 인바디가 없습니다.</p>
               ) : (
-                <table>
-                  {/* 체성분  */}
-                  <thead>
-                    <tr>
-                      <th>측정일</th>
-                      <th>키</th>
-                      <th>체중</th>
-                      <th>체수분</th>
-                      <th>단백질</th>
-                      <th>무기질</th>
-                    </tr>
-                  </thead>
-                  <tbody>{this.state.inbodiesList}</tbody>
-                </table>
+                <TableContainer>
+                  <Table>
+                    {/* 체성분  */}
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>측정일</TableCell>
+                        <TableCell>키</TableCell>
+                        <TableCell>체중</TableCell>
+                        <TableCell>체수분</TableCell>
+                        <TableCell>단백질</TableCell>
+                        <TableCell>무기질</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>{this.state.inbodiesList}</TableBody>
+                  </Table>
+                </TableContainer>
               )}
             </Tab>
             <Tab eventKey='home2' title='체성분 상세'>
               {this.state.inbodiesList.length == 0 ? (
                 <p>등록된 인바디가 없습니다.</p>
               ) : (
-                <table>
-                  {/* 체성분 상세 */}
-                  <thead>
-                    <tr>
-                      <th>측정일</th>
-                      <th>키</th>
-                      <th>체중</th>
-                      <th>체수분</th>
-                      <th>단백질</th>
-                      <th>무기질</th>
-                      <th>체지방</th>
-                      <th>근육량</th>
-                      <th>체지방량1</th>
-                    </tr>
-                  </thead>
-                  <tbody>{this.state.inbodiesList2}</tbody>
-                </table>
+                <TableContainer>
+                  <Table>
+                    {/* 체성분 상세 */}
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>측정일</TableCell>
+                        <TableCell>키</TableCell>
+                        <TableCell>체중</TableCell>
+                        <TableCell>체수분</TableCell>
+                        <TableCell>단백질</TableCell>
+                        <TableCell>무기질</TableCell>
+                        <TableCell>체지방</TableCell>
+                        <TableCell>근육량</TableCell>
+                        <TableCell>체지방량1</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>{this.state.inbodiesList2}</TableBody>
+                  </Table>
+                </TableContainer>
               )}
             </Tab>
             <Tab eventKey='home3' title='골격근, 지방'>
               {this.state.inbodiesList.length == 0 ? (
                 <p>등록된 인바디가 없습니다.</p>
               ) : (
-                <table>
-                  {/* 골격근, 지방 */}
-                  <thead>
-                    <tr>
-                      <th>측정일</th>
-                      <th>키</th>
-                      <th>체중</th>
-                      <th>골격근량</th>
-                      <th>체지방량2</th>
-                    </tr>
-                  </thead>
-                  <tbody>{this.state.inbodiesList3}</tbody>
-                </table>
+                <TableContainer>
+                  <Table>
+                    {/* 골격근, 지방 */}
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>측정일</TableCell>
+                        <TableCell>키</TableCell>
+                        <TableCell>체중</TableCell>
+                        <TableCell>골격근량</TableCell>
+                        <TableCell>체지방량2</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>{this.state.inbodiesList3}</TableBody>
+                  </Table>
+                </TableContainer>
               )}
             </Tab>
             <Tab eventKey='home4' title='비만'>
               {this.state.inbodiesList.length == 0 ? (
                 <p>등록된 인바디가 없습니다.</p>
               ) : (
-                <table>
-                  {/* 비만 */}
-                  <thead>
-                    <tr>
-                      <th>측정일</th>
-                      <th>키</th>
-                      <th>체중</th>
-                      <th>BMI</th>
-                      <th>체지방률</th>
-                    </tr>
-                  </thead>
-                  <tbody>{this.state.inbodiesList4}</tbody>
-                </table>
+                <TableContainer>
+                  <Table>
+                    {/* 비만 */}
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>측정일</TableCell>
+                        <TableCell>키</TableCell>
+                        <TableCell>체중</TableCell>
+                        <TableCell>BMI</TableCell>
+                        <TableCell>체지방률</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>{this.state.inbodiesList4}</TableBody>
+                  </Table>
+                </TableContainer>
               )}
             </Tab>
           </Tabs>
