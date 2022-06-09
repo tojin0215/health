@@ -148,7 +148,9 @@ class Inbodies extends Component {
       inbodiesList: [],
       series: [],
       inbodiesListChart: {
-        chart: { type: 'line' },
+        chart: {
+          type: 'line',
+        },
         series: [{ name: '인바디', data: [0, 1, 2, 3, 4, 5, 6, 7] }],
         xaxis: {
           categories: [
@@ -165,14 +167,16 @@ class Inbodies extends Component {
             '체지방률',
           ],
         },
-        legend: {
-          tooltipHoverFormatter: function (val, opts) {
-            return val; //+ ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
-          },
-          fontSize: '2rem',
-          labels: {
-            colors: '#fff',
-            useSeriesColors: false,
+
+        stroke: {
+          width: 2,
+          curve: 'straight',
+          dashArray: 0,
+        },
+        markers: {
+          size: 6,
+          hover: {
+            sizeOffset: 6,
           },
         },
       },
@@ -354,7 +358,7 @@ class Inbodies extends Component {
       idc === undefined ? '' : idc
     ).then((res) => {
       let inbodyNum = [];
-
+      let measurementDate = [];
       let weight = [];
       let height = [];
       let bodyMoisture = [];
@@ -368,7 +372,9 @@ class Inbodies extends Component {
       let BMI = [];
       let PercentBodyFat = [];
       for (let i = 0; i < res.length; i++) {
-        inbodyNum.push(res[i].inbody_no + '회, ');
+        inbodyNum.push(
+          '측정일: ' + moment(res[i].measurementDate).format('yyyy년MM월DD일')
+        );
 
         height.push(res[i].height);
         weight.push(res[i].weight);
@@ -398,12 +404,14 @@ class Inbodies extends Component {
         { name: '체지방률', data: PercentBodyFat },
       ];
       this.setState({
-        series: chartData.reverse(),
+        series: chartData,
         inbodiesListChart: {
-          chart: { type: 'line' },
+          chart: {
+            type: 'line',
+          },
           series: chartData,
           xaxis: {
-            categories: inbodyNum.reverse(),
+            categories: inbodyNum,
           },
         },
       });
@@ -426,7 +434,11 @@ class Inbodies extends Component {
   };
 
   clickOpen = () => {
-    this.setState({ openChart: true });
+    if (!this.state.client_name) {
+      alert('회원을 선택해주세요');
+    } else {
+      this.setState({ openChart: true });
+    }
   };
   clickclose = () => {
     this.setState({ openChart: false });
@@ -434,7 +446,9 @@ class Inbodies extends Component {
   render() {
     // console.log(this.props.userinfo);
     // console.log(this.state.idc);
-    console.log(this.state.inbodiesListChart);
+    // console.log(this.state.inbodiesListChart);
+    console.log(this.state.client_name);
+
     return (
       <div className='inbody'>
         <div className='header'>
@@ -461,33 +475,6 @@ class Inbodies extends Component {
         </div>
         {/*.header */}
         <Container>
-          <Link
-            to={{
-              pathname: '/assign/add',
-              state: {
-                inbody_no: this.state.inbody_no,
-                member_no: this.state.idc === undefined ? 0 : this.state.idc,
-              },
-            }}
-          >
-            <button className=''>인바디정보추가</button>
-          </Link>
-          {/*.btnCustomerNew */}
-          <button className='mx-4' onClick={this.clickOpen}>
-            인바디변화보기
-          </button>
-          {this.state.openChart ? (
-            <div className='inbodySlide'>
-              {this.state.client_name}님의 변화 그래프
-              <Chart
-                options={this.state.inbodiesListChart}
-                series={this.state.series}
-                type='line'
-              />
-              <button onClick={this.clickclose}>닫기</button>
-            </div>
-          ) : null}
-
           <Col classNvame='text-center my-3'>
             {this.state.open ? (
               <UserSearch
@@ -511,6 +498,32 @@ class Inbodies extends Component {
               />
             )}
           </Col>
+          <Link
+            to={{
+              pathname: '/assign/add',
+              state: {
+                inbody_no: this.state.inbody_no,
+                member_no: this.state.idc === undefined ? 0 : this.state.idc,
+              },
+            }}
+          >
+            <button className=''>인바디정보추가</button>
+          </Link>
+          {/*.btnCustomerNew */}
+          <button className='mx-4' onClick={this.clickOpen}>
+            인바디변화보기
+          </button>
+          {this.state.openChart ? (
+            <div>
+              {this.state.client_name}님의 변화 그래프
+              <Chart
+                options={this.state.inbodiesListChart}
+                series={this.state.series}
+                type='line'
+              />
+            </div>
+          ) : null}
+
           <Tabs
             defaultActiveKey='home'
             id='uncontrolled-tab-example'
