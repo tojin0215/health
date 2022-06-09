@@ -150,6 +150,13 @@
 .customerSlide .react-bs-table {
 }
 
+.client_modal .customercalendar .rbc-ellipsis,
+.rbc-show-more,
+.rbc-row-segment .rbc-event-content,
+.rbc-event-label {
+  white-space: normal !important;
+}
+
 @media (max-width: 767px) {
   .customer .container {
     margin-top: 2rem;
