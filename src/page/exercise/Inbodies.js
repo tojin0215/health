@@ -11,6 +11,7 @@ import {
   clandarInbodies,
   inbodiesSelect,
   selectClientReservation,
+  selectTrainerReservation,
 } from '../../api/user';
 import moment from 'moment';
 import { SERVER_URL } from '../../const/settings';
@@ -313,216 +314,247 @@ class Inbodies extends Component {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
-      const fitness_no =
-        this.props.userinfo.loginWhether === 2
-          ? clientResult[0].fitness_no
-          : this.props.userinfo.fitness_no;
-      inbodiesSelect(fitness_no, idc === undefined ? '' : idc).then(
-        (result) => {
-          const items = result.map((data, index, array) => {
-            return (
-              <InbodiesView
-                num={data.num}
-                fitness_no={data.fitness_no}
-                member_no={data.member_no}
-                height={data.height}
-                measurementDate={data.measurementDate}
-                bodyMoisture={data.bodyMoisture}
-                protein={data.protein}
-                mineral={data.mineral}
-                bodyFat={data.bodyFat}
-                muscleMass={data.muscleMass}
-                bodyFatMass1={data.bodyFatMass1}
-                weight={data.weight}
-                skeletalMuscleMass={data.skeletalMuscleMass}
-                bodyFatMass2={data.bodyFatMass2}
-                BMI={data.BMI}
-                PercentBodyFat={data.PercentBodyFat}
-              />
-            );
-          });
-          this.setState({ inbodiesList: items.reverse() });
-        }
-      );
+      selectTrainerReservation(
+        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+      ).then((trainerResult) => {
+        const fitness_no =
+          this.props.userinfo.loginWhether === 2
+            ? clientResult[0].fitness_no
+            : this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no;
+        inbodiesSelect(fitness_no, idc === undefined ? '' : idc).then(
+          (result) => {
+            const items = result.map((data, index, array) => {
+              return (
+                <InbodiesView
+                  num={data.num}
+                  fitness_no={data.fitness_no}
+                  member_no={data.member_no}
+                  height={data.height}
+                  measurementDate={data.measurementDate}
+                  bodyMoisture={data.bodyMoisture}
+                  protein={data.protein}
+                  mineral={data.mineral}
+                  bodyFat={data.bodyFat}
+                  muscleMass={data.muscleMass}
+                  bodyFatMass1={data.bodyFatMass1}
+                  weight={data.weight}
+                  skeletalMuscleMass={data.skeletalMuscleMass}
+                  bodyFatMass2={data.bodyFatMass2}
+                  BMI={data.BMI}
+                  PercentBodyFat={data.PercentBodyFat}
+                />
+              );
+            });
+            this.setState({ inbodiesList: items.reverse() });
+          }
+        );
+      });
     });
   };
   inbodiesView2 = (idc) => {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
-      const fitness_no =
-        this.props.userinfo.loginWhether === 2
-          ? clientResult[0].fitness_no
-          : this.props.userinfo.fitness_no;
-      inbodiesSelect(fitness_no, idc === undefined ? '' : idc).then(
-        (result) => {
-          const items = result.map((data, index, array) => {
-            return (
-              <InbodiesView2
-                num={data.num}
-                fitness_no={data.fitness_no}
-                member_no={data.member_no}
-                height={data.height}
-                measurementDate={data.measurementDate}
-                bodyMoisture={data.bodyMoisture}
-                protein={data.protein}
-                mineral={data.mineral}
-                bodyFat={data.bodyFat}
-                muscleMass={data.muscleMass}
-                bodyFatMass1={data.bodyFatMass1}
-                weight={data.weight}
-                skeletalMuscleMass={data.skeletalMuscleMass}
-                bodyFatMass2={data.bodyFatMass2}
-                BMI={data.BMI}
-                PercentBodyFat={data.PercentBodyFat}
-              />
-            );
-          });
-          this.setState({ inbodiesList2: items.reverse() });
-        }
-      );
+      selectTrainerReservation(
+        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+      ).then((trainerResult) => {
+        const fitness_no =
+          this.props.userinfo.loginWhether === 2
+            ? clientResult[0].fitness_no
+            : this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no;
+        inbodiesSelect(fitness_no, idc === undefined ? '' : idc).then(
+          (result) => {
+            const items = result.map((data, index, array) => {
+              return (
+                <InbodiesView2
+                  num={data.num}
+                  fitness_no={data.fitness_no}
+                  member_no={data.member_no}
+                  height={data.height}
+                  measurementDate={data.measurementDate}
+                  bodyMoisture={data.bodyMoisture}
+                  protein={data.protein}
+                  mineral={data.mineral}
+                  bodyFat={data.bodyFat}
+                  muscleMass={data.muscleMass}
+                  bodyFatMass1={data.bodyFatMass1}
+                  weight={data.weight}
+                  skeletalMuscleMass={data.skeletalMuscleMass}
+                  bodyFatMass2={data.bodyFatMass2}
+                  BMI={data.BMI}
+                  PercentBodyFat={data.PercentBodyFat}
+                />
+              );
+            });
+            this.setState({ inbodiesList2: items.reverse() });
+          }
+        );
+      });
     });
   };
   inbodiesView3 = (idc) => {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
-      const fitness_no =
-        this.props.userinfo.loginWhether === 2
-          ? clientResult[0].fitness_no
-          : this.props.userinfo.fitness_no;
-      inbodiesSelect(fitness_no, idc === undefined ? '' : idc).then(
-        (result) => {
-          const items = result.map((data, index, array) => {
-            return (
-              <InbodiesView3
-                num={data.num}
-                fitness_no={data.fitness_no}
-                member_no={data.member_no}
-                height={data.height}
-                measurementDate={data.measurementDate}
-                bodyMoisture={data.bodyMoisture}
-                protein={data.protein}
-                mineral={data.mineral}
-                bodyFat={data.bodyFat}
-                muscleMass={data.muscleMass}
-                bodyFatMass1={data.bodyFatMass1}
-                weight={data.weight}
-                skeletalMuscleMass={data.skeletalMuscleMass}
-                bodyFatMass2={data.bodyFatMass2}
-                BMI={data.BMI}
-                PercentBodyFat={data.PercentBodyFat}
-              />
-            );
-          });
-          this.setState({ inbodiesList3: items.reverse() });
-        }
-      );
+      selectTrainerReservation(
+        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+      ).then((trainerResult) => {
+        const fitness_no =
+          this.props.userinfo.loginWhether === 2
+            ? clientResult[0].fitness_no
+            : this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no;
+        inbodiesSelect(fitness_no, idc === undefined ? '' : idc).then(
+          (result) => {
+            const items = result.map((data, index, array) => {
+              return (
+                <InbodiesView3
+                  num={data.num}
+                  fitness_no={data.fitness_no}
+                  member_no={data.member_no}
+                  height={data.height}
+                  measurementDate={data.measurementDate}
+                  bodyMoisture={data.bodyMoisture}
+                  protein={data.protein}
+                  mineral={data.mineral}
+                  bodyFat={data.bodyFat}
+                  muscleMass={data.muscleMass}
+                  bodyFatMass1={data.bodyFatMass1}
+                  weight={data.weight}
+                  skeletalMuscleMass={data.skeletalMuscleMass}
+                  bodyFatMass2={data.bodyFatMass2}
+                  BMI={data.BMI}
+                  PercentBodyFat={data.PercentBodyFat}
+                />
+              );
+            });
+            this.setState({ inbodiesList3: items.reverse() });
+          }
+        );
+      });
     });
   };
   inbodiesView4 = (idc) => {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
-      const fitness_no =
-        this.props.userinfo.loginWhether === 2
-          ? clientResult[0].fitness_no
-          : this.props.userinfo.fitness_no;
-      inbodiesSelect(fitness_no, idc === undefined ? '' : idc).then(
-        (result) => {
-          const items = result.map((data, index, array) => {
-            return (
-              <InbodiesView4
-                num={data.num}
-                fitness_no={data.fitness_no}
-                member_no={data.member_no}
-                height={data.height}
-                measurementDate={data.measurementDate}
-                bodyMoisture={data.bodyMoisture}
-                protein={data.protein}
-                mineral={data.mineral}
-                bodyFat={data.bodyFat}
-                muscleMass={data.muscleMass}
-                bodyFatMass1={data.bodyFatMass1}
-                weight={data.weight}
-                skeletalMuscleMass={data.skeletalMuscleMass}
-                bodyFatMass2={data.bodyFatMass2}
-                BMI={data.BMI}
-                PercentBodyFat={data.PercentBodyFat}
-              />
-            );
-          });
-          this.setState({ inbodiesList4: items.reverse() });
-        }
-      );
+      selectTrainerReservation(
+        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+      ).then((trainerResult) => {
+        const fitness_no =
+          this.props.userinfo.loginWhether === 2
+            ? clientResult[0].fitness_no
+            : this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no;
+        inbodiesSelect(fitness_no, idc === undefined ? '' : idc).then(
+          (result) => {
+            const items = result.map((data, index, array) => {
+              return (
+                <InbodiesView4
+                  num={data.num}
+                  fitness_no={data.fitness_no}
+                  member_no={data.member_no}
+                  height={data.height}
+                  measurementDate={data.measurementDate}
+                  bodyMoisture={data.bodyMoisture}
+                  protein={data.protein}
+                  mineral={data.mineral}
+                  bodyFat={data.bodyFat}
+                  muscleMass={data.muscleMass}
+                  bodyFatMass1={data.bodyFatMass1}
+                  weight={data.weight}
+                  skeletalMuscleMass={data.skeletalMuscleMass}
+                  bodyFatMass2={data.bodyFatMass2}
+                  BMI={data.BMI}
+                  PercentBodyFat={data.PercentBodyFat}
+                />
+              );
+            });
+            this.setState({ inbodiesList4: items.reverse() });
+          }
+        );
+      });
     });
   };
   inbodiesViewChart = (idc) => {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
-      const fitness_no =
-        this.props.userinfo.loginWhether === 2
-          ? clientResult[0].fitness_no
-          : this.props.userinfo.fitness_no;
-      inbodiesSelect(fitness_no, idc === undefined ? '' : idc).then((res) => {
-        let inbodyNum = [];
-        let measurementDate = [];
-        let weight = [];
-        let height = [];
-        let bodyMoisture = [];
-        let protein = [];
-        let mineral = [];
-        let bodyFat = [];
-        let muscleMass = [];
-        let bodyFatMass1 = [];
-        let skeletalMuscleMass = [];
-        let bodyFatMass2 = [];
-        let BMI = [];
-        let PercentBodyFat = [];
-        for (let i = 0; i < res.length; i++) {
-          inbodyNum.push(
-            '측정일: ' + moment(res[i].measurementDate).format('yyyy년MM월DD일')
-          );
+      selectTrainerReservation(
+        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+      ).then((trainerResult) => {
+        const fitness_no =
+          this.props.userinfo.loginWhether === 2
+            ? clientResult[0].fitness_no
+            : this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no;
+        inbodiesSelect(fitness_no, idc === undefined ? '' : idc).then((res) => {
+          let inbodyNum = [];
+          let measurementDate = [];
+          let weight = [];
+          let height = [];
+          let bodyMoisture = [];
+          let protein = [];
+          let mineral = [];
+          let bodyFat = [];
+          let muscleMass = [];
+          let bodyFatMass1 = [];
+          let skeletalMuscleMass = [];
+          let bodyFatMass2 = [];
+          let BMI = [];
+          let PercentBodyFat = [];
+          for (let i = 0; i < res.length; i++) {
+            inbodyNum.push(
+              '측정일: ' +
+                moment(res[i].measurementDate).format('yyyy년MM월DD일')
+            );
 
-          height.push(res[i].height);
-          weight.push(res[i].weight);
-          bodyMoisture.push(res[i].bodyMoisture);
-          protein.push(res[i].protein);
-          mineral.push(res[i].mineral);
-          bodyFat.push(res[i].bodyFat);
-          muscleMass.push(res[i].muscleMass);
-          bodyFatMass1.push(res[i].bodyFatMass1);
-          skeletalMuscleMass.push(res[i].skeletalMuscleMass);
-          bodyFatMass2.push(res[i].bodyFatMass2);
-          BMI.push(res[i].BMI);
-          PercentBodyFat.push(res[i].PercentBodyFat);
-        }
-        let chartData = [
-          { name: '체중', data: weight },
-          // { name: '키', data: height },
-          { name: '체수분', data: bodyMoisture },
-          { name: '단백질', data: protein },
-          { name: '무기질', data: mineral },
-          { name: '체지방', data: bodyFat },
-          { name: '근육량', data: muscleMass },
-          { name: '체지방량1', data: bodyFatMass1 },
-          { name: '골격근량', data: skeletalMuscleMass },
-          { name: '체지방량2', data: bodyFatMass2 },
-          { name: 'BMI', data: BMI },
-          { name: '체지방률', data: PercentBodyFat },
-        ];
-        this.setState({
-          series: chartData,
-          inbodiesListChart: {
-            chart: {
-              type: 'line',
-            },
+            height.push(res[i].height);
+            weight.push(res[i].weight);
+            bodyMoisture.push(res[i].bodyMoisture);
+            protein.push(res[i].protein);
+            mineral.push(res[i].mineral);
+            bodyFat.push(res[i].bodyFat);
+            muscleMass.push(res[i].muscleMass);
+            bodyFatMass1.push(res[i].bodyFatMass1);
+            skeletalMuscleMass.push(res[i].skeletalMuscleMass);
+            bodyFatMass2.push(res[i].bodyFatMass2);
+            BMI.push(res[i].BMI);
+            PercentBodyFat.push(res[i].PercentBodyFat);
+          }
+          let chartData = [
+            { name: '체중', data: weight },
+            // { name: '키', data: height },
+            { name: '체수분', data: bodyMoisture },
+            { name: '단백질', data: protein },
+            { name: '무기질', data: mineral },
+            { name: '체지방', data: bodyFat },
+            { name: '근육량', data: muscleMass },
+            { name: '체지방량1', data: bodyFatMass1 },
+            { name: '골격근량', data: skeletalMuscleMass },
+            { name: '체지방량2', data: bodyFatMass2 },
+            { name: 'BMI', data: BMI },
+            { name: '체지방률', data: PercentBodyFat },
+          ];
+          this.setState({
             series: chartData,
-            xaxis: {
-              categories: inbodyNum,
+            inbodiesListChart: {
+              chart: {
+                type: 'line',
+              },
+              series: chartData,
+              xaxis: {
+                categories: inbodyNum,
+              },
             },
-          },
+          });
         });
       });
     });
