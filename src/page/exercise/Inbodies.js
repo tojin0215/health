@@ -427,7 +427,7 @@ class Inbodies extends Component {
       let PercentBodyFat = [];
       for (let i = 0; i < res.length; i++) {
         inbodyNum.push(
-          '측정일: ' + moment(res[i].measurementDate).format('yyyy년MM월DD일')
+          moment(res[i].measurementDate).format('yyyy년 MM월 DD일')
         );
 
         height.push(res[i].height);
@@ -577,7 +577,7 @@ class Inbodies extends Component {
             </Col>
           </Row>
           {this.state.openChart ? (
-            <div>
+            <div className=''>
               {this.state.client_name}님의 변화 그래프
               <Chart
                 options={this.state.inbodiesListChart}

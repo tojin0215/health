@@ -51,10 +51,6 @@
   height: 4.4rem;
 }
 
-.formAddCustomer input[type='text'] {
-  min-width: 23.1rem;
-}
-
 .formAddCustomer .labelCheck {
   display: flex;
   flex-direction: row;
@@ -223,80 +219,12 @@
 }
 
 .formAddCustomer button {
-  margin: 0 auto;
+  /* margin: 0 auto;
   display: flex;
   width: 20rem;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 @media (max-width: 767px) {
-  .addCustomer .container {
-    padding-top: 6rem;
-  }
-  .formAddCustomer .customerName {
-    width: 100%;
-  }
-  .formAddCustomer .customerPeriod {
-    width: 100%;
-    justify-content: center;
-    white-space: nowrap;
-  }
-  .formAddCustomer input[type='text'] {
-    min-width: auto;
-  }
-  .formAddCustomer .customerPhone {
-    width: 100%;
-  }
-  .formAddCustomer .customerResi {
-    width: 100%;
-  }
-  .formAddCustomer .customerAddress {
-    width: 100%;
-  }
-  .formAddCustomer .customerIncharge {
-    width: 100%;
-  }
-  .formAddCustomer .customerRoute div label {
-    width: 50%;
-  }
-  .formAddCustomer .customerRoute div label input[type='text'] {
-    width: 100%;
-  }
-  .productPay {
-    padding-top: 5rem;
-  }
-  .productPay .exerciseType {
-    padding-right: 0;
-  }
-  .productPay .exerciseType label {
-    width: 50%;
-  }
-  .productPay .exerciseType label input[type='text'] {
-    width: 70%;
-  }
-  .productPay .payType {
-    padding-right: 0;
-  }
-  .productPay .paymentAmount > label {
-    display: flex;
-    flex-direction: column;
-  }
-  .productPay .paymentAmount > label > span {
-    height: auto;
-    align-self: center;
-  }
-  .productPay .paymentAmount input[type='text'] {
-    width: auto;
-  }
-  .productPay .finalAmount .finalAmountOthers {
-    width: 100%;
-  }
-  .productPay .finalAmount .amountTotal {
-    width: 100%;
-    flex-direction: column;
-  }
-  .formAddCustomer .customerRoute div label:last-child {
-    flex-wrap: wrap;
-  }
 }
