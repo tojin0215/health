@@ -1268,7 +1268,7 @@ class ReservationClass extends Component {
                     value={this.props.userinfo.manager_name}
                     onChange={this.handleChange}
                     InputProps={{ disableUnderline: true }}
-                    label='트레이너명'
+                    label='강사명'
                     error={this.state.trainer_err}
                   />
                 </label>

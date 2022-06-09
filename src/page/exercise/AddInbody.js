@@ -17,6 +17,7 @@ import '../../styles/customer/AddCustomer.css';
 import '../../styles/exercise/AddInbody.css';
 
 import { SERVER_URL } from '../../const/settings';
+import { selectClientReservation } from '../../api/user';
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -140,36 +141,41 @@ class AddInbody extends Component {
       //   state: { member_no: 0, a: true },
       // });
     }
-
-    fetch(
-      ip +
-        '/client?type=select&idc=' +
-        this.state.member_no +
-        '&fitness_no=' +
-        this.props.userinfo.fitness_no,
-      {
-        method: 'GET',
-        headers: {
-          'Content-type': 'application/json',
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((res) => {
-        this.setState({
-          customerList: res,
-        });
-
-        this.state.customerList.map((c) => {
-          let s = c.sex == 1 ? '남' : '여';
+    selectClientReservation(this.state.member_no).then((clientResult) => {
+      const fitness_no =
+        this.props.userinfo.loginWhether === 2
+          ? clientResult[0].fitness_no
+          : this.props.userinfo.fitness_no;
+      fetch(
+        ip +
+          '/client?type=select&idc=' +
+          this.state.member_no +
+          '&fitness_no=' +
+          fitness_no,
+        {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((res) => {
           this.setState({
-            name: c.client_name,
-            sex: s,
-            phone: c.phone,
-            birth: c.birth,
+            customerList: res,
+          });
+
+          this.state.customerList.map((c) => {
+            let s = c.sex == 1 ? '남' : '여';
+            this.setState({
+              name: c.client_name,
+              sex: s,
+              phone: c.phone,
+              birth: c.birth,
+            });
           });
         });
-      });
+    });
   };
 
   handleChange = (e) => {
