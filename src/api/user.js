@@ -378,3 +378,27 @@ export const choiceFitness = (fitness_no) => {
     })
     .then((response) => response.data);
 };
+
+//inbodies select member_no
+export const inbodiesSelect = (fitness_no, member_no) => {
+  return axios
+    .get(`${SERVER_URL}/inbody`, {
+      params: { type: 'client', fitness_no: fitness_no, member_no: member_no },
+    })
+    .then((response) => response.data);
+};
+
+//inbodies select calendar
+export const clandarInbodies = (fitness_no, member_no, startDate, endDate) => {
+  return axios
+    .get(`${SERVER_URL}/inbody`, {
+      params: {
+        type: 'select',
+        startDate: startDate,
+        endDate: endDate,
+        fitness_no: fitness_no,
+        member_no: member_no,
+      },
+    })
+    .then((response) => response.data);
+};
