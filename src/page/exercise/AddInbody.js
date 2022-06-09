@@ -17,7 +17,10 @@ import '../../styles/customer/AddCustomer.css';
 import '../../styles/exercise/AddInbody.css';
 
 import { SERVER_URL } from '../../const/settings';
-import { selectClientReservation } from '../../api/user';
+import {
+  selectClientReservation,
+  selectTrainerReservation,
+} from '../../api/user';
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -39,7 +42,7 @@ class AddInbody extends Component {
     }
 
     this.state = {
-      fitness_no: this.props.userinfo.fitness_no, //Redux를 통해 받은 값
+      fitness_no: '',
       //member_no: search.split('/')[3] ,
       member_no: Number(this.props.location.state.member_no),
       inbody_no: inbody_no1,
@@ -142,39 +145,45 @@ class AddInbody extends Component {
       // });
     }
     selectClientReservation(this.state.member_no).then((clientResult) => {
-      const fitness_no =
-        this.props.userinfo.loginWhether === 2
-          ? clientResult[0].fitness_no
-          : this.props.userinfo.fitness_no;
-      fetch(
-        ip +
-          '/client?type=select&idc=' +
-          this.state.member_no +
-          '&fitness_no=' +
-          fitness_no,
-        {
-          method: 'GET',
-          headers: {
-            'Content-type': 'application/json',
-          },
-        }
-      )
-        .then((response) => response.json())
-        .then((res) => {
-          this.setState({
-            customerList: res,
-          });
-
-          this.state.customerList.map((c) => {
-            let s = c.sex == 1 ? '남' : '여';
+      selectTrainerReservation(
+        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+      ).then((trainerResult) => {
+        const fitness_no =
+          this.props.userinfo.loginWhether === 2
+            ? clientResult[0].fitness_no
+            : this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no;
+        fetch(
+          ip +
+            '/client?type=select&idc=' +
+            this.state.member_no +
+            '&fitness_no=' +
+            fitness_no,
+          {
+            method: 'GET',
+            headers: {
+              'Content-type': 'application/json',
+            },
+          }
+        )
+          .then((response) => response.json())
+          .then((res) => {
             this.setState({
-              name: c.client_name,
-              sex: s,
-              phone: c.phone,
-              birth: c.birth,
+              customerList: res,
+            });
+
+            this.state.customerList.map((c) => {
+              let s = c.sex == 1 ? '남' : '여';
+              this.setState({
+                name: c.client_name,
+                sex: s,
+                phone: c.phone,
+                birth: c.birth,
+              });
             });
           });
-        });
+      });
     });
   };
 
@@ -261,47 +270,58 @@ class AddInbody extends Component {
     ) {
       alert('빈칸을 채워주세요.');
     } else {
-      //let in_no = this.state.inbody_no + 1
-      //alert('this.state.inbody_no + 1' + in_no)
-      // 서버 연결하는 부분
-      fetch(ip + '/inbody', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          fitness_no: this.state.fitness_no,
-          member_no: this.state.member_no,
-          //inbody_no:in_no,
-          inbody_no: this.state.inbody_no + 1,
-          height: this.state.height, //키
-          measurementDate: this.state.measurementDate, // 측정날짜
-          //체성분 분석
-          bodyMoisture: this.state.bodyMoisture, //체수분
-          protein: this.state.protein, //단백질
-          mineral: this.state.mineral, //무기질
-          bodyFat: this.state.bodyFat, //체지방
-          muscleMass: this.state.muscleMass, //근육량
-          bodyFatMass1: this.state.bodyFatMass1, //체지방량1
-          weight: this.state.weight, //체중
-          //골격근,지방
-          skeletalMuscleMass: this.state.skeletalMuscleMass, //골격근량
-          bodyFatMass2: this.state.bodyFatMass2, //체지방량2
-          //비만진단
-          bmi: this.state.bmi, //BMI
-          PercentBodyFat: this.state.percentBodyFat, //체지방률
-        }),
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          alert('인바디 등록되었습니다.');
-          // this.props.history.push({
-          //   //pathname: "/assign/inbody?member_no="+this.state.member_no
-          //   pathname: '/assign/inbody',
-          //   state: { member_no: this.state.member_no },
-          // });
-          this.props.history.push('/inbodies');
+      selectClientReservation(
+        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+      ).then((clientResult) => {
+        selectTrainerReservation(
+          this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+        ).then((trainerResult) => {
+          const fitness_no =
+            this.props.userinfo.loginWhether === 2
+              ? clientResult[0].fitness_no
+              : this.props.userinfo.loginWhether === 1
+              ? trainerResult[0].fitness_no
+              : this.props.userinfo.fitness_no;
+          fetch(ip + '/inbody', {
+            method: 'POST',
+            headers: {
+              'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+              fitness_no: fitness_no,
+              member_no: this.state.member_no,
+              //inbody_no:in_no,
+              inbody_no: this.state.inbody_no + 1,
+              height: this.state.height, //키
+              measurementDate: this.state.measurementDate, // 측정날짜
+              //체성분 분석
+              bodyMoisture: this.state.bodyMoisture, //체수분
+              protein: this.state.protein, //단백질
+              mineral: this.state.mineral, //무기질
+              bodyFat: this.state.bodyFat, //체지방
+              muscleMass: this.state.muscleMass, //근육량
+              bodyFatMass1: this.state.bodyFatMass1, //체지방량1
+              weight: this.state.weight, //체중
+              //골격근,지방
+              skeletalMuscleMass: this.state.skeletalMuscleMass, //골격근량
+              bodyFatMass2: this.state.bodyFatMass2, //체지방량2
+              //비만진단
+              bmi: this.state.bmi, //BMI
+              PercentBodyFat: this.state.percentBodyFat, //체지방률
+            }),
+          })
+            .then((response) => response.json())
+            .then((response) => {
+              alert('인바디 등록되었습니다.');
+              // this.props.history.push({
+              //   //pathname: "/assign/inbody?member_no="+this.state.member_no
+              //   pathname: '/assign/inbody',
+              //   state: { member_no: this.state.member_no },
+              // });
+              this.props.history.push('/inbodies');
+            });
         });
+      });
     }
   };
 
@@ -364,7 +384,7 @@ class AddInbody extends Component {
                 selected={this.state.measurementDate}
                 onChange={this.handleDateChange}
                 name='measurementDate'
-                dateFormat='MM/dd/yyyy'
+                dateFormat='yyyy년MM월dd일'
               />
             </label>
             <label>
