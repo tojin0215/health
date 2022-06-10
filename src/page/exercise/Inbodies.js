@@ -590,8 +590,8 @@ class Inbodies extends Component {
     // console.log(this.props.userinfo);
     // console.log(this.state.idc);
     console.log(this.state.inbodiesList);
-    console.log(this.state.client_name);
-    console.log(this.props.userinfo.manager_name);
+    // console.log(this.state.client_name);
+    // console.log(this.props.userinfo.manager_name);
 
     return (
       <div className='inbody'>
@@ -636,12 +636,10 @@ class Inbodies extends Component {
                   loginWhether={this.props.userinfo.loginWhether}
                   joinNo={this.props.userinfo.joinNo}
                   handleUser={this.handleUser}
-                  className=' '
                 />
               ) : (
                 <TextField
-                  id='customer_name'
-                  label='회원 선택'
+                  label='회원 검색'
                   variant='standard'
                   onClick={() => this.setState({ open: true })}
                   className='boxmorpsm h-100 w-100 text-center pb-2 px-5'

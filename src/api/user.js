@@ -402,3 +402,25 @@ export const clandarInbodies = (fitness_no, member_no, startDate, endDate) => {
     })
     .then((response) => response.data);
 };
+
+//assignExercise select member_no=idc
+export const allotAssignexercise = (fitness_no, member_no) => {
+  return axios
+    .get(`${SERVER_URL}/assignexercise`, {
+      params: {
+        type: 'allot',
+        fitness_no: fitness_no,
+        member_no: member_no,
+      },
+    })
+    .then((response) => response.data);
+};
+
+//exercise select
+export const exerciseAllot = (fitness_no, part) => {
+  return axios
+    .get(`${SERVER_URL}/exercise`, {
+      params: { type: 'allot', fitness_no: fitness_no, part: part },
+    })
+    .then((response) => response.data);
+};

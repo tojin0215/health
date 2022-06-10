@@ -31,6 +31,7 @@ import {
   AddIntroduce,
   ChoiceLogin,
   Inbodies,
+  ExerciseAllot,
 } from '../page';
 
 class App extends Component {
@@ -67,6 +68,7 @@ class App extends Component {
         <Route exact path='/introduce/add' component={AddIntroduce} />
         <Route exact path='/choiceLogin' component={ChoiceLogin} />
         <Route exact path='/inbodies' component={Inbodies} />
+        <Route exact path='/exerciseAllot' component={ExerciseAllot} />
       </div>
     );
   }
