@@ -95,6 +95,16 @@ class MegaMenu extends Component {
                   </li>
                 </li>
                 <li class='dropdown'>
+                  <NavLink exact to='/inbodies'>
+                    인바디 정보
+                  </NavLink>
+                  <li>
+                    <NavLink exact to='/inbodies'>
+                      인바디 정보
+                    </NavLink>
+                  </li>
+                </li>
+                <li class='dropdown'>
                   <NavLink exact to='/reservation'>
                     수업
                   </NavLink>
@@ -179,13 +189,7 @@ class MegaMenu extends Component {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink
-                      exact
-                      to={{
-                        pathname: '/assign/inbody',
-                        state: { member_no: 0, a: true },
-                      }}
-                    >
+                    <NavLink exact to='/inbodies'>
                       인바디 정보
                     </NavLink>
                   </li>
@@ -298,13 +302,7 @@ class MegaMenu extends Component {
                     <NavLink exact to='/client/add'>
                       회원 등록
                     </NavLink>
-                    <NavLink
-                      exact
-                      to={{
-                        pathname: '/assign/inbody',
-                        state: { member_no: 0, a: true },
-                      }}
-                    >
+                    <NavLink exact to='/inbodies'>
                       인바디 정보
                     </NavLink>
                   </li>

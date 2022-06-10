@@ -67,6 +67,16 @@ class Navigation extends Component {
                   </li>
                 </ul>
               </NavLink>
+              <NavLink exact to='/inbodies'>
+                <span className={styles.navitem}>인바디 정보</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/inbodies'>
+                      인바디 정보
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
               <NavLink exact to='/reservation'>
                 <span className={styles.navitem}>수업관리</span>
                 <ul>
@@ -134,13 +144,7 @@ class Navigation extends Component {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink
-                      exact
-                      to={{
-                        pathname: '/assign/inbody',
-                        state: { member_no: 0, a: true },
-                      }}
-                    >
+                    <NavLink exact to='/inbodies'>
                       인바디 정보
                     </NavLink>
                   </li>
@@ -258,7 +262,7 @@ class Navigation extends Component {
                       회원 등록
                     </NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <NavLink
                       exact
                       to={{
@@ -268,10 +272,10 @@ class Navigation extends Component {
                     >
                       인바디 정보
                     </NavLink>
-                  </li>
+                  </li> */}
                   <li>
                     <NavLink exact to='/inbodies'>
-                      새인바디
+                      인바디 정보
                     </NavLink>
                   </li>
                 </ul>
