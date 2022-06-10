@@ -409,7 +409,7 @@ class Trainer extends Component {
                   <TableCell>생년월일</TableCell>
                   <Mobile>
                     <TableCell>이력</TableCell>
-                    <TableCell>자기소개</TableCell>\
+                    <TableCell>자기소개</TableCell>
                   </Mobile>
                   <TableCell>수정하기</TableCell>
                 </TableRow>
