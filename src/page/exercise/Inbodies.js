@@ -483,30 +483,6 @@ class Inbodies extends Component {
     });
   };
   inbodiesViewChart = (idc) => {
-<<<<<<< HEAD
-    inbodiesSelect(
-      this.props.userinfo.fitness_no,
-      idc === undefined ? '' : idc
-    ).then((res) => {
-      let inbodyNum = [];
-      let measurementDate = [];
-      let weight = [];
-      let height = [];
-      let bodyMoisture = [];
-      let protein = [];
-      let mineral = [];
-      let bodyFat = [];
-      let muscleMass = [];
-      let bodyFatMass1 = [];
-      let skeletalMuscleMass = [];
-      let bodyFatMass2 = [];
-      let BMI = [];
-      let PercentBodyFat = [];
-      for (let i = 0; i < res.length; i++) {
-        inbodyNum.push(
-          moment(res[i].measurementDate).format('yyyy년 MM월 DD일')
-        );
-=======
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
@@ -539,7 +515,6 @@ class Inbodies extends Component {
               '측정일: ' +
                 moment(res[i].measurementDate).format('yyyy년MM월DD일')
             );
->>>>>>> abef9b0c01854d0abea9d15c52d4417a77ac079a
 
             height.push(res[i].height);
             weight.push(res[i].weight);
