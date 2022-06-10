@@ -29,3 +29,4 @@ export { default as AddIntroduce } from './introduce/AddIntroduce';
 export { default as ChoiceLogin } from './login/ChoiceLogin';
 export { default as Inbodies } from './exercise/Inbodies';
 export { default as ExerciseAllot } from './exercise/ExerciseAllot';
+export { default as ExerciseAllotList } from './exercise/ExerciseAllotList';

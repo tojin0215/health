@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import UserSearch from '../../component/customer/UserSearch';
 import { TextField } from '@mui/material';
 import {
+  allotAssignexercise,
   exerciseAllot,
   inbodiesSelect,
   selectClientReservation,
@@ -23,8 +24,7 @@ const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   );
 };
 
-const ExerciseView = ({
-  assign_exercise_no,
+const AssignexerciseView = ({
   exercise_no,
   fitness_no,
   member_no,
@@ -37,35 +37,17 @@ const ExerciseView = ({
   data,
   rest_second,
   set_count,
-  createdAt,
-  updatedAt,
   completed,
 }) => {
-  const region =
-    part === 1
-      ? '상체'
-      : part === 18
-      ? '하체'
-      : part === 28
-      ? '전신'
-      : part === 38
-      ? '코어'
-      : part === 48
-      ? '유산소'
-      : '기타';
   return (
     <div>
-      {region}
-      {name}
-      {machine}
-      {assign_exercise_no},{exercise_no},{fitness_no},{member_no},{group_no},
-      {url},{data_type},{data},{rest_second},{set_count},{createdAt},{updatedAt}
-      ,
+      {exercise_no},{fitness_no},{member_no},{group_no},{name},{part},{machine},
+      {url},{data_type},{data},{rest_second},{set_count},{completed},
     </div>
   );
 };
 
-class ExerciseAllot extends Component {
+class ExerciseAllotList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -186,35 +168,36 @@ class ExerciseAllot extends Component {
     });
   };
 
-  handleOnClick = (key) => {
+  assignexerciseAllotView = (idc) => {
     const fitness_no = this.props.userinfo.fitness_no;
-    exerciseAllot(fitness_no, key).then((result) => {
+    allotAssignexercise(fitness_no, idc).then((result) => {
       const items = result.map((data, index, array) => {
         return (
-          <ExerciseView
-            part={data.part}
+          <AssignexerciseView
+            member_no={data.member_no}
             name={data.name}
-            machine={data.machine}
-            assign_exercise_no={data.assign_exercise_no}
+            group_no={data.group_no}
             exercise_no={data.exercise_no}
             fitness_no={data.fitness_no}
-            member_no={data.member_no}
-            group_no={data.group_no}
+            part={data.part}
+            machine={data.machine}
             url={data.url}
             data_type={data.data_type}
             data={data.data}
             rest_second={data.rest_second}
             set_count={data.set_count}
-            createdAt={data.set_count}
-            updatedAt={data.updatedAt}
+            completed={data.completed}
           />
         );
       });
-      this.setState({ exerciseAllotlist: items });
+      this.setState({ assignexerciseAllotlist: items });
     });
   };
 
   render() {
+    // console.log(this.state.client_name);
+    // console.log(this.state.exerciseAllotlist);
+    // console.log(this.state.idc);
     return (
       <div>
         <div className='header'>
@@ -262,57 +245,26 @@ class ExerciseAllot extends Component {
               ? this.state.inbodiesList[0]
               : '등록된 인바디가 없습니다.'}
           </div>
-          {this.state.client_name ? (
-            <div>
-              <div>
-                <h1>운동 개별 선택</h1>
-                <button onClick={() => this.handleOnClick(1)}>상체</button>
-                <button onClick={() => this.handleOnClick(18)}>하체</button>
-                <button onClick={() => this.handleOnClick(28)}>전신</button>
-                <button onClick={() => this.handleOnClick(38)}>코어</button>
-                <button onClick={() => this.handleOnClick(48)}>유산소</button>
-                <button onClick={() => this.handleOnClick(58)}>기타</button>
-              </div>
-              <div>
-                <h1>운동 개별 선택된 것 목록</h1>
-                {this.state.exerciseAllotlist
-                  ? this.state.exerciseAllotlist
-                  : ''}
-              </div>
-              <div>+배정되면 임시 저장되는 테이블</div>
-
-              <Link
-                to={{
-                  pathname: '/inbodies/add',
-                  state: {
-                    inbody_no: this.state.inbody_no,
-                    member_no:
-                      this.props.userinfo.loginWhether == 2
-                        ? this.props.userinfo.joinNo
-                        : this.state.idc === undefined
-                        ? 0
-                        : this.state.idc,
-                  },
-                }}
-              >
-                <button>asdasd</button>
-              </Link>
-            </div>
-          ) : null}
+          <div>
+            <h1> 배정된 운동목록</h1>
+            {this.state.assignexerciseAllotlist
+              ? this.state.assignexerciseAllotlist
+              : ''}
+          </div>
         </div>
       </div>
     );
   }
 }
 
-const ExerciseAllotStateToProps = (state) => {
+const ExerciseAllotListStateToProps = (state) => {
   return {
     userinfo: state.authentication.userinfo,
     status: state.authentication.status,
   };
 };
 
-const ExerciseAllotDispatchToProps = (dispatch) => {
+const ExerciseAllotListDispatchToProps = (dispatch) => {
   return {
     getStatusRequest: () => {
       return dispatch(getStatusRequest());
@@ -321,6 +273,6 @@ const ExerciseAllotDispatchToProps = (dispatch) => {
 };
 
 export default connect(
-  ExerciseAllotStateToProps,
-  ExerciseAllotDispatchToProps
-)(ExerciseAllot);
+  ExerciseAllotListStateToProps,
+  ExerciseAllotListDispatchToProps
+)(ExerciseAllotList);
