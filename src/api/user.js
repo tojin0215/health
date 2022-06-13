@@ -425,5 +425,80 @@ export const exerciseAllot = (fitness_no, part) => {
     .then((response) => response.data);
 };
 
-//assignexercise select
-//assignexercise insert
+//workout select
+export const workoutSelect = (fitness_no, part) => {
+  return axios
+    .get(`${SERVER_URL}/workout`, {
+      params: { fitness_no: fitness_no, part: part },
+    })
+    .then((response) => response.data);
+};
+
+//workout insert
+export const workoutInsert = (
+  fitness_no,
+  workout,
+  part,
+  machine,
+  default_set,
+  default_count,
+  default_rest,
+  url
+) => {
+  return axios.post(`${SERVER_URL}/workout`, {
+    fitness_no: fitness_no,
+    workout: workout,
+    part: part,
+    machine: machine,
+    default_set: default_set,
+    //null이면 3세트
+    default_count: default_count,
+    //null이면 8회
+    default_rest: default_rest,
+    //null이면 30초
+    url: url,
+  });
+};
+
+//workout update1 (allot)
+export const workoutUpdateAllot = (
+  default_set,
+  default_count,
+  default_rest,
+  idw,
+  fitness_no
+) => {
+  return axios.put(
+    `${SERVER_URL}/workout?type=allot&idw=` + idw + `fitness_no=` + fitness_no,
+    {
+      default_set: default_set,
+      default_count: default_count,
+      default_rest: default_rest,
+    }
+  );
+};
+
+//workout update2
+export const workoutUpdate = (
+  workout,
+  part,
+  machine,
+  default_set,
+  default_count,
+  default_rest,
+  idw,
+  fitness_no
+) => {
+  return axios.put(
+    `${SERVER_URL}/workout?idw=` + idw + `fitness_no=` + fitness_no,
+    {
+      workout: workout,
+      part: part,
+      machine: machine,
+      default_set: default_set,
+      default_count: default_count,
+      default_rest: default_rest,
+    }
+  );
+};
+//workout delete
