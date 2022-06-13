@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
@@ -8,11 +8,13 @@ import { Link } from 'react-router-dom';
 import UserSearch from '../../component/customer/UserSearch';
 import { TextField } from '@mui/material';
 import {
+  assignexerciseInsert,
   exerciseAllot,
   inbodiesSelect,
   selectClientReservation,
   selectTrainerReservation,
 } from '../../api/user';
+import { data } from 'jquery';
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
     <div>
@@ -24,6 +26,7 @@ const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
 };
 
 const ExerciseView = ({
+  idc,
   assign_exercise_no,
   exercise_no,
   fitness_no,
@@ -53,15 +56,43 @@ const ExerciseView = ({
       : part === 48
       ? '유산소'
       : '기타';
+
+  const [region_input, setRegion_input] = useState('');
+  const [name_input, setName_input] = useState('');
+  const [machine_input, setMachine_input] = useState('');
+
+  const plusClick = () => {
+    setRegion_input(part);
+    setName_input(name);
+    setMachine_input(machine);
+  };
+
+  const eventTable = (e) => {
+    e.target.value;
+  };
+
   return (
-    <div>
-      {region}
-      {name}
+    <>
+      <tr>
+        <td>{region}</td>
+        <td>{name}</td>
+        <td>
+          {machine}
+          {exercise_no}
+        </td>
+        <td>
+          <button onClick={plusClick}>+선택버튼</button>
+          <input value={region_input} onChange={eventTable} />
+          <input value={name_input} onChange={eventTable} />
+          <input value={machine_input} onChange={eventTable} />
+        </td>
+
+        {/* {name}
       {machine}
       {assign_exercise_no},{exercise_no},{fitness_no},{member_no},{group_no},
-      {url},{data_type},{data},{rest_second},{set_count},{createdAt},{updatedAt}
-      ,
-    </div>
+      {url},{data_type},{data},{rest_second},{set_count},{createdAt},{updatedAt} */}
+      </tr>
+    </>
   );
 };
 
@@ -138,7 +169,6 @@ class ExerciseAllot extends Component {
       open: false,
     });
     this.inbodiesView(idc);
-    this.assignexerciseAllotView(idc);
   };
 
   inbodiesView = (idc) => {
@@ -192,6 +222,7 @@ class ExerciseAllot extends Component {
       const items = result.map((data, index, array) => {
         return (
           <ExerciseView
+            idc={this.state.idc}
             part={data.part}
             name={data.name}
             machine={data.machine}
@@ -211,6 +242,7 @@ class ExerciseAllot extends Component {
         );
       });
       this.setState({ exerciseAllotlist: items });
+      console.log(result);
     });
   };
 
@@ -275,11 +307,19 @@ class ExerciseAllot extends Component {
               </div>
               <div>
                 <h1>운동 개별 선택된 것 목록</h1>
-                {this.state.exerciseAllotlist
-                  ? this.state.exerciseAllotlist
-                  : ''}
+                <table class='table'>
+                  <tr>
+                    <th scope='col'>운동 부위</th>
+                    <th scope='col'>운동 이름</th>
+                    <th scope='col'>운동 기구</th>
+                    <th scope='col'>선택</th>
+                  </tr>
+
+                  {this.state.exerciseAllotlist
+                    ? this.state.exerciseAllotlist
+                    : ''}
+                </table>
               </div>
-              <div>+배정되면 임시 저장되는 테이블</div>
 
               <Link
                 to={{

@@ -424,3 +424,6 @@ export const exerciseAllot = (fitness_no, part) => {
     })
     .then((response) => response.data);
 };
+
+//assignexercise select
+//assignexercise insert
