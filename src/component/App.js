@@ -31,6 +31,9 @@ import {
   AddIntroduce,
   ChoiceLogin,
   Inbodies,
+  ExerciseAllot,
+  ExerciseAllotList,
+  ExerciseAllotAdd,
 } from '../page';
 
 class App extends Component {
@@ -48,7 +51,7 @@ class App extends Component {
         <Route exact path='/assign/check' component={AssignCheckExercise} />
         <Route exact path='/assign/customer' component={AssignCustomer} />
         <Route exact path='/assign/inbody' component={Inbody} />
-        <Route exact path='/assign/add' component={AddInbody} />
+        <Route exact path='/inbodies/add' component={AddInbody} />
         <Route exact path='/sales' component={Sales} />
         <Route exact path='/sales/add' component={AddSales} />
         <Route exact path='/statistics' component={Statistics} />
@@ -67,6 +70,9 @@ class App extends Component {
         <Route exact path='/introduce/add' component={AddIntroduce} />
         <Route exact path='/choiceLogin' component={ChoiceLogin} />
         <Route exact path='/inbodies' component={Inbodies} />
+        <Route exact path='/exerciseAllot' component={ExerciseAllot} />
+        <Route exact path='/exerciseAllotList' component={ExerciseAllotList} />
+        <Route exact path='/exerciseAllotAdd' component={ExerciseAllotAdd} />
       </div>
     );
   }

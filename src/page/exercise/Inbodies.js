@@ -590,8 +590,8 @@ class Inbodies extends Component {
     // console.log(this.props.userinfo);
     // console.log(this.state.idc);
     console.log(this.state.inbodiesList);
-    console.log(this.state.client_name);
-    console.log(this.props.userinfo.manager_name);
+    // console.log(this.state.client_name);
+    // console.log(this.props.userinfo.manager_name);
 
     return (
       <div className='inbody'>
@@ -662,7 +662,7 @@ class Inbodies extends Component {
             <Col md={2} className='mb-2'>
               <Link
                 to={{
-                  pathname: '/assign/add',
+                  pathname: '/inbodies/add',
                   state: {
                     inbody_no: this.state.inbody_no,
                     member_no:

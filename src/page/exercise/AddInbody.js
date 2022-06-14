@@ -88,7 +88,7 @@ class AddInbody extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
-    // this.cusFetch();
+    this.cusFetch();
   }
 
   goLogin = () => {
@@ -134,8 +134,6 @@ class AddInbody extends Component {
 
         // and notify
         alert('Your session is expired, please log in again');
-      } else {
-        this.cusFetch();
       }
     });
   }
