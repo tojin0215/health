@@ -629,25 +629,30 @@ class Inbodies extends Component {
                   value={this.props.userinfo.manager_name}
                 />
               ) : this.state.open ? (
-                <UserSearch
-                  open={this.state.open}
-                  setOpen={(o) => this.setState({ open: o })}
-                  fitness_no={this.props.userinfo.fitness_no}
-                  loginWhether={this.props.userinfo.loginWhether}
-                  joinNo={this.props.userinfo.joinNo}
-                  handleUser={this.handleUser}
-                  className=' '
-                />
+                <div>
+                  <UserSearch
+                    open={this.state.open}
+                    setOpen={(o) => this.setState({ open: o })}
+                    fitness_no={this.props.userinfo.fitness_no}
+                    loginWhether={this.props.userinfo.loginWhether}
+                    joinNo={this.props.userinfo.joinNo}
+                    handleUser={this.handleUser}
+                    className=' '
+                  />
+                </div>
               ) : (
-                <TextField
-                  id='customer_name'
-                  label='회원 선택'
-                  variant='standard'
-                  onClick={() => this.setState({ open: true })}
-                  className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
-                  InputProps={{ disableUnderline: true }}
-                  value={this.state.client_name}
-                />
+                <div>
+                  <TextField
+                    id='customer_name'
+                    label='회원 선택'
+                    variant='standard'
+                    onClick={() => this.setState({ open: true })}
+                    className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
+                    InputProps={{ disableUnderline: true }}
+                    value={this.state.client_name}
+                    style={{ cursor: 'pointer' }}
+                  />
+                </div>
               )}
             </Col>
             <Col md={4} className='mb-2'>

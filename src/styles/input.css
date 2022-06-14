@@ -86,3 +86,13 @@ html .MuiInputLabel-outlined {
 .Dropdown-menu {
   border-radius: 1rem;
 }
+
+/*
+* 회원 검색
+*/
+#customer_name {
+  cursor: pointer;
+}
+#customer_name-label {
+  text-indent: 2rem;
+}
