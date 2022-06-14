@@ -33,6 +33,7 @@ import {
   Inbodies,
   ExerciseAllot,
   ExerciseAllotList,
+  ExerciseAllotAdd,
 } from '../page';
 
 class App extends Component {
@@ -71,6 +72,7 @@ class App extends Component {
         <Route exact path='/inbodies' component={Inbodies} />
         <Route exact path='/exerciseAllot' component={ExerciseAllot} />
         <Route exact path='/exerciseAllotList' component={ExerciseAllotList} />
+        <Route exact path='/exerciseAllotAdd' component={ExerciseAllotAdd} />
       </div>
     );
   }

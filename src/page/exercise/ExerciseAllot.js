@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
-import MegaMenu from '../../component/navigation/Menu';
+import Menu from '../../component/navigation/Menu';
 import { Link } from 'react-router-dom';
 import UserSearch from '../../component/customer/UserSearch';
 import { TextField } from '@mui/material';
@@ -13,8 +13,10 @@ import {
   inbodiesSelect,
   selectClientReservation,
   selectTrainerReservation,
+  workoutSelect,
 } from '../../api/user';
 import { data } from 'jquery';
+import Footer from '../../component/footer/Footer';
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
     <div>
@@ -26,23 +28,18 @@ const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
 };
 
 const ExerciseView = ({
-  idc,
-  assign_exercise_no,
-  exercise_no,
+  idw,
   fitness_no,
-  member_no,
-  group_no,
-  name,
+  workout,
   part,
   machine,
+  default_set,
+  default_count,
+  default_rest,
   url,
-  data_type,
-  data,
-  rest_second,
-  set_count,
-  createdAt,
-  updatedAt,
-  completed,
+  inbody_no,
+  idc,
+  client_name,
 }) => {
   const region =
     part === 1
@@ -57,41 +54,59 @@ const ExerciseView = ({
       ? '유산소'
       : '기타';
 
-  const [region_input, setRegion_input] = useState('');
-  const [name_input, setName_input] = useState('');
-  const [machine_input, setMachine_input] = useState('');
-
-  const plusClick = () => {
-    setRegion_input(part);
-    setName_input(name);
-    setMachine_input(machine);
+  const [tablePlus, setTablePlus] = useState([
+    { region: '', workout: '', machine: '' },
+  ]);
+  const plusTable = () => {
+    setTablePlus((tablePlus) => [
+      ...tablePlus,
+      {
+        region: region,
+        workout: workout,
+        machine: machine,
+      },
+    ]);
+    // console.log(tablePlus);
   };
-
-  const eventTable = (e) => {
-    e.target.value;
-  };
-
+  console.log(tablePlus);
   return (
     <>
       <tr>
         <td>{region}</td>
-        <td>{name}</td>
+        <td>{workout}</td>
+        <td>{machine}</td>
         <td>
-          {machine}
-          {exercise_no}
+          <button onClick={plusTable}>+</button>
         </td>
-        <td>
-          <button onClick={plusClick}>+선택버튼</button>
-          <input value={region_input} onChange={eventTable} />
-          <input value={name_input} onChange={eventTable} />
-          <input value={machine_input} onChange={eventTable} />
-        </td>
-
-        {/* {name}
-      {machine}
-      {assign_exercise_no},{exercise_no},{fitness_no},{member_no},{group_no},
-      {url},{data_type},{data},{rest_second},{set_count},{createdAt},{updatedAt} */}
+        <div>
+          <table class='table'>
+            <tr>
+              <th>운동 부위</th>
+              <th>운동 이름</th>
+              <th>운동 기구</th>
+            </tr>
+            {tablePlus.map((plus, index) => (
+              <tr key={index}>
+                <td>{plus.region}</td>
+                <td>{plus.workout}</td>
+                <td>{plus.machine}</td>
+              </tr>
+            ))}
+          </table>
+        </div>
       </tr>
+      <Link
+        to={{
+          pathname: '/exerciseAllotAdd',
+          state: {
+            client_name: client_name,
+            idc: idc,
+            tablePlus: tablePlus,
+          },
+        }}
+      >
+        <button>등록하기(세부데이터입력set,count,rest)</button>
+      </Link>
     </>
   );
 };
@@ -105,6 +120,7 @@ class ExerciseAllot extends Component {
       inbodiesList: [],
       assignexerciseAllotlist: [],
       exerciseAllotlist: [],
+      tablePlus: [],
     };
     //여기 function
   }
@@ -218,41 +234,43 @@ class ExerciseAllot extends Component {
 
   handleOnClick = (key) => {
     const fitness_no = this.props.userinfo.fitness_no;
-    exerciseAllot(fitness_no, key).then((result) => {
+    workoutSelect(fitness_no, key).then((result) => {
       const items = result.map((data, index, array) => {
         return (
           <ExerciseView
-            idc={this.state.idc}
-            part={data.part}
-            name={data.name}
-            machine={data.machine}
-            assign_exercise_no={data.assign_exercise_no}
-            exercise_no={data.exercise_no}
+            idw={data.idw}
             fitness_no={data.fitness_no}
-            member_no={data.member_no}
-            group_no={data.group_no}
+            workout={data.workout}
+            part={data.part}
+            machine={data.machine}
+            default_set={data.default_set}
+            default_count={data.default_count}
+            default_rest={data.default_rest}
             url={data.url}
-            data_type={data.data_type}
-            data={data.data}
-            rest_second={data.rest_second}
-            set_count={data.set_count}
-            createdAt={data.set_count}
-            updatedAt={data.updatedAt}
+            client_name={this.state.client_name}
+            idc={
+              this.props.userinfo.loginWhether == 2
+                ? this.props.userinfo.joinNo
+                : this.state.idc === undefined
+                ? 0
+                : this.state.idc
+            }
           />
         );
       });
       this.setState({ exerciseAllotlist: items });
-      console.log(result);
+      // console.log(result);
     });
   };
 
   render() {
+    console.log(this.state.idc);
     return (
       <div>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <MegaMenu />
+          <Menu />
           <div className='localNavigation'>
             <div className='container'>
               <h2>
@@ -314,31 +332,16 @@ class ExerciseAllot extends Component {
                     <th scope='col'>운동 기구</th>
                     <th scope='col'>선택</th>
                   </tr>
-
                   {this.state.exerciseAllotlist
                     ? this.state.exerciseAllotlist
                     : ''}
                 </table>
               </div>
-
-              <Link
-                to={{
-                  pathname: '/inbodies/add',
-                  state: {
-                    inbody_no: this.state.inbody_no,
-                    member_no:
-                      this.props.userinfo.loginWhether == 2
-                        ? this.props.userinfo.joinNo
-                        : this.state.idc === undefined
-                        ? 0
-                        : this.state.idc,
-                  },
-                }}
-              >
-                <button>asdasd</button>
-              </Link>
             </div>
           ) : null}
+        </div>
+        <div className='footer'>
+          <Footer />
         </div>
       </div>
     );

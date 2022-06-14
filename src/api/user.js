@@ -469,7 +469,7 @@ export const workoutUpdateAllot = (
   fitness_no
 ) => {
   return axios.put(
-    `${SERVER_URL}/workout?type=allot&idw=` + idw + `fitness_no=` + fitness_no,
+    `${SERVER_URL}/workout?type=allot&idw=` + idw + `&fitness_no=` + fitness_no,
     {
       default_set: default_set,
       default_count: default_count,
@@ -490,7 +490,7 @@ export const workoutUpdate = (
   fitness_no
 ) => {
   return axios.put(
-    `${SERVER_URL}/workout?idw=` + idw + `fitness_no=` + fitness_no,
+    `${SERVER_URL}/workout?idw=` + idw + `&fitness_no=` + fitness_no,
     {
       workout: workout,
       part: part,
@@ -502,3 +502,45 @@ export const workoutUpdate = (
   );
 };
 //workout delete
+export const workoutDelete = (idw) => {
+  return axios.delete(`${SERVER_URL}/workout?idw=` + idw, {});
+};
+
+//workoutAlloted select
+export const workoutAllotedSelect = (fitness_no, client_no) => {
+  return axios
+    .get(
+      `${SERVER_URL}/workoutAlloted?fitness_no=` +
+        fitness_no +
+        `&client_no=` +
+        client_no
+    )
+    .then((response) => response.data);
+};
+
+//workoutAlloted insert
+export const workoutAllotedInsert = (
+  fitness_no,
+  client_no,
+  workout,
+  region,
+  machine,
+  default_set,
+  default_count,
+  default_rest,
+  url
+) => {
+  return axios
+    .post(`${SERVER_URL}/workoutAlloted`, {
+      fitness_no: fitness_no,
+      client_no: client_no,
+      workout: workout,
+      region: region,
+      machine: machine,
+      default_set: default_set,
+      default_count: default_count,
+      default_rest: default_rest,
+      url: url,
+    })
+    .then((response) => response.data);
+};
