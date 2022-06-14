@@ -379,7 +379,7 @@ class AddSales extends Component {
           {/*.localNavigation */}
         </div>
         {/*.header */}
-        <div className='container'>
+        <Container>
           <h2>상품 등록페이지</h2>
           <div>
             <Button type='button' onClick={this.handleClickOpen}>
@@ -461,10 +461,7 @@ class AddSales extends Component {
             </Dialog>
           </div>
           {/* <Link to="/sales">회원 검색</Link><br/> */}
-          <form
-            className='AddSalesForm productPay'
-            style={{ flexDirection: 'column' }}
-          >
+          <form className='AddSalesForm productPay'>
             <label className='salesCustomer'>
               <span>{this.state.userName}</span>님 반갑습니다.
             </label>
@@ -479,7 +476,7 @@ class AddSales extends Component {
                     value='1'
                     onChange={this.handleChange}
                   />
-                  <Form.Check.Label htmlFor='male' className='w-100'>
+                  <Form.Check.Label htmlFor='개인 PT' className='w-100'>
                     개인 PT
                   </Form.Check.Label>
                 </Form.Check>
@@ -491,7 +488,7 @@ class AddSales extends Component {
                     value='2'
                     onChange={this.handleChange}
                   />
-                  <Form.Check.Label htmlFor='female' className='w-100'>
+                  <Form.Check.Label htmlFor='GX' className='w-100'>
                     GX
                   </Form.Check.Label>
                 </Form.Check>
@@ -503,7 +500,7 @@ class AddSales extends Component {
                     value='3'
                     onChange={this.handleChange}
                   />
-                  <Form.Check.Label htmlFor='female' className='w-100'>
+                  <Form.Check.Label htmlFor='필라테스' className='w-100'>
                     필라테스
                   </Form.Check.Label>
                 </Form.Check>
@@ -515,7 +512,7 @@ class AddSales extends Component {
                     value='4'
                     onChange={this.handleChange}
                   />
-                  <Form.Check.Label htmlFor='female' className='w-100'>
+                  <Form.Check.Label htmlFor='헬스' className='w-100'>
                     헬스
                   </Form.Check.Label>
                 </Form.Check>
@@ -527,7 +524,7 @@ class AddSales extends Component {
                     value='5'
                     onChange={this.handleChange}
                   />
-                  <Form.Check.Label htmlFor='female' className='w-100'>
+                  <Form.Check.Label htmlFor='기타' className='w-100'>
                     기타
                   </Form.Check.Label>
                   <Form.Control
@@ -542,13 +539,9 @@ class AddSales extends Component {
               </Form.Group>
             </div>
             {/*.exerciseType */}
-
             <h3>이용권 종류</h3>
-            <Row
-              xs={2}
-              className='boxmorpinsm w-100 justify-content-start m-0 p-4 mb-4'
-            >
-              <label className='d-flex align-items-center justify-content-start w-100'>
+            <Row xs={2} className='boxmorpinsm w-100 m-0 p-4 mb-4'>
+              <Form.Group>
                 <Form.Check>
                   <Form.Check.Input
                     type='radio'
@@ -558,100 +551,105 @@ class AddSales extends Component {
                     onChange={this.handleCheckbox}
                     checked={this.state.checkboxGroup['salesDaysCheckbox']}
                   />
-                  <Form.Check.Label htmlFor='male' className='w-100'>
+                  <Form.Check.Label for='salesDaysCheckbox' className='w-100'>
                     기간제
                   </Form.Check.Label>
                 </Form.Check>
-                <label>
-                  기간시작일
-                  <DatePicker
-                    selected={this.state.salesStart_date}
-                    onChange={this.handleDateChange}
-                    name='salesStart_date'
-                    dateFormat='yyyy-MM-dd'
-                    font-size='1.6rem'
-                    // locale 오류로 임시 삭제
-                    // locale='ko'
-                  />
-                  {/* <DatePicker
+                <Form.Label>기간시작일</Form.Label>
+                <DatePicker
+                  selected={this.state.salesStart_date}
+                  onChange={this.handleDateChange}
+                  name='salesStart_date'
+                  dateFormat='yyyy-MM-dd'
+                  font-size='1.6rem'
+                  // locale 오류로 임시 삭제
+                  // locale='ko'
+                />
+                {/* <DatePicker
 										selected={this.state.paymentDate}
 										onChange={this.handleDateChange}
 										name='paymentDate'
 										dateFormat='yyyy-MM-dd'
 										locale='ko'
 									/> */}
-                  <Form.Group>
-                    <Form.Label>일수</Form.Label>
-                    <Form.Control
-                      variant='outlined'
-                      value={this.state.salesDays}
-                      onChange={this.handleChange}
-                      type='number'
-                      id='salesDays'
-                      label='일'
-                      required
-                    ></Form.Control>
-                  </Form.Group>
-                </label>
-              </label>
+                <Form.Label>일수</Form.Label>
+                <Form.Control
+                  variant='outlined'
+                  value={this.state.salesDays}
+                  onChange={this.handleChange}
+                  type='number'
+                  id='salesDays'
+                  label='일'
+                  required
+                ></Form.Control>
+              </Form.Group>
             </Row>
-            <Row
-              xs={2}
-              className='boxmorpinsm w-100 justify-content-start m-0 p-4 mb-4'
-            >
-              <label>
-                <input
-                  type='radio'
-                  id='paidMembershipCheckbox'
-                  name='voucher'
-                  value='4'
-                  onChange={this.handleCheckbox}
-                  checked={this.state.checkboxGroup['paidMembershipCheckbox']}
-                />
-                <Form.Group>
-                  <Form.Label>횟수제 이용권</Form.Label>
-                  <Form.Control
-                    value={this.state.paidMembership}
-                    onChange={this.handleChange}
-                    type='number'
-                    name='paidMembership'
-                    id='paidMembership'
-                    label='숫자만 입력하세요'
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </label>
+            <Row xs={2} className='boxmorpinsm w-100 m-0 p-4 mb-4'>
+              <Form.Group>
+                <Form.Check>
+                  <Form.Check.Input
+                    type='radio'
+                    id='paidMembershipCheckbox'
+                    name='voucher'
+                    value='4'
+                    onChange={this.handleCheckbox}
+                    checked={this.state.checkboxGroup['paidMembershipCheckbox']}
+                  />
+                  <Form.Check.Label
+                    htmlFor='paidMembershipCheckbox'
+                    className='w-100'
+                  >
+                    횟수제 이용권
+                  </Form.Check.Label>
+                </Form.Check>
+                <Form.Control
+                  value={this.state.paidMembership}
+                  onChange={this.handleChange}
+                  type='number'
+                  name='paidMembership'
+                  id='paidMembership'
+                  label='숫자만 입력하세요'
+                  required
+                ></Form.Control>
+              </Form.Group>
             </Row>
-
             <h3>결제 금액</h3>
             <div className='payType boxmorpinsm p-4 mb-2'>
-              <label>
-                <input
-                  type='radio'
-                  name='paymentTools'
-                  id='카드'
-                  onChange={this.handleChange}
-                />
-                카드
-              </label>
-              <label>
-                <input
-                  type='radio'
-                  name='paymentTools'
-                  id='현금'
-                  onChange={this.handleChange}
-                />
-                현금
-              </label>
-              <label>
-                <input
-                  type='radio'
-                  name='paymentTools'
-                  id='계좌이체'
-                  onChange={this.handleChange}
-                />
-                계좌이체
-              </label>
+              <Form.Group>
+                <Form.Check>
+                  <Form.Check.Input
+                    type='radio'
+                    name='paymentTools'
+                    id='카드'
+                    onChange={this.handleChange}
+                  />
+                  <Form.Check.Label htmlFor='카드' className='w-100'>
+                    카드
+                  </Form.Check.Label>
+                </Form.Check>
+                <Form.Check>
+                  <Form.Check.Input
+                    type='radio'
+                    name='paymentTools'
+                    id='현금'
+                    onChange={this.handleChange}
+                  />
+                  <Form.Check.Label htmlFor='현금' className='w-100'>
+                    현금
+                  </Form.Check.Label>
+                </Form.Check>
+                <Form.Check>
+                  <Form.Check.Input
+                    type='radio'
+                    name='paymentTools'
+                    id='계좌이체'
+                    onChange={this.handleChange}
+                  />
+                  <Form.Check.Label htmlFor='계좌이체' className='w-100'>
+                    계좌이체
+                  </Form.Check.Label>
+                </Form.Check>
+              </Form.Group>
             </div>
             {/*.payType */}
             <div className='paymentAmount boxmorpinsm p-4 mb-4'>
@@ -684,7 +682,8 @@ class AddSales extends Component {
               </label>
             </div>
             {/*.paymentAmount */}
-            <div className='finalAmount'>
+            <h3>최종</h3>
+            <div className=' boxmorpinsm p-4 mb-4'>
               <div className='finalAmountOthers'>
                 <label className='amountDay'>
                   <span>결제일</span>
@@ -697,42 +696,35 @@ class AddSales extends Component {
                     // locale='ko'
                   />
                 </label>
-                {/*.amountDay */}
               </div>
-              {/*.finalAmountOthers */}
-              <label className='amountTotal'>
-                금액 합계
-                <NumberFormat
-                  thousandSeparator={true}
-                  name='payment'
-                  id='TotalPayment'
-                  readOnly
-                  value={
-                    parseInt(
-                      this.state.exercisePrice
-                        .toString()
-                        .replace(/[^(0-9)]/gi, '')
-                    ) +
-                    parseInt(
-                      this.state.sportswearPrice
-                        .toString()
-                        .replace(/[^(0-9)]/gi, '')
-                    ) +
-                    parseInt(
-                      this.state.lockerPrice
-                        .toString()
-                        .replace(/[^(0-9)]/gi, '')
-                    )
-                  }
-                />
-              </label>
-              {/*.amountTotal */}
+              <span>금액 합계</span>
+              <NumberFormat
+                thousandSeparator={true}
+                name='payment'
+                id='TotalPayment'
+                readOnly
+                value={
+                  parseInt(
+                    this.state.exercisePrice
+                      .toString()
+                      .replace(/[^(0-9)]/gi, '')
+                  ) +
+                  parseInt(
+                    this.state.sportswearPrice
+                      .toString()
+                      .replace(/[^(0-9)]/gi, '')
+                  ) +
+                  parseInt(
+                    this.state.lockerPrice.toString().replace(/[^(0-9)]/gi, '')
+                  )
+                }
+              />
             </div>
             {/*.finalAmount */}
             <Button onClick={this.handleOnClick}>등록하기</Button>
           </form>
           {/*.AddSalesForm productPay */}
-        </div>
+        </Container>
         {/*.container */}
         <div className='footer'>
           <Footer />
