@@ -7,7 +7,7 @@ import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 
-import { Button } from 'react-bootstrap';
+import { Row, Col, Container, Button } from 'react-bootstrap';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -639,45 +639,43 @@ class Sales extends Component {
           {/*.localNavigation */}
         </div>
         {/*.header */}
-        <div className='container'>
+        <Container>
           <h2>매출 현황</h2>
           <div className='salesUtill'>
             <div className='salesStatus'>
-              <button
-                className='dateSort mr-3'
-                value='오늘'
-                onClick={this.dateClick}
-              >
-                당일
-              </button>
-              <button
-                className='dateSort mr-3'
-                value='한달'
-                onClick={this.dateClick}
-              >
-                1개월
-              </button>
-              <DatePicker
-                selected={this.state.startDate}
-                selectsStart
-                maxDate={new Date()}
-                onChange={(date) => this.setState({ startDate: date })}
-                name='startDate'
-                dateFormat='yyyy/MM/dd'
-              />
-              <text> ~ </text>
-              <DatePicker
-                selected={this.state.endDate}
-                selectsEnd
-                minDate={this.state.startDate}
-                maxDate={new Date()}
-                onChange={(date) => this.setState({ endDate: date })}
-                name='endDate'
-                dateFormat='yyyy/MM/dd'
-              />
-              <button type='button' onClick={this.handleOnClick}>
-                조회하기
-              </button>
+              <Row>
+                <Col className='text-end'>
+                  <Button value='오늘' onClick={this.dateClick}>
+                    당일
+                  </Button>
+                  <Button value='한달' onClick={this.dateClick}>
+                    1개월
+                  </Button>
+                </Col>
+                <Col className='d-flex'>
+                  <DatePicker
+                    selected={this.state.startDate}
+                    selectsStart
+                    maxDate={new Date()}
+                    onChange={(date) => this.setState({ startDate: date })}
+                    name='startDate'
+                    dateFormat='yyyy/MM/dd'
+                  />
+                  <text> ~ </text>
+                  <DatePicker
+                    selected={this.state.endDate}
+                    selectsEnd
+                    minDate={this.state.startDate}
+                    maxDate={new Date()}
+                    onChange={(date) => this.setState({ endDate: date })}
+                    name='endDate'
+                    dateFormat='yyyy/MM/dd'
+                  />
+                </Col>
+                <Col>
+                  <Button onClick={this.handleOnClick}>조회하기</Button>
+                </Col>
+              </Row>
             </div>
             {/*.salesStatus */}
           </div>
@@ -726,7 +724,7 @@ class Sales extends Component {
             </BootstrapTable>
             <div className='salesUtill salesUtill2 d-flex flex-row-reverse'>
               <Link to='/sales/add'>
-                <button className='btnSolid mx-4'>결제 등록</button>
+                <Button>결제 등록</Button>
               </Link>
             </div>
             <h5>전체 기록</h5>
@@ -825,7 +823,7 @@ class Sales extends Component {
               </TableHeaderColumn>
             </BootstrapTable>
           </div>
-        </div>
+        </Container>
         {/*.container */}
         <footer className='footer'>
           <Footer />

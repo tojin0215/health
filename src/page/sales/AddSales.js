@@ -1,22 +1,8 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import Dropdown from 'react-dropdown';
 
-import { Container, Row, Col } from 'react-bootstrap';
-
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-
-import TextField from '@mui/material/TextField';
-
 import '../../styles/sales/AddSales.css';
 
-import Table from '@mui/material/Table';
-import TableHead from '@mui/material/TableHead';
-import TableBody from '@mui/material/TableBody';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
 import NumberFormat from 'react-number-format';
 
 import { getStatusRequest } from '../../action/authentication';
@@ -31,6 +17,21 @@ import MegaMenu from '../../component/navigation/Menu';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
+
+// React-Bootstrap
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+// MUI
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
 
 import DatePicker from 'react-datepicker';
 // locale 오류로 임시 삭제
@@ -381,9 +382,9 @@ class AddSales extends Component {
         <div className='container'>
           <h2>상품 등록페이지</h2>
           <div>
-            <button type='button' onClick={this.handleClickOpen}>
+            <Button type='button' onClick={this.handleClickOpen}>
               회원검색
-            </button>
+            </Button>
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
@@ -408,9 +409,9 @@ class AddSales extends Component {
                     checked={this.state.search}
                     onChange={this.handleChange}
                   />
-                  <button type='button' onClick={this.search}>
+                  <Button type='button' onClick={this.search}>
                     고객 검색
-                  </button>
+                  </Button>
                 </div>
                 {/*.customerSearch */}
                 <Table className='addsalesSearchTable'>
@@ -469,64 +470,76 @@ class AddSales extends Component {
             </label>
             <h3 className='AddSalesHeader'>운동 종목</h3>
             <div className='exerciseType boxmorpinsm p-4 mb-5'>
-              <label>
-                <input
-                  type='radio'
-                  id='개인 PT'
-                  name='exerciseName'
-                  value='1'
-                  onChange={this.handleChange}
-                />
-                개인 PT
-              </label>
-              <label>
-                <input
-                  type='radio'
-                  id='GX'
-                  name='exerciseName'
-                  value='2'
-                  onChange={this.handleChange}
-                />
-                GX
-              </label>
-              <label>
-                <input
-                  type='radio'
-                  id='필라테스'
-                  name='exerciseName'
-                  value='3'
-                  onChange={this.handleChange}
-                />
-                필라테스
-              </label>
-              <label>
-                <input
-                  type='radio'
-                  id='헬스'
-                  name='exerciseName'
-                  value='4'
-                  onChange={this.handleChange}
-                />
-                헬스
-              </label>
-              <label>
-                <input
-                  type='radio'
-                  id='기타'
-                  name='exerciseName'
-                  value='5'
-                  onChange={this.handleChange}
-                />
-                <span>기타</span>
-                <input
-                  type='text'
-                  id='inputExercise'
-                  className='form-control'
-                  placeholder='기타 운동'
-                  name='Exercise'
-                  onChange={this.handleChange}
-                />
-              </label>
+              <Form.Group>
+                <Form.Check>
+                  <Form.Check.Input
+                    type='radio'
+                    id='개인 PT'
+                    name='exerciseName'
+                    value='1'
+                    onChange={this.handleChange}
+                  />
+                  <Form.Check.Label htmlFor='male' className='w-100'>
+                    개인 PT
+                  </Form.Check.Label>
+                </Form.Check>
+                <Form.Check>
+                  <Form.Check.Input
+                    type='radio'
+                    id='GX'
+                    name='exerciseName'
+                    value='2'
+                    onChange={this.handleChange}
+                  />
+                  <Form.Check.Label htmlFor='female' className='w-100'>
+                    GX
+                  </Form.Check.Label>
+                </Form.Check>
+                <Form.Check>
+                  <Form.Check.Input
+                    type='radio'
+                    id='필라테스'
+                    name='exerciseName'
+                    value='3'
+                    onChange={this.handleChange}
+                  />
+                  <Form.Check.Label htmlFor='female' className='w-100'>
+                    필라테스
+                  </Form.Check.Label>
+                </Form.Check>
+                <Form.Check>
+                  <Form.Check.Input
+                    type='radio'
+                    id='헬스'
+                    name='exerciseName'
+                    value='4'
+                    onChange={this.handleChange}
+                  />
+                  <Form.Check.Label htmlFor='female' className='w-100'>
+                    헬스
+                  </Form.Check.Label>
+                </Form.Check>
+                <Form.Check>
+                  <Form.Check.Input
+                    type='radio'
+                    id='기타'
+                    name='exerciseName'
+                    value='5'
+                    onChange={this.handleChange}
+                  />
+                  <Form.Check.Label htmlFor='female' className='w-100'>
+                    기타
+                  </Form.Check.Label>
+                  <Form.Control
+                    type='text'
+                    id='inputExercise'
+                    className='form-control'
+                    placeholder='기타 운동'
+                    name='Exercise'
+                    onChange={this.handleChange}
+                  ></Form.Control>
+                </Form.Check>
+              </Form.Group>
             </div>
             {/*.exerciseType */}
 
@@ -536,8 +549,8 @@ class AddSales extends Component {
               className='boxmorpinsm w-100 justify-content-start m-0 p-4 mb-4'
             >
               <label className='d-flex align-items-center justify-content-start w-100'>
-                <label className='d-flex align-items-center pe-4'>
-                  <input
+                <Form.Check>
+                  <Form.Check.Input
                     type='radio'
                     id='salesDaysCheckbox'
                     name='voucher'
@@ -545,9 +558,11 @@ class AddSales extends Component {
                     onChange={this.handleCheckbox}
                     checked={this.state.checkboxGroup['salesDaysCheckbox']}
                   />
-                  기간제
-                </label>
-                <label className='d-flex align-items-center px-4'>
+                  <Form.Check.Label htmlFor='male' className='w-100'>
+                    기간제
+                  </Form.Check.Label>
+                </Form.Check>
+                <label>
                   기간시작일
                   <DatePicker
                     selected={this.state.salesStart_date}
@@ -558,25 +573,25 @@ class AddSales extends Component {
                     // locale 오류로 임시 삭제
                     // locale='ko'
                   />
-                </label>
-                {/* <DatePicker
+                  {/* <DatePicker
 										selected={this.state.paymentDate}
 										onChange={this.handleDateChange}
 										name='paymentDate'
 										dateFormat='yyyy-MM-dd'
 										locale='ko'
 									/> */}
-                <label className='d-flex align-items-center px-4'>
-                  <p>일수</p>
-                  <TextField
-                    variant='outlined'
-                    value={this.state.salesDays}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='salesDays'
-                    label='일'
-                    required
-                  />
+                  <Form.Group>
+                    <Form.Label>일수</Form.Label>
+                    <Form.Control
+                      variant='outlined'
+                      value={this.state.salesDays}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='salesDays'
+                      label='일'
+                      required
+                    ></Form.Control>
+                  </Form.Group>
                 </label>
               </label>
             </Row>
@@ -584,28 +599,27 @@ class AddSales extends Component {
               xs={2}
               className='boxmorpinsm w-100 justify-content-start m-0 p-4 mb-4'
             >
-              <label className='d-flex align-items-center justify-content-between'>
-                <label>
-                  <input
-                    type='radio'
-                    id='paidMembershipCheckbox'
-                    name='voucher'
-                    value='4'
-                    onChange={this.handleCheckbox}
-                    checked={this.state.checkboxGroup['paidMembershipCheckbox']}
-                  />
-                  횟수제 이용권
-                </label>
-                <TextField
-                  variant='outlined'
-                  value={this.state.paidMembership}
-                  onChange={this.handleChange}
-                  type='number'
-                  name='paidMembership'
-                  id='paidMembership'
-                  label='숫자만 입력하세요'
-                  required
+              <label>
+                <input
+                  type='radio'
+                  id='paidMembershipCheckbox'
+                  name='voucher'
+                  value='4'
+                  onChange={this.handleCheckbox}
+                  checked={this.state.checkboxGroup['paidMembershipCheckbox']}
                 />
+                <Form.Group>
+                  <Form.Label>횟수제 이용권</Form.Label>
+                  <Form.Control
+                    value={this.state.paidMembership}
+                    onChange={this.handleChange}
+                    type='number'
+                    name='paidMembership'
+                    id='paidMembership'
+                    label='숫자만 입력하세요'
+                    required
+                  ></Form.Control>
+                </Form.Group>
               </label>
             </Row>
 
@@ -715,13 +729,7 @@ class AddSales extends Component {
               {/*.amountTotal */}
             </div>
             {/*.finalAmount */}
-            <button
-              className='btnSolid'
-              type='button'
-              onClick={this.handleOnClick}
-            >
-              등록하기
-            </button>
+            <Button onClick={this.handleOnClick}>등록하기</Button>
           </form>
           {/*.AddSalesForm productPay */}
         </div>
