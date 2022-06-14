@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
-import MegaMenu from '../../component/navigation/Menu';
+import Menu from '../../component/navigation/Menu';
 import UserSearch from '../../component/customer/UserSearch';
 import Footer from '../../component/footer/Footer';
 import {
@@ -598,7 +598,7 @@ class Inbodies extends Component {
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <MegaMenu />
+          <Menu />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

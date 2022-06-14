@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
-import MegaMenu from '../../component/navigation/Menu';
+import Menu from '../../component/navigation/Menu';
 import Footer from '../../component/footer/Footer';
 import { getStatusRequest } from '../../action/authentication';
 import { clientManager, clientSelect, insertClient } from '../../api/user';
@@ -173,7 +173,7 @@ class AddClient extends Component {
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <MegaMenu />
+          <Menu />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

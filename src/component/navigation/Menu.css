@@ -12,7 +12,7 @@
   margin: 0;
   padding: 0;
 }
-.megamenu body {
+.menu body {
   background: #bdc3c7;
   line-height: 1.5;
   font-family: sans-serif;
@@ -20,71 +20,71 @@
   font-size: 16px;
   color: rgb(43, 43, 43);
 }
-.megamenu a {
+.menu a {
   text-decoration: none;
   color: rgb(43, 43, 43);
 }
-.megamenu {
+.menu {
   background: #fff;
   width: 100%;
   position: relative;
 }
-.megamenu:after {
+.menu:after {
   content: '';
   clear: both;
   display: block;
 }
-.megamenu .search {
+.menu .search {
   float: right;
   padding: 30px;
 }
-.megamenu input {
+.menu input {
   border: none;
   padding: 10px;
   border-radius: 20px;
 }
-.megamenu .logo {
+.menu .logo {
   float: left;
   padding: 16px 10px 0;
   height: 7rem;
   font-weight: 900;
 }
-.megamenu .logo a {
+.menu .logo a {
   font-size: 28px;
   display: block;
   padding: 0 0 0 20px;
 }
-.megamenu nav {
+.menu nav {
   float: right;
 }
-.megamenu nav > ul {
+.menu nav > ul {
   float: left;
   position: relative;
 }
-.megamenu nav li {
+.menu nav li {
   list-style: none;
   float: left;
 }
-.megamenu nav .dropdown {
+.menu nav .dropdown {
   position: relative;
 }
-.megamenu nav li a {
+.menu nav li a {
   float: left;
   padding: 35px;
 }
-.megamenu nav li a:hover {
+.menu nav li a:hover {
   background: #2c3e50;
 }
-.megamenu nav li ul {
+.menu nav li ul {
   display: none;
 }
-.megamenu nav li:hover ul {
+.menu nav li:hover ul {
   display: inline;
 }
-.megamenu nav li li {
+.menu nav li li {
   float: none;
 }
-.megamenu nav .dropdown ul {
+.menu nav .dropdown ul {
   position: absolute;
   left: 0;
   top: 100%;
@@ -92,15 +92,15 @@
   padding: 20px 0;
   border-bottom: 3px solid #34495e;
 }
-.megamenu nav .dropdown li {
+.menu nav .dropdown li {
   white-space: nowrap;
 }
-.megamenu nav .dropdown li a {
+.menu nav .dropdown li a {
   padding: 10px 35px;
   font-weight: 400;
   min-width: 200px;
 }
-.megamenu nav .mega-dropdown {
+.menu nav .mega-dropdown {
   width: 100%;
   position: absolute;
   top: 100%;
@@ -110,7 +110,7 @@
   padding: 20px 35px;
   border-bottom: 3px solid #34495e;
 }
-.megamenu nav li li a {
+.menu nav li li a {
   float: none;
   color: #333;
   display: block;
@@ -118,11 +118,11 @@
   border-radius: 3px;
   font-size: 13px;
 }
-.megamenu nav li li a:hover {
+.menu nav li li a:hover {
   background: #0f78ff;
   background: #0f78ff;
 }
-.megamenu .mega-col {
+.menu .mega-col {
   width: 25%;
   float: left;
 }
@@ -145,15 +145,15 @@
 }
 
 @media only screen and (max-width: 1170px) {
-  .megamenu nav > ul > li > a {
+  .menu nav > ul > li > a {
     padding: 35px 15px;
   }
 }
 @media only screen and (min-width: 1024px) {
-  .megamenu {
+  .menu {
     display: none !important;
   }
-  .megamenunav {
+  .menunav {
     display: none !important;
   }
 }
@@ -164,7 +164,7 @@
   .header {
     padding-top: 0;
   }
-  .megamenu nav {
+  .menu nav {
     display: none;
     width: 100%;
     clear: both;
@@ -191,54 +191,54 @@
   #menu-icon.active .third {
     display: none;
   }
-  .megamenu .search {
+  .menu .search {
     float: none;
   }
-  .megamenu .search input {
+  .menu .search input {
     width: 100%;
   }
-  .megamenu nav {
+  .menu nav {
     padding: 10px;
   }
-  .megamenu nav ul {
+  .menu nav ul {
     float: none;
   }
-  .megamenu nav li {
+  .menu nav li {
     float: none;
   }
-  .megamenu nav ul li a {
+  .menu nav ul li a {
     float: none;
     padding: 8px;
     display: block;
     font-weight: 500;
   }
-  .megamenu nav ul ul {
+  .menu nav ul ul {
     display: block;
     position: static;
     background: none;
     border: none;
     padding: 0;
   }
-  .megamenu nav a {
+  .menu nav a {
     color: rgb(43, 43, 43);
     padding: 8px;
   }
-  .megamenu nav a:hover {
+  .menu nav a:hover {
     background: #0f78ff;
     color: #fff;
     border-radius: 3px;
   }
-  .megamenu nav ul li li a:before {
+  .menu nav ul li li a:before {
     content: '- ';
   }
-  .megamenu .mega-col {
+  .menu .mega-col {
     width: 100%;
   }
-  .megamenu .menuCenterCode {
+  .menu .menuCenterCode {
     text-align: end;
     padding: 20px 74px 0;
   }
-  .megamenu .btnSolid {
+  .menu .btnSolid {
     height: auto;
     margin: 2rem;
     padding: 0.4rem 2rem;

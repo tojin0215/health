@@ -9,7 +9,7 @@ import { getStatusRequest } from '../../action/authentication';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { SERVER_URL } from '../../const/settings';
-import MegaMenu from '../../component/navigation/Menu';
+import Menu from '../../component/navigation/Menu';
 
 // Bootstrap
 import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
@@ -161,7 +161,7 @@ class AddTrainer extends Component {
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <MegaMenu />
+          <Menu />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

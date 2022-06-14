@@ -29,7 +29,7 @@ import '../../styles/customer/Customer.css';
 // import  { PC, Mobile } from '../../component/MediaQuery';
 
 import { SERVER_URL } from '../../const/settings';
-import MegaMenu from '../../component/navigation/Menu';
+import Menu from '../../component/navigation/Menu';
 import CustomerCalendarComponent from '../../component/customer/CustomerCalendarComponent';
 import {
   getCustomerByAll,
@@ -359,7 +359,7 @@ class Customer extends Component {
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <MegaMenu />
+          <Menu />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

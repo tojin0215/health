@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navigation from '../../component/navigation/Navigation';
-import MegaMenu from '../../component/navigation/Menu';
+import Menu from '../../component/navigation/Menu';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
@@ -571,7 +571,7 @@ class AddExercise extends Component {
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <MegaMenu />
+          <Menu />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

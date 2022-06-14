@@ -31,7 +31,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import 'react-dropdown/style.css';
 
-import MegaMenu from '../../component/navigation/Menu';
+import Menu from '../../component/navigation/Menu';
 import {
   deleteTrainer,
   selectTrainer,
@@ -375,7 +375,7 @@ class Trainer extends Component {
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <MegaMenu />
+          <Menu />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

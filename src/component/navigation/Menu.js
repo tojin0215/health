@@ -13,7 +13,7 @@ import $ from 'jquery';
 
 import './Menu.css';
 
-class MegaMenu extends Component {
+class Menu extends Component {
   constructor(props) {
     super(props);
 
@@ -58,7 +58,7 @@ class MegaMenu extends Component {
     return (
       <div>
         {userinfo.loginWhether === 2 ? (
-          <div class='megamenu'>
+          <div class='menu'>
             <div class='logo'>
               <a href='/home'>
                 <p className='fs-1'>회원</p>
@@ -138,7 +138,7 @@ class MegaMenu extends Component {
             </nav>
           </div>
         ) : userinfo.loginWhether === 1 ? (
-          <div class='megamenu'>
+          <div class='menu'>
             <div class='logo'>
               <a href='/home'>
                 <p className='fs-1'>강사</p>
@@ -248,7 +248,7 @@ class MegaMenu extends Component {
             </nav>
           </div>
         ) : (
-          <div class='megamenu'>
+          <div class='menu'>
             <div class='logo'>
               <a href='/home'>
                 <p className='fs-1'>센터</p>
@@ -409,4 +409,4 @@ const megaDispatchToProps = (dispatch) => {
     },
   };
 };
-export default connect(megaStateToProps, megaDispatchToProps)(MegaMenu);
+export default connect(megaStateToProps, megaDispatchToProps)(Menu);

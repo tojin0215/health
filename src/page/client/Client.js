@@ -15,7 +15,7 @@ import {
 // 컴포넌트
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
-import MegaMenu from '../../component/navigation/Menu';
+import Menu from '../../component/navigation/Menu';
 import Footer from '../../component/footer/Footer';
 import CustomerCalendarComponent from '../../component/customer/CustomerCalendarComponent';
 
@@ -313,7 +313,7 @@ class Client extends Component {
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <MegaMenu />
+          <Menu />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

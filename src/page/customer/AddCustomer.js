@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
-import MegaMenu from '../../component/navigation/Menu';
+import Menu from '../../component/navigation/Menu';
 import { connect } from 'react-redux';
 
 import DatePicker from 'react-datepicker';
@@ -314,7 +314,7 @@ class AddCustomer extends Component {
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <MegaMenu />
+          <Menu />
           <div className='localNavigation'>
             <div className='container'>
               <h2>
