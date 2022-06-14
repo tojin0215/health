@@ -96,3 +96,10 @@ html .MuiInputLabel-outlined {
 #customer_name-label {
   text-indent: 2rem;
 }
+/**
+* 강사 검색
+*/
+#trainer {
+  padding-top: 20px;
+  cursor: pointer;
+}

@@ -637,7 +637,6 @@ class Inbodies extends Component {
                     loginWhether={this.props.userinfo.loginWhether}
                     joinNo={this.props.userinfo.joinNo}
                     handleUser={this.handleUser}
-                    className=' '
                   />
                 </div>
               ) : (

@@ -1253,56 +1253,50 @@ class ReservationClass extends Component {
                 />
               </label>
             </Col>
-            {this.props.userinfo.loginWhether === 1 ? (
-              <Col
-                className='text-center height-fit-content'
-                xs={12}
-                sm={3}
-                lg={3}
-              >
-                <label className='boxmorpinsm d-block w-100'>
-                  <TextField
-                    className=''
-                    id='trainer'
-                    variant='standard'
-                    value={this.props.userinfo.manager_name}
-                    onChange={this.handleChange}
-                    InputProps={{ disableUnderline: true }}
-                    label='강사명'
-                    error={this.state.trainer_err}
-                  />
-                </label>
-              </Col>
-            ) : (
-              <Col
-                className='text-center height-fit-content'
-                xs={12}
-                sm={3}
-                lg={3}
-              >
-                <label className='boxmorpinsm d-block w-100'>
+            <Col className='text-center' xs={12} sm={3} lg={3}>
+              {this.props.userinfo.loginWhether === 1 ? (
+                // <label className=' d-block w-100'>
+                <TextField
+                  id='trainer'
+                  variant='standard'
+                  value={this.props.userinfo.manager_name}
+                  onChange={this.handleChange}
+                  InputProps={{ disableUnderline: true }}
+                  label='강사명'
+                  error={this.state.trainer_err}
+                  className=''
+                />
+              ) : (
+                // </label>
+                <div>
                   {this.state.open ? (
-                    <TrainerSearch
-                      open={this.state.open}
-                      setOpen={(o) => this.setState({ open: o })}
-                      fitness_no={this.props.userinfo.fitness_no}
-                      handleUser={this.handleUser}
-                    />
+                    <div>
+                      <TrainerSearch
+                        open={this.state.open}
+                        setOpen={(o) => this.setState({ open: o })}
+                        fitness_no={this.props.userinfo.fitness_no}
+                        handleUser={this.handleUser}
+                      />
+                    </div>
                   ) : (
-                    <TextField
-                      id='trainer'
-                      lable='강사 검색'
-                      onClick={() => this.setState({ open: true })}
-                      variant='standard'
-                      value={this.state.trainer_name}
-                      // onChange={this.handleChange}
-                      InputProps={{ disableUnderline: true }}
-                      error={this.state.trainer_err}
-                    />
+                    <div>
+                      <TextField
+                        id='trainer'
+                        lable='강사 검색'
+                        onClick={() => this.setState({ open: true })}
+                        value={this.state.trainer_name}
+                        // onChange={this.handleChange}
+                        InputProps={{ disableUnderline: true }}
+                        error={this.state.trainer_err}
+                        variant='standard'
+                        className='boxmorpinsm w-100'
+                        style={{ cursor: 'pointer' }}
+                      />
+                    </div>
                   )}
-                </label>
-              </Col>
-            )}
+                </div>
+              )}
+            </Col>
 
             <Col className='text-center height-fit-content' xs={12} sm={4}>
               <label className='d-block w-100'>
