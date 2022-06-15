@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { setFitness } from '../../action/userinfo';
@@ -211,17 +211,31 @@ class Menu extends Component {
                   </li>
                 </li>
                 <li class='dropdown'>
-                  <NavLink exact to='/assign'>
+                  <NavLink exact to='/workoutAlloted'>
                     운동
                   </NavLink>
                   <li>
-                    <NavLink exact to='/assign'>
-                      운동 배정
+                    <NavLink exact to='/workoutAlloted'>
+                      새 운동 배정
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to='/exercise'>
-                      운동 설정
+                    <Link
+                      to={{
+                        pathname: '/workoutAllotedList',
+                        state: {
+                          client_name2: '',
+                          idc2: '',
+                          line: '',
+                        },
+                      }}
+                    >
+                      새 배정 완료된 운동 배정
+                    </Link>
+                  </li>
+                  <li>
+                    <NavLink exact to='/workoutAdd'>
+                      새 운동 설정
                     </NavLink>
                   </li>
                 </li>
@@ -338,17 +352,31 @@ class Menu extends Component {
                   </li>
                 </li>
                 <li class='dropdown'>
-                  <NavLink exact to='/assign'>
-                    운동
+                  <NavLink exact to='/workoutAlloted'>
+                    새 운동 배정
                   </NavLink>
                   <li>
-                    <NavLink exact to='/assign'>
-                      운동 배정
+                    <NavLink exact to='/workoutAlloted'>
+                      새 운동 배정
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to='/exercise'>
-                      운동 설정
+                    <Link
+                      to={{
+                        pathname: '/workoutAllotedList',
+                        state: {
+                          client_name2: '',
+                          idc2: '',
+                          line: '',
+                        },
+                      }}
+                    >
+                      새 배정 완료된 운동 배정
+                    </Link>
+                  </li>
+                  <li>
+                    <NavLink exact to='/workoutAdd'>
+                      새 운동 설정
                     </NavLink>
                   </li>
                 </li>

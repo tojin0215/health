@@ -416,15 +416,6 @@ export const allotAssignexercise = (fitness_no, member_no) => {
     .then((response) => response.data);
 };
 
-//exercise select
-export const exerciseAllot = (fitness_no, part) => {
-  return axios
-    .get(`${SERVER_URL}/exercise`, {
-      params: { type: 'allot', fitness_no: fitness_no, part: part },
-    })
-    .then((response) => response.data);
-};
-
 //workout select
 export const workoutSelect = (fitness_no, part) => {
   return axios
