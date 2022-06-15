@@ -263,6 +263,7 @@ class AddTrainer extends Component {
                     as='textarea'
                     rows={5}
                   ></Form.Control>
+                  <img />
                 </Form.Group>
               </Col>
               <Col xs={12}>

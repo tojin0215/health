@@ -208,66 +208,101 @@ const ReservationClassItem = ({
       {/* <button onClick={modalOnClick}>수정 및 삭제하기2</button> */}
       <div>
         <Modal show={showModal}>
-          시간:
-          <input
-            value={hour_input == 0 ? '00' : hour_input}
-            type='number'
-            id='hour'
-            onChange={updateChange3}
-            error={hour_err}
-          />
-          시
-          <input
-            type='number'
-            value={minute_input == 0 ? '00' : minute_input}
-            id='minute'
-            onChange={updateChange4}
-            error={minute_err}
-          />
-          분 운동명:
-          <input
-            value={exercise_class_input}
-            id='exercise_class'
-            onChange={updateChange}
-            error={exercise_class_err}
-          />
-          강사명:
-          <input
-            value={trainer_input}
-            id='trainer'
-            onChange={updateChange5}
-            error={trainer_err}
-          />
-          수강인원:
-          <input
-            type='number'
-            value={number_of_people_input}
-            id='number_of_people'
-            onChange={updateChange2}
-            error={number_of_people_err}
-          />
-          날짜:
-          <input
-            type='date'
-            selected={setClass_date_input}
-            // value={class_date_update.split("T")[0]}
-            id='class_date'
-            onChange={updateChange6}
-            error={class_date_err}
-          />
-          <button
-            className='deleteButton'
-            onClick={() =>
-              // eslint-disable-next-line no-restricted-globals
-              confirm('정말 삭제하시겠습니까??') == true
-                ? reservationClassDelete(no)
-                : alert('삭제가 취소 되었습니다.')
-            }
-          >
-            삭제
-          </button>
-          <button onClick={() => reservationClassUpdate(no)}>수정하기</button>
-          <button onClick={modalClose}>닫기</button>
+          <Container>
+            <Row>
+              <Form.Group>
+                <Form.Label>운동명</Form.Label>
+                <Form.Control
+                  value={exercise_class_input}
+                  id='exercise_class'
+                  onChange={updateChange}
+                  error={exercise_class_err}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>강사명</Form.Label>
+                <Form.Control
+                  value={trainer_input}
+                  id='trainer'
+                  onChange={updateChange5}
+                  error={trainer_err}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>날짜</Form.Label>
+                <Form.Control
+                  type='date'
+                  selected={setClass_date_input}
+                  // value={class_date_update.split("T")[0]}
+                  id='class_date'
+                  onChange={updateChange6}
+                  error={class_date_err}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>시간</Form.Label>
+                <Form.Control
+                  value={hour_input == 0 ? '00' : hour_input}
+                  type='number'
+                  id='hour'
+                  onChange={updateChange3}
+                  error={hour_err}
+                ></Form.Control>
+                시
+                <Form.Control
+                  type='number'
+                  value={minute_input == 0 ? '00' : minute_input}
+                  id='minute'
+                  onChange={updateChange4}
+                  error={minute_err}
+                ></Form.Control>
+                분
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>수강인원</Form.Label>
+                <Form.Control
+                  type='number'
+                  value={number_of_people_input}
+                  id='number_of_people'
+                  onChange={updateChange2}
+                  error={number_of_people_err}
+                ></Form.Control>
+              </Form.Group>
+            </Row>
+            <Row className='mt-3'>
+              <Col xs={4}>
+                <Button
+                  className='w-100'
+                  variant='danger'
+                  onClick={() =>
+                    // eslint-disable-next-line no-restricted-globals
+                    confirm('정말 삭제하시겠습니까??') == true
+                      ? reservationClassDelete(no)
+                      : alert('삭제가 취소 되었습니다.')
+                  }
+                >
+                  삭제
+                </Button>
+              </Col>
+              <Col xs={8}>
+                <Button
+                  className='w-100'
+                  onClick={() => reservationClassUpdate(no)}
+                >
+                  수정하기
+                </Button>
+              </Col>
+              <Col xs={12} className='mt-2'>
+                <Button
+                  className='w-100'
+                  variant='outline-secondary'
+                  onClick={modalClose}
+                >
+                  닫기
+                </Button>
+              </Col>
+            </Row>
+          </Container>
         </Modal>
       </div>
     </div>

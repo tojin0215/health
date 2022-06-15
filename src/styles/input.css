@@ -92,6 +92,8 @@ html .MuiInputLabel-outlined {
 */
 #customer_name {
   cursor: pointer;
+  -webkit-text-fill-color: #000;
+  font-weight: bold;
 }
 #customer_name-label {
   text-indent: 2rem;
@@ -101,4 +103,6 @@ html .MuiInputLabel-outlined {
 */
 #trainer {
   cursor: pointer;
+  -webkit-text-fill-color: #000;
+  font-weight: bold;
 }
