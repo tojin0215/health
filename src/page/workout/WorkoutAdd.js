@@ -18,7 +18,7 @@ class WorkoutAdd extends Component {
       default_set: 3,
       default_count: 8,
       default_rest: 30,
-      url: '',
+      url: 'https://',
       radioGroup: {
         region1: true,
         region2: false,

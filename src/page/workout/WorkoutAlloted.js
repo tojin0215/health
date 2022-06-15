@@ -11,10 +11,13 @@ import {
   inbodiesSelect,
   selectClientReservation,
   selectTrainerReservation,
+  workoutAllotedInsert,
+  workoutAllotedSelect,
   workoutSelect,
 } from '../../api/user';
 import { data } from 'jquery';
 import Footer from '../../component/footer/Footer';
+
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
     <div>
@@ -38,6 +41,7 @@ const ExerciseView = ({
   inbody_no,
   idc,
   client_name,
+  workoutAllotedView,
 }) => {
   const region =
     part === 1
@@ -52,21 +56,39 @@ const ExerciseView = ({
       ? '유산소'
       : '기타';
 
-  const [tablePlus, setTablePlus] = useState([
-    { region: '', workout: '', machine: '' },
-  ]);
   const plusTable = () => {
-    setTablePlus((tablePlus) => [
-      ...tablePlus,
-      {
-        region: region,
-        workout: workout,
-        machine: machine,
-      },
-    ]);
-    // console.log(tablePlus);
+    workoutAllotedInsert(
+      fitness_no,
+      idc,
+      workout,
+      region,
+      machine,
+      default_set_input,
+      default_count_input,
+      default_rest_input,
+      url_input
+    ).then((res) => {
+      workoutAllotedView(idc);
+      alert('asdasd');
+    });
   };
-  console.log(tablePlus);
+  const [default_set_input, setDefault_set_input] = useState(default_set);
+  const [default_count_input, setDefault_count_input] = useState(default_count);
+  const [default_rest_input, setDefault_rest_input] = useState(default_rest);
+  const [url_input, setUrl_input] = useState(url);
+  const changeInsert = (e) => {
+    setDefault_set_input(e.target.value);
+  };
+  const changeInsert2 = (e) => {
+    setDefault_count_input(e.target.value);
+  };
+  const changeInsert3 = (e) => {
+    setDefault_rest_input(e.target.value);
+  };
+  const changeInsert4 = (e) => {
+    setUrl_input(e.target.value);
+  };
+
   return (
     <>
       <tr>
@@ -74,38 +96,60 @@ const ExerciseView = ({
         <td>{workout}</td>
         <td>{machine}</td>
         <td>
+          <input
+            type='number'
+            value={default_set_input}
+            onChange={changeInsert}
+          />
+        </td>
+        <td>
+          <input
+            type='number'
+            value={default_count_input}
+            onChange={changeInsert2}
+          />
+        </td>
+        <td>
+          <input
+            type='number'
+            value={default_rest_input}
+            onChange={changeInsert3}
+          />
+        </td>
+        <td>
+          <input value={url_input} onChange={changeInsert4} />
+        </td>
+        <td>
           <button onClick={plusTable}>+</button>
         </td>
-        <div>
-          <table class='table'>
-            <tr>
-              <th>운동 부위</th>
-              <th>운동 이름</th>
-              <th>운동 기구</th>
-            </tr>
-            {tablePlus.map((plus, index) => (
-              <tr key={index}>
-                <td>{plus.region}</td>
-                <td>{plus.workout}</td>
-                <td>{plus.machine}</td>
-              </tr>
-            ))}
-          </table>
-        </div>
+        <div></div>
       </tr>
-      <Link
-        to={{
-          pathname: '/workoutAllotedAdd',
-          state: {
-            client_name: client_name,
-            idc: idc,
-            tablePlus: tablePlus,
-          },
-        }}
-      >
-        <button>등록하기(세부데이터입력set,count,rest)</button>
-      </Link>
     </>
+  );
+};
+
+const WorkoutAllotedView = ({
+  idwa,
+  fitness_no,
+  client_no,
+  workout,
+  region,
+  machine,
+  default_set,
+  default_count,
+  default_rest,
+  url,
+}) => {
+  return (
+    <tr>
+      <td>{workout}</td>
+      <td>{region}</td>
+      <td>{machine}</td>
+      <td>{default_set}</td>
+      <td>{default_count}</td>
+      <td>{default_rest}</td>
+      <td>{url}</td>
+    </tr>
   );
 };
 
@@ -119,6 +163,7 @@ class WorkoutAlloted extends Component {
       assignexerciseAllotlist: [],
       exerciseAllotlist: [],
       tablePlus: [],
+      workoutAllotlist: [],
     };
     //여기 function
   }
@@ -183,6 +228,7 @@ class WorkoutAlloted extends Component {
       open: false,
     });
     this.inbodiesView(idc);
+    this.workoutAllotedView(idc);
   };
 
   inbodiesView = (idc) => {
@@ -259,11 +305,42 @@ class WorkoutAlloted extends Component {
                   ? 0
                   : this.state.idc
               }
+              workoutAllotedView={this.workoutAllotedView}
             />
           );
         });
         this.setState({ exerciseAllotlist: items });
         // console.log(result);
+      });
+    });
+  };
+
+  workoutAllotedView = (idc) => {
+    selectTrainerReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      const fitness_no =
+        this.props.userinfo.loginWhether === 1
+          ? trainerResult[0].fitness_no
+          : this.props.userinfo.fitness_no;
+      workoutAllotedSelect(fitness_no, idc).then((result) => {
+        const items = result.map((data, index, array) => {
+          return (
+            <WorkoutAllotedView
+              idwa={data.idwa}
+              fitness_no={data.fitness_no}
+              client_no={data.client_no}
+              workout={data.workout}
+              region={data.region}
+              machine={data.machine}
+              default_set={data.default_set}
+              default_count={data.default_count}
+              default_rest={data.default_rest}
+              url={data.url}
+            />
+          );
+        });
+        this.setState({ workoutAllotlist: items.reverse() });
       });
     });
   };
@@ -312,14 +389,15 @@ class WorkoutAlloted extends Component {
               value={this.state.client_name}
             />
           )}
-          <div>
-            <h1> 인바디</h1>
-            {this.state.inbodiesList[0]
-              ? this.state.inbodiesList[0]
-              : '등록된 인바디가 없습니다.'}
-          </div>
+
           {this.state.client_name ? (
             <div>
+              <div>
+                <h1> 인바디</h1>
+                {this.state.inbodiesList[0]
+                  ? this.state.inbodiesList[0]
+                  : '등록된 인바디가 없습니다.'}
+              </div>
               <div>
                 <h1>운동 개별 선택</h1>
                 <button onClick={() => this.handleOnClick(1)}>상체</button>
@@ -336,11 +414,30 @@ class WorkoutAlloted extends Component {
                     <th scope='col'>운동 부위</th>
                     <th scope='col'>운동 이름</th>
                     <th scope='col'>운동 기구</th>
+                    <th scope='col'>세트</th>
+                    <th scope='col'>회수</th>
+                    <th scope='col'>쉬는시간</th>
+                    <th scope='col'>url</th>
                     <th scope='col'>선택</th>
                   </tr>
                   {this.state.exerciseAllotlist
                     ? this.state.exerciseAllotlist
                     : ''}
+                </table>
+              </div>
+              <div>
+                <h1>{this.state.client_name}님의 운동 배정된 목록</h1>
+                <table class='table'>
+                  <tr>
+                    <th scope='col'>운동 이름</th>
+                    <th scope='col'>운동 부위</th>
+                    <th scope='col'>운동 기구</th>
+                    <th scope='col'>세트</th>
+                    <th scope='col'>회수</th>
+                    <th scope='col'>쉬는시간</th>
+                    <th scope='col'>url</th>
+                  </tr>
+                  {this.state.workoutAllotlist}
                 </table>
               </div>
             </div>

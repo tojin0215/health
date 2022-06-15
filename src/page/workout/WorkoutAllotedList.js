@@ -24,7 +24,7 @@ const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   );
 };
 
-const AssignexerciseView = ({
+const WorkoutAllotedView = ({
   idwa,
   fitness_no,
   client_no,
@@ -104,14 +104,12 @@ class WorkoutAllotedList extends Component {
         alert('Your session is expired, please log in again');
       } else {
         this.state.line === 1 ? this.inbodiesView(this.state.idc2) : '';
-        this.state.line === 1
-          ? this.assignexerciseAllotView(this.state.idc2)
-          : '';
+        this.state.line === 1 ? this.workoutAllotedView(this.state.idc2) : '';
         this.props.userinfo.loginWhether === 2
           ? this.inbodiesView(this.props.userinfo.joinNo)
           : '';
         this.props.userinfo.loginWhether === 2
-          ? this.assignexerciseAllotView(this.props.userinfo.joinNo)
+          ? this.workoutAllotedView(this.props.userinfo.joinNo)
           : '';
       }
     });
@@ -127,7 +125,7 @@ class WorkoutAllotedList extends Component {
       open: false,
     });
     this.inbodiesView(idc);
-    this.assignexerciseAllotView(idc);
+    this.workoutAllotedView(idc);
   };
 
   inbodiesView = (idc) => {
@@ -181,7 +179,7 @@ class WorkoutAllotedList extends Component {
     });
   };
 
-  assignexerciseAllotView = (idc) => {
+  workoutAllotedView = (idc) => {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((clientResult) => {
@@ -197,7 +195,7 @@ class WorkoutAllotedList extends Component {
         workoutAllotedSelect(fitness_no, idc).then((result) => {
           const items = result.map((data, index, array) => {
             return (
-              <AssignexerciseView
+              <WorkoutAllotedView
                 idwa={data.idwa}
                 fitness_no={data.fitness_no}
                 client_no={data.client_no}
