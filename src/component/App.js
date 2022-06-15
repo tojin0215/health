@@ -31,9 +31,10 @@ import {
   AddIntroduce,
   ChoiceLogin,
   Inbodies,
-  ExerciseAllot,
-  ExerciseAllotList,
-  ExerciseAllotAdd,
+  WorkoutAlloted,
+  WorkoutAllotedList,
+  WorkoutAllotedAdd,
+  WorkoutAdd,
 } from '../page';
 
 class App extends Component {
@@ -70,9 +71,14 @@ class App extends Component {
         <Route exact path='/introduce/add' component={AddIntroduce} />
         <Route exact path='/choiceLogin' component={ChoiceLogin} />
         <Route exact path='/inbodies' component={Inbodies} />
-        <Route exact path='/exerciseAllot' component={ExerciseAllot} />
-        <Route exact path='/exerciseAllotList' component={ExerciseAllotList} />
-        <Route exact path='/exerciseAllotAdd' component={ExerciseAllotAdd} />
+        <Route exact path='/workoutAlloted' component={WorkoutAlloted} />
+        <Route
+          exact
+          path='/workoutAllotedList'
+          component={WorkoutAllotedList}
+        />
+        <Route exact path='/workoutAllotedAdd' component={WorkoutAllotedAdd} />
+        <Route exact path='/workoutAdd' component={WorkoutAdd} />
       </div>
     );
   }

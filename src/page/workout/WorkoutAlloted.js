@@ -8,8 +8,6 @@ import { Link } from 'react-router-dom';
 import UserSearch from '../../component/customer/UserSearch';
 import { TextField } from '@mui/material';
 import {
-  assignexerciseInsert,
-  exerciseAllot,
   inbodiesSelect,
   selectClientReservation,
   selectTrainerReservation,
@@ -97,7 +95,7 @@ const ExerciseView = ({
       </tr>
       <Link
         to={{
-          pathname: '/exerciseAllotAdd',
+          pathname: '/workoutAllotedAdd',
           state: {
             client_name: client_name,
             idc: idc,
@@ -111,7 +109,7 @@ const ExerciseView = ({
   );
 };
 
-class ExerciseAllot extends Component {
+class WorkoutAlloted extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -233,33 +231,40 @@ class ExerciseAllot extends Component {
   };
 
   handleOnClick = (key) => {
-    const fitness_no = this.props.userinfo.fitness_no;
-    workoutSelect(fitness_no, key).then((result) => {
-      const items = result.map((data, index, array) => {
-        return (
-          <ExerciseView
-            idw={data.idw}
-            fitness_no={data.fitness_no}
-            workout={data.workout}
-            part={data.part}
-            machine={data.machine}
-            default_set={data.default_set}
-            default_count={data.default_count}
-            default_rest={data.default_rest}
-            url={data.url}
-            client_name={this.state.client_name}
-            idc={
-              this.props.userinfo.loginWhether == 2
-                ? this.props.userinfo.joinNo
-                : this.state.idc === undefined
-                ? 0
-                : this.state.idc
-            }
-          />
-        );
+    selectTrainerReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      const fitness_no =
+        this.props.userinfo.loginWhether === 1
+          ? trainerResult[0].fitness_no
+          : this.props.userinfo.fitness_no;
+      workoutSelect(fitness_no, key).then((result) => {
+        const items = result.map((data, index, array) => {
+          return (
+            <ExerciseView
+              idw={data.idw}
+              fitness_no={data.fitness_no}
+              workout={data.workout}
+              part={data.part}
+              machine={data.machine}
+              default_set={data.default_set}
+              default_count={data.default_count}
+              default_rest={data.default_rest}
+              url={data.url}
+              client_name={this.state.client_name}
+              idc={
+                this.props.userinfo.loginWhether == 2
+                  ? this.props.userinfo.joinNo
+                  : this.state.idc === undefined
+                  ? 0
+                  : this.state.idc
+              }
+            />
+          );
+        });
+        this.setState({ exerciseAllotlist: items });
+        // console.log(result);
       });
-      this.setState({ exerciseAllotlist: items });
-      // console.log(result);
     });
   };
 
@@ -280,7 +285,7 @@ class ExerciseAllot extends Component {
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/exerciseAllot'>새 운동배정</Link>
+                <Link to='/workoutAlloted'>새 운동배정</Link>
               </div>
             </div>
           </div>
@@ -367,4 +372,4 @@ const ExerciseAllotDispatchToProps = (dispatch) => {
 export default connect(
   ExerciseAllotStateToProps,
   ExerciseAllotDispatchToProps
-)(ExerciseAllot);
+)(WorkoutAlloted);

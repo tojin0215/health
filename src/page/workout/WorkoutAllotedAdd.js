@@ -10,7 +10,7 @@ import Navigation from '../../component/navigation/Navigation';
 import { Row, Col, Container, Tabs, Tab, Button } from 'react-bootstrap';
 import { workoutAllotedInsert } from '../../api/user';
 
-class ExerciseAllotAdd extends Component {
+class WorkoutAllotedAdd extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,6 +25,9 @@ class ExerciseAllotAdd extends Component {
       url: null,
     };
   }
+  goLogin = () => {
+    this.props.history.push('/');
+  };
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
     // get cookie by name
@@ -94,7 +97,6 @@ class ExerciseAllotAdd extends Component {
           this.state.rest,
           this.state.url
         ).then((res) => {
-          console.log(this.state.idc);
           alert('workoutAllotedInsert');
         })
       );
@@ -118,7 +120,7 @@ class ExerciseAllotAdd extends Component {
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/exerciseAllotAdd'>새 운동배정insert</Link>
+                <Link to='/workoutAllotedAdd'>새 운동배정insert</Link>
               </div>
             </div>
           </div>
@@ -143,7 +145,7 @@ class ExerciseAllotAdd extends Component {
                   (value) => value.machine != ''
                 )
                 .map((plus, index) => (
-                  <tr key={index}>
+                  <tr>
                     <td>
                       <input value={plus.region} />
                     </td>
@@ -182,6 +184,7 @@ class ExerciseAllotAdd extends Component {
                     </td>
                     <td>
                       <input
+                        key={index}
                         type='text'
                         value={this.state.url}
                         id='url'
@@ -190,7 +193,18 @@ class ExerciseAllotAdd extends Component {
                     </td>
                   </tr>
                 ))}
-              <button onClick={this.workoutPost}>운동insert</button>
+              <Link
+                to={{
+                  pathname: '/workoutAllotedList',
+                  state: {
+                    client_name2: this.state.client_name,
+                    idc2: this.state.idc,
+                    line: 1,
+                  },
+                }}
+              >
+                <button onClick={this.workoutPost}>운동insert</button>
+              </Link>
             </table>
           </div>
         </Container>
@@ -202,14 +216,14 @@ class ExerciseAllotAdd extends Component {
   }
 }
 
-const ExerciseAllotAddStateToProps = (state) => {
+const WorkoutAllotedAddStateToProps = (state) => {
   return {
     userinfo: state.authentication.userinfo,
     status: state.authentication.status,
   };
 };
 
-const ExerciseAllotAddDispatchToProps = (dispatch) => {
+const WorkoutAllotedAddDispatchToProps = (dispatch) => {
   return {
     getStatusRequest: () => {
       return dispatch(getStatusRequest());
@@ -218,6 +232,6 @@ const ExerciseAllotAddDispatchToProps = (dispatch) => {
 };
 
 export default connect(
-  ExerciseAllotAddStateToProps,
-  ExerciseAllotAddDispatchToProps
-)(ExerciseAllotAdd);
+  WorkoutAllotedAddStateToProps,
+  WorkoutAllotedAddDispatchToProps
+)(WorkoutAllotedAdd);

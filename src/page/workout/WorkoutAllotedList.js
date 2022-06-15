@@ -3,17 +3,17 @@ import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
-import MegaMenu from '../../component/navigation/Menu';
+import Menu from '../../component/navigation/Menu';
 import { Link } from 'react-router-dom';
 import UserSearch from '../../component/customer/UserSearch';
 import { TextField } from '@mui/material';
 import {
-  allotAssignexercise,
-  exerciseAllot,
   inbodiesSelect,
   selectClientReservation,
   selectTrainerReservation,
+  workoutAllotedSelect,
 } from '../../api/user';
+import Footer from '../../component/footer/Footer';
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
     <div>
@@ -25,29 +25,26 @@ const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
 };
 
 const AssignexerciseView = ({
-  exercise_no,
+  idwa,
   fitness_no,
-  member_no,
-  group_no,
-  name,
-  part,
+  client_no,
+  workout,
+  region,
   machine,
+  default_set,
+  default_count,
+  default_rest,
   url,
-  data_type,
-  data,
-  rest_second,
-  set_count,
-  completed,
 }) => {
   return (
     <div>
-      {exercise_no},{fitness_no},{member_no},{group_no},{name},{part},{machine},
-      {url},{data_type},{data},{rest_second},{set_count},{completed},
+      {idwa}, {fitness_no}, {client_no}, {workout}, {region}, {machine}
+      {default_set}, {default_count}, {default_rest}, {url}
     </div>
   );
 };
 
-class ExerciseAllotList extends Component {
+class WorkoutAllotedList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -56,6 +53,9 @@ class ExerciseAllotList extends Component {
       inbodiesList: [],
       assignexerciseAllotlist: [],
       exerciseAllotlist: [],
+      idc2: this.props.location.state.idc2,
+      client_name2: this.props.location.state.client_name2,
+      line: this.props.location.state.line,
     };
     //여기 function
   }
@@ -103,8 +103,15 @@ class ExerciseAllotList extends Component {
         // and notify
         alert('Your session is expired, please log in again');
       } else {
+        this.state.line === 1 ? this.inbodiesView(this.state.idc2) : '';
+        this.state.line === 1
+          ? this.assignexerciseAllotView(this.state.idc2)
+          : '';
         this.props.userinfo.loginWhether === 2
           ? this.inbodiesView(this.props.userinfo.joinNo)
+          : '';
+        this.props.userinfo.loginWhether === 2
+          ? this.assignexerciseAllotView(this.props.userinfo.joinNo)
           : '';
       }
     });
@@ -141,7 +148,13 @@ class ExerciseAllotList extends Component {
             const items = result.map((data, index, array) => {
               return (
                 <InbodiesView
-                  client_name={this.state.client_name}
+                  client_name={
+                    this.state.line === 1
+                      ? this.state.client_name2
+                      : this.props.userinfo.loginWhether === 2
+                      ? this.props.userinfo.manager_name
+                      : this.state.client_name
+                  }
                   num={data.num}
                   fitness_no={data.fitness_no}
                   member_no={data.member_no}
@@ -169,41 +182,54 @@ class ExerciseAllotList extends Component {
   };
 
   assignexerciseAllotView = (idc) => {
-    const fitness_no = this.props.userinfo.fitness_no;
-    allotAssignexercise(fitness_no, idc).then((result) => {
-      const items = result.map((data, index, array) => {
-        return (
-          <AssignexerciseView
-            member_no={data.member_no}
-            name={data.name}
-            group_no={data.group_no}
-            exercise_no={data.exercise_no}
-            fitness_no={data.fitness_no}
-            part={data.part}
-            machine={data.machine}
-            url={data.url}
-            data_type={data.data_type}
-            data={data.data}
-            rest_second={data.rest_second}
-            set_count={data.set_count}
-            completed={data.completed}
-          />
-        );
+    selectClientReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((clientResult) => {
+      selectTrainerReservation(
+        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+      ).then((trainerResult) => {
+        const fitness_no =
+          this.props.userinfo.loginWhether === 2
+            ? clientResult[0].fitness_no
+            : this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no;
+        workoutAllotedSelect(fitness_no, idc).then((result) => {
+          const items = result.map((data, index, array) => {
+            return (
+              <AssignexerciseView
+                idwa={data.idwa}
+                fitness_no={data.fitness_no}
+                client_no={data.client_no}
+                workout={data.workout}
+                region={data.region}
+                machine={data.machine}
+                default_set={data.default_set}
+                default_count={data.default_count}
+                default_rest={data.default_rest}
+                url={data.url}
+              />
+            );
+          });
+          this.setState({ assignexerciseAllotlist: items });
+        });
       });
-      this.setState({ assignexerciseAllotlist: items });
     });
   };
 
   render() {
-    // console.log(this.state.client_name);
+    // console.log(this.state.client_name2);
+    // console.log(this.props.userinfo.manager_name);
+    // console.log(this.props.userinfo.loginWhether);
     // console.log(this.state.exerciseAllotlist);
-    // console.log(this.state.idc);
+    // console.log(this.state.idc2);
+    // console.log(this.state.line);
     return (
       <div>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <MegaMenu />
+          <Menu />
           <div className='localNavigation'>
             <div className='container'>
               <h2>
@@ -213,13 +239,17 @@ class ExerciseAllotList extends Component {
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/exerciseAllot'>새 운동배정</Link>
+                <Link to='/workoutAllotedList'>새 배정된 운동배정</Link>
               </div>
             </div>
           </div>
         </div>
         <div className='container'>
-          {this.state.open ? (
+          {this.state.line === 1 ? (
+            ''
+          ) : this.props.userinfo.loginWhether === 2 ? (
+            ''
+          ) : this.state.open ? (
             <UserSearch
               open={this.state.open}
               setOpen={(o) => this.setState({ open: o })}
@@ -253,19 +283,22 @@ class ExerciseAllotList extends Component {
               : ''}
           </div>
         </div>
+        <div className='footer'>
+          <Footer />
+        </div>
       </div>
     );
   }
 }
 
-const ExerciseAllotListStateToProps = (state) => {
+const WorkoutAllotedListStateToProps = (state) => {
   return {
     userinfo: state.authentication.userinfo,
     status: state.authentication.status,
   };
 };
 
-const ExerciseAllotListDispatchToProps = (dispatch) => {
+const WorkoutAllotedListDispatchToProps = (dispatch) => {
   return {
     getStatusRequest: () => {
       return dispatch(getStatusRequest());
@@ -274,6 +307,6 @@ const ExerciseAllotListDispatchToProps = (dispatch) => {
 };
 
 export default connect(
-  ExerciseAllotListStateToProps,
-  ExerciseAllotListDispatchToProps
-)(ExerciseAllotList);
+  WorkoutAllotedListStateToProps,
+  WorkoutAllotedListDispatchToProps
+)(WorkoutAllotedList);
