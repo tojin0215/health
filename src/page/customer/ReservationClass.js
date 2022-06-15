@@ -1282,15 +1282,18 @@ class ReservationClass extends Component {
                     <div>
                       <TextField
                         id='trainer'
-                        lable='강사 검색'
+                        label='강사 검색'
                         onClick={() => this.setState({ open: true })}
                         value={this.state.trainer_name}
                         // onChange={this.handleChange}
                         InputProps={{ disableUnderline: true }}
                         error={this.state.trainer_err}
                         variant='standard'
-                        className='boxmorpinsm w-100'
-                        style={{ cursor: 'pointer' }}
+                        disabled
+                        className='boxmorpsm boxmorpinsm w-100'
+                        style={{
+                          cursor: 'pointer',
+                        }}
                       />
                     </div>
                   )}

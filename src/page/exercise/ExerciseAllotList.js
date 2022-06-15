@@ -232,6 +232,7 @@ class ExerciseAllotList extends Component {
             <TextField
               id='customer_name'
               label='회원 검색'
+              disabled
               variant='standard'
               onClick={() => this.setState({ open: true })}
               className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
