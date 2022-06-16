@@ -37,10 +37,15 @@ const WorkoutAllotedView = ({
   url,
 }) => {
   return (
-    <div>
-      {idwa}, {fitness_no}, {client_no}, {workout}, {region}, {machine}
-      {default_set}, {default_count}, {default_rest}, {url}
-    </div>
+    <tr>
+      <td>{workout}</td>
+      <td>{region}</td>
+      <td>{machine}</td>
+      <td>{default_set}</td>
+      <td>{default_count}</td>
+      <td>{default_rest}</td>
+      <td>{url}</td>
+    </tr>
   );
 };
 
@@ -51,7 +56,7 @@ class WorkoutAllotedList extends Component {
       client_name: '',
       open: false,
       inbodiesList: [],
-      assignexerciseAllotlist: [],
+      workoutAllotlist: [],
       exerciseAllotlist: [],
       idc2: this.props.location.state.idc2,
       client_name2: this.props.location.state.client_name2,
@@ -209,7 +214,7 @@ class WorkoutAllotedList extends Component {
               />
             );
           });
-          this.setState({ assignexerciseAllotlist: items });
+          this.setState({ workoutAllotlist: items });
         });
       });
     });
@@ -268,18 +273,33 @@ class WorkoutAllotedList extends Component {
               value={this.state.client_name}
             />
           )}
-          <div>
-            <h1> 인바디</h1>
-            {this.state.inbodiesList[0]
-              ? this.state.inbodiesList[0]
-              : '등록된 인바디가 없습니다.'}
-          </div>
-          <div>
-            <h1> 배정된 운동목록</h1>
-            {this.state.assignexerciseAllotlist
-              ? this.state.assignexerciseAllotlist
-              : ''}
-          </div>
+          {this.state.client_name ? (
+            <div>
+              <div>
+                <h1> 인바디</h1>
+                {this.state.inbodiesList[0]
+                  ? this.state.inbodiesList[0]
+                  : '등록된 인바디가 없습니다.'}
+              </div>
+              <div>
+                <h1>{this.state.client_name}님의 운동 배정된 목록</h1>
+                <table class='table'>
+                  <tr>
+                    <th scope='col'>운동 이름</th>
+                    <th scope='col'>운동 부위</th>
+                    <th scope='col'>운동 기구</th>
+                    <th scope='col'>세트</th>
+                    <th scope='col'>회수</th>
+                    <th scope='col'>쉬는시간</th>
+                    <th scope='col'>url</th>
+                  </tr>
+                  {this.state.workoutAllotlist}
+                </table>
+              </div>
+            </div>
+          ) : (
+            ''
+          )}
         </div>
         <div className='footer'>
           <Footer />

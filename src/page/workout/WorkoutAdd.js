@@ -1,12 +1,56 @@
-import { Component } from 'react';
+import { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
-import { workoutInsert } from '../../api/user';
+import {
+  selectTrainerReservation,
+  workoutInsert,
+  workoutSelect,
+} from '../../api/user';
 import Footer from '../../component/footer/Footer';
 import Header from '../../component/header/Header';
 import Menu from '../../component/navigation/Menu';
 import Navigation from '../../component/navigation/Navigation';
+
+const ExerciseView = ({
+  idw,
+  fitness_no,
+  workout,
+  part,
+  machine,
+  default_set,
+  default_count,
+  default_rest,
+  url,
+  inbody_no,
+}) => {
+  const region =
+    part === 1
+      ? '상체'
+      : part === 18
+      ? '하체'
+      : part === 28
+      ? '전신'
+      : part === 38
+      ? '코어'
+      : part === 48
+      ? '유산소'
+      : '기타';
+
+  return (
+    <>
+      <tr>
+        <td>{region}</td>
+        <td>{workout}</td>
+        <td>{machine}</td>
+        <td>{default_set}</td>
+        <td>{default_count}</td>
+        <td>{default_rest}</td>
+        <td>{url}</td>
+      </tr>
+    </>
+  );
+};
 
 class WorkoutAdd extends Component {
   constructor(props) {
@@ -27,6 +71,8 @@ class WorkoutAdd extends Component {
         region5: false,
         region6: false,
       },
+      headRegion: '',
+      workoutlist: [],
     };
   }
   goLogin = () => {
@@ -98,7 +144,31 @@ class WorkoutAdd extends Component {
       this.state.default_rest,
       this.state.url
     ).then((res) => {
+      this.handleOnClick(
+        this.state.radioGroup.region1
+          ? 1
+          : this.state.radioGroup.region2
+          ? 18
+          : this.state.radioGroup.region3
+          ? 28
+          : this.state.radioGroup.region4
+          ? 38
+          : this.state.radioGroup.region5
+          ? 48
+          : this.state.radioGroup.region6
+          ? 58
+          : 1
+      );
       alert('workoutInsert');
+      this.setState({
+        workout: '',
+        radioGroup: '',
+        machine: '',
+        default_set: 3,
+        default_count: 8,
+        default_rest: 30,
+        url: 'https://',
+      });
     });
   };
   handleChange = (e) => {
@@ -120,7 +190,42 @@ class WorkoutAdd extends Component {
       radioGroup: obj,
     });
   };
+  handleOnClick = (key) => {
+    selectTrainerReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      const fitness_no =
+        this.props.userinfo.loginWhether === 1
+          ? trainerResult[0].fitness_no
+          : this.props.userinfo.fitness_no;
+      workoutSelect(fitness_no, key).then((result) => {
+        const items = result.map((data, index, array) => {
+          return (
+            <ExerciseView
+              idw={data.idw}
+              fitness_no={data.fitness_no}
+              workout={data.workout}
+              part={data.part}
+              machine={data.machine}
+              default_set={data.default_set}
+              default_count={data.default_count}
+              default_rest={data.default_rest}
+              url={data.url}
+              client_name={this.state.client_name}
+            />
+          );
+        });
+        this.setState({
+          workoutlist: items.reverse(),
+          headRegion: items[0].props.part,
+        });
+        // console.log(items[0].props.part);
+      });
+    });
+  };
+
   render() {
+    // console.log(this.state.headRegion);
     return (
       <div>
         <div className='header'>
@@ -251,6 +356,42 @@ class WorkoutAdd extends Component {
             </tr>
           </table>
           <button onClick={this.workoutAdd}>운동 설정</button>
+          <div>
+            <h1>
+              {this.state.headRegion === 1
+                ? '상체'
+                : this.state.headRegion === 18
+                ? '하체'
+                : this.state.headRegion === 28
+                ? '전신'
+                : this.state.headRegion === 38
+                ? '코어'
+                : this.state.headRegion === 48
+                ? '유산소'
+                : this.state.headRegion === 58
+                ? '기타'
+                : ''}
+              운동 개별 선택
+            </h1>
+            <button onClick={() => this.handleOnClick(1)}>상체</button>
+            <button onClick={() => this.handleOnClick(18)}>하체</button>
+            <button onClick={() => this.handleOnClick(28)}>전신</button>
+            <button onClick={() => this.handleOnClick(38)}>코어</button>
+            <button onClick={() => this.handleOnClick(48)}>유산소</button>
+            <button onClick={() => this.handleOnClick(58)}>기타</button>
+          </div>
+          <table class='table'>
+            <tr>
+              <th scope='col'>운동 부위</th>
+              <th scope='col'>운동 이름</th>
+              <th scope='col'>운동 기구</th>
+              <th scope='col'>세트</th>
+              <th scope='col'>회수</th>
+              <th scope='col'>쉬는시간</th>
+              <th scope='col'>url</th>
+            </tr>
+            {this.state.workoutlist ? this.state.workoutlist : ''}
+          </table>
         </div>
 
         <div className='footer'>

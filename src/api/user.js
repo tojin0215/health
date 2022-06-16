@@ -535,3 +535,8 @@ export const workoutAllotedInsert = (
     })
     .then((response) => response.data);
 };
+
+//workoutAlloted delete
+export const workoutAllotedDelete = (idwa) => {
+  return axios.delete(`${SERVER_URL}/workoutAlloted?idwa=` + idwa, {});
+};

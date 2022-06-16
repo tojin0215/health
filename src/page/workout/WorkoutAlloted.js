@@ -11,12 +11,14 @@ import {
   inbodiesSelect,
   selectClientReservation,
   selectTrainerReservation,
+  workoutAllotedDelete,
   workoutAllotedInsert,
   workoutAllotedSelect,
   workoutSelect,
 } from '../../api/user';
 import { data } from 'jquery';
 import Footer from '../../component/footer/Footer';
+import { Refresh } from '@mui/icons-material';
 
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
@@ -68,6 +70,9 @@ const ExerciseView = ({
       default_rest_input,
       url_input
     ).then((res) => {
+      setDefault_set_input(default_set);
+      setDefault_count_input(default_count);
+      setDefault_rest_input(default_rest);
       workoutAllotedView(idc);
       alert('asdasd');
     });
@@ -139,7 +144,16 @@ const WorkoutAllotedView = ({
   default_count,
   default_rest,
   url,
+  idc,
+  workoutAllotedView,
 }) => {
+  const hadndleDelete = () => {
+    workoutAllotedDelete(idwa).then((res) => {
+      workoutAllotedView(idc);
+      alert('delete');
+    });
+  };
+
   return (
     <tr>
       <td>{workout}</td>
@@ -149,6 +163,9 @@ const WorkoutAllotedView = ({
       <td>{default_count}</td>
       <td>{default_rest}</td>
       <td>{url}</td>
+      <td>
+        <button onClick={hadndleDelete}>-</button>
+      </td>
     </tr>
   );
 };
@@ -164,6 +181,7 @@ class WorkoutAlloted extends Component {
       exerciseAllotlist: [],
       tablePlus: [],
       workoutAllotlist: [],
+      headRegion: '',
     };
     //여기 function
   }
@@ -309,7 +327,10 @@ class WorkoutAlloted extends Component {
             />
           );
         });
-        this.setState({ exerciseAllotlist: items });
+        this.setState({
+          exerciseAllotlist: items,
+          headRegion: items[0].props.part,
+        });
         // console.log(result);
       });
     });
@@ -337,6 +358,14 @@ class WorkoutAlloted extends Component {
               default_count={data.default_count}
               default_rest={data.default_rest}
               url={data.url}
+              idc={
+                this.props.userinfo.loginWhether == 2
+                  ? this.props.userinfo.joinNo
+                  : this.state.idc === undefined
+                  ? 0
+                  : this.state.idc
+              }
+              workoutAllotedView={this.workoutAllotedView}
             />
           );
         });
@@ -346,7 +375,8 @@ class WorkoutAlloted extends Component {
   };
 
   render() {
-    console.log(this.state.idc);
+    // console.log(this.state.idc);
+
     return (
       <div>
         <div className='header'>
@@ -399,7 +429,22 @@ class WorkoutAlloted extends Component {
                   : '등록된 인바디가 없습니다.'}
               </div>
               <div>
-                <h1>운동 개별 선택</h1>
+                <h1>
+                  {this.state.headRegion === 1
+                    ? '상체'
+                    : this.state.headRegion === 18
+                    ? '하체'
+                    : this.state.headRegion === 28
+                    ? '전신'
+                    : this.state.headRegion === 38
+                    ? '코어'
+                    : this.state.headRegion === 48
+                    ? '유산소'
+                    : this.state.headRegion === 58
+                    ? '기타'
+                    : ''}
+                  운동 개별 선택
+                </h1>
                 <button onClick={() => this.handleOnClick(1)}>상체</button>
                 <button onClick={() => this.handleOnClick(18)}>하체</button>
                 <button onClick={() => this.handleOnClick(28)}>전신</button>
@@ -420,9 +465,7 @@ class WorkoutAlloted extends Component {
                     <th scope='col'>url</th>
                     <th scope='col'>선택</th>
                   </tr>
-                  {this.state.exerciseAllotlist
-                    ? this.state.exerciseAllotlist
-                    : ''}
+                  {this.state.exerciseAllotlist}
                 </table>
               </div>
               <div>
@@ -437,7 +480,9 @@ class WorkoutAlloted extends Component {
                     <th scope='col'>쉬는시간</th>
                     <th scope='col'>url</th>
                   </tr>
-                  {this.state.workoutAllotlist}
+                  {this.state.workoutAllotlist
+                    ? this.state.workoutAllotlist
+                    : '배정된 운동목록이 없습니다.'}
                 </table>
               </div>
             </div>
