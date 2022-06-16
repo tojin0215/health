@@ -63,6 +63,14 @@ const ReservationClassItem = ({
   class_date,
   class_date_update,
   updateOpen,
+  dayIncreament1,
+  dayIncreament2,
+  dayIncreament3,
+  dayIncreament4,
+  dayIncreament5,
+  dayIncreament6,
+  dayIncreament7,
+  items,
 }) => {
   /*
 	운동클래스 delete
@@ -192,8 +200,47 @@ const ReservationClassItem = ({
   const hourArray = hour >= 10 ? hour : '0' + hour;
 
   const minuteArray = minute >= 10 ? minute : '0' + minute;
+  console.log(dayIncreament1);
 
   return (
+    // <tr>
+    //   {class_date === dayIncreament1 ? (
+    //     <td>{trainer}</td>
+    //   ) : (
+    //     <td className='border-0 p-0'></td>
+    //   )}
+    //   {class_date === dayIncreament2 ? (
+    //     <td>{trainer}</td>
+    //   ) : (
+    //     <td className='border-0 p-0'></td>
+    //   )}
+    //   {class_date === dayIncreament3 ? (
+    //     <td>{trainer}</td>
+    //   ) : (
+    //     <td className='border-0 p-0'></td>
+    //   )}
+    //   {class_date === dayIncreament4 ? (
+    //     <td>{trainer}</td>
+    //   ) : (
+    //     <td className='border-0 p-0'></td>
+    //   )}
+    //   {class_date === dayIncreament5 ? (
+    //     <td>{trainer}</td>
+    //   ) : (
+    //     <td className='border-0 p-0'></td>
+    //   )}
+    //   {class_date === dayIncreament6 ? (
+    //     <td>{trainer}</td>
+    //   ) : (
+    //     <td className='border-0 p-0'></td>
+    //   )}
+    //   {class_date === dayIncreament7 ? (
+    //     <td>{trainer}</td>
+    //   ) : (
+    //     <td className='border-0 p-0'></td>
+    //   )}
+    // </tr>
+
     <div className='border py-2 my-1 text-center'>
       <p className='fw-bold'>{exercise_class}</p>
       <p>{trainer}</p>
@@ -431,7 +478,7 @@ class ReservationClass extends Component {
               moment(value.class_date.split('T')[0])
                 .add(9, 'hour')
                 .isSameOrBefore(
-                  moment().day(0 + this.state.dayIncreament),
+                  moment().day(7 + this.state.dayIncreament),
                   'day'
                 )
           )
@@ -440,12 +487,9 @@ class ReservationClass extends Component {
               ? moment(data.class_date.split('T')[0])
               : moment();
             const date_split = date_value.format('YYYY년 MM월 DD일');
-            let exercise_length = result.filter(
-              (filterData) =>
-                filterData.class_date.split('T')[0] ===
-                data.class_date.split('T')[0]
-            ).length;
+
             const handling = this.state.updateOpen ? true : false;
+
             return (
               <ReservationClassItem
                 fitness_no={this.props.userinfo.fitness_no}
@@ -463,13 +507,10 @@ class ReservationClass extends Component {
             );
           });
         // eslint-disable-next-line no-unused-expressions
+
         this.setState({ reservationClass: items }),
-          this.reservationClassSelect1(),
-          this.reservationClassSelect2(),
-          this.reservationClassSelect3(),
-          this.reservationClassSelect4(),
-          this.reservationClassSelect5(),
-          this.reservationClassSelect6();
+          console.log(this.state.reservationClass);
+        this.reservationClassSelect1();
       });
     });
   };
@@ -1111,66 +1152,171 @@ class ReservationClass extends Component {
                 <tbody>
                   <tr>
                     <td>
+                      {' '}
                       {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
                           수업이 없습니다.
                         </div>
                       ) : (
-                        this.state.reservationClass
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date_update.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(0 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date_update.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(0 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
                       )}
                     </td>
-                    <td name='mon'>
-                      {this.state.reservationClass1.length == 0 ? (
+                    <td>
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
                           수업이 없습니다.
                         </div>
                       ) : (
-                        this.state.reservationClass1
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date_update.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(1 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date_update.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(1 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
                       )}
                     </td>
-                    <td name='tue'>
-                      {this.state.reservationClass2.length == 0 ? (
+                    <td>
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
                           수업이 없습니다.
                         </div>
                       ) : (
-                        this.state.reservationClass2
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date_update.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(2 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date_update.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(2 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
                       )}
                     </td>
-                    <td name='wed'>
-                      {this.state.reservationClass3.length == 0 ? (
+                    <td>
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
                           수업이 없습니다.
                         </div>
                       ) : (
-                        this.state.reservationClass3
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date_update.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(3 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date_update.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(3 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
                       )}
                     </td>
-                    <td name='thu'>
-                      {this.state.reservationClass4.length == 0 ? (
+                    <td>
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
                           수업이 없습니다.
                         </div>
                       ) : (
-                        this.state.reservationClass4
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date_update.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(4 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date_update.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(4 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
                       )}
                     </td>
-                    <td name='fri'>
-                      {this.state.reservationClass5.length == 0 ? (
+                    <td>
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
                           수업이 없습니다.
                         </div>
                       ) : (
-                        this.state.reservationClass5
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date_update.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(5 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date_update.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(5 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
                       )}
                     </td>
-                    <td name='sat'>
-                      {this.state.reservationClass6.length == 0 ? (
+                    <td>
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
                           수업이 없습니다.
                         </div>
                       ) : (
-                        this.state.reservationClass6
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date_update.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(6 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date_update.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(6 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
                       )}
                     </td>
                   </tr>
