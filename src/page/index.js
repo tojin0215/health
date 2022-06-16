@@ -30,5 +30,4 @@ export { default as ChoiceLogin } from './login/ChoiceLogin';
 export { default as Inbodies } from './exercise/Inbodies';
 export { default as WorkoutAlloted } from './workout/WorkoutAlloted';
 export { default as WorkoutAllotedList } from './workout/WorkoutAllotedList';
-export { default as WorkoutAllotedAdd } from './workout/WorkoutAllotedAdd';
 export { default as WorkoutAdd } from './workout/WorkoutAdd';

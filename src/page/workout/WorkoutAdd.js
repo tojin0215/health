@@ -12,6 +12,26 @@ import Header from '../../component/header/Header';
 import Menu from '../../component/navigation/Menu';
 import Navigation from '../../component/navigation/Navigation';
 
+// Bootstrap
+import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
+// MUI 테이블
+import Box from '@mui/material/Box';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+
 const ExerciseView = ({
   idw,
   fitness_no,
@@ -39,15 +59,15 @@ const ExerciseView = ({
 
   return (
     <>
-      <tr>
-        <td>{region}</td>
-        <td>{workout}</td>
-        <td>{machine}</td>
-        <td>{default_set}</td>
-        <td>{default_count}</td>
-        <td>{default_rest}</td>
-        <td>{url}</td>
-      </tr>
+      <TableRow>
+        <TableCell>{region}</TableCell>
+        <TableCell>{workout}</TableCell>
+        <TableCell>{machine}</TableCell>
+        <TableCell>{default_set}</TableCell>
+        <TableCell>{default_count}</TableCell>
+        <TableCell>{default_rest}</TableCell>
+        <TableCell>{url}</TableCell>
+      </TableRow>
     </>
   );
 };
@@ -235,164 +255,279 @@ class WorkoutAdd extends Component {
           <div className='localNavigation'>
             <div className='container'>
               <h2>
-                <div className='parallelogram'></div>새 운동설정
+                <div className='parallelogram'></div>운동 설정
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/workoutAdd'>새 운동설정</Link>
+                <Link to='/workoutAdd'>운동 설정</Link>
               </div>
             </div>
           </div>
         </div>
-        <div className='container'>
-          <table>
-            <tr>
-              <th>workout</th>
-              <th>part</th>
-              <th>machine</th>
-            </tr>
-            <tr>
-              <td>
-                <input
+        <Container>
+          <Row className='sectionGlass gap-3 mt-0'>
+            <h3>운동 만들기</h3>
+            <Col>
+              <Form.Group>
+                <Form.Label>
+                  <h5>운동 이름</h5>
+                </Form.Label>
+                <Form.Control
                   value={this.state.workout}
                   id='workout'
                   onChange={this.handleChange}
-                />
-              </td>
-              <td>
-                상체
-                <input
-                  type='radio'
-                  id='region1'
-                  checked={this.state.radioGroup['region1']}
-                  onChange={this.handleRegionRadio}
-                />
-                하체
-                <input
-                  type='radio'
-                  id='region2'
-                  checked={this.state.radioGroup['region2']}
-                  onChange={this.handleRegionRadio}
-                />
-                전신
-                <input
-                  type='radio'
-                  id='region3'
-                  checked={this.state.radioGroup['region3']}
-                  onChange={this.handleRegionRadio}
-                />
-                코어
-                <input
-                  type='radio'
-                  id='region4'
-                  checked={this.state.radioGroup['region4']}
-                  onChange={this.handleRegionRadio}
-                />
-                유산소
-                <input
-                  type='radio'
-                  id='region5'
-                  checked={this.state.radioGroup['region5']}
-                  onChange={this.handleRegionRadio}
-                />
-                기타
-                <input
-                  type='radio'
-                  id='region6'
-                  checked={this.state.radioGroup['region6']}
-                  onChange={this.handleRegionRadio}
-                />
-              </td>
-              <td>
-                <input
+                ></Form.Control>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group>
+                <Form.Label>
+                  <h5>기구</h5>
+                </Form.Label>
+                <Form.Control
                   value={this.state.machine}
                   id='machine'
                   onChange={this.handleChange}
-                />
-              </td>
-            </tr>
-          </table>
-          <table>
-            <tr>
-              <th>default_set</th>
-              <th>default_count</th>
-              <th>default_rest</th>
-              <th>url</th>
-            </tr>
-            <tr>
-              <td>
-                <input
+                ></Form.Control>
+              </Form.Group>
+            </Col>
+            <Col xs={12}>
+              <Form.Group>
+                <Form.Label>
+                  <h5>운동 부위</h5>
+                </Form.Label>
+                <Row xs={6} className='px-5'>
+                  <Col>
+                    <Form.Check>
+                      <Form.Check.Input
+                        type='radio'
+                        id='region1'
+                        checked={this.state.radioGroup['region1']}
+                        onChange={this.handleRegionRadio}
+                      />
+                      <Form.Check.Label htmlFor='region1' className='w-100'>
+                        상체
+                      </Form.Check.Label>
+                    </Form.Check>
+                  </Col>
+                  <Col>
+                    <Form.Check>
+                      <Form.Check.Input
+                        type='radio'
+                        id='region2'
+                        checked={this.state.radioGroup['region2']}
+                        onChange={this.handleRegionRadio}
+                      />
+                      <Form.Check.Label htmlFor='region2' className='w-100'>
+                        하체
+                      </Form.Check.Label>
+                    </Form.Check>
+                  </Col>
+                  <Col>
+                    <Form.Check>
+                      <Form.Check.Input
+                        type='radio'
+                        id='region3'
+                        checked={this.state.radioGroup['region3']}
+                        onChange={this.handleRegionRadio}
+                      />
+                      <Form.Check.Label htmlFor='region3' className='w-100'>
+                        전신
+                      </Form.Check.Label>
+                    </Form.Check>
+                  </Col>
+                  <Col>
+                    <Form.Check>
+                      <Form.Check.Input
+                        type='radio'
+                        id='region4'
+                        checked={this.state.radioGroup['region4']}
+                        onChange={this.handleRegionRadio}
+                      />
+                      <Form.Check.Label htmlFor='region4' className='w-100'>
+                        코어
+                      </Form.Check.Label>
+                    </Form.Check>
+                  </Col>
+                  <Col>
+                    <Form.Check>
+                      <Form.Check.Input
+                        type='radio'
+                        id='region5'
+                        checked={this.state.radioGroup['region5']}
+                        onChange={this.handleRegionRadio}
+                      />
+                      <Form.Check.Label htmlFor='region5' className='w-100'>
+                        유산소
+                      </Form.Check.Label>
+                    </Form.Check>
+                  </Col>
+                  <Col>
+                    <Form.Check>
+                      <Form.Check.Input
+                        type='radio'
+                        id='region6'
+                        checked={this.state.radioGroup['region6']}
+                        onChange={this.handleRegionRadio}
+                      />
+                      <Form.Check.Label htmlFor='region6' className='w-100'>
+                        기타
+                      </Form.Check.Label>
+                    </Form.Check>
+                  </Col>
+                </Row>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group>
+                <Form.Label>
+                  <h5>세트</h5>
+                </Form.Label>
+                <Form.Control
                   type='number'
                   value={this.state.default_set}
                   id='default_set'
                   onChange={this.handleChange}
-                />
-              </td>
-              <td>
-                <input
+                ></Form.Control>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group>
+                <Form.Label>
+                  <h5>횟수</h5>
+                </Form.Label>
+                <Form.Control
                   type='number'
                   value={this.state.default_count}
                   id='default_count'
                   onChange={this.handleChange}
-                />
-              </td>
-              <td>
-                <input
+                ></Form.Control>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group>
+                <Form.Label>
+                  <h5>휴식</h5>
+                </Form.Label>
+                <Form.Control
                   type='number'
                   value={this.state.default_rest}
                   id='default_rest'
                   onChange={this.handleChange}
-                />
-              </td>
-              <td>
-                <input
+                ></Form.Control>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group>
+                <Form.Label>
+                  <h5>링크</h5>
+                </Form.Label>
+                <Form.Control
                   value={this.state.url}
                   id='url'
                   onChange={this.handleChange}
-                />
-              </td>
-            </tr>
-          </table>
-          <button onClick={this.workoutAdd}>운동 설정</button>
-          <div>
-            <h1>
-              {this.state.headRegion === 1
-                ? '상체'
-                : this.state.headRegion === 18
-                ? '하체'
-                : this.state.headRegion === 28
-                ? '전신'
-                : this.state.headRegion === 38
-                ? '코어'
-                : this.state.headRegion === 48
-                ? '유산소'
-                : this.state.headRegion === 58
-                ? '기타'
-                : ''}
-              운동 개별 선택
-            </h1>
-            <button onClick={() => this.handleOnClick(1)}>상체</button>
-            <button onClick={() => this.handleOnClick(18)}>하체</button>
-            <button onClick={() => this.handleOnClick(28)}>전신</button>
-            <button onClick={() => this.handleOnClick(38)}>코어</button>
-            <button onClick={() => this.handleOnClick(48)}>유산소</button>
-            <button onClick={() => this.handleOnClick(58)}>기타</button>
-          </div>
-          <table class='table'>
-            <tr>
-              <th scope='col'>운동 부위</th>
-              <th scope='col'>운동 이름</th>
-              <th scope='col'>운동 기구</th>
-              <th scope='col'>세트</th>
-              <th scope='col'>회수</th>
-              <th scope='col'>쉬는시간</th>
-              <th scope='col'>url</th>
-            </tr>
+                ></Form.Control>
+              </Form.Group>
+            </Col>
+            <Col xs={12}>
+              <Button className='w-100' onClick={this.workoutAdd}>
+                운동 설정
+              </Button>
+            </Col>
+          </Row>
+          <Row className='mt-4' xs={6}>
+            <Col xs={12}>
+              <h3>
+                <span className='text-primary'>
+                  {this.state.headRegion === 1
+                    ? '상체 '
+                    : this.state.headRegion === 18
+                    ? '하체 '
+                    : this.state.headRegion === 28
+                    ? '전신 '
+                    : this.state.headRegion === 38
+                    ? '코어 '
+                    : this.state.headRegion === 48
+                    ? '유산소 '
+                    : this.state.headRegion === 58
+                    ? '기타 '
+                    : ''}
+                </span>
+                운동 목록
+              </h3>
+            </Col>
+            <Col>
+              <Button
+                className='w-100'
+                variant='outline-primary'
+                onClick={() => this.handleOnClick(1)}
+              >
+                상체
+              </Button>
+            </Col>
+            <Col>
+              <Button
+                className='w-100'
+                variant='outline-primary'
+                onClick={() => this.handleOnClick(18)}
+              >
+                하체
+              </Button>
+            </Col>
+            <Col>
+              <Button
+                className='w-100'
+                variant='outline-primary'
+                onClick={() => this.handleOnClick(28)}
+              >
+                전신
+              </Button>
+            </Col>
+            <Col>
+              <Button
+                className='w-100'
+                variant='outline-primary'
+                onClick={() => this.handleOnClick(38)}
+              >
+                코어
+              </Button>
+            </Col>
+            <Col>
+              <Button
+                className='w-100'
+                variant='outline-primary'
+                onClick={() => this.handleOnClick(48)}
+              >
+                유산소
+              </Button>
+            </Col>
+            <Col>
+              <Button
+                className='w-100'
+                variant='outline-primary'
+                onClick={() => this.handleOnClick(58)}
+              >
+                기타
+              </Button>
+            </Col>
+          </Row>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell scope='col'>운동 부위</TableCell>
+                <TableCell scope='col'>운동 이름</TableCell>
+                <TableCell scope='col'>운동 기구</TableCell>
+                <TableCell scope='col'>세트</TableCell>
+                <TableCell scope='col'>횟수</TableCell>
+                <TableCell scope='col'>쉬는시간</TableCell>
+                <TableCell scope='col'>url</TableCell>
+              </TableRow>
+            </TableHead>
             {this.state.workoutlist ? this.state.workoutlist : ''}
-          </table>
-        </div>
+          </Table>
+        </Container>
 
         <div className='footer'>
           <Footer />

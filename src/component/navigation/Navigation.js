@@ -190,7 +190,7 @@ class Navigation extends Component {
                   </li>
                   <li>
                     <NavLink exact to='/workoutAdd'>
-                      새 운동 설정
+                      운동 설정
                     </NavLink>
                   </li>
                 </ul>
@@ -334,7 +334,7 @@ class Navigation extends Component {
                   </li>
                   <li>
                     <NavLink exact to='/workoutAdd'>
-                      새 운동 설정
+                      운동 설정
                     </NavLink>
                   </li>
                 </ul>
