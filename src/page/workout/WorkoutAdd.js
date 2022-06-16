@@ -380,7 +380,7 @@ class WorkoutAdd extends Component {
                 </Row>
               </Form.Group>
             </Col>
-            <Col>
+            <Col xs={2}>
               <Form.Group>
                 <Form.Label>
                   <h5>세트</h5>
@@ -393,7 +393,7 @@ class WorkoutAdd extends Component {
                 ></Form.Control>
               </Form.Group>
             </Col>
-            <Col>
+            <Col xs={2}>
               <Form.Group>
                 <Form.Label>
                   <h5>횟수</h5>
@@ -406,7 +406,7 @@ class WorkoutAdd extends Component {
                 ></Form.Control>
               </Form.Group>
             </Col>
-            <Col>
+            <Col xs={2}>
               <Form.Group>
                 <Form.Label>
                   <h5>휴식</h5>

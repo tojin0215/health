@@ -6,7 +6,6 @@ import Navigation from '../../component/navigation/Navigation';
 import Menu from '../../component/navigation/Menu';
 import { Link } from 'react-router-dom';
 import UserSearch from '../../component/customer/UserSearch';
-import { TextField } from '@mui/material';
 import {
   inbodiesSelect,
   selectClientReservation,
@@ -18,15 +17,60 @@ import {
 } from '../../api/user';
 import { data } from 'jquery';
 import Footer from '../../component/footer/Footer';
+
+//bootstrap
+import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+// mui
 import { Refresh } from '@mui/icons-material';
+import { TextField } from '@mui/material';
+import Box from '@mui/material/Box';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+// 리액트 아이콘
+import { RiDeleteBin5Fill } from 'react-icons/ri';
 
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
-    <div>
-      {client_name}님 운동배정/키{height}cm/체중{weight}kg/체지방{bodyFat}
-      kg/근육량{muscleMass}
-      kg
-    </div>
+    <Row className='mt-4 sectionGlass'>
+      <Col xs={12}>
+        <h3>
+          {client_name}
+          <span className='fs-4'>님 운동배정</span>
+        </h3>
+      </Col>
+      <Col>
+        <h5>키</h5>
+        <span className='fs-5 fw-bold'>{height}</span>
+        <span> cm</span>
+      </Col>
+      <Col>
+        <h5>체중</h5>
+        <span className='fs-5 fw-bold'>{weight}</span>
+        <span> kg</span>
+      </Col>
+      <Col>
+        <h5>체지방</h5>
+        <span className='fs-5 fw-bold'>{bodyFat}</span>
+        <span> kg</span>
+      </Col>
+      <Col>
+        <h5>근육량</h5>
+        <span className='fs-5 fw-bold'>{muscleMass}</span>
+        <span> kg</span>
+      </Col>
+    </Row>
   );
 };
 
@@ -95,41 +139,38 @@ const ExerciseView = ({
   };
 
   return (
-    <>
-      <tr>
-        <td>{region}</td>
-        <td>{workout}</td>
-        <td>{machine}</td>
-        <td>
-          <input
-            type='number'
-            value={default_set_input}
-            onChange={changeInsert}
-          />
-        </td>
-        <td>
-          <input
-            type='number'
-            value={default_count_input}
-            onChange={changeInsert2}
-          />
-        </td>
-        <td>
-          <input
-            type='number'
-            value={default_rest_input}
-            onChange={changeInsert3}
-          />
-        </td>
-        <td>
-          <input value={url_input} onChange={changeInsert4} />
-        </td>
-        <td>
-          <button onClick={plusTable}>+</button>
-        </td>
-        <div></div>
-      </tr>
-    </>
+    <TableRow>
+      <TableCell>{region}</TableCell>
+      <TableCell>{workout}</TableCell>
+      <TableCell>{machine}</TableCell>
+      <TableCell>
+        <input
+          type='number'
+          value={default_set_input}
+          onChange={changeInsert}
+        />
+      </TableCell>
+      <TableCell>
+        <input
+          type='number'
+          value={default_count_input}
+          onChange={changeInsert2}
+        />
+      </TableCell>
+      <TableCell>
+        <input
+          type='number'
+          value={default_rest_input}
+          onChange={changeInsert3}
+        />
+      </TableCell>
+      <TableCell>
+        <input value={url_input} onChange={changeInsert4} />
+      </TableCell>
+      <TableCell>
+        <Button onClick={plusTable}>+</Button>
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -155,18 +196,24 @@ const WorkoutAllotedView = ({
   };
 
   return (
-    <tr>
-      <td>{workout}</td>
-      <td>{region}</td>
-      <td>{machine}</td>
-      <td>{default_set}</td>
-      <td>{default_count}</td>
-      <td>{default_rest}</td>
-      <td>{url}</td>
-      <td>
-        <button onClick={hadndleDelete}>-</button>
-      </td>
-    </tr>
+    <TableRow>
+      <TableCell>{workout}</TableCell>
+      <TableCell>{region}</TableCell>
+      <TableCell>{machine}</TableCell>
+      <TableCell>{default_set}</TableCell>
+      <TableCell>{default_count}</TableCell>
+      <TableCell>{default_rest}</TableCell>
+      <TableCell>{url}</TableCell>
+      <TableCell>
+        <Button
+          className='px-2 py-1'
+          variant='outline-danger'
+          onClick={hadndleDelete}
+        >
+          <RiDeleteBin5Fill />
+        </Button>
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -397,7 +444,7 @@ class WorkoutAlloted extends Component {
             </div>
           </div>
         </div>
-        <div className='container'>
+        <Container>
           {this.state.open ? (
             <UserSearch
               open={this.state.open}
@@ -423,71 +470,125 @@ class WorkoutAlloted extends Component {
           {this.state.client_name ? (
             <div>
               <div>
-                <h1> 인바디</h1>
                 {this.state.inbodiesList[0]
                   ? this.state.inbodiesList[0]
                   : '등록된 인바디가 없습니다.'}
               </div>
-              <div>
-                <h1>
-                  {this.state.headRegion === 1
-                    ? '상체'
-                    : this.state.headRegion === 18
-                    ? '하체'
-                    : this.state.headRegion === 28
-                    ? '전신'
-                    : this.state.headRegion === 38
-                    ? '코어'
-                    : this.state.headRegion === 48
-                    ? '유산소'
-                    : this.state.headRegion === 58
-                    ? '기타'
-                    : ''}
-                  운동 개별 선택
-                </h1>
-                <button onClick={() => this.handleOnClick(1)}>상체</button>
-                <button onClick={() => this.handleOnClick(18)}>하체</button>
-                <button onClick={() => this.handleOnClick(28)}>전신</button>
-                <button onClick={() => this.handleOnClick(38)}>코어</button>
-                <button onClick={() => this.handleOnClick(48)}>유산소</button>
-                <button onClick={() => this.handleOnClick(58)}>기타</button>
-              </div>
-              <div>
-                <h1>운동 개별 선택된 것 목록</h1>
-                <table class='table'>
-                  <tr>
-                    <th scope='col'>운동 부위</th>
-                    <th scope='col'>운동 이름</th>
-                    <th scope='col'>운동 기구</th>
-                    <th scope='col'>세트</th>
-                    <th scope='col'>회수</th>
-                    <th scope='col'>쉬는시간</th>
-                    <th scope='col'>url</th>
-                    <th scope='col'>선택</th>
-                  </tr>
-                  {this.state.exerciseAllotlist}
-                </table>
-              </div>
-              <div>
-                <h1>{this.state.client_name}님의 운동 배정된 목록</h1>
-                <table class='table'>
-                  <tr>
-                    <th scope='col'>운동 이름</th>
-                    <th scope='col'>운동 부위</th>
-                    <th scope='col'>운동 기구</th>
-                    <th scope='col'>세트</th>
-                    <th scope='col'>회수</th>
-                    <th scope='col'>쉬는시간</th>
-                    <th scope='col'>url</th>
-                  </tr>
-                  {this.state.workoutAllotlist
-                    ? this.state.workoutAllotlist
-                    : '배정된 운동목록이 없습니다.'}
-                </table>
-              </div>
+              <Row className='sectionGlass'>
+                <Col xs={12}>
+                  <h3>
+                    <span className='text-primary'>
+                      {this.state.headRegion === 1
+                        ? '상체 '
+                        : this.state.headRegion === 18
+                        ? '하체 '
+                        : this.state.headRegion === 28
+                        ? '전신 '
+                        : this.state.headRegion === 38
+                        ? '코어 '
+                        : this.state.headRegion === 48
+                        ? '유산소 '
+                        : this.state.headRegion === 58
+                        ? '기타 '
+                        : ''}
+                    </span>
+                    운동 선택
+                  </h3>
+                </Col>
+                <Col xs={2}>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.handleOnClick(1)}
+                  >
+                    상체
+                  </Button>
+                </Col>
+                <Col xs={2}>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.handleOnClick(18)}
+                  >
+                    하체
+                  </Button>
+                </Col>
+                <Col xs={2}>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.handleOnClick(28)}
+                  >
+                    전신
+                  </Button>
+                </Col>
+                <Col xs={2}>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.handleOnClick(38)}
+                  >
+                    코어
+                  </Button>
+                </Col>
+                <Col xs={2}>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.handleOnClick(48)}
+                  >
+                    유산소
+                  </Button>
+                </Col>
+                <Col xs={2}>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.handleOnClick(58)}
+                  >
+                    기타
+                  </Button>
+                </Col>
+                <Col xs={12}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell scope='col'>운동 부위</TableCell>
+                        <TableCell scope='col'>운동 이름</TableCell>
+                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>세트</TableCell>
+                        <TableCell scope='col'>회수</TableCell>
+                        <TableCell scope='col'>쉬는시간</TableCell>
+                        <TableCell scope='col'>url</TableCell>
+                        <TableCell scope='col'>선택</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>{this.state.exerciseAllotlist}</TableBody>
+                  </Table>
+                </Col>
+              </Row>
+              <Row className='sectionGlass'>
+                <h3>
+                  {this.state.client_name}
+                  <span className='fs-5'>님의 운동 배정 목록</span>
+                </h3>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell scope='col'>운동 이름</TableCell>
+                      <TableCell scope='col'>운동 부위</TableCell>
+                      <TableCell scope='col'>운동 기구</TableCell>
+                      <TableCell scope='col'>세트</TableCell>
+                      <TableCell scope='col'>회수</TableCell>
+                      <TableCell scope='col'>쉬는시간</TableCell>
+                      <TableCell scope='col'>url</TableCell>
+                      <TableCell scope='col'>삭제</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.workoutAllotlist
+                      ? this.state.workoutAllotlist
+                      : '배정된 운동목록이 없습니다.'}
+                  </TableBody>
+                </Table>
+              </Row>
             </div>
           ) : null}
-        </div>
+        </Container>
         <div className='footer'>
           <Footer />
         </div>
