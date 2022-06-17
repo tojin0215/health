@@ -551,7 +551,7 @@ class WorkoutAlloted extends Component {
                         <TableCell scope='col'>운동 이름</TableCell>
                         <TableCell scope='col'>운동 기구</TableCell>
                         <TableCell scope='col'>세트</TableCell>
-                        <TableCell scope='col'>회수</TableCell>
+                        <TableCell scope='col'>횟수</TableCell>
                         <TableCell scope='col'>쉬는시간</TableCell>
                         <TableCell scope='col'>url</TableCell>
                         <TableCell scope='col'>선택</TableCell>
@@ -573,7 +573,7 @@ class WorkoutAlloted extends Component {
                       <TableCell scope='col'>운동 부위</TableCell>
                       <TableCell scope='col'>운동 기구</TableCell>
                       <TableCell scope='col'>세트</TableCell>
-                      <TableCell scope='col'>회수</TableCell>
+                      <TableCell scope='col'>횟수</TableCell>
                       <TableCell scope='col'>쉬는시간</TableCell>
                       <TableCell scope='col'>url</TableCell>
                       <TableCell scope='col'>삭제</TableCell>

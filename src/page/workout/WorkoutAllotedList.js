@@ -289,7 +289,7 @@ class WorkoutAllotedList extends Component {
                     <th scope='col'>운동 부위</th>
                     <th scope='col'>운동 기구</th>
                     <th scope='col'>세트</th>
-                    <th scope='col'>회수</th>
+                    <th scope='col'>횟수</th>
                     <th scope='col'>쉬는시간</th>
                     <th scope='col'>url</th>
                   </tr>
