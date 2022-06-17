@@ -179,7 +179,7 @@ class WorkoutAdd extends Component {
           ? 58
           : 1
       );
-      alert('workoutInsert');
+      alert(this.state.workout + '운동이 설정됩니다.');
       this.setState({
         workout: '',
         radioGroup: '',

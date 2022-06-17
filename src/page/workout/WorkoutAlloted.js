@@ -118,7 +118,7 @@ const ExerciseView = ({
       setDefault_count_input(default_count);
       setDefault_rest_input(default_rest);
       workoutAllotedView(idc);
-      alert('asdasd');
+      alert(workout + '운동이 배정됩니다.');
     });
   };
   const [default_set_input, setDefault_set_input] = useState(default_set);
@@ -191,7 +191,7 @@ const WorkoutAllotedView = ({
   const hadndleDelete = () => {
     workoutAllotedDelete(idwa).then((res) => {
       workoutAllotedView(idc);
-      alert('delete');
+      alert('삭제합니다.');
     });
   };
 
@@ -208,7 +208,11 @@ const WorkoutAllotedView = ({
         <Button
           className='px-2 py-1'
           variant='outline-danger'
-          onClick={hadndleDelete}
+          onClick={() =>
+            confirm('정말 삭제하시겠습니까?') == true
+              ? hadndleDelete
+              : alert('삭제가 취소 되었습니다.')
+          }
         >
           <RiDeleteBin5Fill />
         </Button>
@@ -433,13 +437,13 @@ class WorkoutAlloted extends Component {
           <div className='localNavigation'>
             <div className='container'>
               <h2>
-                <div className='parallelogram'></div>새 운동배정
+                <div className='parallelogram'></div>운동 배정
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/workoutAlloted'>새 운동배정</Link>
+                <Link to='/workoutAlloted'>운동 배정</Link>
               </div>
             </div>
           </div>

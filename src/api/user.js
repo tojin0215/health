@@ -122,13 +122,8 @@ export const getReservationClassBy = (fitness_no) => {
     .then((response) => response.data);
 };
 //강사테이블 delete
-export const deleteTrainer = (phone, fitness_no) => {
-  return axios
-    .delete(
-      `${SERVER_URL}/trainer?phone=` + phone + `&fitness_no=` + fitness_no,
-      {}
-    )
-    .then((response) => response.data);
+export const deleteTrainer = (idx) => {
+  return axios.delete(`${SERVER_URL}/trainer?idx=` + idx, {});
 };
 //강사테이블 update
 export const updateTrainer = (idx, trainer_name, phone, ment, history) => {
@@ -539,4 +534,24 @@ export const workoutAllotedInsert = (
 //workoutAlloted delete
 export const workoutAllotedDelete = (idwa) => {
   return axios.delete(`${SERVER_URL}/workoutAlloted?idwa=` + idwa, {});
+};
+
+//reservation class delete
+export const reservationDataDelete = (
+  exercise_name,
+  date,
+  fitness_no,
+  time,
+  trainer
+) => {
+  return axios.delete(`${SERVER_URL}/reservation/delete`, {
+    params: {
+      type: 'class',
+      exercise_name: exercise_name,
+      date: date,
+      fitness_no: fitness_no,
+      time: time,
+      trainer: trainer,
+    },
+  });
 };

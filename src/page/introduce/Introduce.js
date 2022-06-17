@@ -111,7 +111,11 @@ const ViewIntroduceItem = ({
               </Col>
               <Col xs={12} sm={4}>
                 <Button
-                  onClick={() => handleDelete(idi)}
+                  onClick={() =>
+                    confirm('정말 삭제하시겠습니까?') == true
+                      ? handleDelete(idi)
+                      : alert('삭제가 취소 되었습니다.')
+                  }
                   variant='outline-danger'
                   className='w-100'
                 >
