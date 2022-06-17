@@ -236,13 +236,13 @@ class WorkoutAllotedList extends Component {
           <div className='localNavigation'>
             <div className='container'>
               <h2>
-                <div className='parallelogram'></div>새 운동배정
+                <div className='parallelogram'></div>운동 배정된 목록
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/workoutAllotedList'>새 배정된 운동배정</Link>
+                <Link to='/workoutAllotedList'>운동 배정된 목록</Link>
               </div>
             </div>
           </div>

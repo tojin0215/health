@@ -116,8 +116,8 @@ class AddClient extends Component {
           : '간판',
         this.state.address
       ).then((res) => {
-        // console.log(res);
-        alert('client Table');
+        // // console.log(res);
+        // alert('client Table');
         clientSelect(this.props.userinfo.fitness_no).then((result) => {
           const items = result.filter(
             (value) => value.client_name === this.state.client_name
@@ -131,7 +131,7 @@ class AddClient extends Component {
           ).then((res) => {
             // console.log(res);
           });
-          alert('manager Table');
+          alert(this.state.client_name + '님이 가입되었습니다.');
           this.props.history.push('/client');
         });
       });

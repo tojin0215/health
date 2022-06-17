@@ -73,7 +73,7 @@ const ViewClientItem = ({
 
   const deleteCompleted = (idc) => {
     deleteClient(idc).then(() => {
-      alert('삭제완료');
+      alert(client_name + '님 회원탈퇴');
       modalClose();
       viewClient();
     });
@@ -92,7 +92,7 @@ const ViewClientItem = ({
           updateManagerClientTrainer(idc, client_name_input, phone_input).then(
             () => {}
           );
-          alert('수정완료');
+          alert(client_name_input + '님 수정이 완료되었습니다.');
           modalClose();
           setShowUpdate(false);
           viewClient();
@@ -182,7 +182,15 @@ const ViewClientItem = ({
                     <div>
                       <Button
                         variant='danger'
-                        onClick={() => deleteCompleted(idc)}
+                        onClick={() =>
+                          // eslint-disable-next-line no-restricted-globals
+                          confirm(client_name + '회원을 탈퇴시겠습니까??') ==
+                          true
+                            ? deleteCompleted(idc)
+                            : alert(
+                                client_name + '회원 탈퇴를 취소 하였습니다.'
+                              )
+                        }
                       >
                         회원삭제
                       </Button>

@@ -33,6 +33,7 @@ import moment from 'moment';
 import TextField from '@mui/material/TextField';
 import {
   getReservationClassBy,
+  reservationDataDelete,
   selectTrainerReservation,
 } from '../../api/user';
 import TrainerSearch from '../../component/customer/TrainerSearch';
@@ -67,10 +68,21 @@ const ReservationClassItem = ({
       method: 'DELETE',
     }).then((result) => {
       modalClose();
+      reservationDelete();
       reservationClassSelect();
+      reservationDelete();
     });
   };
-
+  const reservationDelete = () => {
+    const time = hourArray + ':' + minuteArray;
+    reservationDataDelete(
+      exercise_class,
+      class_date,
+      fitness_no,
+      time,
+      trainer
+    );
+  };
   const [showModal, setShowModal] = useState(false);
 
   const [exercise_class_err, setExercise_class_err] = useState(false);
@@ -89,9 +101,6 @@ const ReservationClassItem = ({
   const [hour_input, setHour_input] = useState('');
   const [minute_input, setMinute_input] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
-  /*
-	운동클래스 update
-	*/
 
   const updateChange = (e) => {
     setExercise_class_input(e.target.value);
@@ -112,6 +121,9 @@ const ReservationClassItem = ({
     setClass_date_input(e.target.value);
   };
 
+  /*
+	운동클래스 update
+	*/
   const reservationClassUpdate = (no) => {
     if (exercise_class_input == '') {
       setExercise_class_err(true);
@@ -178,8 +190,8 @@ const ReservationClassItem = ({
     setTrainer_input(sTrainer.trainer_name);
     setSearchOpen(false);
   };
-  console.log(loginWhether);
-  console.log(loginWhetherTrainer);
+  // console.log(loginWhether);
+  // console.log(loginWhetherTrainer);
 
   return (
     <div className='border py-2 my-1 text-center'>
@@ -291,7 +303,9 @@ const ReservationClassItem = ({
                   variant='danger'
                   onClick={() =>
                     // eslint-disable-next-line no-restricted-globals
-                    confirm('정말 삭제하시겠습니까??') == true
+                    confirm(
+                      '정말 삭제하시겠습니까?_예약된 회원도 같이 취소됩니다.'
+                    ) == true
                       ? reservationClassDelete(no)
                       : alert('삭제가 취소 되었습니다.')
                   }

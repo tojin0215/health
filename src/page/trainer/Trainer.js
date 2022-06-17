@@ -129,7 +129,7 @@ const VieWTrainerItem = ({
       viewTrainer();
     });
   };
-  // console.log(showModal);
+  console.log(idx);
   const [open, setOpen] = React.useState(false);
   return (
     <React.Fragment>
@@ -236,10 +236,14 @@ const VieWTrainerItem = ({
               <Col className='p-0 ps-2' xs={4}>
                 <Button
                   className='w-100'
-                  onClick={() => deleteCompleted(idx)}
+                  onClick={() =>
+                    confirm(trainer_name + '강사 탈퇴시겠습니까?') == true
+                      ? deleteCompleted(idx)
+                      : alert(trainer_name + '강사 탈퇴가 취소 되었습니다.')
+                  }
                   variant='outline-danger'
                 >
-                  제거하기
+                  탈퇴하기
                 </Button>
               </Col>
               <Col className='mt-2 p-0'>
@@ -352,7 +356,7 @@ class Trainer extends Component {
         return (
           <VieWTrainerItem
             idx={data.idx}
-            fitness_no={data.fitness_no}
+            fitness_no={fitness_no}
             trainer_name={data.trainer_name}
             phone={data.phone}
             birth={data.birth}

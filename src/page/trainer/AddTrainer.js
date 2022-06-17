@@ -105,7 +105,7 @@ class AddTrainer extends Component {
         this.state.radioGroup.male ? 1 : 2
       ).then((res) => {
         // console.log(res);
-        alert('trainer Table');
+        // alert('trainer Table');
         selectTrainer(this.props.userinfo.fitness_no).then((result) => {
           const items = result.filter(
             (value) => value.trainer_name === this.state.trainer_name
@@ -119,7 +119,7 @@ class AddTrainer extends Component {
           ).then((res) => {
             // console.log(res);
           });
-          alert('manager Table');
+          alert(this.state.trainer_name + '님이 강사로 등록되었습니다.');
           this.props.history.push('/trainer');
         });
       });

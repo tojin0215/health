@@ -157,52 +157,8 @@ const ReservationItem = ({
   // const [cancelComment_input, setCancelComment_input] = useState('');
   const [number_of_people_input, setNumber_of_people_input] = useState('');
 
-  const updateOnClick = () => {
-    setShowResults(true);
-    setDate_input(date2);
-    setTime_input(time);
-    setExercise_name_input(exercise_name);
-    setTrainer_input(trainer);
-    // setIsCancel_input(isCancel)
-    // setCancelComment_input(cancelComment)
-    setNumber_of_people_input(number_of_people);
-  };
-  const updateClose = () => {
-    setShowResults(false);
-  };
   const handleChangeDate = (e) => {
     setDate_input(e.target.value);
-  };
-  const handleChangeIsCancel = (e) => {
-    // eslint-disable-next-line no-undef
-    setIsCancel_input(e.target.value);
-  };
-  const handleChangeCancelComment = (e) => {
-    // eslint-disable-next-line no-undef
-    setCancelComment_input(e.target.value);
-  };
-
-  const reservationUpdate = (res_no) => {
-    fetch(ip + '/reservation/update?res_no=' + res_no, {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        time: time,
-        exercise_name: exercise_name_input,
-        number_of_people: number_of_people_input,
-        date: date_input,
-        trainer: trainer_input,
-        // isCancel: isCancel_input,
-        // cancelComment: cancelComment_input
-      }),
-    }).then((result) => {
-      // console.log(result);
-      alert('예약변경완료');
-      reservationSelect();
-      updateClose();
-    });
   };
 
   const reservationDelete = (res_no) => {
@@ -218,7 +174,6 @@ const ReservationItem = ({
       <td>{customer_name}</td>
       {showResults ? (
         <td>
-          {/* <input value={date_input} id='date' onChange={handleChangeDate} /> */}
           <DatePicker
             value={date_input}
             seleted={date_input}
@@ -263,15 +218,6 @@ const ReservationItem = ({
         <td>{time}</td>
       )}
 
-      {/* {showResults ?
-                <td><input value={isCancel_input == null ? '예약 완료' : '예약취소'} id='isCancel' onChange={handleChangeIsCancel} /></td>
-                :
-                <td>{isCancel == null ? '예약 완료' : '예약취소'}</td>}
-            {showResults ?
-                <td><input value={cancelComment_input} id='cancelComment' onChange={handleChangeCancelComment} /></td>
-                :
-                <td>{cancelComment}</td>} */}
-
       <td>
         <Button
           className='py-1 px-2'
@@ -286,11 +232,6 @@ const ReservationItem = ({
           <RiDeleteBin5Fill className='align-baseline' />
         </Button>
       </td>
-      {/* {showResults ?
-                <td><button onClick={() => reservationUpdate(res_no)}>수정하기...</button></td>
-                :
-                <td><button onClick={() => updateOnClick()}>수정하기</button></td>
-            } */}
     </tr>
   );
 };

@@ -216,7 +216,7 @@ class Menu extends Component {
                   </NavLink>
                   <li>
                     <NavLink exact to='/workoutAlloted'>
-                      새 운동 배정
+                      운동 배정
                     </NavLink>
                   </li>
                   <li>
@@ -230,7 +230,7 @@ class Menu extends Component {
                         },
                       }}
                     >
-                      새 배정 완료된 운동 배정
+                      운동 배정된 목록
                     </Link>
                   </li>
                   <li>
@@ -353,11 +353,11 @@ class Menu extends Component {
                 </li>
                 <li class='dropdown'>
                   <NavLink exact to='/workoutAlloted'>
-                    새 운동 배정
+                    운동 배정
                   </NavLink>
                   <li>
                     <NavLink exact to='/workoutAlloted'>
-                      새 운동 배정
+                      운동 배정
                     </NavLink>
                   </li>
                   <li>
@@ -371,7 +371,7 @@ class Menu extends Component {
                         },
                       }}
                     >
-                      새 배정 완료된 운동 배정
+                      운동 배정된 목록
                     </Link>
                   </li>
                   <li>
