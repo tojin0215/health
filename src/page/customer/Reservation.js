@@ -972,10 +972,10 @@ class Reservation extends Component {
                 />
               );
             });
-          this.setState(
-            { reservation_choice_trainer: items, reservation_data: result },
-            () => this.reservationClassSelect()
-          );
+          this.setState({
+            reservation_choice_trainer: items,
+            reservation_data: result,
+          });
         }
       );
     });
@@ -1017,13 +1017,10 @@ class Reservation extends Component {
             />
           );
         });
-        this.setState(
-          {
-            reservation_choice_client: items,
-            reservation_data: result,
-          },
-          () => this.reservationClassSelect()
-        );
+        this.setState({
+          reservation_choice_client: items,
+          reservation_data: result,
+        });
       });
     });
   };
@@ -1101,12 +1098,15 @@ class Reservation extends Component {
                 alert(result.message);
               }
               this.reservationSelect();
-              this.reservationSelect_exercise();
-              this.reservationSelect_trainer();
-              this.reservationChoiceTrainer();
-              this.reservationClassSelect_choice();
-              this.reservationClassSelect_choice2();
-              this.reservationSelect_date();
+              this.setState({
+                exercise_name: '',
+                trainer: '',
+                customer_name: '',
+                date: '',
+                number_of_people: '',
+                time: '',
+                class_date: '',
+              });
             });
         });
       });
@@ -1292,7 +1292,7 @@ class Reservation extends Component {
   render() {
     // console.log(this.props.userinfo.loginWhether);
     // console.log('joinNo', this.props.userinfo.joinNo);
-    console.log(this.state.reservationClass);
+    // console.log(this.state.reservationClass);
     // console.log("exercise", this.state.reservation_exercise);
     // console.log("trainer", this.state.reservation_trainer);
     // console.log("reservation_choice_trainer", this.state.reservation_choice_trainer);
