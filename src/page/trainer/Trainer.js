@@ -116,7 +116,6 @@ const VieWTrainerItem = ({
         updateManagerClientTrainer(idx, trainer_name_input, phone_input).then(
           () => {}
         );
-        alert('수정완료');
         modalClose();
         viewTrainer();
       });
@@ -124,7 +123,6 @@ const VieWTrainerItem = ({
   };
   const deleteCompleted = (idx) => {
     deleteTrainer(idx).then(() => {
-      alert('삭제완료');
       modalClose();
       viewTrainer();
     });

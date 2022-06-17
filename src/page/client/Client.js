@@ -73,7 +73,6 @@ const ViewClientItem = ({
 
   const deleteCompleted = (idc) => {
     deleteClient(idc).then(() => {
-      alert(client_name + '님 회원탈퇴');
       modalClose();
       viewClient();
     });
@@ -92,7 +91,6 @@ const ViewClientItem = ({
           updateManagerClientTrainer(idc, client_name_input, phone_input).then(
             () => {}
           );
-          alert(client_name_input + '님 수정이 완료되었습니다.');
           modalClose();
           setShowUpdate(false);
           viewClient();
