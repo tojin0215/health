@@ -565,6 +565,7 @@ class ReservationClass extends Component {
               minute: '',
               trainer: '',
               class_date: new Date(),
+              trainer_name: '',
             });
           });
       }
