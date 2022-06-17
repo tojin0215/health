@@ -472,7 +472,7 @@ const ReservationChoiceTrainerItem = ({
     fetch(ip + '/reservation/delete?res_no=' + res_no, {
       method: 'DELETE',
     }).then((result) => {
-      window.location.replace('/reservation');
+      reservationChoiceTrainer(res_no);
     });
   };
 
@@ -538,12 +538,13 @@ const ReservationChoiceClientItem = ({
   time,
   exercise_length,
   trainer,
+  reservationChoiceClient,
 }) => {
   const reservationDelete = (res_no) => {
     fetch(ip + '/reservation/delete?res_no=' + res_no, {
       method: 'DELETE',
     }).then((result) => {
-      window.location.replace('/reservation');
+      reservationChoiceClient(res_no);
     });
   };
   return (
@@ -1014,6 +1015,7 @@ class Reservation extends Component {
               exercise_length={exercise_length}
               time={data.time}
               trainer={data.trainer}
+              reservationChoiceClient={this.reservationChoiceClient}
             />
           );
         });

@@ -56,6 +56,8 @@ const ReservationClassItem = ({
   trainer,
   class_date,
   updateOpen,
+  loginWhether,
+  loginWhetherTrainer,
 }) => {
   /*
 	운동클래스 delete
@@ -80,10 +82,13 @@ const ReservationClassItem = ({
 
   const [exercise_class_input, setExercise_class_input] = useState('');
   const [class_date_input, setClass_date_input] = useState('');
-  const [trainer_input, setTrainer_input] = useState('');
+  const [trainer_input, setTrainer_input] = useState(
+    loginWhether === 1 ? loginWhetherTrainer : ''
+  );
   const [number_of_people_input, setNumber_of_people_input] = useState('');
   const [hour_input, setHour_input] = useState('');
   const [minute_input, setMinute_input] = useState('');
+  const [searchOpen, setSearchOpen] = useState(false);
   /*
 	운동클래스 update
 	*/
@@ -116,7 +121,7 @@ const ReservationClassItem = ({
       alert('날짜를 써주세요.');
     } else if (trainer_input == '') {
       setTrainer_err(true);
-      alert('트레이너명을 써주세요.');
+      alert('트레이너명을 선택해주세요.');
     } else if ((number_of_people_input == '', number_of_people_input == 0)) {
       setNumber_of_people_err(true);
       alert('인원을 확인해 주세요.(숫자만, 0입력불가)');
@@ -168,6 +173,14 @@ const ReservationClassItem = ({
   const minuteArray = minute >= 10 ? minute : '0' + minute;
   // console.log(class_date_input);
   // console.log(class_date);
+  // console.log(searchOpen);
+  const handleUser = (sTrainer) => {
+    setTrainer_input(sTrainer.trainer_name);
+    setSearchOpen(false);
+  };
+  console.log(loginWhether);
+  console.log(loginWhetherTrainer);
+
   return (
     <div className='border py-2 my-1 text-center'>
       <p className='fw-bold'>{exercise_class}</p>
@@ -176,10 +189,14 @@ const ReservationClassItem = ({
         {hourArray}시{minuteArray}분
       </p>
       <p>정원: {number_of_people}명</p>
-      {updateOpen ? (
-        <Button variant='outline-success mt-2' onClick={modalOnClick}>
-          <AiFillTool className='align-baseline' />
-        </Button>
+      {loginWhetherTrainer === trainer ? (
+        updateOpen ? (
+          <Button variant='outline-success mt-2' onClick={modalOnClick}>
+            <AiFillTool className='align-baseline' />
+          </Button>
+        ) : (
+          ''
+        )
       ) : (
         ''
       )}
@@ -198,12 +215,31 @@ const ReservationClassItem = ({
               </Form.Group>
               <Form.Group>
                 <Form.Label>강사명</Form.Label>
-                <Form.Control
-                  value={trainer_input}
-                  id='trainer'
-                  onChange={updateChange5}
-                  error={trainer_err}
-                ></Form.Control>
+                {loginWhether === 1 ? (
+                  <Form.Control
+                    value={trainer_input}
+                    id='trainer'
+                    error={trainer_err}
+                  ></Form.Control>
+                ) : (
+                  <Form.Control
+                    value={trainer_input}
+                    onClick={() => setSearchOpen(true)}
+                    id='trainer'
+                    error={trainer_err}
+                  ></Form.Control>
+                )}
+
+                <Modal show={searchOpen}>
+                  <div>
+                    <TrainerSearch
+                      open={searchOpen}
+                      setOpen={(o) => setSearchOpen(o)}
+                      fitness_no={fitness_no}
+                      handleUser={handleUser}
+                    />
+                  </div>
+                </Modal>
               </Form.Group>
               <Form.Group>
                 <Form.Label>날짜</Form.Label>
@@ -376,11 +412,11 @@ class ReservationClass extends Component {
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
       // console.log(trainerResult[0].fitness_no);
-      getReservationClassBy(
+      const fitness_no =
         this.props.userinfo.loginWhether === 1
           ? trainerResult[0].fitness_no
-          : this.props.userinfo.fitness_no
-      ).then((result) => {
+          : this.props.userinfo.fitness_no;
+      getReservationClassBy(fitness_no).then((result) => {
         // console.log("dayIncreament", this.state.dayIncreament)
         const items = result
           //오늘 날짜에 해당하는 주간만 조회
@@ -408,7 +444,7 @@ class ReservationClass extends Component {
 
             return (
               <ReservationClassItem
-                fitness_no={this.props.userinfo.fitness_no}
+                fitness_no={fitness_no}
                 reservationClassSelect={this.reservationClassSelect}
                 exercise_class={data.exercise_class}
                 no={data.no}
@@ -418,13 +454,14 @@ class ReservationClass extends Component {
                 trainer={data.trainer}
                 class_date={data.class_date}
                 updateOpen={handling}
+                loginWhether={this.props.userinfo.loginWhether}
+                loginWhetherTrainer={this.props.userinfo.manager_name}
               />
             );
           });
         // eslint-disable-next-line no-unused-expressions
-
-        this.setState({ reservationClass: items }),
-          console.log(this.state.reservationClass);
+        this.setState({ reservationClass: items });
+        // console.log(this.state.reservationClass);
       });
     });
   };
