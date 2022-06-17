@@ -472,7 +472,7 @@ const ReservationChoiceTrainerItem = ({
     fetch(ip + '/reservation/delete?res_no=' + res_no, {
       method: 'DELETE',
     }).then((result) => {
-      window.location.replace('/reservation');
+      reservationChoiceTrainer(res_no);
     });
   };
 
@@ -538,12 +538,13 @@ const ReservationChoiceClientItem = ({
   time,
   exercise_length,
   trainer,
+  reservationChoiceClient,
 }) => {
   const reservationDelete = (res_no) => {
     fetch(ip + '/reservation/delete?res_no=' + res_no, {
       method: 'DELETE',
     }).then((result) => {
-      window.location.replace('/reservation');
+      reservationChoiceClient(res_no);
     });
   };
   return (
@@ -612,12 +613,6 @@ class Reservation extends Component {
       reservation_choice_client: [],
       reservation_data: [],
       reservationClass: [],
-      reservationClass1: [],
-      reservationClass2: [],
-      reservationClass3: [],
-      reservationClass4: [],
-      reservationClass5: [],
-      reservationClass6: [],
       reservationClass_choice: [],
       reservationClass_choice2: [],
       customer_name: '',
@@ -641,7 +636,7 @@ class Reservation extends Component {
       show_date_table: false,
       dayIncreament: 0,
     };
-    this.handleWeekClick = this.handleWeekClick.bind(this);
+    // this.handleWeekClick = this.handleWeekClick.bind(this);
     // this.handleDateChange = this.handleDateChange.bind(this);
   }
 
@@ -691,12 +686,6 @@ class Reservation extends Component {
         this.reservationClassSelect_choice();
         this.reservationClassSelect_choice2();
         this.reservationClassSelect();
-        this.reservationClassSelect1();
-        this.reservationClassSelect2();
-        this.reservationClassSelect3();
-        this.reservationClassSelect4();
-        this.reservationClassSelect5();
-        this.reservationClassSelect6();
       }
     });
   }
@@ -750,15 +739,8 @@ class Reservation extends Component {
                 />
               );
             });
-          this.setState(
-            { reservation: items, reservation_data: result },
-            () => this.reservationClassSelect(),
-            this.reservationClassSelect1(),
-            this.reservationClassSelect2(),
-            this.reservationClassSelect3(),
-            this.reservationClassSelect4(),
-            this.reservationClassSelect5(),
-            this.reservationClassSelect6()
+          this.setState({ reservation: items, reservation_data: result }, () =>
+            this.reservationClassSelect()
           );
           // console.log("reservation_data", result);
         });
@@ -991,10 +973,10 @@ class Reservation extends Component {
                 />
               );
             });
-          this.setState(
-            { reservation_choice_trainer: items, reservation_data: result },
-            () => this.reservationClassSelect()
-          );
+          this.setState({
+            reservation_choice_trainer: items,
+            reservation_data: result,
+          });
         }
       );
     });
@@ -1033,16 +1015,14 @@ class Reservation extends Component {
               exercise_length={exercise_length}
               time={data.time}
               trainer={data.trainer}
+              reservationChoiceClient={this.reservationChoiceClient}
             />
           );
         });
-        this.setState(
-          {
-            reservation_choice_client: items,
-            reservation_data: result,
-          },
-          () => this.reservationClassSelect()
-        );
+        this.setState({
+          reservation_choice_client: items,
+          reservation_data: result,
+        });
       });
     });
   };
@@ -1120,39 +1100,23 @@ class Reservation extends Component {
                 alert(result.message);
               }
               this.reservationSelect();
-              this.reservationClassSelect1();
-              this.reservationClassSelect2();
-              this.reservationClassSelect3();
-              this.reservationClassSelect4();
-              this.reservationClassSelect5();
-              this.reservationClassSelect6();
-              this.reservationSelect_exercise();
-              this.reservationSelect_trainer();
-              this.reservationChoiceTrainer();
-              this.reservationClassSelect_choice();
-              this.reservationClassSelect_choice2();
-              this.reservationSelect_date();
+              this.setState({
+                exercise_name: '',
+                trainer: '',
+                customer_name: '',
+                date: '',
+                number_of_people: '',
+                time: '',
+                class_date: '',
+              });
             });
         });
       });
     }
   };
 
-  // handleDateChange(date) {
-  // 	console.log("date", moment(date).format('YYYY-MM-DD'))
-  // 	this.setState({
-  // 		reserv_date: date,
-  // 	}, () => this.reservationClassSelect()
-  // 	);
-  // }
-
-  // handleChange = (e) => {
-  //     this.setState({
-  //         [e.target.id]: e.target.value,
-  //     });
-  // };
   /**
-   * 운동클래스 일요일
+   * 운동클래스
    */
   reservationClassSelect = () => {
     selectClientReservation(
@@ -1182,7 +1146,7 @@ class Reservation extends Component {
                 moment(value.class_date.split('T')[0])
                   .add(9, 'hour')
                   .isSameOrBefore(
-                    moment().day(0 + this.state.dayIncreament),
+                    moment().day(7 + this.state.dayIncreament),
                     'day'
                   )
             )
@@ -1230,502 +1194,6 @@ class Reservation extends Component {
               );
             });
           this.setState({ reservationClass: items });
-        });
-      });
-    });
-  };
-  /**
-   * 운동클래스 월요일
-   */
-  reservationClassSelect1 = () => {
-    selectClientReservation(
-      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-    ).then((clientResult) => {
-      selectTrainerReservation(
-        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-      ).then((trainerResult) => {
-        const fitness_no =
-          this.props.userinfo.loginWhether === 2
-            ? clientResult[0].fitness_no
-            : this.props.userinfo.loginWhether === 1
-            ? trainerResult[0].fitness_no
-            : this.props.userinfo.fitness_no;
-        getReservationClassBy(fitness_no).then((result) => {
-          const items = result
-            //오늘 날짜에 해당하는 주간만 조회
-            .filter(
-              (value) =>
-                moment(value.class_date.split('T')[0])
-                  .add(9, 'hour')
-                  .isSameOrAfter(
-                    moment().day(1 + this.state.dayIncreament),
-                    'day'
-                  ) &&
-                moment(value.class_date.split('T')[0])
-                  .add(9, 'hour')
-                  .isSameOrBefore(
-                    moment().day(1 + this.state.dayIncreament),
-                    'day'
-                  )
-            )
-
-            .map((data, index, array) => {
-              const time =
-                `${data.hour}`.padStart(2, '0') +
-                ':' +
-                `${data.minute}`.padStart(2, '0');
-              let canRegist = this.state.reservation_data.filter(
-                (item) =>
-                  item.exercise_name === data.exercise_class &&
-                  item.time === time &&
-                  item.date === data.class_date
-                // moment(this.state.class_date).isSame(
-                //   moment(item.date.split("T")[0]),
-                //   "day"
-                // )
-              ).length;
-              return (
-                <ReservationClassItem
-                  exercise_class={data.exercise_class}
-                  number_of_people={data.number_of_people}
-                  hour={data.hour}
-                  minute={data.minute}
-                  trainer={data.trainer}
-                  canRegist={canRegist}
-                  class_date={data.class_date}
-                  handleClick={(
-                    result_exercise_name,
-                    result_number_of_people,
-                    result_hour,
-                    result_minute,
-                    result_trainer,
-                    result_class_date
-                  ) =>
-                    this.setState({
-                      exercise_name: result_exercise_name,
-                      time: time,
-                      number_of_people: result_number_of_people,
-                      trainer: result_trainer,
-                      class_date: result_class_date,
-                    })
-                  }
-                />
-              );
-            });
-          this.setState({ reservationClass1: items });
-        });
-      });
-    });
-  };
-  /**
-   * 운동클래스 화요일
-   */
-  reservationClassSelect2 = () => {
-    selectClientReservation(
-      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-    ).then((clientResult) => {
-      selectTrainerReservation(
-        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-      ).then((trainerResult) => {
-        const fitness_no =
-          this.props.userinfo.loginWhether === 2
-            ? clientResult[0].fitness_no
-            : this.props.userinfo.loginWhether === 1
-            ? trainerResult[0].fitness_no
-            : this.props.userinfo.fitness_no;
-        getReservationClassBy(fitness_no).then((result) => {
-          const items = result
-            //오늘 날짜에 해당하는 주간만 조회
-            .filter(
-              (value) =>
-                moment(value.class_date.split('T')[0])
-                  .add(9, 'hour')
-                  .isSameOrAfter(
-                    moment().day(2 + this.state.dayIncreament),
-                    'day'
-                  ) &&
-                moment(value.class_date.split('T')[0])
-                  .add(9, 'hour')
-                  .isSameOrBefore(
-                    moment().day(2 + this.state.dayIncreament),
-                    'day'
-                  )
-            )
-
-            .map((data, index, array) => {
-              const time =
-                `${data.hour}`.padStart(2, '0') +
-                ':' +
-                `${data.minute}`.padStart(2, '0');
-              let canRegist = this.state.reservation_data.filter(
-                (item) =>
-                  item.exercise_name === data.exercise_class &&
-                  item.time === time &&
-                  item.date === data.class_date
-                // moment(this.state.class_date).isSame(
-                //   moment(item.date.split("T")[0]),
-                //   "day"
-                // )
-              ).length;
-              return (
-                <ReservationClassItem
-                  exercise_class={data.exercise_class}
-                  number_of_people={data.number_of_people}
-                  hour={data.hour}
-                  minute={data.minute}
-                  trainer={data.trainer}
-                  canRegist={canRegist}
-                  class_date={data.class_date}
-                  handleClick={(
-                    result_exercise_name,
-                    result_number_of_people,
-                    result_hour,
-                    result_minute,
-                    result_trainer,
-                    result_class_date
-                  ) =>
-                    this.setState({
-                      exercise_name: result_exercise_name,
-                      time: time,
-                      number_of_people: result_number_of_people,
-                      trainer: result_trainer,
-                      class_date: result_class_date,
-                    })
-                  }
-                />
-              );
-            });
-          this.setState({ reservationClass2: items });
-        });
-      });
-    });
-  };
-  /**
-   * 운동클래스 수요일
-   */
-  reservationClassSelect3 = () => {
-    selectClientReservation(
-      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-    ).then((clientResult) => {
-      selectTrainerReservation(
-        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-      ).then((trainerResult) => {
-        const fitness_no =
-          this.props.userinfo.loginWhether === 2
-            ? clientResult[0].fitness_no
-            : this.props.userinfo.loginWhether === 1
-            ? trainerResult[0].fitness_no
-            : this.props.userinfo.fitness_no;
-        getReservationClassBy(fitness_no).then((result) => {
-          const items = result
-
-            //오늘 날짜에 해당하는 주간만 조회
-            .filter(
-              (value) =>
-                moment(value.class_date.split('T')[0])
-                  .add(9, 'hour')
-                  .isSameOrAfter(
-                    moment().day(3 + this.state.dayIncreament),
-                    'day'
-                  ) &&
-                moment(value.class_date.split('T')[0])
-                  .add(9, 'hour')
-                  .isSameOrBefore(
-                    moment().day(3 + this.state.dayIncreament),
-                    'day'
-                  )
-            )
-            .map((data, index, array) => {
-              const time =
-                `${data.hour}`.padStart(2, '0') +
-                ':' +
-                `${data.minute}`.padStart(2, '0');
-              let canRegist = this.state.reservation_data.filter(
-                (item) =>
-                  item.exercise_name === data.exercise_class &&
-                  item.time === time &&
-                  item.date === data.class_date
-                // moment(this.state.class_date).isSame(
-                //   moment(item.date.split("T")[0]),
-                //   "day"
-                // )
-              ).length;
-              return (
-                <ReservationClassItem
-                  exercise_class={data.exercise_class}
-                  number_of_people={data.number_of_people}
-                  hour={data.hour}
-                  minute={data.minute}
-                  trainer={data.trainer}
-                  canRegist={canRegist}
-                  class_date={data.class_date}
-                  handleClick={(
-                    result_exercise_name,
-                    result_number_of_people,
-                    result_hour,
-                    result_minute,
-                    result_trainer,
-                    result_class_date
-                  ) =>
-                    this.setState({
-                      exercise_name: result_exercise_name,
-                      time: time,
-                      number_of_people: result_number_of_people,
-                      trainer: result_trainer,
-                      class_date: result_class_date,
-                    })
-                  }
-                />
-              );
-            });
-          this.setState({ reservationClass3: items });
-        });
-      });
-    });
-  };
-  /**
-   * 운동클래스 목요일
-   */
-  reservationClassSelect4 = () => {
-    selectClientReservation(
-      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-    ).then((clientResult) => {
-      selectTrainerReservation(
-        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-      ).then((trainerResult) => {
-        const fitness_no =
-          this.props.userinfo.loginWhether === 2
-            ? clientResult[0].fitness_no
-            : this.props.userinfo.loginWhether === 1
-            ? trainerResult[0].fitness_no
-            : this.props.userinfo.fitness_no;
-        getReservationClassBy(fitness_no).then((result) => {
-          const items = result
-            //오늘 날짜에 해당하는 주간만 조회
-            .filter(
-              (value) =>
-                moment(value.class_date.split('T')[0])
-                  .add(9, 'hour')
-                  .isSameOrAfter(
-                    moment().day(4 + this.state.dayIncreament),
-                    'day'
-                  ) &&
-                moment(value.class_date.split('T')[0])
-                  .add(9, 'hour')
-                  .isSameOrBefore(
-                    moment().day(4 + this.state.dayIncreament),
-                    'day'
-                  )
-            )
-            .map((data, index, array) => {
-              const time =
-                `${data.hour}`.padStart(2, '0') +
-                ':' +
-                `${data.minute}`.padStart(2, '0');
-              let canRegist = this.state.reservation_data.filter(
-                (item) =>
-                  item.exercise_name === data.exercise_class &&
-                  item.time === time &&
-                  item.date === data.class_date
-                // moment(this.state.class_date).isSame(
-                //   moment(item.date.split("T")[0]),
-                //   "day"
-                // )
-              ).length;
-              return (
-                <ReservationClassItem
-                  exercise_class={data.exercise_class}
-                  number_of_people={data.number_of_people}
-                  hour={data.hour}
-                  minute={data.minute}
-                  trainer={data.trainer}
-                  canRegist={canRegist}
-                  class_date={data.class_date}
-                  handleClick={(
-                    result_exercise_name,
-                    result_number_of_people,
-                    result_hour,
-                    result_minute,
-                    result_trainer,
-                    result_class_date
-                  ) =>
-                    this.setState({
-                      exercise_name: result_exercise_name,
-                      time: time,
-                      number_of_people: result_number_of_people,
-                      trainer: result_trainer,
-                      class_date: result_class_date,
-                    })
-                  }
-                />
-              );
-            });
-          this.setState({ reservationClass4: items });
-        });
-      });
-    });
-  };
-  /**
-   * 운동클래스 금요일
-   */
-  reservationClassSelect5 = () => {
-    selectClientReservation(
-      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-    ).then((clientResult) => {
-      selectTrainerReservation(
-        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-      ).then((trainerResult) => {
-        const fitness_no =
-          this.props.userinfo.loginWhether === 2
-            ? clientResult[0].fitness_no
-            : this.props.userinfo.loginWhether === 1
-            ? trainerResult[0].fitness_no
-            : this.props.userinfo.fitness_no;
-        getReservationClassBy(fitness_no).then((result) => {
-          const items = result
-            //오늘 날짜에 해당하는 주간만 조회
-            .filter(
-              (value) =>
-                moment(value.class_date.split('T')[0])
-                  .add(9, 'hour')
-                  .isSameOrAfter(
-                    moment().day(5 + this.state.dayIncreament),
-                    'day'
-                  ) &&
-                moment(value.class_date.split('T')[0])
-                  .add(9, 'hour')
-                  .isSameOrBefore(
-                    moment().day(5 + this.state.dayIncreament),
-                    'day'
-                  )
-            )
-            .map((data, index, array) => {
-              const time =
-                `${data.hour}`.padStart(2, '0') +
-                ':' +
-                `${data.minute}`.padStart(2, '0');
-              let canRegist = this.state.reservation_data.filter(
-                (item) =>
-                  item.exercise_name === data.exercise_class &&
-                  item.time === time &&
-                  item.date === data.class_date
-                // moment(this.state.class_date).isSame(
-                //   moment(item.date.split("T")[0]),
-                //   "day"
-                // )
-              ).length;
-              return (
-                <ReservationClassItem
-                  exercise_class={data.exercise_class}
-                  number_of_people={data.number_of_people}
-                  hour={data.hour}
-                  minute={data.minute}
-                  trainer={data.trainer}
-                  canRegist={canRegist}
-                  class_date={data.class_date}
-                  handleClick={(
-                    result_exercise_name,
-                    result_number_of_people,
-                    result_hour,
-                    result_minute,
-                    result_trainer,
-                    result_class_date
-                  ) =>
-                    this.setState({
-                      exercise_name: result_exercise_name,
-                      time: time,
-                      number_of_people: result_number_of_people,
-                      trainer: result_trainer,
-                      class_date: result_class_date,
-                    })
-                  }
-                />
-              );
-            });
-          this.setState({ reservationClass5: items });
-        });
-      });
-    });
-  };
-
-  /**
-   * 운동클래스 토요일
-   */
-  reservationClassSelect6 = () => {
-    selectClientReservation(
-      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-    ).then((clientResult) => {
-      selectTrainerReservation(
-        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-      ).then((trainerResult) => {
-        const fitness_no =
-          this.props.userinfo.loginWhether === 2
-            ? clientResult[0].fitness_no
-            : this.props.userinfo.loginWhether === 1
-            ? trainerResult[0].fitness_no
-            : this.props.userinfo.fitness_no;
-        getReservationClassBy(fitness_no).then((result) => {
-          const items = result
-            //오늘 날짜에 해당하는 주간만 조회
-            .filter(
-              (value) =>
-                moment(value.class_date.split('T')[0])
-                  .add(9, 'hour')
-                  .isSameOrAfter(
-                    moment().day(6 + this.state.dayIncreament),
-                    'day'
-                  ) &&
-                moment(value.class_date.split('T')[0])
-                  .add(9, 'hour')
-                  .isSameOrBefore(
-                    moment().day(6 + this.state.dayIncreament),
-                    'day'
-                  )
-            )
-            .map((data, index, array) => {
-              const time =
-                `${data.hour}`.padStart(2, '0') +
-                ':' +
-                `${data.minute}`.padStart(2, '0');
-              let canRegist = this.state.reservation_data.filter(
-                (item) =>
-                  item.exercise_name === data.exercise_class &&
-                  item.time === time &&
-                  item.date === data.class_date
-                // moment(this.state.class_date).isSame(
-                //   moment(item.date.split("T")[0]),
-                //   "day"
-                // )
-              ).length;
-              return (
-                <ReservationClassItem
-                  exercise_class={data.exercise_class}
-                  number_of_people={data.number_of_people}
-                  hour={data.hour}
-                  minute={data.minute}
-                  trainer={data.trainer}
-                  canRegist={canRegist}
-                  class_date={data.class_date}
-                  handleClick={(
-                    result_exercise_name,
-                    result_number_of_people,
-                    result_hour,
-                    result_minute,
-                    result_trainer,
-                    result_class_date
-                  ) =>
-                    this.setState({
-                      exercise_name: result_exercise_name,
-                      time: time,
-                      number_of_people: result_number_of_people,
-                      trainer: result_trainer,
-                      class_date: result_class_date,
-                    })
-                  }
-                />
-              );
-            });
-          this.setState({ reservationClass6: items });
         });
       });
     });
@@ -1812,24 +1280,12 @@ class Reservation extends Component {
         dayIncreament: this.state.dayIncreament + 7,
       }),
         this.reservationClassSelect();
-      this.reservationClassSelect1();
-      this.reservationClassSelect2();
-      this.reservationClassSelect3();
-      this.reservationClassSelect4();
-      this.reservationClassSelect5();
-      this.reservationClassSelect6();
     } else if (name === 'prev') {
       // eslint-disable-next-line no-unused-expressions
       this.setState({
         dayIncreament: this.state.dayIncreament - 7,
       }),
         this.reservationClassSelect();
-      this.reservationClassSelect1();
-      this.reservationClassSelect2();
-      this.reservationClassSelect3();
-      this.reservationClassSelect4();
-      this.reservationClassSelect5();
-      this.reservationClassSelect6();
     }
   };
   goLogin = () => {
@@ -1838,7 +1294,7 @@ class Reservation extends Component {
   render() {
     // console.log(this.props.userinfo.loginWhether);
     // console.log('joinNo', this.props.userinfo.joinNo);
-    // console.log(this.state.reservation);
+    // console.log(this.state.reservationClass);
     // console.log("exercise", this.state.reservation_exercise);
     // console.log("trainer", this.state.reservation_trainer);
     // console.log("reservation_choice_trainer", this.state.reservation_choice_trainer);
@@ -1975,86 +1431,169 @@ class Reservation extends Component {
                           수업이 없습니다.
                         </div>
                       ) : (
-                        this.state.reservationClass
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(0 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(0 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
                       )}
                     </td>
                     <td name='mon'>
-                      {this.state.reservationClass1.length === 0 ? (
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
                           수업이 없습니다.
                         </div>
                       ) : (
-                        this.state.reservationClass1
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(1 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(1 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
                       )}
                     </td>
                     <td name='tue'>
-                      {this.state.reservationClass2.length === 0 ? (
+                      {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
                           수업이 없습니다.
                         </div>
                       ) : (
-                        this.state.reservationClass2
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(2 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(2 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
                       )}
                     </td>
                     <td name='wed'>
-                      {this.state.reservationClass3.length === 0 ? (
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
                           수업이 없습니다.
                         </div>
                       ) : (
-                        this.state.reservationClass3
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(3 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(3 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
                       )}
                     </td>
                     <td name='thu'>
-                      {this.state.reservationClass4.length === 0 ? (
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
                           수업이 없습니다.
                         </div>
                       ) : (
-                        this.state.reservationClass4
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(4 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(4 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
                       )}
                     </td>
                     <td name='fri'>
-                      {this.state.reservationClass5.length === 0 ? (
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
                           수업이 없습니다.
                         </div>
                       ) : (
-                        this.state.reservationClass5
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(5 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(5 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
                       )}
                     </td>
                     <td name='sat'>
-                      {this.state.reservationClass6.length === 0 ? (
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
                           수업이 없습니다.
                         </div>
                       ) : (
-                        this.state.reservationClass6
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(6 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(6 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
                       )}
                     </td>
                   </tr>
                 </tbody>
               </table>
-
-              {/* 
-                            {
-                                this.state.customer && (
-                                    <span>[{this.state.customer_id}]{this.state.customer_name} 님</span>
-                                )
-                            } */}
-              {/* <TextField
-                                id='customer_name'
-                                value={this.state.customer_name}
-                                // onChange={this.handleChange}
-                                label='회원이름'
-                                error={this.state.customer_name_err}
-                            /> */}
-              {/* <TextField
-                                id='customer_id'
-                                value={this.state.customer_id}
-                                onChange={this.handleChange}
-                                label='회원아이디'
-                            /> */}
             </Col>
             <Col></Col>
           </Row>
@@ -2139,36 +1678,8 @@ class Reservation extends Component {
                 value={this.state.class_date}
                 label='배정된 날짜'
               />
-              {/* <DatePicker
-								selected={this.state.reserv_date}
-								onChange={this.handleDateChange}
-								name='reserv_date'
-								dateFormat='yyyy-MM-dd(eee)'
-								font-size='1.6rem'
-								locale='ko'
-							/> */}
             </Col>
-            {/* <Col className='text-center usersearchButton my-3'>
-              {this.state.open ? (
-                <UserSearch
-                  open={this.state.open}
-                  setOpen={(o) => this.setState({ open: o })}
-                  fitness_no={this.props.userinfo.fitness_no}
-                  handleUser={this.handleUser}
-                />
-              ) : (
-                <TextField
-                  id='customer_name'
-                  label='회원 검색'
-                  onClick={() => this.setState({ open: true })}
-                  className='boxmorpsm h-100 w-100'
-                  InputProps={{ disableUnderline: true }}
-                  value={this.state.customer_name}
-                  // onChange={this.handleChange}
-                  error={this.state.customer_name_err}
-                />
-              )}
-            </Col> */}
+
             {this.props.userinfo.loginWhether === 2 ? (
               <Col className='text-center my-3'>
                 <TextField
