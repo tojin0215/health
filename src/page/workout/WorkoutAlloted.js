@@ -47,7 +47,7 @@ const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
       <Col xs={12}>
         <h3>
           {client_name}
-          <span className='fs-4'>님 운동배정</span>
+          <span className='fs-4'>님</span>
         </h3>
       </Col>
       <Col>
@@ -444,7 +444,7 @@ class WorkoutAlloted extends Component {
             </div>
           </div>
         </div>
-        <Container>
+        <Container className='workoutalloted__container'>
           {this.state.open ? (
             <UserSearch
               open={this.state.open}
@@ -472,7 +472,7 @@ class WorkoutAlloted extends Component {
               <div>
                 {this.state.inbodiesList[0]
                   ? this.state.inbodiesList[0]
-                  : '등록된 인바디가 없습니다.'}
+                  : '등록된 인바디 정보가 없습니다.'}
               </div>
               <Row className='sectionGlass'>
                 <Col xs={12}>

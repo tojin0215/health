@@ -6,7 +6,6 @@ import Navigation from '../../component/navigation/Navigation';
 import Menu from '../../component/navigation/Menu';
 import { Link } from 'react-router-dom';
 import UserSearch from '../../component/customer/UserSearch';
-import { TextField } from '@mui/material';
 import {
   inbodiesSelect,
   selectClientReservation,
@@ -14,13 +13,58 @@ import {
   workoutAllotedSelect,
 } from '../../api/user';
 import Footer from '../../component/footer/Footer';
+
+//bootstrap
+import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+// mui
+import { Refresh } from '@mui/icons-material';
+import { TextField } from '@mui/material';
+import Box from '@mui/material/Box';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
-    <div>
-      {client_name}님 운동배정/키{height}cm/체중{weight}kg/체지방{bodyFat}
-      kg/근육량{muscleMass}
-      kg
-    </div>
+    <Row className='mt-4 sectionGlass'>
+      <Col xs={12}>
+        <h3>
+          {client_name}
+          <span className='fs-4'>님</span>
+        </h3>
+      </Col>
+      <Col>
+        <h5>키</h5>
+        <span className='fs-5 fw-bold'>{height}</span>
+        <span>cm</span>
+      </Col>
+      <Col>
+        <h5>체중</h5>
+        <span className='fs-5 fw-bold'>{weight}</span>
+        <span>kg</span>
+      </Col>
+      <Col>
+        <h5>체지방</h5>
+        <span className='fs-5 fw-bold'>{bodyFat}</span>
+        <span>kg</span>
+      </Col>
+      <Col>
+        <h5>근육량</h5>
+        <span className='fs-5 fw-bold'>{muscleMass}</span>
+        <span>kg</span>
+      </Col>
+    </Row>
   );
 };
 
@@ -37,15 +81,15 @@ const WorkoutAllotedView = ({
   url,
 }) => {
   return (
-    <tr>
-      <td>{workout}</td>
-      <td>{region}</td>
-      <td>{machine}</td>
-      <td>{default_set}</td>
-      <td>{default_count}</td>
-      <td>{default_rest}</td>
-      <td>{url}</td>
-    </tr>
+    <TableRow>
+      <TableCell>{workout}</TableCell>
+      <TableCell>{region}</TableCell>
+      <TableCell>{machine}</TableCell>
+      <TableCell>{default_set}</TableCell>
+      <TableCell>{default_count}</TableCell>
+      <TableCell>{default_rest}</TableCell>
+      <TableCell>{url}</TableCell>
+    </TableRow>
   );
 };
 
@@ -236,18 +280,18 @@ class WorkoutAllotedList extends Component {
           <div className='localNavigation'>
             <div className='container'>
               <h2>
-                <div className='parallelogram'></div>새 운동배정
+                <div className='parallelogram'></div>운동 배정 확인
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/workoutAllotedList'>새 배정된 운동배정</Link>
+                <Link to='/workoutAllotedList'>운동 배정 확인</Link>
               </div>
             </div>
           </div>
         </div>
-        <div className='container'>
+        <Container className='workoutallotedlist__container'>
           {this.state.line === 1 ? (
             ''
           ) : this.props.userinfo.loginWhether === 2 ? (
@@ -276,31 +320,35 @@ class WorkoutAllotedList extends Component {
           {this.state.client_name ? (
             <div>
               <div>
-                <h1> 인바디</h1>
                 {this.state.inbodiesList[0]
                   ? this.state.inbodiesList[0]
-                  : '등록된 인바디가 없습니다.'}
+                  : '등록된 인바디 정보가 없습니다.'}
               </div>
-              <div>
-                <h1>{this.state.client_name}님의 운동 배정된 목록</h1>
-                <table class='table'>
-                  <tr>
-                    <th scope='col'>운동 이름</th>
-                    <th scope='col'>운동 부위</th>
-                    <th scope='col'>운동 기구</th>
-                    <th scope='col'>세트</th>
-                    <th scope='col'>횟수</th>
-                    <th scope='col'>쉬는시간</th>
-                    <th scope='col'>url</th>
-                  </tr>
-                  {this.state.workoutAllotlist}
-                </table>
-              </div>
+              <Row className='sectionGlass'>
+                <h3>
+                  <span className='text-primary'>{this.state.client_name}</span>
+                  님의 운동 배정 목록
+                </h3>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell scope='col'>운동 이름</TableCell>
+                      <TableCell scope='col'>운동 부위</TableCell>
+                      <TableCell scope='col'>운동 기구</TableCell>
+                      <TableCell scope='col'>세트</TableCell>
+                      <TableCell scope='col'>횟수</TableCell>
+                      <TableCell scope='col'>쉬는시간</TableCell>
+                      <TableCell scope='col'>url</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{this.state.workoutAllotlist}</TableBody>
+                </Table>
+              </Row>
             </div>
           ) : (
             ''
           )}
-        </div>
+        </Container>
         <div className='footer'>
           <Footer />
         </div>
