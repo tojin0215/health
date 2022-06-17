@@ -7,7 +7,7 @@ import DatePicker from 'react-datepicker';
 // import DatePicker, { registerLocale } from 'react-datepicker';
 // import ko from 'date-fns/locale/ko';
 
-import { getStatusRequest } from '../../action/authentication';
+import { getStatusRequest, login } from '../../action/authentication';
 
 import { Container, Row, Col, Table, FloatingLabel } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
@@ -189,7 +189,8 @@ const ReservationClassItem = ({
         {hourArray}시{minuteArray}분
       </p>
       <p>정원: {number_of_people}명</p>
-      {loginWhetherTrainer === trainer ? (
+      {(loginWhether === 1 && loginWhetherTrainer === trainer) ||
+      (loginWhether === 0 && loginWhetherTrainer !== trainer) ? (
         updateOpen ? (
           <Button variant='outline-success mt-2' onClick={modalOnClick}>
             <AiFillTool className='align-baseline' />
@@ -200,6 +201,7 @@ const ReservationClassItem = ({
       ) : (
         ''
       )}
+
       <div>
         <Modal show={showModal}>
           <Container>
