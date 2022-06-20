@@ -116,19 +116,17 @@ class Authentication extends Component {
     const loginBox = (
       <div>
         <Form.Group className='mb-3' controlId='formBasicId'>
-          <Form.Label>아이디</Form.Label>
           <Form.Control
             name='id'
             type='text'
             className='validate'
-            placeholder='Enter id'
+            placeholder='아이디'
             onChange={this.handleChange}
             value={this.state.id}
           />
           <Form.Text className='text-muted'></Form.Text>
         </Form.Group>
         <Form.Group className='mb-3' controlId='formBasicPassword'>
-          <Form.Label>Password</Form.Label>
           <Form.Control
             name='password'
             type='password'
@@ -136,7 +134,7 @@ class Authentication extends Component {
             onChange={this.handleChange}
             value={this.state.password}
             onKeyPress={this.handleKeyPress}
-            placeholder='Password'
+            placeholder='비밀번호'
           />
         </Form.Group>
       </div>
@@ -235,39 +233,37 @@ class Authentication extends Component {
     // );
 
     return (
-      <div className='container auth'>
-        <Card>
-          {/* <Card.Header></Card.Header> */}
-          <Card.Body className='bg-primary bg-gradient bg-opacity-10 py-5 text-center'>
-            <h1
-              className='fw-bolder text-primary pb-5'
-              style={{ fontSize: '7rem' }}
-            >
-              divvy
-            </h1>
-            <Image
-              src='/divvylogo500200.png'
-              className='text-center login_logo d-none'
-            />
-            {this.state.radioGroup['fitness'] ? (
-              <div>{this.props.mode ? loginView : ''}</div>
-            ) : (
-              ''
-            )}
-            {this.state.radioGroup['trainer'] ? (
-              <div>{this.props.mode ? loginViewTrainer : ''}</div>
-            ) : (
-              ''
-            )}
-            {this.state.radioGroup['customer'] ? (
-              <div>{this.props.mode ? loginViewCustomer : ''}</div>
-            ) : (
-              ''
-            )}
-          </Card.Body>
-          {/* <Card.Footer></Card.Footer> */}
-        </Card>
-      </div>
+      <Card>
+        {/* <Card.Header></Card.Header> */}
+        <Card.Body className='py-5 text-center'>
+          <h1
+            className='fw-bolder text-primary pb-5'
+            style={{ fontSize: '6rem' }}
+          >
+            divvy
+          </h1>
+          <Image
+            src='/divvylogo500200.png'
+            className='text-center login_logo d-none'
+          />
+          {this.state.radioGroup['fitness'] ? (
+            <div>{this.props.mode ? loginView : ''}</div>
+          ) : (
+            ''
+          )}
+          {this.state.radioGroup['trainer'] ? (
+            <div>{this.props.mode ? loginViewTrainer : ''}</div>
+          ) : (
+            ''
+          )}
+          {this.state.radioGroup['customer'] ? (
+            <div>{this.props.mode ? loginViewCustomer : ''}</div>
+          ) : (
+            ''
+          )}
+        </Card.Body>
+        {/* <Card.Footer></Card.Footer> */}
+      </Card>
     );
   }
 }
