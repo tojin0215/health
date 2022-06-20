@@ -337,6 +337,16 @@ class Navigation extends Component {
                       운동 설정
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink exact to='/WorkoutStage'>
+                      묶음 운동 배정
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/WorkoutStageAdd'>
+                      묶음 운동 설정
+                    </NavLink>
+                  </li>
                 </ul>
               </NavLink>
               <NavLink exact to='/sales'>

@@ -188,7 +188,7 @@ const WorkoutAllotedView = ({
   idc,
   workoutAllotedView,
 }) => {
-  const hadndleDelete = () => {
+  const hadndleDelete = (idwa) => {
     workoutAllotedDelete(idwa).then((res) => {
       workoutAllotedView(idc);
       alert('삭제합니다.');
@@ -210,7 +210,7 @@ const WorkoutAllotedView = ({
           variant='outline-danger'
           onClick={() =>
             confirm('정말 삭제하시겠습니까?') == true
-              ? hadndleDelete
+              ? hadndleDelete(idwa)
               : alert('삭제가 취소 되었습니다.')
           }
         >
@@ -601,14 +601,14 @@ class WorkoutAlloted extends Component {
   }
 }
 
-const ExerciseAllotStateToProps = (state) => {
+const WorkoutAllotedStateToProps = (state) => {
   return {
     userinfo: state.authentication.userinfo,
     status: state.authentication.status,
   };
 };
 
-const ExerciseAllotDispatchToProps = (dispatch) => {
+const WorkoutAllotedDispatchToProps = (dispatch) => {
   return {
     getStatusRequest: () => {
       return dispatch(getStatusRequest());
@@ -617,6 +617,6 @@ const ExerciseAllotDispatchToProps = (dispatch) => {
 };
 
 export default connect(
-  ExerciseAllotStateToProps,
-  ExerciseAllotDispatchToProps
+  WorkoutAllotedStateToProps,
+  WorkoutAllotedDispatchToProps
 )(WorkoutAlloted);

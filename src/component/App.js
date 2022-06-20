@@ -34,6 +34,8 @@ import {
   WorkoutAlloted,
   WorkoutAllotedList,
   WorkoutAdd,
+  WorkoutStage,
+  WorkoutStageAdd,
 } from '../page';
 
 class App extends Component {
@@ -77,6 +79,8 @@ class App extends Component {
           component={WorkoutAllotedList}
         />
         <Route exact path='/workoutAdd' component={WorkoutAdd} />
+        <Route exact path='/workoutStage' component={WorkoutStage} />
+        <Route exact path='/workoutStageAdd' component={WorkoutStageAdd} />
       </div>
     );
   }
