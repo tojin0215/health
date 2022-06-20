@@ -14,7 +14,12 @@ import { getStatusRequest } from '../../action/authentication';
 
 import { SERVER_URL } from '../../const/settings';
 import '../../styles/login/Register.css';
-import { Modal, NavItem } from 'react-bootstrap';
+
+import { Container, Row, Col, Modal, FloatingLabel } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -194,132 +199,174 @@ class Register extends Component {
             </h2>
           </div>
         </div>
-        <div className='container'>
-          <form className='AddSalesForm productPay sectionGlass'>
+        <Container>
+          <Form className='AddSalesForm productPay sectionGlass'>
             {/* <div className='registerId'> */}
             <div
               className='resigterVisual'
               style={{ backgroundImage: 'src/img/resiVisual.jpeg' }}
             ></div>
-            강사, 회원은 사업주가 승인하여야만 회원가입이 가능합니다.
-            <ul>
-              <li>
-                <TextField
-                  value={this.state.id}
-                  onChange={this.handleChange}
-                  id='id'
-                  label='아이디/센터이름'
-                  error={this.state.id_err}
-                  required
-                  autoFocus
-                />
-              </li>
-              <li className='overlapCheck'>
-                <button
-                  className='btnSolid'
-                  type='button'
-                  onClick={this.idCheck}
-                >
+            <h3>사업장 회원가입</h3>
+            <p className='text-secondary'>
+              강사, 회원은 사업주가 승인하여야만 회원가입이 가능합니다.
+            </p>
+            <Row xs={2}>
+              <Col>
+                <Form.Group>
+                  <Form.Label>센터 이름(아이디)</Form.Label>
+                  <Form.Control
+                    value={this.state.id}
+                    onChange={this.handleChange}
+                    id='id'
+                    label='아이디/센터이름'
+                    error={this.state.id_err}
+                    required
+                    autoFocus
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col className='pt-4'>
+                <Button className='mt-2' onClick={this.idCheck}>
                   중복확인
-                </button>
+                </Button>
                 {this.state.check == 0 ? (
                   <label></label>
                 ) : (
                   <label>사용가능한 아이디입니다.</label>
                 )}
-              </li>
-              <li>
-                <TextField
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                  type='password'
-                  id='password'
-                  label='비밀번호'
-                  error={this.state.password_err}
-                  required
-                />
-              </li>
-              <li>
-                <TextField
-                  value={this.state.password_confirm}
-                  onChange={this.handleChange}
-                  type='password'
-                  id='password_confirm'
-                  label='비밀번호확인'
-                  error={this.state.password_confirm_err}
-                  required
-                />
-              </li>
-              <li>
-                <TextField
-                  value={this.state.manager_name}
-                  onChange={this.handleChange}
-                  id='manager_name'
-                  label='대표 이름'
-                  error={this.state.manager_name_err}
-                  required
-                />
-              </li>
-              <li>
-                <TextField
-                  type='number'
-                  value={this.state.phone}
-                  onChange={this.handleChange}
-                  id='phone'
-                  label='대표 연락처(-제외)'
-                  error={this.state.phone_err}
-                  required
-                />
-              </li>
-              <li>
-                <TextField
-                  value={this.state.business_number}
-                  onChange={this.handleChange}
-                  id='business_number'
-                  label='사업자 등록번호'
-                  error={this.state.business_number_err}
-                  required
-                />
-              </li>
-              <li>
-                <TextField
-                  value={this.state.business_phone}
-                  onChange={this.handleChange}
-                  id='business_phone'
-                  label='사업장 연락처(-제외)'
-                  error={this.state.business_phone_err}
-                  required
-                />
-              </li>
-              <li>
-                <div onClick={this.handleModal}>약관</div>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>비밀번호</Form.Label>
+                  <Form.Control
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                    type='password'
+                    id='password'
+                    label='비밀번호'
+                    error={this.state.password_err}
+                    required
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>비밀번호확인</Form.Label>
+                  <Form.Control
+                    value={this.state.password_confirm}
+                    onChange={this.handleChange}
+                    type='password'
+                    id='password_confirm'
+                    label='비밀번호확인'
+                    error={this.state.password_confirm_err}
+                    required
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>대표 이름</Form.Label>
+                  <Form.Control
+                    value={this.state.manager_name}
+                    onChange={this.handleChange}
+                    id='manager_name'
+                    label='대표 이름'
+                    error={this.state.manager_name_err}
+                    required
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>대표 연락처(-제외)</Form.Label>
+                  <Form.Control
+                    type='number'
+                    value={this.state.phone}
+                    onChange={this.handleChange}
+                    id='phone'
+                    label='대표 연락처(-제외)'
+                    error={this.state.phone_err}
+                    required
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>사업자 등록번호</Form.Label>
+                  <Form.Control
+                    value={this.state.business_number}
+                    onChange={this.handleChange}
+                    id='business_number'
+                    label='사업자 등록번호'
+                    error={this.state.business_number_err}
+                    required
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>사업장 연락처(-제외)</Form.Label>
+                  <Form.Control
+                    value={this.state.business_phone}
+                    onChange={this.handleChange}
+                    id='business_phone'
+                    label='사업장 연락처(-제외)'
+                    error={this.state.business_phone_err}
+                    required
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col xs={12} className='text-center mt-2'>
+                {this.state.agreeCheck ? (
+                  <Button variant='outline-primary' onClick={this.handleModal}>
+                    약관 확인
+                  </Button>
+                ) : (
+                  <Button onClick={this.handleModal}>약관 확인</Button>
+                )}
                 <Modal show={this.state.modalShow}>
-                  <p>피트니스CRM 약관</p>
-                  <div>
-                    <input
-                      type='checkbox'
-                      onClick={this.agreeCheckModal}
-                    ></input>
-                  </div>
+                  <Card>
+                    <Card.Header>divvy 서비스 약관</Card.Header>
+                    <Card.Body>
+                      <Card.Title>서비스 이용 약관</Card.Title>
+                      <Card.Text>
+                        해당 사항은 서비스 이용 약관입니다. divvy 서비스 이용에
+                        대해서 필요한 약관 사항에 대해서 이곳에 기입되어,
+                        이용자들이 가입하기 전에 해당 약관 사항을 보고 동의또는
+                        비동의하게 되는 내용입니다.
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                  <Card>
+                    <Card.Body>
+                      <Card.Title>마케팅 이용 동의</Card.Title>
+                      <Card.Text>
+                        해당 사항은 마케팅 이용 동의 약관입니다. 고객의 정보를
+                        마케팅에 이용함에 있어 고지해야할 사항들이 이곳에
+                        기입되어, 이용자들이 가입하기 전에 해당 약관 사항을 보고
+                        동의 또는 비동의 하게 되는 내용입니다.
+                      </Card.Text>
+                    </Card.Body>
+                    <Button onClick={this.agreeCheckModal}>
+                      약관에 동의합니다.
+                    </Button>
+                  </Card>
                 </Modal>
-              </li>
-            </ul>
-            {this.state.agreeCheck ? (
-              <button
-                className='btnSolid'
-                type='button'
-                onClick={this.handleOnClick}
-              >
-                등록하기
-              </button>
-            ) : (
-              <button className='btnSolid' type='button' disabled>
-                disabled
-              </button>
-            )}
-          </form>
+              </Col>
+              <Col xs={12} className='text-center mt-2'>
+                {this.state.agreeCheck ? (
+                  <Button onClick={this.handleOnClick}>등록하기</Button>
+                ) : (
+                  <div>
+                    <p>약관에 동의하여야 가입이 가능합니다.</p>
+                    <Button disabled>등록하기</Button>
+                  </div>
+                )}
+              </Col>
+            </Row>
+          </Form>
           {/*.AddSalesForm productPay */}
-        </div>
+        </Container>
         <div className='footer'>
           <Footer />
         </div>
