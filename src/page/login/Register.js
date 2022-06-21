@@ -24,7 +24,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
 
-const IdCheck = RegExp(/^[A-Za-z0-9_\-]{3,20}$/);
+const IdCheck = RegExp(/[a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣|0-9|A-Z]/g);
 
 class Register extends Component {
   constructor(props) {
@@ -76,7 +76,7 @@ class Register extends Component {
           //console.log(response.length)
           if (response.length == 0) {
             if (IdCheck.test(this.state.id)) {
-              alert('사용가능합니다.');
+              alert('사용 가능합니다.');
               this.setState({
                 check: 1,
               });
@@ -232,7 +232,7 @@ class Register extends Component {
                 {this.state.check == 0 ? (
                   <label></label>
                 ) : (
-                  <label>사용가능한 아이디입니다.</label>
+                  <label>사용 가능한 아이디입니다.</label>
                 )}
               </Col>
               <Col>
@@ -358,7 +358,7 @@ class Register extends Component {
                   <Button onClick={this.handleOnClick}>등록하기</Button>
                 ) : (
                   <div>
-                    <p>약관에 동의하여야 가입이 가능합니다.</p>
+                    <p>필수 약관에 동의하여야 가입이 가능합니다.</p>
                     <Button disabled>등록하기</Button>
                   </div>
                 )}
