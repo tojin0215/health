@@ -555,3 +555,37 @@ export const reservationDataDelete = (
     },
   });
 };
+
+//workoutStage select
+export const workoutStageSelect = (fitness_no, stage) => {
+  return axios
+    .get(`${SERVER_URL}/workoutStage`, {
+      params: { fitness_no: fitness_no, stage: stage },
+    })
+    .then((response) => response.data);
+};
+
+//workoutStage insert
+export const workoutStageInsert = (
+  stage,
+  fitness_no,
+  workout,
+  part,
+  machine,
+  default_set,
+  default_count,
+  default_rest,
+  url
+) => {
+  return axios.post(`${SERVER_URL}/workoutStage`, {
+    stage: stage,
+    fitness_no: fitness_no,
+    workout: workout,
+    part: part,
+    machine: machine,
+    default_set: default_set,
+    default_count: default_count,
+    default_rest: default_rest,
+    url: url,
+  });
+};

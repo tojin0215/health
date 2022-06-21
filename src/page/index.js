@@ -31,3 +31,5 @@ export { default as Inbodies } from './exercise/Inbodies';
 export { default as WorkoutAlloted } from './workout/WorkoutAlloted';
 export { default as WorkoutAllotedList } from './workout/WorkoutAllotedList';
 export { default as WorkoutAdd } from './workout/WorkoutAdd';
+export { default as WorkoutStage } from './workout/WorkoutStage';
+export { default as WorkoutStageAdd } from './workout/WorkoutStageAdd';
