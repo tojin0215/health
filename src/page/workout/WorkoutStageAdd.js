@@ -282,7 +282,7 @@ class WorkoutStageAdd extends Component {
         this.props.userinfo.loginWhether === 1
           ? trainerResult[0].fitness_no
           : this.props.userinfo.fitness_no;
-      workoutStageSelect(10, this.state.stage).then((result) => {
+      workoutStageSelect(fitness_no, this.state.stage).then((result) => {
         const items = result.map((data, index, array) => {
           return (
             <WorkoutStageView
