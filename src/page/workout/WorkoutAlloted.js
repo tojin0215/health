@@ -117,6 +117,7 @@ const ExerciseView = ({
       setDefault_set_input(default_set);
       setDefault_count_input(default_count);
       setDefault_rest_input(default_rest);
+      setUrl_input(url);
       workoutAllotedView(idc);
       alert(workout + '운동이 배정됩니다.');
     });

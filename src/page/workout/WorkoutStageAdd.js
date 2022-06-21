@@ -1,10 +1,15 @@
 import { TableCell, TableHead, TableRow } from '@mui/material';
-import { Component } from 'react';
+import { Component, useState } from 'react';
 import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
-import { selectTrainerReservation, workoutSelect } from '../../api/user';
+import {
+  selectTrainerReservation,
+  workoutSelect,
+  workoutStageInsert,
+  workoutStageSelect,
+} from '../../api/user';
 import Footer from '../../component/footer/Footer';
 import Header from '../../component/header/Header';
 import Menu from '../../component/navigation/Menu';
@@ -21,6 +26,8 @@ const ExerciseView = ({
   default_rest,
   url,
   inbody_no,
+  stage,
+  workoutStageView,
 }) => {
   const region =
     part === 1
@@ -35,11 +42,122 @@ const ExerciseView = ({
       ? '유산소'
       : '기타';
   const plusStage = () => {
-    alert('asd');
+    workoutStageInsert(
+      stage,
+      fitness_no,
+      workout,
+      part,
+      machine,
+      default_set_input,
+      default_count_input,
+      default_rest_input,
+      url_input
+    ).then((res) => {
+      setDefault_set_input(default_set);
+      setDefault_count_input(default_count);
+      setDefault_rest_input(default_rest);
+      setUrl_input(url);
+      workoutStageView();
+      alert(stageWord + '에 넣기');
+    });
+  };
+  const stageWord =
+    stage === 1
+      ? '1단계'
+      : stage === 21
+      ? '2단계'
+      : stage === 31
+      ? '3단계'
+      : stage === 41
+      ? '4단계'
+      : stage === 51
+      ? '5단계'
+      : '1단계';
+
+  const [default_set_input, setDefault_set_input] = useState(default_set);
+  const [default_count_input, setDefault_count_input] = useState(default_count);
+  const [default_rest_input, setDefault_rest_input] = useState(default_rest);
+  const [url_input, setUrl_input] = useState(url);
+  const changeInsert = (e) => {
+    setDefault_set_input(e.target.value);
+  };
+  const changeInsert2 = (e) => {
+    setDefault_count_input(e.target.value);
+  };
+  const changeInsert3 = (e) => {
+    setDefault_rest_input(e.target.value);
+  };
+  const changeInsert4 = (e) => {
+    setUrl_input(e.target.value);
   };
   return (
     <>
       <TableRow>
+        {/* <TableCell>{stage}</TableCell> */}
+        <TableCell>{region}</TableCell>
+        <TableCell>{workout}</TableCell>
+        <TableCell>{machine}</TableCell>
+        <TableCell>
+          <input
+            type='number'
+            value={default_set_input}
+            onChange={changeInsert}
+          />
+        </TableCell>
+        <TableCell>
+          <input
+            type='number'
+            value={default_count_input}
+            onChange={changeInsert2}
+          />
+        </TableCell>
+        <TableCell>
+          <input
+            type='number'
+            value={default_rest_input}
+            onChange={changeInsert3}
+          />
+        </TableCell>
+        <TableCell>
+          <input value={url_input} onChange={changeInsert4} />
+        </TableCell>
+        <TableCell onClick={plusStage}>
+          <button>+</button>
+        </TableCell>
+      </TableRow>
+    </>
+  );
+};
+
+const WorkoutStageView = ({
+  fitness_no,
+  workout,
+  part,
+  machine,
+  default_set,
+  default_count,
+  default_rest,
+  url,
+  inbody_no,
+  stage,
+}) => {
+  const region =
+    part === 1
+      ? '상체'
+      : part === 18
+      ? '하체'
+      : part === 28
+      ? '전신'
+      : part === 38
+      ? '코어'
+      : part === 48
+      ? '유산소'
+      : '기타';
+
+  return (
+    <>
+      <TableRow>
+        {/* <TableCell>{stage}</TableCell> */}
         <TableCell>{region}</TableCell>
         <TableCell>{workout}</TableCell>
         <TableCell>{machine}</TableCell>
@@ -47,7 +165,6 @@ const ExerciseView = ({
         <TableCell>{default_count}</TableCell>
         <TableCell>{default_rest}</TableCell>
         <TableCell>{url}</TableCell>
-        <TableCell onClick={plusStage}>+</TableCell>
       </TableRow>
     </>
   );
@@ -59,8 +176,11 @@ class WorkoutStageAdd extends Component {
     this.state = {
       headRegion: '',
       workoutlist: [],
+      stage: '',
+      workoutStage: [],
     };
   }
+
   goLogin = () => {
     this.props.history.push('/');
   };
@@ -133,6 +253,8 @@ class WorkoutStageAdd extends Component {
               default_rest={data.default_rest}
               url={data.url}
               client_name={this.state.client_name}
+              stage={this.state.stage}
+              workoutStageView={this.workoutStageView}
             />
           );
         });
@@ -144,7 +266,49 @@ class WorkoutStageAdd extends Component {
       });
     });
   };
+
+  stageOnClick = (s) => {
+    this.setState({
+      stage: s,
+    });
+    this.workoutStageView();
+  };
+
+  workoutStageView = () => {
+    selectTrainerReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      const fitness_no =
+        this.props.userinfo.loginWhether === 1
+          ? trainerResult[0].fitness_no
+          : this.props.userinfo.fitness_no;
+      workoutStageSelect(10, this.state.stage).then((result) => {
+        const items = result.map((data, index, array) => {
+          return (
+            <WorkoutStageView
+              ids={data.ids}
+              stage={data.stage}
+              fitness_no={data.fitness_no}
+              workout={data.workout}
+              part={data.part}
+              machine={data.machine}
+              default_set={data.default_set}
+              default_count={data.default_count}
+              default_rest={data.default_rest}
+              url={data.url}
+            />
+          );
+        });
+        this.setState({
+          workoutStage: items.reverse(),
+        });
+        // console.log(items[0].props.part);
+      });
+    });
+  };
+
   render() {
+    console.log(this.state.stage);
     return (
       <div>
         {' '}
@@ -161,12 +325,68 @@ class WorkoutStageAdd extends Component {
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/WorkoutStageAdd'>묶음 운동 설정</Link>
+                <Link to='/workoutStageAdd'>묶음 운동 설정</Link>
               </div>
             </div>
           </div>
         </div>
         <Container>
+          {this.state.stage ? (
+            <div>
+              <div>
+                {this.state.stage === 1
+                  ? '1단계'
+                  : this.state.stage === 21
+                  ? '2단계'
+                  : this.state.stage === 31
+                  ? '3단계'
+                  : this.state.stage === 41
+                  ? '4단계'
+                  : this.state.stage === 51
+                  ? '5단계'
+                  : '1단계'}
+              </div>
+              <div onClick={() => window.location.replace('/workoutStageAdd')}>
+                다시단계선택하기
+              </div>
+              <Col xs={12}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell scope='col'>단계</TableCell>
+                      <TableCell scope='col'>운동 부위</TableCell>
+                      <TableCell scope='col'>운동 이름</TableCell>
+                      <TableCell scope='col'>운동 기구</TableCell>
+                      <TableCell scope='col'>세트</TableCell>
+                      <TableCell scope='col'>횟수</TableCell>
+                      <TableCell scope='col'>쉬는시간</TableCell>
+                      <TableCell scope='col'>url</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  {this.state.workoutStage ? this.state.workoutStage : ''}
+                </Table>
+              </Col>
+            </div>
+          ) : (
+            <div>
+              <div>
+                <button onClick={() => this.stageOnClick(11)}>1단계</button>
+              </div>
+              <div>
+                <button onClick={() => this.stageOnClick(21)}>2단계</button>
+              </div>
+              <div>
+                <button onClick={() => this.stageOnClick(31)}>3단계</button>
+              </div>
+              <div>
+                <button onClick={() => this.stageOnClick(41)}>4단계</button>
+              </div>
+              <div>
+                <button onClick={() => this.stageOnClick(51)}>5단계</button>
+              </div>
+            </div>
+          )}
+
           <Row className='mt-4' xs={6}>
             <Col xs={12}>
               <h3>

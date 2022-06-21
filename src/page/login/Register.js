@@ -19,7 +19,7 @@ import { Modal, NavItem } from 'react-bootstrap';
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
 
-const IdCheck = RegExp(/^[A-Za-z0-9_\-]{3,20}$/);
+const IdCheck = RegExp(/[a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣|0-9|A-Z]/g);
 
 class Register extends Component {
   constructor(props) {
