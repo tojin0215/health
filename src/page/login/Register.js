@@ -232,7 +232,7 @@ class Register extends Component {
                 {this.state.check == 0 ? (
                   <label></label>
                 ) : (
-                  <label>사용 가능한 아이디입니다.</label>
+                  <label className=''>사용 가능한 아이디입니다.</label>
                 )}
               </Col>
               <Col>
@@ -316,13 +316,28 @@ class Register extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={12} className='text-center mt-2'>
+              <Col xs={12} className='text-center mt-4'>
                 {this.state.agreeCheck ? (
-                  <Button variant='outline-primary' onClick={this.handleModal}>
+                  <Button
+                    className='w-100'
+                    variant='outline-success'
+                    onClick={this.handleModal}
+                  >
                     약관 확인
                   </Button>
                 ) : (
-                  <Button onClick={this.handleModal}>약관 확인</Button>
+                  <>
+                    <p className='pb-2'>
+                      필수 약관에 동의하여야 가입이 가능합니다.
+                    </p>
+                    <Button
+                      className='w-100'
+                      variant='outline-primary'
+                      onClick={this.handleModal}
+                    >
+                      약관 확인
+                    </Button>
+                  </>
                 )}
                 <Modal show={this.state.modalShow}>
                   <Card>
@@ -355,11 +370,14 @@ class Register extends Component {
               </Col>
               <Col xs={12} className='text-center mt-2'>
                 {this.state.agreeCheck ? (
-                  <Button onClick={this.handleOnClick}>등록하기</Button>
+                  <Button className='w-100' onClick={this.handleOnClick}>
+                    등록하기
+                  </Button>
                 ) : (
                   <div>
-                    <p>필수 약관에 동의하여야 가입이 가능합니다.</p>
-                    <Button disabled>등록하기</Button>
+                    <Button className='w-100' disabled>
+                      등록하기
+                    </Button>
                   </div>
                 )}
               </Col>
