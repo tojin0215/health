@@ -11,6 +11,7 @@ import '../../styles/home/home.css';
 
 // 리액트 부트스트랩 관련
 import { Container, Row, Col } from 'react-bootstrap';
+import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 
 // import  { PC, Mobile } from '../../component/MediaQuery';
@@ -279,6 +280,28 @@ class Home extends Component {
           >
             메인 이미지
           </div>
+          <Row xs={5}>
+            <Col>
+              <Image src={btnCustomer}></Image>
+              <h5>고객</h5>
+            </Col>
+            <Col>
+              <Image src={btnCustomer}></Image>
+              <h5>수업</h5>
+            </Col>
+            <Col>
+              <Image src={btnCustomer}></Image>
+              <h5>운동 설정</h5>
+            </Col>
+            <Col>
+              <Image src={btnCustomer}></Image>
+              <h5>운동 배정</h5>
+            </Col>
+            <Col>
+              <Image src={btnCustomer}></Image>
+              <h5>상품 매출</h5>
+            </Col>
+          </Row>
           <div className='homeIcon'>
             <ul>
               <li>

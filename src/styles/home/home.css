@@ -119,13 +119,6 @@
   align-items: flex-end;
 }
 
-.home .homeIcon p {
-  color: #333;
-  font-weight: 300;
-  padding-top: 1rem;
-  text-align: center;
-}
-
 .home .homeAbout {
   margin-top: 4.7rem;
   width: 100%;
