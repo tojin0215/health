@@ -185,7 +185,7 @@ class Authentication extends Component {
             <Col className='mt-2'>
               <Button
                 href='/register'
-                variant='outline-secondary fw-bold'
+                variant='outline-light fw-bold'
                 className='px-5 border-0'
               >
                 회원가입

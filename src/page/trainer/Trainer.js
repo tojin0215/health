@@ -155,7 +155,7 @@ const VieWTrainerItem = ({
           <TableCell>{ment}</TableCell>
         </Mobile>
         <TableCell onClick={modalOnClick}>
-          <Button className='' variant='outline-secondary' size='sm'>
+          <Button className='' variant='outline-light' size='sm'>
             수정하기
           </Button>
         </TableCell>
@@ -248,7 +248,7 @@ const VieWTrainerItem = ({
                 <Button
                   className='w-100'
                   onClick={modalClose}
-                  variant='outline-secondary'
+                  variant='outline-light'
                 >
                   닫기
                 </Button>

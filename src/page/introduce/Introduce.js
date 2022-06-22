@@ -130,7 +130,7 @@ const ViewIntroduceItem = ({
               <Col>
                 <Button
                   onClick={() => setShowModal(false)}
-                  variant='outline-secondary'
+                  variant='outline-light'
                   className='w-100 mt-2'
                 >
                   닫기

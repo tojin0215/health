@@ -12,6 +12,7 @@ import '../../styles/home/home.css';
 // 리액트 부트스트랩 관련
 import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
+import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 // import  { PC, Mobile } from '../../component/MediaQuery';
@@ -282,24 +283,75 @@ class Home extends Component {
           </div>
           <Row xs={5}>
             <Col>
-              <Image src={btnCustomer}></Image>
+              <Image thumbnail src={btnCustomer}></Image>
               <h5>고객</h5>
             </Col>
             <Col>
-              <Image src={btnCustomer}></Image>
+              <Image thumbnail src={btnSetting}></Image>
               <h5>수업</h5>
             </Col>
             <Col>
-              <Image src={btnCustomer}></Image>
+              <Image thumbnail src={btnExercise}></Image>
               <h5>운동 설정</h5>
             </Col>
             <Col>
-              <Image src={btnCustomer}></Image>
+              <Image thumbnail src={btnSales}></Image>
               <h5>운동 배정</h5>
             </Col>
             <Col>
-              <Image src={btnCustomer}></Image>
+              <Image thumbnail src={aboutManage}></Image>
               <h5>상품 매출</h5>
+            </Col>
+          </Row>
+          <Row xs={5}>
+            <Col>
+              <Card className='text-center'>
+                <Card.Img variant='top' src={btnCustomer} />
+                <Card.Body>
+                  <Card.Title>고객</Card.Title>
+                  <Card.Text></Card.Text>
+                  <Button variant='primary'>Go somewhere</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col>
+              <Card className='text-center'>
+                <Card.Img variant='top' src={btnSetting} />
+                <Card.Body>
+                  <Card.Title>고객</Card.Title>
+                  <Card.Text></Card.Text>
+                  <Button variant='primary'>Go somewhere</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col>
+              <Card className='text-center'>
+                <Card.Img variant='top' src={btnExercise} />
+                <Card.Body>
+                  <Card.Title>고객</Card.Title>
+                  <Card.Text></Card.Text>
+                  <Button variant='primary'>Go somewhere</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col>
+              <Card className='text-center'>
+                <Card.Img variant='top' src={btnSales} />
+                <Card.Body>
+                  <Card.Title></Card.Title>
+                  <Card.Text></Card.Text>
+                  <Button variant='primary'>회원 관리</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col>
+              <Card className='text-center'>
+                <Card.Img variant='top' src={aboutManage} />
+                <Card.Body>
+                  <Card.Title>Card Title</Card.Title>
+                  <Button variant='primary'>Go somewhere</Button>
+                </Card.Body>
+              </Card>
             </Col>
           </Row>
           <div className='homeIcon'>

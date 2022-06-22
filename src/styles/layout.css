@@ -16,38 +16,39 @@ body {
 }
 
 .boxmorpin {
-  box-shadow: rgb(190, 203, 216) 9px 9px 18px 0px inset,
-    rgb(243, 249, 255) -9px -9px 18px 0px inset;
-  -webkit-box-shadow: rgb(190, 203, 216) 9px 9px 18px 0px inset,
-    rgb(243, 249, 255) -9px -9px 18px 0px inset;
+  box-shadow: rgb(60, 60, 60) 9px 9px 18px 0px inset,
+    rgb(60, 60, 60) -9px -9px 18px 0px inset;
+  -webkit-box-shadow: rgb(60, 60, 60) 9px 9px 18px 0px inset,
+    rgb(60, 60, 60) -9px -9px 18px 0px inset;
   border-radius: 22px;
   -webkit-border-radius: 22px;
 }
 
 .boxmorpinsm {
-  box-shadow: rgb(190, 203, 216) 5px 5px 10px 0px inset,
-    rgb(243, 249, 255) -5px -5px 10px 0px inset;
-  -webkit-box-shadow: rgb(190, 203, 216) 5px 5px 10px 0px inset,
-    rgb(243, 249, 255) -5px -5px 10px 0px inset;
+  background-color: #222;
+  box-shadow: rgb(60, 60, 60) 5px 5px 10px 0px inset,
+    rgb(60, 60, 60) -5px -5px 10px 0px inset;
+  -webkit-box-shadow: rgb(60, 60, 60) 5px 5px 10px 0px inset,
+    rgb(60, 60, 60) -5px -5px 10px 0px inset;
   border-radius: 13px !important;
   -webkit-border-radius: 13px !important;
   border: 0 !important;
 }
 
 .boxmorp {
-  box-shadow: rgb(190, 203, 216) 9px 9px 18px 0px,
-    rgb(243, 249, 255) -9px -9px 18px 0px;
-  -webkit-box-shadow: rgb(190, 203, 216) 9px 9px 18px 0px,
-    rgb(243, 249, 255) -9px -9px 18px 0px;
+  box-shadow: rgb(60, 60, 60) 9px 9px 18px 0px,
+    rgb(60, 60, 60) -9px -9px 18px 0px;
+  -webkit-box-shadow: rgb(60, 60, 60) 9px 9px 18px 0px,
+    rgb(60, 60, 60) -9px -9px 18px 0px;
   border-radius: 22px;
   -webkit-border-radius: 22px;
 }
 
 .boxmorpsm {
-  box-shadow: rgb(190, 203, 216) 5px 5px 10px 0px,
-    rgb(243, 249, 255) -5px -5px 10px 0px;
-  -webkit-box-shadow: rgb(190, 203, 216) 5px 5px 10px 0px,
-    rgb(243, 249, 255) -5px -5px 10px 0px;
+  box-shadow: rgb(60, 60, 60) 5px 5px 10px 0px,
+    rgb(60, 60, 60) -5px -5px 10px 0px;
+  -webkit-box-shadow: rgb(60, 60, 60) 5px 5px 10px 0px,
+    rgb(60, 60, 60) -5px -5px 10px 0px;
   border-radius: 13px !important;
   -webkit-border-radius: 13px !important;
 }
@@ -110,9 +111,9 @@ body {
 
 .boxmorpsm:active {
   /* background-color: rgb(240, 244, 248); */
-  box-shadow: rgba(173, 187, 208, 0.5) 5px 5px 10px 0px inset,
+  box-shadow: rgba(60, 60, 60, 0.5) 5px 5px 10px 0px inset,
     rgb(255, 255, 255) -5px -5px 10px 0px inset;
-  -webkit-box-shadow: rgba(173, 187, 208, 0.5) 5px 5px 10px 0px inset,
+  -webkit-box-shadow: rgba(60, 60, 60, 0.5) 5px 5px 10px 0px inset,
     rgb(255, 255, 255) -5px -5px 10px 0px inset;
   border-radius: 16px !important;
   -webkit-border-radius: 16px !important;

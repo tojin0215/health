@@ -1285,7 +1285,7 @@ class Reservation extends Component {
             <Col className='text-end'>
               <Button
                 name='prev'
-                variant='outline-secondary'
+                variant='outline-light'
                 onClick={this.handleWeekClick}
               >
                 이전주
@@ -1305,7 +1305,7 @@ class Reservation extends Component {
             <Col className='text-start'>
               <Button
                 name='next'
-                variant='outline-secondary'
+                variant='outline-light'
                 onClick={this.handleWeekClick}
               >
                 다음주
@@ -1368,7 +1368,7 @@ class Reservation extends Component {
                   <tr>
                     <td>
                       {this.state.reservationClass.length === 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
+                        <div className='py-2 my-1 text-secondary rounded'>
                           수업이 없습니다.
                         </div>
                       ) : (
@@ -1392,7 +1392,7 @@ class Reservation extends Component {
                     <td name='mon'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
+                        <div className='py-2 my-1 text-secondary  rounded'>
                           수업이 없습니다.
                         </div>
                       ) : (
@@ -1415,7 +1415,7 @@ class Reservation extends Component {
                     </td>
                     <td name='tue'>
                       {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
+                        <div className='py-2 my-1 text-secondary rounded'>
                           수업이 없습니다.
                         </div>
                       ) : (
@@ -1439,7 +1439,7 @@ class Reservation extends Component {
                     <td name='wed'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
+                        <div className='py-2 my-1 text-secondary rounded'>
                           수업이 없습니다.
                         </div>
                       ) : (
@@ -1463,7 +1463,7 @@ class Reservation extends Component {
                     <td name='thu'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
+                        <div className='py-2 my-1 text-secondary rounded'>
                           수업이 없습니다.
                         </div>
                       ) : (
@@ -1487,7 +1487,7 @@ class Reservation extends Component {
                     <td name='fri'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
+                        <div className='py-2 my-1 text-secondary rounded'>
                           수업이 없습니다.
                         </div>
                       ) : (
@@ -1511,7 +1511,7 @@ class Reservation extends Component {
                     <td name='sat'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
+                        <div className='py-2 my-1 text-secondary rounded'>
                           수업이 없습니다.
                         </div>
                       ) : (

@@ -214,7 +214,7 @@ const ViewClientItem = ({
             </Button>
           )}
           {showUpdate ? (
-            <Button onClick={modalClose} variant='outline-secondary'>
+            <Button onClick={modalClose} variant='outline-light'>
               닫기
             </Button>
           ) : (

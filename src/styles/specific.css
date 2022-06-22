@@ -87,6 +87,20 @@
 .MuiDialogContent-root {
   min-width: 550px;
 }
+.btn-primary {
+  background-color: #ebff2e;
+  color: #000;
+  border-color: #ebff2e;
+}
+
+td > div {
+  background-color: #333;
+}
+
+.table {
+  color: #fff;
+}
+
 @media (max-width: 767px) {
   .customerSearch {
     flex-direction: column;

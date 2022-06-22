@@ -324,7 +324,7 @@ const ReservationClassItem = ({
               <Col xs={12} className='mt-2'>
                 <Button
                   className='w-100'
-                  variant='outline-secondary'
+                  variant='outline-light'
                   onClick={modalClose}
                 >
                   닫기
@@ -648,7 +648,7 @@ class ReservationClass extends Component {
             </Col>
             <Col className='text-end'>
               <Link to='/reservation'>
-                <Button variant='outline-secondary me-2'>돌아가기</Button>
+                <Button variant='outline-light me-2'>돌아가기</Button>
               </Link>
               <Button onClick={this.handleUpdate}>수정하기</Button>
             </Col>
@@ -657,7 +657,7 @@ class ReservationClass extends Component {
             <Col className='text-end'>
               <Button
                 name='prev'
-                variant='outline-secondary'
+                variant='outline-light'
                 onClick={this.handleWeekClick}
               >
                 이전주
@@ -680,7 +680,7 @@ class ReservationClass extends Component {
             <Col className='text-start'>
               <Button
                 name='next'
-                variant='outline-secondary'
+                variant='outline-light'
                 onClick={this.handleWeekClick}
               >
                 다음주

@@ -6,11 +6,11 @@
 .Navigation {
   width: 100%;
   height: 5rem;
-  background-color: #fff;
+  background-color: #252525;
   display: flex;
   flex-wrap: wrap;
   white-space: nowrap;
-  border-bottom: 1px solid #bbb;
+  border-bottom: 1px solid #333;
   position: absolute;
   top: 0;
   right: 0;
