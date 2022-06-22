@@ -50,7 +50,7 @@ class AssignExercise extends Component {
       selectedList: [],
       selectedListId: [],
       exerciseList: [],
-      member_no: '',
+      member_no: 'ㅁㄴㅇㅁㄴㅇ',
       open: false,
       search: '',
       item: options[0],
@@ -1149,6 +1149,7 @@ class AssignExercise extends Component {
   };
 
   render() {
+    console.log(this.state.userName);
     return (
       <div className='assignExercise'>
         <div className='header'>

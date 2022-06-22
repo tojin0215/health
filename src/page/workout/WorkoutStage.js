@@ -1,10 +1,15 @@
-import { Menu, TableCell, TableHead, TableRow } from '@mui/material';
+import { Menu, TableCell, TableHead, TableRow, TextField } from '@mui/material';
 import { Component } from 'react';
 import { Col, Container, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
-import { selectTrainerReservation, workoutStageSelect } from '../../api/user';
+import {
+  selectTrainerReservation,
+  workoutAllotedInsert,
+  workoutStageSelect,
+} from '../../api/user';
+import UserSearch from '../../component/customer/UserSearch';
 import Footer from '../../component/footer/Footer';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
@@ -20,6 +25,7 @@ const WorkoutStageView = ({
   url,
   inbody_no,
   stage,
+  idc,
 }) => {
   const region =
     part === 1
@@ -37,7 +43,6 @@ const WorkoutStageView = ({
   return (
     <>
       <TableRow>
-        {/* <TableCell>{stage}</TableCell> */}
         <TableCell>{region}</TableCell>
         <TableCell>{workout}</TableCell>
         <TableCell>{machine}</TableCell>
@@ -45,7 +50,6 @@ const WorkoutStageView = ({
         <TableCell>{default_count}</TableCell>
         <TableCell>{default_rest}</TableCell>
         <TableCell>{url}</TableCell>
-        <TableCell>배정</TableCell>
       </TableRow>
     </>
   );
@@ -57,6 +61,15 @@ class WorkoutStage extends Component {
     this.state = {
       stage: '',
       workoutStage: [],
+      open: false,
+
+      workout: [],
+      part: '',
+      machine: '',
+      default_set: '',
+      default_count: '',
+      default_rest: '',
+      url: '',
     };
   }
   goLogin = () => {
@@ -110,6 +123,17 @@ class WorkoutStage extends Component {
     });
   }
 
+  handleUser = (client) => {
+    const { idc, client_name } = client;
+    // console.log(client_name);
+    this.setState({
+      client: client,
+      client_name: client_name,
+      idc: idc,
+      open: false,
+    });
+  };
+
   stageOnClick = (s) => {
     this.setState({
       stage: s,
@@ -150,8 +174,68 @@ class WorkoutStage extends Component {
     });
   };
 
+  alloted = () => {
+    selectTrainerReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((trainerResult) => {
+      const fitness_no =
+        this.props.userinfo.loginWhether === 1
+          ? trainerResult[0].fitness_no
+          : this.props.userinfo.fitness_no;
+      this.state.workoutStage.map((data, index, array) => {
+        console.log(this.state.workoutStage);
+        this.setState({
+          workout: data.props.workout,
+          part: data.props.part,
+          machine: data.props.machine,
+          default_set: data.props.default_set,
+          default_count: data.props.default_count,
+          default_rest: data.props.default_rest,
+          url: data.props.url,
+        });
+        console.log(this.state.workout);
+        workoutAllotedInsert(
+          fitness_no,
+          this.state.idc,
+          this.state.workout,
+          this.state.part === 1
+            ? '상체'
+            : this.state.part === 18
+            ? '하체'
+            : this.state.part === 28
+            ? '전신'
+            : this.state.part === 38
+            ? '코어'
+            : this.state.part === 48
+            ? '유산소'
+            : '기타',
+          this.state.machine,
+          this.state.default_set,
+          this.state.default_count,
+          this.state.default_rest,
+          this.state.url
+        ).then((res) => {
+          // console.log(this.state.workout);
+          this.props.history.push({
+            pathname: '/workoutAllotedList',
+            state: {
+              client_name2: this.state.client_name,
+              idc2: this.state.idc,
+              line: 3,
+            },
+          });
+        });
+      });
+    });
+  };
+
   render() {
-    console.log(this.state.stage);
+    // console.log(this.state.stage);
+    // console.log(this.state.idc); //idc=client_no
+    // console.log(this.state.workoutStage);
+    // console.log(this.state.workout);
+    console.log(this.state.client_name);
+
     return (
       <div>
         <div className='header'>
@@ -173,6 +257,28 @@ class WorkoutStage extends Component {
           </div>
         </div>
         <Container>
+          {this.state.open ? (
+            <UserSearch
+              open={this.state.open}
+              setOpen={(o) => this.setState({ open: o })}
+              fitness_no={this.props.userinfo.fitness_no}
+              loginWhether={this.props.userinfo.loginWhether}
+              joinNo={this.props.userinfo.joinNo}
+              handleUser={this.handleUser}
+            />
+          ) : (
+            <TextField
+              id='customer_name'
+              label='회원 검색'
+              disabled
+              variant='standard'
+              onClick={() => this.setState({ open: true })}
+              className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
+              InputProps={{ disableUnderline: true }}
+              value={this.state.client_name}
+            />
+          )}
+
           {this.state.stage ? (
             <div>
               <div>
@@ -188,10 +294,17 @@ class WorkoutStage extends Component {
                   ? '5단계'
                   : '1단계'}
               </div>
-              <div onClick={() => window.location.replace('/workoutStage')}>
+
+              <Link
+                to={{
+                  pathname: '/workoutStage',
+                }}
+                onClick={() => this.setState({ stage: '' })}
+              >
                 다시단계선택하기
-              </div>
+              </Link>
               <Col xs={12}>
+                <button onClick={this.alloted}>배정하기</button>
                 <Table>
                   <TableHead>
                     <TableRow>
@@ -202,7 +315,6 @@ class WorkoutStage extends Component {
                       <TableCell scope='col'>횟수</TableCell>
                       <TableCell scope='col'>쉬는시간</TableCell>
                       <TableCell scope='col'>url</TableCell>
-                      <TableCell scope='col'>배정</TableCell>
                     </TableRow>
                   </TableHead>
                   {this.state.workoutStage ? this.state.workoutStage : ''}
