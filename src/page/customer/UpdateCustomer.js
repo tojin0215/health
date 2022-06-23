@@ -309,7 +309,7 @@ class UpdateCustomer extends Component {
     console.log('*************8', this.state.join_route);
 
     return (
-      <div className='updateCustomer'>
+      <div className='wrap updateCustomer'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

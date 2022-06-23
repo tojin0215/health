@@ -418,7 +418,7 @@ class AssignCheckExercise extends Component {
     };
 
     return (
-      <div className='assignCheckExercise'>
+      <div className='wrap assignCheckExercise'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

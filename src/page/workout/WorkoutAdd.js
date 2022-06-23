@@ -247,7 +247,7 @@ class WorkoutAdd extends Component {
   render() {
     // console.log(this.state.headRegion);
     return (
-      <div>
+      <div className='wrap'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

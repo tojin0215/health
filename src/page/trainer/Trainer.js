@@ -373,7 +373,7 @@ class Trainer extends Component {
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.viewTrainerList[0]);
     return (
-      <div className='trainer_wrap'>
+      <div className='wrap trainer_wrap'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

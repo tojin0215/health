@@ -210,7 +210,7 @@ class Register extends Component {
             <p className='text-secondary'>
               강사, 회원은 사업주가 승인하여야만 회원가입이 가능합니다.
             </p>
-            <Row xs={2}>
+            <Row xs={2} className='mt-4'>
               <Col>
                 <Form.Group>
                   <Form.Label>센터 이름(아이디)</Form.Label>
@@ -340,8 +340,13 @@ class Register extends Component {
                   </>
                 )}
                 <Modal show={this.state.modalShow}>
+                  <Modal.Header
+                    closeButton
+                    onClick={() => this.setState({ modalShow: false })}
+                  >
+                    <Modal.Title>divvy 서비스 약관</Modal.Title>
+                  </Modal.Header>
                   <Card>
-                    <Card.Header>divvy 서비스 약관</Card.Header>
                     <Card.Body>
                       <Card.Title>서비스 이용 약관</Card.Title>
                       <Card.Text>

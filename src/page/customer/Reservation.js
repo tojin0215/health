@@ -1242,7 +1242,7 @@ class Reservation extends Component {
     // console.log('reservationClass_choice', this.state.reservationClass_choice);
 
     return (
-      <div className='reservationWrap'>
+      <div className='wrap reservationWrap'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

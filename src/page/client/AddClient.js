@@ -168,7 +168,7 @@ class AddClient extends Component {
 
   render() {
     return (
-      <div>
+      <div className='wrap'>
         {' '}
         <header className='header'>
           <Header />

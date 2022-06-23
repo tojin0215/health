@@ -616,7 +616,7 @@ class Sales extends Component {
     };
 
     return (
-      <div className='sales'>
+      <div className='wrap sales'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

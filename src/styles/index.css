@@ -26,7 +26,7 @@
 }
 
 .localNavigation .container h2 span {
-  color: #0f78ff;
+  color: #ebff2e;
   font-weight: 900;
   padding-left: 0.4rem;
 }
@@ -48,7 +48,7 @@
 .parallelogram {
   width: 0.8rem;
   height: 4.2rem;
-  background: #0f78ff;
+  background: #ebff2e;
   -webkit-transform: skew(-20deg);
   -moz-transform: skew(-20deg);
   -o-transform: skew(-20deg);

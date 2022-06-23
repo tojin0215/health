@@ -455,7 +455,7 @@ class Admin extends Component {
     };
 
     return (
-      <div className='admin'>
+      <div className='wrap admin'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

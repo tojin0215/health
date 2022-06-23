@@ -1082,7 +1082,7 @@ class DefaultExercise extends Component {
     };
 
     return (
-      <div className='defaultExercise'>
+      <div className='wrap defaultExercise'>
         <header>
           <Header />
           <Navigation goLogin={this.goLogin} />

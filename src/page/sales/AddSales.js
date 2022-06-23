@@ -354,7 +354,7 @@ class AddSales extends Component {
     console.log(userinfo);
 
     return (
-      <div className='addSales'>
+      <div className='wrap addSales'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

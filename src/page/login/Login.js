@@ -83,7 +83,7 @@ class Login extends Component {
     // console.log(this.props.status.valid);
     // console.log('Login', this.props.status);
     return (
-      <div className=''>
+      <div className='wrap'>
         {/* <div className='header'>
 					<Header />
 					<Navigation />

@@ -87,10 +87,66 @@
 .MuiDialogContent-root {
   min-width: 550px;
 }
+
+/* bootstrap button */
 .btn-primary {
+  background-color: #222;
+  color: #ebff2e;
+  border-color: #ebff2e;
+}
+.btn-primary:hover {
   background-color: #ebff2e;
   color: #000;
   border-color: #ebff2e;
+}
+.btn-primary:disabled {
+  background-color: #ebff2e;
+  border-color: #ebff2e;
+  color: #444;
+}
+.btn-outline-primary {
+  color: #ebff2e;
+  border-color: #ebff2e;
+}
+.btn-outline-primary:hover {
+  color: #000;
+  background-color: #ebff2e;
+  border-color: #ebff2e;
+}
+/* bootstrap text */
+.text-primary {
+  color: #ebff2e !important;
+}
+/* bootstrap card */
+.card {
+  border: none;
+}
+.card-body {
+  background-color: #111;
+}
+.card-header {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+/* bootstrap modal */
+.modal-header {
+  background-color: #222;
+  border-color: #333;
+}
+.close {
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  float: right;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  /* text-shadow: 0 1px 0 #fff; */
+  /* filter: alpha(opacity=20); */
+  opacity: 0.5;
+}
+.close > span:last-child {
+  display: none;
 }
 
 td > div {

@@ -245,7 +245,7 @@ class AssignCustomer extends Component {
     };
 
     return (
-      <div className='assignCustomer'>
+      <div className='wrap assignCustomer'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

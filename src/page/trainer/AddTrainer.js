@@ -157,7 +157,7 @@ class AddTrainer extends Component {
   render() {
     // console.log(this.state.fitness_no);
     return (
-      <div>
+      <div className='wrap'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

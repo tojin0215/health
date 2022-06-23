@@ -594,7 +594,7 @@ class Inbodies extends Component {
     // console.log(this.props.userinfo.manager_name);
 
     return (
-      <div className='inbody'>
+      <div className='wrap inbody'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

@@ -682,7 +682,7 @@ class Inbody extends Component {
 
     console.log('series.....', this.state.series);
     return (
-      <div className='inbody'>
+      <div className='wrap inbody'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

@@ -591,7 +591,7 @@ class AddExercise extends Component {
           {/*.localNavigation */}
         </header>
         {/*.header */}
-        <div className='container'>
+        <div className='wrap container'>
           {/* <NavLink exact to='/exercise'>[운동 추가]</NavLink>
                 <NavLink exact to='/setting/default'>[운동 기본묶음 설정]</NavLink> */}
           <section className='settingInfoInput sectionGlass'>

@@ -315,7 +315,7 @@ class Client extends Component {
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.viewClientList);
     return (
-      <div className='client_wrap'>
+      <div className='wrap client_wrap'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

@@ -335,7 +335,7 @@ class AddInbody extends Component {
     // console.log('member_no=idc', this.state.member_no);
 
     return (
-      <div className='addInbody'>
+      <div className='wrap addInbody'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

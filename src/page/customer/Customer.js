@@ -355,7 +355,7 @@ class Customer extends Component {
     // const [show, setShow] = useState(false);
 
     return (
-      <div className='customer'>
+      <div className='wrap customer'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

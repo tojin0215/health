@@ -272,7 +272,7 @@ class WorkoutAllotedList extends Component {
     // console.log(this.state.idc2);
     // console.log(this.state.line);
     return (
-      <div>
+      <div className='wrap'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

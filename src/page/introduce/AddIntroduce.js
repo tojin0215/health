@@ -94,7 +94,7 @@ class AddIntroduce extends Component {
     // console.log(this.state.file);
     // console.log(this.state.picture);
     return (
-      <div>
+      <div className='wrap'>
         {''}
         <header className='header'>
           <Header />

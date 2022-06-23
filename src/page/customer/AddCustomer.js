@@ -310,7 +310,7 @@ class AddCustomer extends Component {
     // console.log('11111', this.state.exercisePrice);
     // console.log(this.state.fitness_no);
     return (
-      <div className='addCustomer'>
+      <div className='wrap addCustomer'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

@@ -167,7 +167,7 @@ class ChoiceLogin extends Component {
     // console.log(this.props.userinfo.loginWhether);
     // console.log(this.props.userinfo);
     return (
-      <div className=''>
+      <div className='wrap'>
         <div className='localNavigation'>
           <div className='container'>
             <h2>

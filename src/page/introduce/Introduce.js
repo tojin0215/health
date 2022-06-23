@@ -237,7 +237,7 @@ class Introduce extends Component {
   render() {
     // console.log(this.state.viewIntroduceList);
     return (
-      <div>
+      <div className='wrap'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

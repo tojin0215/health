@@ -310,7 +310,7 @@ class WorkoutStageAdd extends Component {
   render() {
     console.log(this.state.stage);
     return (
-      <div>
+      <div className='wrap'>
         {' '}
         <div className='header'>
           <Header />

@@ -30,7 +30,7 @@
 }
 
 .home .dashboard > div label:last-child span {
-  color: #000;
+  color: #fff;
 }
 
 .home .dashboard .homeDashLeft {
@@ -70,7 +70,7 @@
 
 .home .dashboard label span {
   font-weight: 700;
-  color: #0f78ff;
+  color: #ebff2e;
   text-align: end;
   padding: 0 0.5rem;
 }
@@ -129,7 +129,7 @@
   flex-direction: row;
   font-weight: 700;
   line-height: 5rem;
-  color: #213449;
+  color: #fff;
   border: none;
   margin-bottom: 2rem;
 }
@@ -160,10 +160,13 @@
 .home .homeAbout .aboutList ul li {
   width: 30rem;
   height: 41rem;
+  background-color: #fff;
+  color: #000;
   box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
   border-radius: 25px;
   padding: 2rem;
   position: relative;
+  margin-right: 10px;
 }
 
 .home .homeAbout .aboutList ul li div {

@@ -1,14 +1,22 @@
 body {
-  /* background-color: rgb(222, 234, 246) !important; */
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+#root > div {
+  height: 100%;
+}
+
+#root > div > .wrap {
+  min-height: 100%;
 }
 
 .login_wrap {
   width: 470px;
   margin: 0 auto;
-}
-
-#root > div {
-  margin-bottom: 2rem;
 }
 
 .morpback {

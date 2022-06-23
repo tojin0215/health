@@ -1150,7 +1150,7 @@ class AssignExercise extends Component {
 
   render() {
     return (
-      <div className='assignExercise'>
+      <div className='wrap assignExercise'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

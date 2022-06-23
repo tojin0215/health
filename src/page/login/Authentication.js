@@ -10,6 +10,7 @@ import FormCheck from 'react-bootstrap/FormCheck';
 import Image from 'react-bootstrap/Image';
 
 import '../../styles/login/Authentication.css';
+import { Translate } from '@mui/icons-material';
 
 class Authentication extends Component {
   state = {

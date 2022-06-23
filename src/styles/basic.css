@@ -18,7 +18,7 @@ h2 {
 }
 
 h3 {
-  border-bottom: 1px solid #000055;
+  border-bottom: 1px solid #ebff2e;
   padding-bottom: 0.6rem;
 }
 
@@ -36,6 +36,7 @@ a {
 }
 a:hover {
   text-decoration: none;
+  color: #ebff2e;
 }
 
 p {

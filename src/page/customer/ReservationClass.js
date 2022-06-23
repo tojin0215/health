@@ -617,7 +617,7 @@ class ReservationClass extends Component {
   render() {
     // console.log(this.props.userinfo.loginWhether);
     return (
-      <div className='reservationClassWrap'>
+      <div className='wrap reservationClassWrap'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
