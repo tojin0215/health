@@ -47,6 +47,7 @@ const ExerciseView = ({
       : part === 48
       ? '유산소'
       : '기타';
+  const [stage_input, setStage_input] = useState(stage);
   const plusStage = () => {
     workoutStageInsert(
       stage,
@@ -63,72 +64,73 @@ const ExerciseView = ({
       setDefault_count_input(default_count);
       setDefault_rest_input(default_rest);
       setUrl_input(url);
-      workoutStageView();
-      alert(stageWord + '에 넣기');
+      workoutStageView(stage);
+      alert(stageWord + '에 묶음 운동이 설정되었습니다.');
     });
   };
+  console.log('stage', stage);
   const stageWord =
-    nextStage1 && stage === 111
+    stage === 111
       ? '상체 1단계'
-      : nextStage1 && stage === 112
+      : stage === 112
       ? '상체 2단계'
-      : nextStage1 && stage === 113
+      : stage === 113
       ? '상체 3단계'
-      : nextStage1 && stage === 114
+      : stage === 114
       ? '상체 4단계'
-      : nextStage1 && stage === 115
+      : stage === 115
       ? '상체 5단계'
-      : nextStage2 && stage === 211
+      : stage === 211
       ? '하체 1단계'
-      : nextStage2 && stage === 212
+      : stage === 212
       ? '하체 2단계'
-      : nextStage2 && stage === 213
+      : stage === 213
       ? '하체 3단계'
-      : nextStage2 && stage === 214
+      : stage === 214
       ? '하체 4단계'
-      : nextStage2 && stage === 215
+      : stage === 215
       ? '하체 5단계'
-      : nextStage3 && stage === 311
+      : stage === 311
       ? '전신 1단계'
-      : nextStage3 && stage === 312
+      : stage === 312
       ? '전신 2단계'
-      : nextStage3 && stage === 313
+      : stage === 313
       ? '전신 3단계'
-      : nextStage3 && stage === 314
+      : stage === 314
       ? '전신 4단계'
-      : nextStage3 && stage === 315
+      : stage === 315
       ? '전신 5단계'
-      : nextStage4 && stage === 411
+      : stage === 411
       ? '코어 1단계'
-      : nextStage4 && stage === 412
+      : stage === 412
       ? '코어 2단계'
-      : nextStage4 && stage === 413
+      : stage === 413
       ? '코어 3단계'
-      : nextStage4 && stage === 414
+      : stage === 414
       ? '코어 4단계'
-      : nextStage4 && stage === 415
+      : stage === 415
       ? '코어 5단계'
-      : nextStage5 && stage === 511
+      : stage === 511
       ? '유산소 1단계'
-      : nextStage5 && stage === 512
+      : stage === 512
       ? '유산소 2단계'
-      : nextStage5 && stage === 513
+      : stage === 513
       ? '유산소 3단계'
-      : nextStage5 && stage === 514
+      : stage === 514
       ? '유산소 4단계'
-      : nextStage5 && stage === 515
+      : stage === 515
       ? '유산소 5단계'
-      : nextStage6 && stage === 611
+      : stage === 611
       ? '기타 1단계'
-      : nextStage6 && stage === 612
+      : stage === 612
       ? '기타 2단계'
-      : nextStage6 && stage === 613
+      : stage === 613
       ? '기타 3단계'
-      : nextStage6 && stage === 614
+      : stage === 614
       ? '기타 4단계'
-      : nextStage6 && stage === 615
+      : stage === 615
       ? '기타 5단계'
-      : '';
+      : '기본';
   const [default_set_input, setDefault_set_input] = useState(default_set);
   const [default_count_input, setDefault_count_input] = useState(default_count);
   const [default_rest_input, setDefault_rest_input] = useState(default_rest);
@@ -301,6 +303,7 @@ class WorkoutStageAdd extends Component {
     });
   }
   handleOnClick = (key) => {
+    console.log('workout', this.state.stage);
     selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
@@ -342,14 +345,7 @@ class WorkoutStageAdd extends Component {
     });
   };
 
-  stageOnClick = (s) => {
-    this.setState({
-      stage: s,
-    });
-    this.workoutStageView();
-  };
-
-  workoutStageView = () => {
+  workoutStageView = (s) => {
     selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
@@ -357,7 +353,7 @@ class WorkoutStageAdd extends Component {
         this.props.userinfo.loginWhether === 1
           ? trainerResult[0].fitness_no
           : this.props.userinfo.fitness_no;
-      workoutStageSelect(fitness_no, this.state.stage).then((result) => {
+      workoutStageSelect(fitness_no, s).then((result) => {
         const items = result.map((data, index, array) => {
           return (
             <WorkoutStageView
@@ -377,49 +373,89 @@ class WorkoutStageAdd extends Component {
         this.setState({
           workoutStage: items.reverse(),
         });
+        this.handleOnClick(1);
         // console.log(items[0].props.part);
       });
     });
   };
+
+  stageOnClick = (s) => {
+    this.setState({
+      stage: s,
+    });
+    this.workoutStageView(s);
+    console.log('workoutStageView', s);
+  };
+
   stageOnClickStage = () => {
     this.stageOnClick(111);
     this.setState({
       nextStage1: true,
+      nextStage2: false,
+      nextStage3: false,
+      nextStage4: false,
+      nextStage5: false,
+      nextStage6: false,
     });
   };
   stageOnClickStage2 = () => {
     this.stageOnClick(211);
     this.setState({
       nextStage2: true,
+      nextStage1: false,
+      nextStage3: false,
+      nextStage4: false,
+      nextStage5: false,
+      nextStage6: false,
     });
   };
   stageOnClickStage3 = () => {
     this.stageOnClick(311);
     this.setState({
       nextStage3: true,
+      nextStage2: false,
+      nextStage1: false,
+      nextStage4: false,
+      nextStage5: false,
+      nextStage6: false,
     });
   };
   stageOnClickStage4 = () => {
     this.stageOnClick(411);
     this.setState({
       nextStage4: true,
+      nextStage2: false,
+      nextStage3: false,
+      nextStage1: false,
+      nextStage5: false,
+      nextStage6: false,
     });
   };
   stageOnClickStage5 = () => {
     this.stageOnClick(511);
     this.setState({
       nextStage5: true,
+      nextStage2: false,
+      nextStage3: false,
+      nextStage4: false,
+      nextStage1: false,
+      nextStage6: false,
     });
   };
   stageOnClickStage6 = () => {
     this.stageOnClick(611);
     this.setState({
       nextStage6: true,
+      nextStage2: false,
+      nextStage3: false,
+      nextStage4: false,
+      nextStage5: false,
+      nextStage1: false,
     });
   };
   render() {
-    // console.log(this.state.nextStage1);
-    console.log(this.state.stage);
+    console.log('stage', this.state.stage);
+
     return (
       <div>
         {' '}
@@ -658,24 +694,24 @@ class WorkoutStageAdd extends Component {
                 {/* <button onClick={() => this.stageOnClick(11)}>
                   1단계 기존바꿔야됨
                 </button> */}
-                <button onClick={() => this.stageOnClickStage()}>상체</button>
+                <Button onClick={() => this.stageOnClickStage()}>상체</Button>
               </div>
               <div>
-                <button onClick={() => this.stageOnClickStage2()}>하체</button>
+                <Button onClick={() => this.stageOnClickStage2()}>하체</Button>
               </div>
               <div>
-                <button onClick={() => this.stageOnClickStage3()}>전신</button>
+                <Button onClick={() => this.stageOnClickStage3()}>전신</Button>
               </div>
               <div>
-                <button onClick={() => this.stageOnClickStage4()}>코어</button>
+                <Button onClick={() => this.stageOnClickStage4()}>코어</Button>
               </div>
               <div>
-                <button onClick={() => this.stageOnClickStage5()}>
+                <Button onClick={() => this.stageOnClickStage5()}>
                   유산소
-                </button>
+                </Button>
               </div>
               <div>
-                <button onClick={() => this.stageOnClickStage6()}>기타</button>
+                <Button onClick={() => this.stageOnClickStage6()}>기타</Button>
               </div>
             </div>
           )}

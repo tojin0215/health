@@ -260,7 +260,7 @@ class WorkoutAllotedList extends Component {
               />
             );
           });
-          this.setState({ workoutAllotlist: items });
+          this.setState({ workoutAllotlist: items.reverse() });
         });
       });
     });
