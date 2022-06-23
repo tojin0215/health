@@ -152,6 +152,8 @@ class WorkoutAllotedList extends Component {
         // and notify
         alert('Your session is expired, please log in again');
       } else {
+        this.state.line === 3 ? this.inbodiesView(this.state.idc2) : '';
+        this.state.line === 3 ? this.workoutAllotedView(this.state.idc2) : '';
         this.state.line === 1 ? this.inbodiesView(this.state.idc2) : '';
         this.state.line === 1 ? this.workoutAllotedView(this.state.idc2) : '';
         this.props.userinfo.loginWhether === 2
@@ -258,19 +260,20 @@ class WorkoutAllotedList extends Component {
               />
             );
           });
-          this.setState({ workoutAllotlist: items });
+          this.setState({ workoutAllotlist: items.reverse() });
         });
       });
     });
   };
 
   render() {
+    //line은 들어오는 경로 표시 1,2,3을 보내서 받으면 어떻게 되라하는 것
     // console.log(this.state.client_name2);
     // console.log(this.props.userinfo.manager_name);
     // console.log(this.props.userinfo.loginWhether);
     // console.log(this.state.exerciseAllotlist);
-    // console.log(this.state.idc2);
-    // console.log(this.state.line);
+    console.log(this.state.idc2);
+    console.log(this.state.line);
     return (
       <div className='wrap'>
         <div className='header'>
@@ -292,7 +295,17 @@ class WorkoutAllotedList extends Component {
           </div>
         </div>
         <Container className='workoutallotedlist__container'>
-          {this.state.line === 1 ? (
+          {this.state.line === 3 ? (
+            <TextField
+              id='customer_name'
+              label='회원 검색'
+              disabled
+              variant='standard'
+              className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
+              InputProps={{ disableUnderline: true }}
+              value={this.state.client_name2}
+            />
+          ) : this.state.line === 1 ? (
             ''
           ) : this.props.userinfo.loginWhether === 2 ? (
             ''
@@ -317,7 +330,7 @@ class WorkoutAllotedList extends Component {
               value={this.state.client_name}
             />
           )}
-          {this.state.client_name ? (
+          {this.state.client_name || this.state.client_name2 ? (
             <div>
               <div>
                 {this.state.inbodiesList[0]
@@ -326,7 +339,9 @@ class WorkoutAllotedList extends Component {
               </div>
               <Row className='sectionGlass'>
                 <h3>
-                  <span className='text-primary'>{this.state.client_name}</span>
+                  <span className='text-primary'>
+                    {this.state.client_name || this.state.client_name2}
+                  </span>
                   님의 운동 배정 목록
                 </h3>
                 <Table>

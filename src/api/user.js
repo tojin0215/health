@@ -516,19 +516,17 @@ export const workoutAllotedInsert = (
   default_rest,
   url
 ) => {
-  return axios
-    .post(`${SERVER_URL}/workoutAlloted`, {
-      fitness_no: fitness_no,
-      client_no: client_no,
-      workout: workout,
-      region: region,
-      machine: machine,
-      default_set: default_set,
-      default_count: default_count,
-      default_rest: default_rest,
-      url: url,
-    })
-    .then((response) => response.data);
+  return axios.post(`${SERVER_URL}/workoutAlloted`, {
+    fitness_no: fitness_no,
+    client_no: client_no,
+    workout: workout,
+    region: region,
+    machine: machine,
+    default_set: default_set,
+    default_count: default_count,
+    default_rest: default_rest,
+    url: url,
+  });
 };
 
 //workoutAlloted delete
