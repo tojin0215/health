@@ -198,7 +198,7 @@ class WorkoutAllotedList extends Component {
               return (
                 <InbodiesView
                   client_name={
-                    this.state.line === 1
+                    this.state.line === 1 || this.state.line === 3
                       ? this.state.client_name2
                       : this.props.userinfo.loginWhether === 2
                       ? this.props.userinfo.manager_name
