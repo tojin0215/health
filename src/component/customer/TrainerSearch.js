@@ -47,11 +47,10 @@ const UserSearchTableItem = ({ c, handleSelectUser }) => (
     <TableCell>
       <DialogActions className='p-0'>
         <Button
-          type='button'
           onClick={handleSelectUser}
           id={c.idx}
           value={[c.trainer_name, c.phone]}
-          variant='outline-primary'
+          variant='primary'
         >
           선택
         </Button>
@@ -118,7 +117,7 @@ const TrainerSearch = ({ open, setOpen, fitness_no, handleUser }) => {
           <Col xs={3}>
             <Button
               className='w-100 h-100'
-              type='button'
+              variant='primary'
               onClick={handleOnSearch}
             >
               검색

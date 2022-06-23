@@ -12,6 +12,7 @@ body {
 
 #root > div > .wrap {
   min-height: 100%;
+  position: relative;
 }
 
 .login_wrap {
@@ -33,7 +34,7 @@ body {
 }
 
 .boxmorpinsm {
-  background-color: #222;
+  /* background-color: #222; */
   box-shadow: rgb(60, 60, 60) 5px 5px 10px 0px inset,
     rgb(60, 60, 60) -5px -5px 10px 0px inset;
   -webkit-box-shadow: rgb(60, 60, 60) 5px 5px 10px 0px inset,
@@ -135,11 +136,6 @@ body {
     -9px -9px 16px rgba(255, 255, 255, 0.5);
 }
 
-html,
-body {
-  height: 100%;
-}
-
 #root > div > div {
   position: relative;
   padding-bottom: 350px;
@@ -195,10 +191,11 @@ h6 .circle {
 }
 
 .sectionGlass {
+  background-color: #222;
   border-radius: 2.5rem;
   padding: 4rem 3rem;
   margin-top: 3rem;
-  box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
+  box-shadow: 6px 4px 11px rgba(65, 65, 65, 0.75);
 }
 
 @media (max-width: 767px) {

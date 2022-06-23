@@ -5,7 +5,6 @@ import { Nav, Navbar, Container } from 'react-bootstrap';
 import { logoutRequest } from '../../action/authentication';
 
 import Button from 'react-bootstrap/Button';
-import 'bootstrap/dist/css/bootstrap.css';
 import styles from './Navigation.css';
 //web
 class Navigation extends Component {
@@ -37,7 +36,7 @@ class Navigation extends Component {
       //2:회원, 1:강사, else(0):헬스장
       <div className='Navigation'>
         {userinfo.loginWhether === 2 ? (
-          <Navbar className={styles.navbar}>
+          <Navbar bg='dark'>
             <Nav className='mr-auto dropdownNav navitem'>
               <Nav.Item>
                 <span className={styles.navitem}>회원</span>
@@ -93,14 +92,14 @@ class Navigation extends Component {
                 {userinfo.manager_name}
               </Navbar.Brand>
               <Nav.Item className='align-self-center'>
-                <Button variant='outline-light' onClick={this.handleLogout}>
+                <Button variant='outline-dark' onClick={this.handleLogout}>
                   LOG-OUT
                 </Button>
               </Nav.Item>
             </Nav>
           </Navbar>
         ) : userinfo.loginWhether === 1 ? (
-          <Navbar className={styles.navbar}>
+          <Navbar bg='dark'>
             <Nav className='mr-auto dropdownNav navitem'>
               <Nav.Item>
                 <span className={styles.navitem}>강사</span>
@@ -205,14 +204,14 @@ class Navigation extends Component {
                 {userinfo.manager_name}
               </Navbar.Brand>
               <Nav.Item className='align-self-center'>
-                <Button variant='outline-light' onClick={this.handleLogout}>
+                <Button variant='outline-dark' onClick={this.handleLogout}>
                   LOG-OUT
                 </Button>
               </Nav.Item>
             </Nav>
           </Navbar>
         ) : (
-          <Navbar className={styles.navbar}>
+          <Navbar bg='dark'>
             <Nav className='mr-auto dropdownNav navitem'>
               <Nav.Item>
                 <span className={styles.navitem}>센터</span>
@@ -374,7 +373,7 @@ class Navigation extends Component {
                 </NavLink>
               ) : null} */}
             </Nav>
-            <Nav className={styles.navUtill}>
+            <Nav>
               <Navbar.Brand className='' href='/home'>
                 {userinfo.manager_name}
               </Navbar.Brand>

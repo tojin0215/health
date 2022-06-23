@@ -209,7 +209,7 @@ const ViewClientItem = ({
           {showUpdate ? (
             <Button onClick={() => updateCompleted(idc)}>수정 완료</Button>
           ) : (
-            <Button onClick={modalUpdate} variant='outline-primary'>
+            <Button onClick={modalUpdate} variant='primary'>
               정보 수정
             </Button>
           )}

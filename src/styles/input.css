@@ -92,17 +92,20 @@ html .MuiInputLabel-outlined {
 */
 #customer_name {
   cursor: pointer;
-  -webkit-text-fill-color: #000;
+
   font-weight: bold;
 }
 #customer_name-label {
   text-indent: 2rem;
+}
+.tab-content {
+  background-color: #fff;
 }
 /**
 * 강사 검색
 */
 #trainer {
   cursor: pointer;
-  -webkit-text-fill-color: #000;
+  -webkit-text-fill-color: #fff;
   font-weight: bold;
 }

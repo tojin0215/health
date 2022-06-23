@@ -1698,10 +1698,14 @@ class Reservation extends Component {
                     <table class='table text-center reservationListTable mt-5'>
                       <thead>
                         <tr>
-                          <th scope='col'>회원이름</th>
+                          <th scope='col'>
+                            <Button variant='dark' className='w-100 fw-bold'>
+                              회원이름
+                            </Button>
+                          </th>
                           <th scope='col'>
                             <Button
-                              variant='ouline-ligth'
+                              variant='secondary'
                               className='w-100 fw-bold'
                               onClick={() => this.handleDate()}
                             >
@@ -1710,7 +1714,7 @@ class Reservation extends Component {
                           </th>
                           <th scope='col'>
                             <Button
-                              variant='ouline-ligth'
+                              variant='secondary'
                               className='w-100 fw-bold'
                               onClick={() => this.handleExercise()}
                             >
@@ -1719,18 +1723,30 @@ class Reservation extends Component {
                           </th>
                           <th scope='col'>
                             <Button
-                              variant='ouline-ligth'
+                              variant='secondary'
                               className='w-100 fw-bold'
                               onClick={() => this.handleTrainer()}
                             >
                               강사 <ImSortAlphaAsc />
                             </Button>
                           </th>
-                          <th scope='col'>인원수</th>
-                          <th scope='col'>시간</th>
+                          <th scope='col'>
+                            <Button variant='dark' className='w-100 fw-bold'>
+                              인원수
+                            </Button>
+                          </th>
+                          <th scope='col'>
+                            <Button variant='dark' className='w-100 fw-bold'>
+                              시간
+                            </Button>
+                          </th>
                           {/* <th scope='col'>상태</th>
 										<th scope='col'>취소사유</th> */}
-                          <th scope='col'>삭제</th>
+                          <th scope='col'>
+                            <Button variant='dark' className='w-100 fw-bold'>
+                              삭제
+                            </Button>
+                          </th>
                         </tr>
                       </thead>
                       {this.state.show_exercise_table &&

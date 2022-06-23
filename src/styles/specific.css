@@ -127,10 +127,18 @@
 .card-header {
   background-color: rgba(0, 0, 0, 0.85);
 }
+.card-footer:last-child {
+  background-color: #222;
+  color: #999;
+}
 /* bootstrap modal */
 .modal-header {
-  background-color: #222;
-  border-color: #333;
+  /* background-color: #222;
+  border-color: #333; */
+}
+.modal-content {
+  /* background-color: #222; */
+  color: #111;
 }
 .close {
   padding: 8px;
@@ -149,11 +157,28 @@
   display: none;
 }
 
+/* bootstrap nav */
+.nav-link {
+  color: unset;
+}
+.nav-link:hover {
+  color: unset;
+}
+
+/* mui table */
+.MuiTable-root {
+  /* color: #222; */
+}
+.MuiTableRow-root {
+  background-color: #fff;
+}
+
 td > div {
-  background-color: #333;
+  /* background-color: #333; */
 }
 
 .table {
+  background-color: #222;
   color: #fff;
 }
 

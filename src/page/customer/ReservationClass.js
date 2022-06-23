@@ -626,13 +626,15 @@ class ReservationClass extends Component {
             <div className='container'>
               <h2>
                 <div className='parallelogram'></div>
-                운동 설정하기
+                수업 만들기
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/reservationClass'>운동 설정하기</Link>
+                <Link to='/reservation'>수업</Link>
+                <span>&#62;</span>
+                <Link to='/reservationClass'>수업 만들기</Link>
               </div>
               {/*.breadCrumb */}
             </div>
@@ -941,7 +943,7 @@ class ReservationClass extends Component {
               sm={3}
               lg={3}
             >
-              <label className='boxmorpinsm d-block w-100'>
+              <label className='boxmorpsm d-block w-100 bg-white'>
                 <TextField
                   id='exercise_class'
                   variant='standard'
@@ -990,7 +992,7 @@ class ReservationClass extends Component {
                         error={this.state.trainer_err}
                         variant='standard'
                         disabled
-                        className='boxmorpsm boxmorpinsm w-100'
+                        className='boxmorpsm w-100 bg-white'
                         style={{
                           cursor: 'pointer',
                         }}
@@ -1004,7 +1006,7 @@ class ReservationClass extends Component {
             <Col className='text-center height-fit-content' xs={12} sm={4}>
               <label className='d-block w-100'>
                 <DatePicker
-                  className='boxmorpinsm text-center w-100 border-0'
+                  className='boxmorpsm text-center w-100 border-0'
                   selected={this.state.class_date}
                   onChange={this.handleDateChange}
                   name='class_date'
@@ -1020,7 +1022,7 @@ class ReservationClass extends Component {
             <Col className=' px-1' xs={12} sm={2} lg={2}>
               <Row className=''>
                 <Col className='pe-0 height-fit-content'>
-                  <label className='d-block w-100 boxmorpinsm'>
+                  <label className='d-block w-100 boxmorpsm  bg-white'>
                     <TextField
                       className=''
                       type='number'
@@ -1041,7 +1043,7 @@ class ReservationClass extends Component {
                   <span className='fs-5 fw-bold'>:</span>
                 </Col>
                 <Col className='text-center ps-0 height-fit-content'>
-                  <label className='d-block w-100 boxmorpinsm'>
+                  <label className='d-block w-100 boxmorpsm bg-white'>
                     <TextField
                       className=''
                       type='number'
@@ -1058,7 +1060,7 @@ class ReservationClass extends Component {
               </Row>
             </Col>
             <Col className='text-center height-fit-content' xs={12} sm={4}>
-              <label className='boxmorpinsm d-block w-100'>
+              <label className='boxmorpsm d-block w-100 bg-white'>
                 <TextField
                   className=''
                   type='number'

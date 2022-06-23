@@ -97,11 +97,14 @@
   justify-content: space-around;
   flex-wrap: wrap;
   width: 100%;
-  padding: 0 10rem;
 }
 
 .home .homeIcon ul li {
   width: 16%;
+}
+.home .homeIcon ul li p {
+  padding-top: 4px;
+  text-align: center;
 }
 
 .home .homeIcon a {

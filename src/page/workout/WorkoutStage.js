@@ -1,6 +1,6 @@
 import { Menu, TableCell, TableHead, TableRow, TextField } from '@mui/material';
 import { Component } from 'react';
-import { Button, Col, Container, Table } from 'react-bootstrap';
+import { Button, Row, Col, Container, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
@@ -408,7 +408,7 @@ class WorkoutStage extends Component {
               disabled
               variant='standard'
               onClick={() => this.setState({ open: true })}
-              className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
+              className='boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5'
               InputProps={{ disableUnderline: true }}
               value={this.state.client_name}
             />
@@ -416,22 +416,65 @@ class WorkoutStage extends Component {
 
           {this.state.nextStage1 ? (
             <div>
-              <div>
-                <Button onClick={() => this.stageOnClick(111)}>1</Button>
-                <Button onClick={() => this.stageOnClick(112)}>2</Button>
-                <Button onClick={() => this.stageOnClick(113)}>3</Button>
-                <Button onClick={() => this.stageOnClick(114)}>4</Button>
-                <Button onClick={() => this.stageOnClick(115)}>5</Button>
-              </div>
-              <Link
-                to={{
-                  pathname: '/workoutStage',
-                }}
-                onClick={() => this.setState({ nextStage1: '' })}
-              >
-                다시단계선택하기
-              </Link>
-              <Button onClick={this.alloted}>묶음 운동 배정하기</Button>
+              <Row xs={5} className='mt-3'>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(111)}
+                  >
+                    1
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(112)}
+                  >
+                    2
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(113)}
+                  >
+                    3
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(114)}
+                  >
+                    4
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(115)}
+                  >
+                    5
+                  </Button>
+                </Col>
+              </Row>
+              <Row className='my-2'>
+                <Col>
+                  <Button variant='outline-secondary'>
+                    <Link
+                      to={{
+                        pathname: '/workoutStage',
+                      }}
+                      onClick={() => this.setState({ nextStage1: '' })}
+                    >
+                      초기화
+                    </Link>
+                  </Button>
+                </Col>
+                <Col>
+                  <Button onClick={this.alloted}>묶음 운동 배정하기</Button>
+                </Col>
+              </Row>
               <Col xs={12}>
                 <Table>
                   <TableHead>
@@ -452,13 +495,48 @@ class WorkoutStage extends Component {
             </div>
           ) : this.state.nextStage2 ? (
             <div>
-              <div>
-                <Button onClick={() => this.stageOnClick(211)}>1</Button>
-                <Button onClick={() => this.stageOnClick(212)}>2</Button>
-                <Button onClick={() => this.stageOnClick(213)}>3</Button>
-                <Button onClick={() => this.stageOnClick(214)}>4</Button>
-                <Button onClick={() => this.stageOnClick(215)}>5</Button>
-              </div>
+              <Row xs={5} className='mt-3'>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(211)}
+                  >
+                    1
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(212)}
+                  >
+                    2
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(213)}
+                  >
+                    3
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(214)}
+                  >
+                    4
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(215)}
+                  >
+                    5
+                  </Button>
+                </Col>
+              </Row>
               <Link
                 to={{
                   pathname: '/workoutStage',
@@ -487,13 +565,48 @@ class WorkoutStage extends Component {
             </div>
           ) : this.state.nextStage3 ? (
             <div>
-              <div>
-                <Button onClick={() => this.stageOnClick(311)}>1</Button>
-                <Button onClick={() => this.stageOnClick(312)}>2</Button>
-                <Button onClick={() => this.stageOnClick(313)}>3</Button>
-                <Button onClick={() => this.stageOnClick(314)}>4</Button>
-                <Button onClick={() => this.stageOnClick(315)}>5</Button>
-              </div>
+              <Row xs={5} className='mt-3'>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(311)}
+                  >
+                    1
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(312)}
+                  >
+                    2
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(313)}
+                  >
+                    3
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(314)}
+                  >
+                    4
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(315)}
+                  >
+                    5
+                  </Button>
+                </Col>
+              </Row>
               <Link
                 to={{
                   pathname: '/workoutStage',
@@ -522,13 +635,48 @@ class WorkoutStage extends Component {
             </div>
           ) : this.state.nextStage4 ? (
             <div>
-              <div>
-                <Button onClick={() => this.stageOnClick(411)}>1</Button>
-                <Button onClick={() => this.stageOnClick(412)}>2</Button>
-                <Button onClick={() => this.stageOnClick(413)}>3</Button>
-                <Button onClick={() => this.stageOnClick(414)}>4</Button>
-                <Button onClick={() => this.stageOnClick(415)}>5</Button>
-              </div>
+              <Row xs={5} className='mt-3'>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(411)}
+                  >
+                    1
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(412)}
+                  >
+                    2
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(413)}
+                  >
+                    3
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(414)}
+                  >
+                    4
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(415)}
+                  >
+                    5
+                  </Button>
+                </Col>
+              </Row>
               <Link
                 to={{
                   pathname: '/workoutStage',
@@ -557,13 +705,48 @@ class WorkoutStage extends Component {
             </div>
           ) : this.state.nextStage5 ? (
             <div>
-              <div>
-                <Button onClick={() => this.stageOnClick(511)}>1</Button>
-                <Button onClick={() => this.stageOnClick(512)}>2</Button>
-                <Button onClick={() => this.stageOnClick(513)}>3</Button>
-                <Button onClick={() => this.stageOnClick(514)}>4</Button>
-                <Button onClick={() => this.stageOnClick(515)}>5</Button>
-              </div>
+              <Row xs={5} className='mt-3'>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(511)}
+                  >
+                    1
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(512)}
+                  >
+                    2
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(513)}
+                  >
+                    3
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(514)}
+                  >
+                    4
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(515)}
+                  >
+                    5
+                  </Button>
+                </Col>
+              </Row>
               <Link
                 to={{
                   pathname: '/workoutStage',
@@ -592,13 +775,48 @@ class WorkoutStage extends Component {
             </div>
           ) : this.state.nextStage6 ? (
             <div>
-              <div>
-                <Button onClick={() => this.stageOnClick(611)}>1</Button>
-                <Button onClick={() => this.stageOnClick(612)}>2</Button>
-                <Button onClick={() => this.stageOnClick(613)}>3</Button>
-                <Button onClick={() => this.stageOnClick(614)}>4</Button>
-                <Button onClick={() => this.stageOnClick(615)}>5</Button>
-              </div>
+              <Row xs={5} className='mt-3'>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(611)}
+                  >
+                    1
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(612)}
+                  >
+                    2
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(613)}
+                  >
+                    3
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(614)}
+                  >
+                    4
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClick(615)}
+                  >
+                    5
+                  </Button>
+                </Col>
+              </Row>
               <Link
                 to={{
                   pathname: '/workoutStage',
@@ -626,31 +844,59 @@ class WorkoutStage extends Component {
               </Col>
             </div>
           ) : (
-            <div>
-              <div>
+            <Row xs={6} className='mt-3'>
+              <Col>
                 {/* <button onClick={() => this.stageOnClick(11)}>
                   1단계 기존바꿔야됨
                 </button> */}
-                <Button onClick={() => this.stageOnClickStage()}>상체</Button>
-              </div>
-              <div>
-                <Button onClick={() => this.stageOnClickStage2()}>하체</Button>
-              </div>
-              <div>
-                <Button onClick={() => this.stageOnClickStage3()}>전신</Button>
-              </div>
-              <div>
-                <Button onClick={() => this.stageOnClickStage4()}>코어</Button>
-              </div>
-              <div>
-                <Button onClick={() => this.stageOnClickStage5()}>
+                <Button
+                  className='w-100'
+                  onClick={() => this.stageOnClickStage()}
+                >
+                  상체
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  className='w-100'
+                  onClick={() => this.stageOnClickStage2()}
+                >
+                  하체
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  className='w-100'
+                  onClick={() => this.stageOnClickStage3()}
+                >
+                  전신
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  className='w-100'
+                  onClick={() => this.stageOnClickStage4()}
+                >
+                  코어
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  className='w-100'
+                  onClick={() => this.stageOnClickStage5()}
+                >
                   유산소
                 </Button>
-              </div>
-              <div>
-                <Button onClick={() => this.stageOnClickStage6()}>기타</Button>
-              </div>
-            </div>
+              </Col>
+              <Col>
+                <Button
+                  className='w-100'
+                  onClick={() => this.stageOnClickStage6()}
+                >
+                  기타
+                </Button>
+              </Col>
+            </Row>
           )}
         </Container>
         <div className='footer'>

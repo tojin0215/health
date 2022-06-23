@@ -283,28 +283,6 @@ class Home extends Component {
           </div>
           <Row xs={5}>
             <Col>
-              <Image thumbnail src={btnCustomer}></Image>
-              <h5>고객</h5>
-            </Col>
-            <Col>
-              <Image thumbnail src={btnSetting}></Image>
-              <h5>수업</h5>
-            </Col>
-            <Col>
-              <Image thumbnail src={btnExercise}></Image>
-              <h5>운동 설정</h5>
-            </Col>
-            <Col>
-              <Image thumbnail src={btnSales}></Image>
-              <h5>운동 배정</h5>
-            </Col>
-            <Col>
-              <Image thumbnail src={aboutManage}></Image>
-              <h5>상품 매출</h5>
-            </Col>
-          </Row>
-          <Row xs={5}>
-            <Col>
               <Card className='text-center'>
                 <Card.Img variant='top' src={btnCustomer} />
                 <Card.Body>
@@ -362,6 +340,7 @@ class Home extends Component {
                   className='btnCustomerNew btnCustomer'
                   style={{
                     backgroundImage: `url(${btnCustomer})`,
+                    backgroundColor: '#fff',
                   }}
                 ></Link>
                 <p>고객</p>
@@ -372,6 +351,7 @@ class Home extends Component {
                   className='btnCustomerNew btnSetting'
                   style={{
                     backgroundImage: `url(${btnSetting})`,
+                    backgroundColor: '#fff',
                   }}
                 ></Link>
                 <p>운동 설정</p>
@@ -382,6 +362,7 @@ class Home extends Component {
                   className='btnCustomerNew btnExercise'
                   style={{
                     backgroundImage: `url(${btnExercise})`,
+                    backgroundColor: '#fff',
                   }}
                 ></Link>
                 <p>운동 배정</p>
@@ -392,6 +373,7 @@ class Home extends Component {
                   className='btnCustomerNew btnSales'
                   style={{
                     backgroundImage: `url(${btnSales})`,
+                    backgroundColor: '#fff',
                   }}
                 ></Link>
                 <p>상품매출</p>
@@ -402,6 +384,7 @@ class Home extends Component {
                   className='btnCustomerNew btnStatic'
                   style={{
                     backgroundImage: `url(${btnStatic})`,
+                    backgroundColor: '#fff',
                   }}
                 ></Link>
                 <p>통계</p>
@@ -413,6 +396,7 @@ class Home extends Component {
                     className='btnCustomerNew btnStatic'
                     style={{
                       backgroundImage: `url(${aboutManage})`,
+                      backgroundColor: '#fff',
                     }}
                   ></Link>
                   <p>관리자</p>

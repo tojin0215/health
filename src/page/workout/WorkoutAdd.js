@@ -513,7 +513,7 @@ class WorkoutAdd extends Component {
               </Button>
             </Col>
           </Row>
-          <Table>
+          <Table className='mt-2'>
             <TableHead>
               <TableRow>
                 <TableCell scope='col'>운동 부위</TableCell>

@@ -466,7 +466,7 @@ class WorkoutAlloted extends Component {
               disabled
               variant='standard'
               onClick={() => this.setState({ open: true })}
-              className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
+              className='boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5'
               InputProps={{ disableUnderline: true }}
               value={this.state.client_name}
             />
@@ -548,7 +548,7 @@ class WorkoutAlloted extends Component {
                     기타
                   </Button>
                 </Col>
-                <Col xs={12}>
+                <Col xs={12} className='mt-2'>
                   <Table>
                     <TableHead>
                       <TableRow>

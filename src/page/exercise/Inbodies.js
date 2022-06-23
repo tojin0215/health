@@ -647,7 +647,7 @@ class Inbodies extends Component {
                     disabled
                     variant='standard'
                     onClick={() => this.setState({ open: true })}
-                    className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
+                    className='boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5'
                     InputProps={{ disableUnderline: true }}
                     value={this.state.client_name}
                     style={{ cursor: 'pointer' }}

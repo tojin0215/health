@@ -59,7 +59,7 @@ const UserSearchTableItem = ({ c, handleSelectUser }) => (
           onClick={handleSelectUser}
           id={c.idc}
           value={[c.client_name, c.phone]}
-          variant='outline-primary'
+          variant='primary'
         >
           선택
         </Button>
