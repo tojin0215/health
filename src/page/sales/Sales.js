@@ -42,57 +42,6 @@ var moment = require('moment');
 
 moment.tz.setDefault('Asia/Seoul');
 
-const options = [
-  { value: 'all', label: '전체' },
-  { value: 'card', label: '카드' },
-  { value: 'cash', label: '현금' },
-  { value: 'transfer', label: '계좌이체' },
-];
-
-const exerciseOptions = [
-  { value: 'all', label: '전체' },
-  { value: 'pt', label: '개인 PT' },
-  { value: 'gx', label: 'GX' },
-  { value: 'Pilates', label: '필라테스' },
-  { value: 'health', label: '헬스' },
-  { value: 'exc', label: '기타' },
-];
-
-function dataFormatter(cell, row) {
-  return ` ${cell}`.substring(0, 11);
-}
-
-function PriceFormatter(cell, row) {
-  return (
-    ` ${cell}`.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') + '원'
-  );
-}
-/**회원권 회(단위) */
-function membershipFormatter(cell, row) {
-  if (cell == 'null' || cell == '0' || !cell) {
-    return '-';
-  } else {
-    return `${cell}` + '회';
-  }
-}
-/**기간제날짜 */
-function salesdateFormatter(cell, row) {
-  if (cell) {
-    return `${cell}`.split('T')[0];
-  } else {
-    return '-';
-  }
-}
-
-/**기간제 일수 */
-function daysFormatter(cell, row) {
-  if (cell == 'null' || cell == '0' || !cell) {
-    return '-';
-  } else {
-    return ` ${cell}` + '일';
-  }
-}
-
 const ViewsalesItem = ({
   num,
   fitness_no,
@@ -201,29 +150,13 @@ const ToolsSalesItem = ({
   );
 };
 
-const CashItem = ({
-  num,
-  fitness_no,
-  client_name,
-  exerciseName,
-  exercisePrice,
-  lockerPrice,
-  sportswearPrice,
-  paymentTools,
-  paymentDate,
-  paidMembership,
-  salesStart_date,
-  salesDays,
-}) => {
-  const allPrice = exercisePrice + lockerPrice + sportswearPrice;
-
+const CashItem = ({ card, cash, transfer, total }) => {
   return (
     <TableRow>
-      {/* <TableCell>{num}</TableCell> */}
-      <TableCell>{exercisePrice}</TableCell>
-      <TableCell>{lockerPrice}</TableCell>
-      <TableCell>{sportswearPrice}</TableCell>
-      <TableCell>{allPrice}</TableCell>
+      <TableCell>{card}</TableCell>
+      <TableCell>{cash}</TableCell>
+      <TableCell>{transfer}</TableCell>
+      <TableCell>{total}</TableCell>
     </TableRow>
   );
 };
@@ -363,31 +296,31 @@ class Sales extends Component {
   cashView = () => {
     salesSelect(this.props.userinfo.fitness_no).then((res) => {
       const items = res.map((data, index, array) => {
+        const total =
+          data.exercisePrice + data.lockerPrice + data.sportswearPrice;
+        const card = data.paymentTools === '카드' ? total : '';
+        const cash = data.paymentTools === '현금' ? total : '';
+        const transfer = data.paymentTools === '계좌이체' ? total : '';
+
+        console.log('card', card);
         return (
           <CashItem
-            num={data.num}
-            fitness_no={data.fitness_no}
-            client_name={data.client_name}
-            exerciseName={data.exerciseName}
-            exercisePrice={data.exercisePrice}
-            lockerPrice={data.lockerPrice}
-            sportswearPrice={data.sportswearPrice}
-            paymentTools={data.paymentTools}
-            paymentDate={data.paymentDate}
-            paidMembership={data.paidMembership}
-            salesStart_date={data.salesStart_date}
-            salesDays={data.salesDays}
+            card={card}
+            cash={cash}
+            transfer={transfer}
+            total={card + cash + transfer}
           />
         );
       });
-      this.setState({ cashViewList: items.reverse() });
+      this.setState({ cashViewList: items });
     });
   };
 
   render() {
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.salesViewList);
-    console.log(this.state.exerciseViewList);
+    // console.log(this.state.exerciseViewList);
+    console.log(this.state.cashViewList);
 
     return (
       <div className='wrap sales'>
