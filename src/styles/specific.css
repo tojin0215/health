@@ -155,6 +155,7 @@ td > div {
 
 .table {
   color: #fff;
+  background-color: #fff;
 }
 
 @media (max-width: 767px) {

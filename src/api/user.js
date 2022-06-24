@@ -106,10 +106,14 @@ export const getCustomerByMemberNo = (member_no, fn) => {
     })
     .then((response) => response.data);
 };
-export const getSalesTypeCustomerByMemberNo = (member_no, fn) => {
+export const getSalesTypeCustomerByMemberNo = (member_no, fitness_no) => {
   return axios
     .get(`${SERVER_URL}/sales`, {
-      params: { type: 'customer', member_no: member_no, fn: fn },
+      params: {
+        type: 'customer',
+        member_no: member_no,
+        fitness_no: fitness_no,
+      },
     })
     .then((response) => response.data);
 };
@@ -586,4 +590,36 @@ export const workoutStageInsert = (
     default_rest: default_rest,
     url: url,
   });
+};
+//sales select
+export const salesSelect = (fitness_no) => {
+  return axios
+    .get(`${SERVER_URL}/sales?type=all&fitness_no=` + fitness_no, {})
+    .then((response) => response.data);
+};
+
+//sales select exercise
+export const salesSelectExercise = (fitness_no, exerciseName) => {
+  return axios
+    .get(
+      `${SERVER_URL}/sales?type=exercise&fitness_no=` +
+        fitness_no +
+        '&exerciseName=' +
+        exerciseName,
+      {}
+    )
+    .then((response) => response.data);
+};
+
+//sales select tools
+export const salesSelectTools = (fitness_no, paymentTools) => {
+  return axios
+    .get(
+      `${SERVER_URL}/sales?type=tools&fitness_no=` +
+        fitness_no +
+        '&paymentTools=' +
+        paymentTools,
+      {}
+    )
+    .then((response) => response.data);
 };

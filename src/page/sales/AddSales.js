@@ -34,6 +34,7 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 
 import DatePicker from 'react-datepicker';
+import UserSearch from '../../component/customer/UserSearch';
 // locale 오류로 임시 삭제
 // import DatePicker, { registerLocale } from 'react-datepicker';
 // import ko from 'date-fns/locale/ko';
@@ -65,6 +66,7 @@ class AddSales extends Component {
       //isChecked:false,
       paymentDate: new Date(),
       exerciseName: [],
+      client_name: '회원',
       inputExercise: '',
       exercisePrice: 0,
       //locker:0,
@@ -75,7 +77,6 @@ class AddSales extends Component {
       paymentTools: '',
       open: false,
       //searchKeyword:'',
-      userName: '회원',
       customerList: [],
       search: '',
       item: options[0],
@@ -239,7 +240,7 @@ class AddSales extends Component {
 
     console.log('***********paymentDate : ', this.state.paymentDate);
     console.log(this.state);
-    if (this.state.userName === '회원') {
+    if (this.state.client_name === '회원') {
       alert('회원을 선택해주세요.');
     } else {
       fetch(ip + '/sales', {
@@ -249,7 +250,7 @@ class AddSales extends Component {
         },
         body: JSON.stringify({
           fitness_no: this.state.fitness_no,
-          member_no: this.state.member_no,
+          client_name: this.state.client_name,
           exerciseName: ex,
           exercisePrice: exercisePrice1,
           lockerPrice: lockerPrice1,
@@ -258,15 +259,15 @@ class AddSales extends Component {
           paymentDate: this.state.paymentDate,
           paidMembership:
             this.state.checkboxGroup['paidMembershipCheckbox'] == false
-              ? '0'
+              ? ''
               : this.state.paidMembership,
           salesStart_date:
             this.state.checkboxGroup['salesDaysCheckbox'] == false
-              ? 'null'
+              ? ''
               : this.state.salesStart_date,
           salesDays:
             this.state.checkboxGroup['salesDaysCheckbox'] == false
-              ? 'null'
+              ? ''
               : this.state.salesDays,
         }),
       })
@@ -276,62 +277,6 @@ class AddSales extends Component {
           console.log(response);
         });
       this.props.history.push('/sales');
-    }
-  };
-
-  choiceUser = (e) => {
-    console.log('value', e.target.value);
-    let values = e.target.value.split(',');
-
-    this.setState({
-      userName: values[0],
-      member_no: e.target.id,
-      open: false,
-    });
-    alert('선택하셨습니다.');
-  };
-
-  search = () => {
-    let it = '0';
-    if (this.state.item === '이름') {
-      it = '0';
-    } else if (this.state.item === '핸드폰') {
-      it = '1';
-    }
-    fetch(
-      ip +
-        '/customer?type=search' +
-        it +
-        '&search=' +
-        this.state.search +
-        '&fn=' +
-        this.props.userinfo.fitness_no,
-      {
-        method: 'GET',
-        headers: {
-          'Content-type': 'application/json',
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((res) => {
-        let arr = [];
-        for (let i = 0; i < res.length; i++) {
-          arr.push({
-            no: res[i].member_no,
-            userName: res[i].name,
-            phone: res[i].phone,
-          });
-        }
-        this.setState({ customerList: arr });
-      });
-  };
-
-  selectItem = (e) => {
-    if (e.value == '이름') {
-      this.setState({ item: '이름' });
-    } else if (e.value == '핸드폰') {
-      this.setState({ item: '핸드폰' });
     }
   };
 
@@ -347,11 +292,22 @@ class AddSales extends Component {
     });
   };
 
+  handleUser = (client) => {
+    const { idc, client_name } = client;
+    // console.log(client_name);
+
+    this.setState({
+      client: client,
+      client_name: client_name,
+      idc: idc,
+      open: false,
+    });
+  };
+
   render() {
-    console.log('___', this.state.customerList);
+    // console.log('___', this.state.customerList);
     const { userinfo } = this.props;
-    console.log('userinfo : ');
-    console.log(userinfo);
+    // console.log(userinfo);
 
     return (
       <div className='wrap addSales'>
@@ -381,89 +337,31 @@ class AddSales extends Component {
         {/*.header */}
         <Container>
           <h2>상품 등록페이지</h2>
-          <div>
-            <Button type='button' onClick={this.handleClickOpen}>
-              회원검색
-            </Button>
-            <Dialog
+          {this.state.open ? (
+            <UserSearch
               open={this.state.open}
-              onClose={this.handleClose}
-              maxWidth='lg'
-            >
-              <DialogTitle>고객 검색</DialogTitle>
-              <DialogContent>
-                {/* <label>이름을 입력해주세요</label>
-                            <input type="search" className="form-control" placeholder="김투진" name="searchKeyword" value={this.state.searchKeyword} onChange={this.handleValueChange}/> */}
-                <div className='customerSearch'>
-                  <Dropdown
-                    className='searchDrop'
-                    options={options}
-                    onChange={this.selectItem}
-                    value={this.state.item}
-                    placeholder='Select an option'
-                  />
-                  {/*.searchDrop */}
-                  <input
-                    type='text'
-                    id='search'
-                    checked={this.state.search}
-                    onChange={this.handleChange}
-                  />
-                  <Button type='button' onClick={this.search}>
-                    고객 검색
-                  </Button>
-                </div>
-                {/*.customerSearch */}
-                <Table className='addsalesSearchTable'>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>번호</TableCell>
-                      <TableCell>이름</TableCell>
-                      <TableCell>폰번호</TableCell>
-                      <TableCell>선택</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.customerList ? (
-                      //filteredComponents(this.state.customerList)
-                      this.state.customerList.map((c) => (
-                        <TableRow>
-                          <TableCell>{c.no}</TableCell>
-                          <TableCell>{c.userName}</TableCell>
-                          <TableCell>{c.phone}</TableCell>
-                          <TableCell>
-                            <DialogActions>
-                              <button
-                                type='button'
-                                onClick={this.choiceUser}
-                                id={c.no}
-                                value={[c.userName, c.phone]}
-                              >
-                                선택
-                              </button>
-                            </DialogActions>
-                          </TableCell>
-                        </TableRow>
-                      ))
-                    ) : (
-                      <TableRow>
-                        <TableCell colSpan='6' align='center'></TableCell>
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </Table>
-              </DialogContent>
-              <DialogActions>
-                <button type='button' onClick={this.handleClose}>
-                  닫기
-                </button>
-              </DialogActions>
-            </Dialog>
-          </div>
+              setOpen={(o) => this.setState({ open: o })}
+              fitness_no={this.props.userinfo.fitness_no}
+              loginWhether={this.props.userinfo.loginWhether}
+              joinNo={this.props.userinfo.joinNo}
+              handleUser={this.handleUser}
+            />
+          ) : (
+            <TextField
+              id='customer_name'
+              label='회원 검색'
+              disabled
+              variant='standard'
+              onClick={() => this.setState({ open: true })}
+              className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
+              InputProps={{ disableUnderline: true }}
+              value={this.state.client_name}
+            />
+          )}
           {/* <Link to="/sales">회원 검색</Link><br/> */}
           <form className='AddSalesForm productPay'>
             <label className='salesCustomer'>
-              <span>{this.state.userName}</span>님 반갑습니다.
+              <span>{this.state.client_name}</span>님 반갑습니다.
             </label>
             <h3 className='AddSalesHeader'>운동 종목</h3>
             <div className='exerciseType boxmorpinsm p-4 mb-5'>
