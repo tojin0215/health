@@ -372,7 +372,7 @@ class WorkoutStage extends Component {
     console.log(this.state.client_name);
 
     return (
-      <div>
+      <div className='wrap workoutStage__wrap'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -419,60 +419,70 @@ class WorkoutStage extends Component {
               <Row xs={5} className='mt-3'>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(111)}
                   >
-                    1
+                    1 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(112)}
                   >
-                    2
+                    2 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(113)}
                   >
-                    3
+                    3 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(114)}
                   >
-                    4
+                    4 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(115)}
                   >
-                    5
+                    5 단계
                   </Button>
                 </Col>
               </Row>
               <Row className='my-2'>
-                <Col>
-                  <Button variant='outline-secondary'>
-                    <Link
-                      to={{
-                        pathname: '/workoutStage',
-                      }}
-                      onClick={() => this.setState({ nextStage1: '' })}
-                    >
-                      초기화
-                    </Link>
+                <Col className='text-start'>
+                  <Button
+                    variant='outline-danger'
+                    to={{
+                      pathname: '/workoutStage',
+                    }}
+                    onClick={() => this.setState({ nextStage1: '' })}
+                  >
+                    초기화
                   </Button>
                 </Col>
-                <Col>
-                  <Button onClick={this.alloted}>묶음 운동 배정하기</Button>
+                <Col className='text-end'>
+                  <Button
+                    variant='primary'
+                    className='ms-2'
+                    onClick={this.alloted}
+                  >
+                    묶음 운동 배정하기
+                  </Button>
                 </Col>
               </Row>
               <Col xs={12}>
@@ -498,53 +508,72 @@ class WorkoutStage extends Component {
               <Row xs={5} className='mt-3'>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(211)}
                   >
-                    1
+                    1 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(212)}
                   >
-                    2
+                    2 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(213)}
                   >
-                    3
+                    3 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(214)}
                   >
-                    4
+                    4 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(215)}
                   >
-                    5
+                    5 단계
                   </Button>
                 </Col>
               </Row>
-              <Link
-                to={{
-                  pathname: '/workoutStage',
-                }}
-                onClick={() => this.setState({ nextStage2: '' })}
-              >
-                다시단계선택하기
-              </Link>
+              <Row className='my-2'>
+                <Col className='text-start'>
+                  <Button
+                    variant='outline-danger'
+                    to={{
+                      pathname: '/workoutStage',
+                    }}
+                    onClick={() => this.setState({ nextStage2: '' })}
+                  >
+                    초기화
+                  </Button>
+                </Col>
+                <Col className='text-end'>
+                  <Button
+                    variant='primary'
+                    className='ms-2'
+                    onClick={this.alloted}
+                  >
+                    묶음 운동 배정하기
+                  </Button>
+                </Col>
+              </Row>
               <Col xs={12}>
                 <Table>
                   <TableHead>
@@ -568,53 +597,72 @@ class WorkoutStage extends Component {
               <Row xs={5} className='mt-3'>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(311)}
                   >
-                    1
+                    1 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(312)}
                   >
-                    2
+                    2 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(313)}
                   >
-                    3
+                    3 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(314)}
                   >
-                    4
+                    4 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(315)}
                   >
-                    5
+                    5 단계
                   </Button>
                 </Col>
               </Row>
-              <Link
-                to={{
-                  pathname: '/workoutStage',
-                }}
-                onClick={() => this.setState({ nextStage3: '' })}
-              >
-                다시단계선택하기
-              </Link>
+              <Row className='my-2'>
+                <Col className='text-start'>
+                  <Button
+                    variant='outline-danger'
+                    to={{
+                      pathname: '/workoutStage',
+                    }}
+                    onClick={() => this.setState({ nextStage3: '' })}
+                  >
+                    초기화
+                  </Button>
+                </Col>
+                <Col className='text-end'>
+                  <Button
+                    variant='primary'
+                    className='ms-2'
+                    onClick={this.alloted}
+                  >
+                    묶음 운동 배정하기
+                  </Button>
+                </Col>
+              </Row>
               <Col xs={12}>
                 <Table>
                   <TableHead>
@@ -638,53 +686,72 @@ class WorkoutStage extends Component {
               <Row xs={5} className='mt-3'>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(411)}
                   >
-                    1
+                    1 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(412)}
                   >
-                    2
+                    2 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(413)}
                   >
-                    3
+                    3 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(414)}
                   >
-                    4
+                    4 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(415)}
                   >
-                    5
+                    5 단계
                   </Button>
                 </Col>
               </Row>
-              <Link
-                to={{
-                  pathname: '/workoutStage',
-                }}
-                onClick={() => this.setState({ nextStage4: '' })}
-              >
-                다시단계선택하기
-              </Link>
+              <Row className='my-2'>
+                <Col className='text-start'>
+                  <Button
+                    variant='outline-danger'
+                    to={{
+                      pathname: '/workoutStage',
+                    }}
+                    onClick={() => this.setState({ nextStage4: '' })}
+                  >
+                    초기화
+                  </Button>
+                </Col>
+                <Col className='text-end'>
+                  <Button
+                    variant='primary'
+                    className='ms-2'
+                    onClick={this.alloted}
+                  >
+                    묶음 운동 배정하기
+                  </Button>
+                </Col>
+              </Row>
               <Col xs={12}>
                 <Table>
                   <TableHead>
@@ -708,53 +775,72 @@ class WorkoutStage extends Component {
               <Row xs={5} className='mt-3'>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(511)}
                   >
-                    1
+                    1 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(512)}
                   >
-                    2
+                    2 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(513)}
                   >
-                    3
+                    3 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(514)}
                   >
-                    4
+                    4 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(515)}
                   >
-                    5
+                    5 단계
                   </Button>
                 </Col>
               </Row>
-              <Link
-                to={{
-                  pathname: '/workoutStage',
-                }}
-                onClick={() => this.setState({ nextStage5: '' })}
-              >
-                다시단계선택하기
-              </Link>
+              <Row className='my-2'>
+                <Col className='text-start'>
+                  <Button
+                    variant='outline-danger'
+                    to={{
+                      pathname: '/workoutStage',
+                    }}
+                    onClick={() => this.setState({ nextStage5: '' })}
+                  >
+                    초기화
+                  </Button>
+                </Col>
+                <Col className='text-end'>
+                  <Button
+                    variant='primary'
+                    className='ms-2'
+                    onClick={this.alloted}
+                  >
+                    묶음 운동 배정하기
+                  </Button>
+                </Col>
+              </Row>
               <Col xs={12}>
                 <Table>
                   <TableHead>
@@ -778,53 +864,72 @@ class WorkoutStage extends Component {
               <Row xs={5} className='mt-3'>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(611)}
                   >
-                    1
+                    1 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(612)}
                   >
-                    2
+                    2 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(613)}
                   >
-                    3
+                    3 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(614)}
                   >
-                    4
+                    4 단계
                   </Button>
                 </Col>
                 <Col>
                   <Button
+                    variant='secondary'
                     className='w-100'
                     onClick={() => this.stageOnClick(615)}
                   >
-                    5
+                    5 단계
                   </Button>
                 </Col>
               </Row>
-              <Link
-                to={{
-                  pathname: '/workoutStage',
-                }}
-                onClick={() => this.setState({ nextStage6: '' })}
-              >
-                다시단계선택하기
-              </Link>
+              <Row className='my-2'>
+                <Col className='text-start'>
+                  <Button
+                    variant='outline-danger'
+                    to={{
+                      pathname: '/workoutStage',
+                    }}
+                    onClick={() => this.setState({ nextStage6: '' })}
+                  >
+                    초기화
+                  </Button>
+                </Col>
+                <Col className='text-end'>
+                  <Button
+                    variant='primary'
+                    className='ms-2'
+                    onClick={this.alloted}
+                  >
+                    묶음 운동 배정하기
+                  </Button>
+                </Col>
+              </Row>
               <Col xs={12}>
                 <Table>
                   <TableHead>

@@ -4,12 +4,6 @@
   box-shadow: inherit;
 }
 
-button {
-  /* transition: 0.35s ease-in-out;
-  cursor: pointer;
-  box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75); */
-}
-
 .deleteButton {
   margin: 6px;
   height: 34px;

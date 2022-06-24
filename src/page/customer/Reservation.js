@@ -458,10 +458,7 @@ const ReservationClassItem_choice = ({
   };
 
   return (
-    <Button
-      variant='oultline-secondary m-1'
-      onClick={handleInnerOnClick_choice}
-    >
+    <Button variant='light m-1' onClick={handleInnerOnClick_choice}>
       {trainer_choice}
     </Button>
   );
@@ -528,10 +525,7 @@ const ReservationClassItem_choice2 = ({
     reservationChoiceClient(client_choice);
   };
   return (
-    <Button
-      variant='oultline-secondary m-1'
-      onClick={handleInnerOnClick_choice}
-    >
+    <Button variant='light m-1' onClick={handleInnerOnClick_choice}>
       {client_choice}
     </Button>
   );
@@ -1648,7 +1642,7 @@ class Reservation extends Component {
                     disabled
                     variant='standard'
                     onClick={() => this.setState({ open: true })}
-                    className='boxmorpsm h-100 w-100'
+                    className='boxmorpsm h-100 w-100 justify-content-center'
                     InputProps={{ disableUnderline: true }}
                     value={this.state.customer_name}
                     // onChange={this.handleChange}

@@ -99,7 +99,7 @@ html .MuiInputLabel-outlined {
   text-indent: 2rem;
 }
 .tab-content {
-  background-color: #fff;
+  /* background-color: #fff; */
 }
 /**
 * 강사 검색

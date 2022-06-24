@@ -47,7 +47,8 @@ const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
       <Col xs={12}>
         <h3>
           {client_name}
-          <span className='fs-4'>님</span>
+          <span className='fs-4'> 님</span>
+          <span className='fs-5'>의 마지막 인바디 기록입니다.</span>
         </h3>
       </Col>
       <Col>
@@ -569,7 +570,7 @@ class WorkoutAlloted extends Component {
               <Row className='sectionGlass'>
                 <h3>
                   {this.state.client_name}
-                  <span className='fs-5'>님의 운동 배정 목록</span>
+                  <span className='fs-5'>님에게 배정된 운동 목록입니다</span>
                 </h3>
                 <Table>
                   <TableHead>
