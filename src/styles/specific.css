@@ -178,7 +178,8 @@ td > div {
 }
 
 .table {
-  background-color: #222;
+  background-color: #fff;
+  border-radius: 16px;
 }
 
 @media (max-width: 767px) {

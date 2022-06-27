@@ -154,8 +154,8 @@ const VieWTrainerItem = ({
           <TableCell>{history}</TableCell>
           <TableCell>{ment}</TableCell>
         </Mobile>
-        <TableCell onClick={modalOnClick}>
-          <Button className='' variant='outline-light' size='sm'>
+        <TableCell className='text-center' onClick={modalOnClick}>
+          <Button className='' variant='outline-secondary' size='sm'>
             수정하기
           </Button>
         </TableCell>
@@ -226,12 +226,7 @@ const VieWTrainerItem = ({
           </Modal.Body>
           <Modal.Footer>
             <Row className='w-100'>
-              <Col className='p-0' xs={8}>
-                <Button className='w-100' onClick={() => updateCompleted(idx)}>
-                  수정하기
-                </Button>
-              </Col>
-              <Col className='p-0 ps-2' xs={4}>
+              <Col className='py-0 px-1' xs={4}>
                 <Button
                   className='w-100'
                   onClick={() =>
@@ -244,7 +239,12 @@ const VieWTrainerItem = ({
                   탈퇴하기
                 </Button>
               </Col>
-              <Col className='mt-2 p-0'>
+              <Col className='p-0' xs={8}>
+                <Button className='w-100' onClick={() => updateCompleted(idx)}>
+                  수정하기
+                </Button>
+              </Col>
+              <Col className='mt-2 py-0 px-1'>
                 <Button
                   className='w-100'
                   onClick={modalClose}
@@ -413,7 +413,7 @@ class Trainer extends Component {
                     <TableCell>이력</TableCell>
                     <TableCell>자기소개</TableCell>
                   </Mobile>
-                  <TableCell>수정하기</TableCell>
+                  <TableCell className='text-center'>수정하기</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>{this.state.viewTrainerList}</TableBody>
