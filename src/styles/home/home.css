@@ -75,13 +75,20 @@
   padding: 0 0.5rem;
 }
 
-.home .mainVisual {
-  width: 100%;
-  height: 46.4rem;
+.home__mainvisual {
   margin-top: 4.7rem;
-  /* background-image: url(${mainVisual1}); */
-  background: no-repeat top/contain;
-  text-indent: -9999rem;
+  margin-bottom: 2rem;
+  background-color: #222;
+  width: 100%;
+}
+
+.home .home__mainvisual--content {
+  height: 480px;
+}
+
+.home .home__mainvisual--content img {
+  height: 440px;
+  background-color: #444;
 }
 
 .home .homeIcon {

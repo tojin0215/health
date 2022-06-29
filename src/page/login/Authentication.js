@@ -237,16 +237,13 @@ class Authentication extends Component {
       <Card>
         {/* <Card.Header></Card.Header> */}
         <Card.Body className='py-5 text-center'>
-          <h1
-            className='fw-bolder text-primary pb-5'
-            style={{ fontSize: '6rem' }}
-          >
-            divvy
+          <h1 className='fw-bolder text-primary'>
+            <Image
+              src={process.env.PUBLIC_URL + '/assets/divvy_yello.png'}
+              // src={process.env.PUBLIC_URL + '/assets/divvy_yello.svg'}
+              className='text-center login_logo p-0'
+            />
           </h1>
-          <Image
-            src='/divvylogo500200.png'
-            className='text-center login_logo d-none'
-          />
           {this.state.radioGroup['fitness'] ? (
             <div>{this.props.mode ? loginView : ''}</div>
           ) : (

@@ -137,8 +137,7 @@
   border-color: #333; */
 }
 .modal-content {
-  /* background-color: #222; */
-  color: #111;
+  background-color: #222;
 }
 .close {
   padding: 8px;

@@ -33,6 +33,7 @@ import aboutExercise from '../../../src/img/aboutExercise.png';
 import { SERVER_URL } from '../../const/settings';
 import AlertToastComponent from '../../component/home/AlertToast';
 import { choiceTest, clientSelect } from '../../api/user';
+import { height } from '@mui/system';
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -259,6 +260,31 @@ class Home extends Component {
           {/*.localNavigation */}
         </div>
         {/*.header */}
+        <div className='home__mainvisual'>
+          <Container>
+            <Row className='home__mainvisual--content'>
+              <Col className='py-4 px-5 fs-1'>
+                <h3>
+                  새로워진 피트니스 센터 관리{' '}
+                  <span className='fs-1 text-primary'>divvy</span>
+                </h3>
+                <div className='text-center'>
+                  <p>🐔 강사 관리</p>
+                  <p>🐥 회원 관리</p>
+                  <p>🗓 수업 예약</p>
+                  <p>🤸 운동 배정</p>
+                  <p>📊 매출 관리</p>
+                </div>
+              </Col>
+              <Col className=''>
+                <Image
+                  roundedCircle
+                  src={process.env.PUBLIC_URL + '/assets/mainvisual.svg'}
+                />
+              </Col>
+            </Row>
+          </Container>
+        </div>
         <div className='container'>
           <div
             style={{
@@ -272,14 +298,6 @@ class Home extends Component {
                 fitness_no={this.props.userinfo.fitness_no}
               />
             }
-          </div>
-          <div
-            className='mainVisual'
-            style={{
-              backgroundImage: `url(${MainVisual1})`,
-            }}
-          >
-            메인 이미지
           </div>
           <Row xs={5}>
             <Col>
@@ -387,7 +405,7 @@ class Home extends Component {
                     backgroundColor: '#fff',
                   }}
                 ></Link>
-                <p>통계</p>
+                <p>매출관리</p>
               </li>
               {userinfo.fitness_no === 1 ? (
                 <li>

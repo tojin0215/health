@@ -1,4 +1,8 @@
 .login_logo {
-  height: 200px;
+  height: 300px;
   padding-bottom: 36px;
+}
+
+.login_wrap .card-img-top {
+  height: 300px;
 }

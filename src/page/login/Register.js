@@ -318,13 +318,18 @@ class Register extends Component {
               </Col>
               <Col xs={12} className='text-center mt-4'>
                 {this.state.agreeCheck ? (
-                  <Button
-                    className='w-100'
-                    variant='outline-success'
-                    onClick={this.handleModal}
-                  >
-                    약관 확인
-                  </Button>
+                  <>
+                    <p className='pb-2 text-success'>
+                      필수 약관에 동의했습니다.
+                    </p>
+                    <Button
+                      className='w-100'
+                      variant='outline-success'
+                      onClick={this.handleModal}
+                    >
+                      약관 확인
+                    </Button>
+                  </>
                 ) : (
                   <>
                     <p className='pb-2'>
