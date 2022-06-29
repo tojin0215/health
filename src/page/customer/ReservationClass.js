@@ -361,7 +361,6 @@ class ReservationClass extends Component {
       trainerTable: [],
       open: false,
     };
-    this.handleDateChange = this.handleDateChange.bind(this);
   }
 
   componentDidMount() {
@@ -592,12 +591,6 @@ class ReservationClass extends Component {
     });
   };
 
-  handleDateChange(date) {
-    console.log('date', date);
-    this.setState({
-      class_date: date,
-    });
-  }
   handleUpdate = () => {
     // alert("오늘 이전에 설정한 운동은 수정 및 삭제가 불가합니다.");
     // if (condition) {
@@ -1008,7 +1001,7 @@ class ReservationClass extends Component {
                 <DatePicker
                   className='boxmorpsm text-center w-100 border-0'
                   selected={this.state.class_date}
-                  onChange={this.handleDateChange}
+                  onChange={(date) => this.setState({ class_date: date })}
                   name='class_date'
                   dateFormat='yyyy-MM-dd(eee)'
                   font-size='1.6rem'

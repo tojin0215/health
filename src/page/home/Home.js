@@ -136,7 +136,7 @@ class Home extends Component {
     clientSelect(this.props.userinfo.fitness_no).then((result) => {
       this.setState({ totalClient: result.length });
     });
-    fetch(ip + '/sales?type=all&fn=' + this.props.userinfo.fitness_no, {
+    fetch(ip + '/sales?type=all&fitness_no=' + this.props.userinfo.fitness_no, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
@@ -165,7 +165,7 @@ class Home extends Component {
         startTime +
         '&endDate=' +
         endTime +
-        '&fn=' +
+        '&fitness_no=' +
         this.props.userinfo.fitness_no,
       {
         method: 'GET',
