@@ -87,7 +87,7 @@
     "lint:fix": "eslint --fix ./src",
     "preinstall": "npx force-resolutions"
   },
-  "proxy": "http://localhost:3002",
+  "proxy": "http://13.124.141.28:3002/",
   "browserslist": {
     "production": [
       ">0.2%",
