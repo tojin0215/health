@@ -599,7 +599,13 @@ export const salesSelect = (fitness_no) => {
 };
 
 //sales select select
-export const salesSelect2 = (fitness_no, startDate, endDate) => {
+export const salesSelect2 = (
+  fitness_no,
+  startDate,
+  endDate,
+  paymentTools,
+  exerciseName
+) => {
   return axios
     .get(
       `${SERVER_URL}/sales?type=select&fitness_no=` +
@@ -607,7 +613,11 @@ export const salesSelect2 = (fitness_no, startDate, endDate) => {
         `&startDate=` +
         startDate +
         `&endDate=` +
-        endDate,
+        endDate +
+        `&paymentTools=` +
+        paymentTools +
+        `&exerciseName=` +
+        exerciseName,
       {}
     )
     .then((response) => response.data);
