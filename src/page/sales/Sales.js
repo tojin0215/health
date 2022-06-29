@@ -561,6 +561,8 @@ class Sales extends Component {
         transfer: transfer,
         total: card + cash + transfer,
         salesViewList: items.reverse(),
+        toolsViewList: [],
+        exerciseViewList: [],
       });
     });
   };
@@ -624,6 +626,9 @@ class Sales extends Component {
           transfer: transfer,
           total: card + cash + transfer,
           salesViewList: items.reverse(),
+          tommorrow: this.state.today,
+          toolsViewList: [],
+          exerciseViewList: [],
         });
       });
     } else if (e === '한 달') {
@@ -678,6 +683,9 @@ class Sales extends Component {
           transfer: transfer,
           total: card + cash + transfer,
           salesViewList: items.reverse(),
+          tommorrow: endTime,
+          toolsViewList: [],
+          exerciseViewList: [],
         });
       });
     }
