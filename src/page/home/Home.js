@@ -268,13 +268,23 @@ class Home extends Component {
                   새로워진 피트니스 센터 관리{' '}
                   <span className='fs-1 text-primary'>divvy</span>
                 </h3>
-                <div className='text-center'>
-                  <p>🐔 강사 관리</p>
-                  <p>🐥 회원 관리</p>
-                  <p>🗓 수업 예약</p>
-                  <p>🤸 운동 배정</p>
-                  <p>📊 매출 관리</p>
-                </div>
+                <ul className='text-center'>
+                  <li>
+                    <Link to='/trainer'>🐔 강사 관리</Link>
+                  </li>
+                  <li>
+                    <Link to='/client'>🐥 회원 관리</Link>
+                  </li>
+                  <li>
+                    <Link to='reservation'>🗓 수업 예약</Link>
+                  </li>
+                  <li>
+                    <Link to='workoutAlloted'>🤸 운동 배정</Link>
+                  </li>
+                  <li>
+                    <Link to='sales'>📊 매출 관리</Link>
+                  </li>
+                </ul>
               </Col>
               <Col className=''>
                 <Image
@@ -299,113 +309,82 @@ class Home extends Component {
               />
             }
           </div>
-          <Row xs={5}>
-            <Col>
-              <Card className='text-center'>
-                <Card.Img variant='top' src={btnCustomer} />
-                <Card.Body>
-                  <Card.Title>고객</Card.Title>
-                  <Card.Text></Card.Text>
-                  <Button variant='primary'>Go somewhere</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col>
-              <Card className='text-center'>
-                <Card.Img variant='top' src={btnSetting} />
-                <Card.Body>
-                  <Card.Title>고객</Card.Title>
-                  <Card.Text></Card.Text>
-                  <Button variant='primary'>Go somewhere</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col>
-              <Card className='text-center'>
-                <Card.Img variant='top' src={btnExercise} />
-                <Card.Body>
-                  <Card.Title>고객</Card.Title>
-                  <Card.Text></Card.Text>
-                  <Button variant='primary'>Go somewhere</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col>
-              <Card className='text-center'>
-                <Card.Img variant='top' src={btnSales} />
-                <Card.Body>
-                  <Card.Title></Card.Title>
-                  <Card.Text></Card.Text>
-                  <Button variant='primary'>회원 관리</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col>
-              <Card className='text-center'>
-                <Card.Img variant='top' src={aboutManage} />
-                <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Button variant='primary'>Go somewhere</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
           <div className='homeIcon'>
             <ul>
               <li>
                 <Link
-                  to='/customer'
-                  className='btnCustomerNew btnCustomer'
+                  to='/client'
+                  className='btnCustomerNew btnCustomer p-1'
                   style={{
                     backgroundImage: `url(${btnCustomer})`,
                     backgroundColor: '#fff',
                   }}
-                ></Link>
-                <p>고객</p>
+                >
+                  <div className='homeIcon--hover'>회원 관리</div>
+                </Link>
+                <Button className='w-100 fw-bolder' variant='dark'>
+                  회원 관리
+                </Button>
               </li>
               <li>
                 <Link
-                  to='/exercise'
-                  className='btnCustomerNew btnSetting'
+                  to='/trainer'
+                  className='btnCustomerNew btnSetting p-1'
+                  style={{
+                    backgroundImage: `url(${aboutManage})`,
+                    backgroundColor: '#fff',
+                  }}
+                >
+                  <div className='homeIcon--hover'>강사 관리</div>
+                </Link>
+                <Button className='w-100 fw-bolder' variant='dark'>
+                  강사 관리
+                </Button>
+              </li>
+              <li>
+                <Link
+                  to='/reservation'
+                  className='btnCustomerNew btnExercise p-1'
                   style={{
                     backgroundImage: `url(${btnSetting})`,
                     backgroundColor: '#fff',
                   }}
-                ></Link>
-                <p>운동 설정</p>
+                >
+                  <div className='homeIcon--hover'>수업 일정</div>
+                </Link>
+                <Button className='w-100 fw-bolder' variant='dark'>
+                  수업 일정
+                </Button>
               </li>
               <li>
                 <Link
-                  to='/assign'
-                  className='btnCustomerNew btnExercise'
+                  to='/workoutAlloted'
+                  className='btnCustomerNew btnSales p-1'
                   style={{
                     backgroundImage: `url(${btnExercise})`,
                     backgroundColor: '#fff',
                   }}
-                ></Link>
-                <p>운동 배정</p>
+                >
+                  <div className='homeIcon--hover'>운동 배정</div>
+                </Link>
+                <Button className='w-100 fw-bolder' variant='dark'>
+                  운동 배정
+                </Button>
               </li>
               <li>
                 <Link
                   to='/sales'
-                  className='btnCustomerNew btnSales'
-                  style={{
-                    backgroundImage: `url(${btnSales})`,
-                    backgroundColor: '#fff',
-                  }}
-                ></Link>
-                <p>상품매출</p>
-              </li>
-              <li>
-                <Link
-                  to='/statistics'
-                  className='btnCustomerNew btnStatic'
+                  className='btnCustomerNew btnStatic p-1'
                   style={{
                     backgroundImage: `url(${btnStatic})`,
                     backgroundColor: '#fff',
                   }}
-                ></Link>
-                <p>매출관리</p>
+                >
+                  <div className='homeIcon--hover'>매출 관리</div>
+                </Link>
+                <Button className='w-100 fw-bolder' variant='dark'>
+                  매출 관리
+                </Button>
               </li>
               {userinfo.fitness_no === 1 ? (
                 <li>
@@ -425,7 +404,8 @@ class Home extends Component {
           <section className='homeAbout'>
             <h3>
               <div className='parallelogram'></div>
-              About 헬스케어CRM
+              About 헬스케어CRM 서비스{' '}
+              <span className='text-primary px-2 fs-1'> divvy</span>
             </h3>
             <section className='aboutExplain'>
               <p>
@@ -466,9 +446,6 @@ class Home extends Component {
                     센터의 전문가가 사용자와 상담하고 적합한 운동 리스트를
                     배정해 줄 수 있습니다.
                   </p>
-                  {/* <Button variant='outline-primary border-0 px-5'>
-										더보기
-									</Button> */}
                 </li>
                 <li>
                   <div
