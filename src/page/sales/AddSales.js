@@ -212,7 +212,7 @@ class AddSales extends Component {
     //alert('운동목록 : ' + this.state.exerciseName + ', 운동금액 : '+  this.state.exercisePrice + ', 운동복여부: '+ this.state.sportswear +', 운동복 금액: '+ this.state.sportswearPrice + ', 락커여부: '+ this.state.locker +', 락커금액 : '+  this.state.lockerPrice + ', 결제도구 : '+this.state.paymentTools+', 전체금액 : '+this.state.TotalPayment);
 
     let ex = '';
-    console.log('---------------------------');
+    // console.log('---------------------------');
     // for(var i=0; i<this.state.exerciseName.length;i++){
     //     if(this.state.exerciseName[i] === '기타'){
     //         ex = this.state.exerciseName[i] +'('+this.state.inputExercise +') /'+ex
@@ -238,8 +238,8 @@ class AddSales extends Component {
       this.state.sportswearPrice.toString().replace(/[^(0-9)]/gi, '')
     );
 
-    console.log('***********paymentDate : ', this.state.paymentDate);
-    console.log(this.state);
+    // console.log('***********paymentDate : ', this.state.paymentDate);
+    // console.log(this.state);
     if (this.state.client_name === '회원') {
       alert('회원을 선택해주세요.');
     } else {
@@ -274,7 +274,7 @@ class AddSales extends Component {
         .then((response) => response.json())
         .then((response) => {
           alert('등록되었습니다.');
-          console.log(response);
+          // console.log(response);
         });
       this.props.history.push('/sales');
     }

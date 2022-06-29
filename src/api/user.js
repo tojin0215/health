@@ -591,10 +591,25 @@ export const workoutStageInsert = (
     url: url,
   });
 };
-//sales select
+//sales select all
 export const salesSelect = (fitness_no) => {
   return axios
     .get(`${SERVER_URL}/sales?type=all&fitness_no=` + fitness_no, {})
+    .then((response) => response.data);
+};
+
+//sales select select
+export const salesSelect2 = (fitness_no, startDate, endDate) => {
+  return axios
+    .get(
+      `${SERVER_URL}/sales?type=select&fitness_no=` +
+        fitness_no +
+        `&startDate=` +
+        startDate +
+        `&endDate=` +
+        endDate,
+      {}
+    )
     .then((response) => response.data);
 };
 

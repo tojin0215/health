@@ -23,6 +23,7 @@ import { getStatusRequest } from '../../action/authentication';
 import { SERVER_URL } from '../../const/settings';
 import {
   salesSelect,
+  salesSelect2,
   salesSelectExercise,
   salesSelectTools,
 } from '../../api/user';
@@ -70,7 +71,7 @@ const ViewsalesItem = ({
       <TableCell>{paidMembership ? paidMembership : ''}</TableCell>
       <TableCell>
         {startDate}
-        {salesDays ? `[` + salesDays + `]` : ''}
+        {salesDays ? `[` + salesDays + '일' + `]` : ''}
       </TableCell>
       <TableCell>{paymentTools}</TableCell>
       <TableCell>{allPrice}</TableCell>
@@ -106,7 +107,7 @@ const ExerciseSalesItem = ({
       <TableCell>{paidMembership ? paidMembership : ''}</TableCell>
       <TableCell>
         {startDate}
-        {salesDays ? `[` + salesDays + `]` : ''}
+        {salesDays ? `[` + salesDays + '일' + `]` : ''}
       </TableCell>
       <TableCell>{paymentTools}</TableCell>
       <TableCell>{allPrice}</TableCell>
@@ -142,21 +143,10 @@ const ToolsSalesItem = ({
       <TableCell>{paidMembership ? paidMembership : ''}</TableCell>
       <TableCell>
         {startDate}
-        {salesDays ? `[` + salesDays + `]` : ''}
+        {salesDays ? `[` + salesDays + '일' + `]` : ''}
       </TableCell>
       <TableCell>{paymentTools}</TableCell>
       <TableCell>{allPrice}</TableCell>
-    </TableRow>
-  );
-};
-
-const CashItem = ({ card, cash, transfer, total }) => {
-  return (
-    <TableRow>
-      <TableCell>{card}</TableCell>
-      <TableCell>{cash}</TableCell>
-      <TableCell>{transfer}</TableCell>
-      <TableCell>{total}</TableCell>
     </TableRow>
   );
 };
@@ -169,6 +159,12 @@ class Sales extends Component {
       exerciseViewList: [],
       toolsViewList: [],
       cashViewList: [],
+      card: 0,
+      cash: 0,
+      transfer: 0,
+      total: 0,
+      today: new Date(),
+      tommorrow: new Date(),
     };
   }
   goLogin = () => {
@@ -294,33 +290,234 @@ class Sales extends Component {
   };
 
   cashView = () => {
+    let card = 0;
+    let cash = 0;
+    let transfer = 0;
     salesSelect(this.props.userinfo.fitness_no).then((res) => {
       const items = res.map((data, index, array) => {
         const total =
           data.exercisePrice + data.lockerPrice + data.sportswearPrice;
-        const card = data.paymentTools === '카드' ? total : '';
-        const cash = data.paymentTools === '현금' ? total : '';
-        const transfer = data.paymentTools === '계좌이체' ? total : '';
-
-        console.log('card', card);
-        return (
-          <CashItem
-            card={card}
-            cash={cash}
-            transfer={transfer}
-            total={card + cash + transfer}
-          />
-        );
+        const time = moment(data.paymentDate).format('YYYY/MM/DD');
+        const dt = { ...data, total, time };
+        if (data.paymentTools === '카드') {
+          card = card + dt.total;
+        } else if (data.paymentTools === '현금') {
+          cash = cash + dt.total;
+        } else if (data.paymentTools === '계좌이체') {
+          transfer = transfer + dt.total;
+        }
       });
-      this.setState({ cashViewList: items });
+      this.setState({
+        card: card,
+        cash: cash,
+        transfer: transfer,
+        total: card + cash + transfer,
+      });
     });
   };
 
+  handleOnClick = () => {
+    let startTime = new Date(
+      this.state.today.getFullYear(),
+      this.state.today.getMonth(),
+      this.state.today.getDate()
+    );
+    let endTime = new Date(
+      this.state.tommorrow.getFullYear(),
+      this.state.tommorrow.getMonth(),
+      this.state.tommorrow.getDate() + 1
+    );
+    let card = 0;
+    let cash = 0;
+    let transfer = 0;
+    salesSelect2(this.props.userinfo.fitness_no, startTime, endTime).then(
+      (res) => {
+        const items = res.map((data, index, array) => {
+          const total =
+            data.exercisePrice + data.lockerPrice + data.sportswearPrice;
+          const time = moment(data.paymentDate).format('YYYY/MM/DD');
+          const dt = { ...data, total, time };
+          if (data.paymentTools === '카드') {
+            card = card + dt.total;
+          } else if (data.paymentTools === '현금') {
+            cash = cash + dt.total;
+          } else if (data.paymentTools === '계좌이체') {
+            transfer = transfer + dt.total;
+          }
+          return (
+            (
+              <ViewsalesItem
+                num={data.num}
+                fitness_no={data.fitness_no}
+                client_name={data.client_name}
+                exerciseName={data.exerciseName}
+                exercisePrice={data.exercisePrice}
+                lockerPrice={data.lockerPrice}
+                sportswearPrice={data.sportswearPrice}
+                paymentTools={data.paymentTools}
+                paymentDate={data.paymentDate}
+                paidMembership={data.paidMembership}
+                salesStart_date={data.salesStart_date}
+                salesDays={data.salesDays}
+              />
+            ),
+            (
+              <ToolsSalesItem
+                num={data.num}
+                fitness_no={data.fitness_no}
+                client_name={data.client_name}
+                exerciseName={data.exerciseName}
+                exercisePrice={data.exercisePrice}
+                lockerPrice={data.lockerPrice}
+                sportswearPrice={data.sportswearPrice}
+                paymentTools={data.paymentTools}
+                paymentDate={data.paymentDate}
+                paidMembership={data.paidMembership}
+                salesStart_date={data.salesStart_date}
+                salesDays={data.salesDays}
+              />
+            ),
+            (
+              <ExerciseSalesItem
+                num={data.num}
+                fitness_no={data.fitness_no}
+                client_name={data.client_name}
+                exerciseName={data.exerciseName}
+                exercisePrice={data.exercisePrice}
+                lockerPrice={data.lockerPrice}
+                sportswearPrice={data.sportswearPrice}
+                paymentTools={data.paymentTools}
+                paymentDate={data.paymentDate}
+                paidMembership={data.paidMembership}
+                salesStart_date={data.salesStart_date}
+                salesDays={data.salesDays}
+              />
+            )
+          );
+        });
+        this.setState({
+          card: card,
+          cash: cash,
+          transfer: transfer,
+          total: card + cash + transfer,
+          salesViewList: items.reverse(),
+          toolsViewList: items.reverse(),
+          exerciseViewList: items.reverse(),
+        });
+      }
+    );
+  };
+  handleButton = (e) => {
+    let startTime = new Date(
+      this.state.today.getFullYear(),
+      this.state.today.getMonth(),
+      this.state.today.getDate()
+    );
+    if (e === '당일') {
+      let endTime = new Date(
+        this.state.today.getFullYear(),
+        this.state.today.getMonth(),
+        this.state.today.getDate() + 1
+      );
+      let card = 0;
+      let cash = 0;
+      let transfer = 0;
+      salesSelect2(this.props.userinfo.fitness_no, startTime, endTime).then(
+        (res) => {
+          const items = res.map((data, index, array) => {
+            const total =
+              data.exercisePrice + data.lockerPrice + data.sportswearPrice;
+            const time = moment(data.paymentDate).format('YYYY/MM/DD');
+            const dt = { ...data, total, time };
+            if (data.paymentTools === '카드') {
+              card = card + dt.total;
+            } else if (data.paymentTools === '현금') {
+              cash = cash + dt.total;
+            } else if (data.paymentTools === '계좌이체') {
+              transfer = transfer + dt.total;
+            }
+            return (
+              <ViewsalesItem
+                num={data.num}
+                fitness_no={data.fitness_no}
+                client_name={data.client_name}
+                exerciseName={data.exerciseName}
+                exercisePrice={data.exercisePrice}
+                lockerPrice={data.lockerPrice}
+                sportswearPrice={data.sportswearPrice}
+                paymentTools={data.paymentTools}
+                paymentDate={data.paymentDate}
+                paidMembership={data.paidMembership}
+                salesStart_date={data.salesStart_date}
+                salesDays={data.salesDays}
+              />
+            );
+          });
+          this.setState({
+            card: card,
+            cash: cash,
+            transfer: transfer,
+            total: card + cash + transfer,
+            salesViewList: items.reverse(),
+          });
+        }
+      );
+    } else if (e === '한 달') {
+      let endTime = new Date(
+        this.state.today.getFullYear(),
+        this.state.today.getMonth() + 1,
+        this.state.today.getDate()
+      );
+      let card = 0;
+      let cash = 0;
+      let transfer = 0;
+      salesSelect2(this.props.userinfo.fitness_no, startTime, endTime).then(
+        (res) => {
+          const items = res.map((data, index, array) => {
+            const total =
+              data.exercisePrice + data.lockerPrice + data.sportswearPrice;
+            const time = moment(data.paymentDate).format('YYYY/MM/DD');
+            const dt = { ...data, total, time };
+            if (data.paymentTools === '카드') {
+              card = card + dt.total;
+            } else if (data.paymentTools === '현금') {
+              cash = cash + dt.total;
+            } else if (data.paymentTools === '계좌이체') {
+              transfer = transfer + dt.total;
+            }
+            return (
+              <ViewsalesItem
+                num={data.num}
+                fitness_no={data.fitness_no}
+                client_name={data.client_name}
+                exerciseName={data.exerciseName}
+                exercisePrice={data.exercisePrice}
+                lockerPrice={data.lockerPrice}
+                sportswearPrice={data.sportswearPrice}
+                paymentTools={data.paymentTools}
+                paymentDate={data.paymentDate}
+                paidMembership={data.paidMembership}
+                salesStart_date={data.salesStart_date}
+                salesDays={data.salesDays}
+              />
+            );
+          });
+          this.setState({
+            card: card,
+            cash: cash,
+            transfer: transfer,
+            total: card + cash + transfer,
+            salesViewList: items.reverse(),
+          });
+        }
+      );
+    }
+  };
   render() {
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.salesViewList);
     // console.log(this.state.exerciseViewList);
-    console.log(this.state.cashViewList);
+    // console.log(this.state.card);
 
     return (
       <div className='wrap sales'>
@@ -349,12 +546,35 @@ class Sales extends Component {
         <Container>
           <h2>매출 현황</h2>
           <div className='salesUtill'>
-            <div className='salesStatus'>날짜 범위 설정</div>
+            <div className='salesStatus'>
+              <Row>
+                <Col>
+                  <Button onClick={() => this.handleButton('당일')}>
+                    당일
+                  </Button>
+                  <Button onClick={() => this.handleButton('한 달')}>
+                    한 달
+                  </Button>
+                  <DatePicker
+                    dateFormat='yyyy/MM/dd(eee)'
+                    selected={this.state.today}
+                    onChange={(date) => this.setState({ today: date })}
+                  />
+                  <text>~</text>
+                  <DatePicker
+                    dateFormat='yyyy/MM/dd(eee)'
+                    selected={this.state.tommorrow}
+                    onChange={(date) => this.setState({ tommorrow: date })}
+                    minDate={this.state.today}
+                  />
+                  <Button onClick={this.handleOnClick}>조회하기</Button>
+                </Col>
+              </Row>
+            </div>
             {/*.salesStatus */}
           </div>
           {/*.salesUtill */}
           <div className='tablewrap'>
-            카드 현금 계좌이체 총매출 테이블
             <Table>
               <TableHead>
                 <TableRow>
@@ -364,7 +584,14 @@ class Sales extends Component {
                   <TableCell scope='col'>총매출</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>{this.state.cashViewList}</TableBody>
+              <TableBody>
+                <TableRow>
+                  <TableCell scope='col'> {this.state.card}</TableCell>
+                  <TableCell scope='col'>{this.state.cash}</TableCell>
+                  <TableCell scope='col'>{this.state.transfer}</TableCell>
+                  <TableCell scope='col'>{this.state.total}</TableCell>
+                </TableRow>
+              </TableBody>
             </Table>
             <div className='salesUtill salesUtill2 d-flex flex-row-reverse'>
               <Link to='/addSales'>
@@ -372,7 +599,6 @@ class Sales extends Component {
               </Link>
             </div>
             <h5>전체 기록</h5>
-            sales table 기간권시작일(기간권일수)로 변경
             <Tabs
               defaultActiveKey='home'
               id='uncontrolled-tab-example'
