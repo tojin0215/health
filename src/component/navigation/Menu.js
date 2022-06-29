@@ -390,7 +390,7 @@ class Menu extends Component {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to='/sales/add'>
+                    <NavLink exact to='/addSales'>
                       결제 등록
                     </NavLink>
                   </li>
