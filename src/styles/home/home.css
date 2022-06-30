@@ -33,16 +33,6 @@
   color: #fff;
 }
 
-.home .dashboard .homeDashLeft {
-  padding-left: 15%;
-  border-right: 1px solid #bbb;
-  align-items: center;
-}
-
-.home .dashboard .homeDashRight {
-  padding-right: 15%;
-}
-
 .home .dashboard .homeDashLeft label {
   justify-content: center;
   flex-direction: column;
@@ -78,7 +68,7 @@
 .home__mainvisual {
   margin-top: 4.7rem;
   margin-bottom: 2rem;
-  background-color: #222;
+  background-color: #111;
   width: 100%;
 }
 
@@ -87,8 +77,8 @@
 }
 
 .home .home__mainvisual--content img {
-  height: 440px;
-  background-color: #444;
+  height: 420px;
+  background-color: #fff;
 }
 
 .home .homeIcon {

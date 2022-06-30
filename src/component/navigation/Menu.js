@@ -78,11 +78,11 @@ class Menu extends Component {
                   <NavLink exact to='/home'>
                     Home
                   </NavLink>
-                  <li>
+                  {/* <li>
                     <NavLink exact to='/qr'>
                       QR
                     </NavLink>
-                  </li>
+                  </li> */}
                 </li>
                 <li class='dropdown'>
                   <NavLink exact to='/introduce'>
@@ -158,11 +158,11 @@ class Menu extends Component {
                   <NavLink exact to='/home'>
                     Home
                   </NavLink>
-                  <li>
+                  {/* <li>
                     <NavLink exact to='/qr'>
                       QR
                     </NavLink>
-                  </li>
+                  </li> */}
                 </li>
                 <li class='dropdown'>
                   <NavLink exact to='/introduce'>
@@ -282,11 +282,11 @@ class Menu extends Component {
                   <NavLink exact to='/home'>
                     Home
                   </NavLink>
-                  <li>
+                  {/* <li>
                     <NavLink exact to='/qr'>
                       QR
                     </NavLink>
-                  </li>
+                  </li> */}
                 </li>
                 <li class='dropdown'>
                   <NavLink exact to='/introduce'>

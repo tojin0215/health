@@ -156,6 +156,14 @@
   display: none;
 }
 
+/* calender */
+.rbc-calendar {
+  background-color: #fff;
+  color: #333;
+  padding: 20px;
+  border-radius: 20px;
+}
+
 /* bootstrap nav */
 .nav-link {
   color: unset;

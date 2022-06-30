@@ -685,6 +685,7 @@ class Inbodies extends Component {
             <div className=''>
               {this.state.client_name}님의 변화 그래프
               <Chart
+                height={300}
                 options={this.state.inbodiesListChart}
                 series={this.state.series}
                 type='line'

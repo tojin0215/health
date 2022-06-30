@@ -41,7 +41,7 @@ class NewMenu extends Component {
           <Navbar.Toggle />
           <Navbar.Collapse>
             <Nav className='me-auto'>
-              <Nav.Link href='/QR'>QR</Nav.Link>
+              {/* <Nav.Link href='/QR'>QR</Nav.Link> */}
               <NavDropdown title='고객'>
                 <NavDropdown.Item href=''>예약</NavDropdown.Item>
                 <NavDropdown.Divider />

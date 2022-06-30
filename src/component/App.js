@@ -16,7 +16,7 @@ import {
   Inbody,
   Home,
   Login,
-  QRLogin,
+  // QRLogin,
   Register,
   AddSales,
   Sales,
@@ -58,7 +58,7 @@ class App extends Component {
         <Route exact path='/addSales' component={AddSales} />
         <Route exact path='/statistics' component={Statistics} />
         <Route exact path='/admin' component={Admin} />
-        <Route exact path='/qr' component={QRLogin} />
+        {/* <Route exact path='/qr' component={QRLogin} /> */}
         <Route exact path='/register' component={Register} />
         <Route exact path='/test' component={CustomerCalendar} />
         <Route exact path='/reservation' component={Reservation} />

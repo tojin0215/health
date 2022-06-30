@@ -309,98 +309,6 @@ class Home extends Component {
               />
             }
           </div>
-          <div className='homeIcon'>
-            <ul>
-              <li>
-                <Link
-                  to='/client'
-                  className='btnCustomerNew btnCustomer p-1'
-                  style={{
-                    backgroundImage: `url(${btnCustomer})`,
-                    backgroundColor: '#fff',
-                  }}
-                >
-                  <div className='homeIcon--hover'>회원 관리</div>
-                </Link>
-                <Button className='w-100 fw-bolder' variant='dark'>
-                  회원 관리
-                </Button>
-              </li>
-              <li>
-                <Link
-                  to='/trainer'
-                  className='btnCustomerNew btnSetting p-1'
-                  style={{
-                    backgroundImage: `url(${aboutManage})`,
-                    backgroundColor: '#fff',
-                  }}
-                >
-                  <div className='homeIcon--hover'>강사 관리</div>
-                </Link>
-                <Button className='w-100 fw-bolder' variant='dark'>
-                  강사 관리
-                </Button>
-              </li>
-              <li>
-                <Link
-                  to='/reservation'
-                  className='btnCustomerNew btnExercise p-1'
-                  style={{
-                    backgroundImage: `url(${btnSetting})`,
-                    backgroundColor: '#fff',
-                  }}
-                >
-                  <div className='homeIcon--hover'>수업 일정</div>
-                </Link>
-                <Button className='w-100 fw-bolder' variant='dark'>
-                  수업 일정
-                </Button>
-              </li>
-              <li>
-                <Link
-                  to='/workoutAlloted'
-                  className='btnCustomerNew btnSales p-1'
-                  style={{
-                    backgroundImage: `url(${btnExercise})`,
-                    backgroundColor: '#fff',
-                  }}
-                >
-                  <div className='homeIcon--hover'>운동 배정</div>
-                </Link>
-                <Button className='w-100 fw-bolder' variant='dark'>
-                  운동 배정
-                </Button>
-              </li>
-              <li>
-                <Link
-                  to='/sales'
-                  className='btnCustomerNew btnStatic p-1'
-                  style={{
-                    backgroundImage: `url(${btnStatic})`,
-                    backgroundColor: '#fff',
-                  }}
-                >
-                  <div className='homeIcon--hover'>매출 관리</div>
-                </Link>
-                <Button className='w-100 fw-bolder' variant='dark'>
-                  매출 관리
-                </Button>
-              </li>
-              {userinfo.fitness_no === 1 ? (
-                <li>
-                  <Link
-                    to='/statistics'
-                    className='btnCustomerNew btnStatic'
-                    style={{
-                      backgroundImage: `url(${aboutManage})`,
-                      backgroundColor: '#fff',
-                    }}
-                  ></Link>
-                  <p>관리자</p>
-                </li>
-              ) : null}
-            </ul>
-          </div>
           <section className='homeAbout'>
             <h3>
               <div className='parallelogram'></div>
@@ -416,6 +324,98 @@ class Home extends Component {
 								자세히보기
 							</Button> */}
             </section>
+            <div className='homeIcon'>
+              <ul>
+                <li>
+                  <Link
+                    to='/client'
+                    className='btnCustomerNew btnCustomer p-1'
+                    style={{
+                      backgroundImage: `url(${btnCustomer})`,
+                      backgroundColor: '#fff',
+                    }}
+                  >
+                    <div className='homeIcon--hover'>회원 관리</div>
+                  </Link>
+                  <Button className='w-100 fw-bolder' variant='dark'>
+                    회원 관리
+                  </Button>
+                </li>
+                <li>
+                  <Link
+                    to='/trainer'
+                    className='btnCustomerNew btnSetting p-1'
+                    style={{
+                      backgroundImage: `url(${aboutManage})`,
+                      backgroundColor: '#fff',
+                    }}
+                  >
+                    <div className='homeIcon--hover'>강사 관리</div>
+                  </Link>
+                  <Button className='w-100 fw-bolder' variant='dark'>
+                    강사 관리
+                  </Button>
+                </li>
+                <li>
+                  <Link
+                    to='/reservation'
+                    className='btnCustomerNew btnExercise p-1'
+                    style={{
+                      backgroundImage: `url(${btnSetting})`,
+                      backgroundColor: '#fff',
+                    }}
+                  >
+                    <div className='homeIcon--hover'>수업 일정</div>
+                  </Link>
+                  <Button className='w-100 fw-bolder' variant='dark'>
+                    수업 일정
+                  </Button>
+                </li>
+                <li>
+                  <Link
+                    to='/workoutAlloted'
+                    className='btnCustomerNew btnSales p-1'
+                    style={{
+                      backgroundImage: `url(${btnExercise})`,
+                      backgroundColor: '#fff',
+                    }}
+                  >
+                    <div className='homeIcon--hover'>운동 배정</div>
+                  </Link>
+                  <Button className='w-100 fw-bolder' variant='dark'>
+                    운동 배정
+                  </Button>
+                </li>
+                <li>
+                  <Link
+                    to='/sales'
+                    className='btnCustomerNew btnStatic p-1'
+                    style={{
+                      backgroundImage: `url(${btnStatic})`,
+                      backgroundColor: '#fff',
+                    }}
+                  >
+                    <div className='homeIcon--hover'>매출 관리</div>
+                  </Link>
+                  <Button className='w-100 fw-bolder' variant='dark'>
+                    매출 관리
+                  </Button>
+                </li>
+                {userinfo.fitness_no === 1 ? (
+                  <li>
+                    <Link
+                      to='/statistics'
+                      className='btnCustomerNew btnStatic'
+                      style={{
+                        backgroundImage: `url(${aboutManage})`,
+                        backgroundColor: '#fff',
+                      }}
+                    ></Link>
+                    <p>관리자</p>
+                  </li>
+                ) : null}
+              </ul>
+            </div>
             <section className='aboutList'>
               <ul>
                 <li>

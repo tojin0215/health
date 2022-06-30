@@ -49,11 +49,11 @@ class Navigation extends Component {
                       Home
                     </NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <NavLink exact to='/qr'>
                       QR
                     </NavLink>
-                  </li>
+                  </li> */}
                 </ul>
               </NavLink>
               <NavLink exact to='/introduce'>
@@ -112,11 +112,11 @@ class Navigation extends Component {
                       Home
                     </NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <NavLink exact to='/qr'>
                       QR
                     </NavLink>
-                  </li>
+                  </li> */}
                 </ul>
               </NavLink>
               <NavLink exact to='/introduce'>
@@ -224,11 +224,11 @@ class Navigation extends Component {
                       Home
                     </NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <NavLink exact to='/qr'>
                       QR
                     </NavLink>
-                  </li>
+                  </li> */}
                 </ul>
               </NavLink>
               <NavLink exact to='/introduce'>

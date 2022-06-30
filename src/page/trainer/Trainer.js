@@ -116,6 +116,7 @@ const VieWTrainerItem = ({
         updateManagerClientTrainer(idx, trainer_name_input, phone_input).then(
           () => {}
         );
+        alert('수정 완료되었습니다.');
         modalClose();
         viewTrainer();
       });
@@ -230,7 +231,7 @@ const VieWTrainerItem = ({
                 <Button
                   className='w-100'
                   onClick={() =>
-                    confirm(trainer_name + '강사 탈퇴시겠습니까?') == true
+                    confirm(trainer_name + ' 강사 탈퇴 하시겠습니까?') == true
                       ? deleteCompleted(idx)
                       : alert(trainer_name + '강사 탈퇴가 취소 되었습니다.')
                   }
@@ -403,7 +404,7 @@ class Trainer extends Component {
               <TableHead>
                 <TableRow>
                   <Default>
-                    <TableCell></TableCell>
+                    <TableCell>소개</TableCell>
                   </Default>
                   <TableCell>이름</TableCell>
                   <TableCell>성별</TableCell>

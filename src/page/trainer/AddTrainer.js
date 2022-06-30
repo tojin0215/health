@@ -85,15 +85,15 @@ class AddTrainer extends Component {
   }
   handleTrainer = () => {
     if (this.state.trainer_name === '') {
-      alert('No');
+      alert('이름을 입력해주세요.');
     } else if (this.state.phone === '') {
-      alert('No');
+      alert('연락처를 입력해주세요.');
     } else if (this.state.birth === '') {
-      alert('No');
+      alert('생년월일을 입력해주세요.');
     } else if (this.state.ment === '') {
-      alert('No');
+      alert('이력 정보를 입력해주세요.');
     } else if (this.state.history === '') {
-      alert('No');
+      alert('자기 소개 내용을 입력해주세요.');
     } else {
       insertTrainer(
         this.state.phone,
@@ -254,7 +254,7 @@ class AddTrainer extends Component {
               </Col>
               <Col xs={12}>
                 <Form.Group>
-                  <Form.Label>수상이력</Form.Label>
+                  <Form.Label>이력</Form.Label>
                   <Form.Control
                     type='text'
                     value={this.state.history}
