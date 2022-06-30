@@ -122,6 +122,7 @@ class AddClient extends Component {
           const items = result.filter(
             (value) => value.client_name === this.state.client_name
           );
+          console.log(items[0].idc);
           this.setState(items);
           clientManager(
             this.state.phone,
