@@ -60,6 +60,10 @@ const ViewClientItem = ({
 
   const modalClose = () => {
     setShowModal(false);
+    setClient_name_input(client_name);
+    setAddress_input(address);
+    setPhone_input(phone);
+    setShowUpdate(false);
   };
   const modalOnClick = () => {
     setShowModal(true);
@@ -74,6 +78,7 @@ const ViewClientItem = ({
   const deleteCompleted = (idc) => {
     deleteClient(idc).then(() => {
       modalClose();
+      setShowUpdate(false);
       viewClient();
     });
   };
