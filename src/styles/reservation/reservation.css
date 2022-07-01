@@ -1,3 +1,15 @@
+.reservation__class-table--td {
+  cursor: pointer;
+}
+
+.reservation__class-table--td:hover {
+  background-color: rgba(235, 235, 46, 0.3);
+}
+
+.reservation__class-table--td:active {
+  background-color: rgba(235, 235, 46, 0.5);
+}
+
 .reservationWrap .MuiInput-underline:before {
   border-bottom: none;
 }

@@ -98,13 +98,13 @@ const VieWTrainerItem = ({
 
   const updateCompleted = (idx) => {
     if (trainer_name_input === '') {
-      alert('안됨');
+      alert('올바른 이름을 넣어주세요.');
     } else if (phone_input === '') {
-      alert('안됨2');
+      alert('숫자만으로 이루어진 연락처를 넣어주세요.');
     } else if (ment_input === '') {
-      alert('안됨');
+      alert('소개 내용을 넣어주세요.');
     } else if (history_input === '') {
-      alert('안됨');
+      alert('이력 내용을 넣어주세요.');
     } else {
       updateTrainer(
         idx,
@@ -231,13 +231,16 @@ const VieWTrainerItem = ({
                 <Button
                   className='w-100'
                   onClick={() =>
-                    confirm(trainer_name + ' 강사 탈퇴 하시겠습니까?') == true
+                    confirm(trainer_name + ' 강사 정보를 삭제 하시겠습니까?') ==
+                    true
                       ? deleteCompleted(idx)
-                      : alert(trainer_name + '강사 탈퇴가 취소 되었습니다.')
+                      : alert(
+                          trainer_name + '강사 정보 삭제가 취소 되었습니다.'
+                        )
                   }
                   variant='outline-danger'
                 >
-                  탈퇴하기
+                  삭제
                 </Button>
               </Col>
               <Col className='p-0' xs={8}>

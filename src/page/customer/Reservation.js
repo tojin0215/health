@@ -112,14 +112,17 @@ const ReservationClassItem = ({
   const hourArray = hour >= 10 ? hour : '0' + hour;
   const minuteArray = minute >= 10 ? minute : '0' + minute;
   return (
-    <div className='border py-2 my-1 ' onClick={handleInnerOnClick}>
+    <div
+      className='border py-2 my-1  reservation__class-table--td'
+      onClick={handleInnerOnClick}
+    >
       {/* <p>운동명</p> */}
       <p className='fw-bold'>{exercise_class}</p>
       {/* <p>강사명</p> */}
       <p className='fw-bold'>{trainer}</p>
       {/* <p>시간</p> */}
       <p className='fw-bold'>
-        {hourArray}시{minuteArray}분
+        {hourArray}시 {minuteArray}분
       </p>
       {/* <p>인원</p> */}
       <p className='fw-bold'>
@@ -1539,7 +1542,9 @@ class Reservation extends Component {
             <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
               <div className='boxmorpinsm py-3 h-100 w-100 '>
                 <p className=''>운동명</p>
-                <p className='fw-bold'>{this.state.exercise_name}</p>
+                <p className='fw-bold text-primary'>
+                  {this.state.exercise_name}
+                </p>
               </div>
               <TextField
                 id='exercise_name'
@@ -1553,7 +1558,7 @@ class Reservation extends Component {
             <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
               <div className='boxmorpinsm py-3 h-100 w-100'>
                 <p className=''>강사명</p>
-                <p className='fw-bold'>{this.state.trainer}</p>
+                <p className='fw-bold text-primary'>{this.state.trainer}</p>
               </div>
               <TextField
                 id='trainer'
@@ -1567,7 +1572,7 @@ class Reservation extends Component {
             <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
               <div className='boxmorpinsm py-3 h-100'>
                 <p className=''>시간</p>
-                <p className='fw-bold'>{this.state.time}</p>
+                <p className='fw-bold text-primary'>{this.state.time}</p>
               </div>
               <TextField
                 id='time'
@@ -1579,9 +1584,9 @@ class Reservation extends Component {
             </Col>
             <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
               <div className='boxmorpinsm py-3 h-100 w-100'>
-                <p className=''>최대 인원수</p>
+                <p className=''>현재 정원</p>
                 <p className=''>
-                  <span className='fw-bold'>
+                  <span className='fw-bold text-primary'>
                     {this.state.number_of_people == ''
                       ? ''
                       : this.state.number_of_people + '명'}
@@ -1599,7 +1604,7 @@ class Reservation extends Component {
             <Col className='text-center my-3' xs={12} sm={4}>
               <div className='boxmorpinsm py-3'>
                 <p className=''>배정된 날짜</p>
-                <p className='fw-bold'>
+                <p className='fw-bold text-primary'>
                   {moment(this.state.class_date).format('yyyy-MM-DD') ==
                   'Invalid date'
                     ? ''
@@ -1748,7 +1753,7 @@ class Reservation extends Component {
                       !this.state.show_date_table ? (
                         <tbody>
                           {this.state.reservation_exercise.length == 0 ? (
-                            <p>'설정된 운동이 없습니다.'</p>
+                            <p>'예약된 수업이 없습니다.'</p>
                           ) : (
                             this.state.reservation_exercise
                           )}
@@ -1760,7 +1765,7 @@ class Reservation extends Component {
                       !this.state.show_date_table ? (
                         <tbody>
                           {this.state.reservation_trainer.length == 0 ? (
-                            <p>'설정된 운동이 없습니다.'</p>
+                            <p>'예약된 수업이 없습니다.'</p>
                           ) : (
                             this.state.reservation_trainer
                           )}
@@ -1772,7 +1777,7 @@ class Reservation extends Component {
                       !this.state.show_trainer_table ? (
                         <tbody>
                           {this.state.reservation_date.length == 0 ? (
-                            <p>'설정된 운동이 없습니다.'</p>
+                            <p>'예약된 수업이 없습니다.'</p>
                           ) : (
                             this.state.reservation_date
                           )}
@@ -1784,7 +1789,7 @@ class Reservation extends Component {
                       !this.state.show_date_table ? (
                         <tbody>
                           {this.state.reservation.length == 0 ? (
-                            <p>'설정된 운동이 없습니다.'</p>
+                            <p>'예약된 수업이 없습니다.'</p>
                           ) : (
                             this.state.reservation
                           )}
@@ -1810,7 +1815,7 @@ class Reservation extends Component {
                       </thead>
                       <tbody>
                         {this.state.reservation_choice_trainer.length == 0 ? (
-                          <p>'설정된 운동이 없습니다.'</p>
+                          <p>'예약된 수업이 없습니다.'</p>
                         ) : (
                           this.state.reservation_choice_trainer
                         )}
@@ -1833,7 +1838,7 @@ class Reservation extends Component {
                       </thead>
                       <tbody>
                         {this.state.reservation_choice_client.length == 0 ? (
-                          <p>'설정된 운동이 없습니다.'</p>
+                          <p>'예약된 수업이 없습니다.'</p>
                         ) : (
                           this.state.reservation_choice_client
                         )}
