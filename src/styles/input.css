@@ -106,6 +106,6 @@ html .MuiInputLabel-outlined {
 */
 #trainer {
   cursor: pointer;
-  -webkit-text-fill-color: #fff;
+  -webkit-text-fill-color: rgba(30, 30, 250, 1);
   font-weight: bold;
 }

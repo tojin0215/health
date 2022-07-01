@@ -315,15 +315,10 @@ class Home extends Component {
               About 헬스케어CRM 서비스{' '}
               <span className='text-primary px-2 fs-1'> divvy</span>
             </h3>
-            <section className='aboutExplain'>
-              <p>
-                헬스 회원 스마트 관리 시스템으로 기존 회원 관리 방식에서
-                탈피하여 쉬운 회원관리, 스마트한 서비스를 제공합니다.
-              </p>
-              {/* <Button variant='outline-primary border-0 px-5'>
-								자세히보기
-							</Button> */}
-            </section>
+            <p>
+              헬스 회원 스마트 관리 시스템으로 기존 회원 관리 방식에서 탈피하여
+              쉬운 회원관리, 스마트한 서비스를 제공합니다.
+            </p>
             <div className='homeIcon'>
               <ul>
                 <li>

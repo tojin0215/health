@@ -930,24 +930,6 @@ class ReservationClass extends Component {
             </Col>
           </Row>
           <Row lg={6}>
-            <Col
-              className='text-center height-fit-content fs-2'
-              xs={12}
-              sm={3}
-              lg={3}
-            >
-              <label className='boxmorpsm d-block w-100 bg-white'>
-                <TextField
-                  id='exercise_class'
-                  variant='standard'
-                  value={this.state.exercise_class}
-                  onChange={this.handleChange}
-                  InputProps={{ disableUnderline: true }}
-                  label='운동명'
-                  error={this.state.exercise_class_err}
-                />
-              </label>
-            </Col>
             <Col className='text-center' xs={12} sm={3} lg={3}>
               {this.props.userinfo.loginWhether === 1 ? (
                 // <label className=' d-block w-100'>
@@ -985,7 +967,7 @@ class ReservationClass extends Component {
                         error={this.state.trainer_err}
                         variant='standard'
                         disabled
-                        className='boxmorpsm w-100 bg-white'
+                        className='boxmorpsm w-100 reservation-class--trainer-input'
                         style={{
                           cursor: 'pointer',
                         }}
@@ -995,7 +977,24 @@ class ReservationClass extends Component {
                 </div>
               )}
             </Col>
-
+            <Col
+              className='text-center height-fit-content fs-2'
+              xs={12}
+              sm={3}
+              lg={3}
+            >
+              <label className='boxmorpsm d-block w-100 bg-white'>
+                <TextField
+                  id='exercise_class'
+                  variant='standard'
+                  value={this.state.exercise_class}
+                  onChange={this.handleChange}
+                  InputProps={{ disableUnderline: true }}
+                  label='운동명'
+                  error={this.state.exercise_class_err}
+                />
+              </label>
+            </Col>
             <Col className='text-center height-fit-content' xs={12} sm={4}>
               <label className='d-block w-100'>
                 <DatePicker

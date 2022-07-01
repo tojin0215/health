@@ -17,3 +17,17 @@
   padding-top: 17px;
   padding-bottom: 17px;
 }
+
+.reservation-class--trainer-input {
+  background-color: #fff;
+  transition: background-color 0.5s;
+}
+
+.reservation-class--trainer-input #trainer {
+  -webkit-text-fill-color: rgba(0, 0, 0, 1);
+}
+
+.reservation-class--trainer-input:hover {
+  /* border-radius: 10px; */
+  background-color: rgba(246, 246, 80, 1);
+}

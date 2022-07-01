@@ -1,5 +1,6 @@
 .reservation__class-table--td {
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .reservation__class-table--td:hover {
