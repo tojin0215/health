@@ -339,6 +339,13 @@ export const updateIntroduce = (picture, story, idi) => {
   });
 };
 
+//update introduce story
+export const updateStory = (story, idi) => {
+  return axios.put(`${SERVER_URL}/introduce/story?idi=` + idi, {
+    story: story,
+  });
+};
+
 //delete introduce
 export const deleteIntroduce = (idi) => {
   return axios.delete(`${SERVER_URL}/introduce?idi=` + idi, {});

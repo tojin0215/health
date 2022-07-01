@@ -17,6 +17,7 @@ import {
   selectIntroduce,
   selectTrainerReservation,
   updateIntroduce,
+  updateStory,
 } from '../../api/user';
 
 const ViewIntroduceItem = ({
@@ -32,17 +33,20 @@ const ViewIntroduceItem = ({
   const [story_input, setStory_input] = useState('');
   const [file_input, setFile_input] = useState(null);
   const [picture_input, setPicture_input] = useState('');
-  const [open, setOpen] = React.useState(false);
+  const [whether, setWhether] = useState(false);
 
-  const handleUpdate = () => {
+  const handleUpdate = (idi) => {
     updateIntroduce(file_input, story_input, idi).then(() => {
       alert('수정완료');
       setShowModal(false);
+      setPicture_input('');
+      setFile_input(null);
+      setWhether(false);
       viewIntroduce();
     });
   };
   const handleDelete = (idi) => {
-    console.log(idi);
+    // console.log(idi);
     deleteIntroduce(idi).then(() => {
       alert('삭제완료');
       setShowModal(false);
@@ -57,9 +61,27 @@ const ViewIntroduceItem = ({
   const updateChange1 = (e) => {
     setPicture_input(e.target.value);
     setFile_input(e.target.files[0]);
+    setWhether(true);
   };
   const updateChange2 = (e) => {
     setStory_input(e.target.value);
+  };
+  const close = () => {
+    setShowModal(false);
+    setPicture_input('');
+    setFile_input(null);
+    setWhether(false);
+  };
+
+  const handleUpdateStory = (idi) => {
+    updateStory(story_input, idi).then(() => {
+      alert('수정완료');
+      setShowModal(false);
+      setPicture_input('');
+      setFile_input(null);
+      setWhether(false);
+      viewIntroduce();
+    });
   };
 
   return (
@@ -95,6 +117,7 @@ const ViewIntroduceItem = ({
                   <Form.Control
                     type='file'
                     onChange={updateChange1}
+                    accept='image/*'
                     className='w-100'
                   ></Form.Control>
                 </Form.Group>
@@ -123,13 +146,22 @@ const ViewIntroduceItem = ({
                 </Button>
               </Col>
               <Col xs={12} sm={8} className='pb-2'>
-                <Button onClick={() => handleUpdate(idi)} className='w-100'>
-                  수정하기
-                </Button>
+                {whether ? (
+                  <Button onClick={() => handleUpdate(idi)} className='w-100'>
+                    수정하기
+                  </Button>
+                ) : (
+                  <Button
+                    className='w-100'
+                    onClick={() => handleUpdateStory(idi)}
+                  >
+                    수정하기(내용만)
+                  </Button>
+                )}
               </Col>
               <Col>
                 <Button
-                  onClick={() => setShowModal(false)}
+                  onClick={close}
                   variant='outline-light'
                   className='w-100 mt-2'
                 >
