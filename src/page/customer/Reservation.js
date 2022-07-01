@@ -640,6 +640,11 @@ class Reservation extends Component {
             : this.props.userinfo.loginWhether === 1
             ? trainerResult[0].fitness_no
             : this.props.userinfo.fitness_no;
+        this.props.userinfo.loginWhether === 2
+          ? console.log(clientResult[0].fitness_no)
+          : this.props.userinfo.loginWhether === 1
+          ? console.log(trainerResult[0].fitness_no)
+          : console.log(this.props.userinfo.fitness_no);
         getReservation(fitness_no).then((result) => {
           const now = moment();
           const items = result

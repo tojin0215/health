@@ -71,16 +71,22 @@ class AddIntroduce extends Component {
   }
 
   handleIntroduce = () => {
-    insertIntroduce(
-      this.state.fitness_no,
-      this.props.userinfo.manager_name,
-      this.state.file,
-      this.state.story
-    ).then((res) => {
-      console.log(res);
-      alert('소개 등록 완료');
-      this.props.history.push('/introduce');
-    });
+    if (this.state.file === null) {
+      alert('이미지를 첨부해주세요.');
+    } else if (this.state.story === '') {
+      alert('내용을 써주세요.');
+    } else {
+      insertIntroduce(
+        this.state.fitness_no,
+        this.props.userinfo.manager_name,
+        this.state.file,
+        this.state.story
+      ).then((res) => {
+        console.log(res);
+        alert('소개 등록 완료');
+        this.props.history.push('/introduce');
+      });
+    }
   };
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
