@@ -90,7 +90,7 @@ const ViewIntroduceItem = ({
         <h1>{manager_name}</h1>
       </Col>
       <Col className='text-center'>
-        <img className='width-inherit' src={picture} />
+        <img className='width-inherit' src={'/api/' + picture} />
       </Col>
       <Col className='my-3 white-space-break-spaces text-center'>
         <p>{story}</p>
@@ -109,7 +109,7 @@ const ViewIntroduceItem = ({
                 <h2>{manager_name}</h2>
               </Col>
               <Col className='py-3 text-center'>
-                <img className='width-inherit' src={picture} />
+                <img className='width-inherit' src={'/api/' + picture} />
               </Col>
               <Col className='py-2'>
                 <h5>사진 선택</h5>
