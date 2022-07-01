@@ -12,8 +12,12 @@ class Footer extends Component {
           <a href='#'>법적 고지</a>
         </div>
         <div className='footerCompany'>
-          <span>사업자등록번호 : 312-81-12345</span>
-          <a href='#'>
+          <span>사업자등록번호 : 606-45-00610</span>
+          <a
+            href='http://www.ftc.go.kr/bizCommPop.do?wrkr_no=6064500610'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             <span>사업자정보확인</span>
           </a>
           <span>대표이사 : 박재진</span>

@@ -725,20 +725,26 @@ class Sales extends Component {
           <h2>매출 현황</h2>
           <div className='salesUtill'>
             <div className='salesStatus'>
-              <Row>
+              <Row xs={3}>
                 <Col>
                   <DatePicker
+                    className='sales__calender--dateinput'
                     dateFormat='yyyy/MM/dd(eee)'
                     selected={this.state.today}
                     onChange={(date) => this.setState({ today: date })}
                   />
                   <text>~</text>
                   <DatePicker
+                    className='sales__calender--dateinput'
                     dateFormat='yyyy/MM/dd(eee)'
                     selected={this.state.tommorrow}
                     onChange={(date) => this.setState({ tommorrow: date })}
                     minDate={this.state.today}
                   />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
                   <Button onClick={() => this.handleOnClick()}>조회하기</Button>
                   <Button onClick={() => this.handleButton('당일')}>
                     당일 조회하기
