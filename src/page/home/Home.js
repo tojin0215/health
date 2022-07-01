@@ -429,12 +429,10 @@ class Home extends Component {
             <section className='aboutList'>
               <ul>
                 <li>
-                  <div
-                    className='imageBox'
-                    style={{
-                      backgroundImage: `url(${aboutProduct})`,
-                    }}
-                  ></div>
+                  <Image
+                    className='w-100'
+                    src={process.env.PUBLIC_URL + '/assets/home-shopping.svg'}
+                  />
                   <h5>상품</h5>
                   <p>
                     헬스, 필라테스 등의 운동상품과 함께 운동복, 사물함 등의
@@ -445,12 +443,10 @@ class Home extends Component {
 									</Button> */}
                 </li>
                 <li>
-                  <div
-                    className='imageBox'
-                    style={{
-                      backgroundImage: `url(${aboutExercise})`,
-                    }}
-                  ></div>
+                  <Image
+                    className='w-100'
+                    src={process.env.PUBLIC_URL + '/assets/home-healthy.svg'}
+                  />
                   <h5>운동</h5>
                   <p>
                     센터의 전문가가 사용자와 상담하고 적합한 운동 리스트를
@@ -458,12 +454,10 @@ class Home extends Component {
                   </p>
                 </li>
                 <li>
-                  <div
-                    className='imageBox'
-                    style={{
-                      backgroundImage: `url(${aboutManage})`,
-                    }}
-                  ></div>
+                  <Image
+                    className='w-100'
+                    src={process.env.PUBLIC_URL + '/assets/home-workers.svg'}
+                  />
                   <h5>회원관리</h5>
                   <p>
                     회원을 쉽게 등록하고 수정할 수 있으며, 회원의 인바디 정보,
