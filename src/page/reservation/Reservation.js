@@ -28,8 +28,6 @@ import TextField from '@mui/material/TextField';
 
 import { SERVER_URL } from '../../const/settings';
 
-import ReservationPresetList from '../../component/reservation/ReservationPresetList';
-import ReservationList from '../../component/reservation/ReservationList';
 import UserSearch from '../../component/customer/UserSearch';
 import {
   getReservation,
@@ -917,7 +915,7 @@ class Reservation extends Component {
               );
             });
           this.setState({
-            reservation_choice_trainer: items,
+            reservation_choice_trainer: items.reverse(),
             reservation_data: result,
           });
         }
@@ -963,7 +961,7 @@ class Reservation extends Component {
           );
         });
         this.setState({
-          reservation_choice_client: items,
+          reservation_choice_client: items.reverse(),
           reservation_data: result,
         });
       });

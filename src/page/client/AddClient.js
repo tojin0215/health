@@ -87,13 +87,13 @@ class AddClient extends Component {
   }
   handleClient = () => {
     if (this.state.client_name === '') {
-      alert('!!!');
+      alert('이름을 입력해주새요.');
     } else if (this.state.phone === '') {
-      alert('!!!');
+      alert('연락처를 입력해주세요.');
     } else if (this.state.birth === '') {
-      alert('!!!');
+      alert('생년월일을 입력해주세요.');
     } else if (this.state.address === '') {
-      alert('!!!');
+      alert('주소를 입력해주세요.');
     } else {
       insertClient(
         this.props.userinfo.fitness_no,

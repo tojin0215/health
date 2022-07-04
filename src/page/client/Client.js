@@ -85,11 +85,11 @@ const ViewClientItem = ({
 
   const updateCompleted = (idc) => {
     if (client_name_input === '') {
-      alert('!!!');
+      alert('이름을 입력해주세요.');
     } else if (phone_input === '') {
-      alert('!!!');
+      alert('연락처를 입력해주세요.');
     } else if (address_input === '') {
-      alert('!!!');
+      alert('주소를 입력해주세요.');
     } else {
       updateClient(idc, client_name_input, phone_input, address_input).then(
         () => {

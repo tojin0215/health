@@ -807,13 +807,13 @@ class Sales extends Component {
                 {this.state.lets === 1 ? (
                   <div>
                     <Button onClick={() => this.salesToday1('', '개인 PT')}>
-                      개인 PT1
+                      개인 PT
                     </Button>
                     <Button onClick={() => this.salesToday1('', 'GX')}>
                       GX
                     </Button>
                     <Button onClick={() => this.salesToday1('', '필라테스')}>
-                      필라테스2
+                      필라테스
                     </Button>
                     <Button onClick={() => this.salesToday1('', '헬스')}>
                       헬스
@@ -825,13 +825,13 @@ class Sales extends Component {
                 ) : this.state.lets === 2 ? (
                   <div>
                     <Button onClick={() => this.salesToday2('', '개인 PT')}>
-                      개인 PT12123
+                      개인 PT
                     </Button>
                     <Button onClick={() => this.salesToday2('', 'GX')}>
                       GX
                     </Button>
                     <Button onClick={() => this.salesToday2('', '필라테스')}>
-                      필라테스2
+                      필라테스
                     </Button>
                     <Button onClick={() => this.salesToday2('', '헬스')}>
                       헬스
@@ -843,13 +843,13 @@ class Sales extends Component {
                 ) : this.state.lets === 3 ? (
                   <div>
                     <Button onClick={() => this.salesToday3('', '개인 PT')}>
-                      개인 PT121235345345
+                      개인 PT
                     </Button>
                     <Button onClick={() => this.salesToday3('', 'GX')}>
                       GX
                     </Button>
                     <Button onClick={() => this.salesToday3('', '필라테스')}>
-                      필라테스2
+                      필라테스
                     </Button>
                     <Button onClick={() => this.salesToday3('', '헬스')}>
                       헬스
@@ -912,7 +912,7 @@ class Sales extends Component {
                 ) : this.state.lets === 2 ? (
                   <>
                     <Button onClick={() => this.salesToday2('카드', '')}>
-                      카드123123
+                      카드
                     </Button>
                     <Button onClick={() => this.salesToday2('현금', '')}>
                       현금
@@ -924,7 +924,7 @@ class Sales extends Component {
                 ) : this.state.lets === 3 ? (
                   <>
                     <Button onClick={() => this.salesToday3('카드', '')}>
-                      카드123123ㄴㅇㄹ
+                      카드
                     </Button>
                     <Button onClick={() => this.salesToday3('현금', '')}>
                       현금

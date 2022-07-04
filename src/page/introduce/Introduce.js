@@ -37,7 +37,7 @@ const ViewIntroduceItem = ({
 
   const handleUpdate = (idi) => {
     updateIntroduce(file_input, story_input, idi).then(() => {
-      alert('수정완료');
+      alert('수정이 완료되었습니다.');
       setShowModal(false);
       setPicture_input('');
       setFile_input(null);
@@ -48,7 +48,7 @@ const ViewIntroduceItem = ({
   const handleDelete = (idi) => {
     // console.log(idi);
     deleteIntroduce(idi).then(() => {
-      alert('삭제완료');
+      alert('삭제가 완료되었습니다.');
       setShowModal(false);
       viewIntroduce();
     });
@@ -75,7 +75,7 @@ const ViewIntroduceItem = ({
 
   const handleUpdateStory = (idi) => {
     updateStory(story_input, idi).then(() => {
-      alert('수정완료');
+      alert('수정이 완료되었습니다.');
       setShowModal(false);
       setPicture_input('');
       setFile_input(null);
@@ -90,7 +90,9 @@ const ViewIntroduceItem = ({
         <h1>{manager_name}</h1>
       </Col>
       <Col className='text-center'>
-        <img className='width-inherit' src={'/api/' + picture} />
+        <img className='width-inherit' src={picture} />
+        {/* 웹 올릴때 */}
+        {/* <img className='width-inherit' src={'/api/' + picture} /> */}
       </Col>
       <Col className='my-3 white-space-break-spaces text-center'>
         <p>{story}</p>
@@ -109,7 +111,9 @@ const ViewIntroduceItem = ({
                 <h2>{manager_name}</h2>
               </Col>
               <Col className='py-3 text-center'>
-                <img className='width-inherit' src={'/api/' + picture} />
+                <img className='width-inherit' src={picture} />
+                {/* 웹 올릴때 */}
+                {/* <img className='width-inherit' src={'/api/' + picture} /> */}
               </Col>
               <Col className='py-2'>
                 <h5>사진 선택</h5>
@@ -155,7 +159,7 @@ const ViewIntroduceItem = ({
                     className='w-100'
                     onClick={() => handleUpdateStory(idi)}
                   >
-                    수정하기(내용만)
+                    수정하기
                   </Button>
                 )}
               </Col>

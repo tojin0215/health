@@ -1,4 +1,5 @@
-import { Menu, TableCell, TableHead, TableRow, TextField } from '@mui/material';
+import { TableCell, TableHead, TableRow, TextField } from '@mui/material';
+import Menu from '../../component/navigation/Menu';
 import { Component } from 'react';
 import { Button, Row, Col, Container, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
