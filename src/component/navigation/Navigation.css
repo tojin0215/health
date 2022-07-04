@@ -39,7 +39,12 @@
   flex-direction: row;
 }
 
-.Navigation .navbar-brand {
+.nav-item {
+  color: #888;
+}
+
+.Navigation .navbar .navbar-brand {
+  color: #ebff2e;
   width: auto;
   height: 100%;
   border-radius: 100%;

@@ -115,6 +115,26 @@
   overflow: auto;
 }
 
+.apexcharts-legend-series .apexcharts-legend-text {
+  color: #ebff2e !important;
+}
+
+.apexcharts-inactive-legend .apexcharts-legend-text {
+  color: #fff !important;
+}
+
+.apexcharts-yaxis-label {
+  fill: #fff;
+}
+
+.apexcharts-xaxis-label {
+  fill: rgb(255, 255, 255);
+}
+
+.apexcharts-tooltip {
+  color: #000;
+}
+
 @media (max-width: 767px) {
   .inbodyCustomer .waySub {
     width: 100%;

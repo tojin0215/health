@@ -20,7 +20,7 @@ class Footer extends Component {
           >
             <span>사업자정보확인</span>
           </a>
-          <span>대표이사 : 박재진</span>
+          <span>대표 : 박재진</span>
           <span>주소 : (우)47243 부산광역시 부산진구 서전로37번길 51</span>
           <span>대표 이메일 : bus0215@hanmail.net</span>
         </div>

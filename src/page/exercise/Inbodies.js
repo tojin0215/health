@@ -215,6 +215,14 @@ class Inbodies extends Component {
           type: 'line',
         },
         series: [{ name: '인바디', data: [0, 1, 2, 3, 4, 5, 6, 7] }],
+        theme: {
+          monochrome: {
+            enabled: true,
+            color: '#255aee',
+            shadeTo: 'light',
+            shadeIntensity: 0.65,
+          },
+        },
         xaxis: {
           categories: [
             '체중',
@@ -230,10 +238,9 @@ class Inbodies extends Component {
             '체지방률',
           ],
         },
-
         stroke: {
           width: 2,
-          curve: 'straight',
+          curve: 'smooth',
           dashArray: 0,
         },
         markers: {
@@ -242,6 +249,7 @@ class Inbodies extends Component {
             sizeOffset: 6,
           },
         },
+        colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800'],
       },
       open: false,
       openChart: false,
@@ -512,8 +520,8 @@ class Inbodies extends Component {
           let PercentBodyFat = [];
           for (let i = 0; i < res.length; i++) {
             inbodyNum.push(
-              '측정일: ' +
-                moment(res[i].measurementDate).format('yyyy년MM월DD일')
+              // '측정일: ' +
+              moment(res[i].measurementDate).format('yyyy년MM월DD일')
             );
 
             height.push(res[i].height);
@@ -553,6 +561,19 @@ class Inbodies extends Component {
               xaxis: {
                 categories: inbodyNum,
               },
+              colors: [
+                '#E91E63',
+                '#FF9800',
+                '#FFFF00',
+                '#00BF00',
+                '#A3FF8C',
+                '#00FFEB',
+                '#2E93fA',
+                '#0001FF',
+                '#A468FF',
+                '#FF7AC8',
+                '#FFFFFF',
+              ],
             },
           });
         });
