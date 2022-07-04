@@ -322,75 +322,90 @@ class Home extends Component {
             <div className='homeIcon'>
               <ul>
                 <li>
+                  <div className='homeIcon--hover'>회원 관리</div>
                   <Link
                     to='/client'
-                    className='btnCustomerNew btnCustomer p-1'
+                    className='btnCustomerNew btnCustomer p-1 align-items-center'
                     style={{
-                      backgroundImage: `url(${btnCustomer})`,
                       backgroundColor: '#fff',
                     }}
                   >
-                    <div className='homeIcon--hover'>회원 관리</div>
+                    <Image
+                      className='w-100'
+                      src={process.env.PUBLIC_URL + '/assets/home-client.svg'}
+                    />
                   </Link>
                   <Button className='w-100 fw-bolder' variant='dark'>
                     회원 관리
                   </Button>
                 </li>
                 <li>
+                  <div className='homeIcon--hover'>강사 관리</div>
                   <Link
                     to='/trainer'
-                    className='btnCustomerNew btnSetting p-1'
+                    className='btnCustomerNew btnSetting p-1 align-items-center'
                     style={{
-                      backgroundImage: `url(${aboutManage})`,
                       backgroundColor: '#fff',
                     }}
                   >
-                    <div className='homeIcon--hover'>강사 관리</div>
+                    <Image
+                      className='w-100'
+                      src={process.env.PUBLIC_URL + '/assets/home-trainer.svg'}
+                    />
                   </Link>
                   <Button className='w-100 fw-bolder' variant='dark'>
                     강사 관리
                   </Button>
                 </li>
                 <li>
+                  <div className='homeIcon--hover'>수업 일정</div>
                   <Link
                     to='/reservation'
-                    className='btnCustomerNew btnExercise p-1'
+                    className='btnCustomerNew btnExercise p-1 align-items-center'
                     style={{
-                      backgroundImage: `url(${btnSetting})`,
                       backgroundColor: '#fff',
                     }}
                   >
-                    <div className='homeIcon--hover'>수업 일정</div>
+                    <Image
+                      className='w-100'
+                      src={process.env.PUBLIC_URL + '/assets/home-class.svg'}
+                    />
                   </Link>
                   <Button className='w-100 fw-bolder' variant='dark'>
                     수업 일정
                   </Button>
                 </li>
                 <li>
+                  <div className='homeIcon--hover'>운동 배정</div>
                   <Link
                     to='/workoutAlloted'
-                    className='btnCustomerNew btnSales p-1'
+                    className='btnCustomerNew btnSales p-1 align-items-center'
                     style={{
-                      backgroundImage: `url(${btnExercise})`,
                       backgroundColor: '#fff',
                     }}
                   >
-                    <div className='homeIcon--hover'>운동 배정</div>
+                    <Image
+                      className='w-100'
+                      src={process.env.PUBLIC_URL + '/assets/home-workout.svg'}
+                    />
                   </Link>
                   <Button className='w-100 fw-bolder' variant='dark'>
                     운동 배정
                   </Button>
                 </li>
                 <li>
+                  <div className='homeIcon--hover'>매출 관리</div>
                   <Link
                     to='/sales'
-                    className='btnCustomerNew btnStatic p-1'
+                    className='btnCustomerNew btnStatic p-1 align-items-center'
                     style={{
-                      backgroundImage: `url(${btnStatic})`,
                       backgroundColor: '#fff',
                     }}
                   >
-                    <div className='homeIcon--hover'>매출 관리</div>
+                    <Image
+                      className='w-100'
+                      src={process.env.PUBLIC_URL + '/assets/home-chart.svg'}
+                    />
                   </Link>
                   <Button className='w-100 fw-bolder' variant='dark'>
                     매출 관리
@@ -400,7 +415,7 @@ class Home extends Component {
                   <li>
                     <Link
                       to='/statistics'
-                      className='btnCustomerNew btnStatic'
+                      className='btnCustomerNew btnStatic align-items-center'
                       style={{
                         backgroundImage: `url(${aboutManage})`,
                         backgroundColor: '#fff',
@@ -414,12 +429,10 @@ class Home extends Component {
             <section className='aboutList'>
               <ul>
                 <li>
-                  <div
-                    className='imageBox'
-                    style={{
-                      backgroundImage: `url(${aboutProduct})`,
-                    }}
-                  ></div>
+                  <Image
+                    className='w-100'
+                    src={process.env.PUBLIC_URL + '/assets/home-shopping.svg'}
+                  />
                   <h5>상품</h5>
                   <p>
                     헬스, 필라테스 등의 운동상품과 함께 운동복, 사물함 등의
@@ -430,12 +443,10 @@ class Home extends Component {
 									</Button> */}
                 </li>
                 <li>
-                  <div
-                    className='imageBox'
-                    style={{
-                      backgroundImage: `url(${aboutExercise})`,
-                    }}
-                  ></div>
+                  <Image
+                    className='w-100'
+                    src={process.env.PUBLIC_URL + '/assets/home-healthy.svg'}
+                  />
                   <h5>운동</h5>
                   <p>
                     센터의 전문가가 사용자와 상담하고 적합한 운동 리스트를
@@ -443,12 +454,10 @@ class Home extends Component {
                   </p>
                 </li>
                 <li>
-                  <div
-                    className='imageBox'
-                    style={{
-                      backgroundImage: `url(${aboutManage})`,
-                    }}
-                  ></div>
+                  <Image
+                    className='w-100'
+                    src={process.env.PUBLIC_URL + '/assets/home-workers.svg'}
+                  />
                   <h5>회원관리</h5>
                   <p>
                     회원을 쉽게 등록하고 수정할 수 있으며, 회원의 인바디 정보,
