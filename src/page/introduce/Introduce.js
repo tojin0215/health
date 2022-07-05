@@ -11,6 +11,9 @@ import Footer from '../../component/footer/Footer';
 import { Container, Row, Col, Modal, Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
+// icons
+import { RiDeleteBin5Fill } from 'react-icons/ri';
+
 import {
   deleteIntroduce,
   selectClientReservation,
@@ -136,7 +139,7 @@ const ViewIntroduceItem = ({
                   rows={5}
                 ></Form.Control>
               </Col>
-              <Col xs={12} sm={4}>
+              <Col xs={12} sm={2}>
                 <Button
                   onClick={() =>
                     confirm('정말 삭제하시겠습니까?') == true
@@ -146,10 +149,10 @@ const ViewIntroduceItem = ({
                   variant='outline-danger'
                   className='w-100'
                 >
-                  삭제하기
+                  <RiDeleteBin5Fill className='align-baseline' />
                 </Button>
               </Col>
-              <Col xs={12} sm={8} className='pb-2'>
+              <Col xs={12} sm={10} className='pb-2'>
                 {whether ? (
                   <Button onClick={() => handleUpdate(idi)} className='w-100'>
                     수정하기
@@ -166,7 +169,7 @@ const ViewIntroduceItem = ({
               <Col>
                 <Button
                   onClick={close}
-                  variant='outline-light'
+                  variant='secondary'
                   className='w-100 mt-2'
                 >
                   닫기

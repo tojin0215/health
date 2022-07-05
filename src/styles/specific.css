@@ -90,12 +90,12 @@
 
 /* bootstrap button */
 .btn-primary {
-  background-color: #222;
-  color: #ebff2e;
+  background-color: #ebff2e;
+  color: #222;
   border-color: #ebff2e;
 }
 .btn-primary:hover {
-  background-color: #ebff2e;
+  background-color: #eaff2ea9;
   color: #000;
   border-color: #ebff2e;
 }
