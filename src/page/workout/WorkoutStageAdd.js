@@ -1,6 +1,4 @@
-import { TableCell, TableHead, TableRow } from '@mui/material';
 import { Component, useState } from 'react';
-import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
@@ -14,6 +12,35 @@ import Footer from '../../component/footer/Footer';
 import Header from '../../component/header/Header';
 import Menu from '../../component/navigation/Menu';
 import Navigation from '../../component/navigation/Navigation';
+
+//bootstrap
+import { Button, Col, Container, Row } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+//mui
+import PropTypes from 'prop-types';
+import { alpha } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import TableSortLabel from '@mui/material/TableSortLabel';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
+import Checkbox from '@mui/material/Checkbox';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import { visuallyHidden } from '@mui/utils';
+//react icons
+import { BsPlusLg } from 'react-icons/bs';
 
 const ExerciseView = ({
   idw,
@@ -65,7 +92,6 @@ const ExerciseView = ({
       setDefault_rest_input(default_rest);
       setUrl_input(url);
       workoutStageView(stage);
-      alert(stageWord + '에 묶음 운동이 설정되었습니다.');
     });
   };
   console.log('stage', stage);
@@ -147,6 +173,7 @@ const ExerciseView = ({
   const changeInsert4 = (e) => {
     setUrl_input(e.target.value);
   };
+
   return (
     <>
       <TableRow>
@@ -155,31 +182,36 @@ const ExerciseView = ({
         <TableCell>{workout}</TableCell>
         <TableCell>{machine}</TableCell>
         <TableCell>
-          <input
+          <Form.Control
             type='number'
             value={default_set_input}
             onChange={changeInsert}
-          />
+          ></Form.Control>
         </TableCell>
         <TableCell>
-          <input
+          <Form.Control
             type='number'
             value={default_count_input}
             onChange={changeInsert2}
-          />
+          ></Form.Control>
         </TableCell>
         <TableCell>
-          <input
+          <Form.Control
             type='number'
             value={default_rest_input}
             onChange={changeInsert3}
-          />
+          ></Form.Control>
         </TableCell>
         <TableCell>
-          <input value={url_input} onChange={changeInsert4} />
+          <Form.Control
+            value={url_input}
+            onChange={changeInsert4}
+          ></Form.Control>
         </TableCell>
         <TableCell onClick={plusStage}>
-          <button>+</button>
+          <Button variant='success'>
+            <BsPlusLg />
+          </Button>
         </TableCell>
       </TableRow>
     </>
@@ -489,6 +521,8 @@ class WorkoutStageAdd extends Component {
                   >
                     1 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -496,6 +530,8 @@ class WorkoutStageAdd extends Component {
                   >
                     2 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -503,6 +539,8 @@ class WorkoutStageAdd extends Component {
                   >
                     3 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -510,6 +548,8 @@ class WorkoutStageAdd extends Component {
                   >
                     4 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -532,11 +572,12 @@ class WorkoutStageAdd extends Component {
                   </Col>
                 </Row>
               </Row>
+              <h3>상체 운동 묶음 확인</h3>
               <Col xs={12}>
+                {/* 상체 운동 목록 확인*/}
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell scope='col'>단계</TableCell>
                       <TableCell scope='col'>운동 부위</TableCell>
                       <TableCell scope='col'>운동 이름</TableCell>
                       <TableCell scope='col'>운동 기구</TableCell>
@@ -552,45 +593,54 @@ class WorkoutStageAdd extends Component {
             </div>
           ) : this.state.nextStage2 ? (
             <div>
-              <Row xs={5}></Row>
-              <Col>
-                <Button
-                  variant='secondary'
-                  className='w-100'
-                  onClick={() => this.stageOnClick(211)}
-                >
-                  1 단계
-                </Button>
-                <Button
-                  variant='secondary'
-                  className='w-100'
-                  onClick={() => this.stageOnClick(212)}
-                >
-                  2 단계
-                </Button>
-                <Button
-                  variant='secondary'
-                  className='w-100'
-                  onClick={() => this.stageOnClick(213)}
-                >
-                  3 단계
-                </Button>
-                <Button
-                  variant='secondary'
-                  className='w-100'
-                  onClick={() => this.stageOnClick(214)}
-                >
-                  4 단계
-                </Button>
-                <Button
-                  variant='secondary'
-                  className='w-100'
-                  onClick={() => this.stageOnClick(215)}
-                >
-                  5 단계
-                </Button>
-              </Col>
-              <Row>
+              <Row xs={5}>
+                <Col>
+                  <Button
+                    variant='secondary'
+                    className='w-100'
+                    onClick={() => this.stageOnClick(211)}
+                  >
+                    1 단계
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    variant='secondary'
+                    className='w-100'
+                    onClick={() => this.stageOnClick(212)}
+                  >
+                    2 단계
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    variant='secondary'
+                    className='w-100'
+                    onClick={() => this.stageOnClick(213)}
+                  >
+                    3 단계
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    variant='secondary'
+                    className='w-100'
+                    onClick={() => this.stageOnClick(214)}
+                  >
+                    4 단계
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    variant='secondary'
+                    className='w-100'
+                    onClick={() => this.stageOnClick(215)}
+                  >
+                    5 단계
+                  </Button>
+                </Col>
+              </Row>
+              <Row className='my-2'>
                 <Col className='text-start'>
                   <Button
                     variant='outline-danger'
@@ -603,11 +653,12 @@ class WorkoutStageAdd extends Component {
                   </Button>
                 </Col>
               </Row>
+              <h3>하체 운동 묶음 확인</h3>
               <Col xs={12}>
+                {/* 하체 운동 목록 확인 */}
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell scope='col'>단계</TableCell>
                       <TableCell scope='col'>운동 부위</TableCell>
                       <TableCell scope='col'>운동 이름</TableCell>
                       <TableCell scope='col'>운동 기구</TableCell>
@@ -623,7 +674,7 @@ class WorkoutStageAdd extends Component {
             </div>
           ) : this.state.nextStage3 ? (
             <div>
-              <Row>
+              <Row xs={5}>
                 <Col>
                   <Button
                     variant='secondary'
@@ -632,6 +683,8 @@ class WorkoutStageAdd extends Component {
                   >
                     1 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -639,6 +692,8 @@ class WorkoutStageAdd extends Component {
                   >
                     2 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -646,6 +701,8 @@ class WorkoutStageAdd extends Component {
                   >
                     3 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -653,6 +710,8 @@ class WorkoutStageAdd extends Component {
                   >
                     4 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -675,11 +734,12 @@ class WorkoutStageAdd extends Component {
                   </Button>
                 </Col>
               </Row>
+              <h3>전신 운동 묶음 확인</h3>
               <Col xs={12}>
+                {/* 전신 운동 목록 확인 */}
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell scope='col'>단계</TableCell>
                       <TableCell scope='col'>운동 부위</TableCell>
                       <TableCell scope='col'>운동 이름</TableCell>
                       <TableCell scope='col'>운동 기구</TableCell>
@@ -704,6 +764,8 @@ class WorkoutStageAdd extends Component {
                   >
                     1 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -711,6 +773,8 @@ class WorkoutStageAdd extends Component {
                   >
                     2 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -718,6 +782,8 @@ class WorkoutStageAdd extends Component {
                   >
                     3 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -725,6 +791,8 @@ class WorkoutStageAdd extends Component {
                   >
                     4 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -747,11 +815,12 @@ class WorkoutStageAdd extends Component {
                   </Button>
                 </Col>
               </Row>
+              <h3>코어 운동 묶음 확인</h3>
               <Col xs={12}>
+                {/* 코어 운동 목록 확인 */}
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell scope='col'>단계</TableCell>
                       <TableCell scope='col'>운동 부위</TableCell>
                       <TableCell scope='col'>운동 이름</TableCell>
                       <TableCell scope='col'>운동 기구</TableCell>
@@ -776,6 +845,8 @@ class WorkoutStageAdd extends Component {
                   >
                     1 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -783,6 +854,8 @@ class WorkoutStageAdd extends Component {
                   >
                     2 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -790,6 +863,8 @@ class WorkoutStageAdd extends Component {
                   >
                     3 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -797,6 +872,8 @@ class WorkoutStageAdd extends Component {
                   >
                     4 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -819,11 +896,12 @@ class WorkoutStageAdd extends Component {
                   </Button>
                 </Col>
               </Row>
+              <h3>유산소 운동 묶음 확인</h3>
               <Col xs={12}>
+                {/* 유산소 운동 목록 확인 */}
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell scope='col'>단계</TableCell>
                       <TableCell scope='col'>운동 부위</TableCell>
                       <TableCell scope='col'>운동 이름</TableCell>
                       <TableCell scope='col'>운동 기구</TableCell>
@@ -848,6 +926,8 @@ class WorkoutStageAdd extends Component {
                   >
                     1 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -855,6 +935,8 @@ class WorkoutStageAdd extends Component {
                   >
                     2 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -862,6 +944,8 @@ class WorkoutStageAdd extends Component {
                   >
                     3 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -869,6 +953,8 @@ class WorkoutStageAdd extends Component {
                   >
                     4 단계
                   </Button>
+                </Col>
+                <Col>
                   <Button
                     variant='secondary'
                     className='w-100'
@@ -895,7 +981,6 @@ class WorkoutStageAdd extends Component {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell scope='col'>단계</TableCell>
                       <TableCell scope='col'>운동 부위</TableCell>
                       <TableCell scope='col'>운동 이름</TableCell>
                       <TableCell scope='col'>운동 기구</TableCell>
@@ -910,31 +995,59 @@ class WorkoutStageAdd extends Component {
               </Col>
             </div>
           ) : (
-            <div>
-              <div>
+            <Row>
+              <Col>
                 {/* <button onClick={() => this.stageOnClick(11)}>
                   1단계 기존바꿔야됨
                 </button> */}
-                <Button onClick={() => this.stageOnClickStage()}>상체</Button>
-              </div>
-              <div>
-                <Button onClick={() => this.stageOnClickStage2()}>하체</Button>
-              </div>
-              <div>
-                <Button onClick={() => this.stageOnClickStage3()}>전신</Button>
-              </div>
-              <div>
-                <Button onClick={() => this.stageOnClickStage4()}>코어</Button>
-              </div>
-              <div>
-                <Button onClick={() => this.stageOnClickStage5()}>
+                <Button
+                  className='w-100'
+                  onClick={() => this.stageOnClickStage()}
+                >
+                  상체
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  className='w-100'
+                  onClick={() => this.stageOnClickStage2()}
+                >
+                  하체
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  className='w-100'
+                  onClick={() => this.stageOnClickStage3()}
+                >
+                  전신
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  className='w-100'
+                  onClick={() => this.stageOnClickStage4()}
+                >
+                  코어
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  className='w-100'
+                  onClick={() => this.stageOnClickStage5()}
+                >
                   유산소
                 </Button>
-              </div>
-              <div>
-                <Button onClick={() => this.stageOnClickStage6()}>기타</Button>
-              </div>
-            </div>
+              </Col>
+              <Col>
+                <Button
+                  className='w-100'
+                  onClick={() => this.stageOnClickStage6()}
+                >
+                  기타
+                </Button>
+              </Col>
+            </Row>
           )}
 
           <Row className='mt-4' xs={6}>
@@ -1013,17 +1126,53 @@ class WorkoutStageAdd extends Component {
               </Button>
             </Col>
           </Row>
-          <Table>
+          <Table className='mt-2' size='small'>
             <TableHead>
               <TableRow>
-                <TableCell scope='col'>운동 부위</TableCell>
-                <TableCell scope='col'>운동 이름</TableCell>
-                <TableCell scope='col'>운동 기구</TableCell>
-                <TableCell scope='col'>세트</TableCell>
-                <TableCell scope='col'>횟수</TableCell>
-                <TableCell scope='col'>쉬는시간</TableCell>
-                <TableCell scope='col'>url</TableCell>
-                <TableCell scope='col'>선택</TableCell>
+                <TableCell
+                  scope='col'
+                  align='left'
+                  style={{ minWidth: '3.8rem' }}
+                >
+                  부위
+                </TableCell>
+                <TableCell scope='col' align='left'>
+                  이름
+                </TableCell>
+                <TableCell scope='col' align='left'>
+                  기구
+                </TableCell>
+                <TableCell
+                  scope='col'
+                  align='center'
+                  style={{ width: '100px' }}
+                >
+                  세트
+                </TableCell>
+                <TableCell
+                  scope='col'
+                  align='center'
+                  style={{ width: '100px' }}
+                >
+                  횟수
+                </TableCell>
+                <TableCell
+                  scope='col'
+                  align='center'
+                  style={{ width: '100px' }}
+                >
+                  쉬는시간
+                </TableCell>
+                <TableCell scope='col' align='center'>
+                  url
+                </TableCell>
+                <TableCell
+                  scope='col'
+                  align='center'
+                  style={{ width: '3.6rem' }}
+                >
+                  선택
+                </TableCell>
               </TableRow>
             </TableHead>
             {this.state.workoutlist ? this.state.workoutlist : ''}
