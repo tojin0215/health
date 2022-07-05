@@ -4,3 +4,4 @@
 // export const SERVER_URL = '/api';
 export const SERVER_URL = '';
 //aws  "proxy": "http://13.124.141.28:3002/",
+//divvy "proxy": "http://divvy.fit/",
