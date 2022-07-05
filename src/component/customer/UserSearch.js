@@ -26,8 +26,17 @@ import {
   selectTrainerReservation,
 } from '../../api/user';
 
+import Form from 'react-bootstrap/Form';
+
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+
+import IconButton from '@mui/material/IconButton';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import { BsCheckLg } from 'react-icons/bs';
+import { FaSearch } from 'react-icons/fa';
+import SearchIcon from '@mui/icons-material/Search';
 
 const options = ['이름', '핸드폰'];
 
@@ -38,7 +47,7 @@ const UserSearchTableHeader = () => (
       <TableCell>이름</TableCell>
       <TableCell>폰번호</TableCell>
       <TableCell>성별</TableCell>
-      <TableCell>선택</TableCell>
+      <TableCell align='center'>선택</TableCell>
     </TableRow>
   </TableHead>
 );
@@ -59,9 +68,9 @@ const UserSearchTableItem = ({ c, handleSelectUser }) => (
           onClick={handleSelectUser}
           id={c.idc}
           value={[c.client_name, c.phone]}
-          variant='primary'
+          variant='outline-success'
         >
-          선택
+          <BsCheckLg />
         </Button>
       </DialogActions>
     </TableCell>
@@ -157,7 +166,7 @@ const UserSearch = ({
       <DialogTitle>회원 검색</DialogTitle>
       <DialogContent>
         <Row>
-          <Col xs={3}>
+          <Col xs={3} className=''>
             <Dropdown
               className='searchDrop'
               options={options}
@@ -166,22 +175,53 @@ const UserSearch = ({
               placeholder='검색 대상을 선택하세요.'
             />
           </Col>
-          <Col xs={6}>
-            <input
-              className='w-100 h-100'
-              type='text'
-              id='search'
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </Col>
-          <Col xs={3}>
-            <Button
-              className='w-100 h-100'
-              type='button'
-              onClick={handleOnSearch}
+          {/* <Col xs={9}>
+            <Paper
+              component='form'
+              sx={{
+                p: '2px 4px',
+                display: 'flex',
+                alignItems: 'center',
+              }}
             >
-              검색
+              <InputBase
+                sx={{ ml: 1, flex: 1 }}
+                placeholder='회원을 검색하세요'
+                // className='w-100 h-100'
+                type='text'
+                id='search'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <IconButton
+                sx={{ p: '10px' }}
+                aria-label='search'
+                onClick={handleOnSearch}
+              >
+                <SearchIcon />
+              </IconButton>
+            </Paper>
+          </Col> */}
+          <Col xs={8}>
+            <Form.Group className='h-100'>
+              <Form.Control
+                placeholder='회원을 검색하세요'
+                // className='w-100 h-100'
+                type='text'
+                id='search'
+                className='h-100'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </Form.Group>
+          </Col>
+          <Col xs={1} className='p-0'>
+            <Button
+              className='w-100 h-100 p-0'
+              onClick={handleOnSearch}
+              variant='outline-secondary'
+            >
+              <FaSearch />
             </Button>
           </Col>
         </Row>
