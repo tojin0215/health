@@ -572,7 +572,24 @@ class WorkoutStageAdd extends Component {
                   </Col>
                 </Row>
               </Row>
-              <h3>상체 운동 묶음 확인</h3>
+              <h3>
+                상체{' '}
+                {this.state.stage === 111 ? (
+                  <>1단계</>
+                ) : this.state.stage === 112 ? (
+                  <>2단계</>
+                ) : this.state.stage === 113 ? (
+                  <>3단계</>
+                ) : this.state.stage === 114 ? (
+                  <>4단계</>
+                ) : this.state.stage === 115 ? (
+                  <>5단계</>
+                ) : (
+                  ''
+                )}{' '}
+                운동 묶음 확인
+              </h3>
+
               <Col xs={12}>
                 {/* 상체 운동 목록 확인*/}
                 <Table>
@@ -653,7 +670,23 @@ class WorkoutStageAdd extends Component {
                   </Button>
                 </Col>
               </Row>
-              <h3>하체 운동 묶음 확인</h3>
+              <h3>
+                하체{' '}
+                {this.state.stage === 211 ? (
+                  <>1단계</>
+                ) : this.state.stage === 212 ? (
+                  <>2단계</>
+                ) : this.state.stage === 213 ? (
+                  <>3단계</>
+                ) : this.state.stage === 214 ? (
+                  <>4단계</>
+                ) : this.state.stage === 215 ? (
+                  <>5단계</>
+                ) : (
+                  ''
+                )}
+                운동 묶음 확인
+              </h3>
               <Col xs={12}>
                 {/* 하체 운동 목록 확인 */}
                 <Table>
@@ -734,7 +767,23 @@ class WorkoutStageAdd extends Component {
                   </Button>
                 </Col>
               </Row>
-              <h3>전신 운동 묶음 확인</h3>
+              <h3>
+                전신
+                {this.state.stage === 311 ? (
+                  <>1단계</>
+                ) : this.state.stage === 312 ? (
+                  <>2단계</>
+                ) : this.state.stage === 313 ? (
+                  <>3단계</>
+                ) : this.state.stage === 314 ? (
+                  <>4단계</>
+                ) : this.state.stage === 315 ? (
+                  <>5단계</>
+                ) : (
+                  ''
+                )}{' '}
+                운동 묶음 확인
+              </h3>
               <Col xs={12}>
                 {/* 전신 운동 목록 확인 */}
                 <Table>
@@ -815,7 +864,23 @@ class WorkoutStageAdd extends Component {
                   </Button>
                 </Col>
               </Row>
-              <h3>코어 운동 묶음 확인</h3>
+              <h3>
+                코어{' '}
+                {this.state.stage === 411 ? (
+                  <>1단계</>
+                ) : this.state.stage === 412 ? (
+                  <>2단계</>
+                ) : this.state.stage === 413 ? (
+                  <>3단계</>
+                ) : this.state.stage === 414 ? (
+                  <>4단계</>
+                ) : this.state.stage === 415 ? (
+                  <>5단계</>
+                ) : (
+                  ''
+                )}{' '}
+                운동 묶음 확인
+              </h3>
               <Col xs={12}>
                 {/* 코어 운동 목록 확인 */}
                 <Table>
@@ -896,7 +961,23 @@ class WorkoutStageAdd extends Component {
                   </Button>
                 </Col>
               </Row>
-              <h3>유산소 운동 묶음 확인</h3>
+              <h3>
+                유산소{' '}
+                {this.state.stage === 511 ? (
+                  <>1단계</>
+                ) : this.state.stage === 512 ? (
+                  <>2단계</>
+                ) : this.state.stage === 513 ? (
+                  <>3단계</>
+                ) : this.state.stage === 514 ? (
+                  <>4단계</>
+                ) : this.state.stage === 515 ? (
+                  <>5단계</>
+                ) : (
+                  ''
+                )}{' '}
+                운동 묶음 확인
+              </h3>
               <Col xs={12}>
                 {/* 유산소 운동 목록 확인 */}
                 <Table>
@@ -964,6 +1045,23 @@ class WorkoutStageAdd extends Component {
                   </Button>
                 </Col>
               </Row>
+              <h3>
+                기타{' '}
+                {this.state.stage === 611 ? (
+                  <>1단계</>
+                ) : this.state.stage === 612 ? (
+                  <>2단계</>
+                ) : this.state.stage === 613 ? (
+                  <>3단계</>
+                ) : this.state.stage === 614 ? (
+                  <>4단계</>
+                ) : this.state.stage === 615 ? (
+                  <>5단계</>
+                ) : (
+                  ''
+                )}{' '}
+                운동 묶음 확인
+              </h3>
               <Row className='my-2'>
                 <Col className='text-start'>
                   <Button
