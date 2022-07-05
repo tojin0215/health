@@ -184,11 +184,13 @@ const ViewClientItem = ({
                   ) : (
                     <div>
                       <Button
-                        variant='danger'
+                        variant='outline-danger'
                         onClick={() =>
                           // eslint-disable-next-line no-restricted-globals
-                          confirm(client_name + '회원을 탈퇴시겠습니까??') ==
-                          true
+                          confirm(
+                            client_name +
+                              ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
+                          ) == true
                             ? deleteCompleted(idc)
                             : alert(
                                 client_name + '회원 탈퇴를 취소 하였습니다.'
@@ -212,7 +214,9 @@ const ViewClientItem = ({
         </Modal.Body>
         <Modal.Footer>
           {showUpdate ? (
-            <Button onClick={() => updateCompleted(idc)}>수정 완료</Button>
+            <Button onClick={() => updateCompleted(idc)} variant='success'>
+              완료하기
+            </Button>
           ) : (
             <Button onClick={modalUpdate} variant='primary'>
               정보 수정
