@@ -64,13 +64,16 @@ const UserSearchTableItem = ({ c, handleSelectUser }) => (
     <TableCell>
       <DialogActions className='p-0'>
         <Button
-          type='button'
           onClick={handleSelectUser}
           id={c.idc}
           value={[c.client_name, c.phone]}
           variant='outline-success'
         >
-          <BsCheckLg />
+          <BsCheckLg
+            onClick={handleSelectUser}
+            id={c.idc}
+            value={[c.client_name, c.phone]}
+          />
         </Button>
       </DialogActions>
     </TableCell>
