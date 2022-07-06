@@ -1543,7 +1543,7 @@ class Reservation extends Component {
               <h5>선택된 수업</h5>
             </Col>
             <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
-              <div className='boxmorpinsm py-3 h-100 w-100 '>
+              <div className='reservation__selected-class boxmorpinsm py-3 w-100 '>
                 <p className=''>운동명</p>
                 <p className='fw-bold text-primary'>
                   {this.state.exercise_name}
@@ -1559,7 +1559,7 @@ class Reservation extends Component {
               />
             </Col>
             <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
-              <div className='boxmorpinsm py-3 h-100 w-100'>
+              <div className='reservation__selected-class boxmorpinsm py-3 w-100'>
                 <p className=''>강사명</p>
                 <p className='fw-bold text-primary'>{this.state.trainer}</p>
               </div>
@@ -1573,7 +1573,7 @@ class Reservation extends Component {
               />
             </Col>
             <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
-              <div className='boxmorpinsm py-3 h-100'>
+              <div className='reservation__selected-class boxmorpinsm py-3'>
                 <p className=''>시간</p>
                 <p className='fw-bold text-primary'>{this.state.time}</p>
               </div>
@@ -1586,7 +1586,7 @@ class Reservation extends Component {
               />
             </Col>
             <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
-              <div className='boxmorpinsm py-3 h-100 w-100'>
+              <div className='reservation__selected-class boxmorpinsm py-3 w-100'>
                 <p className=''>현재 정원</p>
                 <p className=''>
                   <span className='fw-bold text-primary'>
@@ -1605,7 +1605,7 @@ class Reservation extends Component {
               />
             </Col>
             <Col className='text-center my-3' xs={12} sm={4}>
-              <div className='boxmorpinsm py-3'>
+              <div className='reservation__selected-class boxmorpinsm py-3'>
                 <p className=''>배정된 날짜</p>
                 <p className='fw-bold text-primary'>
                   {moment(this.state.class_date).format('yyyy-MM-DD') ==
@@ -1650,7 +1650,7 @@ class Reservation extends Component {
                     disabled
                     variant='standard'
                     onClick={() => this.setState({ open: true })}
-                    className='boxmorpsm h-100 w-100 justify-content-center'
+                    className='reservation__selected-class boxmorpsm h-100 w-100 justify-content-center'
                     InputProps={{ disableUnderline: true }}
                     value={this.state.customer_name}
                     // onChange={this.handleChange}
