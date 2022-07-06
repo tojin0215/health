@@ -24,7 +24,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 // mui
 import { Refresh } from '@mui/icons-material';
-import { TextField } from '@mui/material';
+import { TablePagination, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -235,6 +235,8 @@ class WorkoutAlloted extends Component {
       tablePlus: [],
       workoutAllotlist: [],
       headRegion: '',
+      page: 0,
+      rowsPerPage: 5,
     };
     //여기 function
   }
@@ -427,6 +429,14 @@ class WorkoutAlloted extends Component {
     });
   };
 
+  handleChangeRowsPerPage = (e) => {
+    this.setState({ rowsPerPage: e.target.value, page: 0 });
+  };
+
+  handleChangePage = (e, newPage) => {
+    this.setState({ page: newPage });
+  };
+
   render() {
     // console.log(this.state.idc);
 
@@ -563,7 +573,29 @@ class WorkoutAlloted extends Component {
                         <TableCell scope='col'>선택</TableCell>
                       </TableRow>
                     </TableHead>
-                    <TableBody>{this.state.exerciseAllotlist}</TableBody>
+                    <TableBody>
+                      {this.state.exerciseAllotlist.slice(
+                        this.state.page * this.state.rowsPerPage,
+                        this.state.page * this.state.rowsPerPage +
+                          this.state.rowsPerPage
+                      )}
+                    </TableBody>
+                    <TablePagination
+                      rowsPerPageOptions={[
+                        5,
+                        10,
+                        25,
+                        {
+                          label: 'All',
+                          value: this.state.exerciseAllotlist.length,
+                        },
+                      ]}
+                      count={this.state.exerciseAllotlist.length}
+                      rowsPerPage={this.state.rowsPerPage}
+                      page={this.state.page}
+                      onPageChange={this.handleChangePage}
+                      onRowsPerPageChange={this.handleChangeRowsPerPage}
+                    />
                   </Table>
                 </Col>
               </Row>
@@ -587,9 +619,30 @@ class WorkoutAlloted extends Component {
                   </TableHead>
                   <TableBody>
                     {this.state.workoutAllotlist
-                      ? this.state.workoutAllotlist
+                      ? this.state.workoutAllotlist.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )
                       : '배정된 운동목록이 없습니다.'}
                   </TableBody>
+
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.workoutAllotlist.length,
+                      },
+                    ]}
+                    count={this.state.workoutAllotlist.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
                 </Table>
               </Row>
             </div>

@@ -31,6 +31,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { TablePagination } from '@mui/material';
 
 const ExerciseView = ({
   idw,
@@ -93,6 +94,8 @@ class WorkoutAdd extends Component {
       },
       headRegion: '',
       workoutlist: [],
+      rowsPerPage: 5,
+      page: 0,
     };
   }
   goLogin = () => {
@@ -242,6 +245,14 @@ class WorkoutAdd extends Component {
         // console.log(items[0].props.part);
       });
     });
+  };
+
+  handleChangeRowsPerPage = (e) => {
+    this.setState({ rowsPerPage: e.target.value, page: 0 });
+  };
+
+  handleChangePage = (e, newPage) => {
+    this.setState({ page: newPage });
   };
 
   render() {
@@ -525,7 +536,29 @@ class WorkoutAdd extends Component {
                 <TableCell scope='col'>url</TableCell>
               </TableRow>
             </TableHead>
-            {this.state.workoutlist ? this.state.workoutlist : ''}
+            {this.state.workoutlist
+              ? this.state.workoutlist.slice(
+                  this.state.page * this.state.rowsPerPage,
+                  this.state.page * this.state.rowsPerPage +
+                    this.state.rowsPerPage
+                )
+              : ''}
+            <TablePagination
+              rowsPerPageOptions={[
+                5,
+                10,
+                25,
+                {
+                  label: 'All',
+                  value: this.state.workoutlist.length,
+                },
+              ]}
+              count={this.state.workoutlist.length}
+              rowsPerPage={this.state.rowsPerPage}
+              page={this.state.page}
+              onPageChange={this.handleChangePage}
+              onRowsPerPageChange={this.handleChangeRowsPerPage}
+            />
           </Table>
         </Container>
 

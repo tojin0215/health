@@ -20,7 +20,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 // mui
 import { Refresh } from '@mui/icons-material';
-import { TextField } from '@mui/material';
+import { TablePagination, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -105,6 +105,8 @@ class WorkoutAllotedList extends Component {
       idc2: this.props.location.state.idc2,
       client_name2: this.props.location.state.client_name2,
       line: this.props.location.state.line,
+      rowsPerPage: 5,
+      page: 0,
     };
     //여기 function
   }
@@ -266,14 +268,22 @@ class WorkoutAllotedList extends Component {
     });
   };
 
+  handleChangeRowsPerPage = (e) => {
+    this.setState({ rowsPerPage: e.target.value, page: 0 });
+  };
+
+  handleChangePage = (e, newPage) => {
+    this.setState({ page: newPage });
+  };
+
   render() {
     //line은 들어오는 경로 표시 1,2,3을 보내서 받으면 어떻게 되라하는 것
     // console.log(this.state.client_name2);
     // console.log(this.props.userinfo.manager_name);
     // console.log(this.props.userinfo.loginWhether);
     // console.log(this.state.exerciseAllotlist);
-    console.log(this.state.idc2);
-    console.log(this.state.line);
+    // console.log(this.state.idc2);
+    // console.log(this.state.line);
     return (
       <div className='wrap'>
         <div className='header'>
@@ -356,7 +366,29 @@ class WorkoutAllotedList extends Component {
                       <TableCell scope='col'>url</TableCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody>{this.state.workoutAllotlist}</TableBody>
+                  <TableBody>
+                    {this.state.workoutAllotlist.slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )}
+                  </TableBody>
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.workoutAllotlist.length,
+                      },
+                    ]}
+                    count={this.state.workoutAllotlist.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
                 </Table>
               </Row>
             </div>
