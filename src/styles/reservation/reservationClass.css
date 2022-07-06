@@ -23,8 +23,12 @@
   transition: background-color 0.5s;
 }
 
+/* 강사 검색 인풋 */
 .reservation-class--trainer-input #trainer {
   -webkit-text-fill-color: rgba(0, 0, 0, 1);
+  font-size: 1.2rem;
+  padding-top: 0;
+  padding-bottom: 15px;
 }
 
 .reservation-class--trainer-input:hover {
