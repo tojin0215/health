@@ -41,6 +41,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 //react icons
 import { BsPlusLg } from 'react-icons/bs';
+import { TbMoodSuprised } from 'react-icons/tb';
 
 const ExerciseView = ({
   idw,
@@ -1287,79 +1288,86 @@ class WorkoutStageAdd extends Component {
               </Button>
             </Col>
           </Row>
-          <Table className='mt-2' size='small'>
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  scope='col'
-                  align='left'
-                  style={{ minWidth: '3.8rem' }}
-                >
-                  부위
-                </TableCell>
-                <TableCell scope='col' align='left'>
-                  이름
-                </TableCell>
-                <TableCell scope='col' align='left'>
-                  기구
-                </TableCell>
-                <TableCell
-                  scope='col'
-                  align='center'
-                  style={{ width: '100px' }}
-                >
-                  세트
-                </TableCell>
-                <TableCell
-                  scope='col'
-                  align='center'
-                  style={{ width: '100px' }}
-                >
-                  횟수
-                </TableCell>
-                <TableCell
-                  scope='col'
-                  align='center'
-                  style={{ width: '100px' }}
-                >
-                  쉬는시간
-                </TableCell>
-                <TableCell scope='col' align='center'>
-                  url
-                </TableCell>
-                <TableCell
-                  scope='col'
-                  align='center'
-                  style={{ width: '3.6rem' }}
-                >
-                  선택
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            {this.state.workoutlist.length === 0
-              ? '설정된 운동이 없습니다.'
-              : this.state.workoutlist.slice(
-                  this.state.page * this.state.rowsPerPage,
-                  this.state.page * this.state.rowsPerPage +
-                    this.state.rowsPerPage
-                )}
-          </Table>
-          <TablePagination
-            rowsPerPageOptions={[
-              5,
-              10,
-              25,
-              {
-                label: 'All',
-                value: this.state.workoutlist.length,
-              },
-            ]}
-            count={this.state.workoutlist.length}
-            rowsPerPage={this.state.rowsPerPage}
-            page={this.state.page}
-            onPageChange={this.handleChangePage}
-            onRowsPerPageChange={this.handleChangeRowsPerPage}
-          />
+          <TableContainer component={Paper}>
+            <Table className='mt-2' size='small'>
+              <TableHead>
+                <TableRow>
+                  <TableCell
+                    scope='col'
+                    align='left'
+                    style={{ minWidth: '3.8rem' }}
+                  >
+                    부위
+                  </TableCell>
+                  <TableCell scope='col' align='left'>
+                    이름
+                  </TableCell>
+                  <TableCell scope='col' align='left'>
+                    기구
+                  </TableCell>
+                  <TableCell
+                    scope='col'
+                    align='center'
+                    style={{ width: '100px' }}
+                  >
+                    세트
+                  </TableCell>
+                  <TableCell
+                    scope='col'
+                    align='center'
+                    style={{ width: '100px' }}
+                  >
+                    횟수
+                  </TableCell>
+                  <TableCell
+                    scope='col'
+                    align='center'
+                    style={{ width: '100px' }}
+                  >
+                    쉬는시간
+                  </TableCell>
+                  <TableCell scope='col' align='center'>
+                    url
+                  </TableCell>
+                  <TableCell
+                    scope='col'
+                    align='center'
+                    style={{ width: '3.6rem' }}
+                  >
+                    선택
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+            </Table>
+            {this.state.workoutlist.length === 0 ? (
+              <div className='p-3 fs-5 fw-bold text-center'>
+                <TbMoodSuprised className='fs-3' />
+                <p>설정된 운동이 없습니다.</p>
+              </div>
+            ) : (
+              this.state.workoutlist.slice(
+                this.state.page * this.state.rowsPerPage,
+                this.state.page * this.state.rowsPerPage +
+                  this.state.rowsPerPage
+              )
+            )}
+            <TablePagination
+              rowsPerPageOptions={[
+                5,
+                10,
+                25,
+                {
+                  label: 'All',
+                  value: this.state.workoutlist.length,
+                },
+              ]}
+              count={this.state.workoutlist.length}
+              rowsPerPage={this.state.rowsPerPage}
+              page={this.state.page}
+              onPageChange={this.handleChangePage}
+              onRowsPerPageChange={this.handleChangeRowsPerPage}
+            />
+          </TableContainer>
         </Container>
         <div className='footer'>
           <Footer />

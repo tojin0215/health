@@ -92,7 +92,6 @@ html .MuiInputLabel-outlined {
 */
 #customer_name {
   cursor: pointer;
-
   font-weight: bold;
 }
 #customer_name-label {

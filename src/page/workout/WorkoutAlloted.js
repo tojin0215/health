@@ -40,6 +40,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 // 리액트 아이콘
 import { RiDeleteBin5Fill } from 'react-icons/ri';
+import { TbMoodSuprised } from 'react-icons/tb';
 
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
@@ -514,6 +515,7 @@ class WorkoutAlloted extends Component {
                 <Col xs={2}>
                   <Button
                     className='w-100'
+                    variant='outline-primary'
                     onClick={() => this.handleOnClick(1)}
                   >
                     상체
@@ -522,6 +524,7 @@ class WorkoutAlloted extends Component {
                 <Col xs={2}>
                   <Button
                     className='w-100'
+                    variant='outline-primary'
                     onClick={() => this.handleOnClick(18)}
                   >
                     하체
@@ -530,6 +533,7 @@ class WorkoutAlloted extends Component {
                 <Col xs={2}>
                   <Button
                     className='w-100'
+                    variant='outline-primary'
                     onClick={() => this.handleOnClick(28)}
                   >
                     전신
@@ -538,6 +542,7 @@ class WorkoutAlloted extends Component {
                 <Col xs={2}>
                   <Button
                     className='w-100'
+                    variant='outline-primary'
                     onClick={() => this.handleOnClick(38)}
                   >
                     코어
@@ -546,6 +551,7 @@ class WorkoutAlloted extends Component {
                 <Col xs={2}>
                   <Button
                     className='w-100'
+                    variant='outline-primary'
                     onClick={() => this.handleOnClick(48)}
                   >
                     유산소
@@ -554,33 +560,37 @@ class WorkoutAlloted extends Component {
                 <Col xs={2}>
                   <Button
                     className='w-100'
+                    variant='outline-primary'
                     onClick={() => this.handleOnClick(58)}
                   >
                     기타
                   </Button>
                 </Col>
                 <Col xs={12} className='mt-2'>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell scope='col'>운동 부위</TableCell>
-                        <TableCell scope='col'>운동 이름</TableCell>
-                        <TableCell scope='col'>운동 기구</TableCell>
-                        <TableCell scope='col'>세트</TableCell>
-                        <TableCell scope='col'>횟수</TableCell>
-                        <TableCell scope='col'>쉬는시간</TableCell>
-                        <TableCell scope='col'>url</TableCell>
-                        <TableCell scope='col'>선택</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {this.state.exerciseAllotlist.slice(
-                        this.state.page * this.state.rowsPerPage,
-                        this.state.page * this.state.rowsPerPage +
-                          this.state.rowsPerPage
-                      )}
-                    </TableBody>
+                  <TableContainer component={Paper}>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell scope='col'>운동 부위</TableCell>
+                          <TableCell scope='col'>운동 이름</TableCell>
+                          <TableCell scope='col'>운동 기구</TableCell>
+                          <TableCell scope='col'>세트</TableCell>
+                          <TableCell scope='col'>횟수</TableCell>
+                          <TableCell scope='col'>쉬는시간</TableCell>
+                          <TableCell scope='col'>url</TableCell>
+                          <TableCell scope='col'>선택</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {this.state.exerciseAllotlist.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )}
+                      </TableBody>
+                    </Table>
                     <TablePagination
+                      className='bg-white'
                       rowsPerPageOptions={[
                         5,
                         10,
@@ -596,7 +606,7 @@ class WorkoutAlloted extends Component {
                       onPageChange={this.handleChangePage}
                       onRowsPerPageChange={this.handleChangeRowsPerPage}
                     />
-                  </Table>
+                  </TableContainer>
                 </Col>
               </Row>
               <Row className='sectionGlass'>
@@ -619,31 +629,39 @@ class WorkoutAlloted extends Component {
                   </TableHead>
                   <TableBody>
                     {this.state.workoutAllotlist.length === 0
-                      ? '배정된 운동목록이 없습니다.'
+                      ? ''
                       : this.state.workoutAllotlist.slice(
                           this.state.page * this.state.rowsPerPage,
                           this.state.page * this.state.rowsPerPage +
                             this.state.rowsPerPage
                         )}
                   </TableBody>
-
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      {
-                        label: 'All',
-                        value: this.state.workoutAllotlist.length,
-                      },
-                    ]}
-                    count={this.state.workoutAllotlist.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onPageChange={this.handleChangePage}
-                    onRowsPerPageChange={this.handleChangeRowsPerPage}
-                  />
                 </Table>
+                {this.state.workoutAllotlist.length === 0 ? (
+                  <div className='p-3 fs-5 fw-bold text-center bg-white text-black'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>배정된 운동 목록이 없습니다.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
+                <TablePagination
+                  className='bg-white'
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.workoutAllotlist.length,
+                    },
+                  ]}
+                  count={this.state.workoutAllotlist.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
               </Row>
             </div>
           ) : null}

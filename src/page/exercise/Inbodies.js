@@ -29,6 +29,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 // react-icons
 import { MdOutlineClose } from 'react-icons/md';
+import { TbMoodSuprised } from 'react-icons/tb';
 // react-apexcharts
 import Chart from 'react-apexcharts';
 
@@ -721,7 +722,10 @@ class Inbodies extends Component {
           >
             <Tab eventKey='home' title='체성분'>
               {this.state.inbodiesList.length == 0 ? (
-                <p>등록된 인바디가 없습니다.</p>
+                <div className='p-3 fs-5 fw-bold text-center'>
+                  <TbMoodSuprised className='fs-3' />
+                  <p>등록된 인바디 정보가 없습니다.</p>
+                </div>
               ) : (
                 <TableContainer>
                   <Table>
@@ -743,7 +747,10 @@ class Inbodies extends Component {
             </Tab>
             <Tab eventKey='home2' title='체성분 상세'>
               {this.state.inbodiesList.length == 0 ? (
-                <p>등록된 인바디가 없습니다.</p>
+                <div className='p-3 fs-5 fw-bold text-center'>
+                  <TbMoodSuprised className='fs-3' />
+                  <p>등록된 인바디 정보가 없습니다.</p>
+                </div>
               ) : (
                 <TableContainer>
                   <Table>
@@ -768,7 +775,10 @@ class Inbodies extends Component {
             </Tab>
             <Tab eventKey='home3' title='골격근, 지방'>
               {this.state.inbodiesList.length == 0 ? (
-                <p>등록된 인바디가 없습니다.</p>
+                <div className='p-3 fs-5 fw-bold text-center'>
+                  <TbMoodSuprised className='fs-3' />
+                  <p>등록된 인바디 정보가 없습니다.</p>
+                </div>
               ) : (
                 <TableContainer>
                   <Table>
@@ -789,7 +799,10 @@ class Inbodies extends Component {
             </Tab>
             <Tab eventKey='home4' title='비만'>
               {this.state.inbodiesList.length == 0 ? (
-                <p>등록된 인바디가 없습니다.</p>
+                <div className='p-3 fs-5 fw-bold text-center'>
+                  <TbMoodSuprised className='fs-3' />
+                  <p>등록된 인바디 정보가 없습니다.</p>
+                </div>
               ) : (
                 <TableContainer>
                   <Table>

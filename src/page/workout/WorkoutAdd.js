@@ -33,6 +33,9 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { TablePagination } from '@mui/material';
 
+// React icons
+import { TbMoodSuprised } from 'react-icons/tb';
+
 const ExerciseView = ({
   idw,
   fitness_no,
@@ -448,7 +451,7 @@ class WorkoutAdd extends Component {
               </Button>
             </Col>
           </Row>
-          <Row className='mt-4' xs={6}>
+          <Row className='my-2' xs={6}>
             <Col xs={12}>
               <h3>
                 <span className='text-primary'>
@@ -524,42 +527,55 @@ class WorkoutAdd extends Component {
               </Button>
             </Col>
           </Row>
-          <Table className='mt-2'>
-            <TableHead>
-              <TableRow>
-                <TableCell scope='col'>운동 부위</TableCell>
-                <TableCell scope='col'>운동 이름</TableCell>
-                <TableCell scope='col'>운동 기구</TableCell>
-                <TableCell scope='col'>세트</TableCell>
-                <TableCell scope='col'>횟수</TableCell>
-                <TableCell scope='col'>쉬는시간</TableCell>
-                <TableCell scope='col'>url</TableCell>
-              </TableRow>
-            </TableHead>
-            {this.state.workoutlist.length === 0
-              ? '설정된 운동이 없습니다.'
-              : this.state.workoutlist.slice(
-                  this.state.page * this.state.rowsPerPage,
-                  this.state.page * this.state.rowsPerPage +
-                    this.state.rowsPerPage
-                )}
-          </Table>
-          <TablePagination
-            rowsPerPageOptions={[
-              5,
-              10,
-              25,
-              {
-                label: 'All',
-                value: this.state.workoutlist.length,
-              },
-            ]}
-            count={this.state.workoutlist.length}
-            rowsPerPage={this.state.rowsPerPage}
-            page={this.state.page}
-            onPageChange={this.handleChangePage}
-            onRowsPerPageChange={this.handleChangeRowsPerPage}
-          />
+          <TableContainer component={Paper}>
+            <Table className='mt-2'>
+              <TableHead>
+                <TableRow>
+                  <TableCell scope='col'>운동 부위</TableCell>
+                  <TableCell scope='col'>운동 이름</TableCell>
+                  <TableCell scope='col'>운동 기구</TableCell>
+                  <TableCell scope='col'>세트</TableCell>
+                  <TableCell scope='col'>횟수</TableCell>
+                  <TableCell scope='col'>쉬는시간</TableCell>
+                  <TableCell scope='col'>url</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {this.state.workoutlist.length === 0
+                  ? ''
+                  : this.state.workoutlist.slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )}
+              </TableBody>
+            </Table>
+            {this.state.workoutlist.length === 0 ? (
+              <div className='p-3 fs-5 fw-bold text-center'>
+                <TbMoodSuprised className='fs-3' />
+                <p>설정된 운동이 없습니다.</p>
+              </div>
+            ) : (
+              ''
+            )}
+            <TablePagination
+              className='bg-white'
+              rowsPerPageOptions={[
+                5,
+                10,
+                25,
+                {
+                  label: 'All',
+                  value: this.state.workoutlist.length,
+                },
+              ]}
+              count={this.state.workoutlist.length}
+              rowsPerPage={this.state.rowsPerPage}
+              page={this.state.page}
+              onPageChange={this.handleChangePage}
+              onRowsPerPageChange={this.handleChangeRowsPerPage}
+            />
+          </TableContainer>
         </Container>
         <div className='footer'>
           <Footer />

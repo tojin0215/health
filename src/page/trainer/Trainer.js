@@ -40,6 +40,9 @@ import {
 } from '../../api/user';
 import { TablePagination } from '@mui/material';
 
+// react icons
+import { TbMoodSuprised } from 'react-icons/tb';
+
 const Desktop = ({ children }) => {
   const isDesktop = useMediaQuery({ minWidth: 992 });
   return isDesktop ? children : null;
@@ -433,7 +436,7 @@ class Trainer extends Component {
               </TableHead>
               <TableBody>
                 {this.state.viewTrainerList.length === 0
-                  ? '등록된 강사가 없습니다.'
+                  ? ''
                   : this.state.viewTrainerList.slice(
                       this.state.page * this.state.rowsPerPage,
                       this.state.page * this.state.rowsPerPage +
@@ -441,6 +444,14 @@ class Trainer extends Component {
                     )}
               </TableBody>
             </Table>
+            {this.state.viewTrainerList.length === 0 ? (
+              <div className='p-3 fs-5 fw-bold text-center'>
+                <TbMoodSuprised className='fs-3' />
+                <p>등록된 강사가 없습니다.</p>
+              </div>
+            ) : (
+              ''
+            )}
             <TablePagination
               rowsPerPageOptions={[
                 5,

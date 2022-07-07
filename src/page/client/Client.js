@@ -39,6 +39,9 @@ import TextField from '@mui/material/TextField';
 import '../../styles/client/client.css';
 import { TablePagination } from '@mui/material';
 
+// react icons
+import { TbMoodSuprised } from 'react-icons/tb';
+
 const ViewClientItem = ({
   fitness_no,
   client_name,
@@ -370,7 +373,7 @@ class Client extends Component {
               </TableHead>
               <TableBody>
                 {this.state.viewClientList.length === 0
-                  ? '등록된 회원이 없습니다.'
+                  ? ''
                   : this.state.viewClientList.slice(
                       this.state.page * this.state.rowsPerPage,
                       this.state.page * this.state.rowsPerPage +
@@ -378,6 +381,14 @@ class Client extends Component {
                     )}
               </TableBody>
             </Table>
+            {this.state.viewClientList.length === 0 ? (
+              <div className='p-3 fs-5 fw-bold text-center'>
+                <TbMoodSuprised className='fs-3' />
+                <p>등록된 회원이 없습니다.</p>
+              </div>
+            ) : (
+              ''
+            )}
             <TablePagination
               rowsPerPageOptions={[
                 5,

@@ -175,15 +175,6 @@
   .container .inputTextLine {
     width: calc(50% - 2rem);
   }
-  .btnCustomerNew {
-    margin: 0 auto;
-    /* position: absolute;
-		right: 0; */
-  }
-  .btnCustomerNew .btnSolid {
-    height: 4rem;
-    width: auto;
-  }
   .customerTable {
     overflow: auto;
   }

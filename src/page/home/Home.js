@@ -323,113 +323,103 @@ class Home extends Component {
               헬스 회원 스마트 관리 시스템으로 기존 회원 관리 방식에서 탈피하여
               쉬운 회원관리, 스마트한 서비스를 제공합니다.
             </p>
-            <div className='homeIcon'>
-              <ul>
+            <Row xs={5} className='home__shortcut'>
+              <Col>
+                <h5 className='justify-content-center'>회원 관리</h5>
+                <Link
+                  to='/client'
+                  className='p-1 align-items-center'
+                  style={{
+                    backgroundColor: '#fff',
+                  }}
+                >
+                  <div className='home__shortcut--hover'>회원 관리</div>
+                  <Image
+                    className='w-100 h-100'
+                    src={process.env.PUBLIC_URL + '/assets/home-client.svg'}
+                  />
+                </Link>
+              </Col>
+              <Col>
+                <h5 className='justify-content-center'>강사 관리</h5>
+                <Link
+                  to='/trainer'
+                  className='p-1 align-items-center'
+                  style={{
+                    backgroundColor: '#fff',
+                  }}
+                >
+                  <div className='home__shortcut--hover'>강사 관리</div>
+                  <Image
+                    className='w-100 h-100'
+                    src={process.env.PUBLIC_URL + '/assets/home-trainer.svg'}
+                  />
+                </Link>
+              </Col>
+              <Col>
+                <h5 className='justify-content-center'>수업 일정</h5>
+                <Link
+                  to='/reservation'
+                  className='p-1 align-items-center'
+                  style={{
+                    backgroundColor: '#fff',
+                  }}
+                >
+                  <div className='home__shortcut--hover'>수업 일정</div>
+                  <Image
+                    className='w-100 h-100'
+                    src={process.env.PUBLIC_URL + '/assets/home-class.svg'}
+                  />
+                </Link>
+              </Col>
+              <Col>
+                <h5 className='justify-content-center'>운동 배정</h5>
+                <Link
+                  to='/workoutAlloted'
+                  className='p-1 align-items-center'
+                  style={{
+                    backgroundColor: '#fff',
+                  }}
+                >
+                  <div className='home__shortcut--hover'>운동 배정</div>
+                  <Image
+                    className='w-100 h-100'
+                    src={process.env.PUBLIC_URL + '/assets/home-workout.svg'}
+                  />
+                </Link>
+              </Col>
+              <Col>
+                <h5 className='justify-content-center'>매출 관리</h5>
+                <Link
+                  to='/sales'
+                  className='p-1 align-items-center'
+                  style={{
+                    backgroundColor: '#fff',
+                  }}
+                >
+                  <div className='home__shortcut--hover'>매출 관리</div>
+                  <Image
+                    className='w-100 h-100'
+                    src={process.env.PUBLIC_URL + '/assets/home-chart.svg'}
+                  />
+                </Link>
+              </Col>
+            </Row>
+            <ul>
+              {userinfo.fitness_no === 1 ? (
                 <li>
-                  <div className='homeIcon--hover'>회원 관리</div>
                   <Link
-                    to='/client'
-                    className='btnCustomerNew btnCustomer p-1 align-items-center'
+                    to='/statistics'
+                    className='btnStatic align-items-center'
                     style={{
+                      backgroundImage: `url(${aboutManage})`,
                       backgroundColor: '#fff',
                     }}
-                  >
-                    <Image
-                      className='w-100'
-                      src={process.env.PUBLIC_URL + '/assets/home-client.svg'}
-                    />
-                  </Link>
-                  <Button className='w-100 fw-bolder' variant='dark'>
-                    회원 관리
-                  </Button>
+                  ></Link>
+                  <p>관리자</p>
                 </li>
-                <li>
-                  <div className='homeIcon--hover'>강사 관리</div>
-                  <Link
-                    to='/trainer'
-                    className='btnCustomerNew btnSetting p-1 align-items-center'
-                    style={{
-                      backgroundColor: '#fff',
-                    }}
-                  >
-                    <Image
-                      className='w-100'
-                      src={process.env.PUBLIC_URL + '/assets/home-trainer.svg'}
-                    />
-                  </Link>
-                  <Button className='w-100 fw-bolder' variant='dark'>
-                    강사 관리
-                  </Button>
-                </li>
-                <li>
-                  <div className='homeIcon--hover'>수업 일정</div>
-                  <Link
-                    to='/reservation'
-                    className='btnCustomerNew btnExercise p-1 align-items-center'
-                    style={{
-                      backgroundColor: '#fff',
-                    }}
-                  >
-                    <Image
-                      className='w-100'
-                      src={process.env.PUBLIC_URL + '/assets/home-class.svg'}
-                    />
-                  </Link>
-                  <Button className='w-100 fw-bolder' variant='dark'>
-                    수업 일정
-                  </Button>
-                </li>
-                <li>
-                  <div className='homeIcon--hover'>운동 배정</div>
-                  <Link
-                    to='/workoutAlloted'
-                    className='btnCustomerNew btnSales p-1 align-items-center'
-                    style={{
-                      backgroundColor: '#fff',
-                    }}
-                  >
-                    <Image
-                      className='w-100'
-                      src={process.env.PUBLIC_URL + '/assets/home-workout.svg'}
-                    />
-                  </Link>
-                  <Button className='w-100 fw-bolder' variant='dark'>
-                    운동 배정
-                  </Button>
-                </li>
-                <li>
-                  <div className='homeIcon--hover'>매출 관리</div>
-                  <Link
-                    to='/sales'
-                    className='btnCustomerNew btnStatic p-1 align-items-center'
-                    style={{
-                      backgroundColor: '#fff',
-                    }}
-                  >
-                    <Image
-                      className='w-100'
-                      src={process.env.PUBLIC_URL + '/assets/home-chart.svg'}
-                    />
-                  </Link>
-                  <Button className='w-100 fw-bolder' variant='dark'>
-                    매출 관리
-                  </Button>
-                </li>
-                {userinfo.fitness_no === 1 ? (
-                  <li>
-                    <Link
-                      to='/statistics'
-                      className='btnCustomerNew btnStatic align-items-center'
-                      style={{
-                        backgroundImage: `url(${aboutManage})`,
-                        backgroundColor: '#fff',
-                      }}
-                    ></Link>
-                    <p>관리자</p>
-                  </li>
-                ) : null}
-              </ul>
-            </div>
+              ) : null}
+            </ul>
             <section className='aboutList'>
               <ul>
                 <li>

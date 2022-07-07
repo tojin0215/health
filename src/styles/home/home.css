@@ -73,25 +73,14 @@
   background-color: #fff;
 }
 
-.home .homeIcon {
-  width: 100%;
-  margin-top: 7.8rem;
+.home .home__shortcut {
+  /* width: 100%; */
+  margin-top: 2rem;
 }
 
-.home .homeIcon ul {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.home .homeIcon ul li {
-  width: 16%;
+.home .home__shortcut a {
+  display: block;
   position: relative;
-}
-
-.home .homeIcon a {
-  display: flex;
   width: 10rem;
   height: 10rem;
   border-radius: 1rem;
@@ -103,23 +92,24 @@
   align-items: flex-end;
 }
 
-.home .homeIcon--hover {
+.home .home__shortcut--hover {
   width: 160px;
   height: 160px;
   position: absolute;
-  left: 4px;
+  top: 0;
+  left: 0;
   border-radius: 1rem;
   text-align: center;
   line-height: 10rem;
   font-size: 1.8rem;
   font-weight: 700;
-  color: rgba(25, 25, 25, 0.2);
+  color: rgba(25, 25, 25, 0.4);
   background-color: rgba(255, 255, 255, 0);
   -webkit-transition: color 0.25s, background-color 0.25s;
   transition: color 0.25s, background-color 0.25s;
   cursor: pointer;
 }
-.home .homeIcon--hover:hover {
+.home .home__shortcut--hover:hover {
   color: rgba(25, 25, 25, 1);
   background-color: rgba(255, 255, 255, 0.8);
 }

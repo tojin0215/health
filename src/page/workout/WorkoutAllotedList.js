@@ -354,25 +354,27 @@ class WorkoutAllotedList extends Component {
                   </span>
                   님의 운동 배정 목록
                 </h3>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell scope='col'>운동 이름</TableCell>
-                      <TableCell scope='col'>운동 부위</TableCell>
-                      <TableCell scope='col'>운동 기구</TableCell>
-                      <TableCell scope='col'>세트</TableCell>
-                      <TableCell scope='col'>횟수</TableCell>
-                      <TableCell scope='col'>쉬는시간</TableCell>
-                      <TableCell scope='col'>url</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.workoutAllotlist.slice(
-                      this.state.page * this.state.rowsPerPage,
-                      this.state.page * this.state.rowsPerPage +
-                        this.state.rowsPerPage
-                    )}
-                  </TableBody>
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell scope='col'>운동 이름</TableCell>
+                        <TableCell scope='col'>운동 부위</TableCell>
+                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>세트</TableCell>
+                        <TableCell scope='col'>횟수</TableCell>
+                        <TableCell scope='col'>쉬는시간</TableCell>
+                        <TableCell scope='col'>url</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.workoutAllotlist.slice(
+                        this.state.page * this.state.rowsPerPage,
+                        this.state.page * this.state.rowsPerPage +
+                          this.state.rowsPerPage
+                      )}
+                    </TableBody>
+                  </Table>
                   <TablePagination
                     rowsPerPageOptions={[
                       5,
@@ -389,7 +391,7 @@ class WorkoutAllotedList extends Component {
                     onPageChange={this.handleChangePage}
                     onRowsPerPageChange={this.handleChangeRowsPerPage}
                   />
-                </Table>
+                </TableContainer>
               </Row>
             </div>
           ) : (
