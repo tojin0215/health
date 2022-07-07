@@ -723,41 +723,53 @@ class Sales extends Component {
         {/*.header */}
         <Container>
           <h2>매출 현황</h2>
-          <div className='salesUtill'>
-            <div className='salesStatus'>
-              <Row xs={3}>
-                <Col>
-                  <DatePicker
-                    className='sales__calender--dateinput'
-                    dateFormat='yyyy/MM/dd(eee)'
-                    selected={this.state.today}
-                    onChange={(date) => this.setState({ today: date })}
-                  />
-                  <text>~</text>
-                  <DatePicker
-                    className='sales__calender--dateinput'
-                    dateFormat='yyyy/MM/dd(eee)'
-                    selected={this.state.tommorrow}
-                    onChange={(date) => this.setState({ tommorrow: date })}
-                    minDate={this.state.today}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Button onClick={() => this.handleOnClick()}>조회하기</Button>
-                  <Button onClick={() => this.handleButton('당일')}>
-                    당일 조회하기
-                  </Button>
-                  <Button onClick={() => this.handleButton('한 달')}>
-                    한 달 조회하기
-                  </Button>
-                </Col>
-              </Row>
-            </div>
-            {/*.salesStatus */}
-          </div>
-          {/*.salesUtill */}
+          <Row xs={6} className='py-3'>
+            <Col xs={2}>
+              <Button
+                onClick={() => this.handleButton('당일')}
+                variant='outline-primary'
+                className='w-100'
+              >
+                당일
+              </Button>
+            </Col>
+            <Col xs={2}>
+              <Button
+                onClick={() => this.handleButton('한 달')}
+                variant='outline-primary'
+                className='w-100'
+              >
+                한 달
+              </Button>
+            </Col>
+            <Col xs={3}>
+              <DatePicker
+                className='sales__calender--dateinput w-100 text-center'
+                dateFormat='yyyy/MM/dd(eee)'
+                selected={this.state.today}
+                onChange={(date) => this.setState({ today: date })}
+              />
+            </Col>
+            {/* <Col xs={1}>
+            </Col> */}
+            <Col xs={3}>
+              <DatePicker
+                className='sales__calender--dateinput w-100 text-center'
+                dateFormat='yyyy/MM/dd(eee)'
+                selected={this.state.tommorrow}
+                onChange={(date) => this.setState({ tommorrow: date })}
+                minDate={this.state.today}
+              />
+            </Col>
+            <Col xs={2}>
+              <Button onClick={() => this.handleOnClick()} className='w-100'>
+                조회하기
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col></Col>
+          </Row>
           <div className='tablewrap'>
             <Table>
               <TableHead>

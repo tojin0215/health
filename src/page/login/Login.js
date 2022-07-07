@@ -86,7 +86,7 @@ class Login extends Component {
     // console.log(this.props.status.valid);
     // console.log('Login', this.props.status);
     return (
-      <div className='login_wrap wrap'>
+      <div className='login login_wrap wrap'>
         {/* <div className='header'>
 					<Header />
 					<Navigation />
@@ -100,7 +100,7 @@ class Login extends Component {
             </h2>
           </div>
         </div>
-        <Container className='my-0'>
+        <Container className='login__authentication--container my-0'>
           <Authentication mode={true} onLogin={this.handleLogin} />
         </Container>
         <div>

@@ -22,7 +22,7 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 
 const ip = SERVER_URL;
-//const ip = 'localhost:3000';
+// const ip = 'localhost:3000';
 
 const IdCheck = RegExp(/[a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣|0-9|A-Z]/g);
 
@@ -208,12 +208,19 @@ class Register extends Component {
             ></div>
             <h3>사업장 회원가입</h3>
             <p className='text-secondary'>
-              강사, 회원은 사업주가 승인하여야만 회원가입이 가능합니다.
+              강사, 회원은 센터에서 직접 등록할 수 있습니다. 해당 센터로
+              문의해주세요.
             </p>
             <Row xs={2} className='mt-4'>
               <Col>
                 <Form.Group>
-                  <Form.Label>센터 이름(아이디)</Form.Label>
+                  <Form.Label>
+                    센터 이름{' '}
+                    <span className='text-secondary'>
+                      {' '}
+                      아이디로 사용됩니다.
+                    </span>
+                  </Form.Label>
                   <Form.Control
                     value={this.state.id}
                     onChange={this.handleChange}

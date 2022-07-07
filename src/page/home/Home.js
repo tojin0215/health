@@ -201,7 +201,11 @@ class Home extends Component {
 
   fommat = (num) => {
     if (Number(num) >= 1000) {
-      return num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+      const parts = num.toString().split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return parts.join('.');
+
+      // return num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
     } else {
       return num;
     }

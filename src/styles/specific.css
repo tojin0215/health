@@ -44,33 +44,6 @@
   /* text-align: center; */
 }
 
-.inbodySearchTable .MuiTableCell-head:nth-child(1) {
-  width: 7rem;
-}
-.inbodySearchTable .MuiTableCell-head:nth-child(3) {
-  width: 13rem;
-}
-.inbodySearchTable .MuiTableCell-head:nth-child(4) {
-  width: 7rem;
-}
-.inbodySearchTable .MuiTableCell-head:nth-child(5) {
-  width: 10rem;
-}
-.inbodySearchTable .MuiTableCell-head:nth-child(6) {
-  width: 13rem;
-}
-
-.addsalesSearchTable .MuiTableCell-head:nth-child(1) {
-  width: 5rem;
-}
-.addsalesSearchTable .MuiTableCell-head:nth-child(3) {
-  /* width: 25rem; */
-}
-.addsalesSearchTable .MuiTableCell-head:nth-child(4) {
-  width: 7rem;
-  text-align: center;
-}
-
 /* 테이블 셀 사이즈 */
 
 /* 상품/매출 테이블 필터 크기 조절 */
@@ -92,12 +65,12 @@
 .btn-primary {
   background-color: #ebff2e;
   color: #222;
-  border-color: #ebff2e;
+  border-color: #222;
 }
 .btn-primary:hover {
-  background-color: #eaff2ea9;
+  background-color: #cde400;
   color: #000;
-  border-color: #ebff2e;
+  border-color: #bbb;
 }
 .btn-primary:disabled {
   background-color: #ebff2e;
@@ -112,6 +85,15 @@
   color: #000;
   background-color: #ebff2e;
   border-color: #ebff2e;
+}
+.outline-primary-dark {
+  color: #222;
+  border-color: #222;
+}
+.outline-primary-dark:hover {
+  background-color: #ebff2e;
+  color: #000;
+  border-color: #bbb;
 }
 /* bootstrap text */
 .text-primary {

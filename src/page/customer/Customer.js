@@ -62,10 +62,18 @@ function dataFormatter(cell, row) {
   return ` ${cell}`.substring(0, 11);
 }
 
+// function PriceFormatter(cell, row) {
+//   return `${cell}`.toLocaleString('ko-KR', { maximumFractionDigits: 5 });
+// }
+
 function PriceFormatter(cell, row) {
-  return (
-    ` ${cell}`.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') + '원'
-  );
+  const parts = `${cell}`.toString().split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원';
+  return parts.join('.');
+
+  // return (
+  //   ` ${cell}`.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') + '원'
+  // );
 }
 
 class Customer extends Component {
