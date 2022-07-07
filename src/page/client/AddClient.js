@@ -126,6 +126,7 @@ class AddClient extends Component {
           this.setState(items);
           clientManager(
             this.state.phone,
+            this.props.userinfo.fitness_name,
             this.state.birth,
             this.state.client_name,
             items[0].idc

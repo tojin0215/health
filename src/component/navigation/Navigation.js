@@ -31,7 +31,7 @@ class Navigation extends Component {
   render() {
     const { userinfo } = this.props;
     // console.log(userinfo);
-    // console.log(this.props.userinfo);
+    console.log(this.props.userinfo);
     return (
       //2:회원, 1:강사, else(0):헬스장
       <div className='Navigation'>
@@ -39,6 +39,9 @@ class Navigation extends Component {
           <Navbar bg='dark'>
             <Nav className='mr-auto dropdownNav navitem'>
               <Nav.Item>
+                <span className={styles.navitem}>
+                  {this.props.userinfo.fitness_name}
+                </span>
                 <span className={styles.navitem}>회원</span>
               </Nav.Item>
               <NavLink exact to='/home'>
@@ -102,6 +105,9 @@ class Navigation extends Component {
           <Navbar bg='dark'>
             <Nav className='mr-auto dropdownNav navitem'>
               <Nav.Item>
+                <span className={styles.navitem}>
+                  {this.props.userinfo.fitness_name}
+                </span>
                 <span className={styles.navitem}>강사</span>
               </Nav.Item>
               <NavLink exact to='/home'>
@@ -224,6 +230,9 @@ class Navigation extends Component {
           <Navbar bg='dark'>
             <Nav className='mr-auto dropdownNav navitem'>
               <Nav.Item>
+                <span className={styles.navitem}>
+                  {this.props.userinfo.fitness_name}
+                </span>
                 <span className={styles.navitem}>센터</span>
               </Nav.Item>
               <NavLink exact to='/home'>

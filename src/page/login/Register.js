@@ -20,17 +20,19 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
+import { registerManager } from '../../api/user';
 
 const ip = SERVER_URL;
 // const ip = 'localhost:3000';
 
-const IdCheck = RegExp(/[a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣|0-9|A-Z]/g);
+const IdCheck = RegExp(/^[A-Za-z0-9\-]{3,20}$/);
 
 class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: '',
+      fitness_name: '',
       password: '',
       password_confirm: '',
       manager_name: '',
@@ -39,6 +41,7 @@ class Register extends Component {
       business_phone: '',
 
       id_err: false,
+      fitness_name_err: false,
       password_err: false,
       password_confirm_err: false,
       manager_name_err: false,
@@ -73,7 +76,7 @@ class Register extends Component {
         .then((response) => response.json())
         .then((response) => {
           console.log(response);
-          //console.log(response.length)
+          console.log(response.length);
           if (response.length == 0) {
             if (IdCheck.test(this.state.id)) {
               alert('사용 가능합니다.');
@@ -81,7 +84,7 @@ class Register extends Component {
                 check: 1,
               });
             } else {
-              alert('아이디는 3~20자 이내의 영문 숫자만 가능합니다. ');
+              alert('아이디는 3~20자 이내의 영문, 숫자만 가능합니다. ');
             }
           } else {
             alert('존재하는 아이디입니다. 다시 입력해주세요.');
@@ -97,6 +100,7 @@ class Register extends Component {
   handleOnClick = (e) => {
     this.setState({
       id_err: false,
+      fitness_name_err: false,
       password_err: false,
       password_confirm_err: false,
       manager_name_err: false,
@@ -107,6 +111,8 @@ class Register extends Component {
 
     if (this.state.id === '') {
       this.setState({ id_err: true });
+    } else if (this.state.fitness_name === '') {
+      this.setState({ fitness_name_err: true });
     } else if (this.state.password === '') {
       this.setState({ password_err: true });
     } else if (this.state.password_confirm === '') {
@@ -123,6 +129,7 @@ class Register extends Component {
 
     if (
       this.state.id === '' ||
+      this.state.fitness_name === '' ||
       this.state.password === '' ||
       this.state.password_confirm === '' ||
       this.state.manager_name === '' ||
@@ -137,34 +144,28 @@ class Register extends Component {
       alert('아이디 중복체크 해주세요.');
     } else {
       // 서버 연결하는 부분
-      fetch(ip + '/manager', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          id: this.state.id,
-          password: this.state.password,
-          manager_name: this.state.manager_name,
-          phone: this.state.phone,
-          business_number: this.state.business_number,
-          business_phone: this.state.business_phone,
-        }),
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          alert('가입되었습니다.');
-          this.setState({
-            open: false,
-            id: '',
-            password: '',
-            manager_name: '',
-            phone: '',
-            business_number_err: '',
-            business_phone_err: '',
-          });
-          this.props.history.push('/');
+      registerManager(
+        this.state.id,
+        this.state.fitness_name,
+        this.state.password,
+        this.state.manager_name,
+        this.state.phone,
+        this.state.business_number,
+        this.state.business_phone
+      ).then((response) => {
+        alert('가입되었습니다.');
+        this.setState({
+          open: false,
+          id: '',
+          fitness_name: '',
+          password: '',
+          manager_name: '',
+          phone: '',
+          business_number_err: '',
+          business_phone_err: '',
         });
+        this.props.history.push('/');
+      });
     }
   };
   handleModal = () => {
@@ -225,7 +226,7 @@ class Register extends Component {
                     value={this.state.id}
                     onChange={this.handleChange}
                     id='id'
-                    label='아이디/센터이름'
+                    label='아이디'
                     error={this.state.id_err}
                     required
                     autoFocus
@@ -241,6 +242,19 @@ class Register extends Component {
                 ) : (
                   <label className=''>사용 가능한 아이디입니다.</label>
                 )}
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>사업장이름</Form.Label>
+                  <Form.Control
+                    value={this.state.fitness_name}
+                    onChange={this.handleChange}
+                    id='fitness_name'
+                    label='사업장이름'
+                    error={this.state.fitness_name_err}
+                    required
+                  ></Form.Control>
+                </Form.Group>
               </Col>
               <Col>
                 <Form.Group>

@@ -38,6 +38,7 @@ const authentication = (
         userinfo: {
           id: action.id,
           fitness_no: action.fitness_no,
+          fitness_name: action.fitness_name,
           manager_name: action.manager_name,
           loginWhether: action.loginWhether,
           joinNo: action.joinNo,
@@ -80,6 +81,7 @@ const authentication = (
         userinfo: {
           id: action.id,
           fitness_no: action.fitness_no,
+          fitness_name: action.fitness_name,
           manager_name: action.manager_name,
           loginWhether: action.loginWhether,
           joinNo: action.joinNo,
