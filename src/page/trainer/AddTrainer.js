@@ -113,6 +113,7 @@ class AddTrainer extends Component {
           this.setState(items);
           trainerManager(
             this.state.phone,
+            this.props.userinfo.fitness_name,
             this.state.birth,
             this.state.trainer_name,
             items[0].idx

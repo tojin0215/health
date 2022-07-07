@@ -179,10 +179,17 @@ export const insertTrainer = (
   });
 };
 //매니저테이블에 trainer insert(trainer login)
-export const trainerManager = (id, password, manager_name, joinNo) => {
+export const trainerManager = (
+  id,
+  fitness_name,
+  password,
+  manager_name,
+  joinNo
+) => {
   return axios
     .post(`${SERVER_URL}/manager?type=trainer`, {
       id,
+      fitness_name,
       password,
       manager_name,
       joinNo,
@@ -200,10 +207,17 @@ export const clientSelect = (fitness_no) => {
 };
 
 //매니저 테이블에 client insert(client login)
-export const clientManager = (id, password, manager_name, joinNo) => {
+export const clientManager = (
+  id,
+  fitness_name,
+  password,
+  manager_name,
+  joinNo
+) => {
   return axios
     .post(`${SERVER_URL}/manager?type=client`, {
       id,
+      fitness_name,
       password,
       manager_name,
       joinNo,
@@ -352,9 +366,10 @@ export const deleteIntroduce = (idi) => {
 };
 
 //choiceLogin manager update
-export const choiceLoginManager = (id, joinNo) => {
+export const choiceLoginManager = (id, joinNo, fitness_name) => {
   return axios.put(`${SERVER_URL}/manager?type=choiceLogin` + `&id=` + id, {
     joinNo: joinNo,
+    fitness_name: fitness_name,
   });
 };
 
@@ -653,5 +668,28 @@ export const salesSelectTools = (fitness_no, paymentTools) => {
         paymentTools,
       {}
     )
+    .then((response) => response.data);
+};
+
+//manager register
+export const registerManager = (
+  id,
+  fitness_name,
+  password,
+  manager_name,
+  phone,
+  business_number,
+  business_phone
+) => {
+  return axios
+    .post(`${SERVER_URL}/manager?type=manager`, {
+      id,
+      fitness_name,
+      password,
+      manager_name,
+      phone,
+      business_number,
+      business_phone,
+    })
     .then((response) => response.data);
 };

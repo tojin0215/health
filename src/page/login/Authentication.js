@@ -121,7 +121,7 @@ class Authentication extends Component {
             name='id'
             type='text'
             className='validate'
-            placeholder='센터 이름 (아이디)'
+            placeholder='아이디'
             onChange={this.handleChange}
             value={this.state.id}
           />

@@ -61,6 +61,8 @@ class Menu extends Component {
           <div class='menu'>
             <div class='logo'>
               <a href='/home'>
+                <p className='fs-1'>{this.props.userinfo.fitness_name}</p>
+                <p className='fs-1'>{this.props.userinfo.manager_name}</p>
                 <p className='fs-1'>회원</p>
               </a>
             </div>
@@ -141,6 +143,8 @@ class Menu extends Component {
           <div class='menu'>
             <div class='logo'>
               <a href='/home'>
+                <p className='fs-1'>{this.props.userinfo.fitness_name}</p>
+                <p className='fs-1'>{this.props.userinfo.manager_name}</p>
                 <p className='fs-1'>강사</p>
               </a>
             </div>
@@ -275,6 +279,8 @@ class Menu extends Component {
           <div class='menu'>
             <div class='logo'>
               <a href='/home'>
+                <p className='fs-1'>{this.props.userinfo.fitness_name}</p>
+                <p className='fs-1'>{this.props.userinfo.manager_name}</p>
                 <p className='fs-1'>센터</p>
               </a>
             </div>

@@ -22,17 +22,18 @@ const TrainerList = ({
   handleLogin,
 }) => {
   const handleClick = () => {
-    choiceLoginManager(phone, idx).then(() => {
+    choiceLoginManager(phone, idx, fitness_name).then(() => {
       handleLogin(phone, birth);
-      // alert(fitness_no + '로그인');
+      alert(fitness_name + '로그인');
       window.location.replace('/home');
     });
   };
   const [fitness_no_input, setFitness_no_input] = useState('');
-
+  const [fitness_name, setfitness_name] = useState('');
   useEffect(() => {
     choiceFitness(fitness_no).then((res) => {
       setFitness_no_input(res[0].manager_name);
+      setfitness_name(res[0].fitness_name);
       console.log(res[0].manager_name);
     });
   });
@@ -48,6 +49,8 @@ const TrainerList = ({
             onClick={() => handleClick(phone, idx)}
             className='w-100 h-100'
           >
+            {fitness_name}
+            <br />
             {fitness_no_input}
           </Button>
         </Col>
@@ -65,17 +68,18 @@ const ClientList = ({
   handleLogin,
 }) => {
   const handleClick = () => {
-    choiceLoginManager(phone, idc).then(() => {
+    choiceLoginManager(phone, idc, fitness_name).then(() => {
       handleLogin(phone, birth);
-      // alert(fitness_no + '로그인');
+      alert(fitness_name + '로그인');
       window.location.replace('/home');
     });
   };
   const [fitness_no_input, setFitness_no_input] = useState('');
-
+  const [fitness_name, setfitness_name] = useState('');
   useEffect(() => {
     choiceFitness(fitness_no).then((res) => {
       setFitness_no_input(res[0].manager_name);
+      setfitness_name(res[0].fitness_name);
       console.log(res[0].manager_name);
     });
   });
@@ -91,6 +95,8 @@ const ClientList = ({
             onClick={() => handleClick(phone, idc)}
             className='w-100 h-100'
           >
+            {fitness_name}
+            <br />
             {fitness_no_input}
           </Button>
         </Col>
@@ -125,6 +131,7 @@ class ChoiceLogin extends Component {
         );
       });
       this.setState({ trainerList: items });
+      console.log(items);
     });
   };
 
@@ -165,7 +172,9 @@ class ChoiceLogin extends Component {
 
   render() {
     // console.log(this.props.userinfo.loginWhether);
-    // console.log(this.props.userinfo);
+    console.log(this.props.userinfo);
+    console.log(this.state.trainerList);
+
     return (
       <div className='wrap'>
         <div className='localNavigation'>

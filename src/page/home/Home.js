@@ -272,23 +272,49 @@ class Home extends Component {
                   새로워진 피트니스 센터 관리{' '}
                   <span className='fs-1 text-primary'>divvy</span>
                 </h3>
-                <ul className='text-center'>
-                  <li>
-                    <Link to='/trainer'>🐔 강사 관리</Link>
-                  </li>
-                  <li>
-                    <Link to='/client'>🐥 회원 관리</Link>
-                  </li>
-                  <li>
-                    <Link to='reservation'>🗓 수업 예약</Link>
-                  </li>
-                  <li>
-                    <Link to='workoutAlloted'>🤸 운동 배정</Link>
-                  </li>
-                  <li>
-                    <Link to='sales'>📊 매출 관리</Link>
-                  </li>
-                </ul>
+                {this.props.userinfo.loginWhether === 2 ? (
+                  <ul className='text-center'>
+                    <li>
+                      <Link to='introduce'>센터 소개</Link>
+                    </li>
+                    <li>
+                      <Link to='inbodies'>인바디 정보</Link>
+                    </li>
+                    <li>
+                      <Link to='reservation'>🗓 수업 예약</Link>
+                    </li>
+                  </ul>
+                ) : this.props.userinfo.loginWhether === 1 ? (
+                  <ul className='text-center'>
+                    <li>
+                      <Link to='/client'>🐥 회원 관리</Link>
+                    </li>
+                    <li>
+                      <Link to='reservation'>🗓 수업 예약</Link>
+                    </li>
+                    <li>
+                      <Link to='workoutAlloted'>🤸 운동 배정</Link>
+                    </li>
+                  </ul>
+                ) : (
+                  <ul className='text-center'>
+                    <li>
+                      <Link to='/trainer'>🐔 강사 관리</Link>
+                    </li>
+                    <li>
+                      <Link to='/client'>🐥 회원 관리</Link>
+                    </li>
+                    <li>
+                      <Link to='reservation'>🗓 수업 예약</Link>
+                    </li>
+                    <li>
+                      <Link to='workoutAlloted'>🤸 운동 배정</Link>
+                    </li>
+                    <li>
+                      <Link to='sales'>📊 매출 관리</Link>
+                    </li>
+                  </ul>
+                )}
               </Col>
               <Col className=''>
                 <Image
