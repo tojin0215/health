@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import {
   Admin,
-  AddCustomer,
-  Customer,
   Reservation,
   ReservationClass,
   ReservationUpdate,
   CustomerCalendar,
-  UpdateCustomer,
   AddInbody,
   AssignCheckExercise,
   AssignCustomer,
@@ -44,9 +41,6 @@ class App extends Component {
       <div>
         <Route exact path='/' component={Login} />
         <Route exact path='/home' component={Home} />
-        <Route exact path='/customer' component={Customer} />
-        <Route exact path='/customer/add' component={AddCustomer} />
-        <Route exact path='/customer/update' component={UpdateCustomer} />
         <Route exact path='/exercise' component={AddExercise} />
         <Route exact path='/setting/default' component={DefaultExercise} />
         <Route exact path='/assign' component={AssignExercise} />
