@@ -536,32 +536,31 @@ class WorkoutAdd extends Component {
                 <TableCell scope='col'>url</TableCell>
               </TableRow>
             </TableHead>
-            {this.state.workoutlist
-              ? this.state.workoutlist.slice(
+            {this.state.workoutlist.length === 0
+              ? '설정된 운동이 없습니다.'
+              : this.state.workoutlist.slice(
                   this.state.page * this.state.rowsPerPage,
                   this.state.page * this.state.rowsPerPage +
                     this.state.rowsPerPage
-                )
-              : ''}
-            <TablePagination
-              rowsPerPageOptions={[
-                5,
-                10,
-                25,
-                {
-                  label: 'All',
-                  value: this.state.workoutlist.length,
-                },
-              ]}
-              count={this.state.workoutlist.length}
-              rowsPerPage={this.state.rowsPerPage}
-              page={this.state.page}
-              onPageChange={this.handleChangePage}
-              onRowsPerPageChange={this.handleChangeRowsPerPage}
-            />
+                )}
           </Table>
+          <TablePagination
+            rowsPerPageOptions={[
+              5,
+              10,
+              25,
+              {
+                label: 'All',
+                value: this.state.workoutlist.length,
+              },
+            ]}
+            count={this.state.workoutlist.length}
+            rowsPerPage={this.state.rowsPerPage}
+            page={this.state.page}
+            onPageChange={this.handleChangePage}
+            onRowsPerPageChange={this.handleChangeRowsPerPage}
+          />
         </Container>
-
         <div className='footer'>
           <Footer />
         </div>

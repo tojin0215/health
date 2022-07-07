@@ -618,13 +618,13 @@ class WorkoutAlloted extends Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {this.state.workoutAllotlist
-                      ? this.state.workoutAllotlist.slice(
+                    {this.state.workoutAllotlist.length === 0
+                      ? '배정된 운동목록이 없습니다.'
+                      : this.state.workoutAllotlist.slice(
                           this.state.page * this.state.rowsPerPage,
                           this.state.page * this.state.rowsPerPage +
                             this.state.rowsPerPage
-                        )
-                      : '배정된 운동목록이 없습니다.'}
+                        )}
                   </TableBody>
 
                   <TablePagination

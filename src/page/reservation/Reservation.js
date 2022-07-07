@@ -1682,6 +1682,7 @@ class Reservation extends Component {
                               회원이름
                             </Button>
                           </TableCell>
+                          {/* handleDate, handleExercise, handleTrainer 를 EnhancedTableHead로 변경하기 추후 */}
                           <TableCell>
                             <Button
                               variant='secondary'

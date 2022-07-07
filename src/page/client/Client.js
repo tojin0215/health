@@ -37,6 +37,7 @@ import TextField from '@mui/material/TextField';
 
 // css
 import '../../styles/client/client.css';
+import { TablePagination } from '@mui/material';
 
 const ViewClientItem = ({
   fitness_no,
@@ -240,7 +241,7 @@ const ViewClientItem = ({
 class Client extends Component {
   constructor(props) {
     super(props);
-    this.state = { viewClientList: [] };
+    this.state = { viewClientList: [], rowsPerPage: 5, page: 0 };
   }
   goLogin = () => {
     this.props.history.push('/');
@@ -320,6 +321,15 @@ class Client extends Component {
       });
     });
   };
+
+  handleChangeRowsPerPage = (e) => {
+    this.setState({ rowsPerPage: e.target.value, page: 0 });
+  };
+
+  handleChangePage = (e, newPage) => {
+    this.setState({ page: newPage });
+  };
+
   render() {
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.viewClientList);
@@ -358,8 +368,32 @@ class Client extends Component {
                   <TableCell>가입일</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>{this.state.viewClientList}</TableBody>
+              <TableBody>
+                {this.state.viewClientList.length === 0
+                  ? '등록된 회원이 없습니다.'
+                  : this.state.viewClientList.slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )}
+              </TableBody>
             </Table>
+            <TablePagination
+              rowsPerPageOptions={[
+                5,
+                10,
+                25,
+                {
+                  label: 'All',
+                  value: this.state.viewClientList.length,
+                },
+              ]}
+              count={this.state.viewClientList.length}
+              rowsPerPage={this.state.rowsPerPage}
+              page={this.state.page}
+              onPageChange={this.handleChangePage}
+              onRowsPerPageChange={this.handleChangeRowsPerPage}
+            />
           </TableContainer>
         </Container>
         <div className='footer'>
