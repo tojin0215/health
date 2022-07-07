@@ -331,6 +331,7 @@ class WorkoutStageAdd extends Component {
         // and notify
         alert('Your session is expired, please log in again');
       } else {
+        this.handleOnClick(1);
         this.props.userinfo.loginWhether === 2
           ? this.inbodiesView(this.props.userinfo.joinNo)
           : '';
@@ -338,7 +339,7 @@ class WorkoutStageAdd extends Component {
     });
   }
   handleOnClick = (key) => {
-    console.log('workout', this.state.stage);
+    // console.log('workout', this.state.stage);
     selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
