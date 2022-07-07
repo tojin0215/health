@@ -826,26 +826,38 @@ class WorkoutStageAdd extends Component {
               </h3>
               <Col xs={12}>
                 {/* 전신 운동 목록 확인 */}
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell scope='col'>운동 부위</TableCell>
-                      <TableCell scope='col'>운동 이름</TableCell>
-                      <TableCell scope='col'>운동 기구</TableCell>
-                      <TableCell scope='col'>세트</TableCell>
-                      <TableCell scope='col'>횟수</TableCell>
-                      <TableCell scope='col'>쉬는시간</TableCell>
-                      <TableCell scope='col'>url</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  {this.state.workoutStage.length === 0
-                    ? '설정된 운동이 없습니다.'
-                    : this.state.workoutStage.slice(
-                        this.state.page * this.state.rowsPerPage,
-                        this.state.page * this.state.rowsPerPage +
-                          this.state.rowsPerPage
-                      )}
-                </Table>
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell scope='col'>운동 부위</TableCell>
+                        <TableCell scope='col'>운동 이름</TableCell>
+                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>세트</TableCell>
+                        <TableCell scope='col'>횟수</TableCell>
+                        <TableCell scope='col'>쉬는시간</TableCell>
+                        <TableCell scope='col'>url</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.workoutStage.length === 0
+                        ? ''
+                        : this.state.workoutStage.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )}
+                    </TableBody>
+                  </Table>
+                  {this.state.workoutStage.length === 0 ? (
+                    <div className='p-3 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>설정된 운동이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                </TableContainer>
               </Col>
             </div>
           ) : this.state.nextStage4 ? (
@@ -929,26 +941,38 @@ class WorkoutStageAdd extends Component {
               </h3>
               <Col xs={12}>
                 {/* 코어 운동 목록 확인 */}
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell scope='col'>운동 부위</TableCell>
-                      <TableCell scope='col'>운동 이름</TableCell>
-                      <TableCell scope='col'>운동 기구</TableCell>
-                      <TableCell scope='col'>세트</TableCell>
-                      <TableCell scope='col'>횟수</TableCell>
-                      <TableCell scope='col'>쉬는시간</TableCell>
-                      <TableCell scope='col'>url</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  {this.state.workoutStage.length === 0
-                    ? '설정된 운동이 없습니다.'
-                    : this.state.workoutStage.slice(
-                        this.state.page * this.state.rowsPerPage,
-                        this.state.page * this.state.rowsPerPage +
-                          this.state.rowsPerPage
-                      )}
-                </Table>
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell scope='col'>운동 부위</TableCell>
+                        <TableCell scope='col'>운동 이름</TableCell>
+                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>세트</TableCell>
+                        <TableCell scope='col'>횟수</TableCell>
+                        <TableCell scope='col'>쉬는시간</TableCell>
+                        <TableCell scope='col'>url</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.workoutStage.length === 0
+                        ? ''
+                        : this.state.workoutStage.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )}
+                    </TableBody>
+                  </Table>
+                  {this.state.workoutStage.length === 0 ? (
+                    <div className='p-3 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>설정된 운동이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                </TableContainer>
               </Col>
             </div>
           ) : this.state.nextStage5 ? (
@@ -1032,26 +1056,38 @@ class WorkoutStageAdd extends Component {
               </h3>
               <Col xs={12}>
                 {/* 유산소 운동 목록 확인 */}
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell scope='col'>운동 부위</TableCell>
-                      <TableCell scope='col'>운동 이름</TableCell>
-                      <TableCell scope='col'>운동 기구</TableCell>
-                      <TableCell scope='col'>세트</TableCell>
-                      <TableCell scope='col'>횟수</TableCell>
-                      <TableCell scope='col'>쉬는시간</TableCell>
-                      <TableCell scope='col'>url</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  {this.state.workoutStage.length === 0
-                    ? '설정된 운동이 없습니다.'
-                    : this.state.workoutStage.slice(
-                        this.state.page * this.state.rowsPerPage,
-                        this.state.page * this.state.rowsPerPage +
-                          this.state.rowsPerPage
-                      )}
-                </Table>
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell scope='col'>운동 부위</TableCell>
+                        <TableCell scope='col'>운동 이름</TableCell>
+                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>세트</TableCell>
+                        <TableCell scope='col'>횟수</TableCell>
+                        <TableCell scope='col'>쉬는시간</TableCell>
+                        <TableCell scope='col'>url</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.workoutStage.length === 0
+                        ? ''
+                        : this.state.workoutStage.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )}
+                    </TableBody>
+                  </Table>
+                  {this.state.workoutStage.length === 0 ? (
+                    <div className='p-3 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>설정된 운동이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                </TableContainer>
               </Col>
             </div>
           ) : this.state.nextStage6 ? (
@@ -1134,26 +1170,38 @@ class WorkoutStageAdd extends Component {
                 </Col>
               </Row>
               <Col xs={12}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell scope='col'>운동 부위</TableCell>
-                      <TableCell scope='col'>운동 이름</TableCell>
-                      <TableCell scope='col'>운동 기구</TableCell>
-                      <TableCell scope='col'>세트</TableCell>
-                      <TableCell scope='col'>횟수</TableCell>
-                      <TableCell scope='col'>쉬는시간</TableCell>
-                      <TableCell scope='col'>url</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  {this.state.workoutStage.length === 0
-                    ? '설정된 운동이 없습니다.'
-                    : this.state.workoutStage.slice(
-                        this.state.page * this.state.rowsPerPage,
-                        this.state.page * this.state.rowsPerPage +
-                          this.state.rowsPerPage
-                      )}
-                </Table>
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell scope='col'>운동 부위</TableCell>
+                        <TableCell scope='col'>운동 이름</TableCell>
+                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>세트</TableCell>
+                        <TableCell scope='col'>횟수</TableCell>
+                        <TableCell scope='col'>쉬는시간</TableCell>
+                        <TableCell scope='col'>url</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.workoutStage.length === 0
+                        ? ''
+                        : this.state.workoutStage.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )}
+                    </TableBody>
+                  </Table>
+                  {this.state.workoutStage.length === 0 ? (
+                    <div className='p-3 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>설정된 운동이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                </TableContainer>
               </Col>
             </div>
           ) : (
@@ -1288,7 +1336,7 @@ class WorkoutStageAdd extends Component {
               </Button>
             </Col>
           </Row>
-          <TableContainer component={Paper}>
+          <TableContainer className='mt-2' component={Paper}>
             <Table className='mt-2' size='small'>
               <TableHead>
                 <TableRow>
