@@ -32,6 +32,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
+  TablePagination,
   TableRow,
 } from '@mui/material';
 
@@ -166,6 +167,8 @@ class Sales extends Component {
       today: new Date(),
       tommorrow: new Date(),
       lets: 0,
+      page: 0,
+      rowsPerPage: 5,
     };
   }
   goLogin = () => {
@@ -690,7 +693,13 @@ class Sales extends Component {
       });
     }
   };
+  handleChangeRowsPerPage = (e) => {
+    this.setState({ rowsPerPage: e.target.value, page: 0 });
+  };
 
+  handleChangePage = (e, newPage) => {
+    this.setState({ page: newPage });
+  };
   render() {
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.salesViewList);
@@ -815,7 +824,29 @@ class Sales extends Component {
                       <TableCell scope='col'>결제금액</TableCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody>{this.state.salesViewList}</TableBody>
+                  <TableBody>
+                    {this.state.salesViewList.slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )}
+                  </TableBody>
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.salesViewList.length,
+                      },
+                    ]}
+                    count={this.state.salesViewList.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
                 </Table>
               </Tab>
 
@@ -910,7 +941,29 @@ class Sales extends Component {
                       <TableCell scope='col'>결제금액</TableCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody>{this.state.exerciseViewList}</TableBody>
+                  <TableBody>
+                    {this.state.exerciseViewList.slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )}
+                  </TableBody>
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.salesViewList.length,
+                      },
+                    ]}
+                    count={this.state.salesViewList.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
                 </Table>
               </Tab>
               <Tab eventKey='tools' title='결제도구'>
@@ -979,7 +1032,29 @@ class Sales extends Component {
                       <TableCell scope='col'>결제금액</TableCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody>{this.state.toolsViewList}</TableBody>
+                  <TableBody>
+                    {this.state.toolsViewList.slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )}
+                  </TableBody>
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.salesViewList.length,
+                      },
+                    ]}
+                    count={this.state.salesViewList.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
                 </Table>
               </Tab>
             </Tabs>

@@ -38,6 +38,7 @@ import {
   updateManagerClientTrainer,
   updateTrainer,
 } from '../../api/user';
+import { TablePagination } from '@mui/material';
 
 const Desktop = ({ children }) => {
   const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -299,6 +300,8 @@ class Trainer extends Component {
     super(props);
     this.state = {
       viewTrainerList: [],
+      rowsPerPage: 5,
+      page: 0,
     };
   }
   goLogin = () => {
@@ -373,6 +376,14 @@ class Trainer extends Component {
     });
   };
 
+  handleChangeRowsPerPage = (e) => {
+    this.setState({ rowsPerPage: e.target.value, page: 0 });
+  };
+
+  handleChangePage = (e, newPage) => {
+    this.setState({ page: newPage });
+  };
+
   render() {
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.viewTrainerList[0]);
@@ -420,8 +431,32 @@ class Trainer extends Component {
                   <TableCell className='text-center'>수정하기</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>{this.state.viewTrainerList}</TableBody>
+              <TableBody>
+                {this.state.viewTrainerList.length === 0
+                  ? '등록된 강사가 없습니다.'
+                  : this.state.viewTrainerList.slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )}
+              </TableBody>
             </Table>
+            <TablePagination
+              rowsPerPageOptions={[
+                5,
+                10,
+                25,
+                {
+                  label: 'All',
+                  value: this.state.viewTrainerList.length,
+                },
+              ]}
+              count={this.state.viewTrainerList.length}
+              rowsPerPage={this.state.rowsPerPage}
+              page={this.state.page}
+              onPageChange={this.handleChangePage}
+              onRowsPerPageChange={this.handleChangeRowsPerPage}
+            />
           </TableContainer>
         </Container>
         <div className='footer'>

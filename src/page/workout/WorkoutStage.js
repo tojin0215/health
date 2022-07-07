@@ -1,4 +1,10 @@
-import { TableCell, TableHead, TableRow, TextField } from '@mui/material';
+import {
+  TableCell,
+  TableHead,
+  TablePagination,
+  TableRow,
+  TextField,
+} from '@mui/material';
 import Menu from '../../component/navigation/Menu';
 import { Component } from 'react';
 import { Button, Row, Col, Container, Table } from 'react-bootstrap';
@@ -139,6 +145,8 @@ class WorkoutStage extends Component {
       nextStage4: false,
       nextStage5: false,
       nextStage6: false,
+      rowsPerPage: 5,
+      page: 0,
     };
   }
   goLogin = () => {
@@ -244,58 +252,62 @@ class WorkoutStage extends Component {
   };
 
   alloted = () => {
-    selectTrainerReservation(
-      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-    ).then((trainerResult) => {
-      const fitness_no =
-        this.props.userinfo.loginWhether === 1
-          ? trainerResult[0].fitness_no
-          : this.props.userinfo.fitness_no;
-      this.state.workoutStage.map((data, index, array) => {
-        console.log(this.state.workoutStage);
-        this.setState({
-          workout: data.props.workout,
-          part: data.props.part,
-          machine: data.props.machine,
-          default_set: data.props.default_set,
-          default_count: data.props.default_count,
-          default_rest: data.props.default_rest,
-          url: data.props.url,
-        });
-        console.log(this.state.workout);
-        workoutAllotedInsert(
-          fitness_no,
-          this.state.idc,
-          this.state.workout,
-          this.state.part === 1
-            ? '상체'
-            : this.state.part === 18
-            ? '하체'
-            : this.state.part === 28
-            ? '전신'
-            : this.state.part === 38
-            ? '코어'
-            : this.state.part === 48
-            ? '유산소'
-            : '기타',
-          this.state.machine,
-          this.state.default_set,
-          this.state.default_count,
-          this.state.default_rest,
-          this.state.url
-        ).then((res) => {
-          // console.log(this.state.workout);
-          this.props.history.push({
-            pathname: '/workoutAllotedList',
-            state: {
-              client_name2: this.state.client_name,
-              idc2: this.state.idc,
-              line: 3,
-            },
+    if (this.state.idc === undefined) {
+      alert('회원을 선택해주세요.');
+    } else {
+      selectTrainerReservation(
+        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+      ).then((trainerResult) => {
+        const fitness_no =
+          this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no;
+        this.state.workoutStage.map((data, index, array) => {
+          console.log(this.state.workoutStage);
+          this.setState({
+            workout: data.props.workout,
+            part: data.props.part,
+            machine: data.props.machine,
+            default_set: data.props.default_set,
+            default_count: data.props.default_count,
+            default_rest: data.props.default_rest,
+            url: data.props.url,
+          });
+          console.log(this.state.workout);
+          workoutAllotedInsert(
+            fitness_no,
+            this.state.idc,
+            this.state.workout,
+            this.state.part === 1
+              ? '상체'
+              : this.state.part === 18
+              ? '하체'
+              : this.state.part === 28
+              ? '전신'
+              : this.state.part === 38
+              ? '코어'
+              : this.state.part === 48
+              ? '유산소'
+              : '기타',
+            this.state.machine,
+            this.state.default_set,
+            this.state.default_count,
+            this.state.default_rest,
+            this.state.url
+          ).then((res) => {
+            // console.log(this.state.workout);
+            this.props.history.push({
+              pathname: '/workoutAllotedList',
+              state: {
+                client_name2: this.state.client_name,
+                idc2: this.state.idc,
+                line: 3,
+              },
+            });
           });
         });
       });
-    });
+    }
   };
 
   stageOnClickStage = () => {
@@ -365,10 +377,18 @@ class WorkoutStage extends Component {
     });
   };
 
+  handleChangeRowsPerPage = (e) => {
+    this.setState({ rowsPerPage: e.target.value, page: 0 });
+  };
+
+  handleChangePage = (e, newPage) => {
+    this.setState({ page: newPage });
+  };
+
   render() {
-    // console.log(this.state.stage);
-    // console.log(this.state.idc); //idc=client_no
-    // console.log(this.state.workoutStage);
+    console.log(this.state.stage);
+    console.log(this.state.idc); //idc=client_no
+    console.log(this.state.workoutStage);
     // console.log(this.state.workout);
     console.log(this.state.client_name);
 
@@ -415,6 +435,69 @@ class WorkoutStage extends Component {
             />
           )}
 
+          {this.state.nextStage1 && this.state.stage === 111 ? (
+            <h3>상체 1단계</h3>
+          ) : this.state.nextStage1 && this.state.stage === 112 ? (
+            <h3>상체 2단계</h3>
+          ) : this.state.nextStage1 && this.state.stage === 113 ? (
+            <h3>상체 3단계</h3>
+          ) : this.state.nextStage1 && this.state.stage === 114 ? (
+            <h3>상체 4단계</h3>
+          ) : this.state.nextStage1 && this.state.stage === 115 ? (
+            <h3>상체 5단계</h3>
+          ) : this.state.nextStage2 && this.state.stage === 211 ? (
+            <h3>하체 1단계</h3>
+          ) : this.state.nextStage2 && this.state.stage === 212 ? (
+            <h3>하체 2단계</h3>
+          ) : this.state.nextStage2 && this.state.stage === 213 ? (
+            <h3>하체 3단계</h3>
+          ) : this.state.nextStage2 && this.state.stage === 214 ? (
+            <h3>하체 4단계</h3>
+          ) : this.state.nextStage2 && this.state.stage === 215 ? (
+            <h3>하체 5단계</h3>
+          ) : this.state.nextStage3 && this.state.stage === 311 ? (
+            <h3>전신 1단계</h3>
+          ) : this.state.nextStage3 && this.state.stage === 312 ? (
+            <h3>전신 2단계</h3>
+          ) : this.state.nextStage3 && this.state.stage === 313 ? (
+            <h3>전신 3단계</h3>
+          ) : this.state.nextStage3 && this.state.stage === 314 ? (
+            <h3>전신 4단계</h3>
+          ) : this.state.nextStage3 && this.state.stage === 315 ? (
+            <h3>전신 5단계</h3>
+          ) : this.state.nextStage4 && this.state.stage === 411 ? (
+            <h3>코어 1단계</h3>
+          ) : this.state.nextStage4 && this.state.stage === 412 ? (
+            <h3>코어 2단계</h3>
+          ) : this.state.nextStage4 && this.state.stage === 413 ? (
+            <h3>코어 3단계</h3>
+          ) : this.state.nextStage4 && this.state.stage === 414 ? (
+            <h3>코어 4단계</h3>
+          ) : this.state.nextStage4 && this.state.stage === 415 ? (
+            <h3>코어 5단계</h3>
+          ) : this.state.nextStage5 && this.state.stage === 511 ? (
+            <h3>유산소 1단계</h3>
+          ) : this.state.nextStage5 && this.state.stage === 512 ? (
+            <h3>유산소 2단계</h3>
+          ) : this.state.nextStage5 && this.state.stage === 513 ? (
+            <h3>유산소 3단계</h3>
+          ) : this.state.nextStage5 && this.state.stage === 514 ? (
+            <h3>유산소 4단계</h3>
+          ) : this.state.nextStage5 && this.state.stage === 515 ? (
+            <h3>유산소 5단계</h3>
+          ) : this.state.nextStage6 && this.state.stage === 611 ? (
+            <h3>기타 1단계</h3>
+          ) : this.state.nextStage6 && this.state.stage === 612 ? (
+            <h3>기타 2단계</h3>
+          ) : this.state.nextStage6 && this.state.stage === 613 ? (
+            <h3>기타 3단계</h3>
+          ) : this.state.nextStage6 && this.state.stage === 614 ? (
+            <h3>기타 4단계</h3>
+          ) : this.state.nextStage6 && this.state.stage === 615 ? (
+            <h3>기타 5단계</h3>
+          ) : (
+            ''
+          )}
           {this.state.nextStage1 ? (
             <div>
               <Row xs={5} className='mt-3'>
@@ -477,13 +560,19 @@ class WorkoutStage extends Component {
                   </Button>
                 </Col>
                 <Col className='text-end'>
-                  <Button
-                    variant='primary'
-                    className='ms-2'
-                    onClick={this.alloted}
-                  >
-                    묶음 운동 배정하기
-                  </Button>
+                  {this.state.workoutStage.length === 0 ? (
+                    <Button variant='primary' className='ms-2'>
+                      <Link to='/workoutStageAdd'>묶음 운동 설정</Link>
+                    </Button>
+                  ) : (
+                    <Button
+                      variant='primary'
+                      className='ms-2'
+                      onClick={this.alloted}
+                    >
+                      묶음 운동 배정하기
+                    </Button>
+                  )}
                 </Col>
               </Row>
               <Col xs={12}>
@@ -500,8 +589,30 @@ class WorkoutStage extends Component {
                       <TableCell scope='col'>url</TableCell>
                     </TableRow>
                   </TableHead>
-                  {this.state.workoutStage ? this.state.workoutStage : ''}
+                  {this.state.workoutStage.length === 0
+                    ? '설정된 운동이 없습니다.'
+                    : this.state.workoutStage.slice(
+                        this.state.page * this.state.rowsPerPage,
+                        this.state.page * this.state.rowsPerPage +
+                          this.state.rowsPerPage
+                      )}
                 </Table>
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.workoutStage.length,
+                    },
+                  ]}
+                  count={this.state.workoutStage.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
               </Col>
             </div>
           ) : this.state.nextStage2 ? (
@@ -566,13 +677,19 @@ class WorkoutStage extends Component {
                   </Button>
                 </Col>
                 <Col className='text-end'>
-                  <Button
-                    variant='primary'
-                    className='ms-2'
-                    onClick={this.alloted}
-                  >
-                    묶음 운동 배정하기
-                  </Button>
+                  {this.state.workoutStage.length === 0 ? (
+                    <Button variant='primary' className='ms-2'>
+                      <Link to='/workoutStageAdd'>묶음 운동 설정</Link>
+                    </Button>
+                  ) : (
+                    <Button
+                      variant='primary'
+                      className='ms-2'
+                      onClick={this.alloted}
+                    >
+                      묶음 운동 배정하기
+                    </Button>
+                  )}
                 </Col>
               </Row>
               <Col xs={12}>
@@ -589,8 +706,30 @@ class WorkoutStage extends Component {
                       <TableCell scope='col'>url</TableCell>
                     </TableRow>
                   </TableHead>
-                  {this.state.workoutStage ? this.state.workoutStage : ''}
+                  {this.state.workoutStage.length === 0
+                    ? '설정된 운동이 없습니다.'
+                    : this.state.workoutStage.slice(
+                        this.state.page * this.state.rowsPerPage,
+                        this.state.page * this.state.rowsPerPage +
+                          this.state.rowsPerPage
+                      )}
                 </Table>
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.workoutStage.length,
+                    },
+                  ]}
+                  count={this.state.workoutStage.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
               </Col>
             </div>
           ) : this.state.nextStage3 ? (
@@ -655,13 +794,19 @@ class WorkoutStage extends Component {
                   </Button>
                 </Col>
                 <Col className='text-end'>
-                  <Button
-                    variant='primary'
-                    className='ms-2'
-                    onClick={this.alloted}
-                  >
-                    묶음 운동 배정하기
-                  </Button>
+                  {this.state.workoutStage.length === 0 ? (
+                    <Button variant='primary' className='ms-2'>
+                      <Link to='/workoutStageAdd'>묶음 운동 설정</Link>
+                    </Button>
+                  ) : (
+                    <Button
+                      variant='primary'
+                      className='ms-2'
+                      onClick={this.alloted}
+                    >
+                      묶음 운동 배정하기
+                    </Button>
+                  )}
                 </Col>
               </Row>
               <Col xs={12}>
@@ -678,8 +823,30 @@ class WorkoutStage extends Component {
                       <TableCell scope='col'>url</TableCell>
                     </TableRow>
                   </TableHead>
-                  {this.state.workoutStage ? this.state.workoutStage : ''}
+                  {this.state.workoutStage.length === 0
+                    ? '설정된 운동이 없습니다.'
+                    : this.state.workoutStage.slice(
+                        this.state.page * this.state.rowsPerPage,
+                        this.state.page * this.state.rowsPerPage +
+                          this.state.rowsPerPage
+                      )}
                 </Table>
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.workoutStage.length,
+                    },
+                  ]}
+                  count={this.state.workoutStage.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
               </Col>
             </div>
           ) : this.state.nextStage4 ? (
@@ -744,13 +911,19 @@ class WorkoutStage extends Component {
                   </Button>
                 </Col>
                 <Col className='text-end'>
-                  <Button
-                    variant='primary'
-                    className='ms-2'
-                    onClick={this.alloted}
-                  >
-                    묶음 운동 배정하기
-                  </Button>
+                  {this.state.workoutStage.length === 0 ? (
+                    <Button variant='primary' className='ms-2'>
+                      <Link to='/workoutStageAdd'>묶음 운동 설정</Link>
+                    </Button>
+                  ) : (
+                    <Button
+                      variant='primary'
+                      className='ms-2'
+                      onClick={this.alloted}
+                    >
+                      묶음 운동 배정하기
+                    </Button>
+                  )}
                 </Col>
               </Row>
               <Col xs={12}>
@@ -767,8 +940,30 @@ class WorkoutStage extends Component {
                       <TableCell scope='col'>url</TableCell>
                     </TableRow>
                   </TableHead>
-                  {this.state.workoutStage ? this.state.workoutStage : ''}
+                  {this.state.workoutStage.length === 0
+                    ? '설정된 운동이 없습니다.'
+                    : this.state.workoutStage.slice(
+                        this.state.page * this.state.rowsPerPage,
+                        this.state.page * this.state.rowsPerPage +
+                          this.state.rowsPerPage
+                      )}
                 </Table>
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.workoutStage.length,
+                    },
+                  ]}
+                  count={this.state.workoutStage.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
               </Col>
             </div>
           ) : this.state.nextStage5 ? (
@@ -833,13 +1028,19 @@ class WorkoutStage extends Component {
                   </Button>
                 </Col>
                 <Col className='text-end'>
-                  <Button
-                    variant='primary'
-                    className='ms-2'
-                    onClick={this.alloted}
-                  >
-                    묶음 운동 배정하기
-                  </Button>
+                  {this.state.workoutStage.length === 0 ? (
+                    <Button variant='primary' className='ms-2'>
+                      <Link to='/workoutStageAdd'>묶음 운동 설정</Link>
+                    </Button>
+                  ) : (
+                    <Button
+                      variant='primary'
+                      className='ms-2'
+                      onClick={this.alloted}
+                    >
+                      묶음 운동 배정하기
+                    </Button>
+                  )}
                 </Col>
               </Row>
               <Col xs={12}>
@@ -856,8 +1057,30 @@ class WorkoutStage extends Component {
                       <TableCell scope='col'>url</TableCell>
                     </TableRow>
                   </TableHead>
-                  {this.state.workoutStage ? this.state.workoutStage : ''}
+                  {this.state.workoutStage.length === 0
+                    ? '설정된 운동이 없습니다.'
+                    : this.state.workoutStage.slice(
+                        this.state.page * this.state.rowsPerPage,
+                        this.state.page * this.state.rowsPerPage +
+                          this.state.rowsPerPage
+                      )}
                 </Table>
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.workoutStage.length,
+                    },
+                  ]}
+                  count={this.state.workoutStage.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
               </Col>
             </div>
           ) : this.state.nextStage6 ? (
@@ -922,13 +1145,19 @@ class WorkoutStage extends Component {
                   </Button>
                 </Col>
                 <Col className='text-end'>
-                  <Button
-                    variant='primary'
-                    className='ms-2'
-                    onClick={this.alloted}
-                  >
-                    묶음 운동 배정하기
-                  </Button>
+                  {this.state.workoutStage.length === 0 ? (
+                    <Button variant='primary' className='ms-2'>
+                      <Link to='/workoutStageAdd'>묶음 운동 설정</Link>
+                    </Button>
+                  ) : (
+                    <Button
+                      variant='primary'
+                      className='ms-2'
+                      onClick={this.alloted}
+                    >
+                      묶음 운동 배정하기
+                    </Button>
+                  )}
                 </Col>
               </Row>
               <Col xs={12}>
@@ -945,16 +1174,35 @@ class WorkoutStage extends Component {
                       <TableCell scope='col'>url</TableCell>
                     </TableRow>
                   </TableHead>
-                  {this.state.workoutStage ? this.state.workoutStage : ''}
+                  {this.state.workoutStage.length === 0
+                    ? '설정된 운동이 없습니다.'
+                    : this.state.workoutStage.slice(
+                        this.state.page * this.state.rowsPerPage,
+                        this.state.page * this.state.rowsPerPage +
+                          this.state.rowsPerPage
+                      )}
                 </Table>
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.workoutStage.length,
+                    },
+                  ]}
+                  count={this.state.workoutStage.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
               </Col>
             </div>
           ) : (
             <Row xs={6} className='mt-3'>
               <Col>
-                {/* <button onClick={() => this.stageOnClick(11)}>
-                  1단계 기존바꿔야됨
-                </button> */}
                 <Button
                   className='w-100'
                   onClick={() => this.stageOnClickStage()}
