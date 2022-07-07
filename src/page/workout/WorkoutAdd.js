@@ -144,6 +144,8 @@ class WorkoutAdd extends Component {
 
         // and notify
         alert('Your session is expired, please log in again');
+      } else {
+        this.handleOnClick(1);
       }
     });
   }
