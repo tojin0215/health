@@ -9,7 +9,6 @@ class Footer extends Component {
         <div className='footerUtill'>
           <a href='#'>개인정보 처리방침</a>
           <a href='#'>웹사이트 이용 약관</a>
-          <a href='#'>법적 고지</a>
         </div>
         <div className='footerCompany'>
           <span>사업자등록번호 : 606-45-00610</span>

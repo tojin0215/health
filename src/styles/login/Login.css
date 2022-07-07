@@ -6,3 +6,7 @@
 .login_wrap .card-img-top {
   height: 300px;
 }
+
+.login .login__authentication--container {
+  max-width: 22rem;
+}

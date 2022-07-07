@@ -121,7 +121,7 @@ class Authentication extends Component {
             name='id'
             type='text'
             className='validate'
-            placeholder='아이디'
+            placeholder='센터 이름 (아이디)'
             onChange={this.handleChange}
             value={this.state.id}
           />
@@ -177,17 +177,17 @@ class Authentication extends Component {
             <Col>
               <Button
                 onClick={this.handleLogin}
-                className='px-5'
                 variant='primary'
+                className='w-100 px-5'
               >
-                LOGIN
+                로그인
               </Button>
             </Col>
             <Col className='mt-2'>
               <Button
                 href='/register'
                 variant='outline-light fw-bold'
-                className='px-5 border-0'
+                className='w-100 px-5 border-0'
               >
                 회원가입
               </Button>
