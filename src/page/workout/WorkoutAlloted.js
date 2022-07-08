@@ -467,14 +467,13 @@ class WorkoutAlloted extends Component {
             />
           ) : (
             <>
-              <h5>운동이 배정될 회원을 선택해주세요</h5>
               <TextField
                 id='customer_name'
                 label='회원 검색'
                 disabled
                 variant='standard'
                 onClick={() => this.setState({ open: true })}
-                className='boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5'
+                className='customer-input--search'
                 InputProps={{ disableUnderline: true }}
                 value={this.state.client_name}
               />
