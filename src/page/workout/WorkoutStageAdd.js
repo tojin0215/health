@@ -749,14 +749,40 @@ class WorkoutStageAdd extends Component {
                         <TableCell scope='col'>url</TableCell>
                       </TableRow>
                     </TableHead>
-                    {this.state.workoutStage.length === 0
-                      ? '설정된 운동이 없습니다.'
-                      : this.state.workoutStage.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )}
+                    <TableBody>
+                      {this.state.workoutStage.length === 0
+                        ? ''
+                        : this.state.workoutStage.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )}
+                    </TableBody>
                   </Table>
+                  {this.state.workoutStage.length === 0 ? (
+                    <div className='p-3 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>설정된 운동이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.workoutStage.length,
+                      },
+                    ]}
+                    count={this.state.workoutStage.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
                 </TableContainer>
               </Col>
             </div>
@@ -872,6 +898,22 @@ class WorkoutStageAdd extends Component {
                   ) : (
                     ''
                   )}
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.workoutStage.length,
+                      },
+                    ]}
+                    count={this.state.workoutStage.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
                 </TableContainer>
               </Col>
             </div>
@@ -987,6 +1029,22 @@ class WorkoutStageAdd extends Component {
                   ) : (
                     ''
                   )}
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.workoutStage.length,
+                      },
+                    ]}
+                    count={this.state.workoutStage.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
                 </TableContainer>
               </Col>
             </div>
@@ -1102,6 +1160,22 @@ class WorkoutStageAdd extends Component {
                   ) : (
                     ''
                   )}
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.workoutStage.length,
+                      },
+                    ]}
+                    count={this.state.workoutStage.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
                 </TableContainer>
               </Col>
             </div>
@@ -1185,6 +1259,7 @@ class WorkoutStageAdd extends Component {
                 </Col>
               </Row>
               <Col xs={12}>
+                {/* 기타 */}
                 <TableContainer component={Paper}>
                   <Table>
                     <TableHead>
@@ -1216,6 +1291,22 @@ class WorkoutStageAdd extends Component {
                   ) : (
                     ''
                   )}
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.workoutStage.length,
+                      },
+                    ]}
+                    count={this.state.workoutStage.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
                 </TableContainer>
               </Col>
             </div>
