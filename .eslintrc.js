@@ -61,7 +61,7 @@ module.exports = {
     //plugin:import/errors
     'import/named': 1,
     'import/default': 1,
-    'import/no-unresolved': 'off',
+    // 'import/no-unresolved': 'off',
 
     //plugin:prettier/recommended
     'prettier/prettier': 0,
