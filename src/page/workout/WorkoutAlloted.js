@@ -41,17 +41,12 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 // 리액트 아이콘
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { TbMoodSuprised } from 'react-icons/tb';
+import { HiOutlinePlusCircle } from 'react-icons/hi';
+import { MdCancel } from 'react-icons/md';
 
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
-    <Row className='mt-4 sectionGlass'>
-      <Col xs={12}>
-        <h3>
-          {client_name}
-          <span className='fs-4'> 님</span>
-          <span className='fs-5'>의 마지막 인바디 기록입니다.</span>
-        </h3>
-      </Col>
+    <Row className=''>
       <Col>
         <h5>키</h5>
         <span className='fs-5 fw-bold'>{height}</span>
@@ -147,31 +142,34 @@ const ExerciseView = ({
       <TableCell>{workout}</TableCell>
       <TableCell>{machine}</TableCell>
       <TableCell>
-        <input
+        <Form.Control
           type='number'
           value={default_set_input}
           onChange={changeInsert}
         />
       </TableCell>
       <TableCell>
-        <input
+        <Form.Control
           type='number'
           value={default_count_input}
           onChange={changeInsert2}
         />
       </TableCell>
       <TableCell>
-        <input
+        <Form.Control
           type='number'
           value={default_rest_input}
           onChange={changeInsert3}
         />
       </TableCell>
       <TableCell>
-        <input value={url_input} onChange={changeInsert4} />
+        <Form.Control value={url_input} onChange={changeInsert4} />
       </TableCell>
-      <TableCell>
-        <Button onClick={plusTable}>+</Button>
+      <TableCell
+        className='workout-alloted__select--plus cursor-pointer'
+        onClick={plusTable}
+      >
+        <HiOutlinePlusCircle className='fs-1' />
       </TableCell>
     </TableRow>
   );
@@ -194,7 +192,6 @@ const WorkoutAllotedView = ({
   const hadndleDelete = (idwa) => {
     workoutAllotedDelete(idwa).then((res) => {
       workoutAllotedView(idc);
-      alert('삭제합니다.');
     });
   };
 
@@ -207,18 +204,15 @@ const WorkoutAllotedView = ({
       <TableCell>{default_count}</TableCell>
       <TableCell>{default_rest}</TableCell>
       <TableCell>{url}</TableCell>
-      <TableCell>
-        <Button
-          className='px-2 py-1'
-          variant='outline-danger'
-          onClick={() =>
-            confirm('정말 삭제하시겠습니까?') == true
-              ? hadndleDelete(idwa)
-              : alert('삭제가 취소 되었습니다.')
-          }
-        >
-          <RiDeleteBin5Fill />
-        </Button>
+      <TableCell
+        onClick={() =>
+          confirm('정말 삭제하시겠습니까?') == true
+            ? hadndleDelete(idwa)
+            : alert('삭제가 취소 되었습니다.')
+        }
+        className='workout-alloted__selected--cencel'
+      >
+        <MdCancel className='fs-2' />
       </TableCell>
     </TableRow>
   );
@@ -442,7 +436,7 @@ class WorkoutAlloted extends Component {
     // console.log(this.state.idc);
 
     return (
-      <div className='wrap'>
+      <div className='workout-alloted wrap'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -472,24 +466,38 @@ class WorkoutAlloted extends Component {
               handleUser={this.handleUser}
             />
           ) : (
-            <TextField
-              id='customer_name'
-              label='회원 검색'
-              disabled
-              variant='standard'
-              onClick={() => this.setState({ open: true })}
-              className='boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5'
-              InputProps={{ disableUnderline: true }}
-              value={this.state.client_name}
-            />
+            <>
+              <TextField
+                id='customer_name'
+                label='회원 검색'
+                disabled
+                variant='standard'
+                onClick={() => this.setState({ open: true })}
+                className='customer-input--search'
+                InputProps={{ disableUnderline: true }}
+                value={this.state.client_name}
+              />
+            </>
           )}
 
           {this.state.client_name ? (
             <div>
-              <div>
-                {this.state.inbodiesList[0]
-                  ? this.state.inbodiesList[0]
-                  : '등록된 인바디 정보가 없습니다.'}
+              <div className='mt-4 sectionGlass'>
+                <h3>
+                  {this.state.client_name}
+                  <span className='fs-4'> 님</span>
+                  <span className='fs-5 fw-light'>
+                    의 마지막 인바디 기록입니다.
+                  </span>
+                </h3>
+                {this.state.inbodiesList[0] ? (
+                  this.state.inbodiesList[0]
+                ) : (
+                  <div className='p-3 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>등록된 인바디 정보가 없습니다.</p>
+                  </div>
+                )}
               </div>
               <Row className='sectionGlass'>
                 <Col xs={12}>
@@ -568,7 +576,7 @@ class WorkoutAlloted extends Component {
                 </Col>
                 <Col xs={12} className='mt-2'>
                   <TableContainer component={Paper}>
-                    <Table>
+                    <Table size='small'>
                       <TableHead>
                         <TableRow>
                           <TableCell scope='col'>운동 부위</TableCell>
@@ -578,7 +586,9 @@ class WorkoutAlloted extends Component {
                           <TableCell scope='col'>횟수</TableCell>
                           <TableCell scope='col'>쉬는시간</TableCell>
                           <TableCell scope='col'>url</TableCell>
-                          <TableCell scope='col'>선택</TableCell>
+                          <TableCell scope='col' align='center'>
+                            배정
+                          </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -610,58 +620,64 @@ class WorkoutAlloted extends Component {
                 </Col>
               </Row>
               <Row className='sectionGlass'>
-                <h3>
-                  {this.state.client_name}
-                  <span className='fs-5'>님에게 배정된 운동 목록입니다</span>
-                </h3>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell scope='col'>운동 이름</TableCell>
-                      <TableCell scope='col'>운동 부위</TableCell>
-                      <TableCell scope='col'>운동 기구</TableCell>
-                      <TableCell scope='col'>세트</TableCell>
-                      <TableCell scope='col'>횟수</TableCell>
-                      <TableCell scope='col'>쉬는시간</TableCell>
-                      <TableCell scope='col'>url</TableCell>
-                      <TableCell scope='col'>삭제</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.workoutAllotlist.length === 0
-                      ? ''
-                      : this.state.workoutAllotlist.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )}
-                  </TableBody>
-                </Table>
-                {this.state.workoutAllotlist.length === 0 ? (
-                  <div className='p-3 fs-5 fw-bold text-center bg-white text-black'>
-                    <TbMoodSuprised className='fs-3' />
-                    <p>배정된 운동 목록이 없습니다.</p>
-                  </div>
-                ) : (
-                  ''
-                )}
-                <TablePagination
-                  className='bg-white'
-                  rowsPerPageOptions={[
-                    5,
-                    10,
-                    25,
-                    {
-                      label: 'All',
-                      value: this.state.workoutAllotlist.length,
-                    },
-                  ]}
-                  count={this.state.workoutAllotlist.length}
-                  rowsPerPage={this.state.rowsPerPage}
-                  page={this.state.page}
-                  onPageChange={this.handleChangePage}
-                  onRowsPerPageChange={this.handleChangeRowsPerPage}
-                />
+                <Col>
+                  <h3>
+                    {this.state.client_name}
+                    <span className='fs-5'>님에게 배정된 운동 목록입니다</span>
+                  </h3>
+                  <TableContainer component={Paper}>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell scope='col'>운동 이름</TableCell>
+                          <TableCell scope='col'>운동 부위</TableCell>
+                          <TableCell scope='col'>운동 기구</TableCell>
+                          <TableCell scope='col'>세트</TableCell>
+                          <TableCell scope='col'>횟수</TableCell>
+                          <TableCell scope='col'>쉬는시간</TableCell>
+                          <TableCell scope='col'>url</TableCell>
+                          <TableCell scope='col' align='center'>
+                            삭제
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {this.state.workoutAllotlist.length === 0
+                          ? ''
+                          : this.state.workoutAllotlist.slice(
+                              this.state.page * this.state.rowsPerPage,
+                              this.state.page * this.state.rowsPerPage +
+                                this.state.rowsPerPage
+                            )}
+                      </TableBody>
+                    </Table>
+                    {this.state.workoutAllotlist.length === 0 ? (
+                      <div className='p-3 fs-5 fw-bold text-center bg-white text-black'>
+                        <TbMoodSuprised className='fs-3' />
+                        <p>배정된 운동 목록이 없습니다.</p>
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                    <TablePagination
+                      className='bg-white'
+                      rowsPerPageOptions={[
+                        5,
+                        10,
+                        25,
+                        {
+                          label: 'All',
+                          value: this.state.workoutAllotlist.length,
+                        },
+                      ]}
+                      count={this.state.workoutAllotlist.length}
+                      rowsPerPage={this.state.rowsPerPage}
+                      page={this.state.page}
+                      onPageChange={this.handleChangePage}
+                      onRowsPerPageChange={this.handleChangeRowsPerPage}
+                    />
+                  </TableContainer>
+                </Col>
               </Row>
             </div>
           ) : null}

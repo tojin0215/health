@@ -35,15 +35,12 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
+import { TbMoodSuprised } from 'react-icons/tb';
+import { MdPersonSearch } from 'react-icons/md';
+
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
-    <Row className='mt-4 sectionGlass'>
-      <Col xs={12}>
-        <h3>
-          {client_name}
-          <span className='fs-4'>님</span>
-        </h3>
-      </Col>
+    <Row className=''>
       <Col>
         <h5>키</h5>
         <span className='fs-5 fw-bold'>{height}</span>
@@ -306,15 +303,17 @@ class WorkoutAllotedList extends Component {
         </div>
         <Container className='workoutallotedlist__container'>
           {this.state.line === 3 ? (
-            <TextField
-              id='customer_name'
-              label='회원 검색'
-              disabled
-              variant='standard'
-              className='boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5'
-              InputProps={{ disableUnderline: true }}
-              value={this.state.client_name2}
-            />
+            <>
+              <TextField
+                id='customer_name'
+                label='회원 검색'
+                disabled
+                variant='standard'
+                className='customer-input--search'
+                InputProps={{ disableUnderline: true }}
+                value={this.state.client_name2}
+              />
+            </>
           ) : this.state.line === 1 ? (
             ''
           ) : this.props.userinfo.loginWhether === 2 ? (
@@ -329,23 +328,34 @@ class WorkoutAllotedList extends Component {
               handleUser={this.handleUser}
             />
           ) : (
-            <TextField
-              id='customer_name'
-              label='회원 검색'
-              disabled
-              variant='standard'
-              onClick={() => this.setState({ open: true })}
-              className='boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5'
-              InputProps={{ disableUnderline: true }}
-              value={this.state.client_name}
-            />
+            <>
+              <TextField
+                id='customer_name'
+                label='회원 검색'
+                disabled
+                variant='standard'
+                onClick={() => this.setState({ open: true })}
+                className='customer-input--search'
+                InputProps={{ disableUnderline: true }}
+                value={this.state.client_name}
+              />
+            </>
           )}
           {this.state.client_name || this.state.client_name2 ? (
             <div>
-              <div>
-                {this.state.inbodiesList[0]
-                  ? this.state.inbodiesList[0]
-                  : '등록된 인바디 정보가 없습니다.'}
+              <div className='mt-4 sectionGlass'>
+                <h3>
+                  {this.state.client_name}
+                  <span className='fs-4'>님</span>
+                </h3>
+                {this.state.inbodiesList[0] ? (
+                  this.state.inbodiesList[0]
+                ) : (
+                  <div className='p-3 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>등록된 인바디 정보가 없습니다.</p>
+                  </div>
+                )}
               </div>
               <Row className='sectionGlass'>
                 <h3>

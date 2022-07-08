@@ -704,8 +704,9 @@ class Inbodies extends Component {
             </Col>
           </Row>
           {this.state.openChart ? (
-            <div className=''>
-              {this.state.client_name}님의 변화 그래프
+            <div className='inbodies__chart--wrap'>
+              <span className='fs-5 fw-bold'>{this.state.client_name}</span>님의
+              인바디 변화 그래프
               <Chart
                 height={300}
                 options={this.state.inbodiesListChart}

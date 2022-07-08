@@ -351,7 +351,6 @@ class Home extends Component {
             </p>
             <Row xs={5} className='home__shortcut'>
               <Col>
-                <h5 className='justify-content-center'>회원 관리</h5>
                 <Link
                   to='/client'
                   className='p-1 align-items-center'
@@ -365,9 +364,9 @@ class Home extends Component {
                     src={process.env.PUBLIC_URL + '/assets/home-client.svg'}
                   />
                 </Link>
+                <h5 className='justify-content-center mt-2'>회원 관리</h5>
               </Col>
               <Col>
-                <h5 className='justify-content-center'>강사 관리</h5>
                 <Link
                   to='/trainer'
                   className='p-1 align-items-center'
@@ -381,9 +380,9 @@ class Home extends Component {
                     src={process.env.PUBLIC_URL + '/assets/home-trainer.svg'}
                   />
                 </Link>
+                <h5 className='justify-content-center mt-2'>강사 관리</h5>
               </Col>
               <Col>
-                <h5 className='justify-content-center'>수업 일정</h5>
                 <Link
                   to='/reservation'
                   className='p-1 align-items-center'
@@ -397,9 +396,9 @@ class Home extends Component {
                     src={process.env.PUBLIC_URL + '/assets/home-class.svg'}
                   />
                 </Link>
+                <h5 className='justify-content-center mt-2'>수업 일정</h5>
               </Col>
               <Col>
-                <h5 className='justify-content-center'>운동 배정</h5>
                 <Link
                   to='/workoutAlloted'
                   className='p-1 align-items-center'
@@ -413,9 +412,9 @@ class Home extends Component {
                     src={process.env.PUBLIC_URL + '/assets/home-workout.svg'}
                   />
                 </Link>
+                <h5 className='justify-content-center mt-2'>운동 배정</h5>
               </Col>
               <Col>
-                <h5 className='justify-content-center'>매출 관리</h5>
                 <Link
                   to='/sales'
                   className='p-1 align-items-center'
@@ -429,6 +428,7 @@ class Home extends Component {
                     src={process.env.PUBLIC_URL + '/assets/home-chart.svg'}
                   />
                 </Link>
+                <h5 className='justify-content-center mt-2'>매출 관리</h5>
               </Col>
             </Row>
             <ul>

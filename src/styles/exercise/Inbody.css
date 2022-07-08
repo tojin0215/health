@@ -1,3 +1,9 @@
+.inbodies__chart--wrap {
+  background-color: #224;
+  padding: 30px;
+  margin: 10px 0;
+}
+
 .inbodyCustomer {
   position: relative;
   padding-bottom: 5rem;

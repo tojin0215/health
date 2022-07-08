@@ -158,9 +158,6 @@
 .MuiTable-root {
   color: #222;
 }
-.MuiTableRow-root {
-  background-color: #fff;
-}
 
 td > div {
   /* background-color: #333; */

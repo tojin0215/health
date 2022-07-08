@@ -1,3 +1,34 @@
+/* 포인트 커서 단축 클래스 */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* 회원 검색 인풋 */
+.customer-input--search {
+  background-color: #fff;
+  border-radius: 1rem;
+  height: 4rem;
+  width: 100%;
+  max-width: 16rem;
+  cursor: pointer;
+  transition: background-color 0.4s;
+}
+.customer-input--search #customer_name-label {
+  /* left: 30%; */
+}
+.customer-input--search #customer_name {
+  text-align: center;
+}
+.customer-input--search:hover {
+  background-color: rgba(255, 255, 160, 1);
+}
+.customer-input--search:active {
+  background-color: rgba(255, 255, 160, 0.2);
+}
+/* 
+boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5 
+ */
+
 /**
 * 연락처 입력 input 에 숫자 조작 화살표가 보이지 않게 만든다.
 */
@@ -95,6 +126,8 @@ html .MuiInputLabel-outlined {
   font-weight: bold;
 }
 #customer_name-label {
+  color: #222;
+  font-size: 1.2rem;
   text-indent: 2rem;
 }
 .tab-content {
