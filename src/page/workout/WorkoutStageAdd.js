@@ -605,42 +605,54 @@ class WorkoutStageAdd extends Component {
 
               <Col xs={12}>
                 {/* 상체 운동 목록 확인*/}
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell scope='col'>운동 부위</TableCell>
-                      <TableCell scope='col'>운동 이름</TableCell>
-                      <TableCell scope='col'>운동 기구</TableCell>
-                      <TableCell scope='col'>세트</TableCell>
-                      <TableCell scope='col'>횟수</TableCell>
-                      <TableCell scope='col'>쉬는시간</TableCell>
-                      <TableCell scope='col'>url</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  {this.state.workoutStage.length === 0
-                    ? '설정된 운동이 없습니다.'
-                    : this.state.workoutStage.slice(
-                        this.state.page * this.state.rowsPerPage,
-                        this.state.page * this.state.rowsPerPage +
-                          this.state.rowsPerPage
-                      )}
-                </Table>
-                <TablePagination
-                  rowsPerPageOptions={[
-                    5,
-                    10,
-                    25,
-                    {
-                      label: 'All',
-                      value: this.state.workoutStage.length,
-                    },
-                  ]}
-                  count={this.state.workoutStage.length}
-                  rowsPerPage={this.state.rowsPerPage}
-                  page={this.state.page}
-                  onPageChange={this.handleChangePage}
-                  onRowsPerPageChange={this.handleChangeRowsPerPage}
-                />
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell scope='col'>운동 부위</TableCell>
+                        <TableCell scope='col'>운동 이름</TableCell>
+                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>세트</TableCell>
+                        <TableCell scope='col'>횟수</TableCell>
+                        <TableCell scope='col'>쉬는시간</TableCell>
+                        <TableCell scope='col'>url</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.workoutStage.length === 0
+                        ? ''
+                        : this.state.workoutStage.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )}
+                    </TableBody>
+                  </Table>
+                  {this.state.workoutStage.length === 0 ? (
+                    <div className='p-3 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>등록된 운동이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.workoutStage.length,
+                      },
+                    ]}
+                    count={this.state.workoutStage.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
+                </TableContainer>
               </Col>
             </div>
           ) : this.state.nextStage2 ? (
@@ -724,26 +736,28 @@ class WorkoutStageAdd extends Component {
               </h3>
               <Col xs={12}>
                 {/* 하체 운동 목록 확인 */}
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell scope='col'>운동 부위</TableCell>
-                      <TableCell scope='col'>운동 이름</TableCell>
-                      <TableCell scope='col'>운동 기구</TableCell>
-                      <TableCell scope='col'>세트</TableCell>
-                      <TableCell scope='col'>횟수</TableCell>
-                      <TableCell scope='col'>쉬는시간</TableCell>
-                      <TableCell scope='col'>url</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  {this.state.workoutStage.length === 0
-                    ? '설정된 운동이 없습니다.'
-                    : this.state.workoutStage.slice(
-                        this.state.page * this.state.rowsPerPage,
-                        this.state.page * this.state.rowsPerPage +
-                          this.state.rowsPerPage
-                      )}
-                </Table>
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell scope='col'>운동 부위</TableCell>
+                        <TableCell scope='col'>운동 이름</TableCell>
+                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>세트</TableCell>
+                        <TableCell scope='col'>횟수</TableCell>
+                        <TableCell scope='col'>쉬는시간</TableCell>
+                        <TableCell scope='col'>url</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    {this.state.workoutStage.length === 0
+                      ? '설정된 운동이 없습니다.'
+                      : this.state.workoutStage.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )}
+                  </Table>
+                </TableContainer>
               </Col>
             </div>
           ) : this.state.nextStage3 ? (
