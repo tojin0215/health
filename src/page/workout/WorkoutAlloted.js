@@ -297,6 +297,7 @@ class WorkoutAlloted extends Component {
     });
     this.inbodiesView(idc);
     this.workoutAllotedView(idc);
+    this.handleOnClick(1);
   };
 
   inbodiesView = (idc) => {
