@@ -35,6 +35,8 @@ import {
   WorkoutStageAdd,
 } from '../page';
 
+import '../styles/workout/workoutAlloted.css';
+
 class App extends Component {
   render() {
     return (
