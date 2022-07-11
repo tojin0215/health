@@ -95,7 +95,11 @@ class Navigation extends Component {
                 {userinfo.manager_name}
               </Navbar.Brand>
               <Nav.Item className='align-self-center'>
-                <Button variant='outline-dark' onClick={this.handleLogout}>
+                <Button
+                  className='me-4'
+                  variant='outline-light'
+                  onClick={this.handleLogout}
+                >
                   LOG-OUT
                 </Button>
               </Nav.Item>
@@ -221,7 +225,11 @@ class Navigation extends Component {
                 {userinfo.manager_name}
               </Navbar.Brand>
               <Nav.Item className='align-self-center'>
-                <Button variant='outline-dark' onClick={this.handleLogout}>
+                <Button
+                  className='me-4'
+                  variant='outline-light'
+                  onClick={this.handleLogout}
+                >
                   LOG-OUT
                 </Button>
               </Nav.Item>
