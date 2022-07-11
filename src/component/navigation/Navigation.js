@@ -6,7 +6,7 @@ import { logoutRequest } from '../../action/authentication';
 
 import Button from 'react-bootstrap/Button';
 import styles from './Navigation.css';
-//web
+//web용 내비게이션
 class Navigation extends Component {
   constructor(props) {
     super(props);

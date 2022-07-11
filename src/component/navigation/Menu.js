@@ -8,7 +8,7 @@ import { logoutRequest } from '../../action/authentication';
 import { textlogo } from '../../../src/img/logo-text.png';
 
 import $ from 'jquery';
-//app
+//app 사이드 내비게이션
 // import { MdMenu } from 'react-icons/md';
 
 import './Menu.css';

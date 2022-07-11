@@ -23,8 +23,14 @@
   -ms-transition: height 500ms cubic-bezier(0.19, 1, 0.22, 1);
   -o-transition: height 500ms cubic-bezier(0.19, 1, 0.22, 1);
   transition: height 500ms cubic-bezier(0.19, 1, 0.22, 1); /* easeOutExpo */
-}
 
+  /* 사이드 스크롤바 없애기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.Navigation::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
 .Navigation:hover {
   height: 14rem;
 }
