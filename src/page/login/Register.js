@@ -212,16 +212,10 @@ class Register extends Component {
               강사, 회원은 센터에서 직접 등록할 수 있습니다. 해당 센터로
               문의해주세요.
             </p>
-            <Row xs={2} className='mt-4'>
-              <Col>
+            <Row xs={1} md={2} className='mt-4 g-3'>
+              <Col md={4}>
                 <Form.Group>
-                  <Form.Label>
-                    센터 이름{' '}
-                    <span className='text-secondary'>
-                      {' '}
-                      아이디로 사용됩니다.
-                    </span>
-                  </Form.Label>
+                  <Form.Label>아이디</Form.Label>
                   <Form.Control
                     value={this.state.id}
                     onChange={this.handleChange}
@@ -233,25 +227,35 @@ class Register extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col className='pt-4'>
-                <Button className='mt-2' onClick={this.idCheck}>
-                  중복확인
-                </Button>
+              <Col md={2} className='align-self-end'>
                 {this.state.check == 0 ? (
-                  <label></label>
+                  <Button className='mt-2 w-100' onClick={this.idCheck}>
+                    중복확인
+                  </Button>
                 ) : (
-                  <label className=''>사용 가능한 아이디입니다.</label>
+                  <>
+                    <span className='register__form--id-check-ok text-success'>
+                      사용 가능한 아이디입니다.
+                    </span>
+                    <Button
+                      variant='outline-success'
+                      className='mt-2 w-100'
+                      onClick={this.idCheck}
+                    >
+                      중복확인
+                    </Button>
+                  </>
                 )}
               </Col>
-              <Col>
+              <Col md={6}>
                 <Form.Group>
-                  <Form.Label>사업장이름</Form.Label>
+                  <Form.Label>사업자 등록번호</Form.Label>
                   <Form.Control
-                    value={this.state.fitness_name}
+                    value={this.state.business_number}
                     onChange={this.handleChange}
-                    id='fitness_name'
-                    label='사업장이름'
-                    error={this.state.fitness_name_err}
+                    id='business_number'
+                    label='사업자 등록번호'
+                    error={this.state.business_number_err}
                     required
                   ></Form.Control>
                 </Form.Group>
@@ -286,6 +290,32 @@ class Register extends Component {
               </Col>
               <Col>
                 <Form.Group>
+                  <Form.Label>사업장 이름</Form.Label>
+                  <Form.Control
+                    value={this.state.fitness_name}
+                    onChange={this.handleChange}
+                    id='fitness_name'
+                    label='사업장이름'
+                    error={this.state.fitness_name_err}
+                    required
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>사업장 연락처(-제외)</Form.Label>
+                  <Form.Control
+                    value={this.state.business_phone}
+                    onChange={this.handleChange}
+                    id='business_phone'
+                    label='사업장 연락처(-제외)'
+                    error={this.state.business_phone_err}
+                    required
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
                   <Form.Label>대표 이름</Form.Label>
                   <Form.Control
                     value={this.state.manager_name}
@@ -311,36 +341,10 @@ class Register extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col>
-                <Form.Group>
-                  <Form.Label>사업자 등록번호</Form.Label>
-                  <Form.Control
-                    value={this.state.business_number}
-                    onChange={this.handleChange}
-                    id='business_number'
-                    label='사업자 등록번호'
-                    error={this.state.business_number_err}
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group>
-                  <Form.Label>사업장 연락처(-제외)</Form.Label>
-                  <Form.Control
-                    value={this.state.business_phone}
-                    onChange={this.handleChange}
-                    id='business_phone'
-                    label='사업장 연락처(-제외)'
-                    error={this.state.business_phone_err}
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col xs={12} className='text-center mt-4'>
+              <Col md={12} className='text-center mt-4'>
                 {this.state.agreeCheck ? (
                   <>
-                    <p className='pb-2 text-success'>
+                    <p className='pb-2 text-success fw-bold'>
                       필수 약관에 동의했습니다.
                     </p>
                     <Button
@@ -358,7 +362,7 @@ class Register extends Component {
                     </p>
                     <Button
                       className='w-100'
-                      variant='outline-primary'
+                      variant='primary'
                       onClick={this.handleModal}
                     >
                       약관 확인
@@ -399,14 +403,14 @@ class Register extends Component {
                   </Card>
                 </Modal>
               </Col>
-              <Col xs={12} className='text-center mt-2'>
+              <Col md={12} className='text-center mt-2'>
                 {this.state.agreeCheck ? (
                   <Button className='w-100' onClick={this.handleOnClick}>
                     등록하기
                   </Button>
                 ) : (
                   <div>
-                    <Button className='w-100' disabled>
+                    <Button variant='secondary' className='w-100' disabled>
                       등록하기
                     </Button>
                   </div>
