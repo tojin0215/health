@@ -616,7 +616,7 @@ class Inbodies extends Component {
     // console.log(this.props.userinfo.manager_name);
 
     return (
-      <div className='wrap inbody'>
+      <div className='wrap inbodies'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -708,7 +708,7 @@ class Inbodies extends Component {
               <span className='fs-5 fw-bold'>{this.state.client_name}</span>님의
               인바디 변화 그래프
               <Chart
-                height={300}
+                height={400}
                 options={this.state.inbodiesListChart}
                 series={this.state.series}
                 type='line'
@@ -723,7 +723,7 @@ class Inbodies extends Component {
           >
             <Tab eventKey='home' title='체성분'>
               {this.state.inbodiesList.length == 0 ? (
-                <div className='p-3 fs-5 fw-bold text-center'>
+                <div className='p-3 fs-5 fw-bold text-center text-dark'>
                   <TbMoodSuprised className='fs-3' />
                   <p>등록된 인바디 정보가 없습니다.</p>
                 </div>
@@ -748,7 +748,7 @@ class Inbodies extends Component {
             </Tab>
             <Tab eventKey='home2' title='체성분 상세'>
               {this.state.inbodiesList.length == 0 ? (
-                <div className='p-3 fs-5 fw-bold text-center'>
+                <div className='p-3 fs-5 fw-bold text-center text-dark'>
                   <TbMoodSuprised className='fs-3' />
                   <p>등록된 인바디 정보가 없습니다.</p>
                 </div>
@@ -776,7 +776,7 @@ class Inbodies extends Component {
             </Tab>
             <Tab eventKey='home3' title='골격근, 지방'>
               {this.state.inbodiesList.length == 0 ? (
-                <div className='p-3 fs-5 fw-bold text-center'>
+                <div className='p-3 fs-5 fw-bold text-center text-dark'>
                   <TbMoodSuprised className='fs-3' />
                   <p>등록된 인바디 정보가 없습니다.</p>
                 </div>
@@ -800,7 +800,7 @@ class Inbodies extends Component {
             </Tab>
             <Tab eventKey='home4' title='비만'>
               {this.state.inbodiesList.length == 0 ? (
-                <div className='p-3 fs-5 fw-bold text-center'>
+                <div className='p-3 fs-5 fw-bold text-center text-dark'>
                   <TbMoodSuprised className='fs-3' />
                   <p>등록된 인바디 정보가 없습니다.</p>
                 </div>
