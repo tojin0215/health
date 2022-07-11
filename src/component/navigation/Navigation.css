@@ -51,6 +51,11 @@
   text-align: center;
   display: flex;
   align-items: center;
+
+  transition: color 0.5s;
+}
+.Navigation .navbar .navbar-brand:hover {
+  color: #fff;
 }
 
 .navbar-brand img {

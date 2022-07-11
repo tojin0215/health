@@ -39,10 +39,10 @@ class Navigation extends Component {
           <Navbar bg='dark'>
             <Nav className='mr-auto dropdownNav navitem'>
               <Nav.Item>
-                <span className={styles.navitem}>
+                <span className='text-primary'>
                   {this.props.userinfo.fitness_name}
                 </span>
-                <span className={styles.navitem}>회원</span>
+                <span className={styles.navitem}> 회원</span>
               </Nav.Item>
               <NavLink exact to='/home'>
                 <span className={styles.navitem}>Home</span>
@@ -105,10 +105,10 @@ class Navigation extends Component {
           <Navbar bg='dark'>
             <Nav className='mr-auto dropdownNav navitem'>
               <Nav.Item>
-                <span className={styles.navitem}>
+                <span className='text-primary'>
                   {this.props.userinfo.fitness_name}
                 </span>
-                <span className={styles.navitem}>강사</span>
+                <span className={styles.navitem}> 강사</span>
               </Nav.Item>
               <NavLink exact to='/home'>
                 <span className={styles.navitem}>Home</span>
@@ -231,10 +231,10 @@ class Navigation extends Component {
           <Navbar bg='dark'>
             <Nav className='mr-auto dropdownNav navitem'>
               <Nav.Item>
-                <span className={styles.navitem}>
+                <span className='text-primary'>
                   {this.props.userinfo.fitness_name}
                 </span>
-                <span className={styles.navitem}>센터</span>
+                <span className={styles.navitem}> 센터</span>
               </Nav.Item>
               <NavLink exact to='/home'>
                 <span className={styles.navitem}>Home</span>
@@ -399,8 +399,8 @@ class Navigation extends Component {
               </Navbar.Brand>
               <Nav.Item className='align-self-center'>
                 <Button
-                  variant='outline-light
-                '
+                  className='me-4'
+                  variant='outline-light'
                   onClick={this.handleLogout}
                 >
                   LOG-OUT
