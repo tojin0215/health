@@ -433,7 +433,11 @@ const ReservationClassItem_choice = ({
   };
 
   return (
-    <Button variant='light m-1' onClick={handleInnerOnClick_choice}>
+    <Button
+      variant='outline-dark'
+      className='m-1'
+      onClick={handleInnerOnClick_choice}
+    >
       {trainer_choice}
     </Button>
   );
@@ -500,7 +504,11 @@ const ReservationClassItem_choice2 = ({
     reservationChoiceClient(client_choice);
   };
   return (
-    <Button variant='light m-1' onClick={handleInnerOnClick_choice}>
+    <Button
+      variant='outline-dark'
+      className='m-1'
+      onClick={handleInnerOnClick_choice}
+    >
       {client_choice}
     </Button>
   );
@@ -1674,7 +1682,7 @@ class Reservation extends Component {
                   className='mb-3'
                 >
                   <Tab eventKey='home' title='전체보기'>
-                    <Table class='table text-center reservationListTable mt-5'>
+                    <Table class='table text-center reservationListTable'>
                       <TableHead rowCount={this.state.reservation.length}>
                         <TableRow>
                           <TableCell>
@@ -1812,7 +1820,7 @@ class Reservation extends Component {
 
                   <Tab eventKey='trainer' title='강사별조회'>
                     <p>{this.state.reservationClass_choice}</p>
-                    <table class='table text-center reservationListTable mt-5'>
+                    <table class='table text-center reservationListTable'>
                       <thead>
                         <tr>
                           <th scope='col'>회원이름</th>
@@ -1857,7 +1865,7 @@ class Reservation extends Component {
                   </Tab>
                   <Tab eventKey='client' title='회원별조회'>
                     <p>{this.state.reservationClass_choice2}</p>
-                    <table class='table text-center reservationListTable mt-5'>
+                    <table class='table text-center reservationListTable'>
                       <thead>
                         <tr>
                           <th scope='col'>회원이름</th>

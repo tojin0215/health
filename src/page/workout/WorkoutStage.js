@@ -623,7 +623,7 @@ class WorkoutStage extends Component {
                           to='/workoutStageAdd'
                           className=''
                         >
-                          묶음 운동 설정
+                          기본 루틴 설정
                         </Button>
                       </Link>
                     </div>
@@ -761,7 +761,7 @@ class WorkoutStage extends Component {
                           to='/workoutStageAdd'
                           className=''
                         >
-                          묶음 운동 설정
+                          기본 루틴 설정
                         </Button>
                       </Link>
                     </div>
@@ -898,7 +898,7 @@ class WorkoutStage extends Component {
                           to='/workoutStageAdd'
                           className=''
                         >
-                          묶음 운동 설정
+                          기본 루틴 설정
                         </Button>
                       </Link>
                     </div>
@@ -1035,7 +1035,7 @@ class WorkoutStage extends Component {
                           to='/workoutStageAdd'
                           className=''
                         >
-                          묶음 운동 설정
+                          기본 루틴 설정
                         </Button>
                       </Link>
                     </div>
@@ -1172,7 +1172,7 @@ class WorkoutStage extends Component {
                           to='/workoutStageAdd'
                           className=''
                         >
-                          묶음 운동 설정
+                          기본 루틴 설정
                         </Button>
                       </Link>
                     </div>
@@ -1307,7 +1307,7 @@ class WorkoutStage extends Component {
                           to='/workoutStageAdd'
                           className=''
                         >
-                          묶음 운동 설정
+                          기본 루틴 설정
                         </Button>
                       </Link>
                     </div>

@@ -511,13 +511,13 @@ class WorkoutStageAdd extends Component {
           <div className='localNavigation'>
             <div className='container'>
               <h2>
-                <div className='parallelogram'></div>묶음 운동 설정
+                <div className='parallelogram'></div>기본 루틴 설정
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/workoutStageAdd'>묶음 운동 설정</Link>
+                <Link to='/workoutStageAdd'>기본 루틴 설정</Link>
               </div>
             </div>
           </div>

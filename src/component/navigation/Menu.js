@@ -244,12 +244,12 @@ class Menu extends Component {
                   </li>
                   <li>
                     <NavLink exact to='/workoutStage'>
-                      묶음 운동 배정
+                      기본 루틴 배정
                     </NavLink>
                   </li>
                   <li>
                     <NavLink exact to='/workoutStageAdd'>
-                      묶음 운동 설정
+                      기본 루틴 설정
                     </NavLink>
                   </li>
                 </li>
@@ -397,12 +397,12 @@ class Menu extends Component {
                   </li>
                   <li>
                     <NavLink exact to='/workoutStage'>
-                      묶음 운동 배정
+                      기본 루틴 배정
                     </NavLink>
                   </li>
                   <li>
                     <NavLink exact to='/workoutStageAdd'>
-                      묶음 운동 설정
+                      기본 루틴 설정
                     </NavLink>
                   </li>
                 </li>
