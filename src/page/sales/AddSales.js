@@ -360,8 +360,9 @@ class AddSales extends Component {
           )}
           {/* <Link to="/sales">회원 검색</Link><br/> */}
           <form className='AddSalesForm productPay'>
-            <label className='salesCustomer'>
-              <span>{this.state.client_name}</span>님 반갑습니다.
+            <label className='salesCustomer my-4'>
+              <span className='fs-5 fw-bold'>{this.state.client_name}</span> 님
+              결제 등록입니다.
             </label>
             <h3 className='AddSalesHeader'>운동 종목</h3>
             <div className='exerciseType boxmorpinsm p-4 mb-5'>
@@ -581,7 +582,7 @@ class AddSales extends Component {
             </div>
             {/*.paymentAmount */}
             <h3>최종</h3>
-            <div className=' boxmorpinsm p-4 mb-4'>
+            <div className='boxmorpinsm p-4 mb-4'>
               <div className='finalAmountOthers'>
                 <label className='amountDay'>
                   <span>결제일</span>
@@ -595,31 +596,37 @@ class AddSales extends Component {
                   />
                 </label>
               </div>
-              <span>금액 합계</span>
-              <NumberFormat
-                thousandSeparator={true}
-                name='payment'
-                id='TotalPayment'
-                readOnly
-                value={
-                  parseInt(
-                    this.state.exercisePrice
-                      .toString()
-                      .replace(/[^(0-9)]/gi, '')
-                  ) +
-                  parseInt(
-                    this.state.sportswearPrice
-                      .toString()
-                      .replace(/[^(0-9)]/gi, '')
-                  ) +
-                  parseInt(
-                    this.state.lockerPrice.toString().replace(/[^(0-9)]/gi, '')
-                  )
-                }
-              />
+              <Row>
+                <span>금액 합계</span>
+                <NumberFormat
+                  thousandSeparator={true}
+                  name='payment'
+                  id='TotalPayment'
+                  readOnly
+                  value={
+                    parseInt(
+                      this.state.exercisePrice
+                        .toString()
+                        .replace(/[^(0-9)]/gi, '')
+                    ) +
+                    parseInt(
+                      this.state.sportswearPrice
+                        .toString()
+                        .replace(/[^(0-9)]/gi, '')
+                    ) +
+                    parseInt(
+                      this.state.lockerPrice
+                        .toString()
+                        .replace(/[^(0-9)]/gi, '')
+                    )
+                  }
+                />
+              </Row>
             </div>
             {/*.finalAmount */}
-            <Button onClick={this.handleOnClick}>등록하기</Button>
+            <Button className='w-100' onClick={this.handleOnClick}>
+              등록하기
+            </Button>
           </form>
           {/*.AddSalesForm productPay */}
         </Container>
