@@ -353,19 +353,19 @@ class AddSales extends Component {
               disabled
               variant='standard'
               onClick={() => this.setState({ open: true })}
-              className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
+              className='h-100 w-100 text-center pb-2 px-5'
               InputProps={{ disableUnderline: true }}
               value={this.state.client_name}
             />
           )}
           {/* <Link to="/sales">회원 검색</Link><br/> */}
-          <form className='AddSalesForm productPay'>
-            <label className='salesCustomer my-4'>
+          <form>
+            <label className='my-4'>
               <span className='fs-5 fw-bold'>{this.state.client_name}</span> 님
               결제 등록입니다.
             </label>
-            <h3 className='AddSalesHeader'>운동 종목</h3>
-            <div className='exerciseType boxmorpinsm p-4 mb-5'>
+            <h3>운동 종목</h3>
+            <div className='p-4 mb-5'>
               <Form.Group>
                 <Form.Check>
                   <Form.Check.Input
@@ -429,7 +429,6 @@ class AddSales extends Component {
                   <Form.Control
                     type='text'
                     id='inputExercise'
-                    className='form-control'
                     placeholder='기타 운동'
                     name='Exercise'
                     onChange={this.handleChange}
@@ -439,7 +438,7 @@ class AddSales extends Component {
             </div>
             {/*.exerciseType */}
             <h3>이용권 종류</h3>
-            <Row xs={2} className='boxmorpinsm w-100 m-0 p-4 mb-4'>
+            <Row xs={2} className='w-100 m-0 p-4 mb-4'>
               <Form.Group>
                 <Form.Check>
                   <Form.Check.Input
@@ -483,7 +482,7 @@ class AddSales extends Component {
                 ></Form.Control>
               </Form.Group>
             </Row>
-            <Row xs={2} className='boxmorpinsm w-100 m-0 p-4 mb-4'>
+            <Row xs={2} className='w-100 m-0 p-4 mb-4'>
               <Form.Group>
                 <Form.Check>
                   <Form.Check.Input
@@ -513,7 +512,7 @@ class AddSales extends Component {
               </Form.Group>
             </Row>
             <h3>결제 금액</h3>
-            <div className='payType boxmorpinsm p-4 mb-2'>
+            <div className='p-4 mb-2'>
               <Form.Group>
                 <Form.Check>
                   <Form.Check.Input
@@ -550,41 +549,45 @@ class AddSales extends Component {
                 </Form.Check>
               </Form.Group>
             </div>
-            {/*.payType */}
-            <div className='paymentAmount boxmorpinsm p-4 mb-4'>
-              <label>
-                운동
-                <NumberFormat
-                  thousandSeparator={true}
-                  id='exercisePrice'
-                  placeholder='0'
-                  onChange={this.handleChange}
-                />
-              </label>
-              <label>
-                운동복
-                <NumberFormat
-                  thousandSeparator={true}
-                  id='sportswearPrice'
-                  placeholder='0'
-                  onChange={this.handleChange}
-                />
-              </label>
-              <label>
-                개인 사물함
-                <NumberFormat
-                  thousandSeparator={true}
-                  id='lockerPrice'
-                  placeholder='0'
-                  onChange={this.handleChange}
-                />
-              </label>
-            </div>
-            {/*.paymentAmount */}
+            <Row className='p-4 mb-4'>
+              <Col>
+                <label>
+                  운동
+                  <NumberFormat
+                    thousandSeparator={true}
+                    id='exercisePrice'
+                    placeholder='0'
+                    onChange={this.handleChange}
+                  />
+                </label>
+              </Col>
+              <Col>
+                <label>
+                  운동복
+                  <NumberFormat
+                    thousandSeparator={true}
+                    id='sportswearPrice'
+                    placeholder='0'
+                    onChange={this.handleChange}
+                  />
+                </label>
+              </Col>
+              <Col>
+                <label>
+                  개인 사물함
+                  <NumberFormat
+                    thousandSeparator={true}
+                    id='lockerPrice'
+                    placeholder='0'
+                    onChange={this.handleChange}
+                  />
+                </label>
+              </Col>
+            </Row>
             <h3>최종</h3>
-            <div className='boxmorpinsm p-4 mb-4'>
-              <div className='finalAmountOthers'>
-                <label className='amountDay'>
+            <div className='p-4 mb-4'>
+              <div>
+                <label>
                   <span>결제일</span>
                   <DatePicker
                     selected={this.state.paymentDate}
@@ -623,19 +626,15 @@ class AddSales extends Component {
                 />
               </Row>
             </div>
-            {/*.finalAmount */}
             <Button className='w-100' onClick={this.handleOnClick}>
               등록하기
             </Button>
           </form>
-          {/*.AddSalesForm productPay */}
         </Container>
-        {/*.container */}
         <div className='footer'>
           <Footer />
         </div>
-        {/*.footer */}
-      </div> /*.addSales */
+      </div>
     );
   }
 }
