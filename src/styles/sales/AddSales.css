@@ -1,3 +1,4 @@
-.addSales .MuiTextField-root {
-  background-color: #fff;
+.add-sales__input--number-format {
+  padding: 4px;
+  border-radius: 6px;
 }
