@@ -336,7 +336,6 @@ class AddSales extends Component {
         </div>
         {/*.header */}
         <Container>
-          <h2>상품 등록페이지</h2>
           {this.state.open ? (
             <UserSearch
               open={this.state.open}
@@ -627,31 +626,33 @@ class AddSales extends Component {
                   </label>
                 </Col>
                 <Col>
-                  <p>금액 합계</p>
-                  <NumberFormat
-                    className='add-sales__input--number-format'
-                    thousandSeparator={true}
-                    name='payment'
-                    id='TotalPayment'
-                    readOnly
-                    value={
-                      parseInt(
-                        this.state.exercisePrice
-                          .toString()
-                          .replace(/[^(0-9)]/gi, '')
-                      ) +
-                      parseInt(
-                        this.state.sportswearPrice
-                          .toString()
-                          .replace(/[^(0-9)]/gi, '')
-                      ) +
-                      parseInt(
-                        this.state.lockerPrice
-                          .toString()
-                          .replace(/[^(0-9)]/gi, '')
-                      )
-                    }
-                  />
+                  <label>
+                    <p>금액 합계</p>
+                    <NumberFormat
+                      className='add-sales__input--number-format'
+                      thousandSeparator={true}
+                      name='payment'
+                      id='TotalPayment'
+                      readOnly
+                      value={
+                        parseInt(
+                          this.state.exercisePrice
+                            .toString()
+                            .replace(/[^(0-9)]/gi, '')
+                        ) +
+                        parseInt(
+                          this.state.sportswearPrice
+                            .toString()
+                            .replace(/[^(0-9)]/gi, '')
+                        ) +
+                        parseInt(
+                          this.state.lockerPrice
+                            .toString()
+                            .replace(/[^(0-9)]/gi, '')
+                        )
+                      }
+                    />
+                  </label>
                 </Col>
               </Row>
             </div>
