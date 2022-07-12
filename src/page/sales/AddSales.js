@@ -365,7 +365,7 @@ class AddSales extends Component {
               결제 등록입니다.
             </label>
             <h3>운동 종목</h3>
-            <div className='p-4 mb-5'>
+            <div className='mb-5'>
               <Form.Group>
                 <Row>
                   <Col>
