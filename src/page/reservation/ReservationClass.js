@@ -983,8 +983,9 @@ class ReservationClass extends Component {
               sm={3}
               lg={3}
             >
-              <label className='boxmorpsm d-block w-100 bg-white'>
+              <label className='w-100'>
                 <TextField
+                  className='boxmorpsm w-100'
                   id='exercise_class'
                   variant='standard'
                   value={this.state.exercise_class}
@@ -1014,9 +1015,9 @@ class ReservationClass extends Component {
             <Col className=' px-1' xs={12} sm={2} lg={2}>
               <Row className=''>
                 <Col className='pe-0 height-fit-content'>
-                  <label className='d-block w-100 boxmorpsm  bg-white'>
+                  <label className='w-100'>
                     <TextField
-                      className=''
+                      className='boxmorpsm w-100'
                       type='number'
                       id='hour'
                       variant='standard'
@@ -1035,9 +1036,9 @@ class ReservationClass extends Component {
                   <span className='fs-5 fw-bold'>:</span>
                 </Col>
                 <Col className='text-center ps-0 height-fit-content'>
-                  <label className='d-block w-100 boxmorpsm bg-white'>
+                  <label className='w-100'>
                     <TextField
-                      className=''
+                      className='w-100 boxmorpsm'
                       type='number'
                       id='minute'
                       variant='standard'
@@ -1052,9 +1053,9 @@ class ReservationClass extends Component {
               </Row>
             </Col>
             <Col className='text-center height-fit-content' xs={12} sm={4}>
-              <label className='boxmorpsm d-block w-100 bg-white'>
+              <label className='w-100'>
                 <TextField
-                  className=''
+                  className='w-100 boxmorpsm'
                   type='number'
                   id='number_of_people'
                   variant='standard'

@@ -446,7 +446,7 @@ class AddSales extends Component {
             </div>
             <h3>이용권 종류</h3>
             <Row xs={2}>
-              <Col>
+              <Col xs={12} sm={2} className='mb-3'>
                 <Form.Group>
                   <Form.Check>
                     <Form.Check.Input
@@ -490,7 +490,7 @@ class AddSales extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col>
+              <Col xs={12} sm={2}>
                 <Form.Group>
                   <Form.Check>
                     <Form.Check.Input
@@ -528,7 +528,7 @@ class AddSales extends Component {
               <h4>결제 종류</h4>
               <Form.Group>
                 <Row>
-                  <Col>
+                  <Col xs={12} sm={2}>
                     <Form.Check>
                       <Form.Check.Input
                         type='radio'
@@ -541,7 +541,7 @@ class AddSales extends Component {
                       </Form.Check.Label>
                     </Form.Check>
                   </Col>
-                  <Col>
+                  <Col xs={12} sm={2}>
                     <Form.Check>
                       <Form.Check.Input
                         type='radio'
@@ -554,7 +554,7 @@ class AddSales extends Component {
                       </Form.Check.Label>
                     </Form.Check>
                   </Col>
-                  <Col>
+                  <Col xs={12} sm={2}>
                     <Form.Check>
                       <Form.Check.Input
                         type='radio'
@@ -572,7 +572,7 @@ class AddSales extends Component {
             </div>
             <h4>금액</h4>
             <Row className='mb-4'>
-              <Col>
+              <Col xs={12} sm={2}>
                 <label>
                   <p>운동</p>
                   <NumberFormat
@@ -584,7 +584,7 @@ class AddSales extends Component {
                   />
                 </label>
               </Col>
-              <Col>
+              <Col xs={12} sm={2}>
                 <label>
                   <p>운동복</p>
                   <NumberFormat
@@ -596,7 +596,7 @@ class AddSales extends Component {
                   />
                 </label>
               </Col>
-              <Col>
+              <Col xs={12} sm={2}>
                 <label>
                   <p>개인 사물함</p>
                   <NumberFormat
@@ -609,9 +609,9 @@ class AddSales extends Component {
                 </label>
               </Col>
             </Row>
-            <h3>최종</h3>
+            <h3>결제</h3>
             <div className='mb-4'>
-              <Row>
+              <Row xs={1}>
                 <Col>
                   <label>
                     <span>결제일</span>

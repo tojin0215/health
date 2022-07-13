@@ -438,7 +438,7 @@ class ReservationUpdate extends Component {
   render() {
     console.log(this.state.reservationClass);
     return (
-      <div className='wrap addCustomer'>
+      <div className='wrap'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

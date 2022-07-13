@@ -14,8 +14,8 @@
 }
 
 .reservationClassWrap .react-datepicker__input-container input[type='text'] {
-  padding-top: 17px;
-  padding-bottom: 17px;
+  padding-top: 19px;
+  padding-bottom: 20px;
 }
 
 .reservation-class--trainer-input {
