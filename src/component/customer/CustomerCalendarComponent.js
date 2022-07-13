@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
+import {
+  Calendar,
+  Views,
+  DateLocalizer,
+  momentLocalizer,
+} from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import {
@@ -231,7 +236,7 @@ class CustomerCalendarComponent extends Component {
           events={events}
           startAccessor='start'
           endAccessor='end'
-          views={['month']}
+          views={['month', 'day', 'week', 'agenda']}
           onSelectEvent={this.handleOnSelectEvent}
           defaultDate={new Date()}
         />

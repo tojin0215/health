@@ -1368,7 +1368,7 @@ class Reservation extends Component {
                   </TableHead>
                   <TableBody>
                     <TableRow>
-                      <TableCell align='center'>
+                      <TableCell align='center' className='align-top'>
                         {this.state.reservationClass.length === 0 ? (
                           <div className='py-2 my-1 text-secondary rounded'>
                             <TbMoodSuprised className='fs-3' />
@@ -1392,7 +1392,11 @@ class Reservation extends Component {
                           )
                         )}
                       </TableCell>
-                      <TableCell name='mon' align='center'>
+                      <TableCell
+                        name='mon'
+                        align='center'
+                        className='align-top'
+                      >
                         {' '}
                         {this.state.reservationClass.length == 0 ? (
                           <div className='py-2 my-1 text-secondary  rounded'>
@@ -1417,7 +1421,11 @@ class Reservation extends Component {
                           )
                         )}
                       </TableCell>
-                      <TableCell name='tue' align='center'>
+                      <TableCell
+                        name='tue'
+                        align='center'
+                        className='align-top'
+                      >
                         {this.state.reservationClass.length == 0 ? (
                           <div className='py-2 my-1 text-secondary rounded'>
                             <TbMoodSuprised className='fs-3' />
@@ -1441,7 +1449,11 @@ class Reservation extends Component {
                           )
                         )}
                       </TableCell>
-                      <TableCell name='wed' align='center'>
+                      <TableCell
+                        name='wed'
+                        align='center'
+                        className='align-top'
+                      >
                         {' '}
                         {this.state.reservationClass.length == 0 ? (
                           <div className='py-2 my-1 text-secondary rounded'>
@@ -1466,7 +1478,11 @@ class Reservation extends Component {
                           )
                         )}
                       </TableCell>
-                      <TableCell name='thu' align='center'>
+                      <TableCell
+                        name='thu'
+                        align='center'
+                        className='align-top'
+                      >
                         {' '}
                         {this.state.reservationClass.length == 0 ? (
                           <div className='py-2 my-1 text-secondary rounded'>
@@ -1491,7 +1507,11 @@ class Reservation extends Component {
                           )
                         )}
                       </TableCell>
-                      <TableCell name='fri' align='center'>
+                      <TableCell
+                        name='fri'
+                        align='center'
+                        className='align-top'
+                      >
                         {' '}
                         {this.state.reservationClass.length == 0 ? (
                           <div className='py-2 my-1 text-secondary rounded'>
@@ -1516,7 +1536,11 @@ class Reservation extends Component {
                           )
                         )}
                       </TableCell>
-                      <TableCell name='sat' align='center'>
+                      <TableCell
+                        name='sat'
+                        align='center'
+                        className='align-top'
+                      >
                         {' '}
                         {this.state.reservationClass.length == 0 ? (
                           <div className='py-2 my-1 text-secondary rounded'>
