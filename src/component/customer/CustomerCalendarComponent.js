@@ -74,19 +74,28 @@ class CustomerCalendarComponent extends Component {
               const start_m = moment(created.format('YYYY-MM-DD'));
               const ent_m = moment(created.format('YYYY-MM-DD')).add(1, 'day');
 
+              const created_hour = value.time;
+              const time_h = created_hour.split(':');
+              console.log(time_h[0], ':', time_h[1]);
+
+              console.log(parseInt(time_h[0]) + 1);
+
               const start = new Date(
                 start_m.get('year'),
                 start_m.get('month'),
-                start_m.get('date')
+                start_m.get('date'),
+                parseInt(time_h[0]),
+                parseInt(time_h[1])
               );
               const end = new Date(
-                ent_m.get('year'),
-                ent_m.get('month'),
-                ent_m.get('date')
+                start_m.get('year'),
+                start_m.get('month'),
+                start_m.get('date'),
+                parseInt(time_h[0]) + 1,
+                parseInt(time_h[1])
               );
 
               console.debug('start::', start, 'end::', end);
-
               return {
                 ...value,
                 id: value.res_no,
@@ -94,7 +103,7 @@ class CustomerCalendarComponent extends Component {
                 customer_no: Number(value.customer_id),
                 start: start,
                 end: end,
-                allDay: true,
+                // allDay: true,
                 title: `${value.exercise_name} [${value.time}]`,
                 // title: `[${value.time}] ${value.customer_name} - ${value.exercise_name}`,
               };
@@ -104,6 +113,7 @@ class CustomerCalendarComponent extends Component {
     });
   };
 
+  //안씀
   fetchAssignExercise = () => {
     getAssginExercise(this.state.fitness_no, this.state.customer_no).then(
       (result) => {
@@ -152,11 +162,12 @@ class CustomerCalendarComponent extends Component {
             })
             .filter((item) => item != undefined),
         });
-        console.log(result);
+        // console.log(result);
       }
     );
   };
 
+  //안씀
   fetchEnter = () => {
     getEnter(this.state.fitness_no).then((result) => {
       const added_date = [];
@@ -220,6 +231,7 @@ class CustomerCalendarComponent extends Component {
   };
 
   render() {
+    // console.log(this.state.enters);
     const complexData = [
       ...this.state.enters,
       ...this.state.assigned_exercise,
@@ -233,7 +245,7 @@ class CustomerCalendarComponent extends Component {
       <div className='customercalendar' style={{ height: 700 }}>
         <Calendar
           localizer={localizer}
-          events={events}
+          events={this.state.reservations}
           startAccessor='start'
           endAccessor='end'
           views={['month', 'day', 'week', 'agenda']}
