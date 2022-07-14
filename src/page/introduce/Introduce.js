@@ -94,7 +94,7 @@ const ViewIntroduceItem = ({
       </Col>
       <Col className='text-center'>
         {/* <img className='width-inherit' src={picture} /> */}
-        {/* 웹 올릴때 */}
+        {/* 웹 올릴때 밑에 거*/}
         <img className='width-inherit' src={'/api/' + picture} />
       </Col>
       <Col className='my-3 white-space-break-spaces text-center'>
@@ -117,7 +117,7 @@ const ViewIntroduceItem = ({
               </Col>
               <Col className='py-3 text-center'>
                 {/* <img className='width-inherit' src={picture} /> */}
-                {/* 웹 올릴때 */}
+                {/* 웹 올릴때  밑에 거*/}
                 <img className='width-inherit' src={'/api/' + picture} />
               </Col>
               <Col className='py-2'>
