@@ -486,7 +486,7 @@ class Admin extends Component {
             >
               <DialogTitle>추가하기</DialogTitle>
               <DialogContent>
-                <form className='formAddCustomer formAddAdmin'>
+                <form className=''>
                   <label>
                     <TextField
                       variant='outlined'
@@ -591,7 +591,6 @@ class Admin extends Component {
                     />
                   </label>
                 </form>
-                {/*.formAddCustomer */}
               </DialogContent>
               <DialogActions>
                 <button type='button' onClick={this.handleOnClick}>

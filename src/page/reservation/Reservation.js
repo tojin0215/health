@@ -21,6 +21,7 @@ import Button from 'react-bootstrap/Button';
 // 리액트 아이콘
 import { ImSortAlphaAsc } from 'react-icons/im';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
+import { TbMoodSuprised } from 'react-icons/tb';
 // MUI
 import ClickAwayListener from '@mui/base/ClickAwayListener';
 import Box from '@mui/material/Box';
@@ -181,19 +182,15 @@ const ReservationItem = ({
 
   return (
     <TableRow>
-      <TableCell>{customer_name}</TableCell>
-
-      <TableCell>{date}</TableCell>
-
-      <TableCell>{exercise_name}</TableCell>
-
-      <TableCell>{trainer}</TableCell>
-
-      <TableCell>{exercise_length + '/' + number_of_people}</TableCell>
-
-      <TableCell>{time}</TableCell>
-
-      <TableCell>
+      <TableCell align='center'>{customer_name}</TableCell>
+      <TableCell align='center'>{date}</TableCell>
+      <TableCell align='center'>{exercise_name}</TableCell>
+      <TableCell align='center'>{trainer}</TableCell>
+      <TableCell align='center'>
+        {exercise_length + '/' + number_of_people}
+      </TableCell>
+      <TableCell align='center'>{time}</TableCell>
+      <TableCell align='center'>
         <Button
           className='py-1 px-2'
           variant='outline-danger'
@@ -237,14 +234,16 @@ const ReservationItem_exercise = ({
     });
   };
   return (
-    <tr>
-      <td>{customer_name}</td>
-      <td>{date}</td>
-      <td>{exercise_name}</td>
-      <td>{trainer}</td>
-      <td>{exercise_length + '/' + number_of_people}</td>
-      <td>{time}</td>
-      <td>
+    <TableRow>
+      <TableCell align='center'>{customer_name}</TableCell>
+      <TableCell align='center'>{date}</TableCell>
+      <TableCell align='center'>{exercise_name}</TableCell>
+      <TableCell align='center'>{trainer}</TableCell>
+      <TableCell align='center'>
+        {exercise_length + '/' + number_of_people}
+      </TableCell>
+      <TableCell align='center'>{time}</TableCell>
+      <TableCell align='center'>
         <Button
           className='py-1 px-2'
           variant='outline-danger'
@@ -257,8 +256,8 @@ const ReservationItem_exercise = ({
         >
           <RiDeleteBin5Fill className='align-baseline' />
         </Button>
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };
 /**
@@ -288,14 +287,16 @@ const ReservationItem_trainer = ({
   };
 
   return (
-    <tr>
-      <td>{customer_name}</td>
-      <td>{date}</td>
-      <td>{exercise_name}</td>
-      <td>{trainer}</td>
-      <td>{exercise_length + '/' + number_of_people}</td>
-      <td>{time}</td>
-      <td>
+    <TableRow>
+      <TableCell align='center'>{customer_name}</TableCell>
+      <TableCell align='center'>{date}</TableCell>
+      <TableCell align='center'>{exercise_name}</TableCell>
+      <TableCell align='center'>{trainer}</TableCell>
+      <TableCell align='center'>
+        {exercise_length + '/' + number_of_people}
+      </TableCell>
+      <TableCell align='center'>{time}</TableCell>
+      <TableCell align='center'>
         <Button
           className='py-1 px-2'
           variant='outline-danger'
@@ -308,8 +309,8 @@ const ReservationItem_trainer = ({
         >
           <RiDeleteBin5Fill className='align-baseline' />
         </Button>
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -340,14 +341,16 @@ const ReservationItem_date = ({
   };
 
   return (
-    <tr>
-      <td>{customer_name}</td>
-      <td>{date}</td>
-      <td>{exercise_name}</td>
-      <td>{trainer}</td>
-      <td>{exercise_length + '/' + number_of_people}</td>
-      <td>{time}</td>
-      <td>
+    <TableRow>
+      <TableCell align='center'>{customer_name}</TableCell>
+      <TableCell align='center'>{date}</TableCell>
+      <TableCell align='center'>{exercise_name}</TableCell>
+      <TableCell align='center'>{trainer}</TableCell>
+      <TableCell align='center'>
+        {exercise_length + '/' + number_of_people}
+      </TableCell>
+      <TableCell align='center'>{time}</TableCell>
+      <TableCell align='center'>
         <Button
           className='py-1 px-2'
           variant='outline-danger'
@@ -360,8 +363,8 @@ const ReservationItem_date = ({
         >
           <RiDeleteBin5Fill className='align-baseline' />
         </Button>
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -393,14 +396,16 @@ const ReservationChoiceTrainerItem = ({
   };
 
   return (
-    <tr>
-      <td>{customer_name}</td>
-      <td>{date}</td>
-      <td>{exercise_name}</td>
-      <td>{trainer}</td>
-      <td>{exercise_length + '/' + number_of_people}</td>
-      <td>{time}</td>
-      <td>
+    <TableRow>
+      <TableCell align='center'>{customer_name}</TableCell>
+      <TableCell align='center'>{date}</TableCell>
+      <TableCell align='center'>{exercise_name}</TableCell>
+      <TableCell align='center'>{trainer}</TableCell>
+      <TableCell align='center'>
+        {exercise_length + '/' + number_of_people}
+      </TableCell>
+      <TableCell align='center'>{time}</TableCell>
+      <TableCell align='center'>
         <Button
           className='py-1 px-2'
           variant='outline-danger'
@@ -413,8 +418,8 @@ const ReservationChoiceTrainerItem = ({
         >
           <RiDeleteBin5Fill className='align-baseline' />
         </Button>
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -465,14 +470,16 @@ const ReservationChoiceClientItem = ({
     });
   };
   return (
-    <tr>
-      <td>{customer_name}</td>
-      <td>{date}</td>
-      <td>{exercise_name}</td>
-      <td>{trainer}</td>
-      <td>{exercise_length + '/' + number_of_people}</td>
-      <td>{time}</td>
-      <td>
+    <TableRow>
+      <TableCell align='center'>{customer_name}</TableCell>
+      <TableCell align='center'>{date}</TableCell>
+      <TableCell align='center'>{exercise_name}</TableCell>
+      <TableCell align='center'>{trainer}</TableCell>
+      <TableCell align='center'>
+        {exercise_length + '/' + number_of_people}
+      </TableCell>
+      <TableCell align='center'>{time}</TableCell>
+      <TableCell align='center'>
         <Button
           className='py-1 px-2'
           variant='outline-danger'
@@ -485,8 +492,8 @@ const ReservationChoiceClientItem = ({
         >
           <RiDeleteBin5Fill className='align-baseline' />
         </Button>
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -1311,224 +1318,257 @@ class Reservation extends Component {
               className='text-center py-2 w-100 overflow-auto justify-content-center'
               xs={12}
             >
-              <table class='table classListTable'>
-                <thead>
-                  <tr>
-                    <th scope='col'>
-                      {moment(this.state.reserv_date)
-                        .day(0)
-                        .add(this.state.dayIncreament, 'days')
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.reserv_date)
-                        .day(1)
-                        .add(this.state.dayIncreament, 'days')
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.reserv_date)
-                        .day(2)
-                        .add(this.state.dayIncreament, 'days')
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.reserv_date)
-                        .day(3)
-                        .add(this.state.dayIncreament, 'days')
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.reserv_date)
-                        .day(4)
-                        .add(this.state.dayIncreament, 'days')
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.reserv_date)
-                        .day(5)
-                        .add(this.state.dayIncreament, 'days')
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.reserv_date)
-                        .day(6)
-                        .add(this.state.dayIncreament, 'days')
-                        .format('MM-DD (dd)')}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      {this.state.reservationClass.length === 0 ? (
-                        <div className='py-2 my-1 text-secondary rounded'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(0 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(0 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
-                    </td>
-                    <td name='mon'>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='py-2 my-1 text-secondary  rounded'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(1 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(1 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
-                    </td>
-                    <td name='tue'>
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='py-2 my-1 text-secondary rounded'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(2 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(2 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
-                    </td>
-                    <td name='wed'>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='py-2 my-1 text-secondary rounded'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(3 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(3 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
-                    </td>
-                    <td name='thu'>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='py-2 my-1 text-secondary rounded'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(4 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(4 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
-                    </td>
-                    <td name='fri'>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='py-2 my-1 text-secondary rounded'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(5 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(5 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
-                    </td>
-                    <td name='sat'>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='py-2 my-1 text-secondary rounded'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(6 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(6 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <TableContainer>
+                <Table class='table classListTable'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell scope='col' align='center'>
+                        {moment(this.state.reserv_date)
+                          .day(0)
+                          .add(this.state.dayIncreament, 'days')
+                          .format('MM-DD (dd)')}
+                      </TableCell>
+                      <TableCell scope='col' align='center'>
+                        {moment(this.state.reserv_date)
+                          .day(1)
+                          .add(this.state.dayIncreament, 'days')
+                          .format('MM-DD (dd)')}
+                      </TableCell>
+                      <TableCell scope='col' align='center'>
+                        {moment(this.state.reserv_date)
+                          .day(2)
+                          .add(this.state.dayIncreament, 'days')
+                          .format('MM-DD (dd)')}
+                      </TableCell>
+                      <TableCell scope='col' align='center'>
+                        {moment(this.state.reserv_date)
+                          .day(3)
+                          .add(this.state.dayIncreament, 'days')
+                          .format('MM-DD (dd)')}
+                      </TableCell>
+                      <TableCell scope='col' align='center'>
+                        {moment(this.state.reserv_date)
+                          .day(4)
+                          .add(this.state.dayIncreament, 'days')
+                          .format('MM-DD (dd)')}
+                      </TableCell>
+                      <TableCell scope='col' align='center'>
+                        {moment(this.state.reserv_date)
+                          .day(5)
+                          .add(this.state.dayIncreament, 'days')
+                          .format('MM-DD (dd)')}
+                      </TableCell>
+                      <TableCell scope='col' align='center'>
+                        {moment(this.state.reserv_date)
+                          .day(6)
+                          .add(this.state.dayIncreament, 'days')
+                          .format('MM-DD (dd)')}
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell align='center' className='align-top'>
+                        {this.state.reservationClass.length === 0 ? (
+                          <div className='py-2 my-1 text-secondary rounded'>
+                            <TbMoodSuprised className='fs-3' />
+                            <p>수업이 없습니다.</p>
+                          </div>
+                        ) : (
+                          this.state.reservationClass.filter(
+                            (value) =>
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrAfter(
+                                  moment().day(0 + this.state.dayIncreament),
+                                  'day'
+                                ) &&
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrBefore(
+                                  moment().day(0 + this.state.dayIncreament),
+                                  'day'
+                                )
+                          )
+                        )}
+                      </TableCell>
+                      <TableCell
+                        name='mon'
+                        align='center'
+                        className='align-top'
+                      >
+                        {' '}
+                        {this.state.reservationClass.length == 0 ? (
+                          <div className='py-2 my-1 text-secondary  rounded'>
+                            <TbMoodSuprised className='fs-3' />
+                            <p>수업이 없습니다.</p>
+                          </div>
+                        ) : (
+                          this.state.reservationClass.filter(
+                            (value) =>
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrAfter(
+                                  moment().day(1 + this.state.dayIncreament),
+                                  'day'
+                                ) &&
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrBefore(
+                                  moment().day(1 + this.state.dayIncreament),
+                                  'day'
+                                )
+                          )
+                        )}
+                      </TableCell>
+                      <TableCell
+                        name='tue'
+                        align='center'
+                        className='align-top'
+                      >
+                        {this.state.reservationClass.length == 0 ? (
+                          <div className='py-2 my-1 text-secondary rounded'>
+                            <TbMoodSuprised className='fs-3' />
+                            <p>수업이 없습니다.</p>
+                          </div>
+                        ) : (
+                          this.state.reservationClass.filter(
+                            (value) =>
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrAfter(
+                                  moment().day(2 + this.state.dayIncreament),
+                                  'day'
+                                ) &&
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrBefore(
+                                  moment().day(2 + this.state.dayIncreament),
+                                  'day'
+                                )
+                          )
+                        )}
+                      </TableCell>
+                      <TableCell
+                        name='wed'
+                        align='center'
+                        className='align-top'
+                      >
+                        {' '}
+                        {this.state.reservationClass.length == 0 ? (
+                          <div className='py-2 my-1 text-secondary rounded'>
+                            <TbMoodSuprised className='fs-3' />
+                            <p>수업이 없습니다.</p>
+                          </div>
+                        ) : (
+                          this.state.reservationClass.filter(
+                            (value) =>
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrAfter(
+                                  moment().day(3 + this.state.dayIncreament),
+                                  'day'
+                                ) &&
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrBefore(
+                                  moment().day(3 + this.state.dayIncreament),
+                                  'day'
+                                )
+                          )
+                        )}
+                      </TableCell>
+                      <TableCell
+                        name='thu'
+                        align='center'
+                        className='align-top'
+                      >
+                        {' '}
+                        {this.state.reservationClass.length == 0 ? (
+                          <div className='py-2 my-1 text-secondary rounded'>
+                            <TbMoodSuprised className='fs-3' />
+                            <p>수업이 없습니다.</p>
+                          </div>
+                        ) : (
+                          this.state.reservationClass.filter(
+                            (value) =>
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrAfter(
+                                  moment().day(4 + this.state.dayIncreament),
+                                  'day'
+                                ) &&
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrBefore(
+                                  moment().day(4 + this.state.dayIncreament),
+                                  'day'
+                                )
+                          )
+                        )}
+                      </TableCell>
+                      <TableCell
+                        name='fri'
+                        align='center'
+                        className='align-top'
+                      >
+                        {' '}
+                        {this.state.reservationClass.length == 0 ? (
+                          <div className='py-2 my-1 text-secondary rounded'>
+                            <TbMoodSuprised className='fs-3' />
+                            <p>수업이 없습니다.</p>
+                          </div>
+                        ) : (
+                          this.state.reservationClass.filter(
+                            (value) =>
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrAfter(
+                                  moment().day(5 + this.state.dayIncreament),
+                                  'day'
+                                ) &&
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrBefore(
+                                  moment().day(5 + this.state.dayIncreament),
+                                  'day'
+                                )
+                          )
+                        )}
+                      </TableCell>
+                      <TableCell
+                        name='sat'
+                        align='center'
+                        className='align-top'
+                      >
+                        {' '}
+                        {this.state.reservationClass.length == 0 ? (
+                          <div className='py-2 my-1 text-secondary rounded'>
+                            <TbMoodSuprised className='fs-3' />
+                            <p>수업이 없습니다.</p>
+                          </div>
+                        ) : (
+                          this.state.reservationClass.filter(
+                            (value) =>
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrAfter(
+                                  moment().day(6 + this.state.dayIncreament),
+                                  'day'
+                                ) &&
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrBefore(
+                                  moment().day(6 + this.state.dayIncreament),
+                                  'day'
+                                )
+                          )
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Col>
             <Col></Col>
           </Row>
@@ -1742,7 +1782,12 @@ class Reservation extends Component {
                       !this.state.show_date_table ? (
                         <TableBody>
                           {this.state.reservation_exercise.length == 0 ? (
-                            <p>'예약된 수업이 없습니다.'</p>
+                            <TableCell colSpan={7}>
+                              <div className='p-3 fs-5 fw-bold text-center text-dark'>
+                                <TbMoodSuprised className='fs-3' />
+                                <p>예약된 수업이 없습니다.</p>
+                              </div>
+                            </TableCell>
                           ) : (
                             this.state.reservation_exercise.slice(
                               this.state.page * this.state.rowsPerPage,
@@ -1758,7 +1803,12 @@ class Reservation extends Component {
                       !this.state.show_date_table ? (
                         <TableBody>
                           {this.state.reservation_trainer.length == 0 ? (
-                            <p>'예약된 수업이 없습니다.'</p>
+                            <TableCell colSpan={7}>
+                              <div className='p-3 fs-5 fw-bold text-center text-dark'>
+                                <TbMoodSuprised className='fs-3' />
+                                <p>예약된 수업이 없습니다.</p>
+                              </div>
+                            </TableCell>
                           ) : (
                             this.state.reservation_trainer.slice(
                               this.state.page * this.state.rowsPerPage,
@@ -1773,7 +1823,12 @@ class Reservation extends Component {
                       !this.state.show_trainer_table ? (
                         <TableBody>
                           {this.state.reservation_date.length == 0 ? (
-                            <p>'예약된 수업이 없습니다.'</p>
+                            <TableCell colSpan={7}>
+                              <div className='p-3 fs-5 fw-bold text-center text-dark'>
+                                <TbMoodSuprised className='fs-3' />
+                                <p>예약된 수업이 없습니다.</p>
+                              </div>
+                            </TableCell>
                           ) : (
                             this.state.reservation_date.slice(
                               this.state.page * this.state.rowsPerPage,
@@ -1789,7 +1844,12 @@ class Reservation extends Component {
                       !this.state.show_date_table ? (
                         <TableBody>
                           {this.state.reservation.length == 0 ? (
-                            <p>'예약된 수업이 없습니다.'</p>
+                            <TableCell colSpan={7}>
+                              <div className='p-3 fs-5 fw-bold text-center text-dark'>
+                                <TbMoodSuprised className='fs-3' />
+                                <p>예약된 수업이 없습니다.</p>
+                              </div>
+                            </TableCell>
                           ) : (
                             this.state.reservation.slice(
                               this.state.page * this.state.rowsPerPage,
@@ -1818,93 +1878,109 @@ class Reservation extends Component {
                     </Table>
                   </Tab>
 
-                  <Tab eventKey='trainer' title='강사별조회'>
+                  <Tab eventKey='trainer' title='강사별 조회'>
                     <p>{this.state.reservationClass_choice}</p>
-                    <table class='table text-center reservationListTable'>
-                      <thead>
-                        <tr>
-                          <th scope='col'>회원이름</th>
-                          <th scope='col'>날짜</th>
-                          <th scope='col'>운동</th>
-                          <th scope='col'>강사</th>
-                          <th scope='col'>인원수</th>
-                          <th scope='col'>시간</th>
-                          {/* <th scope='col'>상태</th>
-										<th scope='col'>취소사유</th> */}
-                          <th scope='col'>삭제</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {this.state.reservation_choice_trainer.length == 0 ? (
-                          <p>'예약된 수업이 없습니다.'</p>
-                        ) : (
-                          this.state.reservation_choice_trainer.slice(
-                            this.state.page * this.state.rowsPerPage,
-                            this.state.page * this.state.rowsPerPage +
-                              this.state.rowsPerPage
-                          )
-                        )}
-                      </tbody>
-                      <TablePagination
-                        rowsPerPageOptions={[
-                          5,
-                          10,
-                          25,
-                          {
-                            label: 'All',
-                            value: this.state.reservation_choice_trainer.length,
-                          },
-                        ]}
-                        count={this.state.reservation_choice_trainer.length}
-                        rowsPerPage={this.state.rowsPerPage}
-                        page={this.state.page}
-                        onPageChange={this.handleChangePage}
-                        onRowsPerPageChange={this.handleChangeRowsPerPage}
-                      />
-                    </table>
+                    <TableContainer>
+                      <Table class='table text-center reservationListTable'>
+                        <TableHead>
+                          <TableRow>
+                            <TableCell scope='col'>회원이름</TableCell>
+                            <TableCell scope='col'>날짜</TableCell>
+                            <TableCell scope='col'>운동</TableCell>
+                            <TableCell scope='col'>강사</TableCell>
+                            <TableCell scope='col'>인원수</TableCell>
+                            <TableCell scope='col'>시간</TableCell>
+                            {/* <TableCell scope='col'>상태</TableCell>
+										<TableCell scope='col'>취소사유</TableCell> */}
+                            <TableCell scope='col'>삭제</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {this.state.reservation_choice_trainer.length == 0 ? (
+                            <TableCell colSpan={7}>
+                              <div className='p-3 fs-5 fw-bold text-center text-dark'>
+                                <TbMoodSuprised className='fs-3' />
+                                <p>예약된 수업이 없습니다.</p>
+                              </div>
+                            </TableCell>
+                          ) : (
+                            this.state.reservation_choice_trainer.slice(
+                              this.state.page * this.state.rowsPerPage,
+                              this.state.page * this.state.rowsPerPage +
+                                this.state.rowsPerPage
+                            )
+                          )}
+                        </TableBody>
+                        <TablePagination
+                          rowsPerPageOptions={[
+                            5,
+                            10,
+                            25,
+                            {
+                              label: 'All',
+                              value:
+                                this.state.reservation_choice_trainer.length,
+                            },
+                          ]}
+                          count={this.state.reservation_choice_trainer.length}
+                          rowsPerPage={this.state.rowsPerPage}
+                          page={this.state.page}
+                          onPageChange={this.handleChangePage}
+                          onRowsPerPageChange={this.handleChangeRowsPerPage}
+                        />
+                      </Table>
+                    </TableContainer>
                   </Tab>
                   <Tab eventKey='client' title='회원별조회'>
                     <p>{this.state.reservationClass_choice2}</p>
-                    <table class='table text-center reservationListTable'>
-                      <thead>
-                        <tr>
-                          <th scope='col'>회원이름</th>
-                          <th scope='col'>날짜</th>
-                          <th scope='col'>운동</th>
-                          <th scope='col'>강사</th>
-                          <th scope='col'>인원수</th>
-                          <th scope='col'>시간</th>
-                          <th scope='col'>삭제</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {this.state.reservation_choice_client.length == 0 ? (
-                          <p>'예약된 수업이 없습니다.'</p>
-                        ) : (
-                          this.state.reservation_choice_client.slice(
-                            this.state.page * this.state.rowsPerPage,
-                            this.state.page * this.state.rowsPerPage +
-                              this.state.rowsPerPage
-                          )
-                        )}
-                      </tbody>
-                      <TablePagination
-                        rowsPerPageOptions={[
-                          5,
-                          10,
-                          25,
-                          {
-                            label: 'All',
-                            value: this.state.reservation_choice_client.length,
-                          },
-                        ]}
-                        count={this.state.reservation_choice_client.length}
-                        rowsPerPage={this.state.rowsPerPage}
-                        page={this.state.page}
-                        onPageChange={this.handleChangePage}
-                        onRowsPerPageChange={this.handleChangeRowsPerPage}
-                      />
-                    </table>
+                    <TableContainer>
+                      <Table class='table text-center reservationListTable'>
+                        <TableHead>
+                          <TableRow>
+                            <TableCell scope='col'>회원이름</TableCell>
+                            <TableCell scope='col'>날짜</TableCell>
+                            <TableCell scope='col'>운동</TableCell>
+                            <TableCell scope='col'>강사</TableCell>
+                            <TableCell scope='col'>인원수</TableCell>
+                            <TableCell scope='col'>시간</TableCell>
+                            <TableCell scope='col'>삭제</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {this.state.reservation_choice_client.length == 0 ? (
+                            <TableCell colSpan={7}>
+                              <div className='p-3 fs-5 fw-bold text-center text-dark'>
+                                <TbMoodSuprised className='fs-3' />
+                                <p>예약된 수업이 없습니다.</p>
+                              </div>
+                            </TableCell>
+                          ) : (
+                            this.state.reservation_choice_client.slice(
+                              this.state.page * this.state.rowsPerPage,
+                              this.state.page * this.state.rowsPerPage +
+                                this.state.rowsPerPage
+                            )
+                          )}
+                        </TableBody>
+                        <TablePagination
+                          rowsPerPageOptions={[
+                            5,
+                            10,
+                            25,
+                            {
+                              label: 'All',
+                              value:
+                                this.state.reservation_choice_client.length,
+                            },
+                          ]}
+                          count={this.state.reservation_choice_client.length}
+                          rowsPerPage={this.state.rowsPerPage}
+                          page={this.state.page}
+                          onPageChange={this.handleChangePage}
+                          onRowsPerPageChange={this.handleChangeRowsPerPage}
+                        />
+                      </Table>
+                    </TableContainer>
                   </Tab>
                 </Tabs>
               </Col>

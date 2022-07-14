@@ -1,3 +1,11 @@
+.rbc-calendar a {
+  color: inherit;
+}
+
+.rbc-calendar a:hover {
+  color: blue;
+}
+
 @media (max-width: 767px) {
   .client_wrap .table--block thead {
     display: none;

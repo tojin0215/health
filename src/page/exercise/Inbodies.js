@@ -646,8 +646,11 @@ class Inbodies extends Component {
               {this.props.userinfo.loginWhether === 2 ? (
                 <TextField
                   id='customer_name'
+                  label='선택된 회원'
+                  disabled
                   variant='standard'
                   className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
+                  InputProps={{ disableUnderline: true }}
                   value={this.props.userinfo.manager_name}
                 />
               ) : this.state.open ? (

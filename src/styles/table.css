@@ -76,7 +76,12 @@
 }
 /* 회원 상세페이지 - 캘린더, 하루에 알림이 많이 등록된경우 스크롤로 확인할 수 있도록 */
 .rbc-month-row {
-  overflow: scroll;
+  /* overflow: scroll; */
+  /* 스크롤바가 안보이도록  */
+  /* IE and Edge */
+  /* -ms-overflow-style: none; */
+  /* Firefox */
+  /* scrollbar-width: none; */
 }
 
 /*

@@ -90,7 +90,7 @@ const ViewIntroduceItem = ({
   return (
     <Row className='sectionGlass' xs={1}>
       <Col className='text-center mb-5'>
-        <h1>{manager_name}</h1>
+        <h2>{manager_name}</h2>
       </Col>
       <Col className='text-center'>
         {/* <img className='width-inherit' src={picture} /> */}
@@ -106,7 +106,9 @@ const ViewIntroduceItem = ({
         ''
       ) : (
         <Col className='text-end'>
-          <Button onClick={modalOnClick}>수정하기</Button>
+          <Button variant='secondary' onClick={modalOnClick}>
+            수정하기
+          </Button>
           <Modal show={showModal} size='lg' onHide={() => setShowModal(false)}>
             {/* <Modal show={true} className=''> */}
             <Row xs={1} className='p-4'>

@@ -36,7 +36,7 @@ class Navigation extends Component {
       //2:회원, 1:강사, else(0):헬스장
       <div className='Navigation'>
         {userinfo.loginWhether === 2 ? (
-          <Navbar bg='dark'>
+          <Navbar>
             <Nav className='mr-auto dropdownNav navitem'>
               <Nav.Item>
                 <span className='text-primary'>
@@ -106,7 +106,7 @@ class Navigation extends Component {
             </Nav>
           </Navbar>
         ) : userinfo.loginWhether === 1 ? (
-          <Navbar bg='dark'>
+          <Navbar>
             <Nav className='mr-auto dropdownNav navitem'>
               <Nav.Item>
                 <span className='text-primary'>
@@ -236,7 +236,7 @@ class Navigation extends Component {
             </Nav>
           </Navbar>
         ) : (
-          <Navbar bg='dark'>
+          <Navbar>
             <Nav className='mr-auto dropdownNav navitem'>
               <Nav.Item>
                 <span className='text-primary'>

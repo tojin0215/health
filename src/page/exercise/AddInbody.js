@@ -363,7 +363,7 @@ class AddInbody extends Component {
         {/*.header */}
         {/* <label>번호 : {this.state.member_no}</label>  */}
         <Container>
-          <Row className='gap-3'>
+          <Row className=''>
             <Col xs={12}>
               <h3>회원 정보</h3>
             </Col>
@@ -380,12 +380,12 @@ class AddInbody extends Component {
               <p>{this.state.sex}</p>
             </Col>
           </Row>
-          <Form className='formAddCustomer'>
+          <Form className='mt-5'>
             <Row>
               <Col xs={12}>
                 <h3>인바디 정보 입력</h3>
               </Col>
-              <Col xs={12} sm={4}>
+              <Col xs={12} sm={3}>
                 <Form.Group>
                   <Form.Label className='w-100'>검사날짜</Form.Label>
                   <DatePicker
@@ -396,7 +396,7 @@ class AddInbody extends Component {
                   />
                 </Form.Group>
               </Col>
-              <Col xs={12} sm={4}>
+              <Col xs={12} sm={3}>
                 <Form.Group>
                   <Form.Label>키</Form.Label>
                   <Form.Control
@@ -412,9 +412,9 @@ class AddInbody extends Component {
                 </Form.Group>
               </Col>
               <Col xs={12}>
-                <h5>체성분 분석</h5>
+                <h5 className='mt-3'>체성분 분석</h5>
               </Col>
-              <Col xs={4}>
+              <Col xs={4} md={3}>
                 <Form.Group>
                   <Form.Label>체수분</Form.Label>
                   <Form.Control
@@ -428,7 +428,7 @@ class AddInbody extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={4}>
+              <Col xs={4} md={3}>
                 <Form.Group>
                   <Form.Label>단백질</Form.Label>
                   <Form.Control
@@ -442,7 +442,7 @@ class AddInbody extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={4}>
+              <Col xs={4} md={3}>
                 <Form.Group>
                   <Form.Label>무기질</Form.Label>
                   <Form.Control
@@ -456,7 +456,7 @@ class AddInbody extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={4}>
+              <Col xs={4} md={3}>
                 <Form.Group>
                   <Form.Label>체지방</Form.Label>
                   <Form.Control
@@ -470,7 +470,7 @@ class AddInbody extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={4}>
+              <Col xs={4} md={3}>
                 <Form.Group>
                   <Form.Label>근육량</Form.Label>
                   <Form.Control
@@ -484,7 +484,7 @@ class AddInbody extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={4}>
+              <Col xs={4} md={3}>
                 <Form.Group>
                   <Form.Label>체지방량</Form.Label>
                   <Form.Control
@@ -498,7 +498,7 @@ class AddInbody extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={4}>
+              <Col xs={4} md={3}>
                 <Form.Group>
                   <Form.Label>체중</Form.Label>
                   <Form.Control
@@ -513,9 +513,9 @@ class AddInbody extends Component {
                 </Form.Group>
               </Col>
               <Col xs={12}>
-                <h5>골격근, 지방</h5>
+                <h5 className='mt-3'>골격근, 지방</h5>
               </Col>
-              <Col xs={4}>
+              <Col xs={6} md={3}>
                 <Form.Group>
                   <Form.Label>골격근량</Form.Label>
                   <Form.Control
@@ -529,7 +529,7 @@ class AddInbody extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={4}>
+              <Col xs={6} md={3}>
                 <Form.Group>
                   <Form.Label>체지방량</Form.Label>
                   <Form.Control
@@ -543,10 +543,10 @@ class AddInbody extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={12}>
+              <Col className='mt-3' xs={12}>
                 <h5>비만진단</h5>
               </Col>
-              <Col xs={4}>
+              <Col xs={6} md={3}>
                 <Form.Group>
                   <Form.Label>BMI</Form.Label>
                   <Form.Control
@@ -560,7 +560,7 @@ class AddInbody extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={4}>
+              <Col xs={6} md={3}>
                 <Form.Group>
                   <Form.Label>체지방률</Form.Label>
                   <Form.Control
