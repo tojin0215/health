@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Nav, Navbar, Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { setFitness } from '../../action/userinfo';
 import { logoutRequest } from '../../action/authentication';
 
 import { textlogo } from '../../../src/img/logo-text.png';
+
+// MUI AppBar
+
+// 부트스트랩
+import { Container } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import $ from 'jquery';
 //app 사이드 내비게이션
@@ -60,8 +68,10 @@ class Menu extends Component {
         {userinfo.loginWhether === 2 ? (
           <div class='menu'>
             <div class='logo'>
-              <a href='/home'>
-                <p className='fs-1'>{this.props.userinfo.fitness_name}</p>
+              <a href='/home' className='text-white'>
+                <p className='fs-1 text-white'>
+                  {this.props.userinfo.fitness_name}
+                </p>
                 <p className='fs-1'>{this.props.userinfo.manager_name}</p>
                 <p className='fs-1'>회원</p>
               </a>
@@ -118,9 +128,9 @@ class Menu extends Component {
                 </li>
 
                 <li className='text-center'>
-                  <button className='btnSolid' onClick={this.handleLogout}>
-                    LOG-OUT
-                  </button>
+                  <Button variant='danger' onClick={this.handleLogout}>
+                    로그아웃
+                  </Button>
                 </li>
                 {/* <li class="dropdown">
             <NavLink exact to="/statistics">
@@ -254,9 +264,9 @@ class Menu extends Component {
                   </li>
                 </li>
                 <li className='text-center'>
-                  <button className='btnSolid' onClick={this.handleLogout}>
-                    LOG-OUT
-                  </button>
+                  <Button variant='danger' onClick={this.handleLogout}>
+                    로그아웃
+                  </Button>
                 </li>
                 {/* <li class="dropdown">
             <NavLink exact to="/statistics">
@@ -279,9 +289,13 @@ class Menu extends Component {
           <div class='menu'>
             <div class='logo'>
               <a href='/home'>
-                <p className='fs-1'>{this.props.userinfo.fitness_name}</p>
-                <p className='fs-1'>{this.props.userinfo.manager_name}</p>
-                <p className='fs-1'>센터</p>
+                <p className='fs-5'>
+                  {this.props.userinfo.fitness_name}
+                  <span className='text-secondary ps-2'>센터</span>
+                  <span className='ps-2 fw-normal'>
+                    {this.props.userinfo.manager_name}
+                  </span>
+                </p>
               </a>
             </div>
             {/* <p className='menuCenterCode fs-2'>
@@ -422,10 +436,10 @@ class Menu extends Component {
                   </li>
                 </li>
 
-                <li className='text-center'>
-                  <button className='btnSolid' onClick={this.handleLogout}>
-                    LOG-OUT
-                  </button>
+                <li className='text-start mt-3'>
+                  <Button variant='danger' onClick={this.handleLogout}>
+                    로그아웃
+                  </Button>
                 </li>
                 {/* <li class="dropdown">
 								<NavLink exact to="/statistics">

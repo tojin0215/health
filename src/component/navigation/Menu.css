@@ -22,10 +22,11 @@
 }
 .menu a {
   text-decoration: none;
-  color: rgb(43, 43, 43);
+  color: rgb(255, 255, 255);
 }
 .menu {
-  background: #fff;
+  background-color: #333;
+  box-shadow: 0 6px 7px rgba(30, 30, 30, 0.5);
   width: 100%;
   position: relative;
 }
@@ -46,7 +47,7 @@
 .menu .logo {
   float: left;
   padding: 16px 10px 0;
-  height: 7rem;
+  height: 4rem;
   font-weight: 900;
 }
 .menu .logo a {
@@ -112,7 +113,7 @@
 }
 .menu nav li li a {
   float: none;
-  color: #333;
+  /* color: #333; */
   display: block;
   padding: 8px 10px;
   border-radius: 3px;
@@ -135,8 +136,8 @@
   display: none;
 }
 #menu-icon span {
-  border: 2px solid rgb(43, 43, 43);
-  background-color: rgb(43, 43, 43);
+  border: 2px solid rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
   width: 30px;
   margin-bottom: 5px;
   display: block;
@@ -164,14 +165,6 @@
   .header {
     padding-top: 0;
   }
-  .menu nav {
-    display: none;
-    width: 100%;
-    clear: both;
-    float: none;
-    /* max-height: 400px; */
-    overflow-y: scroll;
-  }
   #menu-icon {
     display: inline;
     top: 32px;
@@ -198,7 +191,13 @@
     width: 100%;
   }
   .menu nav {
-    padding: 10px;
+    display: none;
+    width: 100%;
+    clear: both;
+    float: none;
+    /* max-height: 400px; */
+    overflow-y: scroll;
+    padding: 10px 50px;
   }
   .menu nav ul {
     float: none;
@@ -220,7 +219,7 @@
     padding: 0;
   }
   .menu nav a {
-    color: rgb(43, 43, 43);
+    color: rgb(255, 255, 255);
     padding: 8px;
   }
   .menu nav a:hover {

@@ -180,7 +180,7 @@ class AddClient extends Component {
             <div className='container'>
               <h2>
                 <div className='parallelogram'></div>
-                회원관리
+                신규회원 등록
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
@@ -196,10 +196,10 @@ class AddClient extends Component {
           </div>
           {/*.localNavigation */}
         </header>
-        <Container className='sectionGlass'>
-          <h3>회원 정보 입력</h3>
+        <Container>
           <Form>
-            <Row>
+            <Row className='sectionGlass'>
+              <h3 className='mb-4'>회원 정보 입력</h3>
               <Col xs={4}>
                 <Form.Group>
                   <Form.Label>이름</Form.Label>
@@ -359,11 +359,11 @@ class AddClient extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={12} className='mt-4'>
+              <Col xs={12} className='mt-4 text-center'>
                 <Button
+                  className='w-100'
                   type='button'
                   onClick={this.handleClient}
-                  className='w-100'
                 >
                   등록하기
                 </Button>

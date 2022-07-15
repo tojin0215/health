@@ -190,11 +190,11 @@ h6 .circle {
 }
 
 .sectionGlass {
-  background-color: #1c1c1c;
+  background-color: #333;
   border-radius: 0.6rem;
   padding: 3rem;
   margin-top: 3rem;
-  /* box-shadow: 6px 4px 11px rgba(60, 60, 60, 1); */
+  box-shadow: 6px 4px 11px rgba(20, 20, 20, 0.6);
 }
 
 @media (max-width: 767px) {

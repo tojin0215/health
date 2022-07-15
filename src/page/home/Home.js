@@ -325,7 +325,7 @@ class Home extends Component {
             </Row>
           </Container>
         </div>
-        <div className='container'>
+        <Container>
           <div
             style={{
               position: 'absolute',
@@ -349,7 +349,7 @@ class Home extends Component {
               헬스 회원 스마트 관리 시스템으로 기존 회원 관리 방식에서 탈피하여
               쉬운 회원관리, 스마트한 서비스를 제공합니다.
             </p>
-            <Row xs={5} className='home__shortcut'>
+            <Row xs={1} className='home__shortcut'>
               <Col>
                 <Link
                   to='/client'
@@ -490,7 +490,7 @@ class Home extends Component {
               </ul>
             </section>
           </section>
-        </div>
+        </Container>
         <div className='footer'>
           <Footer />
         </div>

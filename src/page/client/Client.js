@@ -136,83 +136,74 @@ const ViewClientItem = ({
           <Modal.Title>회원 상세 정보</Modal.Title>
         </Modal.Header>
         <Modal.Body className='mw-100'>
-          <Row>
-            <Col xs={8}>
-              <CustomerCalendarComponent customer_no={idc} />
+          <div>
+            <CustomerCalendarComponent customer_no={idc} />
+          </div>
+          <Row className='mt-3'>
+            <Col md={4} className='mb-2'>
+              <h5 className='mb-1'>이름</h5>
+              {showUpdate ? (
+                <Form.Control
+                  value={client_name_input}
+                  onChange={updateChange1}
+                />
+              ) : (
+                <p>{client_name}</p>
+              )}
             </Col>
-            <Col xs={4}>
-              <Col className='mb-2'>
-                <h5 className='mb-1'>이름</h5>
-              </Col>
-              <Col className='mb-2'>
-                {showUpdate ? (
-                  <Form.Control
-                    value={client_name_input}
-                    onChange={updateChange1}
-                  />
-                ) : (
-                  <p>{client_name}</p>
-                )}
-              </Col>
-              <Col className='mb-2'>
-                <h5 className='mb-1'>주소</h5>
-                {showUpdate ? (
-                  <Form.Control
-                    value={address_input}
-                    onChange={updateChange2}
-                  />
-                ) : (
-                  <p>{address}</p>
-                )}
-              </Col>
-              <Col className='mb-2'>
-                <h5 className='mb-1'>연락처</h5>
-                {showUpdate ? (
-                  <Form.Control value={phone_input} onChange={updateChange3} />
-                ) : (
-                  <p>{phone}</p>
-                )}
-              </Col>
-              <Col className='mb-2'>
-                <h5 className='mb-1'>생년월일</h5>
-                <p>{birth}</p>
-              </Col>
-              <Col className='mb-2'>
-                <h5 className='mb-1'>가입경로</h5>
-                <p>{join_route}</p>
-              </Col>
-              <Col className='text-center mt-4'>
-                {showUpdate ? (
-                  loginWhether === 1 ? (
-                    ''
-                  ) : (
-                    <div>
-                      <Button
-                        variant='outline-danger'
-                        onClick={() =>
-                          // eslint-disable-next-line no-restricted-globals
-                          confirm(
-                            client_name +
-                              ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
-                          ) == true
-                            ? deleteCompleted(idc)
-                            : alert(
-                                client_name + '회원 탈퇴를 취소 하였습니다.'
-                              )
-                        }
-                      >
-                        회원삭제
-                      </Button>
-                      <p className='text-danger fs-6 fw-lighter fst-italic'>
-                        회원 삭제시 되돌릴 수 없습니다.
-                        <br /> 한번 더 확인해주세요.
-                      </p>
-                    </div>
-                  )
-                ) : (
+            <Col md={8} className='mb-2'>
+              <h5 className='mb-1'>주소</h5>
+              {showUpdate ? (
+                <Form.Control value={address_input} onChange={updateChange2} />
+              ) : (
+                <p>{address}</p>
+              )}
+            </Col>
+            <Col md={4} className='mb-2'>
+              <h5 className='mb-1'>연락처</h5>
+              {showUpdate ? (
+                <Form.Control value={phone_input} onChange={updateChange3} />
+              ) : (
+                <p>{phone}</p>
+              )}
+            </Col>
+            <Col md={4} className='mb-2'>
+              <h5 className='mb-1'>생년월일</h5>
+              <p>{birth}</p>
+            </Col>
+            <Col md={4} className='mb-2'>
+              <h5 className='mb-1'>가입경로</h5>
+              <p>{join_route}</p>
+            </Col>
+            <Col className='text-center mt-4'>
+              {showUpdate ? (
+                loginWhether === 1 ? (
                   ''
-                )}
-              </Col>
+                ) : (
+                  <div>
+                    <Button
+                      variant='outline-danger'
+                      onClick={() =>
+                        // eslint-disable-next-line no-restricted-globals
+                        confirm(
+                          client_name +
+                            ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
+                        ) == true
+                          ? deleteCompleted(idc)
+                          : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
+                      }
+                    >
+                      회원삭제
+                    </Button>
+                    <p className='text-danger fs-6 fw-lighter fst-italic'>
+                      회원 삭제시 되돌릴 수 없습니다.
+                      <br /> 한번 더 확인해주세요.
+                    </p>
+                  </div>
+                )
+              ) : (
+                ''
+              )}
             </Col>
           </Row>
         </Modal.Body>
