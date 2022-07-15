@@ -76,9 +76,8 @@ class CustomerCalendarComponent extends Component {
 
               const created_hour = value.time;
               const time_h = created_hour.split(':');
-              console.log(time_h[0], ':', time_h[1]);
-
-              console.log(parseInt(time_h[0]) + 1);
+              // console.log(time_h[0], ':', time_h[1]);
+              // console.log(parseInt(time_h[0]) + 1);
 
               const start = new Date(
                 start_m.get('year'),
@@ -91,7 +90,7 @@ class CustomerCalendarComponent extends Component {
                 start_m.get('year'),
                 start_m.get('month'),
                 start_m.get('date'),
-                parseInt(time_h[0]) + 2,
+                parseInt(time_h[0]) + 1,
                 parseInt(time_h[1])
               );
 
@@ -242,14 +241,16 @@ class CustomerCalendarComponent extends Component {
       return value;
     });
     var todayselect = document.querySelectorAll('.rbc-btn-group button');
-    todayselect[0].textContent = '오늘';
-    todayselect[1].textContent = '이전';
-    todayselect[2].textContent = '내일';
-    todayselect[3].textContent = '월간';
-    todayselect[4].textContent = '일간';
-    todayselect[5].textContent = '주간';
-    todayselect[6].textContent = '목록';
 
+    if (todayselect[0]) {
+      todayselect[0].textContent = '오늘';
+      todayselect[1].textContent = '이전';
+      todayselect[2].textContent = '내일';
+      todayselect[3].textContent = '월간';
+      todayselect[4].textContent = '일간';
+      todayselect[5].textContent = '주간';
+      todayselect[6].textContent = '목록';
+    }
     return (
       <div className='customercalendar' style={{ height: 700 }}>
         <Calendar
