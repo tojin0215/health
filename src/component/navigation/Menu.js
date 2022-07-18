@@ -21,6 +21,8 @@ import $ from 'jquery';
 
 import './Menu.css';
 
+import DrawerAppBar from './Drawer';
+
 class Menu extends Component {
   constructor(props) {
     super(props);
@@ -51,17 +53,17 @@ class Menu extends Component {
   // }
   render() {
     const { userinfo } = this.props;
-    // console.log(userinfo.loginWhether);
+    console.log(userinfo.loginWhether);
 
-    $('#menu-icon')
-      .off('click')
-      .on('click', function () {
-        $('nav').slideToggle();
-        $(this).toggleClass('active');
-        // $(".active").off('click').on('click', function(){
-        // 	$("nav").slideToggle();
-        // });
-      });
+    // $('#menu-icon')
+    //   .off('click')
+    //   .on('click', function () {
+    //     $('nav').slideToggle();
+    //     $(this).toggleClass('active');
+    //     $(".active").off('click').on('click', function(){
+    //     	$("nav").slideToggle();
+    //     });
+    //   });
     // console.log(userinfo);
     return (
       <div>
@@ -286,6 +288,7 @@ class Menu extends Component {
             </nav>
           </div>
         ) : (
+          // <DrawerAppBar />
           <div class='menu'>
             <div class='logo'>
               <a href='/home'>
@@ -298,9 +301,6 @@ class Menu extends Component {
                 </p>
               </a>
             </div>
-            {/* <p className='menuCenterCode fs-2'>
-              센터코드 {userinfo.fitness_no}
-            </p> */}
             <div id='menu-icon'>
               <span className='first'></span>
               <span className='second'></span>
@@ -312,11 +312,6 @@ class Menu extends Component {
                   <NavLink exact to='/home'>
                     Home
                   </NavLink>
-                  {/* <li>
-                    <NavLink exact to='/qr'>
-                      QR
-                    </NavLink>
-                  </li> */}
                 </li>
                 <li class='dropdown'>
                   <NavLink exact to='/introduce'>
@@ -435,26 +430,11 @@ class Menu extends Component {
                     </NavLink>
                   </li>
                 </li>
-
                 <li className='text-start mt-3'>
                   <Button variant='danger' onClick={this.handleLogout}>
                     로그아웃
                   </Button>
                 </li>
-                {/* <li class="dropdown">
-								<NavLink exact to="/statistics">
-								</NavLink>
-							</li> */}
-                {/* <li>
-								{userinfo.fitness_no === 1?
-										<NavLink exact to="/admin">
-												<span className={styles.navitem}>
-														관리자
-												</span>
-										</NavLink>
-								:null
-								}
-							</li> */}
               </ul>
             </nav>
           </div>
