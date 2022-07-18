@@ -69,6 +69,6 @@
     justify-content: center;
   }
   .localNavigation .breadCrumb {
-    justify-content: flex-end;
+    display: none;
   }
 }

@@ -197,8 +197,12 @@ h6 .circle {
   box-shadow: 6px 4px 11px rgba(20, 20, 20, 0.6);
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .container section {
-    padding: 2rem;
+    padding: 1rem;
+  }
+  .sectionGlass {
+    padding: 2rem 1rem;
+    margin-top: 1.4rem;
   }
 }

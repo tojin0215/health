@@ -115,11 +115,6 @@
   background-color: rgba(255, 255, 255, 0.8);
 }
 
-.home .homeAbout {
-  margin-top: 4.7rem;
-  width: 100%;
-}
-
 .home .homeAbout h3 {
   display: flex;
   flex-direction: row;
@@ -134,10 +129,6 @@
   margin: 0.7rem 2rem 0 1rem;
 }
 
-.home .homeAbout section {
-  position: relative;
-}
-
 .home .homeAbout section > p {
   font-weight: 300;
 }
@@ -148,101 +139,55 @@
   right: 0;
 }
 
-.home .homeAbout .aboutList ul {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 10rem;
-}
-
-.home .homeAbout .aboutList img {
+.home .homeAbout .about-list img {
   height: 300px;
 }
 
-.home .homeAbout .aboutList ul li {
-  width: 100%;
-  height: 32rem;
+.home .homeAbout .about-list .home__about-list--content {
+  height: 466px;
   background-color: #fff;
   color: #000;
   box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
   border-radius: 25px;
   padding: 2rem;
-  position: relative;
-  margin-right: 10px;
 }
 
-.home .homeAbout .aboutList ul li div {
-  height: 20rem;
-  background-repeat: no-repeat;
-  background-size: 12rem auto;
-}
-
-.home .homeAbout .aboutList ul li button {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 1rem;
-}
-
-.home .homeAbout .aboutList ul li p {
+.home .homeAbout .about-list .home__about-list--content p {
   word-break: keep-all;
 }
 
 @media only screen and (max-width: 767px) {
-  .home .header .localNavigation {
+  .home .container {
+    margin: 0px auto 3rem;
+  }
+  .home__main-visual--image-box {
+    background-color: #fff;
+  }
+  .home .home__mainvisual--content img {
+    width: 180px;
     height: auto;
   }
-  .home .dashboard {
-    padding: 0 0 8px 0;
-    flex-direction: column;
-    margin: 0;
+  .home .homeAbout h3 {
+    flex-wrap: wrap;
+    line-height: 1.6rem;
+    margin-bottom: 0.6rem;
   }
-  .home .header .dashboard > div {
-    width: 100%;
+  .home .homeAbout h3 .parallelogram {
+    margin: 1.2rem 1rem 0 0;
+    height: 2.2rem;
   }
-  .home .header .dashboard .homeDashRight {
-    padding: 0;
-    border: 0;
+  .home .home__shortcut a {
+    width: 7rem;
+    height: 7rem;
   }
-  .home .header .dashboard .homeDashLeft {
-    padding: 0;
-    border: 0;
-  }
-  .home .header .dashboard label p {
-    padding: 0 1rem;
-  }
-
-  div > .home > .container {
-    padding: 0;
-    padding-bottom: 0;
-  }
-  .home .container .mainVisual {
-    background: no-repeat top/cover;
-  }
-  .home .container .homeIcon ul {
-    padding: 0;
-  }
-  .home .container .homeIcon ul li {
-    width: 33.3%;
-    padding: 1rem;
-  }
-
-  .home .homeAbout .aboutExplain button {
+  .home .home__shortcut--hover {
     display: none;
   }
-  .home .homeAbout .aboutList ul {
-    flex-direction: column;
+  .home .homeAbout .about-list img {
+    height: 130px;
   }
-  .home .container .homeAbout h3 {
-  }
-  .home .container .homeAbout .aboutList ul li {
-    width: 100%;
-    height: auto;
-    margin-bottom: 3rem;
-  }
-  .home .container .homeAbout .aboutList ul li div {
-    height: 13rem;
-  }
-  .home .homeAbout .aboutList ul li button {
-    display: none;
+  .home .homeAbout .about-list .home__about-list--content {
+    height: 340px;
+    margin-bottom: 16px;
   }
 }

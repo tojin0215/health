@@ -266,7 +266,7 @@ class Home extends Component {
         {/*.header */}
         <div className='home__mainvisual'>
           <Container>
-            <Row className='home__mainvisual--content'>
+            <Row xs={1} md={2} className='home__mainvisual--content'>
               <Col className='py-4 px-5 fs-1'>
                 <h3>
                   새로워진 피트니스 센터 관리{' '}
@@ -316,7 +316,7 @@ class Home extends Component {
                   </ul>
                 )}
               </Col>
-              <Col className=''>
+              <Col className='text-center home__main-visual--image-box'>
                 <Image
                   roundedCircle
                   src={process.env.PUBLIC_URL + '/assets/mainvisual.svg'}
@@ -349,7 +349,7 @@ class Home extends Component {
               헬스 회원 스마트 관리 시스템으로 기존 회원 관리 방식에서 탈피하여
               쉬운 회원관리, 스마트한 서비스를 제공합니다.
             </p>
-            <Row xs={1} className='home__shortcut'>
+            <Row xs={2} md={5} className='home__shortcut'>
               <Col>
                 <Link
                   to='/client'
@@ -446,48 +446,48 @@ class Home extends Component {
                 </li>
               ) : null}
             </ul>
-            <section className='aboutList'>
-              <ul>
-                <li>
-                  <Image
-                    className='w-100'
-                    src={process.env.PUBLIC_URL + '/assets/home-shopping.svg'}
-                  />
-                  <h5>상품</h5>
-                  <p>
-                    헬스, 필라테스 등의 운동상품과 함께 운동복, 사물함 등의
-                    상품도 함께 등록하고 매출을 관리할 수 있습니다.
-                  </p>
-                  {/* <Button variant='outline-primary border-0 px-5'>
-										더보기
-									</Button> */}
-                </li>
-                <li>
-                  <Image
-                    className='w-100'
-                    src={process.env.PUBLIC_URL + '/assets/home-healthy.svg'}
-                  />
-                  <h5>운동</h5>
-                  <p>
-                    센터의 전문가가 사용자와 상담하고 적합한 운동 리스트를
-                    배정해 줄 수 있습니다.
-                  </p>
-                </li>
-                <li>
-                  <Image
-                    className='w-100'
-                    src={process.env.PUBLIC_URL + '/assets/home-workers.svg'}
-                  />
-                  <h5>회원관리</h5>
-                  <p>
-                    회원을 쉽게 등록하고 수정할 수 있으며, 회원의 인바디 정보,
-                    운동 정보 등도 함께 관리할 수 있습니다.
-                  </p>
-                  {/* <Button variant='outline-primary border-0 px-5'>
-										더보기
-									</Button> */}
-                </li>
-              </ul>
+            <section className='about-list'>
+              <Row xs={1} md={3}>
+                <Col>
+                  <div className='home__about-list--content'>
+                    <Image
+                      className='w-100'
+                      src={process.env.PUBLIC_URL + '/assets/home-shopping.svg'}
+                    />
+                    <h5>상품</h5>
+                    <p>
+                      헬스, 필라테스 등의 운동상품과 함께 운동복, 사물함 등의
+                      상품도 함께 등록하고 매출을 관리할 수 있습니다.
+                    </p>
+                  </div>
+                </Col>
+                <Col>
+                  <div className='home__about-list--content'>
+                    <Image
+                      className='w-100'
+                      src={process.env.PUBLIC_URL + '/assets/home-healthy.svg'}
+                    />
+                    <h5>운동</h5>
+                    <p>
+                      센터의 전문가가 사용자와 상담하고 적합한 운동 리스트를
+                      배정해 줄 수 있습니다.
+                    </p>
+                  </div>
+                </Col>
+                <Col>
+                  <div className='home__about-list--content'>
+                    <Image
+                      className='w-100'
+                      src={process.env.PUBLIC_URL + '/assets/home-workers.svg'}
+                    />
+                    <h5>회원관리</h5>
+                    <p>
+                      회원을 쉽게 등록하고 수정할 수 있으며, 회원의 인바디 정보,
+                      운동 정보 등도 함께 관리할 수 있습니다.
+                    </p>
+                  </div>
+                </Col>
+              </Row>
             </section>
           </section>
         </Container>

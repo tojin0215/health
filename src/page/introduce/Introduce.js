@@ -294,12 +294,6 @@ class Introduce extends Component {
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
                 <Link to='/introduce'>센터 소개</Link>
-                <span>&#62;</span>
-                {this.props.userinfo.loginWhether === 0 ? (
-                  <Link to='/introduce/add'>센터 소개 등록</Link>
-                ) : (
-                  ''
-                )}
               </div>
               {/*.breadCrumb */}
             </div>
