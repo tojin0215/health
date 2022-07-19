@@ -133,14 +133,14 @@ class AddIntroduce extends Component {
         <Container>
           <div className='sectionGlass'>
             <Row>
-              <Col xs={6}>
+              <Col xs={12} md={6}>
                 <h5>사업장</h5>
                 <Form.Control
                   id='manager_name'
                   value={this.props.userinfo.manager_name}
                 ></Form.Control>
               </Col>
-              <Col xs={6}>
+              <Col xs={12} md={6} className='pt-3'>
                 <Form.Group>
                   <h5>사진</h5>
                   <Form.Control

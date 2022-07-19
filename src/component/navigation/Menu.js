@@ -55,15 +55,17 @@ class Menu extends Component {
     const { userinfo } = this.props;
     console.log(userinfo.loginWhether);
 
-    // $('#menu-icon')
-    //   .off('click')
-    //   .on('click', function () {
-    //     $('nav').slideToggle();
-    //     $(this).toggleClass('active');
-    //     $(".active").off('click').on('click', function(){
-    //     	$("nav").slideToggle();
-    //     });
-    //   });
+    $('#menu-icon')
+      .off('click')
+      .on('click', function () {
+        $('nav').slideToggle();
+        $(this).toggleClass('active');
+        $('.active')
+          .off('click')
+          .on('click', function () {
+            $('nav').slideToggle();
+          });
+      });
     // console.log(userinfo);
     return (
       <div>

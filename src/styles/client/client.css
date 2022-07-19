@@ -13,7 +13,6 @@
   .client_wrap .table--block tr {
     display: block;
     margin-bottom: 10px;
-    border-top: none;
   }
   .client_wrap .table--block th,
   .client_wrap .table--block td {
@@ -31,7 +30,10 @@
     top: 0;
     width: 30%;
     padding: 10px;
-    background: #ccc;
+    background: #fff;
+    font-weight: 700;
+    border-right: 1px solid #ccc;
+    text-align: center;
   }
   .client_wrap .table--block td:nth-child(1):before {
     content: '회원이름';
@@ -44,5 +46,45 @@
   }
   .client_wrap .table--block td:nth-child(4):before {
     content: '가입일';
+  }
+  .MuiTablePagination-toolbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .client_modal .rbc-calendar {
+    padding: 20px 0;
+    border-radius: 10px;
+  }
+  .client_modal .modal-body {
+    padding: 0;
+  }
+  .client_modal .modal-dialog {
+    margin: 0;
+  }
+  .client_modal .modal-header {
+    border-bottom: 0;
+  }
+  .client_modal .rbc-toolbar {
+    flex-direction: column;
+  }
+  .client_modal .rbc-toolbar .rbc-toolbar-label {
+    font-size: 1.6rem;
+  }
+  .client_modal .client__modal--information {
+    padding: 0 10px;
+  }
+  .rbc-agenda-table tbody tr .rbc-agenda-time-cell > span {
+    display: block;
+    white-space: normal;
+    width: 5rem;
+  }
+
+  /**
+  * 신규 회원 등록
+  */
+  .add-client__form__route-text {
+    width: 100%;
   }
 }

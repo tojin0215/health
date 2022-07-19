@@ -139,8 +139,8 @@ const ViewClientItem = ({
           <div>
             <CustomerCalendarComponent customer_no={idc} />
           </div>
-          <Row className='mt-3'>
-            <Col md={4} className='mb-2'>
+          <Row className='mt-3 client__modal--information'>
+            <Col xs={6} md={4} className='mb-2'>
               <h5 className='mb-1'>이름</h5>
               {showUpdate ? (
                 <Form.Control
@@ -151,7 +151,11 @@ const ViewClientItem = ({
                 <p>{client_name}</p>
               )}
             </Col>
-            <Col md={8} className='mb-2'>
+            <Col xs={6} md={4} className='mb-2'>
+              <h5 className='mb-1'>생년월일</h5>
+              <p>{birth}</p>
+            </Col>
+            <Col xs={12} md={8} className='mb-2'>
               <h5 className='mb-1'>주소</h5>
               {showUpdate ? (
                 <Form.Control value={address_input} onChange={updateChange2} />
@@ -159,7 +163,7 @@ const ViewClientItem = ({
                 <p>{address}</p>
               )}
             </Col>
-            <Col md={4} className='mb-2'>
+            <Col xs={6} md={4} className='mb-2'>
               <h5 className='mb-1'>연락처</h5>
               {showUpdate ? (
                 <Form.Control value={phone_input} onChange={updateChange3} />
@@ -167,11 +171,7 @@ const ViewClientItem = ({
                 <p>{phone}</p>
               )}
             </Col>
-            <Col md={4} className='mb-2'>
-              <h5 className='mb-1'>생년월일</h5>
-              <p>{birth}</p>
-            </Col>
-            <Col md={4} className='mb-2'>
+            <Col xs={6} md={4} className='mb-2'>
               <h5 className='mb-1'>가입경로</h5>
               <p>{join_route}</p>
             </Col>

@@ -198,6 +198,9 @@ h6 .circle {
 }
 
 @media screen and (max-width: 767px) {
+  #root > div > div {
+    padding-bottom: 290px;
+  }
   .container section {
     padding: 1rem;
   }

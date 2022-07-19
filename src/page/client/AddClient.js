@@ -200,41 +200,44 @@ class AddClient extends Component {
           <Form>
             <Row className='sectionGlass'>
               <h3 className='mb-4'>회원 정보 입력</h3>
-              <Col xs={4}>
+              <Col md={4}>
                 <Form.Group>
                   <Form.Label>이름</Form.Label>
                   <Form.Control
                     id='client_name'
                     type='text'
+                    placeholder='이름'
                     value={this.state.client_name}
                     onChange={this.handleChange}
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={4}>
+              <Col md={4}>
                 <Form.Group>
                   <Form.Label>핸드폰번호</Form.Label>
                   <Form.Control
                     id='phone'
                     type='number'
+                    placeholder='01000000000'
                     value={this.state.phone}
                     onChange={this.handleChange}
                     variant='outlined'
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={3}>
+              <Col md={3}>
                 <Form.Group>
                   <Form.Label>생년월일</Form.Label>
                   <Form.Control
                     id='birth'
                     type='text'
+                    placeholder='19990101'
                     value={this.state.birth}
                     onChange={this.handleChange}
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={1}>
+              <Col md={1}>
                 <Form.Group>
                   <Form.Label>성별</Form.Label>
                   <Form.Check>
@@ -338,8 +341,12 @@ class AddClient extends Component {
                       onChange={this.handleRouteRadio}
                     />
                   </Form.Check>
-                  <Form.Check inline className='p-0'>
+                  <Form.Check
+                    inline
+                    className='p-0 add-client__form__route-text'
+                  >
                     <Form.Control
+                      placeholder='기타 경로인 경우 입력'
                       id='join_route'
                       type='text'
                       value={this.state.join_route}
@@ -354,6 +361,7 @@ class AddClient extends Component {
                   <Form.Control
                     id='address'
                     type='text'
+                    placeholder='OO시 OO구 OO로 000, 000'
                     value={this.state.address}
                     onChange={this.handleChange}
                   ></Form.Control>
