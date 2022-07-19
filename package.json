@@ -87,7 +87,7 @@
     "lint:fix": "eslint --fix ./src",
     "preinstall": "npx force-resolutions"
   },
-  "proxy": "https://divvy.fit/",
+  "proxy": "https://divvy.fit",
   "browserslist": {
     "production": [
       ">0.2%",
