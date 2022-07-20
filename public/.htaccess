@@ -2,7 +2,3 @@ Options -MultiViews
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.html [QSA,L]
-
-RewriteCond %{HTTP_HOST} ^www\.[^.]+\.divvy\.fit$
-RewriteRule ^(.+) %{HTTP_HOST}$1 [C]
-RewriteRule ^www\.([^.]+)\.divvy\.fit(.\*) /home/$1$2
