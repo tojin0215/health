@@ -27,3 +27,30 @@
 .apexcharts-tooltip {
   color: #000;
 }
+
+.inbodies .inbodies__user__information--mobile {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .inbodies__chart--wrap {
+    padding: 0;
+  }
+  .MuiTable-root .MuiTableCell-root {
+    text-align: center;
+  }
+  .inbodies .inbodies__user__information--mobile {
+    background-color: #fff;
+    height: 5rem;
+    color: #000;
+    padding: 12px;
+    border-radius: 10px;
+    margin: 0 4px 10px;
+  }
+  .inbodies .inbodies__table--mobile {
+    display: none;
+  }
+  .inbodies .tab-content .MuiTable-root .MuiTableCell-root {
+    padding: 4px;
+  }
+}

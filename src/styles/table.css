@@ -94,7 +94,7 @@
   background-color: #003c20;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .react-bs-table-container {
     /* min-width: 1024px; */
     padding: 1.4rem 0 9rem;
