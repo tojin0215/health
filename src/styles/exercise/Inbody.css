@@ -40,6 +40,7 @@
     text-align: center;
   }
   .inbodies .inbodies__user__information--mobile {
+    display: flex;
     background-color: #fff;
     height: 5rem;
     color: #000;

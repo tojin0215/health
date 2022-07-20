@@ -1282,7 +1282,7 @@ class Reservation extends Component {
               </Col>
             )}
           </Row>
-          <Row xs={3}>
+          <Row md={3}>
             <Col className='text-end'>
               <Button
                 name='prev'

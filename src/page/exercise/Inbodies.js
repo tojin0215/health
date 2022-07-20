@@ -32,6 +32,7 @@ import { MdOutlineClose } from 'react-icons/md';
 import { TbMoodSuprised } from 'react-icons/tb';
 // react-apexcharts
 import Chart from 'react-apexcharts';
+import { height } from '@mui/system';
 
 const InbodiesView = ({
   num,
@@ -590,6 +591,7 @@ class Inbodies extends Component {
       client_name: client_name,
       idc: idc,
       open: false,
+      height: height,
     });
     this.inbodiesView(idc);
     this.inbodiesView2(idc);
@@ -721,11 +723,11 @@ class Inbodies extends Component {
           <Row className='inbodies__user__information--mobile'>
             <Col>
               <h5>키</h5>
-              <p>162cm</p>
+              <p>{this.state.height}cm</p>
             </Col>
             <Col>
               <h5>체중</h5>
-              <p>64kg</p>
+              <p>{this.state.weight}kg</p>
             </Col>
           </Row>
           <Tabs
