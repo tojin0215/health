@@ -6,4 +6,4 @@ Require all granted
 RewriteRule ^/~([^/]+)/?(.\*) /u/$1/$2  [R]
 RewriteRule   ^/([uge])/([^/]+)$ /$1/$2/ [R]
 
-<!-- RewriteRule ^ index.html [QSA,L] -->
+RewriteRule ^ index.html [QSA,L]
