@@ -2,6 +2,5 @@ Options -MultiViews
 AllowOverride All
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
-Require all granted
 
 RewriteRule ^ index.html [QSA,L]
