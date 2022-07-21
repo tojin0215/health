@@ -1,5 +1,5 @@
 Options -MultiViews
-AllowOverride All
+
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 
