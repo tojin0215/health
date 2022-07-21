@@ -1,6 +1,13 @@
-Options -MultiViews
-
+Options - MultiViews
 RewriteEngine On
+Options -Indexes
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_URI} !(.js$)
+RewriteCond %{REQUEST_URI} !(.css$)
+RewriteCond %{REQUEST_URI} !(.ico$)
+RewriteRule ^(.*)$ Index.php?htaccess=$1 [QSA,L]
 
-RewriteRule ^ index.html [QSA,L]
+
+//RewriteRule ^ index.html [QSA,L]
