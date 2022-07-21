@@ -1,5 +1,9 @@
 Options -MultiViews
+AllowOverride None
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
+Require all granted  
+RewriteRule ^/~([^/]+)/?(.\*) /u/$1/$2  [R]
+RewriteRule   ^/([uge])/([^/]+)$ /$1/$2/ [R]
 
 <!-- RewriteRule ^ index.html [QSA,L] -->
