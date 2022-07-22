@@ -1,1 +1,1 @@
-RewriteEngine On
+RewriteEngine On RewriteRule ^(.*)$ https://divvy.fit/$1
