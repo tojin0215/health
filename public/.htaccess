@@ -1,4 +1,4 @@
 Options -MultiViews 
 RewriteEngine On 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ https://divvy.fit/$1
+RewriteRule ^(.*)$ https://divvy.fit/$1 [L,R]
