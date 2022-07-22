@@ -3,12 +3,26 @@
   padding-bottom: 36px;
 }
 
-.login_wrap .card-img-top {
-  height: 300px;
+.login__main-visual--image {
+  width: 100%;
 }
 
-.login .login__authentication--container {
-  max-width: 22rem;
+.login__introduce {
+  background-color: #333;
+}
+.login__introduce__title {
+  color: #999;
+  justify-content: center;
+  padding-bottom: 60px;
+  font-weight: 400;
+}
+.login__introduce__title--brand {
+  font-weight: 700;
+  font-style: italic;
+  padding-right: 6px;
+}
+.login__introduce .card-body {
+  background-color: #333;
 }
 
 @media screen and (max-width: 767px) {

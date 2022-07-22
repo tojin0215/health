@@ -15,6 +15,7 @@ import { choiceLoginClient, choiceLoginTrainer } from '../../api/user';
 
 // React-Bootstrap
 import { Row, Col, Container, Button } from 'react-bootstrap';
+import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 
@@ -99,49 +100,67 @@ class Login extends Component {
             </h2>
           </div>
         </div>
-        <Container className='login__authentication--container my-0'>
-          <Authentication mode={true} onLogin={this.handleLogin} />
-        </Container>
-        <div>
+        <div className='bg-black'>
+          <Container className='login__authentication--container my-0'>
+            <Row>
+              <Col xs={9}>
+                <Image
+                  className='login__main-visual--image'
+                  src={process.env.PUBLIC_URL + '/assets/login-main-visual.jpg'}
+                />
+              </Col>
+              <Col xs={3}>
+                <Authentication mode={true} onLogin={this.handleLogin} />
+              </Col>
+            </Row>
+          </Container>
+        </div>
+        <div className='login__introduce'>
           <Container>
-            <h3>About Us</h3>
+            <h5 className='login__introduce__title'>
+              <span className='login__introduce__title--brand'>DIVVY</span>는
+              헬스장&#183;회원 관리를 한 번에 해결할 수 있습니다.
+            </h5>
             <CardGroup>
               <Card>
                 <Card.Img
                   variant='top'
-                  src={process.env.PUBLIC_URL + '/assets/sales_management.svg'}
+                  src={process.env.PUBLIC_URL + '/assets/login-center.jpg'}
                 />
                 <Card.Body>
-                  <Card.Title>상품</Card.Title>
+                  <Card.Title>센터</Card.Title>
                   <Card.Text>
-                    헬스, 필라테스 등의 운동 상품과 함께 운동복, 사물함 등의
-                    상품도 함께 등록하고 매출을 관리할 수 있습니다.
+                    - 헬스, 필라테스 등의 운동 상품 및 운동복, 사물함 등의 상품
+                    등록
                   </Card.Text>
+                  <Card.Text>- 결제, 매출 관리까지</Card.Text>
                 </Card.Body>
               </Card>
               <Card>
                 <Card.Img
                   variant='top'
-                  src={process.env.PUBLIC_URL + '/assets/working_out.svg'}
+                  src={process.env.PUBLIC_URL + '/assets/login-workout.jpg'}
                 />
                 <Card.Body>
                   <Card.Title>운동</Card.Title>
                   <Card.Text>
-                    센터의 전문가가 사용자와 상담하고 적합한 운동의 리스트를
+                    - 센터의 전문가가 사용자와 상담하고 적합한 운동의 리스트를
                     배정해 줄 수 있습니다.
                   </Card.Text>
+                  <Card.Text>- 운동 후 체크 서비스까지</Card.Text>
                 </Card.Body>
               </Card>
               <Card>
                 <Card.Img
                   variant='top'
-                  src={process.env.PUBLIC_URL + '/assets/member_management.svg'}
+                  src={process.env.PUBLIC_URL + '/assets/login-workers.jpg'}
                 />
                 <Card.Body>
                   <Card.Title>회원관리</Card.Title>
+                  <Card.Text>- 쉬운 회원등록 및 수정</Card.Text>
                   <Card.Text>
-                    회원을 쉽게 등록하고 수정할 수 있으며, 회원의 인바디 정보,
-                    운동 정보 등도 함께 관리할 수 있습니다.
+                    - 회원의 인바디 정보, 운동 정보 등도 함께 관리할 수
+                    있습니다.
                   </Card.Text>
                 </Card.Body>
               </Card>
