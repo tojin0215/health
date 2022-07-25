@@ -2,4 +2,5 @@ Options -MultiViews
 RewriteEngine On 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{SERVER_PORT} !^3002$
+RewriteRule ^/(.*)         http://divvy.fit:%{SERVER_PORT}/$1 [L,R]
 RewriteRule ^ index.html [QSA,L]
