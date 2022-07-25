@@ -95,9 +95,7 @@ class Login extends Component {
         <div className='localNavigation login__local-navigation'>
           <div className='container'>
             <h1>
-              <Image
-                src={process.env.PUBLIC_URL + '/assets/login-main-visual.jpg'}
-              />
+              <Image src={process.env.PUBLIC_URL + '/assets/divvy_yello.svg'} />
               <Image
                 src={process.env.PUBLIC_URL + '/assets/logo-circle-yellow.png'}
               />
