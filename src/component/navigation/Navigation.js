@@ -268,7 +268,7 @@ class Navigation extends Component {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to='/introduce/add'>
+                    <NavLink exact to='/introduceAdd'>
                       센터 소개 등록
                     </NavLink>
                   </li>
@@ -284,7 +284,7 @@ class Navigation extends Component {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to='/trainer/add'>
+                    <NavLink exact to='/trainerAdd'>
                       강사 등록
                     </NavLink>
                   </li>
