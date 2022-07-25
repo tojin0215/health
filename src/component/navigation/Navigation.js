@@ -148,7 +148,7 @@ class Navigation extends Component {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to='/client/add'>
+                    <NavLink exact to='/clientAdd'>
                       회원 등록
                     </NavLink>
                   </li>
@@ -299,7 +299,7 @@ class Navigation extends Component {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to='/client/add'>
+                    <NavLink exact to='/clientAdd'>
                       회원 등록
                     </NavLink>
                   </li>

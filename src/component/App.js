@@ -61,11 +61,11 @@ class App extends Component {
         <Route exact path='/reservationClass' component={ReservationClass} />
         <Route exact path='/reservation/update' component={ReservationUpdate} />
         <Route exact path='/trainer' component={Trainer} />
-        <Route exact path='/trainer/add' component={AddTrainer} />
+        <Route exact path='/trainerAdd' component={AddTrainer} />
         <Route exact path='/client' component={Client} />
-        <Route exact path='/client/add' component={AddClient} />
+        <Route exact path='/clientAdd' component={AddClient} />
         <Route exact path='/introduce' component={Introduce} />
-        <Route exact path='/introduce/add' component={AddIntroduce} />
+        <Route exact path='/introduceAdd' component={AddIntroduce} />
         <Route exact path='/choiceLogin' component={ChoiceLogin} />
         <Route exact path='/inbodies' component={Inbodies} />
         <Route exact path='/workoutAlloted' component={WorkoutAlloted} />

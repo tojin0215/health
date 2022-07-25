@@ -198,7 +198,7 @@ class Menu extends Component {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to='/client/add'>
+                    <NavLink exact to='/clientAdd'>
                       회원 등록
                     </NavLink>
                   </li>
@@ -343,7 +343,7 @@ class Menu extends Component {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink exact to='/client/add'>
+                    <NavLink exact to='/clientAdd'>
                       회원 등록
                     </NavLink>
                     <NavLink exact to='/inbodies'>
