@@ -49,7 +49,7 @@ class App extends Component {
         <Route exact path='/assign/check' component={AssignCheckExercise} />
         <Route exact path='/assign/customer' component={AssignCustomer} />
         <Route exact path='/assign/inbody' component={Inbody} />
-        <Route exact path='/inbodies/add' component={AddInbody} />
+        <Route exact path='/inbodiesAdd' component={AddInbody} />
         <Route exact path='/sales' component={Sales} />
         <Route exact path='/addSales' component={AddSales} />
         <Route exact path='/statistics' component={Statistics} />

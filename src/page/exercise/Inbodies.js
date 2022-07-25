@@ -690,7 +690,7 @@ class Inbodies extends Component {
             <Col md={2} className='mb-2'>
               <Link
                 to={{
-                  pathname: '/inbodies/add',
+                  pathname: '/inbodiesAdd',
                   state: {
                     inbody_no: this.state.inbody_no,
                     member_no:
