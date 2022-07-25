@@ -106,7 +106,7 @@ class Login extends Component {
         <div className='bg-black'>
           <Container className='login__authentication--container my-0'>
             <Row>
-              <Col className='login__main-visual--box' xs={9}>
+              <Col className='login__main-visual--box' md={9}>
                 {/* <Image
                   className='login__main-visual--image'
                   src={process.env.PUBLIC_URL + '/assets/login-main-visual.jpg'}
@@ -118,7 +118,7 @@ class Login extends Component {
                   src={process.env.PUBLIC_URL + '/assets/logo-text-white.svg'}
                 />
               </Col>
-              <Col xs={3}>
+              <Col md={3}>
                 <Authentication mode={true} onLogin={this.handleLogin} />
               </Col>
             </Row>
@@ -127,10 +127,18 @@ class Login extends Component {
         <div className='login__introduce'>
           <Container>
             <h5 className='login__introduce__title'>
-              <span className='login__introduce__title--brand'>DIVVY</span>는
-              헬스장&#183;회원 관리를 한 번에 해결할 수 있습니다.
+              <Row>
+                <Col className='login__introduce__title--brand' md={3}>
+                  <span>DIVVY</span>
+                </Col>
+                <Col className='login__introduce__title--text' md={9}>
+                  <span>
+                    는 헬스장&#183;회원 관리를 한 번에 해결할 수 있습니다.
+                  </span>
+                </Col>
+              </Row>
             </h5>
-            <CardGroup>
+            <CardGroup className='login__introduce-card'>
               <Card>
                 <Card.Img
                   variant='top'

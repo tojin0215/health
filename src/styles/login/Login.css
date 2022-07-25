@@ -56,6 +56,38 @@
 
 @media screen and (max-width: 767px) {
   .login_logo {
-    height: 260px;
+    height: 45px;
+  }
+  .login__main-visual--box {
+    height: 175px;
+    padding-top: 16px;
+  }
+  .login__main-visual--box > p {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+  .login__main-visual--logo {
+    bottom: -19px;
+    height: 100px;
+    left: 12px;
+  }
+  .login__introduce__title {
+    font-size: 38px;
+    padding-bottom: 16px;
+  }
+  .login__introduce__title--text {
+    font-size: 16px;
+    white-space: nowrap;
+  }
+  .login__introduce__title--brand {
+    align-self: normal;
+  }
+  .login__introduce-card .card-title {
+    font-weight: 700;
+    text-align: center;
+  }
+  .login__introduce-card .card-text {
+    line-height: 22px;
+    padding-bottom: 6px;
   }
 }
