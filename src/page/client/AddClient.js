@@ -188,7 +188,7 @@ class AddClient extends Component {
                 <span>&#62;</span>
                 <Link to='/client'>회원 관리</Link>
                 <span>&#62;</span>
-                <Link to='/client/add'>신규 회원 등록</Link>
+                <Link to='/clientAdd'>신규 회원 등록</Link>
               </div>
               {/*.breadCrumb */}
             </div>
