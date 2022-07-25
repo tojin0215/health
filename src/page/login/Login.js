@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Authentication from '../login/Authentication';
 import Navigation from '../../component/navigation/Navigation';
 import { Slide } from 'react-slideshow-image';
@@ -91,23 +92,26 @@ class Login extends Component {
 					<Header />
 					<Navigation />
 				</div> */}
-        <div className='localNavigation'>
+        <div className='localNavigation login__local-navigation'>
           <div className='container'>
-            <h2>
-              <div className='parallelogram'></div>
-              로그인
-              <span>.</span>
-            </h2>
+            <h1>
+              <Image
+                src={process.env.PUBLIC_URL + '/assets/login-main-visual.jpg'}
+              />
+              <Image
+                src={process.env.PUBLIC_URL + '/assets/logo-circle-yellow.png'}
+              />
+            </h1>
           </div>
         </div>
         <div className='bg-black'>
           <Container className='login__authentication--container my-0'>
             <Row>
-              <Col xs={9}>
-                <Image
+              <Col className='login__main-visual--box' xs={9}>
+                {/* <Image
                   className='login__main-visual--image'
                   src={process.env.PUBLIC_URL + '/assets/login-main-visual.jpg'}
-                />
+                /> */}
               </Col>
               <Col xs={3}>
                 <Authentication mode={true} onLogin={this.handleLogin} />

@@ -116,22 +116,22 @@ class Authentication extends Component {
     // );
     const loginBox = (
       <div>
-        <Form.Group className='mb-3' controlId='formBasicId'>
+        <Form.Group className='mb-2' controlId='formBasicId'>
           <Form.Control
             name='id'
             type='text'
-            className='validate'
+            className='validate login__authentication__id--box'
             placeholder='YOUR ID'
             onChange={this.handleChange}
             value={this.state.id}
           />
           <Form.Text className='text-muted'></Form.Text>
         </Form.Group>
-        <Form.Group className='mb-3' controlId='formBasicPassword'>
+        <Form.Group className='mb-2' controlId='formBasicPassword'>
           <Form.Control
             name='password'
             type='password'
-            className='validate'
+            className='validate login__authentication__password--box'
             onChange={this.handleChange}
             value={this.state.password}
             onKeyPress={this.handleKeyPress}
@@ -147,7 +147,7 @@ class Authentication extends Component {
           <Form.Control
             name='id'
             type='text'
-            className='validate'
+            className='validate login__authentication__id--box'
             placeholder='Enter phone number'
             onChange={this.handleChange}
             value={this.state.id}
@@ -159,7 +159,7 @@ class Authentication extends Component {
           <Form.Control
             name='password'
             type='password'
-            className='validate'
+            className='validate login__authentication__password--box'
             onChange={this.handleChange}
             value={this.state.password}
             onKeyPress={this.handleKeyPress}

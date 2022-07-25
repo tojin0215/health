@@ -1,8 +1,16 @@
+.login .login__local-navigation {
+  background-color: #000;
+}
+
 .login_logo {
   height: 300px;
   padding-bottom: 36px;
 }
-
+.login__main-visual--box {
+  background-image: url(/public/assets/login-main-visual.jpg);
+  background-size: cover;
+  height: 348px;
+}
 .login__main-visual--image {
   width: 100%;
 }
