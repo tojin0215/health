@@ -1,0 +1,19 @@
+.authentication .card-body {
+  padding-top: 6rem;
+  background-color: #000;
+}
+
+.authentication .authentication__login-button {
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+}
+
+.authentication .login__authentication__id--box {
+  background-color: #333;
+  border-color: #666;
+}
+.authentication .login__authentication__password--box {
+  background-color: #333;
+  border-color: #666;
+}

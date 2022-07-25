@@ -47,22 +47,22 @@ import { MdCancel } from 'react-icons/md';
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
     <Row className=''>
-      <Col>
+      <Col xs={6} md={3}>
         <h5>키</h5>
         <span className='fs-5 fw-bold'>{height}</span>
         <span> cm</span>
       </Col>
-      <Col>
+      <Col xs={6} md={3}>
         <h5>체중</h5>
         <span className='fs-5 fw-bold'>{weight}</span>
         <span> kg</span>
       </Col>
-      <Col>
+      <Col xs={6} md={3}>
         <h5>체지방</h5>
         <span className='fs-5 fw-bold'>{bodyFat}</span>
         <span> kg</span>
       </Col>
-      <Col>
+      <Col xs={6} md={3}>
         <h5>근육량</h5>
         <span className='fs-5 fw-bold'>{muscleMass}</span>
         <span> kg</span>
@@ -521,7 +521,7 @@ class WorkoutAlloted extends Component {
                     운동 선택
                   </h3>
                 </Col>
-                <Col xs={2}>
+                <Col xs={6} md={2}>
                   <Button
                     className='w-100'
                     variant='outline-primary'
@@ -530,7 +530,7 @@ class WorkoutAlloted extends Component {
                     상체
                   </Button>
                 </Col>
-                <Col xs={2}>
+                <Col xs={6} md={2}>
                   <Button
                     className='w-100'
                     variant='outline-primary'
@@ -539,7 +539,7 @@ class WorkoutAlloted extends Component {
                     하체
                   </Button>
                 </Col>
-                <Col xs={2}>
+                <Col xs={6} md={2}>
                   <Button
                     className='w-100'
                     variant='outline-primary'
@@ -548,7 +548,7 @@ class WorkoutAlloted extends Component {
                     전신
                   </Button>
                 </Col>
-                <Col xs={2}>
+                <Col xs={6} md={2}>
                   <Button
                     className='w-100'
                     variant='outline-primary'
@@ -557,7 +557,7 @@ class WorkoutAlloted extends Component {
                     코어
                   </Button>
                 </Col>
-                <Col xs={2}>
+                <Col xs={6} md={2}>
                   <Button
                     className='w-100'
                     variant='outline-primary'
@@ -566,7 +566,7 @@ class WorkoutAlloted extends Component {
                     유산소
                   </Button>
                 </Col>
-                <Col xs={2}>
+                <Col xs={6} md={2}>
                   <Button
                     className='w-100'
                     variant='outline-primary'

@@ -61,9 +61,10 @@ const UserSearchTableItem = ({ c, handleSelectUser }) => (
       {c.phone.slice(0, 3) + '-' + c.phone.slice(3, 7) + '-' + c.phone.slice(7)}
     </TableCell>
     <TableCell>{c.sex === 1 ? '남자' : '여자'}</TableCell>
-    <TableCell>
+    <TableCell className='user-search__select--tr'>
       <DialogActions className='p-0'>
         <Button
+          className='user-search__select'
           onClick={handleSelectUser}
           id={c.idc}
           value={[c.client_name, c.phone]}
@@ -165,11 +166,16 @@ const UserSearch = ({
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <Dialog open={open} onClose={handleClose} fullScreen={fullScreen}>
+    <Dialog
+      className='user-search'
+      open={open}
+      onClose={handleClose}
+      fullScreen={fullScreen}
+    >
       <DialogTitle>회원 검색</DialogTitle>
       <DialogContent>
         <Row>
-          <Col xs={3} className=''>
+          <Col xs={12} md={3} className=''>
             <Dropdown
               className='searchDrop'
               options={options}
@@ -205,7 +211,7 @@ const UserSearch = ({
               </IconButton>
             </Paper>
           </Col> */}
-          <Col xs={8}>
+          <Col xs={12} md={8} className='mt-2'>
             <Form.Group className='h-100'>
               <Form.Control
                 placeholder='회원을 검색하세요'
@@ -218,17 +224,17 @@ const UserSearch = ({
               />
             </Form.Group>
           </Col>
-          <Col xs={1} className='p-0'>
+          <Col xs={12} md={1} className='mt-2'>
             <Button
-              className='w-100 h-100 p-0'
+              className='w-100 h-100 py-1'
               onClick={handleOnSearch}
-              variant='outline-secondary'
+              variant='success'
             >
               <FaSearch />
             </Button>
           </Col>
         </Row>
-        <Table size='small' className='addsalesSearchTable'>
+        <Table size='small' className='user-search__table table--block'>
           <UserSearchTableHeader />
           <TableBody>
             {customers ? (

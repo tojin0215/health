@@ -174,9 +174,6 @@ td > div {
     left: 0;
     right: 0;
   }
-  .MuiTable-root {
-    min-width: max-content;
-  }
   .MuiDialog-root .Dropdown-root {
     width: 80%;
   }
@@ -190,8 +187,15 @@ td > div {
     width: 80%;
     align-self: center;
   }
-  .addsalesSearchTable .MuiTableCell-head:nth-child(3) {
-    width: auto;
-    padding: 0 5rem;
+  /* 고객 검색 모바일 너비 */
+  .user-search .MuiDialogContent-root {
+    min-width: auto;
+  }
+  .user-search .Dropdown-root {
+    width: 100%;
+  }
+  .user-search #search {
+    width: 100%;
+    padding: 10px;
   }
 }

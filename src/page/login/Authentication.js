@@ -116,26 +116,26 @@ class Authentication extends Component {
     // );
     const loginBox = (
       <div>
-        <Form.Group className='mb-3' controlId='formBasicId'>
+        <Form.Group className='mb-2' controlId='formBasicId'>
           <Form.Control
             name='id'
             type='text'
-            className='validate'
-            placeholder='아이디'
+            className='validate login__authentication__id--box'
+            placeholder='YOUR ID'
             onChange={this.handleChange}
             value={this.state.id}
           />
           <Form.Text className='text-muted'></Form.Text>
         </Form.Group>
-        <Form.Group className='mb-3' controlId='formBasicPassword'>
+        <Form.Group className='mb-2' controlId='formBasicPassword'>
           <Form.Control
             name='password'
             type='password'
-            className='validate'
+            className='validate login__authentication__password--box'
             onChange={this.handleChange}
             value={this.state.password}
             onKeyPress={this.handleKeyPress}
-            placeholder='비밀번호'
+            placeholder='PASSWORD'
           />
         </Form.Group>
       </div>
@@ -147,7 +147,7 @@ class Authentication extends Component {
           <Form.Control
             name='id'
             type='text'
-            className='validate'
+            className='validate login__authentication__id--box'
             placeholder='Enter phone number'
             onChange={this.handleChange}
             value={this.state.id}
@@ -159,7 +159,7 @@ class Authentication extends Component {
           <Form.Control
             name='password'
             type='password'
-            className='validate'
+            className='validate login__authentication__password--box'
             onChange={this.handleChange}
             value={this.state.password}
             onKeyPress={this.handleKeyPress}
@@ -173,23 +173,23 @@ class Authentication extends Component {
         <Card.Body>
           {/* {inputBoxes} */}
           {loginBox}
-          <Row xs={1}>
+          <Row xs={2}>
+            <Col className='align-self-center'>
+              <Button
+                href='/register'
+                variant='outline-secondary fw-bold'
+                className='w-100 border-0'
+              >
+                회원가입
+              </Button>
+            </Col>
             <Col>
               <Button
                 onClick={this.handleLogin}
                 variant='primary'
-                className='w-100 px-5'
+                className='authentication__login-button'
               >
                 로그인
-              </Button>
-            </Col>
-            <Col className='mt-2'>
-              <Button
-                href='/register'
-                variant='outline-light fw-bold'
-                className='w-100 px-5 border-0'
-              >
-                회원가입
               </Button>
             </Col>
           </Row>
@@ -234,15 +234,14 @@ class Authentication extends Component {
     // );
 
     return (
-      <Card>
+      <Card className='authentication'>
         {/* <Card.Header></Card.Header> */}
-        <Card.Body className='py-5 text-center'>
+        <Card.Body className='text-center'>
           <h1 className='fw-bolder text-primary'>
-            <Image
+            {/* <Image
               src={process.env.PUBLIC_URL + '/assets/divvy_yello.png'}
-              // src={process.env.PUBLIC_URL + '/assets/divvy_yello.svg'}
               className='text-center login_logo p-0'
-            />
+            /> */}
           </h1>
           {this.state.radioGroup['fitness'] ? (
             <div>{this.props.mode ? loginView : ''}</div>

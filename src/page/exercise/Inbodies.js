@@ -32,6 +32,7 @@ import { MdOutlineClose } from 'react-icons/md';
 import { TbMoodSuprised } from 'react-icons/tb';
 // react-apexcharts
 import Chart from 'react-apexcharts';
+import { height } from '@mui/system';
 
 const InbodiesView = ({
   num,
@@ -56,10 +57,10 @@ const InbodiesView = ({
   return (
     <TableRow>
       <TableCell>{date}</TableCell>
-      <TableCell>
+      <TableCell className='inbodies__table--mobile'>
         <b>{height}</b> cm
       </TableCell>
-      <TableCell>
+      <TableCell className='inbodies__table--mobile'>
         <b>{weight}</b> kg
       </TableCell>
       <TableCell>
@@ -97,19 +98,19 @@ const InbodiesView2 = ({
   return (
     <TableRow>
       <TableCell>{date}</TableCell>
-      <TableCell>
+      <TableCell className='inbodies__table--mobile'>
         <b>{height}</b> cm
       </TableCell>
-      <TableCell>
+      <TableCell className='inbodies__table--mobile'>
         <b>{weight}</b> kg
       </TableCell>
-      <TableCell>
+      <TableCell className='inbodies__table--mobile'>
         <b>{bodyMoisture}</b> kg
       </TableCell>
-      <TableCell>
+      <TableCell className='inbodies__table--mobile'>
         <b>{protein}</b> kg
       </TableCell>
-      <TableCell>
+      <TableCell className='inbodies__table--mobile'>
         <b>{mineral}</b> kg
       </TableCell>
       <TableCell>
@@ -147,10 +148,10 @@ const InbodiesView3 = ({
   return (
     <TableRow>
       <TableCell>{date}</TableCell>
-      <TableCell>
+      <TableCell className='inbodies__table--mobile'>
         <b>{height}</b> cm
       </TableCell>
-      <TableCell>
+      <TableCell className='inbodies__table--mobile'>
         <b>{weight}</b> kg
       </TableCell>
       <TableCell>
@@ -185,10 +186,10 @@ const InbodiesView4 = ({
   return (
     <TableRow>
       <TableCell>{date}</TableCell>
-      <TableCell>
+      <TableCell className='inbodies__table--mobile'>
         <b>{height}</b> cm
       </TableCell>
-      <TableCell>
+      <TableCell className='inbodies__table--mobile'>
         <b>{weight}</b> kg
       </TableCell>
       <TableCell>
@@ -590,6 +591,7 @@ class Inbodies extends Component {
       client_name: client_name,
       idc: idc,
       open: false,
+      height: height,
     });
     this.inbodiesView(idc);
     this.inbodiesView2(idc);
@@ -718,7 +720,16 @@ class Inbodies extends Component {
               />
             </div>
           ) : null}
-
+          <Row className='inbodies__user__information--mobile'>
+            <Col>
+              <h5>키</h5>
+              <p>{this.state.height}cm</p>
+            </Col>
+            <Col>
+              <h5>체중</h5>
+              <p>{this.state.weight}kg</p>
+            </Col>
+          </Row>
           <Tabs
             defaultActiveKey='home'
             id='uncontrolled-tab-example'
@@ -737,8 +748,12 @@ class Inbodies extends Component {
                     <TableHead>
                       <TableRow>
                         <TableCell>측정일</TableCell>
-                        <TableCell>키</TableCell>
-                        <TableCell>체중</TableCell>
+                        <TableCell className='inbodies__table--mobile'>
+                          키
+                        </TableCell>
+                        <TableCell className='inbodies__table--mobile'>
+                          체중
+                        </TableCell>
                         <TableCell>체수분</TableCell>
                         <TableCell>단백질</TableCell>
                         <TableCell>무기질</TableCell>
@@ -762,11 +777,21 @@ class Inbodies extends Component {
                     <TableHead>
                       <TableRow>
                         <TableCell>측정일</TableCell>
-                        <TableCell>키</TableCell>
-                        <TableCell>체중</TableCell>
-                        <TableCell>체수분</TableCell>
-                        <TableCell>단백질</TableCell>
-                        <TableCell>무기질</TableCell>
+                        <TableCell className='inbodies__table--mobile'>
+                          키
+                        </TableCell>
+                        <TableCell className='inbodies__table--mobile'>
+                          체중
+                        </TableCell>
+                        <TableCell className='inbodies__table--mobile'>
+                          체수분
+                        </TableCell>
+                        <TableCell className='inbodies__table--mobile'>
+                          단백질
+                        </TableCell>
+                        <TableCell className='inbodies__table--mobile'>
+                          무기질
+                        </TableCell>
                         <TableCell>체지방</TableCell>
                         <TableCell>근육량</TableCell>
                         <TableCell>체지방량1</TableCell>
@@ -790,8 +815,12 @@ class Inbodies extends Component {
                     <TableHead>
                       <TableRow>
                         <TableCell>측정일</TableCell>
-                        <TableCell>키</TableCell>
-                        <TableCell>체중</TableCell>
+                        <TableCell className='inbodies__table--mobile'>
+                          키
+                        </TableCell>
+                        <TableCell className='inbodies__table--mobile'>
+                          체중
+                        </TableCell>
                         <TableCell>골격근량</TableCell>
                         <TableCell>체지방량2</TableCell>
                       </TableRow>
@@ -814,8 +843,12 @@ class Inbodies extends Component {
                     <TableHead>
                       <TableRow>
                         <TableCell>측정일</TableCell>
-                        <TableCell>키</TableCell>
-                        <TableCell>체중</TableCell>
+                        <TableCell className='inbodies__table--mobile'>
+                          키
+                        </TableCell>
+                        <TableCell className='inbodies__table--mobile'>
+                          체중
+                        </TableCell>
                         <TableCell>BMI</TableCell>
                         <TableCell>체지방률</TableCell>
                       </TableRow>

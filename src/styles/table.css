@@ -94,7 +94,7 @@
   background-color: #003c20;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .react-bs-table-container {
     /* min-width: 1024px; */
     padding: 1.4rem 0 9rem;
@@ -108,10 +108,10 @@
     flex-wrap: nowrap;
     margin: 1rem;
   }
-  .trainer_wrap .table--block thead {
+  .table--block thead {
     display: none;
   }
-  .trainer_wrap .table--block tr {
+  .table--block tr {
     display: block;
     margin-bottom: 10px;
     border-top: none;
@@ -166,5 +166,56 @@
   }
   .trainer_wrap .table--block .trainer_table_row td:nth-child(7):before {
     content: '';
+  }
+  /* user-search table--block*/
+  .user-search .user-search__table {
+    margin-top: 10px;
+  }
+  .user-search .table--block th,
+  .table--block td {
+    display: block;
+    position: relative;
+    padding: 10px 0;
+    padding-left: 30%;
+    border-width: 0 0 1px 0;
+    text-align: center;
+  }
+
+  .user-search .table--block td:before {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25%;
+    padding: 10px;
+    background: #ccc;
+    text-align: center;
+  }
+  .user-search .table--block td:nth-child(1):before {
+    content: 'No';
+  }
+  .user-search .table--block td:nth-child(2):before {
+    content: '이름';
+  }
+  .user-search .table--block td:nth-child(3):before {
+    content: '연락처';
+  }
+  .user-search .table--block td:nth-child(4):before {
+    content: '성별';
+  }
+  .user-search .table--block td:nth-child(5):before {
+    content: '선택';
+  }
+  .user-search .user-search__select {
+    padding: 0 10px;
+    width: 100%;
+  }
+  .user-search .user-search__select--tr {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-right: 10px;
+  }
+  .user-search .Dropdown-arrow {
+    top: 18px;
   }
 }

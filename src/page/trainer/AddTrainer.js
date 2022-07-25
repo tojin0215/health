@@ -189,7 +189,7 @@ class AddTrainer extends Component {
               <TextField value={this.props.userinfo.fitness_no} />
             </label> */}
             <Row>
-              <Col xs={4}>
+              <Col md={4}>
                 <Form.Group>
                   <Form.Label>이름</Form.Label>
                   <Form.Control
@@ -200,7 +200,7 @@ class AddTrainer extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={4}>
+              <Col md={4}>
                 <Form.Group>
                   <Form.Label>핸드폰번호</Form.Label>
                   <Form.Control
@@ -208,23 +208,25 @@ class AddTrainer extends Component {
                     variant='outlined'
                     value={this.state.phone}
                     id='phone'
+                    placeholder='01012345678'
                     onChange={this.handleChange}
                     required
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={3}>
+              <Col xs={8} md={3}>
                 <Form.Group>
                   <Form.Label>생년월일</Form.Label>
                   <Form.Control
                     type='number'
                     value={this.state.birth}
                     id='birth'
+                    placeholder='19990101'
                     onChange={this.handleChange}
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={1}>
+              <Col xs={4} md={1}>
                 <Form.Group>
                   <Form.Label>성별</Form.Label>
                   <Form.Check>
