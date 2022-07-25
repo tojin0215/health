@@ -147,10 +147,10 @@ class Login extends Component {
                 <Card.Body>
                   <Card.Title>센터</Card.Title>
                   <Card.Text>
-                    - 헬스, 필라테스 등의 운동 상품 및 운동복, 사물함 등의 상품
+                    • 헬스, 필라테스 등의 운동 상품 및 운동복, 사물함 등의 상품
                     등록
                   </Card.Text>
-                  <Card.Text>- 결제, 매출 관리까지</Card.Text>
+                  <Card.Text>• 결제, 매출 관리까지</Card.Text>
                 </Card.Body>
               </Card>
               <Card>
@@ -161,10 +161,10 @@ class Login extends Component {
                 <Card.Body>
                   <Card.Title>운동</Card.Title>
                   <Card.Text>
-                    - 센터의 전문가가 사용자와 상담하고 적합한 운동의 리스트를
+                    • 센터의 전문가가 사용자와 상담하고 적합한 운동의 리스트를
                     배정해 줄 수 있습니다.
                   </Card.Text>
-                  <Card.Text>- 운동 후 체크 서비스까지</Card.Text>
+                  <Card.Text>• 운동 후 체크 서비스까지</Card.Text>
                 </Card.Body>
               </Card>
               <Card>
@@ -174,9 +174,9 @@ class Login extends Component {
                 />
                 <Card.Body>
                   <Card.Title>회원관리</Card.Title>
-                  <Card.Text>- 쉬운 회원등록 및 수정</Card.Text>
+                  <Card.Text>• 쉬운 회원등록 및 수정</Card.Text>
                   <Card.Text>
-                    - 회원의 인바디 정보, 운동 정보 등도 함께 관리할 수
+                    • 회원의 인바디 정보, 운동 정보 등도 함께 관리할 수
                     있습니다.
                   </Card.Text>
                 </Card.Body>
