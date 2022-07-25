@@ -5,8 +5,9 @@
 
 .authentication .authentication__login-button {
   border-radius: 50%;
-  width: 75px;
-  height: 75px;
+  padding: 0;
+  width: 70px;
+  height: 70px;
 }
 
 .authentication .login__authentication__id--box {

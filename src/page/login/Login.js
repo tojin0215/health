@@ -92,12 +92,13 @@ class Login extends Component {
 					<Header />
 					<Navigation />
 				</div> */}
-        <div className='localNavigation login__local-navigation'>
+        <div className='localNavigation login__local-navigation pt-1'>
           <div className='container'>
-            <h1>
-              <Image src={process.env.PUBLIC_URL + '/assets/divvy_yello.svg'} />
+            <h1 className='pt-2'>
               <Image
+                className='login_logo'
                 src={process.env.PUBLIC_URL + '/assets/logo-circle-yellow.png'}
+                // src={process.env.PUBLIC_URL + '/assets/divvy_gif_1.gif'}
               />
             </h1>
           </div>
@@ -110,6 +111,12 @@ class Login extends Component {
                   className='login__main-visual--image'
                   src={process.env.PUBLIC_URL + '/assets/login-main-visual.jpg'}
                 /> */}
+                <p>반갑습니다.</p>
+                <p>편리한 피트니스 관리</p>
+                <Image
+                  className='login__main-visual--logo'
+                  src={process.env.PUBLIC_URL + '/assets/logo-text-white.svg'}
+                />
               </Col>
               <Col xs={3}>
                 <Authentication mode={true} onLogin={this.handleLogin} />
