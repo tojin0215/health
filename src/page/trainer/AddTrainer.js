@@ -126,22 +126,7 @@ class AddTrainer extends Component {
       });
     }
   };
-  // handleManagerLogin = () => {
-  //   trainerManager(
-  //     this.state.phone,
-  //     this.state.birth,
-  //     this.state.trainer_name,
-  //     this.state.joinNo
-  //   ).then((res) => {
-  //     // console.log(res);
-  //     alert('manager Table');
-  //   });
-  // };
-  // handleTotal = () => {
-  //   this.handleTrainer();
-  //   this.handleManagerLogin();
-  //   this.props.history.push('/trainer');
-  // };
+
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
