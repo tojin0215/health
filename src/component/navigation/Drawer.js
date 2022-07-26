@@ -47,7 +47,6 @@ function DrawerAppBar(props) {
 
   const [open, setOpen] = React.useState(true);
   const handleClick = () => {
-    alert('asdasd');
     setOpen(!open);
   };
 
@@ -66,9 +65,9 @@ function DrawerAppBar(props) {
             <ListItemText primary={'센터소개222'} />
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding></ListItem>
-        <ListItemButton sx={{ textAlign: 'center' }} onClick={handleClick}>
-          <ListItemText primary={'센터소개'} />
+        {/* 센터 */}
+        <ListItemButton sx={{ textAlign: 'start' }} onClick={handleClick(1)}>
+          <ListItemText primary={'센터'} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout='auto' unmountOnExit>
@@ -77,7 +76,142 @@ function DrawerAppBar(props) {
               <ListItemIcon>
                 <StarBorder />
               </ListItemIcon>
-              <ListItemText primary='Starred' />
+              <ListItemText primary='센터 소개' />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='센터 소개 등록' />
+            </ListItemButton>
+          </List>
+        </Collapse>
+        {/* 강사 */}
+        <ListItemButton sx={{ textAlign: 'start' }} onClick={handleClick}>
+          <ListItemText primary={'강사'} />
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={open} timeout='auto' unmountOnExit>
+          <List component='div' disablePadding>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='강사' />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='강사 등록' />
+            </ListItemButton>
+          </List>
+        </Collapse>
+        {/* 회원 */}
+        <ListItemButton sx={{ textAlign: 'start' }} onClick={handleClick}>
+          <ListItemText primary={'회원'} />
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={open} timeout='auto' unmountOnExit>
+          <List component='div' disablePadding>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='회원' />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='회원 등록' />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='인바디 정보' />
+            </ListItemButton>
+          </List>
+        </Collapse>
+        {/* 수업 */}
+        <ListItemButton sx={{ textAlign: 'start' }} onClick={handleClick}>
+          <ListItemText primary={'수업'} />
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={open} timeout='auto' unmountOnExit>
+          <List component='div' disablePadding>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='수업' />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='수업 설정' />
+            </ListItemButton>
+          </List>
+        </Collapse>
+        {/* 운동 */}
+        <ListItemButton sx={{ textAlign: 'start' }} onClick={handleClick}>
+          <ListItemText primary={'운동'} />
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={open} timeout='auto' unmountOnExit>
+          <List component='div' disablePadding>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='운동 배정' />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='루틴 배정' />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='배정된 운동 목록' />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='운동 만들기' />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='루틴 만들기' />
+            </ListItemButton>
+          </List>
+        </Collapse>
+        {/* 매출 */}
+        <ListItemButton sx={{ textAlign: 'start' }} onClick={handleClick}>
+          <ListItemText primary={'매출'} />
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={open} timeout='auto' unmountOnExit>
+          <List component='div' disablePadding>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='매출 현황' />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='결제 등록' />
             </ListItemButton>
           </List>
         </Collapse>
