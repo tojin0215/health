@@ -47,19 +47,23 @@ function DrawerAppBar(props) {
 
   const [open, setOpen] = React.useState(true);
   const handleClick = () => {
+    alert('asdasd');
     setOpen(!open);
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+    <Box sx={{ textAlign: 'center' }}>
       <Typography variant='h6' sx={{ my: 2 }}>
         DIVVY
       </Typography>
       <Divider />
       <List>
         <ListItem disablePadding>
-          <ListItemButton sx={{ textAlign: 'center' }}>
-            <ListItemText primary={'센터소개'} />
+          <ListItemButton
+            sx={{ textAlign: 'center' }}
+            onClick={handleDrawerToggle}
+          >
+            <ListItemText primary={'센터소개222'} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding></ListItem>
@@ -69,7 +73,7 @@ function DrawerAppBar(props) {
         </ListItemButton>
         <Collapse in={open} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
               <ListItemIcon>
                 <StarBorder />
               </ListItemIcon>
