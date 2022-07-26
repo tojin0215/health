@@ -127,13 +127,13 @@ class Login extends Component {
         <div className='login__introduce'>
           <Container>
             <h5 className='login__introduce__title'>
-              <Row>
-                <Col className='login__introduce__title--brand' md={3}>
+              <Row className='w-100'>
+                <Col className='login__introduce__title--brand' md={2}>
                   <span>DIVVY</span>
                 </Col>
-                <Col className='login__introduce__title--text' md={9}>
+                <Col className='login__introduce__title--text' md={10}>
                   <span>
-                    는 헬스장&#183;회원 관리를 한 번에 해결할 수 있습니다.
+                    헬스장&#183;회원 관리를 한 번에 해결할 수 있습니다.
                   </span>
                 </Col>
               </Row>
