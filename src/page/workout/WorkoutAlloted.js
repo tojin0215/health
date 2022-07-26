@@ -381,7 +381,7 @@ class WorkoutAlloted extends Component {
         });
         this.setState({
           exerciseAllotlist: items,
-          headRegion: items[0].props.part,
+          headRegion: key,
         });
         // console.log(result);
       });
@@ -602,6 +602,14 @@ class WorkoutAlloted extends Component {
                         )}
                       </TableBody>
                     </Table>
+                    {this.state.exerciseAllotlist.length === 0 ? (
+                      <div className='p-3 fs-5 fw-bold text-center'>
+                        <TbMoodSuprised className='fs-3' />
+                        <p>설정된 운동이 없습니다.</p>
+                      </div>
+                    ) : (
+                      ''
+                    )}
                     <TablePagination
                       className='bg-white'
                       rowsPerPageOptions={[

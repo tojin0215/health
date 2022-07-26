@@ -374,7 +374,7 @@ class WorkoutStageAdd extends Component {
         });
         this.setState({
           workoutlist: items.reverse(),
-          headRegion: items[0].props.part,
+          headRegion: key,
         });
         // console.log(items[0].props.part);
       });
