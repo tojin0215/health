@@ -138,8 +138,6 @@ class AddSales extends Component {
 
         // and notify
         alert('Your session is expired, please log in again');
-      } else {
-        this.cusFetch();
       }
     });
   }
