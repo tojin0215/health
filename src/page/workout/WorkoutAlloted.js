@@ -345,6 +345,7 @@ class WorkoutAlloted extends Component {
     });
   };
 
+  /**운동선택 클릭시 운동테이블 ex)상체->상체 테이블 */
   handleOnClick = (key) => {
     selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
@@ -435,6 +436,7 @@ class WorkoutAlloted extends Component {
 
   render() {
     // console.log(this.state.idc);
+    console.log(this.state.workoutAllotlist);
 
     return (
       <div className='workout-alloted wrap'>
