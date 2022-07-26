@@ -53,7 +53,7 @@ function DrawerAppBar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant='h6' sx={{ my: 2 }}>
-        센터
+        DIVVY
       </Typography>
       <Divider />
       <List>
@@ -62,22 +62,21 @@ function DrawerAppBar(props) {
             <ListItemText primary={'센터소개'} />
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton sx={{ textAlign: 'center' }}>
-            <ListItemText primary={'센터소개'} />
-            {open ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={open} timeout='auto' unmountOnExit>
-            <List component='div' disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText primary='Starred' />
-              </ListItemButton>
-            </List>
-          </Collapse>
-        </ListItem>
+        <ListItem disablePadding></ListItem>
+        <ListItemButton sx={{ textAlign: 'center' }} onClick={handleClick}>
+          <ListItemText primary={'센터소개'} />
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={open} timeout='auto' unmountOnExit>
+          <List component='div' disablePadding>
+            <ListItemButton sx={{ pl: 4 }}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='Starred' />
+            </ListItemButton>
+          </List>
+        </Collapse>
       </List>
     </Box>
   );
