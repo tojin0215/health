@@ -6,6 +6,10 @@ import { connect } from 'react-redux';
 import { setFitness } from '../../action/userinfo';
 import { logoutRequest } from '../../action/authentication';
 
+// react-Bootstrap
+import Image from 'react-bootstrap/Image';
+
+// MUI
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,15 +19,22 @@ import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import Collapse from '@mui/material/Collapse';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import StarBorder from '@mui/icons-material/StarBorder';
+
+import './drawer.css';
+
 const drawerWidth = 240;
-const navItems = ['센터소개', '강사', '회원', '수업관리', '운동', '매출'];
 
 function DrawerAppBar(props) {
   // DrawerAppBar = (props) => {
@@ -34,6 +45,11 @@ function DrawerAppBar(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const [open, setOpen] = React.useState(true);
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant='h6' sx={{ my: 2 }}>
@@ -41,13 +57,27 @@ function DrawerAppBar(props) {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <ListItem disablePadding>
+          <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemText primary={'센터소개'} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemText primary={'센터소개'} />
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={open} timeout='auto' unmountOnExit>
+            <List component='div' disablePadding>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='Starred' />
+              </ListItemButton>
+            </List>
+          </Collapse>
+        </ListItem>
       </List>
     </Box>
   );
@@ -66,7 +96,7 @@ function DrawerAppBar(props) {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex' }} className='top-menu'>
         <AppBar component='nav'>
           <Toolbar>
             <IconButton
@@ -83,16 +113,23 @@ function DrawerAppBar(props) {
               component='div'
               sx={{ flexGrow: 1, display: { sm: 'block' } }}
             >
-              MUI
+              <Image
+                className='menu_logo'
+                src={process.env.PUBLIC_URL + '/assets/logo-circle-yellow.png'}
+                // src={process.env.PUBLIC_URL + '/assets/divvy_gif_1.gif'}
+              />
             </Typography>
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-              {navItems.map((item) => (
-                <Button key={item} sx={{ color: '#fff' }}>
-                  {item}
-                </Button>
-              ))}
+              <Button sx={{ color: '#fff' }}>센터</Button>
+              <Button sx={{ color: '#fff' }}>강사</Button>
+              <Button sx={{ color: '#fff' }}>회원</Button>
+              <Button sx={{ color: '#fff' }}>수업</Button>
+              <Button sx={{ color: '#fff' }}>운동</Button>
+              <Button sx={{ color: '#fff' }}>매출</Button>
             </Box>
-            <Button color='inherit'>LOG-OUT</Button>
+            <Button variant='text' color='error'>
+              LOG-OUT
+            </Button>
           </Toolbar>
         </AppBar>
         <Box component='nav'>

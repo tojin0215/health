@@ -5,6 +5,7 @@ import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import Menu from '../../component/navigation/Menu';
 import NewMenu from '../../component/navigation/NewMenu';
+import DrawerAppBar from '../../component/navigation/Drawer';
 import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 import '../../styles/home/home.css';
@@ -225,6 +226,7 @@ class Home extends Component {
           <Navigation goLogin={this.goLogin} />
           <Menu goLogin={this.goLogin} />
           <NewMenu />
+          <DrawerAppBar />
           {this.props.userinfo.loginWhether === 2 ? (
             ''
           ) : this.props.userinfo.loginWhether === 1 ? (
