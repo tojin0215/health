@@ -49,6 +49,10 @@
   font-weight: 700;
   font-style: italic;
   padding-right: 6px;
+  font-size: 50px;
+}
+.login__introduce__title--text {
+  align-self: center;
 }
 .login__introduce .card-body {
   background-color: #333;
@@ -77,10 +81,10 @@
   }
   .login__introduce__title--text {
     font-size: 16px;
-    white-space: nowrap;
   }
   .login__introduce__title--brand {
     align-self: normal;
+    font-size: 40px;
   }
   .login__introduce-card .card-title {
     font-weight: 700;

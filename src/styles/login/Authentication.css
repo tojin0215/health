@@ -12,11 +12,13 @@
 
 .authentication .login__authentication__id--box {
   background-color: #333;
-  border-color: #666;
+  border-color: #777;
+  color: #fff;
 }
 .authentication .login__authentication__password--box {
   background-color: #333;
-  border-color: #666;
+  border-color: #777;
+  color: #fff;
 }
 
 @media screen and (max-width: 767px) {
