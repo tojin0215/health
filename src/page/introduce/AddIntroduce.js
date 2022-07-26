@@ -157,7 +157,7 @@ class AddIntroduce extends Component {
                 <h5>내용</h5>
                 <Form.Control
                   id='story'
-                  value={this.state.story}
+                  defaultValue={this.state.story}
                   onChange={this.handleChange}
                   type='text'
                   as='textarea'
