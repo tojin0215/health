@@ -1,3 +1,5 @@
+// https://codesandbox.io/s/vj6noq66w0?file=/demo.js
+// 작업중
 import * as React from 'react';
 
 import { Component } from 'react';
@@ -36,8 +38,25 @@ import './drawer.css';
 
 const drawerWidth = 240;
 
+const styles = (theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
+  nested: {
+    paddingLeft: theme.spacing.unit * 4,
+  },
+});
+
 function DrawerAppBar(props) {
-  // DrawerAppBar = (props) => {
+  state = { open: {} };
+
+  handleClick = (key) => () => {
+    console.log(key);
+    this.setState({ [key]: !this.state[key] });
+  };
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -46,9 +65,8 @@ function DrawerAppBar(props) {
   };
 
   const [open, setOpen] = React.useState(true);
-  const handleClick = () => {
-    setOpen(!open);
-  };
+
+  const { lists, classes } = this.props;
 
   const drawer = (
     <Box sx={{ textAlign: 'center' }}>
