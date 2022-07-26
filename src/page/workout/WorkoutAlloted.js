@@ -436,7 +436,7 @@ class WorkoutAlloted extends Component {
 
   render() {
     // console.log(this.state.idc);
-    console.log(this.state.workoutAllotlist);
+    // console.log(this.state.workoutAllotlist);
 
     return (
       <div className='workout-alloted wrap'>

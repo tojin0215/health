@@ -218,6 +218,7 @@ class WorkoutAdd extends Component {
       radioGroup: obj,
     });
   };
+  /**운동선택 클릭시 운동테이블 ex)상체->상체 테이블 */
   handleOnClick = (key) => {
     selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
@@ -245,9 +246,9 @@ class WorkoutAdd extends Component {
         });
         this.setState({
           workoutlist: items.reverse(),
-          headRegion: items[0].props.part,
+          headRegion: key,
         });
-        // console.log(items[0].props.part);
+        console.log(this.state.workoutlist);
       });
     });
   };
