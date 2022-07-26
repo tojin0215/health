@@ -78,7 +78,7 @@ class AddIntroduce extends Component {
     } else {
       insertIntroduce(
         this.state.fitness_no,
-        this.props.userinfo.manager_name,
+        this.props.userinfo.fitness_name,
         this.state.file,
         this.state.story
       ).then((res) => {
@@ -99,6 +99,7 @@ class AddIntroduce extends Component {
   render() {
     // console.log(this.state.file);
     // console.log(this.state.picture);
+    console.log(this.props.userinfo);
     return (
       <div className='wrap'>
         {''}
@@ -137,7 +138,7 @@ class AddIntroduce extends Component {
                 <h5>사업장</h5>
                 <Form.Control
                   id='manager_name'
-                  value={this.props.userinfo.manager_name}
+                  value={this.props.userinfo.fitness_name}
                 ></Form.Control>
               </Col>
               <Col xs={12} md={6} className='pt-3'>
