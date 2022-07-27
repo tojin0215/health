@@ -1,3 +1,5 @@
+// https://codesandbox.io/s/vj6noq66w0?file=/demo.js
+// 작업중
 import * as React from 'react';
 
 import { Component } from 'react';
@@ -66,7 +68,7 @@ function DrawerAppBar(props) {
           </ListItemButton>
         </ListItem>
         {/* 센터 */}
-        <ListItemButton sx={{ textAlign: 'start' }} onClick={handleClick(1)}>
+        <ListItemButton sx={{ textAlign: 'start' }} onClick={handleClick}>
           <ListItemText primary={'센터'} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
