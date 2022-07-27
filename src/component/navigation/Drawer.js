@@ -33,6 +33,16 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
+//상위 메뉴 아이콘
+import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
+import BadgeTwoToneIcon from '@mui/icons-material/BadgeTwoTone';
+import SentimentVerySatisfiedTwoToneIcon from '@mui/icons-material/SentimentVerySatisfiedTwoTone';
+import CalendarMonthTwoToneIcon from '@mui/icons-material/CalendarMonthTwoTone';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import InsertChartTwoToneIcon from '@mui/icons-material/InsertChartTwoTone';
+//하위 메뉴 아이콘
+import SpeakerNotesOutlinedIcon from '@mui/icons-material/SpeakerNotesOutlined';
+import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 
 import './drawer.css';
 
@@ -59,162 +69,204 @@ function DrawerAppBar(props) {
       </Typography>
       <Divider />
       <List>
-        <ListItem disablePadding>
-          <ListItemButton
-            sx={{ textAlign: 'center' }}
-            onClick={handleDrawerToggle}
-          >
-            <ListItemText primary={'센터소개222'} />
-          </ListItemButton>
-        </ListItem>
         {/* 센터 */}
         <ListItemButton sx={{ textAlign: 'start' }} onClick={handleClick}>
+          <ListItemIcon>
+            <HomeTwoToneIcon />
+          </ListItemIcon>
           <ListItemText primary={'센터'} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='센터 소개' />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='센터 소개 등록' />
-            </ListItemButton>
+            <NavLink exact to='/introduce'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <SpeakerNotesOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary='센터 소개' />
+              </ListItemButton>
+            </NavLink>
+            <NavLink exact to='/introduceAdd'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <CreateOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary='센터 소개 등록' />
+              </ListItemButton>
+            </NavLink>
           </List>
         </Collapse>
         {/* 강사 */}
         <ListItemButton sx={{ textAlign: 'start' }} onClick={handleClick}>
+          <ListItemIcon>
+            <BadgeTwoToneIcon />
+          </ListItemIcon>
           <ListItemText primary={'강사'} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='강사' />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='강사 등록' />
-            </ListItemButton>
+            <NavLink exact to='/trainer'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='강사' />
+              </ListItemButton>
+            </NavLink>
+            <NavLink exact to='/trainerAdd'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='강사 등록' />
+              </ListItemButton>
+            </NavLink>
           </List>
         </Collapse>
         {/* 회원 */}
         <ListItemButton sx={{ textAlign: 'start' }} onClick={handleClick}>
+          <ListItemIcon>
+            <SentimentVerySatisfiedTwoToneIcon />
+          </ListItemIcon>
           <ListItemText primary={'회원'} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='회원' />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='회원 등록' />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='인바디 정보' />
-            </ListItemButton>
+            <NavLink exact to='/client'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='회원' />
+              </ListItemButton>
+            </NavLink>
+            <NavLink exact to='/clientAdd'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='회원 등록' />
+              </ListItemButton>
+            </NavLink>
+            <NavLink exact to='/inbodies'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='인바디 정보' />
+              </ListItemButton>
+            </NavLink>
           </List>
         </Collapse>
         {/* 수업 */}
         <ListItemButton sx={{ textAlign: 'start' }} onClick={handleClick}>
+          <ListItemIcon>
+            <CalendarMonthTwoToneIcon />
+          </ListItemIcon>
           <ListItemText primary={'수업'} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='수업' />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='수업 설정' />
-            </ListItemButton>
+            <NavLink exact to='/reservation'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='수업' />
+              </ListItemButton>
+            </NavLink>
+            <NavLink exact to='/reservationClass'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='수업 설정' />
+              </ListItemButton>
+            </NavLink>
           </List>
         </Collapse>
         {/* 운동 */}
         <ListItemButton sx={{ textAlign: 'start' }} onClick={handleClick}>
+          <ListItemIcon>
+            <FitnessCenterIcon />
+          </ListItemIcon>
           <ListItemText primary={'운동'} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='운동 배정' />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='루틴 배정' />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='배정된 운동 목록' />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='운동 만들기' />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='루틴 만들기' />
-            </ListItemButton>
+            <NavLink exact to='/workoutAlloted'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='운동 배정' />
+              </ListItemButton>
+            </NavLink>
+            <NavLink exact to='/workoutAllotedList'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='루틴 배정' />
+              </ListItemButton>
+            </NavLink>
+            <NavLink exact to='/workoutAdd'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='배정된 운동 목록' />
+              </ListItemButton>
+            </NavLink>
+            <NavLink exact to='/workoutStage'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='운동 만들기' />
+              </ListItemButton>
+            </NavLink>
+            <NavLink exact to='/workoutStageAdd'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='루틴 만들기' />
+              </ListItemButton>
+            </NavLink>
           </List>
         </Collapse>
         {/* 매출 */}
         <ListItemButton sx={{ textAlign: 'start' }} onClick={handleClick}>
+          <ListItemIcon>
+            <InsertChartTwoToneIcon />
+          </ListItemIcon>
           <ListItemText primary={'매출'} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='매출 현황' />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }} onClick={handleDrawerToggle}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary='결제 등록' />
-            </ListItemButton>
+            <NavLink exact to='/sales'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='매출 현황' />
+              </ListItemButton>
+            </NavLink>
+            <NavLink exact to='/addSales'>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary='결제 등록' />
+              </ListItemButton>
+            </NavLink>
           </List>
         </Collapse>
       </List>
