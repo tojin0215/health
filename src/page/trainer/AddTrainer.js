@@ -18,7 +18,14 @@ import Button from 'react-bootstrap/Button';
 // MUI
 import TextField from '@mui/material/TextField';
 
-import { insertTrainer, selectTrainer, trainerManager } from '../../api/user';
+import {
+  insertTrainer,
+  phoneCheckTrainer,
+  selectTrainer,
+  trainerManager,
+} from '../../api/user';
+
+const pCheck = RegExp(/^\d{11}$/);
 
 class AddTrainer extends Component {
   constructor(props) {
@@ -83,6 +90,7 @@ class AddTrainer extends Component {
       }
     });
   }
+
   handleTrainer = () => {
     if (this.state.trainer_name === '') {
       alert('이름을 입력해주세요.');
@@ -95,35 +103,63 @@ class AddTrainer extends Component {
     } else if (this.state.history === '') {
       alert('자기 소개 내용을 입력해주세요.');
     } else {
-      insertTrainer(
-        this.state.phone,
-        this.state.birth,
-        this.state.trainer_name,
-        this.props.userinfo.fitness_no,
-        this.state.ment,
-        this.state.history,
-        this.state.radioGroup.male ? 1 : 2
-      ).then((res) => {
-        // console.log(res);
-        // alert('trainer Table');
-        selectTrainer(this.props.userinfo.fitness_no).then((result) => {
-          const items = result.filter(
-            (value) => value.trainer_name === this.state.trainer_name
-          );
-          this.setState(items);
-          trainerManager(
-            this.state.phone,
-            this.props.userinfo.fitness_name,
-            this.state.birth,
-            this.state.trainer_name,
-            items[0].idx
-          ).then((res) => {
-            // console.log(res);
-          });
-          alert(this.state.trainer_name + '님이 강사로 등록되었습니다.');
-          this.props.history.push('/trainer');
-        });
-      });
+      phoneCheckTrainer(this.props.userinfo.fitness_no, this.state.phone).then(
+        (res) => {
+          if (res.length === 0) {
+            if (pCheck.test(this.state.phone)) {
+              insertTrainer(
+                this.state.phone,
+                this.state.birth,
+                this.state.trainer_name,
+                this.props.userinfo.fitness_no,
+                this.state.ment,
+                this.state.history,
+                this.state.radioGroup.male ? 1 : 2
+              ).then((res) => {
+                // console.log(res);
+                // alert('trainer Table');
+                selectTrainer(this.props.userinfo.fitness_no).then((result) => {
+                  const items = result.filter(
+                    (value) => value.trainer_name === this.state.trainer_name
+                  );
+                  this.setState(items);
+                  trainerManager(
+                    this.state.phone,
+                    this.props.userinfo.fitness_name,
+                    this.state.birth,
+                    this.state.trainer_name,
+                    items[0].idx
+                  ).then((res) => {
+                    // console.log(res);
+                  });
+                  alert(
+                    this.state.trainer_name + '님이 강사로 등록되었습니다.'
+                  );
+                  this.props.history.push('/trainer');
+                });
+              });
+            } else {
+              alert('11자리 번호만');
+              this.setState({
+                phone: '',
+                birth: '',
+                trainer_name: '',
+                ment: '',
+                history: '',
+              });
+            }
+          } else {
+            alert('연락처 중복');
+            this.setState({
+              phone: '',
+              birth: '',
+              trainer_name: '',
+              ment: '',
+              history: '',
+            });
+          }
+        }
+      );
     }
   };
 

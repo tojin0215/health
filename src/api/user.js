@@ -693,3 +693,28 @@ export const registerManager = (
     })
     .then((response) => response.data);
 };
+
+//phoneCheck trainer
+export const phoneCheckTrainer = (fitness_no, phone) => {
+  return axios
+    .get(
+      `${SERVER_URL}/trainer?type=phoneCheck&fitness_no=` +
+        fitness_no +
+        `&phone=` +
+        phone,
+      {}
+    )
+    .then((response) => response.data);
+};
+//phoneCheck client
+export const phoneCheckClient = (fitness_no, phone) => {
+  return axios
+    .get(
+      `${SERVER_URL}/client?type=phoneCheck&fitness_no=` +
+        fitness_no +
+        `&phone=` +
+        phone,
+      {}
+    )
+    .then((response) => response.data);
+};

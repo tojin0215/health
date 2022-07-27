@@ -6,7 +6,12 @@ import Navigation from '../../component/navigation/Navigation';
 import Menu from '../../component/navigation/Menu';
 import Footer from '../../component/footer/Footer';
 import { getStatusRequest } from '../../action/authentication';
-import { clientManager, clientSelect, insertClient } from '../../api/user';
+import {
+  clientManager,
+  clientSelect,
+  insertClient,
+  phoneCheckClient,
+} from '../../api/user';
 
 // Bootstrap
 import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
@@ -15,7 +20,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 // MUI
 import TextField from '@mui/material/TextField';
-
+const pCheck = RegExp(/^\d{11}$/);
 class AddClient extends Component {
   constructor(props) {
     super(props);
@@ -95,48 +100,73 @@ class AddClient extends Component {
     } else if (this.state.address === '') {
       alert('주소를 입력해주세요.');
     } else {
-      insertClient(
-        this.props.userinfo.fitness_no,
-        this.state.client_name,
-        this.state.phone,
-        this.state.birth,
-        this.state.radioGroup.male ? 1 : 2,
-        this.state.radioGroup2.route1
-          ? '간판'
-          : this.state.radioGroup2.route2
-          ? '홈페이지'
-          : this.state.radioGroup2.route3
-          ? '전단지'
-          : this.state.radioGroup2.route4
-          ? '지인소개'
-          : this.state.radioGroup2.route5
-          ? 'SNS'
-          : this.state.radioGroup2.route6
-          ? this.state.join_route
-          : '간판',
-        this.state.address
-      ).then((res) => {
-        // // console.log(res);
-        // alert('client Table');
-        clientSelect(this.props.userinfo.fitness_no).then((result) => {
-          const items = result.filter(
-            (value) => value.client_name === this.state.client_name
-          );
-          console.log(items[0].idc);
-          this.setState(items);
-          clientManager(
-            this.state.phone,
-            this.props.userinfo.fitness_name,
-            this.state.birth,
-            this.state.client_name,
-            items[0].idc
-          ).then((res) => {
-            // console.log(res);
-          });
-          alert(this.state.client_name + '님이 가입되었습니다.');
-          this.props.history.push('/client');
-        });
-      });
+      phoneCheckClient(this.props.userinfo.fitness_no, this.state.phone).then(
+        (res) => {
+          console.log(res);
+          if (res.length === 0) {
+            if (pCheck.test(this.state.phone)) {
+              insertClient(
+                this.props.userinfo.fitness_no,
+                this.state.client_name,
+                this.state.phone,
+                this.state.birth,
+                this.state.radioGroup.male ? 1 : 2,
+                this.state.radioGroup2.route1
+                  ? '간판'
+                  : this.state.radioGroup2.route2
+                  ? '홈페이지'
+                  : this.state.radioGroup2.route3
+                  ? '전단지'
+                  : this.state.radioGroup2.route4
+                  ? '지인소개'
+                  : this.state.radioGroup2.route5
+                  ? 'SNS'
+                  : this.state.radioGroup2.route6
+                  ? this.state.join_route
+                  : '간판',
+                this.state.address
+              ).then((res) => {
+                // // console.log(res);
+                // alert('client Table');
+                clientSelect(this.props.userinfo.fitness_no).then((result) => {
+                  const items = result.filter(
+                    (value) => value.client_name === this.state.client_name
+                  );
+                  console.log(items[0].idc);
+                  this.setState(items);
+                  clientManager(
+                    this.state.phone,
+                    this.props.userinfo.fitness_name,
+                    this.state.birth,
+                    this.state.client_name,
+                    items[0].idc
+                  ).then((res) => {});
+                  alert(this.state.client_name + '님이 가입되었습니다.');
+                  this.props.history.push('/client');
+                });
+              });
+            } else {
+              alert('11자리 번호만');
+              this.setState({
+                phone: '',
+                birth: '',
+                client_name: '',
+                address: '',
+                join_route: '',
+              });
+            }
+          } else {
+            alert('중복');
+            this.setState({
+              phone: '',
+              birth: '',
+              client_name: '',
+              address: '',
+              join_route: '',
+            });
+          }
+        }
+      );
     }
   };
   handleRadio = (s) => {
@@ -230,7 +260,7 @@ class AddClient extends Component {
                   <Form.Label>생년월일</Form.Label>
                   <Form.Control
                     id='birth'
-                    type='text'
+                    type='number'
                     placeholder='19990101'
                     value={this.state.birth}
                     onChange={this.handleChange}
