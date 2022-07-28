@@ -75,89 +75,31 @@ const ExerciseView = ({
       : part === 48
       ? '유산소'
       : '기타';
-  const [stage_input, setStage_input] = useState(stage);
   const plusStage = () => {
-    workoutStageInsert(
-      stage,
-      fitness_no,
-      workout,
-      part,
-      machine,
-      default_set_input,
-      default_count_input,
-      default_rest_input,
-      url_input
-    ).then((res) => {
-      setDefault_set_input(default_set);
-      setDefault_count_input(default_count);
-      setDefault_rest_input(default_rest);
-      setUrl_input(url);
-      workoutStageView(stage);
-    });
+    if (stage === '') {
+      alert('루틴을 선택한 뒤 설정하세요');
+    } else {
+      workoutStageInsert(
+        stage,
+        fitness_no,
+        workout,
+        part,
+        machine,
+        default_set_input,
+        default_count_input,
+        default_rest_input,
+        url_input
+      ).then((res) => {
+        setDefault_set_input(default_set);
+        setDefault_count_input(default_count);
+        setDefault_rest_input(default_rest);
+        setUrl_input(url);
+        workoutStageView(stage);
+      });
+    }
   };
   console.log('stage', stage);
-  const stageWord =
-    stage === 111
-      ? '상체 1단계'
-      : stage === 112
-      ? '상체 2단계'
-      : stage === 113
-      ? '상체 3단계'
-      : stage === 114
-      ? '상체 4단계'
-      : stage === 115
-      ? '상체 5단계'
-      : stage === 211
-      ? '하체 1단계'
-      : stage === 212
-      ? '하체 2단계'
-      : stage === 213
-      ? '하체 3단계'
-      : stage === 214
-      ? '하체 4단계'
-      : stage === 215
-      ? '하체 5단계'
-      : stage === 311
-      ? '전신 1단계'
-      : stage === 312
-      ? '전신 2단계'
-      : stage === 313
-      ? '전신 3단계'
-      : stage === 314
-      ? '전신 4단계'
-      : stage === 315
-      ? '전신 5단계'
-      : stage === 411
-      ? '코어 1단계'
-      : stage === 412
-      ? '코어 2단계'
-      : stage === 413
-      ? '코어 3단계'
-      : stage === 414
-      ? '코어 4단계'
-      : stage === 415
-      ? '코어 5단계'
-      : stage === 511
-      ? '유산소 1단계'
-      : stage === 512
-      ? '유산소 2단계'
-      : stage === 513
-      ? '유산소 3단계'
-      : stage === 514
-      ? '유산소 4단계'
-      : stage === 515
-      ? '유산소 5단계'
-      : stage === 611
-      ? '기타 1단계'
-      : stage === 612
-      ? '기타 2단계'
-      : stage === 613
-      ? '기타 3단계'
-      : stage === 614
-      ? '기타 4단계'
-      : stage === 615
-      ? '기타 5단계'
-      : '기본';
+
   const [default_set_input, setDefault_set_input] = useState(default_set);
   const [default_count_input, setDefault_count_input] = useState(default_count);
   const [default_rest_input, setDefault_rest_input] = useState(default_rest);
