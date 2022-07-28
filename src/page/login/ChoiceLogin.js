@@ -185,7 +185,7 @@ class ChoiceLogin extends Component {
   };
 
   render() {
-    console.log(this.props.userinfo.loginWhether);
+    // console.log(this.props.userinfo.loginWhether);
     // console.log(this.props.userinfo.id);
     // console.log(this.state.trainerList);
 
