@@ -98,11 +98,11 @@ class AddTrainer extends Component {
     } else if (this.state.phone === '') {
       alert('연락처를 입력해주세요.');
     } else if (!pCheck.test(this.state.phone)) {
-      alert('11자리 번호만, 특수문자 사용불가(-포함)');
+      alert('연락처는 11자리 번호만, 특수문자 사용불가(-포함)');
     } else if (this.state.birth === '') {
       alert('생년월일을 입력해주세요.');
     } else if (!pCheck2.test(this.state.birth)) {
-      alert('8자리 번호만, 특수문자 사용불가(-포함)');
+      alert('생년월일은 8자리 번호만, 특수문자 사용불가(-포함)');
     } else if (this.state.ment === '') {
       alert('이력 정보를 입력해주세요.');
     } else if (this.state.history === '') {
