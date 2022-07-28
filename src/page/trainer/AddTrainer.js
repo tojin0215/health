@@ -24,8 +24,9 @@ import {
   selectTrainer,
   trainerManager,
 } from '../../api/user';
-
+// [`~!@#$%^&*()_|+\-=?;:'"<>\{\}\[\]\\\/ ]
 const pCheck = RegExp(/^\d{11}$/);
+const pCheck2 = RegExp(/^\d{8}$/);
 
 class AddTrainer extends Component {
   constructor(props) {
@@ -96,8 +97,12 @@ class AddTrainer extends Component {
       alert('이름을 입력해주세요.');
     } else if (this.state.phone === '') {
       alert('연락처를 입력해주세요.');
+    } else if (!pCheck.test(this.state.phone)) {
+      alert('11자리 번호만, 특수문자 사용불가(-포함)');
     } else if (this.state.birth === '') {
       alert('생년월일을 입력해주세요.');
+    } else if (!pCheck2.test(this.state.birth)) {
+      alert('8자리 번호만, 특수문자 사용불가(-포함)');
     } else if (this.state.ment === '') {
       alert('이력 정보를 입력해주세요.');
     } else if (this.state.history === '') {
@@ -106,48 +111,35 @@ class AddTrainer extends Component {
       phoneCheckTrainer(this.props.userinfo.fitness_no, this.state.phone).then(
         (res) => {
           if (res.length === 0) {
-            if (pCheck.test(this.state.phone)) {
-              insertTrainer(
-                this.state.phone,
-                this.state.birth,
-                this.state.trainer_name,
-                this.props.userinfo.fitness_no,
-                this.state.ment,
-                this.state.history,
-                this.state.radioGroup.male ? 1 : 2
-              ).then((res) => {
-                // console.log(res);
-                // alert('trainer Table');
-                selectTrainer(this.props.userinfo.fitness_no).then((result) => {
-                  const items = result.filter(
-                    (value) => value.trainer_name === this.state.trainer_name
-                  );
-                  this.setState(items);
-                  trainerManager(
-                    this.state.phone,
-                    this.props.userinfo.fitness_name,
-                    this.state.birth,
-                    this.state.trainer_name,
-                    items[0].idx
-                  ).then((res) => {
-                    // console.log(res);
-                  });
-                  alert(
-                    this.state.trainer_name + '님이 강사로 등록되었습니다.'
-                  );
-                  this.props.history.push('/trainer');
+            insertTrainer(
+              this.state.phone,
+              this.state.birth,
+              this.state.trainer_name,
+              this.props.userinfo.fitness_no,
+              this.state.ment,
+              this.state.history,
+              this.state.radioGroup.male ? 1 : 2
+            ).then((res) => {
+              // console.log(res);
+              // alert('trainer Table');
+              selectTrainer(this.props.userinfo.fitness_no).then((result) => {
+                const items = result.filter(
+                  (value) => value.trainer_name === this.state.trainer_name
+                );
+                this.setState(items);
+                trainerManager(
+                  this.state.phone,
+                  this.props.userinfo.fitness_name,
+                  this.state.birth,
+                  this.state.trainer_name,
+                  items[0].idx
+                ).then((res) => {
+                  // console.log(res);
                 });
+                alert(this.state.trainer_name + '님이 강사로 등록되었습니다.');
+                this.props.history.push('/trainer');
               });
-            } else {
-              alert('11자리 번호만');
-              this.setState({
-                phone: '',
-                birth: '',
-                trainer_name: '',
-                ment: '',
-                history: '',
-              });
-            }
+            });
           } else {
             alert('연락처 중복');
             this.setState({
@@ -177,7 +169,7 @@ class AddTrainer extends Component {
     });
   };
   render() {
-    // console.log(this.state.fitness_no);
+    console.log(this.state.phone.replace(/-/g, ''));
     return (
       <div className='wrap'>
         <header className='header'>
@@ -225,7 +217,8 @@ class AddTrainer extends Component {
                 <Form.Group>
                   <Form.Label>핸드폰번호</Form.Label>
                   <Form.Control
-                    type='number'
+                    type='text'
+                    pattern='[0-9]+'
                     variant='outlined'
                     value={this.state.phone}
                     id='phone'
@@ -239,7 +232,8 @@ class AddTrainer extends Component {
                 <Form.Group>
                   <Form.Label>생년월일</Form.Label>
                   <Form.Control
-                    type='number'
+                    type='text'
+                    pattern='[0-9]+'
                     value={this.state.birth}
                     id='birth'
                     placeholder='19990101'
