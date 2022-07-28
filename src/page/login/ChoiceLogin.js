@@ -2,6 +2,7 @@ import { Component, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { loginRequest } from '../../action/authentication';
 import {
+  changeLoginwhether,
   choiceFitness,
   choiceLoginClient,
   choiceLoginManager,
@@ -34,7 +35,7 @@ const TrainerList = ({
     choiceFitness(fitness_no).then((res) => {
       setFitness_no_input(res[0].manager_name);
       setfitness_name(res[0].fitness_name);
-      console.log(res[0].manager_name);
+      // console.log(res[0].manager_name);
     });
   });
   return (
@@ -68,7 +69,7 @@ const ClientList = ({
   handleLogin,
 }) => {
   const handleClick = () => {
-    choiceLoginManager(phone, idc, fitness_name).then(() => {
+    choiceLoginManager(phone, idc, fitness_name, 2).then(() => {
       handleLogin(phone, birth);
       alert(fitness_name + '로그인');
       window.location.replace('/home');
@@ -111,6 +112,8 @@ class ChoiceLogin extends Component {
       joinNo: '',
       trainerList: [],
       clientList: [],
+      on: false,
+      on2: false,
     };
     this.selectTrainer();
     this.selectClient();
@@ -170,10 +173,21 @@ class ChoiceLogin extends Component {
     });
   };
 
+  //회원 2
+  handleOn = () => {
+    this.setState({ on: true, on2: false });
+    changeLoginwhether(this.props.userinfo.id, 2).then(() => {});
+  };
+  //강사 1
+  handleOn2 = () => {
+    this.setState({ on2: true, on: false });
+    changeLoginwhether(this.props.userinfo.id, 1).then(() => {});
+  };
+
   render() {
-    // console.log(this.props.userinfo.loginWhether);
-    console.log(this.props.userinfo);
-    console.log(this.state.trainerList);
+    console.log(this.props.userinfo.loginWhether);
+    // console.log(this.props.userinfo.id);
+    // console.log(this.state.trainerList);
 
     return (
       <div className='wrap'>
@@ -188,9 +202,23 @@ class ChoiceLogin extends Component {
         </div>
         <Container className='container'>
           <div>{this.props.userinfo.manager_name}</div>
-          {this.props.userinfo.loginWhether == 2
-            ? this.state.clientList
-            : this.state.trainerList}
+          <h2>
+            <Button onClick={this.handleOn}>회원</Button>
+          </h2>
+          {this.state.on
+            ? this.state.clientList.length === 0
+              ? ''
+              : this.state.clientList
+            : ''}
+
+          <h2>
+            <Button onClick={this.handleOn2}>강사</Button>
+          </h2>
+          {this.state.on2
+            ? this.state.trainerList.length === 0
+              ? ''
+              : this.state.trainerList
+            : ''}
         </Container>
         <div className='footer'>
           <Footer />

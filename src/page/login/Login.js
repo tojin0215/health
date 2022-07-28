@@ -40,17 +40,17 @@ class Login extends Component {
         document.cookie = 'key=' + btoa(JSON.stringify(loginData));
         choiceLoginTrainer(id).then((trainer) => {
           choiceLoginClient(id).then((client) => {
-            if (this.props.userinfo.loginWhether === 1 && trainer.length > 1) {
-              // alert('강사 로그인 선택');
+            if (trainer.length > 1) {
+              alert('강사 로그인 선택');
               this.props.history.push('/choiceLogin');
               return true;
-            } else if (
-              this.props.userinfo.loginWhether === 2 &&
-              client.length > 1
-            ) {
-              // alert('회원 로그인 선택');
+            } else if (client.length > 1) {
+              alert('회원 로그인 선택');
               this.props.history.push('/choiceLogin');
               return true;
+            } else if (trainer.length >= 1 && client.length >= 1) {
+              alert('회원&&강사 로그인 선택');
+              this.props.history.push('/choiceLogin');
             } else {
               // alert(id + '님 반갑습니다.');
               this.props.history.push('/home');

@@ -718,3 +718,10 @@ export const phoneCheckClient = (fitness_no, phone) => {
     )
     .then((response) => response.data);
 };
+
+//change loginWhether
+export const changeLoginwhether = (id, loginWhether) => {
+  return axios.put(`${SERVER_URL}/manager?type=changeLW&id=` + id, {
+    loginWhether: loginWhether,
+  });
+};
