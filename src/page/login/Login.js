@@ -68,20 +68,6 @@ class Login extends Component {
     });
   };
 
-  // loginWhetherhow = (id) => {
-  //   this.props.userinfo.loginWhether === 1
-  //     ? choiceLoginTrainer(id).then((trainer) => {
-  //         trainer.length > 1;
-  //         return true;
-  //       })
-  //     : this.props.userinfo.loginWhether === 2
-  //     ? choiceLoginClient(id).then((client) => {
-  //         client.length > 1;
-  //         return true;
-  //       })
-  //     : true;
-  // };
-
   render() {
     // console.log(this.props.userinfo);
     // console.log(this.props.status.valid);
