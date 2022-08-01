@@ -141,7 +141,7 @@ class AddTrainer extends Component {
               });
             });
           } else {
-            alert('연락처 중복');
+            alert('해당 연락처로 이미 등록되어 있습니다.');
             this.setState({
               phone: '',
               birth: '',

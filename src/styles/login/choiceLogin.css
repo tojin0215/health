@@ -1,0 +1,29 @@
+.choice-login__block {
+  cursor: pointer;
+  border: 1px solid #fff;
+  transition: background-color 1s;
+  margin-top: 1rem;
+  border-radius: 0.6rem;
+  padding: 3rem;
+  box-shadow: 6px 4px 11px rgb(20 20 20 / 60%);
+}
+
+.choice-login__block:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.choice-login__block span {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.choice-login__block h5 {
+  font-weight: 500;
+  justify-content: center;
+}
+
+.choice-login__block h4 {
+  color: #ebff2e;
+  font-weight: 800;
+  justify-content: center;
+}

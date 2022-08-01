@@ -226,7 +226,7 @@ class Home extends Component {
           <Navigation goLogin={this.goLogin} />
           <Menu goLogin={this.goLogin} />
           <NewMenu />
-          <DrawerAppBar />
+          {/* <DrawerAppBar /> */}
           {this.props.userinfo.loginWhether === 2 ? (
             ''
           ) : this.props.userinfo.loginWhether === 1 ? (
