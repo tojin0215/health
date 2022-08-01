@@ -41,15 +41,15 @@ class Login extends Component {
         choiceLoginTrainer(id).then((trainer) => {
           choiceLoginClient(id).then((client) => {
             if (trainer.length > 1) {
-              alert('강사 로그인 선택');
+              // alert('강사 로그인 선택');
               this.props.history.push('/choiceLogin');
               return true;
             } else if (client.length > 1) {
-              alert('회원 로그인 선택');
+              // alert('회원 로그인 선택');
               this.props.history.push('/choiceLogin');
               return true;
             } else if (trainer.length >= 1 && client.length >= 1) {
-              alert('회원&&강사 로그인 선택');
+              // alert('회원&&강사 로그인 선택');
               this.props.history.push('/choiceLogin');
             } else {
               // alert(id + '님 반갑습니다.');

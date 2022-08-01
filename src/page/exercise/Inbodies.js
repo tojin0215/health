@@ -613,7 +613,7 @@ class Inbodies extends Component {
   render() {
     // console.log(this.props.userinfo);
     // console.log(this.state.idc);
-    console.log(this.state.inbodiesList);
+    // console.log(this.state.inbodiesList);
     // console.log(this.state.client_name);
     // console.log(this.props.userinfo.manager_name);
 
