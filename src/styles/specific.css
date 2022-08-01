@@ -72,6 +72,11 @@
   color: #000;
   border-color: #bbb;
 }
+.btn-primary:focus {
+  background-color: #cde400;
+  color: #000;
+  border-color: #bbb;
+}
 .btn-primary:disabled {
   background-color: #ebff2e;
   border-color: #ebff2e;
