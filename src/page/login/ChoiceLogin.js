@@ -32,7 +32,7 @@ const TrainerList = ({
   const handleClick = () => {
     choiceLoginManager(phone, idx, fitness_name).then(() => {
       handleLogin(phone, birth);
-      alert(fitness_name + '로그인');
+      // alert(fitness_name + '로그인');
       window.location.replace('/home');
     });
   };
@@ -77,7 +77,7 @@ const ClientList = ({
   const handleClick = () => {
     choiceLoginManager(phone, idc, fitness_name, 2).then(() => {
       handleLogin(phone, birth);
-      alert(fitness_name + '로그인');
+      // alert(fitness_name + '로그인');
       window.location.replace('/home');
     });
   };
