@@ -222,7 +222,7 @@ class ChoiceLogin extends Component {
                     <Col md={6}>
                       <Button
                         variant='primary'
-                        className='w-100'
+                        className='w-100 fs-4 fw-bold'
                         onClick={this.handleOn}
                       >
                         <AiFillSmile />
@@ -232,7 +232,7 @@ class ChoiceLogin extends Component {
                     <Col md={6}>
                       <Button
                         variant='success'
-                        className='w-100'
+                        className='w-100 fs-4 fw-bold'
                         onClick={this.handleOn2}
                       >
                         <AiTwotoneSnippets />
