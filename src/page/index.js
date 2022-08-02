@@ -32,3 +32,4 @@ export { default as WorkoutAdd } from './workout/WorkoutAdd';
 export { default as WorkoutStage } from './workout/WorkoutStage';
 export { default as WorkoutStageAdd } from './workout/WorkoutStageAdd';
 export { default as Genetic } from './genetic/Genetic';
+export { default as GeneticAdd } from './genetic/GeneticAdd';

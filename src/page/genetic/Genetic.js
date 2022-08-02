@@ -136,7 +136,7 @@ class Genetic extends Component {
     // console.log('genetic', this.state.genetic[0]);
     // console.log('geneticidg', this.state.idg);
     // console.log(this.props.userinfo.fitness_no);
-
+    // console.log('client', this.state.client);
     return (
       <div className='wrap inbodies'>
         <div className='header'>
@@ -202,26 +202,41 @@ class Genetic extends Component {
                 </div>
               )}
             </Col>
-            <Col md={2} className='mb-2'>
-              <Link
-              // to={{
-              //   pathname: '/inbodiesAdd',
-              //   state: {
-              //     inbody_no: this.state.inbody_no,
-              //     member_no:
-              //       this.props.userinfo.loginWhether == 2
-              //         ? this.props.userinfo.joinNo
-              //         : this.state.idc === undefined
-              //         ? 0
-              //         : this.state.idc,
-              //   },
-              // }}
-              >
-                <Button className='w-100 h-100' variant='outline-primary'>
-                  DTC 다시측정
-                </Button>
-              </Link>
-            </Col>
+            {this.state.client ? (
+              this.state.genetic.length === 0 ? (
+                <Col md={2} className='mb-2'>
+                  <Link
+                    to={{
+                      pathname: '/geneticAdd',
+                      state: {
+                        //이부분 수정
+                      },
+                    }}
+                  >
+                    <Button className='w-100 h-100' variant='outline-primary'>
+                      DTC 다시측정
+                    </Button>
+                  </Link>
+                </Col>
+              ) : (
+                <Col md={2} className='mb-2'>
+                  <Link
+                    to={{
+                      pathname: '/geneticAdd',
+                      state: {
+                        //이부분 수정
+                      },
+                    }}
+                  >
+                    <Button className='w-100 h-100' variant='outline-primary'>
+                      DTC 수정하기
+                    </Button>
+                  </Link>
+                </Col>
+              )
+            ) : (
+              ''
+            )}
           </Row>
           {this.state.genetic.length === 0 ? (
             ''

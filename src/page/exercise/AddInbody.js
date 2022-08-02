@@ -333,6 +333,7 @@ class AddInbody extends Component {
     // console.log('userinfo : ');
     // console.log(userinfo);
     // console.log('member_no=idc', this.state.member_no);
+    console.log('name', this.state.name);
 
     return (
       <div className='wrap addInbody'>
