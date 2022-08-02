@@ -725,3 +725,16 @@ export const changeLoginwhether = (id, loginWhether) => {
     loginWhether: loginWhether,
   });
 };
+
+//select genetic
+export const geneticSelect = (fitness_no, member_no) => {
+  return axios
+    .get(
+      `${SERVER_URL}/genetic?fitness_no=` +
+        fitness_no +
+        `&member_no=` +
+        member_no,
+      {}
+    )
+    .then((response) => response.data);
+};
