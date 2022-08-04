@@ -18,6 +18,7 @@ import '../../styles/exercise/AddInbody.css';
 
 import { SERVER_URL } from '../../const/settings';
 import {
+  clientSetname,
   selectClientReservation,
   selectTrainerReservation,
 } from '../../api/user';
@@ -72,7 +73,6 @@ class AddInbody extends Component {
       name: '',
       customerList: [],
       birth: '',
-
       height_err: false,
       bodyMoisture_err: false,
       protein_err: false,
@@ -157,35 +157,20 @@ class AddInbody extends Component {
             : this.props.userinfo.loginWhether === 1
             ? trainerResult[0].fitness_no
             : this.props.userinfo.fitness_no;
-        fetch(
-          ip +
-            '/client?type=select&idc=' +
-            this.state.member_no +
-            '&fitness_no=' +
-            fitness_no,
-          {
-            method: 'GET',
-            headers: {
-              'Content-type': 'application/json',
-            },
-          }
-        )
-          .then((response) => response.json())
-          .then((res) => {
+        clientSetname(this.state.member_no, fitness_no).then((res) => {
+          this.setState({
+            customerList: res,
+          });
+          this.state.customerList.map((c) => {
+            let s = c.sex == 1 ? '남' : '여';
             this.setState({
-              customerList: res,
-            });
-
-            this.state.customerList.map((c) => {
-              let s = c.sex == 1 ? '남' : '여';
-              this.setState({
-                name: c.client_name,
-                sex: s,
-                phone: c.phone,
-                birth: c.birth,
-              });
+              name: c.client_name,
+              sex: s,
+              phone: c.phone,
+              birth: c.birth,
             });
           });
+        });
       });
     });
   };
@@ -333,7 +318,7 @@ class AddInbody extends Component {
     // console.log('userinfo : ');
     // console.log(userinfo);
     // console.log('member_no=idc', this.state.member_no);
-    console.log('name', this.state.name);
+    // console.log('name', this.state.name);
 
     return (
       <div className='wrap addInbody'>

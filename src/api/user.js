@@ -823,3 +823,20 @@ export const geneticInsert = (
     caffeine3,
   });
 };
+
+//client select fitness_no, idc
+export const clientSetname = (idc, fitness_no) => {
+  return axios
+    .get(
+      `${SERVER_URL}/client?type=select&idc=` +
+        idc +
+        `&fitness_no=` +
+        fitness_no
+    )
+    .then((response) => response.data);
+};
+
+//delete genetic
+export const geneticDestroy = (member_no) => {
+  return axios.delete(`${SERVER_URL}/genetic?member_no=` + member_no);
+};

@@ -2,7 +2,12 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
-import { geneticInsert } from '../../api/user';
+import {
+  clientSetname,
+  geneticDestroy,
+  geneticInsert,
+  geneticSelect,
+} from '../../api/user';
 import Header from '../../component/header/Header';
 import Menu from '../../component/navigation/Menu';
 import Navigation from '../../component/navigation/Navigation';
@@ -11,6 +16,11 @@ class GeneticAdd extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      idc: this.props.location.state.idc || localStorage.getItem('idc'),
+      name: '',
+      sex: '',
+      phone: '',
+      birth: '',
       measurementDate: new Date(),
       bmi1: '',
       bmi2: '',
@@ -91,18 +101,85 @@ class GeneticAdd extends Component {
         document.cookie = 'key=' + btoa(JSON.stringify(loginData));
         // and notify
         alert('Your session is expired, please log in again');
+      } else {
+        this.client_name();
+        this.geneticView();
       }
     });
   }
-  // current=()=>{
-  //     select
-  // }
 
+  client_name = () => {
+    clientSetname(this.state.idc, this.props.userinfo.fitness_no).then(
+      (res) => {
+        this.setState({
+          customerList: res,
+        });
+        this.state.customerList.map((c) => {
+          let s = c.sex == 1 ? '남' : '여';
+          this.setState({
+            name: c.client_name,
+            sex: s,
+            phone: c.phone,
+            birth: c.birth,
+          });
+        });
+      }
+    );
+  };
+  geneticView = () => {
+    geneticSelect(this.props.userinfo.fitness_no, this.state.idc).then(
+      (result) => {
+        // console.log(result);
+        this.setState({
+          genetic: result,
+          idg: result[0].idg,
+          member_no: result[0].member_no,
+          measurementDate: result[0].measurementDate,
+          bmi1: result[0].bmi1,
+          bmi2: result[0].bmi2,
+          bmi3: result[0].bmi3,
+          cholesterol1: result[0].cholesterol1,
+          cholesterol2: result[0].cholesterol2,
+          cholesterol3: result[0].cholesterol3,
+          triglyceride1: result[0].triglyceride1,
+          triglyceride2: result[0].triglyceride2,
+          triglyceride3: result[0].triglyceride3,
+          hypertension1: result[0].hypertension1,
+          hypertension2: result[0].hypertension2,
+          hypertension3: result[0].hypertension3,
+          bloodsugar1: result[0].bloodsugar1,
+          bloodsugar2: result[0].bloodsugar2,
+          bloodsugar3: result[0].bloodsugar3,
+          pigmentation1: result[0].pigmentation1,
+          pigmentation2: result[0].pigmentation2,
+          pigmentation3: result[0].pigmentation3,
+          skinfold1: result[0].skinfold1,
+          skinfold2: result[0].skinfold2,
+          skinfold3: result[0].skinfold3,
+          dermis1: result[0].dermis1,
+          dermis2: result[0].dermis2,
+          dermis3: result[0].dermis3,
+          hairthick1: result[0].hairthick1,
+          hairthick2: result[0].hairthick2,
+          hairthick3: result[0].hairthick3,
+          nohair1: result[0].nohair1,
+          nohair2: result[0].nohair2,
+          nohair3: result[0].nohair3,
+          vitaminc1: result[0].vitaminc1,
+          vitaminc2: result[0].vitaminc2,
+          vitaminc3: result[0].vitaminc3,
+          caffeine1: result[0].caffeine1,
+          caffeine2: result[0].caffeine2,
+          caffeine3: result[0].caffeine3,
+        });
+      }
+    );
+  };
   //   idc=123 moment
   handleClick = () => {
     geneticInsert(
       this.props.userinfo.fitness_no,
-      123,
+      this.state.idc,
       this.state.measurementDate,
       this.state.bmi1,
       this.state.bmi2,
@@ -140,13 +217,20 @@ class GeneticAdd extends Component {
       this.state.caffeine1,
       this.state.caffeine2,
       this.state.caffeine3
-    ).then((response) => {
+    ).then(() => {
       alert('DTC가 등록되었습니다.');
+    });
+  };
+  handleDelete = () => {
+    geneticDestroy(this.state.idc).then((res) => {
+      alert('삭제 완료');
     });
   };
 
   render() {
-    console.log('idc', this.state.member_no);
+    console.log('idc', this.state.idc);
+    // console.log('name', this.state.name);
+
     return (
       <div className='wrap inbodies'>
         <div className='header'>
@@ -173,9 +257,16 @@ class GeneticAdd extends Component {
         </div>
         {/*.header */}
         <Container>
-          <Col>회원이름</Col>
-          <Col>측정일</Col>
+          <Col>회원이름: {this.state.name}</Col>
+          <Col>성별: {this.state.sex}</Col>
+          <Col>생년월일: {this.state.birth}</Col>
+          <Col>측정일: </Col>
           <Row md={6}></Row>
+          <Col>
+            <Button onClick={this.handleClick}>post테스트</Button>
+            <Button onClick={this.handleDelete}>delete테스트</Button>
+            {/* <Button onClick={}>put테스트</Button> */}
+          </Col>
         </Container>
       </div>
     );

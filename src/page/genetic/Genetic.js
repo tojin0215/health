@@ -6,6 +6,9 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import moment from 'moment';
+moment.locale('ko-KR');
+
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -16,12 +19,50 @@ import Navigation from '../../component/navigation/Navigation';
 import { Container, Table, Row, Col, Button } from 'react-bootstrap';
 import TextField from '@mui/material/TextField';
 import UserSearch from '../../component/customer/UserSearch';
+import { TbMoodSuprised } from 'react-icons/tb';
 
 class Genetic extends Component {
   constructor(props) {
     super(props);
     this.state = {
       genetic: [],
+      measurementDate: new Date(),
+      bmi1: 0,
+      bmi2: 0,
+      bmi3: 0,
+      cholesterol1: 0,
+      cholesterol2: 0,
+      cholesterol3: 0,
+      triglyceride1: 0,
+      triglyceride2: 0,
+      triglyceride3: 0,
+      hypertension1: 0,
+      hypertension2: 0,
+      hypertension3: 0,
+      bloodsugar1: 0,
+      bloodsugar2: 0,
+      bloodsugar3: 0,
+      pigmentation1: 0,
+      pigmentation2: 0,
+      pigmentation3: 0,
+      skinfold1: 0,
+      skinfold2: 0,
+      skinfold3: 0,
+      dermis1: 0,
+      dermis2: 0,
+      dermis3: 0,
+      hairthick1: 0,
+      hairthick2: 0,
+      hairthick3: 0,
+      nohair1: 0,
+      nohair2: 0,
+      nohair3: 0,
+      vitaminc1: 0,
+      vitaminc2: 0,
+      vitaminc3: 0,
+      caffeine1: 0,
+      caffeine2: 0,
+      caffeine3: 0,
     };
   }
   goLogin = () => {
@@ -71,52 +112,60 @@ class Genetic extends Component {
       }
     });
   }
-  //geneticSelect, idc=1
+
+  geneticAddLink = () => {
+    // alert('DTC검사를 하지 않았습니다. DTC측정으로 이동합니다');
+    // window.location.replace('/geneticAdd');
+    // localStorage.setItem('idc', this.state.idc);
+  };
+
+  //geneticSelect
   geneticView = (idc) => {
     geneticSelect(this.props.userinfo.fitness_no, idc).then((result) => {
       // console.log(result);
-      this.setState({
-        genetic: result,
-        idg: result[0].idg,
-        member_no: result[0].member_no,
-        measurementDate: result[0].measurementDate,
-        bmi1: result[0].bmi1,
-        bmi2: result[0].bmi2,
-        bmi3: result[0].bmi3,
-        cholesterol1: result[0].cholesterol1,
-        cholesterol2: result[0].cholesterol2,
-        cholesterol3: result[0].cholesterol3,
-        triglyceride1: result[0].triglyceride1,
-        triglyceride2: result[0].triglyceride2,
-        triglyceride3: result[0].triglyceride3,
-        hypertension1: result[0].hypertension1,
-        hypertension2: result[0].hypertension2,
-        hypertension3: result[0].hypertension3,
-        bloodsugar1: result[0].bloodsugar1,
-        bloodsugar2: result[0].bloodsugar2,
-        bloodsugar3: result[0].bloodsugar3,
-        pigmentation1: result[0].pigmentation1,
-        pigmentation2: result[0].pigmentation2,
-        pigmentation3: result[0].pigmentation3,
-        skinfold1: result[0].skinfold1,
-        skinfold2: result[0].skinfold2,
-        skinfold3: result[0].skinfold3,
-        dermis1: result[0].dermis1,
-        dermis2: result[0].dermis2,
-        dermis3: result[0].dermis3,
-        hairthick1: result[0].hairthick1,
-        hairthick2: result[0].hairthick2,
-        hairthick3: result[0].hairthick3,
-        nohair1: result[0].nohair1,
-        nohair2: result[0].nohair2,
-        nohair3: result[0].nohair3,
-        vitaminc1: result[0].vitaminc1,
-        vitaminc2: result[0].vitaminc2,
-        vitaminc3: result[0].vitaminc3,
-        caffeine1: result[0].caffeine1,
-        caffeine2: result[0].caffeine2,
-        caffeine3: result[0].caffeine3,
-      });
+      result.length === 0
+        ? this.geneticAddLink()
+        : this.setState({
+            genetic: result,
+            member_no: this.state.idc,
+            measurementDate: result[0].measurementDate,
+            bmi1: result[0].bmi1,
+            bmi2: result[0].bmi2,
+            bmi3: result[0].bmi3,
+            cholesterol1: result[0].cholesterol1,
+            cholesterol2: result[0].cholesterol2,
+            cholesterol3: result[0].cholesterol3,
+            triglyceride1: result[0].triglyceride1,
+            triglyceride2: result[0].triglyceride2,
+            triglyceride3: result[0].triglyceride3,
+            hypertension1: result[0].hypertension1,
+            hypertension2: result[0].hypertension2,
+            hypertension3: result[0].hypertension3,
+            bloodsugar1: result[0].bloodsugar1,
+            bloodsugar2: result[0].bloodsugar2,
+            bloodsugar3: result[0].bloodsugar3,
+            pigmentation1: result[0].pigmentation1,
+            pigmentation2: result[0].pigmentation2,
+            pigmentation3: result[0].pigmentation3,
+            skinfold1: result[0].skinfold1,
+            skinfold2: result[0].skinfold2,
+            skinfold3: result[0].skinfold3,
+            dermis1: result[0].dermis1,
+            dermis2: result[0].dermis2,
+            dermis3: result[0].dermis3,
+            hairthick1: result[0].hairthick1,
+            hairthick2: result[0].hairthick2,
+            hairthick3: result[0].hairthick3,
+            nohair1: result[0].nohair1,
+            nohair2: result[0].nohair2,
+            nohair3: result[0].nohair3,
+            vitaminc1: result[0].vitaminc1,
+            vitaminc2: result[0].vitaminc2,
+            vitaminc3: result[0].vitaminc3,
+            caffeine1: result[0].caffeine1,
+            caffeine2: result[0].caffeine2,
+            caffeine3: result[0].caffeine3,
+          });
     });
   };
   handleUser = (client) => {
@@ -133,10 +182,16 @@ class Genetic extends Component {
   };
 
   render() {
-    // console.log('genetic', this.state.genetic[0]);
-    // console.log('geneticidg', this.state.idg);
+    console.log('genetic', this.state.genetic);
     // console.log(this.props.userinfo.fitness_no);
     // console.log('client', this.state.client);
+    console.log('idc', this.state.idc);
+    console.log('member_no', this.state.member_no);
+    console.log(
+      'measurementDate',
+      moment(this.state.measurementDate).format('YYYY-MM-DD')
+    );
+
     return (
       <div className='wrap inbodies'>
         <div className='header'>
@@ -165,17 +220,7 @@ class Genetic extends Component {
         <Container>
           <Row className=''>
             <Col md={6} className='text-center mb-2'>
-              {this.props.userinfo.loginWhether === 2 ? (
-                <TextField
-                  id='customer_name'
-                  label='선택된 회원'
-                  disabled
-                  variant='standard'
-                  className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
-                  InputProps={{ disableUnderline: true }}
-                  value={this.props.userinfo.manager_name}
-                />
-              ) : this.state.open ? (
+              {this.state.open ? (
                 <div>
                   <UserSearch
                     open={this.state.open}
@@ -202,47 +247,49 @@ class Genetic extends Component {
                 </div>
               )}
             </Col>
-            {this.state.client ? (
-              this.state.genetic.length === 0 ? (
-                <Col md={2} className='mb-2'>
-                  <Link
-                    to={{
-                      pathname: '/geneticAdd',
-                      state: {
-                        //이부분 수정
-                      },
-                    }}
-                  >
-                    <Button className='w-100 h-100' variant='outline-primary'>
-                      DTC 다시측정
-                    </Button>
-                  </Link>
-                </Col>
-              ) : (
-                <Col md={2} className='mb-2'>
-                  <Link
-                    to={{
-                      pathname: '/geneticAdd',
-                      state: {
-                        //이부분 수정
-                      },
-                    }}
-                  >
-                    <Button className='w-100 h-100' variant='outline-primary'>
-                      DTC 수정하기
-                    </Button>
-                  </Link>
-                </Col>
-              )
+            {this.state.genetic.length === 0 ? (
+              <Col md={2} className='mb-2'>
+                <Link
+                  to={{
+                    pathname: '/geneticAdd',
+                    state: {
+                      idc: this.state.idc,
+                    },
+                  }}
+                >
+                  <Button className='w-100 h-100' variant='outline-primary'>
+                    DTC 측정
+                  </Button>
+                </Link>
+              </Col>
             ) : (
-              ''
+              <Col md={2} className='mb-2'>
+                <Link
+                  to={{
+                    pathname: '/geneticAdd',
+                    state: {
+                      idc: this.state.idc,
+                    },
+                  }}
+                >
+                  <Button className='w-100 h-100' variant='outline-primary'>
+                    DTC 수정하기
+                  </Button>
+                </Link>
+              </Col>
             )}
           </Row>
+
           {this.state.genetic.length === 0 ? (
             ''
           ) : (
             <div>
-              <Col>측정일{this.state.measurementDate}</Col>
+              <Col>
+                측정일:
+                {moment(this.state.measurementDate).format(
+                  '  YYYY년 MM월 DD일'
+                )}
+              </Col>
               <Row md={6}>
                 <Col>
                   체질량 지수
