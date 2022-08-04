@@ -21,7 +21,6 @@ import Button from 'react-bootstrap/Button';
 
 // 이미지 파일 관련
 // import MainVisual1 from 'url(/src/img/mainVisual1.png)';
-import MainVisual1 from '../../../src/img/mainVisual1.png';
 import btnCustomer from '../../../src/img/btnCustomer.png';
 import btnSetting from '../../../src/img/btnSetting.png';
 import btnExercise from '../../../src/img/btnExercise.png';
@@ -227,104 +226,64 @@ class Home extends Component {
           <Menu goLogin={this.goLogin} />
           <NewMenu />
           {/* <DrawerAppBar /> */}
-          {this.props.userinfo.loginWhether === 2 ? (
-            ''
-          ) : this.props.userinfo.loginWhether === 1 ? (
-            ''
-          ) : (
-            <div className='localNavigation'>
-              <div className='container'>
-                {/* <Menu /> */}
-                <Row className='dashboard' xs={2}>
-                  <Col className='homeDashLeft h-100' xs={2}>
-                    <label>
-                      {/* <p>오늘 방문고객</p> */}
-                      {/* <span>{this.fommat(this.state.todayCustomer)}</span> */}
-                    </label>
-                    <label>
-                      <p>등록된 회원</p>
-                      <span>{this.fommat(this.state.totalClient)}</span>
-                    </label>
-                  </Col>
-                  <Col className='homeDashRight' xs={2}>
-                    <label>
-                      <p className=''>당일 매출</p>
-                      <span>{this.fommat(this.state.todaySales)}</span>
-                    </label>
-                    <label>
-                      <p className=''>월 매출</p>
-                      <span>{this.fommat(this.state.monthSales)}</span>
-                    </label>
-                  </Col>
-                </Row>
-                <div></div>
-                {/*.dashboard */}
-              </div>
-              {/*.container */}
-            </div>
-          )}
-          {/*.localNavigation */}
         </div>
         {/*.header */}
-        <div className='home__mainvisual'>
-          <Container>
-            <Row xs={1} md={2} className='home__mainvisual--content'>
-              <Col className='py-4 px-5 fs-1'>
-                <h3>
-                  새로워진 피트니스 센터 관리{' '}
-                  <span className='fs-1 text-primary'>divvy</span>
-                </h3>
-                {this.props.userinfo.loginWhether === 2 ? (
-                  <ul className='text-center'>
-                    <li>
-                      <Link to='introduce'>센터 소개</Link>
-                    </li>
-                    <li>
-                      <Link to='inbodies'>인바디 정보</Link>
-                    </li>
-                    <li>
-                      <Link to='reservation'>🗓 수업 예약</Link>
-                    </li>
-                  </ul>
-                ) : this.props.userinfo.loginWhether === 1 ? (
-                  <ul className='text-center'>
-                    <li>
-                      <Link to='/client'>🐥 회원 관리</Link>
-                    </li>
-                    <li>
-                      <Link to='reservation'>🗓 수업 예약</Link>
-                    </li>
-                    <li>
-                      <Link to='workoutAlloted'>🤸 운동 배정</Link>
-                    </li>
-                  </ul>
-                ) : (
-                  <ul className='text-center'>
-                    <li>
-                      <Link to='/trainer'>🐔 강사 관리</Link>
-                    </li>
-                    <li>
-                      <Link to='/client'>🐥 회원 관리</Link>
-                    </li>
-                    <li>
-                      <Link to='reservation'>🗓 수업 예약</Link>
-                    </li>
-                    <li>
-                      <Link to='workoutAlloted'>🤸 운동 배정</Link>
-                    </li>
-                    <li>
-                      <Link to='sales'>📊 매출 관리</Link>
-                    </li>
-                  </ul>
-                )}
-              </Col>
-              <Col className='text-center home__main-visual--image-box'>
-                <Image
-                  roundedCircle
-                  src={process.env.PUBLIC_URL + '/assets/mainvisual.svg'}
-                />
-              </Col>
-            </Row>
+        <div
+          className='home__mainvisual'
+          style={{
+            backgroundImage: 'url(/assets/home__main-visual.jpg)',
+          }}
+        >
+          <Container className='home__main-visual--content'>
+            <div className='home__main-visual--logo'>
+              <p>새로워진 피트니스 센터 관리</p>
+              <h2>DIVVY</h2>
+            </div>
+            <div>
+              {this.props.userinfo.loginWhether === 2 ? (
+                <ul className='text-cente'>
+                  <li>
+                    <Link to='introduce'>센터 소개</Link>
+                  </li>
+                  <li>
+                    <Link to='inbodies'>인바디 정보</Link>
+                  </li>
+                  <li>
+                    <Link to='reservation'>수업 예약</Link>
+                  </li>
+                </ul>
+              ) : this.props.userinfo.loginWhether === 1 ? (
+                <ul className='text-center'>
+                  <li>
+                    <Link to='/client'>회원 관리</Link>
+                  </li>
+                  <li>
+                    <Link to='reservation'>수업 예약</Link>
+                  </li>
+                  <li>
+                    <Link to='workoutAlloted'>운동 배정</Link>
+                  </li>
+                </ul>
+              ) : (
+                <ul className='text-center d-flex'>
+                  <li>
+                    <Link to='/trainer'>강사 관리</Link>
+                  </li>
+                  <li>
+                    <Link to='/client'>회원 관리</Link>
+                  </li>
+                  <li>
+                    <Link to='reservation'>수업 예약</Link>
+                  </li>
+                  <li>
+                    <Link to='workoutAlloted'>운동 배정</Link>
+                  </li>
+                  <li>
+                    <Link to='sales'>매출 관리</Link>
+                  </li>
+                </ul>
+              )}
+            </div>
           </Container>
         </div>
         <Container>

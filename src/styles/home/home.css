@@ -58,20 +58,27 @@
 }
 
 .home__mainvisual {
-  margin-top: 4.7rem;
-  margin-bottom: 2rem;
-  background-color: #333;
-  box-shadow: 0 6px 7px rgba(20, 20, 20, 0.7);
   width: 100%;
+  height: 41.3rem;
+  padding-top: 4.7rem;
+  margin-bottom: 2rem;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.home .home__mainvisual--content {
-  height: 480px;
+.home__main-visual--content {
+  position: relative;
 }
 
-.home .home__mainvisual--content img {
-  height: 420px;
-  background-color: #fff;
+.home__main-visual--logo {
+  position: absolute;
+  bottom: 5rem;
+}
+
+.home__main-visual--logo p {
+}
+
+.home__main-visual--logo h2 {
 }
 
 .home .home__shortcut {
@@ -159,13 +166,6 @@
 @media only screen and (max-width: 767px) {
   .home .container {
     margin: 0px auto 3rem;
-  }
-  .home__main-visual--image-box {
-    background-color: #fff;
-  }
-  .home .home__mainvisual--content img {
-    width: 180px;
-    height: auto;
   }
   .home .homeAbout h3 {
     flex-wrap: wrap;
