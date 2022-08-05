@@ -274,7 +274,9 @@ class Genetic extends Component {
                 </div>
               )}
             </Col>
-            {this.state.genetic.length === 0 ? (
+            {this.state.idc === undefined ? (
+              ''
+            ) : this.state.genetic.length === 0 ? (
               <Col md={2} className='mb-2'>
                 <Link
                   to={{
