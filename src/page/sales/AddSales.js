@@ -65,7 +65,6 @@ class AddSales extends Component {
       member_no: '',
       //isChecked:false,
       paymentDate: new Date(),
-      exerciseName: [],
       client_name: '회원',
       inputExercise: '',
       exercisePrice: 0,
@@ -74,7 +73,6 @@ class AddSales extends Component {
       //sportswear:0,
       sportswearPrice: 0,
       //TotalPayment: 0,
-      paymentTools: '',
       open: false,
       //searchKeyword:'',
       customerList: [],
@@ -87,10 +85,16 @@ class AddSales extends Component {
         salesDaysCheckbox: true,
         paidMembershipCheckbox: false,
       },
+      exerciseGroup: {
+        pt: true,
+        gx: false,
+        pila: false,
+        health: false,
+        etc: false,
+      },
+      etcExercise: '',
     };
     this.handleDateChange = this.handleDateChange.bind(this);
-    this.toggleChange = this.toggleChange.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
@@ -154,51 +158,6 @@ class AddSales extends Component {
     });
   }
 
-  toggleChange = (e) => {
-    const target = e.target;
-    let value = target.id;
-    console.log(target.checked);
-    if (target.checked === true) {
-      this.state.exerciseName[value] = value;
-      this.setState({
-        exerciseName: [
-          ...this.state.exerciseName,
-          this.state.exerciseName[value],
-        ],
-      });
-      //console.log('들어오는 값 )    ')
-      //console.log(this.state.exerciseName)
-    } else {
-      //console.log('들어오니')
-      for (var i = 0; i < this.state.exerciseName.length; i++) {
-        if (this.state.exerciseName[i] === value) {
-          this.state.exerciseName.splice(i, 1);
-        }
-      }
-      //console.log(this.state.exerciseName)
-    }
-
-    // this.setState({
-    //     isChecked: !this.state.isChecked,
-    //     exerciseName:exerciseName.concat(e.target.id)
-    // });
-    // //alert(e.target.id)
-    // console.log(this.state.exerciseName)
-  };
-
-  handleChange = (e) => {
-    if (e.target.name === 'paymentTools' || e.target.name === 'exerciseName') {
-      this.setState({
-        [e.target.name]: e.target.id,
-      });
-    } else {
-      this.setState({
-        [e.target.id]: e.target.value,
-        //TotalPayment : parseInt(this.state.TotalPayment) + parseInt(e.target.value)
-      });
-    }
-  };
-
   handleDateChange(date) {
     this.setState({
       paymentDate: date,
@@ -207,25 +166,6 @@ class AddSales extends Component {
   }
 
   handleOnClick = (e) => {
-    //alert('운동목록 : ' + this.state.exerciseName + ', 운동금액 : '+  this.state.exercisePrice + ', 운동복여부: '+ this.state.sportswear +', 운동복 금액: '+ this.state.sportswearPrice + ', 락커여부: '+ this.state.locker +', 락커금액 : '+  this.state.lockerPrice + ', 결제도구 : '+this.state.paymentTools+', 전체금액 : '+this.state.TotalPayment);
-
-    let ex = '';
-    // console.log('---------------------------');
-    // for(var i=0; i<this.state.exerciseName.length;i++){
-    //     if(this.state.exerciseName[i] === '기타'){
-    //         ex = this.state.exerciseName[i] +'('+this.state.inputExercise +') /'+ex
-    //     }
-    //     else{
-    //         ex = this.state.exerciseName[i] +'/ '+ex
-    //     }
-    // }
-
-    if (this.state.exerciseName === '기타') {
-      ex = this.state.exerciseName + '(' + this.state.inputExercise + ')';
-    } else {
-      ex = this.state.exerciseName;
-    }
-
     let exercisePrice1 = parseInt(
       this.state.exercisePrice.toString().replace(/[^(0-9)]/gi, '')
     );
@@ -236,8 +176,6 @@ class AddSales extends Component {
       this.state.sportswearPrice.toString().replace(/[^(0-9)]/gi, '')
     );
 
-    // console.log('***********paymentDate : ', this.state.paymentDate);
-    // console.log(this.state);
     if (this.state.client_name === '회원') {
       alert('회원을 선택해주세요.');
     } else {
@@ -249,11 +187,21 @@ class AddSales extends Component {
         body: JSON.stringify({
           fitness_no: this.state.fitness_no,
           client_name: this.state.client_name,
-          exerciseName: ex,
+          exerciseName: this.state.exerciseGroup.pt
+            ? '개인PT'
+            : this.state.exerciseGroup.gx
+            ? 'GX'
+            : this.state.exerciseGroup.pila
+            ? '필라테스'
+            : this.state.exerciseGroup.health
+            ? '헬스'
+            : this.state.exerciseGroup.etc
+            ? '기타(' + this.state.etcExercise + ')'
+            : '개인PT',
           exercisePrice: exercisePrice1,
           lockerPrice: lockerPrice1,
           sportswearPrice: sportswearPrice1,
-          paymentTools: this.state.paymentTools,
+          paymentTools: '카드', //수정
           paymentDate: this.state.paymentDate,
           paidMembership:
             this.state.checkboxGroup['paidMembershipCheckbox'] == false
@@ -302,10 +250,28 @@ class AddSales extends Component {
     });
   };
 
+  handleExerciseRadio = (e) => {
+    let obj = {
+      pt: false,
+      gx: false,
+      pila: false,
+      health: false,
+      etc: false,
+    };
+    obj[e.target.id] = e.target.checked;
+    this.setState({
+      exerciseGroup: obj,
+    });
+  };
+  handleChange = (e) => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+
   render() {
     // console.log('___', this.state.customerList);
     const { userinfo } = this.props;
     // console.log(userinfo);
+    // console.log(this.state.paymentTools);
 
     return (
       <div className='wrap addSales'>
@@ -369,10 +335,10 @@ class AddSales extends Component {
                     <Form.Check>
                       <Form.Check.Input
                         type='radio'
-                        id='개인 PT'
-                        name='exerciseName'
-                        value='1'
-                        onChange={this.handleChange}
+                        name='exerciseGroup'
+                        id='pt'
+                        checked={this.state.exerciseGroup['pt']}
+                        onChange={this.handleExerciseRadio}
                       />
                       <Form.Check.Label htmlFor='개인 PT' className='w-100'>
                         개인 PT
@@ -383,10 +349,10 @@ class AddSales extends Component {
                     <Form.Check>
                       <Form.Check.Input
                         type='radio'
-                        id='GX'
-                        name='exerciseName'
-                        value='2'
-                        onChange={this.handleChange}
+                        name='exerciseGroup'
+                        id='gx'
+                        checked={this.state.exerciseGroup['gx']}
+                        onChange={this.handleExerciseRadio}
                       />
                       <Form.Check.Label htmlFor='GX' className='w-100'>
                         GX
@@ -397,10 +363,10 @@ class AddSales extends Component {
                     <Form.Check>
                       <Form.Check.Input
                         type='radio'
-                        id='필라테스'
-                        name='exerciseName'
-                        value='3'
-                        onChange={this.handleChange}
+                        name='exerciseGroup'
+                        id='pila'
+                        checked={this.state.exerciseGroup['pila']}
+                        onChange={this.handleExerciseRadio}
                       />
                       <Form.Check.Label htmlFor='필라테스' className='w-100'>
                         필라테스
@@ -411,10 +377,10 @@ class AddSales extends Component {
                     <Form.Check>
                       <Form.Check.Input
                         type='radio'
-                        id='헬스'
-                        name='exerciseName'
-                        value='4'
-                        onChange={this.handleChange}
+                        name='exerciseGroup'
+                        id='health'
+                        checked={this.state.exerciseGroup['health']}
+                        onChange={this.handleExerciseRadio}
                       />
                       <Form.Check.Label htmlFor='헬스' className='w-100'>
                         헬스
@@ -425,16 +391,16 @@ class AddSales extends Component {
                     <Form.Check>
                       <Form.Check.Input
                         type='radio'
-                        id='기타'
-                        name='exerciseName'
-                        value='5'
-                        onChange={this.handleChange}
+                        name='exerciseGroup'
+                        id='etc'
+                        checked={this.state.exerciseGroup['etc']}
+                        onChange={this.handleExerciseRadio}
                       />
                       <Form.Control
+                        placeholder='기타'
+                        id='etcExercise'
                         type='text'
-                        id='inputExercise'
-                        placeholder='기타 운동'
-                        name='Exercise'
+                        value={this.state.etcExercise}
                         onChange={this.handleChange}
                       ></Form.Control>
                     </Form.Check>
@@ -528,12 +494,7 @@ class AddSales extends Component {
                 <Row>
                   <Col xs={12} sm={2}>
                     <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        name='paymentTools'
-                        id='카드'
-                        onChange={this.handleChange}
-                      />
+                      <Form.Check.Input />
                       <Form.Check.Label htmlFor='카드' className='w-100'>
                         카드
                       </Form.Check.Label>
@@ -541,12 +502,7 @@ class AddSales extends Component {
                   </Col>
                   <Col xs={12} sm={2}>
                     <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        name='paymentTools'
-                        id='현금'
-                        onChange={this.handleChange}
-                      />
+                      <Form.Check.Input />
                       <Form.Check.Label htmlFor='현금' className='w-100'>
                         현금
                       </Form.Check.Label>
@@ -554,12 +510,7 @@ class AddSales extends Component {
                   </Col>
                   <Col xs={12} sm={2}>
                     <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        name='paymentTools'
-                        id='계좌이체'
-                        onChange={this.handleChange}
-                      />
+                      <Form.Check.Input />
                       <Form.Check.Label htmlFor='계좌이체' className='w-100'>
                         계좌이체
                       </Form.Check.Label>
