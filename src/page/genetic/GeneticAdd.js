@@ -461,7 +461,12 @@ class GeneticAdd extends Component {
                 </Row>
               </Col>
               <Col>
-                <p>콜레스테롤</p>
+                <Col xs={12}>
+                  <Image
+                    src={process.env.PUBLIC_URL + '/assets/dtc-img2.png'}
+                  />
+                </Col>
+                <Col xs={12}>콜레스테롤</Col>
                 <Row xs={3} className='dtc-add__lamp'>
                   <Col>
                     <CircleIcon />
@@ -493,7 +498,12 @@ class GeneticAdd extends Component {
                 </Row>
               </Col>
               <Col>
-                <p>중성지방농도</p>
+                <Col xs={12}>
+                  <Image
+                    src={process.env.PUBLIC_URL + '/assets/dtc-img3.png'}
+                  />
+                </Col>
+                <Col xs={12}>중성지방농도</Col>
                 <Row xs={3} className='dtc-add__lamp'>
                   <Col>
                     <CircleIcon />
