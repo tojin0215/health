@@ -120,6 +120,11 @@ class Menu extends Component {
                       인바디 정보
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink exact to='/genetic'>
+                      DTC
+                    </NavLink>
+                  </li>
                 </li>
                 <li class='dropdown'>
                   <NavLink exact to='/reservation'>
@@ -210,6 +215,11 @@ class Menu extends Component {
                   <li>
                     <NavLink exact to='/inbodies'>
                       인바디 정보
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/genetic'>
+                      DTC
                     </NavLink>
                   </li>
                 </li>
@@ -346,6 +356,11 @@ class Menu extends Component {
                     </NavLink>
                     <NavLink exact to='/inbodies'>
                       인바디 정보
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/genetic'>
+                      DTC
                     </NavLink>
                   </li>
                 </li>
