@@ -15,8 +15,13 @@ import Header from '../../component/header/Header';
 import Menu from '../../component/navigation/Menu';
 import Navigation from '../../component/navigation/Navigation';
 import { Container, Table, Row, Col, Button } from 'react-bootstrap';
+import Image from 'react-bootstrap/Image';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
+
+// icons
+import CircleIcon from '@mui/icons-material/Circle';
+
 class GeneticAdd extends Component {
   constructor(props) {
     super(props);
@@ -356,7 +361,7 @@ class GeneticAdd extends Component {
     // console.log(this.state.well);
 
     return (
-      <div className='wrap inbodies'>
+      <div className='wrap dtc-add'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -380,328 +385,371 @@ class GeneticAdd extends Component {
           {/*.localNavigation */}
         </div>
         {/*.header */}
-        <Container>
-          <Col>회원이름: {this.state.name}</Col>
-          <Col>성별: {this.state.sex}</Col>
-          <Col>생년월일: {this.state.birth}</Col>
-          <Col>
-            측정일:
-            <DatePicker
-              selected={this.state.measurementDate}
-              onChange={this.handleDateChange}
-              name='measurementDate'
-              dateFormat='yyyy년MM월dd일'
-            />
-          </Col>
-          <Row md={6}>
-            <Col>
-              체질량 지수
-              <p>
-                <input
-                  value={this.state.bmi1}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='bmi1'
+        <Container className='dtc-add__box'>
+          <div className='sectionGlass p-4'>
+            <Row>
+              <Col>
+                회원이름<p className='fs-4 fw-bold'>{this.state.name}</p>
+              </Col>
+              <Col>
+                성별<p className='fs-4 fw-bold'>{this.state.sex}</p>
+              </Col>
+              <Col>
+                생년월일<p className='fs-4 fw-bold'>{this.state.birth}</p>
+              </Col>
+            </Row>
+          </div>
+          <div className='sectionGlass mt-1 p-4'>
+            <Row xs={3} className='dtc-add__lamp'>
+              <Col>
+                <CircleIcon /> 위험 유전자 수
+              </Col>
+              <Col>
+                <CircleIcon /> 주의 유전자 수
+              </Col>
+              <Col>
+                <CircleIcon /> 양호 유전자 수
+              </Col>
+            </Row>
+            <Row className='py-4'>
+              <Col xs={3}>
+                측정일:
+                <DatePicker
+                  selected={this.state.measurementDate}
+                  onChange={this.handleDateChange}
+                  name='measurementDate'
+                  dateFormat='yyyy년MM월dd일'
                 />
-                /
-                <input
-                  value={this.state.bmi2}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='bmi2'
-                />
-                /
-                <input
-                  value={this.state.bmi3}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='bmi3'
-                />
-              </p>
-            </Col>
-            <Col>
-              콜레스테롤
-              <p>
-                <input
-                  value={this.state.cholesterol1}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='cholesterol1'
-                />
-                /
-                <input
-                  value={this.state.cholesterol2}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='cholesterol2'
-                />
-                /
-                <input
-                  value={this.state.cholesterol3}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='cholesterol3'
-                />
-              </p>
-            </Col>
-            <Col>
-              중성지방농도
-              <p>
-                <input
-                  value={this.state.triglyceride1}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='triglyceride1'
-                />
-                /
-                <input
-                  value={this.state.triglyceride2}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='triglyceride2'
-                />
-                /
-                <input
-                  value={this.state.triglyceride3}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='triglyceride3'
-                />
-              </p>
-            </Col>
-            <Col>
-              혈압
-              <p>
-                <input
-                  value={this.state.hypertension1}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='hypertension1'
-                />
-                /
-                <input
-                  value={this.state.hypertension2}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='hypertension2'
-                />
-                /
-                <input
-                  value={this.state.hypertension3}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='hypertension3'
-                />
-              </p>
-            </Col>
-            <Col>
-              혈당
-              <p>
-                <input
-                  value={this.state.bloodsugar1}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='bloodsugar1'
-                />
-                /
-                <input
-                  value={this.state.bloodsugar2}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='bloodsugar2'
-                />
-                /
-                <input
-                  value={this.state.bloodsugar3}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='bloodsugar3'
-                />
-              </p>
-            </Col>
-            <Col>
-              색소침착
-              <p>
-                <input
-                  value={this.state.pigmentation1}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='pigmentation1'
-                />
-                /
-                <input
-                  value={this.state.pigmentation2}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='pigmentation2'
-                />
-                /
-                <input
-                  value={this.state.pigmentation3}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='pigmentation3'
-                />
-              </p>
-            </Col>
-            <Col>
-              피부노화
-              <p>
-                <input
-                  value={this.state.skinfold1}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='skinfold1'
-                />
-                /
-                <input
-                  value={this.state.skinfold2}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='skinfold2'
-                />
-                /
-                <input
-                  value={this.state.skinfold3}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='skinfold3'
-                />
-              </p>
-            </Col>
-            <Col>
-              피부탄력
-              <p>
-                <input
-                  value={this.state.dermis1}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='dermis1'
-                />
-                /
-                <input
-                  value={this.state.dermis2}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='dermis2'
-                />
-                /
-                <input
-                  value={this.state.dermis3}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='dermis3'
-                />
-              </p>
-            </Col>
-            <Col>
-              모발굵기
-              <p>
-                <input
-                  value={this.state.hairthick1}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='hairthick1'
-                />
-                /
-                <input
-                  value={this.state.hairthick2}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='hairthick2'
-                />
-                /
-                <input
-                  value={this.state.hairthick3}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='hairthick3'
-                />
-              </p>
-            </Col>
-            <Col>
-              탈모
-              <p>
-                <input
-                  value={this.state.nohair1}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='nohair1'
-                />
-                /
-                <input
-                  value={this.state.nohair2}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='nohair2'
-                />
-                /
-                <input
-                  value={this.state.nohair3}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='nohair3'
-                />
-              </p>
-            </Col>
-            <Col>
-              비타민C
-              <p>
-                <input
-                  value={this.state.vitaminc1}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='vitaminc1'
-                />
-                /
-                <input
-                  value={this.state.vitaminc2}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='vitaminc2'
-                />
-                /
-                <input
-                  value={this.state.vitaminc3}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='vitaminc3'
-                />
-              </p>
-            </Col>
-            <Col>
-              카페인 대사
-              <p>
-                <input
-                  value={this.state.caffeine1}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='caffeine1'
-                />
-                /
-                <input
-                  value={this.state.caffeine2}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='caffeine2'
-                />
-                /
-                <input
-                  value={this.state.caffeine3}
-                  onChange={this.handleChange}
-                  type='number'
-                  id='caffeine3'
-                />
-              </p>
-            </Col>
-            <Col>
-              {this.state.well ? (
-                <Button onClick={this.handleUpdate}>put테스트</Button>
-              ) : (
-                <Button onClick={this.handleClick}>post테스트</Button>
-              )}
-            </Col>
-          </Row>
+              </Col>
+            </Row>
+            <Row md={6}>
+              <Col>
+                <Row xs={3} className='dtc-add__lamp'>
+                  <Col xs={12}>
+                    <Image
+                      src={process.env.PUBLIC_URL + '/assets/dtc-img1.png'}
+                    />
+                  </Col>
+                  <Col xs={12}>체질량 지수</Col>
+                  <Col>
+                    <CircleIcon />
+                    <input
+                      value={this.state.bmi1}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='bmi1'
+                    />
+                  </Col>
+                  <Col>
+                    <CircleIcon />
+                    <input
+                      value={this.state.bmi2}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='bmi2'
+                    />
+                  </Col>
+                  <Col>
+                    <CircleIcon />
+                    <input
+                      value={this.state.bmi3}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='bmi3'
+                    />
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <p>콜레스테롤</p>
+                <Row xs={3} className='dtc-add__lamp'>
+                  <Col>
+                    <CircleIcon />
+                    <input
+                      value={this.state.cholesterol1}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='cholesterol1'
+                    />
+                  </Col>
+                  <Col>
+                    <CircleIcon />
+                    <input
+                      value={this.state.cholesterol2}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='cholesterol2'
+                    />
+                  </Col>
+                  <Col>
+                    <CircleIcon />
+                    <input
+                      value={this.state.cholesterol3}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='cholesterol3'
+                    />
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <p>중성지방농도</p>
+                <Row xs={3} className='dtc-add__lamp'>
+                  <Col>
+                    <CircleIcon />
+                    <input
+                      value={this.state.triglyceride1}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='triglyceride1'
+                    />
+                  </Col>
+                  <Col>
+                    <CircleIcon />
+                    <input
+                      value={this.state.triglyceride2}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='triglyceride2'
+                    />
+                  </Col>
+                  <Col>
+                    <CircleIcon />
+                    <input
+                      value={this.state.triglyceride3}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='triglyceride3'
+                    />
+                  </Col>
+                </Row>
+              </Col>
+              <Row xs={3} className='dtc-add__lamp'>
+                <Col>
+                  혈압
+                  <p>
+                    <input
+                      value={this.state.hypertension1}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='hypertension1'
+                    />
+                    /
+                    <input
+                      value={this.state.hypertension2}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='hypertension2'
+                    />
+                    /
+                    <input
+                      value={this.state.hypertension3}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='hypertension3'
+                    />
+                  </p>
+                </Col>
+              </Row>
+              <Row xs={3} className='dtc-add__lamp'>
+                <Col>
+                  색소침착
+                  <p>
+                    <input
+                      value={this.state.pigmentation1}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='pigmentation1'
+                    />
+                    /
+                    <input
+                      value={this.state.pigmentation2}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='pigmentation2'
+                    />
+                    /
+                    <input
+                      value={this.state.pigmentation3}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='pigmentation3'
+                    />
+                  </p>
+                </Col>
+              </Row>
+              <Row xs={3} className='dtc-add__lamp'>
+                <Col>
+                  피부노화
+                  <p>
+                    <input
+                      value={this.state.skinfold1}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='skinfold1'
+                    />
+                    /
+                    <input
+                      value={this.state.skinfold2}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='skinfold2'
+                    />
+                    /
+                    <input
+                      value={this.state.skinfold3}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='skinfold3'
+                    />
+                  </p>
+                </Col>
+              </Row>
+              <Row xs={3} className='dtc-add__lamp'>
+                <Col>
+                  피부탄력
+                  <p>
+                    <input
+                      value={this.state.dermis1}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='dermis1'
+                    />
+                    /
+                    <input
+                      value={this.state.dermis2}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='dermis2'
+                    />
+                    /
+                    <input
+                      value={this.state.dermis3}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='dermis3'
+                    />
+                  </p>
+                </Col>
+              </Row>
+              <Row xs={3} className='dtc-add__lamp'>
+                <Col>
+                  모발굵기
+                  <p>
+                    <input
+                      value={this.state.hairthick1}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='hairthick1'
+                    />
+                    /
+                    <input
+                      value={this.state.hairthick2}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='hairthick2'
+                    />
+                    /
+                    <input
+                      value={this.state.hairthick3}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='hairthick3'
+                    />
+                  </p>
+                </Col>
+              </Row>
+              <Row xs={3} className='dtc-add__lamp'>
+                <Col>
+                  탈모
+                  <p>
+                    <input
+                      value={this.state.nohair1}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='nohair1'
+                    />
+                    /
+                    <input
+                      value={this.state.nohair2}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='nohair2'
+                    />
+                    /
+                    <input
+                      value={this.state.nohair3}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='nohair3'
+                    />
+                  </p>
+                </Col>
+              </Row>
+              <Row xs={3} className='dtc-add__lamp'>
+                <Col>
+                  비타민C
+                  <p>
+                    <input
+                      value={this.state.vitaminc1}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='vitaminc1'
+                    />
+                    /
+                    <input
+                      value={this.state.vitaminc2}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='vitaminc2'
+                    />
+                    /
+                    <input
+                      value={this.state.vitaminc3}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='vitaminc3'
+                    />
+                  </p>
+                </Col>
+              </Row>
+              <Row xs={3} className='dtc-add__lamp'>
+                <Col>
+                  카페인 대사
+                  <p>
+                    <input
+                      value={this.state.caffeine1}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='caffeine1'
+                    />
+                    /
+                    <input
+                      value={this.state.caffeine2}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='caffeine2'
+                    />
+                    /
+                    <input
+                      value={this.state.caffeine3}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='caffeine3'
+                    />
+                  </p>
+                </Col>
+              </Row>
+              <Row xs={3} className='dtc-add__lamp'></Row>
+              <Col>
+                {this.state.well ? (
+                  <Button onClick={this.handleUpdate}>put테스트</Button>
+                ) : (
+                  <Button onClick={this.handleClick}>post테스트</Button>
+                )}
+              </Col>
+            </Row>
+          </div>
         </Container>
       </div>
     );

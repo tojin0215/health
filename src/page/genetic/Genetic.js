@@ -23,6 +23,11 @@ import Navigation from '../../component/navigation/Navigation';
 import { Container, Table, Row, Col, Button } from 'react-bootstrap';
 import TextField from '@mui/material/TextField';
 import UserSearch from '../../component/customer/UserSearch';
+
+// css
+import '../../styles/genetic/genetic.css';
+
+// icons
 import { TbMoodSuprised } from 'react-icons/tb';
 
 class Genetic extends Component {
@@ -319,7 +324,14 @@ class Genetic extends Component {
           {this.state.idc === undefined ? (
             ''
           ) : this.state.genetic.length === 0 ? (
-            'DTC검사를 하지 않았습니다. DTC측정을 하려면 버튼을 누르세요'
+            <div className='mt-4 sectionGlass'>
+              <div className='p-3 fs-5 fw-bold text-center'>
+                <TbMoodSuprised className='fs-3' />
+                <p>
+                  DTC검사를 하지 않았습니다. DTC측정을 하려면 버튼을 누르세요
+                </p>
+              </div>
+            </div>
           ) : (
             <div>
               <Col>

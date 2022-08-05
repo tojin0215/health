@@ -1,0 +1,16 @@
+.dtc-add__lamp {
+  text-align: center;
+}
+.dtc-add__lamp .col:nth-child(1) {
+  color: coral;
+}
+.dtc-add__lamp .col:nth-child(2) {
+  color: gold;
+}
+.dtc-add__lamp .col:nth-child(3) {
+  color: lightgreen;
+}
+
+.dtc-add input {
+  width: 100%;
+}
