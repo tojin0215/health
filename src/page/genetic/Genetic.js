@@ -113,18 +113,14 @@ class Genetic extends Component {
     });
   }
 
-  geneticAddLink = () => {
-    // alert('DTC검사를 하지 않았습니다. DTC측정으로 이동합니다');
-    // window.location.replace('/geneticAdd');
-    // localStorage.setItem('idc', this.state.idc);
-  };
-
   //geneticSelect
   geneticView = (idc) => {
     geneticSelect(this.props.userinfo.fitness_no, idc).then((result) => {
       // console.log(result);
       result.length === 0
-        ? this.geneticAddLink()
+        ? this.setState({
+            genetic: result,
+          })
         : this.setState({
             genetic: result,
             member_no: this.state.idc,
@@ -182,15 +178,15 @@ class Genetic extends Component {
   };
 
   render() {
-    console.log('genetic', this.state.genetic);
+    // console.log('genetic', this.state.genetic);
     // console.log(this.props.userinfo.fitness_no);
     // console.log('client', this.state.client);
-    console.log('idc', this.state.idc);
-    console.log('member_no', this.state.member_no);
-    console.log(
-      'measurementDate',
-      moment(this.state.measurementDate).format('YYYY-MM-DD')
-    );
+    // console.log('idc', this.state.idc);
+    // console.log('member_no', this.state.member_no);
+    // console.log(
+    //   'measurementDate',
+    //   moment(this.state.measurementDate).format('YYYY-MM-DD')
+    // );
 
     return (
       <div className='wrap inbodies'>
@@ -221,30 +217,25 @@ class Genetic extends Component {
           <Row className=''>
             <Col md={6} className='text-center mb-2'>
               {this.state.open ? (
-                <div>
-                  <UserSearch
-                    open={this.state.open}
-                    setOpen={(o) => this.setState({ open: o })}
-                    fitness_no={this.props.userinfo.fitness_no}
-                    loginWhether={this.props.userinfo.loginWhether}
-                    joinNo={this.props.userinfo.joinNo}
-                    handleUser={this.handleUser}
-                  />
-                </div>
+                <UserSearch
+                  open={this.state.open}
+                  setOpen={(o) => this.setState({ open: o })}
+                  fitness_no={this.props.userinfo.fitness_no}
+                  loginWhether={this.props.userinfo.loginWhether}
+                  joinNo={this.props.userinfo.joinNo}
+                  handleUser={this.handleUser}
+                />
               ) : (
-                <div>
-                  <TextField
-                    id='customer_name'
-                    label='회원 선택'
-                    disabled
-                    variant='standard'
-                    onClick={() => this.setState({ open: true })}
-                    className='boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5'
-                    InputProps={{ disableUnderline: true }}
-                    value={this.state.client_name}
-                    style={{ cursor: 'pointer' }}
-                  />
-                </div>
+                <TextField
+                  id='customer_name'
+                  label='회원 선택'
+                  disabled
+                  variant='standard'
+                  onClick={() => this.setState({ open: true })}
+                  className='boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5'
+                  InputProps={{ disableUnderline: true }}
+                  value={this.state.client_name}
+                />
               )}
             </Col>
             {this.state.genetic.length === 0 ? (
@@ -269,6 +260,7 @@ class Genetic extends Component {
                     pathname: '/geneticAdd',
                     state: {
                       idc: this.state.idc,
+                      well: 1,
                     },
                   }}
                 >
@@ -281,7 +273,7 @@ class Genetic extends Component {
           </Row>
 
           {this.state.genetic.length === 0 ? (
-            ''
+            'DTC검사를 하지 않았습니다. DTC측정을 하려면 버튼을 누르세요'
           ) : (
             <div>
               <Col>
