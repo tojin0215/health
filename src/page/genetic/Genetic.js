@@ -13,7 +13,11 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
-import { geneticSelect } from '../../api/user';
+import {
+  geneticSelect,
+  selectClientReservation,
+  selectTrainerReservation,
+} from '../../api/user';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
 import { Container, Table, Row, Col, Button } from 'react-bootstrap';
@@ -109,59 +113,76 @@ class Genetic extends Component {
         // and notify
         alert('Your session is expired, please log in again');
       } else {
+        this.props.userinfo.loginWhether === 2
+          ? this.geneticView(this.props.userinfo.joinNo)
+          : '';
       }
     });
   }
 
   //geneticSelect
   geneticView = (idc) => {
-    geneticSelect(this.props.userinfo.fitness_no, idc).then((result) => {
-      // console.log(result);
-      result.length === 0
-        ? this.setState({
-            genetic: result,
-          })
-        : this.setState({
-            genetic: result,
-            member_no: this.state.idc,
-            measurementDate: result[0].measurementDate,
-            bmi1: result[0].bmi1,
-            bmi2: result[0].bmi2,
-            bmi3: result[0].bmi3,
-            cholesterol1: result[0].cholesterol1,
-            cholesterol2: result[0].cholesterol2,
-            cholesterol3: result[0].cholesterol3,
-            triglyceride1: result[0].triglyceride1,
-            triglyceride2: result[0].triglyceride2,
-            triglyceride3: result[0].triglyceride3,
-            hypertension1: result[0].hypertension1,
-            hypertension2: result[0].hypertension2,
-            hypertension3: result[0].hypertension3,
-            bloodsugar1: result[0].bloodsugar1,
-            bloodsugar2: result[0].bloodsugar2,
-            bloodsugar3: result[0].bloodsugar3,
-            pigmentation1: result[0].pigmentation1,
-            pigmentation2: result[0].pigmentation2,
-            pigmentation3: result[0].pigmentation3,
-            skinfold1: result[0].skinfold1,
-            skinfold2: result[0].skinfold2,
-            skinfold3: result[0].skinfold3,
-            dermis1: result[0].dermis1,
-            dermis2: result[0].dermis2,
-            dermis3: result[0].dermis3,
-            hairthick1: result[0].hairthick1,
-            hairthick2: result[0].hairthick2,
-            hairthick3: result[0].hairthick3,
-            nohair1: result[0].nohair1,
-            nohair2: result[0].nohair2,
-            nohair3: result[0].nohair3,
-            vitaminc1: result[0].vitaminc1,
-            vitaminc2: result[0].vitaminc2,
-            vitaminc3: result[0].vitaminc3,
-            caffeine1: result[0].caffeine1,
-            caffeine2: result[0].caffeine2,
-            caffeine3: result[0].caffeine3,
-          });
+    selectClientReservation(
+      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+    ).then((clientResult) => {
+      selectTrainerReservation(
+        this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+      ).then((trainerResult) => {
+        const fitness =
+          this.props.userinfo.loginWhether === 2
+            ? clientResult[0].fitness_no
+            : this.props.userinfo.loginWhether === 1
+            ? trainerResult[0].fitness_no
+            : this.props.userinfo.fitness_no;
+        geneticSelect(fitness, idc).then((result) => {
+          // console.log(result);
+          result.length === 0
+            ? this.setState({
+                genetic: result,
+              })
+            : this.setState({
+                genetic: result,
+                member_no: this.state.idc,
+                measurementDate: result[0].measurementDate,
+                bmi1: result[0].bmi1,
+                bmi2: result[0].bmi2,
+                bmi3: result[0].bmi3,
+                cholesterol1: result[0].cholesterol1,
+                cholesterol2: result[0].cholesterol2,
+                cholesterol3: result[0].cholesterol3,
+                triglyceride1: result[0].triglyceride1,
+                triglyceride2: result[0].triglyceride2,
+                triglyceride3: result[0].triglyceride3,
+                hypertension1: result[0].hypertension1,
+                hypertension2: result[0].hypertension2,
+                hypertension3: result[0].hypertension3,
+                bloodsugar1: result[0].bloodsugar1,
+                bloodsugar2: result[0].bloodsugar2,
+                bloodsugar3: result[0].bloodsugar3,
+                pigmentation1: result[0].pigmentation1,
+                pigmentation2: result[0].pigmentation2,
+                pigmentation3: result[0].pigmentation3,
+                skinfold1: result[0].skinfold1,
+                skinfold2: result[0].skinfold2,
+                skinfold3: result[0].skinfold3,
+                dermis1: result[0].dermis1,
+                dermis2: result[0].dermis2,
+                dermis3: result[0].dermis3,
+                hairthick1: result[0].hairthick1,
+                hairthick2: result[0].hairthick2,
+                hairthick3: result[0].hairthick3,
+                nohair1: result[0].nohair1,
+                nohair2: result[0].nohair2,
+                nohair3: result[0].nohair3,
+                vitaminc1: result[0].vitaminc1,
+                vitaminc2: result[0].vitaminc2,
+                vitaminc3: result[0].vitaminc3,
+                caffeine1: result[0].caffeine1,
+                caffeine2: result[0].caffeine2,
+                caffeine3: result[0].caffeine3,
+              });
+        });
+      });
     });
   };
   handleUser = (client) => {
@@ -181,7 +202,7 @@ class Genetic extends Component {
     // console.log('genetic', this.state.genetic);
     // console.log(this.props.userinfo.fitness_no);
     // console.log('client', this.state.client);
-    // console.log('idc', this.state.idc);
+    console.log('idc', this.state.idc);
     // console.log('member_no', this.state.member_no);
     // console.log(
     //   'measurementDate',
@@ -216,26 +237,41 @@ class Genetic extends Component {
         <Container>
           <Row className=''>
             <Col md={6} className='text-center mb-2'>
-              {this.state.open ? (
-                <UserSearch
-                  open={this.state.open}
-                  setOpen={(o) => this.setState({ open: o })}
-                  fitness_no={this.props.userinfo.fitness_no}
-                  loginWhether={this.props.userinfo.loginWhether}
-                  joinNo={this.props.userinfo.joinNo}
-                  handleUser={this.handleUser}
-                />
-              ) : (
+              {this.props.userinfo.loginWhether === 2 ? (
                 <TextField
                   id='customer_name'
-                  label='회원 선택'
+                  label='선택된 회원'
                   disabled
                   variant='standard'
-                  onClick={() => this.setState({ open: true })}
-                  className='boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5'
+                  className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
                   InputProps={{ disableUnderline: true }}
-                  value={this.state.client_name}
+                  value={this.props.userinfo.manager_name}
                 />
+              ) : this.state.open ? (
+                <div>
+                  <UserSearch
+                    open={this.state.open}
+                    setOpen={(o) => this.setState({ open: o })}
+                    fitness_no={this.props.userinfo.fitness_no}
+                    loginWhether={this.props.userinfo.loginWhether}
+                    joinNo={this.props.userinfo.joinNo}
+                    handleUser={this.handleUser}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <TextField
+                    id='customer_name'
+                    label='회원 선택'
+                    disabled
+                    variant='standard'
+                    onClick={() => this.setState({ open: true })}
+                    className='boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5'
+                    InputProps={{ disableUnderline: true }}
+                    value={this.state.client_name}
+                    style={{ cursor: 'pointer' }}
+                  />
+                </div>
               )}
             </Col>
             {this.state.genetic.length === 0 ? (
@@ -244,7 +280,10 @@ class Genetic extends Component {
                   to={{
                     pathname: '/geneticAdd',
                     state: {
-                      idc: this.state.idc,
+                      idc:
+                        this.props.userinfo.loginWhether === 2
+                          ? this.props.userinfo.joinNo
+                          : this.state.idc,
                     },
                   }}
                 >
@@ -259,7 +298,10 @@ class Genetic extends Component {
                   to={{
                     pathname: '/geneticAdd',
                     state: {
-                      idc: this.state.idc,
+                      idc:
+                        this.props.userinfo.loginWhether === 2
+                          ? this.props.userinfo.joinNo
+                          : this.state.idc,
                       well: 1,
                     },
                   }}
@@ -272,7 +314,9 @@ class Genetic extends Component {
             )}
           </Row>
 
-          {this.state.genetic.length === 0 ? (
+          {this.state.idc === undefined ? (
+            ''
+          ) : this.state.genetic.length === 0 ? (
             'DTC검사를 하지 않았습니다. DTC측정을 하려면 버튼을 누르세요'
           ) : (
             <div>
@@ -281,6 +325,22 @@ class Genetic extends Component {
                 {moment(this.state.measurementDate).format(
                   '  YYYY년 MM월 DD일'
                 )}
+              </Col>
+              <Col>
+                DTC Total Care 검사결과,
+                {this.state.bmi1 >= 1 ? '체질량지수, ' : ''}
+                {this.state.cholesterol1 >= 1 ? '콜레스테롤, ' : ''}
+                {this.state.triglyceride1 >= 1 ? '중성지방농도, ' : ''}
+                {this.state.hypertension1 >= 1 ? '혈압, ' : ''}
+                {this.state.bloodsugar1 >= 1 ? '혈당, ' : ''}
+                {this.state.pigmentation1 >= 1 ? '색소침착, ' : ''}
+                {this.state.skinfold1 >= 1 ? '피부노화, ' : ''}
+                {this.state.dermis1 >= 1 ? '피부탄력, ' : ''}
+                {this.state.hairthick1 >= 1 ? '모발굵기, ' : ''}
+                {this.state.nohair1 >= 1 ? '탈모, ' : ''}
+                {this.state.vitaminc1 >= 1 ? '비타민C, ' : ''}
+                {this.state.caffeine1 >= 1 ? '카페인 대사' : ''}
+                항목에서 위험 유전자가 확인되었습니다.
               </Col>
               <Row md={6}>
                 <Col>
