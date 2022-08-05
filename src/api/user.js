@@ -232,7 +232,9 @@ export const insertClient = (
   birth,
   sex,
   join_route,
-  address
+  address,
+  lockerNumber,
+  sportswear
 ) => {
   return axios.post(`${SERVER_URL}/client`, {
     fitness_no,
@@ -242,14 +244,25 @@ export const insertClient = (
     sex,
     join_route,
     address,
+    lockerNumber,
+    sportswear,
   });
 };
 //client update
-export const updateClient = (idc, client_name, phone, address) => {
+export const updateClient = (
+  idc,
+  client_name,
+  phone,
+  address,
+  lockerNumber,
+  sportswear
+) => {
   return axios.put(`${SERVER_URL}/client?idc=` + idc, {
     client_name,
     phone,
     address,
+    lockerNumber,
+    sportswear,
   });
 };
 // client, trainer update manager table phone, manager_name change

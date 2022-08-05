@@ -51,6 +51,8 @@ const ViewClientItem = ({
   join_route,
   address,
   start_date,
+  lockerNumber,
+  sportswear,
   idc,
   viewClient,
   loginWhether,
@@ -61,6 +63,8 @@ const ViewClientItem = ({
   const [client_name_input, setClient_name_input] = useState('');
   const [address_input, setAddress_input] = useState('');
   const [phone_input, setPhone_input] = useState('');
+  const [locker_input, setLocker_input] = useState(lockerNumber);
+  const [wear_input, setWear_input] = useState(sportswear);
 
   const modalClose = () => {
     setShowModal(false);
@@ -95,16 +99,21 @@ const ViewClientItem = ({
     } else if (address_input === '') {
       alert('주소를 입력해주세요.');
     } else {
-      updateClient(idc, client_name_input, phone_input, address_input).then(
-        () => {
-          updateManagerClientTrainer(idc, client_name_input, phone_input).then(
-            () => {}
-          );
-          modalClose();
-          setShowUpdate(false);
-          viewClient();
-        }
-      );
+      updateClient(
+        idc,
+        client_name_input,
+        phone_input,
+        address_input,
+        locker_input,
+        wear_input
+      ).then(() => {
+        updateManagerClientTrainer(idc, client_name_input, phone_input).then(
+          () => {}
+        );
+        modalClose();
+        setShowUpdate(false);
+        viewClient();
+      });
     }
   };
 
@@ -116,6 +125,15 @@ const ViewClientItem = ({
   };
   const updateChange3 = (e) => {
     setPhone_input(e.target.value);
+  };
+  const updateChange4 = (e) => {
+    setLocker_input(e.target.value);
+  };
+  const handleWear = () => {
+    setWear_input('미사용');
+  };
+  const handleWear2 = () => {
+    setWear_input('사용');
   };
   return (
     <TableRow>
@@ -175,6 +193,48 @@ const ViewClientItem = ({
               <h5 className='mb-1'>가입경로</h5>
               <p>{join_route}</p>
             </Col>
+            <Col xs={6} md={4} className='mb-2'>
+              <h5 className='mb-1'>사물함번호</h5>
+              {showUpdate ? (
+                <Form.Control
+                  type='number'
+                  value={locker_input}
+                  onChange={updateChange4}
+                />
+              ) : (
+                <p>{lockerNumber}</p>
+              )}
+            </Col>
+            <Col xs={6} md={4} className='mb-2'>
+              <h5 className='mb-1'>운동복사용여부</h5>
+              {showUpdate ? (
+                <Form.Group>
+                  <Form.Check inline>
+                    <Form.Check.Label htmlFor='route1' className='w-100'>
+                      미사용
+                    </Form.Check.Label>
+                    <Form.Check.Input
+                      type='radio'
+                      checked={wear_input === '미사용'}
+                      onChange={() => setWear_input('미사용')}
+                    />
+                  </Form.Check>
+                  <Form.Check inline>
+                    <Form.Check.Label htmlFor='route1' className='w-100'>
+                      사용
+                    </Form.Check.Label>
+                    <Form.Check.Input
+                      type='radio'
+                      checked={wear_input === '사용'}
+                      onChange={() => setWear_input('사용')}
+                    />
+                  </Form.Check>
+                </Form.Group>
+              ) : (
+                <p>{sportswear}</p>
+              )}
+            </Col>
+
             <Col className='text-center mt-4'>
               {showUpdate ? (
                 loginWhether === 1 ? (
@@ -305,6 +365,8 @@ class Client extends Component {
               join_route={data.join_route}
               address={data.address}
               start_date={data.start_date}
+              lockerNumber={data.lockerNumber}
+              sportswear={data.sportswear}
               idc={data.idc}
               viewClient={this.viewClient}
               loginWhether={this.props.userinfo.loginWhether}

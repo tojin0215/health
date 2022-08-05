@@ -44,6 +44,11 @@ class AddClient extends Component {
         route5: false,
         route6: false,
       },
+      lockerNumber: '',
+      radioGroup3: {
+        sportswear1: true,
+        sportswear2: false,
+      },
     };
   }
   goLogin = () => {
@@ -128,7 +133,13 @@ class AddClient extends Component {
                 : this.state.radioGroup2.route6
                 ? this.state.join_route
                 : '간판',
-              this.state.address
+              this.state.address,
+              this.state.lockerNumber,
+              this.state.radioGroup3.sportswear1
+                ? '미사용'
+                : this.state.radioGroup3.sportswear2
+                ? '사용'
+                : '미사용'
             ).then((res) => {
               // // console.log(res);
               // alert('client Table');
@@ -188,6 +199,18 @@ class AddClient extends Component {
       radioGroup2: obj,
     });
   };
+
+  handleWearRadio = (w) => {
+    let obj = {
+      sportswear1: false,
+      sportswear2: false,
+    };
+    obj[w.target.id] = w.target.checked;
+    this.setState({
+      radioGroup3: obj,
+    });
+  };
+
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
@@ -391,6 +414,46 @@ class AddClient extends Component {
                     value={this.state.address}
                     onChange={this.handleChange}
                   ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>사물함번호</Form.Label>
+                  <Form.Control
+                    id='lockerNumber'
+                    type='number'
+                    value={this.state.lockerNumber}
+                    onChange={this.handleChange}
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>운동복</Form.Label>
+                  <Form.Check inline>
+                    <Form.Check.Label htmlFor='route1' className='w-100'>
+                      미사용
+                    </Form.Check.Label>
+                    <Form.Check.Input
+                      type='radio'
+                      name='radioGroup3'
+                      id='sportswear1'
+                      checked={this.state.radioGroup3['sportswear1']}
+                      onChange={this.handleWearRadio}
+                    />
+                  </Form.Check>
+                  <Form.Check inline>
+                    <Form.Check.Label htmlFor='route1' className='w-100'>
+                      사용
+                    </Form.Check.Label>
+                    <Form.Check.Input
+                      type='radio'
+                      name='radioGroup3'
+                      id='sportswear2'
+                      checked={this.state.radioGroup3['sportswear2']}
+                      onChange={this.handleWearRadio}
+                    />
+                  </Form.Check>
                 </Form.Group>
               </Col>
               <Col xs={12} className='mt-4 text-center'>
