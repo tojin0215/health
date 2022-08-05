@@ -98,7 +98,7 @@ const ExerciseView = ({
       });
     }
   };
-  console.log('stage', stage);
+  // console.log('stage', stage);
 
   const [default_set_input, setDefault_set_input] = useState(default_set);
   const [default_count_input, setDefault_count_input] = useState(default_count);

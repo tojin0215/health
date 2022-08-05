@@ -725,3 +725,207 @@ export const changeLoginwhether = (id, loginWhether) => {
     loginWhether: loginWhether,
   });
 };
+
+//select genetic
+export const geneticSelect = (fitness_no, member_no) => {
+  return axios
+    .get(
+      `${SERVER_URL}/genetic?fitness_no=` +
+        fitness_no +
+        `&member_no=` +
+        member_no,
+      {}
+    )
+    .then((response) => response.data);
+};
+
+//insert genetic
+export const geneticInsert = (
+  fitness_no,
+  member_no,
+  measurementDate,
+  bmi1,
+  bmi2,
+  bmi3,
+  cholesterol1,
+  cholesterol2,
+  cholesterol3,
+  triglyceride1,
+  triglyceride2,
+  triglyceride3,
+  hypertension1,
+  hypertension2,
+  hypertension3,
+  bloodsugar1,
+  bloodsugar2,
+  bloodsugar3,
+  pigmentation1,
+  pigmentation2,
+  pigmentation3,
+  skinfold1,
+  skinfold2,
+  skinfold3,
+  dermis1,
+  dermis2,
+  dermis3,
+  hairthick1,
+  hairthick2,
+  hairthick3,
+  nohair1,
+  nohair2,
+  nohair3,
+  vitaminc1,
+  vitaminc2,
+  vitaminc3,
+  caffeine1,
+  caffeine2,
+  caffeine3
+) => {
+  return axios.post(`${SERVER_URL}/genetic`, {
+    fitness_no,
+    member_no,
+    measurementDate,
+    bmi1,
+    bmi2,
+    bmi3,
+    cholesterol1,
+    cholesterol2,
+    cholesterol3,
+    triglyceride1,
+    triglyceride2,
+    triglyceride3,
+    hypertension1,
+    hypertension2,
+    hypertension3,
+    bloodsugar1,
+    bloodsugar2,
+    bloodsugar3,
+    pigmentation1,
+    pigmentation2,
+    pigmentation3,
+    skinfold1,
+    skinfold2,
+    skinfold3,
+    dermis1,
+    dermis2,
+    dermis3,
+    hairthick1,
+    hairthick2,
+    hairthick3,
+    nohair1,
+    nohair2,
+    nohair3,
+    vitaminc1,
+    vitaminc2,
+    vitaminc3,
+    caffeine1,
+    caffeine2,
+    caffeine3,
+  });
+};
+
+//client select fitness_no, idc
+export const clientSetname = (idc, fitness_no) => {
+  return axios
+    .get(
+      `${SERVER_URL}/client?type=select&idc=` +
+        idc +
+        `&fitness_no=` +
+        fitness_no
+    )
+    .then((response) => response.data);
+};
+
+//delete genetic
+export const geneticDestroy = (member_no) => {
+  return axios.delete(`${SERVER_URL}/genetic?member_no=` + member_no);
+};
+
+//update genetic
+export const genticUpdate = (
+  fitness_no,
+  member_no,
+  measurementDate,
+  bmi1,
+  bmi2,
+  bmi3,
+  cholesterol1,
+  cholesterol2,
+  cholesterol3,
+  triglyceride1,
+  triglyceride2,
+  triglyceride3,
+  hypertension1,
+  hypertension2,
+  hypertension3,
+  bloodsugar1,
+  bloodsugar2,
+  bloodsugar3,
+  pigmentation1,
+  pigmentation2,
+  pigmentation3,
+  skinfold1,
+  skinfold2,
+  skinfold3,
+  dermis1,
+  dermis2,
+  dermis3,
+  hairthick1,
+  hairthick2,
+  hairthick3,
+  nohair1,
+  nohair2,
+  nohair3,
+  vitaminc1,
+  vitaminc2,
+  vitaminc3,
+  caffeine1,
+  caffeine2,
+  caffeine3
+) => {
+  return axios.put(
+    `${SERVER_URL}/genetic?fitness_no=` +
+      fitness_no +
+      `&member_no=` +
+      member_no,
+    {
+      measurementDate,
+      bmi1,
+      bmi2,
+      bmi3,
+      cholesterol1,
+      cholesterol2,
+      cholesterol3,
+      triglyceride1,
+      triglyceride2,
+      triglyceride3,
+      hypertension1,
+      hypertension2,
+      hypertension3,
+      bloodsugar1,
+      bloodsugar2,
+      bloodsugar3,
+      pigmentation1,
+      pigmentation2,
+      pigmentation3,
+      skinfold1,
+      skinfold2,
+      skinfold3,
+      dermis1,
+      dermis2,
+      dermis3,
+      hairthick1,
+      hairthick2,
+      hairthick3,
+      nohair1,
+      nohair2,
+      nohair3,
+      vitaminc1,
+      vitaminc2,
+      vitaminc3,
+      caffeine1,
+      caffeine2,
+      caffeine3,
+    }
+  );
+};
