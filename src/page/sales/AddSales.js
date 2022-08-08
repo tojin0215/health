@@ -93,6 +93,11 @@ class AddSales extends Component {
         etc: false,
       },
       etcExercise: '',
+      payGroup: {
+        card: true,
+        cash: false,
+        transfer: false,
+      },
     };
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -201,7 +206,13 @@ class AddSales extends Component {
           exercisePrice: exercisePrice1,
           lockerPrice: lockerPrice1,
           sportswearPrice: sportswearPrice1,
-          paymentTools: '카드', //수정
+          paymentTools: this.state.payGroup.card
+            ? '카드'
+            : this.state.payGroup.cash
+            ? '현금'
+            : this.state.payGroup.transfer
+            ? '계좌이체'
+            : '카드',
           paymentDate: this.state.paymentDate,
           paidMembership:
             this.state.checkboxGroup['paidMembershipCheckbox'] == false
@@ -265,6 +276,17 @@ class AddSales extends Component {
   };
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
+  };
+  handlePayRadio = (e) => {
+    let obj = {
+      card: false,
+      cash: false,
+      transfer: false,
+    };
+    obj[e.target.id] = e.target.checked;
+    this.setState({
+      payGroup: obj,
+    });
   };
 
   render() {
@@ -494,7 +516,13 @@ class AddSales extends Component {
                 <Row>
                   <Col xs={12} sm={2}>
                     <Form.Check>
-                      <Form.Check.Input />
+                      <Form.Check.Input
+                        type='radio'
+                        name='payGroup'
+                        id='card'
+                        checked={this.state.payGroup['card']}
+                        onChange={this.handlePayRadio}
+                      />
                       <Form.Check.Label htmlFor='카드' className='w-100'>
                         카드
                       </Form.Check.Label>
@@ -502,7 +530,13 @@ class AddSales extends Component {
                   </Col>
                   <Col xs={12} sm={2}>
                     <Form.Check>
-                      <Form.Check.Input />
+                      <Form.Check.Input
+                        type='radio'
+                        name='payGroup'
+                        id='cash'
+                        checked={this.state.payGroup['cash']}
+                        onChange={this.handlePayRadio}
+                      />
                       <Form.Check.Label htmlFor='현금' className='w-100'>
                         현금
                       </Form.Check.Label>
@@ -510,7 +544,13 @@ class AddSales extends Component {
                   </Col>
                   <Col xs={12} sm={2}>
                     <Form.Check>
-                      <Form.Check.Input />
+                      <Form.Check.Input
+                        type='radio'
+                        name='payGroup'
+                        id='transfer'
+                        checked={this.state.payGroup['transfer']}
+                        onChange={this.handlePayRadio}
+                      />
                       <Form.Check.Label htmlFor='계좌이체' className='w-100'>
                         계좌이체
                       </Form.Check.Label>

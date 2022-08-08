@@ -709,9 +709,9 @@ class Sales extends Component {
   render() {
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.salesViewList);
-    // console.log(this.state.exerciseViewList);
+    console.log(this.state.exerciseViewList);
     // console.log(this.state.card);
-    // console.log(this.state.today);
+    console.log(this.state.today);
 
     return (
       <div className='wrap sales'>
@@ -863,9 +863,9 @@ class Sales extends Component {
                     <Button
                       variant='outline-dark'
                       className='m-1'
-                      onClick={() => this.salesToday1('', '개인 PT')}
+                      onClick={() => this.salesToday1('', '개인PT')}
                     >
-                      개인 PT
+                      개인PT
                     </Button>
                     <Button
                       variant='outline-dark'
@@ -901,9 +901,9 @@ class Sales extends Component {
                     <Button
                       variant='outline-dark'
                       className='m-1'
-                      onClick={() => this.salesToday2('', '개인 PT')}
+                      onClick={() => this.salesToday2('', '개인PT')}
                     >
-                      개인 PT
+                      개인PT
                     </Button>
                     <Button
                       variant='outline-dark'
@@ -939,9 +939,9 @@ class Sales extends Component {
                     <Button
                       variant='outline-dark'
                       className='m-1'
-                      onClick={() => this.salesToday3('', '개인 PT')}
+                      onClick={() => this.salesToday3('', ' PT')}
                     >
-                      개인 PT
+                      개인PT
                     </Button>
                     <Button
                       variant='outline-dark'
@@ -977,9 +977,9 @@ class Sales extends Component {
                     <Button
                       variant='outline-dark'
                       className='m-1'
-                      onClick={() => this.salesViewExercise('개인 PT')}
+                      onClick={() => this.salesViewExercise('개인PT')}
                     >
-                      개인 PT
+                      개인PT
                     </Button>
                     <Button
                       variant='outline-dark'
