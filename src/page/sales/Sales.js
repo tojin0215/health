@@ -939,7 +939,7 @@ class Sales extends Component {
                     <Button
                       variant='outline-dark'
                       className='m-1'
-                      onClick={() => this.salesToday3('', ' PT')}
+                      onClick={() => this.salesToday3('', '개인PT')}
                     >
                       개인PT
                     </Button>
