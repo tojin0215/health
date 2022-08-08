@@ -215,6 +215,7 @@ class Sales extends Component {
       } else {
         this.salesView();
         this.cashView();
+        this.handleButton('당일');
       }
     });
   }
@@ -443,19 +444,18 @@ class Sales extends Component {
     });
   };
 
-  //한달 조회
+  //당월 조회
   salesToday3 = (tools, exercise) => {
     let startTime = new Date(
       this.state.today.getFullYear(),
       this.state.today.getMonth(),
-      this.state.today.getDate()
+      1
     );
     let endTime = new Date(
       this.state.today.getFullYear(),
       this.state.today.getMonth() + 1,
-      this.state.today.getDate()
+      0
     );
-
     salesSelect2(
       this.props.userinfo.fitness_no,
       startTime,
@@ -570,14 +570,14 @@ class Sales extends Component {
     });
   };
 
-  //당일, 한 달 버튼
+  //당일, 당월 버튼
   handleButton = (e, tools, exercise) => {
-    let startTime = new Date(
-      this.state.today.getFullYear(),
-      this.state.today.getMonth(),
-      this.state.today.getDate()
-    );
     if (e === '당일') {
+      let startTime = new Date(
+        this.state.today.getFullYear(),
+        this.state.today.getMonth(),
+        this.state.today.getDate()
+      );
       let endTime = new Date(
         this.state.today.getFullYear(),
         this.state.today.getMonth(),
@@ -634,11 +634,16 @@ class Sales extends Component {
           exerciseViewList: [],
         });
       });
-    } else if (e === '한 달') {
+    } else if (e === '당월') {
+      let startTime = new Date(
+        this.state.today.getFullYear(),
+        this.state.today.getMonth(),
+        1
+      );
       let endTime = new Date(
         this.state.today.getFullYear(),
         this.state.today.getMonth() + 1,
-        this.state.today.getDate()
+        0
       );
       let card = 0;
       let cash = 0;
@@ -686,6 +691,7 @@ class Sales extends Component {
           transfer: transfer,
           total: card + cash + transfer,
           salesViewList: items.reverse(),
+          today: startTime,
           tommorrow: endTime,
           toolsViewList: [],
           exerciseViewList: [],
@@ -705,6 +711,7 @@ class Sales extends Component {
     // console.log(this.state.salesViewList);
     // console.log(this.state.exerciseViewList);
     // console.log(this.state.card);
+    // console.log(this.state.today);
 
     return (
       <div className='wrap sales'>
@@ -744,11 +751,11 @@ class Sales extends Component {
             </Col>
             <Col xs={2}>
               <Button
-                onClick={() => this.handleButton('한 달')}
+                onClick={() => this.handleButton('당월')}
                 variant='outline-primary'
                 className='w-100'
               >
-                한 달
+                당월
               </Button>
             </Col>
             <Col xs={3}>
@@ -759,8 +766,6 @@ class Sales extends Component {
                 onChange={(date) => this.setState({ today: date })}
               />
             </Col>
-            {/* <Col xs={1}>
-            </Col> */}
             <Col xs={3}>
               <DatePicker
                 className='sales__calender--dateinput w-100 text-center'

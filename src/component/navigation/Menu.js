@@ -54,7 +54,7 @@ class Menu extends Component {
   // }
   render() {
     const { userinfo } = this.props;
-    console.log(userinfo.loginWhether);
+    // console.log(userinfo.loginWhether);
 
     $('#menu-icon')
       .off('click')

@@ -31,7 +31,7 @@ class Navigation extends Component {
   render() {
     const { userinfo } = this.props;
     // console.log(userinfo);
-    console.log(this.props.userinfo);
+    // console.log(this.props.userinfo);
     return (
       //2:회원, 1:강사, else(0):헬스장
       <div className='Navigation'>
