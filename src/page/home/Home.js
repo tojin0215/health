@@ -327,7 +327,6 @@ class Home extends Component {
                 <Link to='/trainer'>
                   <div className='home__shortcut-box'>
                     <Image
-                      className='w-100 h-100'
                       src={
                         process.env.PUBLIC_URL +
                         '/assets/home__content-coach.jpg'
@@ -341,7 +340,6 @@ class Home extends Component {
                 <Link to='/reservation'>
                   <div className='home__shortcut-box'>
                     <Image
-                      className='w-100 h-100'
                       src={
                         process.env.PUBLIC_URL +
                         '/assets/home__content-class.jpg'
@@ -355,7 +353,6 @@ class Home extends Component {
                 <Link to='/workoutAlloted'>
                   <div className='home__shortcut-box'>
                     <Image
-                      className='w-100 h-100'
                       src={
                         process.env.PUBLIC_URL +
                         '/assets/home__content-workout.jpg'
@@ -369,7 +366,6 @@ class Home extends Component {
                 <Link to='/sales'>
                   <div className='home__shortcut-box'>
                     <Image
-                      className='w-100 h-100'
                       src={
                         process.env.PUBLIC_URL +
                         '/assets/home__content-sales.jpg'

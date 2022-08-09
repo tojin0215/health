@@ -66,6 +66,7 @@ module.exports = {
     //plugin:prettier/recommended
     'prettier/prettier': 0,
 
+    'import/namespace': 1,
     /*
     외부 소스로 가져왔으므로 오류 확인 및 기능 적합 확인 후 적용
     'no-restricted-globals': 1,
