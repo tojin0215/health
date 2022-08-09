@@ -270,7 +270,7 @@ class GeneticAdd extends Component {
           this.state.caffeine2,
           this.state.caffeine3
         ).then(() => {
-          alert('DTC가 등록되었습니다.');
+          alert('DTC 정보가 등록되었습니다.');
           this.props.history.push('/genetic');
         });
       });
@@ -400,7 +400,7 @@ class GeneticAdd extends Component {
             </Row>
           </div>
           <div className='sectionGlass mt-1 p-4'>
-            <Row xs={3} className='dtc-add__lamp'>
+            <Row xs={3} className='dtc__lamp-explain'>
               <Col>
                 <CircleIcon /> 위험 유전자 수
               </Col>
@@ -413,7 +413,7 @@ class GeneticAdd extends Component {
             </Row>
             <Row className='py-4'>
               <Col xs={3}>
-                측정일:
+                측정일
                 <DatePicker
                   selected={this.state.measurementDate}
                   onChange={this.handleDateChange}
@@ -422,9 +422,9 @@ class GeneticAdd extends Component {
                 />
               </Col>
             </Row>
-            <Row md={6}>
+            <Row md={6} className='dtc-add__input-box g-5'>
               <Col>
-                <Row xs={3} className='dtc-add__lamp'>
+                <Row xs={3} className='dtc__lamp'>
                   <Col xs={12}>
                     <Image
                       src={process.env.PUBLIC_URL + '/assets/dtc-img1.png'}
@@ -461,13 +461,13 @@ class GeneticAdd extends Component {
                 </Row>
               </Col>
               <Col>
-                <Col xs={12}>
-                  <Image
-                    src={process.env.PUBLIC_URL + '/assets/dtc-img2.png'}
-                  />
-                </Col>
-                <Col xs={12}>콜레스테롤</Col>
-                <Row xs={3} className='dtc-add__lamp'>
+                <Row xs={3} className='dtc__lamp'>
+                  <Col xs={12}>
+                    <Image
+                      src={process.env.PUBLIC_URL + '/assets/dtc-img2.png'}
+                    />
+                  </Col>
+                  <Col xs={12}>콜레스테롤</Col>
                   <Col>
                     <CircleIcon />
                     <input
@@ -498,13 +498,13 @@ class GeneticAdd extends Component {
                 </Row>
               </Col>
               <Col>
-                <Col xs={12}>
-                  <Image
-                    src={process.env.PUBLIC_URL + '/assets/dtc-img3.png'}
-                  />
-                </Col>
-                <Col xs={12}>중성지방농도</Col>
-                <Row xs={3} className='dtc-add__lamp'>
+                <Row xs={3} className='dtc__lamp'>
+                  <Col xs={12}>
+                    <Image
+                      src={process.env.PUBLIC_URL + '/assets/dtc-img3.png'}
+                    />
+                  </Col>
+                  <Col xs={12}>중성지방농도</Col>
                   <Col>
                     <CircleIcon />
                     <input
@@ -534,228 +534,350 @@ class GeneticAdd extends Component {
                   </Col>
                 </Row>
               </Col>
-              <Row xs={3} className='dtc-add__lamp'>
-                <Col>
-                  혈압
-                  <p>
+              <Col>
+                <Row xs={3} className='dtc__lamp'>
+                  <Col xs={12}>
+                    <Image
+                      src={process.env.PUBLIC_URL + '/assets/dtc-img4.png'}
+                    />
+                  </Col>
+                  <Col xs={12}>혈압</Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.hypertension1}
                       onChange={this.handleChange}
                       type='number'
                       id='hypertension1'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.hypertension2}
                       onChange={this.handleChange}
                       type='number'
                       id='hypertension2'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.hypertension3}
                       onChange={this.handleChange}
                       type='number'
                       id='hypertension3'
                     />
-                  </p>
-                </Col>
-              </Row>
-              <Row xs={3} className='dtc-add__lamp'>
-                <Col>
-                  색소침착
-                  <p>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row xs={3} className='dtc__lamp'>
+                  <Col xs={12}>
+                    <Image
+                      src={process.env.PUBLIC_URL + '/assets/dtc-img5.png'}
+                    />
+                  </Col>
+                  <Col xs={12}>혈당</Col>
+                  <Col>
+                    <CircleIcon />
+                    <input
+                      value={this.state.bloodsugar1}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='bloodsugar1'
+                    />
+                  </Col>
+                  <Col>
+                    <CircleIcon />
+                    <input
+                      value={this.state.bloodsugar2}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='bloodsugar2'
+                    />
+                  </Col>
+                  <Col>
+                    <CircleIcon />
+                    <input
+                      value={this.state.bloodsugar3}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='bloodsugar3'
+                    />
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row xs={3} className='dtc__lamp'>
+                  <Col xs={12}>
+                    <Image
+                      src={process.env.PUBLIC_URL + '/assets/dtc-img6.png'}
+                    />
+                  </Col>
+                  <Col xs={12}>색소침착</Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.pigmentation1}
                       onChange={this.handleChange}
                       type='number'
                       id='pigmentation1'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.pigmentation2}
                       onChange={this.handleChange}
                       type='number'
                       id='pigmentation2'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.pigmentation3}
                       onChange={this.handleChange}
                       type='number'
                       id='pigmentation3'
                     />
-                  </p>
-                </Col>
-              </Row>
-              <Row xs={3} className='dtc-add__lamp'>
-                <Col>
-                  피부노화
-                  <p>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row xs={3} className='dtc__lamp'>
+                  <Col xs={12}>
+                    <Image
+                      src={process.env.PUBLIC_URL + '/assets/dtc-img7.png'}
+                    />
+                  </Col>
+                  <Col xs={12}>피부노화</Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.skinfold1}
                       onChange={this.handleChange}
                       type='number'
                       id='skinfold1'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.skinfold2}
                       onChange={this.handleChange}
                       type='number'
                       id='skinfold2'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.skinfold3}
                       onChange={this.handleChange}
                       type='number'
                       id='skinfold3'
                     />
-                  </p>
-                </Col>
-              </Row>
-              <Row xs={3} className='dtc-add__lamp'>
-                <Col>
-                  피부탄력
-                  <p>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row xs={3} className='dtc__lamp'>
+                  <Col xs={12}>
+                    <Image
+                      src={process.env.PUBLIC_URL + '/assets/dtc-img8.png'}
+                    />
+                  </Col>
+                  <Col xs={12}>피부탄력</Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.dermis1}
                       onChange={this.handleChange}
                       type='number'
                       id='dermis1'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.dermis2}
                       onChange={this.handleChange}
                       type='number'
                       id='dermis2'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.dermis3}
                       onChange={this.handleChange}
                       type='number'
                       id='dermis3'
                     />
-                  </p>
-                </Col>
-              </Row>
-              <Row xs={3} className='dtc-add__lamp'>
-                <Col>
-                  모발굵기
-                  <p>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row xs={3} className='dtc__lamp'>
+                  <Col xs={12}>
+                    <Image
+                      src={process.env.PUBLIC_URL + '/assets/dtc-img9.png'}
+                    />
+                  </Col>
+                  <Col xs={12}>모발굵기</Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.hairthick1}
                       onChange={this.handleChange}
                       type='number'
                       id='hairthick1'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.hairthick2}
                       onChange={this.handleChange}
                       type='number'
                       id='hairthick2'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.hairthick3}
                       onChange={this.handleChange}
                       type='number'
                       id='hairthick3'
                     />
-                  </p>
-                </Col>
-              </Row>
-              <Row xs={3} className='dtc-add__lamp'>
-                <Col>
-                  탈모
-                  <p>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row xs={3} className='dtc__lamp'>
+                  <Col xs={12}>
+                    <Image
+                      src={process.env.PUBLIC_URL + '/assets/dtc-img10.png'}
+                    />
+                  </Col>
+                  <Col xs={12}>탈모</Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.nohair1}
                       onChange={this.handleChange}
                       type='number'
                       id='nohair1'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.nohair2}
                       onChange={this.handleChange}
                       type='number'
                       id='nohair2'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.nohair3}
                       onChange={this.handleChange}
                       type='number'
                       id='nohair3'
                     />
-                  </p>
-                </Col>
-              </Row>
-              <Row xs={3} className='dtc-add__lamp'>
-                <Col>
-                  비타민C
-                  <p>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row xs={3} className='dtc__lamp'>
+                  <Col xs={12}>
+                    <Image
+                      src={process.env.PUBLIC_URL + '/assets/dtc-img11.png'}
+                    />
+                  </Col>
+                  <Col xs={12}>비타민C</Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.vitaminc1}
                       onChange={this.handleChange}
                       type='number'
                       id='vitaminc1'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.vitaminc2}
                       onChange={this.handleChange}
                       type='number'
                       id='vitaminc2'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.vitaminc3}
                       onChange={this.handleChange}
                       type='number'
                       id='vitaminc3'
                     />
-                  </p>
-                </Col>
-              </Row>
-              <Row xs={3} className='dtc-add__lamp'>
-                <Col>
-                  카페인 대사
-                  <p>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row xs={3} className='dtc__lamp'>
+                  <Col xs={12}>
+                    <Image
+                      src={process.env.PUBLIC_URL + '/assets/dtc-img12.png'}
+                    />
+                  </Col>
+                  <Col xs={12}>카페인 대사</Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.caffeine1}
                       onChange={this.handleChange}
                       type='number'
                       id='caffeine1'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.caffeine2}
                       onChange={this.handleChange}
                       type='number'
                       id='caffeine2'
                     />
-                    /
+                  </Col>
+                  <Col>
+                    <CircleIcon />
                     <input
                       value={this.state.caffeine3}
                       onChange={this.handleChange}
                       type='number'
                       id='caffeine3'
                     />
-                  </p>
-                </Col>
-              </Row>
-              <Row xs={3} className='dtc-add__lamp'></Row>
-              <Col>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <Row className='pt-4'>
+              <Col className='text-center'>
                 {this.state.well ? (
-                  <Button onClick={this.handleUpdate}>put테스트</Button>
+                  <Button className='w-100' onClick={this.handleUpdate}>
+                    수정하기
+                  </Button>
                 ) : (
-                  <Button onClick={this.handleClick}>post테스트</Button>
+                  <Button className='w-100' onClick={this.handleClick}>
+                    입력하기
+                  </Button>
                 )}
               </Col>
             </Row>
