@@ -413,6 +413,7 @@ class Home extends Component {
                 </div>
               </Col>
               <Col xs={4}>
+                {/* misson */}
                 <div className='home__mission--contents'>
                   <div className='home__mission--img-box'>
                     <Image
