@@ -10,10 +10,6 @@ body {
   height: 100%;
 }
 
-#root > div > div > div {
-  padding-top: 4.4rem;
-}
-
 #root > div > .wrap {
   min-height: 100%;
   position: relative;

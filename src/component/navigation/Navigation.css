@@ -1,5 +1,6 @@
 .header {
   position: relative;
+  padding-top: 4.4rem;
 }
 
 .Navigation {
@@ -108,5 +109,8 @@
 @media (max-width: 1023px) {
   .wrap .Navigation {
     display: none;
+  }
+  .header {
+    padding-top: 0;
   }
 }
