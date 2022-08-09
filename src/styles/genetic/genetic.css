@@ -1,0 +1,57 @@
+.dtc__label {
+}
+.dtc__label-date {
+  padding: 16px;
+  border: 1px solid;
+  border-radius: 15px;
+  margin: 0 10px 26px;
+}
+.dtc__label-date span {
+  padding: 1rem;
+  font-weight: 800;
+}
+
+.dtc__risk-factor {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: coral;
+  padding: 6px;
+}
+.dtc__lamp-explain {
+  border: 1px solid #fff;
+  padding: 12px;
+  border-radius: 26px;
+  margin: 4px;
+}
+.dtc__lamp-explain .col:nth-child(1) {
+  color: coral;
+}
+.dtc__lamp-explain .col:nth-child(2) {
+  color: gold;
+}
+.dtc__lamp-explain .col:nth-child(3) {
+  color: lightgreen;
+}
+.dtc__lamp-box > .col {
+  padding: 1rem 1.8rem;
+}
+.dtc__lamp {
+  text-align: center;
+}
+.dtc__lamp .col:nth-child(3) {
+  color: coral;
+  padding-right: calc(var(--bs-gutter-x) * 0.0002);
+}
+.dtc__lamp .col:nth-child(4) {
+  color: gold;
+  padding-left: calc(var(--bs-gutter-x) * 0.25);
+  padding-right: calc(var(--bs-gutter-x) * 0.25);
+}
+.dtc__lamp .col:nth-child(5) {
+  color: lightgreen;
+  padding-left: calc(var(--bs-gutter-x) * 0.0002);
+}
+
+.dtc-add input {
+  width: 100%;
+}
