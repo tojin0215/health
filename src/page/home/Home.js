@@ -453,9 +453,7 @@ class Home extends Component {
             </Row>
           </Container>
         </section>
-        <div className='footer'>
-          <Footer />
-        </div>
+        <Footer />
       </div>
     );
   }

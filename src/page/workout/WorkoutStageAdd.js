@@ -1465,9 +1465,7 @@ class WorkoutStageAdd extends Component {
             />
           </TableContainer>
         </Container>
-        <div className='footer'>
-          <Footer />
-        </div>
+        <Footer />
       </div>
     );
   }
