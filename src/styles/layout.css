@@ -138,7 +138,7 @@ body {
 
 #root > div > div {
   position: relative;
-  padding-bottom: 150px;
+  padding-bottom: 120px;
 }
 
 .wrap {
@@ -169,7 +169,6 @@ section {
 }
 
 h5 {
-  display: flex;
   font-weight: 700;
   align-items: center;
 }

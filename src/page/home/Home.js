@@ -21,7 +21,6 @@ import Button from 'react-bootstrap/Button';
 
 // 이미지 파일 관련
 // import MainVisual1 from 'url(/src/img/mainVisual1.png)';
-import MainVisual1 from '../../../src/img/mainVisual1.png';
 import btnCustomer from '../../../src/img/btnCustomer.png';
 import btnSetting from '../../../src/img/btnSetting.png';
 import btnExercise from '../../../src/img/btnExercise.png';
@@ -227,104 +226,64 @@ class Home extends Component {
           <Menu goLogin={this.goLogin} />
           <NewMenu />
           {/* <DrawerAppBar /> */}
-          {this.props.userinfo.loginWhether === 2 ? (
-            ''
-          ) : this.props.userinfo.loginWhether === 1 ? (
-            ''
-          ) : (
-            <div className='localNavigation'>
-              <div className='container'>
-                {/* <Menu /> */}
-                <Row className='dashboard' xs={2}>
-                  <Col className='homeDashLeft h-100' xs={2}>
-                    <label>
-                      {/* <p>오늘 방문고객</p> */}
-                      {/* <span>{this.fommat(this.state.todayCustomer)}</span> */}
-                    </label>
-                    <label>
-                      <p>등록된 회원</p>
-                      <span>{this.fommat(this.state.totalClient)}</span>
-                    </label>
-                  </Col>
-                  <Col className='homeDashRight' xs={2}>
-                    <label>
-                      <p className=''>당일 매출</p>
-                      <span>{this.fommat(this.state.todaySales)}</span>
-                    </label>
-                    <label>
-                      <p className=''>월 매출</p>
-                      <span>{this.fommat(this.state.monthSales)}</span>
-                    </label>
-                  </Col>
-                </Row>
-                <div></div>
-                {/*.dashboard */}
-              </div>
-              {/*.container */}
-            </div>
-          )}
-          {/*.localNavigation */}
         </div>
         {/*.header */}
-        <div className='home__mainvisual'>
-          <Container>
-            <Row xs={1} md={2} className='home__mainvisual--content'>
-              <Col className='py-4 px-5 fs-1'>
-                <h3>
-                  새로워진 피트니스 센터 관리{' '}
-                  <span className='fs-1 text-primary'>divvy</span>
-                </h3>
-                {this.props.userinfo.loginWhether === 2 ? (
-                  <ul className='text-center'>
-                    <li>
-                      <Link to='introduce'>센터 소개</Link>
-                    </li>
-                    <li>
-                      <Link to='inbodies'>인바디 정보</Link>
-                    </li>
-                    <li>
-                      <Link to='reservation'>🗓 수업 예약</Link>
-                    </li>
-                  </ul>
-                ) : this.props.userinfo.loginWhether === 1 ? (
-                  <ul className='text-center'>
-                    <li>
-                      <Link to='/client'>🐥 회원 관리</Link>
-                    </li>
-                    <li>
-                      <Link to='reservation'>🗓 수업 예약</Link>
-                    </li>
-                    <li>
-                      <Link to='workoutAlloted'>🤸 운동 배정</Link>
-                    </li>
-                  </ul>
-                ) : (
-                  <ul className='text-center'>
-                    <li>
-                      <Link to='/trainer'>🐔 강사 관리</Link>
-                    </li>
-                    <li>
-                      <Link to='/client'>🐥 회원 관리</Link>
-                    </li>
-                    <li>
-                      <Link to='reservation'>🗓 수업 예약</Link>
-                    </li>
-                    <li>
-                      <Link to='workoutAlloted'>🤸 운동 배정</Link>
-                    </li>
-                    <li>
-                      <Link to='sales'>📊 매출 관리</Link>
-                    </li>
-                  </ul>
-                )}
-              </Col>
-              <Col className='text-center home__main-visual--image-box'>
-                <Image
-                  roundedCircle
-                  src={process.env.PUBLIC_URL + '/assets/mainvisual.svg'}
-                />
-              </Col>
-            </Row>
+        <div
+          className='home__mainvisual'
+          style={{
+            backgroundImage: 'url(/assets/home__main-visual.jpg)',
+          }}
+        >
+          <Container className='home__main-visual--content'>
+            <div className='home__main-visual--logo'>
+              <p>새로워진 피트니스 센터 관리</p>
+              <h2>DIVVY</h2>
+            </div>
+            <div className='home__main-visual--menu'>
+              {this.props.userinfo.loginWhether === 2 ? (
+                <ul className='text-cente'>
+                  <li>
+                    <Link to='introduce'>센터 소개</Link>
+                  </li>
+                  <li>
+                    <Link to='inbodies'>인바디 정보</Link>
+                  </li>
+                  <li>
+                    <Link to='reservation'>수업 예약</Link>
+                  </li>
+                </ul>
+              ) : this.props.userinfo.loginWhether === 1 ? (
+                <ul className='text-center'>
+                  <li>
+                    <Link to='/client'>회원 관리</Link>
+                  </li>
+                  <li>
+                    <Link to='reservation'>수업 예약</Link>
+                  </li>
+                  <li>
+                    <Link to='workoutAlloted'>운동 배정</Link>
+                  </li>
+                </ul>
+              ) : (
+                <ul className='text-center d-flex'>
+                  <li>
+                    <Link to='/trainer'>강사 관리</Link>
+                  </li>
+                  <li>
+                    <Link to='/client'>회원 관리</Link>
+                  </li>
+                  <li>
+                    <Link to='reservation'>수업 예약</Link>
+                  </li>
+                  <li>
+                    <Link to='workoutAlloted'>운동 배정</Link>
+                  </li>
+                  <li>
+                    <Link to='sales'>매출 관리</Link>
+                  </li>
+                </ul>
+              )}
+            </div>
           </Container>
         </div>
         <Container>
@@ -341,161 +300,160 @@ class Home extends Component {
               />
             }
           </div>
-          <section className='homeAbout'>
-            <h3>
-              <div className='parallelogram'></div>
-              About 헬스케어CRM 서비스{' '}
-              <span className='text-primary px-2 fs-1'> divvy</span>
-            </h3>
-            <p>
-              헬스 회원 스마트 관리 시스템으로 기존 회원 관리 방식에서 탈피하여
+          <section className='home__about'>
+            <h4 className='home_about--title'>
+              About 헬스케어CRM 서비스 DIVVY
+            </h4>
+            <p className='home_about--explain'>
+              헬스 회원 스마트 관리 시스템으로 <br /> 기존 회원 관리 방식에서
+              탈피하여 <br />
               쉬운 회원관리, 스마트한 서비스를 제공합니다.
             </p>
             <Row xs={2} md={5} className='home__shortcut'>
               <Col>
-                <Link
-                  to='/client'
-                  className='p-1 align-items-center'
-                  style={{
-                    backgroundColor: '#fff',
-                  }}
-                >
-                  <div className='home__shortcut--hover'>회원 관리</div>
-                  <Image
-                    className='w-100 h-100'
-                    src={process.env.PUBLIC_URL + '/assets/home-client.svg'}
-                  />
+                <Link to='/client'>
+                  <div className='home__shortcut-box'>
+                    <Image
+                      src={
+                        process.env.PUBLIC_URL +
+                        '/assets/home__content-client.jpg'
+                      }
+                    />
+                    <h5>회원 관리</h5>
+                  </div>
                 </Link>
-                <h5 className='justify-content-center mt-2'>회원 관리</h5>
               </Col>
               <Col>
-                <Link
-                  to='/trainer'
-                  className='p-1 align-items-center'
-                  style={{
-                    backgroundColor: '#fff',
-                  }}
-                >
-                  <div className='home__shortcut--hover'>강사 관리</div>
-                  <Image
-                    className='w-100 h-100'
-                    src={process.env.PUBLIC_URL + '/assets/home-trainer.svg'}
-                  />
+                <Link to='/trainer'>
+                  <div className='home__shortcut-box'>
+                    <Image
+                      className='w-100 h-100'
+                      src={
+                        process.env.PUBLIC_URL +
+                        '/assets/home__content-coach.jpg'
+                      }
+                    />
+                    <h5>강사 관리</h5>
+                  </div>
                 </Link>
-                <h5 className='justify-content-center mt-2'>강사 관리</h5>
               </Col>
               <Col>
-                <Link
-                  to='/reservation'
-                  className='p-1 align-items-center'
-                  style={{
-                    backgroundColor: '#fff',
-                  }}
-                >
-                  <div className='home__shortcut--hover'>수업 일정</div>
-                  <Image
-                    className='w-100 h-100'
-                    src={process.env.PUBLIC_URL + '/assets/home-class.svg'}
-                  />
+                <Link to='/reservation'>
+                  <div className='home__shortcut-box'>
+                    <Image
+                      className='w-100 h-100'
+                      src={
+                        process.env.PUBLIC_URL +
+                        '/assets/home__content-class.jpg'
+                      }
+                    />
+                    <h5>수업 일정</h5>
+                  </div>
                 </Link>
-                <h5 className='justify-content-center mt-2'>수업 일정</h5>
               </Col>
               <Col>
-                <Link
-                  to='/workoutAlloted'
-                  className='p-1 align-items-center'
-                  style={{
-                    backgroundColor: '#fff',
-                  }}
-                >
-                  <div className='home__shortcut--hover'>운동 배정</div>
-                  <Image
-                    className='w-100 h-100'
-                    src={process.env.PUBLIC_URL + '/assets/home-workout.svg'}
-                  />
+                <Link to='/workoutAlloted'>
+                  <div className='home__shortcut-box'>
+                    <Image
+                      className='w-100 h-100'
+                      src={
+                        process.env.PUBLIC_URL +
+                        '/assets/home__content-workout.jpg'
+                      }
+                    />
+                    <h5>운동 배정</h5>
+                  </div>
                 </Link>
-                <h5 className='justify-content-center mt-2'>운동 배정</h5>
               </Col>
               <Col>
-                <Link
-                  to='/sales'
-                  className='p-1 align-items-center'
-                  style={{
-                    backgroundColor: '#fff',
-                  }}
-                >
-                  <div className='home__shortcut--hover'>매출 관리</div>
-                  <Image
-                    className='w-100 h-100'
-                    src={process.env.PUBLIC_URL + '/assets/home-chart.svg'}
-                  />
+                <Link to='/sales'>
+                  <div className='home__shortcut-box'>
+                    <Image
+                      className='w-100 h-100'
+                      src={
+                        process.env.PUBLIC_URL +
+                        '/assets/home__content-sales.jpg'
+                      }
+                    />
+                    <h5>매출 관리</h5>
+                  </div>
                 </Link>
-                <h5 className='justify-content-center mt-2'>매출 관리</h5>
               </Col>
             </Row>
-            <ul>
-              {userinfo.fitness_no === 1 ? (
-                <li>
-                  <Link
-                    to='/statistics'
-                    className='btnStatic align-items-center'
-                    style={{
-                      backgroundImage: `url(${aboutManage})`,
-                      backgroundColor: '#fff',
-                    }}
-                  ></Link>
-                  <p>관리자</p>
-                </li>
-              ) : null}
-            </ul>
-            <section className='about-list'>
-              <Row xs={1} md={3}>
-                <Col>
-                  <div className='home__about-list--content'>
+            <ul>{userinfo.fitness_no === 1 ? '' : null}</ul>
+          </section>
+        </Container>
+        <section
+          className='home__mission'
+          style={{
+            backgroundImage: 'url(/assets/home__mission-background.jpg)',
+          }}
+        >
+          <Container>
+            <h4>Our Mission</h4>
+            <p>
+              센터 운영자와 강사 및 회원 모두가 편하게 사용할 수 있습니다.
+              <br />
+              웹&amp;앱을 이용한 출석체크 등 센터 편의 프로그램부터
+              <br />
+              개개인의 맞춤형 운동정보, 매출관리까지 한 번에 관리할 수 있습니다.
+            </p>
+            <Row xs={1} md={3}>
+              <Col xs={4}>
+                <div className='home__mission--contents'>
+                  <div className='home__mission--img-box'>
                     <Image
                       className='w-100'
                       src={process.env.PUBLIC_URL + '/assets/home-shopping.svg'}
                     />
+                  </div>
+                  <div className='home__mission--txt-box'>
                     <h5>상품</h5>
                     <p>
                       헬스, 필라테스 등의 운동상품과 함께 운동복, 사물함 등의
                       상품도 함께 등록하고 매출을 관리할 수 있습니다.
                     </p>
                   </div>
-                </Col>
-                <Col>
-                  <div className='home__about-list--content'>
+                </div>
+              </Col>
+              <Col xs={4}>
+                <div className='home__mission--contents'>
+                  <div className='home__mission--img-box'>
                     <Image
                       className='w-100'
                       src={process.env.PUBLIC_URL + '/assets/home-healthy.svg'}
                     />
+                  </div>
+                  <div className='home__mission--txt-box'>
                     <h5>운동</h5>
                     <p>
                       센터의 전문가가 사용자와 상담하고 적합한 운동 리스트를
                       배정해 줄 수 있습니다.
                     </p>
                   </div>
-                </Col>
-                <Col>
-                  <div className='home__about-list--content'>
+                </div>
+              </Col>
+              <Col xs={4}>
+                <div className='home__mission--contents'>
+                  <div className='home__mission--img-box'>
                     <Image
                       className='w-100'
                       src={process.env.PUBLIC_URL + '/assets/home-workers.svg'}
                     />
+                  </div>
+                  <div className='home__mission--txt-box'>
                     <h5>회원관리</h5>
                     <p>
                       회원을 쉽게 등록하고 수정할 수 있으며, 회원의 인바디 정보,
                       운동 정보 등도 함께 관리할 수 있습니다.
                     </p>
                   </div>
-                </Col>
-              </Row>
-            </section>
-          </section>
-        </Container>
-        <div className='footer'>
-          <Footer />
-        </div>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </section>
+        <Footer />
       </div>
     );
   }

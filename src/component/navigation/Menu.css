@@ -162,9 +162,6 @@
   .Navigation {
     display: none !important;
   }
-  .header {
-    padding-top: 0;
-  }
   #menu-icon {
     display: inline;
     top: 32px;

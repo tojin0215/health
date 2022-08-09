@@ -2,41 +2,38 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 9rem;
-  background-color: #111;
-  border-top: 1px solid #222;
+  background-color: #000;
   font-size: 0.8rem;
   font-weight: 300;
   color: #999;
-  padding: 2rem 1rem;
+  padding: 40px 0;
 }
-.footerIn {
-  width: 100%;
-  max-width: 108rem;
+.footer-in {
+  max-width: 1080px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.footerIn .copy {
+.footer-in .copy {
   flex: 50%;
   padding-left: 1rem;
 }
-.footerIn .footerUtill {
+.footer-in .footerUtill {
   flex: 50%;
   text-align: end;
 }
-.footerIn .footerUtill a {
+.footer-in .footerUtill a {
   padding: 0 3rem;
   border-left: 1px solid #999;
 }
-.footerIn .footerUtill a:first-child {
+.footer-in .footerUtill a:first-child {
   border: none;
 }
-.footerIn .footerCompany {
+.footer-in .footerCompany {
   flex: 100%;
 }
-.footerIn .footerCompany span {
+.footer-in .footerCompany span {
   padding: 0 1rem;
 }
 
@@ -44,31 +41,31 @@
   div > .footer {
     height: auto;
   }
-  .footerIn {
+  .footer-in {
     flex-direction: column;
   }
-  .footerIn .copy {
+  .footer-in .copy {
     text-align: center;
     padding-bottom: 1rem;
   }
-  .footerIn .footerUtill {
+  .footer-in .footerUtill {
     display: flex;
     flex-direction: column;
   }
-  .footer .footerIn .footerUtill a {
+  .footer .footer-in .footerUtill a {
     text-align: center;
     border: 0;
     font-weight: 500;
     padding: 0.4rem;
   }
-  .footerIn .footerCompany {
+  .footer-in .footerCompany {
     display: flex;
     flex-direction: column;
   }
-  .footerIn .footerCompany span {
+  .footer-in .footerCompany span {
     text-align: center;
   }
-  .footerIn .footerCompany a {
+  .footer-in .footerCompany a {
     text-align: center;
     font-weight: 500;
     padding: 0.4rem;
