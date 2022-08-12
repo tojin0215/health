@@ -1,4 +1,34 @@
+/* 수업 - 진행중인 수업 */
+.class-list {
+  border-bottom: 0;
+}
+.class-list .MuiTableHead-root {
+  background-color: #111;
+  border-bottom: 2px solid #fff;
+}
+.class-list .MuiTableHead-root > tr > th {
+  color: rgba(200, 200, 200, 1);
+}
+
+.class-list .MuiTableBody-root {
+}
+
+.reservation__class-prev {
+  color: #ccc;
+  border-color: #ccc;
+}
+
+.reservation__class-next {
+  color: #ccc;
+  border-color: #ccc;
+}
+
 .reservation__class-table--td {
+  background-color: rgb(51, 51, 51);
+  padding: 10px 0;
+  border: 1px solid #666;
+  color: #ccc;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -9,6 +39,17 @@
 
 .reservation__class-table--td:active {
   background-color: rgba(235, 235, 46, 0.7);
+}
+
+.reservation__class-table--td p:nth-child(1) {
+  padding: 4px 0;
+  color: orange;
+  font-size: 20px;
+}
+
+.reservation__class-table--td p:nth-child(3) {
+  line-height: 12px;
+  padding-top: 6px;
 }
 
 .reservation .MuiInput-underline:before {

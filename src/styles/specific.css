@@ -168,10 +168,6 @@ td > div {
   /* background-color: #333; */
 }
 
-.table {
-  background-color: #fff;
-}
-
 @media (max-width: 767px) {
   .customerSearch {
     flex-direction: column;
