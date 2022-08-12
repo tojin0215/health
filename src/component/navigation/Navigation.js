@@ -96,7 +96,7 @@ class Navigation extends Component {
               </NavLink>
             </Nav>
             <Nav className={styles.navUtill}>
-              <Navbar.Brand className='' href='/home'>
+              <Navbar.Brand className='' href='/mypage'>
                 {userinfo.manager_name}
               </Navbar.Brand>
               <Nav.Item className='align-self-center'>
@@ -231,7 +231,7 @@ class Navigation extends Component {
               </NavLink>
             </Nav>
             <Nav className={styles.navUtill}>
-              <Navbar.Brand className='' href='/home'>
+              <Navbar.Brand className='' href='/mypage'>
                 {userinfo.manager_name}
               </Navbar.Brand>
               <Nav.Item className='align-self-center'>
