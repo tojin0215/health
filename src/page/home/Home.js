@@ -234,6 +234,28 @@ class Home extends Component {
             backgroundImage: 'url(/assets/home__main-visual.jpg)',
           }}
         >
+          <div className='home__dashboard'>
+            <Row className='home__dashboard__box'>
+              <Col lg='1'>
+                <label>
+                  <p>등록된 회원</p>
+                  <span>{this.fommat(this.state.totalClient)}</span>
+                </label>
+              </Col>
+              <Col lg='1'>
+                <label>
+                  <p>당일 매출</p>
+                  <span>{this.fommat(this.state.todaySales)}</span>
+                </label>
+              </Col>
+              <Col lg='1'>
+                <label>
+                  <p>월 매출</p>
+                  <span>{this.fommat(this.state.monthSales)}</span>
+                </label>
+              </Col>
+            </Row>
+          </div>
           <Container className='home__main-visual--content'>
             <div className='home__main-visual--logo'>
               <p>새로워진 피트니스 센터 관리</p>
