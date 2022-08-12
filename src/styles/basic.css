@@ -1,5 +1,9 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
+.MuiDrawer-root li a {
+  color: #000;
+}
+
 html {
   font-size: 16px;
   word-break: break-word;
@@ -38,6 +42,7 @@ a {
   text-decoration: none;
   color: #fff;
 }
+
 a:hover {
   text-decoration: none;
   color: #ebff2e;

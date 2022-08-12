@@ -3,7 +3,8 @@ import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setFitness } from '../../action/userinfo';
 import { logoutRequest } from '../../action/authentication';
-
+import Drawer from '@mui/material/Drawer';
+import MenuIcon from '@mui/icons-material/Menu';
 import { textlogo } from '../../../src/img/logo-text.png';
 
 // MUI AppBar
@@ -21,12 +22,22 @@ import $ from 'jquery';
 // import { MdMenu } from 'react-icons/md';
 
 import './Menu.css';
-
-import DrawerAppBar from './Drawer';
+import { IconButton } from '@mui/material';
 
 class Menu extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      mobile: false,
+      sideGroup: {
+        center: false,
+        client: false,
+        trainer: false,
+        reserv: false,
+        workout: false,
+        sales: false,
+      },
+    };
 
     // console.log(this.props.userinfo);
     // console.log("AAAA");
@@ -48,207 +59,241 @@ class Menu extends Component {
       this.props.goLogin();
     });
   };
-  // constructor(props) {
-  // 	super(props);
-  // 	console.log(this.props.userinfo);
-  // }
+  mobileOpen = () => {
+    this.setState({ mobile: open });
+  };
+  mobileClose = () => {
+    this.setState({ mobile: false, side: false });
+  };
+  sideMenu = () => {
+    let obj = {
+      center: true,
+      client: false,
+      trainer: false,
+      reserv: false,
+      workout: false,
+      sales: false,
+    };
+    this.setState({ sideGroup: obj });
+  };
+  sideMenu2 = () => {
+    let obj = {
+      center: false,
+      client: true,
+      trainer: false,
+      reserv: false,
+      workout: false,
+      sales: false,
+    };
+    this.setState({ sideGroup: obj });
+  };
+  sideMenu3 = () => {
+    let obj = {
+      center: false,
+      client: false,
+      trainer: true,
+      reserv: false,
+      workout: false,
+      sales: false,
+    };
+    this.setState({ sideGroup: obj });
+  };
+  sideMenu4 = () => {
+    let obj = {
+      center: false,
+      client: false,
+      trainer: false,
+      reserv: true,
+      workout: false,
+      sales: false,
+    };
+    this.setState({ sideGroup: obj });
+  };
+  sideMenu5 = () => {
+    let obj = {
+      center: false,
+      client: false,
+      trainer: false,
+      reserv: false,
+      workout: true,
+      sales: false,
+    };
+    this.setState({ sideGroup: obj });
+  };
+  sideMenu6 = () => {
+    let obj = {
+      center: false,
+      client: false,
+      trainer: false,
+      reserv: false,
+      workout: false,
+      sales: true,
+    };
+    this.setState({ sideGroup: obj });
+  };
   render() {
     const { userinfo } = this.props;
     // console.log(userinfo.loginWhether);
-
-    $('#menu-icon')
-      .off('click')
-      .on('click', function () {
-        $('nav').slideToggle();
-        $(this).toggleClass('active');
-        $('.active')
-          .off('click')
-          .on('click', function () {
-            $('nav').slideToggle();
-          });
-      });
     // console.log(userinfo);
     return (
       <div>
         {userinfo.loginWhether === 2 ? (
+          //회원
           <div class='menu'>
-            <div class='logo'>
-              <a href='/home' className='text-white'>
-                <p className='fs-1 text-white'>
-                  {this.props.userinfo.fitness_name}
-                </p>
-                <p className='fs-1'>{this.props.userinfo.manager_name}</p>
-                <p className='fs-1'>회원</p>
-              </a>
-            </div>
-            {/* <p className='menuCenterCode fs-2'>
-              센터코드 {userinfo.fitness_no}
-            </p> */}
-            <div id='menu-icon'>
+            {/* <div id='menu-icon'>
               <span className='first'></span>
               <span className='second'></span>
               <span className='third'></span>
+            </div> */}
+            <IconButton onClick={() => this.mobileOpen()}>
+              <MenuIcon />
+            </IconButton>
+            <div class='logo'>
+              <p className='fs-5'>
+                <a href='/home'>
+                  {this.props.userinfo.fitness_name}
+                  <span className='text-secondary ps-2'>회원</span>
+                </a>
+              </p>
             </div>
-            <nav>
+            <Drawer
+              variant='temporary'
+              open={this.state.mobile}
+              onClose={() => this.mobileClose()}
+            >
               <ul>
+                <h3>{this.props.userinfo.manager_name}</h3>
                 <li class='dropdown'>
-                  <NavLink exact to='/home'>
-                    Home
+                  <NavLink exact to='/mypage'>
+                    내 정보
                   </NavLink>
-                  {/* <li>
-                    <NavLink exact to='/qr'>
-                      QR
-                    </NavLink>
-                  </li> */}
                 </li>
-                <li class='dropdown'>
-                  <NavLink exact to='/introduce'>
-                    센터 소개
-                  </NavLink>
-                  <li>
+                <div onClick={() => this.sideMenu()}>센터 소개(대메뉴)</div>
+                {this.state.sideGroup.center ? (
+                  <li class='dropdown'>
                     <NavLink exact to='/introduce'>
                       센터 소개
                     </NavLink>
                   </li>
-                </li>
-                <li class='dropdown'>
-                  <NavLink exact to='/inbodies'>
-                    인바디 정보
-                  </NavLink>
-                  <li>
+                ) : (
+                  ''
+                )}
+                <div onClick={() => this.sideMenu2()}>회원(대메뉴)</div>
+                {this.state.sideGroup.client ? (
+                  <li class='dropdown'>
                     <NavLink exact to='/inbodies'>
                       인바디 정보
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/genetic'>
                       DTC
                     </NavLink>
                   </li>
-                </li>
-                <li class='dropdown'>
-                  <NavLink exact to='/reservation'>
-                    수업
-                  </NavLink>
-                  <li>
-                    <NavLink exact to='/reservation'>
-                      수업
-                    </NavLink>
+                ) : (
+                  ''
+                )}
+                <div onClick={() => this.sideMenu4()}>수업(대메뉴)</div>
+                {this.state.sideGroup.reserv ? (
+                  <li class='dropdown'>
+                    <li>
+                      <NavLink exact to='/reservation'>
+                        수업
+                      </NavLink>
+                    </li>
                   </li>
-                </li>
-
+                ) : (
+                  ''
+                )}
                 <li className='text-center'>
                   <Button variant='danger' onClick={this.handleLogout}>
                     로그아웃
                   </Button>
                 </li>
-                {/* <li class="dropdown">
-            <NavLink exact to="/statistics">
-            </NavLink>
-          </li> */}
-                {/* <li>
-            {userinfo.fitness_no === 1?
-                <NavLink exact to="/admin">
-                    <span className={styles.navitem}>
-                        관리자
-                    </span>
-                </NavLink>
-            :null
-            }
-          </li> */}
               </ul>
-            </nav>
+            </Drawer>
           </div>
         ) : userinfo.loginWhether === 1 ? (
+          //강사
           <div class='menu'>
+            <IconButton onClick={() => this.mobileOpen()}>
+              <MenuIcon />
+            </IconButton>
             <div class='logo'>
-              <a href='/home'>
-                <p className='fs-1'>{this.props.userinfo.fitness_name}</p>
-                <p className='fs-1'>{this.props.userinfo.manager_name}</p>
-                <p className='fs-1'>강사</p>
-              </a>
+              <p className='fs-5'>
+                <a href='/home'>
+                  {this.props.userinfo.fitness_name}
+                  <span className='text-secondary ps-2'>강사</span>
+                </a>
+              </p>
             </div>
-            {/* <p className='menuCenterCode fs-2'>
-              센터코드 {userinfo.fitness_no}
-            </p> */}
-            <div id='menu-icon'>
-              <span className='first'></span>
-              <span className='second'></span>
-              <span className='third'></span>
-            </div>
-            <nav>
+
+            <Drawer
+              variant='temporary'
+              open={this.state.mobile}
+              onClose={() => this.mobileClose()}
+            >
               <ul>
+                <h3>{this.props.userinfo.manager_name}</h3>
                 <li class='dropdown'>
-                  <NavLink exact to='/home'>
-                    Home
+                  <NavLink exact to='/mypage'>
+                    내 정보
                   </NavLink>
-                  {/* <li>
-                    <NavLink exact to='/qr'>
-                      QR
-                    </NavLink>
-                  </li> */}
                 </li>
-                <li class='dropdown'>
-                  <NavLink exact to='/introduce'>
-                    센터 소개
-                  </NavLink>
-                  <li>
+                <div onClick={() => this.sideMenu()}>센터 소개(대메뉴)</div>
+                {this.state.sideGroup.center ? (
+                  <li class='dropdown'>
                     <NavLink exact to='/introduce'>
                       센터 소개
                     </NavLink>
                   </li>
-                </li>
-                <li class='dropdown'>
-                  <NavLink exact to='/client'>
-                    회원
-                  </NavLink>
-                  <li>
+                ) : (
+                  ''
+                )}
+                <div onClick={() => this.sideMenu2()}>회원(대메뉴)</div>
+                {this.state.sideGroup.client ? (
+                  <li class='dropdown'>
                     <NavLink exact to='/client'>
                       회원 관리
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/clientAdd'>
                       회원 등록
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/inbodies'>
                       인바디 정보
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/genetic'>
                       DTC
                     </NavLink>
                   </li>
-                </li>
-
-                <li class='dropdown'>
-                  <NavLink exact to='/reservation'>
-                    수업
-                  </NavLink>
-                  <li>
-                    <NavLink exact to='/reservation'>
-                      수업
-                    </NavLink>
+                ) : (
+                  ''
+                )}
+                <div onClick={() => this.sideMenu4()}>수업(대메뉴)</div>
+                {this.state.sideGroup.reserv ? (
+                  <li class='dropdown'>
+                    <li>
+                      <NavLink exact to='/reservation'>
+                        수업
+                      </NavLink>
+                      <br />
+                      <NavLink exact to='/reservationClass'>
+                        수업 설정
+                      </NavLink>
+                    </li>
                   </li>
-                  <li>
-                    <NavLink exact to='/reservationClass'>
-                      수업 설정
-                    </NavLink>
-                  </li>
-                </li>
-                <li class='dropdown'>
-                  <NavLink exact to='/workoutAlloted'>
-                    운동
-                  </NavLink>
-                  <li>
+                ) : (
+                  ''
+                )}
+                <div onClick={() => this.sideMenu5()}>운동(대메뉴)</div>
+                {this.state.sideGroup.workout ? (
+                  <li class='dropdown'>
                     <NavLink exact to='/workoutAlloted'>
                       운동 배정
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <Link
                       to={{
                         pathname: '/workoutAllotedList',
@@ -261,149 +306,130 @@ class Menu extends Component {
                     >
                       운동 배정된 목록
                     </Link>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/workoutAdd'>
                       운동 설정
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/workoutStage'>
                       기본 루틴 배정
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/workoutStageAdd'>
                       기본 루틴 설정
                     </NavLink>
                   </li>
-                </li>
+                ) : (
+                  ''
+                )}
+
                 <li className='text-center'>
                   <Button variant='danger' onClick={this.handleLogout}>
                     로그아웃
                   </Button>
                 </li>
-                {/* <li class="dropdown">
-            <NavLink exact to="/statistics">
-            </NavLink>
-          </li> */}
-                {/* <li>
-            {userinfo.fitness_no === 1?
-                <NavLink exact to="/admin">
-                    <span className={styles.navitem}>
-                        관리자
-                    </span>
-                </NavLink>
-            :null
-            }
-          </li> */}
               </ul>
-            </nav>
+            </Drawer>
           </div>
         ) : (
-          // <DrawerAppBar />
           <div class='menu'>
+            <IconButton onClick={() => this.mobileOpen()}>
+              <MenuIcon />
+            </IconButton>
             <div class='logo'>
-              <a href='/home'>
-                <p className='fs-5'>
+              <p className='fs-5'>
+                <a href='/home'>
                   {this.props.userinfo.fitness_name}
                   <span className='text-secondary ps-2'>센터</span>
-                  <span className='ps-2 fw-normal'>
-                    {this.props.userinfo.manager_name}
-                  </span>
-                </p>
-              </a>
+                </a>
+              </p>
             </div>
-            <div id='menu-icon'>
-              <span className='first'></span>
-              <span className='second'></span>
-              <span className='third'></span>
-            </div>
-            <nav>
+
+            <Drawer
+              variant='temporary'
+              open={this.state.mobile}
+              onClose={() => this.mobileClose()}
+            >
               <ul>
+                <h3>{this.props.userinfo.manager_name}</h3>
                 <li class='dropdown'>
-                  <NavLink exact to='/home'>
-                    Home
+                  <NavLink exact to='/mypage'>
+                    내 정보
                   </NavLink>
                 </li>
-                <li class='dropdown'>
-                  <NavLink exact to='/introduce'>
-                    센터 소개
-                  </NavLink>
-                  <li>
+                <div onClick={() => this.sideMenu()}>센터 소개(대메뉴)</div>
+                {this.state.sideGroup.center ? (
+                  <li class='dropdown'>
                     <NavLink exact to='/introduce'>
                       센터 소개
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/introduceAdd'>
                       센터 소개 등록
                     </NavLink>
                   </li>
-                </li>
-                <li class='dropdown'>
-                  <NavLink exact to='/client'>
-                    회원
-                  </NavLink>
-                  <li>
+                ) : (
+                  ''
+                )}
+                <div onClick={() => this.sideMenu2()}>회원(대메뉴)</div>
+                {this.state.sideGroup.client ? (
+                  <li class='dropdown'>
                     <NavLink exact to='/client'>
                       회원 관리
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/clientAdd'>
                       회원 등록
                     </NavLink>
+                    <br />
                     <NavLink exact to='/inbodies'>
                       인바디 정보
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/genetic'>
                       DTC
                     </NavLink>
                   </li>
-                </li>
-                <li class='dropdown'>
-                  <NavLink exact to='/trainer'>
-                    강사
-                  </NavLink>
-                  <li>
+                ) : (
+                  ''
+                )}
+                <div onClick={() => this.sideMenu3()}>강사(대메뉴)</div>
+                {this.state.sideGroup.trainer ? (
+                  <li class='dropdown'>
                     <NavLink exact to='/trainer'>
                       강사 관리
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/trainerAdd'>
                       강사 등록
                     </NavLink>
                   </li>
-                </li>
-                <li class='dropdown'>
-                  <NavLink exact to='/reservation'>
-                    수업
-                  </NavLink>
-                  <li>
-                    <NavLink exact to='/reservation'>
-                      수업
-                    </NavLink>
+                ) : (
+                  ''
+                )}
+                <div onClick={() => this.sideMenu4()}>수업(대메뉴)</div>
+                {this.state.sideGroup.reserv ? (
+                  <li class='dropdown'>
+                    <li>
+                      <NavLink exact to='/reservation'>
+                        수업
+                      </NavLink>
+                      <br />
+                      <NavLink exact to='/reservationClass'>
+                        수업 설정
+                      </NavLink>
+                    </li>
                   </li>
-                  <li>
-                    <NavLink exact to='/reservationClass'>
-                      수업 설정
-                    </NavLink>
-                  </li>
-                </li>
-                <li class='dropdown'>
-                  <NavLink exact to='/workoutAlloted'>
-                    운동 배정
-                  </NavLink>
-                  <li>
+                ) : (
+                  ''
+                )}
+                <div onClick={() => this.sideMenu5()}>운동(대메뉴)</div>
+                {this.state.sideGroup.workout ? (
+                  <li class='dropdown'>
                     <NavLink exact to='/workoutAlloted'>
                       운동 배정
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <Link
                       to={{
                         pathname: '/workoutAllotedList',
@@ -416,45 +442,44 @@ class Menu extends Component {
                     >
                       운동 배정된 목록
                     </Link>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/workoutAdd'>
                       운동 설정
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/workoutStage'>
                       기본 루틴 배정
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/workoutStageAdd'>
                       기본 루틴 설정
                     </NavLink>
                   </li>
-                </li>
-                <li class='dropdown'>
-                  <NavLink exact to='/sales'>
-                    매출
-                  </NavLink>
-                  <li>
+                ) : (
+                  ''
+                )}
+                <div onClick={() => this.sideMenu6()}>매출(대메뉴)</div>
+                {this.state.sideGroup.sales ? (
+                  <li class='dropdown'>
                     <NavLink exact to='/sales'>
                       매출 현황
                     </NavLink>
-                  </li>
-                  <li>
+                    <br />
                     <NavLink exact to='/addSales'>
                       결제 등록
                     </NavLink>
                   </li>
-                </li>
+                ) : (
+                  ''
+                )}
+
                 <li className='text-start mt-3'>
                   <Button variant='danger' onClick={this.handleLogout}>
                     로그아웃
                   </Button>
                 </li>
               </ul>
-            </nav>
+            </Drawer>
           </div>
         )}
       </div>

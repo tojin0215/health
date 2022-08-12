@@ -4,8 +4,7 @@ import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import Menu from '../../component/navigation/Menu';
-import NewMenu from '../../component/navigation/NewMenu';
-import DrawerAppBar from '../../component/navigation/Drawer';
+import Drawer from '../../component/navigation/Drawer';
 import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 import '../../styles/home/home.css';
@@ -224,8 +223,7 @@ class Home extends Component {
           <Header />
           <Navigation goLogin={this.goLogin} />
           <Menu goLogin={this.goLogin} />
-          <NewMenu />
-          {/* <DrawerAppBar /> */}
+          {/* <Drawer /> */}
         </div>
         {/*.header */}
         <div

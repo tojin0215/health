@@ -459,7 +459,7 @@ class Admin extends Component {
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu />
+          <Menu goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>관리자페이지</h2>
