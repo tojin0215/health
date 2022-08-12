@@ -69,6 +69,7 @@ class Mypage extends Component {
       tPhone: '',
       tBirth: '',
       tSex: '',
+      start_date: new Date(),
       voucher: [],
     };
   }
@@ -140,11 +141,12 @@ class Mypage extends Component {
 
   tableSalesTrainer = () => {
     selectTrainerReservation(this.props.userinfo.joinNo).then((res21) => {
-      // console.log(res21);
+      console.log(res21);
       this.setState({
         tPhone: res21[0].phone,
         tBirth: res21[0].birth,
         tSex: res21[0].sex === 1 ? '남자' : '여자',
+        tJOin: moment(res21[0].start_date).format('YYYY년 MM월 DD일 '),
       });
     });
   };
@@ -241,7 +243,7 @@ class Mypage extends Component {
               <p>폰번호: {this.state.tPhone}</p>
               <p>생년월일: {this.state.tBirth}</p>
               <p>성별: {this.state.tSex}</p>
-              <p>입사일: </p>
+              <p>입사일: {this.state.tJOin}</p>
             </div>
           ) : (
             //사업주
