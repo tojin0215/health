@@ -35,6 +35,7 @@ import {
   WorkoutStageAdd,
   Genetic,
   GeneticAdd,
+  Mypage,
 } from '../page';
 
 import '../styles/workout/workoutAlloted.css';
@@ -81,6 +82,7 @@ class App extends Component {
         <Route exact path='/workoutStageAdd' component={WorkoutStageAdd} />
         <Route exact path='/genetic' component={Genetic} />
         <Route exact path='/geneticAdd' component={GeneticAdd} />
+        <Route exact path='/mypage' component={Mypage} />
       </div>
     );
   }

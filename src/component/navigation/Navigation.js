@@ -248,27 +248,24 @@ class Navigation extends Component {
         ) : (
           <Navbar>
             <Nav className='mr-auto dropdownNav navitem'>
-              <Nav.Item>
-                <span className='text-primary'>
-                  {this.props.userinfo.fitness_name}
-                </span>
-                <span className={styles.navitem}> 센터</span>
-              </Nav.Item>
               <NavLink exact to='/home'>
+                <Nav.Item>
+                  <span className='text-primary'>
+                    {this.props.userinfo.fitness_name}
+                  </span>
+                  <span className={styles.navitem}> 센터</span>
+                </Nav.Item>
+              </NavLink>
+              {/* <NavLink exact to='/home'>
                 <span className={styles.navitem}>Home</span>
                 <ul>
                   <li>
                     <NavLink exact to='/home'>
                       Home
                     </NavLink>
-                  </li>
-                  {/* <li>
-                    <NavLink exact to='/qr'>
-                      QR
-                    </NavLink>
-                  </li> */}
+                  </li>                 
                 </ul>
-              </NavLink>
+              </NavLink> */}
               <NavLink exact to='/introduce'>
                 <span className={styles.navitem}>센터 소개</span>
                 <ul>
@@ -417,7 +414,7 @@ class Navigation extends Component {
               ) : null} */}
             </Nav>
             <Nav>
-              <Navbar.Brand className='' href='/home'>
+              <Navbar.Brand className='' href='/mypage'>
                 {userinfo.manager_name}
               </Navbar.Brand>
               <Nav.Item className='align-self-center'>

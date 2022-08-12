@@ -942,3 +942,16 @@ export const genticUpdate = (
     }
   );
 };
+
+//sales client
+export const salesClient = (client_name, fitness_no) => {
+  return axios
+    .get(`${SERVER_URL}/sales`, {
+      params: {
+        type: 'client',
+        client_name: client_name,
+        fitness_no: fitness_no,
+      },
+    })
+    .then((response) => response.data);
+};
