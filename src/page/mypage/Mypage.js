@@ -24,7 +24,34 @@ import {
   choiceFitness,
   salesClient,
   selectClientReservation,
+  selectTrainerReservation,
 } from '../../api/user';
+
+const SalesClient = ({
+  paidMembership,
+  paymentDate,
+  paymentTools,
+  salesDays,
+  salesStart_date,
+}) => {
+  const date1 = moment(paymentDate).format('YYYY년 MM월 DD일 ');
+  const date2 = moment(salesStart_date).format('YYYY년 MM월 DD일 ');
+  return (
+    <div>
+      <p>결제도구: {paymentTools}</p>
+      {paidMembership ? (
+        <p>
+          이용권: {paidMembership} 이용권 결제일: {date1}
+        </p>
+      ) : (
+        <p>
+          기간권: {salesDays}
+          기간권 결제일: {date2}
+        </p>
+      )}
+    </div>
+  );
+};
 
 class Mypage extends Component {
   constructor(props) {
@@ -39,6 +66,9 @@ class Mypage extends Component {
       cBirth: '',
       cSex: '',
       cWear: '',
+      tPhone: '',
+      tBirth: '',
+      tSex: '',
       voucher: [],
     };
   }
@@ -87,33 +117,64 @@ class Mypage extends Component {
         alert('Your session is expired, please log in again');
       } else {
         this.selectManager();
+        this.props.userinfo.loginWhether === 2
+          ? this.tableSalesClient()
+          : this.props.userinfo.loginWhether === 1
+          ? this.tableSalesTrainer()
+          : '';
       }
     });
   }
   selectManager = () => {
     choiceFitness(this.props.userinfo.fitness_no).then((res) => {
-      console.log(res);
-      selectClientReservation(this.props.userinfo.joinNo).then((res2) => {
-        console.log(res2);
-        salesClient(this.props.userinfo.manager_name, res2[0].fitness_no).then(
-          (res3) => {
-            console.log(res3);
-            this.setState({
-              myName: res[0].manager_name,
-              fitness_name: res[0].fitness_name,
-              phone: res[0].phone,
-              business_phone: res[0].business_phone,
-              business_number: res[0].business_number,
-              cPhone: res2[0].phone,
-              cBirth: res2[0].birth,
-              cLocker: res2[0].lockerNumber === 1 ? '사용' : '미사용',
-              cWear: res[0].sportswear,
-              cSex: res2[0].sex === 1 ? '남자' : '여자',
-              voucher: res3,
-            });
-          }
-        );
+      // console.log(res);
+      this.setState({
+        myName: res[0].manager_name,
+        fitness_name: res[0].fitness_name,
+        phone: res[0].phone,
+        business_phone: res[0].business_phone,
+        business_number: res[0].business_number,
       });
+    });
+  };
+
+  tableSalesTrainer = () => {
+    selectTrainerReservation(this.props.userinfo.joinNo).then((res21) => {
+      // console.log(res21);
+      this.setState({
+        tPhone: res21[0].phone,
+        tBirth: res21[0].birth,
+        tSex: res21[0].sex === 1 ? '남자' : '여자',
+      });
+    });
+  };
+
+  tableSalesClient = () => {
+    selectClientReservation(this.props.userinfo.joinNo).then((res2) => {
+      // console.log(res2);
+      salesClient(this.props.userinfo.manager_name, res2[0].fitness_no).then(
+        (res3) => {
+          const items = res3.map((data, index, array) => {
+            return (
+              <SalesClient
+                paidMembership={data.paidMembership}
+                paymentDate={data.paymentDate}
+                paymentTools={data.paymentTools}
+                salesDays={data.salesDays}
+                salesStart_date={data.salesStart_date}
+              />
+            );
+          });
+          this.setState({
+            voucher: items,
+            cPhone: res2[0].phone,
+            cBirth: res2[0].birth,
+            cLocker: res2[0].lockerNumber ? res2[0].lockerNumber : '미사용',
+            cWear: res2[0].sportswear,
+            cSex: res2[0].sex === 1 ? '남자' : '여자',
+          });
+        }
+      );
     });
   };
 
@@ -155,6 +216,7 @@ class Mypage extends Component {
               : '센터'}
           </p>
           {this.props.userinfo.loginWhether === 2 ? (
+            //회원
             <div>
               <p>헬스장명: {this.state.fitness_name}</p>
               <p>
@@ -163,12 +225,26 @@ class Mypage extends Component {
               </p>
               <p>폰번호: {this.state.cPhone}</p>
               <p>생년월일: {this.state.cBirth}</p>
+              <p>락커룸: {this.state.cLocker}</p>
+              <p>운동복: {this.state.cWear}</p>
               <p>성별: {this.state.cSex}</p>
-              <p>결제기간(이용권, 횟수권): </p>
+              <p>결제기간(이용권, 횟수권): {this.state.voucher}</p>
             </div>
           ) : this.props.userinfo.loginWhether === 1 ? (
-            <div>123</div>
+            //강사
+            <div>
+              <p>헬스장명: {this.state.fitness_name}</p>
+              <p>
+                이름:
+                {this.state.myName}
+              </p>
+              <p>폰번호: {this.state.tPhone}</p>
+              <p>생년월일: {this.state.tBirth}</p>
+              <p>성별: {this.state.tSex}</p>
+              <p>입사일: </p>
+            </div>
           ) : (
+            //사업주
             <div>
               <p>헬스장명: {this.state.fitness_name}</p>
               <p>
