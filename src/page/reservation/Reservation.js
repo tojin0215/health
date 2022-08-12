@@ -1243,7 +1243,7 @@ class Reservation extends Component {
     // console.log('reservationClass_choice', this.state.reservationClass_choice);
 
     return (
-      <div className='wrap reservationWrap'>
+      <div className='wrap reservation'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -1267,7 +1267,7 @@ class Reservation extends Component {
           {/*.localNavigation */}
         </header>
 
-        <Container className='reservationWrap'>
+        <Container className='reservation'>
           <Row className='pb-5 justify-content-center'>
             <Col xs={9}>
               <h4 className=''>진행중인 수업</h4>
