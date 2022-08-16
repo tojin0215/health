@@ -221,9 +221,9 @@ class Home extends Component {
       <div className='wrap home'>
         <div className='header'>
           <Header />
-          {/* <Navigation goLogin={this.goLogin} /> */}
+          <Navigation goLogin={this.goLogin} />
           <Menu goLogin={this.goLogin} />
-          {/* <Drawer /> */}
+          {/* 이전처럼 Navigation Menu 공존 */}
         </div>
         {/*.header */}
         <div

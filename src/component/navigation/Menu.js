@@ -135,6 +135,7 @@ class Menu extends Component {
     const { userinfo } = this.props;
     // console.log(userinfo.loginWhether);
     // console.log(userinfo);
+
     return (
       <div>
         {userinfo.loginWhether === 2 ? (

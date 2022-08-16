@@ -955,3 +955,40 @@ export const salesClient = (client_name, fitness_no) => {
     })
     .then((response) => response.data);
 };
+
+// voucher insert
+export const voucherInsert = (
+  client_name,
+  fitness_no,
+  kind,
+  paidMembership,
+  paidMembership2,
+  paymentDate,
+  salesDays,
+  salesStart_date,
+  salesEnd_date
+) => {
+  return axios.post(`${SERVER_URL}/voucher`, {
+    client_name,
+    fitness_no,
+    kind,
+    paidMembership,
+    paidMembership2,
+    paymentDate,
+    salesDays,
+    salesStart_date,
+    salesEnd_date,
+  });
+};
+
+//voucher select
+export const voucherSelect = (client_name, fitness_no) => {
+  return axios
+    .get(`${SERVER_URL}/voucher`, {
+      params: {
+        client_name: client_name,
+        fitness_no: fitness_no,
+      },
+    })
+    .then((response) => response.data);
+};

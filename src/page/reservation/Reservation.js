@@ -104,10 +104,12 @@ const ReservationClassItem = ({
   trainer,
   reservationSelect,
   class_date,
+  kind,
 }) => {
   const handleInnerOnClick = () => {
     handleClick(
       exercise_class,
+      kind,
       number_of_people,
       hour,
       minute,
@@ -125,7 +127,9 @@ const ReservationClassItem = ({
       onClick={handleInnerOnClick}
     >
       {/* <p>운동명</p> */}
-      <p className='fw-bold'>{exercise_class}</p>
+      <p className='fw-bold'>
+        {exercise_class}[{kind}]
+      </p>
       {/* <p>강사명</p> */}
       <p className='fw-bold'>{trainer}</p>
       {/* <p>시간</p> */}
@@ -546,6 +550,7 @@ class Reservation extends Component {
       reserv_date: new Date(),
       time: '',
       exercise_name: '',
+      kind: '',
       cancelComment: '',
       number_of_people: '',
       trainer: '',
@@ -1009,7 +1014,8 @@ class Reservation extends Component {
             body: JSON.stringify({
               fitness_no: fitness_no,
               date: date,
-              exercise_name: this.state.exercise_name,
+              exercise_name:
+                this.state.exercise_name + '[' + this.state.kind + ']',
               trainer: this.state.trainer,
               customer_name:
                 this.props.userinfo.loginWhether === 2
@@ -1040,6 +1046,7 @@ class Reservation extends Component {
                 number_of_people: '',
                 time: '',
                 class_date: '',
+                kind: '',
               });
             });
         });
@@ -1106,8 +1113,10 @@ class Reservation extends Component {
                   trainer={data.trainer}
                   canRegist={canRegist}
                   class_date={data.class_date}
+                  kind={data.kind}
                   handleClick={(
                     result_exercise_name,
+                    result_kind,
                     result_number_of_people,
                     result_hour,
                     result_minute,
@@ -1116,6 +1125,7 @@ class Reservation extends Component {
                   ) =>
                     this.setState({
                       exercise_name: result_exercise_name,
+                      kind: result_kind,
                       time: time,
                       number_of_people: result_number_of_people,
                       trainer: result_trainer,
@@ -1580,7 +1590,9 @@ class Reservation extends Component {
               <div className='reservation__selected-class boxmorpinsm py-3 w-100 '>
                 <p className=''>운동명</p>
                 <p className='fw-bold text-primary'>
-                  {this.state.exercise_name}
+                  {this.state.exercise_name
+                    ? this.state.exercise_name + '[' + this.state.kind + ']'
+                    : ''}
                 </p>
               </div>
               <TextField

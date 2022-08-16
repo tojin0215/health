@@ -35,6 +35,7 @@ import TableCell from '@mui/material/TableCell';
 
 import DatePicker from 'react-datepicker';
 import UserSearch from '../../component/customer/UserSearch';
+import { voucherInsert } from '../../api/user';
 // locale 오류로 임시 삭제
 // import DatePicker, { registerLocale } from 'react-datepicker';
 // import ko from 'date-fns/locale/ko';
@@ -180,7 +181,6 @@ class AddSales extends Component {
     let sportswearPrice1 = parseInt(
       this.state.sportswearPrice.toString().replace(/[^(0-9)]/gi, '')
     );
-
     if (this.state.client_name === '회원') {
       alert('회원을 선택해주세요.');
     } else {
@@ -230,20 +230,60 @@ class AddSales extends Component {
       })
         .then((response) => response.json())
         .then((response) => {
+          this.voucherPost();
           alert('등록되었습니다.');
+
           // console.log(response);
         });
       this.props.history.push('/sales');
     }
   };
 
+  voucherPost = () => {
+    voucherInsert(
+      this.state.client_name,
+      this.state.fitness_no,
+      this.state.exerciseGroup.pt
+        ? '개인PT'
+        : this.state.exerciseGroup.gx
+        ? 'GX'
+        : this.state.exerciseGroup.pila
+        ? '필라테스'
+        : this.state.exerciseGroup.health
+        ? '헬스'
+        : this.state.exerciseGroup.etc
+        ? '기타(' + this.state.etcExercise + ')'
+        : '개인PT',
+      this.state.checkboxGroup['paidMembershipCheckbox'] == false
+        ? ''
+        : this.state.paidMembership,
+      this.state.checkboxGroup['paidMembershipCheckbox'] == false
+        ? ''
+        : this.state.paidMembership, //paidMembership2
+      this.state.paymentDate,
+      this.state.checkboxGroup['salesDaysCheckbox'] == false
+        ? ''
+        : this.state.salesDays,
+      this.state.checkboxGroup['salesDaysCheckbox'] == false
+        ? ''
+        : this.state.salesStart_date,
+      this.state.checkboxGroup['salesDaysCheckbox'] == false
+        ? ''
+        : this.state.salesStart_date //salesEnd_date
+    ).then((res) => {});
+  };
+
+  // plusHandle = () => {
+  //   this.voucherPost();
+  //   this.handleOnClick();
+  // };
   handleCheckbox = (e) => {
     let obj = {
       paidMembershipCheckbox: false,
       salesDaysCheckbox: false,
     };
     obj[e.target.id] = e.target.checked;
-    console.log(obj);
+    // console.log(obj);
     this.setState({
       checkboxGroup: obj,
     });

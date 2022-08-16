@@ -25,12 +25,12 @@ import {
   salesClient,
   selectClientReservation,
   selectTrainerReservation,
+  voucherSelect,
 } from '../../api/user';
 
 const SalesClient = ({
   paidMembership,
   paymentDate,
-  paymentTools,
   salesDays,
   salesStart_date,
 }) => {
@@ -38,14 +38,16 @@ const SalesClient = ({
   const date2 = moment(salesStart_date).format('YYYY년 MM월 DD일 ');
   return (
     <div>
-      <p>결제도구: {paymentTools}</p>
       {paidMembership ? (
         <p>
-          이용권: {paidMembership} 이용권 결제일: {date1}
+          이용권: {paidMembership}
+          <br />
+          이용권 결제일: {date1}
         </p>
       ) : (
         <p>
           기간권: {salesDays}
+          <br />
           기간권 결제일: {date2}
         </p>
       )}
@@ -141,7 +143,7 @@ class Mypage extends Component {
 
   tableSalesTrainer = () => {
     selectTrainerReservation(this.props.userinfo.joinNo).then((res21) => {
-      console.log(res21);
+      // console.log(res21);
       this.setState({
         tPhone: res21[0].phone,
         tBirth: res21[0].birth,
@@ -154,14 +156,13 @@ class Mypage extends Component {
   tableSalesClient = () => {
     selectClientReservation(this.props.userinfo.joinNo).then((res2) => {
       // console.log(res2);
-      salesClient(this.props.userinfo.manager_name, res2[0].fitness_no).then(
+      voucherSelect(this.props.userinfo.manager_name, res2[0].fitness_no).then(
         (res3) => {
           const items = res3.map((data, index, array) => {
             return (
               <SalesClient
                 paidMembership={data.paidMembership}
                 paymentDate={data.paymentDate}
-                paymentTools={data.paymentTools}
                 salesDays={data.salesDays}
                 salesStart_date={data.salesStart_date}
               />
@@ -185,7 +186,7 @@ class Mypage extends Component {
     // console.log(this.props.userinfo.loginWhether);
     // console.log(this.props.userinfo.joinNo);
     // console.log(this.props.userinfo);
-    console.log(this.state.voucher);
+    // console.log(this.state.voucher);
     return (
       <div className='wrap client_wrap'>
         <header className='header'>
