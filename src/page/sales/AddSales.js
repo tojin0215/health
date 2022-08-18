@@ -269,7 +269,7 @@ class AddSales extends Component {
         : this.state.salesStart_date,
       this.state.checkboxGroup['salesDaysCheckbox'] == false
         ? ''
-        : this.state.salesStart_date //salesEnd_date
+        : this.state.salesDays //salesDays2
     ).then((res) => {});
   };
 

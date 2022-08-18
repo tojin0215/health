@@ -1,4 +1,4 @@
-import React, { Component, useRef, useState } from 'react';
+import React, { Component, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { render } from 'react-dom';
 import { Container, Row, Col, Tabs, Tab } from 'react-bootstrap';
@@ -50,6 +50,7 @@ import {
   selectTrainer,
   clientSelect,
   getReservation_choice_client,
+  voucherUpdate,
 } from '../../api/user';
 
 // locale 오류로 임시 삭제
@@ -64,33 +65,6 @@ moment.locale('ko'); // en - 영어
 
 const ip = SERVER_URL;
 
-const dateFormat = (reserv_date) => {
-  let month = reserv_date.getMonth() + 1;
-  let day = reserv_date.getDate();
-  let hour = reserv_date.getHours();
-  let minute = reserv_date.getMinutes();
-  let second = reserv_date.getSeconds();
-
-  month = month >= 10 ? month : '0' + month;
-  day = day >= 10 ? day : '0' + day;
-  hour = hour >= 10 ? hour : '0' + hour;
-  minute = minute >= 10 ? minute : '0' + minute;
-  second = second >= 10 ? second : '0' + second;
-
-  return (
-    reserv_date.getFullYear() +
-    '-' +
-    month +
-    '-' +
-    day +
-    'T' +
-    hour +
-    ':' +
-    minute +
-    ':' +
-    second
-  );
-};
 /*
  * 운동클래스 body
  */
@@ -102,7 +76,6 @@ const ReservationClassItem = ({
   handleClick,
   canRegist,
   trainer,
-  reservationSelect,
   class_date,
   kind,
 }) => {
@@ -128,7 +101,7 @@ const ReservationClassItem = ({
     >
       {/* <p>운동명</p> */}
       <p className='fw-bold'>
-        {exercise_class}[{kind}]
+        {exercise_class}/{kind}
       </p>
       {/* <p>강사명</p> */}
       <p className='fw-bold'>{trainer}</p>
@@ -151,31 +124,13 @@ const ReservationItem = ({
   res_no,
   date,
   exercise_name,
-  fitness_no,
   customer_name,
-  isCancel,
-  cancelComment,
   number_of_people,
   time,
-  date2,
   exercise_length,
-  customer_id,
   reservationSelect,
   trainer,
 }) => {
-  // const [showResults, setShowResults] = React.useState(false);
-  // const [date_input, setDate_input] = useState('');
-  // const [time_input, setTime_input] = useState('');
-  // const [exercise_name_input, setExercise_name_input] = useState('');
-  // const [trainer_input, setTrainer_input] = useState('');
-  // const [isCancel_input, setIsCancel_input] = useState('');
-  // const [cancelComment_input, setCancelComment_input] = useState('');
-  // const [number_of_people_input, setNumber_of_people_input] = useState('');
-
-  // const handleChangeDate = (e) => {
-  //   setDate_input(e.target.value);
-  // };
-
   const reservationDelete = (res_no) => {
     fetch(ip + '/reservation/delete?res_no=' + res_no, {
       method: 'DELETE',
@@ -183,6 +138,32 @@ const ReservationItem = ({
       reservationSelect();
     });
   };
+  const [clockDate, setClockDate] = useState(new Date());
+
+  const month =
+    clockDate.getMonth() + 1 < 10
+      ? '0' + (clockDate.getMonth() + 1)
+      : clockDate.getMonth() + 1;
+  useEffect(() => {
+    if (
+      clockDate.getFullYear() == date.substr(0, 4) &&
+      month == date.substr(6, 2) &&
+      clockDate.getDate() == date.substr(10, 2) &&
+      clockDate.getHours() == time.substr(0, 2) &&
+      clockDate.getMinutes() == time.substr(3, 2)
+    ) {
+      alert('성공');
+    }
+  });
+
+  const voucherReservationUpdate = () => {
+    voucherUpdate();
+  };
+
+  // console.log(month);
+  // console.log(date);
+  // console.log(clockDate.getFullYear());
+  console.log(exercise_name.split('/', 2));
 
   return (
     <TableRow>
@@ -219,13 +200,9 @@ const ReservationItem_exercise = ({
   res_no,
   date,
   exercise_name,
-  fitness_no,
   customer_name,
-  isCancel,
-  cancelComment,
   number_of_people,
   time,
-  date2,
   exercise_length,
   reservationSelect,
   trainer,
@@ -271,13 +248,9 @@ const ReservationItem_trainer = ({
   res_no,
   date,
   exercise_name,
-  fitness_no,
   customer_name,
-  isCancel,
-  cancelComment,
   number_of_people,
   time,
-  date2,
   exercise_length,
   reservationSelect,
   trainer,
@@ -325,13 +298,9 @@ const ReservationItem_date = ({
   res_no,
   date,
   exercise_name,
-  fitness_no,
   customer_name,
-  isCancel,
-  cancelComment,
   number_of_people,
   time,
-  date2,
   exercise_length,
   reservationSelect,
   trainer,
@@ -379,15 +348,10 @@ const ReservationChoiceTrainerItem = ({
   res_no,
   date,
   exercise_name,
-  fitness_no,
   customer_name,
-  isCancel,
-  cancelComment,
   number_of_people,
   time,
-  date2,
   exercise_length,
-  customer_id,
   reservationChoiceTrainer,
   trainer,
 }) => {
@@ -458,7 +422,6 @@ const ReservationChoiceClientItem = ({
   res_no,
   date,
   exercise_name,
-  fitness_no,
   customer_name,
   number_of_people,
   time,
@@ -637,11 +600,11 @@ class Reservation extends Component {
             : this.props.userinfo.loginWhether === 1
             ? trainerResult[0].fitness_no
             : this.props.userinfo.fitness_no;
-        this.props.userinfo.loginWhether === 2
-          ? console.log(clientResult[0].fitness_no)
-          : this.props.userinfo.loginWhether === 1
-          ? console.log(trainerResult[0].fitness_no)
-          : console.log(this.props.userinfo.fitness_no);
+        // this.props.userinfo.loginWhether === 2
+        //   ? console.log(clientResult[0].fitness_no)
+        //   : this.props.userinfo.loginWhether === 1
+        //   ? console.log(trainerResult[0].fitness_no)
+        //   : console.log(this.props.userinfo.fitness_no);
         getReservation(fitness_no).then((result) => {
           const now = moment();
           const items = result
@@ -662,12 +625,8 @@ class Reservation extends Component {
                 <ReservationItem
                   res_no={data.res_no}
                   date={date}
-                  date2={data.date}
                   exercise_name={data.exercise_name}
-                  fitness_no={data.fitness_no}
                   customer_name={data.customer_name}
-                  isCancel={data.isCancel}
-                  cancelComment={data.cancelComment}
                   number_of_people={data.number_of_people}
                   exercise_length={exercise_length}
                   time={data.time}
@@ -679,7 +638,7 @@ class Reservation extends Component {
           this.setState({ reservation: items, reservation_data: result }, () =>
             this.reservationClassSelect()
           );
-          // console.log("reservation_data", result);
+          console.log('reservation_data', result);
         });
       });
     });
@@ -714,12 +673,8 @@ class Reservation extends Component {
               <ReservationItem_exercise
                 res_no={data.res_no}
                 date={date}
-                date2={data.date}
                 exercise_name={data.exercise_name}
-                fitness_no={data.fitness_no}
                 customer_name={data.customer_name}
-                isCancel={data.isCancel}
-                cancelComment={data.cancelComment}
                 number_of_people={data.number_of_people}
                 exercise_length={exercise_length}
                 time={data.time}
@@ -766,12 +721,8 @@ class Reservation extends Component {
               <ReservationItem_trainer
                 res_no={data.res_no}
                 date={date}
-                date2={data.date}
                 exercise_name={data.exercise_name}
-                fitness_no={data.fitness_no}
                 customer_name={data.customer_name}
-                isCancel={data.isCancel}
-                cancelComment={data.cancelComment}
                 number_of_people={data.number_of_people}
                 exercise_length={exercise_length}
                 time={data.time}
@@ -818,12 +769,8 @@ class Reservation extends Component {
               <ReservationItem_date
                 res_no={data.res_no}
                 date={date}
-                date2={data.date}
                 exercise_name={data.exercise_name}
-                fitness_no={data.fitness_no}
                 customer_name={data.customer_name}
-                isCancel={data.isCancel}
-                cancelComment={data.cancelComment}
                 number_of_people={data.number_of_people}
                 exercise_length={exercise_length}
                 time={data.time}
@@ -896,12 +843,8 @@ class Reservation extends Component {
                 <ReservationChoiceTrainerItem
                   res_no={data.res_no}
                   date={date}
-                  date2={data.date}
                   exercise_name={data.exercise_name}
-                  fitness_no={data.fitness_no}
                   customer_name={data.customer_name}
-                  isCancel={data.isCancel}
-                  cancelComment={data.cancelComment}
                   number_of_people={data.number_of_people}
                   exercise_length={exercise_length}
                   time={data.time}
@@ -1014,8 +957,7 @@ class Reservation extends Component {
             body: JSON.stringify({
               fitness_no: fitness_no,
               date: date,
-              exercise_name:
-                this.state.exercise_name + '[' + this.state.kind + ']',
+              exercise_name: this.state.exercise_name + '/' + this.state.kind,
               trainer: this.state.trainer,
               customer_name:
                 this.props.userinfo.loginWhether === 2
@@ -1591,7 +1533,7 @@ class Reservation extends Component {
                 <p className=''>운동명</p>
                 <p className='fw-bold text-primary'>
                   {this.state.exercise_name
-                    ? this.state.exercise_name + '[' + this.state.kind + ']'
+                    ? this.state.exercise_name + '/' + this.state.kind
                     : ''}
                 </p>
               </div>

@@ -30,25 +30,33 @@ import {
 
 const SalesClient = ({
   paidMembership,
+  paidMembership2,
   paymentDate,
   salesDays,
   salesStart_date,
 }) => {
   const date1 = moment(paymentDate).format('YYYY년 MM월 DD일 ');
   const date2 = moment(salesStart_date).format('YYYY년 MM월 DD일 ');
+  const date3 = moment(salesStart_date)
+    .add(salesDays, 'days')
+    .format('YYYY년 MM월 DD일 ');
   return (
     <div>
       {paidMembership ? (
         <p>
-          이용권: {paidMembership}
+          이용권: {paidMembership2}/{paidMembership}
           <br />
           이용권 결제일: {date1}
         </p>
       ) : (
         <p>
-          기간권: {salesDays}
+          기간권: {salesDays}일 권
+          <br />
+          남은기간: D-{salesDays}
           <br />
           기간권 결제일: {date2}
+          <br />
+          기간권 마감일: {date3}
         </p>
       )}
     </div>
@@ -162,9 +170,11 @@ class Mypage extends Component {
             return (
               <SalesClient
                 paidMembership={data.paidMembership}
+                paidMembership2={data.paidMembership2}
                 paymentDate={data.paymentDate}
                 salesDays={data.salesDays}
                 salesStart_date={data.salesStart_date}
+                salesEnd_date={data.salesEnd_date}
               />
             );
           });
@@ -231,7 +241,7 @@ class Mypage extends Component {
               <p>락커룸: {this.state.cLocker}</p>
               <p>운동복: {this.state.cWear}</p>
               <p>성별: {this.state.cSex}</p>
-              <p>결제기간(이용권, 횟수권): {this.state.voucher}</p>
+              <p>결제기간(이용권, 기간권): {this.state.voucher}</p>
             </div>
           ) : this.props.userinfo.loginWhether === 1 ? (
             //강사

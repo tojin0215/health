@@ -275,7 +275,7 @@ const ReservationClassItem = ({
   return (
     <div className='border py-2 my-1 text-center'>
       <p className='fw-bold'>
-        {exercise_class}[{kind}]
+        {exercise_class}/{kind}
       </p>
 
       <p>{trainer}</p>
