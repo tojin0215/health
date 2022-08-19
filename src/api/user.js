@@ -965,8 +965,7 @@ export const voucherInsert = (
   paidMembership2,
   paymentDate,
   salesDays,
-  salesStart_date,
-  salesDays2
+  salesStart_date
 ) => {
   return axios.post(`${SERVER_URL}/voucher`, {
     client_name,
@@ -977,7 +976,6 @@ export const voucherInsert = (
     paymentDate,
     salesDays,
     salesStart_date,
-    salesDays2,
   });
 };
 
@@ -993,18 +991,40 @@ export const voucherSelect = (client_name, fitness_no) => {
     .then((response) => response.data);
 };
 
-//voucher update --> reservation
-export const voucherUpdate = (
-  client_name,
-  kind,
-  paidMembership2,
-  salesDays2
+//voucher update --> reservation paidMembership
+export const voucherUpdate = (client_name, kind) => {
+  return axios
+    .put(
+      `${SERVER_URL}/voucher?client_name=` + client_name + `&kind=` + kind,
+      {}
+    )
+    .then((response) => response.data);
+};
+
+//reservation insert
+
+export const reservationInsert = (
+  fitness_no,
+  date,
+  time,
+  exercise_name,
+  customer_name,
+  number_of_people,
+  trainer,
+  customer_id,
+  kind
 ) => {
-  return axios.put(
-    `${SERVER_URL}/voucher?client_name=` + client_name + `&kind=` + kind,
-    {
-      paidMembership2,
-      salesDays2,
-    }
-  );
+  return axios
+    .post(`${SERVER_URL}/reservation/insert`, {
+      fitness_no,
+      date,
+      time,
+      exercise_name,
+      customer_name,
+      number_of_people,
+      trainer,
+      customer_id,
+      kind,
+    })
+    .then((response) => response.data);
 };

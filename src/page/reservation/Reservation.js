@@ -50,6 +50,8 @@ import {
   selectTrainer,
   clientSelect,
   getReservation_choice_client,
+  reservationInsert,
+  voucherSelect,
   voucherUpdate,
 } from '../../api/user';
 
@@ -101,7 +103,7 @@ const ReservationClassItem = ({
     >
       {/* <p>운동명</p> */}
       <p className='fw-bold'>
-        {exercise_class}/{kind}
+        {exercise_class}[{kind}]
       </p>
       {/* <p>강사명</p> */}
       <p className='fw-bold'>{trainer}</p>
@@ -130,6 +132,7 @@ const ReservationItem = ({
   exercise_length,
   reservationSelect,
   trainer,
+  kind,
 }) => {
   const reservationDelete = (res_no) => {
     fetch(ip + '/reservation/delete?res_no=' + res_no, {
@@ -144,32 +147,14 @@ const ReservationItem = ({
     clockDate.getMonth() + 1 < 10
       ? '0' + (clockDate.getMonth() + 1)
       : clockDate.getMonth() + 1;
-  useEffect(() => {
-    if (
-      clockDate.getFullYear() == date.substr(0, 4) &&
-      month == date.substr(6, 2) &&
-      clockDate.getDate() == date.substr(10, 2) &&
-      clockDate.getHours() == time.substr(0, 2) &&
-      clockDate.getMinutes() == time.substr(3, 2)
-    ) {
-      alert('성공');
-    }
-  });
-
-  const voucherReservationUpdate = () => {
-    voucherUpdate();
-  };
-
-  // console.log(month);
-  // console.log(date);
-  // console.log(clockDate.getFullYear());
-  console.log(exercise_name.split('/', 2));
 
   return (
     <TableRow>
       <TableCell align='center'>{customer_name}</TableCell>
       <TableCell align='center'>{date}</TableCell>
-      <TableCell align='center'>{exercise_name}</TableCell>
+      <TableCell align='center'>
+        {exercise_name}[{kind}]
+      </TableCell>
       <TableCell align='center'>{trainer}</TableCell>
       <TableCell align='center'>
         {exercise_length + '/' + number_of_people}
@@ -206,6 +191,7 @@ const ReservationItem_exercise = ({
   exercise_length,
   reservationSelect,
   trainer,
+  kind,
 }) => {
   const reservationDelete = (res_no) => {
     fetch(ip + '/reservation/delete?res_no=' + res_no, {
@@ -218,7 +204,9 @@ const ReservationItem_exercise = ({
     <TableRow>
       <TableCell align='center'>{customer_name}</TableCell>
       <TableCell align='center'>{date}</TableCell>
-      <TableCell align='center'>{exercise_name}</TableCell>
+      <TableCell align='center'>
+        {exercise_name}[{kind}]
+      </TableCell>
       <TableCell align='center'>{trainer}</TableCell>
       <TableCell align='center'>
         {exercise_length + '/' + number_of_people}
@@ -254,6 +242,7 @@ const ReservationItem_trainer = ({
   exercise_length,
   reservationSelect,
   trainer,
+  kind,
 }) => {
   const reservationDelete = (res_no) => {
     fetch(ip + '/reservation/delete?res_no=' + res_no, {
@@ -267,7 +256,9 @@ const ReservationItem_trainer = ({
     <TableRow>
       <TableCell align='center'>{customer_name}</TableCell>
       <TableCell align='center'>{date}</TableCell>
-      <TableCell align='center'>{exercise_name}</TableCell>
+      <TableCell align='center'>
+        {exercise_name}[{kind}]
+      </TableCell>
       <TableCell align='center'>{trainer}</TableCell>
       <TableCell align='center'>
         {exercise_length + '/' + number_of_people}
@@ -304,6 +295,7 @@ const ReservationItem_date = ({
   exercise_length,
   reservationSelect,
   trainer,
+  kind,
 }) => {
   const reservationDelete = (res_no) => {
     fetch(ip + '/reservation/delete?res_no=' + res_no, {
@@ -317,7 +309,9 @@ const ReservationItem_date = ({
     <TableRow>
       <TableCell align='center'>{customer_name}</TableCell>
       <TableCell align='center'>{date}</TableCell>
-      <TableCell align='center'>{exercise_name}</TableCell>
+      <TableCell align='center'>
+        {exercise_name}[{kind}]
+      </TableCell>
       <TableCell align='center'>{trainer}</TableCell>
       <TableCell align='center'>
         {exercise_length + '/' + number_of_people}
@@ -354,6 +348,7 @@ const ReservationChoiceTrainerItem = ({
   exercise_length,
   reservationChoiceTrainer,
   trainer,
+  kind,
 }) => {
   const reservationDelete = (res_no) => {
     fetch(ip + '/reservation/delete?res_no=' + res_no, {
@@ -367,7 +362,9 @@ const ReservationChoiceTrainerItem = ({
     <TableRow>
       <TableCell align='center'>{customer_name}</TableCell>
       <TableCell align='center'>{date}</TableCell>
-      <TableCell align='center'>{exercise_name}</TableCell>
+      <TableCell align='center'>
+        {exercise_name}[{kind}]
+      </TableCell>
       <TableCell align='center'>{trainer}</TableCell>
       <TableCell align='center'>
         {exercise_length + '/' + number_of_people}
@@ -428,6 +425,7 @@ const ReservationChoiceClientItem = ({
   exercise_length,
   trainer,
   reservationChoiceClient,
+  kind,
 }) => {
   const reservationDelete = (res_no) => {
     fetch(ip + '/reservation/delete?res_no=' + res_no, {
@@ -440,7 +438,9 @@ const ReservationChoiceClientItem = ({
     <TableRow>
       <TableCell align='center'>{customer_name}</TableCell>
       <TableCell align='center'>{date}</TableCell>
-      <TableCell align='center'>{exercise_name}</TableCell>
+      <TableCell align='center'>
+        {exercise_name}[{kind}]
+      </TableCell>
       <TableCell align='center'>{trainer}</TableCell>
       <TableCell align='center'>
         {exercise_length + '/' + number_of_people}
@@ -625,6 +625,7 @@ class Reservation extends Component {
                 <ReservationItem
                   res_no={data.res_no}
                   date={date}
+                  kind={data.kind}
                   exercise_name={data.exercise_name}
                   customer_name={data.customer_name}
                   number_of_people={data.number_of_people}
@@ -638,7 +639,7 @@ class Reservation extends Component {
           this.setState({ reservation: items, reservation_data: result }, () =>
             this.reservationClassSelect()
           );
-          console.log('reservation_data', result);
+          // console.log('reservation_data', result);
         });
       });
     });
@@ -673,6 +674,7 @@ class Reservation extends Component {
               <ReservationItem_exercise
                 res_no={data.res_no}
                 date={date}
+                kind={data.kind}
                 exercise_name={data.exercise_name}
                 customer_name={data.customer_name}
                 number_of_people={data.number_of_people}
@@ -721,6 +723,7 @@ class Reservation extends Component {
               <ReservationItem_trainer
                 res_no={data.res_no}
                 date={date}
+                kind={data.kind}
                 exercise_name={data.exercise_name}
                 customer_name={data.customer_name}
                 number_of_people={data.number_of_people}
@@ -769,6 +772,7 @@ class Reservation extends Component {
               <ReservationItem_date
                 res_no={data.res_no}
                 date={date}
+                kind={data.kind}
                 exercise_name={data.exercise_name}
                 customer_name={data.customer_name}
                 number_of_people={data.number_of_people}
@@ -843,6 +847,7 @@ class Reservation extends Component {
                 <ReservationChoiceTrainerItem
                   res_no={data.res_no}
                   date={date}
+                  kind={data.kind}
                   exercise_name={data.exercise_name}
                   customer_name={data.customer_name}
                   number_of_people={data.number_of_people}
@@ -889,6 +894,7 @@ class Reservation extends Component {
             <ReservationChoiceClientItem
               res_no={data.res_no}
               date={date}
+              kind={data.kind}
               exercise_name={data.exercise_name}
               customer_name={data.customer_name}
               number_of_people={data.number_of_people}
@@ -949,52 +955,69 @@ class Reservation extends Component {
               : this.props.userinfo.loginWhether === 2
               ? clientResult[0].fitness_no
               : this.props.userinfo.fitness_no;
-          fetch(ip + '/reservation/insert', {
-            method: 'POST',
-            headers: {
-              'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-              fitness_no: fitness_no,
-              date: date,
-              exercise_name: this.state.exercise_name + '/' + this.state.kind,
-              trainer: this.state.trainer,
-              customer_name:
-                this.props.userinfo.loginWhether === 2
-                  ? this.props.userinfo.manager_name
-                  : this.state.customer_name,
-              customer_id:
-                this.props.userinfo.loginWhether === 2
-                  ? this.props.userinfo.id
-                  : this.state.customer_id,
-              number_of_people: this.state.number_of_people,
-              time: this.state.time,
-            }),
-          })
-            .then((result) => result.json())
-            .then((result) => {
-              if (result.message == 'ok') {
-                alert('예약이 완료되었습니다.');
-                // console.log(this.state.reserv_date)
-              } else {
-                alert(result.message);
-              }
-              this.reservationSelect();
-              this.setState({
-                exercise_name: '',
-                trainer: '',
-                customer_name: '',
-                date: '',
-                number_of_people: '',
-                time: '',
-                class_date: '',
-                kind: '',
-              });
+          reservationInsert(
+            fitness_no,
+            date,
+            this.state.time,
+            this.state.exercise_name,
+            this.props.userinfo.loginWhether === 2
+              ? this.props.userinfo.manager_name
+              : this.state.customer_name,
+            this.state.number_of_people,
+            this.state.trainer,
+            this.props.userinfo.loginWhether === 2
+              ? this.props.userinfo.id
+              : this.state.customer_id,
+            this.state.kind
+          ).then((result) => {
+            if (result.message == 'ok') {
+              alert('예약이 완료되었습니다.');
+              // console.log(this.state.reserv_date)
+            } else {
+              alert(result.message);
+            }
+            voucherUpdate(this.state.customer_name, fitness_no).then((res) =>
+              alert(res)
+            );
+            this.reservationSelect();
+            this.setState({
+              exercise_name: '',
+              trainer: '',
+              customer_name: '',
+              date: '',
+              number_of_people: '',
+              time: '',
+              class_date: '',
+              kind: '',
             });
+          });
         });
       });
     }
   };
+  /**
+   * voucher select
+   * voucher update 차감
+   */
+  // voucherReduction = () => {
+  //   selectTrainerReservation(
+  //     this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+  //   ).then((trainerResult) => {
+  //     selectClientReservation(
+  //       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+  //     ).then((clientResult) => {
+  //       const fitness_no =
+  //         this.props.userinfo.loginWhether === 1
+  //           ? trainerResult[0].fitness_no
+  //           : this.props.userinfo.loginWhether === 2
+  //           ? clientResult[0].fitness_no
+  //           : this.props.userinfo.fitness_no;
+  //       voucherSelect(this.state.customer_name, fitness_no).then((res) =>
+  //         console.log(res)
+  //       );
+  //     });
+  //   });
+  // };
 
   /**
    * 운동클래스
@@ -1533,7 +1556,7 @@ class Reservation extends Component {
                 <p className=''>운동명</p>
                 <p className='fw-bold text-primary'>
                   {this.state.exercise_name
-                    ? this.state.exercise_name + '/' + this.state.kind
+                    ? this.state.exercise_name + '[' + this.state.kind + ']'
                     : ''}
                 </p>
               </div>
