@@ -991,6 +991,20 @@ export const voucherSelect = (client_name, fitness_no) => {
     .then((response) => response.data);
 };
 
+//voucher select --> reservation
+export const voucherSelect2 = (client_name, fitness_no, kind) => {
+  return axios
+    .get(`${SERVER_URL}/voucher`, {
+      params: {
+        type: 'reserv',
+        client_name: client_name,
+        fitness_no: fitness_no,
+        kind: kind,
+      },
+    })
+    .then((response) => response.data);
+};
+
 //voucher update --> reservation paidMembership
 export const voucherUpdate = (client_name, kind, paidMembership2) => {
   return axios

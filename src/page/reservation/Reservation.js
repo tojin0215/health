@@ -53,6 +53,7 @@ import {
   reservationInsert,
   voucherSelect,
   voucherUpdate,
+  voucherSelect2,
 } from '../../api/user';
 
 // locale 오류로 임시 삭제
@@ -955,6 +956,45 @@ class Reservation extends Component {
               : this.props.userinfo.loginWhether === 2
               ? clientResult[0].fitness_no
               : this.props.userinfo.fitness_no;
+          voucherSelect2(
+            this.props.userinfo.loginWhether === 2
+              ? this.props.userinfo.manager_name
+              : this.state.customer_name,
+            fitness_no,
+            this.state.kind
+          ).then((res) => {
+            console.log(res[0]);
+            if (res[0].paidMembership2 == 0) {
+              alert('기간권소지자 xx');
+            } else if (res[0] === undefined) {
+              alert('asd xx');
+              if (this.props.userinfo.loginWhether === 2) {
+                alert('이용권이 없습니다. 이용권을 결제 후 예약가능합니다. xx');
+              } else {
+                alert(
+                  res[0].client_name +
+                    '님은 ' +
+                    res[0].kind +
+                    '이용권이 없습니다. 그래도 예약하시겠습니까? insert'
+                );
+              }
+            } else {
+              voucherUpdate(
+                res[0].client_name,
+                res[0].kind,
+                res[0].paidMembership2 - 1
+              ).then((res2) =>
+                alert(
+                  res[0].client_name +
+                    '님 의' +
+                    res[0].kind +
+                    '이용권이 1회 차감됩니다. 잔여 이용권은' +
+                    (res[0].paidMembership2 - 1) +
+                    '회 입니다. insert'
+                )
+              );
+            }
+          });
           reservationInsert(
             fitness_no,
             date,
@@ -976,22 +1016,6 @@ class Reservation extends Component {
             } else {
               alert(result.message);
             }
-            voucherSelect(
-              this.props.userinfo.loginWhether === 2
-                ? this.props.userinfo.manager_name
-                : this.state.customer_name,
-              fitness_no
-            ).then((res) => {
-              this.setState({ Redux: res[0].paidMembership2 });
-              voucherUpdate(
-                this.props.userinfo.loginWhether === 2
-                  ? this.props.userinfo.manager_name
-                  : this.state.customer_name,
-                fitness_no,
-                this.state.Redux
-              ).then((res2) => alert(res2));
-            });
-
             this.reservationSelect();
             this.setState({
               exercise_name: '',
@@ -1008,29 +1032,6 @@ class Reservation extends Component {
       });
     }
   };
-  /**
-   * voucher select
-   * voucher update 차감
-   */
-  // voucherReduction = () => {
-  //   selectTrainerReservation(
-  //     this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-  //   ).then((trainerResult) => {
-  //     selectClientReservation(
-  //       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-  //     ).then((clientResult) => {
-  //       const fitness_no =
-  //         this.props.userinfo.loginWhether === 1
-  //           ? trainerResult[0].fitness_no
-  //           : this.props.userinfo.loginWhether === 2
-  //           ? clientResult[0].fitness_no
-  //           : this.props.userinfo.fitness_no;
-  //       voucherSelect(this.state.customer_name, fitness_no).then((res) =>
-  //         console.log(res)
-  //       );
-  //     });
-  //   });
-  // };
 
   /**
    * 운동클래스
@@ -1220,6 +1221,7 @@ class Reservation extends Component {
     this.setState({ page: newPage });
   };
   render() {
+    console.log(this.state.kind);
     // console.log('rowPerPage', this.state.rowsPerPage);
     // console.log('page', this.state.page);
     // console.log(this.props.userinfo.loginWhether);
