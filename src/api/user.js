@@ -942,3 +942,87 @@ export const genticUpdate = (
     }
   );
 };
+
+//sales client
+export const salesClient = (client_name, fitness_no) => {
+  return axios
+    .get(`${SERVER_URL}/sales`, {
+      params: {
+        type: 'client',
+        client_name: client_name,
+        fitness_no: fitness_no,
+      },
+    })
+    .then((response) => response.data);
+};
+
+// voucher insert --> sales
+export const voucherInsert = (
+  client_name,
+  fitness_no,
+  kind,
+  paidMembership,
+  paidMembership2,
+  paymentDate,
+  salesDays,
+  salesStart_date
+) => {
+  return axios.post(`${SERVER_URL}/voucher`, {
+    client_name,
+    fitness_no,
+    kind,
+    paidMembership,
+    paidMembership2,
+    paymentDate,
+    salesDays,
+    salesStart_date,
+  });
+};
+
+//voucher select --> mypage
+export const voucherSelect = (client_name, fitness_no) => {
+  return axios
+    .get(`${SERVER_URL}/voucher`, {
+      params: {
+        client_name: client_name,
+        fitness_no: fitness_no,
+      },
+    })
+    .then((response) => response.data);
+};
+
+//voucher update --> reservation paidMembership
+export const voucherUpdate = (client_name, kind, paidMembership2) => {
+  return axios
+    .put(`${SERVER_URL}/voucher?client_name=` + client_name + `&kind=` + kind, {
+      paidMembership2,
+    })
+    .then((response) => response.data);
+};
+
+//reservation insert
+export const reservationInsert = (
+  fitness_no,
+  date,
+  time,
+  exercise_name,
+  customer_name,
+  number_of_people,
+  trainer,
+  customer_id,
+  kind
+) => {
+  return axios
+    .post(`${SERVER_URL}/reservation/insert`, {
+      fitness_no,
+      date,
+      time,
+      exercise_name,
+      customer_name,
+      number_of_people,
+      trainer,
+      customer_id,
+      kind,
+    })
+    .then((response) => response.data);
+};

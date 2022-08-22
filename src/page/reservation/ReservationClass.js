@@ -59,6 +59,7 @@ const ReservationClassItem = ({
   updateOpen,
   loginWhether,
   loginWhetherTrainer,
+  kind,
 }) => {
   /*
 	운동클래스 delete
@@ -92,6 +93,7 @@ const ReservationClassItem = ({
   const [trainer_err, setTrainer_err] = useState(false);
   const [class_date_err, setClass_date_err] = useState(false);
 
+  const [kind_input, setKind_input] = useState('');
   const [exercise_class_input, setExercise_class_input] = useState('');
   const [class_date_input, setClass_date_input] = useState('');
   const [trainer_input, setTrainer_input] = useState(
@@ -101,7 +103,16 @@ const ReservationClassItem = ({
   const [hour_input, setHour_input] = useState('');
   const [minute_input, setMinute_input] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
+  const [kindOpen, setKindOpen] = useState(false);
 
+  const [etcExercise_input, setEtcExercise_input] = useState('');
+  const [exerciseGroup, setExerciseGroup] = useState({
+    pt: true,
+    gx: false,
+    pila: false,
+    health: false,
+    etc: false,
+  });
   const updateChange = (e) => {
     setExercise_class_input(e.target.value);
   };
@@ -119,6 +130,54 @@ const ReservationClassItem = ({
   };
   const updateChange6 = (e) => {
     setClass_date_input(e.target.value);
+  };
+  const handleChangeEtc = (e) => {
+    setEtcExercise_input(e.target.value);
+  };
+  const handleExerciseRadio = () => {
+    setExerciseGroup({
+      pt: true,
+      gx: false,
+      pila: false,
+      health: false,
+      etc: false,
+    });
+  };
+  const handleExerciseRadio2 = () => {
+    setExerciseGroup({
+      pt: false,
+      gx: true,
+      pila: false,
+      health: false,
+      etc: false,
+    });
+  };
+  const handleExerciseRadio3 = () => {
+    setExerciseGroup({
+      pt: false,
+      gx: false,
+      pila: true,
+      health: false,
+      etc: false,
+    });
+  };
+  const handleExerciseRadio4 = () => {
+    setExerciseGroup({
+      pt: false,
+      gx: false,
+      pila: false,
+      health: true,
+      etc: false,
+    });
+  };
+  const handleExerciseRadio5 = () => {
+    setExerciseGroup({
+      pt: false,
+      gx: false,
+      pila: false,
+      health: false,
+      etc: true,
+    });
   };
 
   /*
@@ -157,6 +216,7 @@ const ReservationClassItem = ({
           minute: minute_input,
           trainer: trainer_input,
           class_date: class_date_input + 'T00:00:00.000Z',
+          kind: kind_input,
         }),
       })
         .then((result) => result.json())
@@ -167,6 +227,7 @@ const ReservationClassItem = ({
         });
     }
   };
+  // console.log(exerciseGroup.pt);
 
   const modalOnClick = () => {
     setShowModal(true);
@@ -176,6 +237,7 @@ const ReservationClassItem = ({
     setMinute_input(minute);
     setTrainer_input(trainer);
     setClass_date_input(class_date);
+    setKind_input(kind);
   };
   const modalClose = () => {
     setShowModal(false);
@@ -193,9 +255,29 @@ const ReservationClassItem = ({
   // console.log(loginWhether);
   // console.log(loginWhetherTrainer);
 
+  const exerciseKind = () => {
+    setKind_input(
+      exerciseGroup.pt
+        ? '개인PT'
+        : exerciseGroup.gx
+        ? 'gx'
+        : exerciseGroup.pila
+        ? '필라테스'
+        : exerciseGroup.health
+        ? '헬스'
+        : exerciseGroup.etc
+        ? '기타(' + etcExercise_input + ')'
+        : '개인PT'
+    );
+    setKindOpen(false);
+  };
+  console.log(kind_input);
   return (
     <div className='border py-2 my-1 text-center'>
-      <p className='fw-bold'>{exercise_class}</p>
+      <p className='fw-bold'>
+        {exercise_class}/{kind}
+      </p>
+
       <p>{trainer}</p>
       <p>
         {hourArray}시{minuteArray}분
@@ -218,6 +300,104 @@ const ReservationClassItem = ({
         <Modal show={showModal}>
           <Container>
             <Row>
+              <Form.Group>
+                <Form.Label>운동종목</Form.Label>
+                <Form.Control
+                  value={kind_input}
+                  id='kind'
+                  onClick={() => setKindOpen(true)}
+                ></Form.Control>
+                <Modal show={kindOpen}>
+                  <div className='mb-5'>
+                    <Form.Group>
+                      <Row>
+                        <Col>
+                          <Form.Check>
+                            <Form.Check.Input
+                              type='radio'
+                              name='exerciseGroup'
+                              id='pt'
+                              checked={exerciseGroup['pt']}
+                              onChange={handleExerciseRadio}
+                            />
+                            <Form.Check.Label
+                              htmlFor='개인 PT'
+                              className='w-100'
+                            >
+                              개인 PT
+                            </Form.Check.Label>
+                          </Form.Check>
+                        </Col>
+                        <Col>
+                          <Form.Check>
+                            <Form.Check.Input
+                              type='radio'
+                              name='exerciseGroup'
+                              id='gx'
+                              checked={exerciseGroup['gx']}
+                              onChange={handleExerciseRadio2}
+                            />
+                            <Form.Check.Label htmlFor='GX' className='w-100'>
+                              GX
+                            </Form.Check.Label>
+                          </Form.Check>
+                        </Col>
+                        <Col>
+                          <Form.Check>
+                            <Form.Check.Input
+                              type='radio'
+                              name='exerciseGroup'
+                              id='pila'
+                              checked={exerciseGroup['pila']}
+                              onChange={handleExerciseRadio3}
+                            />
+                            <Form.Check.Label
+                              htmlFor='필라테스'
+                              className='w-100'
+                            >
+                              필라테스
+                            </Form.Check.Label>
+                          </Form.Check>
+                        </Col>
+                        <Col>
+                          <Form.Check>
+                            <Form.Check.Input
+                              type='radio'
+                              name='exerciseGroup'
+                              id='health'
+                              checked={exerciseGroup['health']}
+                              onChange={handleExerciseRadio4}
+                            />
+                            <Form.Check.Label htmlFor='헬스' className='w-100'>
+                              헬스
+                            </Form.Check.Label>
+                          </Form.Check>
+                        </Col>
+                        <Col>
+                          <Form.Check>
+                            <Form.Check.Input
+                              type='radio'
+                              name='exerciseGroup'
+                              id='etc'
+                              checked={exerciseGroup['etc']}
+                              onChange={handleExerciseRadio5}
+                            />
+                            <Form.Control
+                              placeholder='기타'
+                              id='etcExercise'
+                              type='text'
+                              value={etcExercise_input}
+                              onChange={handleChangeEtc}
+                            ></Form.Control>
+                          </Form.Check>
+                        </Col>
+                      </Row>
+                    </Form.Group>
+                    <Button onClick={exerciseKind}>선택완료</Button>
+                  </div>
+                  <Button onClick={() => kindOpen(false)}>닫기</Button>
+                </Modal>
+              </Form.Group>
               <Form.Group>
                 <Form.Label>운동명</Form.Label>
                 <Form.Control
@@ -360,6 +540,16 @@ class ReservationClass extends Component {
       updateOpen: false,
       trainerTable: [],
       open: false,
+      kindOpen: false,
+      kind: '',
+      etcExercise: '',
+      exerciseGroup: {
+        pt: true,
+        gx: false,
+        pila: false,
+        health: false,
+        etc: false,
+      },
     };
   }
 
@@ -471,6 +661,7 @@ class ReservationClass extends Component {
                 updateOpen={handling}
                 loginWhether={this.props.userinfo.loginWhether}
                 loginWhetherTrainer={this.props.userinfo.manager_name}
+                kind={data.kind}
               />
             );
           });
@@ -560,6 +751,7 @@ class ReservationClass extends Component {
                 ? trainerResult[0].trainer_name
                 : this.state.trainer_name,
             class_date: date,
+            kind: this.state.kind,
           }),
         })
           .then((result) => result.json())
@@ -579,6 +771,7 @@ class ReservationClass extends Component {
               trainer: '',
               class_date: new Date(),
               trainer_name: '',
+              kind: '',
             });
           });
       }
@@ -607,14 +800,54 @@ class ReservationClass extends Component {
   goLogin = () => {
     this.props.history.push('/');
   };
+
+  handlekindOpen = () => {
+    this.setState({ kindOpen: true });
+  };
+  handlekindClose = () => {
+    this.setState({ kindOpen: false });
+  };
+  handleExerciseRadio = (e) => {
+    let obj = {
+      pt: false,
+      gx: false,
+      pila: false,
+      health: false,
+      etc: false,
+    };
+    obj[e.target.id] = e.target.checked;
+    this.setState({
+      exerciseGroup: obj,
+    });
+  };
+  exerciseKind = () => {
+    this.setState({
+      kind: this.state.exerciseGroup.pt
+        ? '개인PT'
+        : this.state.exerciseGroup.gx
+        ? 'GX'
+        : this.state.exerciseGroup.pila
+        ? '필라테스'
+        : this.state.exerciseGroup.health
+        ? '헬스'
+        : this.state.exerciseGroup.etc
+        ? '기타(' + this.state.etcExercise + ')'
+        : '개인PT',
+      kindOpen: false,
+    });
+  };
   render() {
     // console.log(this.props.userinfo.loginWhether);
+    // console.log(this.state.kindOpen);
+    // console.log(this.state.exerciseGroup);
+    // console.log(this.state.etcExercise);
+    console.log(this.state.kind);
     return (
       <div className='wrap reservationClassWrap'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu />
+          <Menu goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>
@@ -977,6 +1210,106 @@ class ReservationClass extends Component {
                 </div>
               )}
             </Col>
+            <Col
+              className='text-center height-fit-content fs-2'
+              xs={12}
+              sm={3}
+              lg={3}
+            >
+              <label className='w-100'>
+                <TextField
+                  className='boxmorpsm w-100'
+                  variant='standard'
+                  label='운동종류'
+                  onClick={this.handlekindOpen}
+                  value={this.state.kind}
+                />
+              </label>
+            </Col>
+            <Modal show={this.state.kindOpen}>
+              <div className='mb-5'>
+                <Form.Group>
+                  <Row>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='pt'
+                          checked={this.state.exerciseGroup['pt']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Check.Label htmlFor='개인 PT' className='w-100'>
+                          개인 PT
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='gx'
+                          checked={this.state.exerciseGroup['gx']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Check.Label htmlFor='GX' className='w-100'>
+                          GX
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='pila'
+                          checked={this.state.exerciseGroup['pila']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Check.Label htmlFor='필라테스' className='w-100'>
+                          필라테스
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='health'
+                          checked={this.state.exerciseGroup['health']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Check.Label htmlFor='헬스' className='w-100'>
+                          헬스
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='etc'
+                          checked={this.state.exerciseGroup['etc']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Control
+                          placeholder='기타'
+                          id='etcExercise'
+                          type='text'
+                          value={this.state.etcExercise}
+                          onChange={this.handleChange}
+                        ></Form.Control>
+                      </Form.Check>
+                    </Col>
+                  </Row>
+                </Form.Group>
+                <Button onClick={this.exerciseKind}>선택완료</Button>
+              </div>
+              <Button onClick={this.handlekindClose}>닫기</Button>
+            </Modal>
             <Col
               className='text-center height-fit-content fs-2'
               xs={12}

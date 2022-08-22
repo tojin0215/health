@@ -1,11 +1,4 @@
-import {
-  Menu,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@mui/material';
+import Menu from '../../component/navigation/Menu';
 import moment from 'moment';
 moment.locale('ko-KR');
 
@@ -221,7 +214,7 @@ class Genetic extends Component {
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu />
+          <Menu goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

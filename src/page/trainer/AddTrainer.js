@@ -175,7 +175,7 @@ class AddTrainer extends Component {
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu />
+          <Menu goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>
