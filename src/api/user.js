@@ -992,17 +992,15 @@ export const voucherSelect = (client_name, fitness_no) => {
 };
 
 //voucher update --> reservation paidMembership
-export const voucherUpdate = (client_name, kind) => {
+export const voucherUpdate = (client_name, kind, paidMembership2) => {
   return axios
-    .put(
-      `${SERVER_URL}/voucher?client_name=` + client_name + `&kind=` + kind,
-      {}
-    )
+    .put(`${SERVER_URL}/voucher?client_name=` + client_name + `&kind=` + kind, {
+      paidMembership2,
+    })
     .then((response) => response.data);
 };
 
 //reservation insert
-
 export const reservationInsert = (
   fitness_no,
   date,

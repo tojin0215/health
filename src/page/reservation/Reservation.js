@@ -497,7 +497,7 @@ class Reservation extends Component {
       fitness_no: 1,
       customer: null,
       reservation: [],
-
+      Redux: '',
       reservation_trainer: [],
       reservation_exercise: [],
       reservation_date: [],
@@ -976,9 +976,22 @@ class Reservation extends Component {
             } else {
               alert(result.message);
             }
-            voucherUpdate(this.state.customer_name, fitness_no).then((res) =>
-              alert(res)
-            );
+            voucherSelect(
+              this.props.userinfo.loginWhether === 2
+                ? this.props.userinfo.manager_name
+                : this.state.customer_name,
+              fitness_no
+            ).then((res) => {
+              this.setState({ Redux: res[0].paidMembership2 });
+              voucherUpdate(
+                this.props.userinfo.loginWhether === 2
+                  ? this.props.userinfo.manager_name
+                  : this.state.customer_name,
+                fitness_no,
+                this.state.Redux
+              ).then((res2) => alert(res2));
+            });
+
             this.reservationSelect();
             this.setState({
               exercise_name: '',
