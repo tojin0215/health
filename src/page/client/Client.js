@@ -10,6 +10,7 @@ import {
   selectTrainerReservation,
   updateClient,
   updateManagerClientTrainer,
+  voucherSelect,
 } from '../../api/user';
 
 // 컴포넌트
@@ -385,6 +386,42 @@ class Client extends Component {
   handleChangePage = (e, newPage) => {
     this.setState({ page: newPage });
   };
+
+  // handleRedux = () => {
+  //   selectTrainerReservation(
+  //     this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
+  //   ).then((trainerResult) => {
+  //     const fitness_no =
+  //       this.props.userinfo.loginWhether === 1
+  //         ? trainerResult[0].fitness_no
+  //         : this.props.userinfo.fitness_no;
+  //     voucherSelect2(
+  //       this.state.customer_name,
+  //       fitness_no,
+  //       this.state.kind
+  //     ).then((res) => {
+  //       console.log(res);
+  //       if (res.length === 0) {
+  //         alert(this.state.kind + '이용권이 없습니다.');
+  //       } else {
+  //         voucherUpdate(
+  //           this.state.customer_name,
+  //           this.state.kind,
+  //           res[0].paidMembership2 - 1
+  //         ).then((res2) => {
+  //           alert(
+  //             this.state.customer_name +
+  //               '님의 ' +
+  //               this.state.kind +
+  //               '이용권이 차감됩니다. 잔여 이용권은' +
+  //               (res[0].paidMembership2 - 1) +
+  //               '회 입니다.'
+  //           );
+  //         });
+  //       }
+  //     });
+  //   });
+  // };
 
   render() {
     // console.log(this.props.userinfo.fitness_no);

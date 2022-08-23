@@ -1040,3 +1040,8 @@ export const reservationInsert = (
     })
     .then((response) => response.data);
 };
+
+//reservation delete
+export const reservationDestroy = (res_no) => {
+  return axios.delete(`${SERVER_URL}/reservation/delete?res_no=` + res_no);
+};

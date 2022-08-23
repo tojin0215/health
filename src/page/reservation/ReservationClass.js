@@ -1272,7 +1272,7 @@ class ReservationClass extends Component {
                         </Form.Check.Label>
                       </Form.Check>
                     </Col>
-                    <Col>
+                    {/* <Col>
                       <Form.Check>
                         <Form.Check.Input
                           type='radio'
@@ -1285,7 +1285,7 @@ class ReservationClass extends Component {
                           헬스
                         </Form.Check.Label>
                       </Form.Check>
-                    </Col>
+                    </Col> */}
                     <Col>
                       <Form.Check>
                         <Form.Check.Input

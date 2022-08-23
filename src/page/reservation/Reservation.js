@@ -54,6 +54,7 @@ import {
   voucherSelect,
   voucherUpdate,
   voucherSelect2,
+  reservationDestroy,
 } from '../../api/user';
 
 // locale 오류로 임시 삭제
@@ -134,14 +135,35 @@ const ReservationItem = ({
   reservationSelect,
   trainer,
   kind,
+  fitness_no,
 }) => {
   const reservationDelete = (res_no) => {
-    fetch(ip + '/reservation/delete?res_no=' + res_no, {
-      method: 'DELETE',
-    }).then((result) => {
+    reservationDestroy(res_no).then((result) => {
       reservationSelect();
+      voucherPlus();
     });
   };
+
+  const voucherPlus = () => {
+    voucherSelect2(customer_name, fitness_no, kind).then((res) => {
+      console.log(res);
+      voucherUpdate(
+        res[0].client_name,
+        res[0].kind,
+        res[0].paidMembership2 + 1
+      ).then((res2) =>
+        alert(
+          res[0].client_name +
+            '님 의' +
+            res[0].kind +
+            '이용권이 1회 증가됩니다. 잔여 이용권은' +
+            (res[0].paidMembership2 + 1) +
+            '회 입니다.'
+        )
+      );
+    });
+  };
+
   const [clockDate, setClockDate] = useState(new Date());
 
   const month =
@@ -193,14 +215,35 @@ const ReservationItem_exercise = ({
   reservationSelect,
   trainer,
   kind,
+  fitness_no,
 }) => {
   const reservationDelete = (res_no) => {
-    fetch(ip + '/reservation/delete?res_no=' + res_no, {
-      method: 'DELETE',
-    }).then((result) => {
+    reservationDestroy(res_no).then((result) => {
       reservationSelect();
+      voucherPlus();
     });
   };
+
+  const voucherPlus = () => {
+    voucherSelect2(customer_name, fitness_no, kind).then((res) => {
+      console.log(res);
+      voucherUpdate(
+        res[0].client_name,
+        res[0].kind,
+        res[0].paidMembership2 + 1
+      ).then((res2) =>
+        alert(
+          res[0].client_name +
+            '님 의' +
+            res[0].kind +
+            '이용권이 1회 증가됩니다. 잔여 이용권은' +
+            (res[0].paidMembership2 + 1) +
+            '회 입니다.'
+        )
+      );
+    });
+  };
+
   return (
     <TableRow>
       <TableCell align='center'>{customer_name}</TableCell>
@@ -244,15 +287,34 @@ const ReservationItem_trainer = ({
   reservationSelect,
   trainer,
   kind,
+  fitness_no,
 }) => {
   const reservationDelete = (res_no) => {
-    fetch(ip + '/reservation/delete?res_no=' + res_no, {
-      method: 'DELETE',
-    }).then((result) => {
+    reservationDestroy(res_no).then((result) => {
       reservationSelect();
+      voucherPlus();
     });
   };
 
+  const voucherPlus = () => {
+    voucherSelect2(customer_name, fitness_no, kind).then((res) => {
+      console.log(res);
+      voucherUpdate(
+        res[0].client_name,
+        res[0].kind,
+        res[0].paidMembership2 + 1
+      ).then((res2) =>
+        alert(
+          res[0].client_name +
+            '님 의' +
+            res[0].kind +
+            '이용권이 1회 증가됩니다. 잔여 이용권은' +
+            (res[0].paidMembership2 + 1) +
+            '회 입니다.'
+        )
+      );
+    });
+  };
   return (
     <TableRow>
       <TableCell align='center'>{customer_name}</TableCell>
@@ -297,12 +359,32 @@ const ReservationItem_date = ({
   reservationSelect,
   trainer,
   kind,
+  fitness_no,
 }) => {
   const reservationDelete = (res_no) => {
-    fetch(ip + '/reservation/delete?res_no=' + res_no, {
-      method: 'DELETE',
-    }).then((result) => {
+    reservationDestroy(res_no).then((result) => {
       reservationSelect();
+      voucherPlus();
+    });
+  };
+
+  const voucherPlus = () => {
+    voucherSelect2(customer_name, fitness_no, kind).then((res) => {
+      console.log(res);
+      voucherUpdate(
+        res[0].client_name,
+        res[0].kind,
+        res[0].paidMembership2 + 1
+      ).then((res2) =>
+        alert(
+          res[0].client_name +
+            '님 의' +
+            res[0].kind +
+            '이용권이 1회 증가됩니다. 잔여 이용권은' +
+            (res[0].paidMembership2 + 1) +
+            '회 입니다.'
+        )
+      );
     });
   };
 
@@ -350,12 +432,32 @@ const ReservationChoiceTrainerItem = ({
   reservationChoiceTrainer,
   trainer,
   kind,
+  fitness_no,
 }) => {
   const reservationDelete = (res_no) => {
-    fetch(ip + '/reservation/delete?res_no=' + res_no, {
-      method: 'DELETE',
-    }).then((result) => {
+    reservationDestroy(res_no).then((result) => {
       reservationChoiceTrainer(res_no);
+      voucherPlus();
+    });
+  };
+
+  const voucherPlus = () => {
+    voucherSelect2(customer_name, fitness_no, kind).then((res) => {
+      console.log(res);
+      voucherUpdate(
+        res[0].client_name,
+        res[0].kind,
+        res[0].paidMembership2 + 1
+      ).then((res2) =>
+        alert(
+          res[0].client_name +
+            '님 의' +
+            res[0].kind +
+            '이용권이 1회 증가됩니다. 잔여 이용권은' +
+            (res[0].paidMembership2 + 1) +
+            '회 입니다.'
+        )
+      );
     });
   };
 
@@ -427,12 +529,32 @@ const ReservationChoiceClientItem = ({
   trainer,
   reservationChoiceClient,
   kind,
+  fitness_no,
 }) => {
   const reservationDelete = (res_no) => {
-    fetch(ip + '/reservation/delete?res_no=' + res_no, {
-      method: 'DELETE',
-    }).then((result) => {
+    reservationDestroy(res_no).then((result) => {
       reservationChoiceClient(res_no);
+      voucherPlus();
+    });
+  };
+
+  const voucherPlus = () => {
+    voucherSelect2(customer_name, fitness_no, kind).then((res) => {
+      console.log(res);
+      voucherUpdate(
+        res[0].client_name,
+        res[0].kind,
+        res[0].paidMembership2 + 1
+      ).then((res2) =>
+        alert(
+          res[0].client_name +
+            '님 의' +
+            res[0].kind +
+            '이용권이 1회 증가됩니다. 잔여 이용권은' +
+            (res[0].paidMembership2 + 1) +
+            '회 입니다.'
+        )
+      );
     });
   };
   return (
@@ -624,6 +746,7 @@ class Reservation extends Component {
               ).length;
               return (
                 <ReservationItem
+                  fitness_no={fitness_no}
                   res_no={data.res_no}
                   date={date}
                   kind={data.kind}
@@ -673,6 +796,7 @@ class Reservation extends Component {
             ).length;
             return (
               <ReservationItem_exercise
+                fitness_no={fitness_no}
                 res_no={data.res_no}
                 date={date}
                 kind={data.kind}
@@ -722,6 +846,7 @@ class Reservation extends Component {
             ).length;
             return (
               <ReservationItem_trainer
+                fitness_no={fitness_no}
                 res_no={data.res_no}
                 date={date}
                 kind={data.kind}
@@ -771,6 +896,7 @@ class Reservation extends Component {
             ).length;
             return (
               <ReservationItem_date
+                fitness_no={fitness_no}
                 res_no={data.res_no}
                 date={date}
                 kind={data.kind}
@@ -846,6 +972,7 @@ class Reservation extends Component {
               ).length;
               return (
                 <ReservationChoiceTrainerItem
+                  fitness_no={fitness_no}
                   res_no={data.res_no}
                   date={date}
                   kind={data.kind}
@@ -893,6 +1020,7 @@ class Reservation extends Component {
           ).length;
           return (
             <ReservationChoiceClientItem
+              fitness_no={fitness_no}
               res_no={data.res_no}
               date={date}
               kind={data.kind}
@@ -965,15 +1093,14 @@ class Reservation extends Component {
           ).then((res) => {
             // console.log(res[0]);
             if (res[0] === undefined) {
-              alert('undefined xx');
               if (this.props.userinfo.loginWhether === 2) {
-                alert('이용권이 없습니다. 이용권을 결제 후 예약가능합니다. xx');
+                alert('이용권이 없습니다. 이용권을 결제 후 예약가능합니다.');
               } else {
                 confirm(
                   this.state.customer_name +
                     '님은 ' +
                     this.state.kind +
-                    '이용권이 없습니다. 그래도 예약하시겠습니까? insert'
+                    '이용권이 없습니다. 그래도 예약하시겠습니까?'
                 ) === true
                   ? reservationInsert(
                       fitness_no,
@@ -1008,25 +1135,11 @@ class Reservation extends Component {
                         kind: '',
                       });
                     })
-                  : alert('false');
+                  : alert(this.state.customer_name + '님은 취소됐습니다.');
               }
             } else if (res[0].paidMembership2 == 0) {
-              alert('기간권소지자 xx');
+              alert('기간권소지자입니다. 이용권을 결제 후 이용가능합니다.');
             } else {
-              voucherUpdate(
-                res[0].client_name,
-                res[0].kind,
-                res[0].paidMembership2 - 1
-              ).then((res2) =>
-                alert(
-                  res[0].client_name +
-                    '님 의' +
-                    res[0].kind +
-                    '이용권이 1회 차감됩니다. 잔여 이용권은' +
-                    (res[0].paidMembership2 - 1) +
-                    '회 입니다. insert'
-                )
-              );
               reservationInsert(
                 fitness_no,
                 date,
@@ -1044,6 +1157,20 @@ class Reservation extends Component {
               ).then((result) => {
                 if (result.message == 'ok') {
                   alert('예약이 완료되었습니다.');
+                  voucherUpdate(
+                    res[0].client_name,
+                    res[0].kind,
+                    res[0].paidMembership2 - 1
+                  ).then((res2) =>
+                    alert(
+                      res[0].client_name +
+                        '님 의' +
+                        res[0].kind +
+                        '이용권이 1회 차감됩니다. 잔여 이용권은' +
+                        (res[0].paidMembership2 - 1) +
+                        '회 입니다.'
+                    )
+                  );
                   // console.log(this.state.reserv_date)
                 } else {
                   alert(result.message);
@@ -1255,7 +1382,8 @@ class Reservation extends Component {
     this.setState({ page: newPage });
   };
   render() {
-    // console.log(this.state.kind);
+    console.log(this.state.customer_name);
+    console.log(this.state.kind);
     // console.log('rowPerPage', this.state.rowsPerPage);
     // console.log('page', this.state.page);
     // console.log(this.props.userinfo.loginWhether);

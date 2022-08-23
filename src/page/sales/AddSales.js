@@ -484,7 +484,7 @@ class AddSales extends Component {
                       checked={this.state.checkboxGroup['salesDaysCheckbox']}
                     />
                     <Form.Check.Label for='salesDaysCheckbox' className='w-100'>
-                      기간제
+                      기간권
                     </Form.Check.Label>
                   </Form.Check>
                   <Form.Label>기간시작일</Form.Label>
@@ -533,7 +533,7 @@ class AddSales extends Component {
                       htmlFor='paidMembershipCheckbox'
                       className='w-100'
                     >
-                      횟수제
+                      이용권
                     </Form.Check.Label>
                   </Form.Check>
                   <Form.Label>이용권 횟수</Form.Label>
