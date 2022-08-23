@@ -963,21 +963,55 @@ class Reservation extends Component {
             fitness_no,
             this.state.kind
           ).then((res) => {
-            console.log(res[0]);
-            if (res[0].paidMembership2 == 0) {
-              alert('기간권소지자 xx');
-            } else if (res[0] === undefined) {
-              alert('asd xx');
+            // console.log(res[0]);
+            if (res[0] === undefined) {
+              alert('undefined xx');
               if (this.props.userinfo.loginWhether === 2) {
                 alert('이용권이 없습니다. 이용권을 결제 후 예약가능합니다. xx');
               } else {
-                alert(
-                  res[0].client_name +
+                confirm(
+                  this.state.customer_name +
                     '님은 ' +
-                    res[0].kind +
+                    this.state.kind +
                     '이용권이 없습니다. 그래도 예약하시겠습니까? insert'
-                );
+                ) === true
+                  ? reservationInsert(
+                      fitness_no,
+                      date,
+                      this.state.time,
+                      this.state.exercise_name,
+                      this.props.userinfo.loginWhether === 2
+                        ? this.props.userinfo.manager_name
+                        : this.state.customer_name,
+                      this.state.number_of_people,
+                      this.state.trainer,
+                      this.props.userinfo.loginWhether === 2
+                        ? this.props.userinfo.id
+                        : this.state.customer_id,
+                      this.state.kind
+                    ).then((result) => {
+                      if (result.message == 'ok') {
+                        alert('예약이 완료되었습니다.');
+                        // console.log(this.state.reserv_date)
+                      } else {
+                        alert(result.message);
+                      }
+                      this.reservationSelect();
+                      this.setState({
+                        exercise_name: '',
+                        trainer: '',
+                        customer_name: '',
+                        date: '',
+                        number_of_people: '',
+                        time: '',
+                        class_date: '',
+                        kind: '',
+                      });
+                    })
+                  : alert('false');
               }
+            } else if (res[0].paidMembership2 == 0) {
+              alert('기간권소지자 xx');
             } else {
               voucherUpdate(
                 res[0].client_name,
@@ -993,40 +1027,40 @@ class Reservation extends Component {
                     '회 입니다. insert'
                 )
               );
+              reservationInsert(
+                fitness_no,
+                date,
+                this.state.time,
+                this.state.exercise_name,
+                this.props.userinfo.loginWhether === 2
+                  ? this.props.userinfo.manager_name
+                  : this.state.customer_name,
+                this.state.number_of_people,
+                this.state.trainer,
+                this.props.userinfo.loginWhether === 2
+                  ? this.props.userinfo.id
+                  : this.state.customer_id,
+                this.state.kind
+              ).then((result) => {
+                if (result.message == 'ok') {
+                  alert('예약이 완료되었습니다.');
+                  // console.log(this.state.reserv_date)
+                } else {
+                  alert(result.message);
+                }
+                this.reservationSelect();
+                this.setState({
+                  exercise_name: '',
+                  trainer: '',
+                  customer_name: '',
+                  date: '',
+                  number_of_people: '',
+                  time: '',
+                  class_date: '',
+                  kind: '',
+                });
+              });
             }
-          });
-          reservationInsert(
-            fitness_no,
-            date,
-            this.state.time,
-            this.state.exercise_name,
-            this.props.userinfo.loginWhether === 2
-              ? this.props.userinfo.manager_name
-              : this.state.customer_name,
-            this.state.number_of_people,
-            this.state.trainer,
-            this.props.userinfo.loginWhether === 2
-              ? this.props.userinfo.id
-              : this.state.customer_id,
-            this.state.kind
-          ).then((result) => {
-            if (result.message == 'ok') {
-              alert('예약이 완료되었습니다.');
-              // console.log(this.state.reserv_date)
-            } else {
-              alert(result.message);
-            }
-            this.reservationSelect();
-            this.setState({
-              exercise_name: '',
-              trainer: '',
-              customer_name: '',
-              date: '',
-              number_of_people: '',
-              time: '',
-              class_date: '',
-              kind: '',
-            });
           });
         });
       });
@@ -1221,7 +1255,7 @@ class Reservation extends Component {
     this.setState({ page: newPage });
   };
   render() {
-    console.log(this.state.kind);
+    // console.log(this.state.kind);
     // console.log('rowPerPage', this.state.rowsPerPage);
     // console.log('page', this.state.page);
     // console.log(this.props.userinfo.loginWhether);
