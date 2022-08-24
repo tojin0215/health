@@ -29,6 +29,7 @@ import {
 } from '../../api/user';
 
 const SalesClient = ({
+  kind,
   paidMembership,
   paidMembership2,
   paymentDate,
@@ -49,12 +50,14 @@ const SalesClient = ({
     <div>
       {paidMembership ? (
         <p>
+          <h2>{kind}</h2>
           이용권: {paidMembership2}/{paidMembership}
           <br />
           이용권 결제일: {date1}
         </p>
       ) : (
         <p>
+          <h2>{kind}</h2>
           기간권: {salesDays}일 권
           <br />
           남은기간: D {endDays}
@@ -174,6 +177,7 @@ class Mypage extends Component {
           const items = res3.map((data, index, array) => {
             return (
               <SalesClient
+                kind={data.kind}
                 paidMembership={data.paidMembership}
                 paidMembership2={data.paidMembership2}
                 paymentDate={data.paymentDate}

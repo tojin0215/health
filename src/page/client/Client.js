@@ -1,4 +1,4 @@
-import { Component, useState } from 'react';
+import { Component, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
@@ -66,6 +66,12 @@ const ViewClientItem = ({
   const [phone_input, setPhone_input] = useState('');
   const [locker_input, setLocker_input] = useState(lockerNumber);
   const [wear_input, setWear_input] = useState(sportswear);
+  const [kind, setKind] = useState('');
+  const [paidMembership, setPaidMembership] = useState('');
+  const [paidMembership2, setPaidMembership2] = useState('');
+  const [paymentDate, setPaymentDate] = useState(new Date());
+  const [salesDays, setSalesDays] = useState('');
+  const [salesStart, setSalesStart] = useState(new Date());
 
   const modalClose = () => {
     setShowModal(false);
@@ -76,6 +82,7 @@ const ViewClientItem = ({
   };
   const modalOnClick = () => {
     setShowModal(true);
+    vocherView();
   };
   const modalUpdate = () => {
     setShowUpdate(true);
@@ -136,6 +143,29 @@ const ViewClientItem = ({
   const handleWear2 = () => {
     setWear_input('사용');
   };
+
+  const vocherView = () => {
+    voucherSelect(client_name, fitness_no).then((res) => {
+      console.log(res);
+      setKind(res[0].kind);
+      setPaidMembership(res[0].paidMembership);
+      setPaidMembership2(res[0].paidMembership2);
+      setPaymentDate(res[0].paymentDate);
+      setSalesDays(res[0].salesDays);
+      setSalesStart(res[0].salesStart);
+    });
+  };
+  console.log(paidMembership);
+  const date1 = moment(paymentDate).format('YYYY년 MM월 DD일');
+  const date2 = moment(salesStart).format('YYYY년 MM월 DD일');
+  const date3 = moment(salesStart)
+    .add(salesDays, 'days')
+    .subtract(1, 'days')
+    .format('YYYY년 MM월 DD일');
+  const date4 = moment(salesStart).add(salesDays, 'days');
+  const endDays =
+    moment().diff(date4, 'days') == 0 ? '-Day' : moment().diff(date4, 'days');
+
   return (
     <TableRow>
       <TableCell onClick={modalOnClick}>{client_name}</TableCell>
@@ -170,6 +200,33 @@ const ViewClientItem = ({
                 <p>{client_name}</p>
               )}
             </Col>
+            <div>
+              {paidMembership ? (
+                <Col xs={6} md={4} className='mb-2'>
+                  <h2>{kind}</h2>
+                  이용권: {paidMembership2}/{paidMembership}
+                  <br />
+                  이용권 결제일: {date1}
+                </Col>
+              ) : salesDays ? (
+                <Col xs={6} md={4} className='mb-2'>
+                  <h2>{kind}</h2>
+                  기간권: {salesDays}일 권
+                  <br />
+                  남은기간: D {endDays}
+                  <br />
+                  기간권 결제일: {date2}
+                  <br />
+                  기간권 마감일: {date3}
+                </Col>
+              ) : (
+                <Col xs={6} md={4} className='mb-2'>
+                  결제된 기간권 이용권이 없습니다.
+                </Col>
+              )}
+              <Button>결제된 이용권 더보기</Button>
+              {/* voucher page만들어서 이동 */}
+            </div>
             <Col xs={6} md={4} className='mb-2'>
               <h5 className='mb-1'>생년월일</h5>
               <p>{birth}</p>
