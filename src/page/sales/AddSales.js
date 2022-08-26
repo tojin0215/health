@@ -419,6 +419,15 @@ class AddSales extends Component {
                       <Form.Check.Label htmlFor='GX' className='w-100'>
                         GX
                       </Form.Check.Label>
+                      {/* GX이용권--> GX[스피닝]이용권
+                      으로 바꾸기 기타처럼 */}
+                      {/* <Form.Control
+                        placeholder='GX'
+                        id='gxExercise'
+                        type='text'
+                        value={this.state.gxExercise}
+                        onChange={this.handleChange}
+                      ></Form.Control> */}
                     </Form.Check>
                   </Col>
                   <Col>

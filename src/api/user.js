@@ -1008,9 +1008,30 @@ export const voucherSelect2 = (client_name, fitness_no, kind) => {
 //voucher update --> reservation paidMembership
 export const voucherUpdate = (client_name, kind, paidMembership2) => {
   return axios
-    .put(`${SERVER_URL}/voucher?client_name=` + client_name + `&kind=` + kind, {
-      paidMembership2,
-    })
+    .put(
+      `${SERVER_URL}/voucher?type=paidMembership2&client_name=` +
+        client_name +
+        `&kind=` +
+        kind,
+      {
+        paidMembership2,
+      }
+    )
+    .then((response) => response.data);
+};
+
+//voucher update --> reservation salesDays
+export const voucherUpdate2 = (client_name, kind, salesDays) => {
+  return axios
+    .put(
+      `${SERVER_URL}/voucher?type=salesDays&client_name=` +
+        client_name +
+        `&kind=` +
+        kind,
+      {
+        salesDays,
+      }
+    )
     .then((response) => response.data);
 };
 

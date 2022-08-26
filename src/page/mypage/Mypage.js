@@ -45,19 +45,31 @@ const SalesClient = ({
   const date4 = moment(salesStart_date).add(salesDays, 'days');
   const endDays =
     moment().diff(date4, 'days') == 0 ? '-Day' : moment().diff(date4, 'days');
-
+  const today = moment(new Date()).format('YYYY년 MM월 DD일');
+  const date3plus1 = moment(salesStart_date)
+    .add(salesDays, 'days')
+    .add(1, 'days')
+    .subtract(1, 'days')
+    .format('YYYY년 MM월 DD일');
   return (
     <div>
-      {paidMembership ? (
-        <p>
-          <h2>{kind}</h2>
-          이용권: {paidMembership2}/{paidMembership}
-          <br />
-          이용권 결제일: {date1}
-        </p>
+      <h3>현재 사용중인 이용권</h3>
+      {date3plus1 <= today ? (
+        ''
+      ) : paidMembership ? (
+        paidMembership === 0 ? (
+          ''
+        ) : (
+          <p>
+            <h4>{kind}</h4>
+            이용권: {paidMembership2}/{paidMembership}
+            <br />
+            이용권 결제일: {date1}
+          </p>
+        )
       ) : (
         <p>
-          <h2>{kind}</h2>
+          <h4>{kind}</h4>
           기간권: {salesDays}일 권
           <br />
           남은기간: D {endDays}
