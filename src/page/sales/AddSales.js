@@ -419,6 +419,15 @@ class AddSales extends Component {
                       <Form.Check.Label htmlFor='GX' className='w-100'>
                         GX
                       </Form.Check.Label>
+                      {/* GX이용권--> GX[스피닝]이용권
+                      으로 바꾸기 기타처럼 */}
+                      {/* <Form.Control
+                        placeholder='GX'
+                        id='gxExercise'
+                        type='text'
+                        value={this.state.gxExercise}
+                        onChange={this.handleChange}
+                      ></Form.Control> */}
                     </Form.Check>
                   </Col>
                   <Col>
@@ -484,7 +493,7 @@ class AddSales extends Component {
                       checked={this.state.checkboxGroup['salesDaysCheckbox']}
                     />
                     <Form.Check.Label for='salesDaysCheckbox' className='w-100'>
-                      기간제
+                      기간권
                     </Form.Check.Label>
                   </Form.Check>
                   <Form.Label>기간시작일</Form.Label>
@@ -533,7 +542,7 @@ class AddSales extends Component {
                       htmlFor='paidMembershipCheckbox'
                       className='w-100'
                     >
-                      횟수제
+                      이용권
                     </Form.Check.Label>
                   </Form.Check>
                   <Form.Label>이용권 횟수</Form.Label>

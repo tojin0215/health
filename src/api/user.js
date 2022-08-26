@@ -991,12 +991,47 @@ export const voucherSelect = (client_name, fitness_no) => {
     .then((response) => response.data);
 };
 
+//voucher select --> reservation
+export const voucherSelect2 = (client_name, fitness_no, kind) => {
+  return axios
+    .get(`${SERVER_URL}/voucher`, {
+      params: {
+        type: 'reserv',
+        client_name: client_name,
+        fitness_no: fitness_no,
+        kind: kind,
+      },
+    })
+    .then((response) => response.data);
+};
+
 //voucher update --> reservation paidMembership
 export const voucherUpdate = (client_name, kind, paidMembership2) => {
   return axios
-    .put(`${SERVER_URL}/voucher?client_name=` + client_name + `&kind=` + kind, {
-      paidMembership2,
-    })
+    .put(
+      `${SERVER_URL}/voucher?type=paidMembership2&client_name=` +
+        client_name +
+        `&kind=` +
+        kind,
+      {
+        paidMembership2,
+      }
+    )
+    .then((response) => response.data);
+};
+
+//voucher update --> reservation salesDays
+export const voucherUpdate2 = (client_name, kind, salesDays) => {
+  return axios
+    .put(
+      `${SERVER_URL}/voucher?type=salesDays&client_name=` +
+        client_name +
+        `&kind=` +
+        kind,
+      {
+        salesDays,
+      }
+    )
     .then((response) => response.data);
 };
 
@@ -1025,4 +1060,9 @@ export const reservationInsert = (
       kind,
     })
     .then((response) => response.data);
+};
+
+//reservation delete
+export const reservationDestroy = (res_no) => {
+  return axios.delete(`${SERVER_URL}/reservation/delete?res_no=` + res_no);
 };

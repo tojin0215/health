@@ -1,4 +1,4 @@
-import { Component, useState } from 'react';
+import { Component, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
@@ -10,6 +10,10 @@ import {
   selectTrainerReservation,
   updateClient,
   updateManagerClientTrainer,
+  voucherSelect,
+  voucherSelect2,
+  voucherUpdate,
+  voucherUpdate2,
 } from '../../api/user';
 
 // 컴포넌트
@@ -43,6 +47,7 @@ import { TablePagination } from '@mui/material';
 import { TbMoodSuprised } from 'react-icons/tb';
 
 const ViewClientItem = ({
+  joinNo,
   fitness_no,
   client_name,
   phone,
@@ -65,6 +70,9 @@ const ViewClientItem = ({
   const [phone_input, setPhone_input] = useState('');
   const [locker_input, setLocker_input] = useState(lockerNumber);
   const [wear_input, setWear_input] = useState(sportswear);
+  const [voucher, setVoucher] = useState([]);
+  const [voucher2, setVoucher2] = useState([]);
+  const [viewModal, setViewModal] = useState(false);
 
   const modalClose = () => {
     setShowModal(false);
@@ -75,6 +83,7 @@ const ViewClientItem = ({
   };
   const modalOnClick = () => {
     setShowModal(true);
+    vocherView();
   };
   const modalUpdate = () => {
     setShowUpdate(true);
@@ -89,6 +98,14 @@ const ViewClientItem = ({
       setShowUpdate(false);
       viewClient();
     });
+  };
+
+  const viewModalOnclick = () => {
+    setViewModal(true);
+    vocherView2();
+  };
+  const viewModalClose = () => {
+    setViewModal(false);
   };
 
   const updateCompleted = (idc) => {
@@ -135,6 +152,260 @@ const ViewClientItem = ({
   const handleWear2 = () => {
     setWear_input('사용');
   };
+
+  const VoucherView = ({
+    kind,
+    paidMembership,
+    paidMembership2,
+    paymentDate,
+    salesDays,
+    salesStart_date,
+  }) => {
+    const date1 = moment(paymentDate).format('YYYY년 MM월 DD일');
+    const date2 = moment(salesStart_date).format('YYYY년 MM월 DD일');
+    const date3 = moment(salesStart_date)
+      .add(salesDays, 'days')
+      .subtract(1, 'days')
+      .format('YYYY년 MM월 DD일');
+    const date4 = moment(salesStart_date).add(salesDays, 'days');
+    const endDays =
+      moment().diff(date4, 'days') == 0 ? '-Day' : moment().diff(date4, 'days');
+    const today = moment(new Date()).format('YYYY년 MM월 DD일');
+    const date3plus1 = moment(salesStart_date)
+      .add(salesDays, 'days')
+      .add(1, 'days')
+      .subtract(1, 'days')
+      .format('YYYY년 MM월 DD일');
+    // console.log(today);
+    // console.log(date3plus1);
+    // console.log(client_name, fitness_no, kind);
+    const paidControl = () => {
+      selectTrainerReservation(joinNo ? joinNo : '').then((trainerResult) => {
+        const fitness =
+          loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no;
+        voucherSelect2(client_name, fitness, kind).then((res) => {
+          console.log(res);
+          if (res.length === 0) {
+            alert(kind + '이용권이 없습니다.');
+          } else {
+            voucherUpdate(client_name, kind, res[0].paidMembership2 - 1).then(
+              (res2) => {
+                vocherView();
+                alert(
+                  client_name +
+                    '님의 ' +
+                    kind +
+                    '이용권이 차감됩니다. 잔여 이용권은' +
+                    (res[0].paidMembership2 - 1) +
+                    '회 입니다.'
+                );
+              }
+            );
+          }
+        });
+      });
+    };
+
+    const paidControl2 = () => {
+      selectTrainerReservation(joinNo ? joinNo : '').then((trainerResult) => {
+        const fitness =
+          loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no;
+        voucherSelect2(client_name, fitness, kind).then((res) => {
+          console.log(res);
+          if (res.length === 0) {
+            alert(kind + '이용권이 없습니다.');
+          } else {
+            voucherUpdate(client_name, kind, res[0].paidMembership2 + 1).then(
+              (res2) => {
+                vocherView();
+                alert(
+                  client_name +
+                    '님의 ' +
+                    kind +
+                    '이용권이 증가됩니다. 잔여 이용권은' +
+                    (res[0].paidMembership2 + 1) +
+                    '회 입니다.'
+                );
+              }
+            );
+          }
+        });
+      });
+    };
+    //salesControl 비활성화
+    const salesControl = () => {
+      selectTrainerReservation(joinNo ? joinNo : '').then((trainerResult) => {
+        const fitness =
+          loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no;
+        voucherSelect2(client_name, fitness, kind).then((res) => {
+          console.log(res);
+          if (res.length === 0) {
+            alert(kind + '이용권이 없습니다.');
+          } else {
+            voucherUpdate2(client_name, kind, res[0].salesDays + 1).then(
+              (res2) => {
+                vocherView();
+                alert(
+                  client_name +
+                    '님의 ' +
+                    kind +
+                    '기간권이 증가됩니다. D - ' +
+                    (res[0].salesDays + 1)
+                );
+              }
+            );
+          }
+        });
+      });
+    };
+
+    const salesControl2 = () => {
+      selectTrainerReservation(joinNo ? joinNo : '').then((trainerResult) => {
+        const fitness =
+          loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no;
+        voucherSelect2(client_name, fitness, kind).then((res) => {
+          console.log(res);
+          if (res.length === 0) {
+            alert(kind + '이용권이 없습니다.');
+          } else {
+            voucherUpdate2(client_name, kind, res[0].salesDays - 1).then(
+              (res2) => {
+                vocherView();
+                alert(
+                  client_name +
+                    '님의 ' +
+                    kind +
+                    '기간권이 차감됩니다. D - ' +
+                    (res[0].salesDays - 1)
+                );
+              }
+            );
+          }
+        });
+      });
+    };
+
+    return (
+      //paidMembership: 이용권, salesDays: 기간권
+      <div>
+        {date3plus1 <= today ? (
+          ''
+        ) : paidMembership ? (
+          paidMembership2 === 0 ? (
+            ''
+          ) : (
+            <p>
+              <Button onClick={paidControl}>-이용권 차감</Button>
+              <Button onClick={paidControl2}>+이용권 증가</Button>
+              <h4>{kind}</h4>
+              이용권: {paidMembership2}/{paidMembership}
+              <br />
+              이용권 결제일: {date1}
+            </p>
+          )
+        ) : (
+          <p>
+            {/* <Button onClick={salesControl}>+기간권 기간 증가</Button>
+            <Button onClick={salesControl2}>-기간권 기간 차감</Button> */}
+            <h4>{kind}</h4>
+            기간권: {salesDays}일 권
+            <br />
+            남은기간: D {endDays}
+            <br />
+            기간권 결제일: {date2}
+            <br />
+            기간권 마감일: {date3}
+          </p>
+        )}
+      </div>
+    );
+  };
+
+  const vocherView = () => {
+    voucherSelect(client_name, fitness_no).then((res) => {
+      // console.log(res);
+      const items = res.map((data, index, array) => {
+        return (
+          <VoucherView
+            kind={data.kind}
+            paidMembership={data.paidMembership}
+            paidMembership2={data.paidMembership2}
+            paymentDate={data.paymentDate}
+            salesDays={data.salesDays}
+            salesStart_date={data.salesStart_date}
+            salesEnd_date={data.salesEnd_date}
+          />
+        );
+      });
+      setVoucher(items);
+    });
+  };
+
+  const VoucherView2 = ({
+    kind,
+    paidMembership,
+    paidMembership2,
+    paymentDate,
+    salesDays,
+    salesStart_date,
+  }) => {
+    const date1 = moment(paymentDate).format('YYYY년 MM월 DD일');
+    const date2 = moment(salesStart_date).format('YYYY년 MM월 DD일');
+    const date3 = moment(salesStart_date)
+      .add(salesDays, 'days')
+      .subtract(1, 'days')
+      .format('YYYY년 MM월 DD일');
+    const date4 = moment(salesStart_date).add(salesDays, 'days');
+    const endDays =
+      moment().diff(date4, 'days') == 0 ? '-Day' : moment().diff(date4, 'days');
+
+    return (
+      //paidMembership: 이용권, salesDays: 기간권
+      <div>
+        {/* paidMembership= true면 이용권 아니면 기간권 */}
+        {paidMembership ? (
+          <p>
+            <h4>{kind}</h4>
+            이용권: {paidMembership2}/{paidMembership}
+            <br />
+            이용권 결제일: {date1}
+          </p>
+        ) : (
+          <p>
+            <h4>{kind}</h4>
+            기간권: {salesDays}일 권
+            <br />
+            남은기간: D {endDays}
+            <br />
+            기간권 결제일: {date2}
+            <br />
+            기간권 마감일: {date3}
+          </p>
+        )}
+      </div>
+    );
+  };
+
+  const vocherView2 = () => {
+    voucherSelect(client_name, fitness_no).then((res) => {
+      // console.log(res);
+      const items = res.map((data, index, array) => {
+        return (
+          <VoucherView2
+            kind={data.kind}
+            paidMembership={data.paidMembership}
+            paidMembership2={data.paidMembership2}
+            paymentDate={data.paymentDate}
+            salesDays={data.salesDays}
+            salesStart_date={data.salesStart_date}
+            salesEnd_date={data.salesEnd_date}
+          />
+        );
+      });
+      setVoucher2(items);
+    });
+  };
+
   return (
     <TableRow>
       <TableCell onClick={modalOnClick}>{client_name}</TableCell>
@@ -169,6 +440,20 @@ const ViewClientItem = ({
                 <p>{client_name}</p>
               )}
             </Col>
+            <h3>현재 사용중인 이용권</h3>
+            <div>{voucher}</div>
+            <Button onClick={viewModalOnclick}>이용권&기간권 더보기</Button>
+            {/* 이용권&기간권 더보기 Modal */}
+            <Modal
+              className='client_modal'
+              show={viewModal}
+              onHide={viewModalClose}
+            >
+              <Modal.Header>
+                <Modal.Title>이용권&기간권 더보기</Modal.Title>
+              </Modal.Header>
+              <Modal.Body className='mw-100'>{voucher2}</Modal.Body>
+            </Modal>
             <Col xs={6} md={4} className='mb-2'>
               <h5 className='mb-1'>생년월일</h5>
               <p>{birth}</p>
@@ -357,6 +642,7 @@ class Client extends Component {
         const items = result.map((data, index, array) => {
           return (
             <ViewClientItem
+              joinNo={this.props.userinfo.joinNo}
               fitness_no={data.fitness_no}
               client_name={data.client_name}
               phone={data.phone}
