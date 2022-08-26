@@ -1726,13 +1726,11 @@ class Reservation extends Component {
               <h5>선택된 수업</h5>
             </Col>
             <Col className='reservation__selected-class' xs={12} sm={4}>
+              <p>운동명</p>
               <div className=''>
-                <p>운동명</p>
-                <p className='fw-bold text-primary'>
-                  {this.state.exercise_name
-                    ? this.state.exercise_name + '[' + this.state.kind + ']'
-                    : ''}
-                </p>
+                {this.state.exercise_name
+                  ? this.state.exercise_name + '[' + this.state.kind + ']'
+                  : ''}
               </div>
               <TextField
                 id='exercise_name'
@@ -1801,6 +1799,7 @@ class Reservation extends Component {
               </div>
               <TextField
                 id='class_date'
+                className='d-none'
                 name='class_date'
                 value={this.state.class_date}
                 label='배정된 날짜'
