@@ -82,7 +82,7 @@ class DrawerAppBar extends Component {
 
   render() {
     const { userinfo } = this.props;
-    console.log(this.props.userinfo);
+    // console.log(this.props.userinfo);
 
     const drawer = (
       <Box sx={{ textAlign: 'center' }}>

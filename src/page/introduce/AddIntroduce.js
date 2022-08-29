@@ -82,7 +82,7 @@ class AddIntroduce extends Component {
         this.state.file,
         this.state.story
       ).then((res) => {
-        console.log(res);
+        // console.log(res);
         alert('소개 등록 완료');
         this.props.history.push('/introduce');
       });
@@ -99,7 +99,7 @@ class AddIntroduce extends Component {
   render() {
     // console.log(this.state.file);
     // console.log(this.state.picture);
-    console.log(this.props.userinfo);
+    // console.log(this.props.userinfo);
     return (
       <div className='wrap'>
         {''}

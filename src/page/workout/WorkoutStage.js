@@ -277,7 +277,7 @@ class WorkoutStage extends Component {
             ? trainerResult[0].fitness_no
             : this.props.userinfo.fitness_no;
         this.state.workoutStage.map((data, index, array) => {
-          console.log(this.state.workoutStage);
+          // console.log(this.state.workoutStage);
           this.setState({
             workout: data.props.workout,
             part: data.props.part,
@@ -287,7 +287,7 @@ class WorkoutStage extends Component {
             default_rest: data.props.default_rest,
             url: data.props.url,
           });
-          console.log(this.state.workout);
+          // console.log(this.state.workout);
           workoutAllotedInsert(
             fitness_no,
             this.state.idc,
@@ -400,11 +400,11 @@ class WorkoutStage extends Component {
   };
 
   render() {
-    console.log(this.state.stage);
-    console.log(this.state.idc); //idc=client_no
-    console.log(this.state.workoutStage);
+    // console.log(this.state.stage);
+    // console.log(this.state.idc); //idc=client_no
+    // console.log(this.state.workoutStage);
     // console.log(this.state.workout);
-    console.log(this.state.client_name);
+    // console.log(this.state.client_name);
 
     return (
       <div className='wrap workoutStage__wrap'>

@@ -202,7 +202,7 @@ class Genetic extends Component {
     // console.log('genetic', this.state.genetic);
     // console.log(this.props.userinfo.fitness_no);
     // console.log('client', this.state.client);
-    console.log('idc', this.state.idc);
+    // console.log('idc', this.state.idc);
     // console.log('member_no', this.state.member_no);
     // console.log(
     //   'measurementDate',

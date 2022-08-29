@@ -146,7 +146,7 @@ const ReservationItem = ({
 
   const voucherPlus = () => {
     voucherSelect2(customer_name, fitness_no, kind).then((res) => {
-      console.log(res);
+      // console.log(res);
       voucherUpdate(
         res[0].client_name,
         res[0].kind,
@@ -226,7 +226,7 @@ const ReservationItem_exercise = ({
 
   const voucherPlus = () => {
     voucherSelect2(customer_name, fitness_no, kind).then((res) => {
-      console.log(res);
+      // console.log(res);
       voucherUpdate(
         res[0].client_name,
         res[0].kind,
@@ -298,7 +298,7 @@ const ReservationItem_trainer = ({
 
   const voucherPlus = () => {
     voucherSelect2(customer_name, fitness_no, kind).then((res) => {
-      console.log(res);
+      // console.log(res);
       voucherUpdate(
         res[0].client_name,
         res[0].kind,
@@ -370,7 +370,7 @@ const ReservationItem_date = ({
 
   const voucherPlus = () => {
     voucherSelect2(customer_name, fitness_no, kind).then((res) => {
-      console.log(res);
+      // console.log(res);
       voucherUpdate(
         res[0].client_name,
         res[0].kind,
@@ -443,7 +443,7 @@ const ReservationChoiceTrainerItem = ({
 
   const voucherPlus = () => {
     voucherSelect2(customer_name, fitness_no, kind).then((res) => {
-      console.log(res);
+      // console.log(res);
       voucherUpdate(
         res[0].client_name,
         res[0].kind,
@@ -540,7 +540,7 @@ const ReservationChoiceClientItem = ({
 
   const voucherPlus = () => {
     voucherSelect2(customer_name, fitness_no, kind).then((res) => {
-      console.log(res);
+      // console.log(res);
       voucherUpdate(
         res[0].client_name,
         res[0].kind,
@@ -1382,8 +1382,8 @@ class Reservation extends Component {
     this.setState({ page: newPage });
   };
   render() {
-    console.log(this.state.customer_name);
-    console.log(this.state.kind);
+    // console.log(this.state.customer_name);
+    // console.log(this.state.kind);
     // console.log('rowPerPage', this.state.rowsPerPage);
     // console.log('page', this.state.page);
     // console.log(this.props.userinfo.loginWhether);

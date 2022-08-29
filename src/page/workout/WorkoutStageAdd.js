@@ -362,7 +362,7 @@ class WorkoutStageAdd extends Component {
       stage: s,
     });
     this.workoutStageView(s);
-    console.log('workoutStageView', s);
+    // console.log('workoutStageView', s);
   };
 
   stageOnClickStage = () => {
@@ -441,7 +441,7 @@ class WorkoutStageAdd extends Component {
   };
 
   render() {
-    console.log('stage', this.state.stage);
+    // console.log('stage', this.state.stage);
 
     return (
       <div className='wrap'>

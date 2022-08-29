@@ -302,12 +302,12 @@ class AddExercise extends Component {
     )
       .then((response) => response.json())
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         let arr = [];
         for (let i = res.length - 1; i >= 0; i--) {
           let part = ', ';
           let part_num = Number(res[i].part);
-          console.log(part_num);
+          // console.log(part_num);
           if (part_num == 32) {
             part = '기타, ' + part;
             part_num = 0;
@@ -539,7 +539,7 @@ class AddExercise extends Component {
   };
   handleKeyUp = (e) => {
     if (e.key === 'Enter') {
-      console.log(e);
+      // console.log(e);
       this.AddExercise();
     }
   };

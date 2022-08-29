@@ -216,7 +216,7 @@ class Home extends Component {
     // console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
     // console.log('오늘매출', this.state.todaySales);
     // console.log(userinfo.joinNo);
-    console.log(this.props.userinfo);
+    // console.log(this.props.userinfo);
     return (
       <div className='wrap home'>
         <div className='header'>

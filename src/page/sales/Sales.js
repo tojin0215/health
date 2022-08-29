@@ -709,9 +709,9 @@ class Sales extends Component {
   render() {
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.salesViewList);
-    console.log(this.state.exerciseViewList);
+    // console.log(this.state.exerciseViewList);
     // console.log(this.state.card);
-    console.log(this.state.today);
+    // console.log(this.state.today);
 
     return (
       <div className='wrap sales'>

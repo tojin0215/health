@@ -269,7 +269,7 @@ class Introduce extends Component {
               />
             );
           });
-          this.setState({ viewIntroduceList: items });
+          this.setState({ viewIntroduceList: items.reverse() });
         });
       });
     });

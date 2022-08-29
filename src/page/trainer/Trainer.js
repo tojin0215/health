@@ -132,7 +132,7 @@ const VieWTrainerItem = ({
       viewTrainer();
     });
   };
-  console.log(idx);
+  // console.log(idx);
   const [open, setOpen] = React.useState(false);
   return (
     <React.Fragment>
