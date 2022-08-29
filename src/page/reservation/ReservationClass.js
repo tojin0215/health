@@ -187,9 +187,6 @@ const ReservationClassItem = ({
     if (exercise_class_input == '') {
       setExercise_class_err(true);
       alert('운동명을 써주세요.');
-    } else if (class_date_input == class_date) {
-      setClass_date_err(true);
-      alert('날짜를 써주세요.');
     } else if (trainer_input == '') {
       setTrainer_err(true);
       alert('트레이너명을 선택해주세요.');
@@ -215,7 +212,7 @@ const ReservationClassItem = ({
           hour: hour_input,
           minute: minute_input,
           trainer: trainer_input,
-          class_date: class_date_input + 'T00:00:00.000Z',
+          class_date: moment(class_date_input).format('yyyy-MM-DD'),
           kind: kind_input,
         }),
       })
@@ -245,7 +242,7 @@ const ReservationClassItem = ({
   const hourArray = hour >= 10 ? hour : '0' + hour;
 
   const minuteArray = minute >= 10 ? minute : '0' + minute;
-  // console.log(class_date_input);
+  // console.log(moment(class_date_input).format('yyyy-MM-DD'));
   // console.log(class_date);
   // console.log(searchOpen);
   const handleUser = (sTrainer) => {
@@ -271,7 +268,7 @@ const ReservationClassItem = ({
     );
     setKindOpen(false);
   };
-  console.log(kind_input);
+  // console.log(kind_input);
   return (
     <div className='border py-2 my-1 text-center'>
       <p className='fw-bold'>
@@ -395,7 +392,7 @@ const ReservationClassItem = ({
                     </Form.Group>
                     <Button onClick={exerciseKind}>선택완료</Button>
                   </div>
-                  <Button onClick={() => kindOpen(false)}>닫기</Button>
+                  <Button onClick={() => setKindOpen(false)}>닫기</Button>
                 </Modal>
               </Form.Group>
               <Form.Group>
@@ -440,7 +437,7 @@ const ReservationClassItem = ({
                 <Form.Control
                   type='date'
                   selected={setClass_date_input}
-                  value={class_date_input}
+                  value={moment(class_date_input).format('yyyy-MM-DD')}
                   id='class_date'
                   onChange={updateChange6}
                   error={class_date_err}
