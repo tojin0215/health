@@ -166,6 +166,7 @@ class Sales extends Component {
       total: 0,
       today: new Date(),
       tommorrow: new Date(),
+      ntoday: new Date(),
       lets: 0,
       page: 0,
       rowsPerPage: 5,
@@ -384,14 +385,14 @@ class Sales extends Component {
   //당일 조회
   salesToday2 = (tools, exercise) => {
     let startTime = new Date(
-      this.state.today.getFullYear(),
-      this.state.today.getMonth(),
-      this.state.today.getDate()
+      this.state.ntoday.getFullYear(),
+      this.state.ntoday.getMonth(),
+      this.state.ntoday.getDate()
     );
     let endTime = new Date(
-      this.state.today.getFullYear(),
-      this.state.today.getMonth(),
-      this.state.today.getDate() + 1
+      this.state.ntoday.getFullYear(),
+      this.state.ntoday.getMonth(),
+      this.state.ntoday.getDate() + 1
     );
 
     salesSelect2(
@@ -447,13 +448,13 @@ class Sales extends Component {
   //당월 조회
   salesToday3 = (tools, exercise) => {
     let startTime = new Date(
-      this.state.today.getFullYear(),
-      this.state.today.getMonth(),
+      this.state.ntoday.getFullYear(),
+      this.state.ntoday.getMonth(),
       1
     );
     let endTime = new Date(
-      this.state.today.getFullYear(),
-      this.state.today.getMonth() + 1,
+      this.state.ntoday.getFullYear(),
+      this.state.ntoday.getMonth() + 1,
       0
     );
     salesSelect2(
@@ -574,14 +575,14 @@ class Sales extends Component {
   handleButton = (e, tools, exercise) => {
     if (e === '당일') {
       let startTime = new Date(
-        this.state.today.getFullYear(),
-        this.state.today.getMonth(),
-        this.state.today.getDate()
+        this.state.ntoday.getFullYear(),
+        this.state.ntoday.getMonth(),
+        this.state.ntoday.getDate()
       );
       let endTime = new Date(
-        this.state.today.getFullYear(),
-        this.state.today.getMonth(),
-        this.state.today.getDate() + 1
+        this.state.ntoday.getFullYear(),
+        this.state.ntoday.getMonth(),
+        this.state.ntoday.getDate() + 1
       );
       let card = 0;
       let cash = 0;
@@ -629,20 +630,21 @@ class Sales extends Component {
           transfer: transfer,
           total: card + cash + transfer,
           salesViewList: items.reverse(),
-          tommorrow: this.state.today,
+          today: this.state.ntoday,
+          tommorrow: this.state.ntoday,
           toolsViewList: [],
           exerciseViewList: [],
         });
       });
     } else if (e === '당월') {
       let startTime = new Date(
-        this.state.today.getFullYear(),
-        this.state.today.getMonth(),
+        this.state.ntoday.getFullYear(),
+        this.state.ntoday.getMonth(),
         1
       );
       let endTime = new Date(
-        this.state.today.getFullYear(),
-        this.state.today.getMonth() + 1,
+        this.state.ntoday.getFullYear(),
+        this.state.ntoday.getMonth() + 1,
         0
       );
       let card = 0;
@@ -711,7 +713,6 @@ class Sales extends Component {
     // console.log(this.state.salesViewList);
     // console.log(this.state.exerciseViewList);
     // console.log(this.state.card);
-    // console.log(this.state.today);
 
     return (
       <div className='wrap sales'>
