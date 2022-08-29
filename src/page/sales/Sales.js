@@ -167,7 +167,7 @@ class Sales extends Component {
       today: new Date(),
       tommorrow: new Date(),
       ntoday: new Date(),
-      lets: 0,
+      lets: 0, //선택조회:1, 당일:2, 당월:3
       page: 0,
       rowsPerPage: 5,
     };
@@ -217,6 +217,7 @@ class Sales extends Component {
         this.salesView();
         this.cashView();
         this.handleButton('당일');
+        this.salesToday1('', '');
       }
     });
   }
@@ -713,6 +714,7 @@ class Sales extends Component {
     // console.log(this.state.salesViewList);
     // console.log(this.state.exerciseViewList);
     // console.log(this.state.card);
+    // console.log(this.state.lets);
 
     return (
       <div className='wrap sales'>
@@ -856,11 +858,16 @@ class Sales extends Component {
                 </Table>
               </Tab>
 
-              <Tab eventKey='exercise' title='운동명'>
-                {/* 추후 테이블 만들어서 운동명 리스트 클릭시 테이블 갱신
-                (like handleInnerOnClick_choice, Reservation.js 455줄) */}
+              <Tab eventKey='exercise' title='운동 명칭 별 조회'>
                 {this.state.lets === 1 ? (
                   <div>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
                     <Button
                       variant='outline-dark'
                       className='m-1'
@@ -902,6 +909,13 @@ class Sales extends Component {
                     <Button
                       variant='outline-dark'
                       className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
                       onClick={() => this.salesToday2('', '개인PT')}
                     >
                       개인PT
@@ -940,6 +954,13 @@ class Sales extends Component {
                     <Button
                       variant='outline-dark'
                       className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
                       onClick={() => this.salesToday3('', '개인PT')}
                     >
                       개인PT
@@ -975,6 +996,13 @@ class Sales extends Component {
                   </div>
                 ) : (
                   <div>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
                     <Button
                       variant='outline-dark'
                       className='m-1'
@@ -1052,10 +1080,17 @@ class Sales extends Component {
                   />
                 </Table>
               </Tab>
-              <Tab eventKey='tools' title='결제도구'>
+              <Tab eventKey='tools' title='결제 도구 별 조회'>
                 {/* 위와 동일 */}
                 {this.state.lets === 1 ? (
                   <>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
                     <Button
                       variant='outline-dark'
                       className='m-1'
@@ -1083,6 +1118,13 @@ class Sales extends Component {
                     <Button
                       variant='outline-dark'
                       className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
                       onClick={() => this.salesToday2('카드', '')}
                     >
                       카드
@@ -1107,6 +1149,13 @@ class Sales extends Component {
                     <Button
                       variant='outline-dark'
                       className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
                       onClick={() => this.salesToday3('카드', '')}
                     >
                       카드
@@ -1128,6 +1177,13 @@ class Sales extends Component {
                   </>
                 ) : (
                   <>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
                     <Button
                       variant='outline-dark'
                       className='m-1'

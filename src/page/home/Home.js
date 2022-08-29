@@ -31,7 +31,12 @@ import aboutExercise from '../../../src/img/aboutExercise.png';
 
 import { SERVER_URL } from '../../const/settings';
 import AlertToastComponent from '../../component/home/AlertToast';
-import { choiceTest, clientSelect } from '../../api/user';
+import {
+  choiceTest,
+  clientSelect,
+  salesSelect,
+  salesSelect2,
+} from '../../api/user';
 import { height } from '@mui/system';
 
 const ip = SERVER_URL;
@@ -113,78 +118,44 @@ class Home extends Component {
     });
   }
 
-  cusFetch = () => {
-    // fetch(ip + '/customer?type=all&fn=' + this.props.userinfo.fitness_no, {
-    //   method: 'GET',
-    //   headers: {
-    //     'Content-type': 'application/json',
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((res) => {
-    //     //alert(res.length)
-    //     this.setState({ totalCustomer: res.length });
-    //     // let arr = [];
-    //     // for(let i=(res.length-1) ; i>=0 ; i--){
-    //     //     let sor = res[i].solar_or_lunar===true?"양":"음";
-    //     //     let s = res[i].sex===true?"남":"여";
-    //     //     arr.push({"no":res[i].member_no, "name":res[i].name, "sex":s, "phone":res[i].phone, "in_charge":res[i].in_charge,"start_date":moment(res[i].start_date).format("YYYY/MM/DD")+"~ ("+res[i].period+"개월)", "resi_no":res[i].resi_no+ " ("+sor+")" })
-    //     // }
-    //     // this.setState({customerList : arr});
-    //   });
+  cusFetch = (tools, exercise) => {
     clientSelect(this.props.userinfo.fitness_no).then((result) => {
       this.setState({ totalClient: result.length });
     });
-    fetch(ip + '/sales?type=all&fitness_no=' + this.props.userinfo.fitness_no, {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        let sum = 0;
-        for (let i = 0; i < res.length; i++) {
-          sum =
-            Number(sum) +
-            Number(res[i].lockerPrice) +
-            Number(res[i].sportswearPrice) +
-            Number(res[i].exercisePrice);
-        }
-        this.setState({ todaySales: sum });
-      });
+    salesSelect(this.props.userinfo.fitness_no).then((res) => {
+      let sum = 0;
+      for (let i = 0; i < res.length; i++) {
+        sum =
+          Number(sum) +
+          Number(res[i].lockerPrice) +
+          Number(res[i].sportswearPrice) +
+          Number(res[i].exercisePrice);
+      }
+      this.setState({ todaySales: sum });
+    });
 
     let today = new Date();
     let startTime = new Date(today.getFullYear(), today.getMonth(), 1);
     let endTime = new Date(today.getFullYear(), today.getMonth() + 1, 0);
     //alert(today)
-    fetch(
-      ip +
-        '/sales?type=select&startDate=' +
-        startTime +
-        '&endDate=' +
-        endTime +
-        '&fitness_no=' +
-        this.props.userinfo.fitness_no,
-      {
-        method: 'GET',
-        headers: {
-          'Content-type': 'application/json',
-        },
+    salesSelect2(
+      this.props.userinfo.fitness_no,
+      startTime,
+      endTime,
+      tools != undefined ? tools : '',
+      exercise != undefined ? exercise : ''
+    ).then((res) => {
+      let sum = 0;
+      for (let i = 0; i < res.length; i++) {
+        sum =
+          Number(sum) +
+          Number(res[i].lockerPrice) +
+          Number(res[i].sportswearPrice) +
+          Number(res[i].exercisePrice);
       }
-    )
-      .then((response) => response.json())
-      .then((res) => {
-        let sum = 0;
-        for (let i = 0; i < res.length; i++) {
-          sum =
-            Number(sum) +
-            Number(res[i].lockerPrice) +
-            Number(res[i].sportswearPrice) +
-            Number(res[i].exercisePrice);
-        }
-        this.setState({ monthSales: sum });
-      });
+      this.setState({ monthSales: sum });
+      // console.log(res);
+    });
     // 금일 방문 고객
     fetch(ip + '/customerenter?fitness_no=' + this.props.userinfo.fitness_no, {
       method: 'GET',
@@ -232,28 +203,33 @@ class Home extends Component {
             backgroundImage: 'url(/assets/home__main-visual.jpg)',
           }}
         >
-          <div className='home__dashboard'>
-            <Row className='home__dashboard__box'>
-              <Col lg='1'>
-                <label>
-                  <p>등록된 회원</p>
-                  <span>{this.fommat(this.state.totalClient)}</span>
-                </label>
-              </Col>
-              <Col lg='1'>
-                <label>
-                  <p>당일 매출</p>
-                  <span>{this.fommat(this.state.todaySales)}</span>
-                </label>
-              </Col>
-              <Col lg='1'>
-                <label>
-                  <p>월 매출</p>
-                  <span>{this.fommat(this.state.monthSales)}</span>
-                </label>
-              </Col>
-            </Row>
-          </div>
+          {!this.props.userinfo.loginWhether ? (
+            <div className='home__dashboard'>
+              <Row className='home__dashboard__box'>
+                <Col lg='1'>
+                  <label>
+                    <p>등록된 회원</p>
+                    <span>{this.fommat(this.state.totalClient)}</span>
+                  </label>
+                </Col>
+                <Col lg='1'>
+                  <label>
+                    <p>당일 매출</p>
+                    <span>{this.fommat(this.state.todaySales)}</span>
+                  </label>
+                </Col>
+                <Col lg='1'>
+                  <label>
+                    <p>월 매출</p>
+                    <span>{this.fommat(this.state.monthSales)}</span>
+                  </label>
+                </Col>
+              </Row>
+            </div>
+          ) : (
+            ''
+          )}
+
           <Container className='home__main-visual--content'>
             <div className='home__main-visual--logo'>
               <p>새로워진 피트니스 센터 관리</p>
