@@ -195,7 +195,7 @@ class AssignExercise extends Component {
   afterSaveCell = (row, cellName, cellValue) => {};
 
   choiceUser = (e) => {
-    console.log('value', e.target.value);
+    // console.log('value', e.target.value);
     let values = e.target.value.split(',');
 
     this.setState({
@@ -259,7 +259,7 @@ class AssignExercise extends Component {
             '&fn=' +
             this.props.userinfo.fitness_no;
 
-          console.log('url: ' + url);
+          // console.log('url: ' + url);
 
           if (arr.includes(item.member_no)) return;
           else arr.push(item.member_no);
@@ -301,9 +301,9 @@ class AssignExercise extends Component {
         [n]: this.state.assignDefault.filter((i) => i !== v),
       });
     }
-    console.log(e.target.checked);
-    console.log(this.state.assignDefault);
-    console.log(v);
+    // console.log(e.target.checked);
+    // console.log(this.state.assignDefault);
+    // console.log(v);
   };
 
   onSelectRow = (row, isSelected, e) => {
@@ -325,7 +325,7 @@ class AssignExercise extends Component {
       d[select_data] = selected_data;
     }
     this.setState(d);
-    console.log(d);
+    // console.log(d);
   };
 
   onSelectRowTop = (row, isSelected, e) => {
@@ -617,7 +617,7 @@ class AssignExercise extends Component {
 
       let arr = [];
       for (let i = 0; i < res.length; i++) {
-        console.log(res[i]);
+        // console.log(res[i]);
         arr.push(res[i]);
         // arr.push({
         //     "no": res[i].member_no,
@@ -898,7 +898,7 @@ class AssignExercise extends Component {
 
               if (res[i].is_default) {
                 arr.push(res[i]);
-                console.log(res[i]);
+                // console.log(res[i]);
               } else {
               }
               if (res[i].is_default) {
@@ -929,7 +929,7 @@ class AssignExercise extends Component {
                 },
                 body: JSON.stringify(ex),
               }).then((response) => {
-                console.log(response);
+                // console.log(response);
               });
             });
           });
@@ -976,7 +976,7 @@ class AssignExercise extends Component {
     else if (e.target.value === '유산소') result.show5 = true;
     else if (e.target.value === '기타') result.show6 = true;
     this.setState(result);
-    console.log(e);
+    // console.log(e);
     return;
   };
 
@@ -1149,7 +1149,7 @@ class AssignExercise extends Component {
   };
 
   render() {
-    console.log(this.state.userName);
+    // console.log(this.state.userName);
     return (
       <div className='wrap assignExercise'>
         <div className='header'>

@@ -87,7 +87,7 @@ const ClientList = ({
     choiceFitness(fitness_no).then((res) => {
       setFitness_no_input(res[0].manager_name);
       setfitness_name(res[0].fitness_name);
-      console.log(res[0].manager_name);
+      // console.log(res[0].manager_name);
     });
   });
   return (
@@ -139,7 +139,7 @@ class ChoiceLogin extends Component {
         );
       });
       this.setState({ trainerList: items });
-      console.log(items);
+      // console.log(items);
     });
   };
 

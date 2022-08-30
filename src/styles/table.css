@@ -1,3 +1,7 @@
+.table {
+  background-color: rgb(41, 41, 41);
+}
+
 /* 운동개별선택 테이블 체크박스 크기 조절 */
 .exerciseSelectList input[type='checkbox'] {
   width: 1.5rem;

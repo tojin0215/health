@@ -355,7 +355,7 @@ class GeneticAdd extends Component {
   };
 
   render() {
-    console.log('idc', this.state.idc);
+    // console.log('idc', this.state.idc);
     // console.log('name', this.state.name);
     // console.log('measurementDate', this.state.measurementDate);
     // console.log(this.state.well);

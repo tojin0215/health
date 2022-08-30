@@ -19,8 +19,8 @@ const AlertItem = ({ value }) => {
         alert_id: value.alert_id,
       })
       .then((response) => {
-        console.log(response);
-        console.log(value);
+        // console.log(response);
+        // console.log(value);
       });
   };
 

@@ -111,11 +111,11 @@ export function getStatusRequest() {
           // SUCCEED
           dispatch(getStatusSuccess(response.info));
           if (response.info.loginWhether === 2) {
-            console.log('회원');
+            // console.log('회원');
           } else if (response.info.loginWhether === 1) {
-            console.log('트레이너');
+            // console.log('트레이너');
           } else {
-            console.log('헬스장');
+            // console.log('헬스장');
           }
         } else {
           // FAILED

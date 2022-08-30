@@ -339,11 +339,11 @@ class Inbody extends Component {
   }
 
   choiceUser = (e) => {
-    console.log('value', e.target.value);
+    // console.log('value', e.target.value);
     let values = e.target.value.split(',');
 
     let age = this.calAge(values[3]); // 만나이
-    console.log(this.state.inbodyList);
+    // console.log(this.state.inbodyList);
 
     this.setState({
       userName: values[0],
@@ -422,7 +422,7 @@ class Inbody extends Component {
       this.state.endDate.getMonth(),
       this.state.endDate.getDate() + 1
     );
-    console.log('clickclickclick');
+    // console.log('clickclickclick');
     fetch(
       ip +
         '/inbody?type=select&startDate=' +
@@ -480,7 +480,7 @@ class Inbody extends Component {
   };
 
   search = () => {
-    console.log('click');
+    // console.log('click');
     let it = '0';
     if (this.state.item === '이름') {
       it = '0';
@@ -658,8 +658,6 @@ class Inbody extends Component {
 
   render() {
     const { userinfo } = this.props;
-    console.log('userinfo : ');
-    console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
     const textOptions = {
       noDataText: '인바디 정보가 없습니다.',
       alwaysShowAllBtns: true,
@@ -680,7 +678,7 @@ class Inbody extends Component {
       ],
     };
 
-    console.log('series.....', this.state.series);
+    // console.log('series.....', this.state.series);
     return (
       <div className='wrap inbody'>
         <div className='header'>

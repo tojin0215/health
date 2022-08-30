@@ -140,7 +140,7 @@ const UserSearch = ({
             searchClientname(
               loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no,
               search
-            ).then((result) => setCustomers(result), console.log(customers));
+            ).then((result) => setCustomers(result));
           }
         );
     }

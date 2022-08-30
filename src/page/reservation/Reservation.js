@@ -99,22 +99,19 @@ const ReservationClassItem = ({
   const hourArray = hour >= 10 ? hour : '0' + hour;
   const minuteArray = minute >= 10 ? minute : '0' + minute;
   return (
-    <div
-      className='border py-2 my-1  reservation__class-table--td'
-      onClick={handleInnerOnClick}
-    >
+    <div className='reservation__class-table--td' onClick={handleInnerOnClick}>
       {/* <p>운동명</p> */}
       <p className='fw-bold'>
         {exercise_class}[{kind}]
       </p>
       {/* <p>강사명</p> */}
-      <p className='fw-bold'>{trainer}</p>
+      <p className=''>{trainer}</p>
       {/* <p>시간</p> */}
-      <p className='fw-bold'>
+      <p className=''>
         {hourArray}시 {minuteArray}분
       </p>
       {/* <p>인원</p> */}
-      <p className='fw-bold'>
+      <p className=''>
         {canRegist}/{number_of_people}
       </p>
     </div>
@@ -146,7 +143,7 @@ const ReservationItem = ({
 
   const voucherPlus = () => {
     voucherSelect2(customer_name, fitness_no, kind).then((res) => {
-      console.log(res);
+      // console.log(res);
       voucherUpdate(
         res[0].client_name,
         res[0].kind,
@@ -226,7 +223,7 @@ const ReservationItem_exercise = ({
 
   const voucherPlus = () => {
     voucherSelect2(customer_name, fitness_no, kind).then((res) => {
-      console.log(res);
+      // console.log(res);
       voucherUpdate(
         res[0].client_name,
         res[0].kind,
@@ -298,7 +295,7 @@ const ReservationItem_trainer = ({
 
   const voucherPlus = () => {
     voucherSelect2(customer_name, fitness_no, kind).then((res) => {
-      console.log(res);
+      // console.log(res);
       voucherUpdate(
         res[0].client_name,
         res[0].kind,
@@ -370,7 +367,7 @@ const ReservationItem_date = ({
 
   const voucherPlus = () => {
     voucherSelect2(customer_name, fitness_no, kind).then((res) => {
-      console.log(res);
+      // console.log(res);
       voucherUpdate(
         res[0].client_name,
         res[0].kind,
@@ -443,7 +440,7 @@ const ReservationChoiceTrainerItem = ({
 
   const voucherPlus = () => {
     voucherSelect2(customer_name, fitness_no, kind).then((res) => {
-      console.log(res);
+      // console.log(res);
       voucherUpdate(
         res[0].client_name,
         res[0].kind,
@@ -540,7 +537,7 @@ const ReservationChoiceClientItem = ({
 
   const voucherPlus = () => {
     voucherSelect2(customer_name, fitness_no, kind).then((res) => {
-      console.log(res);
+      // console.log(res);
       voucherUpdate(
         res[0].client_name,
         res[0].kind,
@@ -1382,8 +1379,8 @@ class Reservation extends Component {
     this.setState({ page: newPage });
   };
   render() {
-    console.log(this.state.customer_name);
-    console.log(this.state.kind);
+    // console.log(this.state.customer_name);
+    // console.log(this.state.kind);
     // console.log('rowPerPage', this.state.rowsPerPage);
     // console.log('page', this.state.page);
     // console.log(this.props.userinfo.loginWhether);
@@ -1395,7 +1392,7 @@ class Reservation extends Component {
     // console.log('reservationClass_choice', this.state.reservationClass_choice);
 
     return (
-      <div className='wrap reservationWrap'>
+      <div className='wrap reservation'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -1418,8 +1415,7 @@ class Reservation extends Component {
           </div>
           {/*.localNavigation */}
         </header>
-
-        <Container className='reservationWrap'>
+        <Container className='reservation'>
           <Row className='pb-5 justify-content-center'>
             <Col xs={9}>
               <h4 className=''>진행중인 수업</h4>
@@ -1427,9 +1423,9 @@ class Reservation extends Component {
             {this.props.userinfo.loginWhether === 2 ? (
               '      '
             ) : (
-              <Col xs={3} className='text-center w-auto'>
+              <Col xs={3} className='text-center'>
                 <Link to='/reservationClass'>
-                  <Button>새로운 수업 만들기</Button>
+                  <Button className='w-100'>+ 새로운 수업 만들기</Button>
                 </Link>
               </Col>
             )}
@@ -1437,6 +1433,7 @@ class Reservation extends Component {
           <Row md={3}>
             <Col className='text-end'>
               <Button
+                className='reservation__class-prev'
                 name='prev'
                 variant='outline-light'
                 onClick={this.handleWeekClick}
@@ -1457,6 +1454,7 @@ class Reservation extends Component {
             </Col>
             <Col className='text-start'>
               <Button
+                className='reservation__class-next'
                 name='next'
                 variant='outline-light'
                 onClick={this.handleWeekClick}
@@ -1471,7 +1469,7 @@ class Reservation extends Component {
               xs={12}
             >
               <TableContainer>
-                <Table class='table classListTable'>
+                <Table class='table class-list'>
                   <TableHead>
                     <TableRow>
                       <TableCell scope='col' align='center'>
@@ -1722,20 +1720,17 @@ class Reservation extends Component {
                 </Table>
               </TableContainer>
             </Col>
-            <Col></Col>
           </Row>
-          <Row className='' lg={6}>
+          <Row lg={6}>
             <Col lg={12}>
               <h5>선택된 수업</h5>
             </Col>
-            <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
-              <div className='reservation__selected-class boxmorpinsm py-3 w-100 '>
-                <p className=''>운동명</p>
-                <p className='fw-bold text-primary'>
-                  {this.state.exercise_name
-                    ? this.state.exercise_name + '[' + this.state.kind + ']'
-                    : ''}
-                </p>
+            <Col className='reservation__selected-class' xs={12} sm={4}>
+              <p>운동명</p>
+              <div className=''>
+                {this.state.exercise_name
+                  ? this.state.exercise_name + '[' + this.state.kind + ']'
+                  : ''}
               </div>
               <TextField
                 id='exercise_name'
@@ -1746,8 +1741,8 @@ class Reservation extends Component {
                 err={this.state.exercise_name_err}
               />
             </Col>
-            <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
-              <div className='reservation__selected-class boxmorpinsm py-3 w-100'>
+            <Col className='reservation__selected-class' xs={12} sm={4}>
+              <div className=''>
                 <p className=''>강사명</p>
                 <p className='fw-bold text-primary'>{this.state.trainer}</p>
               </div>
@@ -1760,8 +1755,8 @@ class Reservation extends Component {
                 // err={this.state.trainer_err}
               />
             </Col>
-            <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
-              <div className='reservation__selected-class boxmorpinsm py-3'>
+            <Col className='reservation__selected-class' xs={12} sm={4}>
+              <div className=''>
                 <p className=''>시간</p>
                 <p className='fw-bold text-primary'>{this.state.time}</p>
               </div>
@@ -1773,8 +1768,8 @@ class Reservation extends Component {
                 label='시간'
               />
             </Col>
-            <Col className='text-center my-3 height-fit-content' xs={12} sm={4}>
-              <div className='reservation__selected-class boxmorpinsm py-3 w-100'>
+            <Col className='reservation__selected-class' xs={12} sm={4}>
+              <div className=''>
                 <p className=''>현재 정원</p>
                 <p className=''>
                   <span className='fw-bold text-primary'>
@@ -1792,8 +1787,8 @@ class Reservation extends Component {
                 label='최대 인원수'
               />
             </Col>
-            <Col className='text-center my-3' xs={12} sm={4}>
-              <div className='reservation__selected-class boxmorpinsm py-3'>
+            <Col className='reservation__selected-class' xs={12} sm={4}>
+              <div className=''>
                 <p className=''>배정된 날짜</p>
                 <p className='fw-bold text-primary'>
                   {moment(this.state.class_date).format('yyyy-MM-DD') ==
@@ -1810,7 +1805,6 @@ class Reservation extends Component {
                 label='배정된 날짜'
               />
             </Col>
-
             {this.props.userinfo.loginWhether === 2 ? (
               <Col className='text-center my-3'>
                 <TextField

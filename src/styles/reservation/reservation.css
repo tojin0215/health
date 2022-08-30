@@ -1,4 +1,34 @@
+/* 수업 - 진행중인 수업 */
+.class-list {
+  border-bottom: 0;
+}
+.class-list .MuiTableHead-root {
+  background-color: #111;
+  border-bottom: 2px solid #fff;
+}
+.class-list .MuiTableHead-root > tr > th {
+  color: rgba(200, 200, 200, 1);
+}
+
+.class-list .MuiTableBody-root {
+}
+
+.reservation__class-prev {
+  color: #ccc;
+  border-color: #ccc;
+}
+
+.reservation__class-next {
+  color: #ccc;
+  border-color: #ccc;
+}
+
 .reservation__class-table--td {
+  background-color: rgb(51, 51, 51);
+  padding: 10px 0;
+  border: 1px solid #666;
+  color: #ccc;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -11,11 +41,22 @@
   background-color: rgba(235, 235, 46, 0.7);
 }
 
-.reservationWrap .MuiInput-underline:before {
+.reservation__class-table--td p:nth-child(1) {
+  padding: 4px 0;
+  color: orange;
+  font-size: 20px;
+}
+
+.reservation__class-table--td p:nth-child(3) {
+  line-height: 12px;
+  padding-top: 6px;
+}
+
+.reservation .MuiInput-underline:before {
   border-bottom: none;
 }
 
-.reservationWrap label + .MuiInput-formControl {
+.reservation label + .MuiInput-formControl {
   margin-top: 16px;
   font-size: 1.6rem;
 }
@@ -24,14 +65,14 @@
   font-weight: bold;
 }
 
-.reservationWrap .MuiInputBase-input {
+.reservation .MuiInputBase-input {
   text-align: center;
   font-weight: bold;
 }
 
-.reservationWrap
+.reservation
   .MuiInputLabel-formControl
-  .reservationWrap
+  .reservation
   .usersearchButton
   #customer_name {
   border: 0;
@@ -42,19 +83,19 @@
   cursor: pointer;
 }
 
-.reservationWrap .usersearchButton .MuiFormControl-root:hover {
+.reservation .usersearchButton .MuiFormControl-root:hover {
   background-color: #9dcdff;
   transition: all linear 0.2s;
 }
 
-.reservationWrap .datepickerButton .react-datepicker-wrapper {
+.reservation .datepickerButton .react-datepicker-wrapper {
   height: 100%;
   width: 100%;
 }
-.reservationWrap .datepickerButton .react-datepicker__input-container {
+.reservation .datepickerButton .react-datepicker__input-container {
   height: 100%;
 }
-.reservationWrap .datepickerButton .react-datepicker__input-container > input {
+.reservation .datepickerButton .react-datepicker__input-container > input {
   height: 100%;
   width: 100%;
   margin: 0;
@@ -65,7 +106,7 @@
   color: #0f78ff;
 }
 
-.reservationWrap
+.reservation
   .datepickerButton
   .react-datepicker__input-container
   > input:hover {
@@ -73,7 +114,7 @@
   transition: all linear 0.2s;
 }
 
-.reservationWrap .deleteButton {
+.reservation .deleteButton {
   margin: 6px;
   height: 34px;
   padding: 0 24px;
@@ -81,15 +122,15 @@
   color: white;
   background-color: tomato;
 }
-.reservationWrap .rdt_TableCol {
+.reservation .rdt_TableCol {
   justify-content: center;
 }
 
-.reservationWrap .rdt_TableCell {
+.reservation .rdt_TableCell {
   justify-content: center;
 }
 
-.reservationWrap .rdt_TableCell > div {
+.reservation .rdt_TableCell > div {
   padding: 0;
   width: 100%;
   text-align: center;
@@ -101,11 +142,11 @@
 }
 
 /* 진행중인 수업 - 선택된 수업 - 회원 검색 */
-.reservationWrap .MuiFormControl-root {
+.reservation .MuiFormControl-root {
   background-color: #fff;
 }
 
-.reservationWrap .MuiTextField-root .MuiFormLabel-root {
+.reservation .MuiTextField-root .MuiFormLabel-root {
   color: rgba(0, 0, 0, 1);
   top: 10px;
   left: 14px;
@@ -116,6 +157,6 @@
   -webkit-text-fill-color: #000;
 }
 
-.reservationWrap .MuiTextField-root > .MuiInputBase-formControl {
+.reservation .MuiTextField-root > .MuiInputBase-formControl {
   margin-top: 4px;
 }

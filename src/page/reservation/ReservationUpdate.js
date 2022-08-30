@@ -167,7 +167,7 @@ const ReservationItem = ({
         // cancelComment: cancelComment_input
       }),
     }).then((result) => {
-      console.log(result);
+      // console.log(result);
       alert('예약변경완료');
       reservationSelect();
       updateClose();
@@ -347,7 +347,7 @@ class ReservationUpdate extends Component {
             />
           );
         });
-        console.log(result);
+        // console.log(result);
         this.setState({ reservation: items });
       });
   };
@@ -436,7 +436,7 @@ class ReservationUpdate extends Component {
   };
 
   render() {
-    console.log(this.state.reservationClass);
+    // console.log(this.state.reservationClass);
     return (
       <div className='wrap'>
         <header className='header'>

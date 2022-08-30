@@ -755,7 +755,7 @@ class ReservationClass extends Component {
           .then((result) => {
             if (result.message == 'ok') {
               alert('운동 설정이 완료되었습니다.');
-              console.log(this.state.class_date);
+              // console.log(this.state.class_date);
             } else {
               alert(result.message);
             }
@@ -838,7 +838,7 @@ class ReservationClass extends Component {
     // console.log(this.state.kindOpen);
     // console.log(this.state.exerciseGroup);
     // console.log(this.state.etcExercise);
-    console.log(this.state.kind);
+    // console.log(this.state.kind);
     return (
       <div className='wrap reservationClassWrap'>
         <header className='header'>

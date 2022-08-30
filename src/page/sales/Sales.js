@@ -166,7 +166,8 @@ class Sales extends Component {
       total: 0,
       today: new Date(),
       tommorrow: new Date(),
-      lets: 0,
+      ntoday: new Date(),
+      lets: 0, //선택조회:1, 당일:2, 당월:3
       page: 0,
       rowsPerPage: 5,
     };
@@ -216,6 +217,7 @@ class Sales extends Component {
         this.salesView();
         this.cashView();
         this.handleButton('당일');
+        this.salesToday1('', '');
       }
     });
   }
@@ -384,14 +386,14 @@ class Sales extends Component {
   //당일 조회
   salesToday2 = (tools, exercise) => {
     let startTime = new Date(
-      this.state.today.getFullYear(),
-      this.state.today.getMonth(),
-      this.state.today.getDate()
+      this.state.ntoday.getFullYear(),
+      this.state.ntoday.getMonth(),
+      this.state.ntoday.getDate()
     );
     let endTime = new Date(
-      this.state.today.getFullYear(),
-      this.state.today.getMonth(),
-      this.state.today.getDate() + 1
+      this.state.ntoday.getFullYear(),
+      this.state.ntoday.getMonth(),
+      this.state.ntoday.getDate() + 1
     );
 
     salesSelect2(
@@ -447,13 +449,13 @@ class Sales extends Component {
   //당월 조회
   salesToday3 = (tools, exercise) => {
     let startTime = new Date(
-      this.state.today.getFullYear(),
-      this.state.today.getMonth(),
+      this.state.ntoday.getFullYear(),
+      this.state.ntoday.getMonth(),
       1
     );
     let endTime = new Date(
-      this.state.today.getFullYear(),
-      this.state.today.getMonth() + 1,
+      this.state.ntoday.getFullYear(),
+      this.state.ntoday.getMonth() + 1,
       0
     );
     salesSelect2(
@@ -574,14 +576,14 @@ class Sales extends Component {
   handleButton = (e, tools, exercise) => {
     if (e === '당일') {
       let startTime = new Date(
-        this.state.today.getFullYear(),
-        this.state.today.getMonth(),
-        this.state.today.getDate()
+        this.state.ntoday.getFullYear(),
+        this.state.ntoday.getMonth(),
+        this.state.ntoday.getDate()
       );
       let endTime = new Date(
-        this.state.today.getFullYear(),
-        this.state.today.getMonth(),
-        this.state.today.getDate() + 1
+        this.state.ntoday.getFullYear(),
+        this.state.ntoday.getMonth(),
+        this.state.ntoday.getDate() + 1
       );
       let card = 0;
       let cash = 0;
@@ -629,20 +631,21 @@ class Sales extends Component {
           transfer: transfer,
           total: card + cash + transfer,
           salesViewList: items.reverse(),
-          tommorrow: this.state.today,
+          today: this.state.ntoday,
+          tommorrow: this.state.ntoday,
           toolsViewList: [],
           exerciseViewList: [],
         });
       });
     } else if (e === '당월') {
       let startTime = new Date(
-        this.state.today.getFullYear(),
-        this.state.today.getMonth(),
+        this.state.ntoday.getFullYear(),
+        this.state.ntoday.getMonth(),
         1
       );
       let endTime = new Date(
-        this.state.today.getFullYear(),
-        this.state.today.getMonth() + 1,
+        this.state.ntoday.getFullYear(),
+        this.state.ntoday.getMonth() + 1,
         0
       );
       let card = 0;
@@ -709,9 +712,9 @@ class Sales extends Component {
   render() {
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.salesViewList);
-    console.log(this.state.exerciseViewList);
+    // console.log(this.state.exerciseViewList);
     // console.log(this.state.card);
-    console.log(this.state.today);
+    // console.log(this.state.lets);
 
     return (
       <div className='wrap sales'>
@@ -855,11 +858,16 @@ class Sales extends Component {
                 </Table>
               </Tab>
 
-              <Tab eventKey='exercise' title='운동명'>
-                {/* 추후 테이블 만들어서 운동명 리스트 클릭시 테이블 갱신
-                (like handleInnerOnClick_choice, Reservation.js 455줄) */}
+              <Tab eventKey='exercise' title='운동 명칭 별 조회'>
                 {this.state.lets === 1 ? (
                   <div>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
                     <Button
                       variant='outline-dark'
                       className='m-1'
@@ -901,6 +909,13 @@ class Sales extends Component {
                     <Button
                       variant='outline-dark'
                       className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
                       onClick={() => this.salesToday2('', '개인PT')}
                     >
                       개인PT
@@ -939,6 +954,13 @@ class Sales extends Component {
                     <Button
                       variant='outline-dark'
                       className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
                       onClick={() => this.salesToday3('', '개인PT')}
                     >
                       개인PT
@@ -974,6 +996,13 @@ class Sales extends Component {
                   </div>
                 ) : (
                   <div>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
                     <Button
                       variant='outline-dark'
                       className='m-1'
@@ -1051,10 +1080,17 @@ class Sales extends Component {
                   />
                 </Table>
               </Tab>
-              <Tab eventKey='tools' title='결제도구'>
+              <Tab eventKey='tools' title='결제 도구 별 조회'>
                 {/* 위와 동일 */}
                 {this.state.lets === 1 ? (
                   <>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
                     <Button
                       variant='outline-dark'
                       className='m-1'
@@ -1082,6 +1118,13 @@ class Sales extends Component {
                     <Button
                       variant='outline-dark'
                       className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
                       onClick={() => this.salesToday2('카드', '')}
                     >
                       카드
@@ -1106,6 +1149,13 @@ class Sales extends Component {
                     <Button
                       variant='outline-dark'
                       className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
                       onClick={() => this.salesToday3('카드', '')}
                     >
                       카드
@@ -1127,6 +1177,13 @@ class Sales extends Component {
                   </>
                 ) : (
                   <>
+                    <Button
+                      variant='outline-dark'
+                      className='m-1'
+                      onClick={() => this.salesToday1('', '')}
+                    >
+                      전체보기
+                    </Button>
                     <Button
                       variant='outline-dark'
                       className='m-1'

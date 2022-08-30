@@ -362,7 +362,7 @@ class WorkoutStageAdd extends Component {
       stage: s,
     });
     this.workoutStageView(s);
-    console.log('workoutStageView', s);
+    // console.log('workoutStageView', s);
   };
 
   stageOnClickStage = () => {
@@ -441,7 +441,7 @@ class WorkoutStageAdd extends Component {
   };
 
   render() {
-    console.log('stage', this.state.stage);
+    // console.log('stage', this.state.stage);
 
     return (
       <div className='wrap'>
@@ -522,7 +522,7 @@ class WorkoutStageAdd extends Component {
                       }}
                       onClick={() => this.setState({ nextStage1: '' })}
                     >
-                      초기화
+                      돌아가기
                     </Button>
                   </Col>
                 </Row>
@@ -655,7 +655,7 @@ class WorkoutStageAdd extends Component {
                     }}
                     onClick={() => this.setState({ nextStage2: '' })}
                   >
-                    초기화
+                    돌아가기
                   </Button>
                 </Col>
               </Row>
@@ -786,7 +786,7 @@ class WorkoutStageAdd extends Component {
                     }}
                     onClick={() => this.setState({ nextStage3: '' })}
                   >
-                    초기화
+                    돌아가기
                   </Button>
                 </Col>
               </Row>
@@ -917,7 +917,7 @@ class WorkoutStageAdd extends Component {
                     }}
                     onClick={() => this.setState({ nextStage4: '' })}
                   >
-                    초기화
+                    돌아가기
                   </Button>
                 </Col>
               </Row>
@@ -1048,7 +1048,7 @@ class WorkoutStageAdd extends Component {
                     }}
                     onClick={() => this.setState({ nextStage5: '' })}
                   >
-                    초기화
+                    돌아가기
                   </Button>
                 </Col>
               </Row>
@@ -1196,7 +1196,7 @@ class WorkoutStageAdd extends Component {
                     }}
                     onClick={() => this.setState({ nextStage6: '' })}
                   >
-                    초기화
+                    돌아가기
                   </Button>
                 </Col>
               </Row>

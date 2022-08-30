@@ -184,7 +184,7 @@ const ViewClientItem = ({
         const fitness =
           loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no;
         voucherSelect2(client_name, fitness, kind).then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.length === 0) {
             alert(kind + '이용권이 없습니다.');
           } else {
@@ -211,7 +211,7 @@ const ViewClientItem = ({
         const fitness =
           loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no;
         voucherSelect2(client_name, fitness, kind).then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.length === 0) {
             alert(kind + '이용권이 없습니다.');
           } else {
@@ -238,7 +238,7 @@ const ViewClientItem = ({
         const fitness =
           loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no;
         voucherSelect2(client_name, fitness, kind).then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.length === 0) {
             alert(kind + '이용권이 없습니다.');
           } else {
@@ -264,7 +264,7 @@ const ViewClientItem = ({
         const fitness =
           loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no;
         voucherSelect2(client_name, fitness, kind).then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.length === 0) {
             alert(kind + '이용권이 없습니다.');
           } else {

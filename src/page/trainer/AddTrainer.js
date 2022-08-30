@@ -169,7 +169,7 @@ class AddTrainer extends Component {
     });
   };
   render() {
-    console.log(this.state.phone.replace(/-/g, ''));
+    // console.log(this.state.phone.replace(/-/g, ''));
     return (
       <div className='wrap'>
         <header className='header'>

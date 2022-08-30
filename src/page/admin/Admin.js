@@ -184,7 +184,7 @@ class Admin extends Component {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         //console.log(response.length)
         if (response.length == 0) {
           alert('사용가능합니다.');
@@ -431,8 +431,9 @@ class Admin extends Component {
 
   render() {
     const { userinfo } = this.props;
-    console.log('userinfo : ');
-    console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
+    // console.log('userinfo : ');
+    // console.log(userinfo);
+    // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
 
     const textOptions = {
       noDataText: '등록된 헬스장이 없습니다.',
