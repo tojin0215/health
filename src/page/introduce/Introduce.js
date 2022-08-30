@@ -241,7 +241,17 @@ class Introduce extends Component {
       }
     });
   }
-
+  linkAdd = () => {
+    if (this.state.viewIntroduceList.length === 0) {
+      this.props.history.push('/introduceAdd'),
+        alert('등록된 센터소개가 없습니다. 센터소개를 등록해주세요');
+    }
+  };
+  linkHome = () => {
+    if (this.state.viewIntroduceList.length === 0) {
+      this.props.history.push('/home'), alert('등록된 센터소개가 없습니다.');
+    }
+  };
   viewIntroduce = () => {
     selectClientReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
@@ -269,7 +279,8 @@ class Introduce extends Component {
               />
             );
           });
-          this.setState({ viewIntroduceList: items });
+          this.setState({ viewIntroduceList: items.reverse() });
+          !this.props.userinfo.loginWhether ? this.linkAdd() : this.linkHome();
         });
       });
     });
@@ -308,7 +319,11 @@ class Introduce extends Component {
           {/*.localNavigation */}
         </header>
         <Container>
-          <div>{this.state.viewIntroduceList}</div>
+          {this.state.viewIntroduceList.length === 0 ? (
+            '센터소개가 없습니다.'
+          ) : (
+            <div>{this.state.viewIntroduceList}</div>
+          )}
         </Container>
         <div className='footer'>
           <Footer />

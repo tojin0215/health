@@ -112,7 +112,7 @@ class AddClient extends Component {
     } else {
       phoneCheckClient(this.props.userinfo.fitness_no, this.state.phone).then(
         (res) => {
-          console.log(res);
+          // console.log(res);
           if (res.length === 0) {
             insertClient(
               this.props.userinfo.fitness_no,
@@ -141,7 +141,7 @@ class AddClient extends Component {
                 ? '사용'
                 : '미사용'
             ).then((res) => {
-              // // console.log(res);
+              // console.log(res);
               // alert('client Table');
               clientSelect(this.props.userinfo.fitness_no).then((result) => {
                 const items = result.filter(

@@ -263,7 +263,7 @@ class DefaultExercise extends Component {
     })
       .then((response) => response.json())
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         let arr = [];
         let arr_top = [];
         let arr_bottom = [];
@@ -275,7 +275,7 @@ class DefaultExercise extends Component {
         for (let i = res.length - 1; i >= 0; i--) {
           let part = ', ';
           let part_num = Number(res[i].part);
-          console.log(part_num);
+          // console.log(part_num);
 
           if (part_num == 32) {
             part = '기타, ' + part;
@@ -406,7 +406,7 @@ class DefaultExercise extends Component {
         for (let i = res.length - 1; i >= 0; i--) {
           let part = ', ';
           let part_num = Number(res[i].part);
-          console.log('isD' + res[i].is_default);
+          // console.log('isD' + res[i].is_default);
 
           if (part_num === 32) {
             part = '기타, ' + part;
@@ -492,7 +492,7 @@ class DefaultExercise extends Component {
       selectedList: [...this.state.selectedList, [exercise_no, isSelected]],
     });
 
-    console.log(this.state.selectedListId);
+    // console.log(this.state.selectedListId);
     if (isSelected) {
       this.setState({
         selectedListId: [...this.state.selectedListId, exercise_no],

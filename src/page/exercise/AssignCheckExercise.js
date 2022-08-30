@@ -21,8 +21,8 @@ const ip = SERVER_URL;
 
 function isDefaultExercise(exercise_name, default_value) {
   const value = default_value.toString().split(''); //.map(v => Number(v));
-  console.log(exercise_name);
-  console.log(value);
+  // console.log(exercise_name);
+  // console.log(value);
   if (exercise_name === 1)
     return value.length > 0 && value.includes('1') && !value.includes('6');
   else if (exercise_name === 2) return value.length > 0 && value.includes('2');
@@ -48,10 +48,10 @@ class AssignCheckExercise extends Component {
 
       exerciseList: [],
     };
-    console.log(
-      this.props.location.state.assignDefault,
-      this.props.location.state.assignCustom
-    );
+    // console.log(
+    //   this.props.location.state.assignDefault,
+    //   this.props.location.state.assignCustom
+    // );
     if (this.props.location.state.assignDefault.length !== 0)
       this.getExerciseListDefault();
     else {
@@ -60,10 +60,10 @@ class AssignCheckExercise extends Component {
       for (const [key, value] of Object.entries(
         this.props.location.state.assignCustom
       )) {
-        console.log(key, value);
+        // console.log(key, value);
         for (const [k, v] of Object.entries(value)) {
           idx = idx + 1;
-          console.log(idx, v);
+          // console.log(idx, v);
           if (v.hasOwnProperty('exercise_no')) {
             v['no'] = idx;
           } else {
@@ -175,7 +175,7 @@ class AssignCheckExercise extends Component {
         },
         body: JSON.stringify(ex),
       }).then((response) => {
-        console.log(response);
+        // console.log(response);
       });
     });
     alert('배정되었습니다.');
@@ -275,11 +275,11 @@ class AssignCheckExercise extends Component {
         }
       })
       .then(() => {
-        console.log('this: ' + this);
-        console.log(this);
+        // console.log('this: ' + this);
+        // console.log(this);
         if (searchs.length > 0) {
-          console.log('this: ' + this);
-          console.log(this);
+          // console.log('this: ' + this);
+          // console.log(this);
           return this.procDefaultPackage(
             next_func,
             searchs,

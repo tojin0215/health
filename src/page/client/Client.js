@@ -184,7 +184,7 @@ const ViewClientItem = ({
         const fitness =
           loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no;
         voucherSelect2(client_name, fitness, kind).then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.length === 0) {
             alert(kind + '이용권이 없습니다.');
           } else {
@@ -211,7 +211,7 @@ const ViewClientItem = ({
         const fitness =
           loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no;
         voucherSelect2(client_name, fitness, kind).then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.length === 0) {
             alert(kind + '이용권이 없습니다.');
           } else {
@@ -238,7 +238,7 @@ const ViewClientItem = ({
         const fitness =
           loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no;
         voucherSelect2(client_name, fitness, kind).then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.length === 0) {
             alert(kind + '이용권이 없습니다.');
           } else {
@@ -264,7 +264,7 @@ const ViewClientItem = ({
         const fitness =
           loginWhether === 1 ? trainerResult[0].fitness_no : fitness_no;
         voucherSelect2(client_name, fitness, kind).then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.length === 0) {
             alert(kind + '이용권이 없습니다.');
           } else {
@@ -287,6 +287,7 @@ const ViewClientItem = ({
 
     return (
       //paidMembership: 이용권, salesDays: 기간권
+      //기간권 이용권 보다 보기좋게 구분
       <div>
         {date3plus1 <= today ? (
           ''
@@ -307,6 +308,7 @@ const ViewClientItem = ({
           <p>
             {/* <Button onClick={salesControl}>+기간권 기간 증가</Button>
             <Button onClick={salesControl2}>-기간권 기간 차감</Button> */}
+            --------------기간권-------------------
             <h4>{kind}</h4>
             기간권: {salesDays}일 권
             <br />

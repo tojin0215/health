@@ -10,8 +10,8 @@ const userinfo = (state = [], action) => {
         username: action.text,
       };
     case SET_FITNESS:
-      console.log('setfitness state: ');
-      console.log(state);
+      // console.log('setfitness state: ');
+      // console.log(state);
       return {
         ...state,
         fitnessidx: 2,

@@ -94,6 +94,7 @@ class AddSales extends Component {
         etc: false,
       },
       etcExercise: '',
+      gxExercise: '',
       payGroup: {
         card: true,
         cash: false,
@@ -195,7 +196,7 @@ class AddSales extends Component {
           exerciseName: this.state.exerciseGroup.pt
             ? '개인PT'
             : this.state.exerciseGroup.gx
-            ? 'GX'
+            ? 'GX(' + this.state.gxExercise + ')'
             : this.state.exerciseGroup.pila
             ? '필라테스'
             : this.state.exerciseGroup.health
@@ -402,7 +403,7 @@ class AddSales extends Component {
                         checked={this.state.exerciseGroup['pt']}
                         onChange={this.handleExerciseRadio}
                       />
-                      <Form.Check.Label htmlFor='개인 PT' className='w-100'>
+                      <Form.Check.Label htmlFor='pt' className='w-100'>
                         개인 PT
                       </Form.Check.Label>
                     </Form.Check>
@@ -416,18 +417,16 @@ class AddSales extends Component {
                         checked={this.state.exerciseGroup['gx']}
                         onChange={this.handleExerciseRadio}
                       />
-                      <Form.Check.Label htmlFor='GX' className='w-100'>
+                      <Form.Check.Label htmlFor='gx' className='w-100'>
                         GX
                       </Form.Check.Label>
-                      {/* GX이용권--> GX[스피닝]이용권
-                      으로 바꾸기 기타처럼 */}
-                      {/* <Form.Control
+                      <Form.Control
                         placeholder='GX'
                         id='gxExercise'
                         type='text'
                         value={this.state.gxExercise}
                         onChange={this.handleChange}
-                      ></Form.Control> */}
+                      ></Form.Control>
                     </Form.Check>
                   </Col>
                   <Col>
@@ -439,7 +438,7 @@ class AddSales extends Component {
                         checked={this.state.exerciseGroup['pila']}
                         onChange={this.handleExerciseRadio}
                       />
-                      <Form.Check.Label htmlFor='필라테스' className='w-100'>
+                      <Form.Check.Label htmlFor='pila' className='w-100'>
                         필라테스
                       </Form.Check.Label>
                     </Form.Check>
@@ -453,7 +452,7 @@ class AddSales extends Component {
                         checked={this.state.exerciseGroup['health']}
                         onChange={this.handleExerciseRadio}
                       />
-                      <Form.Check.Label htmlFor='헬스' className='w-100'>
+                      <Form.Check.Label htmlFor='health' className='w-100'>
                         헬스
                       </Form.Check.Label>
                     </Form.Check>
@@ -467,6 +466,9 @@ class AddSales extends Component {
                         checked={this.state.exerciseGroup['etc']}
                         onChange={this.handleExerciseRadio}
                       />
+                      <Form.Check.Label htmlFor='etc' className='w-100'>
+                        기타
+                      </Form.Check.Label>
                       <Form.Control
                         placeholder='기타'
                         id='etcExercise'
@@ -572,7 +574,7 @@ class AddSales extends Component {
                         checked={this.state.payGroup['card']}
                         onChange={this.handlePayRadio}
                       />
-                      <Form.Check.Label htmlFor='카드' className='w-100'>
+                      <Form.Check.Label htmlFor='card' className='w-100'>
                         카드
                       </Form.Check.Label>
                     </Form.Check>
@@ -586,7 +588,7 @@ class AddSales extends Component {
                         checked={this.state.payGroup['cash']}
                         onChange={this.handlePayRadio}
                       />
-                      <Form.Check.Label htmlFor='현금' className='w-100'>
+                      <Form.Check.Label htmlFor='cash' className='w-100'>
                         현금
                       </Form.Check.Label>
                     </Form.Check>
@@ -600,7 +602,7 @@ class AddSales extends Component {
                         checked={this.state.payGroup['transfer']}
                         onChange={this.handlePayRadio}
                       />
-                      <Form.Check.Label htmlFor='계좌이체' className='w-100'>
+                      <Form.Check.Label htmlFor='transfer' className='w-100'>
                         계좌이체
                       </Form.Check.Label>
                     </Form.Check>

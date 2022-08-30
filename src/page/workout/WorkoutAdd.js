@@ -248,7 +248,7 @@ class WorkoutAdd extends Component {
           workoutlist: items.reverse(),
           headRegion: key,
         });
-        console.log(this.state.workoutlist);
+        // console.log(this.state.workoutlist);
       });
     });
   };

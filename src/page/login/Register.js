@@ -75,8 +75,8 @@ class Register extends Component {
       })
         .then((response) => response.json())
         .then((response) => {
-          console.log(response);
-          console.log(response.length);
+          // console.log(response);
+          // console.log(response.length);
           if (response.length == 0) {
             if (IdCheck.test(this.state.id)) {
               alert('사용 가능합니다.');
@@ -184,7 +184,7 @@ class Register extends Component {
     const { userinfo } = this.props;
     // console.log("userinfo : ");
     // console.log(userinfo);
-    console.log(this.state.agreeCheck);
+    // console.log(this.state.agreeCheck);
     return (
       <div className='wrap loginWrap register'>
         {/* <div className='header d-none'>

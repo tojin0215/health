@@ -54,8 +54,7 @@ const CustomUtil = {
 
 export function getExercise(callback, fitness_no) {
   let arr = [];
-  const url =
-     SERVER_URL + '/exercise?type=search&search=&fn=' + fitness_no;
+  const url = SERVER_URL + '/exercise?type=search&search=&fn=' + fitness_no;
   fetch(url, {
     method: 'GET',
     async: false,
@@ -70,7 +69,7 @@ export function getExercise(callback, fitness_no) {
         let part_num = Number(res[i].part);
         const t = new Array(8);
 
-        console.log(part_num);
+        // console.log(part_num);
         if (part_num === 32) {
           part = '기타, ' + part;
           part_num = 0;
@@ -113,12 +112,11 @@ export function getExercise(callback, fitness_no) {
           link: res[i].url,
           t: t,
         });
-        console.log(arr);
+        // console.log(arr);
         // return arr;
         callback(arr);
       }
     });
-
 }
 
 export default CustomUtil;
