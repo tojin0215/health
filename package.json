@@ -23,6 +23,7 @@
     "@kunukn/react-collapse": "^2.2.9",
     "@mui/icons-material": "^5.8.0",
     "@mui/material": "^5.8.0",
+    "@mui/x-data-grid": "^5.16.0",
     "apexcharts": "^3.26.1",
     "autoprefixer": "10.4.5",
     "awesome-react-icons": "^1.4.8",

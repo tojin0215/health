@@ -10,6 +10,7 @@ import { getStatusRequest } from '../../action/authentication';
 
 // react-responsive
 import { useMediaQuery } from 'react-responsive';
+import Dropdown from 'react-dropdown';
 // Bootstrap
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
@@ -34,14 +35,18 @@ import 'react-dropdown/style.css';
 import Menu from '../../component/navigation/Menu';
 import {
   deleteTrainer,
+  searchTrainername,
+  searchTrainerPhone,
   selectTrainer,
   updateManagerClientTrainer,
   updateTrainer,
 } from '../../api/user';
-import { TablePagination } from '@mui/material';
+import { TablePagination, TextField } from '@mui/material';
 
 // react icons
 import { TbMoodSuprised } from 'react-icons/tb';
+
+const options = ['이름', '핸드폰'];
 
 const Desktop = ({ children }) => {
   const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -58,6 +63,481 @@ const Mobile = ({ children }) => {
 const Default = ({ children }) => {
   const isNotMobile = useMediaQuery({ minWidth: 768 });
   return isNotMobile ? children : null;
+};
+
+const TrainerName = ({
+  idx,
+  fitness_no,
+  trainer_name,
+  phone,
+  birth,
+  ment,
+  history,
+  sex,
+  viewTrainer,
+}) => {
+  const [showModal, setShowModal] = useState(false);
+  const [trainer_name_input, setTrainer_name_input] = useState('');
+  const [phone_input, setPhone_input] = useState('');
+  const [ment_input, setMent_input] = useState('');
+  const [history_input, setHistory_input] = useState('');
+
+  const modalClose = () => {
+    setShowModal(false);
+  };
+  const modalOnClick = () => {
+    setShowModal(true);
+    setTrainer_name_input(trainer_name);
+    setPhone_input(phone);
+    setMent_input(ment);
+    setHistory_input(history);
+  };
+  const updateChange1 = (e) => {
+    setTrainer_name_input(e.target.value);
+  };
+  const updateChange2 = (e) => {
+    setPhone_input(e.target.value);
+  };
+  const updateChange3 = (e) => {
+    setMent_input(e.target.value);
+  };
+  const updateChange4 = (e) => {
+    setHistory_input(e.target.value);
+  };
+
+  const updateCompleted = (idx) => {
+    if (trainer_name_input === '') {
+      alert('올바른 이름을 넣어주세요.');
+    } else if (phone_input === '') {
+      alert('숫자만으로 이루어진 연락처를 넣어주세요.');
+    } else if (ment_input === '') {
+      alert('소개 내용을 넣어주세요.');
+    } else if (history_input === '') {
+      alert('이력 내용을 넣어주세요.');
+    } else {
+      updateTrainer(
+        idx,
+        trainer_name_input,
+        phone_input,
+        ment_input,
+        history_input
+      ).then(() => {
+        updateManagerClientTrainer(idx, trainer_name_input, phone_input).then(
+          () => {}
+        );
+        alert('수정 완료되었습니다.');
+        modalClose();
+        viewTrainer();
+      });
+    }
+  };
+  const deleteCompleted = (idx) => {
+    deleteTrainer(idx).then(() => {
+      modalClose();
+      viewTrainer();
+    });
+  };
+  // console.log(idx);
+  const [open, setOpen] = React.useState(false);
+  return (
+    <React.Fragment>
+      <TableRow
+        sx={{ '& > *': { borderBottom: 'unset' } }}
+        className='trainer_table_row'
+      >
+        <Default>
+          <TableCell>
+            <IconButton
+              aria-label='expand row'
+              size='small'
+              onClick={() => setOpen(!open)}
+            >
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+        </Default>
+        <TableCell>{trainer_name}</TableCell>
+        <TableCell>{sex == 1 ? '남' : '여'}</TableCell>
+        <TableCell>{phone}</TableCell>
+        <TableCell>{birth}</TableCell>
+        <Mobile>
+          <TableCell>{history}</TableCell>
+          <TableCell>{ment}</TableCell>
+        </Mobile>
+        <TableCell className='text-center' onClick={modalOnClick}>
+          <Button className='' variant='outline-secondary' size='sm'>
+            수정하기
+          </Button>
+        </TableCell>
+        <Modal show={showModal} onHide={modalClose}>
+          <Modal.Header>
+            <Modal.Title>강사 정보 수정</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Row xs={1}>
+              <Col>
+                <Form.Group className='mb-3'>
+                  <Form.Label htmlFor='disabledTextInput'>이름</Form.Label>
+                  <Form.Control
+                    id='trainer_name'
+                    value={trainer_name_input}
+                    onChange={updateChange1}
+                  />
+                </Form.Group>
+              </Col>
+              <Col xs={10}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>생년월일</Form.Label>
+                  <Form.Control value={birth} disabled />
+                </Form.Group>
+              </Col>
+              <Col xs={2}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>성별</Form.Label>
+                  <Form.Control value={sex == 1 ? '남' : '여'} disabled />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className='mb-3'>
+                  <Form.Label htmlFor='disabledTextInput'>연락처</Form.Label>
+                  <Form.Control
+                    type='number'
+                    id='disabledTextInput'
+                    value={phone_input}
+                    onChange={updateChange2}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className='mb-3'>
+                  <Form.Label htmlFor='TextInput'>이력</Form.Label>
+                  <Form.Control
+                    id='history'
+                    onChange={updateChange4}
+                    as='textarea'
+                    rows={5}
+                    value={history_input}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className='mb-3'>
+                  <Form.Label htmlFor='TextInput'>자기소개</Form.Label>
+                  <Form.Control
+                    id='ment'
+                    onChange={updateChange3}
+                    as='textarea'
+                    rows={6}
+                    value={ment_input}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+          </Modal.Body>
+          <Modal.Footer>
+            <Row className='w-100'>
+              <Col className='py-0 px-1' xs={4}>
+                <Button
+                  className='w-100'
+                  onClick={() =>
+                    confirm(trainer_name + ' 강사 정보를 삭제 하시겠습니까?') ==
+                    true
+                      ? deleteCompleted(idx)
+                      : alert(
+                          trainer_name + '강사 정보 삭제가 취소 되었습니다.'
+                        )
+                  }
+                  variant='outline-danger'
+                >
+                  삭제
+                </Button>
+              </Col>
+              <Col className='p-0' xs={8}>
+                <Button className='w-100' onClick={() => updateCompleted(idx)}>
+                  수정하기
+                </Button>
+              </Col>
+              <Col className='mt-2 py-0 px-1'>
+                <Button
+                  className='w-100'
+                  onClick={modalClose}
+                  variant='outline-light'
+                >
+                  닫기
+                </Button>
+              </Col>
+            </Row>
+          </Modal.Footer>
+        </Modal>
+      </TableRow>
+      <Default>
+        <TableRow className='trainer_table_collapse'>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+            <Collapse in={open} timeout='auto' unmountOnExit>
+              <Box sx={{ margin: 1 }}>
+                <Typography variant='h6' gutterBottom component='div'>
+                  강사 소개
+                </Typography>
+                <Table size='small' aria-label='purchases'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell style={{ width: '40%' }}>이력</TableCell>
+                      <TableCell>자기소개</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell component='th' scope='row'>
+                        {history}
+                      </TableCell>
+                      <TableCell>{ment}</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      </Default>
+    </React.Fragment>
+  );
+};
+const TrainerPhone = ({
+  idx,
+  fitness_no,
+  trainer_name,
+  phone,
+  birth,
+  ment,
+  history,
+  sex,
+  viewTrainer,
+}) => {
+  const [showModal, setShowModal] = useState(false);
+  const [trainer_name_input, setTrainer_name_input] = useState('');
+  const [phone_input, setPhone_input] = useState('');
+  const [ment_input, setMent_input] = useState('');
+  const [history_input, setHistory_input] = useState('');
+
+  const modalClose = () => {
+    setShowModal(false);
+  };
+  const modalOnClick = () => {
+    setShowModal(true);
+    setTrainer_name_input(trainer_name);
+    setPhone_input(phone);
+    setMent_input(ment);
+    setHistory_input(history);
+  };
+  const updateChange1 = (e) => {
+    setTrainer_name_input(e.target.value);
+  };
+  const updateChange2 = (e) => {
+    setPhone_input(e.target.value);
+  };
+  const updateChange3 = (e) => {
+    setMent_input(e.target.value);
+  };
+  const updateChange4 = (e) => {
+    setHistory_input(e.target.value);
+  };
+
+  const updateCompleted = (idx) => {
+    if (trainer_name_input === '') {
+      alert('올바른 이름을 넣어주세요.');
+    } else if (phone_input === '') {
+      alert('숫자만으로 이루어진 연락처를 넣어주세요.');
+    } else if (ment_input === '') {
+      alert('소개 내용을 넣어주세요.');
+    } else if (history_input === '') {
+      alert('이력 내용을 넣어주세요.');
+    } else {
+      updateTrainer(
+        idx,
+        trainer_name_input,
+        phone_input,
+        ment_input,
+        history_input
+      ).then(() => {
+        updateManagerClientTrainer(idx, trainer_name_input, phone_input).then(
+          () => {}
+        );
+        alert('수정 완료되었습니다.');
+        modalClose();
+        viewTrainer();
+      });
+    }
+  };
+  const deleteCompleted = (idx) => {
+    deleteTrainer(idx).then(() => {
+      modalClose();
+      viewTrainer();
+    });
+  };
+  // console.log(idx);
+  const [open, setOpen] = React.useState(false);
+  return (
+    <React.Fragment>
+      <TableRow
+        sx={{ '& > *': { borderBottom: 'unset' } }}
+        className='trainer_table_row'
+      >
+        <Default>
+          <TableCell>
+            <IconButton
+              aria-label='expand row'
+              size='small'
+              onClick={() => setOpen(!open)}
+            >
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+        </Default>
+        <TableCell>{trainer_name}</TableCell>
+        <TableCell>{sex == 1 ? '남' : '여'}</TableCell>
+        <TableCell>{phone}</TableCell>
+        <TableCell>{birth}</TableCell>
+        <Mobile>
+          <TableCell>{history}</TableCell>
+          <TableCell>{ment}</TableCell>
+        </Mobile>
+        <TableCell className='text-center' onClick={modalOnClick}>
+          <Button className='' variant='outline-secondary' size='sm'>
+            수정하기
+          </Button>
+        </TableCell>
+        <Modal show={showModal} onHide={modalClose}>
+          <Modal.Header>
+            <Modal.Title>강사 정보 수정</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Row xs={1}>
+              <Col>
+                <Form.Group className='mb-3'>
+                  <Form.Label htmlFor='disabledTextInput'>이름</Form.Label>
+                  <Form.Control
+                    id='trainer_name'
+                    value={trainer_name_input}
+                    onChange={updateChange1}
+                  />
+                </Form.Group>
+              </Col>
+              <Col xs={10}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>생년월일</Form.Label>
+                  <Form.Control value={birth} disabled />
+                </Form.Group>
+              </Col>
+              <Col xs={2}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>성별</Form.Label>
+                  <Form.Control value={sex == 1 ? '남' : '여'} disabled />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className='mb-3'>
+                  <Form.Label htmlFor='disabledTextInput'>연락처</Form.Label>
+                  <Form.Control
+                    type='number'
+                    id='disabledTextInput'
+                    value={phone_input}
+                    onChange={updateChange2}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className='mb-3'>
+                  <Form.Label htmlFor='TextInput'>이력</Form.Label>
+                  <Form.Control
+                    id='history'
+                    onChange={updateChange4}
+                    as='textarea'
+                    rows={5}
+                    value={history_input}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className='mb-3'>
+                  <Form.Label htmlFor='TextInput'>자기소개</Form.Label>
+                  <Form.Control
+                    id='ment'
+                    onChange={updateChange3}
+                    as='textarea'
+                    rows={6}
+                    value={ment_input}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+          </Modal.Body>
+          <Modal.Footer>
+            <Row className='w-100'>
+              <Col className='py-0 px-1' xs={4}>
+                <Button
+                  className='w-100'
+                  onClick={() =>
+                    confirm(trainer_name + ' 강사 정보를 삭제 하시겠습니까?') ==
+                    true
+                      ? deleteCompleted(idx)
+                      : alert(
+                          trainer_name + '강사 정보 삭제가 취소 되었습니다.'
+                        )
+                  }
+                  variant='outline-danger'
+                >
+                  삭제
+                </Button>
+              </Col>
+              <Col className='p-0' xs={8}>
+                <Button className='w-100' onClick={() => updateCompleted(idx)}>
+                  수정하기
+                </Button>
+              </Col>
+              <Col className='mt-2 py-0 px-1'>
+                <Button
+                  className='w-100'
+                  onClick={modalClose}
+                  variant='outline-light'
+                >
+                  닫기
+                </Button>
+              </Col>
+            </Row>
+          </Modal.Footer>
+        </Modal>
+      </TableRow>
+      <Default>
+        <TableRow className='trainer_table_collapse'>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+            <Collapse in={open} timeout='auto' unmountOnExit>
+              <Box sx={{ margin: 1 }}>
+                <Typography variant='h6' gutterBottom component='div'>
+                  강사 소개
+                </Typography>
+                <Table size='small' aria-label='purchases'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell style={{ width: '40%' }}>이력</TableCell>
+                      <TableCell>자기소개</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell component='th' scope='row'>
+                        {history}
+                      </TableCell>
+                      <TableCell>{ment}</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      </Default>
+    </React.Fragment>
+  );
 };
 
 const VieWTrainerItem = ({
@@ -305,6 +785,10 @@ class Trainer extends Component {
       viewTrainerList: [],
       rowsPerPage: 5,
       page: 0,
+      searchOption: options[0],
+      search: '',
+      trainer_phone: '',
+      trainer_name: '',
     };
   }
   goLogin = () => {
@@ -386,10 +870,67 @@ class Trainer extends Component {
   handleChangePage = (e, newPage) => {
     this.setState({ page: newPage });
   };
+  handleOnChangeSearchOption = (e) => {
+    this.setState({ searchOption: e.value });
+  };
+
+  handleOnSearch = () => {
+    switch (this.state.searchOption) {
+      case '핸드폰':
+        return searchTrainerPhone(
+          this.props.userinfo.fitness_no,
+          this.state.search
+        ).then((result) => {
+          const items = result.map((data, index, array) => {
+            return (
+              <TrainerPhone
+                idx={data.idx}
+                fitness_no={this.props.userinfo.fitness_no}
+                trainer_name={data.trainer_name}
+                phone={data.phone}
+                birth={data.birth}
+                ment={data.ment}
+                history={data.history}
+                sex={data.sex}
+                viewTrainer={this.handleOnSearch}
+              />
+            );
+          });
+          this.setState({ trainer_phone: items });
+        });
+      case '이름':
+        return searchTrainername(
+          this.props.userinfo.fitness_no,
+          this.state.search
+        ).then((result) => {
+          const items = result.map((data, index, array) => {
+            return (
+              <TrainerName
+                idx={data.idx}
+                fitness_no={this.props.userinfo.fitness_no}
+                trainer_name={data.trainer_name}
+                phone={data.phone}
+                birth={data.birth}
+                ment={data.ment}
+                history={data.history}
+                sex={data.sex}
+                viewTrainer={this.handleOnSearch}
+              />
+            );
+          });
+          this.setState({ trainer_name: items });
+        });
+    }
+  };
 
   render() {
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.viewTrainerList[0]);
+    // console.log(this.state.search);
+    // console.log(this.state.searchOption);
+    // console.log(this.state.trainer_phone);
+    // console.log(this.state.trainer_name);
+
     return (
       <div className='wrap trainer_wrap'>
         <header className='header'>
@@ -416,6 +957,37 @@ class Trainer extends Component {
         </header>
         <Container>
           <h3>강사 목록</h3>
+          <div>
+            <Row>
+              <Col>
+                <Dropdown
+                  className='searchDrop'
+                  options={options}
+                  onChange={this.handleOnChangeSearchOption}
+                  value={this.state.searchOption}
+                  placeholder='검색 대상을 선택하세요.'
+                />
+              </Col>
+              <Col>
+                <input
+                  className='w-100 h-100'
+                  type='text'
+                  id='search'
+                  value={this.state.search}
+                  onChange={(e) => this.setState({ search: e.target.value })}
+                />
+              </Col>
+              <Col>
+                <Button
+                  className='w-100 h-100'
+                  variant='primary'
+                  onClick={this.handleOnSearch}
+                >
+                  검색
+                </Button>
+              </Col>
+            </Row>
+          </div>
           <TableContainer component={Paper}>
             <Table aria-label='simple table' className='table--block'>
               <TableHead>
@@ -435,8 +1007,18 @@ class Trainer extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {this.state.viewTrainerList.length === 0
-                  ? ''
+                {this.state.trainer_phone
+                  ? this.state.trainer_phone.slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )
+                  : this.state.trainer_name
+                  ? this.state.trainer_name.slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )
                   : this.state.viewTrainerList.slice(
                       this.state.page * this.state.rowsPerPage,
                       this.state.page * this.state.rowsPerPage +

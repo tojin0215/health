@@ -1236,7 +1236,7 @@ class ReservationClass extends Component {
                           checked={this.state.exerciseGroup['pt']}
                           onChange={this.handleExerciseRadio}
                         />
-                        <Form.Check.Label htmlFor='개인 PT' className='w-100'>
+                        <Form.Check.Label htmlFor='pt' className='w-100'>
                           개인 PT
                         </Form.Check.Label>
                       </Form.Check>
@@ -1250,7 +1250,7 @@ class ReservationClass extends Component {
                           checked={this.state.exerciseGroup['gx']}
                           onChange={this.handleExerciseRadio}
                         />
-                        <Form.Check.Label htmlFor='GX' className='w-100'>
+                        <Form.Check.Label htmlFor='gx' className='w-100'>
                           GX
                         </Form.Check.Label>
                       </Form.Check>
@@ -1264,7 +1264,7 @@ class ReservationClass extends Component {
                           checked={this.state.exerciseGroup['pila']}
                           onChange={this.handleExerciseRadio}
                         />
-                        <Form.Check.Label htmlFor='필라테스' className='w-100'>
+                        <Form.Check.Label htmlFor='pila' className='w-100'>
                           필라테스
                         </Form.Check.Label>
                       </Form.Check>
