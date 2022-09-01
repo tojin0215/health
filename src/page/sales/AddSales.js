@@ -352,7 +352,7 @@ class AddSales extends Component {
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/sales'>상품/매출</Link>
+                <Link to='/sales'>매출</Link>
                 <span>&#62;</span>
                 <Link to='#'>결제 등록</Link>
               </div>
