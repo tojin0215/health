@@ -1159,8 +1159,8 @@ class ReservationClass extends Component {
 						</table> */}
             </Col>
           </Row>
-          <Row lg={6}>
-            <Col className='text-center' xs={12} sm={3} lg={3}>
+          <Row className='reservation-class_input-container'>
+            <Col className='text-center' xs={12} sm={3}>
               {this.props.userinfo.loginWhether === 1 ? (
                 // <label className=' d-block w-100'>
                 <TextField
@@ -1307,12 +1307,7 @@ class ReservationClass extends Component {
               </div>
               <Button onClick={this.handlekindClose}>닫기</Button>
             </Modal>
-            <Col
-              className='text-center height-fit-content fs-2'
-              xs={12}
-              sm={3}
-              lg={3}
-            >
+            <Col className='text-center height-fit-content fs-2' xs={12} sm={6}>
               <label className='w-100'>
                 <TextField
                   className='boxmorpsm w-100'
@@ -1326,7 +1321,7 @@ class ReservationClass extends Component {
                 />
               </label>
             </Col>
-            <Col className='text-center height-fit-content' xs={12} sm={4}>
+            <Col className='text-center height-fit-content' xs={12} sm={6}>
               <label className='d-block w-100'>
                 <DatePicker
                   className='boxmorpsm text-center w-100 border-0'
@@ -1342,7 +1337,7 @@ class ReservationClass extends Component {
                 />
               </label>
             </Col>
-            <Col className=' px-1' xs={12} sm={2} lg={2}>
+            <Col className=' px-1' xs={12} sm={3}>
               <Row className=''>
                 <Col className='pe-0 height-fit-content'>
                   <label className='w-100'>
@@ -1382,7 +1377,7 @@ class ReservationClass extends Component {
                 </Col>
               </Row>
             </Col>
-            <Col className='text-center height-fit-content' xs={12} sm={4}>
+            <Col className='text-center height-fit-content' xs={12} sm={3}>
               <label className='w-100'>
                 <TextField
                   className='w-100 boxmorpsm'

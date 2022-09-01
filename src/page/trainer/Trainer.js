@@ -958,7 +958,7 @@ class Trainer extends Component {
         <Container>
           <h3>강사 목록</h3>
           <div>
-            <Row>
+            <Row className='mt-2'>
               <Col>
                 <Dropdown
                   className='searchDrop'
