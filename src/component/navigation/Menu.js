@@ -137,7 +137,7 @@ class Menu extends Component {
     // console.log(userinfo);
 
     return (
-      <div>
+      <div className=''>
         {userinfo.loginWhether === 2 ? (
           //회원
           <div class='menu'>
