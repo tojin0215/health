@@ -229,7 +229,6 @@ class Home extends Component {
           ) : (
             ''
           )}
-
           <Container className='home__main-visual--content'>
             <div className='home__main-visual--logo'>
               <p>새로워진 피트니스 센터 관리</p>
