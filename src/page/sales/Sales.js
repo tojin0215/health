@@ -732,7 +732,9 @@ class Sales extends Component {
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='#'>상품/매출</Link>
+                <Link to='#'>매출</Link>
+                <span>&#62;</span>
+                <Link to='#'>매출현황</Link>
               </div>
             </div>
             {/*.container */}

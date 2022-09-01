@@ -81,7 +81,7 @@ input[id='phone'][type='number'] {
 
 /* 드롭다운 메뉴 아래 화살표 위치 */
 .Dropdown-arrow {
-  top: 1.8rem;
+  top: 1.2rem;
 }
 /* 달력 셀렉터 */
 
