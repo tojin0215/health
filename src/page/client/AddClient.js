@@ -157,7 +157,7 @@ class AddClient extends Component {
                   items[0].idc
                 ).then((res) => {});
                 alert(this.state.client_name + '님이 가입되었습니다.');
-                this.props.history.push('/client');
+                this.AddSalesPush();
               });
             });
           } else {
@@ -174,6 +174,16 @@ class AddClient extends Component {
       );
     }
   };
+
+  AddSalesPush = () => {
+    this.props.history.push({
+      pathname: '/addSales',
+      state: {
+        client_name: this.state.client_name,
+      },
+    });
+  };
+
   handleRadio = (s) => {
     let obj = {
       male: false,
@@ -216,6 +226,7 @@ class AddClient extends Component {
   };
 
   render() {
+    // console.log(this.state.client_name);
     return (
       <div className='wrap'>
         {' '}

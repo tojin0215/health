@@ -66,7 +66,9 @@ class AddSales extends Component {
       member_no: '',
       //isChecked:false,
       paymentDate: new Date(),
-      client_name: '회원',
+      client_name: !this.props.location.state
+        ? '회원'
+        : this.props.location.state.client_name,
       inputExercise: '',
       exercisePrice: 0,
       //locker:0,
@@ -335,7 +337,8 @@ class AddSales extends Component {
     const { userinfo } = this.props;
     // console.log(userinfo);
     // console.log(this.state.paymentTools);
-
+    // console.log(this.props.location.state.client_name);
+    console.log(this.state.client_name);
     return (
       <div className='wrap addSales'>
         <div className='header'>
