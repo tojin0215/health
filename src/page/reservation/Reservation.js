@@ -504,7 +504,7 @@ const ReservationClassItem_choice = ({
 
   return (
     <Button
-      variant='outline-dark'
+      variant='outline-light'
       className='m-1'
       onClick={handleInnerOnClick_choice}
     >
@@ -599,7 +599,7 @@ const ReservationClassItem_choice2 = ({
   };
   return (
     <Button
-      variant='outline-dark'
+      variant='outline-light'
       className='m-1'
       onClick={handleInnerOnClick_choice}
     >
@@ -1719,6 +1719,7 @@ class Reservation extends Component {
                   </TableBody>
                 </Table>
               </TableContainer>
+              <p>예약하실 수업을 선택해주세요.</p>
             </Col>
           </Row>
           <Row lg={6}>
@@ -1815,7 +1816,7 @@ class Reservation extends Component {
                 />
               </Col>
             ) : (
-              <Col className='text-center my-3'>
+              <Col className='text-center'>
                 {this.state.open ? (
                   <UserSearch
                     open={this.state.open}
@@ -1863,7 +1864,10 @@ class Reservation extends Component {
             {this.props.userinfo.loginWhether === 2 ? (
               ''
             ) : (
-              <Col xs={12} className='w-100 overflow-auto'>
+              <Col
+                xs={12}
+                className='w-100 overflow-auto reservation__reservation-status'
+              >
                 <Tabs
                   defaultActiveKey='home'
                   id='uncontrolled-tab-example'
@@ -1931,7 +1935,7 @@ class Reservation extends Component {
                         <TableBody>
                           {this.state.reservation_exercise.length == 0 ? (
                             <TableCell colSpan={7}>
-                              <div className='p-3 fs-5 fw-bold text-center text-dark'>
+                              <div className='p-3 fs-5 fw-bold text-center text-white'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>예약된 수업이 없습니다.</p>
                               </div>
@@ -1952,7 +1956,7 @@ class Reservation extends Component {
                         <TableBody>
                           {this.state.reservation_trainer.length == 0 ? (
                             <TableCell colSpan={7}>
-                              <div className='p-3 fs-5 fw-bold text-center text-dark'>
+                              <div className='p-3 fs-5 fw-bold text-center text-white'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>예약된 수업이 없습니다.</p>
                               </div>
@@ -1972,7 +1976,7 @@ class Reservation extends Component {
                         <TableBody>
                           {this.state.reservation_date.length == 0 ? (
                             <TableCell colSpan={7}>
-                              <div className='p-3 fs-5 fw-bold text-center text-dark'>
+                              <div className='p-3 fs-5 fw-bold text-center text-white'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>예약된 수업이 없습니다.</p>
                               </div>
@@ -1993,7 +1997,7 @@ class Reservation extends Component {
                         <TableBody>
                           {this.state.reservation.length == 0 ? (
                             <TableCell colSpan={7}>
-                              <div className='p-3 fs-5 fw-bold text-center text-dark'>
+                              <div className='p-3 fs-5 fw-bold text-center text-white'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>예약된 수업이 없습니다.</p>
                               </div>
@@ -2046,7 +2050,7 @@ class Reservation extends Component {
                         <TableBody>
                           {this.state.reservation_choice_trainer.length == 0 ? (
                             <TableCell colSpan={7}>
-                              <div className='p-3 fs-5 fw-bold text-center text-dark'>
+                              <div className='p-3 fs-5 fw-bold text-center text-white'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>예약된 수업이 없습니다.</p>
                               </div>
@@ -2097,7 +2101,7 @@ class Reservation extends Component {
                         <TableBody>
                           {this.state.reservation_choice_client.length == 0 ? (
                             <TableCell colSpan={7}>
-                              <div className='p-3 fs-5 fw-bold text-center text-dark'>
+                              <div className='p-3 fs-5 fw-bold text-center text-white'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>예약된 수업이 없습니다.</p>
                               </div>

@@ -1,5 +1,24 @@
+/* 
+* 수업 만들기 시간표 목록
+*/
+/* thead 폰트 컬러 */
+.reservationClassWrap .table thead tr th {
+  color: #eee;
+}
+/* tbody 폰트 컬러 */
+.reservationClassWrap tbody tr td {
+  color: #fff;
+}
+
 .reservationClassWrap .MuiInputBase-input {
   text-align: center;
+}
+
+/* 
+* 수업 만들기 인풋 컨테이너
+*/
+.reservation-class_input-container > div {
+  margin-bottom: 14px;
 }
 
 /*

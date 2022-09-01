@@ -862,42 +862,42 @@ class Sales extends Component {
                 {this.state.lets === 1 ? (
                   <div>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('', '')}
                     >
                       전체보기
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('', '개인PT')}
                     >
                       개인PT
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('', 'GX')}
                     >
                       GX
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('', '필라테스')}
                     >
                       필라테스
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('', '헬스')}
                     >
                       헬스
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('', '기타')}
                     >
@@ -907,42 +907,42 @@ class Sales extends Component {
                 ) : this.state.lets === 2 ? (
                   <div>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('', '')}
                     >
                       전체보기
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday2('', '개인PT')}
                     >
                       개인PT
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday2('', 'GX')}
                     >
                       GX
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday2('', '필라테스')}
                     >
                       필라테스
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday2('', '헬스')}
                     >
                       헬스
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday2('', '기타')}
                     >
@@ -952,42 +952,42 @@ class Sales extends Component {
                 ) : this.state.lets === 3 ? (
                   <div>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('', '')}
                     >
                       전체보기
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday3('', '개인PT')}
                     >
                       개인PT
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday3('', 'GX')}
                     >
                       GX
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday3('', '필라테스')}
                     >
                       필라테스
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday3('', '헬스')}
                     >
                       헬스
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday3('', '기타')}
                     >
@@ -997,42 +997,42 @@ class Sales extends Component {
                 ) : (
                   <div>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('', '')}
                     >
                       전체보기
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesViewExercise('개인PT')}
                     >
                       개인PT
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesViewExercise('GX')}
                     >
                       GX
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesViewExercise('필라테스')}
                     >
                       필라테스
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesViewExercise('헬스')}
                     >
                       헬스
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesViewExercise('기타')}
                     >
@@ -1085,28 +1085,28 @@ class Sales extends Component {
                 {this.state.lets === 1 ? (
                   <>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('', '')}
                     >
                       전체보기
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('카드', '')}
                     >
                       카드
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('현금', '')}
                     >
                       현금
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('계좌이체', '')}
                     >
@@ -1116,28 +1116,28 @@ class Sales extends Component {
                 ) : this.state.lets === 2 ? (
                   <>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('', '')}
                     >
                       전체보기
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday2('카드', '')}
                     >
                       카드
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday2('현금', '')}
                     >
                       현금
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday2('계좌이체', '')}
                     >
@@ -1147,28 +1147,28 @@ class Sales extends Component {
                 ) : this.state.lets === 3 ? (
                   <>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('', '')}
                     >
                       전체보기
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday3('카드', '')}
                     >
                       카드
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday3('현금', '')}
                     >
                       현금
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday3('계좌이체', '')}
                     >
@@ -1178,28 +1178,28 @@ class Sales extends Component {
                 ) : (
                   <>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesToday1('', '')}
                     >
                       전체보기
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesViewTools('카드')}
                     >
                       카드
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesViewTools('현금')}
                     >
                       현금
                     </Button>
                     <Button
-                      variant='outline-dark'
+                      variant='outline-light'
                       className='m-1'
                       onClick={() => this.salesViewTools('계좌이체')}
                     >
