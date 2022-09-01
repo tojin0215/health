@@ -1,10 +1,12 @@
 import { Component, useState } from 'react';
+import DatePicker from 'react-datepicker';
 import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
 import Menu from '../../component/navigation/Menu';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import UserSearch from '../../component/customer/UserSearch';
 import {
   inbodiesSelect,
@@ -85,6 +87,7 @@ const ExerciseView = ({
   idc,
   client_name,
   workoutAllotedView,
+  workoutA_date,
 }) => {
   const region =
     part === 1
@@ -109,20 +112,26 @@ const ExerciseView = ({
       default_set_input,
       default_count_input,
       default_rest_input,
-      url_input
+      url_input,
+      workoutA_date_input
     ).then((res) => {
       setDefault_set_input(default_set);
       setDefault_count_input(default_count);
       setDefault_rest_input(default_rest);
       setUrl_input(url);
+      setWorkoutA_date(moment(workoutA_date).format('YYYY-MM-DD'));
       workoutAllotedView(idc);
-      alert(workout + '운동이 배정됩니다.');
+      alert(workoutA_date_input);
+      // alert(workout + '운동이 배정됩니다.');
     });
   };
   const [default_set_input, setDefault_set_input] = useState(default_set);
   const [default_count_input, setDefault_count_input] = useState(default_count);
   const [default_rest_input, setDefault_rest_input] = useState(default_rest);
   const [url_input, setUrl_input] = useState(url);
+  const [workoutA_date_input, setWorkoutA_date] = useState(
+    moment(workoutA_date).format('YYYY-MM-DD')
+  );
   const changeInsert = (e) => {
     setDefault_set_input(e.target.value);
   };
@@ -232,6 +241,7 @@ class WorkoutAlloted extends Component {
       headRegion: '',
       page: 0,
       rowsPerPage: 5,
+      workoutA_date: new Date(),
     };
     //여기 function
   }
@@ -376,6 +386,7 @@ class WorkoutAlloted extends Component {
                   : this.state.idc
               }
               workoutAllotedView={this.workoutAllotedView}
+              workoutA_date={this.state.workoutA_date}
             />
           );
         });
@@ -396,7 +407,11 @@ class WorkoutAlloted extends Component {
         this.props.userinfo.loginWhether === 1
           ? trainerResult[0].fitness_no
           : this.props.userinfo.fitness_no;
-      workoutAllotedSelect(fitness_no, idc).then((result) => {
+      workoutAllotedSelect(
+        fitness_no,
+        idc,
+        moment(this.state.workoutA_date).format('YYYY-MM-DD')
+      ).then((result) => {
         const items = result.map((data, index, array) => {
           return (
             <WorkoutAllotedView
@@ -437,6 +452,7 @@ class WorkoutAlloted extends Component {
   render() {
     // console.log(this.state.idc);
     // console.log(this.state.workoutAllotlist);
+    console.log(this.state.workoutA_date);
 
     return (
       <div className='workout-alloted wrap'>
@@ -485,6 +501,28 @@ class WorkoutAlloted extends Component {
 
           {this.state.client_name ? (
             <div>
+              asd
+              <Col className='text-center height-fit-content' xs={12} sm={4}>
+                <label className='d-block w-100'>
+                  <DatePicker
+                    className='boxmorpsm text-center w-100 border-0'
+                    selected={this.state.workoutA_date}
+                    onChange={(date) => this.setState({ workoutA_date: date })}
+                    dateFormat='yyyy-MM-dd(eee)'
+                    font-size='1.6rem'
+                    // locale 오류로 임시 삭제
+                    // locale='ko'
+                    minDate={new Date()}
+                  />
+                </label>
+                <Button
+                  onClick={() => {
+                    this.workoutAllotedView(this.state.idc);
+                  }}
+                >
+                  날짜선택완료
+                </Button>
+              </Col>
               <div className='mt-4 sectionGlass'>
                 <h3>
                   {this.state.client_name}
@@ -634,7 +672,13 @@ class WorkoutAlloted extends Component {
                 <Col>
                   <h3>
                     {this.state.client_name}
-                    <span className='fs-5'>님에게 배정된 운동 목록입니다</span>
+                    <span className='fs-5'>
+                      님의{' '}
+                      {moment(this.state.workoutA_date).format(
+                        'YYYY년 MM월DD일'
+                      )}
+                      에 배정된 운동 목록입니다
+                    </span>
                   </h3>
                   <TableContainer component={Paper}>
                     <Table>
