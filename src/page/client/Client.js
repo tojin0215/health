@@ -49,7 +49,8 @@ import { TablePagination } from '@mui/material';
 import { TbMoodSuprised } from 'react-icons/tb';
 // MUI icons
 import CloseIcon from '@mui/icons-material/Close';
-
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
 
 const options = ['이름', '핸드폰'];
 
@@ -295,38 +296,66 @@ const ClientPhone = ({
     return (
       //paidMembership: 이용권, salesDays: 기간권
       //기간권 이용권 보다 보기좋게 구분
-      <Row>
+      <>
         {date3plus1 <= today ? (
           ''
         ) : paidMembership ? (
           paidMembership2 === 0 ? (
             ''
           ) : (
-            <Col xs={12} sm={6}>
-              <Button onClick={paidControl}>-이용권 차감</Button>
-              <Button onClick={paidControl2}>+이용권 증가</Button>
-              <h4>{kind}</h4>
-              이용권: {paidMembership2}/{paidMembership}
-              <br />
-              이용권 결제일: {date1}
-            </Col>
+            <Row className='client-infomation__detail--membership'>
+              <Col xs={12}>
+                <h4>{kind}</h4>
+              </Col>
+              <Col xs={12} sm={8}>
+                <p>
+                  이용권: {paidMembership2}/{paidMembership}
+                </p>
+                <p>이용권 결제일: {date1}</p>
+              </Col>
+              <Col xs={12} sm={4}>
+                <div className='text-end'>
+                  <Button
+                    variant='outline-danger'
+                    size='sm'
+                    onClick={paidControl}
+                  >
+                    <RemoveIcon />
+                    이용권 차감하기
+                  </Button>
+                </div>
+                <div className='text-end'>
+                  <Button
+                    variant='outline-success'
+                    size='sm'
+                    onClick={paidControl2}
+                  >
+                    <AddIcon />
+                    이용권 증가하기
+                  </Button>
+                </div>
+              </Col>
+            </Row>
           )
         ) : (
-          <Col xs={12} sm={6}>
-            {/* <Button onClick={salesControl}>+기간권 기간 증가</Button>
+          <Row className='client-infomation__detail--membership'>
+            <Col xs={12} sm={8}>
+              <h4>{kind}</h4>
+              기간권: {salesDays}일 권
+              <br />
+              남은기간: D {endDays}
+              <br />
+              기간권 결제일: {date2}
+              <br />
+              기간권 마감일: {date3}
+            </Col>
+            <Col xs={12} sm={4}>
+              {/* <Button onClick={salesControl}>+기간권 기간 증가</Button>
             <Button onClick={salesControl2}>-기간권 기간 차감</Button> */}
-            --------------기간권-------------------
-            <h4>{kind}</h4>
-            기간권: {salesDays}일 권
-            <br />
-            남은기간: D {endDays}
-            <br />
-            기간권 결제일: {date2}
-            <br />
-            기간권 마감일: {date3}
-          </Col>
+            </Col>
+          </Row>
         )}
-      </Row>
+      </>
     );
   };
 
@@ -370,28 +399,35 @@ const ClientPhone = ({
 
     return (
       //paidMembership: 이용권, salesDays: 기간권
-      <div>
+      <>
         {/* paidMembership= true면 이용권 아니면 기간권 */}
         {paidMembership ? (
-          <p>
-            <h4>{kind}</h4>
-            이용권: {paidMembership2}/{paidMembership}
-            <br />
-            이용권 결제일: {date1}
-          </p>
+          <Row className='client-infomation__detail--membership'>
+            <Col xs={12}>
+              <h4>{kind}</h4>
+            </Col>
+            <Col xs={12} sm={8}>
+              <p>
+                이용권: {paidMembership2}/{paidMembership}
+              </p>
+              <p>이용권 결제일: {date1}</p>
+            </Col>
+          </Row>
         ) : (
-          <p>
-            <h4>{kind}</h4>
-            기간권: {salesDays}일 권
-            <br />
-            남은기간: D {endDays}
-            <br />
-            기간권 결제일: {date2}
-            <br />
-            기간권 마감일: {date3}
-          </p>
+          <Row className='client-infomation__detail--membership'>
+            <Col xs={12} sm={8}>
+              <h4>{kind}</h4>
+              기간권: {salesDays}일 권
+              <br />
+              남은기간: D {endDays}
+              <br />
+              기간권 결제일: {date2}
+              <br />
+              기간권 마감일: {date3}
+            </Col>
+          </Row>
         )}
-      </div>
+      </>
     );
   };
 
@@ -528,8 +564,7 @@ const ClientPhone = ({
                 <p>{sportswear}</p>
               )}
             </Col>
-
-            <Col className='text-center mt-4'>
+            <Col className='text-center mt-4' xs={12}>
               {showUpdate ? (
                 loginWhether === 1 ? (
                   ''
@@ -827,38 +862,66 @@ const ClientName = ({
     return (
       //paidMembership: 이용권, salesDays: 기간권
       //기간권 이용권 보다 보기좋게 구분
-      <Row>
-      {date3plus1 <= today ? (
-        ''
-      ) : paidMembership ? (
-        paidMembership2 === 0 ? (
+      <>
+        {date3plus1 <= today ? (
           ''
+        ) : paidMembership ? (
+          paidMembership2 === 0 ? (
+            ''
+          ) : (
+            <Row className='client-infomation__detail--membership'>
+              <Col xs={12}>
+                <h4>{kind}</h4>
+              </Col>
+              <Col xs={12} sm={8}>
+                <p>
+                  이용권: {paidMembership2}/{paidMembership}
+                </p>
+                <p>이용권 결제일: {date1}</p>
+              </Col>
+              <Col xs={12} sm={4}>
+                <div className='text-end'>
+                  <Button
+                    variant='outline-danger'
+                    size='sm'
+                    onClick={paidControl}
+                  >
+                    <RemoveIcon />
+                    이용권 차감하기
+                  </Button>
+                </div>
+                <div className='text-end'>
+                  <Button
+                    variant='outline-success'
+                    size='sm'
+                    onClick={paidControl2}
+                  >
+                    <AddIcon />
+                    이용권 증가하기
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          )
         ) : (
-          <Col xs={12} sm={6}>
-            <Button onClick={paidControl}>-이용권 차감</Button>
-            <Button onClick={paidControl2}>+이용권 증가</Button>
-            <h4>{kind}</h4>
-            이용권: {paidMembership2}/{paidMembership}
-            <br />
-            이용권 결제일: {date1}
-          </Col>
-        )
-      ) : (
-        <Col xs={12} sm={6}>
-          {/* <Button onClick={salesControl}>+기간권 기간 증가</Button>
-          <Button onClick={salesControl2}>-기간권 기간 차감</Button> */}
-          --------------기간권-------------------
-          <h4>{kind}</h4>
-          기간권: {salesDays}일 권
-          <br />
-          남은기간: D {endDays}
-          <br />
-          기간권 결제일: {date2}
-          <br />
-          기간권 마감일: {date3}
-        </Col>
-      )}
-      </Row>
+          <Row className='client-infomation__detail--membership'>
+            <Col xs={12} sm={8}>
+              <h4>{kind}</h4>
+              기간권: {salesDays}일 권
+              <br />
+              남은기간: D {endDays}
+              <br />
+              기간권 결제일: {date2}
+              <br />
+              기간권 마감일: {date3}
+            </Col>
+            <Col xs={12} sm={4}>
+              {/* <Button onClick={salesControl}>+기간권 기간 증가</Button>
+            <Button onClick={salesControl2}>-기간권 기간 차감</Button> */}
+            </Col>
+          </Row>
+        )}
+      </>
     );
   };
 
@@ -902,28 +965,35 @@ const ClientName = ({
 
     return (
       //paidMembership: 이용권, salesDays: 기간권
-      <div>
+      <>
         {/* paidMembership= true면 이용권 아니면 기간권 */}
         {paidMembership ? (
-          <p>
-            <h4>{kind}</h4>
-            이용권: {paidMembership2}/{paidMembership}
-            <br />
-            이용권 결제일: {date1}
-          </p>
+          <Row className='client-infomation__detail--membership'>
+            <Col xs={12}>
+              <h4>{kind}</h4>
+            </Col>
+            <Col xs={12} sm={8}>
+              <p>
+                이용권: {paidMembership2}/{paidMembership}
+              </p>
+              <p>이용권 결제일: {date1}</p>
+            </Col>
+          </Row>
         ) : (
-          <p>
-            <h4>{kind}</h4>
-            기간권: {salesDays}일 권
-            <br />
-            남은기간: D {endDays}
-            <br />
-            기간권 결제일: {date2}
-            <br />
-            기간권 마감일: {date3}
-          </p>
+          <Row className='client-infomation__detail--membership'>
+            <Col xs={12} sm={8}>
+              <h4>{kind}</h4>
+              기간권: {salesDays}일 권
+              <br />
+              남은기간: D {endDays}
+              <br />
+              기간권 결제일: {date2}
+              <br />
+              기간권 마감일: {date3}
+            </Col>
+          </Row>
         )}
-      </div>
+      </>
     );
   };
 
@@ -1061,7 +1131,7 @@ const ClientName = ({
               )}
             </Col>
 
-            <Col className='text-center mt-4'>
+            <Col className='text-center mt-4' xs={12}>
               {showUpdate ? (
                 loginWhether === 1 ? (
                   ''
@@ -1360,38 +1430,66 @@ const ViewClientItem = ({
     return (
       //paidMembership: 이용권, salesDays: 기간권
       //기간권 이용권 보다 보기좋게 구분
-      <Row>
+      <>
         {date3plus1 <= today ? (
           ''
         ) : paidMembership ? (
           paidMembership2 === 0 ? (
             ''
           ) : (
-            <Col xs={12} sm={6}>
-              <Button onClick={paidControl}>-이용권 차감</Button>
-              <Button onClick={paidControl2}>+이용권 증가</Button>
-              <h4>{kind}</h4>
-              이용권: {paidMembership2}/{paidMembership}
-              <br />
-              이용권 결제일: {date1}
-            </Col>
+            <Row className='client-infomation__detail--membership'>
+              <Col xs={12}>
+                <h4>{kind}</h4>
+              </Col>
+              <Col xs={12} sm={8}>
+                <p>
+                  이용권: {paidMembership2}/{paidMembership}
+                </p>
+                <p>이용권 결제일: {date1}</p>
+              </Col>
+              <Col xs={12} sm={4}>
+                <div className='text-end'>
+                  <Button
+                    variant='outline-danger'
+                    size='sm'
+                    onClick={paidControl}
+                  >
+                    <RemoveIcon />
+                    이용권 차감하기
+                  </Button>
+                </div>
+                <div className='text-end'>
+                  <Button
+                    variant='outline-success'
+                    size='sm'
+                    onClick={paidControl2}
+                  >
+                    <AddIcon />
+                    이용권 증가하기
+                  </Button>
+                </div>
+              </Col>
+            </Row>
           )
         ) : (
-          <Col xs={12} sm={6}>
-            {/* <Button onClick={salesControl}>+기간권 기간 증가</Button>
+          <Row className='client-infomation__detail--membership'>
+            <Col xs={12} sm={8}>
+              <h4>{kind}</h4>
+              기간권: {salesDays}일 권
+              <br />
+              남은기간: D {endDays}
+              <br />
+              기간권 결제일: {date2}
+              <br />
+              기간권 마감일: {date3}
+            </Col>
+            <Col xs={12} sm={4}>
+              {/* <Button onClick={salesControl}>+기간권 기간 증가</Button>
             <Button onClick={salesControl2}>-기간권 기간 차감</Button> */}
-            --------------기간권-------------------
-            <h4>{kind}</h4>
-            기간권: {salesDays}일 권
-            <br />
-            남은기간: D {endDays}
-            <br />
-            기간권 결제일: {date2}
-            <br />
-            기간권 마감일: {date3}
-          </Col>
+            </Col>
+          </Row>
         )}
-      </Row>
+      </>
     );
   };
 
@@ -1435,28 +1533,35 @@ const ViewClientItem = ({
 
     return (
       //paidMembership: 이용권, salesDays: 기간권
-      <div>
+      <>
         {/* paidMembership= true면 이용권 아니면 기간권 */}
         {paidMembership ? (
-          <p>
-            <h4>{kind}</h4>
-            이용권: {paidMembership2}/{paidMembership}
-            <br />
-            이용권 결제일: {date1}
-          </p>
+          <Row className='client-infomation__detail--membership'>
+            <Col xs={12}>
+              <h4>{kind}</h4>
+            </Col>
+            <Col xs={12} sm={8}>
+              <p>
+                이용권: {paidMembership2}/{paidMembership}
+              </p>
+              <p>이용권 결제일: {date1}</p>
+            </Col>
+          </Row>
         ) : (
-          <p>
-            <h4>{kind}</h4>
-            기간권: {salesDays}일 권
-            <br />
-            남은기간: D {endDays}
-            <br />
-            기간권 결제일: {date2}
-            <br />
-            기간권 마감일: {date3}
-          </p>
+          <Row className='client-infomation__detail--membership'>
+            <Col xs={12} sm={8}>
+              <h4>{kind}</h4>
+              기간권: {salesDays}일 권
+              <br />
+              남은기간: D {endDays}
+              <br />
+              기간권 결제일: {date2}
+              <br />
+              기간권 마감일: {date3}
+            </Col>
+          </Row>
         )}
-      </div>
+      </>
     );
   };
 
@@ -1481,7 +1586,7 @@ const ViewClientItem = ({
   };
 
   return (
-    // 회원 페이지 
+    // 회원 페이지
     <TableRow>
       <TableCell onClick={modalOnClick}>{client_name}</TableCell>
       <TableCell onClick={modalOnClick}>{phone}</TableCell>
@@ -1503,8 +1608,12 @@ const ViewClientItem = ({
               <CloseIcon />
             </Button>
           ) : (
-            <Button className='border-0' onClick={modalClose} variant='outline-light'>
-              <CloseIcon fontSize="large" />
+            <Button
+              className='border-0'
+              onClick={modalClose}
+              variant='outline-light'
+            >
+              <CloseIcon fontSize='large' />
             </Button>
           )}
         </Modal.Header>
@@ -1589,17 +1698,23 @@ const ViewClientItem = ({
                 <p>{sportswear}</p>
               )}
             </Col>
-            <Row>
-              <Col sm={9}>
-                <h4>현재 사용중인 이용권</h4>
-              </Col>
-              <Col sm={3}>
-                <Button className='w-100 border-0' variant='outline-primary' onClick={viewModalOnclick}>+ 지난 이용권 더보기</Button>
-              </Col>
-              <Col xs={12}>
-                <div>{voucher}</div>
-              </Col>
-              <Col xs={12}>
+            <div>
+              <Row>
+                <Col sm={9}>
+                  <h4>현재 사용중인 이용권</h4>
+                </Col>
+                <Col sm={3}>
+                  <Button
+                    className='w-100 border-0'
+                    variant='outline-primary'
+                    onClick={viewModalOnclick}
+                  >
+                    + 지난 이용권 더보기
+                  </Button>
+                </Col>
+              </Row>
+              <div>{voucher}</div>
+              <div>
                 {/* 이용권&기간권 더보기 Modal */}
                 <Modal
                   className='client_modal'
@@ -1607,13 +1722,13 @@ const ViewClientItem = ({
                   onHide={viewModalClose}
                 >
                   <Modal.Header>
-                    <Modal.Title>이용권&기간권 더보기</Modal.Title>
+                    <Modal.Title>이용권&amp;기간권 더보기</Modal.Title>
                   </Modal.Header>
                   <Modal.Body className='mw-100'>{voucher2}</Modal.Body>
                 </Modal>
-              </Col>
-            </Row>
-            <Col className='text-center mt-4'>
+              </div>
+            </div>
+            <div className='text-center mt-4'>
               {showUpdate ? (
                 loginWhether === 1 ? (
                   ''
@@ -1642,7 +1757,7 @@ const ViewClientItem = ({
               ) : (
                 ''
               )}
-            </Col>
+            </div>
           </Row>
         </Modal.Body>
         <Modal.Footer>
