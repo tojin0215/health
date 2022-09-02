@@ -1327,20 +1327,16 @@ class ReservationClass extends Component {
               </label>
             </Col>
             <Col className='text-center height-fit-content' xs={12} sm={4}>
-              <label className='d-block w-100'>
-                <DatePicker
-                  className='boxmorpsm text-center w-100 border-0'
-                  selected={this.state.class_date}
-                  onChange={(date) => this.setState({ class_date: date })}
-                  name='class_date'
-                  dateFormat='yyyy-MM-dd(eee)'
-                  font-size='1.6rem'
-                  // locale 오류로 임시 삭제
-                  // locale='ko'
-                  error={this.state.class_date_err}
-                  minDate={new Date()}
-                />
-              </label>
+              <DatePicker
+                className='boxmorpsm text-center w-100 border-0'
+                selected={this.state.class_date}
+                onChange={(date) => this.setState({ class_date: date })}
+                name='class_date'
+                dateFormat='yyyy년MM월dd일'
+                font-size='1.6rem'
+                error={this.state.class_date_err}
+                minDate={new Date()}
+              />
             </Col>
             <Col className=' px-1' xs={12} sm={2} lg={2}>
               <Row className=''>
