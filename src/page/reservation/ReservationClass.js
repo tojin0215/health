@@ -1392,7 +1392,7 @@ class ReservationClass extends Component {
                 />
               </label>
             </Col>
-            <Col xs={12} lg={12} className='text-center'>
+            <Col xs={12} className='text-center'>
               <Button className='my-4 px-5' onClick={this.handleOnClick}>
                 수업 만들기
               </Button>

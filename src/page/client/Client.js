@@ -1837,7 +1837,7 @@ class Client extends Component {
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/client'>고객</Link>
+                <Link to='/client'>회원</Link>
               </div>
               {/*.breadCrumb */}
             </div>
@@ -1848,7 +1848,7 @@ class Client extends Component {
         <Container>
           <h3>회원 목록</h3>
           <div>
-            <Row>
+            <Row className='my-2'>
               <Col>
                 <Dropdown
                   className='searchDrop'
