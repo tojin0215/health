@@ -47,6 +47,10 @@ import { TablePagination } from '@mui/material';
 
 // react icons
 import { TbMoodSuprised } from 'react-icons/tb';
+// MUI icons
+import CloseIcon from '@mui/icons-material/Close';
+
+
 const options = ['이름', '핸드폰'];
 
 const ClientPhone = ({
@@ -291,24 +295,24 @@ const ClientPhone = ({
     return (
       //paidMembership: 이용권, salesDays: 기간권
       //기간권 이용권 보다 보기좋게 구분
-      <div>
+      <Row>
         {date3plus1 <= today ? (
           ''
         ) : paidMembership ? (
           paidMembership2 === 0 ? (
             ''
           ) : (
-            <p>
+            <Col xs={12} sm={6}>
               <Button onClick={paidControl}>-이용권 차감</Button>
               <Button onClick={paidControl2}>+이용권 증가</Button>
               <h4>{kind}</h4>
               이용권: {paidMembership2}/{paidMembership}
               <br />
               이용권 결제일: {date1}
-            </p>
+            </Col>
           )
         ) : (
-          <p>
+          <Col xs={12} sm={6}>
             {/* <Button onClick={salesControl}>+기간권 기간 증가</Button>
             <Button onClick={salesControl2}>-기간권 기간 차감</Button> */}
             --------------기간권-------------------
@@ -320,9 +324,9 @@ const ClientPhone = ({
             기간권 결제일: {date2}
             <br />
             기간권 마감일: {date3}
-          </p>
+          </Col>
         )}
-      </div>
+      </Row>
     );
   };
 
@@ -823,38 +827,38 @@ const ClientName = ({
     return (
       //paidMembership: 이용권, salesDays: 기간권
       //기간권 이용권 보다 보기좋게 구분
-      <div>
-        {date3plus1 <= today ? (
+      <Row>
+      {date3plus1 <= today ? (
+        ''
+      ) : paidMembership ? (
+        paidMembership2 === 0 ? (
           ''
-        ) : paidMembership ? (
-          paidMembership2 === 0 ? (
-            ''
-          ) : (
-            <p>
-              <Button onClick={paidControl}>-이용권 차감</Button>
-              <Button onClick={paidControl2}>+이용권 증가</Button>
-              <h4>{kind}</h4>
-              이용권: {paidMembership2}/{paidMembership}
-              <br />
-              이용권 결제일: {date1}
-            </p>
-          )
         ) : (
-          <p>
-            {/* <Button onClick={salesControl}>+기간권 기간 증가</Button>
-            <Button onClick={salesControl2}>-기간권 기간 차감</Button> */}
-            --------------기간권-------------------
+          <Col xs={12} sm={6}>
+            <Button onClick={paidControl}>-이용권 차감</Button>
+            <Button onClick={paidControl2}>+이용권 증가</Button>
             <h4>{kind}</h4>
-            기간권: {salesDays}일 권
+            이용권: {paidMembership2}/{paidMembership}
             <br />
-            남은기간: D {endDays}
-            <br />
-            기간권 결제일: {date2}
-            <br />
-            기간권 마감일: {date3}
-          </p>
-        )}
-      </div>
+            이용권 결제일: {date1}
+          </Col>
+        )
+      ) : (
+        <Col xs={12} sm={6}>
+          {/* <Button onClick={salesControl}>+기간권 기간 증가</Button>
+          <Button onClick={salesControl2}>-기간권 기간 차감</Button> */}
+          --------------기간권-------------------
+          <h4>{kind}</h4>
+          기간권: {salesDays}일 권
+          <br />
+          남은기간: D {endDays}
+          <br />
+          기간권 결제일: {date2}
+          <br />
+          기간권 마감일: {date3}
+        </Col>
+      )}
+      </Row>
     );
   };
 
@@ -1356,24 +1360,24 @@ const ViewClientItem = ({
     return (
       //paidMembership: 이용권, salesDays: 기간권
       //기간권 이용권 보다 보기좋게 구분
-      <div>
+      <Row>
         {date3plus1 <= today ? (
           ''
         ) : paidMembership ? (
           paidMembership2 === 0 ? (
             ''
           ) : (
-            <p>
+            <Col xs={12} sm={6}>
               <Button onClick={paidControl}>-이용권 차감</Button>
               <Button onClick={paidControl2}>+이용권 증가</Button>
               <h4>{kind}</h4>
               이용권: {paidMembership2}/{paidMembership}
               <br />
               이용권 결제일: {date1}
-            </p>
+            </Col>
           )
         ) : (
-          <p>
+          <Col xs={12} sm={6}>
             {/* <Button onClick={salesControl}>+기간권 기간 증가</Button>
             <Button onClick={salesControl2}>-기간권 기간 차감</Button> */}
             --------------기간권-------------------
@@ -1385,9 +1389,9 @@ const ViewClientItem = ({
             기간권 결제일: {date2}
             <br />
             기간권 마감일: {date3}
-          </p>
+          </Col>
         )}
-      </div>
+      </Row>
     );
   };
 
@@ -1477,6 +1481,7 @@ const ViewClientItem = ({
   };
 
   return (
+    // 회원 페이지 
     <TableRow>
       <TableCell onClick={modalOnClick}>{client_name}</TableCell>
       <TableCell onClick={modalOnClick}>{phone}</TableCell>
@@ -1493,6 +1498,15 @@ const ViewClientItem = ({
       >
         <Modal.Header>
           <Modal.Title>회원 상세 정보</Modal.Title>
+          {showUpdate ? (
+            <Button onClick={modalClose} variant='outline-light'>
+              <CloseIcon />
+            </Button>
+          ) : (
+            <Button className='border-0' onClick={modalClose} variant='outline-light'>
+              <CloseIcon fontSize="large" />
+            </Button>
+          )}
         </Modal.Header>
         <Modal.Body className='mw-100'>
           <div>
@@ -1510,20 +1524,6 @@ const ViewClientItem = ({
                 <p>{client_name}</p>
               )}
             </Col>
-            <h3>현재 사용중인 이용권</h3>
-            <div>{voucher}</div>
-            <Button onClick={viewModalOnclick}>이용권&기간권 더보기</Button>
-            {/* 이용권&기간권 더보기 Modal */}
-            <Modal
-              className='client_modal'
-              show={viewModal}
-              onHide={viewModalClose}
-            >
-              <Modal.Header>
-                <Modal.Title>이용권&기간권 더보기</Modal.Title>
-              </Modal.Header>
-              <Modal.Body className='mw-100'>{voucher2}</Modal.Body>
-            </Modal>
             <Col xs={6} md={4} className='mb-2'>
               <h5 className='mb-1'>생년월일</h5>
               <p>{birth}</p>
@@ -1589,7 +1589,30 @@ const ViewClientItem = ({
                 <p>{sportswear}</p>
               )}
             </Col>
-
+            <Row>
+              <Col sm={9}>
+                <h4>현재 사용중인 이용권</h4>
+              </Col>
+              <Col sm={3}>
+                <Button className='w-100 border-0' variant='outline-primary' onClick={viewModalOnclick}>+ 지난 이용권 더보기</Button>
+              </Col>
+              <Col xs={12}>
+                <div>{voucher}</div>
+              </Col>
+              <Col xs={12}>
+                {/* 이용권&기간권 더보기 Modal */}
+                <Modal
+                  className='client_modal'
+                  show={viewModal}
+                  onHide={viewModalClose}
+                >
+                  <Modal.Header>
+                    <Modal.Title>이용권&기간권 더보기</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body className='mw-100'>{voucher2}</Modal.Body>
+                </Modal>
+              </Col>
+            </Row>
             <Col className='text-center mt-4'>
               {showUpdate ? (
                 loginWhether === 1 ? (
@@ -1630,15 +1653,6 @@ const ViewClientItem = ({
           ) : (
             <Button onClick={modalUpdate} variant='primary'>
               정보 수정
-            </Button>
-          )}
-          {showUpdate ? (
-            <Button onClick={modalClose} variant='outline-light'>
-              닫기
-            </Button>
-          ) : (
-            <Button onClick={modalClose} variant='secondary'>
-              닫기
             </Button>
           )}
         </Modal.Footer>
