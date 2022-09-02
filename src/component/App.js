@@ -30,6 +30,7 @@ import {
   Inbodies,
   WorkoutAlloted,
   WorkoutAllotedList,
+  WorkoutAllotedList2,
   WorkoutAdd,
   WorkoutStage,
   WorkoutStageAdd,
@@ -76,6 +77,11 @@ class App extends Component {
           exact
           path='/workoutAllotedList'
           component={WorkoutAllotedList}
+        />
+        <Route
+          exact
+          path='/workoutAllotedList2'
+          component={WorkoutAllotedList2}
         />
         <Route exact path='/workoutAdd' component={WorkoutAdd} />
         <Route exact path='/workoutStage' component={WorkoutStage} />

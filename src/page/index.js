@@ -28,6 +28,7 @@ export { default as ChoiceLogin } from './login/ChoiceLogin';
 export { default as Inbodies } from './exercise/Inbodies';
 export { default as WorkoutAlloted } from './workout/WorkoutAlloted';
 export { default as WorkoutAllotedList } from './workout/WorkoutAllotedList';
+export { default as WorkoutAllotedList2 } from './workout/WorkoutAllotedList2';
 export { default as WorkoutAdd } from './workout/WorkoutAdd';
 export { default as WorkoutStage } from './workout/WorkoutStage';
 export { default as WorkoutStageAdd } from './workout/WorkoutStageAdd';

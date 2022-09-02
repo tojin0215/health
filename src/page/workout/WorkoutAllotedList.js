@@ -288,6 +288,7 @@ class WorkoutAllotedList extends Component {
   };
   render() {
     //line은 들어오는 경로 표시 1,2,3을 보내서 받으면 어떻게 되라하는 것
+    //검색이 있는 운동배정된목록
     // console.log(this.state.client_name2);
     // console.log(this.props.userinfo.manager_name);
     // console.log(this.props.userinfo.loginWhether);
