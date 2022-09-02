@@ -25,6 +25,7 @@
   color: rgb(255, 255, 255);
 }
 .menu {
+  display: none;
   background-color: #333;
   box-shadow: 0 6px 7px rgba(30, 30, 30, 0.5);
   width: 100%;
@@ -225,4 +226,26 @@
   margin: 2rem;
   padding: 0.4rem 2rem;
   background-color: orangered;
+}
+
+/*
+* 신 메뉴 작업 
+*/
+.menu .logo a {
+  font-size: 20px;
+}
+.menu .MuiButtonBase-root {
+  position: absolute;
+  right: 10px;
+}
+.menu .MuiSvgIcon-root {
+  width: 40px;
+  height: 40px;
+  color: #fff;
+}
+
+@media screen and (max-width: 1023px) {
+  .menu {
+    display: block;
+  }
 }

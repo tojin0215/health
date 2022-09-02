@@ -229,7 +229,6 @@ class Home extends Component {
           ) : (
             ''
           )}
-
           <Container className='home__main-visual--content'>
             <div className='home__main-visual--logo'>
               <p>새로워진 피트니스 센터 관리</p>
@@ -391,7 +390,7 @@ class Home extends Component {
               개개인의 맞춤형 운동정보, 매출관리까지 한 번에 관리할 수 있습니다.
             </p>
             <Row xs={1} md={3}>
-              <Col xs={4}>
+              <Col xs={12} sm={4}>
                 <div className='home__mission--contents'>
                   <div className='home__mission--img-box'>
                     <Image
@@ -408,7 +407,7 @@ class Home extends Component {
                   </div>
                 </div>
               </Col>
-              <Col xs={4}>
+              <Col xs={12} sm={4}>
                 {/* misson */}
                 <div className='home__mission--contents'>
                   <div className='home__mission--img-box'>
@@ -426,7 +425,7 @@ class Home extends Component {
                   </div>
                 </div>
               </Col>
-              <Col xs={4}>
+              <Col xs={12} sm={4}>
                 <div className='home__mission--contents'>
                   <div className='home__mission--img-box'>
                     <Image
