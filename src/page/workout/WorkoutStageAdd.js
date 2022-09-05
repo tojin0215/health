@@ -670,19 +670,26 @@ class WorkoutStageAdd extends Component {
                     5 단계
                   </Button>
                 </Col>
-              </Row>
-              <Row className='my-2'>
-                <Col className='text-start'>
-                  <Button
-                    variant='outline-danger'
-                    to={{
-                      pathname: '/workoutStage',
-                    }}
-                    onClick={() => this.setState({ nextStage2: '' })}
-                  >
-                    돌아가기
-                  </Button>
-                </Col>
+                <Row className='my-2'>
+                  <Col className='text-start'>
+                    <Button
+                      variant='outline-danger'
+                      to={{
+                        pathname: '/workoutStage',
+                      }}
+                      onClick={() => this.setState({ nextStage2: '' })}
+                    >
+                      돌아가기
+                    </Button>
+                  </Col>
+                </Row>
+                <Row className='my-2'>
+                  <Col className='text-start'>
+                    <Button onClick={() => this.workoutStageDelete()}>
+                      초기화
+                    </Button>
+                  </Col>
+                </Row>
               </Row>
 
               <h3>
@@ -802,19 +809,26 @@ class WorkoutStageAdd extends Component {
                     5 단계
                   </Button>
                 </Col>
-              </Row>
-              <Row className='my-2'>
-                <Col className='text-start'>
-                  <Button
-                    variant='outline-danger'
-                    to={{
-                      pathname: '/workoutStage',
-                    }}
-                    onClick={() => this.setState({ nextStage3: '' })}
-                  >
-                    돌아가기
-                  </Button>
-                </Col>
+                <Row className='my-2'>
+                  <Col className='text-start'>
+                    <Button
+                      variant='outline-danger'
+                      to={{
+                        pathname: '/workoutStage',
+                      }}
+                      onClick={() => this.setState({ nextStage3: '' })}
+                    >
+                      돌아가기
+                    </Button>
+                  </Col>
+                </Row>
+                <Row className='my-2'>
+                  <Col className='text-start'>
+                    <Button onClick={() => this.workoutStageDelete()}>
+                      초기화
+                    </Button>
+                  </Col>
+                </Row>
               </Row>
               <h3>
                 전신
@@ -933,19 +947,26 @@ class WorkoutStageAdd extends Component {
                     5 단계
                   </Button>
                 </Col>
-              </Row>
-              <Row className='my-2'>
-                <Col className='text-start'>
-                  <Button
-                    variant='outline-danger'
-                    to={{
-                      pathname: '/workoutStage',
-                    }}
-                    onClick={() => this.setState({ nextStage4: '' })}
-                  >
-                    돌아가기
-                  </Button>
-                </Col>
+                <Row className='my-2'>
+                  <Col className='text-start'>
+                    <Button
+                      variant='outline-danger'
+                      to={{
+                        pathname: '/workoutStage',
+                      }}
+                      onClick={() => this.setState({ nextStage4: '' })}
+                    >
+                      돌아가기
+                    </Button>
+                  </Col>
+                </Row>
+                <Row className='my-2'>
+                  <Col className='text-start'>
+                    <Button onClick={() => this.workoutStageDelete()}>
+                      초기화
+                    </Button>
+                  </Col>
+                </Row>
               </Row>
               <h3>
                 코어{' '}
@@ -1064,19 +1085,26 @@ class WorkoutStageAdd extends Component {
                     5 단계
                   </Button>
                 </Col>
-              </Row>
-              <Row className='my-2'>
-                <Col className='text-start'>
-                  <Button
-                    variant='outline-danger'
-                    to={{
-                      pathname: '/workoutStage',
-                    }}
-                    onClick={() => this.setState({ nextStage5: '' })}
-                  >
-                    돌아가기
-                  </Button>
-                </Col>
+                <Row className='my-2'>
+                  <Col className='text-start'>
+                    <Button
+                      variant='outline-danger'
+                      to={{
+                        pathname: '/workoutStage',
+                      }}
+                      onClick={() => this.setState({ nextStage5: '' })}
+                    >
+                      돌아가기
+                    </Button>
+                  </Col>
+                </Row>
+                <Row className='my-2'>
+                  <Col className='text-start'>
+                    <Button onClick={() => this.workoutStageDelete()}>
+                      초기화
+                    </Button>
+                  </Col>
+                </Row>
               </Row>
               <h3>
                 유산소{' '}
@@ -1195,6 +1223,26 @@ class WorkoutStageAdd extends Component {
                     5 단계
                   </Button>
                 </Col>
+                <Row className='my-2'>
+                  <Col className='text-start'>
+                    <Button
+                      variant='outline-danger'
+                      to={{
+                        pathname: '/workoutStage',
+                      }}
+                      onClick={() => this.setState({ nextStage6: '' })}
+                    >
+                      돌아가기
+                    </Button>
+                  </Col>
+                </Row>
+                <Row className='my-2'>
+                  <Col className='text-start'>
+                    <Button onClick={() => this.workoutStageDelete()}>
+                      초기화
+                    </Button>
+                  </Col>
+                </Row>
               </Row>
               <h3>
                 기타{' '}
@@ -1213,19 +1261,6 @@ class WorkoutStageAdd extends Component {
                 )}{' '}
                 운동 묶음 확인
               </h3>
-              <Row className='my-2'>
-                <Col className='text-start'>
-                  <Button
-                    variant='outline-danger'
-                    to={{
-                      pathname: '/workoutStage',
-                    }}
-                    onClick={() => this.setState({ nextStage6: '' })}
-                  >
-                    돌아가기
-                  </Button>
-                </Col>
-              </Row>
               <Col xs={12}>
                 {/* 기타 */}
                 <TableContainer component={Paper}>
