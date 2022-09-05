@@ -462,7 +462,7 @@ class WorkoutStage extends Component {
                 onChange={(date) => this.setState({ workoutA_date: date })}
                 dateFormat='yyyy년MM월dd일'
                 font-size='1.6rem'
-                minDate={new Date()}
+                // minDate={new Date()}
               />
             </Col>
           ) : (
