@@ -606,6 +606,19 @@ export const workoutStageSelect = (fitness_no, stage) => {
     .then((response) => response.data);
 };
 
+// workoutStage delete
+export const workoutDestroy = (ids) => {
+  return axios.delete(`${SERVER_URL}/workoutStage?ids=` + ids, {});
+};
+
+// workoutStage stage delete
+export const workoutStageDestroy = (stage) => {
+  return axios.delete(
+    `${SERVER_URL}/workoutStage?type=stage&stage=` + stage,
+    {}
+  );
+};
+
 //workoutStage insert
 export const workoutStageInsert = (
   stage,
