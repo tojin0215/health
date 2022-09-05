@@ -1,8 +1,10 @@
 import Menu from '../../component/navigation/Menu';
 import { Component } from 'react';
+import DatePicker from 'react-datepicker';
 import { Button, Row, Col, Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import { getStatusRequest } from '../../action/authentication';
 import {
   selectTrainerReservation,
@@ -161,6 +163,7 @@ class WorkoutStage extends Component {
       nextStage6: false,
       rowsPerPage: 5,
       page: 0,
+      workoutA_date: new Date(),
     };
   }
   goLogin = () => {
@@ -307,7 +310,8 @@ class WorkoutStage extends Component {
             this.state.default_set,
             this.state.default_count,
             this.state.default_rest,
-            this.state.url
+            this.state.url,
+            moment(this.state.workoutA_date).format('YYYY-MM-DD')
           ).then((res) => {
             // console.log(this.state.workout);
             this.props.history.push({
@@ -316,6 +320,7 @@ class WorkoutStage extends Component {
                 client_name2: this.state.client_name,
                 idc2: this.state.idc,
                 line: 3,
+                workoutB_date: this.state.workoutA_date,
               },
             });
           });
@@ -447,6 +452,21 @@ class WorkoutStage extends Component {
               InputProps={{ disableUnderline: true }}
               value={this.state.client_name}
             />
+          )}
+
+          {this.state.client_name ? (
+            <Col className='text-center height-fit-content' xs={12} sm={4}>
+              <DatePicker
+                className='boxmorpsm text-center w-100 border-0'
+                selected={this.state.workoutA_date}
+                onChange={(date) => this.setState({ workoutA_date: date })}
+                dateFormat='yyyy년MM월dd일'
+                font-size='1.6rem'
+                minDate={new Date()}
+              />
+            </Col>
+          ) : (
+            ''
           )}
 
           {this.state.nextStage1 && this.state.stage === 111 ? (

@@ -532,13 +532,15 @@ export const workoutDelete = (idw) => {
 };
 
 //workoutAlloted select
-export const workoutAllotedSelect = (fitness_no, client_no) => {
+export const workoutAllotedSelect = (fitness_no, client_no, workoutA_date) => {
   return axios
     .get(
       `${SERVER_URL}/workoutAlloted?fitness_no=` +
         fitness_no +
         `&client_no=` +
-        client_no
+        client_no +
+        `&workoutA_date=` +
+        workoutA_date
     )
     .then((response) => response.data);
 };
@@ -553,7 +555,8 @@ export const workoutAllotedInsert = (
   default_set,
   default_count,
   default_rest,
-  url
+  url,
+  workoutA_date
 ) => {
   return axios.post(`${SERVER_URL}/workoutAlloted`, {
     fitness_no: fitness_no,
@@ -565,6 +568,7 @@ export const workoutAllotedInsert = (
     default_count: default_count,
     default_rest: default_rest,
     url: url,
+    workoutA_date: workoutA_date,
   });
 };
 
@@ -600,6 +604,19 @@ export const workoutStageSelect = (fitness_no, stage) => {
       params: { fitness_no: fitness_no, stage: stage },
     })
     .then((response) => response.data);
+};
+
+// workoutStage delete
+export const workoutDestroy = (ids) => {
+  return axios.delete(`${SERVER_URL}/workoutStage?ids=` + ids, {});
+};
+
+// workoutStage stage delete
+export const workoutStageDestroy = (stage) => {
+  return axios.delete(
+    `${SERVER_URL}/workoutStage?type=stage&stage=` + stage,
+    {}
+  );
 };
 
 //workoutStage insert

@@ -66,7 +66,9 @@ class AddSales extends Component {
       member_no: '',
       //isChecked:false,
       paymentDate: new Date(),
-      client_name: '회원',
+      client_name: !this.props.location.state
+        ? '회원'
+        : this.props.location.state.client_name,
       inputExercise: '',
       exercisePrice: 0,
       //locker:0,
@@ -335,7 +337,8 @@ class AddSales extends Component {
     const { userinfo } = this.props;
     // console.log(userinfo);
     // console.log(this.state.paymentTools);
-
+    // console.log(this.props.location.state.client_name);
+    console.log(this.state.client_name);
     return (
       <div className='wrap addSales'>
         <div className='header'>
@@ -503,10 +506,8 @@ class AddSales extends Component {
                     selected={this.state.salesStart_date}
                     onChange={this.handleDateChange}
                     name='salesStart_date'
-                    dateFormat='yyyy-MM-dd'
+                    dateFormat='yyyy년MM월dd일'
                     font-size='1.6rem'
-                    // locale 오류로 임시 삭제
-                    // locale='ko'
                   />
                   {/* <DatePicker
 										selected={this.state.paymentDate}
@@ -652,18 +653,14 @@ class AddSales extends Component {
             <h3>결제</h3>
             <div className='mb-4'>
               <Row xs={1}>
-                <Col>
-                  <label>
-                    <span>결제일</span>
-                    <DatePicker
-                      selected={this.state.paymentDate}
-                      onChange={this.handleDateChange}
-                      name='paymentDate'
-                      dateFormat='yyyy-MM-dd'
-                      // locale 오류로 임시 삭제
-                      // locale='ko'
-                    />
-                  </label>
+                <Col xs={3}>
+                  <span>결제일</span>
+                  <DatePicker
+                    selected={this.state.paymentDate}
+                    onChange={this.handleDateChange}
+                    name='paymentDate'
+                    dateFormat='yyyy년MM월dd일'
+                  />
                 </Col>
                 <Col>
                   <label>

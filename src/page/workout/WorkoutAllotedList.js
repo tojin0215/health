@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
@@ -104,6 +106,8 @@ class WorkoutAllotedList extends Component {
       line: this.props.location.state.line,
       rowsPerPage: 5,
       page: 0,
+      workoutA_date: new Date(),
+      workoutB_date: this.props.location.state.workoutB_date,
     };
     //여기 function
   }
@@ -242,7 +246,13 @@ class WorkoutAllotedList extends Component {
             : this.props.userinfo.loginWhether === 1
             ? trainerResult[0].fitness_no
             : this.props.userinfo.fitness_no;
-        workoutAllotedSelect(fitness_no, idc).then((result) => {
+        workoutAllotedSelect(
+          fitness_no,
+          this.state.line === 3 ? this.state.idc2 : idc,
+          this.state.line === 3
+            ? moment(this.state.workoutB_date).format('YYYY-MM-DD')
+            : moment(this.state.workoutA_date).format('YYYY-MM-DD')
+        ).then((result) => {
           const items = result.map((data, index, array) => {
             return (
               <WorkoutAllotedView
@@ -272,9 +282,13 @@ class WorkoutAllotedList extends Component {
   handleChangePage = (e, newPage) => {
     this.setState({ page: newPage });
   };
-
+  dateOnChange = (date) => {
+    this.setState({ workoutA_date: date, workoutB_date: date });
+    this.workoutAllotedView(this.state.idc);
+  };
   render() {
     //line은 들어오는 경로 표시 1,2,3을 보내서 받으면 어떻게 되라하는 것
+    //검색이 있는 운동배정된목록
     // console.log(this.state.client_name2);
     // console.log(this.props.userinfo.manager_name);
     // console.log(this.props.userinfo.loginWhether);
@@ -343,10 +357,36 @@ class WorkoutAllotedList extends Component {
           )}
           {this.state.client_name || this.state.client_name2 ? (
             <div>
+              {this.state.line === 3 ? (
+                <Col className='text-center height-fit-content' xs={12} sm={4}>
+                  <DatePicker
+                    className='boxmorpsm text-center w-100 border-0'
+                    selected={this.state.workoutB_date}
+                    onChange={(date) => this.dateOnChange(date)}
+                    dateFormat='yyyy년MM월dd일'
+                    font-size='1.6rem'
+                    //  minDate={new Date()}
+                  />
+                </Col>
+              ) : (
+                <Col className='text-center height-fit-content' xs={12} sm={4}>
+                  <DatePicker
+                    className='boxmorpsm text-center w-100 border-0'
+                    selected={this.state.workoutA_date}
+                    onChange={(date) => this.dateOnChange(date)}
+                    dateFormat='yyyy년MM월dd일'
+                    font-size='1.6rem'
+                    minDate={new Date()}
+                  />
+                </Col>
+              )}
+
               <div className='mt-4 sectionGlass'>
                 <h3>
-                  {this.state.client_name}
-                  <span className='fs-4'>님</span>
+                  {this.state.line === 3
+                    ? this.state.client_name2
+                    : this.state.client_name}
+                  <span className='fs-4'>님의 인바디정보</span>
                 </h3>
                 {this.state.inbodiesList[0] ? (
                   this.state.inbodiesList[0]
@@ -358,12 +398,30 @@ class WorkoutAllotedList extends Component {
                 )}
               </div>
               <Row className='sectionGlass'>
-                <h3>
-                  <span className='text-primary'>
-                    {this.state.client_name || this.state.client_name2}
-                  </span>
-                  님의 운동 배정 목록
-                </h3>
+                {this.state.line === 3 ? (
+                  <h3>
+                    <span className='text-primary'>
+                      {this.state.client_name2}
+                    </span>
+                    님의{' '}
+                    {moment(this.state.workoutB_date).format(
+                      'YYYY년 MM월 DD일'
+                    )}
+                    운동 배정 목록
+                  </h3>
+                ) : (
+                  <h3>
+                    <span className='text-primary'>
+                      {this.state.client_name}
+                    </span>
+                    님의
+                    {moment(this.state.workoutA_date).format(
+                      'YYYY년 MM월 DD일'
+                    )}
+                    운동 배정 목록
+                  </h3>
+                )}
+
                 <TableContainer component={Paper}>
                   <Table>
                     <TableHead>

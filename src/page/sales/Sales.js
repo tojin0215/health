@@ -766,7 +766,7 @@ class Sales extends Component {
             <Col xs={3}>
               <DatePicker
                 className='sales__calender--dateinput w-100 text-center'
-                dateFormat='yyyy/MM/dd(eee)'
+                dateFormat='yyyy년MM월dd일'
                 selected={this.state.today}
                 onChange={(date) => this.setState({ today: date })}
               />
@@ -774,7 +774,7 @@ class Sales extends Component {
             <Col xs={3}>
               <DatePicker
                 className='sales__calender--dateinput w-100 text-center'
-                dateFormat='yyyy/MM/dd(eee)'
+                dateFormat='yyyy년MM월dd일'
                 selected={this.state.tommorrow}
                 onChange={(date) => this.setState({ tommorrow: date })}
                 minDate={this.state.today}

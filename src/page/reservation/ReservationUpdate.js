@@ -185,10 +185,8 @@ const ReservationItem = ({
             seleted={date_input}
             id='date'
             onChange={handleChangeDate}
-            dateFormat='yyyy-MM-dd(eee)'
+            dateFormat='yyyy년MM월dd일'
             font-size='1.6rem'
-            // locale 오류로 임시 삭제
-            // locale='ko'
           />
         </td>
       ) : (

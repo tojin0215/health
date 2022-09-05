@@ -106,7 +106,9 @@ class AddClient extends Component {
     } else if (this.state.birth === '') {
       alert('생년월일을 입력해주세요.');
     } else if (!pCheck2.test(this.state.birth)) {
-      alert('생년월일은 8자리 번호만, 특수문자 사용불가(-포함)');
+      alert(
+        '생년월일은 8자리 번호만, 특수문자 사용불가(-포함), 비밀번호는 월일입니다.'
+      );
     } else if (this.state.address === '') {
       alert('주소를 입력해주세요.');
     } else {
@@ -152,12 +154,18 @@ class AddClient extends Component {
                 clientManager(
                   this.state.phone,
                   this.props.userinfo.fitness_name,
-                  this.state.birth,
+                  this.state.birth.slice(4),
+                  //생년월일 중 월일 4자리만 입력
                   this.state.client_name,
                   items[0].idc
                 ).then((res) => {});
-                alert(this.state.client_name + '님이 가입되었습니다.');
-                this.props.history.push('/client');
+                confirm(
+                  this.state.client_name +
+                    '님이 가입되었습니다. 바로 매출등록하시겠습니까?'
+                ) == true
+                  ? this.AddSalesPush()
+                  : alert('매출 등록을 안했습니다.'),
+                  this.props.history.push('/client');
               });
             });
           } else {
@@ -174,6 +182,16 @@ class AddClient extends Component {
       );
     }
   };
+
+  AddSalesPush = () => {
+    this.props.history.push({
+      pathname: '/addSales',
+      state: {
+        client_name: this.state.client_name,
+      },
+    });
+  };
+
   handleRadio = (s) => {
     let obj = {
       male: false,
@@ -216,6 +234,8 @@ class AddClient extends Component {
   };
 
   render() {
+    // console.log(this.state.client_name);
+    // console.log(this.state.birth.slice(4));
     return (
       <div className='wrap'>
         {' '}

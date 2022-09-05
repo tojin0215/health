@@ -51,7 +51,7 @@
     "react-checkbox-group": "^5.0.2",
     "react-confirm-alert": "^2.7.0",
     "react-data-table-component": "^7.4.7",
-    "react-datepicker": "3.8.0",
+    "react-datepicker": "4.8.0",
     "react-dom": "^17.0.1",
     "react-dropdown": "^1.9.2",
     "react-google-charts": "^3.0.15",
@@ -88,7 +88,7 @@
     "lint:fix": "eslint --fix ./src",
     "preinstall": "npx force-resolutions"
   },
-  "proxy": "http://13.124.141.28:3002/",
+  "proxy": "http://localhost:3002",
   "browserslist": {
     "production": [
       ">0.2%",

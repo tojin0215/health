@@ -1321,6 +1321,7 @@ class ReservationClass extends Component {
                 />
               </label>
             </Col>
+<<<<<<< HEAD
             <Col className='text-center height-fit-content' xs={12} sm={6}>
               <label className='d-block w-100'>
                 <DatePicker
@@ -1336,6 +1337,19 @@ class ReservationClass extends Component {
                   minDate={new Date()}
                 />
               </label>
+=======
+            <Col className='text-center height-fit-content' xs={12} sm={4}>
+              <DatePicker
+                className='boxmorpsm text-center w-100 border-0'
+                selected={this.state.class_date}
+                onChange={(date) => this.setState({ class_date: date })}
+                name='class_date'
+                dateFormat='yyyy년MM월dd일'
+                font-size='1.6rem'
+                error={this.state.class_date_err}
+                minDate={new Date()}
+              />
+>>>>>>> xcv
             </Col>
             <Col className=' px-1' xs={12} sm={3}>
               <Row className=''>

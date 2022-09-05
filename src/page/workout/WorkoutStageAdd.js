@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
 import {
   selectTrainerReservation,
+  workoutDestroy,
   workoutSelect,
+  workoutStageDestroy,
   workoutStageInsert,
   workoutStageSelect,
 } from '../../api/user';
@@ -172,6 +174,8 @@ const WorkoutStageView = ({
   url,
   inbody_no,
   stage,
+  ids,
+  workoutStageView,
 }) => {
   const region =
     part === 1
@@ -185,7 +189,11 @@ const WorkoutStageView = ({
       : part === 48
       ? '유산소'
       : '기타';
-
+  const destroy = () => {
+    workoutDestroy(ids).then((res) => {
+      workoutStageView(stage);
+    });
+  };
   return (
     <>
       <TableRow>
@@ -197,6 +205,9 @@ const WorkoutStageView = ({
         <TableCell>{default_count}</TableCell>
         <TableCell>{default_rest}</TableCell>
         <TableCell>{url}</TableCell>
+        <TableCell onClick={destroy}>
+          <Button>삭제</Button>
+        </TableCell>
       </TableRow>
     </>
   );
@@ -345,6 +356,7 @@ class WorkoutStageAdd extends Component {
               default_count={data.default_count}
               default_rest={data.default_rest}
               url={data.url}
+              workoutStageView={this.workoutStageView}
             />
           );
         });
@@ -440,6 +452,12 @@ class WorkoutStageAdd extends Component {
     this.setState({ page: newPage });
   };
 
+  workoutStageDelete = () => {
+    workoutStageDestroy(this.state.stage).then((res) => {
+      this.workoutStageView(this.state.stage);
+    });
+  };
+
   render() {
     // console.log('stage', this.state.stage);
 
@@ -523,6 +541,13 @@ class WorkoutStageAdd extends Component {
                       onClick={() => this.setState({ nextStage1: '' })}
                     >
                       돌아가기
+                    </Button>
+                  </Col>
+                </Row>
+                <Row className='my-2'>
+                  <Col className='text-start'>
+                    <Button onClick={() => this.workoutStageDelete()}>
+                      초기화
                     </Button>
                   </Col>
                 </Row>
@@ -659,8 +684,9 @@ class WorkoutStageAdd extends Component {
                   </Button>
                 </Col>
               </Row>
+
               <h3>
-                하체{' '}
+                하체
                 {this.state.stage === 211 ? (
                   <>1단계</>
                 ) : this.state.stage === 212 ? (
