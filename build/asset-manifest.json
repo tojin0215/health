@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.52e2634c.css",
-    "main.js": "/static/js/main.580a62b2.js",
+    "main.css": "/static/css/main.5067b4a7.css",
+    "main.js": "/static/js/main.eb58fc03.js",
     "static/media/login-main-visual.jpg": "/static/media/login-main-visual.1642678a7d90ac6d18e6.jpg",
     "static/media/logo-text.png": "/static/media/logo-text.4264bc172210a7b35cca.png",
     "static/media/assignAerobic.png": "/static/media/assignAerobic.8a7d38f391b97166d550.png",
@@ -13,11 +13,11 @@
     "static/media/btnCustomer.png": "/static/media/btnCustomer.87862649736471091577.png",
     "static/media/aboutProduct.png": "/static/media/aboutProduct.e1ec80057da5bba4509f.png",
     "index.html": "/index.html",
-    "main.52e2634c.css.map": "/static/css/main.52e2634c.css.map",
-    "main.580a62b2.js.map": "/static/js/main.580a62b2.js.map"
+    "main.5067b4a7.css.map": "/static/css/main.5067b4a7.css.map",
+    "main.eb58fc03.js.map": "/static/js/main.eb58fc03.js.map"
   },
   "entrypoints": [
-    "static/css/main.52e2634c.css",
-    "static/js/main.580a62b2.js"
+    "static/css/main.5067b4a7.css",
+    "static/js/main.eb58fc03.js"
   ]
 }
