@@ -260,23 +260,23 @@ class Home extends Component {
                   </li>
                 </ul>
               ) : (
-                <ul className='text-center d-flex'>
-                  <li>
+                <Row xs={1} sm={2} md={6} className='text-center d-flex'>
+                  <Col>
                     <Link to='/trainer'>강사 관리</Link>
-                  </li>
-                  <li>
+                  </Col>
+                  <Col>
                     <Link to='/client'>회원 관리</Link>
-                  </li>
-                  <li>
+                  </Col>
+                  <Col>
                     <Link to='reservation'>수업 예약</Link>
-                  </li>
-                  <li>
+                  </Col>
+                  <Col>
                     <Link to='workoutAlloted'>운동 배정</Link>
-                  </li>
-                  <li>
+                  </Col>
+                  <Col>
                     <Link to='sales'>매출 관리</Link>
-                  </li>
-                </ul>
+                  </Col>
+                </Row>
               )}
             </div>
           </Container>
