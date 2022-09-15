@@ -427,7 +427,7 @@ class AssignCheckExercise extends Component {
             <div className='container'>
               <h2>
                 <div className='parallelogram'></div>
-                운동 배정 확인
+                운동 배정 목록
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
@@ -435,7 +435,7 @@ class AssignCheckExercise extends Component {
                 <span>&#62;</span>
                 <Link to='/assign'>운동 배정</Link>
                 <span>&#62;</span>
-                <Link to='#'>운동 배정 확인</Link>
+                <Link to='#'>운동 배정 목록</Link>
               </div>
               {/*.breadCrumb */}
             </div>
