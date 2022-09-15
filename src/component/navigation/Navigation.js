@@ -256,134 +256,18 @@ class Navigation extends Component {
                   <span className={styles.navitem}> 센터</span>
                 </Nav.Item>
               </NavLink>
-              {/* <NavLink exact to='/home'>
-                <span className={styles.navitem}>Home</span>
-                <ul>
-                  <li>
-                    <NavLink exact to='/home'>
-                      Home
-                    </NavLink>
-                  </li>                 
-                </ul>
-              </NavLink> */}
-              <NavLink exact to='/introduce'>
-                <span className={styles.navitem}>센터 소개</span>
-                <ul>
-                  <li>
-                    <NavLink exact to='/introduce'>
-                      센터 소개
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/introduceAdd'>
-                      센터 소개 등록
-                    </NavLink>
-                  </li>
-                </ul>
-              </NavLink>
-
-              <NavLink exact to='/trainer'>
-                <span className={styles.navitem}>강사</span>
-                <ul>
-                  <li>
-                    <NavLink exact to='/trainer'>
-                      강사 관리
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/trainerAdd'>
-                      강사 등록
-                    </NavLink>
-                  </li>
-                </ul>
-              </NavLink>
-              <NavLink exact to='/client'>
-                <span className={styles.navitem}>회원</span>
-                <ul>
-                  <li>
-                    <NavLink exact to='/client'>
-                      회원 관리
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/clientAdd'>
-                      회원 등록
-                    </NavLink>
-                  </li>
-                  {/* <li>
-                    <NavLink
-                      exact
-                      to={{
-                        pathname: '/assign/inbody',
-                        state: { member_no: 0, a: true },
-                      }}
-                    >
-                      인바디 정보
-                    </NavLink>
-                  </li> */}
-                  <li>
-                    <NavLink exact to='/inbodies'>
-                      인바디 정보
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/genetic'>
-                      DTC
-                    </NavLink>
-                  </li>
-                </ul>
-              </NavLink>
               <NavLink exact to='/reservation'>
-                <span className={styles.navitem}>수업관리</span>
+                <span className={styles.navitem}>수업</span>
                 <ul>
                   <li class='dropdown'>
                     <NavLink exact to='/reservation'>
-                      수업
+                      시간표/예약
                     </NavLink>
                   </li>
                   <li>
                     <NavLink exact to='/reservationClass'>
                       수업 설정
                       {/* (강사,회원 hide) */}
-                    </NavLink>
-                  </li>
-                </ul>
-              </NavLink>
-              <NavLink exact to='/workoutAlloted'>
-                <span className={styles.navitem}>운동</span>
-                <ul>
-                  <li>
-                    <NavLink exact to='/workoutAlloted'>
-                      운동 배정
-                    </NavLink>
-                  </li>
-                  <li>
-                    <Link
-                      to={{
-                        pathname: '/workoutAllotedList',
-                        state: {
-                          client_name2: '',
-                          idc2: '',
-                          line: '',
-                        },
-                      }}
-                    >
-                      운동 배정된 목록
-                    </Link>
-                  </li>
-                  <li>
-                    <NavLink exact to='/workoutAdd'>
-                      운동 설정
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/workoutStage'>
-                      기본 루틴 배정
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/workoutStageAdd'>
-                      기본 루틴 설정
                     </NavLink>
                   </li>
                 </ul>
@@ -403,7 +287,90 @@ class Navigation extends Component {
                   </li>
                 </ul>
               </NavLink>
-
+              <NavLink exact to='/workoutAlloted'>
+                <span className={styles.navitem}>운동</span>
+                <ul>
+                  <li>
+                    <Link
+                      to={{
+                        pathname: '/workoutAllotedList',
+                        state: {
+                          client_name2: '',
+                          idc2: '',
+                          line: '',
+                        },
+                      }}
+                    >
+                      회원 운동 확인
+                    </Link>
+                  </li>
+                  <li>
+                    <NavLink exact to='/workoutAlloted'>
+                      운동 배정
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/workoutAdd'>
+                      운동값 설정
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/workoutStage'>
+                      기본 루틴 배정 (삭제)
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/workoutStageAdd'>
+                      기본 루틴 설정 (삭제)
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
+              <NavLink exact to='/introduce'>
+                <span className={styles.navitem}>센터</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/client'>
+                      회원 관리
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/trainer'>
+                      강사 관리
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/introduce'>
+                      센터 관리
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/introduceAdd'>
+                      센터 소개 등록 (삭제)
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/trainerAdd'>
+                      강사 등록 (삭제)
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/clientAdd'>
+                      회원 등록 (삭제)
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/inbodies'>
+                      인바디 정보 (삭제)
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/genetic'>
+                      DTC (삭제)
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
               <NavLink exact to='/statistics'>
                 <span className={styles.navitem}></span>
               </NavLink>
