@@ -159,17 +159,17 @@ class AddClient extends Component {
                   this.state.client_name,
                   items[0].idc
                 ).then((res) => {});
-                confirm(
-                  this.state.client_name +
-                    '님이 가입되었습니다. 바로 매출등록하시겠습니까?'
-                ) == true
-                  ? this.AddSalesPush()
-                  : alert('매출 등록을 안했습니다.'),
-                  this.props.history.push('/client');
+                // confirm(
+                //   this.state.client_name +
+                //     '님이 가입되었습니다. 바로 매출등록하시겠습니까?'
+                // ) == true
+                //   ? this.AddSalesPush()
+                //   : alert('매출 등록을 안했습니다.'),
+                this.props.history.push('/client');
               });
             });
           } else {
-            alert('중복');
+            alert('중복된 회원 정보가 있습니다.');
             this.setState({
               phone: '',
               birth: '',
@@ -183,14 +183,14 @@ class AddClient extends Component {
     }
   };
 
-  AddSalesPush = () => {
-    this.props.history.push({
-      pathname: '/addSales',
-      state: {
-        client_name: this.state.client_name,
-      },
-    });
-  };
+  // AddSalesPush = () => {
+  //   this.props.history.push({
+  //     pathname: '/addSales',
+  //     state: {
+  //       client_name: this.state.client_name,
+  //     },
+  //   });
+  // };
 
   handleRadio = (s) => {
     let obj = {

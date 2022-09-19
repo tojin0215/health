@@ -1060,7 +1060,7 @@ class Reservation extends Component {
       this.setState({ exercise_name_err: true });
       alert('운동을 선택해 주세요');
     } else if (date <= dateYesterday) {
-      alert('오늘 이후 만 예약이 가능합니다.');
+      alert('이미 지난 수업은 예약할 수 없습니다.');
     } else if (
       this.props.userinfo.loginWhether === 2
         ? ''
