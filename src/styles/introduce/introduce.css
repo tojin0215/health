@@ -3,9 +3,9 @@
 }
 
 .introduce__article--header {
+  text-align: start;
   background-color: #888;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 12px 10px 2px 10px;
   margin-bottom: 30px;
   font-size: 26px;
   font-weight: 700;
