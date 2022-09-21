@@ -31,3 +31,19 @@
   left: 50%;
   transform: translateX(-50%);
 }
+
+.btn_primary {
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  background: #e2ff33;
+  color: #111;
+}
+
+.btn_close {
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  background: #333;
+  color: #fff;
+}

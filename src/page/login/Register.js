@@ -208,7 +208,7 @@ class Register extends Component {
               style={{ backgroundImage: 'src/img/resiVisual.jpeg' }}
             ></div>
             <h3>사업장 회원가입</h3>
-            <p className='text-secondary'>
+            <p className='resigter_des'>
               강사, 회원은 센터에서 직접 등록할 수 있습니다. 해당 센터로
               문의해주세요.
             </p>
@@ -403,21 +403,36 @@ class Register extends Component {
                   </Card>
                 </Modal>
               </Col>
-              <Col md={12} className='text-center mt-2'>
-                {this.state.agreeCheck ? (
-                  <Button className='w-100' onClick={this.handleOnClick}>
-                    등록하기
-                  </Button>
-                ) : (
-                  <div>
-                    <Button variant='secondary' className='w-100' disabled>
-                      등록하기
-                    </Button>
-                  </div>
-                )}
-              </Col>
             </Row>
           </Form>
+          <Row>
+            <Col md={12} className='btn_close text-center mt-2'>
+              {this.state.agreeCheck ? (
+                <Button className='w-100' onClick={this.handleOnClick}>
+                  닫기
+                </Button>
+              ) : (
+                <div>
+                  <Button variant='secondary' className='w-100' disabled>
+                    닫기
+                  </Button>
+                </div>
+              )}
+            </Col>
+            <Col md={12} className='btn_primary text-center mt-2'>
+              {this.state.agreeCheck ? (
+                <Button className='w-100' onClick={this.handleOnClick}>
+                  등록하기
+                </Button>
+              ) : (
+                <div>
+                  <Button variant='secondary' className='w-100' disabled>
+                    등록하기
+                  </Button>
+                </div>
+              )}
+            </Col>
+          </Row>
           {/*.AddSalesForm productPay */}
         </Container>
         <div className='footer'>
