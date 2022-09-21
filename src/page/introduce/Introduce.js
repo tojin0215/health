@@ -7,6 +7,8 @@ import Menu from '../../component/navigation/Menu';
 import { Link } from 'react-router-dom';
 import Footer from '../../component/footer/Footer';
 
+import '../../styles/introduce/introduce.css';
+
 //bootstrap
 import { Container, Row, Col, Modal, Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -88,24 +90,24 @@ const ViewIntroduceItem = ({
   };
 
   return (
-    <Row className='sectionGlass' xs={1}>
-      <Col className='text-center mb-5'>
-        <h2>{manager_name}</h2>
-      </Col>
-      <Col className='text-center'>
+    <div className='sectionGlass introduce__article'>
+      <div className='introduce__article--header'>
+        <h4>{manager_name}</h4>
+      </div>
+      <div className='introduce__article--img-box'>
         {/* <img className='width-inherit' src={picture} /> */}
         {/* 웹 올릴때 밑에 거*/}
-        <img className='width-inherit' src={'/api/' + picture} />
-      </Col>
-      <Col className='my-3 white-space-break-spaces text-center'>
+        <img src={'/api/' + picture} />
+      </div>
+      <div className='introduce__article--text-box'>
         <p>{story}</p>
-      </Col>
+      </div>
       {loginWhether == 2 ? (
         ''
       ) : loginWhether == 1 ? (
         ''
       ) : (
-        <Col className='text-end'>
+        <Col>
           <Button variant='secondary' onClick={modalOnClick}>
             수정하기
           </Button>
@@ -181,7 +183,7 @@ const ViewIntroduceItem = ({
           </Modal>
         </Col>
       )}
-    </Row>
+    </div>
   );
 };
 
@@ -289,7 +291,7 @@ class Introduce extends Component {
   render() {
     // console.log(this.state.viewIntroduceList);
     return (
-      <div className='wrap'>
+      <div className='wrap introduce'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -319,6 +321,11 @@ class Introduce extends Component {
           {/*.localNavigation */}
         </header>
         <Container>
+          <div className='text-end'>
+            <Link to='/introduceAdd'>
+              <Button variant='outline-primary'>센터소개 등록</Button>
+            </Link>
+          </div>
           {this.state.viewIntroduceList.length === 0 ? (
             '센터소개가 없습니다.'
           ) : (

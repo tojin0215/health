@@ -190,9 +190,9 @@ const ReservationClassItem = ({
     } else if (trainer_input == '') {
       setTrainer_err(true);
       alert('트레이너명을 선택해주세요.');
-    } else if ((number_of_people_input == '', number_of_people_input == 0)) {
+    } else if (number_of_people_input == '') {
       setNumber_of_people_err(true);
-      alert('인원을 확인해 주세요.(숫자만, 0입력불가)');
+      alert('올바른 수강 인원을 입력해 주세요.');
     } else if (hour_input >= 24) {
       setHour_err(true);
       alert('00~23시까지 설정 가능합니다.');
