@@ -341,9 +341,7 @@ const ClientPhone = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권
-              <br />
-              남은기간: D {endDays}
+              기간권: {salesDays}일 권 [ D {endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -417,9 +415,7 @@ const ClientPhone = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권
-              <br />
-              남은기간: D {endDays}
+              기간권: {salesDays}일 권 [ D {endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -907,9 +903,7 @@ const ClientName = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권
-              <br />
-              남은기간: D {endDays}
+              기간권: {salesDays}일 권 [ D {endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -983,9 +977,7 @@ const ClientName = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권
-              <br />
-              남은기간: D {endDays}
+              기간권: {salesDays}일 권 [ D {endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -1130,7 +1122,6 @@ const ClientName = ({
                 <p>{sportswear}</p>
               )}
             </Col>
-
             <Col className='text-center mt-4' xs={12}>
               {showUpdate ? (
                 loginWhether === 1 ? (
@@ -1475,9 +1466,7 @@ const ViewClientItem = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권
-              <br />
-              남은기간: D {endDays}
+              기간권: {salesDays}일 권 [ D {endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -1551,9 +1540,7 @@ const ViewClientItem = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권
-              <br />
-              남은기간: D {endDays}
+              기간권: {salesDays}일 권 [ D {endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -1996,13 +1983,18 @@ class Client extends Component {
                   onChange={(e) => this.setState({ search: e.target.value })}
                 />
               </Col>
-              <Col>
+              <Col className='col-lg-2'>
                 <Button
                   className='w-100 h-100'
                   variant='primary'
                   onClick={this.handleOnSearch}
                 >
                   검색
+                </Button>
+              </Col>
+              <Col className='col-lg-2'>
+                <Button className='w-100 h-100' variant='outline-primary'>
+                  등록하기
                 </Button>
               </Col>
             </Row>

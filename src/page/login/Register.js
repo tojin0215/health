@@ -357,9 +357,10 @@ class Register extends Component {
                   </>
                 ) : (
                   <>
-                    <p className='pb-2'>
+                    <form className='pb-2'>
+                      <input type='checkbox' name='agree' value='agree'></input>
                       필수 약관에 동의하여야 가입이 가능합니다.
-                    </p>
+                    </form>
                     <Button
                       className='w-100'
                       variant='primary'
@@ -406,32 +407,48 @@ class Register extends Component {
             </Row>
           </Form>
           <Row>
-            <Col md={12} className='btn_close text-center mt-2'>
+            <Col></Col>
+            <Col md={3} className='text-center mt-2'>
               {this.state.agreeCheck ? (
-                <Button className='w-100' onClick={this.handleOnClick}>
+                <Button
+                  className='btn-primary_dark w-100'
+                  onClick={this.handleOnClick}
+                >
                   닫기
                 </Button>
               ) : (
                 <div>
-                  <Button variant='secondary' className='w-100' disabled>
+                  <Button
+                    variant='btn-primary_dark'
+                    className='btn-primary_dark w-100'
+                    disabled
+                  >
                     닫기
                   </Button>
                 </div>
               )}
             </Col>
-            <Col md={12} className='btn_primary text-center mt-2'>
+            <Col md={3} className='text-center mt-2'>
               {this.state.agreeCheck ? (
-                <Button className='w-100' onClick={this.handleOnClick}>
+                <Button
+                  className='btn-primary w-100'
+                  onClick={this.handleOnClick}
+                >
                   등록하기
                 </Button>
               ) : (
                 <div>
-                  <Button variant='secondary' className='w-100' disabled>
+                  <Button
+                    variant='btn-primary secondary'
+                    className='btn-primary w-100'
+                    disabled
+                  >
                     등록하기
                   </Button>
                 </div>
               )}
             </Col>
+            <Col></Col>
           </Row>
           {/*.AddSalesForm productPay */}
         </Container>

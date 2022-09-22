@@ -63,9 +63,11 @@
 
 /* bootstrap button */
 .btn-primary {
+  width: 200px;
+  height: 45px;
+  border-radius: 5px;
   background-color: #ebff2e;
   color: #222;
-  border-color: #222;
 }
 .btn-primary:hover {
   background-color: #cde400;
@@ -81,6 +83,14 @@
   background-color: #ebff2e;
   border-color: #ebff2e;
   color: #444;
+}
+.btn-primary_dark {
+  width: 200px;
+  height: 45px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
 }
 .btn-outline-primary {
   color: #ebff2e;
@@ -100,6 +110,13 @@
   color: #000;
   border-color: #bbb;
 }
+.btn-outline-secondary {
+  height: 31px;
+  border-radius: 31px;
+  background-color: #888;
+  color: #fff;
+} /* 수정하기 */
+
 /* bootstrap text */
 .text-primary {
   color: #ebff2e !important;

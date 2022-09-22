@@ -977,13 +977,22 @@ class Trainer extends Component {
                   onChange={(e) => this.setState({ search: e.target.value })}
                 />
               </Col>
-              <Col>
+              <Col className='col-lg-2'>
                 <Button
                   className='w-100 h-100'
                   variant='primary'
                   onClick={this.handleOnSearch}
                 >
                   검색
+                </Button>
+              </Col>
+              <Col className='col-lg-2'>
+                <Button
+                  className='w-100 h-100'
+                  variant='outline-primary'
+                  onClick={this.handleOnSearch}
+                >
+                  등록하기
                 </Button>
               </Col>
             </Row>
@@ -994,12 +1003,12 @@ class Trainer extends Component {
               <TableHead>
                 <TableRow>
                   <Default>
-                    <TableCell>소개</TableCell>
+                    <TableCell className='text-center'>소개</TableCell>
                   </Default>
-                  <TableCell>이름</TableCell>
-                  <TableCell>성별</TableCell>
-                  <TableCell>연락처</TableCell>
-                  <TableCell>생년월일</TableCell>
+                  <TableCell className='text-center'>이름</TableCell>
+                  <TableCell className='text-center'>성별</TableCell>
+                  <TableCell className='text-center'>연락처</TableCell>
+                  <TableCell className='text-center'>생년월일</TableCell>
                   <Mobile>
                     <TableCell>이력</TableCell>
                     <TableCell>자기소개</TableCell>
