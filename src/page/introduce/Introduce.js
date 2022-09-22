@@ -108,7 +108,11 @@ const ViewIntroduceItem = ({
         ''
       ) : (
         <Col>
-          <Button variant='secondary' onClick={modalOnClick}>
+          <Button
+            className='btn-primary'
+            variant='secondary'
+            onClick={modalOnClick}
+          >
             수정하기
           </Button>
           <Modal show={showModal} size='lg' onHide={() => setShowModal(false)}>
@@ -321,11 +325,18 @@ class Introduce extends Component {
           {/*.localNavigation */}
         </header>
         <Container>
-          <div className='text-end'>
-            <Link to='/introduceAdd'>
-              <Button variant='outline-primary'>센터소개 등록</Button>
-            </Link>
-          </div>
+          <Row>
+            <Col>
+              <h3>센터명</h3>
+            </Col>
+            <Col>
+              <div className='text-end'>
+                <Link to='/introduceAdd'>
+                  <Button variant='outline-primary'>센터소개 등록</Button>
+                </Link>
+              </div>
+            </Col>
+          </Row>
           {this.state.viewIntroduceList.length === 0 ? (
             '센터소개가 없습니다.'
           ) : (
