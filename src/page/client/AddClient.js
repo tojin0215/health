@@ -165,7 +165,7 @@ class AddClient extends Component {
                 // ) == true
                 //   ? this.AddSalesPush()
                 //   : alert('매출 등록을 안했습니다.'),
-                this.props.history.push('/client');
+                this.props.history.push('/addSales');
               });
             });
           } else {
