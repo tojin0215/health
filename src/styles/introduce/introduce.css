@@ -21,3 +21,13 @@
 .introduce__article--text-box {
   margin: 30px 24px;
 }
+
+input[type='file']::file-selector-button {
+  width: 129px;
+  height: 40px;
+  border: 1px solid #fff;
+  background: #222;
+  color: #fff;
+  border-radius: 40px;
+  margin-right: 10px;
+}
