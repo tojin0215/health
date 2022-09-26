@@ -890,6 +890,10 @@ class Trainer extends Component {
     this.setState({ searchOption: e.value });
   };
 
+  moveTrainerAdd = () => {
+    this.props.history.push('/trainerAdd');
+  };
+
   handleOnSearch = () => {
     switch (this.state.searchOption) {
       case '핸드폰':
@@ -1006,7 +1010,7 @@ class Trainer extends Component {
                 <Button
                   className='w-100 h-100'
                   variant='outline-primary'
-                  onClick={this.handleOnSearch}
+                  onClick={this.moveTrainerAdd}
                 >
                   등록하기
                 </Button>

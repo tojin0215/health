@@ -194,118 +194,127 @@ class AddTrainer extends Component {
           </div>
           {/*.localNavigation */}
         </header>
-        <Container className='sectionGlass'>
-          <h3>강사 정보 입력</h3>
-          <Form>
+        <Container>
+          <Form className='sectionGlass'>
+            <h3>강사 정보 입력</h3>
             {/* <label>
               헬스장 번호:
               <TextField value={this.props.userinfo.fitness_no} />
             </label> */}
             <Row>
-              <Col md={4}>
-                <Form.Group>
-                  <Form.Label>이름</Form.Label>
-                  <Form.Control
-                    id='trainer_name'
-                    type='text'
-                    value={this.state.trainer_name}
-                    onChange={this.handleChange}
-                  ></Form.Control>
-                </Form.Group>
+              <Col xs={2}>
+                <Form.Label>이름</Form.Label>
               </Col>
-              <Col md={4}>
-                <Form.Group>
-                  <Form.Label>핸드폰번호</Form.Label>
-                  <Form.Control
-                    type='text'
-                    pattern='[0-9]+'
-                    variant='outlined'
-                    value={this.state.phone}
-                    id='phone'
-                    placeholder='01012345678'
-                    onChange={this.handleChange}
-                    required
-                  ></Form.Control>
-                </Form.Group>
+              <Col>
+                <Form.Control
+                  id='trainer_name'
+                  type='text'
+                  value={this.state.trainer_name}
+                  onChange={this.handleChange}
+                ></Form.Control>
               </Col>
-              <Col xs={8} md={3}>
-                <Form.Group>
-                  <Form.Label>생년월일</Form.Label>
-                  <Form.Control
-                    type='text'
-                    pattern='[0-9]+'
-                    value={this.state.birth}
-                    id='birth'
-                    placeholder='19990101'
-                    onChange={this.handleChange}
-                  ></Form.Control>
-                </Form.Group>
+              <Col xs={1}>
+                <Form.Label>성별</Form.Label>
               </Col>
-              <Col xs={4} md={1}>
-                <Form.Group>
-                  <Form.Label>성별</Form.Label>
-                  <Form.Check>
-                    <Form.Check.Input
-                      type='radio'
-                      name='radioGroup'
-                      id='male'
-                      checked={this.state.radioGroup['male']}
-                      onChange={this.handleRadio}
-                    />
-                    <Form.Check.Label htmlFor='male' className='w-100'>
-                      남
-                    </Form.Check.Label>
-                  </Form.Check>
-                  <Form.Check>
-                    <Form.Check.Input
-                      type='radio'
-                      name='radioGroup'
-                      id='female'
-                      checked={this.state.radioGroup['female']}
-                      onChange={this.handleRadio}
-                    />
-                    <Form.Check.Label htmlFor='female' className='w-100'>
-                      여
-                    </Form.Check.Label>
-                  </Form.Check>
-                </Form.Group>
-              </Col>
-              <Col xs={12}>
-                <Form.Group>
-                  <Form.Label>이력</Form.Label>
-                  <Form.Control
-                    type='text'
-                    value={this.state.history}
-                    id='history'
-                    onChange={this.handleChange}
-                    as='textarea'
-                    rows={5}
-                  ></Form.Control>
-                  <img />
-                </Form.Group>
-              </Col>
-              <Col xs={12}>
-                <Form.Group>
-                  <Form.Label>자기소개</Form.Label>
-                  <Form.Control
-                    type='text'
-                    value={this.state.ment}
-                    id='ment'
-                    onChange={this.handleChange}
-                    as='textarea'
-                    rows={5}
-                  ></Form.Control>
-                </Form.Group>
+              <Col xs={2}>
+                <Row>
+                  <Col xs={6}>
+                    <Form.Check>
+                      <Form.Check.Input
+                        type='radio'
+                        name='radioGroup'
+                        id='male'
+                        checked={this.state.radioGroup['male']}
+                        onChange={this.handleRadio}
+                      />
+                      <Form.Check.Label htmlFor='male' className='w-100'>
+                        남
+                      </Form.Check.Label>
+                    </Form.Check>
+                  </Col>
+                  <Col xs={6}>
+                    <Form.Check>
+                      <Form.Check.Input
+                        type='radio'
+                        name='radioGroup'
+                        id='female'
+                        checked={this.state.radioGroup['female']}
+                        onChange={this.handleRadio}
+                      />
+                      <Form.Check.Label htmlFor='female' className='w-100'>
+                        여
+                      </Form.Check.Label>
+                    </Form.Check>
+                  </Col>
+                </Row>
               </Col>
             </Row>
-            <Button
-              className='w-100 mt-3'
-              type='button'
-              onClick={this.handleTrainer}
-            >
-              등록하기
-            </Button>
+            <Row>
+              <Col xs={2}>
+                <Form.Label>연락처</Form.Label>
+              </Col>
+              <Col>
+                <Form.Control
+                  type='text'
+                  pattern='[0-9]+'
+                  variant='outlined'
+                  value={this.state.phone}
+                  id='phone'
+                  placeholder='01012345678'
+                  onChange={this.handleChange}
+                  required
+                ></Form.Control>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={2}>
+                <Form.Label>생년월일</Form.Label>
+              </Col>
+              <Col>
+                <Form.Control
+                  type='text'
+                  pattern='[0-9]+'
+                  value={this.state.birth}
+                  id='birth'
+                  placeholder='19990101'
+                  onChange={this.handleChange}
+                ></Form.Control>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={2}>
+                <Form.Label>이력</Form.Label>
+              </Col>
+              <Col>
+                <Form.Control
+                  type='text'
+                  value={this.state.history}
+                  id='history'
+                  onChange={this.handleChange}
+                  as='textarea'
+                  rows={5}
+                ></Form.Control>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={2}>
+                <Form.Label>자기소개</Form.Label>
+              </Col>
+              <Col>
+                <Form.Control
+                  type='text'
+                  value={this.state.ment}
+                  id='ment'
+                  onChange={this.handleChange}
+                  as='textarea'
+                  rows={5}
+                ></Form.Control>
+              </Col>
+            </Row>
           </Form>
+          <Button type='button' onClick={this.handleTrainer}>
+            등록하기
+          </Button>
         </Container>
         <div className='footer'>
           <Footer />
