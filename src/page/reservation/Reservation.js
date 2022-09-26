@@ -64,6 +64,7 @@ import {
 import moment from 'moment';
 import 'moment/locale/ko';
 import { Paper } from '@mui/material';
+import { ConstructionOutlined } from '@mui/icons-material';
 moment.locale('ko'); // en - 영어
 // moment().format();
 
@@ -1060,7 +1061,7 @@ class Reservation extends Component {
       this.setState({ exercise_name_err: true });
       alert('운동을 선택해 주세요');
     } else if (date <= dateYesterday) {
-      alert('오늘 이후 만 예약이 가능합니다.');
+      alert('이미 지난 수업은 예약할 수 없습니다.');
     } else if (
       this.props.userinfo.loginWhether === 2
         ? ''
@@ -1068,6 +1069,8 @@ class Reservation extends Component {
     ) {
       this.setState({ customer_name_err: true });
       alert('회원을 선택해 주세요');
+    } else if (this.state.kind == 'GX') {
+      alert('GX 수업은 예약할 수 없습니다.');
     } else {
       selectTrainerReservation(
         this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''

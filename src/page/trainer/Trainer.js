@@ -988,6 +988,7 @@ class Trainer extends Component {
               </Col>
             </Row>
           </div>
+
           <TableContainer component={Paper}>
             <Table aria-label='simple table' className='table--block'>
               <TableHead>

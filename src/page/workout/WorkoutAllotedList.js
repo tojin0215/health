@@ -304,13 +304,13 @@ class WorkoutAllotedList extends Component {
           <div className='localNavigation'>
             <div className='container'>
               <h2>
-                <div className='parallelogram'></div>운동 배정 확인
+                <div className='parallelogram'></div>운동 배정 목록
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/workoutAllotedList'>운동 배정 확인</Link>
+                <Link to='/workoutAllotedList'>운동 배정 목록</Link>
               </div>
             </div>
           </div>

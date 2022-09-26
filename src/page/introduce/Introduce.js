@@ -92,7 +92,7 @@ const ViewIntroduceItem = ({
   return (
     <div className='sectionGlass introduce__article'>
       <div className='introduce__article--header'>
-        <h2>{manager_name}</h2>
+        <h4>{manager_name}</h4>
       </div>
       <div className='introduce__article--img-box'>
         {/* <img className='width-inherit' src={picture} /> */}
@@ -321,6 +321,11 @@ class Introduce extends Component {
           {/*.localNavigation */}
         </header>
         <Container>
+          <div className='text-end'>
+            <Link to='/introduceAdd'>
+              <Button variant='outline-primary'>센터소개 등록</Button>
+            </Link>
+          </div>
           {this.state.viewIntroduceList.length === 0 ? (
             '센터소개가 없습니다.'
           ) : (
