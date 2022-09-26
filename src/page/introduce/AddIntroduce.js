@@ -69,7 +69,9 @@ class AddIntroduce extends Component {
       }
     });
   }
-
+  returnIntroduce = () => {
+    this.props.history.push('/introduce');
+  };
   handleIntroduce = () => {
     if (this.state.file === null) {
       alert('이미지를 첨부해주세요.');
@@ -133,9 +135,8 @@ class AddIntroduce extends Component {
         </header>
         <Container>
           <div className='sectionGlass'>
-            <h3>센터소개 등록</h3>
-            <Row>
-              <Col xs={12} md={1} className='mt-3'>
+            <h4>센터 소개 등록</h4>
+            {/* <Col xs={12} md={6}>
                 <h5>사업장</h5>
               </Col>
               <Col xs={12} md={11}>
@@ -143,11 +144,12 @@ class AddIntroduce extends Component {
                   id='manager_name'
                   value={this.props.userinfo.fitness_name}
                 ></Form.Control>
-              </Col>
-              <Col xs={12} md={1} className='mt-2'>
+              </Col> */}
+            <Row>
+              <Col xs={1}>
                 <h5>내용</h5>
               </Col>
-              <Col md={11} className='mt-2'>
+              <Col xs={11}>
                 <Form.Control
                   id='story'
                   defaultValue={this.state.story}
@@ -157,34 +159,32 @@ class AddIntroduce extends Component {
                   rows={5}
                 ></Form.Control>
               </Col>
-              <Col md={1} className='mt-3'>
+            </Row>
+            <Row>
+              <Col xs={1}>
                 <h5>사진</h5>
               </Col>
-              <Col xs={11} className='pt-3'>
-                <Form.Group>
-                  <Form.Control
-                    id='picture'
-                    type='file'
-                    value={this.state.picture}
-                    onChange={this.handleFileChange}
-                    accept='image/*'
-                  ></Form.Control>
-                </Form.Group>
+              <Col xs={11}>
+                <Form.Control
+                  id='picture'
+                  type='file'
+                  value={this.state.picture}
+                  onChange={this.handleFileChange}
+                  accept='image/*'
+                ></Form.Control>
               </Col>
             </Row>
           </div>
-          <div className='d-flex justify-content-center mt-3'>
-            <Button type='button' className='btn-primary_dark mx-3'>
-              닫기
-            </Button>
-            <Button
-              type='button'
-              onClick={this.handleIntroduce}
-              className='btn-primary mx-3'
-            >
-              등록하기
-            </Button>
-          </div>
+          <Button
+            variant='secondary'
+            type='button'
+            onClick={this.returnIntroduce}
+          >
+            닫기
+          </Button>
+          <Button type='button' onClick={this.handleIntroduce}>
+            등록하기
+          </Button>
         </Container>
         <div className='footer'>
           <Footer />
