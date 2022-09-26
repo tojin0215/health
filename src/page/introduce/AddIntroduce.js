@@ -69,7 +69,9 @@ class AddIntroduce extends Component {
       }
     });
   }
-
+  returnIntroduce = () => {
+    this.props.history.push('/introduce');
+  };
   handleIntroduce = () => {
     if (this.state.file === null) {
       alert('이미지를 첨부해주세요.');
@@ -133,28 +135,19 @@ class AddIntroduce extends Component {
         </header>
         <Container>
           <div className='sectionGlass'>
-            <Row>
-              <Col xs={12} md={6}>
+            <h4>센터 소개 등록</h4>
+            {/* <Col xs={12} md={6}>
                 <h5>사업장</h5>
                 <Form.Control
                   id='manager_name'
                   value={this.props.userinfo.fitness_name}
                 ></Form.Control>
-              </Col>
-              <Col xs={12} md={6} className='pt-3'>
-                <Form.Group>
-                  <h5>사진</h5>
-                  <Form.Control
-                    id='picture'
-                    type='file'
-                    value={this.state.picture}
-                    onChange={this.handleFileChange}
-                    accept='image/*'
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col xs={12} className='mt-3'>
+              </Col> */}
+            <Row>
+              <Col xs={1}>
                 <h5>내용</h5>
+              </Col>
+              <Col xs={11}>
                 <Form.Control
                   id='story'
                   defaultValue={this.state.story}
@@ -164,17 +157,32 @@ class AddIntroduce extends Component {
                   rows={5}
                 ></Form.Control>
               </Col>
-              <Col className='text-center mt-4'>
-                <Button
-                  type='button'
-                  onClick={this.handleIntroduce}
-                  className='w-100'
-                >
-                  등록하기
-                </Button>
+            </Row>
+            <Row>
+              <Col xs={1}>
+                <h5>사진</h5>
+              </Col>
+              <Col xs={11}>
+                <Form.Control
+                  id='picture'
+                  type='file'
+                  value={this.state.picture}
+                  onChange={this.handleFileChange}
+                  accept='image/*'
+                ></Form.Control>
               </Col>
             </Row>
           </div>
+          <Button
+            variant='secondary'
+            type='button'
+            onClick={this.returnIntroduce}
+          >
+            닫기
+          </Button>
+          <Button type='button' onClick={this.handleIntroduce}>
+            등록하기
+          </Button>
         </Container>
         <div className='footer'>
           <Footer />

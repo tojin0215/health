@@ -113,28 +113,30 @@ const ViewIntroduceItem = ({
           </Button>
           <Modal show={showModal} size='lg' onHide={() => setShowModal(false)}>
             {/* <Modal show={true} className=''> */}
-            <Row xs={1} className='p-4'>
-              <Col className='py-3 text-center'>
-                <h2>{manager_name}</h2>
+            <h2>{manager_name}</h2>
+            <div className='py-3 text-center'>
+              {/* <img className='width-inherit' src={picture} /> */}
+              {/* 웹 올릴때  밑에 거*/}
+              <img className='width-inherit' src={'/api/' + picture} />
+            </div>
+            <Row>
+              <Col xs={1}>
+                <h5>사진</h5>
               </Col>
-              <Col className='py-3 text-center'>
-                {/* <img className='width-inherit' src={picture} /> */}
-                {/* 웹 올릴때  밑에 거*/}
-                <img className='width-inherit' src={'/api/' + picture} />
+              <Col xs={11}>
+                <Form.Control
+                  type='file'
+                  onChange={updateChange1}
+                  accept='image/*'
+                  className='w-100'
+                ></Form.Control>
               </Col>
-              <Col className='py-2'>
-                <h5>사진 선택</h5>
-                <Form.Group className='border'>
-                  <Form.Control
-                    type='file'
-                    onChange={updateChange1}
-                    accept='image/*'
-                    className='w-100'
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col className='py-2'>
+            </Row>
+            <Row>
+              <Col xs={1}>
                 <h5>내용</h5>
+              </Col>
+              <Col xs={11}>
                 <Form.Control
                   value={story_input}
                   onChange={updateChange2}
@@ -143,41 +145,34 @@ const ViewIntroduceItem = ({
                   rows={5}
                 ></Form.Control>
               </Col>
-              <Col xs={12} sm={2}>
-                <Button
-                  onClick={() =>
-                    confirm('정말 삭제하시겠습니까?') == true
-                      ? handleDelete(idi)
-                      : alert('삭제가 취소 되었습니다.')
-                  }
-                  variant='outline-danger'
-                  className='w-100'
-                >
-                  <RiDeleteBin5Fill className='align-baseline' />
+            </Row>
+            <Col xs={12} className='text-danger text-end'>
+              삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+              <Button
+                onClick={() =>
+                  confirm('정말 삭제하시겠습니까?') == true
+                    ? handleDelete(idi)
+                    : alert('삭제가 취소 되었습니다.')
+                }
+                variant='outline-danger'
+              >
+                삭제
+              </Button>
+            </Col>
+            <Row>
+              <Col>
+                <Button onClick={close} variant='secondary'>
+                  닫기
                 </Button>
               </Col>
-              <Col xs={12} sm={10} className='pb-2'>
+              <Col>
                 {whether ? (
-                  <Button onClick={() => handleUpdate(idi)} className='w-100'>
-                    수정하기
-                  </Button>
+                  <Button onClick={() => handleUpdate(idi)}>수정하기</Button>
                 ) : (
-                  <Button
-                    className='w-100'
-                    onClick={() => handleUpdateStory(idi)}
-                  >
+                  <Button onClick={() => handleUpdateStory(idi)}>
                     수정하기
                   </Button>
                 )}
-              </Col>
-              <Col>
-                <Button
-                  onClick={close}
-                  variant='secondary'
-                  className='w-100 mt-2'
-                >
-                  닫기
-                </Button>
               </Col>
             </Row>
           </Modal>
