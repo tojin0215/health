@@ -1,9 +1,9 @@
 .client-infomation__detail--membership {
-  background-color: rgb(230, 230, 230);
-  color: #000;
+  background-color: #333;
+  color: #fff;
   margin: 20px 10px;
   padding: 20px;
-  border-radius: 18px;
+  border-radius: 10px;
 }
 
 .rbc-calendar a {

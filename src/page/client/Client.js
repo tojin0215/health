@@ -341,9 +341,7 @@ const ClientPhone = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권
-              <br />
-              남은기간: D {endDays}
+              기간권: {salesDays}일 권 [ D {endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -417,9 +415,7 @@ const ClientPhone = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권
-              <br />
-              남은기간: D {endDays}
+              기간권: {salesDays}일 권 [ D {endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -907,9 +903,7 @@ const ClientName = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권
-              <br />
-              남은기간: D {endDays}
+              기간권: {salesDays}일 권 [ D {endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -983,9 +977,7 @@ const ClientName = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권
-              <br />
-              남은기간: D {endDays}
+              기간권: {salesDays}일 권 [ D {endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -1040,7 +1032,7 @@ const ClientName = ({
             <CustomerCalendarComponent customer_no={idc} />
           </div>
           <Row className='mt-3 client__modal--information'>
-            <Col xs={6} md={4} className='mb-2'>
+            <Col xs={6} md={12} className='mb-2 '>
               <h5 className='mb-1'>이름</h5>
               {showUpdate ? (
                 <Form.Control
@@ -1130,7 +1122,6 @@ const ClientName = ({
                 <p>{sportswear}</p>
               )}
             </Col>
-
             <Col className='text-center mt-4' xs={12}>
               {showUpdate ? (
                 loginWhether === 1 ? (
@@ -1475,9 +1466,7 @@ const ViewClientItem = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권
-              <br />
-              남은기간: D {endDays}
+              기간권: {salesDays}일 권 [ D {endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -1551,9 +1540,7 @@ const ViewClientItem = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권
-              <br />
-              남은기간: D {endDays}
+              기간권: {salesDays}일 권 [ D {endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -1699,30 +1686,26 @@ const ViewClientItem = ({
               )}
             </Col>
             <div>
-              <Row>
-                <Col sm={9}>
-                  <h4>현재 사용중인 이용권</h4>
-                </Col>
-                <Col sm={3}>
-                  <Button
-                    className='w-100 border-0'
-                    variant='outline-primary'
-                    onClick={viewModalOnclick}
-                  >
-                    + 지난 이용권 더보기
-                  </Button>
-                </Col>
-              </Row>
+              <div className='d-flex justify-content-between '>
+                <h4>현재 사용중인 이용권</h4>
+                <Button
+                  className='border-0'
+                  variant='outline-primary'
+                  onClick={viewModalOnclick}
+                >
+                  + 지난 이용권 더보기
+                </Button>
+              </div>
               <div>{voucher}</div>
               <div>
-                {/* 이용권&기간권 더보기 Modal */}
+                {/* 이용권&기간권 더보기 Modal d-flex justify-content-between */}
                 <Modal
                   className='client_modal'
                   show={viewModal}
                   onHide={viewModalClose}
                 >
                   <Modal.Header>
-                    <Modal.Title>이용권&amp;기간권 더보기</Modal.Title>
+                    <Modal.Title>지난 이용권 더보기</Modal.Title>
                   </Modal.Header>
                   <Modal.Body className='mw-100'>{voucher2}</Modal.Body>
                 </Modal>
@@ -1977,6 +1960,28 @@ class Client extends Component {
         <Container>
           <h3>회원 목록</h3>
           <div>
+            <Row>
+              <div className='hstack gap-3 input-group'>
+                <Dropdown
+                  className='searchDrop'
+                  options={options}
+                  onChange={this.handleOnChangeSearchOption}
+                  value={this.state.searchOption}
+                  placeholder='검색 대상을 선택하세요.'
+                />
+                <input
+                  type='text'
+                  className='form-control'
+                  id='search'
+                  value={this.state.search}
+                  onChange={(e) => this.setState({ search: e.target.value })}
+                />
+                <Button variant='primary' onClick={this.handleOnSearch}>
+                  검색
+                </Button>
+                <Button variant='outline-primary'>등록하기</Button>
+              </div>
+            </Row>
             <Row className='my-2'>
               <Col>
                 <Dropdown
@@ -1996,13 +2001,18 @@ class Client extends Component {
                   onChange={(e) => this.setState({ search: e.target.value })}
                 />
               </Col>
-              <Col>
+              <Col className='col-lg-2'>
                 <Button
                   className='w-100 h-100'
                   variant='primary'
                   onClick={this.handleOnSearch}
                 >
                   검색
+                </Button>
+              </Col>
+              <Col className='col-lg-2'>
+                <Button className='w-100 h-100' variant='outline-primary'>
+                  등록하기
                 </Button>
               </Col>
             </Row>

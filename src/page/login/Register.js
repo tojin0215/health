@@ -208,7 +208,7 @@ class Register extends Component {
               style={{ backgroundImage: 'src/img/resiVisual.jpeg' }}
             ></div>
             <h3>사업장 회원가입</h3>
-            <p className='text-secondary'>
+            <p className='resigter_des'>
               강사, 회원은 센터에서 직접 등록할 수 있습니다. 해당 센터로
               문의해주세요.
             </p>
@@ -341,83 +341,87 @@ class Register extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col md={12} className='text-center mt-4'>
-                {this.state.agreeCheck ? (
-                  <>
-                    <p className='pb-2 text-success fw-bold'>
-                      필수 약관에 동의했습니다.
-                    </p>
-                    <Button
-                      className='w-100'
-                      variant='outline-success'
+              <Col>
+                <div className='form-check'>
+                  <input
+                    className='form-check-input'
+                    type='checkbox'
+                    value=''
+                    id='flexCheckDefault'
+                    onClick={this.agreeCheckModal}
+                  />
+                  <label className='form-check-label'>
+                    필수 약관에 동의했습니다.{' '}
+                    <a
+                      href='#'
+                      className='text-decoration-underline text-reset'
                       onClick={this.handleModal}
                     >
-                      약관 확인
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    <p className='pb-2'>
-                      필수 약관에 동의하여야 가입이 가능합니다.
-                    </p>
-                    <Button
-                      className='w-100'
-                      variant='primary'
-                      onClick={this.handleModal}
+                      약관동의
+                    </a>
+                  </label>
+                  <Modal show={this.state.modalShow}>
+                    <Modal.Header
+                      closeButton
+                      onClick={() => this.setState({ modalShow: false })}
                     >
-                      약관 확인
-                    </Button>
-                  </>
-                )}
-                <Modal show={this.state.modalShow}>
-                  <Modal.Header
-                    closeButton
-                    onClick={() => this.setState({ modalShow: false })}
-                  >
-                    <Modal.Title>divvy 서비스 약관</Modal.Title>
-                  </Modal.Header>
-                  <Card>
-                    <Card.Body>
-                      <Card.Title>서비스 이용 약관</Card.Title>
-                      <Card.Text>
-                        해당 사항은 서비스 이용 약관입니다. divvy 서비스 이용에
-                        대해서 필요한 약관 사항에 대해서 이곳에 기입되어,
-                        이용자들이 가입하기 전에 해당 약관 사항을 보고 동의또는
-                        비동의하게 되는 내용입니다.
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                  <Card>
-                    <Card.Body>
-                      <Card.Title>마케팅 이용 동의</Card.Title>
-                      <Card.Text>
-                        해당 사항은 마케팅 이용 동의 약관입니다. 고객의 정보를
-                        마케팅에 이용함에 있어 고지해야할 사항들이 이곳에
-                        기입되어, 이용자들이 가입하기 전에 해당 약관 사항을 보고
-                        동의 또는 비동의 하게 되는 내용입니다.
-                      </Card.Text>
-                    </Card.Body>
-                    <Button onClick={this.agreeCheckModal}>
-                      약관에 동의합니다.
-                    </Button>
-                  </Card>
-                </Modal>
-              </Col>
-              <Col md={12} className='text-center mt-2'>
-                {this.state.agreeCheck ? (
-                  <Button className='w-100' onClick={this.handleOnClick}>
-                    등록하기
-                  </Button>
-                ) : (
-                  <div>
-                    <Button variant='secondary' className='w-100' disabled>
-                      등록하기
-                    </Button>
-                  </div>
-                )}
+                      <Modal.Title>divvy 서비스 약관</Modal.Title>
+                    </Modal.Header>
+                    <Card>
+                      <Card.Body>
+                        <Card.Title>서비스 이용 약관</Card.Title>
+                        <Card.Text>
+                          해당 사항은 서비스 이용 약관입니다. divvy 서비스
+                          이용에 대해서 필요한 약관 사항에 대해서 이곳에
+                          기입되어, 이용자들이 가입하기 전에 해당 약관 사항을
+                          보고 동의또는 비동의하게 되는 내용입니다.
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                    <Card>
+                      <Card.Body>
+                        <Card.Title>마케팅 이용 동의</Card.Title>
+                        <Card.Text>
+                          해당 사항은 마케팅 이용 동의 약관입니다. 고객의 정보를
+                          마케팅에 이용함에 있어 고지해야할 사항들이 이곳에
+                          기입되어, 이용자들이 가입하기 전에 해당 약관 사항을
+                          보고 동의 또는 비동의 하게 되는 내용입니다.
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Modal>
+                </div>
               </Col>
             </Row>
           </Form>
+          <div className='d-flex justify-content-center mt-3'>
+            {this.state.agreeCheck ? (
+              <Button type='button' className='btn-primary_dark mx-2'>
+                이전으로
+              </Button>
+            ) : (
+              <div>
+                <Button type='button' className='btn-primary_dark mx-2'>
+                  이전으로
+                </Button>
+              </div>
+            )}
+            {this.state.agreeCheck ? (
+              <Button
+                type='button'
+                className='btn-primary mx-2'
+                onClick={this.handleOnClick}
+              >
+                등록하기
+              </Button>
+            ) : (
+              <div>
+                <Button variant='primary' className='btn-primary mx-2' disabled>
+                  등록하기
+                </Button>
+              </div>
+            )}
+          </div>
           {/*.AddSalesForm productPay */}
         </Container>
         <div className='footer'>
