@@ -173,24 +173,18 @@ class AddIntroduce extends Component {
               </Col>
             </Row>
           </div>
-          <Row>
-            <Col></Col>
-            <Col className='text-center mt-4'>
-              <Button type='button' className='btn-primary_dark'>
-                닫기
-              </Button>
-            </Col>
-            <Col className='text-center mt-4'>
-              <Button
-                type='button'
-                onClick={this.handleIntroduce}
-                className='btn-primary'
-              >
-                등록하기
-              </Button>
-            </Col>
-            <Col></Col>
-          </Row>
+          <div className='d-flex justify-content-center mt-3'>
+            <Button type='button' className='btn-primary_dark mx-3'>
+              닫기
+            </Button>
+            <Button
+              type='button'
+              onClick={this.handleIntroduce}
+              className='btn-primary mx-3'
+            >
+              등록하기
+            </Button>
+          </div>
         </Container>
         <div className='footer'>
           <Footer />

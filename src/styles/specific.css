@@ -37,6 +37,7 @@
 }
 /* 버튼 크기 */
 .MuiTable-root button {
+  border-radius: 31px;
   /* width: auto; */
 }
 /* 테이블 헤더 */
@@ -63,19 +64,19 @@
 
 /* bootstrap button */
 .btn-primary {
-  width: 200px;
-  height: 45px;
-  border-radius: 5px;
+  width: 12.5rem;
+  height: 2.8rem;
+  border-radius: 0.3rem;
   background-color: #ebff2e;
   color: #222;
 }
 .btn-primary:hover {
-  background-color: #cde400;
+  background-color: #d6ec0f;
   color: #000;
   border-color: #bbb;
 }
 .btn-primary:focus {
-  background-color: #cde400;
+  background-color: #d6ec0f;
   color: #000;
   border-color: #bbb;
 }
@@ -85,14 +86,16 @@
   color: #444;
 }
 .btn-primary_dark {
-  width: 200px;
-  height: 45px;
+  width: 12.5rem;
+  height: 2.8rem;
   border: none;
   border-radius: 5px;
   background-color: #333;
   color: #fff;
 }
 .btn-outline-primary {
+  width: 12.5rem;
+  height: 2.8rem;
   color: #ebff2e;
   border-color: #ebff2e;
 }
@@ -111,8 +114,6 @@
   border-color: #bbb;
 }
 .btn-outline-secondary {
-  height: 31px;
-  border-radius: 31px;
   background-color: #888;
   color: #fff;
 } /* 수정하기 */
@@ -137,6 +138,7 @@
 }
 /* bootstrap modal */
 .modal-header {
+  border: none;
   /* background-color: #222;
   border-color: #333; */
 }
@@ -179,6 +181,10 @@
 /* mui table */
 .MuiTable-root {
   color: #222;
+}
+.MuiTable-root th {
+  background: #333;
+  color: #fff;
 }
 
 td > div {

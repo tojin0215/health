@@ -165,7 +165,7 @@ const TrainerName = ({
           <TableCell>{ment}</TableCell>
         </Mobile>
         <TableCell className='text-center' onClick={modalOnClick}>
-          <Button className='' variant='outline-secondary' size='sm'>
+          <Button variant='outline-secondary' size='sm'>
             수정하기
           </Button>
         </TableCell>
@@ -646,9 +646,24 @@ const VieWTrainerItem = ({
         </TableCell>
         <Modal show={showModal} onHide={modalClose}>
           <Modal.Header>
-            <Modal.Title>강사 정보 수정</Modal.Title>
+            <Modal.Title>강사 ㅇㅇㅇ 정보 수정</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <div className='row g-3 align-items-center'>
+              <div className='col-auto'>
+                <label htmlFor='inputPassword6' className='col-form-label'>
+                  이름
+                </label>
+              </div>
+              <div className='col-auto'>
+                <input
+                  type='password'
+                  id='inputPassword6'
+                  className='form-control col-auto'
+                  aria-describedby='passwordHelpInline'
+                />
+              </div>
+            </div>
             <Row xs={1}>
               <Col>
                 <Form.Group className='mb-3'>
@@ -711,9 +726,9 @@ const VieWTrainerItem = ({
           </Modal.Body>
           <Modal.Footer>
             <Row className='w-100'>
-              <Col className='py-0 px-1' xs={4}>
+              <Col className='py-0 px-1'>
                 <Button
-                  className='w-100'
+                  className='w-100 my-2'
                   onClick={() =>
                     confirm(trainer_name + ' 강사 정보를 삭제 하시겠습니까?') ==
                     true
@@ -727,20 +742,23 @@ const VieWTrainerItem = ({
                   삭제
                 </Button>
               </Col>
-              <Col className='p-0' xs={8}>
-                <Button className='w-100' onClick={() => updateCompleted(idx)}>
-                  수정하기
-                </Button>
-              </Col>
-              <Col className='mt-2 py-0 px-1'>
+              <div className='d-flex justify-content-center mt-3'>
                 <Button
-                  className='w-100'
+                  className='btn-primary_dark mx-1'
                   onClick={modalClose}
                   variant='outline-light'
                 >
                   닫기
                 </Button>
-              </Col>
+                <Button
+                  className='btn-primary mx-1'
+                  onClick={() => updateCompleted(idx)}
+                >
+                  수정하기
+                </Button>
+              </div>
+              <Col className='p-0'></Col>
+              <Col className='mt-2 py-0 px-1'></Col>
             </Row>
           </Modal.Footer>
         </Modal>
@@ -958,7 +976,7 @@ class Trainer extends Component {
         <Container>
           <h3>강사 목록</h3>
           <div>
-            <Row className='my-2'>
+            <Row className='my-3'>
               <Col>
                 <Dropdown
                   className='searchDrop'
@@ -997,7 +1015,6 @@ class Trainer extends Component {
               </Col>
             </Row>
           </div>
-
           <TableContainer component={Paper}>
             <Table aria-label='simple table' className='table--block'>
               <TableHead>
@@ -1016,7 +1033,7 @@ class Trainer extends Component {
                   <TableCell className='text-center'>수정하기</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
+              <TableBody className='text-center'>
                 {this.state.trainer_phone
                   ? this.state.trainer_phone.slice(
                       this.state.page * this.state.rowsPerPage,

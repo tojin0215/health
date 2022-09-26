@@ -145,3 +145,7 @@ html .MuiInputLabel-outlined {
   -webkit-text-fill-color: rgba(30, 30, 250, 1);
   font-weight: bold;
 }
+
+input {
+  height: 2.8rem;
+}

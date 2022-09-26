@@ -149,9 +149,9 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1080px;
+  max-width: 1088px;
   margin: 0 auto 12rem;
-  padding: 3rem 0.5rem;
+  padding: 6rem 0;
 }
 
 section {
