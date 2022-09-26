@@ -97,6 +97,9 @@
 .table > :not(caption) > * .btn-success:hover {
   background-color: #003c20;
 }
+.MuiTableBody-root tr td {
+  text-align: center;
+}
 
 @media screen and (max-width: 767px) {
   .react-bs-table-container {

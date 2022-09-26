@@ -1020,7 +1020,7 @@ class Trainer extends Component {
               <TableHead>
                 <TableRow>
                   <Default>
-                    <TableCell className='text-center'>소개</TableCell>
+                    <TableCell className='text-center'>이력</TableCell>
                   </Default>
                   <TableCell className='text-center'>이름</TableCell>
                   <TableCell className='text-center'>성별</TableCell>
