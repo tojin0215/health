@@ -649,84 +649,80 @@ const VieWTrainerItem = ({
             <Modal.Title>강사 ㅇㅇㅇ 정보 수정</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className='row g-3 align-items-center'>
-              <div className='col-auto'>
-                <label htmlFor='inputPassword6' className='col-form-label'>
-                  이름
-                </label>
-              </div>
-              <div className='col-auto'>
-                <input
-                  type='password'
-                  id='inputPassword6'
-                  className='form-control col-auto'
-                  aria-describedby='passwordHelpInline'
-                />
-              </div>
-            </div>
-            <Row xs={1}>
-              <Col>
-                <Form.Group className='mb-3'>
-                  <Form.Label htmlFor='disabledTextInput'>이름</Form.Label>
-                  <Form.Control
-                    id='trainer_name'
-                    value={trainer_name_input}
-                    onChange={updateChange1}
-                  />
-                </Form.Group>
+            <Row>
+              <Col xs={2}>
+                <Form.Label htmlFor='disabledTextInput'>이름</Form.Label>
               </Col>
               <Col xs={10}>
-                <Form.Group className='mb-3'>
-                  <Form.Label>생년월일</Form.Label>
-                  <Form.Control value={birth} disabled />
-                </Form.Group>
-              </Col>
-              <Col xs={2}>
-                <Form.Group className='mb-3'>
-                  <Form.Label>성별</Form.Label>
-                  <Form.Control value={sex == 1 ? '남' : '여'} disabled />
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group className='mb-3'>
-                  <Form.Label htmlFor='disabledTextInput'>연락처</Form.Label>
-                  <Form.Control
-                    type='number'
-                    id='disabledTextInput'
-                    value={phone_input}
-                    onChange={updateChange2}
-                  />
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group className='mb-3'>
-                  <Form.Label htmlFor='TextInput'>이력</Form.Label>
-                  <Form.Control
-                    id='history'
-                    onChange={updateChange4}
-                    as='textarea'
-                    rows={5}
-                    value={history_input}
-                  />
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group className='mb-3'>
-                  <Form.Label htmlFor='TextInput'>자기소개</Form.Label>
-                  <Form.Control
-                    id='ment'
-                    onChange={updateChange3}
-                    as='textarea'
-                    rows={6}
-                    value={ment_input}
-                  />
-                </Form.Group>
+                <Form.Control
+                  id='trainer_name'
+                  value={trainer_name_input}
+                  onChange={updateChange1}
+                />
               </Col>
             </Row>
-          </Modal.Body>
-          <Modal.Footer>
-            <Row className='w-100'>
-              <Col className='py-0 px-1'>
+            <Row>
+              <Col xs={2}>
+                <Form.Label>생년월일</Form.Label>
+              </Col>
+              <Col xs={10}>
+                <Form.Control value={birth} disabled />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={2}>
+                <Form.Label>성별</Form.Label>
+              </Col>
+              <Col xs={10}>
+                <Form.Control value={sex == 1 ? '남' : '여'} disabled />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={2}>
+                <Form.Label htmlFor='disabledTextInput'>연락처</Form.Label>
+              </Col>
+              <Col xs={10}>
+                <Form.Control
+                  type='number'
+                  id='disabledTextInput'
+                  value={phone_input}
+                  onChange={updateChange2}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={2}>
+                <Form.Label htmlFor='TextInput'>이력</Form.Label>
+              </Col>
+              <Col xs={10}>
+                <Form.Control
+                  id='history'
+                  onChange={updateChange4}
+                  as='textarea'
+                  rows={5}
+                  value={history_input}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={2}>
+                <Form.Label htmlFor='TextInput'>자기소개</Form.Label>
+              </Col>
+              <Col xs={10}>
+                <Form.Control
+                  id='ment'
+                  onChange={updateChange3}
+                  as='textarea'
+                  rows={6}
+                  value={ment_input}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col className='text-danger'>
+                삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+              </Col>
+              <Col>
                 <Button
                   className='w-100 my-2'
                   onClick={() =>
@@ -742,7 +738,9 @@ const VieWTrainerItem = ({
                   삭제
                 </Button>
               </Col>
-              <div className='d-flex justify-content-center mt-3'>
+            </Row>
+            <Row>
+              <Col>
                 <Button
                   className='btn-primary_dark mx-1'
                   onClick={modalClose}
@@ -750,17 +748,17 @@ const VieWTrainerItem = ({
                 >
                   닫기
                 </Button>
+              </Col>
+              <Col>
                 <Button
                   className='btn-primary mx-1'
                   onClick={() => updateCompleted(idx)}
                 >
                   수정하기
                 </Button>
-              </div>
-              <Col className='p-0'></Col>
-              <Col className='mt-2 py-0 px-1'></Col>
+              </Col>
             </Row>
-          </Modal.Footer>
+          </Modal.Body>
         </Modal>
       </TableRow>
       <Default>
