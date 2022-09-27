@@ -117,7 +117,7 @@ const ViewIntroduceItem = ({
           </Button>
           <Modal show={showModal} size='lg' onHide={() => setShowModal(false)}>
             {/* <Modal show={true} className=''> */}
-            <h2>{manager_name}</h2>
+            <h2 className='text-center'>{manager_name}</h2>
             <div className='py-3 text-center'>
               {/* <img className='width-inherit' src={picture} /> */}
               {/* 웹 올릴때  밑에 거*/}
