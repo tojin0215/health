@@ -29,7 +29,15 @@ import Dropdown from 'react-dropdown';
 import moment from 'moment';
 // Bootstrap
 import Form from 'react-bootstrap/Form';
-import { Container, Modal, Row, Col, FloatingLabel } from 'react-bootstrap';
+import {
+  Container,
+  Modal,
+  Row,
+  Col,
+  FloatingLabel,
+  Tabs,
+  Tab,
+} from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 // MUI 테이블
 import Table from '@mui/material/Table';
@@ -1576,9 +1584,10 @@ const ViewClientItem = ({
     // 회원 페이지
     <TableRow>
       <TableCell onClick={modalOnClick}>{client_name}</TableCell>
-      <TableCell onClick={modalOnClick}>{phone}</TableCell>
       <TableCell onClick={modalOnClick}>{sex == 1 ? '남' : '여'}</TableCell>
+      <TableCell onClick={modalOnClick}>{phone}</TableCell>
       <TableCell onClick={modalOnClick}>{newDate}</TableCell>
+      <TableCell onClick={modalOnClick}>{lockerNumber}</TableCell>
       {/* <TableCell>
         <button onClick={modalOnClick}>수정</button>
       </TableCell> */}
@@ -1868,6 +1877,10 @@ class Client extends Component {
     this.setState({ searchOption: e.value });
   };
 
+  moveClientAdd = () => {
+    this.props.history.push('/clientAdd');
+  };
+
   handleOnSearch = () => {
     selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
@@ -1949,6 +1962,8 @@ class Client extends Component {
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
+                <Link to='/home'>HOME</Link>
+                <span>&#62;</span>
                 <Link to='/client'>회원</Link>
               </div>
               {/*.breadCrumb */}
@@ -1960,7 +1975,7 @@ class Client extends Component {
         <Container>
           <h3>회원 목록</h3>
           <div>
-            <Row>
+            {/* <Row>
               <div className='hstack gap-3 input-group'>
                 <Dropdown
                   className='searchDrop'
@@ -1979,9 +1994,11 @@ class Client extends Component {
                 <Button variant='primary' onClick={this.handleOnSearch}>
                   검색
                 </Button>
-                <Button variant='outline-primary'>등록하기</Button>
+                <Button variant='outline-primary' onClick={this.moveClientAdd}>
+                  등록하기
+                </Button>
               </div>
-            </Row>
+            </Row> */}
             <Row className='my-2'>
               <Col>
                 <Dropdown
@@ -2017,61 +2034,240 @@ class Client extends Component {
               </Col>
             </Row>
           </div>
-          <TableContainer component={Paper}>
-            <Table className='table--block' aria-label='simple table'>
-              <TableHead>
-                <TableRow>
-                  <TableCell>회원이름</TableCell>
-                  <TableCell>연락처</TableCell>
-                  <TableCell>성별</TableCell>
-                  <TableCell>가입일</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {this.state.client_phone
-                  ? this.state.client_phone.slice(
-                      this.state.page * this.state.rowsPerPage,
-                      this.state.page * this.state.rowsPerPage +
-                        this.state.rowsPerPage
-                    )
-                  : this.state.clinet_name
-                  ? this.state.clinet_name.slice(
-                      this.state.page * this.state.rowsPerPage,
-                      this.state.page * this.state.rowsPerPage +
-                        this.state.rowsPerPage
-                    )
-                  : this.state.viewClientList.slice(
-                      this.state.page * this.state.rowsPerPage,
-                      this.state.page * this.state.rowsPerPage +
-                        this.state.rowsPerPage
-                    )}
-              </TableBody>
-            </Table>
-            {this.state.viewClientList.length === 0 ? (
-              <div className='p-3 fs-5 fw-bold text-center'>
-                <TbMoodSuprised className='fs-3' />
-                <p>등록된 회원이 없습니다.</p>
-              </div>
-            ) : (
-              ''
-            )}
-            <TablePagination
-              rowsPerPageOptions={[
-                5,
-                10,
-                25,
-                {
-                  label: 'All',
-                  value: this.state.viewClientList.length,
-                },
-              ]}
-              count={this.state.viewClientList.length}
-              rowsPerPage={this.state.rowsPerPage}
-              page={this.state.page}
-              onPageChange={this.handleChangePage}
-              onRowsPerPageChange={this.handleChangeRowsPerPage}
-            />
-          </TableContainer>
+          <Tabs defaultActiveKey='allClient' id='client-tab' className='mb-3'>
+            <Tab eventKey='allClient' title='전체'>
+              <TableContainer component={Paper}>
+                <Table className='table--block' aria-label='simple table'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>회원이름</TableCell>
+                      <TableCell>성별</TableCell>
+                      <TableCell>연락처</TableCell>
+                      <TableCell>가입일</TableCell>
+                      <TableCell>사물함번호</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.client_phone
+                      ? this.state.client_phone.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )
+                      : this.state.clinet_name
+                      ? this.state.clinet_name.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )
+                      : this.state.viewClientList.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )}
+                  </TableBody>
+                </Table>
+                {this.state.viewClientList.length === 0 ? (
+                  <div className='p-3 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>등록된 회원이 없습니다.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.viewClientList.length,
+                    },
+                  ]}
+                  count={this.state.viewClientList.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
+              </TableContainer>
+            </Tab>
+            <Tab eventKey='activeClient' title='유효회원'>
+              <TableContainer component={Paper}>
+                <Table className='table--block' aria-label='simple table'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>회원이름</TableCell>
+                      <TableCell>성별</TableCell>
+                      <TableCell>연락처</TableCell>
+                      <TableCell>가입일</TableCell>
+                      <TableCell>사물함번호</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.client_phone
+                      ? this.state.client_phone.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )
+                      : this.state.clinet_name
+                      ? this.state.clinet_name.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )
+                      : this.state.viewClientList.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )}
+                  </TableBody>
+                </Table>
+                {this.state.viewClientList.length === 0 ? (
+                  <div className='p-3 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>등록된 회원이 없습니다.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.viewClientList.length,
+                    },
+                  ]}
+                  count={this.state.viewClientList.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
+              </TableContainer>
+            </Tab>
+            <Tab eventKey='warningClient' title='마감임박'>
+              <TableContainer component={Paper}>
+                <Table className='table--block' aria-label='simple table'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>회원이름</TableCell>
+                      <TableCell>성별</TableCell>
+                      <TableCell>연락처</TableCell>
+                      <TableCell>가입일</TableCell>
+                      <TableCell>사물함번호</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.client_phone
+                      ? this.state.client_phone.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )
+                      : this.state.clinet_name
+                      ? this.state.clinet_name.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )
+                      : this.state.viewClientList.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )}
+                  </TableBody>
+                </Table>
+                {this.state.viewClientList.length === 0 ? (
+                  <div className='p-3 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>등록된 회원이 없습니다.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.viewClientList.length,
+                    },
+                  ]}
+                  count={this.state.viewClientList.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
+              </TableContainer>
+            </Tab>
+            <Tab eventKey='endClient' title='마감'>
+              <TableContainer component={Paper}>
+                <Table className='table--block' aria-label='simple table'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>회원이름</TableCell>
+                      <TableCell>성별</TableCell>
+                      <TableCell>연락처</TableCell>
+                      <TableCell>가입일</TableCell>
+                      <TableCell>사물함번호</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.client_phone
+                      ? this.state.client_phone.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )
+                      : this.state.clinet_name
+                      ? this.state.clinet_name.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )
+                      : this.state.viewClientList.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )}
+                  </TableBody>
+                </Table>
+                {this.state.viewClientList.length === 0 ? (
+                  <div className='p-3 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>등록된 회원이 없습니다.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.viewClientList.length,
+                    },
+                  ]}
+                  count={this.state.viewClientList.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
+              </TableContainer>
+            </Tab>
+          </Tabs>
         </Container>
         <div className='footer'>
           <Footer />
