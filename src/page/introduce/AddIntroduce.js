@@ -145,8 +145,8 @@ class AddIntroduce extends Component {
                   value={this.props.userinfo.fitness_name}
                 ></Form.Control>
               </Col> */}
-            <Row>
-              <Col xs={1}>
+            <Row className='mb-3'>
+              <Col xs={1} className='mt-1'>
                 <h5>내용</h5>
               </Col>
               <Col xs={11}>
@@ -156,12 +156,13 @@ class AddIntroduce extends Component {
                   onChange={this.handleChange}
                   type='text'
                   as='textarea'
+                  placeholder='내용을 입력해주세요'
                   rows={5}
                 ></Form.Control>
               </Col>
             </Row>
             <Row>
-              <Col xs={1}>
+              <Col xs={1} className='input_tit'>
                 <h5>사진</h5>
               </Col>
               <Col xs={11}>
@@ -175,16 +176,19 @@ class AddIntroduce extends Component {
               </Col>
             </Row>
           </div>
-          <Button
-            variant='secondary'
-            type='button'
-            onClick={this.returnIntroduce}
-          >
-            닫기
-          </Button>
-          <Button type='button' onClick={this.handleIntroduce}>
-            등록하기
-          </Button>
+          <div className='d-flex justify-content-center mt-3'>
+            <Button
+              className='btn-primary-dark mx-2'
+              variant='secondary'
+              type='button'
+              onClick={this.returnIntroduce}
+            >
+              이전
+            </Button>
+            <Button type='button' onClick={this.handleIntroduce}>
+              등록하기
+            </Button>
+          </div>
         </Container>
         <div className='footer'>
           <Footer />

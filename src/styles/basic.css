@@ -28,6 +28,9 @@ h3 {
   /* border-bottom: 1px solid #ebff2e; */
   padding-bottom: 0.6rem;
 }
+h4 {
+  margin-bottom: 1rem;
+}
 
 ul,
 ol,

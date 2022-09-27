@@ -124,7 +124,7 @@ const ViewIntroduceItem = ({
               <img className='w-100' src={'/api/' + picture} />
             </div>
             <Row>
-              <Col xs={1} className='d-flex '>
+              <Col xs={1} className='input_tit'>
                 <h5>사진</h5>
               </Col>
               <Col xs={11}>
@@ -137,7 +137,7 @@ const ViewIntroduceItem = ({
               </Col>
             </Row>
             <Row className='my-2'>
-              <Col xs={1}>
+              <Col xs={1} className='mt-1'>
                 <h5>내용</h5>
               </Col>
               <Col xs={11}>
