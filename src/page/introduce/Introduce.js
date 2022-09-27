@@ -117,14 +117,14 @@ const ViewIntroduceItem = ({
           </Button>
           <Modal show={showModal} size='lg' onHide={() => setShowModal(false)}>
             {/* <Modal show={true} className=''> */}
-            <h2>{manager_name}</h2>
+            <h2 className='text-center'>{manager_name}</h2>
             <div className='py-3 text-center'>
               {/* <img className='width-inherit' src={picture} /> */}
               {/* 웹 올릴때  밑에 거*/}
-              <img className='width-inherit' src={'/api/' + picture} />
+              <img className='w-100' src={'/api/' + picture} />
             </div>
             <Row>
-              <Col xs={1}>
+              <Col xs={1} className='d-flex '>
                 <h5>사진</h5>
               </Col>
               <Col xs={11}>
@@ -132,11 +132,11 @@ const ViewIntroduceItem = ({
                   type='file'
                   onChange={updateChange1}
                   accept='image/*'
-                  className='w-100'
+                  className='w-100 '
                 ></Form.Control>
               </Col>
             </Row>
-            <Row>
+            <Row className='my-2'>
               <Col xs={1}>
                 <h5>내용</h5>
               </Col>
@@ -150,8 +150,10 @@ const ViewIntroduceItem = ({
                 ></Form.Control>
               </Col>
             </Row>
-            <Col xs={12} className='text-danger text-end'>
-              삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+            <Col xs={12} className='text-danger text-end mt-3'>
+              <span className='m-2'>
+                삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+              </span>
               <Button
                 onClick={() =>
                   confirm('정말 삭제하시겠습니까?') == true
@@ -163,21 +165,23 @@ const ViewIntroduceItem = ({
                 삭제
               </Button>
             </Col>
-            <Row>
-              <Col>
-                <Button onClick={close} variant='secondary'>
-                  닫기
+            <Row className='d-flex justify-content-center mt-3'>
+              <Button
+                className='btn-primary-dark mx-2'
+                onClick={close}
+                variant='secondary'
+              >
+                닫기
+              </Button>
+              {whether ? (
+                <Button className='mx-2' onClick={() => handleUpdate(idi)}>
+                  수정하기
                 </Button>
-              </Col>
-              <Col>
-                {whether ? (
-                  <Button onClick={() => handleUpdate(idi)}>수정하기</Button>
-                ) : (
-                  <Button onClick={() => handleUpdateStory(idi)}>
-                    수정하기
-                  </Button>
-                )}
-              </Col>
+              ) : (
+                <Button className='mx-2' onClick={() => handleUpdateStory(idi)}>
+                  수정하기
+                </Button>
+              )}
             </Row>
           </Modal>
         </Col>
