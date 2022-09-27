@@ -478,17 +478,22 @@ const ClientPhone = ({
             <CustomerCalendarComponent customer_no={idc} />
           </div>
           <Row className='mt-3 client__modal--information'>
-            <Col xs={6} md={4} className='mb-2'>
+            <Col xs={2}>
               <h5 className='mb-1'>이름</h5>
-              {showUpdate ? (
-                <Form.Control
-                  value={client_name_input}
-                  onChange={updateChange1}
-                />
-              ) : (
-                <p>{client_name}</p>
-              )}
             </Col>
+            {showUpdate ? (
+              <Form.Control
+                value={client_name_input}
+                onChange={updateChange1}
+              />
+            ) : (
+              <Col xs={10}>{client_name}</Col>
+            )}
+            <Col xs={2}>
+              <h5 className='mb-1'>생년월일</h5>
+            </Col>
+            <Col xs={10}>{birth}</Col>
+            <Col xs={6} md={4} className='mb-2'></Col>
             <h3>현재 사용중인 이용권</h3>
             <div>{voucher}</div>
             <Button onClick={viewModalOnclick}>이용권&기간권 더보기</Button>
@@ -1040,17 +1045,21 @@ const ClientName = ({
             <CustomerCalendarComponent customer_no={idc} />
           </div>
           <Row className='mt-3 client__modal--information'>
-            <Col xs={6} md={12} className='mb-2 '>
+            <Col xs={2}>
               <h5 className='mb-1'>이름</h5>
-              {showUpdate ? (
-                <Form.Control
-                  value={client_name_input}
-                  onChange={updateChange1}
-                />
-              ) : (
-                <p>{client_name}</p>
-              )}
             </Col>
+            {showUpdate ? (
+              <Form.Control
+                value={client_name_input}
+                onChange={updateChange1}
+              />
+            ) : (
+              <Col xs={10}>{client_name}</Col>
+            )}
+            <Col xs={2}>
+              <h5 className='mb-1'>생년월일</h5>
+            </Col>
+            <Col xs={10}>{birth}</Col>
             <h3>현재 사용중인 이용권</h3>
             <div>{voucher}</div>
             <Button onClick={viewModalOnclick}>이용권&기간권 더보기</Button>
@@ -1065,10 +1074,6 @@ const ClientName = ({
               </Modal.Header>
               <Modal.Body className='mw-100'>{voucher2}</Modal.Body>
             </Modal>
-            <Col xs={6} md={4} className='mb-2'>
-              <h5 className='mb-1'>생년월일</h5>
-              <p>{birth}</p>
-            </Col>
             <Col xs={12} md={8} className='mb-2'>
               <h5 className='mb-1'>주소</h5>
               {showUpdate ? (
@@ -1618,21 +1623,21 @@ const ViewClientItem = ({
             <CustomerCalendarComponent customer_no={idc} />
           </div>
           <Row className='mt-3 client__modal--information'>
-            <Col xs={6} md={4} className='mb-2'>
+            <Col xs={2}>
               <h5 className='mb-1'>이름</h5>
-              {showUpdate ? (
-                <Form.Control
-                  value={client_name_input}
-                  onChange={updateChange1}
-                />
-              ) : (
-                <p>{client_name}</p>
-              )}
             </Col>
-            <Col xs={6} md={4} className='mb-2'>
+            {showUpdate ? (
+              <Form.Control
+                value={client_name_input}
+                onChange={updateChange1}
+              />
+            ) : (
+              <Col xs={10}>{client_name}</Col>
+            )}
+            <Col xs={2}>
               <h5 className='mb-1'>생년월일</h5>
-              <p>{birth}</p>
             </Col>
+            <Col xs={10}>{birth}</Col>
             <Col xs={12} md={8} className='mb-2'>
               <h5 className='mb-1'>주소</h5>
               {showUpdate ? (
