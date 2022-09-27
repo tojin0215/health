@@ -2028,7 +2028,11 @@ class Client extends Component {
                 </Button>
               </Col>
               <Col className='col-lg-2'>
-                <Button className='w-100 h-100' variant='outline-primary'>
+                <Button
+                  className='w-100 h-100'
+                  variant='outline-primary'
+                  onClick={this.moveClientAdd}
+                >
                   등록하기
                 </Button>
               </Col>
