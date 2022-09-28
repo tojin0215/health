@@ -1442,36 +1442,31 @@ const ViewClientItem = ({
             ''
           ) : (
             <Row className='client-infomation__detail--membership'>
-              <Col xs={12}>
-                <h4>{kind}</h4>
-              </Col>
-              <Col xs={12} sm={8}>
-                <p>
+              <Col xs={9}>
+                <Col xs={12}>
+                  <h4>{kind}</h4>
+                </Col>
+                <Col xs={12}>
                   이용권: {paidMembership2}/{paidMembership}
-                </p>
-                <p>이용권 결제일: {date1}</p>
+                  <br />
+                  이용권 결제일: {date1}
+                </Col>
               </Col>
-              <Col xs={12} sm={4}>
-                <div className='text-end'>
-                  <Button
-                    variant='outline-danger'
-                    size='sm'
-                    onClick={paidControl}
-                  >
-                    <RemoveIcon />
-                    이용권 차감하기
-                  </Button>
-                </div>
-                <div className='text-end'>
-                  <Button
-                    variant='outline-success'
-                    size='sm'
-                    onClick={paidControl2}
-                  >
-                    <AddIcon />
-                    이용권 증가하기
-                  </Button>
-                </div>
+              <Col xs={3}>
+                <Col xs={12} sm={4}>
+                  <div className='text-center'>
+                    <Button variant='paidControl' onClick={paidControl}>
+                      <RemoveIcon />
+                      이용권 차감하기
+                    </Button>
+                  </div>
+                  <div className='text-end'>
+                    <Button variant='paidControl' onClick={paidControl2}>
+                      <AddIcon />
+                      이용권 증가하기
+                    </Button>
+                  </div>
+                </Col>
               </Col>
             </Row>
           )
@@ -1638,69 +1633,77 @@ const ViewClientItem = ({
               <h5 className='mb-1'>생년월일</h5>
             </Col>
             <Col xs={10}>{birth}</Col>
-            <Col xs={12} md={8} className='mb-2'>
+            <Col xs={2} className='mb-2'>
               <h5 className='mb-1'>주소</h5>
-              {showUpdate ? (
-                <Form.Control value={address_input} onChange={updateChange2} />
-              ) : (
-                <p>{address}</p>
-              )}
             </Col>
-            <Col xs={6} md={4} className='mb-2'>
+            {showUpdate ? (
+              <Form.Control value={address_input} onChange={updateChange2} />
+            ) : (
+              <Col xs={10}>{address}</Col>
+            )}
+            <Col xs={2} className='mb-2'>
               <h5 className='mb-1'>연락처</h5>
-              {showUpdate ? (
-                <Form.Control value={phone_input} onChange={updateChange3} />
-              ) : (
-                <p>{phone}</p>
-              )}
             </Col>
-            <Col xs={6} md={4} className='mb-2'>
-              <h5 className='mb-1'>가입경로</h5>
-              <p>{join_route}</p>
+            {showUpdate ? (
+              <Form.Control value={phone_input} onChange={updateChange3} />
+            ) : (
+              <Col xs={10}>{phone}</Col>
+            )}
+            <Col xs={2} className='mb-4'>
+              <h5>메모</h5>
             </Col>
-            <Col xs={6} md={4} className='mb-2'>
-              <h5 className='mb-1'>사물함번호</h5>
-              {showUpdate ? (
-                <Form.Control
-                  type='number'
-                  value={locker_input}
-                  onChange={updateChange4}
-                />
-              ) : (
-                <p>{lockerNumber}</p>
-              )}
-            </Col>
-            <Col xs={6} md={4} className='mb-2'>
-              <h5 className='mb-1'>운동복사용여부</h5>
-              {showUpdate ? (
-                <Form.Group>
-                  <Form.Check inline>
-                    <Form.Check.Label htmlFor='route1' className='w-100'>
-                      미사용
-                    </Form.Check.Label>
-                    <Form.Check.Input
-                      type='radio'
-                      checked={wear_input === '미사용'}
-                      onChange={() => setWear_input('미사용')}
-                    />
-                  </Form.Check>
-                  <Form.Check inline>
-                    <Form.Check.Label htmlFor='route1' className='w-100'>
-                      사용
-                    </Form.Check.Label>
-                    <Form.Check.Input
-                      type='radio'
-                      checked={wear_input === '사용'}
-                      onChange={() => setWear_input('사용')}
-                    />
-                  </Form.Check>
-                </Form.Group>
-              ) : (
-                <p>{sportswear}</p>
-              )}
-            </Col>
+            <Col xs={10}>메모내용</Col>
+            <div className='d-flex justify-content-between'>
+              <div className='d-flex justify-content'>
+                <h5 className='me-3'>운동복사용여부</h5>
+                {showUpdate ? (
+                  <Form.Group>
+                    <Form.Check inline>
+                      <Form.Check.Label htmlFor='route1' className='w-100'>
+                        미사용
+                      </Form.Check.Label>
+                      <Form.Check.Input
+                        type='radio'
+                        checked={wear_input === '미사용'}
+                        onChange={() => setWear_input('미사용')}
+                      />
+                    </Form.Check>
+                    <Form.Check inline>
+                      <Form.Check.Label htmlFor='route1' className='w-100'>
+                        사용
+                      </Form.Check.Label>
+                      <Form.Check.Input
+                        type='radio'
+                        checked={wear_input === '사용'}
+                        onChange={() => setWear_input('사용')}
+                      />
+                    </Form.Check>
+                  </Form.Group>
+                ) : (
+                  <p>{sportswear}</p>
+                )}
+              </div>
+              <div className='d-flex justify-content'>
+                <h5 className='me-3'>사물함번호</h5>
+                {showUpdate ? (
+                  <Form.Control
+                    type='number'
+                    value={locker_input}
+                    onChange={updateChange4}
+                  />
+                ) : (
+                  <p>{lockerNumber}</p>
+                )}
+              </div>
+              <div className='d-flex justify-content'>
+                <h5 className='me-3'>가입경로</h5>
+                <p>{join_route}</p>
+              </div>
+            </div>
+          </Row>
+          <Row>
             <div>
-              <div className='d-flex justify-content-between '>
+              <div className='d-flex justify-content-between'>
                 <h4>현재 사용중인 이용권</h4>
                 <Button
                   className='border-0'
@@ -1725,12 +1728,15 @@ const ViewClientItem = ({
                 </Modal>
               </div>
             </div>
-            <div className='text-center mt-4'>
+            <div className='text-end text-danger mt-4'>
               {showUpdate ? (
                 loginWhether === 1 ? (
                   ''
                 ) : (
                   <div>
+                    <span className='m-2'>
+                      삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+                    </span>
                     <Button
                       variant='outline-danger'
                       onClick={() =>
@@ -1743,12 +1749,8 @@ const ViewClientItem = ({
                           : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
                       }
                     >
-                      회원삭제
+                      삭제
                     </Button>
-                    <p className='text-danger fs-6 fw-lighter fst-italic'>
-                      회원 삭제시 되돌릴 수 없습니다.
-                      <br /> 한번 더 확인해주세요.
-                    </p>
                   </div>
                 )
               ) : (
@@ -1757,14 +1759,23 @@ const ViewClientItem = ({
             </div>
           </Row>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className='d-flex justify-content-center'>
           {showUpdate ? (
-            <Button onClick={() => updateCompleted(idc)} variant='success'>
+            <Button onClick={modalClose} variant='primary-dark'>
+              취소
+            </Button>
+          ) : (
+            <Button onClick={modalClose} variant='primary-dark'>
+              닫기
+            </Button>
+          )}
+          {showUpdate ? (
+            <Button onClick={() => updateCompleted(idc)} variant='primary'>
               완료하기
             </Button>
           ) : (
             <Button onClick={modalUpdate} variant='primary'>
-              정보 수정
+              수정하기
             </Button>
           )}
         </Modal.Footer>
@@ -1979,77 +1990,47 @@ class Client extends Component {
         </header>
         <Container>
           <h3>회원 목록</h3>
-          <div>
-            {/* <Row>
-              <div className='hstack gap-3 input-group'>
-                <Dropdown
-                  className='searchDrop'
-                  options={options}
-                  onChange={this.handleOnChangeSearchOption}
-                  value={this.state.searchOption}
-                  placeholder='검색 대상을 선택하세요.'
-                />
-                <input
-                  type='text'
-                  className='form-control'
-                  id='search'
-                  value={this.state.search}
-                  onChange={(e) => this.setState({ search: e.target.value })}
-                />
-                <Button variant='primary' onClick={this.handleOnSearch}>
-                  검색
-                </Button>
-                <Button variant='outline-primary' onClick={this.moveClientAdd}>
-                  등록하기
-                </Button>
-              </div>
-            </Row> */}
-            <Row className='my-2'>
-              <Col>
-                <Dropdown
-                  className='searchDrop'
-                  options={options}
-                  onChange={this.handleOnChangeSearchOption}
-                  value={this.state.searchOption}
-                  placeholder='검색 대상을 선택하세요.'
-                />
-              </Col>
-              <Col>
-                <input
-                  className='w-100 h-100'
-                  type='text'
-                  id='search'
-                  value={this.state.search}
-                  onChange={(e) => this.setState({ search: e.target.value })}
-                />
-              </Col>
-              <Col className='col-lg-2'>
-                <Button
-                  className='w-100 h-100'
-                  variant='primary'
-                  onClick={this.handleOnSearch}
-                >
-                  검색
-                </Button>
-              </Col>
-              <Col className='col-lg-2'>
-                <Button
-                  className='w-100 h-100'
-                  variant='outline-primary'
-                  onClick={this.moveClientAdd}
-                >
-                  등록하기
-                </Button>
-              </Col>
-            </Row>
+          <div className='d-flex justify-content mb-3'>
+            <div className='d-flex sch_list'>
+              <Dropdown
+                className='searchDrop'
+                options={options}
+                onChange={this.handleOnChangeSearchOption}
+                value={this.state.searchOption}
+                placeholder='검색 대상을 선택하세요.'
+              />
+              <input
+                type='text'
+                id='search'
+                value={this.state.search}
+                onChange={(e) => this.setState({ search: e.target.value })}
+              />
+            </div>
+            <div>
+              <Button
+                className='mx-2'
+                variant='primary'
+                onClick={this.handleOnSearch}
+              >
+                검색
+              </Button>
+            </div>
+            <div>
+              <Button variant='outline-primary' onClick={this.moveClientAdd}>
+                등록하기
+              </Button>
+            </div>
           </div>
-          <Tabs defaultActiveKey='allClient' id='client-tab' className='mb-3'>
+          <Tabs defaultActiveKey='allClient' id='client-tab'>
             <Tab eventKey='allClient' title='전체'>
               <TableContainer component={Paper}>
-                <Table className='table--block' aria-label='simple table'>
+                <Table
+                  className='table--block table-dark'
+                  aria-label='simple table'
+                >
                   <TableHead>
                     <TableRow>
-                      <TableCell>회원이름</TableCell>
+                      <TableCell>이름</TableCell>
                       <TableCell>성별</TableCell>
                       <TableCell>연락처</TableCell>
                       <TableCell>가입일</TableCell>
@@ -2104,10 +2085,13 @@ class Client extends Component {
             </Tab>
             <Tab eventKey='activeClient' title='유효회원'>
               <TableContainer component={Paper}>
-                <Table className='table--block' aria-label='simple table'>
+                <Table
+                  className='table--block table-dark'
+                  aria-label='simple table'
+                >
                   <TableHead>
                     <TableRow>
-                      <TableCell>회원이름</TableCell>
+                      <TableCell>이름</TableCell>
                       <TableCell>성별</TableCell>
                       <TableCell>연락처</TableCell>
                       <TableCell>가입일</TableCell>
@@ -2162,10 +2146,13 @@ class Client extends Component {
             </Tab>
             <Tab eventKey='warningClient' title='마감임박'>
               <TableContainer component={Paper}>
-                <Table className='table--block' aria-label='simple table'>
+                <Table
+                  className='table--block table-dark'
+                  aria-label='simple table'
+                >
                   <TableHead>
                     <TableRow>
-                      <TableCell>회원이름</TableCell>
+                      <TableCell>이름</TableCell>
                       <TableCell>성별</TableCell>
                       <TableCell>연락처</TableCell>
                       <TableCell>가입일</TableCell>
@@ -2220,10 +2207,13 @@ class Client extends Component {
             </Tab>
             <Tab eventKey='endClient' title='마감'>
               <TableContainer component={Paper}>
-                <Table className='table--block' aria-label='simple table'>
+                <Table
+                  className='table--block table-dark'
+                  aria-label='simple table'
+                >
                   <TableHead>
                     <TableRow>
-                      <TableCell>회원이름</TableCell>
+                      <TableCell>이름</TableCell>
                       <TableCell>성별</TableCell>
                       <TableCell>연락처</TableCell>
                       <TableCell>가입일</TableCell>

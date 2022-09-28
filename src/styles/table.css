@@ -103,13 +103,17 @@
 }
 
 /* mui table dark 회원목록 강사목록*/
-.MuiTable-root .table-dark {
-  /*   color: #222; */
+.MuiTableContainer-root {
+  border-radius: 0;
+}
+.MuiTable-root {
+  border-radius: 0;
 }
 
 .table-dark th {
   background: #333;
   color: #fff;
+  text-align: center;
 }
 
 @media screen and (max-width: 767px) {

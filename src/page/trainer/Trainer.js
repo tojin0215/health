@@ -1006,20 +1006,20 @@ class Trainer extends Component {
               <TableHead>
                 <TableRow>
                   <Default>
-                    <TableCell className='text-center'>이력</TableCell>
+                    <TableCell>이력</TableCell>
                   </Default>
-                  <TableCell className='text-center'>이름</TableCell>
-                  <TableCell className='text-center'>성별</TableCell>
-                  <TableCell className='text-center'>연락처</TableCell>
-                  <TableCell className='text-center'>생년월일</TableCell>
+                  <TableCell>이름</TableCell>
+                  <TableCell>성별</TableCell>
+                  <TableCell>연락처</TableCell>
+                  <TableCell>생년월일</TableCell>
                   <Mobile>
                     <TableCell>이력</TableCell>
                     <TableCell>자기소개</TableCell>
                   </Mobile>
-                  <TableCell className='text-center'>수정하기</TableCell>
+                  <TableCell>수정하기</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody className='text-center'>
+              <TableBody>
                 {this.state.trainer_phone
                   ? this.state.trainer_phone.slice(
                       this.state.page * this.state.rowsPerPage,
