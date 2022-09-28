@@ -96,6 +96,11 @@ class AddClient extends Component {
       }
     });
   }
+
+  moveClientList = () => {
+    this.props.history.push('/client');
+  };
+
   handleClient = () => {
     if (this.state.client_name === '') {
       alert('이름을 입력해주새요.');
@@ -267,9 +272,11 @@ class AddClient extends Component {
           <Form>
             <Row className='sectionGlass'>
               <h3 className='mb-4'>회원 정보 입력</h3>
-              <Col md={4}>
-                <Form.Group>
+              <Row>
+                <Col xs={1}>
                   <Form.Label>이름</Form.Label>
+                </Col>
+                <Col xs={5}>
                   <Form.Control
                     id='client_name'
                     type='text'
@@ -277,11 +284,42 @@ class AddClient extends Component {
                     value={this.state.client_name}
                     onChange={this.handleChange}
                   ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col md={4}>
-                <Form.Group>
-                  <Form.Label>핸드폰번호</Form.Label>
+                </Col>
+                <Col xs={1}>
+                  <Form.Label>성별</Form.Label>
+                </Col>
+                <Col xs={5}>
+                  <Form.Group className='d-flex'>
+                    <Form.Check>
+                      <Form.Check.Input
+                        type='radio'
+                        name='radioGroup'
+                        id='male'
+                        checked={this.state.radioGroup['male']}
+                        onChange={this.handleRadio}
+                      />
+                      <Form.Check.Label htmlFor='male' className='w-100'>
+                        남
+                      </Form.Check.Label>
+                    </Form.Check>
+                    <Form.Check>
+                      <Form.Check.Input
+                        type='radio'
+                        name='radioGroup'
+                        id='female'
+                        checked={this.state.radioGroup['female']}
+                        onChange={this.handleRadio}
+                      />
+                      <Form.Check.Label htmlFor='female' className='w-100'>
+                        여
+                      </Form.Check.Label>
+                    </Form.Check>
+                  </Form.Group>
+                </Col>
+                <Col xs={1}>
+                  <Form.Label>연락처</Form.Label>
+                </Col>
+                <Col xs={5}>
                   <Form.Control
                     id='phone'
                     type='text'
@@ -291,11 +329,11 @@ class AddClient extends Component {
                     onChange={this.handleChange}
                     variant='outlined'
                   ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col md={3}>
-                <Form.Group>
+                </Col>
+                <Col xs={1}>
                   <Form.Label>생년월일</Form.Label>
+                </Col>
+                <Col xs={5}>
                   <Form.Control
                     id='birth'
                     type='text'
@@ -304,129 +342,11 @@ class AddClient extends Component {
                     value={this.state.birth}
                     onChange={this.handleChange}
                   ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col md={1}>
-                <Form.Group>
-                  <Form.Label>성별</Form.Label>
-                  <Form.Check>
-                    <Form.Check.Input
-                      type='radio'
-                      name='radioGroup'
-                      id='male'
-                      checked={this.state.radioGroup['male']}
-                      onChange={this.handleRadio}
-                    />
-                    <Form.Check.Label htmlFor='male' className='w-100'>
-                      남
-                    </Form.Check.Label>
-                  </Form.Check>
-                  <Form.Check>
-                    <Form.Check.Input
-                      type='radio'
-                      name='radioGroup'
-                      id='female'
-                      checked={this.state.radioGroup['female']}
-                      onChange={this.handleRadio}
-                    />
-                    <Form.Check.Label htmlFor='female' className='w-100'>
-                      여
-                    </Form.Check.Label>
-                  </Form.Check>
-                </Form.Group>
-              </Col>
-              <Col xs={12}>
-                <Form.Group className=''>
-                  <Form.Label className='w-100'>가입경로</Form.Label>
-                  <Form.Check inline>
-                    <Form.Check.Label htmlFor='route1' className='w-100'>
-                      간판
-                    </Form.Check.Label>
-                    <Form.Check.Input
-                      type='radio'
-                      name='radioGroup2'
-                      id='route1'
-                      checked={this.state.radioGroup2['route1']}
-                      onChange={this.handleRouteRadio}
-                    />
-                  </Form.Check>
-                  <Form.Check inline>
-                    <Form.Check.Label htmlFor='route2' className='w-100'>
-                      홈페이지
-                    </Form.Check.Label>
-                    <Form.Check.Input
-                      type='radio'
-                      name='radioGroup2'
-                      id='route2'
-                      checked={this.state.radioGroup2['route2']}
-                      onChange={this.handleRouteRadio}
-                    />
-                  </Form.Check>
-                  <Form.Check inline>
-                    <Form.Check.Label htmlFor='route3' className='w-100'>
-                      전단지
-                    </Form.Check.Label>
-                    <Form.Check.Input
-                      type='radio'
-                      name='radioGroup2'
-                      id='route3'
-                      checked={this.state.radioGroup2['route3']}
-                      onChange={this.handleRouteRadio}
-                    />
-                  </Form.Check>
-                  <Form.Check inline>
-                    <Form.Check.Label htmlFor='route4' className='w-100'>
-                      지인소개
-                    </Form.Check.Label>
-                    <Form.Check.Input
-                      type='radio'
-                      name='radioGroup2'
-                      id='route4'
-                      checked={this.state.radioGroup2['route4']}
-                      onChange={this.handleRouteRadio}
-                    />
-                  </Form.Check>
-                  <Form.Check inline>
-                    <Form.Check.Label htmlFor='route5' className='w-100'>
-                      SNS
-                    </Form.Check.Label>
-                    <Form.Check.Input
-                      type='radio'
-                      name='radioGroup2'
-                      id='route5'
-                      checked={this.state.radioGroup2['route5']}
-                      onChange={this.handleRouteRadio}
-                    />
-                  </Form.Check>
-                  <Form.Check inline className='me-1'>
-                    <Form.Check.Label htmlFor='route6' className='w-100'>
-                      기타
-                    </Form.Check.Label>
-                    <Form.Check.Input
-                      type='radio'
-                      name='radioGroup2'
-                      id='route6'
-                      checked={this.state.radioGroup2['route6']}
-                      onChange={this.handleRouteRadio}
-                    />
-                  </Form.Check>
-                  <Form.Check
-                    inline
-                    className='p-0 add-client__form__route-text'
-                  >
-                    <Form.Control
-                      placeholder='기타 경로인 경우 입력'
-                      id='join_route'
-                      type='text'
-                      value={this.state.join_route}
-                      onChange={this.handleChange}
-                    ></Form.Control>
-                  </Form.Check>
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group>
+                </Col>
+                <Col xs={1}>
                   <Form.Label>주소</Form.Label>
+                </Col>
+                <Col xs={11}>
                   <Form.Control
                     id='address'
                     type='text'
@@ -434,9 +354,109 @@ class AddClient extends Component {
                     value={this.state.address}
                     onChange={this.handleChange}
                   ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col>
+                </Col>
+                <Col xs={1}>메모</Col>
+                <Col xs={11}>
+                  <Form.Control
+                    id='memo'
+                    type='text'
+                    placeholder='메모 내용을 입력해주세요.'
+                    as='textarea'
+                    rows={4}
+                  ></Form.Control>
+                </Col>
+                <Col md={1}>
+                  <Form.Label>가입경로</Form.Label>
+                </Col>
+                <Col xs={11}>
+                  <Form.Group className=''>
+                    <Form.Check inline>
+                      <Form.Check.Label htmlFor='route1' className='w-100'>
+                        간판
+                      </Form.Check.Label>
+                      <Form.Check.Input
+                        type='radio'
+                        name='radioGroup2'
+                        id='route1'
+                        checked={this.state.radioGroup2['route1']}
+                        onChange={this.handleRouteRadio}
+                      />
+                    </Form.Check>
+                    <Form.Check inline>
+                      <Form.Check.Label htmlFor='route2' className='w-100'>
+                        홈페이지
+                      </Form.Check.Label>
+                      <Form.Check.Input
+                        type='radio'
+                        name='radioGroup2'
+                        id='route2'
+                        checked={this.state.radioGroup2['route2']}
+                        onChange={this.handleRouteRadio}
+                      />
+                    </Form.Check>
+                    <Form.Check inline>
+                      <Form.Check.Label htmlFor='route3' className='w-100'>
+                        전단지
+                      </Form.Check.Label>
+                      <Form.Check.Input
+                        type='radio'
+                        name='radioGroup2'
+                        id='route3'
+                        checked={this.state.radioGroup2['route3']}
+                        onChange={this.handleRouteRadio}
+                      />
+                    </Form.Check>
+                    <Form.Check inline>
+                      <Form.Check.Label htmlFor='route4' className='w-100'>
+                        지인소개
+                      </Form.Check.Label>
+                      <Form.Check.Input
+                        type='radio'
+                        name='radioGroup2'
+                        id='route4'
+                        checked={this.state.radioGroup2['route4']}
+                        onChange={this.handleRouteRadio}
+                      />
+                    </Form.Check>
+                    <Form.Check inline>
+                      <Form.Check.Label htmlFor='route5' className='w-100'>
+                        SNS
+                      </Form.Check.Label>
+                      <Form.Check.Input
+                        type='radio'
+                        name='radioGroup2'
+                        id='route5'
+                        checked={this.state.radioGroup2['route5']}
+                        onChange={this.handleRouteRadio}
+                      />
+                    </Form.Check>
+                    <Form.Check inline className='me-1'>
+                      <Form.Check.Label htmlFor='route6' className='w-100'>
+                        기타
+                      </Form.Check.Label>
+                      <Form.Check.Input
+                        type='radio'
+                        name='radioGroup2'
+                        id='route6'
+                        checked={this.state.radioGroup2['route6']}
+                        onChange={this.handleRouteRadio}
+                      />
+                    </Form.Check>
+                    <Form.Check
+                      inline
+                      className='p-0 add-client__form__route-text'
+                    >
+                      <Form.Control
+                        placeholder='기타 경로인 경우 입력'
+                        id='join_route'
+                        type='text'
+                        value={this.state.join_route}
+                        onChange={this.handleChange}
+                      ></Form.Control>
+                    </Form.Check>
+                  </Form.Group>
+                </Col>
+                {/* <Col>
                 <Form.Group>
                   <Form.Label>사물함번호</Form.Label>
                   <Form.Control
@@ -475,18 +495,20 @@ class AddClient extends Component {
                     />
                   </Form.Check>
                 </Form.Group>
-              </Col>
-              <Col xs={12} className='mt-4 text-center'>
-                <Button
-                  className='w-100'
-                  type='button'
-                  onClick={this.handleClient}
-                >
-                  등록하기
-                </Button>
-              </Col>
+              </Col> */}
+              </Row>
             </Row>
           </Form>
+          <Button
+            variant='secondary'
+            type='button'
+            onClick={this.moveClientList}
+          >
+            이전
+          </Button>
+          <Button type='button' onClick={this.handleClient}>
+            등록하기
+          </Button>
         </Container>
         <div className='footer'>
           <Footer />
