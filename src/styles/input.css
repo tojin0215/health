@@ -29,6 +29,11 @@
 .customer-input--search:active {
   background-color: rgba(255, 255, 160, 0.2);
 }
+
+.Dropdown-control {
+  border: 0;
+}
+
 /* 
 boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5 
  */
@@ -117,9 +122,29 @@ html .MuiInputLabel-outlined {
   z-index: 2;
 }
 
-/* 드롭다운 메뉴 */
-.Dropdown-menu {
-  border-radius: 1rem;
+input {
+  height: 2.8rem;
+}
+
+.form-control {
+  border: none;
+}
+
+/* 목록검색 */
+.sch_list {
+  width: 100%;
+  height: 2.8rem;
+  background: #fff;
+  border-radius: 0.3rem;
+}
+.sch_list > .searchDrop {
+  border: 0;
+  width: 117px;
+  margin-right: 1rem;
+}
+.sch_list > input {
+  width: 70%;
+  border: none;
 }
 
 /*
@@ -144,8 +169,4 @@ html .MuiInputLabel-outlined {
   cursor: pointer;
   -webkit-text-fill-color: rgba(30, 30, 250, 1);
   font-weight: bold;
-}
-
-input {
-  height: 2.8rem;
 }

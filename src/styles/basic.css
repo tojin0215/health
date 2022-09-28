@@ -31,7 +31,10 @@ h3 {
 h4 {
   margin-bottom: 1rem;
 }
-
+h5 {
+  line-height: 2.8rem;
+  font-weight: 500;
+}
 ul,
 ol,
 li {

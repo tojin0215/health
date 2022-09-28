@@ -114,6 +114,7 @@
   border-color: #bbb;
 }
 .btn-outline-secondary {
+  width: 61px;
   background-color: #888;
   color: #fff;
 } /* 수정하기 */
