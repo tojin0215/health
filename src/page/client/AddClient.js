@@ -12,7 +12,8 @@ import {
   insertClient,
   phoneCheckClient,
 } from '../../api/user';
-
+//css
+import '../../styles/client/client.css';
 // Bootstrap
 import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
@@ -272,103 +273,119 @@ class AddClient extends Component {
           <Form>
             <Row className='sectionGlass'>
               <h3 className='mb-4'>회원 정보 입력</h3>
-              <Row>
-                <Col xs={1}>
-                  <Form.Label>이름</Form.Label>
+              <Row className='mb-4'>
+                <Col xs={2}>
+                  <h5>이름</h5>
                 </Col>
-                <Col xs={5}>
+                <Col>
                   <Form.Control
                     id='client_name'
                     type='text'
-                    placeholder='이름'
+                    placeholder='이름을 입력해주세요'
                     value={this.state.client_name}
                     onChange={this.handleChange}
                   ></Form.Control>
                 </Col>
                 <Col xs={1}>
-                  <Form.Label>성별</Form.Label>
+                  <h5>성별</h5>
                 </Col>
-                <Col xs={5}>
-                  <Form.Group className='d-flex'>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        name='radioGroup'
-                        id='male'
-                        checked={this.state.radioGroup['male']}
-                        onChange={this.handleRadio}
-                      />
-                      <Form.Check.Label htmlFor='male' className='w-100'>
-                        남
-                      </Form.Check.Label>
-                    </Form.Check>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        name='radioGroup'
-                        id='female'
-                        checked={this.state.radioGroup['female']}
-                        onChange={this.handleRadio}
-                      />
-                      <Form.Check.Label htmlFor='female' className='w-100'>
-                        여
-                      </Form.Check.Label>
-                    </Form.Check>
-                  </Form.Group>
+                <Col xs={2} className='mt-2'>
+                  <Row>
+                    <Col xs={6}>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='radioGroup'
+                          id='male'
+                          checked={this.state.radioGroup['male']}
+                          onChange={this.handleRadio}
+                        />
+                        <Form.Check.Label htmlFor='male' className='w-100'>
+                          남
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col xs={6}>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='radioGroup'
+                          id='female'
+                          checked={this.state.radioGroup['female']}
+                          onChange={this.handleRadio}
+                        />
+                        <Form.Check.Label htmlFor='female' className='w-100'>
+                          여
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                  </Row>
                 </Col>
-                <Col xs={1}>
-                  <Form.Label>연락처</Form.Label>
+              </Row>
+              <Row className='mb-4'>
+                <Col xs={2}>
+                  <h5>연락처</h5>
                 </Col>
-                <Col xs={5}>
+                <Col>
                   <Form.Control
                     id='phone'
                     type='text'
                     pattern='[0-9]+'
-                    placeholder='01000000000'
+                    placeholder='연락처를 입력해주세요 ( -제외 )'
                     value={this.state.phone}
                     onChange={this.handleChange}
                     variant='outlined'
                   ></Form.Control>
                 </Col>
-                <Col xs={1}>
-                  <Form.Label>생년월일</Form.Label>
+              </Row>
+              <Row className='mb-4'>
+                <Col xs={2}>
+                  <h5>생년월일</h5>
                 </Col>
-                <Col xs={5}>
+                <Col>
                   <Form.Control
                     id='birth'
                     type='text'
                     pattern='[0-9]+'
-                    placeholder='19990101'
+                    placeholder='생년월일을 입력해주세요 ( 8자리 )'
                     value={this.state.birth}
                     onChange={this.handleChange}
                   ></Form.Control>
                 </Col>
-                <Col xs={1}>
-                  <Form.Label>주소</Form.Label>
+              </Row>
+              <Row className='mb-4'>
+                <Col xs={2}>
+                  <h5>주소</h5>
                 </Col>
-                <Col xs={11}>
+                <Col>
                   <Form.Control
                     id='address'
                     type='text'
-                    placeholder='OO시 OO구 OO로 000, 000'
+                    placeholder='주소를 입력해주세요'
                     value={this.state.address}
                     onChange={this.handleChange}
                   ></Form.Control>
                 </Col>
-                <Col xs={1}>메모</Col>
-                <Col xs={11}>
+              </Row>
+              <Row className='mb-4'>
+                <Col xs={2}>
+                  <h5>메모</h5>
+                </Col>
+                <Col>
                   <Form.Control
                     id='memo'
                     type='text'
-                    placeholder='메모 내용을 입력해주세요.'
+                    placeholder='메모를 입력해주세요.'
                     as='textarea'
                     rows={4}
                   ></Form.Control>
                 </Col>
-                <Col md={1}>
-                  <Form.Label>가입경로</Form.Label>
+              </Row>
+              <Row className='route'>
+                <Col md={2}>
+                  <h5>가입경로</h5>
                 </Col>
-                <Col xs={11}>
+                <Col>
                   <Form.Group className=''>
                     <Form.Check inline>
                       <Form.Check.Label htmlFor='route1' className='w-100'>
@@ -442,12 +459,9 @@ class AddClient extends Component {
                         onChange={this.handleRouteRadio}
                       />
                     </Form.Check>
-                    <Form.Check
-                      inline
-                      className='p-0 add-client__form__route-text'
-                    >
+                    <Form.Check inline>
                       <Form.Control
-                        placeholder='기타 경로인 경우 입력'
+                        placeholder='기타'
                         id='join_route'
                         type='text'
                         value={this.state.join_route}
@@ -456,59 +470,65 @@ class AddClient extends Component {
                     </Form.Check>
                   </Form.Group>
                 </Col>
-                {/* <Col>
-                <Form.Group>
-                  <Form.Label>사물함번호</Form.Label>
-                  <Form.Control
-                    id='lockerNumber'
-                    type='number'
-                    value={this.state.lockerNumber}
-                    onChange={this.handleChange}
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group>
-                  <Form.Label>운동복</Form.Label>
-                  <Form.Check inline>
-                    <Form.Check.Label htmlFor='route1' className='w-100'>
-                      미사용
-                    </Form.Check.Label>
-                    <Form.Check.Input
-                      type='radio'
-                      name='radioGroup3'
-                      id='sportswear1'
-                      checked={this.state.radioGroup3['sportswear1']}
-                      onChange={this.handleWearRadio}
-                    />
-                  </Form.Check>
-                  <Form.Check inline>
-                    <Form.Check.Label htmlFor='route1' className='w-100'>
-                      사용
-                    </Form.Check.Label>
-                    <Form.Check.Input
-                      type='radio'
-                      name='radioGroup3'
-                      id='sportswear2'
-                      checked={this.state.radioGroup3['sportswear2']}
-                      onChange={this.handleWearRadio}
-                    />
-                  </Form.Check>
-                </Form.Group>
-              </Col> */}
               </Row>
+              {/* <Col>
+                  <Form.Group>
+                    <Form.Label>사물함번호</Form.Label>
+                    <Form.Control
+                      id='lockerNumber'
+                      type='number'
+                      value={this.state.lockerNumber}
+                      onChange={this.handleChange}
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>운동복</Form.Label>
+                    <Form.Check inline>
+                      <Form.Check.Label htmlFor='route1' className='w-100'>
+                        미사용
+                      </Form.Check.Label>
+                      <Form.Check.Input
+                        type='radio'
+                        name='radioGroup3'
+                        id='sportswear1'
+                        checked={this.state.radioGroup3['sportswear1']}
+                        onChange={this.handleWearRadio}
+                      />
+                    </Form.Check>
+                    <Form.Check inline>
+                      <Form.Check.Label htmlFor='route1' className='w-100'>
+                        사용
+                      </Form.Check.Label>
+                      <Form.Check.Input
+                        type='radio'
+                        name='radioGroup3'
+                        id='sportswear2'
+                        checked={this.state.radioGroup3['sportswear2']}
+                        onChange={this.handleWearRadio}
+                      />
+                    </Form.Check>
+                  </Form.Group>
+                </Col> */}
             </Row>
           </Form>
-          <Button
-            variant='secondary'
-            type='button'
-            onClick={this.moveClientList}
-          >
-            이전
-          </Button>
-          <Button type='button' onClick={this.handleClient}>
-            등록하기
-          </Button>
+          <div className='d-flex justify-content-center mt-3'>
+            <Button
+              variant='primary-dark mx-1'
+              type='button'
+              onClick={this.moveClientList}
+            >
+              취소
+            </Button>
+            <Button
+              className='btn-primary mx-1'
+              type='button'
+              onClick={this.handleClient}
+            >
+              등록하기
+            </Button>
+          </div>
         </Container>
         <div className='footer'>
           <Footer />

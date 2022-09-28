@@ -85,6 +85,7 @@
   border-color: #ebff2e;
   color: #444;
 }
+
 .btn-primary-dark {
   width: 12.5rem;
   height: 2.8rem;
@@ -92,37 +93,55 @@
   border-radius: 5px;
   background-color: #333;
   color: #fff;
+} /* 닫기/취소 */
+
+.btn-paidControl {
+  width: 12.5rem;
+  height: 2.8rem;
+  border-radius: 0.3rem;
+  background: #d9d9d9;
+  color: #888;
 }
+.btn-paidControl:hover {
+  background: #ebff2e;
+  color: #222;
+} /* 이용권 버튼 */
+
 .btn-outline-primary {
   width: 12.5rem;
   height: 2.8rem;
   color: #ebff2e;
   border-color: #ebff2e;
 }
+
 .btn-outline-primary:hover {
   color: #000;
   background-color: #ebff2e;
   border-color: #ebff2e;
 }
+
 .outline-primary-dark {
   color: #222;
   border-color: #222;
 }
+
 .outline-primary-dark:hover {
   background-color: #ebff2e;
   color: #000;
   border-color: #bbb;
 }
+
 .btn-outline-secondary {
   width: 61px;
   background-color: #888;
   color: #fff;
-} /* 수정하기 버튼 */
+}
+
 .btn-outline-danger {
   width: 6.25rem;
   padding: 0;
   line-height: 1.87rem;
-}
+} /* 삭제 */
 
 /* bootstrap text */
 .text-primary {

@@ -14,6 +14,22 @@
   color: blue;
 }
 
+/* 회원상세/수정 */
+.client_modal {
+  line-height: 2.8rem;
+}
+
+/* addclient css */
+.route {
+  border-top: 1px solid #fff;
+  margin-top: 1.563rem;
+  padding-top: 1.563rem;
+}
+
+.add-client__form__route-text {
+  /* width: 100%; */
+}
+
 @media (max-width: 767px) {
   .client_wrap .table--block thead {
     display: none;
@@ -81,18 +97,12 @@
     font-size: 1.6rem;
   }
   .client_modal .client__modal--information {
+    border-bottom: 1px solid #fff;
     padding: 0 10px;
   }
   .rbc-agenda-table tbody tr .rbc-agenda-time-cell > span {
     display: block;
     white-space: normal;
     width: 5rem;
-  }
-
-  /**
-  * 신규 회원 등록
-  */
-  .add-client__form__route-text {
-    width: 100%;
   }
 }

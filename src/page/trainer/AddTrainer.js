@@ -217,8 +217,8 @@ class AddTrainer extends Component {
               <Col xs={1}>
                 <h5>성별</h5>
               </Col>
-              <Col xs={2}>
-                <Row className='mt-2'>
+              <Col xs={2} className='mt-2'>
+                <Row>
                   <Col xs={6}>
                     <Form.Check>
                       <Form.Check.Input
