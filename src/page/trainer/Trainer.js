@@ -166,10 +166,10 @@ const TrainerName = ({
         </Mobile>
         <TableCell className='text-center' onClick={modalOnClick}>
           <Button variant='outline-secondary' size='sm'>
-            수정하기
+            수정
           </Button>
         </TableCell>
-        <Modal show={showModal} onHide={modalClose}>
+        <Modal show={showModal} size='xl' onHide={modalClose}>
           <Modal.Header>
             <Modal.Title>강사 정보 수정</Modal.Title>
           </Modal.Header>
@@ -177,7 +177,7 @@ const TrainerName = ({
             <Row xs={1}>
               <Col>
                 <Form.Group className='mb-3'>
-                  <Form.Label htmlFor='disabledTextInput'>이름</Form.Label>
+                  <h5>이름</h5>
                   <Form.Control
                     id='trainer_name'
                     value={trainer_name_input}
@@ -403,10 +403,10 @@ const TrainerPhone = ({
         </Mobile>
         <TableCell className='text-center' onClick={modalOnClick}>
           <Button className='' variant='outline-secondary' size='sm'>
-            수정하기
+            수정
           </Button>
         </TableCell>
-        <Modal show={showModal} onHide={modalClose}>
+        <Modal show={showModal} size='md' onHide={modalClose}>
           <Modal.Header>
             <Modal.Title>강사 정보 수정</Modal.Title>
           </Modal.Header>
@@ -414,7 +414,7 @@ const TrainerPhone = ({
             <Row xs={1}>
               <Col>
                 <Form.Group className='mb-3'>
-                  <Form.Label htmlFor='disabledTextInput'>이름</Form.Label>
+                  <h5>이름</h5>
                   <Form.Control
                     id='trainer_name'
                     value={trainer_name_input}
@@ -424,7 +424,7 @@ const TrainerPhone = ({
               </Col>
               <Col xs={10}>
                 <Form.Group className='mb-3'>
-                  <Form.Label>생년월일</Form.Label>
+                  <h5>생년월일</h5>
                   <Form.Control value={birth} disabled />
                 </Form.Group>
               </Col>
@@ -436,7 +436,7 @@ const TrainerPhone = ({
               </Col>
               <Col>
                 <Form.Group className='mb-3'>
-                  <Form.Label htmlFor='disabledTextInput'>연락처</Form.Label>
+                  <h5>연락처</h5>
                   <Form.Control
                     type='number'
                     id='disabledTextInput'
@@ -447,7 +447,7 @@ const TrainerPhone = ({
               </Col>
               <Col>
                 <Form.Group className='mb-3'>
-                  <Form.Label htmlFor='TextInput'>이력</Form.Label>
+                  <h5>이력</h5>
                   <Form.Control
                     id='history'
                     onChange={updateChange4}
@@ -459,12 +459,12 @@ const TrainerPhone = ({
               </Col>
               <Col>
                 <Form.Group className='mb-3'>
-                  <Form.Label htmlFor='TextInput'>자기소개</Form.Label>
+                  <h5>자기소개</h5>
                   <Form.Control
                     id='ment'
                     onChange={updateChange3}
                     as='textarea'
-                    rows={6}
+                    rows={5}
                     value={ment_input}
                   />
                 </Form.Group>
@@ -496,9 +496,9 @@ const TrainerPhone = ({
               </Col>
               <Col className='mt-2 py-0 px-1'>
                 <Button
-                  className='w-100'
+                  className='btn-primary-dark'
                   onClick={modalClose}
-                  variant='outline-light'
+                  variant='primary-dark'
                 >
                   닫기
                 </Button>
@@ -641,17 +641,18 @@ const VieWTrainerItem = ({
         </Mobile>
         <TableCell className='text-center' onClick={modalOnClick}>
           <Button className='' variant='outline-secondary' size='sm'>
-            수정하기
+            수정
           </Button>
+          {/* 여기 */}
         </TableCell>
-        <Modal show={showModal} onHide={modalClose}>
+        <Modal show={showModal} size='lg' onHide={modalClose}>
           <Modal.Header>
-            <Modal.Title>강사 ㅇㅇㅇ 정보 수정</Modal.Title>
+            <Modal.Title>강사 정보 수정</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Row>
+            <Row className='mb-4'>
               <Col xs={2}>
-                <Form.Label htmlFor='disabledTextInput'>이름</Form.Label>
+                <h5>이름</h5>
               </Col>
               <Col xs={10}>
                 <Form.Control
@@ -661,25 +662,25 @@ const VieWTrainerItem = ({
                 />
               </Col>
             </Row>
-            <Row>
+            <Row className='mb-4'>
               <Col xs={2}>
-                <Form.Label>생년월일</Form.Label>
+                <h5>생년월일</h5>
               </Col>
               <Col xs={10}>
                 <Form.Control value={birth} disabled />
               </Col>
             </Row>
-            <Row>
+            <Row className='mb-4'>
               <Col xs={2}>
-                <Form.Label>성별</Form.Label>
+                <h5>성별</h5>
               </Col>
               <Col xs={10}>
                 <Form.Control value={sex == 1 ? '남' : '여'} disabled />
               </Col>
             </Row>
-            <Row>
+            <Row className='mb-4'>
               <Col xs={2}>
-                <Form.Label htmlFor='disabledTextInput'>연락처</Form.Label>
+                <h5>연락처</h5>
               </Col>
               <Col xs={10}>
                 <Form.Control
@@ -690,9 +691,9 @@ const VieWTrainerItem = ({
                 />
               </Col>
             </Row>
-            <Row>
+            <Row className='mb-4'>
               <Col xs={2}>
-                <Form.Label htmlFor='TextInput'>이력</Form.Label>
+                <h5>이력</h5>
               </Col>
               <Col xs={10}>
                 <Form.Control
@@ -704,59 +705,51 @@ const VieWTrainerItem = ({
                 />
               </Col>
             </Row>
-            <Row>
+            <Row className='mb-4'>
               <Col xs={2}>
-                <Form.Label htmlFor='TextInput'>자기소개</Form.Label>
+                <h5>자기소개</h5>
               </Col>
               <Col xs={10}>
                 <Form.Control
                   id='ment'
                   onChange={updateChange3}
                   as='textarea'
-                  rows={6}
+                  rows={5}
                   value={ment_input}
                 />
               </Col>
             </Row>
-            <Row>
-              <Col className='text-danger'>
+            <Col xs={12} className='text-danger text-end mt-3'>
+              <span className='m-2'>
                 삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
-              </Col>
-              <Col>
-                <Button
-                  className='w-100 my-2'
-                  onClick={() =>
-                    confirm(trainer_name + ' 강사 정보를 삭제 하시겠습니까?') ==
-                    true
-                      ? deleteCompleted(idx)
-                      : alert(
-                          trainer_name + '강사 정보 삭제가 취소 되었습니다.'
-                        )
-                  }
-                  variant='outline-danger'
-                >
-                  삭제
-                </Button>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Button
-                  className='btn-primary_dark mx-1'
-                  onClick={modalClose}
-                  variant='outline-light'
-                >
-                  닫기
-                </Button>
-              </Col>
-              <Col>
-                <Button
-                  className='btn-primary mx-1'
-                  onClick={() => updateCompleted(idx)}
-                >
-                  수정하기
-                </Button>
-              </Col>
+              </span>
+              <Button
+                onClick={() =>
+                  confirm(trainer_name + ' 강사 정보를 삭제 하시겠습니까?') ==
+                  true
+                    ? deleteCompleted(idx)
+                    : alert(trainer_name + '강사 정보 삭제가 취소 되었습니다.')
+                }
+                variant='outline-danger'
+              >
+                삭제
+              </Button>
+            </Col>
+            <Row className='d-flex justify-content-center mt-3'>
+              <Button
+                className='btn-primary-dark mx-1'
+                onClick={modalClose}
+                variant='primary-dark'
+              >
+                닫기
+              </Button>
+              <Button
+                className='btn-primary mx-1'
+                onClick={() => updateCompleted(idx)}
+              >
+                수정하기
+              </Button>
+              {/* 여기 */}
             </Row>
           </Modal.Body>
         </Modal>
@@ -766,21 +759,16 @@ const VieWTrainerItem = ({
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout='auto' unmountOnExit>
               <Box sx={{ margin: 1 }}>
-                <Typography variant='h6' gutterBottom component='div'>
-                  강사 소개
-                </Typography>
                 <Table size='small' aria-label='purchases'>
                   <TableHead>
-                    <TableRow>
+                    <TableRow className='text-center'>
                       <TableCell style={{ width: '40%' }}>이력</TableCell>
                       <TableCell>자기소개</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     <TableRow>
-                      <TableCell component='th' scope='row'>
-                        {history}
-                      </TableCell>
+                      <TableCell>{history}</TableCell>
                       <TableCell>{ment}</TableCell>
                     </TableRow>
                   </TableBody>
@@ -977,45 +965,36 @@ class Trainer extends Component {
         </header>
         <Container>
           <h3>강사 목록</h3>
-          <div>
-            <Row className='my-3'>
-              <Col>
-                <Dropdown
-                  className='searchDrop'
-                  options={options}
-                  onChange={this.handleOnChangeSearchOption}
-                  value={this.state.searchOption}
-                  placeholder='검색 대상을 선택하세요.'
-                />
-              </Col>
-              <Col>
-                <input
-                  className='w-100 h-100'
-                  type='text'
-                  id='search'
-                  value={this.state.search}
-                  onChange={(e) => this.setState({ search: e.target.value })}
-                />
-              </Col>
-              <Col className='col-lg-2'>
-                <Button
-                  className='w-100 h-100'
-                  variant='primary'
-                  onClick={this.handleOnSearch}
-                >
-                  검색
-                </Button>
-              </Col>
-              <Col className='col-lg-2'>
-                <Button
-                  className='w-100 h-100'
-                  variant='outline-primary'
-                  onClick={this.moveTrainerAdd}
-                >
-                  등록하기
-                </Button>
-              </Col>
-            </Row>
+          <div className='d-flex justify-content mb-3'>
+            <div className='d-flex sch_list'>
+              <Dropdown
+                className='searchDrop'
+                options={options}
+                onChange={this.handleOnChangeSearchOption}
+                value={this.state.searchOption}
+                placeholder='검색 대상을 선택하세요.'
+              />
+              <input
+                type='text'
+                id='search'
+                value={this.state.search}
+                onChange={(e) => this.setState({ search: e.target.value })}
+              />
+            </div>
+            <div>
+              <Button
+                className='mx-2'
+                variant='primary'
+                onClick={this.handleOnSearch}
+              >
+                검색
+              </Button>
+            </div>
+            <div>
+              <Button variant='outline-primary' onClick={this.moveTrainerAdd}>
+                등록하기
+              </Button>
+            </div>
           </div>
           <TableContainer component={Paper}>
             <Table aria-label='simple table' className='table--block'>

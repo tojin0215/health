@@ -97,6 +97,9 @@
 .table > :not(caption) > * .btn-success:hover {
   background-color: #003c20;
 }
+.MuiTableBody-root tr th {
+  text-align: center;
+}
 .MuiTableBody-root tr td {
   text-align: center;
 }

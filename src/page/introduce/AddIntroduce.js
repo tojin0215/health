@@ -146,7 +146,7 @@ class AddIntroduce extends Component {
                 ></Form.Control>
               </Col> */}
             <Row className='mb-3'>
-              <Col xs={1} className='mt-1'>
+              <Col xs={1}>
                 <h5>내용</h5>
               </Col>
               <Col xs={11}>

@@ -196,14 +196,14 @@ class AddTrainer extends Component {
         </header>
         <Container>
           <Form className='sectionGlass'>
-            <h3>강사 정보 입력</h3>
+            <h4>강사 정보 입력</h4>
             {/* <label>
               헬스장 번호:
               <TextField value={this.props.userinfo.fitness_no} />
             </label> */}
-            <Row>
+            <Row className='mb-4'>
               <Col xs={2}>
-                <Form.Label>이름</Form.Label>
+                <h5>이름</h5>
               </Col>
               <Col>
                 <Form.Control
@@ -211,13 +211,14 @@ class AddTrainer extends Component {
                   type='text'
                   value={this.state.trainer_name}
                   onChange={this.handleChange}
+                  placeholder='이름을 입력해주세요'
                 ></Form.Control>
               </Col>
               <Col xs={1}>
-                <Form.Label>성별</Form.Label>
+                <h5>성별</h5>
               </Col>
               <Col xs={2}>
-                <Row>
+                <Row className='mt-2'>
                   <Col xs={6}>
                     <Form.Check>
                       <Form.Check.Input
@@ -249,9 +250,9 @@ class AddTrainer extends Component {
                 </Row>
               </Col>
             </Row>
-            <Row>
+            <Row className='mb-4'>
               <Col xs={2}>
-                <Form.Label>연락처</Form.Label>
+                <h5>연락처</h5>
               </Col>
               <Col>
                 <Form.Control
@@ -260,15 +261,15 @@ class AddTrainer extends Component {
                   variant='outlined'
                   value={this.state.phone}
                   id='phone'
-                  placeholder='01012345678'
+                  placeholder='연락처를 입력해주세요'
                   onChange={this.handleChange}
                   required
                 ></Form.Control>
               </Col>
             </Row>
-            <Row>
+            <Row className='mb-4'>
               <Col xs={2}>
-                <Form.Label>생년월일</Form.Label>
+                <h5>생년월일</h5>
               </Col>
               <Col>
                 <Form.Control
@@ -276,14 +277,14 @@ class AddTrainer extends Component {
                   pattern='[0-9]+'
                   value={this.state.birth}
                   id='birth'
-                  placeholder='19990101'
+                  placeholder='생년월일을 입력해주세요'
                   onChange={this.handleChange}
                 ></Form.Control>
               </Col>
             </Row>
-            <Row>
+            <Row className='mb-4'>
               <Col xs={2}>
-                <Form.Label>이력</Form.Label>
+                <h5>이력</h5>
               </Col>
               <Col>
                 <Form.Control
@@ -292,13 +293,14 @@ class AddTrainer extends Component {
                   id='history'
                   onChange={this.handleChange}
                   as='textarea'
+                  placeholder='이력을 입력해주세요'
                   rows={5}
                 ></Form.Control>
               </Col>
             </Row>
-            <Row>
+            <Row className='mb-4'>
               <Col xs={2}>
-                <Form.Label>자기소개</Form.Label>
+                <h5>자기소개</h5>
               </Col>
               <Col>
                 <Form.Control
@@ -307,14 +309,26 @@ class AddTrainer extends Component {
                   id='ment'
                   onChange={this.handleChange}
                   as='textarea'
+                  placeholder='자기소개를 입력해주세요'
                   rows={5}
                 ></Form.Control>
               </Col>
             </Row>
           </Form>
-          <Button type='button' onClick={this.handleTrainer}>
-            등록하기
-          </Button>
+          <div className='d-flex justify-content-center mt-3'>
+            <Button
+              className='btn-primary-dark mx-2'
+              variant='secondary'
+              type='button'
+              onClick={this.returnIntroduce}
+            >
+              이전
+            </Button>
+            {/* 기능추가 */}
+            <Button type='button' onClick={this.handleTrainer}>
+              등록하기
+            </Button>
+          </div>
         </Container>
         <div className='footer'>
           <Footer />
