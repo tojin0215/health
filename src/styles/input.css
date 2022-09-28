@@ -136,6 +136,7 @@ input {
   height: 2.8rem;
   background: #fff;
   border-radius: 0.3rem;
+  padding: 0 0.3rem;
 }
 .sch_list > .searchDrop {
   border: 0;
@@ -143,7 +144,7 @@ input {
   margin-right: 1rem;
 }
 .sch_list > input {
-  width: 70%;
+  width: 80%;
   border: none;
 }
 

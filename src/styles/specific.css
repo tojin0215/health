@@ -117,7 +117,7 @@
   width: 61px;
   background-color: #888;
   color: #fff;
-} /* 수정하기 */
+} /* 수정하기 버튼 */
 .btn-outline-danger {
   width: 6.25rem;
   padding: 0;
@@ -183,19 +183,6 @@
 }
 .nav-link:hover {
   color: unset;
-}
-
-/* mui table */
-.MuiTable-root {
-  color: #222;
-}
-.MuiTable-root th {
-  background: #333;
-  color: #fff;
-}
-
-td > div {
-  /* background-color: #333; */
 }
 
 @media (max-width: 767px) {
