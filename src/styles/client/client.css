@@ -1,9 +1,24 @@
+.modal-body,
+.modal-header {
+  padding: 0;
+}
+.modal-footer {
+  border: 0;
+}
+
 .client-infomation__detail--membership {
   background-color: #333;
   color: #fff;
-  margin: 20px 10px;
-  padding: 20px;
-  border-radius: 10px;
+  margin: 1.25rem 0;
+  padding: 1.25rem;
+  border-radius: 0.625rem;
+}
+.client-infomation__detail--membership2 {
+  background-color: #333;
+  color: #fff;
+  margin: 0.625rem 0;
+  padding: 1.25rem;
+  border-radius: 0.625rem;
 }
 
 .rbc-calendar a {
@@ -15,8 +30,11 @@
 }
 
 /* 회원상세/수정 */
-.client_modal {
+.client__modal--information {
   line-height: 2.8rem;
+}
+.voucher {
+  border-top: 1px solid #fff;
 }
 
 /* addclient css */
@@ -25,9 +43,11 @@
   margin-top: 1.563rem;
   padding-top: 1.563rem;
 }
+.more {
+  line-height: 1.5rem;
+}
 
 .add-client__form__route-text {
-  /* width: 100%; */
 }
 
 @media (max-width: 767px) {

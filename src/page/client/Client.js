@@ -349,7 +349,7 @@ const ClientPhone = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권 [ D {endDays} ]
+              기간권: {salesDays}일 권 [ D{endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -423,7 +423,7 @@ const ClientPhone = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권 [ D {endDays} ]
+              기간권: {salesDays}일 권 [ D{endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -493,7 +493,7 @@ const ClientPhone = ({
               <h5 className='mb-1'>생년월일</h5>
             </Col>
             <Col xs={10}>{birth}</Col>
-            <Col xs={6} md={4} className='mb-2'></Col>
+            <Col xs={6} md={4} className='mt-2'></Col>
             <h3>현재 사용중인 이용권</h3>
             <div>{voucher}</div>
             <Button onClick={viewModalOnclick}>이용권&기간권 더보기</Button>
@@ -990,7 +990,7 @@ const ClientName = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권 [ D {endDays} ]
+              기간권: {salesDays}일 권 [ D{endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -1454,13 +1454,17 @@ const ViewClientItem = ({
               </Col>
               <Col xs={3}>
                 <Col xs={12} sm={4}>
-                  <div className='text-center'>
-                    <Button variant='paidControl' onClick={paidControl}>
+                  <div>
+                    <Button
+                      className='mb-2'
+                      variant='paidControl'
+                      onClick={paidControl}
+                    >
                       <RemoveIcon />
                       이용권 차감하기
                     </Button>
                   </div>
-                  <div className='text-end'>
+                  <div>
                     <Button variant='paidControl' onClick={paidControl2}>
                       <AddIcon />
                       이용권 증가하기
@@ -1474,7 +1478,7 @@ const ViewClientItem = ({
           <Row className='client-infomation__detail--membership'>
             <Col xs={12} sm={8}>
               <h4>{kind}</h4>
-              기간권: {salesDays}일 권 [ D {endDays} ]
+              기간권: {salesDays}일 권 [ D{endDays} ]
               <br />
               기간권 결제일: {date2}
               <br />
@@ -1537,7 +1541,7 @@ const ViewClientItem = ({
             <Col xs={12}>
               <h4>{kind}</h4>
             </Col>
-            <Col xs={12} sm={8}>
+            <Col xs={12}>
               <p>
                 이용권: {paidMembership2}/{paidMembership}
               </p>
@@ -1546,7 +1550,7 @@ const ViewClientItem = ({
           </Row>
         ) : (
           <Row className='client-infomation__detail--membership'>
-            <Col xs={12} sm={8}>
+            <Col xs={12}>
               <h4>{kind}</h4>
               기간권: {salesDays}일 권 [ D {endDays} ]
               <br />
@@ -1597,7 +1601,7 @@ const ViewClientItem = ({
         onHide={modalClose}
         size='xl'
       >
-        <Modal.Header>
+        <Modal.Header className='mb-3'>
           <Modal.Title>회원 상세 정보</Modal.Title>
           {showUpdate ? (
             <Button onClick={modalClose} variant='outline-light'>
@@ -1622,10 +1626,13 @@ const ViewClientItem = ({
               <h5 className='mb-1'>이름</h5>
             </Col>
             {showUpdate ? (
-              <Form.Control
-                value={client_name_input}
-                onChange={updateChange1}
-              />
+              <Col xs={10}>
+                <Form.Control
+                  className='w-50'
+                  value={client_name_input}
+                  onChange={updateChange1}
+                />
+              </Col>
             ) : (
               <Col xs={10}>{client_name}</Col>
             )}
@@ -1634,45 +1641,63 @@ const ViewClientItem = ({
             </Col>
             <Col xs={10}>{birth}</Col>
             <Col xs={2} className='mb-2'>
-              <h5 className='mb-1'>주소</h5>
-            </Col>
-            {showUpdate ? (
-              <Form.Control value={address_input} onChange={updateChange2} />
-            ) : (
-              <Col xs={10}>{address}</Col>
-            )}
-            <Col xs={2} className='mb-2'>
               <h5 className='mb-1'>연락처</h5>
             </Col>
             {showUpdate ? (
-              <Form.Control value={phone_input} onChange={updateChange3} />
+              <Col xs={10}>
+                <Form.Control
+                  className='w-50'
+                  value={phone_input}
+                  onChange={updateChange3}
+                />
+              </Col>
             ) : (
               <Col xs={10}>{phone}</Col>
             )}
-            <Col xs={2} className='mb-4'>
+            <Col xs={2} className='mb-2'>
+              <h5 className='mb-1'>주소</h5>
+            </Col>
+            {showUpdate ? (
+              <Col xs={10}>
+                <Form.Control value={address_input} onChange={updateChange2} />
+              </Col>
+            ) : (
+              <Col xs={10}>{address}</Col>
+            )}
+            <Col xs={2} className='mb-3'>
+              {/* 기능추가:메모로 변경해야함 */}
               <h5>메모</h5>
             </Col>
-            <Col xs={10}>메모내용</Col>
+            {showUpdate ? (
+              <Col>
+                <Form.Control
+                  value={client_name_input}
+                  onChange={updateChange1}
+                />
+              </Col>
+            ) : (
+              <Col xs={10}>{client_name}</Col>
+            )}
             <div className='d-flex justify-content-between'>
               <div className='d-flex justify-content'>
-                <h5 className='me-3'>운동복사용여부</h5>
+                <h5 className='me-4'>운동복</h5>
                 {showUpdate ? (
                   <Form.Group>
                     <Form.Check inline>
-                      <Form.Check.Label htmlFor='route1' className='w-100'>
+                      <Form.Check.Label htmlFor='route1'>
                         미사용
                       </Form.Check.Label>
                       <Form.Check.Input
+                        className='mt-3'
                         type='radio'
                         checked={wear_input === '미사용'}
                         onChange={() => setWear_input('미사용')}
                       />
                     </Form.Check>
                     <Form.Check inline>
-                      <Form.Check.Label htmlFor='route1' className='w-100'>
-                        사용
-                      </Form.Check.Label>
+                      <Form.Check.Label htmlFor='route1'>사용</Form.Check.Label>
                       <Form.Check.Input
+                        className='mt-3'
                         type='radio'
                         checked={wear_input === '사용'}
                         onChange={() => setWear_input('사용')}
@@ -1683,14 +1708,16 @@ const ViewClientItem = ({
                   <p>{sportswear}</p>
                 )}
               </div>
-              <div className='d-flex justify-content'>
+              <div className='d-flex justify-content mb-3'>
                 <h5 className='me-3'>사물함번호</h5>
                 {showUpdate ? (
-                  <Form.Control
-                    type='number'
-                    value={locker_input}
-                    onChange={updateChange4}
-                  />
+                  <Col xs={2}>
+                    <Form.Control
+                      type='number'
+                      value={locker_input}
+                      onChange={updateChange4}
+                    />
+                  </Col>
                 ) : (
                   <p>{lockerNumber}</p>
                 )}
@@ -1702,16 +1729,12 @@ const ViewClientItem = ({
             </div>
           </Row>
           <Row>
-            <div>
-              <div className='d-flex justify-content-between'>
+            <div className='voucher'>
+              <div className='d-flex justify-content-between mt-4'>
                 <h4>현재 사용중인 이용권</h4>
-                <Button
-                  className='border-0'
-                  variant='outline-primary'
-                  onClick={viewModalOnclick}
-                >
-                  + 지난 이용권 더보기
-                </Button>
+                <p className='text-primary more' onClick={viewModalOnclick}>
+                  + 이용권 전체보기
+                </p>
               </div>
               <div>{voucher}</div>
               <div>
@@ -1721,10 +1744,10 @@ const ViewClientItem = ({
                   show={viewModal}
                   onHide={viewModalClose}
                 >
-                  <Modal.Header>
-                    <Modal.Title>지난 이용권 더보기</Modal.Title>
+                  <Modal.Header className='p-0'>
+                    <Modal.Title>이용권 전체보기</Modal.Title>
                   </Modal.Header>
-                  <Modal.Body className='mw-100'>{voucher2}</Modal.Body>
+                  <Modal.Body>{voucher2}</Modal.Body>
                 </Modal>
               </div>
             </div>
