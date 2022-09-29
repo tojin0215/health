@@ -470,8 +470,21 @@ const ClientPhone = ({
         onHide={modalClose}
         size='xl'
       >
-        <Modal.Header>
-          <Modal.Title>회원 상세 정보</Modal.Title>
+        <Modal.Header className='mb-3'>
+          <Modal.Title>회원 상1세 정보</Modal.Title>
+          {showUpdate ? (
+            <Button onClick={modalClose} variant='outline-light'>
+              <CloseIcon />
+            </Button>
+          ) : (
+            <Button
+              className='border-0'
+              onClick={modalClose}
+              variant='outline-light'
+            >
+              <CloseIcon fontSize='large' />
+            </Button>
+          )}
         </Modal.Header>
         <Modal.Body className='mw-100'>
           <div>
@@ -482,10 +495,13 @@ const ClientPhone = ({
               <h5 className='mb-1'>이름</h5>
             </Col>
             {showUpdate ? (
-              <Form.Control
-                value={client_name_input}
-                onChange={updateChange1}
-              />
+              <Col xs={10}>
+                <Form.Control
+                  className='w-50'
+                  value={client_name_input}
+                  onChange={updateChange1}
+                />
+              </Col>
             ) : (
               <Col xs={10}>{client_name}</Col>
             )}
@@ -493,92 +509,126 @@ const ClientPhone = ({
               <h5 className='mb-1'>생년월일</h5>
             </Col>
             <Col xs={10}>{birth}</Col>
-            <Col xs={6} md={4} className='mt-2'></Col>
-            <h3>현재 사용중인 이용권</h3>
-            <div>{voucher}</div>
-            <Button onClick={viewModalOnclick}>이용권&기간권 더보기</Button>
-            {/* 이용권&기간권 더보기 Modal */}
-            <Modal
-              className='client_modal'
-              show={viewModal}
-              onHide={viewModalClose}
-            >
-              <Modal.Header>
-                <Modal.Title>이용권&기간권 더보기</Modal.Title>
-              </Modal.Header>
-              <Modal.Body className='mw-100'>{voucher2}</Modal.Body>
-            </Modal>
-            <Col xs={6} md={4} className='mb-2'>
-              <h5 className='mb-1'>생년월일</h5>
-              <p>{birth}</p>
-            </Col>
-            <Col xs={12} md={8} className='mb-2'>
-              <h5 className='mb-1'>주소</h5>
-              {showUpdate ? (
-                <Form.Control value={address_input} onChange={updateChange2} />
-              ) : (
-                <p>{address}</p>
-              )}
-            </Col>
-            <Col xs={6} md={4} className='mb-2'>
+            <Col xs={2} className='mb-2'>
               <h5 className='mb-1'>연락처</h5>
-              {showUpdate ? (
-                <Form.Control value={phone_input} onChange={updateChange3} />
-              ) : (
-                <p>{phone}</p>
-              )}
             </Col>
-            <Col xs={6} md={4} className='mb-2'>
-              <h5 className='mb-1'>가입경로</h5>
-              <p>{join_route}</p>
-            </Col>
-            <Col xs={6} md={4} className='mb-2'>
-              <h5 className='mb-1'>사물함번호</h5>
-              {showUpdate ? (
+            {showUpdate ? (
+              <Col xs={10}>
                 <Form.Control
-                  type='number'
-                  value={locker_input}
-                  onChange={updateChange4}
+                  className='w-50'
+                  value={phone_input}
+                  onChange={updateChange3}
                 />
-              ) : (
-                <p>{lockerNumber}</p>
-              )}
+              </Col>
+            ) : (
+              <Col xs={10}>{phone}</Col>
+            )}
+            <Col xs={2} className='mb-2'>
+              <h5 className='mb-1'>주소</h5>
             </Col>
-            <Col xs={6} md={4} className='mb-2'>
-              <h5 className='mb-1'>운동복사용여부</h5>
-              {showUpdate ? (
-                <Form.Group>
-                  <Form.Check inline>
-                    <Form.Check.Label htmlFor='route1' className='w-100'>
-                      미사용
-                    </Form.Check.Label>
-                    <Form.Check.Input
-                      type='radio'
-                      checked={wear_input === '미사용'}
-                      onChange={() => setWear_input('미사용')}
-                    />
-                  </Form.Check>
-                  <Form.Check inline>
-                    <Form.Check.Label htmlFor='route1' className='w-100'>
-                      사용
-                    </Form.Check.Label>
-                    <Form.Check.Input
-                      type='radio'
-                      checked={wear_input === '사용'}
-                      onChange={() => setWear_input('사용')}
-                    />
-                  </Form.Check>
-                </Form.Group>
-              ) : (
-                <p>{sportswear}</p>
-              )}
+            {showUpdate ? (
+              <Col xs={10}>
+                <Form.Control value={address_input} onChange={updateChange2} />
+              </Col>
+            ) : (
+              <Col xs={10}>{address}</Col>
+            )}
+            <Col xs={2} className='mb-3'>
+              <h5>메모</h5>
             </Col>
-            <Col className='text-center mt-4' xs={12}>
+            {/* 기능추가:메모로 변경해야함 */}
+            {showUpdate ? (
+              <Col>
+                <Form.Control
+                  value={client_name_input}
+                  onChange={updateChange1}
+                />
+              </Col>
+            ) : (
+              <Col xs={10}>{client_name}</Col>
+            )}
+            <div className='d-flex justify-content-between'>
+              <div className='d-flex justify-content'>
+                <h5 className='me-4'>운동복</h5>
+                {showUpdate ? (
+                  <Form.Group>
+                    <Form.Check inline>
+                      <Form.Check.Label htmlFor='route1'>
+                        미사용
+                      </Form.Check.Label>
+                      <Form.Check.Input
+                        className='mt-3'
+                        type='radio'
+                        checked={wear_input === '미사용'}
+                        onChange={() => setWear_input('미사용')}
+                      />
+                    </Form.Check>
+                    <Form.Check inline>
+                      <Form.Check.Label htmlFor='route1'>사용</Form.Check.Label>
+                      <Form.Check.Input
+                        className='mt-3'
+                        type='radio'
+                        checked={wear_input === '사용'}
+                        onChange={() => setWear_input('사용')}
+                      />
+                    </Form.Check>
+                  </Form.Group>
+                ) : (
+                  <p>{sportswear}</p>
+                )}
+              </div>
+              <div className='d-flex justify-content mb-3'>
+                <h5 className='me-3'>사물함번호</h5>
+                {showUpdate ? (
+                  <Col xs={2}>
+                    <Form.Control
+                      type='number'
+                      value={locker_input}
+                      onChange={updateChange4}
+                    />
+                  </Col>
+                ) : (
+                  <p>{lockerNumber}</p>
+                )}
+              </div>
+              <div className='d-flex justify-content'>
+                <h5 className='me-3'>가입경로</h5>
+                <p>{join_route}</p>
+              </div>
+            </div>
+          </Row>
+          <Row>
+            <div className='voucher'>
+              <div className='d-flex justify-content-between mt-4'>
+                <h4>현재 사용중인 이용권</h4>
+                <p className='text-primary more' onClick={viewModalOnclick}>
+                  + 이용권 전체보기
+                </p>
+              </div>
+              <div>{voucher}</div>
+              <div>
+                {/* 이용권&기간권 더보기 Modal d-flex justify-content-between */}
+                <Modal
+                  className='client_modal'
+                  show={viewModal}
+                  onHide={viewModalClose}
+                >
+                  <Modal.Header className='p-0'>
+                    <Modal.Title>이용권 전체보기</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>{voucher2}</Modal.Body>
+                </Modal>
+              </div>
+            </div>
+            <div className='text-end text-danger mt-4'>
               {showUpdate ? (
                 loginWhether === 1 ? (
                   ''
                 ) : (
                   <div>
+                    <span className='m-2'>
+                      삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+                    </span>
                     <Button
                       variant='outline-danger'
                       onClick={() =>
@@ -591,37 +641,33 @@ const ClientPhone = ({
                           : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
                       }
                     >
-                      회원삭제
+                      삭제
                     </Button>
-                    <p className='text-danger fs-6 fw-lighter fst-italic'>
-                      회원 삭제시 되돌릴 수 없습니다.
-                      <br /> 한번 더 확인해주세요.
-                    </p>
                   </div>
                 )
               ) : (
                 ''
               )}
-            </Col>
+            </div>
           </Row>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className='d-flex justify-content-center'>
           {showUpdate ? (
-            <Button onClick={() => updateCompleted(idc)} variant='success'>
+            <Button onClick={modalClose} variant='primary-dark'>
+              취소
+            </Button>
+          ) : (
+            <Button onClick={modalClose} variant='primary-dark'>
+              닫기
+            </Button>
+          )}
+          {showUpdate ? (
+            <Button onClick={() => updateCompleted(idc)} variant='primary'>
               완료하기
             </Button>
           ) : (
             <Button onClick={modalUpdate} variant='primary'>
-              정보 수정
-            </Button>
-          )}
-          {showUpdate ? (
-            <Button onClick={modalClose} variant='outline-light'>
-              닫기
-            </Button>
-          ) : (
-            <Button onClick={modalClose} variant='secondary'>
-              닫기
+              수정하기
             </Button>
           )}
         </Modal.Footer>
@@ -1037,8 +1083,21 @@ const ClientName = ({
         onHide={modalClose}
         size='xl'
       >
-        <Modal.Header>
-          <Modal.Title>회원 상세 정보</Modal.Title>
+        <Modal.Header className='mb-3'>
+          <Modal.Title>회원 상2세 정보</Modal.Title>
+          {showUpdate ? (
+            <Button onClick={modalClose} variant='outline-light'>
+              <CloseIcon />
+            </Button>
+          ) : (
+            <Button
+              className='border-0'
+              onClick={modalClose}
+              variant='outline-light'
+            >
+              <CloseIcon fontSize='large' />
+            </Button>
+          )}
         </Modal.Header>
         <Modal.Body className='mw-100'>
           <div>
@@ -1049,10 +1108,13 @@ const ClientName = ({
               <h5 className='mb-1'>이름</h5>
             </Col>
             {showUpdate ? (
-              <Form.Control
-                value={client_name_input}
-                onChange={updateChange1}
-              />
+              <Col xs={10}>
+                <Form.Control
+                  className='w-50'
+                  value={client_name_input}
+                  onChange={updateChange1}
+                />
+              </Col>
             ) : (
               <Col xs={10}>{client_name}</Col>
             )}
@@ -1060,87 +1122,126 @@ const ClientName = ({
               <h5 className='mb-1'>생년월일</h5>
             </Col>
             <Col xs={10}>{birth}</Col>
-            <h3>현재 사용중인 이용권</h3>
-            <div>{voucher}</div>
-            <Button onClick={viewModalOnclick}>이용권&기간권 더보기</Button>
-            {/* 이용권&기간권 더보기 Modal */}
-            <Modal
-              className='client_modal'
-              show={viewModal}
-              onHide={viewModalClose}
-            >
-              <Modal.Header>
-                <Modal.Title>이용권&기간권 더보기</Modal.Title>
-              </Modal.Header>
-              <Modal.Body className='mw-100'>{voucher2}</Modal.Body>
-            </Modal>
-            <Col xs={12} md={8} className='mb-2'>
-              <h5 className='mb-1'>주소</h5>
-              {showUpdate ? (
-                <Form.Control value={address_input} onChange={updateChange2} />
-              ) : (
-                <p>{address}</p>
-              )}
-            </Col>
-            <Col xs={6} md={4} className='mb-2'>
+            <Col xs={2} className='mb-2'>
               <h5 className='mb-1'>연락처</h5>
-              {showUpdate ? (
-                <Form.Control value={phone_input} onChange={updateChange3} />
-              ) : (
-                <p>{phone}</p>
-              )}
             </Col>
-            <Col xs={6} md={4} className='mb-2'>
-              <h5 className='mb-1'>가입경로</h5>
-              <p>{join_route}</p>
-            </Col>
-            <Col xs={6} md={4} className='mb-2'>
-              <h5 className='mb-1'>사물함번호</h5>
-              {showUpdate ? (
+            {showUpdate ? (
+              <Col xs={10}>
                 <Form.Control
-                  type='number'
-                  value={locker_input}
-                  onChange={updateChange4}
+                  className='w-50'
+                  value={phone_input}
+                  onChange={updateChange3}
                 />
-              ) : (
-                <p>{lockerNumber}</p>
-              )}
+              </Col>
+            ) : (
+              <Col xs={10}>{phone}</Col>
+            )}
+            <Col xs={2} className='mb-2'>
+              <h5 className='mb-1'>주소</h5>
             </Col>
-            <Col xs={6} md={4} className='mb-2'>
-              <h5 className='mb-1'>운동복사용여부</h5>
-              {showUpdate ? (
-                <Form.Group>
-                  <Form.Check inline>
-                    <Form.Check.Label htmlFor='route1' className='w-100'>
-                      미사용
-                    </Form.Check.Label>
-                    <Form.Check.Input
-                      type='radio'
-                      checked={wear_input === '미사용'}
-                      onChange={() => setWear_input('미사용')}
-                    />
-                  </Form.Check>
-                  <Form.Check inline>
-                    <Form.Check.Label htmlFor='route1' className='w-100'>
-                      사용
-                    </Form.Check.Label>
-                    <Form.Check.Input
-                      type='radio'
-                      checked={wear_input === '사용'}
-                      onChange={() => setWear_input('사용')}
-                    />
-                  </Form.Check>
-                </Form.Group>
-              ) : (
-                <p>{sportswear}</p>
-              )}
+            {showUpdate ? (
+              <Col xs={10}>
+                <Form.Control value={address_input} onChange={updateChange2} />
+              </Col>
+            ) : (
+              <Col xs={10}>{address}</Col>
+            )}
+            <Col xs={2} className='mb-3'>
+              <h5>메모</h5>
             </Col>
-            <Col className='text-center mt-4' xs={12}>
+            {/* 기능추가:메모로 변경해야함 */}
+            {showUpdate ? (
+              <Col>
+                <Form.Control
+                  value={client_name_input}
+                  onChange={updateChange1}
+                />
+              </Col>
+            ) : (
+              <Col xs={10}>{client_name}</Col>
+            )}
+            <div className='d-flex justify-content-between'>
+              <div className='d-flex justify-content'>
+                <h5 className='me-4'>운동복</h5>
+                {showUpdate ? (
+                  <Form.Group>
+                    <Form.Check inline>
+                      <Form.Check.Label htmlFor='route1'>
+                        미사용
+                      </Form.Check.Label>
+                      <Form.Check.Input
+                        className='mt-3'
+                        type='radio'
+                        checked={wear_input === '미사용'}
+                        onChange={() => setWear_input('미사용')}
+                      />
+                    </Form.Check>
+                    <Form.Check inline>
+                      <Form.Check.Label htmlFor='route1'>사용</Form.Check.Label>
+                      <Form.Check.Input
+                        className='mt-3'
+                        type='radio'
+                        checked={wear_input === '사용'}
+                        onChange={() => setWear_input('사용')}
+                      />
+                    </Form.Check>
+                  </Form.Group>
+                ) : (
+                  <p>{sportswear}</p>
+                )}
+              </div>
+              <div className='d-flex justify-content mb-3'>
+                <h5 className='me-3'>사물함번호</h5>
+                {showUpdate ? (
+                  <Col xs={2}>
+                    <Form.Control
+                      type='number'
+                      value={locker_input}
+                      onChange={updateChange4}
+                    />
+                  </Col>
+                ) : (
+                  <p>{lockerNumber}</p>
+                )}
+              </div>
+              <div className='d-flex justify-content'>
+                <h5 className='me-3'>가입경로</h5>
+                <p>{join_route}</p>
+              </div>
+            </div>
+          </Row>
+          <Row>
+            <div className='voucher'>
+              <div className='d-flex justify-content-between mt-4'>
+                <h4>현재 사용중인 이용권</h4>
+                <p className='text-primary more' onClick={viewModalOnclick}>
+                  + 이용권 전체보기
+                </p>
+              </div>
+              <div>{voucher}</div>
+              <div>
+                {/* 이용권&기간권 더보기 Modal d-flex justify-content-between */}
+                <Modal
+                  className='client_modal'
+                  show={viewModal}
+                  onHide={viewModalClose}
+                >
+                  <Modal.Header className='p-0'>
+                    <Modal.Title>이용권 전체보기</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>{voucher2}</Modal.Body>
+                </Modal>
+              </div>
+            </div>
+            <div className='text-end text-danger mt-4'>
               {showUpdate ? (
                 loginWhether === 1 ? (
                   ''
                 ) : (
                   <div>
+                    <span className='m-2'>
+                      삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+                    </span>
                     <Button
                       variant='outline-danger'
                       onClick={() =>
@@ -1153,37 +1254,33 @@ const ClientName = ({
                           : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
                       }
                     >
-                      회원삭제
+                      삭제
                     </Button>
-                    <p className='text-danger fs-6 fw-lighter fst-italic'>
-                      회원 삭제시 되돌릴 수 없습니다.
-                      <br /> 한번 더 확인해주세요.
-                    </p>
                   </div>
                 )
               ) : (
                 ''
               )}
-            </Col>
+            </div>
           </Row>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className='d-flex justify-content-center'>
           {showUpdate ? (
-            <Button onClick={() => updateCompleted(idc)} variant='success'>
+            <Button onClick={modalClose} variant='primary-dark'>
+              취소
+            </Button>
+          ) : (
+            <Button onClick={modalClose} variant='primary-dark'>
+              닫기
+            </Button>
+          )}
+          {showUpdate ? (
+            <Button onClick={() => updateCompleted(idc)} variant='primary'>
               완료하기
             </Button>
           ) : (
             <Button onClick={modalUpdate} variant='primary'>
-              정보 수정
-            </Button>
-          )}
-          {showUpdate ? (
-            <Button onClick={modalClose} variant='outline-light'>
-              닫기
-            </Button>
-          ) : (
-            <Button onClick={modalClose} variant='secondary'>
-              닫기
+              수정하기
             </Button>
           )}
         </Modal.Footer>
@@ -1602,7 +1699,7 @@ const ViewClientItem = ({
         size='xl'
       >
         <Modal.Header className='mb-3'>
-          <Modal.Title>회원 상세 정보</Modal.Title>
+          <Modal.Title>회원 상3세 정보</Modal.Title>
           {showUpdate ? (
             <Button onClick={modalClose} variant='outline-light'>
               <CloseIcon />
@@ -1665,9 +1762,9 @@ const ViewClientItem = ({
               <Col xs={10}>{address}</Col>
             )}
             <Col xs={2} className='mb-3'>
-              {/* 기능추가:메모로 변경해야함 */}
               <h5>메모</h5>
             </Col>
+            {/* 기능추가:메모로 변경해야함 */}
             {showUpdate ? (
               <Col>
                 <Form.Control
