@@ -100,22 +100,30 @@ const ReservationClassItem = ({
   const hourArray = hour >= 10 ? hour : '0' + hour;
   const minuteArray = minute >= 10 ? minute : '0' + minute;
   return (
-    <div className='reservation__class-table--td' onClick={handleInnerOnClick}>
-      {/* <p>운동명</p> */}
-      <p className='fw-bold'>
-        {exercise_class}[{kind}]
-      </p>
-      {/* <p>강사명</p> */}
-      <p className=''>{trainer}</p>
-      {/* <p>시간</p> */}
-      <p className=''>
-        {hourArray}시 {minuteArray}분
-      </p>
-      {/* <p>인원</p> */}
-      <p className=''>
+    <Row className='reservation__class-table--td' onClick={handleInnerOnClick}>
+      <Col xs={6}>{kind}</Col>
+      <Col xs={6}>{trainer}</Col>
+      <Col xs={6}>
         {canRegist}/{number_of_people}
-      </p>
-    </div>
+      </Col>
+      <Col xs={6} className='text-center fw-bold'>
+        {hourArray}:{minuteArray}
+      </Col>
+      {/* <p>운동명</p> */}
+      {/* <p className='fw-bold'>
+        {exercise_class}[{kind}]
+      </p> */}
+      {/* <p>강사명</p> */}
+      {/* <p className=''>{trainer}</p> */}
+      {/* <p>시간</p> */}
+      {/* <p className=''>
+        {hourArray}시 {minuteArray}분
+      </p> */}
+      {/* <p>인원</p> */}
+      {/* <p className=''>
+        {canRegist}/{number_of_people}
+      </p> */}
+    </Row>
   );
 };
 

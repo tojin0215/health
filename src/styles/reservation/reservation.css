@@ -52,6 +52,16 @@
   padding-top: 6px;
 }
 
+/* 웹디자인 반영분 css 적용 */
+.reservation__class-table--td {
+}
+
+.reservation__class-table--td > div {
+  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .reservation .MuiInput-underline:before {
   border-bottom: none;
 }
