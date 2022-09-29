@@ -291,8 +291,11 @@ class Menu extends Component {
                 <div onClick={() => this.sideMenu5()}>운동(대메뉴)</div>
                 {this.state.sideGroup.workout ? (
                   <li class='dropdown'>
-                    <NavLink exact to='/workoutAlloted'>
+                    <NavLink exact to='/workout'>
                       운동 배정
+                    </NavLink>
+                    <NavLink exact to='/workoutAlloted'>
+                      개별 운동 배정
                     </NavLink>
                     <br />
                     <Link

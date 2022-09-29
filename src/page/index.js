@@ -26,6 +26,7 @@ export { default as Introduce } from './introduce/Introduce';
 export { default as AddIntroduce } from './introduce/AddIntroduce';
 export { default as ChoiceLogin } from './login/ChoiceLogin';
 export { default as Inbodies } from './exercise/Inbodies';
+export { default as Workout } from './workout/Workout';
 export { default as WorkoutAlloted } from './workout/WorkoutAlloted';
 export { default as WorkoutAllotedList } from './workout/WorkoutAllotedList';
 export { default as WorkoutAllotedList2 } from './workout/WorkoutAllotedList2';

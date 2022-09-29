@@ -28,6 +28,7 @@ import {
   AddIntroduce,
   ChoiceLogin,
   Inbodies,
+  Workout,
   WorkoutAlloted,
   WorkoutAllotedList,
   WorkoutAllotedList2,
@@ -72,6 +73,7 @@ class App extends Component {
         <Route exact path='/introduceAdd' component={AddIntroduce} />
         <Route exact path='/choiceLogin' component={ChoiceLogin} />
         <Route exact path='/inbodies' component={Inbodies} />
+        <Route exact path='/workout' component={Workout} />
         <Route exact path='/workoutAlloted' component={WorkoutAlloted} />
         <Route
           exact

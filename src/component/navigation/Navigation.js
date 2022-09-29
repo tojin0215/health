@@ -305,8 +305,13 @@ class Navigation extends Component {
                     </Link>
                   </li>
                   <li>
-                    <NavLink exact to='/workoutAlloted'>
+                    <NavLink exact to='/workout'>
                       운동 배정
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/workoutAlloted'>
+                      개별 운동 배정
                     </NavLink>
                   </li>
                   <li>
