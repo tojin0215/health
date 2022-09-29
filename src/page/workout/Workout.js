@@ -11,6 +11,10 @@ import Footer from '../../component/footer/Footer';
 import { Container, Row, Col, Modal, Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
+//react-icons.github.io
+import { CgArrowRight } from 'react-icons/cg';
+import { MdArrowForwardIos } from 'react-icons/md';
+
 class Workout extends Component {
   constructor(props) {
     super(props);
@@ -98,11 +102,76 @@ class Workout extends Component {
         </header>
         <Container>
           <Row>
-            <Col>
+            <Col xs={12}>
               <h3>운동 배정</h3>
             </Col>
-            <Col>
-              <div className='text-end'>운동 배정 페이지입니다.</div>
+            <Col xs={6}>
+              <Link to='/workoutAlloted'>
+                <Row>
+                  <Col xs={8}>
+                    <h5>커스텀 루틴 배정</h5>
+                  </Col>
+                  <Col xs={4}>
+                    <CgArrowRight className='fs-1' />
+                  </Col>
+                  <Col xs={12}>
+                    <p>
+                      개별 운동을 직접 조합해서 루틴을 만들어
+                      <br />
+                      회원에게 배정해 줄 수 있습니다.
+                    </p>
+                  </Col>
+                </Row>
+              </Link>
+            </Col>
+            <Col xs={6}>
+              <Link to='/workoutStage'>
+                <Row>
+                  <Col xs={8}>
+                    <h5>베이직 루틴 배정</h5>
+                  </Col>
+                  <Col xs={4}>
+                    <CgArrowRight className='fs-1' />
+                  </Col>
+                  <Col xs={12}>
+                    <p>
+                      사전에 생성한 루틴을 선택해
+                      <br />
+                      회원에게 배정해 줄 수 있습니다.
+                    </p>
+                  </Col>
+                </Row>
+              </Link>
+            </Col>
+            <Col xs={12}>
+              <Link to='/workoutAdd'>
+                <Row>
+                  <Col xs={3}>
+                    <h5>운동 설정</h5>
+                  </Col>
+                  <Col xs={8}>
+                    <p>루틴에 들어갈 개별 운동들을 만들 수 있습니다.</p>
+                  </Col>
+                  <Col xs={1}>
+                    <MdArrowForwardIos />
+                  </Col>
+                </Row>
+              </Link>
+            </Col>
+            <Col xs={12}>
+              <Link to='/workoutStageAdd'>
+                <Row>
+                  <Col xs={3}>
+                    <h5>루틴 설정</h5>
+                  </Col>
+                  <Col xs={8}>
+                    <p>베이직 루틴을 직접 만들 수 있습니다.</p>
+                  </Col>
+                  <Col xs={1}>
+                    <MdArrowForwardIos />
+                  </Col>
+                </Row>
+              </Link>
             </Col>
           </Row>
         </Container>
