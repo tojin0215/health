@@ -316,155 +316,147 @@ class WorkoutAllotedList extends Component {
           </div>
         </div>
         <Container className='workoutallotedlist__container'>
-          {this.state.line === 3 ? (
-            <>
-              <TextField
-                id='customer_name'
-                label='회원 검색'
-                disabled
-                variant='standard'
-                className='customer-input--search'
-                InputProps={{ disableUnderline: true }}
-                value={this.state.client_name2}
-              />
-            </>
-          ) : this.state.line === 1 ? (
-            ''
-          ) : this.props.userinfo.loginWhether === 2 ? (
-            ''
-          ) : this.state.open ? (
-            <UserSearch
-              open={this.state.open}
-              setOpen={(o) => this.setState({ open: o })}
-              fitness_no={this.props.userinfo.fitness_no}
-              loginWhether={this.props.userinfo.loginWhether}
-              joinNo={this.props.userinfo.joinNo}
-              handleUser={this.handleUser}
-            />
-          ) : (
-            <>
-              <TextField
-                id='customer_name'
-                label='회원 검색'
-                disabled
-                variant='standard'
-                onClick={() => this.setState({ open: true })}
-                className='customer-input--search'
-                InputProps={{ disableUnderline: true }}
-                value={this.state.client_name}
-              />
-            </>
-          )}
-          {this.state.client_name || this.state.client_name2 ? (
-            <div>
+          <Row>
+            {this.state.line === 3 ? (
+              <Col xs={6}>
+                <TextField
+                  id='customer_name'
+                  label='회원 검색'
+                  disabled
+                  variant='standard'
+                  className='customer-input--search'
+                  InputProps={{ disableUnderline: true }}
+                  value={this.state.client_name2}
+                />
+              </Col>
+            ) : this.state.line === 1 ? (
+              ''
+            ) : this.props.userinfo.loginWhether === 2 ? (
+              ''
+            ) : this.state.open ? (
+              <Col xs={6}>
+                <UserSearch
+                  open={this.state.open}
+                  setOpen={(o) => this.setState({ open: o })}
+                  fitness_no={this.props.userinfo.fitness_no}
+                  loginWhether={this.props.userinfo.loginWhether}
+                  joinNo={this.props.userinfo.joinNo}
+                  handleUser={this.handleUser}
+                />
+              </Col>
+            ) : (
+              <Col xs={6}>
+                <TextField
+                  id='customer_name'
+                  label='회원 검색'
+                  disabled
+                  variant='standard'
+                  onClick={() => this.setState({ open: true })}
+                  className='customer-input--search'
+                  InputProps={{ disableUnderline: true }}
+                  value={this.state.client_name}
+                />
+              </Col>
+            )}
+            {this.state.line === 3 ? (
+              <Col className='text-center height-fit-content' xs={6}>
+                <DatePicker
+                  className='boxmorpsm text-center w-100 border-0'
+                  selected={this.state.workoutB_date}
+                  onChange={(date) => this.dateOnChange(date)}
+                  dateFormat='yyyy년MM월dd일'
+                  font-size='1.6rem'
+                  //  minDate={new Date()}
+                />
+              </Col>
+            ) : (
+              <Col className='text-center height-fit-content' xs={6}>
+                <DatePicker
+                  className='boxmorpsm text-center w-100 border-0'
+                  selected={this.state.workoutA_date}
+                  onChange={(date) => this.dateOnChange(date)}
+                  dateFormat='yyyy년MM월dd일'
+                  font-size='1.6rem'
+                  minDate={new Date()}
+                />
+              </Col>
+            )}
+          </Row>
+          <div>
+            <Row className='sectionGlass'>
               {this.state.line === 3 ? (
-                <Col className='text-center height-fit-content' xs={12} sm={4}>
-                  <DatePicker
-                    className='boxmorpsm text-center w-100 border-0'
-                    selected={this.state.workoutB_date}
-                    onChange={(date) => this.dateOnChange(date)}
-                    dateFormat='yyyy년MM월dd일'
-                    font-size='1.6rem'
-                    //  minDate={new Date()}
-                  />
-                </Col>
-              ) : (
-                <Col className='text-center height-fit-content' xs={12} sm={4}>
-                  <DatePicker
-                    className='boxmorpsm text-center w-100 border-0'
-                    selected={this.state.workoutA_date}
-                    onChange={(date) => this.dateOnChange(date)}
-                    dateFormat='yyyy년MM월dd일'
-                    font-size='1.6rem'
-                    minDate={new Date()}
-                  />
-                </Col>
-              )}
-
-              <div className='mt-4 sectionGlass'>
                 <h3>
-                  {this.state.line === 3
-                    ? this.state.client_name2
-                    : this.state.client_name}
-                  <span className='fs-4'>님의 인바디정보</span>
+                  <span className='text-primary'>
+                    {this.state.client_name2}
+                  </span>
+                  님의{' '}
+                  {moment(this.state.workoutB_date).format('YYYY년 MM월 DD일')}
+                  운동 배정 목록
                 </h3>
-                {this.state.inbodiesList[0] ? (
-                  this.state.inbodiesList[0]
-                ) : (
-                  <div className='p-3 fs-5 fw-bold text-center'>
-                    <TbMoodSuprised className='fs-3' />
-                    <p>등록된 인바디 정보가 없습니다.</p>
-                  </div>
-                )}
-              </div>
-              <Row className='sectionGlass'>
-                {this.state.line === 3 ? (
-                  <h3>
-                    <span className='text-primary'>
-                      {this.state.client_name2}
-                    </span>
-                    님의{' '}
-                    {moment(this.state.workoutB_date).format(
-                      'YYYY년 MM월 DD일'
+              ) : (
+                <h3>
+                  <span className='text-primary'>{this.state.client_name}</span>
+                  님의
+                  {moment(this.state.workoutA_date).format('YYYY년 MM월 DD일')}
+                  운동 배정 목록
+                </h3>
+              )}
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell scope='col'>운동 이름</TableCell>
+                      <TableCell scope='col'>운동 부위</TableCell>
+                      <TableCell scope='col'>운동 기구</TableCell>
+                      <TableCell scope='col'>세트</TableCell>
+                      <TableCell scope='col'>횟수</TableCell>
+                      <TableCell scope='col'>쉬는시간</TableCell>
+                      <TableCell scope='col'>url</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.workoutAllotlist.slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
                     )}
-                    운동 배정 목록
-                  </h3>
-                ) : (
-                  <h3>
-                    <span className='text-primary'>
-                      {this.state.client_name}
-                    </span>
-                    님의
-                    {moment(this.state.workoutA_date).format(
-                      'YYYY년 MM월 DD일'
-                    )}
-                    운동 배정 목록
-                  </h3>
-                )}
-
-                <TableContainer component={Paper}>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell scope='col'>운동 이름</TableCell>
-                        <TableCell scope='col'>운동 부위</TableCell>
-                        <TableCell scope='col'>운동 기구</TableCell>
-                        <TableCell scope='col'>세트</TableCell>
-                        <TableCell scope='col'>횟수</TableCell>
-                        <TableCell scope='col'>쉬는시간</TableCell>
-                        <TableCell scope='col'>url</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {this.state.workoutAllotlist.slice(
-                        this.state.page * this.state.rowsPerPage,
-                        this.state.page * this.state.rowsPerPage +
-                          this.state.rowsPerPage
-                      )}
-                    </TableBody>
-                  </Table>
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      {
-                        label: 'All',
-                        value: this.state.workoutAllotlist.length,
-                      },
-                    ]}
-                    count={this.state.workoutAllotlist.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onPageChange={this.handleChangePage}
-                    onRowsPerPageChange={this.handleChangeRowsPerPage}
-                  />
-                </TableContainer>
-              </Row>
-            </div>
-          ) : (
-            ''
-          )}
+                  </TableBody>
+                </Table>
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.workoutAllotlist.length,
+                    },
+                  ]}
+                  count={this.state.workoutAllotlist.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
+              </TableContainer>
+            </Row>
+            <Row className='sectionGlass'>
+              <h3>
+                {this.state.line === 3
+                  ? this.state.client_name2
+                  : this.state.client_name}
+                <span className='fs-4'>님의 인바디정보</span>
+              </h3>
+              {this.state.inbodiesList[0] ? (
+                this.state.inbodiesList[0]
+              ) : (
+                <div className='p-3 fs-5 fw-bold text-center'>
+                  <TbMoodSuprised className='fs-3' />
+                  <p>등록된 인바디 정보가 없습니다.</p>
+                </div>
+              )}
+            </Row>
+          </div>
         </Container>
         <div className='footer'>
           <Footer />
