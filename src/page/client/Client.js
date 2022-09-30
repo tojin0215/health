@@ -60,7 +60,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
-const options = ['이름', '핸드폰'];
+const options = ['이름', '핸드폰', '사물함번호'];
 
 const ClientPhone = ({
   joinNo,
@@ -456,14 +456,13 @@ const ClientPhone = ({
   };
 
   return (
+    // 3 연락처-검색 페이지
     <TableRow>
       <TableCell onClick={modalOnClick}>{client_name}</TableCell>
-      <TableCell onClick={modalOnClick}>{phone}</TableCell>
       <TableCell onClick={modalOnClick}>{sex == 1 ? '남' : '여'}</TableCell>
+      <TableCell onClick={modalOnClick}>{phone}</TableCell>
       <TableCell onClick={modalOnClick}>{newDate}</TableCell>
-      {/* <TableCell>
-        <button onClick={modalOnClick}>수정</button>
-      </TableCell> */}
+      <TableCell onClick={modalOnClick}>{lockerNumber}</TableCell>
       <Modal
         className='client_modal'
         show={showModal}
@@ -471,7 +470,7 @@ const ClientPhone = ({
         size='xl'
       >
         <Modal.Header className='mb-3'>
-          <Modal.Title>회원 상1세 정보</Modal.Title>
+          <Modal.Title>회원 상세 정보</Modal.Title>
           {showUpdate ? (
             <Button onClick={modalClose} variant='outline-light'>
               <CloseIcon />
@@ -1069,14 +1068,13 @@ const ClientName = ({
   };
 
   return (
+    //2 이름-검색페이지
     <TableRow>
       <TableCell onClick={modalOnClick}>{client_name}</TableCell>
-      <TableCell onClick={modalOnClick}>{phone}</TableCell>
       <TableCell onClick={modalOnClick}>{sex == 1 ? '남' : '여'}</TableCell>
+      <TableCell onClick={modalOnClick}>{phone}</TableCell>
       <TableCell onClick={modalOnClick}>{newDate}</TableCell>
-      {/* <TableCell>
-        <button onClick={modalOnClick}>수정</button>
-      </TableCell> */}
+      <TableCell onClick={modalOnClick}>{lockerNumber}</TableCell>
       <Modal
         className='client_modal'
         show={showModal}
@@ -1084,7 +1082,7 @@ const ClientName = ({
         size='xl'
       >
         <Modal.Header className='mb-3'>
-          <Modal.Title>회원 상2세 정보</Modal.Title>
+          <Modal.Title>회원 상세 정보</Modal.Title>
           {showUpdate ? (
             <Button onClick={modalClose} variant='outline-light'>
               <CloseIcon />
@@ -1682,16 +1680,13 @@ const ViewClientItem = ({
   };
 
   return (
-    // 회원 페이지
+    // 1 페이지
     <TableRow>
       <TableCell onClick={modalOnClick}>{client_name}</TableCell>
       <TableCell onClick={modalOnClick}>{sex == 1 ? '남' : '여'}</TableCell>
       <TableCell onClick={modalOnClick}>{phone}</TableCell>
       <TableCell onClick={modalOnClick}>{newDate}</TableCell>
       <TableCell onClick={modalOnClick}>{lockerNumber}</TableCell>
-      {/* <TableCell>
-        <button onClick={modalOnClick}>수정</button>
-      </TableCell> */}
       <Modal
         className='client_modal'
         show={showModal}
@@ -2152,7 +2147,7 @@ class Client extends Component {
                     <TableRow>
                       <TableCell>이름</TableCell>
                       <TableCell>성별</TableCell>
-                      <TableCell>연락처</TableCell>
+                      <TableCell>연락ㅇㅇㅇ처</TableCell>
                       <TableCell>가입일</TableCell>
                       <TableCell>사물함번호</TableCell>
                     </TableRow>
