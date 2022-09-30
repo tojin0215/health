@@ -140,11 +140,11 @@ input {
 }
 .sch_list > .searchDrop {
   border: 0;
-  width: 117px;
+  width: 20%;
   margin-right: 1rem;
 }
 .sch_list > input {
-  width: 80%;
+  width: 70%;
   border: none;
 }
 
