@@ -61,7 +61,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
 const options = ['이름', '핸드폰', '사물함번호'];
-
+/* 기능추가 : 사물함검색 */
 const ClientPhone = ({
   joinNo,
   fitness_no,
