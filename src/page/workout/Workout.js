@@ -7,13 +7,18 @@ import Menu from '../../component/navigation/Menu';
 import { Link } from 'react-router-dom';
 import Footer from '../../component/footer/Footer';
 
+//css
+import '../../styles/workout/workout.css';
+
 //bootstrap
 import { Container, Row, Col, Modal, Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
 //react-icons.github.io
-import { CgArrowRight } from 'react-icons/cg';
+import { CgArrowRight, CgArrowLongRight } from 'react-icons/cg';
 import { MdArrowForwardIos } from 'react-icons/md';
+
+// import { HiOutlineArrowLongRight } from 'react-icons/hi2';
 
 class Workout extends Component {
   constructor(props) {
@@ -105,49 +110,53 @@ class Workout extends Component {
             <Col xs={12}>
               <h3>운동 배정</h3>
             </Col>
-            <Col xs={6}>
-              <Link to='/workoutAlloted'>
-                <Row>
-                  <Col xs={8}>
-                    <h5>커스텀 루틴 배정</h5>
-                  </Col>
-                  <Col xs={4}>
-                    <CgArrowRight className='fs-1' />
-                  </Col>
-                  <Col xs={12}>
-                    <p>
-                      개별 운동을 직접 조합해서 루틴을 만들어
-                      <br />
-                      회원에게 배정해 줄 수 있습니다.
-                    </p>
-                  </Col>
-                </Row>
-              </Link>
-            </Col>
-            <Col xs={6}>
-              <Link to='/workoutStage'>
-                <Row>
-                  <Col xs={8}>
-                    <h5>베이직 루틴 배정</h5>
-                  </Col>
-                  <Col xs={4}>
-                    <CgArrowRight className='fs-1' />
-                  </Col>
-                  <Col xs={12}>
-                    <p>
-                      사전에 생성한 루틴을 선택해
-                      <br />
-                      회원에게 배정해 줄 수 있습니다.
-                    </p>
-                  </Col>
-                </Row>
-              </Link>
-            </Col>
-            <Col xs={12}>
+            <Row>
+              <Col xs={6} className='workoutRoutine'>
+                <Link to='/workoutAlloted'>
+                  <Row>
+                    <Col xs={10} className='mb-5'>
+                      <h2>커스텀 루틴 배정</h2>
+                    </Col>
+                    <Col xs={2}>
+                      {/* <HiOutlineArrowLongRight className='fs-1' /> */}
+                      <CgArrowLongRight className='fs-1' />
+                    </Col>
+                    <Col xs={12}>
+                      <p>
+                        개별 운동을 직접 조합해서 루틴을 만들어
+                        <br />
+                        회원에게 배정해 줄 수 있습니다.
+                      </p>
+                    </Col>
+                  </Row>
+                </Link>
+              </Col>
+              <Col xs={6} className='workoutRoutine ds'>
+                <Link to='/workoutStage'>
+                  <Row>
+                    <Col xs={10} className='mb-5'>
+                      <h2>베이직 루틴 배정</h2>
+                    </Col>
+                    <Col xs={2}>
+                      <CgArrowLongRight className='fs-1' />
+                    </Col>
+                    <Col xs={12}>
+                      <p>
+                        사전에 생성한 루틴을 선택해
+                        <br />
+                        회원에게 배정해 줄 수 있습니다.
+                      </p>
+                    </Col>
+                  </Row>
+                </Link>
+              </Col>
+            </Row>
+
+            <Col xs={12} className='addWorkout my-4'>
               <Link to='/workoutAdd'>
                 <Row>
                   <Col xs={3}>
-                    <h5>운동 설정</h5>
+                    <h4>운동 설정</h4>
                   </Col>
                   <Col xs={8}>
                     <p>루틴에 들어갈 개별 운동들을 만들 수 있습니다.</p>
@@ -158,11 +167,11 @@ class Workout extends Component {
                 </Row>
               </Link>
             </Col>
-            <Col xs={12}>
+            <Col xs={12} className='addWorkout'>
               <Link to='/workoutStageAdd'>
                 <Row>
                   <Col xs={3}>
-                    <h5>루틴 설정</h5>
+                    <h4>루틴 설정</h4>
                   </Col>
                   <Col xs={8}>
                     <p>베이직 루틴을 직접 만들 수 있습니다.</p>
