@@ -287,7 +287,7 @@ class Navigation extends Component {
                   </li>
                 </ul>
               </NavLink>
-              <NavLink exact to='/workoutAlloted'>
+              <NavLink exact to='/workout'>
                 <span className={styles.navitem}>운동</span>
                 <ul>
                   <li>
