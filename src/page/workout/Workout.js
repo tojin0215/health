@@ -151,7 +151,6 @@ class Workout extends Component {
                 </Link>
               </Col>
             </Row>
-
             <Col xs={12} className='addWorkout my-4'>
               <Link to='/workoutAdd'>
                 <Row>
