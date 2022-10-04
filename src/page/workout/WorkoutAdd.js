@@ -35,6 +35,7 @@ import { TablePagination } from '@mui/material';
 
 // React icons
 import { TbMoodSuprised } from 'react-icons/tb';
+import { MdOutlineCancel } from 'react-icons/md';
 
 const ExerciseView = ({
   idw,
@@ -71,6 +72,9 @@ const ExerciseView = ({
         <TableCell>{default_count}</TableCell>
         <TableCell>{default_rest}</TableCell>
         <TableCell>{url}</TableCell>
+        <TableCell>
+          <MdOutlineCancel />
+        </TableCell>
       </TableRow>
     </>
   );
@@ -284,13 +288,11 @@ class WorkoutAdd extends Component {
           </div>
         </div>
         <Container>
-          <Row className='sectionGlass gap-3 mt-0'>
-            <h3>운동 만들기</h3>
-            <Col>
+          <Row className='sectionGlass'>
+            <h3>운동설정</h3>
+            <Col xs={6}>
               <Form.Group>
-                <Form.Label>
-                  <h5>운동 이름</h5>
-                </Form.Label>
+                <Form.Label>운동명</Form.Label>
                 <Form.Control
                   value={this.state.workout}
                   id='workout'
@@ -298,11 +300,9 @@ class WorkoutAdd extends Component {
                 ></Form.Control>
               </Form.Group>
             </Col>
-            <Col>
+            <Col xs={6}>
               <Form.Group>
-                <Form.Label>
-                  <h5>기구</h5>
-                </Form.Label>
+                <Form.Label>기구</Form.Label>
                 <Form.Control
                   value={this.state.machine}
                   id='machine'
@@ -312,9 +312,7 @@ class WorkoutAdd extends Component {
             </Col>
             <Col xs={12}>
               <Form.Group>
-                <Form.Label>
-                  <h5>운동 부위</h5>
-                </Form.Label>
+                <Form.Label>운동 부위</Form.Label>
                 <Row xs={6} className='px-5'>
                   <Col>
                     <Form.Check>
@@ -449,12 +447,10 @@ class WorkoutAdd extends Component {
               </Form.Group>
             </Col>
             <Col xs={12}>
-              <Button className='w-100' onClick={this.workoutAdd}>
-                운동 설정
-              </Button>
+              <Button onClick={this.workoutAdd}>운동 만들기</Button>
             </Col>
           </Row>
-          <Row className='my-2' xs={6}>
+          <Row className='sectionGlass'>
             <Col xs={12}>
               <h3>
                 <span className='text-primary'>
@@ -529,56 +525,59 @@ class WorkoutAdd extends Component {
                 기타
               </Button>
             </Col>
+            <Col xs={12}>
+              <TableContainer component={Paper}>
+                <Table className='mt-2'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell scope='col'>부위</TableCell>
+                      <TableCell scope='col'>이름</TableCell>
+                      <TableCell scope='col'>운동기구</TableCell>
+                      <TableCell scope='col'>세트</TableCell>
+                      <TableCell scope='col'>횟수</TableCell>
+                      <TableCell scope='col'>휴식</TableCell>
+                      <TableCell scope='col'>URL</TableCell>
+                      <TableCell scope='col'>삭제</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.workoutlist.length === 0
+                      ? ''
+                      : this.state.workoutlist.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )}
+                  </TableBody>
+                </Table>
+                {this.state.workoutlist.length === 0 ? (
+                  <div className='p-3 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>설정된 운동이 없습니다.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
+                <TablePagination
+                  className='bg-white'
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.workoutlist.length,
+                    },
+                  ]}
+                  count={this.state.workoutlist.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
+              </TableContainer>
+            </Col>
           </Row>
-          <TableContainer component={Paper}>
-            <Table className='mt-2'>
-              <TableHead>
-                <TableRow>
-                  <TableCell scope='col'>운동 부위</TableCell>
-                  <TableCell scope='col'>운동 이름</TableCell>
-                  <TableCell scope='col'>운동 기구</TableCell>
-                  <TableCell scope='col'>세트</TableCell>
-                  <TableCell scope='col'>횟수</TableCell>
-                  <TableCell scope='col'>쉬는시간</TableCell>
-                  <TableCell scope='col'>url</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {this.state.workoutlist.length === 0
-                  ? ''
-                  : this.state.workoutlist.slice(
-                      this.state.page * this.state.rowsPerPage,
-                      this.state.page * this.state.rowsPerPage +
-                        this.state.rowsPerPage
-                    )}
-              </TableBody>
-            </Table>
-            {this.state.workoutlist.length === 0 ? (
-              <div className='p-3 fs-5 fw-bold text-center'>
-                <TbMoodSuprised className='fs-3' />
-                <p>설정된 운동이 없습니다.</p>
-              </div>
-            ) : (
-              ''
-            )}
-            <TablePagination
-              className='bg-white'
-              rowsPerPageOptions={[
-                5,
-                10,
-                25,
-                {
-                  label: 'All',
-                  value: this.state.workoutlist.length,
-                },
-              ]}
-              count={this.state.workoutlist.length}
-              rowsPerPage={this.state.rowsPerPage}
-              page={this.state.page}
-              onPageChange={this.handleChangePage}
-              onRowsPerPageChange={this.handleChangeRowsPerPage}
-            />
-          </TableContainer>
         </Container>
         <div className='footer'>
           <Footer />
