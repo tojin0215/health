@@ -1,0 +1,23 @@
+.workoutRoutine {
+  background: #222;
+  border: 1px solid #888;
+  border-radius: 0.625rem;
+  width: 32.438rem;
+  height: 15.313rem;
+  padding: 3.125rem 2.5rem;
+  margin-right: 3.125rem;
+}
+.ds {
+  margin-right: 0;
+}
+
+.addWorkout {
+  width: 1088px;
+  height: 6.625rem;
+  line-height: 6.625rem;
+  font-size: 20px;
+  background: #222222;
+}
+.addWorkout h4 {
+  line-height: 6.625rem;
+}
