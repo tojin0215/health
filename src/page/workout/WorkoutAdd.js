@@ -284,13 +284,11 @@ class WorkoutAdd extends Component {
           </div>
         </div>
         <Container>
-          <Row className='sectionGlass gap-3 mt-0'>
-            <h3>운동 만들기</h3>
-            <Col>
+          <Row className='sectionGlass'>
+            <h3>운동설정</h3>
+            <Col xs={6}>
               <Form.Group>
-                <Form.Label>
-                  <h5>운동 이름</h5>
-                </Form.Label>
+                <Form.Label>운동명</Form.Label>
                 <Form.Control
                   value={this.state.workout}
                   id='workout'
@@ -298,11 +296,9 @@ class WorkoutAdd extends Component {
                 ></Form.Control>
               </Form.Group>
             </Col>
-            <Col>
+            <Col xs={6}>
               <Form.Group>
-                <Form.Label>
-                  <h5>기구</h5>
-                </Form.Label>
+                <Form.Label>기구</Form.Label>
                 <Form.Control
                   value={this.state.machine}
                   id='machine'
