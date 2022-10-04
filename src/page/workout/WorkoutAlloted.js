@@ -21,7 +21,11 @@ import { data } from 'jquery';
 import Footer from '../../component/footer/Footer';
 
 //bootstrap
-import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import TabContainer from 'react-bootstrap/TabContainer';
+import TabPane from 'react-bootstrap/TabPane';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 // mui
@@ -245,6 +249,7 @@ class WorkoutAlloted extends Component {
       rowsPerPage: 5,
       workoutA_date: new Date(),
       asd: '',
+      key: 1,
     };
     //여기 function
   }
@@ -367,6 +372,7 @@ class WorkoutAlloted extends Component {
         this.props.userinfo.loginWhether === 1
           ? trainerResult[0].fitness_no
           : this.props.userinfo.fitness_no;
+      this.workoutAllotedView(this.state.idc);
       workoutSelect(fitness_no, key).then((result) => {
         const items = result.map((data, index, array) => {
           return (
@@ -459,6 +465,12 @@ class WorkoutAlloted extends Component {
     this.setState({ workoutA_date: date, asd: 1 });
     this.workoutAllotedView(this.state.idc);
   };
+  // handleSelect(key) {
+  //   {
+  //     alert('선택되었습니다. ' + key);
+  //     this.state.handleOnClick(1);
+  //   }
+  // }
   render() {
     // console.log(this.state.idc);
     // console.log(this.state.workoutAllotlist);
@@ -485,43 +497,396 @@ class WorkoutAlloted extends Component {
           </div>
         </div>
         <Container className='workoutalloted__container'>
-          {this.state.open ? (
-            <UserSearch
-              open={this.state.open}
-              setOpen={(o) => this.setState({ open: o })}
-              fitness_no={this.props.userinfo.fitness_no}
-              loginWhether={this.props.userinfo.loginWhether}
-              joinNo={this.props.userinfo.joinNo}
-              handleUser={this.handleUser}
-            />
-          ) : (
-            <>
-              <TextField
-                id='customer_name'
-                label='회원 검색'
-                disabled
-                variant='standard'
-                onClick={() => this.setState({ open: true })}
-                className='customer-input--search'
-                InputProps={{ disableUnderline: true }}
-                value={this.state.client_name}
-              />
-            </>
-          )}
-
-          {this.state.client_name ? (
-            <div>
-              <Col className='text-center height-fit-content' xs={12} sm={4}>
-                <DatePicker
-                  className='boxmorpsm text-center w-100 border-0'
-                  selected={this.state.workoutA_date}
-                  onChange={(date) => this.dateOnChange(date)}
-                  dateFormat='yyyy년MM월dd일'
-                  font-size='1.6rem'
-                  minDate={new Date()}
+          <Row className='border p-2'>
+            <Col xs={3}>
+              {this.state.open ? (
+                <UserSearch
+                  open={this.state.open}
+                  setOpen={(o) => this.setState({ open: o })}
+                  fitness_no={this.props.userinfo.fitness_no}
+                  loginWhether={this.props.userinfo.loginWhether}
+                  joinNo={this.props.userinfo.joinNo}
+                  handleUser={this.handleUser}
                 />
-              </Col>
-              {/* <div className='mt-4 sectionGlass'>
+              ) : (
+                <>
+                  <TextField
+                    id='customer_name'
+                    label='회원 검색'
+                    disabled
+                    variant='standard'
+                    onClick={() => this.setState({ open: true })}
+                    className='customer-input--search'
+                    InputProps={{ disableUnderline: true }}
+                    value={this.state.client_name}
+                  />
+                </>
+              )}
+            </Col>
+            <Col xs={1}>님의</Col>
+            <Col className='text-center height-fit-content' xs={3}>
+              <DatePicker
+                className='boxmorpsm text-center w-100 border-0'
+                selected={this.state.workoutA_date}
+                onChange={(date) => this.dateOnChange(date)}
+                dateFormat='yyyy년MM월dd일'
+                font-size='1.6rem'
+                minDate={new Date()}
+              />
+            </Col>
+            <Col xs={2}>운동 배정입니다.</Col>
+          </Row>
+          <div>
+            <Tabs
+              defaultActiveKey='1'
+              id='exercise-part-tab'
+              onSelect={this.handleSelect}
+            >
+              <Tab
+                eventKey='1'
+                title='상체'
+                onClick={() => this.handleOnClick(1)}
+              >
+                <TabContainer>
+                  <TableContainer component={Paper}>
+                    <Table size='small'>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell scope='col'>운동 부위</TableCell>
+                          <TableCell scope='col'>운동 이름</TableCell>
+                          <TableCell scope='col'>운동 기구</TableCell>
+                          <TableCell scope='col'>세트</TableCell>
+                          <TableCell scope='col'>횟수</TableCell>
+                          <TableCell scope='col'>쉬는시간</TableCell>
+                          <TableCell scope='col'>url</TableCell>
+                          <TableCell scope='col' align='center'>
+                            배정
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {this.state.exerciseAllotlist.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )}
+                      </TableBody>
+                    </Table>
+                    {this.state.exerciseAllotlist.length === 0 ? (
+                      <div className='p-3 fs-5 fw-bold text-center'>
+                        <TbMoodSuprised className='fs-3' />
+                        <p>운동을 선택하거나 설정된 운동이 없습니다.</p>
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                    <TablePagination
+                      className='bg-white'
+                      rowsPerPageOptions={[
+                        5,
+                        10,
+                        25,
+                        {
+                          label: 'All',
+                          value: this.state.exerciseAllotlist.length,
+                        },
+                      ]}
+                      count={this.state.exerciseAllotlist.length}
+                      rowsPerPage={this.state.rowsPerPage}
+                      page={this.state.page}
+                      onPageChange={this.handleChangePage}
+                      onRowsPerPageChange={this.handleChangeRowsPerPage}
+                    />
+                  </TableContainer>
+                </TabContainer>
+              </Tab>
+              <Tab
+                eventKey='18'
+                title='하체'
+                // onSelect={this.handleOnClick(18)}
+                onClick={() => this.handleSelect(18)}
+              >
+                <TabContainer>
+                  <TableContainer component={Paper}>
+                    <Table size='small'>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell scope='col'>운동 부위</TableCell>
+                          <TableCell scope='col'>운동 이름</TableCell>
+                          <TableCell scope='col'>운동 기구</TableCell>
+                          <TableCell scope='col'>세트</TableCell>
+                          <TableCell scope='col'>횟수</TableCell>
+                          <TableCell scope='col'>쉬는시간</TableCell>
+                          <TableCell scope='col'>url</TableCell>
+                          <TableCell scope='col' align='center'>
+                            배정
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {this.state.exerciseAllotlist.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )}
+                      </TableBody>
+                    </Table>
+                    {this.state.exerciseAllotlist.length === 0 ? (
+                      <div className='p-3 fs-5 fw-bold text-center'>
+                        <TbMoodSuprised className='fs-3' />
+                        <p>운동을 선택하거나 설정된 운동이 없습니다.</p>
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                    <TablePagination
+                      className='bg-white'
+                      rowsPerPageOptions={[
+                        5,
+                        10,
+                        25,
+                        {
+                          label: 'All',
+                          value: this.state.exerciseAllotlist.length,
+                        },
+                      ]}
+                      count={this.state.exerciseAllotlist.length}
+                      rowsPerPage={this.state.rowsPerPage}
+                      page={this.state.page}
+                      onPageChange={this.handleChangePage}
+                      onRowsPerPageChange={this.handleChangeRowsPerPage}
+                    />
+                  </TableContainer>
+                </TabContainer>
+              </Tab>
+              <Tab
+                eventKey='28'
+                title='전신'
+                onClick={() => this.handleOnClick(28)}
+              >
+                <TableContainer component={Paper}>
+                  <Table size='small'>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell scope='col'>운동 부위</TableCell>
+                        <TableCell scope='col'>운동 이름</TableCell>
+                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>세트</TableCell>
+                        <TableCell scope='col'>횟수</TableCell>
+                        <TableCell scope='col'>쉬는시간</TableCell>
+                        <TableCell scope='col'>url</TableCell>
+                        <TableCell scope='col' align='center'>
+                          배정
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.exerciseAllotlist.slice(
+                        this.state.page * this.state.rowsPerPage,
+                        this.state.page * this.state.rowsPerPage +
+                          this.state.rowsPerPage
+                      )}
+                    </TableBody>
+                  </Table>
+                  {this.state.exerciseAllotlist.length === 0 ? (
+                    <div className='p-3 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>운동을 선택하거나 설정된 운동이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <TablePagination
+                    className='bg-white'
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.exerciseAllotlist.length,
+                      },
+                    ]}
+                    count={this.state.exerciseAllotlist.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
+                </TableContainer>
+              </Tab>
+              <Tab
+                eventKey='38'
+                title='코어'
+                onClick={() => this.handleOnClick(38)}
+              >
+                <TableContainer component={Paper}>
+                  <Table size='small'>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell scope='col'>운동 부위</TableCell>
+                        <TableCell scope='col'>운동 이름</TableCell>
+                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>세트</TableCell>
+                        <TableCell scope='col'>횟수</TableCell>
+                        <TableCell scope='col'>쉬는시간</TableCell>
+                        <TableCell scope='col'>url</TableCell>
+                        <TableCell scope='col' align='center'>
+                          배정
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.exerciseAllotlist.slice(
+                        this.state.page * this.state.rowsPerPage,
+                        this.state.page * this.state.rowsPerPage +
+                          this.state.rowsPerPage
+                      )}
+                    </TableBody>
+                  </Table>
+                  {this.state.exerciseAllotlist.length === 0 ? (
+                    <div className='p-3 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>운동을 선택하거나 설정된 운동이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <TablePagination
+                    className='bg-white'
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.exerciseAllotlist.length,
+                      },
+                    ]}
+                    count={this.state.exerciseAllotlist.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
+                </TableContainer>
+              </Tab>
+              <Tab
+                eventKey='48'
+                title='유산소'
+                onClick={() => this.handleOnClick(48)}
+              >
+                <TableContainer component={Paper}>
+                  <Table size='small'>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell scope='col'>운동 부위</TableCell>
+                        <TableCell scope='col'>운동 이름</TableCell>
+                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>세트</TableCell>
+                        <TableCell scope='col'>횟수</TableCell>
+                        <TableCell scope='col'>쉬는시간</TableCell>
+                        <TableCell scope='col'>url</TableCell>
+                        <TableCell scope='col' align='center'>
+                          배정
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.exerciseAllotlist.slice(
+                        this.state.page * this.state.rowsPerPage,
+                        this.state.page * this.state.rowsPerPage +
+                          this.state.rowsPerPage
+                      )}
+                    </TableBody>
+                  </Table>
+                  {this.state.exerciseAllotlist.length === 0 ? (
+                    <div className='p-3 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>운동을 선택하거나 설정된 운동이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <TablePagination
+                    className='bg-white'
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.exerciseAllotlist.length,
+                      },
+                    ]}
+                    count={this.state.exerciseAllotlist.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
+                </TableContainer>
+              </Tab>
+              <Tab
+                eventKey='58'
+                title='기타'
+                onClick={() => this.handleOnClick(58)}
+              >
+                <TableContainer component={Paper}>
+                  <Table size='small'>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell scope='col'>운동 부위</TableCell>
+                        <TableCell scope='col'>운동 이름</TableCell>
+                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>세트</TableCell>
+                        <TableCell scope='col'>횟수</TableCell>
+                        <TableCell scope='col'>쉬는시간</TableCell>
+                        <TableCell scope='col'>url</TableCell>
+                        <TableCell scope='col' align='center'>
+                          배정
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.exerciseAllotlist.slice(
+                        this.state.page * this.state.rowsPerPage,
+                        this.state.page * this.state.rowsPerPage +
+                          this.state.rowsPerPage
+                      )}
+                    </TableBody>
+                  </Table>
+                  {this.state.exerciseAllotlist.length === 0 ? (
+                    <div className='p-3 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>운동을 선택하거나 설정된 운동이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <TablePagination
+                    className='bg-white'
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.exerciseAllotlist.length,
+                      },
+                    ]}
+                    count={this.state.exerciseAllotlist.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
+                </TableContainer>
+              </Tab>
+            </Tabs>
+          </div>
+          <div>
+            {/* <div className='mt-4 sectionGlass'>
                 <h3>
                   {this.state.client_name}
                   <span className='fs-4'> 님</span>
@@ -538,180 +903,118 @@ class WorkoutAlloted extends Component {
                   </div>
                 )}
               </div> */}
-              {this.state.asd === 1 ? (
-                <Row className='sectionGlass'>
-                  <Col xs={12}>
-                    <h3>
-                      <span className='text-primary'>
-                        {this.state.headRegion === 1
-                          ? '상체 '
-                          : this.state.headRegion === 18
-                          ? '하체 '
-                          : this.state.headRegion === 28
-                          ? '전신 '
-                          : this.state.headRegion === 38
-                          ? '코어 '
-                          : this.state.headRegion === 48
-                          ? '유산소 '
-                          : this.state.headRegion === 58
-                          ? '기타 '
-                          : ''}
-                      </span>
-                      운동 선택
-                    </h3>
-                  </Col>
-                  <Col xs={6} md={2}>
-                    <Button
-                      className='w-100'
-                      variant='outline-primary'
-                      onClick={() => this.handleOnClick(1)}
-                    >
-                      상체
-                    </Button>
-                  </Col>
-                  <Col xs={6} md={2}>
-                    <Button
-                      className='w-100'
-                      variant='outline-primary'
-                      onClick={() => this.handleOnClick(18)}
-                    >
-                      하체
-                    </Button>
-                  </Col>
-                  <Col xs={6} md={2}>
-                    <Button
-                      className='w-100'
-                      variant='outline-primary'
-                      onClick={() => this.handleOnClick(28)}
-                    >
-                      전신
-                    </Button>
-                  </Col>
-                  <Col xs={6} md={2}>
-                    <Button
-                      className='w-100'
-                      variant='outline-primary'
-                      onClick={() => this.handleOnClick(38)}
-                    >
-                      코어
-                    </Button>
-                  </Col>
-                  <Col xs={6} md={2}>
-                    <Button
-                      className='w-100'
-                      variant='outline-primary'
-                      onClick={() => this.handleOnClick(48)}
-                    >
-                      유산소
-                    </Button>
-                  </Col>
-                  <Col xs={6} md={2}>
-                    <Button
-                      className='w-100'
-                      variant='outline-primary'
-                      onClick={() => this.handleOnClick(58)}
-                    >
-                      기타
-                    </Button>
-                  </Col>
-                  <Col xs={12} className='mt-2'>
-                    <TableContainer component={Paper}>
-                      <Table size='small'>
-                        <TableHead>
-                          <TableRow>
-                            <TableCell scope='col'>운동 부위</TableCell>
-                            <TableCell scope='col'>운동 이름</TableCell>
-                            <TableCell scope='col'>운동 기구</TableCell>
-                            <TableCell scope='col'>세트</TableCell>
-                            <TableCell scope='col'>횟수</TableCell>
-                            <TableCell scope='col'>쉬는시간</TableCell>
-                            <TableCell scope='col'>url</TableCell>
-                            <TableCell scope='col' align='center'>
-                              배정
-                            </TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {this.state.exerciseAllotlist.slice(
-                            this.state.page * this.state.rowsPerPage,
-                            this.state.page * this.state.rowsPerPage +
-                              this.state.rowsPerPage
-                          )}
-                        </TableBody>
-                      </Table>
-                      {this.state.exerciseAllotlist.length === 0 ? (
-                        <div className='p-3 fs-5 fw-bold text-center'>
-                          <TbMoodSuprised className='fs-3' />
-                          <p>운동을 선택하거나 설정된 운동이 없습니다.</p>
-                        </div>
-                      ) : (
-                        ''
-                      )}
-                      <TablePagination
-                        className='bg-white'
-                        rowsPerPageOptions={[
-                          5,
-                          10,
-                          25,
-                          {
-                            label: 'All',
-                            value: this.state.exerciseAllotlist.length,
-                          },
-                        ]}
-                        count={this.state.exerciseAllotlist.length}
-                        rowsPerPage={this.state.rowsPerPage}
-                        page={this.state.page}
-                        onPageChange={this.handleChangePage}
-                        onRowsPerPageChange={this.handleChangeRowsPerPage}
-                      />
-                    </TableContainer>
-                  </Col>
-                </Row>
-              ) : (
-                ''
-              )}
+            {this.state.asd === 1 ? (
               <Row className='sectionGlass'>
-                <Col>
-                  <h3>
-                    {this.state.client_name}
-                    <span className='fs-5'>
-                      님의{' '}
-                      {moment(this.state.workoutA_date).format(
-                        'YYYY년 MM월DD일'
-                      )}
-                      에 배정된 운동 목록입니다
-                    </span>
-                  </h3>
+                <Col xs={12}>
+                  <Row className='bg-secondary'>
+                    <Col>
+                      <h3>
+                        <span className='text-primary'>
+                          {this.state.headRegion === 1
+                            ? '상체 '
+                            : this.state.headRegion === 18
+                            ? '하체 '
+                            : this.state.headRegion === 28
+                            ? '전신 '
+                            : this.state.headRegion === 38
+                            ? '코어 '
+                            : this.state.headRegion === 48
+                            ? '유산소 '
+                            : this.state.headRegion === 58
+                            ? '기타 '
+                            : ''}
+                        </span>
+                        운동목록
+                      </h3>
+                    </Col>
+                    <Col>
+                      <span>설정된 운동목록입니다. 회원에게 배정해주세요.</span>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col xs={6} md={2}>
+                  <Button
+                    className='w-100'
+                    variant='outline-primary'
+                    onClick={() => this.handleOnClick(1)}
+                  >
+                    상체
+                  </Button>
+                </Col>
+                <Col xs={6} md={2}>
+                  <Button
+                    className='w-100'
+                    variant='outline-primary'
+                    onClick={() => this.handleOnClick(18)}
+                  >
+                    하체
+                  </Button>
+                </Col>
+                <Col xs={6} md={2}>
+                  <Button
+                    className='w-100'
+                    variant='outline-primary'
+                    onClick={() => this.handleOnClick(28)}
+                  >
+                    전신
+                  </Button>
+                </Col>
+                <Col xs={6} md={2}>
+                  <Button
+                    className='w-100'
+                    variant='outline-primary'
+                    onClick={() => this.handleOnClick(38)}
+                  >
+                    코어
+                  </Button>
+                </Col>
+                <Col xs={6} md={2}>
+                  <Button
+                    className='w-100'
+                    variant='outline-primary'
+                    onClick={() => this.handleOnClick(48)}
+                  >
+                    유산소
+                  </Button>
+                </Col>
+                <Col xs={6} md={2}>
+                  <Button
+                    className='w-100'
+                    variant='outline-primary'
+                    onClick={() => this.handleOnClick(58)}
+                  >
+                    기타
+                  </Button>
+                </Col>
+                <Col xs={12} className='mt-2'>
                   <TableContainer component={Paper}>
-                    <Table>
+                    <Table size='small'>
                       <TableHead>
                         <TableRow>
-                          <TableCell scope='col'>운동 이름</TableCell>
                           <TableCell scope='col'>운동 부위</TableCell>
+                          <TableCell scope='col'>운동 이름</TableCell>
                           <TableCell scope='col'>운동 기구</TableCell>
                           <TableCell scope='col'>세트</TableCell>
                           <TableCell scope='col'>횟수</TableCell>
                           <TableCell scope='col'>쉬는시간</TableCell>
                           <TableCell scope='col'>url</TableCell>
                           <TableCell scope='col' align='center'>
-                            삭제
+                            배정
                           </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {this.state.workoutAllotlist.length === 0
-                          ? ''
-                          : this.state.workoutAllotlist.slice(
-                              this.state.page * this.state.rowsPerPage,
-                              this.state.page * this.state.rowsPerPage +
-                                this.state.rowsPerPage
-                            )}
+                        {this.state.exerciseAllotlist.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )}
                       </TableBody>
                     </Table>
-                    {this.state.workoutAllotlist.length === 0 ? (
-                      <div className='p-3 fs-5 fw-bold text-center bg-white text-black'>
+                    {this.state.exerciseAllotlist.length === 0 ? (
+                      <div className='p-3 fs-5 fw-bold text-center'>
                         <TbMoodSuprised className='fs-3' />
-                        <p>배정된 운동 목록이 없습니다.</p>
+                        <p>운동을 선택하거나 설정된 운동이 없습니다.</p>
                       </div>
                     ) : (
                       ''
@@ -724,10 +1027,10 @@ class WorkoutAlloted extends Component {
                         25,
                         {
                           label: 'All',
-                          value: this.state.workoutAllotlist.length,
+                          value: this.state.exerciseAllotlist.length,
                         },
                       ]}
-                      count={this.state.workoutAllotlist.length}
+                      count={this.state.exerciseAllotlist.length}
                       rowsPerPage={this.state.rowsPerPage}
                       page={this.state.page}
                       onPageChange={this.handleChangePage}
@@ -736,8 +1039,74 @@ class WorkoutAlloted extends Component {
                   </TableContainer>
                 </Col>
               </Row>
-            </div>
-          ) : null}
+            ) : (
+              ''
+            )}
+            <Row className='sectionGlass'>
+              <Col>
+                <h3>
+                  {this.state.client_name}
+                  <span className='fs-5'>
+                    님의{' '}
+                    {moment(this.state.workoutA_date).format('YYYY년 MM월DD일')}
+                    에 배정된 운동 목록입니다
+                  </span>
+                </h3>
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell scope='col'>운동 이름</TableCell>
+                        <TableCell scope='col'>운동 부위</TableCell>
+                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>세트</TableCell>
+                        <TableCell scope='col'>횟수</TableCell>
+                        <TableCell scope='col'>쉬는시간</TableCell>
+                        <TableCell scope='col'>url</TableCell>
+                        <TableCell scope='col' align='center'>
+                          삭제
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.workoutAllotlist.length === 0
+                        ? ''
+                        : this.state.workoutAllotlist.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )}
+                    </TableBody>
+                  </Table>
+                  {this.state.workoutAllotlist.length === 0 ? (
+                    <div className='p-3 fs-5 fw-bold text-center bg-white text-black'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>배정된 운동 목록이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <TablePagination
+                    className='bg-white'
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.workoutAllotlist.length,
+                      },
+                    ]}
+                    count={this.state.workoutAllotlist.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
+                </TableContainer>
+              </Col>
+            </Row>
+          </div>
         </Container>
         <div className='footer'>
           <Footer />
