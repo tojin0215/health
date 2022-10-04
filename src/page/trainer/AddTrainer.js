@@ -130,7 +130,7 @@ class AddTrainer extends Component {
                 trainerManager(
                   this.state.phone,
                   this.props.userinfo.fitness_name,
-                  this.state.birth,
+                  this.state.birth.slice(4),
                   this.state.trainer_name,
                   items[0].idx
                 ).then((res) => {
