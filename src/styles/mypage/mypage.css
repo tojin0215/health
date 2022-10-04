@@ -1,0 +1,8 @@
+.myName,
+.myInfo,
+.fitInfo {
+  background: #333;
+  border-radius: 5px;
+  padding: 30px;
+  line-height: 30px;
+}

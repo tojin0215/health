@@ -7,6 +7,8 @@ import Menu from '../../component/navigation/Menu';
 import Navigation from '../../component/navigation/Navigation';
 // moment
 import moment from 'moment';
+//css
+import '../../styles/mypage/mypage.css';
 // Bootstrap
 import Form from 'react-bootstrap/Form';
 import { Container, Modal, Row, Col, FloatingLabel } from 'react-bootstrap';
@@ -242,53 +244,98 @@ class Mypage extends Component {
           {/*.localNavigation */}
         </header>
         <Container>
-          <p>
+          {/*           <p>
             {this.props.userinfo.loginWhether === 2
               ? '회원'
               : this.props.userinfo.loginWhether === 1
               ? '강사'
               : '센터'}
-          </p>
+          </p> */}
           {this.props.userinfo.loginWhether === 2 ? (
             //회원
-            <div>
-              <p>헬스장명: {this.state.fitness_name}</p>
-              <p>
-                이름:
-                {this.state.myName}
-              </p>
-              <p>폰번호: {this.state.cPhone}</p>
-              <p>생년월일: {this.state.cBirth}</p>
-              <p>락커룸: {this.state.cLocker}</p>
-              <p>운동복: {this.state.cWear}</p>
-              <p>성별: {this.state.cSex}</p>
-              <p>결제기간(이용권, 기간권): {this.state.voucher}</p>
-            </div>
+            <Row>
+              <Col
+                xs={12}
+                className='myName mb-4 d-flex justify-content-between'
+              >
+                <h4 className='text-primary'>{this.state.myName}</h4>
+                <p>내정보수정은 센터로 문의 바랍니다</p>
+              </Col>
+              <Col className='myInfo me-4'>
+                <h4>내정보</h4>
+                이름:{this.state.myName}
+                <br />
+                성별: {this.state.cSex}
+                <br />
+                폰번호: {this.state.cPhone}
+                <br />
+                생년월일: {this.state.cBirth}
+              </Col>
+              <Col className='fitInfo'>
+                <h4>이용중인 센터정보</h4>
+                헬스장명: {this.state.fitness_name}
+                <br />
+                헬스장 전화번호: {this.state.business_phone}
+                <br />
+                락커룸: {this.state.cLocker}
+                <br />
+                운동복: {this.state.cWear}
+              </Col>
+              {/* 결제기간(이용권, 기간권): {this.state.voucher} */}
+            </Row>
           ) : this.props.userinfo.loginWhether === 1 ? (
             //강사
-            <div>
-              <p>헬스장명: {this.state.fitness_name}</p>
-              <p>
-                이름:
-                {this.state.myName}
-              </p>
-              <p>폰번호: {this.state.tPhone}</p>
-              <p>생년월일: {this.state.tBirth}</p>
-              <p>성별: {this.state.tSex}</p>
-              <p>입사일: {this.state.tJOin}</p>
-            </div>
+            <Row>
+              <Col
+                xs={12}
+                className='myName mb-4 d-flex justify-content-between'
+              >
+                <h4 className='text-primary'>{this.state.myName}</h4>
+                <p>내정보수정은 센터로 문의 바랍니다</p>
+              </Col>
+              <Col className='myInfo me-4'>
+                <h4>내정보</h4>
+                이름: {this.state.myName}
+                <br />
+                성별: {this.state.tSex}
+                <br />
+                연락처: {this.state.tPhone}
+                <br />
+                소속: {this.state.fitness_name}
+                <br />
+              </Col>
+              <Col className='fitInfo'>
+                <h4>소속 센터정보</h4>
+                사업장 명: {this.state.fitness_name}
+                <br />
+                입사일: {this.state.tJOin}
+                <br />
+                사업장 전화번호: {this.state.business_phone}
+              </Col>
+            </Row>
           ) : (
             //사업주
-            <div>
-              <p>헬스장명: {this.state.fitness_name}</p>
-              <p>
-                이름:
-                {this.state.myName}
-              </p>
-              <p>폰번호: {this.state.phone}</p>
-              <p>사업장 전화번호: {this.state.business_phone}</p>
-              <p>사업장등록번호: {this.state.business_number}</p>
-            </div>
+            <Row>
+              <Col className='myName text-primary mb-4' xs={12}>
+                <h4>{this.state.fitness_name}</h4>
+              </Col>
+              <Col className='myInfo me-4'>
+                <h4>내정보</h4>
+                이름:{this.state.myName}
+                <br />
+                폰번호: {this.state.phone}
+                <br />
+                사업장 명 : {this.state.fitness_name}
+              </Col>
+              <Col className='fitInfo'>
+                <h4>센터정보</h4>
+                사업장 명 : {this.state.fitness_name}
+                <br />
+                사업장 전화번호: {this.state.business_phone}
+                <br />
+                사업장등록번호: {this.state.business_number}
+              </Col>
+            </Row>
           )}
         </Container>
       </div>

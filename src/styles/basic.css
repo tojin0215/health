@@ -29,12 +29,29 @@ h3 {
   padding-bottom: 0.6rem;
 }
 h4 {
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 h5 {
   line-height: 2.8rem;
   font-weight: 500;
+  align-items: center;
 }
+
+h5 .parallelogram {
+  height: 2.8rem;
+  margin-right: 1.2rem;
+}
+
+h6 {
+  display: flex;
+  font-weight: 400;
+  align-items: center;
+}
+
+h6 .circle {
+  margin-right: 1rem;
+}
+
 ul,
 ol,
 li {
