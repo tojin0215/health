@@ -1,57 +1,18 @@
-import { Component, useState } from 'react';
-import DatePicker from 'react-datepicker';
+import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
 import Menu from '../../component/navigation/Menu';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
-import UserSearch from '../../component/customer/UserSearch';
-import {
-  inbodiesSelect,
-  selectClientReservation,
-  selectTrainerReservation,
-  workoutAllotedDelete,
-  workoutAllotedInsert,
-  workoutAllotedSelect,
-  workoutSelect,
-} from '../../api/user';
-import { data } from 'jquery';
 import Footer from '../../component/footer/Footer';
 
 //css
 import '../../styles/workout/workout.css';
 
 //bootstrap
-import { Container, Row, Col } from 'react-bootstrap';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-import TabContainer from 'react-bootstrap/TabContainer';
-import TabPane from 'react-bootstrap/TabPane';
-import Form from 'react-bootstrap/Form';
+import { Container, Row, Col, Modal, Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-// mui
-import { Refresh } from '@mui/icons-material';
-import { TablePagination, TextField } from '@mui/material';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-// 리액트 아이콘
-import { RiDeleteBin5Fill } from 'react-icons/ri';
-import { TbMoodSuprised } from 'react-icons/tb';
-import { HiOutlinePlusCircle } from 'react-icons/hi';
-import { MdCancel } from 'react-icons/md';
 
 //react-icons.github.io
 import { CgArrowRight, CgArrowLongRight } from 'react-icons/cg';
@@ -62,26 +23,17 @@ import { MdArrowForwardIos } from 'react-icons/md';
 class Workout extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      client_name: '',
-      open: false,
-      inbodiesList: [],
-      assignexerciseAllotlist: [],
-      exerciseAllotlist: [],
-      tablePlus: [],
-      workoutAllotlist: [],
-      headRegion: '',
-      page: 0,
-      rowsPerPage: 5,
-      workoutA_date: new Date(),
-      asd: '',
-      key: 1,
-    };
-    //여기 function
   }
   goLogin = () => {
     this.props.history.push('/');
   };
+  goAlloted = () => {
+    this.props.history.push('/workoutAlloted');
+  };
+  goStage = () => {
+    this.props.history.push('/workoutStage');
+  };
+
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
     // get cookie by name
@@ -125,107 +77,38 @@ class Workout extends Component {
       } else {
         this.viewWorkout();
       }
-              handleOnClick={this.handleOnClick}
-              workoutAllotedView={this.workoutAllotedView}
-              workoutA_date={this.state.workoutA_date}
-              close={() => this.setState({ asd: 0, exerciseAllotlist: '' })}
-            />
-          );
-        });
-        this.setState({
-          exerciseAllotlist: items,
-          headRegion: key,
-        });
-        // console.log(result);
-      });
     });
-  };
-
-  workoutAllotedView = (idc) => {
-    selectTrainerReservation(
-      this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
-    ).then((trainerResult) => {
-      const fitness_no =
-        this.props.userinfo.loginWhether === 1
-          ? trainerResult[0].fitness_no
-          : this.props.userinfo.fitness_no;
-      workoutAllotedSelect(
-        fitness_no,
-        idc,
-        moment(this.state.workoutA_date).format('YYYY-MM-DD')
-      ).then((result) => {
-        const items = result.map((data, index, array) => {
-          return (
-            <WorkoutAllotedView
-              idwa={data.idwa}
-              fitness_no={data.fitness_no}
-              client_no={data.client_no}
-              workout={data.workout}
-              region={data.region}
-              machine={data.machine}
-              default_set={data.default_set}
-              default_count={data.default_count}
-              default_rest={data.default_rest}
-              url={data.url}
-              idc={
-                this.props.userinfo.loginWhether == 2
-                  ? this.props.userinfo.joinNo
-                  : this.state.idc === undefined
-                  ? 0
-                  : this.state.idc
   }
 
   render() {
-    // console.log(this.state.idc);
-    // console.log(this.state.workoutAllotlist);
-    console.log(this.state.workoutA_date);
-
     return (
-      <div className='workout-alloted wrap'>
-        <div className='header'>
-          <Header />
-          <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+      <div className='wrap workout'>
+        <Header />
+        <Navigation goLogin={this.goLogin} />
+        <Menu goLogin={this.goLogin} />
+        <header className='header'>
           <div className='localNavigation'>
             <div className='container'>
               <h2>
-                <div className='parallelogram'></div>운동 배정
+                <div className='parallelogram'></div>
+                운동 배정
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/workoutAlloted'>운동 배정</Link>
+                <Link to='/introduce'>운동 배정</Link>
               </div>
+              {/*.breadCrumb */}
             </div>
+            {/*.container */}
           </div>
-        </div>
-        <Container className='workoutalloted__container'>
-          <Row className='border p-2'>
-            <Col xs={3}>
-              {this.state.open ? (
-                <UserSearch
-                  open={this.state.open}
-                  setOpen={(o) => this.setState({ open: o })}
-                  fitness_no={this.props.userinfo.fitness_no}
-                  loginWhether={this.props.userinfo.loginWhether}
-                  joinNo={this.props.userinfo.joinNo}
-                  handleUser={this.handleUser}
-                />
-              ) : (
-                <>
-                  <TextField
-                    id='customer_name'
-                    label='회원 검색'
-                    disabled
-                    variant='standard'
-                    onClick={() => this.setState({ open: true })}
-                    className='customer-input--search'
-                    InputProps={{ disableUnderline: true }}
-                    value={this.state.client_name}
-                  />
-                </>
-              )}
+          {/*.localNavigation */}
+        </header>
+        <Container>
+          <Row>
+            <Col xs={12}>
+              <h3>운동 배정</h3>
             </Col>
             <Row>
               <Col xs={6} className='workoutRoutine'>
@@ -309,14 +192,14 @@ class Workout extends Component {
   }
 }
 
-const WorkoutAllotedStateToProps = (state) => {
+const WorkoutStateToProps = (state) => {
   return {
     userinfo: state.authentication.userinfo,
     status: state.authentication.status,
   };
 };
 
-const WorkoutAllotedDispatchToProps = (dispatch) => {
+const WorkoutDispatchToProps = (dispatch) => {
   return {
     getStatusRequest: () => {
       return dispatch(getStatusRequest());
@@ -324,7 +207,4 @@ const WorkoutAllotedDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(
-  WorkoutAllotedStateToProps,
-  WorkoutAllotedDispatchToProps
-)(WorkoutAlloted);
+export default connect(WorkoutStateToProps, WorkoutDispatchToProps)(Workout);
