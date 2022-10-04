@@ -167,25 +167,8 @@ section {
   width: 100%;
   justify-content: space-between;
 }
-
-h5 {
-  font-weight: 500;
+h4 {
   align-items: center;
-}
-
-h5 .parallelogram {
-  height: 2.8rem;
-  margin-right: 1.2rem;
-}
-
-h6 {
-  display: flex;
-  font-weight: 400;
-  align-items: center;
-}
-
-h6 .circle {
-  margin-right: 1rem;
 }
 
 .sectionGlass {
