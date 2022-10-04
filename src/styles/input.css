@@ -1,26 +1,29 @@
-.MuiTextField-root {
-  background-color: #fff;
-}
-
 /* 포인트 커서 단축 클래스 */
 .cursor-pointer {
   cursor: pointer;
 }
 
 /* 회원 검색 인풋 */
+.clientSearch .MuiTextField-root {
+  border-radius: 0.313rem;
+  border: 1px solid #fff;
+}
 .customer-input--search {
-  background-color: #fff;
-  border-radius: 1rem;
-  width: 100%;
-  max-width: 16rem;
   cursor: pointer;
   transition: background-color 0.4s;
 }
-.customer-input--search #customer_name-label {
+.customer-input--search .MuiInputBase-input {
+  color: #fff;
+  /* left: 30%; */
+}
+.MuiInputBase-input {
+  color: #fff;
   /* left: 30%; */
 }
 .customer-input--search #customer_name {
-  text-align: center;
+  font-size: 1.2rem;
+  -webkit-text-fill-color: #ffff;
+  text-align: start;
 }
 .customer-input--search:hover {
   background-color: rgba(255, 255, 160, 1);

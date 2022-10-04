@@ -19,7 +19,8 @@ import {
 } from '../../api/user';
 import { data } from 'jquery';
 import Footer from '../../component/footer/Footer';
-
+//css
+import '../../styles/workout/workoutAlloted.css';
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
@@ -44,11 +45,20 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+
+//mui-
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+
 // 리액트 아이콘
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { TbMoodSuprised } from 'react-icons/tb';
 import { HiOutlinePlusCircle } from 'react-icons/hi';
 import { MdCancel } from 'react-icons/md';
+import { BsCalendarCheck } from 'react-icons/bs';
 
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
@@ -497,11 +507,11 @@ class WorkoutAlloted extends Component {
           </div>
         </div>
         <Container className='workoutalloted__container'>
-          <Row className='border p-2'>
+          <Row className='clientSearch'>
             <Col>
               <h4>커스텀 루틴 배정</h4>
             </Col>
-            <Col>
+            <Col className='customer_name'>
               {this.state.open ? (
                 <UserSearch
                   open={this.state.open}
@@ -514,13 +524,21 @@ class WorkoutAlloted extends Component {
               ) : (
                 <>
                   <TextField
-                    id='customer_name'
+                    id='customer_name outlined-basic'
                     label='회원 검색'
+                    placeholder='회원 검색'
                     disabled
                     variant='standard'
                     onClick={() => this.setState({ open: true })}
                     className='customer-input--search'
-                    InputProps={{ disableUnderline: true }}
+                    InputProps={{
+                      disableUnderline: true,
+                      /*                       startAdornment: (
+                        <InputAdornment position='start'>
+                          <BsCalendarCheck />
+                        </InputAdornment>
+                      ), */
+                    }}
                     value={this.state.client_name}
                   />
                 </>
@@ -538,7 +556,7 @@ class WorkoutAlloted extends Component {
             </Col>
             <Col>
               <Button variant='outline-primary' onClick={this.moveWorkoutAdd}>
-                등록하기
+                운동설정
               </Button>
             </Col>
           </Row>
@@ -892,56 +910,55 @@ class WorkoutAlloted extends Component {
             </Tabs> */}
           </div>
           <div>
-            {/* <div className='mt-4 sectionGlass'>
-                <h3>
-                  {this.state.client_name}
-                  <span className='fs-4'> 님</span>
-                  <span className='fs-5 fw-light'>
-                    의 마지막 인바디 기록입니다.
-                  </span>
-                </h3>
-                {this.state.inbodiesList[0] ? (
-                  this.state.inbodiesList[0]
-                ) : (
-                  <div className='p-3 fs-5 fw-bold text-center'>
-                    <TbMoodSuprised className='fs-3' />
-                    <p>등록된 인바디 정보가 없습니다.</p>
-                  </div>
-                )}
-              </div> */}
-            {/* {this.state.asd === 1 ? ( */}
+            <div>
+              {/* <div className='mt-4 sectionGlass'>
+                  <h3>
+                    {this.state.client_name}
+                    <span className='fs-4'> 님</span>
+                    <span className='fs-5 fw-light'>
+                      의 마지막 인바디 기록입니다.
+                    </span>
+                  </h3>
+                  {this.state.inbodiesList[0] ? (
+                    this.state.inbodiesList[0]
+                  ) : (
+                    <div className='p-3 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>등록된 인바디 정보가 없습니다.</p>
+                    </div>
+                  )}
+                </div> */}
+              {/* {this.state.asd === 1 ? ( */}
+            </div>
             <Row className='sectionGlass'>
               <Col xs={12}>
-                <Row className='bg-secondary'>
-                  <Col>
-                    <h3>
-                      <span className='text-primary'>
-                        {this.state.headRegion === 1
-                          ? '상체 '
-                          : this.state.headRegion === 18
-                          ? '하체 '
-                          : this.state.headRegion === 28
-                          ? '전신 '
-                          : this.state.headRegion === 38
-                          ? '코어 '
-                          : this.state.headRegion === 48
-                          ? '유산소 '
-                          : this.state.headRegion === 58
-                          ? '기타 '
-                          : ''}
-                      </span>
-                      운동목록
-                    </h3>
-                  </Col>
-                  <Col>
-                    <span>설정된 운동목록입니다. 회원에게 배정해주세요.</span>
-                  </Col>
-                </Row>
+                <div className='pageTit d-flex justify-content-between mb-3'>
+                  <h3>
+                    <span className='text-primary'>
+                      {this.state.headRegion === 1
+                        ? '상체 '
+                        : this.state.headRegion === 18
+                        ? '하체 '
+                        : this.state.headRegion === 28
+                        ? '전신 '
+                        : this.state.headRegion === 38
+                        ? '코어 '
+                        : this.state.headRegion === 48
+                        ? '유산소 '
+                        : this.state.headRegion === 58
+                        ? '기타 '
+                        : ''}
+                    </span>
+                    운동목록
+                  </h3>
+                  <p>설정된 운동목록입니다. 회원에게 배정해주세요.</p>
+                </div>
               </Col>
               <Col xs={12} className='mt-2'>
-                <Row>
-                  <Col xs={6} md={2}>
+                <Row className='workoutTabs'>
+                  <Col>
                     <Button
+                      data-bs-toggle='button'
                       className='w-100'
                       variant='outline-primary'
                       onClick={() => this.handleOnClick(1)}
@@ -949,7 +966,7 @@ class WorkoutAlloted extends Component {
                       상체
                     </Button>
                   </Col>
-                  <Col xs={6} md={2}>
+                  <Col>
                     <Button
                       className='w-100'
                       variant='outline-primary'

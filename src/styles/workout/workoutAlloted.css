@@ -1,3 +1,29 @@
+.clientSearch {
+  background: #333;
+  padding: 30px;
+  vertical-align: middle;
+}
+/* .react-datepicker__input-container::before {
+  display: inlin-block;
+  position: absolute;
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  font-family: icomoon !important;
+  color: #333;
+  font-size: 1rem;
+} */
+
+.pageTit {
+  background: #535353;
+  padding: 10px;
+}
+
+/* 운동탭 */
+.workoutTabs Button {
+  border: 0;
+}
+
 /**
 * 운동 선택 - 배정 버튼
 */
