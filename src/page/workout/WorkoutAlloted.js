@@ -498,7 +498,10 @@ class WorkoutAlloted extends Component {
         </div>
         <Container className='workoutalloted__container'>
           <Row className='border p-2'>
-            <Col xs={3}>
+            <Col>
+              <h4>커스텀 루틴 배정</h4>
+            </Col>
+            <Col>
               {this.state.open ? (
                 <UserSearch
                   open={this.state.open}
@@ -523,8 +526,7 @@ class WorkoutAlloted extends Component {
                 </>
               )}
             </Col>
-            <Col xs={1}>님의</Col>
-            <Col className='text-center height-fit-content' xs={3}>
+            <Col className='text-center height-fit-content'>
               <DatePicker
                 className='boxmorpsm text-center w-100 border-0'
                 selected={this.state.workoutA_date}
@@ -534,7 +536,11 @@ class WorkoutAlloted extends Component {
                 minDate={new Date()}
               />
             </Col>
-            <Col xs={2}>운동 배정입니다.</Col>
+            <Col>
+              <Button variant='outline-primary' onClick={this.moveWorkoutAdd}>
+                등록하기
+              </Button>
+            </Col>
           </Row>
           <div>
             <Tabs
