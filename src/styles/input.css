@@ -20,7 +20,16 @@
   color: #fff;
   /* left: 30%; */
 }
-.customer-input--search #customer_name {
+.customer_name {
+  height: 45px;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid #fff;
+}
+.customer-input--search {
+  height: 45px;
+}
+.customer-input--search #customer_name-label {
   font-size: 1.2rem;
   -webkit-text-fill-color: #ffff;
   text-align: start;

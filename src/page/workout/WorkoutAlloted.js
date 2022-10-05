@@ -531,8 +531,8 @@ class WorkoutAlloted extends Component {
               ) : (
                 <>
                   <TextField
-                    id='customer_name outlined-basic'
-                    label='회원 dd검색'
+                    id='customer_name'
+                    label='회원 검색'
                     disabled
                     variant='standard'
                     onClick={() => this.setState({ open: true })}
@@ -1005,7 +1005,7 @@ class WorkoutAlloted extends Component {
                   <Table className='table--block table-light'>
                     <TableHead>
                       <TableRow>
-                        <TableCell scope='col'>부ㅇㅇ위</TableCell>
+                        <TableCell scope='col'>부위</TableCell>
                         <TableCell scope='col'>이름</TableCell>
                         <TableCell scope='col'>운동기구</TableCell>
                         <TableCell scope='col'>세트</TableCell>
@@ -1071,7 +1071,7 @@ class WorkoutAlloted extends Component {
                   <Table className=' table-light'>
                     <TableHead>
                       <TableRow>
-                        <TableCell scope='col'>부dd위</TableCell>
+                        <TableCell scope='col'>부위</TableCell>
                         <TableCell scope='col'>이름</TableCell>
                         <TableCell scope='col'>운동기구</TableCell>
                         <TableCell scope='col'>세트</TableCell>
