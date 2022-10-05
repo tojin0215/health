@@ -272,7 +272,7 @@ class AddClient extends Component {
         <Container>
           <Form>
             <Row className='sectionGlass'>
-              <h3 className='mb-4'>회원 정보 입력</h3>
+              <h3>회원 정보 입력</h3>
               <Row className='mb-4'>
                 <Col xs={2}>
                   <h5>이름</h5>

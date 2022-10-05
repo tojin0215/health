@@ -4,22 +4,27 @@
 
 .introduce__article--header {
   text-align: start;
+  vertical-align: center;
   background-color: #888;
-  padding: 12px 10px 2px 10px;
-  margin-bottom: 30px;
+  padding: 1.25rem;
+  margin-bottom: 1.875rem;
   font-size: 26px;
   font-weight: 700;
+  border-radius: 0.313rem;
 }
 
 .introduce__article--img-box {
 }
 
 .introduce__article--img-box img {
+  /*   border-radius: 0.313rem; */
   width: 100%;
 }
 
 .introduce__article--text-box {
   margin: 30px 24px;
+  white-space: pre-wrap;
+  text-align: start;
 }
 
 input[type='file']::file-selector-button {

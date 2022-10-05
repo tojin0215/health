@@ -196,7 +196,7 @@ class AddTrainer extends Component {
         </header>
         <Container>
           <Form className='sectionGlass'>
-            <h4>강사 정보 입력</h4>
+            <h3>강사 정보 입력</h3>
             {/* <label>
               헬스장 번호:
               <TextField value={this.props.userinfo.fitness_no} />
@@ -261,7 +261,7 @@ class AddTrainer extends Component {
                   variant='outlined'
                   value={this.state.phone}
                   id='phone'
-                  placeholder='연락처를 입력해주세요'
+                  placeholder='연락처를 입력해주세요 (-제외)'
                   onChange={this.handleChange}
                   required
                 ></Form.Control>
@@ -277,7 +277,7 @@ class AddTrainer extends Component {
                   pattern='[0-9]+'
                   value={this.state.birth}
                   id='birth'
-                  placeholder='생년월일을 입력해주세요'
+                  placeholder='생년월일을 입력해주세요 (8자리)'
                   onChange={this.handleChange}
                 ></Form.Control>
               </Col>

@@ -27,9 +27,9 @@ h2 {
 h3 {
   /* border-bottom: 1px solid #ebff2e; */
   padding-bottom: 0.6rem;
-}
+} /* sectionGlass 제목  */
 h4 {
-  /* margin-bottom: 1rem; */
+  margin: 0;
 }
 h5 {
   line-height: 2.8rem;
