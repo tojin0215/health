@@ -115,6 +115,25 @@
   color: #fff;
   text-align: center;
 }
+/* mui table light*/
+.MuiTableContainer-root {
+  border-radius: 0;
+}
+.MuiTable-root {
+  border-radius: 0;
+}
+
+.table-light th {
+  border-bottom: 1px solid #333;
+  color: #333;
+  text-align: center;
+}
+
+.MuiTableCell-root input {
+  border: 1px solid #d9d9d9;
+  border-radius: 2.8rem;
+  text-align: center;
+}
 
 @media screen and (max-width: 767px) {
   .react-bs-table-container {
