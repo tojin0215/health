@@ -1,18 +1,9 @@
 .clientSearch {
   background: #333;
-  padding: 30px;
-  vertical-align: middle;
+
+  padding: 3rem;
+  border-radius: 0.313rem;
 }
-/* .react-datepicker__input-container::before {
-  display: inlin-block;
-  position: absolute;
-  position: absolute;
-  top: 7px;
-  left: 7px;
-  font-family: icomoon !important;
-  color: #333;
-  font-size: 1rem;
-} */
 
 .pageTit {
   background: #535353;
@@ -28,8 +19,13 @@
 h4 span {
   color: #ebff2e;
 }
-/**
-* 운동 선택 - 배정 버튼
+/* .workoutTabs .btn-table:hover {
+  background: #fff;
+  color: #222;
+  border-radius: 5px 5px 0 0;
+} */
+/*
+ 운동 선택 - 배정 버튼
 */
 .workout-alloted .workout-alloted__select--plus {
   color: #198754;
@@ -47,8 +43,8 @@ h4 span {
 .workout-alloted .workout-alloted__select--plus:active {
   color: rgba(46, 46, 46, 1);
 }
-/**
-* 배정된 운동목록 - 삭제 버튼
+/*
+배정된 운동목록 - 삭제 버튼
 */
 .workout-alloted .workout-alloted__selected--cencel {
   color: #dc3545;

@@ -471,10 +471,12 @@ class WorkoutAdd extends Component {
                 운동 목록
               </h3>
             </Col>
+          </Row>
+          <Row className='workoutTabs text-center'>
             <Col>
               <Button
-                className='w-100'
-                variant='outline-primary'
+                className='btn-table'
+                variant='btn-table'
                 onClick={() => this.handleOnClick(1)}
               >
                 상체
@@ -482,8 +484,8 @@ class WorkoutAdd extends Component {
             </Col>
             <Col>
               <Button
-                className='w-100'
-                variant='outline-primary'
+                className='btn-table'
+                variant='btn-tabley'
                 onClick={() => this.handleOnClick(18)}
               >
                 하체
@@ -491,8 +493,8 @@ class WorkoutAdd extends Component {
             </Col>
             <Col>
               <Button
-                className='w-100'
-                variant='outline-primary'
+                className='btn-table'
+                variant='btn-table'
                 onClick={() => this.handleOnClick(28)}
               >
                 전신
@@ -500,8 +502,8 @@ class WorkoutAdd extends Component {
             </Col>
             <Col>
               <Button
-                className='w-100'
-                variant='outline-primary'
+                className='btn-table'
+                variant='btn-table'
                 onClick={() => this.handleOnClick(38)}
               >
                 코어
@@ -509,8 +511,8 @@ class WorkoutAdd extends Component {
             </Col>
             <Col>
               <Button
-                className='w-100'
-                variant='outline-primary'
+                className='btn-table'
+                variant='btn-table'
                 onClick={() => this.handleOnClick(48)}
               >
                 유산소
@@ -518,16 +520,18 @@ class WorkoutAdd extends Component {
             </Col>
             <Col>
               <Button
-                className='w-100'
-                variant='outline-primary'
+                className='btn-table0'
+                variant='btn-table'
                 onClick={() => this.handleOnClick(58)}
               >
                 기타
               </Button>
             </Col>
+          </Row>
+          <Row>
             <Col xs={12}>
               <TableContainer component={Paper}>
-                <Table className='mt-2'>
+                <Table className='table-light'>
                   <TableHead>
                     <TableRow>
                       <TableCell scope='col'>부위</TableCell>
@@ -537,7 +541,9 @@ class WorkoutAdd extends Component {
                       <TableCell scope='col'>횟수</TableCell>
                       <TableCell scope='col'>휴식</TableCell>
                       <TableCell scope='col'>URL</TableCell>
-                      <TableCell scope='col'>삭제</TableCell>
+                      <TableCell scope='col' align='center'>
+                        삭제
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>

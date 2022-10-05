@@ -141,7 +141,18 @@
   width: 6.25rem;
   padding: 0;
   line-height: 1.87rem;
-} /* 삭제 */
+}
+.btn-table {
+  color: #fff;
+  text-align: center;
+  padding: 15px 50px;
+  border-radius: 5px 5px 0 0;
+}
+.btn-table:hover {
+  background: #fff;
+  color: #222;
+  border-radius: 5px 5px 0 0;
+}
 
 /* bootstrap text */
 .text-primary {
