@@ -507,11 +507,18 @@ class WorkoutAlloted extends Component {
           </div>
         </div>
         <Container className='workoutalloted__container'>
-          <Row className='clientSearch'>
-            <Col>
-              <h4>커스텀 루틴 배정</h4>
-            </Col>
-            <Col className='customer_name'>
+          <div className='sectionGlass d-flex justify-content-between align-items-center'>
+            <h4>커스텀 루틴 배정</h4>
+            <div>
+              <DatePicker
+                className='text-center'
+                selected={this.state.workoutA_date}
+                onChange={(date) => this.dateOnChange(date)}
+                dateFormat='yyyy년 MM월 dd일'
+                minDate={new Date()}
+              />
+            </div>
+            <div className='customer_name'>
               {this.state.open ? (
                 <UserSearch
                   open={this.state.open}
@@ -524,44 +531,27 @@ class WorkoutAlloted extends Component {
               ) : (
                 <>
                   <TextField
-                    id='customer_name outlined-basic'
+                    id='customer_name'
                     label='회원 검색'
-                    placeholder='회원 검색'
                     disabled
                     variant='standard'
                     onClick={() => this.setState({ open: true })}
                     className='customer-input--search'
                     InputProps={{
                       disableUnderline: true,
-                      /*                       startAdornment: (
-                        <InputAdornment position='start'>
-                          <BsCalendarCheck />
-                        </InputAdornment>
-                      ), */
                     }}
                     value={this.state.client_name}
                   />
                 </>
               )}
-            </Col>
-            <Col className='text-center height-fit-content'>
-              <DatePicker
-                className='boxmorpsm text-center w-100 border-0'
-                selected={this.state.workoutA_date}
-                onChange={(date) => this.dateOnChange(date)}
-                dateFormat='yyyy년MM월dd일'
-                font-size='1.6rem'
-                minDate={new Date()}
-              />
-            </Col>
-            <Col>
+            </div>
+            <div>
               <Button variant='outline-primary' onClick={this.moveWorkoutAdd}>
                 운동설정
               </Button>
-            </Col>
-          </Row>
-          <div>
-            {/* <Tabs
+            </div>
+          </div>
+          {/* <Tabs
               defaultActiveKey='1'
               id='exercise-part-tab'
               onSelect={this.handleSelect}
@@ -908,7 +898,6 @@ class WorkoutAlloted extends Component {
                 </TableContainer>
               </Tab>
             </Tabs> */}
-          </div>
           <div>
             <div>
               {/* <div className='mt-4 sectionGlass'>
@@ -933,8 +922,8 @@ class WorkoutAlloted extends Component {
             <Row className='sectionGlass'>
               <Col xs={12}>
                 <div className='pageTit d-flex justify-content-between mb-3'>
-                  <h3>
-                    <span className='text-primary'>
+                  <h4>
+                    <span>
                       {this.state.headRegion === 1
                         ? '상체 '
                         : this.state.headRegion === 18
@@ -950,7 +939,7 @@ class WorkoutAlloted extends Component {
                         : ''}
                     </span>
                     운동목록
-                  </h3>
+                  </h4>
                   <p>설정된 운동목록입니다. 회원에게 배정해주세요.</p>
                 </div>
               </Col>
@@ -1013,18 +1002,18 @@ class WorkoutAlloted extends Component {
                   </Col>
                 </Row>
                 <TableContainer component={Paper}>
-                  <Table size='small'>
+                  <Table className='table--block table-light'>
                     <TableHead>
                       <TableRow>
-                        <TableCell scope='col'>운동 부위</TableCell>
-                        <TableCell scope='col'>운동 이름</TableCell>
-                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>부위</TableCell>
+                        <TableCell scope='col'>이름</TableCell>
+                        <TableCell scope='col'>운동기구</TableCell>
                         <TableCell scope='col'>세트</TableCell>
                         <TableCell scope='col'>횟수</TableCell>
-                        <TableCell scope='col'>쉬는시간</TableCell>
-                        <TableCell scope='col'>url</TableCell>
+                        <TableCell scope='col'>휴식</TableCell>
+                        <TableCell scope='col'>URL</TableCell>
                         <TableCell scope='col' align='center'>
-                          배정
+                          삭제
                         </TableCell>
                       </TableRow>
                     </TableHead>
@@ -1069,25 +1058,26 @@ class WorkoutAlloted extends Component {
             )} */}
             <Row className='sectionGlass'>
               <Col>
-                <h3>
-                  {this.state.client_name}
-                  <span className='fs-5'>
-                    님의{' '}
+                <h5>
+                  <strong>{this.state.client_name}</strong>
+                  님의
+                  <strong>
+                    {' '}
                     {moment(this.state.workoutA_date).format('YYYY년 MM월DD일')}
-                    에 배정된 운동 목록입니다
-                  </span>
-                </h3>
+                  </strong>
+                  에 배정된 운동 목록입니다
+                </h5>
                 <TableContainer component={Paper}>
-                  <Table>
+                  <Table className=' table-light'>
                     <TableHead>
                       <TableRow>
-                        <TableCell scope='col'>운동 이름</TableCell>
-                        <TableCell scope='col'>운동 부위</TableCell>
-                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>부위</TableCell>
+                        <TableCell scope='col'>이름</TableCell>
+                        <TableCell scope='col'>운동기구</TableCell>
                         <TableCell scope='col'>세트</TableCell>
                         <TableCell scope='col'>횟수</TableCell>
-                        <TableCell scope='col'>쉬는시간</TableCell>
-                        <TableCell scope='col'>url</TableCell>
+                        <TableCell scope='col'>휴식</TableCell>
+                        <TableCell scope='col'>URL</TableCell>
                         <TableCell scope='col' align='center'>
                           삭제
                         </TableCell>

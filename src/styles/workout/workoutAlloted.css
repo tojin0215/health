@@ -16,14 +16,18 @@
 
 .pageTit {
   background: #535353;
-  padding: 10px;
+  padding: 1.25rem;
+  border-radius: 0.313rem;
 }
 
 /* 운동탭 */
 .workoutTabs Button {
   border: 0;
 }
-
+.sectionGlass h5 strong,
+h4 span {
+  color: #ebff2e;
+}
 /**
 * 운동 선택 - 배정 버튼
 */
