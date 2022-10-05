@@ -6,3 +6,15 @@
   padding: 30px;
   line-height: 30px;
 }
+
+ul li:after {
+  display: block;
+  clear: both;
+  content: '';
+}
+ul li strong {
+  float: left;
+}
+ul li p {
+  float: right;
+}

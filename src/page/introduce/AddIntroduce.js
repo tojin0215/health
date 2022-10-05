@@ -135,7 +135,7 @@ class AddIntroduce extends Component {
         </header>
         <Container>
           <div className='sectionGlass'>
-            <h4>센터 소개 등록</h4>
+            <h3>센터 소개 등록</h3>
             {/* <Col xs={12} md={6}>
                 <h5>사업장</h5>
               </Col>
