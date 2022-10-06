@@ -10,6 +10,7 @@ import {
   selectTrainerReservation,
   workoutAllotedInsert,
   workoutStageSelect,
+  workoutAllotedSelect,
 } from '../../api/user';
 import UserSearch from '../../component/customer/UserSearch';
 import Footer from '../../component/footer/Footer';
@@ -141,14 +142,39 @@ const WorkoutStageView = ({
   );
 };
 
+const WorkoutAllotedView = ({
+  idwa,
+  fitness_no,
+  client_no,
+  workout,
+  region,
+  machine,
+  default_set,
+  default_count,
+  default_rest,
+  url,
+}) => {
+  return (
+    <TableRow>
+      <TableCell>{region}</TableCell>
+      <TableCell>{workout}</TableCell>
+      <TableCell>{machine}</TableCell>
+      <TableCell>{default_set}</TableCell>
+      <TableCell>{default_count}</TableCell>
+      <TableCell>{default_rest}</TableCell>
+      <TableCell>{url}</TableCell>
+    </TableRow>
+  );
+};
+
 class WorkoutStage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       stage: '',
       workoutStage: [],
+      workoutAllotlist: [],
       open: false,
-
       workout: [],
       part: '',
       machine: '',
@@ -165,6 +191,11 @@ class WorkoutStage extends Component {
       rowsPerPage: 5,
       page: 0,
       workoutA_date: new Date(),
+      client_name: '',
+      inbodiesList: [],
+      exerciseAllotlist: [],
+      rowsPerPage: 5,
+      page: 0,
     };
   }
   goLogin = () => {
@@ -408,6 +439,11 @@ class WorkoutStage extends Component {
     this.setState({ page: newPage });
   };
 
+  dateOnChange = (date) => {
+    this.setState({ workoutA_date: date });
+    this.workoutAllotedView(this.state.idc);
+  };
+
   render() {
     console.log(
       'date : ',
@@ -445,11 +481,10 @@ class WorkoutStage extends Component {
             <Col>베이직 루틴 배정</Col>
             <Col>
               <DatePicker
-                className='boxmorpsm text-center w-100 border-0'
+                className=''
                 selected={this.state.workoutA_date}
-                onChange={(date) => this.setState({ workoutA_date: date })}
+                onChange={(date) => this.dateOnChange(date)}
                 dateFormat='yyyy년MM월dd일'
-                font-size='1.6rem'
                 minDate={new Date()}
               />
             </Col>
@@ -1302,7 +1337,46 @@ class WorkoutStage extends Component {
             ) : (
               <Col xs={12}>회원을 선택해주세요.</Col>
             )}
-            <Col xs={12}>회원에게 배정된 운동 목록 테이블</Col>
+            <Col xs={12}>
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell scope='col'>부위</TableCell>
+                      <TableCell scope='col'>이름</TableCell>
+                      <TableCell scope='col'>운동기구</TableCell>
+                      <TableCell scope='col'>세트</TableCell>
+                      <TableCell scope='col'>횟수</TableCell>
+                      <TableCell scope='col'>휴식</TableCell>
+                      <TableCell scope='col'>URL</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.workoutAllotlist.slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )}
+                  </TableBody>
+                </Table>
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.workoutAllotlist.length,
+                    },
+                  ]}
+                  count={this.state.workoutAllotlist.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
+              </TableContainer>
+            </Col>
           </Row>
           {/* 
           선택된 부위와 단계에 따른 텍스트 표시

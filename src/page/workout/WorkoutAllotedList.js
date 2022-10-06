@@ -330,7 +330,6 @@ class WorkoutAllotedList extends Component {
                       selected={this.state.workoutB_date}
                       onChange={(date) => this.dateOnChange(date)}
                       dateFormat='yyyy년MM월dd일'
-                      font-size='1.6rem'
                       //  minDate={new Date()}
                     />
                     {/* {moment(this.state.workoutB_date).format('YYYY년 MM월 DD일')} */}
