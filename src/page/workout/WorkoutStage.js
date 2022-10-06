@@ -35,6 +35,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 // react-icons
 import { TbMoodSuprised } from 'react-icons/tb';
+import { TbMoodSmile } from 'react-icons/tb';
 import { MdOutlineRotateLeft } from 'react-icons/md';
 
 const WorkoutStageView = ({
@@ -168,6 +169,9 @@ class WorkoutStage extends Component {
   }
   goLogin = () => {
     this.props.history.push('/');
+  };
+  goWorkoutStageAdd = () => {
+    this.props.history.push('/workoutStageAdd');
   };
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
@@ -405,11 +409,16 @@ class WorkoutStage extends Component {
   };
 
   render() {
-    // console.log(this.state.stage);
-    // console.log(this.state.idc); //idc=client_no
-    // console.log(this.state.workoutStage);
-    // console.log(this.state.workout);
-    // console.log(this.state.client_name);
+    console.log(
+      'date : ',
+      moment(this.state.workoutA_date).format('YYYY-MM-DD')
+    );
+    // console.log('stage : ', this.state.stage);
+    // console.log('stage typeof : ', typeof this.state.stage);
+    // console.log('idc : ', this.state.idc); //idc=client_no
+    // console.log('workoutStage : ', this.state.workoutStage);
+    // console.log('workout : ', this.state.workout);
+    // console.log('client_name : ', this.state.client_name);
 
     return (
       <div className='wrap workoutStage__wrap'>
@@ -432,43 +441,871 @@ class WorkoutStage extends Component {
           </div>
         </div>
         <Container>
-          {this.state.open ? (
-            <UserSearch
-              open={this.state.open}
-              setOpen={(o) => this.setState({ open: o })}
-              fitness_no={this.props.userinfo.fitness_no}
-              loginWhether={this.props.userinfo.loginWhether}
-              joinNo={this.props.userinfo.joinNo}
-              handleUser={this.handleUser}
-            />
-          ) : (
-            <TextField
-              id='customer_name'
-              label='회원 검색'
-              disabled
-              variant='standard'
-              onClick={() => this.setState({ open: true })}
-              className='customer-input--search mb-3'
-              InputProps={{ disableUnderline: true }}
-              value={this.state.client_name}
-            />
-          )}
-
-          {this.state.client_name ? (
-            <Col className='text-center height-fit-content' xs={12} sm={4}>
+          <Row className='sectionGlass'>
+            <Col>베이직 루틴 배정</Col>
+            <Col>
               <DatePicker
                 className='boxmorpsm text-center w-100 border-0'
                 selected={this.state.workoutA_date}
                 onChange={(date) => this.setState({ workoutA_date: date })}
                 dateFormat='yyyy년MM월dd일'
                 font-size='1.6rem'
-                // minDate={new Date()}
+                minDate={new Date()}
               />
             </Col>
-          ) : (
-            ''
-          )}
-
+            <Col>
+              {this.state.open ? (
+                <UserSearch
+                  open={this.state.open}
+                  setOpen={(o) => this.setState({ open: o })}
+                  fitness_no={this.props.userinfo.fitness_no}
+                  loginWhether={this.props.userinfo.loginWhether}
+                  joinNo={this.props.userinfo.joinNo}
+                  handleUser={this.handleUser}
+                />
+              ) : (
+                <TextField
+                  id='customer_name'
+                  label='회원 검색'
+                  disabled
+                  variant='standard'
+                  onClick={() => this.setState({ open: true })}
+                  className='customer-input--search mb-3'
+                  InputProps={{ disableUnderline: true }}
+                  value={this.state.client_name}
+                />
+              )}
+            </Col>
+            <Col>
+              <Button variant='secondary' onClick={this.goWorkoutStageAdd}>
+                루틴 설정
+              </Button>
+            </Col>
+          </Row>
+          <Row className='sectionGlass'>
+            <Col xs={12}>
+              <Row>
+                <Col>베이직 루틴 배정</Col>
+                <Col>기본 루틴 목록입니다. 회원에게 배정하세요.</Col>
+              </Row>
+            </Col>
+            <Col xs={12}>
+              <Row xs={6} className='mt-3'>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClickStage()}
+                  >
+                    상체
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClickStage2()}
+                  >
+                    하체
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClickStage3()}
+                  >
+                    전신
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClickStage4()}
+                  >
+                    코어
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClickStage5()}
+                  >
+                    유산소
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='w-100'
+                    onClick={() => this.stageOnClickStage6()}
+                  >
+                    기타
+                  </Button>
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={12}>
+              <Row>
+                {/* 선택된 부위에 따른 단계 선택 버튼 표시 */}
+                {this.state.nextStage1 ? (
+                  <div>
+                    <Row xs={5} className='mt-3'>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(111)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(112)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(113)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(114)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(115)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </Row>
+                  </div>
+                ) : this.state.nextStage2 ? (
+                  <div>
+                    <Row xs={5} className='mt-3'>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(211)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(212)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(213)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(214)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(215)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </Row>
+                    <Col xs={12}>
+                      <TableContainer component={Paper}>
+                        <Table>
+                          <TableHead>
+                            <TableRow>
+                              <TableCell scope='col'>단계</TableCell>
+                              <TableCell scope='col'>운동 부위</TableCell>
+                              <TableCell scope='col'>운동 이름</TableCell>
+                              <TableCell scope='col'>운동 기구</TableCell>
+                              <TableCell scope='col'>세트</TableCell>
+                              <TableCell scope='col'>횟수</TableCell>
+                              <TableCell scope='col'>쉬는시간</TableCell>
+                              <TableCell scope='col'>url</TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {this.state.workoutStage.length === 0
+                              ? ''
+                              : this.state.workoutStage.slice(
+                                  this.state.page * this.state.rowsPerPage,
+                                  this.state.page * this.state.rowsPerPage +
+                                    this.state.rowsPerPage
+                                )}
+                          </TableBody>
+                        </Table>
+                        {this.state.workoutStage.length === 0 ? (
+                          <div className='p-3 fs-5 fw-bold text-center'>
+                            <TbMoodSuprised className='fs-3' />
+                            <p>등록된 운동 목록이 없습니다.</p>
+                            <p>설정 페이지로 이동하시겠습니까?</p>
+                            <Link to='/workoutStageAdd'>
+                              <Button
+                                variant='success'
+                                to='/workoutStageAdd'
+                                className=''
+                              >
+                                기본 루틴 설정
+                              </Button>
+                            </Link>
+                          </div>
+                        ) : (
+                          ''
+                        )}
+                        <TablePagination
+                          rowsPerPageOptions={[
+                            5,
+                            10,
+                            25,
+                            {
+                              label: 'All',
+                              value: this.state.workoutStage.length,
+                            },
+                          ]}
+                          count={this.state.workoutStage.length}
+                          rowsPerPage={this.state.rowsPerPage}
+                          page={this.state.page}
+                          onPageChange={this.handleChangePage}
+                          onRowsPerPageChange={this.handleChangeRowsPerPage}
+                        />
+                      </TableContainer>
+                    </Col>
+                  </div>
+                ) : this.state.nextStage3 ? (
+                  <div>
+                    <Row xs={5} className='mt-3'>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(311)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(312)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(313)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(314)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(315)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </Row>
+                    <Col xs={12}>
+                      <TableContainer component={Paper}>
+                        <Table>
+                          <TableHead>
+                            <TableRow>
+                              <TableCell scope='col'>단계</TableCell>
+                              <TableCell scope='col'>운동 부위</TableCell>
+                              <TableCell scope='col'>운동 이름</TableCell>
+                              <TableCell scope='col'>운동 기구</TableCell>
+                              <TableCell scope='col'>세트</TableCell>
+                              <TableCell scope='col'>횟수</TableCell>
+                              <TableCell scope='col'>쉬는시간</TableCell>
+                              <TableCell scope='col'>url</TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {this.state.workoutStage.length === 0
+                              ? ''
+                              : this.state.workoutStage.slice(
+                                  this.state.page * this.state.rowsPerPage,
+                                  this.state.page * this.state.rowsPerPage +
+                                    this.state.rowsPerPage
+                                )}
+                          </TableBody>
+                        </Table>
+                        {this.state.workoutStage.length === 0 ? (
+                          <div className='p-3 fs-5 fw-bold text-center'>
+                            <TbMoodSuprised className='fs-3' />
+                            <p>등록된 운동 목록이 없습니다.</p>
+                            <p>설정 페이지로 이동하시겠습니까?</p>
+                            <Link to='/workoutStageAdd'>
+                              <Button
+                                variant='success'
+                                to='/workoutStageAdd'
+                                className=''
+                              >
+                                기본 루틴 설정
+                              </Button>
+                            </Link>
+                          </div>
+                        ) : (
+                          ''
+                        )}
+                        <TablePagination
+                          rowsPerPageOptions={[
+                            5,
+                            10,
+                            25,
+                            {
+                              label: 'All',
+                              value: this.state.workoutStage.length,
+                            },
+                          ]}
+                          count={this.state.workoutStage.length}
+                          rowsPerPage={this.state.rowsPerPage}
+                          page={this.state.page}
+                          onPageChange={this.handleChangePage}
+                          onRowsPerPageChange={this.handleChangeRowsPerPage}
+                        />
+                      </TableContainer>
+                    </Col>
+                  </div>
+                ) : this.state.nextStage4 ? (
+                  <div>
+                    <Row xs={5} className='mt-3'>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(411)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(412)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(413)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(414)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(415)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </Row>
+                    <Col xs={12}>
+                      <TableContainer component={Paper}>
+                        <Table>
+                          <TableHead>
+                            <TableRow>
+                              <TableCell scope='col'>단계</TableCell>
+                              <TableCell scope='col'>운동 부위</TableCell>
+                              <TableCell scope='col'>운동 이름</TableCell>
+                              <TableCell scope='col'>운동 기구</TableCell>
+                              <TableCell scope='col'>세트</TableCell>
+                              <TableCell scope='col'>횟수</TableCell>
+                              <TableCell scope='col'>쉬는시간</TableCell>
+                              <TableCell scope='col'>url</TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {this.state.workoutStage.length === 0
+                              ? ''
+                              : this.state.workoutStage.slice(
+                                  this.state.page * this.state.rowsPerPage,
+                                  this.state.page * this.state.rowsPerPage +
+                                    this.state.rowsPerPage
+                                )}
+                          </TableBody>
+                        </Table>
+                        {this.state.workoutStage.length === 0 ? (
+                          <div className='p-3 fs-5 fw-bold text-center'>
+                            <TbMoodSuprised className='fs-3' />
+                            <p>등록된 운동 목록이 없습니다.</p>
+                            <p>설정 페이지로 이동하시겠습니까?</p>
+                            <Link to='/workoutStageAdd'>
+                              <Button
+                                variant='success'
+                                to='/workoutStageAdd'
+                                className=''
+                              >
+                                기본 루틴 설정
+                              </Button>
+                            </Link>
+                          </div>
+                        ) : (
+                          ''
+                        )}
+                        <TablePagination
+                          rowsPerPageOptions={[
+                            5,
+                            10,
+                            25,
+                            {
+                              label: 'All',
+                              value: this.state.workoutStage.length,
+                            },
+                          ]}
+                          count={this.state.workoutStage.length}
+                          rowsPerPage={this.state.rowsPerPage}
+                          page={this.state.page}
+                          onPageChange={this.handleChangePage}
+                          onRowsPerPageChange={this.handleChangeRowsPerPage}
+                        />
+                      </TableContainer>
+                    </Col>
+                  </div>
+                ) : this.state.nextStage5 ? (
+                  <div>
+                    <Row xs={5} className='mt-3'>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(511)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(512)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(513)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(514)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(515)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </Row>
+                    <Col xs={12}>
+                      <TableContainer component={Paper}>
+                        <Table>
+                          <TableHead>
+                            <TableRow>
+                              <TableCell scope='col'>단계</TableCell>
+                              <TableCell scope='col'>운동 부위</TableCell>
+                              <TableCell scope='col'>운동 이름</TableCell>
+                              <TableCell scope='col'>운동 기구</TableCell>
+                              <TableCell scope='col'>세트</TableCell>
+                              <TableCell scope='col'>횟수</TableCell>
+                              <TableCell scope='col'>쉬는시간</TableCell>
+                              <TableCell scope='col'>url</TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {this.state.workoutStage.length === 0
+                              ? ''
+                              : this.state.workoutStage.slice(
+                                  this.state.page * this.state.rowsPerPage,
+                                  this.state.page * this.state.rowsPerPage +
+                                    this.state.rowsPerPage
+                                )}
+                          </TableBody>
+                        </Table>
+                        {this.state.workoutStage.length === 0 ? (
+                          <div className='p-3 fs-5 fw-bold text-center'>
+                            <TbMoodSuprised className='fs-3' />
+                            <p>등록된 운동 목록이 없습니다.</p>
+                            <p>설정 페이지로 이동하시겠습니까?</p>
+                            <Link to='/workoutStageAdd'>
+                              <Button
+                                variant='success'
+                                to='/workoutStageAdd'
+                                className=''
+                              >
+                                기본 루틴 설정
+                              </Button>
+                            </Link>
+                          </div>
+                        ) : (
+                          ''
+                        )}
+                        <TablePagination
+                          rowsPerPageOptions={[
+                            5,
+                            10,
+                            25,
+                            {
+                              label: 'All',
+                              value: this.state.workoutStage.length,
+                            },
+                          ]}
+                          count={this.state.workoutStage.length}
+                          rowsPerPage={this.state.rowsPerPage}
+                          page={this.state.page}
+                          onPageChange={this.handleChangePage}
+                          onRowsPerPageChange={this.handleChangeRowsPerPage}
+                        />
+                      </TableContainer>
+                    </Col>
+                  </div>
+                ) : this.state.nextStage6 ? (
+                  <div>
+                    <Row xs={5} className='mt-3'>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(611)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(612)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(613)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(614)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(615)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </Row>
+                    <Col xs={12}>
+                      <TableContainer component={Paper}>
+                        <Table>
+                          <TableHead>
+                            <TableRow>
+                              <TableCell scope='col'>단계</TableCell>
+                              <TableCell scope='col'>운동 부위</TableCell>
+                              <TableCell scope='col'>운동 이름</TableCell>
+                              <TableCell scope='col'>운동 기구</TableCell>
+                              <TableCell scope='col'>세트</TableCell>
+                              <TableCell scope='col'>횟수</TableCell>
+                              <TableCell scope='col'>쉬는시간</TableCell>
+                              <TableCell scope='col'>url</TableCell>
+                            </TableRow>
+                          </TableHead>
+                          {this.state.workoutStage.length === 0
+                            ? ''
+                            : this.state.workoutStage.slice(
+                                this.state.page * this.state.rowsPerPage,
+                                this.state.page * this.state.rowsPerPage +
+                                  this.state.rowsPerPage
+                              )}
+                        </Table>
+                        {this.state.workoutStage.length === 0 ? (
+                          <div className='p-3 fs-5 fw-bold text-center'>
+                            <TbMoodSuprised className='fs-3' />
+                            <p>등록된 운동 목록이 없습니다.</p>
+                            <p>설정 페이지로 이동하시겠습니까?</p>
+                            <Link to='/workoutStageAdd'>
+                              <Button
+                                variant='success'
+                                to='/workoutStageAdd'
+                                className=''
+                              >
+                                기본 루틴 설정
+                              </Button>
+                            </Link>
+                          </div>
+                        ) : (
+                          ''
+                        )}
+                        <TablePagination
+                          rowsPerPageOptions={[
+                            5,
+                            10,
+                            25,
+                            {
+                              label: 'All',
+                              value: this.state.workoutStage.length,
+                            },
+                          ]}
+                          count={this.state.workoutStage.length}
+                          rowsPerPage={this.state.rowsPerPage}
+                          page={this.state.page}
+                          onPageChange={this.handleChangePage}
+                          onRowsPerPageChange={this.handleChangeRowsPerPage}
+                        />
+                      </TableContainer>
+                    </Col>
+                  </div>
+                ) : (
+                  <div>
+                    <Row xs={5} className='mt-3'>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(111)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(112)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(113)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(114)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(115)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </Row>
+                  </div>
+                )}
+              </Row>
+            </Col>
+            <Col xs={12}>
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell scope='col'>단계</TableCell>
+                      <TableCell scope='col'>운동 부위</TableCell>
+                      <TableCell scope='col'>운동 이름</TableCell>
+                      <TableCell scope='col'>운동 기구</TableCell>
+                      <TableCell scope='col'>세트</TableCell>
+                      <TableCell scope='col'>횟수</TableCell>
+                      <TableCell scope='col'>쉬는시간</TableCell>
+                      <TableCell scope='col'>url</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.workoutStage.length === 0
+                      ? ''
+                      : this.state.workoutStage.slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )}
+                  </TableBody>
+                </Table>
+                {this.state.stage == '' ? (
+                  <div className='p-3 fs-5 fw-bold text-center'>
+                    <TbMoodSmile className='fs-3' />
+                    <p>운동 단계를 선택해주세요</p>
+                  </div>
+                ) : this.state.workoutStage.length === 0 ? (
+                  <div className='p-3 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>등록된 운동 목록이 없습니다.</p>
+                    <p>설정 페이지로 이동하시겠습니까?</p>
+                    <Link to='/workoutStageAdd'>
+                      <Button
+                        variant='success'
+                        to='/workoutStageAdd'
+                        className=''
+                      >
+                        기본 루틴 설정
+                      </Button>
+                    </Link>
+                  </div>
+                ) : (
+                  ''
+                )}
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.workoutStage.length,
+                    },
+                  ]}
+                  count={this.state.workoutStage.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
+              </TableContainer>
+            </Col>
+            <Col xs={12}>
+              {this.state.client_name == undefined ? (
+                <Button
+                  variant='primary'
+                  className='ms-2'
+                  onClick={this.alloted}
+                  disabled
+                >
+                  루틴 배정하기
+                </Button>
+              ) : (
+                <Button
+                  variant='primary'
+                  className='ms-2'
+                  onClick={this.alloted}
+                >
+                  루틴 배정하기
+                </Button>
+              )}
+            </Col>
+          </Row>
+          <Row className='sectionGlass'>
+            {this.state.client_name ? (
+              <Col xs={12}>
+                <span>{this.state.client_name}</span>
+                님의{' '}
+                <span>
+                  {moment(this.state.workoutA_date).format(
+                    'YYYY년 MM년 DD일 (ddd요일)'
+                  )}
+                </span>
+                에 배정된 운동목록입니다.
+              </Col>
+            ) : (
+              <Col xs={12}>회원을 선택해주세요.</Col>
+            )}
+            <Col xs={12}>회원에게 배정된 운동 목록 테이블</Col>
+          </Row>
+          {/* 
+          선택된 부위와 단계에 따른 텍스트 표시
           {this.state.nextStage1 && this.state.stage === 111 ? (
             <h3>상체 1단계</h3>
           ) : this.state.nextStage1 && this.state.stage === 112 ? (
@@ -531,880 +1368,7 @@ class WorkoutStage extends Component {
             <h3>기타 5단계</h3>
           ) : (
             ''
-          )}
-          {this.state.nextStage1 ? (
-            <div>
-              <Row xs={5} className='mt-3'>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(111)}
-                  >
-                    1 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(112)}
-                  >
-                    2 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(113)}
-                  >
-                    3 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(114)}
-                  >
-                    4 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(115)}
-                  >
-                    5 단계
-                  </Button>
-                </Col>
-              </Row>
-              <Row className='my-2'>
-                <Col className='text-start'>
-                  <Button
-                    variant='outline-danger'
-                    to={{
-                      pathname: '/workoutStage',
-                    }}
-                    onClick={() => this.setState({ nextStage1: '' })}
-                  >
-                    다시 선택하기
-                  </Button>
-                </Col>
-                <Col className='text-end'>
-                  {this.state.workoutStage.length === 0 ? (
-                    <></>
-                  ) : (
-                    <Button
-                      variant='primary'
-                      className='ms-2'
-                      onClick={this.alloted}
-                    >
-                      루틴 배정하기
-                    </Button>
-                  )}
-                </Col>
-              </Row>
-              <Col xs={12}>
-                <TableContainer component={Paper}>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell scope='col'>단계</TableCell>
-                        <TableCell scope='col'>운동 부위</TableCell>
-                        <TableCell scope='col'>운동 이름</TableCell>
-                        <TableCell scope='col'>운동 기구</TableCell>
-                        <TableCell scope='col'>세트</TableCell>
-                        <TableCell scope='col'>횟수</TableCell>
-                        <TableCell scope='col'>쉬는시간</TableCell>
-                        <TableCell scope='col'>url</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {this.state.workoutStage.length === 0
-                        ? ''
-                        : this.state.workoutStage.slice(
-                            this.state.page * this.state.rowsPerPage,
-                            this.state.page * this.state.rowsPerPage +
-                              this.state.rowsPerPage
-                          )}
-                    </TableBody>
-                  </Table>
-                  {this.state.workoutStage.length === 0 ? (
-                    <div className='p-3 fs-5 fw-bold text-center'>
-                      <TbMoodSuprised className='fs-3' />
-                      <p>등록된 운동 목록이 없습니다.</p>
-                      <p>설정 페이지로 이동하시겠습니까?</p>
-                      <Link to='/workoutStageAdd'>
-                        <Button
-                          variant='success'
-                          to='/workoutStageAdd'
-                          className=''
-                        >
-                          기본 루틴 설정
-                        </Button>
-                      </Link>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      {
-                        label: 'All',
-                        value: this.state.workoutStage.length,
-                      },
-                    ]}
-                    count={this.state.workoutStage.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onPageChange={this.handleChangePage}
-                    onRowsPerPageChange={this.handleChangeRowsPerPage}
-                  />
-                </TableContainer>
-              </Col>
-            </div>
-          ) : this.state.nextStage2 ? (
-            <div>
-              <Row xs={5} className='mt-3'>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(211)}
-                  >
-                    1 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(212)}
-                  >
-                    2 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(213)}
-                  >
-                    3 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(214)}
-                  >
-                    4 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(215)}
-                  >
-                    5 단계
-                  </Button>
-                </Col>
-              </Row>
-              <Row className='my-2'>
-                <Col className='text-start'>
-                  <Button
-                    variant='outline-danger'
-                    to={{
-                      pathname: '/workoutStage',
-                    }}
-                    onClick={() => this.setState({ nextStage2: '' })}
-                  >
-                    <MdOutlineRotateLeft />
-                    다시 선택하기
-                  </Button>
-                </Col>
-                <Col className='text-end'>
-                  {this.state.workoutStage.length === 0 ? (
-                    ''
-                  ) : (
-                    <Button
-                      variant='primary'
-                      className='ms-2'
-                      onClick={this.alloted}
-                    >
-                      루틴 배정하기
-                    </Button>
-                  )}
-                </Col>
-              </Row>
-              <Col xs={12}>
-                <TableContainer component={Paper}>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell scope='col'>단계</TableCell>
-                        <TableCell scope='col'>운동 부위</TableCell>
-                        <TableCell scope='col'>운동 이름</TableCell>
-                        <TableCell scope='col'>운동 기구</TableCell>
-                        <TableCell scope='col'>세트</TableCell>
-                        <TableCell scope='col'>횟수</TableCell>
-                        <TableCell scope='col'>쉬는시간</TableCell>
-                        <TableCell scope='col'>url</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {this.state.workoutStage.length === 0
-                        ? ''
-                        : this.state.workoutStage.slice(
-                            this.state.page * this.state.rowsPerPage,
-                            this.state.page * this.state.rowsPerPage +
-                              this.state.rowsPerPage
-                          )}
-                    </TableBody>
-                  </Table>
-                  {this.state.workoutStage.length === 0 ? (
-                    <div className='p-3 fs-5 fw-bold text-center'>
-                      <TbMoodSuprised className='fs-3' />
-                      <p>등록된 운동 목록이 없습니다.</p>
-                      <p>설정 페이지로 이동하시겠습니까?</p>
-                      <Link to='/workoutStageAdd'>
-                        <Button
-                          variant='success'
-                          to='/workoutStageAdd'
-                          className=''
-                        >
-                          기본 루틴 설정
-                        </Button>
-                      </Link>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      {
-                        label: 'All',
-                        value: this.state.workoutStage.length,
-                      },
-                    ]}
-                    count={this.state.workoutStage.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onPageChange={this.handleChangePage}
-                    onRowsPerPageChange={this.handleChangeRowsPerPage}
-                  />
-                </TableContainer>
-              </Col>
-            </div>
-          ) : this.state.nextStage3 ? (
-            <div>
-              <Row xs={5} className='mt-3'>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(311)}
-                  >
-                    1 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(312)}
-                  >
-                    2 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(313)}
-                  >
-                    3 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(314)}
-                  >
-                    4 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(315)}
-                  >
-                    5 단계
-                  </Button>
-                </Col>
-              </Row>
-              <Row className='my-2'>
-                <Col className='text-start'>
-                  <Button
-                    variant='outline-danger'
-                    to={{
-                      pathname: '/workoutStage',
-                    }}
-                    onClick={() => this.setState({ nextStage3: '' })}
-                  >
-                    다시 선택하기
-                  </Button>
-                </Col>
-                <Col className='text-end'>
-                  {this.state.workoutStage.length === 0 ? (
-                    ''
-                  ) : (
-                    <Button
-                      variant='primary'
-                      className='ms-2'
-                      onClick={this.alloted}
-                    >
-                      루틴 배정하기
-                    </Button>
-                  )}
-                </Col>
-              </Row>
-              <Col xs={12}>
-                <TableContainer component={Paper}>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell scope='col'>단계</TableCell>
-                        <TableCell scope='col'>운동 부위</TableCell>
-                        <TableCell scope='col'>운동 이름</TableCell>
-                        <TableCell scope='col'>운동 기구</TableCell>
-                        <TableCell scope='col'>세트</TableCell>
-                        <TableCell scope='col'>횟수</TableCell>
-                        <TableCell scope='col'>쉬는시간</TableCell>
-                        <TableCell scope='col'>url</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {this.state.workoutStage.length === 0
-                        ? ''
-                        : this.state.workoutStage.slice(
-                            this.state.page * this.state.rowsPerPage,
-                            this.state.page * this.state.rowsPerPage +
-                              this.state.rowsPerPage
-                          )}
-                    </TableBody>
-                  </Table>
-                  {this.state.workoutStage.length === 0 ? (
-                    <div className='p-3 fs-5 fw-bold text-center'>
-                      <TbMoodSuprised className='fs-3' />
-                      <p>등록된 운동 목록이 없습니다.</p>
-                      <p>설정 페이지로 이동하시겠습니까?</p>
-                      <Link to='/workoutStageAdd'>
-                        <Button
-                          variant='success'
-                          to='/workoutStageAdd'
-                          className=''
-                        >
-                          기본 루틴 설정
-                        </Button>
-                      </Link>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      {
-                        label: 'All',
-                        value: this.state.workoutStage.length,
-                      },
-                    ]}
-                    count={this.state.workoutStage.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onPageChange={this.handleChangePage}
-                    onRowsPerPageChange={this.handleChangeRowsPerPage}
-                  />
-                </TableContainer>
-              </Col>
-            </div>
-          ) : this.state.nextStage4 ? (
-            <div>
-              <Row xs={5} className='mt-3'>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(411)}
-                  >
-                    1 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(412)}
-                  >
-                    2 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(413)}
-                  >
-                    3 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(414)}
-                  >
-                    4 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(415)}
-                  >
-                    5 단계
-                  </Button>
-                </Col>
-              </Row>
-              <Row className='my-2'>
-                <Col className='text-start'>
-                  <Button
-                    variant='outline-danger'
-                    to={{
-                      pathname: '/workoutStage',
-                    }}
-                    onClick={() => this.setState({ nextStage4: '' })}
-                  >
-                    다시 선택하기
-                  </Button>
-                </Col>
-                <Col className='text-end'>
-                  {this.state.workoutStage.length === 0 ? (
-                    ''
-                  ) : (
-                    <Button
-                      variant='primary'
-                      className='ms-2'
-                      onClick={this.alloted}
-                    >
-                      루틴 배정하기
-                    </Button>
-                  )}
-                </Col>
-              </Row>
-              <Col xs={12}>
-                <TableContainer component={Paper}>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell scope='col'>단계</TableCell>
-                        <TableCell scope='col'>운동 부위</TableCell>
-                        <TableCell scope='col'>운동 이름</TableCell>
-                        <TableCell scope='col'>운동 기구</TableCell>
-                        <TableCell scope='col'>세트</TableCell>
-                        <TableCell scope='col'>횟수</TableCell>
-                        <TableCell scope='col'>쉬는시간</TableCell>
-                        <TableCell scope='col'>url</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {this.state.workoutStage.length === 0
-                        ? ''
-                        : this.state.workoutStage.slice(
-                            this.state.page * this.state.rowsPerPage,
-                            this.state.page * this.state.rowsPerPage +
-                              this.state.rowsPerPage
-                          )}
-                    </TableBody>
-                  </Table>
-                  {this.state.workoutStage.length === 0 ? (
-                    <div className='p-3 fs-5 fw-bold text-center'>
-                      <TbMoodSuprised className='fs-3' />
-                      <p>등록된 운동 목록이 없습니다.</p>
-                      <p>설정 페이지로 이동하시겠습니까?</p>
-                      <Link to='/workoutStageAdd'>
-                        <Button
-                          variant='success'
-                          to='/workoutStageAdd'
-                          className=''
-                        >
-                          기본 루틴 설정
-                        </Button>
-                      </Link>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      {
-                        label: 'All',
-                        value: this.state.workoutStage.length,
-                      },
-                    ]}
-                    count={this.state.workoutStage.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onPageChange={this.handleChangePage}
-                    onRowsPerPageChange={this.handleChangeRowsPerPage}
-                  />
-                </TableContainer>
-              </Col>
-            </div>
-          ) : this.state.nextStage5 ? (
-            <div>
-              <Row xs={5} className='mt-3'>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(511)}
-                  >
-                    1 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(512)}
-                  >
-                    2 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(513)}
-                  >
-                    3 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(514)}
-                  >
-                    4 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(515)}
-                  >
-                    5 단계
-                  </Button>
-                </Col>
-              </Row>
-              <Row className='my-2'>
-                <Col className='text-start'>
-                  <Button
-                    variant='outline-danger'
-                    to={{
-                      pathname: '/workoutStage',
-                    }}
-                    onClick={() => this.setState({ nextStage5: '' })}
-                  >
-                    다시 선택하기
-                  </Button>
-                </Col>
-                <Col className='text-end'>
-                  {this.state.workoutStage.length === 0 ? (
-                    ''
-                  ) : (
-                    <Button
-                      variant='primary'
-                      className='ms-2'
-                      onClick={this.alloted}
-                    >
-                      루틴 배정하기
-                    </Button>
-                  )}
-                </Col>
-              </Row>
-              <Col xs={12}>
-                <TableContainer component={Paper}>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell scope='col'>단계</TableCell>
-                        <TableCell scope='col'>운동 부위</TableCell>
-                        <TableCell scope='col'>운동 이름</TableCell>
-                        <TableCell scope='col'>운동 기구</TableCell>
-                        <TableCell scope='col'>세트</TableCell>
-                        <TableCell scope='col'>횟수</TableCell>
-                        <TableCell scope='col'>쉬는시간</TableCell>
-                        <TableCell scope='col'>url</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {this.state.workoutStage.length === 0
-                        ? ''
-                        : this.state.workoutStage.slice(
-                            this.state.page * this.state.rowsPerPage,
-                            this.state.page * this.state.rowsPerPage +
-                              this.state.rowsPerPage
-                          )}
-                    </TableBody>
-                  </Table>
-                  {this.state.workoutStage.length === 0 ? (
-                    <div className='p-3 fs-5 fw-bold text-center'>
-                      <TbMoodSuprised className='fs-3' />
-                      <p>등록된 운동 목록이 없습니다.</p>
-                      <p>설정 페이지로 이동하시겠습니까?</p>
-                      <Link to='/workoutStageAdd'>
-                        <Button
-                          variant='success'
-                          to='/workoutStageAdd'
-                          className=''
-                        >
-                          기본 루틴 설정
-                        </Button>
-                      </Link>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      {
-                        label: 'All',
-                        value: this.state.workoutStage.length,
-                      },
-                    ]}
-                    count={this.state.workoutStage.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onPageChange={this.handleChangePage}
-                    onRowsPerPageChange={this.handleChangeRowsPerPage}
-                  />
-                </TableContainer>
-              </Col>
-            </div>
-          ) : this.state.nextStage6 ? (
-            <div>
-              <Row xs={5} className='mt-3'>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(611)}
-                  >
-                    1 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(612)}
-                  >
-                    2 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(613)}
-                  >
-                    3 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(614)}
-                  >
-                    4 단계
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant='secondary'
-                    className='w-100'
-                    onClick={() => this.stageOnClick(615)}
-                  >
-                    5 단계
-                  </Button>
-                </Col>
-              </Row>
-              <Row className='my-2'>
-                <Col className='text-start'>
-                  <Button
-                    variant='outline-danger'
-                    to={{
-                      pathname: '/workoutStage',
-                    }}
-                    onClick={() => this.setState({ nextStage6: '' })}
-                  >
-                    다시 선택하기
-                  </Button>
-                </Col>
-                <Col className='text-end'>
-                  {this.state.workoutStage.length === 0 ? (
-                    ''
-                  ) : (
-                    <Button
-                      variant='primary'
-                      className='ms-2'
-                      onClick={this.alloted}
-                    >
-                      루틴 배정하기
-                    </Button>
-                  )}
-                </Col>
-              </Row>
-              <Col xs={12}>
-                <TableContainer component={Paper}>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell scope='col'>단계</TableCell>
-                        <TableCell scope='col'>운동 부위</TableCell>
-                        <TableCell scope='col'>운동 이름</TableCell>
-                        <TableCell scope='col'>운동 기구</TableCell>
-                        <TableCell scope='col'>세트</TableCell>
-                        <TableCell scope='col'>횟수</TableCell>
-                        <TableCell scope='col'>쉬는시간</TableCell>
-                        <TableCell scope='col'>url</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    {this.state.workoutStage.length === 0
-                      ? ''
-                      : this.state.workoutStage.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )}
-                  </Table>
-                  {this.state.workoutStage.length === 0 ? (
-                    <div className='p-3 fs-5 fw-bold text-center'>
-                      <TbMoodSuprised className='fs-3' />
-                      <p>등록된 운동 목록이 없습니다.</p>
-                      <p>설정 페이지로 이동하시겠습니까?</p>
-                      <Link to='/workoutStageAdd'>
-                        <Button
-                          variant='success'
-                          to='/workoutStageAdd'
-                          className=''
-                        >
-                          기본 루틴 설정
-                        </Button>
-                      </Link>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      {
-                        label: 'All',
-                        value: this.state.workoutStage.length,
-                      },
-                    ]}
-                    count={this.state.workoutStage.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onPageChange={this.handleChangePage}
-                    onRowsPerPageChange={this.handleChangeRowsPerPage}
-                  />
-                </TableContainer>
-              </Col>
-            </div>
-          ) : (
-            <Row xs={6} className='mt-3'>
-              <Col>
-                <Button
-                  className='w-100'
-                  onClick={() => this.stageOnClickStage()}
-                >
-                  상체
-                </Button>
-              </Col>
-              <Col>
-                <Button
-                  className='w-100'
-                  onClick={() => this.stageOnClickStage2()}
-                >
-                  하체
-                </Button>
-              </Col>
-              <Col>
-                <Button
-                  className='w-100'
-                  onClick={() => this.stageOnClickStage3()}
-                >
-                  전신
-                </Button>
-              </Col>
-              <Col>
-                <Button
-                  className='w-100'
-                  onClick={() => this.stageOnClickStage4()}
-                >
-                  코어
-                </Button>
-              </Col>
-              <Col>
-                <Button
-                  className='w-100'
-                  onClick={() => this.stageOnClickStage5()}
-                >
-                  유산소
-                </Button>
-              </Col>
-              <Col>
-                <Button
-                  className='w-100'
-                  onClick={() => this.stageOnClickStage6()}
-                >
-                  기타
-                </Button>
-              </Col>
-            </Row>
-          )}
+          )} */}
         </Container>
         <div className='footer'>
           <Footer />
