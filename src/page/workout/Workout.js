@@ -118,7 +118,6 @@ class Workout extends Component {
                       <h2>커스텀 루틴 배정</h2>
                     </Col>
                     <Col xs={2}>
-                      {/* <HiOutlineArrowLongRight className='fs-1' /> */}
                       <CgArrowLongRight className='fs-1' />
                     </Col>
                     <Col xs={12}>

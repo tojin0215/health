@@ -11,6 +11,8 @@ import Footer from '../../component/footer/Footer';
 import Header from '../../component/header/Header';
 import Menu from '../../component/navigation/Menu';
 import Navigation from '../../component/navigation/Navigation';
+//css
+import '../../styles/workout/workoutAlloted.css';
 
 // Bootstrap
 import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
@@ -35,7 +37,7 @@ import { TablePagination } from '@mui/material';
 
 // React icons
 import { TbMoodSuprised } from 'react-icons/tb';
-import { MdOutlineCancel } from 'react-icons/md';
+import { GiCancel } from 'react-icons/gi';
 
 const ExerciseView = ({
   idw,
@@ -72,8 +74,10 @@ const ExerciseView = ({
         <TableCell>{default_count}</TableCell>
         <TableCell>{default_rest}</TableCell>
         <TableCell>{url}</TableCell>
-        <TableCell>
-          <MdOutlineCancel />
+        <TableCell
+        /* onClick={} 기능추가 */
+        >
+          <GiCancel className='fs-2' />
         </TableCell>
       </TableRow>
     </>
@@ -289,170 +293,156 @@ class WorkoutAdd extends Component {
         </div>
         <Container>
           <Row className='sectionGlass'>
-            <h3>운동설정</h3>
-            <Col xs={6}>
-              <Form.Group>
-                <Form.Label>운동명</Form.Label>
-                <Form.Control
-                  value={this.state.workout}
-                  id='workout'
-                  onChange={this.handleChange}
-                ></Form.Control>
-              </Form.Group>
-            </Col>
-            <Col xs={6}>
-              <Form.Group>
-                <Form.Label>기구</Form.Label>
-                <Form.Control
-                  value={this.state.machine}
-                  id='machine'
-                  onChange={this.handleChange}
-                ></Form.Control>
-              </Form.Group>
-            </Col>
             <Col xs={12}>
-              <Form.Group>
-                <Form.Label>운동 부위</Form.Label>
-                <Row xs={6} className='px-5'>
-                  <Col>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        id='region1'
-                        checked={this.state.radioGroup['region1']}
-                        onChange={this.handleRegionRadio}
-                      />
-                      <Form.Check.Label htmlFor='region1' className='w-100'>
-                        상체
-                      </Form.Check.Label>
-                    </Form.Check>
-                  </Col>
-                  <Col>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        id='region2'
-                        checked={this.state.radioGroup['region2']}
-                        onChange={this.handleRegionRadio}
-                      />
-                      <Form.Check.Label htmlFor='region2' className='w-100'>
-                        하체
-                      </Form.Check.Label>
-                    </Form.Check>
-                  </Col>
-                  <Col>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        id='region3'
-                        checked={this.state.radioGroup['region3']}
-                        onChange={this.handleRegionRadio}
-                      />
-                      <Form.Check.Label htmlFor='region3' className='w-100'>
-                        전신
-                      </Form.Check.Label>
-                    </Form.Check>
-                  </Col>
-                  <Col>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        id='region4'
-                        checked={this.state.radioGroup['region4']}
-                        onChange={this.handleRegionRadio}
-                      />
-                      <Form.Check.Label htmlFor='region4' className='w-100'>
-                        코어
-                      </Form.Check.Label>
-                    </Form.Check>
-                  </Col>
-                  <Col>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        id='region5'
-                        checked={this.state.radioGroup['region5']}
-                        onChange={this.handleRegionRadio}
-                      />
-                      <Form.Check.Label htmlFor='region5' className='w-100'>
-                        유산소
-                      </Form.Check.Label>
-                    </Form.Check>
-                  </Col>
-                  <Col>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        id='region6'
-                        checked={this.state.radioGroup['region6']}
-                        onChange={this.handleRegionRadio}
-                      />
-                      <Form.Check.Label htmlFor='region6' className='w-100'>
-                        기타
-                      </Form.Check.Label>
-                    </Form.Check>
-                  </Col>
-                </Row>
-              </Form.Group>
+              <h3 className='mb-4'>운동설정</h3>
             </Col>
             <Col xs={2}>
-              <Form.Group>
-                <Form.Label>
-                  <h5>세트</h5>
-                </Form.Label>
-                <Form.Control
-                  type='number'
-                  value={this.state.default_set}
-                  id='default_set'
-                  onChange={this.handleChange}
-                ></Form.Control>
-              </Form.Group>
+              <h5>운동부위</h5>
+            </Col>
+            <Col xs={10} className='d-flex justify-content-between'>
+              <Form.Check>
+                <Form.Check.Input
+                  type='radio'
+                  id='region1'
+                  checked={this.state.radioGroup['region1']}
+                  onChange={this.handleRegionRadio}
+                />
+                <Form.Check.Label htmlFor='region1' className='w-100'>
+                  상체
+                </Form.Check.Label>
+              </Form.Check>
+              <Form.Check>
+                <Form.Check.Input
+                  type='radio'
+                  id='region2'
+                  checked={this.state.radioGroup['region2']}
+                  onChange={this.handleRegionRadio}
+                />
+                <Form.Check.Label htmlFor='region2' className='w-100'>
+                  하체
+                </Form.Check.Label>
+              </Form.Check>
+              <Form.Check>
+                <Form.Check.Input
+                  type='radio'
+                  id='region3'
+                  checked={this.state.radioGroup['region3']}
+                  onChange={this.handleRegionRadio}
+                />
+                <Form.Check.Label htmlFor='region3' className='w-100'>
+                  전신
+                </Form.Check.Label>
+              </Form.Check>
+              <Form.Check>
+                <Form.Check.Input
+                  type='radio'
+                  id='region4'
+                  checked={this.state.radioGroup['region4']}
+                  onChange={this.handleRegionRadio}
+                />
+                <Form.Check.Label htmlFor='region4' className='w-100'>
+                  코어
+                </Form.Check.Label>
+              </Form.Check>
+              <Form.Check>
+                <Form.Check.Input
+                  type='radio'
+                  id='region5'
+                  checked={this.state.radioGroup['region5']}
+                  onChange={this.handleRegionRadio}
+                />
+                <Form.Check.Label htmlFor='region5' className='w-100'>
+                  유산소
+                </Form.Check.Label>
+              </Form.Check>
+              <Form.Check>
+                <Form.Check.Input
+                  type='radio'
+                  id='region6'
+                  checked={this.state.radioGroup['region6']}
+                  onChange={this.handleRegionRadio}
+                />
+                <Form.Check.Label htmlFor='region6' className='w-100'>
+                  기타
+                </Form.Check.Label>
+              </Form.Check>
             </Col>
             <Col xs={2}>
-              <Form.Group>
-                <Form.Label>
-                  <h5>횟수</h5>
-                </Form.Label>
-                <Form.Control
-                  type='number'
-                  value={this.state.default_count}
-                  id='default_count'
-                  onChange={this.handleChange}
-                ></Form.Control>
-              </Form.Group>
+              <h5>운동명</h5>
+            </Col>
+            <Col xs={10} className='mb-4'>
+              <Form.Control
+                placeholder='운동명을 입력해주세요'
+                value={this.state.workout}
+                id='workout'
+                onChange={this.handleChange}
+              ></Form.Control>
             </Col>
             <Col xs={2}>
-              <Form.Group>
-                <Form.Label>
-                  <h5>휴식</h5>
-                </Form.Label>
-                <Form.Control
-                  type='number'
-                  value={this.state.default_rest}
-                  id='default_rest'
-                  onChange={this.handleChange}
-                ></Form.Control>
-              </Form.Group>
+              <h5>기구</h5>
             </Col>
-            <Col>
-              <Form.Group>
-                <Form.Label>
-                  <h5>링크</h5>
-                </Form.Label>
-                <Form.Control
-                  value={this.state.url}
-                  id='url'
-                  onChange={this.handleChange}
-                ></Form.Control>
-              </Form.Group>
+            <Col xs={10} className='mb-4'>
+              <Form.Control
+                placeholder='사용할 기구를 입력해주세요'
+                value={this.state.machine}
+                id='machine'
+                onChange={this.handleChange}
+              ></Form.Control>
             </Col>
-            <Col xs={12}>
-              <Button onClick={this.workoutAdd}>운동 만들기</Button>
+            <Col xs={2}>
+              <h5>반복</h5>
+            </Col>
+            <Col xs={10} className='mb-4'>
+              <Row>
+                <Col>
+                  <Form.Control
+                    placeholder='세트'
+                    type='number'
+                    /* value={this.state.default_set} */
+                    id='default_set'
+                    onChange={this.handleChange}
+                  ></Form.Control>
+                </Col>
+                <Col>
+                  <Form.Control
+                    placeholder='횟수'
+                    type='number'
+                    /* value={this.state.default_count} */
+                    id='default_count'
+                    onChange={this.handleChange}
+                  ></Form.Control>
+                </Col>
+                <Col>
+                  <Form.Control
+                    placeholder='휴식'
+                    type='number'
+                    /* value={this.state.default_rest} */
+                    id='default_rest'
+                    onChange={this.handleChange}
+                  ></Form.Control>
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={2} className='mb-4'>
+              <h5>링크</h5>
+            </Col>
+            <Col xs={10}>
+              <Form.Control
+                placeholder='URL 링크를 입력해주세요'
+                /* value={this.state.url} */
+                id='url'
+                onChange={this.handleChange}
+              ></Form.Control>
+            </Col>
+            <Col xs={12} className='text-center'>
+              <Button className='btn-primary' onClick={this.workoutAdd}>
+                운동 만들기
+              </Button>
             </Col>
           </Row>
           <Row className='sectionGlass'>
-            <Col xs={12}>
-              <h3>
+            <Col xs={12} className='pageTit mb-3'>
+              <h4>
                 <span className='text-primary'>
                   {this.state.headRegion === 1
                     ? '상체 '
@@ -469,119 +459,121 @@ class WorkoutAdd extends Component {
                     : ''}
                 </span>
                 운동 목록
-              </h3>
-            </Col>
-          </Row>
-          <Row className='workoutTabs text-center'>
-            <Col>
-              <Button
-                className='btn-table'
-                variant='btn-table'
-                onClick={() => this.handleOnClick(1)}
-              >
-                상체
-              </Button>
+              </h4>
             </Col>
             <Col>
-              <Button
-                className='btn-table'
-                variant='btn-tabley'
-                onClick={() => this.handleOnClick(18)}
-              >
-                하체
-              </Button>
-            </Col>
-            <Col>
-              <Button
-                className='btn-table'
-                variant='btn-table'
-                onClick={() => this.handleOnClick(28)}
-              >
-                전신
-              </Button>
-            </Col>
-            <Col>
-              <Button
-                className='btn-table'
-                variant='btn-table'
-                onClick={() => this.handleOnClick(38)}
-              >
-                코어
-              </Button>
-            </Col>
-            <Col>
-              <Button
-                className='btn-table'
-                variant='btn-table'
-                onClick={() => this.handleOnClick(48)}
-              >
-                유산소
-              </Button>
-            </Col>
-            <Col>
-              <Button
-                className='btn-table0'
-                variant='btn-table'
-                onClick={() => this.handleOnClick(58)}
-              >
-                기타
-              </Button>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <TableContainer component={Paper}>
-                <Table className='table-light'>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell scope='col'>부위</TableCell>
-                      <TableCell scope='col'>이름</TableCell>
-                      <TableCell scope='col'>운동기구</TableCell>
-                      <TableCell scope='col'>세트</TableCell>
-                      <TableCell scope='col'>횟수</TableCell>
-                      <TableCell scope='col'>휴식</TableCell>
-                      <TableCell scope='col'>URL</TableCell>
-                      <TableCell scope='col' align='center'>
-                        삭제
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.workoutlist.length === 0
-                      ? ''
-                      : this.state.workoutlist.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )}
-                  </TableBody>
-                </Table>
-                {this.state.workoutlist.length === 0 ? (
-                  <div className='p-3 fs-5 fw-bold text-center'>
-                    <TbMoodSuprised className='fs-3' />
-                    <p>설정된 운동이 없습니다.</p>
-                  </div>
-                ) : (
-                  ''
-                )}
-                <TablePagination
-                  className='bg-white'
-                  rowsPerPageOptions={[
-                    5,
-                    10,
-                    25,
-                    {
-                      label: 'All',
-                      value: this.state.workoutlist.length,
-                    },
-                  ]}
-                  count={this.state.workoutlist.length}
-                  rowsPerPage={this.state.rowsPerPage}
-                  page={this.state.page}
-                  onPageChange={this.handleChangePage}
-                  onRowsPerPageChange={this.handleChangeRowsPerPage}
-                />
-              </TableContainer>
+              <Row className='workoutTabs text-center'>
+                <Col>
+                  <Button
+                    className='btn-table'
+                    variant='btn-table'
+                    onClick={() => this.handleOnClick(1)}
+                  >
+                    상체
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='btn-table'
+                    variant='btn-table'
+                    onClick={() => this.handleOnClick(18)}
+                  >
+                    하체
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='btn-table'
+                    variant='btn-table'
+                    onClick={() => this.handleOnClick(28)}
+                  >
+                    전신
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='btn-table'
+                    variant='btn-table'
+                    onClick={() => this.handleOnClick(38)}
+                  >
+                    코어
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='btn-table'
+                    variant='btn-table'
+                    onClick={() => this.handleOnClick(48)}
+                  >
+                    유산소
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='btn-table'
+                    variant='btn-table'
+                    onClick={() => this.handleOnClick(58)}
+                  >
+                    기타
+                  </Button>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12}>
+                  <TableContainer component={Paper}>
+                    <Table className='table-light'>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell scope='col'>부위</TableCell>
+                          <TableCell scope='col'>이름</TableCell>
+                          <TableCell scope='col'>운동기구</TableCell>
+                          <TableCell scope='col'>세트</TableCell>
+                          <TableCell scope='col'>횟수</TableCell>
+                          <TableCell scope='col'>휴식</TableCell>
+                          <TableCell scope='col'>URL</TableCell>
+                          <TableCell scope='col' align='center'>
+                            삭제
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {this.state.workoutlist.length === 0
+                          ? ''
+                          : this.state.workoutlist.slice(
+                              this.state.page * this.state.rowsPerPage,
+                              this.state.page * this.state.rowsPerPage +
+                                this.state.rowsPerPage
+                            )}
+                      </TableBody>
+                    </Table>
+                    {this.state.workoutlist.length === 0 ? (
+                      <div className='p-3 fs-5 fw-bold text-center'>
+                        <TbMoodSuprised className='fs-3' />
+                        <p>설정된 운동이 없습니다.</p>
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                    <TablePagination
+                      className='bg-white'
+                      rowsPerPageOptions={[
+                        5,
+                        10,
+                        25,
+                        {
+                          label: 'All',
+                          value: this.state.workoutlist.length,
+                        },
+                      ]}
+                      count={this.state.workoutlist.length}
+                      rowsPerPage={this.state.rowsPerPage}
+                      page={this.state.page}
+                      onPageChange={this.handleChangePage}
+                      onRowsPerPageChange={this.handleChangeRowsPerPage}
+                    />
+                  </TableContainer>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Container>

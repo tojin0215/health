@@ -6,10 +6,11 @@
 /* 회원 검색 인풋 */
 .clientSearch .MuiTextField-root {
   border-radius: 0.313rem;
-  border: 1px solid #fff;
+  border: 0;
 }
 .customer-input--search {
   cursor: pointer;
+
   transition: background-color 0.4s;
 }
 .customer-input--search .MuiInputBase-input {
@@ -28,18 +29,19 @@
 }
 .customer-input--search {
   height: 45px;
+  color: #fff;
 }
 .customer-input--search #customer_name-label {
   font-size: 1.2rem;
   -webkit-text-fill-color: #ffff;
   text-align: start;
 }
-.customer-input--search:hover {
+/* .customer-input--search:hover {
   background-color: rgba(255, 255, 160, 1);
-}
-.customer-input--search:active {
+} */
+/* .customer-input--search:active {
   background-color: rgba(255, 255, 160, 0.2);
-}
+} */
 
 .Dropdown-control {
   border: 0;

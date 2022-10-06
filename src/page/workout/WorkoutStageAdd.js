@@ -483,8 +483,7 @@ class WorkoutStageAdd extends Component {
           </div>
         </div>
         <Container>
-          <Row className='sectionGlass'>
-            {/* <Col xs={12}>
+          {/* <Col xs={12}>
               <h3>
                 <span className='text-primary'>
                   {this.state.headRegion === 1
@@ -504,110 +503,84 @@ class WorkoutStageAdd extends Component {
                 운동 목록
               </h3>
             </Col> */}
-            <Row>
-              <Col>
-                <h3>베이직 루틴 설정</h3>
-              </Col>
-              <Col>
-                <p>베이직 루틴을 설정하세요.</p>
-              </Col>
-            </Row>
-            <Col xs={2}>
-              <Button
-                variant='outline-primary'
-                onClick={() => this.handleOnClick(1)}
-              >
-                상체
-              </Button>
+          <Row className='sectionGlass'>
+            <Col
+              xs={12}
+              className='pageTit d-flex justify-content-between mb-3'
+            >
+              <h4>베이직 루틴 설정</h4>
+              <p>베이직 루틴을 설정하세요.</p>
             </Col>
-            <Col xs={2}>
-              <Button
-                variant='outline-primary'
-                onClick={() => this.handleOnClick(18)}
-              >
-                하체
-              </Button>
+            <Col>
+              <Row className='workoutTabs text-center'>
+                <Col>
+                  <Button
+                    className='btn-table'
+                    variant='btn-table'
+                    onClick={() => this.handleOnClick(1)}
+                  >
+                    상체
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='btn-table'
+                    variant='btn-table'
+                    onClick={() => this.handleOnClick(18)}
+                  >
+                    하체
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='btn-table'
+                    variant='btn-table'
+                    onClick={() => this.handleOnClick(28)}
+                  >
+                    전신
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='btn-table'
+                    variant='btn-table'
+                    onClick={() => this.handleOnClick(38)}
+                  >
+                    코어
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className='btn-table'
+                    variant='btn-table'
+                    onClick={() => this.handleOnClick(48)}
+                  >
+                    유산소
+                  </Button>
+                </Col>
+                <Col xs={2}>
+                  <Button
+                    className='btn-table'
+                    variant='btn-table'
+                    onClick={() => this.handleOnClick(58)}
+                  >
+                    기타
+                  </Button>
+                </Col>
+              </Row>
             </Col>
-            <Col xs={2}>
-              <Button
-                variant='outline-primary'
-                onClick={() => this.handleOnClick(28)}
-              >
-                전신
-              </Button>
-            </Col>
-            <Col xs={2}>
-              <Button
-                variant='outline-primary'
-                onClick={() => this.handleOnClick(38)}
-              >
-                코어
-              </Button>
-            </Col>
-            <Col xs={2}>
-              <Button
-                variant='outline-primary'
-                onClick={() => this.handleOnClick(48)}
-              >
-                유산소
-              </Button>
-            </Col>
-            <Col xs={2}>
-              <Button
-                variant='outline-primary'
-                onClick={() => this.handleOnClick(58)}
-              >
-                기타
-              </Button>
-            </Col>
-            <TableContainer className='mt-2' component={Paper}>
-              <Table className='mt-2' size='small'>
+            <TableContainer component={Paper}>
+              <Table className='table-light'>
                 <TableHead>
                   <TableRow>
-                    <TableCell
-                      scope='col'
-                      align='left'
-                      style={{ minWidth: '3.8rem' }}
-                    >
-                      부위
-                    </TableCell>
-                    <TableCell scope='col' align='left'>
-                      이름
-                    </TableCell>
-                    <TableCell scope='col' align='left'>
-                      운동기구
-                    </TableCell>
-                    <TableCell
-                      scope='col'
-                      align='center'
-                      style={{ width: '100px' }}
-                    >
-                      세트
-                    </TableCell>
-                    <TableCell
-                      scope='col'
-                      align='center'
-                      style={{ width: '100px' }}
-                    >
-                      횟수
-                    </TableCell>
-                    <TableCell
-                      scope='col'
-                      align='center'
-                      style={{ width: '100px' }}
-                    >
-                      휴식
-                    </TableCell>
-                    <TableCell scope='col' align='center'>
-                      URL
-                    </TableCell>
-                    <TableCell
-                      scope='col'
-                      align='center'
-                      style={{ width: '3.6rem' }}
-                    >
-                      배정
-                    </TableCell>
+                    <TableCell scope='col'>부위</TableCell>
+                    <TableCell scope='col'>이름</TableCell>
+                    <TableCell scope='col'>운동기구</TableCell>
+                    <TableCell scope='col'>세트</TableCell>
+                    <TableCell scope='col'>횟수</TableCell>
+                    <TableCell scope='col'>휴식</TableCell>
+                    <TableCell scope='col'>URL</TableCell>
+                    <TableCell scope='col'>배정</TableCell>
                   </TableRow>
                 </TableHead>
               </Table>
@@ -624,6 +597,7 @@ class WorkoutStageAdd extends Component {
                 )
               )}
               <TablePagination
+                className='bg-white'
                 rowsPerPageOptions={[
                   5,
                   10,
