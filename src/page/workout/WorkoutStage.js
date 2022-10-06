@@ -35,6 +35,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 // react-icons
 import { TbMoodSuprised } from 'react-icons/tb';
+import { TbMoodSmile } from 'react-icons/tb';
 import { MdOutlineRotateLeft } from 'react-icons/md';
 
 const WorkoutStageView = ({
@@ -168,6 +169,9 @@ class WorkoutStage extends Component {
   }
   goLogin = () => {
     this.props.history.push('/');
+  };
+  goWorkoutStageAdd = () => {
+    this.props.history.push('/workoutStageAdd');
   };
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
@@ -405,11 +409,16 @@ class WorkoutStage extends Component {
   };
 
   render() {
-    // console.log(this.state.stage);
-    // console.log(this.state.idc); //idc=client_no
-    // console.log(this.state.workoutStage);
-    // console.log(this.state.workout);
-    // console.log(this.state.client_name);
+    console.log(
+      'date : ',
+      moment(this.state.workoutA_date).format('YYYY-MM-DD')
+    );
+    // console.log('stage : ', this.state.stage);
+    // console.log('stage typeof : ', typeof this.state.stage);
+    // console.log('idc : ', this.state.idc); //idc=client_no
+    // console.log('workoutStage : ', this.state.workoutStage);
+    // console.log('workout : ', this.state.workout);
+    // console.log('client_name : ', this.state.client_name);
 
     return (
       <div className='wrap workoutStage__wrap'>
@@ -441,7 +450,7 @@ class WorkoutStage extends Component {
                 onChange={(date) => this.setState({ workoutA_date: date })}
                 dateFormat='yyyy년MM월dd일'
                 font-size='1.6rem'
-                // minDate={new Date()}
+                minDate={new Date()}
               />
             </Col>
             <Col>
@@ -467,7 +476,11 @@ class WorkoutStage extends Component {
                 />
               )}
             </Col>
-            <Col>루틴 설정</Col>
+            <Col>
+              <Button variant='secondary' onClick={this.goWorkoutStageAdd}>
+                루틴 설정
+              </Button>
+            </Col>
           </Row>
           <Row className='sectionGlass'>
             <Col xs={12}>
@@ -580,32 +593,6 @@ class WorkoutStage extends Component {
                         </Button>
                       </Col>
                     </Row>
-                    <Row className='my-2'>
-                      <Col className='text-start'>
-                        <Button
-                          variant='outline-danger'
-                          to={{
-                            pathname: '/workoutStage',
-                          }}
-                          onClick={() => this.setState({ nextStage1: '' })}
-                        >
-                          다시 선택하기
-                        </Button>
-                      </Col>
-                      <Col className='text-end'>
-                        {this.state.workoutStage.length === 0 ? (
-                          <></>
-                        ) : (
-                          <Button
-                            variant='primary'
-                            className='ms-2'
-                            onClick={this.alloted}
-                          >
-                            루틴 배정하기
-                          </Button>
-                        )}
-                      </Col>
-                    </Row>
                   </div>
                 ) : this.state.nextStage2 ? (
                   <div>
@@ -654,33 +641,6 @@ class WorkoutStage extends Component {
                         >
                           5 단계
                         </Button>
-                      </Col>
-                    </Row>
-                    <Row className='my-2'>
-                      <Col className='text-start'>
-                        <Button
-                          variant='outline-danger'
-                          to={{
-                            pathname: '/workoutStage',
-                          }}
-                          onClick={() => this.setState({ nextStage2: '' })}
-                        >
-                          <MdOutlineRotateLeft />
-                          다시 선택하기
-                        </Button>
-                      </Col>
-                      <Col className='text-end'>
-                        {this.state.workoutStage.length === 0 ? (
-                          ''
-                        ) : (
-                          <Button
-                            variant='primary'
-                            className='ms-2'
-                            onClick={this.alloted}
-                          >
-                            루틴 배정하기
-                          </Button>
-                        )}
                       </Col>
                     </Row>
                     <Col xs={12}>
@@ -794,32 +754,6 @@ class WorkoutStage extends Component {
                         </Button>
                       </Col>
                     </Row>
-                    <Row className='my-2'>
-                      <Col className='text-start'>
-                        <Button
-                          variant='outline-danger'
-                          to={{
-                            pathname: '/workoutStage',
-                          }}
-                          onClick={() => this.setState({ nextStage3: '' })}
-                        >
-                          다시 선택하기
-                        </Button>
-                      </Col>
-                      <Col className='text-end'>
-                        {this.state.workoutStage.length === 0 ? (
-                          ''
-                        ) : (
-                          <Button
-                            variant='primary'
-                            className='ms-2'
-                            onClick={this.alloted}
-                          >
-                            루틴 배정하기
-                          </Button>
-                        )}
-                      </Col>
-                    </Row>
                     <Col xs={12}>
                       <TableContainer component={Paper}>
                         <Table>
@@ -929,32 +863,6 @@ class WorkoutStage extends Component {
                         >
                           5 단계
                         </Button>
-                      </Col>
-                    </Row>
-                    <Row className='my-2'>
-                      <Col className='text-start'>
-                        <Button
-                          variant='outline-danger'
-                          to={{
-                            pathname: '/workoutStage',
-                          }}
-                          onClick={() => this.setState({ nextStage4: '' })}
-                        >
-                          다시 선택하기
-                        </Button>
-                      </Col>
-                      <Col className='text-end'>
-                        {this.state.workoutStage.length === 0 ? (
-                          ''
-                        ) : (
-                          <Button
-                            variant='primary'
-                            className='ms-2'
-                            onClick={this.alloted}
-                          >
-                            루틴 배정하기
-                          </Button>
-                        )}
                       </Col>
                     </Row>
                     <Col xs={12}>
@@ -1068,32 +976,6 @@ class WorkoutStage extends Component {
                         </Button>
                       </Col>
                     </Row>
-                    <Row className='my-2'>
-                      <Col className='text-start'>
-                        <Button
-                          variant='outline-danger'
-                          to={{
-                            pathname: '/workoutStage',
-                          }}
-                          onClick={() => this.setState({ nextStage5: '' })}
-                        >
-                          다시 선택하기
-                        </Button>
-                      </Col>
-                      <Col className='text-end'>
-                        {this.state.workoutStage.length === 0 ? (
-                          ''
-                        ) : (
-                          <Button
-                            variant='primary'
-                            className='ms-2'
-                            onClick={this.alloted}
-                          >
-                            루틴 배정하기
-                          </Button>
-                        )}
-                      </Col>
-                    </Row>
                     <Col xs={12}>
                       <TableContainer component={Paper}>
                         <Table>
@@ -1205,32 +1087,6 @@ class WorkoutStage extends Component {
                         </Button>
                       </Col>
                     </Row>
-                    <Row className='my-2'>
-                      <Col className='text-start'>
-                        <Button
-                          variant='outline-danger'
-                          to={{
-                            pathname: '/workoutStage',
-                          }}
-                          onClick={() => this.setState({ nextStage6: '' })}
-                        >
-                          다시 선택하기
-                        </Button>
-                      </Col>
-                      <Col className='text-end'>
-                        {this.state.workoutStage.length === 0 ? (
-                          ''
-                        ) : (
-                          <Button
-                            variant='primary'
-                            className='ms-2'
-                            onClick={this.alloted}
-                          >
-                            루틴 배정하기
-                          </Button>
-                        )}
-                      </Col>
-                    </Row>
                     <Col xs={12}>
                       <TableContainer component={Paper}>
                         <Table>
@@ -1292,7 +1148,55 @@ class WorkoutStage extends Component {
                     </Col>
                   </div>
                 ) : (
-                  <p>선택된 부위가 없습니다. 운동 부위부터 선택해주세요.</p>
+                  <div>
+                    <Row xs={5} className='mt-3'>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(111)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(112)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(113)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(114)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(115)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </Row>
+                  </div>
                 )}
               </Row>
             </Col>
@@ -1321,7 +1225,12 @@ class WorkoutStage extends Component {
                         )}
                   </TableBody>
                 </Table>
-                {this.state.workoutStage.length === 0 ? (
+                {this.state.stage == '' ? (
+                  <div className='p-3 fs-5 fw-bold text-center'>
+                    <TbMoodSmile className='fs-3' />
+                    <p>운동 단계를 선택해주세요</p>
+                  </div>
+                ) : this.state.workoutStage.length === 0 ? (
                   <div className='p-3 fs-5 fw-bold text-center'>
                     <TbMoodSuprised className='fs-3' />
                     <p>등록된 운동 목록이 없습니다.</p>
@@ -1357,14 +1266,42 @@ class WorkoutStage extends Component {
                 />
               </TableContainer>
             </Col>
-            <Col xs={12}>배정하기</Col>
+            <Col xs={12}>
+              {this.state.client_name == undefined ? (
+                <Button
+                  variant='primary'
+                  className='ms-2'
+                  onClick={this.alloted}
+                  disabled
+                >
+                  루틴 배정하기
+                </Button>
+              ) : (
+                <Button
+                  variant='primary'
+                  className='ms-2'
+                  onClick={this.alloted}
+                >
+                  루틴 배정하기
+                </Button>
+              )}
+            </Col>
           </Row>
           <Row className='sectionGlass'>
-            <Col xs={12}>
-              <span>김회원</span>
-              님의
-              <span>2022년 09월 01일 (월요일)</span>에 배정된 운동목록입니다.
-            </Col>
+            {this.state.client_name ? (
+              <Col xs={12}>
+                <span>{this.state.client_name}</span>
+                님의{' '}
+                <span>
+                  {moment(this.state.workoutA_date).format(
+                    'YYYY년 MM년 DD일 (ddd요일)'
+                  )}
+                </span>
+                에 배정된 운동목록입니다.
+              </Col>
+            ) : (
+              <Col xs={12}>회원을 선택해주세요.</Col>
+            )}
             <Col xs={12}>회원에게 배정된 운동 목록 테이블</Col>
           </Row>
           {/* 
