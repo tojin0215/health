@@ -507,9 +507,12 @@ class WorkoutAlloted extends Component {
           </div>
         </div>
         <Container className='workoutalloted__container'>
-          <div className='clientSearch d-flex justify-content-between align-items-center'>
-            <h4>커스텀 루틴 배정</h4>
-            <div>
+          <Row className='clientSearch d-flex justify-content-between align-items-center'>
+            <Col>
+              <h4>커스텀 루틴 배정</h4>
+            </Col>
+
+            <Col>
               <DatePicker
                 className='text-center'
                 selected={this.state.workoutA_date}
@@ -517,8 +520,8 @@ class WorkoutAlloted extends Component {
                 dateFormat='yyyy년 MM월 dd일'
                 minDate={new Date()}
               />
-            </div>
-            <div className='customer_name'>
+            </Col>
+            <Col className='customer_name'>
               {this.state.open ? (
                 <UserSearch
                   open={this.state.open}
@@ -531,6 +534,7 @@ class WorkoutAlloted extends Component {
               ) : (
                 <>
                   <TextField
+                    placeholder='회원검색'
                     id='customer_name'
                     label='회원 검색'
                     disabled
@@ -544,13 +548,13 @@ class WorkoutAlloted extends Component {
                   />
                 </>
               )}
-            </div>
-            <div>
-              <Button variant='outline-primary' onClick={this.moveWorkoutAdd}>
+            </Col>
+            <Col>
+              <Button variant='primary' onClick={this.moveWorkoutAdd}>
                 운동설정
               </Button>
-            </div>
-          </div>
+            </Col>
+          </Row>
           {/* <Tabs
               defaultActiveKey='1'
               id='exercise-part-tab'
@@ -948,7 +952,7 @@ class WorkoutAlloted extends Component {
                   <Col>
                     <Button
                       className='btn-table'
-                      variant='table'
+                      variant='btn-table'
                       onClick={() => this.handleOnClick(1)}
                     >
                       상체
@@ -957,7 +961,7 @@ class WorkoutAlloted extends Component {
                   <Col>
                     <Button
                       className='btn-table'
-                      variant='table'
+                      variant='btn-table'
                       onClick={() => this.handleOnClick(18)}
                     >
                       하체
@@ -966,7 +970,7 @@ class WorkoutAlloted extends Component {
                   <Col>
                     <Button
                       className='btn-table'
-                      variant='table'
+                      variant='btn-table'
                       onClick={() => this.handleOnClick(28)}
                     >
                       전신
@@ -1067,7 +1071,7 @@ class WorkoutAlloted extends Component {
                   에 배정된 운동 목록입니다
                 </h5>
                 <TableContainer component={Paper}>
-                  <Table className=' table-light'>
+                  <Table className='table-light'>
                     <TableHead>
                       <TableRow>
                         <TableCell scope='col'>부위</TableCell>
