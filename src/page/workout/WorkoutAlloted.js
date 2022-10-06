@@ -57,7 +57,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { TbMoodSuprised } from 'react-icons/tb';
 import { HiOutlinePlusCircle } from 'react-icons/hi';
-import { MdCancel } from 'react-icons/md';
+import { GiCancel } from 'react-icons/gi';
 import { BsCalendarCheck } from 'react-icons/bs';
 
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
@@ -222,8 +222,8 @@ const WorkoutAllotedView = ({
 
   return (
     <TableRow>
-      <TableCell>{workout}</TableCell>
       <TableCell>{region}</TableCell>
+      <TableCell>{workout}</TableCell>
       <TableCell>{machine}</TableCell>
       <TableCell>{default_set}</TableCell>
       <TableCell>{default_count}</TableCell>
@@ -237,7 +237,7 @@ const WorkoutAllotedView = ({
         }
         className='workout-alloted__selected--cencel'
       >
-        <MdCancel className='fs-2' />
+        <GiCancel className='fs-2' />
       </TableCell>
     </TableRow>
   );
@@ -507,7 +507,7 @@ class WorkoutAlloted extends Component {
           </div>
         </div>
         <Container className='workoutalloted__container'>
-          <div className='sectionGlass d-flex justify-content-between align-items-center'>
+          <div className='clientSearch d-flex justify-content-between align-items-center'>
             <h4>커스텀 루틴 배정</h4>
             <div>
               <DatePicker
@@ -943,13 +943,12 @@ class WorkoutAlloted extends Component {
                   <p>설정된 운동목록입니다. 회원에게 배정해주세요.</p>
                 </div>
               </Col>
-              <Col xs={12} className='mt-2'>
-                <Row className='workoutTabs'>
+              <Col className='mt-2'>
+                <Row className='workoutTabs text-center'>
                   <Col>
                     <Button
-                      data-bs-toggle='button'
-                      className='w-100'
-                      variant='outline-primary'
+                      className='btn-table'
+                      variant='table'
                       onClick={() => this.handleOnClick(1)}
                     >
                       상체
@@ -957,44 +956,44 @@ class WorkoutAlloted extends Component {
                   </Col>
                   <Col>
                     <Button
-                      className='w-100'
-                      variant='outline-primary'
+                      className='btn-table'
+                      variant='table'
                       onClick={() => this.handleOnClick(18)}
                     >
                       하체
                     </Button>
                   </Col>
-                  <Col xs={6} md={2}>
+                  <Col>
                     <Button
-                      className='w-100'
-                      variant='outline-primary'
+                      className='btn-table'
+                      variant='table'
                       onClick={() => this.handleOnClick(28)}
                     >
                       전신
                     </Button>
                   </Col>
-                  <Col xs={6} md={2}>
+                  <Col>
                     <Button
-                      className='w-100'
-                      variant='outline-primary'
+                      className='btn-table'
+                      variant='btn-table'
                       onClick={() => this.handleOnClick(38)}
                     >
                       코어
                     </Button>
                   </Col>
-                  <Col xs={6} md={2}>
+                  <Col>
                     <Button
-                      className='w-100'
-                      variant='outline-primary'
+                      className='btn-table'
+                      variant='btn-table'
                       onClick={() => this.handleOnClick(48)}
                     >
                       유산소
                     </Button>
                   </Col>
-                  <Col xs={6} md={2}>
+                  <Col>
                     <Button
-                      className='w-100'
-                      variant='outline-primary'
+                      className='btn-table'
+                      variant='btn-table'
                       onClick={() => this.handleOnClick(58)}
                     >
                       기타
