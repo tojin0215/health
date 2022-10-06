@@ -15,7 +15,8 @@ import {
   workoutAllotedSelect,
 } from '../../api/user';
 import Footer from '../../component/footer/Footer';
-
+//css
+import '../../styles/workout/workoutAlloted.css';
 //bootstrap
 import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
@@ -316,7 +317,7 @@ class WorkoutAllotedList extends Component {
           </div>
         </div>
         <Container className='workoutallotedlist__container'>
-          <div>
+          <Col>
             <Row className='sectionGlass'>
               {this.state.line === 3 ? (
                 <Col xs={12}>
@@ -341,23 +342,21 @@ class WorkoutAllotedList extends Component {
                 <Row xs='auto'>
                   <Col>
                     {this.state.line === 3 ? (
-                      <div>
-                        <TextField
-                          id='customer_name'
-                          label='회원 검색'
-                          disabled
-                          variant='standard'
-                          className='customer-input--search'
-                          InputProps={{ disableUnderline: true }}
-                          value={this.state.client_name2}
-                        />
-                      </div>
+                      <TextField
+                        id='customer_name'
+                        label='회원 검색'
+                        disabled
+                        variant='standard'
+                        className='customer-input--search'
+                        InputProps={{ disableUnderline: true }}
+                        value={this.state.client_name2}
+                      />
                     ) : this.state.line === 1 ? (
                       ''
                     ) : this.props.userinfo.loginWhether === 2 ? (
                       ''
                     ) : this.state.open ? (
-                      <div>
+                      <>
                         <UserSearch
                           open={this.state.open}
                           setOpen={(o) => this.setState({ open: o })}
@@ -366,9 +365,9 @@ class WorkoutAllotedList extends Component {
                           joinNo={this.props.userinfo.joinNo}
                           handleUser={this.handleUser}
                         />
-                      </div>
+                      </>
                     ) : (
-                      <div>
+                      <div className='customer_name mb-4'>
                         <TextField
                           id='customer_name'
                           label='회원 검색'
@@ -386,6 +385,7 @@ class WorkoutAllotedList extends Component {
                   <Col>님의</Col>
                   <Col>
                     <DatePicker
+                      className='text-center'
                       selected={this.state.workoutA_date}
                       onChange={(date) => this.dateOnChange(date)}
                       dateFormat='yyyy년MM월dd일'
@@ -398,7 +398,7 @@ class WorkoutAllotedList extends Component {
                 </Row>
               )}
               <TableContainer component={Paper}>
-                <Table>
+                <Table className=' table-light'>
                   <TableHead>
                     <TableRow>
                       <TableCell scope='col'>부위</TableCell>
@@ -452,7 +452,7 @@ class WorkoutAllotedList extends Component {
                 </div>
               )}
             </Row>
-          </div>
+          </Col>
         </Container>
         <div className='footer'>
           <Footer />
