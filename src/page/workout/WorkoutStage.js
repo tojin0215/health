@@ -432,6 +432,49 @@ class WorkoutStage extends Component {
           </div>
         </div>
         <Container>
+          <Row className='sectionGlass'>
+            <Col>베이직 루틴 배정</Col>
+            <Col>DatePicker</Col>
+            <Col>회원 검색</Col>
+            <Col>루틴 설정</Col>
+          </Row>
+          <Row className='sectionGlass'>
+            <Col xs={12}>
+              <Row>
+                <Col>베이직 루틴 배정</Col>
+                <Col>기본 루틴 목록입니다. 회원에게 배정하세요.</Col>
+              </Row>
+            </Col>
+            <Col xs={12}>
+              <Row>
+                <Col>상체</Col>
+                <Col>하체</Col>
+                <Col>전신</Col>
+                <Col>코어</Col>
+                <Col>유산소</Col>
+                <Col>기타</Col>
+              </Row>
+            </Col>
+            <Col xs={12}>
+              <Row>
+                <Col>1단계</Col>
+                <Col>2단계</Col>
+                <Col>3단계</Col>
+                <Col>4단계</Col>
+                <Col>5단계</Col>
+              </Row>
+            </Col>
+            <Col xs={12}>기본 루틴 테이블</Col>
+            <Col xs={12}>배정하기</Col>
+          </Row>
+          <Row className='sectionGlass'>
+            <Col xs={12}>
+              <span>김회원</span>
+              님의
+              <span>2022년 09월 01일 (월요일)</span>에 배정된 운동목록입니다.
+            </Col>
+            <Col xs={12}>회원에게 배정된 운동 목록 테이블</Col>
+          </Row>
           {this.state.open ? (
             <UserSearch
               open={this.state.open}
