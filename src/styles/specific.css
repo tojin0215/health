@@ -106,6 +106,15 @@
   background: #ebff2e;
   color: #222;
 } /* 이용권 버튼 */
+.btn-secondary {
+  width: 12.5rem;
+  height: 2.8rem;
+  background: #888;
+}
+.btn-secondary:hover {
+  background: #666;
+  border: 1px solid #888;
+}
 
 .btn-outline-primary {
   width: 12.5rem;
@@ -145,7 +154,7 @@
 .btn-table {
   color: #fff;
   text-align: center;
-  padding: 15px 50px;
+  padding: 15px 40px;
   border-radius: 5px 5px 0 0;
 }
 .btn-table:hover {

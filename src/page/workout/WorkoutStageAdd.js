@@ -14,7 +14,8 @@ import Footer from '../../component/footer/Footer';
 import Header from '../../component/header/Header';
 import Menu from '../../component/navigation/Menu';
 import Navigation from '../../component/navigation/Navigation';
-
+//css
+import '../../styles/workout/workoutAlloted.css';
 //bootstrap
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
@@ -515,14 +516,13 @@ class WorkoutStageAdd extends Component {
         </div>
         <Container>
           <Row className='sectionGlass'>
-            <Col
-              xs={12}
-              className='pageTit d-flex justify-content-between mb-3'
-            >
-              <h4>베이직 루틴 설정</h4>
-              <p>베이직 루틴을 설정하세요.</p>
+            <Col xs={12}>
+              <div className='pageTit d-flex justify-content-between mb-3'>
+                <h4>베이직 루틴 설정</h4>
+                <p>베이직 루틴을 설정하세요.</p>
+              </div>
             </Col>
-            <Col>
+            <Col xs={12}>
               <Row className='workoutTabs text-center'>
                 <Col>
                   <Button
@@ -580,51 +580,53 @@ class WorkoutStageAdd extends Component {
                 </Col>
               </Row>
             </Col>
-            <TableContainer component={Paper}>
-              <Table className='table-light'>
-                <TableHead>
-                  <TableRow>
-                    <TableCell scope='col'>부위</TableCell>
-                    <TableCell scope='col'>이름</TableCell>
-                    <TableCell scope='col'>운동기구</TableCell>
-                    <TableCell scope='col'>세트</TableCell>
-                    <TableCell scope='col'>횟수</TableCell>
-                    <TableCell scope='col'>휴식</TableCell>
-                    <TableCell scope='col'>URL</TableCell>
-                    <TableCell scope='col'>배정</TableCell>
-                  </TableRow>
-                </TableHead>
-              </Table>
-              {this.state.workoutlist.length === 0 ? (
-                <div className='p-3 fs-5 fw-bold text-center'>
-                  <TbMoodSuprised className='fs-3' />
-                  <p>설정된 운동이 없습니다.</p>
-                </div>
-              ) : (
-                this.state.workoutlist.slice(
-                  this.state.page * this.state.rowsPerPage,
-                  this.state.page * this.state.rowsPerPage +
-                    this.state.rowsPerPage
-                )
-              )}
-              <TablePagination
-                className='bg-white'
-                rowsPerPageOptions={[
-                  5,
-                  10,
-                  25,
-                  {
-                    label: 'All',
-                    value: this.state.workoutlist.length,
-                  },
-                ]}
-                count={this.state.workoutlist.length}
-                rowsPerPage={this.state.rowsPerPage}
-                page={this.state.page}
-                onPageChange={this.handleChangePage}
-                onRowsPerPageChange={this.handleChangeRowsPerPage}
-              />
-            </TableContainer>
+            <Col xs={12}>
+              <TableContainer component={Paper}>
+                <Table className='table-light'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell scope='col'>부위</TableCell>
+                      <TableCell scope='col'>이름</TableCell>
+                      <TableCell scope='col'>운동기구</TableCell>
+                      <TableCell scope='col'>세트</TableCell>
+                      <TableCell scope='col'>횟수</TableCell>
+                      <TableCell scope='col'>휴식</TableCell>
+                      <TableCell scope='col'>URL</TableCell>
+                      <TableCell scope='col'>배정</TableCell>
+                    </TableRow>
+                  </TableHead>
+                </Table>
+                {this.state.workoutlist.length === 0 ? (
+                  <div className='p-3 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>설정된 운동이 없습니다.</p>
+                  </div>
+                ) : (
+                  this.state.workoutlist.slice(
+                    this.state.page * this.state.rowsPerPage,
+                    this.state.page * this.state.rowsPerPage +
+                      this.state.rowsPerPage
+                  )
+                )}
+                <TablePagination
+                  className='bg-white'
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.workoutlist.length,
+                    },
+                  ]}
+                  count={this.state.workoutlist.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
+              </TableContainer>
+            </Col>
           </Row>
           <div className='sectionGlass'>
             <Row>
@@ -671,7 +673,7 @@ class WorkoutStageAdd extends Component {
                         : ''}
                     </span>
                     {this.state.headRegion && this.state.stage
-                      ? '에 배정될 베이직 운동 루틴 목록입니다.'
+                      ? '에 배정된 베이직 운동 루틴 목록입니다.'
                       : ''}
                   </p>
                 ) : (
@@ -684,13 +686,14 @@ class WorkoutStageAdd extends Component {
                 </button>
               </Col>
             </Row>
-            <Row>
+            <Row className='my-3'>
               <Col>
                 {/* <button onClick={() => this.stageOnClick(11)}>
                   1단계 기존바꿔야됨
                 </button> */}
                 <Button
-                  className='w-100'
+                  className='btn-table'
+                  variant='btn-table'
                   onClick={() => this.stageOnClickStage1()}
                 >
                   상체
@@ -698,7 +701,8 @@ class WorkoutStageAdd extends Component {
               </Col>
               <Col>
                 <Button
-                  className='w-100'
+                  className='btn-table'
+                  variant='btn-table'
                   onClick={() => this.stageOnClickStage2()}
                 >
                   하체
@@ -706,7 +710,8 @@ class WorkoutStageAdd extends Component {
               </Col>
               <Col>
                 <Button
-                  className='w-100'
+                  className='btn-table'
+                  variant='btn-table'
                   onClick={() => this.stageOnClickStage3()}
                 >
                   전신
@@ -714,7 +719,8 @@ class WorkoutStageAdd extends Component {
               </Col>
               <Col>
                 <Button
-                  className='w-100'
+                  className='btn-table'
+                  variant='btn-table'
                   onClick={() => this.stageOnClickStage4()}
                 >
                   코어
@@ -722,7 +728,8 @@ class WorkoutStageAdd extends Component {
               </Col>
               <Col>
                 <Button
-                  className='w-100'
+                  className='btn-table'
+                  variant='btn-table'
                   onClick={() => this.stageOnClickStage5()}
                 >
                   유산소
@@ -730,7 +737,8 @@ class WorkoutStageAdd extends Component {
               </Col>
               <Col>
                 <Button
-                  className='w-100'
+                  className='btn-table'
+                  variant='btn-table'
                   onClick={() => this.stageOnClickStage6()}
                 >
                   기타
@@ -1097,17 +1105,17 @@ class WorkoutStageAdd extends Component {
             <Row>
               <Col xs={12}>
                 {/* 기타 */}
-                <TableContainer component={Paper}>
-                  <Table>
+                <TableContainer component={Paper} className='mt-3'>
+                  <Table className='table-light'>
                     <TableHead>
                       <TableRow>
-                        <TableCell scope='col'>운동 부위</TableCell>
-                        <TableCell scope='col'>운동 이름</TableCell>
-                        <TableCell scope='col'>운동 기구</TableCell>
+                        <TableCell scope='col'>부위</TableCell>
+                        <TableCell scope='col'>이름</TableCell>
+                        <TableCell scope='col'>기구</TableCell>
                         <TableCell scope='col'>세트</TableCell>
                         <TableCell scope='col'>횟수</TableCell>
                         <TableCell scope='col'>쉬는시간</TableCell>
-                        <TableCell scope='col'>url</TableCell>
+                        <TableCell scope='col'>URL</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -1121,7 +1129,7 @@ class WorkoutStageAdd extends Component {
                     </TableBody>
                   </Table>
                   {this.state.workoutStage.length === 0 ? (
-                    <div className='p-3 fs-5 fw-bold text-center'>
+                    <div className='p-5 fs-5 fw-bold text-center'>
                       <TbMoodSuprised className='fs-3' />
                       <p>설정된 운동이 없습니다.</p>
                     </div>
