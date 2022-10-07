@@ -2147,7 +2147,7 @@ class Client extends Component {
                     <TableRow>
                       <TableCell>이름</TableCell>
                       <TableCell>성별</TableCell>
-                      <TableCell>연락ㅇㅇㅇ처</TableCell>
+                      <TableCell>연락처</TableCell>
                       <TableCell>가입일</TableCell>
                       <TableCell>사물함번호</TableCell>
                     </TableRow>
