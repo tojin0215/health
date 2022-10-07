@@ -36,6 +36,7 @@ import TableCell from '@mui/material/TableCell';
 import DatePicker from 'react-datepicker';
 import UserSearch from '../../component/customer/UserSearch';
 import { voucherInsert } from '../../api/user';
+import { RFC_2822 } from 'moment/moment';
 // locale 오류로 임시 삭제
 // import DatePicker, { registerLocale } from 'react-datepicker';
 // import ko from 'date-fns/locale/ko';
@@ -102,6 +103,7 @@ class AddSales extends Component {
         cash: false,
         transfer: false,
       },
+      voucherType: '',
     };
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -110,6 +112,9 @@ class AddSales extends Component {
 
   goLogin = () => {
     this.props.history.push('/');
+  };
+  goSales = () => {
+    this.props.history.push('/sales');
   };
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
@@ -173,6 +178,13 @@ class AddSales extends Component {
       salesStart_date: date,
     });
   }
+
+  // voucherSelect(e) {
+  //   this.setState({
+  //     voucherType: e,
+  //   });
+  //   console.log('선택된 이용권 종류입니다.', e);
+  // }
 
   handleOnClick = (e) => {
     let exercisePrice1 = parseInt(
@@ -286,7 +298,7 @@ class AddSales extends Component {
       salesDaysCheckbox: false,
     };
     obj[e.target.id] = e.target.checked;
-    // console.log(obj);
+    console.log('handleCheckbox 의 obj입니다', obj);
     this.setState({
       checkboxGroup: obj,
     });
@@ -366,295 +378,326 @@ class AddSales extends Component {
         </div>
         {/*.header */}
         <Container>
-          {this.state.open ? (
-            <UserSearch
-              open={this.state.open}
-              setOpen={(o) => this.setState({ open: o })}
-              fitness_no={this.props.userinfo.fitness_no}
-              loginWhether={this.props.userinfo.loginWhether}
-              joinNo={this.props.userinfo.joinNo}
-              handleUser={this.handleUser}
-            />
-          ) : (
-            <TextField
-              id='customer_name'
-              label='회원 검색'
-              disabled
-              variant='standard'
-              onClick={() => this.setState({ open: true })}
-              className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
-              InputProps={{ disableUnderline: true }}
-              value={this.state.client_name}
-            />
-          )}
-          {/* <Link to="/sales">회원 검색</Link><br/> */}
           <form>
-            <label className='my-4'>
-              <span className='fs-5 fw-bold'>{this.state.client_name}</span> 님
-              결제 등록입니다.
-            </label>
-            <h3>운동 종목</h3>
-            <div className='mb-5'>
-              <Form.Group>
-                <Row>
-                  <Col>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        name='exerciseGroup'
-                        id='pt'
-                        checked={this.state.exerciseGroup['pt']}
-                        onChange={this.handleExerciseRadio}
-                      />
-                      <Form.Check.Label htmlFor='pt' className='w-100'>
-                        개인 PT
-                      </Form.Check.Label>
-                    </Form.Check>
-                  </Col>
-                  <Col>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        name='exerciseGroup'
-                        id='gx'
-                        checked={this.state.exerciseGroup['gx']}
-                        onChange={this.handleExerciseRadio}
-                      />
-                      <Form.Check.Label htmlFor='gx' className='w-100'>
-                        GX
-                      </Form.Check.Label>
-                      <Form.Control
-                        placeholder='GX'
-                        id='gxExercise'
-                        type='text'
-                        value={this.state.gxExercise}
-                        onChange={this.handleChange}
-                      ></Form.Control>
-                    </Form.Check>
-                  </Col>
-                  <Col>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        name='exerciseGroup'
-                        id='pila'
-                        checked={this.state.exerciseGroup['pila']}
-                        onChange={this.handleExerciseRadio}
-                      />
-                      <Form.Check.Label htmlFor='pila' className='w-100'>
-                        필라테스
-                      </Form.Check.Label>
-                    </Form.Check>
-                  </Col>
-                  <Col>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        name='exerciseGroup'
-                        id='health'
-                        checked={this.state.exerciseGroup['health']}
-                        onChange={this.handleExerciseRadio}
-                      />
-                      <Form.Check.Label htmlFor='health' className='w-100'>
-                        헬스
-                      </Form.Check.Label>
-                    </Form.Check>
-                  </Col>
-                  <Col>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        name='exerciseGroup'
-                        id='etc'
-                        checked={this.state.exerciseGroup['etc']}
-                        onChange={this.handleExerciseRadio}
-                      />
-                      <Form.Check.Label htmlFor='etc' className='w-100'>
-                        기타
-                      </Form.Check.Label>
-                      <Form.Control
-                        placeholder='기타'
-                        id='etcExercise'
-                        type='text'
-                        value={this.state.etcExercise}
-                        onChange={this.handleChange}
-                      ></Form.Control>
-                    </Form.Check>
-                  </Col>
-                </Row>
-              </Form.Group>
-            </div>
-            <h3>이용권 종류</h3>
-            <Row xs={2}>
-              <Col xs={12} sm={2} className='mb-3'>
-                <Form.Group>
-                  <Form.Check>
-                    <Form.Check.Input
-                      type='radio'
-                      id='salesDaysCheckbox'
-                      name='voucher'
-                      value='4'
-                      onChange={this.handleCheckbox}
-                      checked={this.state.checkboxGroup['salesDaysCheckbox']}
+            <div className='sectionGlass'>
+              <Row>
+                <Col>
+                  {this.state.open ? (
+                    <UserSearch
+                      open={this.state.open}
+                      setOpen={(o) => this.setState({ open: o })}
+                      fitness_no={this.props.userinfo.fitness_no}
+                      loginWhether={this.props.userinfo.loginWhether}
+                      joinNo={this.props.userinfo.joinNo}
+                      handleUser={this.handleUser}
                     />
-                    <Form.Check.Label for='salesDaysCheckbox' className='w-100'>
-                      기간권
-                    </Form.Check.Label>
-                  </Form.Check>
-                  <Form.Label>기간시작일</Form.Label>
-                  <DatePicker
-                    selected={this.state.salesStart_date}
-                    onChange={this.handleDateChange}
-                    name='salesStart_date'
-                    dateFormat='yyyy년MM월dd일'
-                    font-size='1.6rem'
-                  />
-                  {/* <DatePicker
-										selected={this.state.paymentDate}
-										onChange={this.handleDateChange}
-										name='paymentDate'
-										dateFormat='yyyy-MM-dd'
-										locale='ko'
-									/> */}
-                  <Form.Label>기간 일수</Form.Label>
-                  <Form.Control
-                    variant='outlined'
-                    value={this.state.salesDays}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='salesDays'
-                    placeholder='숫자만 입력하세요'
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col xs={12} sm={2}>
-                <Form.Group>
-                  <Form.Check>
-                    <Form.Check.Input
-                      type='radio'
-                      id='paidMembershipCheckbox'
-                      name='voucher'
-                      value='4'
-                      onChange={this.handleCheckbox}
-                      checked={
-                        this.state.checkboxGroup['paidMembershipCheckbox']
-                      }
+                  ) : (
+                    <TextField
+                      id='customer_name'
+                      label='회원 검색'
+                      disabled
+                      variant='standard'
+                      onClick={() => this.setState({ open: true })}
+                      className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
+                      InputProps={{ disableUnderline: true }}
+                      value={this.state.client_name}
                     />
-                    <Form.Check.Label
-                      htmlFor='paidMembershipCheckbox'
-                      className='w-100'
-                    >
-                      이용권
-                    </Form.Check.Label>
-                  </Form.Check>
-                  <Form.Label>이용권 횟수</Form.Label>
-                  <Form.Control
-                    value={this.state.paidMembership}
-                    onChange={this.handleChange}
-                    type='number'
-                    name='paidMembership'
-                    id='paidMembership'
-                    placeholder='숫자만 입력하세요'
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-            </Row>
-            <h3 className='mt-5'>결제</h3>
-            <div className='mb-2'>
-              <h4>결제 종류</h4>
-              <Form.Group>
-                <Row>
-                  <Col xs={12} sm={2}>
+                  )}
+                </Col>
+                <Col>
+                  {/* <span className='fs-5 fw-bold'>{this.state.client_name}</span> */}
+                  님의 결제 등록입니다.
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={2}>운동종목</Col>
+                <Col>
+                  <Row>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='pt'
+                          checked={this.state.exerciseGroup['pt']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Check.Label htmlFor='pt' className='w-100'>
+                          개인 PT
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='gx'
+                          checked={this.state.exerciseGroup['gx']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Check.Label htmlFor='gx' className='w-100'>
+                          GX
+                        </Form.Check.Label>
+                        <Form.Control
+                          placeholder='GX'
+                          id='gxExercise'
+                          type='text'
+                          value={this.state.gxExercise}
+                          onChange={this.handleChange}
+                        ></Form.Control>
+                      </Form.Check>
+                    </Col>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='pila'
+                          checked={this.state.exerciseGroup['pila']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Check.Label htmlFor='pila' className='w-100'>
+                          필라테스
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='health'
+                          checked={this.state.exerciseGroup['health']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Check.Label htmlFor='health' className='w-100'>
+                          헬스
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='etc'
+                          checked={this.state.exerciseGroup['etc']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Check.Label htmlFor='etc' className='w-100'>
+                          기타
+                        </Form.Check.Label>
+                        <Form.Control
+                          placeholder='기타'
+                          id='etcExercise'
+                          type='text'
+                          value={this.state.etcExercise}
+                          onChange={this.handleChange}
+                        ></Form.Control>
+                      </Form.Check>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={2}>이용권종류</Col>
+                <Col>
+                  <Form.Group>
                     <Form.Check>
                       <Form.Check.Input
                         type='radio'
-                        name='payGroup'
-                        id='card'
-                        checked={this.state.payGroup['card']}
-                        onChange={this.handlePayRadio}
+                        id='salesDaysCheckbox'
+                        name='voucher'
+                        value='4'
+                        onChange={this.handleCheckbox}
+                        checked={this.state.checkboxGroup['salesDaysCheckbox']}
                       />
-                      <Form.Check.Label htmlFor='card' className='w-100'>
-                        카드
+                      <Form.Check.Label
+                        for='salesDaysCheckbox'
+                        className='w-100'
+                      >
+                        기간권
                       </Form.Check.Label>
                     </Form.Check>
-                  </Col>
-                  <Col xs={12} sm={2}>
+                    {/* <Form.Label>기간 일수</Form.Label>
+                    <Form.Control
+                      variant='outlined'
+                      value={this.state.salesDays}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='salesDays'
+                      placeholder='숫자만 입력하세요'
+                      required
+                    ></Form.Control> */}
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group>
                     <Form.Check>
                       <Form.Check.Input
                         type='radio'
-                        name='payGroup'
-                        id='cash'
-                        checked={this.state.payGroup['cash']}
-                        onChange={this.handlePayRadio}
+                        id='paidMembershipCheckbox'
+                        name='voucher'
+                        value='4'
+                        onChange={this.handleCheckbox}
+                        checked={
+                          this.state.checkboxGroup['paidMembershipCheckbox']
+                        }
                       />
-                      <Form.Check.Label htmlFor='cash' className='w-100'>
-                        현금
+                      <Form.Check.Label
+                        htmlFor='paidMembershipCheckbox'
+                        className='w-100'
+                      >
+                        이용권
                       </Form.Check.Label>
                     </Form.Check>
-                  </Col>
-                  <Col xs={12} sm={2}>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        name='payGroup'
-                        id='transfer'
-                        checked={this.state.payGroup['transfer']}
-                        onChange={this.handlePayRadio}
-                      />
-                      <Form.Check.Label htmlFor='transfer' className='w-100'>
-                        계좌이체
-                      </Form.Check.Label>
-                    </Form.Check>
-                  </Col>
-                </Row>
-              </Form.Group>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                {/* 기간권 이용권 라디오 버튼 선택에 따라 바뀌게 기능 수정 예정 */}
+                <Col xs={2}></Col>
+                {
+                  // 기간권 선택 this.state.client_name
+                  // 이용권 선택일 경우 !this.state.client_name
+                  this.state.client_name ? (
+                    <Col className='border'>
+                      <Row>
+                        <Col xs={2}>
+                          <Form.Label>기간시작일</Form.Label>
+                        </Col>
+                        <Col xs={10}>
+                          <DatePicker
+                            selected={this.state.salesStart_date}
+                            onChange={this.handleDateChange}
+                            name='salesStart_date'
+                            dateFormat='yyyy년MM월dd일'
+                            font-size='1.6rem'
+                          />
+                        </Col>
+                        <Col xs={2}>기간</Col>
+                        <Col xs={10}>
+                          <Row>
+                            <Col>
+                              <Form.Check>
+                                <Form.Check.Input
+                                  type='radio'
+                                  id='voucherPeriod1'
+                                  name='PeriodQuickSelection'
+                                  value='1'
+                                />
+                                <Form.Check.Label
+                                  htmlFor='voucherPeriod1'
+                                  className='w-100'
+                                >
+                                  1개월
+                                </Form.Check.Label>
+                              </Form.Check>
+                            </Col>
+                            <Col>
+                              <Form.Check>
+                                <Form.Check.Input
+                                  type='radio'
+                                  id='voucherPeriod3'
+                                  name='PeriodQuickSelection'
+                                  value='2'
+                                />
+                                <Form.Check.Label
+                                  htmlFor='voucherPeriod3'
+                                  className='w-100'
+                                >
+                                  3개월
+                                </Form.Check.Label>
+                              </Form.Check>
+                            </Col>
+                            <Col>
+                              <Form.Check>
+                                <Form.Check.Input
+                                  type='radio'
+                                  id='voucherPeriod6'
+                                  name='PeriodQuickSelection'
+                                  value='3'
+                                />
+                                <Form.Check.Label
+                                  htmlFor='voucherPeriod6'
+                                  className='w-100'
+                                >
+                                  6개월
+                                </Form.Check.Label>
+                              </Form.Check>
+                            </Col>
+                            <Col>
+                              <Form.Check>
+                                <Form.Check.Input
+                                  type='radio'
+                                  id='voucherPeriod12'
+                                  name='PeriodQuickSelection'
+                                  value='4'
+                                />
+                                <Form.Check.Label
+                                  htmlFor='voucherPeriod12'
+                                  className='w-100'
+                                >
+                                  12개월
+                                </Form.Check.Label>
+                              </Form.Check>
+                            </Col>
+                            <Col>
+                              <Form.Check>
+                                <Form.Check.Input
+                                  type='radio'
+                                  id='voucherPeriodetc'
+                                  name='PeriodQuickSelection'
+                                  value='5'
+                                />
+                                <Form.Check.Label
+                                  htmlFor='voucherPeriodetc'
+                                  className='w-100'
+                                >
+                                  기타
+                                </Form.Check.Label>
+                                <Form.Control
+                                  placeholder='개월'
+                                  id='etcVoucherPeriod'
+                                  type='number'
+                                ></Form.Control>
+                              </Form.Check>
+                            </Col>
+                          </Row>
+                        </Col>
+                      </Row>
+                    </Col>
+                  ) : (
+                    // 이용권 선택일 경우
+                    <Col>
+                      <Row>
+                        <Col xs={RFC_2822}>
+                          <Form.Label htmlFor='paidMembership'>
+                            이용권 횟수
+                          </Form.Label>
+                        </Col>
+                        <Col>
+                          <Form.Control
+                            value={this.state.paidMembership}
+                            onChange={this.handleChange}
+                            type='number'
+                            name='paidMembership'
+                            id='paidMembership'
+                            placeholder='숫자만 입력하세요'
+                            required
+                          ></Form.Control>
+                        </Col>
+                      </Row>
+                    </Col>
+                  )
+                }
+              </Row>
             </div>
-            <h4>금액</h4>
-            <Row className='mb-4'>
-              <Col xs={12} sm={2}>
-                <label>
-                  <p>운동</p>
-                  <NumberFormat
-                    className='add-sales__input--number-format'
-                    thousandSeparator={true}
-                    id='exercisePrice'
-                    placeholder='0'
-                    onChange={this.handleChange}
-                  />
-                </label>
-              </Col>
-              <Col xs={12} sm={2}>
-                <label>
-                  <p>운동복</p>
-                  <NumberFormat
-                    className='add-sales__input--number-format'
-                    thousandSeparator={true}
-                    id='sportswearPrice'
-                    placeholder='0'
-                    onChange={this.handleChange}
-                  />
-                </label>
-              </Col>
-              <Col xs={12} sm={2}>
-                <label>
-                  <p>개인 사물함</p>
-                  <NumberFormat
-                    className='add-sales__input--number-format'
-                    thousandSeparator={true}
-                    id='lockerPrice'
-                    placeholder='0'
-                    onChange={this.handleChange}
-                  />
-                </label>
-              </Col>
-            </Row>
-            <h3>결제</h3>
-            <div className='mb-4'>
-              <Row xs={1}>
-                <Col xs={3}>
-                  <span>결제일</span>
+            <div className='sectionGlass'>
+              <Row>
+                <Col xs={2}>결제일</Col>
+                <Col>
                   <DatePicker
                     selected={this.state.paymentDate}
                     onChange={this.handleDateChange}
@@ -662,40 +705,130 @@ class AddSales extends Component {
                     dateFormat='yyyy년MM월dd일'
                   />
                 </Col>
+              </Row>
+              <Row>
+                <Col xs={2}>결제 종류</Col>
                 <Col>
-                  <label>
-                    <p>금액 합계</p>
-                    <NumberFormat
-                      className='add-sales__input--number-format'
-                      thousandSeparator={true}
-                      name='payment'
-                      id='TotalPayment'
-                      readOnly
-                      value={
-                        parseInt(
-                          this.state.exercisePrice
-                            .toString()
-                            .replace(/[^(0-9)]/gi, '')
-                        ) +
-                        parseInt(
-                          this.state.sportswearPrice
-                            .toString()
-                            .replace(/[^(0-9)]/gi, '')
-                        ) +
-                        parseInt(
-                          this.state.lockerPrice
-                            .toString()
-                            .replace(/[^(0-9)]/gi, '')
-                        )
-                      }
-                    />
-                  </label>
+                  <Row>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='payGroup'
+                          id='card'
+                          checked={this.state.payGroup['card']}
+                          onChange={this.handlePayRadio}
+                        />
+                        <Form.Check.Label htmlFor='card'>카드</Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='payGroup'
+                          id='cash'
+                          checked={this.state.payGroup['cash']}
+                          onChange={this.handlePayRadio}
+                        />
+                        <Form.Check.Label htmlFor='cash'>현금</Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='payGroup'
+                          id='transfer'
+                          checked={this.state.payGroup['transfer']}
+                          onChange={this.handlePayRadio}
+                        />
+                        <Form.Check.Label htmlFor='transfer'>
+                          계좌이체
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={2}>금액</Col>
+                <Col>
+                  <Row>
+                    <Col>이용권</Col>
+                    <Col>
+                      <NumberFormat
+                        className='add-sales__input--number-format'
+                        thousandSeparator={true}
+                        id='exercisePrice'
+                        placeholder='0'
+                        onChange={this.handleChange}
+                      />
+                    </Col>
+                    <Col>사물함</Col>
+                    <Col>
+                      <NumberFormat
+                        className='add-sales__input--number-format'
+                        thousandSeparator={true}
+                        id='sportswearPrice'
+                        placeholder='0'
+                        onChange={this.handleChange}
+                      />
+                    </Col>
+                    <Col>운동복</Col>
+                    <Col>
+                      <NumberFormat
+                        className='add-sales__input--number-format'
+                        thousandSeparator={true}
+                        id='lockerPrice'
+                        placeholder='0'
+                        onChange={this.handleChange}
+                      />
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+              <Row className='bg-secondary'>
+                <Col xs={2}>총 결제 금액</Col>
+                <Col>
+                  <NumberFormat
+                    className='add-sales__input--number-format'
+                    thousandSeparator={true}
+                    name='payment'
+                    id='TotalPayment'
+                    readOnly
+                    value={
+                      parseInt(
+                        this.state.exercisePrice
+                          .toString()
+                          .replace(/[^(0-9)]/gi, '')
+                      ) +
+                      parseInt(
+                        this.state.sportswearPrice
+                          .toString()
+                          .replace(/[^(0-9)]/gi, '')
+                      ) +
+                      parseInt(
+                        this.state.lockerPrice
+                          .toString()
+                          .replace(/[^(0-9)]/gi, '')
+                      )
+                    }
+                  />
+                  원
                 </Col>
               </Row>
             </div>
-            <Button className='w-100' onClick={this.handleOnClick}>
-              등록하기
-            </Button>
+            <Row>
+              <Col>
+                <Button variant='secondary' onClick={this.goSales}>
+                  이전
+                </Button>
+              </Col>
+              <Col>
+                <Button onClick={this.handleOnClick}>등록하기</Button>
+              </Col>
+            </Row>
           </form>
         </Container>
         <div className='footer'>
