@@ -1474,7 +1474,7 @@ class Reservation extends Component {
               </Button>
             </Col>
           </Row>
-          <Row>
+          <Row className='reservation__class-container'>
             <Col
               className='text-center py-2 w-100 overflow-auto justify-content-center'
               xs={12}
@@ -1730,139 +1730,134 @@ class Reservation extends Component {
                   </TableBody>
                 </Table>
               </TableContainer>
-              <p>예약하실 수업을 선택해주세요.</p>
             </Col>
-          </Row>
-          <Row lg={6}>
-            <Col lg={12}>
-              <h5>선택된 수업</h5>
-            </Col>
-            <Col className='reservation__selected-class' xs={12} sm={4}>
-              <p>운동명</p>
-              <div className=''>
-                {this.state.exercise_name
-                  ? this.state.exercise_name + '[' + this.state.kind + ']'
-                  : ''}
-              </div>
-              <TextField
-                id='exercise_name'
-                className='d-none'
-                value={this.state.exercise_name}
-                // onChange={this.handleChange}
-                label='운동명'
-                err={this.state.exercise_name_err}
-              />
-            </Col>
-            <Col className='reservation__selected-class' xs={12} sm={4}>
-              <div className=''>
-                <p className=''>강사명</p>
-                <p className='fw-bold text-primary'>{this.state.trainer}</p>
-              </div>
-              <TextField
-                id='trainer'
-                className='d-none'
-                value={this.state.trainer}
-                // onChange={this.handleChange}
-                label='강사명'
-                // err={this.state.trainer_err}
-              />
-            </Col>
-            <Col className='reservation__selected-class' xs={12} sm={4}>
-              <div className=''>
-                <p className=''>시간</p>
-                <p className='fw-bold text-primary'>{this.state.time}</p>
-              </div>
-              <TextField
-                id='time'
-                className='d-none'
-                value={this.state.time}
-                // onChange={this.handleChange}
-                label='시간'
-              />
-            </Col>
-            <Col className='reservation__selected-class' xs={12} sm={4}>
-              <div className=''>
-                <p className=''>현재 정원</p>
-                <p className=''>
-                  <span className='fw-bold text-primary'>
+            <div className='reservation__selected-class'>
+              <Button>수업추가</Button>
+              <div>
+                <h5>선택된 수업</h5>
+                <Row>
+                  <Col xs={3}>운동명</Col>
+                  <Col xs={9}>
+                    {this.state.exercise_name
+                      ? this.state.exercise_name + '[' + this.state.kind + ']'
+                      : ''}
+                    <TextField
+                      id='exercise_name'
+                      className='d-none'
+                      value={this.state.exercise_name}
+                      // onChange={this.handleChange}
+                      label='운동명'
+                      err={this.state.exercise_name_err}
+                    />
+                  </Col>
+                  <Col xs={3}>날짜</Col>
+                  <Col xs={9}>
+                    <p className='fw-bold text-primary'>
+                      {moment(this.state.class_date).format('yyyy-MM-DD') ==
+                      'Invalid date'
+                        ? ''
+                        : moment(this.state.class_date).format('yyyy-MM-DD')}
+                    </p>
+                    <TextField
+                      id='class_date'
+                      className='d-none'
+                      name='class_date'
+                      value={this.state.class_date}
+                      label='배정된 날짜'
+                    />
+                  </Col>
+                  <Col xs={3}>시간</Col>
+                  <Col xs={9}>
+                    {this.state.time}
+                    <TextField
+                      id='time'
+                      className='d-none'
+                      value={this.state.time}
+                      // onChange={this.handleChange}
+                      label='시간'
+                    />
+                  </Col>
+                  <Col>현재정원</Col>
+                  <Col>
                     {this.state.number_of_people == ''
                       ? ''
                       : this.state.number_of_people + '명'}
-                  </span>{' '}
-                </p>
-              </div>
-              <TextField
-                id='number_of_people'
-                className='d-none'
-                value={this.state.number_of_people}
-                // onChange={this.handleChange}
-                label='최대 인원수'
-              />
-            </Col>
-            <Col className='reservation__selected-class' xs={12} sm={4}>
-              <div className=''>
-                <p className=''>배정된 날짜</p>
-                <p className='fw-bold text-primary'>
-                  {moment(this.state.class_date).format('yyyy-MM-DD') ==
-                  'Invalid date'
-                    ? ''
-                    : moment(this.state.class_date).format('yyyy-MM-DD')}
-                </p>
-              </div>
-              <TextField
-                id='class_date'
-                className='d-none'
-                name='class_date'
-                value={this.state.class_date}
-                label='배정된 날짜'
-              />
-            </Col>
-            {this.props.userinfo.loginWhether === 2 ? (
-              <Col className='text-center my-3'>
-                <TextField
-                  id='customer_name'
-                  variant='standard'
-                  value={this.props.userinfo.manager_name}
-                  // onChange={this.handleChange}
-                />
-              </Col>
-            ) : (
-              <Col className='text-center'>
-                {this.state.open ? (
-                  <UserSearch
-                    open={this.state.open}
-                    setOpen={(o) => this.setState({ open: o })}
-                    fitness_no={this.props.userinfo.fitness_no}
-                    loginWhether={this.props.userinfo.loginWhether}
-                    joinNo={this.props.userinfo.joinNo}
-                    handleUser={this.handleUser}
-                  />
-                ) : (
-                  <TextField
-                    id='customer_name'
-                    label='회원 검색'
-                    disabled
-                    variant='standard'
-                    onClick={() => this.setState({ open: true })}
-                    className='reservation__selected-class boxmorpsm h-100 w-100 justify-content-center'
-                    InputProps={{ disableUnderline: true }}
-                    value={this.state.customer_name}
-                    // onChange={this.handleChange}
-                    error={this.state.customer_name_err}
-                  />
-                )}
-              </Col>
-            )}
+                    <TextField
+                      id='number_of_people'
+                      className='d-none'
+                      value={this.state.number_of_people}
+                      // onChange={this.handleChange}
+                      label='최대 인원수'
+                    />
+                  </Col>
+                  <Col>예약자</Col>
+                  <Col></Col>
+                  <Col className='' xs={12} sm={4}>
+                    <div className=''>
+                      <p className=''>강사명</p>
+                      <p className='fw-bold text-primary'>
+                        {this.state.trainer}
+                      </p>
+                    </div>
+                    <TextField
+                      id='trainer'
+                      className='d-none'
+                      value={this.state.trainer}
+                      // onChange={this.handleChange}
+                      label='강사명'
+                      // err={this.state.trainer_err}
+                    />
+                  </Col>
+                  <Col className='' xs={12} sm={4}></Col>
+                  {this.props.userinfo.loginWhether === 2 ? (
+                    <Col className='text-center my-3'>
+                      <TextField
+                        id='customer_name'
+                        variant='standard'
+                        value={this.props.userinfo.manager_name}
+                        // onChange={this.handleChange}
+                      />
+                    </Col>
+                  ) : (
+                    <Col className='text-center'>
+                      {this.state.open ? (
+                        <UserSearch
+                          open={this.state.open}
+                          setOpen={(o) => this.setState({ open: o })}
+                          fitness_no={this.props.userinfo.fitness_no}
+                          loginWhether={this.props.userinfo.loginWhether}
+                          joinNo={this.props.userinfo.joinNo}
+                          handleUser={this.handleUser}
+                        />
+                      ) : (
+                        <TextField
+                          id='customer_name'
+                          label='회원 검색'
+                          disabled
+                          variant='standard'
+                          onClick={() => this.setState({ open: true })}
+                          className='boxmorpsm h-100 w-100 justify-content-center'
+                          InputProps={{ disableUnderline: true }}
+                          value={this.state.customer_name}
+                          // onChange={this.handleChange}
+                          error={this.state.customer_name_err}
+                        />
+                      )}
+                    </Col>
+                  )}
 
-            <Col className='text-center w-100 mt-3' xs={12}>
-              <Button
-                className='btnSolid mx-4 px-5'
-                type='button'
-                onClick={this.handleOnClick}
-              >
-                예약하기
-              </Button>
-            </Col>
+                  <Col className='text-center w-100 mt-3' xs={12}>
+                    <Button
+                      className='btnSolid mx-4 px-5'
+                      type='button'
+                      onClick={this.handleOnClick}
+                    >
+                      예약하기
+                    </Button>
+                  </Col>
+                </Row>
+              </div>
+            </div>
           </Row>
           <Row xs={1} sm={3}>
             {this.props.userinfo.loginWhether === 2 ? (

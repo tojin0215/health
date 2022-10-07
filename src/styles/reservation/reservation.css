@@ -145,10 +145,17 @@
   width: 100%;
   text-align: center;
 }
-
+.reservation__class-container {
+  position: relative;
+}
 /* 진행중인 수업 __ 선택된 수업 __ 인풋 박스 */
 .reservation__selected-class {
-  height: 4rem;
+  position: absolute;
+  top: 0;
+  right: -275px;
+  background-color: #666;
+  width: 275px;
+  height: 420px;
 }
 
 /* 진행중인 수업 - 선택된 수업 - 회원 검색 */
