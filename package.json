@@ -25,6 +25,8 @@
     "@mui/icons-material": "^5.8.0",
     "@mui/material": "^5.8.0",
     "@mui/x-data-grid": "^5.16.0",
+    "@nivo/bar": "^0.80.0",
+    "@nivo/core": "^0.80.0",
     "apexcharts": "^3.26.1",
     "autoprefixer": "10.4.5",
     "awesome-react-icons": "^1.4.8",
