@@ -511,7 +511,6 @@ class WorkoutAlloted extends Component {
             <Col>
               <h4>커스텀 루틴 배정</h4>
             </Col>
-
             <Col>
               <DatePicker
                 className='text-center'
@@ -550,9 +549,9 @@ class WorkoutAlloted extends Component {
               )}
             </Col>
             <Col>
-              <Button variant='primary' onClick={this.moveWorkoutAdd}>
-                운동설정
-              </Button>
+              <Link to='/WorkoutAdd'>
+                <Button variant='primary'>운동설정</Button>
+              </Link>
             </Col>
           </Row>
           {/* <Tabs
@@ -1029,7 +1028,7 @@ class WorkoutAlloted extends Component {
                     </TableBody>
                   </Table>
                   {this.state.exerciseAllotlist.length === 0 ? (
-                    <div className='p-3 fs-5 fw-bold text-center'>
+                    <div className='p-5 fs-5 fw-bold text-center'>
                       <TbMoodSuprised className='fs-3' />
                       <p>운동을 선택하거나 설정된 운동이 없습니다.</p>
                     </div>
