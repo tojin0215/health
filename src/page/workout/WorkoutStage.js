@@ -10,6 +10,8 @@ import {
   selectTrainerReservation,
   workoutAllotedInsert,
   workoutStageSelect,
+  inbodiesSelect,
+  selectClientReservation,
   workoutAllotedSelect,
 } from '../../api/user';
 import UserSearch from '../../component/customer/UserSearch';
@@ -173,7 +175,6 @@ class WorkoutStage extends Component {
     this.state = {
       stage: '',
       workoutStage: [],
-      workoutAllotlist: [],
       open: false,
       workout: [],
       part: '',
@@ -193,9 +194,14 @@ class WorkoutStage extends Component {
       workoutA_date: new Date(),
       client_name: '',
       inbodiesList: [],
+      workoutAllotlist: [],
       exerciseAllotlist: [],
+      // idc2: this.props.location.state.idc2,
+      // client_name2: this.props.location.state.client_name2,
+      // line: this.props.location.state.line,
       rowsPerPage: 5,
       page: 0,
+      // workoutB_date: this.props.location.state.workoutB_date,
     };
   }
   goLogin = () => {
