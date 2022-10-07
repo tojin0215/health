@@ -35,6 +35,10 @@ import {
   TablePagination,
   TableRow,
 } from '@mui/material';
+import { DataArrayRounded } from '@mui/icons-material';
+
+// nivo.rocks 그래프
+import { ResponsiveBar } from '@nivo/bar';
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -151,7 +155,6 @@ const ToolsSalesItem = ({
     </TableRow>
   );
 };
-
 class Sales extends Component {
   constructor(props) {
     super(props);
@@ -174,6 +177,9 @@ class Sales extends Component {
   }
   goLogin = () => {
     this.props.history.push('/');
+  };
+  goAddSales = () => {
+    this.props.history.push('/addSales');
   };
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
@@ -322,6 +328,7 @@ class Sales extends Component {
       });
     });
   };
+
   //선택 조회
   salesToday1 = (tools, exercise) => {
     let startTime = new Date(
@@ -445,7 +452,6 @@ class Sales extends Component {
       });
     });
   };
-
   //당월 조회
   salesToday3 = (tools, exercise) => {
     let startTime = new Date(
@@ -743,9 +749,15 @@ class Sales extends Component {
         </div>
         {/*.header */}
         <Container>
-          <h2>매출 현황</h2>
-          <Row xs={6} className='py-3'>
-            <Col xs={2}>
+          <Row>
+            <Col>투진피트니스의 매출현황입니다</Col>
+            <Col>
+              <Button onClick={this.goAddSales}>결제 등록</Button>
+            </Col>
+          </Row>
+          <div style={{ height: '500px' }}>그래프 공간입니다.</div>
+          <Row>
+            <Col>
               <Button
                 onClick={() => this.handleButton('당일')}
                 variant='outline-primary'
@@ -754,7 +766,7 @@ class Sales extends Component {
                 당일
               </Button>
             </Col>
-            <Col xs={2}>
+            <Col>
               <Button
                 onClick={() => this.handleButton('당월')}
                 variant='outline-primary'
@@ -763,493 +775,486 @@ class Sales extends Component {
                 당월
               </Button>
             </Col>
-            <Col xs={3}>
+            <Col>
               <DatePicker
                 className='sales__calender--dateinput w-100 text-center'
                 dateFormat='yyyy년MM월dd일'
                 selected={this.state.today}
                 onChange={(date) => this.setState({ today: date })}
+                maxDate={this.state.today}
               />
             </Col>
-            <Col xs={3}>
+            <Col>
               <DatePicker
                 className='sales__calender--dateinput w-100 text-center'
                 dateFormat='yyyy년MM월dd일'
                 selected={this.state.tommorrow}
                 onChange={(date) => this.setState({ tommorrow: date })}
-                minDate={this.state.today}
+                maxDate={this.state.today}
               />
             </Col>
-            <Col xs={2}>
+            <Col>
               <Button onClick={() => this.handleOnClick()} className='w-100'>
                 조회하기
               </Button>
             </Col>
           </Row>
-          <Row>
-            <Col></Col>
-          </Row>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell scope='col'>카드</TableCell>
+                <TableCell scope='col'>현금</TableCell>
+                <TableCell scope='col'>계좌이체</TableCell>
+                <TableCell scope='col'>총매출</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell scope='col'> {this.state.card}</TableCell>
+                <TableCell scope='col'>{this.state.cash}</TableCell>
+                <TableCell scope='col'>{this.state.transfer}</TableCell>
+                <TableCell scope='col'>{this.state.total}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+          <Tabs
+            defaultActiveKey='home'
+            id='uncontrolled-tab-example'
+            className='mb-3'
+          >
+            <Tab eventKey='home' title='전체보기'>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell scope='col'>고객명</TableCell>
+                    <TableCell scope='col'>운동명</TableCell>
+                    <TableCell scope='col'>결제일</TableCell>
+                    <TableCell scope='col'>결제된 회원권</TableCell>
+                    <TableCell scope='col'>기간권시작일[기간권일수]</TableCell>
+                    <TableCell scope='col'>결제도구</TableCell>
+                    <TableCell scope='col'>결제금액</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {this.state.salesViewList.slice(
+                    this.state.page * this.state.rowsPerPage,
+                    this.state.page * this.state.rowsPerPage +
+                      this.state.rowsPerPage
+                  )}
+                </TableBody>
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.salesViewList.length,
+                    },
+                  ]}
+                  count={this.state.salesViewList.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
+              </Table>
+            </Tab>
+
+            <Tab eventKey='exercise' title='운동별'>
+              {/* lets == 1, 선택 조회 */}
+              {this.state.lets === 1 ? (
+                <div>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('', '')}
+                  >
+                    전체보기
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('', '개인PT')}
+                  >
+                    개인PT
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('', 'GX')}
+                  >
+                    GX
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('', '필라테스')}
+                  >
+                    필라테스
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('', '헬스')}
+                  >
+                    헬스
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('', '기타')}
+                  >
+                    기타
+                  </Button>
+                </div>
+              ) : this.state.lets === 2 ? (
+                <div>
+                  {/* lets == 2, 당일 조회 */}
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('', '')}
+                  >
+                    전체보기
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday2('', '개인PT')}
+                  >
+                    개인PT
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday2('', 'GX')}
+                  >
+                    GX
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday2('', '필라테스')}
+                  >
+                    필라테스
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday2('', '헬스')}
+                  >
+                    헬스
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday2('', '기타')}
+                  >
+                    기타
+                  </Button>
+                </div>
+              ) : this.state.lets === 3 ? (
+                <div>
+                  {/* lets == 3, 당월 조회 */}
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('', '')}
+                  >
+                    전체보기
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday3('', '개인PT')}
+                  >
+                    개인PT
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday3('', 'GX')}
+                  >
+                    GX
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday3('', '필라테스')}
+                  >
+                    필라테스
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday3('', '헬스')}
+                  >
+                    헬스
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday3('', '기타')}
+                  >
+                    기타
+                  </Button>
+                </div>
+              ) : (
+                <div>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('', '')}
+                  >
+                    전체보기
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesViewExercise('개인PT')}
+                  >
+                    개인PT
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesViewExercise('GX')}
+                  >
+                    GX
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesViewExercise('필라테스')}
+                  >
+                    필라테스
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesViewExercise('헬스')}
+                  >
+                    헬스
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesViewExercise('기타')}
+                  >
+                    기타
+                  </Button>
+                </div>
+              )}
+
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell scope='col'>고객명</TableCell>
+                    <TableCell scope='col'>운동명</TableCell>
+                    <TableCell scope='col'>결제일</TableCell>
+                    <TableCell scope='col'>결제된 회원권</TableCell>
+                    <TableCell scope='col'>기간권시작일[기간권일수]</TableCell>
+                    <TableCell scope='col'>결제도구</TableCell>
+                    <TableCell scope='col'>결제금액</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {this.state.exerciseViewList.slice(
+                    this.state.page * this.state.rowsPerPage,
+                    this.state.page * this.state.rowsPerPage +
+                      this.state.rowsPerPage
+                  )}
+                </TableBody>
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.salesViewList.length,
+                    },
+                  ]}
+                  count={this.state.salesViewList.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
+              </Table>
+            </Tab>
+            <Tab eventKey='tools' title='결제도구별'>
+              {/* 위와 동일 */}
+              {/* 셀렉트 박스로 변경 기능 작업 예정 */}
+              {this.state.lets === 1 ? (
+                <>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('', '')}
+                  >
+                    전체보기
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('카드', '')}
+                  >
+                    카드
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('현금', '')}
+                  >
+                    현금
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('계좌이체', '')}
+                  >
+                    계좌이체
+                  </Button>
+                </>
+              ) : this.state.lets === 2 ? (
+                <>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('', '')}
+                  >
+                    전체보기
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday2('카드', '')}
+                  >
+                    카드
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday2('현금', '')}
+                  >
+                    현금
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday2('계좌이체', '')}
+                  >
+                    계좌이체
+                  </Button>
+                </>
+              ) : this.state.lets === 3 ? (
+                <>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('', '')}
+                  >
+                    전체보기
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday3('카드', '')}
+                  >
+                    카드
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday3('현금', '')}
+                  >
+                    현금
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday3('계좌이체', '')}
+                  >
+                    계좌이체
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesToday1('', '')}
+                  >
+                    전체보기
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesViewTools('카드')}
+                  >
+                    카드
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesViewTools('현금')}
+                  >
+                    현금
+                  </Button>
+                  <Button
+                    variant='outline-light'
+                    className='m-1'
+                    onClick={() => this.salesViewTools('계좌이체')}
+                  >
+                    계좌이체
+                  </Button>
+                </>
+              )}
+
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell scope='col'>고객명</TableCell>
+                    <TableCell scope='col'>운동명</TableCell>
+                    <TableCell scope='col'>결제일</TableCell>
+                    <TableCell scope='col'>결제된 회원권</TableCell>
+                    <TableCell scope='col'>기간권시작일[기간권일수]</TableCell>
+                    <TableCell scope='col'>결제도구</TableCell>
+                    <TableCell scope='col'>결제금액</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {this.state.toolsViewList.slice(
+                    this.state.page * this.state.rowsPerPage,
+                    this.state.page * this.state.rowsPerPage +
+                      this.state.rowsPerPage
+                  )}
+                </TableBody>
+                <TablePagination
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.salesViewList.length,
+                    },
+                  ]}
+                  count={this.state.salesViewList.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
+              </Table>
+            </Tab>
+          </Tabs>
           <div className='tablewrap'>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell scope='col'>카드</TableCell>
-                  <TableCell scope='col'>현금</TableCell>
-                  <TableCell scope='col'>계좌이체</TableCell>
-                  <TableCell scope='col'>총매출</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell scope='col'> {this.state.card}</TableCell>
-                  <TableCell scope='col'>{this.state.cash}</TableCell>
-                  <TableCell scope='col'>{this.state.transfer}</TableCell>
-                  <TableCell scope='col'>{this.state.total}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
             <div className='salesUtill salesUtill2 d-flex flex-row-reverse'>
-              <Link to='/addSales'>
-                <Button>결제 등록</Button>
-              </Link>
+              <Link to='/addSales'></Link>
             </div>
-            <h5>전체 기록</h5>
-            <Tabs
-              defaultActiveKey='home'
-              id='uncontrolled-tab-example'
-              className='mb-3'
-            >
-              <Tab eventKey='home' title='전체보기'>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell scope='col'>고객명</TableCell>
-                      <TableCell scope='col'>운동명</TableCell>
-                      <TableCell scope='col'>결제일</TableCell>
-                      <TableCell scope='col'>결제된 회원권</TableCell>
-                      <TableCell scope='col'>
-                        기간권시작일[기간권일수]
-                      </TableCell>
-                      <TableCell scope='col'>결제도구</TableCell>
-                      <TableCell scope='col'>결제금액</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.salesViewList.slice(
-                      this.state.page * this.state.rowsPerPage,
-                      this.state.page * this.state.rowsPerPage +
-                        this.state.rowsPerPage
-                    )}
-                  </TableBody>
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      {
-                        label: 'All',
-                        value: this.state.salesViewList.length,
-                      },
-                    ]}
-                    count={this.state.salesViewList.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onPageChange={this.handleChangePage}
-                    onRowsPerPageChange={this.handleChangeRowsPerPage}
-                  />
-                </Table>
-              </Tab>
-
-              <Tab eventKey='exercise' title='운동 명칭 별 조회'>
-                {this.state.lets === 1 ? (
-                  <div>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('', '')}
-                    >
-                      전체보기
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('', '개인PT')}
-                    >
-                      개인PT
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('', 'GX')}
-                    >
-                      GX
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('', '필라테스')}
-                    >
-                      필라테스
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('', '헬스')}
-                    >
-                      헬스
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('', '기타')}
-                    >
-                      기타
-                    </Button>
-                  </div>
-                ) : this.state.lets === 2 ? (
-                  <div>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('', '')}
-                    >
-                      전체보기
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday2('', '개인PT')}
-                    >
-                      개인PT
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday2('', 'GX')}
-                    >
-                      GX
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday2('', '필라테스')}
-                    >
-                      필라테스
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday2('', '헬스')}
-                    >
-                      헬스
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday2('', '기타')}
-                    >
-                      기타
-                    </Button>
-                  </div>
-                ) : this.state.lets === 3 ? (
-                  <div>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('', '')}
-                    >
-                      전체보기
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday3('', '개인PT')}
-                    >
-                      개인PT
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday3('', 'GX')}
-                    >
-                      GX
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday3('', '필라테스')}
-                    >
-                      필라테스
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday3('', '헬스')}
-                    >
-                      헬스
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday3('', '기타')}
-                    >
-                      기타
-                    </Button>
-                  </div>
-                ) : (
-                  <div>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('', '')}
-                    >
-                      전체보기
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesViewExercise('개인PT')}
-                    >
-                      개인PT
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesViewExercise('GX')}
-                    >
-                      GX
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesViewExercise('필라테스')}
-                    >
-                      필라테스
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesViewExercise('헬스')}
-                    >
-                      헬스
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesViewExercise('기타')}
-                    >
-                      기타
-                    </Button>
-                  </div>
-                )}
-
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell scope='col'>고객명</TableCell>
-                      <TableCell scope='col'>운동명</TableCell>
-                      <TableCell scope='col'>결제일</TableCell>
-                      <TableCell scope='col'>결제된 회원권</TableCell>
-                      <TableCell scope='col'>
-                        기간권시작일[기간권일수]
-                      </TableCell>
-                      <TableCell scope='col'>결제도구</TableCell>
-                      <TableCell scope='col'>결제금액</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.exerciseViewList.slice(
-                      this.state.page * this.state.rowsPerPage,
-                      this.state.page * this.state.rowsPerPage +
-                        this.state.rowsPerPage
-                    )}
-                  </TableBody>
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      {
-                        label: 'All',
-                        value: this.state.salesViewList.length,
-                      },
-                    ]}
-                    count={this.state.salesViewList.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onPageChange={this.handleChangePage}
-                    onRowsPerPageChange={this.handleChangeRowsPerPage}
-                  />
-                </Table>
-              </Tab>
-              <Tab eventKey='tools' title='결제 도구 별 조회'>
-                {/* 위와 동일 */}
-                {this.state.lets === 1 ? (
-                  <>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('', '')}
-                    >
-                      전체보기
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('카드', '')}
-                    >
-                      카드
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('현금', '')}
-                    >
-                      현금
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('계좌이체', '')}
-                    >
-                      계좌이체
-                    </Button>
-                  </>
-                ) : this.state.lets === 2 ? (
-                  <>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('', '')}
-                    >
-                      전체보기
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday2('카드', '')}
-                    >
-                      카드
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday2('현금', '')}
-                    >
-                      현금
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday2('계좌이체', '')}
-                    >
-                      계좌이체
-                    </Button>
-                  </>
-                ) : this.state.lets === 3 ? (
-                  <>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('', '')}
-                    >
-                      전체보기
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday3('카드', '')}
-                    >
-                      카드
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday3('현금', '')}
-                    >
-                      현금
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday3('계좌이체', '')}
-                    >
-                      계좌이체
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesToday1('', '')}
-                    >
-                      전체보기
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesViewTools('카드')}
-                    >
-                      카드
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesViewTools('현금')}
-                    >
-                      현금
-                    </Button>
-                    <Button
-                      variant='outline-light'
-                      className='m-1'
-                      onClick={() => this.salesViewTools('계좌이체')}
-                    >
-                      계좌이체
-                    </Button>
-                  </>
-                )}
-
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell scope='col'>고객명</TableCell>
-                      <TableCell scope='col'>운동명</TableCell>
-                      <TableCell scope='col'>결제일</TableCell>
-                      <TableCell scope='col'>결제된 회원권</TableCell>
-                      <TableCell scope='col'>
-                        기간권시작일[기간권일수]
-                      </TableCell>
-                      <TableCell scope='col'>결제도구</TableCell>
-                      <TableCell scope='col'>결제금액</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.toolsViewList.slice(
-                      this.state.page * this.state.rowsPerPage,
-                      this.state.page * this.state.rowsPerPage +
-                        this.state.rowsPerPage
-                    )}
-                  </TableBody>
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      {
-                        label: 'All',
-                        value: this.state.salesViewList.length,
-                      },
-                    ]}
-                    count={this.state.salesViewList.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onPageChange={this.handleChangePage}
-                    onRowsPerPageChange={this.handleChangeRowsPerPage}
-                  />
-                </Table>
-              </Tab>
-            </Tabs>
           </div>
         </Container>
         {/*.container */}

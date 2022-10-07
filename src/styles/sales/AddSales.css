@@ -1,5 +1,10 @@
 .add-sales__input--number-format {
   padding: 6px;
-
   border-radius: 6px;
+}
+
+#TotalPayment {
+  background: transparent;
+  border: 0;
+  text-align: end;
 }
