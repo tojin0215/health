@@ -100,8 +100,6 @@ const ExerciseView = ({
       });
     }
   };
-  console.log('stage', stage);
-  // console.log('part', part);
 
   const [default_set_input, setDefault_set_input] = useState(default_set);
   const [default_count_input, setDefault_count_input] = useState(default_count);
@@ -293,7 +291,7 @@ class WorkoutStageAdd extends Component {
     });
   }
   handleOnClick = (key) => {
-    console.log('workout', this.state.stage);
+    console.log('handleOnClick 동작 workout', this.state.stage);
     selectTrainerReservation(
       this.props.userinfo.joinNo ? this.props.userinfo.joinNo : ''
     ).then((trainerResult) => {
@@ -369,47 +367,45 @@ class WorkoutStageAdd extends Component {
       });
     });
   };
-
   stageOnClick = (s) => {
+    console.log('stageOnClick 동작하였습니다. 매개변수 :', s);
     let sliceNumber = Number(String(s).slice(0, 1));
+    let stepNumber = Number(String(s).slice(-1));
     this.setState({
       stage: s,
     });
-    console.log('typeof sliceNumber', typeof sliceNumber);
-    console.log('sliceNumber', sliceNumber);
+    // console.log('typeof sliceNumber', typeof sliceNumber);
+    // console.log('sliceNumber', sliceNumber);
     switch (sliceNumber) {
       case 1:
+        console.log('active stageOnClick switch 1');
         this.handleOnClick(1);
-        console.log('active onclick 1');
         break;
       case 2:
+        console.log('active stageOnClick switch 18');
         this.handleOnClick(18);
-        console.log('active onclick 18');
         break;
       case 3:
+        console.log('active stageOnClick switch 28');
         this.handleOnClick(28);
-        console.log('active onclick 28');
         break;
       case 4:
+        console.log('active stageOnClick switch 38');
         this.handleOnClick(38);
-        console.log('active onclick 38');
         break;
       case 5:
+        console.log('active stageOnClick switch 48');
         this.handleOnClick(48);
-        console.log('active onclick 48');
         break;
       case 6:
+        console.log('active stageOnClick switch 58');
         this.handleOnClick(58);
-        console.log('active onclick 58');
         break;
       default:
-        console.log('switch 문 실패');
+        console.log('active stageOnClick switch 문 실패');
     }
-
-    this.handleOnClick(Number(sliceNumber + '8'));
-
     this.workoutStageView(s);
-    console.log('workoutStageView s', s);
+    console.log('workoutStageView :', s);
   };
 
   stageOnClickStage1 = () => {
@@ -494,7 +490,6 @@ class WorkoutStageAdd extends Component {
   };
 
   render() {
-    // console.log('stage', this.state.stage);
     // const [select_region_type, setSelect_region_type] = useState(1);
     return (
       <div className='wrap'>
@@ -519,26 +514,6 @@ class WorkoutStageAdd extends Component {
           </div>
         </div>
         <Container>
-          {/* <Col xs={12}>
-              <h3>
-                <span className='text-primary'>
-                  {this.state.headRegion === 1
-                    ? '상체 '
-                    : this.state.headRegion === 18
-                    ? '하체 '
-                    : this.state.headRegion === 28
-                    ? '전신 '
-                    : this.state.headRegion === 38
-                    ? '코어 '
-                    : this.state.headRegion === 48
-                    ? '유산소 '
-                    : this.state.headRegion === 58
-                    ? '기타 '
-                    : ''}
-                </span>
-                운동 목록
-              </h3>
-            </Col> */}
           <Row className='sectionGlass'>
             <Col
               xs={12}
@@ -653,7 +628,8 @@ class WorkoutStageAdd extends Component {
           </Row>
           <div className='sectionGlass'>
             <Row>
-              <Col>
+              {/* 셀렉트 박스로 기능 수정 작업 예정 */}
+              {/* <Col>
                 <Form.Control as='select'>
                   <option value='1'>상체</option>
                   <option value='2'>하체</option>
@@ -662,9 +638,45 @@ class WorkoutStageAdd extends Component {
                   <option value='5'>유산소</option>
                   <option value='6'>기타</option>
                 </Form.Control>
-              </Col>
+              </Col> */}
               <Col>
-                <p>에 배정될 베이직루틴 운동목록입니다.</p>
+                {this.state.stage ? (
+                  <p>
+                    <span>
+                      {this.state.headRegion === 1
+                        ? '상체 '
+                        : this.state.headRegion === 18
+                        ? '하체 '
+                        : this.state.headRegion === 28
+                        ? '전신 '
+                        : this.state.headRegion === 38
+                        ? '코어 '
+                        : this.state.headRegion === 48
+                        ? '유산소 '
+                        : this.state.headRegion === 58
+                        ? '기타 '
+                        : ''}
+                      {String(this.state.stage).slice(-1) === '1'
+                        ? '1단계 '
+                        : String(this.state.stage).slice(-1) === '2'
+                        ? '2단계 '
+                        : String(this.state.stage).slice(-1) === '3'
+                        ? '3단계 '
+                        : String(this.state.stage).slice(-1) === '4'
+                        ? '4단계 '
+                        : String(this.state.stage).slice(-1) === '5'
+                        ? '5단계 '
+                        : String(this.state.stage).slice(-1) === '6'
+                        ? '6단계 '
+                        : ''}
+                    </span>
+                    {this.state.headRegion && this.state.stage
+                      ? '에 배정될 베이직 운동 루틴 목록입니다.'
+                      : ''}
+                  </p>
+                ) : (
+                  ''
+                )}
               </Col>
               <Col>
                 <button onClick={() => this.workoutStageDelete()}>
