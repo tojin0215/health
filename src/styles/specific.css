@@ -157,10 +157,15 @@
   padding: 15px 40px;
   border-radius: 5px 5px 0 0;
 }
+/* btn-table 탭 기능 적용시 삭제가능 */
 .btn-table:hover {
   background: #fff;
   color: #222;
   border-radius: 5px 5px 0 0;
+}
+.btn-table:active {
+  background: #fff;
+  color: #222;
 }
 
 /* bootstrap text */
