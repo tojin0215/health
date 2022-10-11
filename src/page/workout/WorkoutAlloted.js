@@ -1060,9 +1060,6 @@ class WorkoutAlloted extends Component {
                 </TableContainer>
               </Col>
             </Row>
-            {/* ) : (
-              ''
-            )} */}
             <Row className='sectionGlass'>
               <Col>
                 <h5>

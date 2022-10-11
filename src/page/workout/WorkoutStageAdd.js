@@ -533,7 +533,7 @@ class WorkoutStageAdd extends Component {
                 <p>베이직 루틴을 설정하세요.</p>
               </div>
             </Col>
-            <Col xs={12}>
+            <Col>
               <Row className='workoutTabs text-center'>
                 <Col>
                   <Button
@@ -590,56 +590,57 @@ class WorkoutStageAdd extends Component {
                   </Button>
                 </Col>
               </Row>
-            </Col>
-            <div>
-              <Col xs={12}>
-                <TableContainer component={Paper}>
-                  <Table className='table-light'>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell scope='col'>부위</TableCell>
-                        <TableCell scope='col'>이름</TableCell>
-                        <TableCell scope='col'>운동기구</TableCell>
-                        <TableCell scope='col'>세트</TableCell>
-                        <TableCell scope='col'>횟수</TableCell>
-                        <TableCell scope='col'>휴식</TableCell>
-                        <TableCell scope='col'>URL</TableCell>
-                        <TableCell scope='col'>배정</TableCell>
-                      </TableRow>
-                    </TableHead>
-                  </Table>
-                  {this.state.workoutlist.length === 0 ? (
-                    <div className='p-3 fs-5 fw-bold text-center'>
-                      <TbMoodSuprised className='fs-3' />
-                      <p>설정된 운동이 없습니다.</p>
-                    </div>
-                  ) : (
-                    this.state.workoutlist.slice(
+              <TableContainer component={Paper}>
+                <Table className='table--block table-light'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell scope='col'>부위</TableCell>
+                      <TableCell scope='col'>이름</TableCell>
+                      <TableCell scope='col'>운동기구</TableCell>
+                      <TableCell scope='col'>세트</TableCell>
+                      <TableCell scope='col'>횟수</TableCell>
+                      <TableCell scope='col'>휴식</TableCell>
+                      <TableCell scope='col'>URL</TableCell>
+                      <TableCell scope='col' align='center'>
+                        배정
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.workoutlist.slice(
                       this.state.page * this.state.rowsPerPage,
                       this.state.page * this.state.rowsPerPage +
                         this.state.rowsPerPage
-                    )
-                  )}
-                  <TablePagination
-                    className='bg-white'
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      {
-                        label: 'All',
-                        value: this.state.workoutlist.length,
-                      },
-                    ]}
-                    count={this.state.workoutlist.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onPageChange={this.handleChangePage}
-                    onRowsPerPageChange={this.handleChangeRowsPerPage}
-                  />
-                </TableContainer>
-              </Col>
-            </div>
+                    )}
+                  </TableBody>
+                </Table>
+                {this.state.workoutlist.length === 0 ? (
+                  <div className='p-3 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>설정된 운동이 없습니다.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
+                <TablePagination
+                  className='bg-white'
+                  rowsPerPageOptions={[
+                    5,
+                    10,
+                    25,
+                    {
+                      label: 'All',
+                      value: this.state.workoutlist.length,
+                    },
+                  ]}
+                  count={this.state.workoutlist.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                  onRowsPerPageChange={this.handleChangeRowsPerPage}
+                />
+              </TableContainer>
+            </Col>
           </Row>
           <Row className='sectionGlass'>
             <Col xs={12} className='d-flex justify-content-between'>

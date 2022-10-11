@@ -197,6 +197,28 @@ class Home extends Component {
           {/* 이전처럼 Navigation Menu 공존 */}
         </div>
         {/*.header */}
+        <Container>
+          <div>시간표</div>
+          <Row>
+            <Col xs={3} className='sectionGlass'>
+              전체회원
+            </Col>
+            <Col xs={3} className='sectionGlass'>
+              유효회원
+            </Col>
+            <Col xs={3} className='sectionGlass'>
+              마감임박회원
+            </Col>
+            <Col xs={3} className='sectionGlass'>
+              마감회원
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={6}>당일 매출</Col>
+            <Col xs={6}>당월 누적 매출</Col>
+            <Col xs={12}>매출 그래프</Col>
+          </Row>
+        </Container>
         <div
           className='home__mainvisual'
           style={{
