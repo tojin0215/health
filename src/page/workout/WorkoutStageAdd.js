@@ -122,49 +122,47 @@ const ExerciseView = ({
   };
 
   return (
-    <>
-      <TableRow>
-        {/* <TableCell>{stage}</TableCell> */}
-        <TableCell>{region}</TableCell>
-        <TableCell>{workout}</TableCell>
-        <TableCell>{machine}</TableCell>
-        <TableCell>
-          <Form.Control
-            type='number'
-            value={default_set_input}
-            onChange={changeInsert}
-          />
-        </TableCell>
-        <TableCell>
-          <Form.Control
-            type='number'
-            value={default_count_input}
-            onChange={changeInsert2}
-          />
-        </TableCell>
-        <TableCell>
-          <Form.Control
-            type='number'
-            value={default_rest_input}
-            onChange={changeInsert3}
-          />
-        </TableCell>
-        <TableCell>
-          <Form.Control value={url_input} onChange={changeInsert4} />
-        </TableCell>
-        {/* <TableCell onClick={plusStage}>
+    <TableRow>
+      {/* <TableCell>{stage}</TableCell> */}
+      <TableCell>{region}</TableCell>
+      <TableCell>{workout}</TableCell>
+      <TableCell>{machine}</TableCell>
+      <TableCell>
+        <Form.Control
+          type='number'
+          value={default_set_input}
+          onChange={changeInsert}
+        />
+      </TableCell>
+      <TableCell>
+        <Form.Control
+          type='number'
+          value={default_count_input}
+          onChange={changeInsert2}
+        />
+      </TableCell>
+      <TableCell>
+        <Form.Control
+          type='number'
+          value={default_rest_input}
+          onChange={changeInsert3}
+        />
+      </TableCell>
+      <TableCell>
+        <Form.Control value={url_input} onChange={changeInsert4} />
+      </TableCell>
+      {/* <TableCell onClick={plusStage}>
           <Button variant='success'>
             <BsPlusLg />
           </Button>
         </TableCell> */}
-        <TableCell
-          className='workout-alloted__select--plus cursor-pointer'
-          onClick={plusStage}
-        >
-          <HiOutlinePlusCircle className='fs-1' />
-        </TableCell>
-      </TableRow>
-    </>
+      <TableCell
+        className='workout-alloted__select--plus cursor-pointer'
+        onClick={plusStage}
+      >
+        <HiOutlinePlusCircle className='fs-1' />
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -200,27 +198,25 @@ const WorkoutStageView = ({
     });
   };
   return (
-    <>
-      <TableRow>
-        {/* <TableCell>{stage}</TableCell> */}
-        <TableCell>{region}</TableCell>
-        <TableCell>{workout}</TableCell>
-        <TableCell>{machine}</TableCell>
-        <TableCell>{default_set}</TableCell>
-        <TableCell>{default_count}</TableCell>
-        <TableCell>{default_rest}</TableCell>
-        <TableCell>{url}</TableCell>
-        {/* <TableCell onClick={destroy}>
+    <TableRow>
+      {/* <TableCell>{stage}</TableCell> */}
+      <TableCell>{region}</TableCell>
+      <TableCell>{workout}</TableCell>
+      <TableCell>{machine}</TableCell>
+      <TableCell>{default_set}</TableCell>
+      <TableCell>{default_count}</TableCell>
+      <TableCell>{default_rest}</TableCell>
+      <TableCell>{url}</TableCell>
+      {/* <TableCell onClick={destroy}>
           <Button>삭제</Button>
         </TableCell> */}
-        <TableCell
-          onClick={destroy}
-          className='workout-alloted__selected--cencel'
-        >
-          <GiCancel className='fs-2' />
-        </TableCell>
-      </TableRow>
-    </>
+      <TableCell
+        onClick={destroy}
+        className='workout-alloted__selected--cencel'
+      >
+        <GiCancel className='fs-2' />
+      </TableCell>
+    </TableRow>
   );
 };
 
