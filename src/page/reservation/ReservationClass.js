@@ -144,6 +144,7 @@ const ReservationClassItem = ({
       health: false,
       etc: false,
     });
+    this.setState({ kind: '개인PT' });
   };
   const handleExerciseRadio2 = () => {
     setExerciseGroup({
@@ -153,6 +154,7 @@ const ReservationClassItem = ({
       health: false,
       etc: false,
     });
+    this.setState({ kind: 'GX' });
   };
   const handleExerciseRadio3 = () => {
     setExerciseGroup({
@@ -162,6 +164,8 @@ const ReservationClassItem = ({
       health: false,
       etc: false,
     });
+    this.setState({ kind: '필라테스' });
+    console.log('kind: ', kind);
   };
   const handleExerciseRadio4 = () => {
     setExerciseGroup({
@@ -171,6 +175,7 @@ const ReservationClassItem = ({
       health: true,
       etc: false,
     });
+    this.setState({ kind: '헬스' });
   };
   const handleExerciseRadio5 = () => {
     setExerciseGroup({
@@ -180,6 +185,7 @@ const ReservationClassItem = ({
       health: false,
       etc: true,
     });
+    this.setState({ kind: '기타(' + this.state.etcExercise + ')' });
   };
 
   /*
@@ -272,248 +278,229 @@ const ReservationClassItem = ({
   };
   // console.log(kind_input);
   return (
-    <div className='border py-2 my-1 text-center'>
-      <p className='fw-bold'>
-        {exercise_class}/{kind}
-      </p>
-
-      <p>{trainer}</p>
-      <p>
-        {hourArray}시{minuteArray}분
-      </p>
-      <p>정원: {number_of_people}명</p>
+    <>
       {(loginWhether === 1 && loginWhetherTrainer === trainer) ||
       (loginWhether === 0 && loginWhetherTrainer !== trainer) ? (
-        updateOpen ? (
-          <Button variant='outline-success mt-2' onClick={modalOnClick}>
-            <AiFillTool className='align-baseline' />
-          </Button>
-        ) : (
-          ''
-        )
+        <div
+          className='reservation-class__schedule-content'
+          onClick={modalOnClick}
+        >
+          <p className='fw-bold'>
+            {exercise_class}/{kind}
+          </p>
+
+          <p>{trainer}</p>
+          <p>
+            {hourArray}시{minuteArray}분
+          </p>
+          <p>정원: {number_of_people}명</p>
+
+          <div></div>
+        </div>
       ) : (
         ''
       )}
-
-      <div>
-        <Modal show={showModal}>
-          <Container>
-            <Row>
-              <Form.Group>
-                <Form.Label>운동종목</Form.Label>
-                <Form.Control
-                  value={kind_input}
-                  id='kind'
-                  onClick={() => setKindOpen(true)}
-                ></Form.Control>
-                <Modal show={kindOpen}>
-                  <div className='mb-5'>
-                    <Form.Group>
-                      <Row>
-                        <Col>
-                          <Form.Check>
-                            <Form.Check.Input
-                              type='radio'
-                              name='exerciseGroup'
-                              id='pt'
-                              checked={exerciseGroup['pt']}
-                              onChange={handleExerciseRadio}
-                            />
-                            <Form.Check.Label
-                              htmlFor='개인 PT'
-                              className='w-100'
-                            >
-                              개인 PT
-                            </Form.Check.Label>
-                          </Form.Check>
-                        </Col>
-                        <Col>
-                          <Form.Check>
-                            <Form.Check.Input
-                              type='radio'
-                              name='exerciseGroup'
-                              id='gx'
-                              checked={exerciseGroup['gx']}
-                              onChange={handleExerciseRadio2}
-                            />
-                            <Form.Check.Label htmlFor='GX' className='w-100'>
-                              GX
-                            </Form.Check.Label>
-                          </Form.Check>
-                        </Col>
-                        <Col>
-                          <Form.Check>
-                            <Form.Check.Input
-                              type='radio'
-                              name='exerciseGroup'
-                              id='pila'
-                              checked={exerciseGroup['pila']}
-                              onChange={handleExerciseRadio3}
-                            />
-                            <Form.Check.Label
-                              htmlFor='필라테스'
-                              className='w-100'
-                            >
-                              필라테스
-                            </Form.Check.Label>
-                          </Form.Check>
-                        </Col>
-                        <Col>
-                          <Form.Check>
-                            <Form.Check.Input
-                              type='radio'
-                              name='exerciseGroup'
-                              id='health'
-                              checked={exerciseGroup['health']}
-                              onChange={handleExerciseRadio4}
-                            />
-                            <Form.Check.Label htmlFor='헬스' className='w-100'>
-                              헬스
-                            </Form.Check.Label>
-                          </Form.Check>
-                        </Col>
-                        <Col>
-                          <Form.Check>
-                            <Form.Check.Input
-                              type='radio'
-                              name='exerciseGroup'
-                              id='etc'
-                              checked={exerciseGroup['etc']}
-                              onChange={handleExerciseRadio5}
-                            />
-                            <Form.Control
-                              placeholder='기타'
-                              id='etcExercise'
-                              type='text'
-                              value={etcExercise_input}
-                              onChange={handleChangeEtc}
-                            ></Form.Control>
-                          </Form.Check>
-                        </Col>
-                      </Row>
-                    </Form.Group>
-                    <Button onClick={exerciseKind}>선택완료</Button>
-                  </div>
-                  <Button onClick={() => setKindOpen(false)}>닫기</Button>
-                </Modal>
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>운동명</Form.Label>
-                <Form.Control
-                  value={exercise_class_input}
-                  id='exercise_class'
-                  onChange={updateChange}
-                  error={exercise_class_err}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>강사명</Form.Label>
-                {loginWhether === 1 ? (
-                  <Form.Control
-                    value={trainer_input}
-                    id='trainer'
-                    error={trainer_err}
-                  ></Form.Control>
-                ) : (
-                  <Form.Control
-                    value={trainer_input}
-                    onClick={() => setSearchOpen(true)}
-                    id='trainer'
-                    error={trainer_err}
-                  ></Form.Control>
-                )}
-
-                <Modal show={searchOpen}>
-                  <div>
-                    <TrainerSearch
-                      open={searchOpen}
-                      setOpen={(o) => setSearchOpen(o)}
-                      fitness_no={fitness_no}
-                      handleUser={handleUser}
+      <Modal show={showModal}>
+        <div>
+          <h4>수업 수정</h4>
+          <Row>
+            <Col xs={3}>운동종류</Col>
+            <Col xs={9}>
+              <Row xs={2}>
+                <Col>
+                  <Form.Check>
+                    <Form.Check.Input
+                      type='radio'
+                      name='exerciseGroup'
+                      id='pt'
+                      checked={exerciseGroup['pt']}
+                      onChange={handleExerciseRadio}
                     />
-                  </div>
-                </Modal>
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>날짜</Form.Label>
+                    <Form.Check.Label htmlFor='pt' className='w-100'>
+                      개인 PT
+                    </Form.Check.Label>
+                  </Form.Check>
+                </Col>
+                <Col>
+                  <Form.Check>
+                    <Form.Check.Input
+                      type='radio'
+                      name='exerciseGroup'
+                      id='gx'
+                      checked={exerciseGroup['gx']}
+                      onChange={handleExerciseRadio2}
+                    />
+                    <Form.Check.Label htmlFor='gx' className='w-100'>
+                      GX
+                    </Form.Check.Label>
+                  </Form.Check>
+                </Col>
+                <Col>
+                  <Form.Check>
+                    <Form.Check.Input
+                      type='radio'
+                      name='exerciseGroup'
+                      id='pila'
+                      checked={exerciseGroup['pila']}
+                      onChange={handleExerciseRadio3}
+                    />
+                    <Form.Check.Label htmlFor='pila' className='w-100'>
+                      필라테스
+                    </Form.Check.Label>
+                  </Form.Check>
+                </Col>
+                <Col>
+                  <Form.Check>
+                    <Form.Check.Input
+                      type='radio'
+                      name='exerciseGroup'
+                      id='etc'
+                      checked={exerciseGroup['etc']}
+                      onChange={handleExerciseRadio5}
+                    />
+                    <Form.Control
+                      placeholder='기타'
+                      id='etcExercise'
+                      htmlFor='etc'
+                      type='text'
+                      value={etcExercise_input}
+                      onChange={handleChangeEtc}
+                    ></Form.Control>
+                  </Form.Check>
+                  {/* <Form.Group>
+                    <Form.Control
+                      value={kind_input}
+                      id='kind'
+                      onClick={() => setKindOpen(true)}
+                    />
+                    <Modal show={kindOpen}>
+                      <div className='mb-5'>
+                        <Button onClick={exerciseKind}>선택완료</Button>
+                      </div>
+                      <Button onClick={() => setKindOpen(false)}>닫기</Button>
+                    </Modal>
+                  </Form.Group> */}
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={3}>운동명</Col>
+            <Col xs={9}>
+              <Form.Control
+                value={exercise_class_input}
+                id='exercise_class'
+                onChange={updateChange}
+                error={exercise_class_err}
+              ></Form.Control>
+            </Col>
+            <Col xs={3}>강사</Col>
+            <Col xs={9}>
+              {loginWhether === 1 ? (
                 <Form.Control
-                  type='date'
-                  selected={setClass_date_input}
-                  value={moment(class_date_input).format('yyyy-MM-DD')}
-                  id='class_date'
-                  onChange={updateChange6}
-                  error={class_date_err}
+                  value={trainer_input}
+                  id='trainer'
+                  error={trainer_err}
                 ></Form.Control>
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>시간</Form.Label>
+              ) : (
                 <Form.Control
-                  value={hour_input == 0 ? '00' : hour_input}
-                  type='number'
-                  id='hour'
-                  onChange={updateChange3}
-                  error={hour_err}
+                  value={trainer_input}
+                  onClick={() => setSearchOpen(true)}
+                  id='trainer'
+                  error={trainer_err}
                 ></Form.Control>
-                시
-                <Form.Control
-                  type='number'
-                  value={minute_input == 0 ? '00' : minute_input}
-                  id='minute'
-                  onChange={updateChange4}
-                  error={minute_err}
-                ></Form.Control>
-                분
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>수강인원</Form.Label>
-                <Form.Control
-                  type='number'
-                  value={number_of_people_input}
-                  id='number_of_people'
-                  onChange={updateChange2}
-                  error={number_of_people_err}
-                ></Form.Control>
-              </Form.Group>
-            </Row>
-            <Row className='mt-3'>
-              <Col xs={4}>
-                <Button
-                  className='w-100'
-                  variant='danger'
-                  onClick={() =>
-                    // eslint-disable-next-line no-restricted-globals
-                    confirm(
-                      '정말 삭제하시겠습니까?_예약된 회원도 같이 취소됩니다.'
-                    ) == true
-                      ? reservationClassDelete(no)
-                      : alert('삭제가 취소 되었습니다.')
-                  }
-                >
-                  삭제
-                </Button>
-              </Col>
-              <Col xs={8}>
-                <Button
-                  className='w-100'
-                  onClick={() => reservationClassUpdate(no)}
-                >
-                  수정하기
-                </Button>
-              </Col>
-              <Col xs={12} className='mt-2'>
-                <Button
-                  className='w-100'
-                  variant='outline-light'
-                  onClick={modalClose}
-                >
-                  닫기
-                </Button>
-              </Col>
-            </Row>
-          </Container>
-        </Modal>
-      </div>
-    </div>
+              )}
+
+              <Modal show={searchOpen}>
+                <div>
+                  <TrainerSearch
+                    open={searchOpen}
+                    setOpen={(o) => setSearchOpen(o)}
+                    fitness_no={fitness_no}
+                    handleUser={handleUser}
+                  />
+                </div>
+              </Modal>
+            </Col>
+            <Col xs={3}>날짜</Col>
+            <Col xs={9}>
+              <Form.Control
+                type='date'
+                selected={setClass_date_input}
+                value={moment(class_date_input).format('yyyy-MM-DD')}
+                id='class_date'
+                onChange={updateChange6}
+                error={class_date_err}
+              />
+            </Col>
+            <Col xs={3}>시간</Col>
+            <Col xs={9}>
+              <Row>
+                <Col>
+                  <Form.Control
+                    type='number'
+                    id='hour'
+                    value={hour_input == 0 ? '00' : hour_input}
+                    onChange={updateChange3}
+                    label='시'
+                    error={hour_err}
+                  />
+                </Col>
+                <Col className='d-flex align-items-center' xs={1}>
+                  <span className='fs-6 fw-bold'>:</span>
+                </Col>
+                <Col>
+                  <Form.Control
+                    type='number'
+                    id='minute'
+                    value={minute_input == 0 ? '00' : minute_input}
+                    onChange={updateChange4}
+                    label='분'
+                    error={minute_err}
+                  />
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={3}>수강인원</Col>
+            <Col xs={9}>
+              <Form.Control
+                type='number'
+                value={number_of_people_input}
+                id='number_of_people'
+                onChange={updateChange2}
+                error={number_of_people_err}
+              ></Form.Control>
+            </Col>
+          </Row>
+          <Row className='mt-3'>
+            <Col xs={12}>
+              <span>삭제시 되돌릴 수 없습니다. 한번 더 확인해주세요.</span>
+              <Button
+                variant='danger'
+                onClick={() =>
+                  // eslint-disable-next-line no-restricted-globals
+                  confirm(
+                    '정말 삭제하시겠습니까?_예약된 회원도 같이 취소됩니다.'
+                  ) == true
+                    ? reservationClassDelete(no)
+                    : alert('삭제가 취소 되었습니다.')
+                }
+              >
+                삭제
+              </Button>
+            </Col>
+            <Col xs={6}>
+              <Button variant='secondary' onClick={modalClose}>
+                닫기
+              </Button>
+            </Col>
+            <Col xs={6}>
+              <Button onClick={() => reservationClassUpdate(no)}>
+                수정하기
+              </Button>
+            </Col>
+          </Row>
+        </div>
+      </Modal>
+    </>
   );
 };
 
