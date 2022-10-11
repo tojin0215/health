@@ -52,3 +52,14 @@
   /* border-radius: 10px; */
   background-color: rgba(246, 246, 80, 1);
 }
+
+.reservation-class__schedule-content {
+  border: 1px solid #fff;
+  padding: 5px 0;
+  margin: 2px 0;
+  text-align: center;
+  cursor: pointer;
+}
+.reservation-class__schedule-content:hover {
+  background-color: rgba(240, 240, 240, 0.2);
+}
