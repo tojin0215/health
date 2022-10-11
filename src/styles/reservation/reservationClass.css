@@ -15,11 +15,8 @@
 }
 
 /* 
-* 수업 만들기 인풋 컨테이너
+* 수업 만들기 인풋 폼
 */
-.reservation-class_input-container > div {
-  margin-bottom: 14px;
-}
 
 /*
 * 텍스트 인풋 라벨 위치 조정
@@ -40,6 +37,7 @@
 .reservation-class--trainer-input {
   background-color: #fff;
   transition: background-color 0.5s;
+  cursor: pointer;
 }
 
 /* 강사 검색 인풋 */
@@ -53,4 +51,15 @@
 .reservation-class--trainer-input:hover {
   /* border-radius: 10px; */
   background-color: rgba(246, 246, 80, 1);
+}
+
+.reservation-class__schedule-content {
+  border: 1px solid #fff;
+  padding: 5px 0;
+  margin: 2px 0;
+  text-align: center;
+  cursor: pointer;
+}
+.reservation-class__schedule-content:hover {
+  background-color: rgba(240, 240, 240, 0.2);
 }
