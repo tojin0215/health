@@ -662,7 +662,7 @@ class Reservation extends Component {
       dayIncreament: 0,
       rowsPerPage: 5,
       page: 0,
-      key: 'default',
+      key: 'pt',
       keyTrainer: 'trainerAll',
     };
     // this.handleWeekClick = this.handleWeekClick.bind(this);
@@ -1479,7 +1479,7 @@ class Reservation extends Component {
               activeKey={this.key}
               onSelect={this.selectClassTabs}
             >
-              <Tab className='' eventKey='default' title='개인PT'>
+              <Tab className='' eventKey='pt' title='개인PT'>
                 <Tabs
                   activeKey={this.keyTrainer}
                   onSelect={this.selectClassTabs}
@@ -1770,7 +1770,7 @@ class Reservation extends Component {
                   <Tab eventKey='trainer3' title='한세연 강사'></Tab>
                 </Tabs>
               </Tab>
-              <Tab eventKey='second' title='필라테스'>
+              <Tab eventKey='pilates' title='필라테스'>
                 <Tabs
                   activeKey={this.keyTrainer}
                   onSelect={this.selectClassTabs}
@@ -1781,7 +1781,7 @@ class Reservation extends Component {
                   <Tab eventKey='trainer3' title='한세연 강사'></Tab>
                 </Tabs>
               </Tab>
-              <Tab eventKey='third' title='GX'>
+              <Tab eventKey='gx' title='GX'>
                 <Tabs
                   activeKey={this.keyTrainer}
                   onSelect={this.selectClassTabs}
@@ -1792,7 +1792,7 @@ class Reservation extends Component {
                   <Tab eventKey='trainer3' title='한세연 강사'></Tab>
                 </Tabs>
               </Tab>
-              <Tab eventKey='fourth' title='기타'>
+              <Tab eventKey='etc' title='기타'>
                 <Tabs
                   activeKey={this.keyTrainer}
                   onSelect={this.selectClassTabs}
