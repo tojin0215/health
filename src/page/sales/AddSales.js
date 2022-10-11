@@ -661,7 +661,7 @@ class AddSales extends Component {
                                   placeholder='개월'
                                   id='etcVoucherPeriod'
                                   type='number'
-                                ></Form.Control>
+                                />
                               </Form.Check>
                             </Col>
                           </Row>

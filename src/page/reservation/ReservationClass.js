@@ -13,6 +13,8 @@ import { Container, Row, Col, Table, FloatingLabel } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 import { AiFillTool } from 'react-icons/ai';
 
@@ -547,6 +549,8 @@ class ReservationClass extends Component {
         health: false,
         etc: false,
       },
+      key: 'pt',
+      keyTrainer: 'trainerAll',
     };
   }
 
@@ -833,6 +837,11 @@ class ReservationClass extends Component {
       kindOpen: false,
     });
   };
+
+  selectClassTabs = (e) => {
+    this.setState({ key: e });
+  };
+
   render() {
     // console.log(this.props.userinfo.loginWhether);
     // console.log(this.state.kindOpen);
@@ -867,14 +876,290 @@ class ReservationClass extends Component {
         </header>
 
         <Container>
-          <Row className='pb-5 justify-content-center'>
-            <Col>
-              <h4>수업 만들기</h4>
+          <Row className='reservation-class__form sectionGlass'>
+            <Col xs={12}>
+              <h4>수업 설정</h4>
             </Col>
-            <Col className='text-end'>
-              <Link to='/reservation'>
-                <Button variant='outline-light me-2'>돌아가기</Button>
-              </Link>
+            <Col xs={1}>운동종류</Col>
+            <Col xs={9}>
+              <Form.Group>
+                <Row>
+                  <Col>
+                    <Form.Check>
+                      <Form.Check.Input
+                        type='radio'
+                        name='exerciseGroup'
+                        id='pt'
+                        checked={this.state.exerciseGroup['pt']}
+                        onChange={this.handleExerciseRadio}
+                      />
+                      <Form.Check.Label htmlFor='pt' className='w-100'>
+                        개인 PT
+                      </Form.Check.Label>
+                    </Form.Check>
+                  </Col>
+                  <Col>
+                    <Form.Check>
+                      <Form.Check.Input
+                        type='radio'
+                        name='exerciseGroup'
+                        id='gx'
+                        checked={this.state.exerciseGroup['gx']}
+                        onChange={this.handleExerciseRadio}
+                      />
+                      <Form.Check.Label htmlFor='gx' className='w-100'>
+                        GX
+                      </Form.Check.Label>
+                    </Form.Check>
+                  </Col>
+                  <Col>
+                    <Form.Check>
+                      <Form.Check.Input
+                        type='radio'
+                        name='exerciseGroup'
+                        id='pila'
+                        checked={this.state.exerciseGroup['pila']}
+                        onChange={this.handleExerciseRadio}
+                      />
+                      <Form.Check.Label htmlFor='pila' className='w-100'>
+                        필라테스
+                      </Form.Check.Label>
+                    </Form.Check>
+                  </Col>
+                  {/* <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='health'
+                          checked={this.state.exerciseGroup['health']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Check.Label htmlFor='헬스' className='w-100'>
+                          헬스
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col> */}
+                  <Col>
+                    <Form.Check>
+                      <Form.Check.Input
+                        type='radio'
+                        name='exerciseGroup'
+                        id='etc'
+                        checked={this.state.exerciseGroup['etc']}
+                        onChange={this.handleExerciseRadio}
+                      />
+                      <Form.Control
+                        placeholder='기타'
+                        id='etcExercise'
+                        type='text'
+                        value={this.state.etcExercise}
+                        onChange={this.handleChange}
+                      ></Form.Control>
+                    </Form.Check>
+                  </Col>
+                </Row>
+              </Form.Group>
+            </Col>
+            <Col xs={2}></Col>
+            {/* <Col xs={11}>
+              <Form.Control
+                label='운동종류'
+                onClick={this.handlekindOpen}
+                value={this.state.kind}
+              />
+              <Modal show={this.state.kindOpen}>
+                <Form.Group>
+                  <Row>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='pt'
+                          checked={this.state.exerciseGroup['pt']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Check.Label htmlFor='pt' className='w-100'>
+                          개인 PT
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='gx'
+                          checked={this.state.exerciseGroup['gx']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Check.Label htmlFor='gx' className='w-100'>
+                          GX
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='pila'
+                          checked={this.state.exerciseGroup['pila']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Check.Label htmlFor='pila' className='w-100'>
+                          필라테스
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='etc'
+                          checked={this.state.exerciseGroup['etc']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Control
+                          placeholder='기타'
+                          id='etcExercise'
+                          type='text'
+                          value={this.state.etcExercise}
+                          onChange={this.handleChange}
+                        ></Form.Control>
+                      </Form.Check>
+                    </Col>
+                  </Row>
+                </Form.Group>
+                <Row xs={2}>
+                  <Col>
+                    <Button onClick={this.handlekindClose} variant='secondary'>
+                      닫기
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button onClick={this.exerciseKind}>선택완료</Button>
+                  </Col>
+                </Row>
+              </Modal>
+            </Col> */}
+            <Col xs={1}>운동명</Col>
+            <Col xs={4}>
+              <Form.Control
+                id='exercise_class'
+                value={this.state.exercise_class}
+                onChange={this.handleChange}
+                InputProps={{ disableUnderline: true }}
+                label='운동명'
+                error={this.state.exercise_class_err}
+              />
+            </Col>
+            <Col xs={1}>강사</Col>
+            <Col xs={4}>
+              {this.props.userinfo.loginWhether === 1 ? (
+                <Form.Control
+                  id='trainer'
+                  value={this.props.userinfo.manager_name}
+                  onChange={this.handleChange}
+                  InputProps={{ disableUnderline: true }}
+                  label='강사명'
+                  error={this.state.trainer_err}
+                  className='reservation-class--trainer-input'
+                />
+              ) : (
+                <div>
+                  {this.state.open ? (
+                    <div>
+                      <TrainerSearch
+                        open={this.state.open}
+                        setOpen={(o) => this.setState({ open: o })}
+                        fitness_no={this.props.userinfo.fitness_no}
+                        handleUser={this.handleUser}
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <Form.Control
+                        id='trainer'
+                        label='강사 검색'
+                        onClick={() => this.setState({ open: true })}
+                        value={this.state.trainer_name}
+                        // onChange={this.handleChange}
+                        InputProps={{ disableUnderline: true }}
+                        error={this.state.trainer_err}
+                        // disabled
+                        className='reservation-class--trainer-input'
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+            </Col>
+            <Col xs={2}> </Col>
+            <Col xs={1}>날짜</Col>
+            <Col xs={4}>
+              <DatePicker
+                className='text-center w-100'
+                selected={this.state.class_date}
+                onChange={(date) => this.setState({ class_date: date })}
+                name='class_date'
+                dateFormat='yyyy년MM월dd일'
+                font-size='1.6rem'
+                error={this.state.class_date_err}
+                minDate={new Date()}
+              />
+            </Col>
+            <Col xs={1}>시간</Col>
+            <Col xs={4}>
+              <Row>
+                <Col>
+                  <Form.Control
+                    type='number'
+                    id='hour'
+                    value={this.state.hour}
+                    onChange={this.handleChange}
+                    InputProps={{ disableUnderline: true }}
+                    label='시'
+                    error={this.state.hour_err}
+                  />
+                </Col>
+                <Col className='d-flex align-items-center' xs={1}>
+                  <span className='fs-5 fw-bold'>:</span>
+                </Col>
+                <Col>
+                  <Form.Control
+                    type='number'
+                    id='minute'
+                    value={this.state.minute}
+                    onChange={this.handleChange}
+                    InputProps={{ disableUnderline: true }}
+                    label='분'
+                    error={this.state.minute_err}
+                  />
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={1}>수강인원</Col>
+            <Col xs={1}>
+              <Form.Control
+                className=''
+                type='number'
+                id='number_of_people'
+                value={this.state.number_of_people}
+                onChange={this.handleChange}
+                InputProps={{ disableUnderline: true }}
+                label='수강 인원'
+                error={this.state.number_of_people_err}
+              />
+            </Col>
+            <Col xs={12} className='text-center'>
+              <Button onClick={this.handleOnClick}>수업 만들기</Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
               <Button onClick={this.handleUpdate}>수정하기</Button>
             </Col>
           </Row>
@@ -912,12 +1197,46 @@ class ReservationClass extends Component {
               </Button>
             </Col>
           </Row>
+          <Tabs activeKey={this.key} onSelect={this.selectClassTabs}>
+            <Tab eventKey='pt' title='개인PT'>
+              <Tabs activeKey={this.keyTrainer} onSelect={this.selectClassTabs}>
+                <Tab eventKey='trainerAll' title='전체'></Tab>
+                <Tab eventKey='trainer1' title='김유리 강사'></Tab>
+                <Tab eventKey='trainer2' title='박우진 강사'></Tab>
+                <Tab eventKey='trainer3' title='한세연 강사'></Tab>
+              </Tabs>
+            </Tab>
+            <Tab eventKey='pilates' title='필라테스'>
+              <Tabs activeKey={this.keyTrainer} onSelect={this.selectClassTabs}>
+                <Tab eventKey='trainerAll' title='전체'></Tab>
+                <Tab eventKey='trainer1' title='김유리 강사'></Tab>
+                <Tab eventKey='trainer2' title='박우진 강사'></Tab>
+                <Tab eventKey='trainer3' title='한세연 강사'></Tab>
+              </Tabs>
+            </Tab>
+            <Tab eventKey='gx' title='GX'>
+              <Tabs activeKey={this.keyTrainer} onSelect={this.selectClassTabs}>
+                <Tab eventKey='trainerAll' title='전체'></Tab>
+                <Tab eventKey='trainer1' title='김유리 강사'></Tab>
+                <Tab eventKey='trainer2' title='박우진 강사'></Tab>
+                <Tab eventKey='trainer3' title='한세연 강사'></Tab>
+              </Tabs>
+            </Tab>
+            <Tab eventKey='etc' title='기타'>
+              <Tabs activeKey={this.keyTrainer} onSelect={this.selectClassTabs}>
+                <Tab eventKey='trainerAll' title='전체'></Tab>
+                <Tab eventKey='trainer1' title='김유리 강사'></Tab>
+                <Tab eventKey='trainer2' title='박우진 강사'></Tab>
+                <Tab eventKey='trainer3' title='한세연 강사'></Tab>
+              </Tabs>
+            </Tab>
+          </Tabs>
           <Row>
             <Col
               className='text-center py-2 w-100 overflow-auto justify-content-center'
               xs={12}
             >
-              <table class='table' name='classTable'>
+              <table className='table' name='classTable'>
                 <thead>
                   <tr>
                     <th scope='col'>
@@ -1157,241 +1476,6 @@ class ReservationClass extends Component {
 								)}
 							</tbody>
 						</table> */}
-            </Col>
-          </Row>
-          <Row className='reservation-class_input-container'>
-            <Col className='text-center' xs={12} sm={3}>
-              {this.props.userinfo.loginWhether === 1 ? (
-                // <label className=' d-block w-100'>
-                <TextField
-                  id='trainer'
-                  variant='standard'
-                  value={this.props.userinfo.manager_name}
-                  onChange={this.handleChange}
-                  InputProps={{ disableUnderline: true }}
-                  label='강사명'
-                  error={this.state.trainer_err}
-                  className=''
-                />
-              ) : (
-                // </label>
-                <div>
-                  {this.state.open ? (
-                    <div>
-                      <TrainerSearch
-                        open={this.state.open}
-                        setOpen={(o) => this.setState({ open: o })}
-                        fitness_no={this.props.userinfo.fitness_no}
-                        handleUser={this.handleUser}
-                      />
-                    </div>
-                  ) : (
-                    <div>
-                      <TextField
-                        id='trainer'
-                        label='강사 검색'
-                        onClick={() => this.setState({ open: true })}
-                        value={this.state.trainer_name}
-                        // onChange={this.handleChange}
-                        InputProps={{ disableUnderline: true }}
-                        error={this.state.trainer_err}
-                        variant='standard'
-                        disabled
-                        className='boxmorpsm w-100 reservation-class--trainer-input'
-                        style={{
-                          cursor: 'pointer',
-                        }}
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
-            </Col>
-            <Col
-              className='text-center height-fit-content fs-2'
-              xs={12}
-              sm={3}
-              lg={3}
-            >
-              <label className='w-100'>
-                <TextField
-                  className='boxmorpsm w-100'
-                  variant='standard'
-                  label='운동종류'
-                  onClick={this.handlekindOpen}
-                  value={this.state.kind}
-                />
-              </label>
-            </Col>
-            <Modal show={this.state.kindOpen}>
-              <div className='mb-5'>
-                <Form.Group>
-                  <Row>
-                    <Col>
-                      <Form.Check>
-                        <Form.Check.Input
-                          type='radio'
-                          name='exerciseGroup'
-                          id='pt'
-                          checked={this.state.exerciseGroup['pt']}
-                          onChange={this.handleExerciseRadio}
-                        />
-                        <Form.Check.Label htmlFor='pt' className='w-100'>
-                          개인 PT
-                        </Form.Check.Label>
-                      </Form.Check>
-                    </Col>
-                    <Col>
-                      <Form.Check>
-                        <Form.Check.Input
-                          type='radio'
-                          name='exerciseGroup'
-                          id='gx'
-                          checked={this.state.exerciseGroup['gx']}
-                          onChange={this.handleExerciseRadio}
-                        />
-                        <Form.Check.Label htmlFor='gx' className='w-100'>
-                          GX
-                        </Form.Check.Label>
-                      </Form.Check>
-                    </Col>
-                    <Col>
-                      <Form.Check>
-                        <Form.Check.Input
-                          type='radio'
-                          name='exerciseGroup'
-                          id='pila'
-                          checked={this.state.exerciseGroup['pila']}
-                          onChange={this.handleExerciseRadio}
-                        />
-                        <Form.Check.Label htmlFor='pila' className='w-100'>
-                          필라테스
-                        </Form.Check.Label>
-                      </Form.Check>
-                    </Col>
-                    {/* <Col>
-                      <Form.Check>
-                        <Form.Check.Input
-                          type='radio'
-                          name='exerciseGroup'
-                          id='health'
-                          checked={this.state.exerciseGroup['health']}
-                          onChange={this.handleExerciseRadio}
-                        />
-                        <Form.Check.Label htmlFor='헬스' className='w-100'>
-                          헬스
-                        </Form.Check.Label>
-                      </Form.Check>
-                    </Col> */}
-                    <Col>
-                      <Form.Check>
-                        <Form.Check.Input
-                          type='radio'
-                          name='exerciseGroup'
-                          id='etc'
-                          checked={this.state.exerciseGroup['etc']}
-                          onChange={this.handleExerciseRadio}
-                        />
-                        <Form.Control
-                          placeholder='기타'
-                          id='etcExercise'
-                          type='text'
-                          value={this.state.etcExercise}
-                          onChange={this.handleChange}
-                        ></Form.Control>
-                      </Form.Check>
-                    </Col>
-                  </Row>
-                </Form.Group>
-                <Button onClick={this.exerciseKind}>선택완료</Button>
-              </div>
-              <Button onClick={this.handlekindClose}>닫기</Button>
-            </Modal>
-            <Col className='text-center height-fit-content fs-2' xs={12} sm={6}>
-              <label className='w-100'>
-                <TextField
-                  className='boxmorpsm w-100'
-                  id='exercise_class'
-                  variant='standard'
-                  value={this.state.exercise_class}
-                  onChange={this.handleChange}
-                  InputProps={{ disableUnderline: true }}
-                  label='운동명'
-                  error={this.state.exercise_class_err}
-                />
-              </label>
-            </Col>
-            <Col className='text-center height-fit-content' xs={12} sm={4}>
-              <DatePicker
-                className='boxmorpsm text-center w-100 border-0'
-                selected={this.state.class_date}
-                onChange={(date) => this.setState({ class_date: date })}
-                name='class_date'
-                dateFormat='yyyy년MM월dd일'
-                font-size='1.6rem'
-                error={this.state.class_date_err}
-                minDate={new Date()}
-              />
-            </Col>
-            <Col className=' px-1' xs={12} sm={3}>
-              <Row className=''>
-                <Col className='pe-0 height-fit-content'>
-                  <label className='w-100'>
-                    <TextField
-                      className='boxmorpsm w-100'
-                      type='number'
-                      id='hour'
-                      variant='standard'
-                      value={this.state.hour}
-                      onChange={this.handleChange}
-                      InputProps={{ disableUnderline: true }}
-                      label='시'
-                      error={this.state.hour_err}
-                    />
-                  </label>
-                </Col>
-                <Col
-                  className='p-0 d-flex justify-content-center align-items-center'
-                  xs={1}
-                >
-                  <span className='fs-5 fw-bold'>:</span>
-                </Col>
-                <Col className='text-center ps-0 height-fit-content'>
-                  <label className='w-100'>
-                    <TextField
-                      className='w-100 boxmorpsm'
-                      type='number'
-                      id='minute'
-                      variant='standard'
-                      value={this.state.minute}
-                      onChange={this.handleChange}
-                      InputProps={{ disableUnderline: true }}
-                      label='분'
-                      error={this.state.minute_err}
-                    />
-                  </label>
-                </Col>
-              </Row>
-            </Col>
-            <Col className='text-center height-fit-content' xs={12} sm={3}>
-              <label className='w-100'>
-                <TextField
-                  className='w-100 boxmorpsm'
-                  type='number'
-                  id='number_of_people'
-                  variant='standard'
-                  value={this.state.number_of_people}
-                  onChange={this.handleChange}
-                  InputProps={{ disableUnderline: true }}
-                  label='수강 인원'
-                  error={this.state.number_of_people_err}
-                />
-              </label>
-            </Col>
-            <Col xs={12} className='text-center'>
-              <Button className='my-4 px-5' onClick={this.handleOnClick}>
-                수업 만들기
-              </Button>
             </Col>
           </Row>
         </Container>

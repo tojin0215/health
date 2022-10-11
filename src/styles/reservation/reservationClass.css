@@ -15,11 +15,8 @@
 }
 
 /* 
-* 수업 만들기 인풋 컨테이너
+* 수업 만들기 인풋 폼
 */
-.reservation-class_input-container > div {
-  margin-bottom: 14px;
-}
 
 /*
 * 텍스트 인풋 라벨 위치 조정
@@ -40,6 +37,7 @@
 .reservation-class--trainer-input {
   background-color: #fff;
   transition: background-color 0.5s;
+  cursor: pointer;
 }
 
 /* 강사 검색 인풋 */
