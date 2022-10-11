@@ -1,4 +1,6 @@
-/* 수업 - 진행중인 수업 */
+/*
+* 수업 - 진행중인 수업 
+*/
 .class-list {
   border-bottom: 0;
 }
@@ -11,6 +13,15 @@
 }
 
 .class-list .MuiTableBody-root {
+}
+
+/* 
+* 진행중인 수업 - 수업 시간표 및 예약 (reservation__class)
+*/
+.reservation__class {
+  width: 100%;
+  max-width: 1400px;
+  margin: 6rem auto 0;
 }
 
 .reservation__class-prev {
@@ -50,10 +61,6 @@
 .reservation__class-table--td p:nth-child(3) {
   line-height: 12px;
   padding-top: 6px;
-}
-
-/* 웹디자인 반영분 css 적용 */
-.reservation__class-table--td {
 }
 
 .reservation__class-table--td > div {
@@ -148,14 +155,14 @@
 .reservation__class-container {
   position: relative;
 }
-/* 진행중인 수업 __ 선택된 수업 __ 인풋 박스 */
-.reservation__selected-class {
-  position: absolute;
-  top: 0;
-  right: -275px;
-  background-color: #666;
-  width: 275px;
+
+/* 진행중인 수업 - 선택된 수업 - 콘솔 박스 */
+.reservation__class__console {
+  max-width: 275px;
   height: 420px;
+}
+.reservation__class__console-info {
+  background-color: #444;
 }
 
 /* 진행중인 수업 - 선택된 수업 - 회원 검색 */
@@ -168,6 +175,7 @@
   top: 0;
   left: 14px;
 }
+
 /* 
 .MuiInputBase-formControl > #customer_name {
   font-size: 1.2rem;
@@ -176,6 +184,13 @@
 
 .reservation .MuiTextField-root > .MuiInputBase-formControl {
   margin-top: 4px;
+}
+
+/* 
+* 진행중인 수업 - 예약 현황 (reservation__list)
+*/
+.reservation__list {
+  padding-bottom: 6rem;
 }
 
 /* 
