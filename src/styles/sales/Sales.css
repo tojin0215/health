@@ -34,6 +34,17 @@
 .sales .react-datepicker__input-container input[type='text'] {
   width: 10rem;
 }
+/* 당일/당월 table - 회원검색 창 표*/
+/* .MuiTableBody-root > th {
+  border: 0;
+}
+.MuiTableBody-root .MuiTableCell-root {
+  color: #fff;
+  background: #111;
+} */
+strong {
+  color: #ebff2e;
+}
 
 @media (max-width: 767px) {
 }
