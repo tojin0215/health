@@ -35,6 +35,12 @@
   width: 10rem;
 }
 /* 당일/당월 table - 회원검색 창 표*/
+.table-sales > tbody {
+  text-align: center;
+  color: #fff;
+  background: #111;
+}
+
 /* .MuiTableBody-root > th {
   border: 0;
 }
@@ -42,9 +48,6 @@
   color: #fff;
   background: #111;
 } */
-strong {
-  color: #ebff2e;
-}
 
 @media (max-width: 767px) {
 }

@@ -2,6 +2,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Dropdown from 'react-dropdown';
 
 import '../../styles/sales/AddSales.css';
+import '../../styles/input.css';
 
 import NumberFormat from 'react-number-format';
 
@@ -21,6 +22,7 @@ import { connect } from 'react-redux';
 // React-Bootstrap
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
+
 // MUI
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -381,37 +383,43 @@ class AddSales extends Component {
           <form>
             <div className='sectionGlass'>
               <Row>
-                <Col>
-                  {this.state.open ? (
-                    <UserSearch
-                      open={this.state.open}
-                      setOpen={(o) => this.setState({ open: o })}
-                      fitness_no={this.props.userinfo.fitness_no}
-                      loginWhether={this.props.userinfo.loginWhether}
-                      joinNo={this.props.userinfo.joinNo}
-                      handleUser={this.handleUser}
-                    />
-                  ) : (
-                    <TextField
-                      id='customer_name'
-                      label='회원 검색'
-                      disabled
-                      variant='standard'
-                      onClick={() => this.setState({ open: true })}
-                      className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
-                      InputProps={{ disableUnderline: true }}
-                      value={this.state.client_name}
-                    />
-                  )}
-                </Col>
-                <Col>
-                  {/* <span className='fs-5 fw-bold'>{this.state.client_name}</span> */}
-                  님의 결제 등록입니다.
-                </Col>
+                <h5>
+                  <Row xs='auto'>
+                    <Col className='customer_name'>
+                      {this.state.open ? (
+                        <UserSearch
+                          open={this.state.open}
+                          setOpen={(o) => this.setState({ open: o })}
+                          fitness_no={this.props.userinfo.fitness_no}
+                          loginWhether={this.props.userinfo.loginWhether}
+                          joinNo={this.props.userinfo.joinNo}
+                          handleUser={this.handleUser}
+                        />
+                      ) : (
+                        <TextField
+                          id='customer_name'
+                          label='회원 검색'
+                          disabled
+                          variant='standard'
+                          onClick={() => this.setState({ open: true })}
+                          className='customer-input--search'
+                          InputProps={{ disableUnderline: true }}
+                          value={this.state.client_name}
+                        />
+                      )}
+                    </Col>
+                    <Col>
+                      {/* <span className='fs-5 fw-bold'>{this.state.client_name}</span> */}
+                      님의 결제 등록입니다.
+                    </Col>
+                  </Row>
+                </h5>
               </Row>
               <Row>
-                <Col xs={2}>운동종목</Col>
-                <Col>
+                <Col xs={2}>
+                  <h5>운동종목</h5>
+                </Col>
+                <Col className='justify-content-center'>
                   <Row>
                     <Col>
                       <Form.Check>
@@ -428,7 +436,7 @@ class AddSales extends Component {
                       </Form.Check>
                     </Col>
                     <Col>
-                      <Form.Check>
+                      <Form.Check inline>
                         <Form.Check.Input
                           type='radio'
                           name='exerciseGroup'
@@ -447,9 +455,7 @@ class AddSales extends Component {
                           onChange={this.handleChange}
                         ></Form.Control>
                       </Form.Check>
-                    </Col>
-                    <Col>
-                      <Form.Check>
+                      <Form.Check inline>
                         <Form.Check.Input
                           type='radio'
                           name='exerciseGroup'
@@ -477,7 +483,10 @@ class AddSales extends Component {
                       </Form.Check>
                     </Col>
                     <Col>
-                      <Form.Check>
+                      <Form.Check inline>
+                        <Form.Check.Label htmlFor='etc' className='w-100'>
+                          기타
+                        </Form.Check.Label>
                         <Form.Check.Input
                           type='radio'
                           name='exerciseGroup'
@@ -485,9 +494,6 @@ class AddSales extends Component {
                           checked={this.state.exerciseGroup['etc']}
                           onChange={this.handleExerciseRadio}
                         />
-                        <Form.Check.Label htmlFor='etc' className='w-100'>
-                          기타
-                        </Form.Check.Label>
                         <Form.Control
                           placeholder='기타'
                           id='etcExercise'
@@ -500,8 +506,11 @@ class AddSales extends Component {
                   </Row>
                 </Col>
               </Row>
+
               <Row>
-                <Col xs={2}>이용권종류</Col>
+                <Col xs={2}>
+                  <h5>이용권종류</h5>
+                </Col>
                 <Col>
                   <Form.Group>
                     <Form.Check>
@@ -696,7 +705,9 @@ class AddSales extends Component {
             </div>
             <div className='sectionGlass'>
               <Row>
-                <Col xs={2}>결제일</Col>
+                <Col xs={2}>
+                  <h5>결제일</h5>
+                </Col>
                 <Col>
                   <DatePicker
                     selected={this.state.paymentDate}
@@ -707,7 +718,9 @@ class AddSales extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col xs={2}>결제 종류</Col>
+                <Col xs={2}>
+                  <h5>결제 종류</h5>
+                </Col>
                 <Col>
                   <Row>
                     <Col>
@@ -752,7 +765,9 @@ class AddSales extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col xs={2}>금액</Col>
+                <Col xs={2}>
+                  <h5>금액</h5>
+                </Col>
                 <Col>
                   <Row>
                     <Col>이용권</Col>
