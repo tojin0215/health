@@ -158,11 +158,24 @@
 
 /* 진행중인 수업 - 선택된 수업 - 콘솔 박스 */
 .reservation__class__console {
+  position: fixed;
+  left: 50%;
+  margin-left: 550px;
   max-width: 275px;
   height: 420px;
 }
 .reservation__class__console-info {
-  background-color: #444;
+  background-color: #333;
+  border-radius: 5px;
+  padding: 25px 20px;
+}
+.reservation__class__console-infoContent dl div :after {
+  display: block;
+  content: '';
+  clear: both;
+}
+.reservation__class__console-infoContent dl div > dt {
+  float: left;
 }
 
 /* 진행중인 수업 - 선택된 수업 - 회원 검색 */
@@ -210,4 +223,12 @@
 /* 강사별 조회 회원별 조회 탭 색상 */
 .reservation .reservation__reservation-status .tab-content {
   background-color: #111;
+}
+/* 탭 */
+.resevation__class-Tabs {
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 20px;
+}
+.reservation__class-container {
 }
