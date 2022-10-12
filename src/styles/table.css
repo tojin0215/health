@@ -128,7 +128,9 @@
   color: #333;
   text-align: center;
 }
-
+.MuiTableBody-root .MuiTableCell-root {
+  text-align: center;
+}
 .MuiTableCell-root input {
   border: 1px solid #d9d9d9;
   border-radius: 2.8rem;

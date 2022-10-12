@@ -749,33 +749,31 @@ class Sales extends Component {
         </div>
         {/*.header */}
         <Container>
-          <Row>
-            <Col>투진피트니스의 매출현황입니다</Col>
-            <Col>
-              <Button onClick={this.goAddSales}>결제 등록</Button>
-            </Col>
-          </Row>
-          <div style={{ height: '500px' }}>그래프 공간입니다.</div>
-          <Row>
-            <Col>
-              <Button
-                onClick={() => this.handleButton('당일')}
-                variant='outline-primary'
-                className='w-100'
-              >
-                당일
-              </Button>
-            </Col>
-            <Col>
-              <Button
-                onClick={() => this.handleButton('당월')}
-                variant='outline-primary'
-                className='w-100'
-              >
-                당월
-              </Button>
-            </Col>
-            <Col>
+          <div className='d-flex justify-content-between'>
+            <h5>
+              <strong>투진피트니스</strong>의 매출현황입니다.
+            </h5>
+            <Button onClick={this.goAddSales}>결제 등록</Button>
+          </div>
+          <div style={{ height: '500px', background: '#2F2F3D' }}>
+            그래프 공간입니다.
+          </div>
+          <div className='d-flex justify-content-between my-3'>
+            <Button
+              onClick={() => this.handleButton('당일')}
+              variant='outline-primary'
+              className=''
+            >
+              당일
+            </Button>
+            <Button
+              onClick={() => this.handleButton('당월')}
+              variant='outline-primary'
+              className=''
+            >
+              당월
+            </Button>
+            <div>
               <DatePicker
                 className='sales__calender--dateinput w-100 text-center'
                 dateFormat='yyyy년MM월dd일'
@@ -783,8 +781,8 @@ class Sales extends Component {
                 onChange={(date) => this.setState({ today: date })}
                 maxDate={this.state.today}
               />
-            </Col>
-            <Col>
+            </div>
+            <div>
               <DatePicker
                 className='sales__calender--dateinput w-100 text-center'
                 dateFormat='yyyy년MM월dd일'
@@ -792,14 +790,12 @@ class Sales extends Component {
                 onChange={(date) => this.setState({ tommorrow: date })}
                 maxDate={this.state.today}
               />
-            </Col>
-            <Col>
-              <Button onClick={() => this.handleOnClick()} className='w-100'>
-                조회하기
-              </Button>
-            </Col>
-          </Row>
-          <Table>
+            </div>
+            <Button onClick={() => this.handleOnClick()} className=''>
+              조회하기
+            </Button>
+          </div>
+          <Table className='table-sales'>
             <TableHead>
               <TableRow>
                 <TableCell scope='col'>카드</TableCell>
@@ -808,13 +804,13 @@ class Sales extends Component {
                 <TableCell scope='col'>총매출</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell scope='col'> {this.state.card}</TableCell>
-                <TableCell scope='col'>{this.state.cash}</TableCell>
-                <TableCell scope='col'>{this.state.transfer}</TableCell>
-                <TableCell scope='col'>{this.state.total}</TableCell>
-              </TableRow>
+            <TableBody className='text-center'>
+              <TableCell scope='col'> {this.state.card}</TableCell>
+              <TableCell scope='col'>{this.state.cash}</TableCell>
+              <TableCell scope='col'>{this.state.transfer}</TableCell>
+              <TableCell scope='col' className='text-primary'>
+                {this.state.total}
+              </TableCell>
             </TableBody>
           </Table>
           <Tabs
@@ -826,11 +822,11 @@ class Sales extends Component {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell scope='col'>고객명</TableCell>
-                    <TableCell scope='col'>운동명</TableCell>
+                    <TableCell scope='col'>회원명</TableCell>
+                    <TableCell scope='col'>보유이용권</TableCell>
                     <TableCell scope='col'>결제일</TableCell>
-                    <TableCell scope='col'>결제된 회원권</TableCell>
-                    <TableCell scope='col'>기간권시작일[기간권일수]</TableCell>
+                    <TableCell scope='col'>이용권시작일</TableCell>
+                    <TableCell scope='col'>잔여이용권</TableCell>
                     <TableCell scope='col'>결제도구</TableCell>
                     <TableCell scope='col'>결제금액</TableCell>
                   </TableRow>
@@ -1047,7 +1043,7 @@ class Sales extends Component {
                 </div>
               )}
 
-              <Table>
+              <Table className='table-dark'>
                 <TableHead>
                   <TableRow>
                     <TableCell scope='col'>고객명</TableCell>

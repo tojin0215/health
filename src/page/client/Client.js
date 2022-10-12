@@ -1694,7 +1694,7 @@ const ViewClientItem = ({
         size='xl'
       >
         <Modal.Header className='mb-3'>
-          <Modal.Title>회원 상3세 정보</Modal.Title>
+          <Modal.Title>회원 상세 정보</Modal.Title>
           {showUpdate ? (
             <Button onClick={modalClose} variant='outline-light'>
               <CloseIcon />
