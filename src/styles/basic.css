@@ -88,3 +88,10 @@ p {
 .white-space-break-spaces {
   white-space: break-spaces;
 }
+.cf {
+}
+.cf:after {
+  content: '';
+  display: block;
+  clear: both;
+}
