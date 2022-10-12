@@ -795,7 +795,7 @@ class Sales extends Component {
               조회하기
             </Button>
           </div>
-          <Table className='table-dark'>
+          <Table className='table-sales'>
             <TableHead>
               <TableRow>
                 <TableCell scope='col'>카드</TableCell>
