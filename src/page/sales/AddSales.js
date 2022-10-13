@@ -506,7 +506,6 @@ class AddSales extends Component {
                   </Row>
                 </Col>
               </Row>
-
               <Row>
                 <Col xs={2}>
                   <h5>이용권종류</h5>
@@ -529,16 +528,6 @@ class AddSales extends Component {
                         기간권
                       </Form.Check.Label>
                     </Form.Check>
-                    {/* <Form.Label>기간 일수</Form.Label>
-                    <Form.Control
-                      variant='outlined'
-                      value={this.state.salesDays}
-                      onChange={this.handleChange}
-                      type='number'
-                      id='salesDays'
-                      placeholder='숫자만 입력하세요'
-                      required
-                    ></Form.Control> */}
                   </Form.Group>
                 </Col>
                 <Col>
@@ -701,6 +690,118 @@ class AddSales extends Component {
                     </Col>
                   )
                 }
+              </Row>
+              <Row>
+                <Col xs={2}>테스트용(삭제예정)</Col>
+                <Col xs={1}>
+                  <Form.Label>기간 일수</Form.Label>
+                </Col>
+                <Col xs={2}>
+                  <Form.Control
+                    variant='outlined'
+                    value={this.state.salesDays}
+                    onChange={this.handleChange}
+                    type='number'
+                    id='salesDays'
+                    placeholder='숫자만 입력하세요'
+                    required
+                  ></Form.Control>
+                </Col>
+                <Col xs={1}>
+                  <Form.Label htmlFor='paidMembership'>
+                    이용권
+                    <br />
+                    횟수
+                  </Form.Label>
+                </Col>
+                <Col xs={2}>
+                  <Form.Control
+                    value={this.state.paidMembership}
+                    onChange={this.handleChange}
+                    type='number'
+                    name='paidMembership'
+                    id='paidMembership'
+                    placeholder='숫자만 입력하세요'
+                    required
+                  ></Form.Control>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={2}>사물함</Col>
+                <Col xs={10}>
+                  <Row>
+                    <Col xs={2}>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          id='lockerUnused'
+                          name='locker'
+                          checked='checked'
+                        ></Form.Check.Input>
+                        <Form.Check.Label
+                          htmlFor='lockerUnused'
+                          className='w-100'
+                        >
+                          미사용
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col xs={2}>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          id='lockerUse'
+                          name='locker'
+                        ></Form.Check.Input>
+                        <Form.Check.Label htmlFor='lockerUse' className='w-100'>
+                          사용
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col xs={2}>
+                      <Form.Control
+                        placeholder='사물함 번호'
+                        id='lockerNumber'
+                        type='number'
+                      />
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={2}>운동복</Col>
+                <Col xs={10}>
+                  <Row>
+                    <Col xs={2}>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          id='wearUnused'
+                          name='sportswear'
+                          checked='checked'
+                        ></Form.Check.Input>
+                        <Form.Check.Label
+                          htmlFor='wearUnused'
+                          className='w-100'
+                        >
+                          미사용
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                    <Col xs={2}>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          id='wearUse'
+                          name='sportswear'
+                        ></Form.Check.Input>
+                        <Form.Check.Label htmlFor='wearUse' className='w-100'>
+                          사용
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col>
+                  </Row>
+                </Col>
               </Row>
             </div>
             <div className='sectionGlass'>
