@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
@@ -14,6 +14,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
 // import  { PC, Mobile } from '../../component/MediaQuery';
 // import Menu from '../../component/navigation/Menu';
@@ -47,6 +48,31 @@ var moment = require('moment');
 
 moment.tz.setDefault('Asia/Seoul');
 
+function classTimeTable() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+    <>
+      <Button variant='primary' onClick={handleShow}>
+        Launch
+      </Button>
+
+      <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          Some text as placeholder. In real life you can have the elements you
+          have chosen. Like, text, images, lists, etc.
+        </Offcanvas.Body>
+      </Offcanvas>
+    </>
+  );
+}
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -57,9 +83,17 @@ class Home extends Component {
       monthSales: 0,
       todaySales: 0,
       admin: this.props.userinfo.manager_name,
+      show: false,
+      setShow: true,
     };
     this.cusFetch();
     // console.log(`${MainVisual1}`);
+  }
+
+  componentDidMount() {
+    this.setState({
+      show: false,
+    });
   }
 
   goLogin = () => {
@@ -181,8 +215,16 @@ class Home extends Component {
     }
   };
 
+  handleClose = () => {
+    this.setState({ show: false });
+  };
+  handleShow = () => {
+    this.setState({ show: true });
+  };
+
   render() {
     const { userinfo } = this.props;
+
     // console.log('userinfo : ');
     // console.log(userinfo); // 나중에 DB에서 불러올 때 사용, 로그인된 ID, fitness 정보 들어있음
     // console.log('오늘매출', this.state.todaySales);
@@ -198,25 +240,70 @@ class Home extends Component {
         </div>
         {/*.header */}
         <Container>
-          <div>시간표</div>
+          <Button variant='secondary' onClick={this.handleShow}>
+            시간표
+          </Button>
+          <Offcanvas show={this.state.show} onHide={this.handleClose}>
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              Some text as placeholder. In real life you can have the elements
+              you have chosen. Like, text, images, lists, etc.
+            </Offcanvas.Body>
+          </Offcanvas>
           <Row>
             <Col xs={3} className='sectionGlass'>
-              전체회원
+              <p>전체회원</p>
+              <p>99999명</p>
+              <p>현재까지 등록된 모든 회원수는</p>
+              <p>9999명 입니다.</p>
+              <Button>{'>'}</Button>
             </Col>
             <Col xs={3} className='sectionGlass'>
-              유효회원
+              <p>유효회원</p>
+              <p>99999명</p>
+              <p>현재 회원권 활성화된 회원수는</p>
+              <p>9999명 입니다.</p>
+              <Button>{'>'}</Button>
             </Col>
             <Col xs={3} className='sectionGlass'>
-              마감임박회원
+              <p>마감임박회원</p>
+              <p>99999명</p>
+              <p>이용권 만료 일주일 이내 회원수는</p>
+              <p>9999명 입니다.</p>
+              <Button>{'>'}</Button>
             </Col>
             <Col xs={3} className='sectionGlass'>
-              마감회원
+              <p>마감회원</p>
+              <p>99999명</p>
+              <p>최근 한달이내 마감된 회원수는</p>
+              <p>9999명 입니다.</p>
+              <Button>{'>'}</Button>
             </Col>
           </Row>
-          <Row>
-            <Col xs={6}>당일 매출</Col>
-            <Col xs={6}>당월 누적 매출</Col>
-            <Col xs={12}>매출 그래프</Col>
+          <Row className='sectionGlass'>
+            <Col xs={6}>
+              <Row>
+                <Col xs={6}>
+                  <p>당일 매출</p>
+                  <p>2022년 07월 30일</p>
+                </Col>
+                <Col xs={6}>3,200,000원</Col>
+              </Row>
+            </Col>
+            <Col xs={6}>
+              <Row>
+                <Col xs={6}>
+                  <p>당월 누적 매출</p>
+                  <p>2022년 07월</p>
+                </Col>
+                <Col xs={6}>3,200,000원</Col>
+              </Row>
+            </Col>
+            <Col xs={12}>
+              <div id='chart'>매출 차트 공간</div>
+            </Col>
           </Row>
         </Container>
         <div
