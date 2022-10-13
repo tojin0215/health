@@ -311,7 +311,9 @@ const ReservationClassItem = ({
         <div>
           <h4>수업 수정</h4>
           <Row>
-            <Col xs={3}>운동종류</Col>
+            <Col xs={3}>
+              <h5>운동종류</h5>
+            </Col>
             <Col xs={9}>
               <Row xs={2}>
                 <Col>
@@ -357,7 +359,7 @@ const ReservationClassItem = ({
                   </Form.Check>
                 </Col>
                 <Col>
-                  <Form.Check>
+                  <Form.Check inline>
                     <Form.Check.Input
                       type='radio'
                       name='exerciseGroup'
@@ -365,6 +367,11 @@ const ReservationClassItem = ({
                       checked={exerciseGroup['etc']}
                       onChange={handleExerciseRadio5}
                     />
+                    <Form.Check.Label htmlFor='etc' className='w-100'>
+                      기타
+                    </Form.Check.Label>
+                  </Form.Check>
+                  <Form.Check inline>
                     <Form.Control
                       placeholder='기타'
                       id='etcExercise'
@@ -478,14 +485,16 @@ const ReservationClassItem = ({
             </Col>
           </Row>
           <Row className='mt-3'>
-            <Col xs={12}>
-              <span>삭제시 되돌릴 수 없습니다. 한번 더 확인해주세요.</span>
+            <Col xs={12} className='text-danger text-end mt-3'>
+              <span className='m-2'>
+                삭제시 되돌릴 수 없습니다. 한번 더 확인해주세요.
+              </span>
               <Button
-                variant='danger'
+                variant='outline-danger'
                 onClick={() =>
                   // eslint-disable-next-line no-restricted-globals
                   confirm(
-                    '정말 삭제하시겠습니까?_예약된 회원도 같이 취소됩니다.'
+                    '정말 삭제하시겠습니까?_예약된 회원도 함께 취소됩니다.'
                   ) == true
                     ? reservationClassDelete(no)
                     : alert('삭제가 취소 되었습니다.')
