@@ -1,5 +1,27 @@
 .table {
   background-color: rgb(41, 41, 41);
+  border-color: #111;
+}
+.table td {
+  border: 1px solid #111;
+  padding: 0;
+  margin: 5px 0;
+  max-width: 147px;
+}
+
+.table td .class-info {
+  padding: 10px 0;
+  white-space: nowrap;
+}
+/* .reservation-class__schedule-content:hover {
+  border: 1px solid #e2ff33;
+} */
+.class-info > .reservation-class__schedule-content:hover {
+  border: 1px solid #e2ff33;
+}
+
+.table td .class-info :active {
+  background: #e2ff33;
 }
 
 /* 운동개별선택 테이블 체크박스 크기 조절 */

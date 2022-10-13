@@ -185,3 +185,7 @@ input {
   -webkit-text-fill-color: rgba(30, 30, 250, 1);
   font-weight: bold;
 }
+input::-webkit-input-placeholder {
+  -webkit-text-fill-color: #888;
+  font-weight: 400;
+}

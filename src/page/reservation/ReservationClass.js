@@ -281,26 +281,33 @@ const ReservationClassItem = ({
     <>
       {(loginWhether === 1 && loginWhetherTrainer === trainer) ||
       (loginWhether === 0 && loginWhetherTrainer !== trainer) ? (
-        <div
+        <Row
           className='reservation-class__schedule-content'
           onClick={modalOnClick}
         >
-          <p className='fw-bold'>
-            {exercise_class}/{kind}
-          </p>
-
-          <p>{trainer}</p>
-          <p>
-            {hourArray}시{minuteArray}분
-          </p>
-          <p>정원: {number_of_people}명</p>
+          <Col>
+            <p>
+              {hourArray}:{minuteArray}
+            </p>
+          </Col>
+          <Col>
+            <p className='fw-bold'>
+              {exercise_class}
+              {/* /{kind} */}
+            </p>
+            <p>{trainer}</p>
+            <p>
+              {number_of_people}/{/* {canRegist} */}전체
+            </p>
+          </Col>
 
           <div></div>
-        </div>
+        </Row>
       ) : (
         ''
       )}
       <Modal show={showModal}>
+        {/* <Modal show={true}> */}
         <div>
           <h4>수업 수정</h4>
           <Row>
@@ -863,16 +870,18 @@ class ReservationClass extends Component {
         </header>
 
         <Container>
-          <Row className='reservation-class__form sectionGlass'>
-            <Col xs={12}>
+          <Row className='reservation-class__form sectionGlass mb-5'>
+            <Col xs={12} className='mb-3'>
               <h4>수업 설정</h4>
             </Col>
-            <Col xs={1}>운동종류</Col>
-            <Col xs={9}>
-              <Form.Group>
-                <Row>
-                  <Col>
-                    <Form.Check>
+            <Col xs={12}>
+              <Row className='mb-3'>
+                <Col md={1} className='exerciseGroup'>
+                  <h5>운동종류</h5>
+                </Col>
+                <Col>
+                  <div>
+                    <Form.Check inline>
                       <Form.Check.Input
                         type='radio'
                         name='exerciseGroup'
@@ -884,9 +893,7 @@ class ReservationClass extends Component {
                         개인 PT
                       </Form.Check.Label>
                     </Form.Check>
-                  </Col>
-                  <Col>
-                    <Form.Check>
+                    <Form.Check inline>
                       <Form.Check.Input
                         type='radio'
                         name='exerciseGroup'
@@ -898,9 +905,7 @@ class ReservationClass extends Component {
                         GX
                       </Form.Check.Label>
                     </Form.Check>
-                  </Col>
-                  <Col>
-                    <Form.Check>
+                    <Form.Check inline>
                       <Form.Check.Input
                         type='radio'
                         name='exerciseGroup'
@@ -912,8 +917,26 @@ class ReservationClass extends Component {
                         필라테스
                       </Form.Check.Label>
                     </Form.Check>
-                  </Col>
-                  {/* <Col>
+                    <Form.Check inline>
+                      <Form.Check.Input
+                        type='radio'
+                        name='exerciseGroup'
+                        id='etc'
+                        checked={this.state.exerciseGroup['etc']}
+                        onChange={this.handleExerciseRadio}
+                      />
+                      <Form.Check.Label htmlFor='etc'>기타</Form.Check.Label>
+                    </Form.Check>
+                    <Form.Check inline>
+                      <Form.Control
+                        placeholder='기타'
+                        id='etcExercise'
+                        type='text'
+                        value={this.state.etcExercise}
+                        onChange={this.handleChange}
+                      ></Form.Control>
+                    </Form.Check>
+                    {/* <Col>
                       <Form.Check>
                         <Form.Check.Input
                           type='radio'
@@ -927,28 +950,10 @@ class ReservationClass extends Component {
                         </Form.Check.Label>
                       </Form.Check>
                     </Col> */}
-                  <Col>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        name='exerciseGroup'
-                        id='etc'
-                        checked={this.state.exerciseGroup['etc']}
-                        onChange={this.handleExerciseRadio}
-                      />
-                      <Form.Control
-                        placeholder='기타'
-                        id='etcExercise'
-                        type='text'
-                        value={this.state.etcExercise}
-                        onChange={this.handleChange}
-                      ></Form.Control>
-                    </Form.Check>
-                  </Col>
-                </Row>
-              </Form.Group>
+                  </div>
+                </Col>
+              </Row>
             </Col>
-            <Col xs={2}></Col>
             {/* <Col xs={11}>
               <Form.Control
                 label='운동종류'
@@ -1032,23 +1037,29 @@ class ReservationClass extends Component {
                 </Row>
               </Modal>
             </Col> */}
-            <Col xs={1}>운동명</Col>
-            <Col xs={4}>
+            <Col md={1} className='mb-3'>
+              <h5>운동명</h5>
+            </Col>
+            <Col md={4}>
               <Form.Control
                 id='exercise_class'
                 value={this.state.exercise_class}
+                placeholder='운동명을 입력해주세요'
                 onChange={this.handleChange}
                 InputProps={{ disableUnderline: true }}
                 label='운동명'
                 error={this.state.exercise_class_err}
               />
             </Col>
-            <Col xs={1}>강사</Col>
+            <Col xs={1}>
+              <h5>강사</h5>
+            </Col>
             <Col xs={4}>
               {this.props.userinfo.loginWhether === 1 ? (
                 <Form.Control
                   id='trainer'
                   value={this.props.userinfo.manager_name}
+                  placeholder='강사명을 입력해주세요'
                   onChange={this.handleChange}
                   InputProps={{ disableUnderline: true }}
                   label='강사명'
@@ -1061,6 +1072,8 @@ class ReservationClass extends Component {
                     <div>
                       <TrainerSearch
                         open={this.state.open}
+                        labe='강사검색'
+                        placeholder='강사명을 입력해주세요'
                         setOpen={(o) => this.setState({ open: o })}
                         fitness_no={this.props.userinfo.fitness_no}
                         handleUser={this.handleUser}
@@ -1071,6 +1084,7 @@ class ReservationClass extends Component {
                       <Form.Control
                         id='trainer'
                         label='강사 검색'
+                        placeholder='강사명 검색'
                         onClick={() => this.setState({ open: true })}
                         value={this.state.trainer_name}
                         // onChange={this.handleChange}
@@ -1084,11 +1098,13 @@ class ReservationClass extends Component {
                 </div>
               )}
             </Col>
-            <Col xs={2}> </Col>
-            <Col xs={1}>날짜</Col>
+            <Col xs={2}></Col>
+            <Col xs={1}>
+              <h5>날짜</h5>
+            </Col>
             <Col xs={4}>
               <DatePicker
-                className='text-center w-100'
+                className='text-center w-100 mb-4'
                 selected={this.state.class_date}
                 onChange={(date) => this.setState({ class_date: date })}
                 name='class_date'
@@ -1098,7 +1114,9 @@ class ReservationClass extends Component {
                 minDate={new Date()}
               />
             </Col>
-            <Col xs={1}>시간</Col>
+            <Col xs={1}>
+              <h5>시간</h5>
+            </Col>
             <Col xs={4}>
               <Row>
                 <Col>
@@ -1109,6 +1127,7 @@ class ReservationClass extends Component {
                     onChange={this.handleChange}
                     InputProps={{ disableUnderline: true }}
                     label='시'
+                    placeholder='시'
                     error={this.state.hour_err}
                   />
                 </Col>
@@ -1123,15 +1142,19 @@ class ReservationClass extends Component {
                     onChange={this.handleChange}
                     InputProps={{ disableUnderline: true }}
                     label='분'
+                    placeholder='분'
                     error={this.state.minute_err}
                   />
                 </Col>
               </Row>
             </Col>
-            <Col xs={1}>수강인원</Col>
+            <Col xs={1}>
+              <h5>인원</h5>
+            </Col>
             <Col xs={1}>
               <Form.Control
                 className=''
+                placeholder='인원'
                 type='number'
                 id='number_of_people'
                 value={this.state.number_of_people}
@@ -1145,12 +1168,7 @@ class ReservationClass extends Component {
               <Button onClick={this.handleOnClick}>수업 만들기</Button>
             </Col>
           </Row>
-          <Row>
-            <Col>
-              <Button onClick={this.handleUpdate}>수정하기</Button>
-            </Col>
-          </Row>
-          <Row xs={3}>
+          <Row xs={3} className='mb-3'>
             <Col className='text-end'>
               <Button
                 name='prev'
@@ -1223,14 +1241,16 @@ class ReservationClass extends Component {
               className='text-center py-2 w-100 overflow-auto justify-content-center'
               xs={12}
             >
-              <table className='table' name='classTable'>
+              <table className='table classTable' name='classTable'>
                 <thead>
                   <tr>
                     <th scope='col'>
-                      {moment(this.state.class_date)
-                        .day(0)
-                        .add({ days: this.state.dayIncreament })
-                        .format('MM-DD (dd)')}
+                      <div>
+                        {moment(this.state.class_date)
+                          .day(0)
+                          .add({ days: this.state.dayIncreament })
+                          .format('MM-DD (dd)')}
+                      </div>
                     </th>
                     <th scope='col'>
                       {moment(this.state.class_date)
@@ -1273,172 +1293,186 @@ class ReservationClass extends Component {
                 <tbody>
                   <tr>
                     <td>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(0 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(0 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
+                      <div className='class-info'>
+                        {' '}
+                        {this.state.reservationClass.length == 0 ? (
+                          <div className='border py-2 my-1 text-secondary'>
+                            수업이 없습니다.
+                          </div>
+                        ) : (
+                          this.state.reservationClass.filter(
+                            (value) =>
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrAfter(
+                                  moment().day(0 + this.state.dayIncreament),
+                                  'day'
+                                ) &&
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrBefore(
+                                  moment().day(0 + this.state.dayIncreament),
+                                  'day'
+                                )
+                          )
+                        )}
+                      </div>
                     </td>
                     <td>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(1 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(1 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
+                      <div className='class-info'>
+                        {' '}
+                        {this.state.reservationClass.length == 0 ? (
+                          <div className='border py-2 my-1 text-secondary'>
+                            수업이 없습니다.
+                          </div>
+                        ) : (
+                          this.state.reservationClass.filter(
+                            (value) =>
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrAfter(
+                                  moment().day(1 + this.state.dayIncreament),
+                                  'day'
+                                ) &&
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrBefore(
+                                  moment().day(1 + this.state.dayIncreament),
+                                  'day'
+                                )
+                          )
+                        )}
+                      </div>
                     </td>
                     <td>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(2 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(2 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
+                      <div className='class-info'>
+                        {' '}
+                        {this.state.reservationClass.length == 0 ? (
+                          <div className='border py-2 my-1 text-secondary'>
+                            수업이 없습니다.
+                          </div>
+                        ) : (
+                          this.state.reservationClass.filter(
+                            (value) =>
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrAfter(
+                                  moment().day(2 + this.state.dayIncreament),
+                                  'day'
+                                ) &&
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrBefore(
+                                  moment().day(2 + this.state.dayIncreament),
+                                  'day'
+                                )
+                          )
+                        )}
+                      </div>
                     </td>
                     <td>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(3 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(3 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
+                      <div className='class-info'>
+                        {' '}
+                        {this.state.reservationClass.length == 0 ? (
+                          <div className='border py-2 my-1 text-secondary'>
+                            수업이 없습니다.
+                          </div>
+                        ) : (
+                          this.state.reservationClass.filter(
+                            (value) =>
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrAfter(
+                                  moment().day(3 + this.state.dayIncreament),
+                                  'day'
+                                ) &&
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrBefore(
+                                  moment().day(3 + this.state.dayIncreament),
+                                  'day'
+                                )
+                          )
+                        )}
+                      </div>
                     </td>
                     <td>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(4 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(4 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
+                      <div className='class-info'>
+                        {' '}
+                        {this.state.reservationClass.length == 0 ? (
+                          <div className='border py-2 my-1 text-secondary'>
+                            수업이 없습니다.
+                          </div>
+                        ) : (
+                          this.state.reservationClass.filter(
+                            (value) =>
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrAfter(
+                                  moment().day(4 + this.state.dayIncreament),
+                                  'day'
+                                ) &&
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrBefore(
+                                  moment().day(4 + this.state.dayIncreament),
+                                  'day'
+                                )
+                          )
+                        )}
+                      </div>
                     </td>
                     <td>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(5 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(5 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
+                      <div className='class-info'>
+                        {' '}
+                        {this.state.reservationClass.length == 0 ? (
+                          <div className='border py-2 my-1 text-secondary'>
+                            수업이 없습니다.
+                          </div>
+                        ) : (
+                          this.state.reservationClass.filter(
+                            (value) =>
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrAfter(
+                                  moment().day(5 + this.state.dayIncreament),
+                                  'day'
+                                ) &&
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrBefore(
+                                  moment().day(5 + this.state.dayIncreament),
+                                  'day'
+                                )
+                          )
+                        )}
+                      </div>
                     </td>
                     <td>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(6 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(6 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
+                      <div className='class-info'>
+                        {' '}
+                        {this.state.reservationClass.length == 0 ? (
+                          <div className='border py-2 my-1 text-secondary'>
+                            수업이 없습니다.
+                          </div>
+                        ) : (
+                          this.state.reservationClass.filter(
+                            (value) =>
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrAfter(
+                                  moment().day(6 + this.state.dayIncreament),
+                                  'day'
+                                ) &&
+                              moment(value.props.class_date.split('T')[0])
+                                .add(9, 'hour')
+                                .isSameOrBefore(
+                                  moment().day(6 + this.state.dayIncreament),
+                                  'day'
+                                )
+                          )
+                        )}
+                      </div>
                     </td>
                   </tr>
                 </tbody>
