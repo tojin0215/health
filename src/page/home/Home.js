@@ -14,7 +14,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Offcanvas from 'react-bootstrap/Offcanvas';
 
 // import  { PC, Mobile } from '../../component/MediaQuery';
 // import Menu from '../../component/navigation/Menu';
@@ -47,31 +46,6 @@ require('moment-timezone');
 var moment = require('moment');
 
 moment.tz.setDefault('Asia/Seoul');
-
-function classTimeTable() {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  return (
-    <>
-      <Button variant='primary' onClick={handleShow}>
-        Launch
-      </Button>
-
-      <Offcanvas show={show} onHide={handleClose}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
-        </Offcanvas.Body>
-      </Offcanvas>
-    </>
-  );
-}
 
 class Home extends Component {
   constructor(props) {
@@ -215,13 +189,6 @@ class Home extends Component {
     }
   };
 
-  handleClose = () => {
-    this.setState({ show: false });
-  };
-  handleShow = () => {
-    this.setState({ show: true });
-  };
-
   render() {
     const { userinfo } = this.props;
 
@@ -240,18 +207,7 @@ class Home extends Component {
         </div>
         {/*.header */}
         <Container>
-          <Button variant='secondary' onClick={this.handleShow}>
-            시간표
-          </Button>
-          <Offcanvas show={this.state.show} onHide={this.handleClose}>
-            <Offcanvas.Header closeButton>
-              <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
-              Some text as placeholder. In real life you can have the elements
-              you have chosen. Like, text, images, lists, etc.
-            </Offcanvas.Body>
-          </Offcanvas>
+          <Button variant='secondary'>시간표</Button>
           <Row>
             <Col xs={3} className='sectionGlass'>
               <p>전체회원</p>
