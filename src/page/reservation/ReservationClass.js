@@ -356,7 +356,7 @@ const ReservationClassItem = ({
                     </Form.Check.Label>
                   </Form.Check>
                 </Col>
-                <Col xs={8} className='d-flex justify-content'>
+                <Col xs={3} /* className='d-flex justify-content' */>
                   <Form.Check>
                     <Form.Check.Input
                       type='radio'
@@ -369,6 +369,8 @@ const ReservationClassItem = ({
                       기타
                     </Form.Check.Label>
                   </Form.Check>
+                </Col>
+                <Col xs={5}>
                   <Form.Check>
                     <Form.Control
                       placeholder='기타'
