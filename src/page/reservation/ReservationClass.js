@@ -306,15 +306,17 @@ const ReservationClassItem = ({
       ) : (
         ''
       )}
+      {/* <Modal show={showModal}> */}
       <Modal show={showModal}>
-        {/* <Modal show={true}> */}
         <div>
-          <h4>수업 수정</h4>
+          <h4 className='mb-3'>수업 수정</h4>
           <Row>
-            <Col xs={3}>운동종류</Col>
-            <Col xs={9}>
+            <Col xs={3}>
+              <h5>운동종류</h5>
+            </Col>
+            <Col xs={9} className='mt-2'>
               <Row xs={2}>
-                <Col>
+                <Col xs={4}>
                   <Form.Check>
                     <Form.Check.Input
                       type='radio'
@@ -342,7 +344,7 @@ const ReservationClassItem = ({
                     </Form.Check.Label>
                   </Form.Check>
                 </Col>
-                <Col>
+                <Col xs={4}>
                   <Form.Check>
                     <Form.Check.Input
                       type='radio'
@@ -356,7 +358,7 @@ const ReservationClassItem = ({
                     </Form.Check.Label>
                   </Form.Check>
                 </Col>
-                <Col>
+                <Col xs={8} className='d-flex justify-content'>
                   <Form.Check>
                     <Form.Check.Input
                       type='radio'
@@ -365,6 +367,11 @@ const ReservationClassItem = ({
                       checked={exerciseGroup['etc']}
                       onChange={handleExerciseRadio5}
                     />
+                    <Form.Check.Label htmlFor='etc' className='w-100'>
+                      기타
+                    </Form.Check.Label>
+                  </Form.Check>
+                  <Form.Check>
                     <Form.Control
                       placeholder='기타'
                       id='etcExercise'
@@ -390,16 +397,25 @@ const ReservationClassItem = ({
                 </Col>
               </Row>
             </Col>
-            <Col xs={3}>운동명</Col>
+          </Row>
+          <Row>
+            <Col xs={3}>
+              <h5>운동명</h5>
+            </Col>
             <Col xs={9}>
               <Form.Control
                 value={exercise_class_input}
+                placeholder='운동명을 입력해주세요'
                 id='exercise_class'
                 onChange={updateChange}
                 error={exercise_class_err}
               ></Form.Control>
             </Col>
-            <Col xs={3}>강사</Col>
+          </Row>
+          <Row>
+            <Col xs={3}>
+              <h5>강사</h5>
+            </Col>
             <Col xs={9}>
               {loginWhether === 1 ? (
                 <Form.Control
@@ -410,6 +426,7 @@ const ReservationClassItem = ({
               ) : (
                 <Form.Control
                   value={trainer_input}
+                  placeholder='강사 검색'
                   onClick={() => setSearchOpen(true)}
                   id='trainer'
                   error={trainer_err}
@@ -427,7 +444,11 @@ const ReservationClassItem = ({
                 </div>
               </Modal>
             </Col>
-            <Col xs={3}>날짜</Col>
+          </Row>
+          <Row>
+            <Col xs={3}>
+              <h5>날짜</h5>
+            </Col>
             <Col xs={9}>
               <Form.Control
                 type='date'
@@ -438,7 +459,11 @@ const ReservationClassItem = ({
                 error={class_date_err}
               />
             </Col>
-            <Col xs={3}>시간</Col>
+          </Row>
+          <Row>
+            <Col xs={3}>
+              <h5>시간</h5>
+            </Col>
             <Col xs={9}>
               <Row>
                 <Col>
@@ -466,6 +491,8 @@ const ReservationClassItem = ({
                 </Col>
               </Row>
             </Col>
+          </Row>
+          <Row>
             <Col xs={3}>수강인원</Col>
             <Col xs={9}>
               <Form.Control
@@ -478,14 +505,16 @@ const ReservationClassItem = ({
             </Col>
           </Row>
           <Row className='mt-3'>
-            <Col xs={12}>
-              <span>삭제시 되돌릴 수 없습니다. 한번 더 확인해주세요.</span>
+            <Col xs={12} className='text-danger text-end my-3'>
+              <span className='m-2'>
+                삭제시 되돌릴 수 없습니다. 한번 더 확인해주세요.
+              </span>
               <Button
-                variant='danger'
+                variant='outline-danger'
                 onClick={() =>
                   // eslint-disable-next-line no-restricted-globals
                   confirm(
-                    '정말 삭제하시겠습니까?_예약된 회원도 같이 취소됩니다.'
+                    '정말 삭제하시겠습니까?_예약된 회원도 함께 취소됩니다.'
                   ) == true
                     ? reservationClassDelete(no)
                     : alert('삭제가 취소 되었습니다.')
@@ -494,12 +523,14 @@ const ReservationClassItem = ({
                 삭제
               </Button>
             </Col>
-            <Col xs={6}>
-              <Button variant='secondary' onClick={modalClose}>
+            <Col className='text-center'>
+              <Button
+                className='btn-primary-dark mx-1'
+                onClick={modalClose}
+                variant='primary-dark'
+              >
                 닫기
               </Button>
-            </Col>
-            <Col xs={6}>
               <Button onClick={() => reservationClassUpdate(no)}>
                 수정하기
               </Button>
