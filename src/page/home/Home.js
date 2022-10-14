@@ -294,28 +294,39 @@ class Home extends Component {
           <Container>
             <Button variant='secondary'>시간표</Button>
             <Row>
-              <Col xs={3} className='sectionGlass'>
-                <p>전체회원</p>
-                <p>99999명</p>
-                <p>현재까지 등록된 모든 회원수는</p>
-                <p>9999명 입니다.</p>
-                <Button>{'>'}</Button>
+              <Col xs={3} className='sectionGlass-manager '>
+                <Row>
+                  <Col className='sectionGlass-manger-Tit'>
+                    전체회원
+                    <br />
+                    <strong>99999</strong>명
+                  </Col>
+                  <Col>버튼</Col>
+                </Row>
+                <Row className='mt-5'>
+                  <Col className='sectionGlass-manager-des'>
+                    현재까지 등록된 모든 회원수는
+                    <br />
+                    99999명 입니다.
+                  </Col>
+                </Row>
+                {/* <Button>{'>'}</Button> */}
               </Col>
-              <Col xs={3} className='sectionGlass'>
+              <Col xs={3} className='sectionGlass-manager'>
                 <p>유효회원</p>
                 <p>99999명</p>
                 <p>현재 회원권 활성화된 회원수는</p>
                 <p>9999명 입니다.</p>
                 <Button>{'>'}</Button>
               </Col>
-              <Col xs={3} className='sectionGlass'>
+              <Col xs={3} className='sectionGlass-manager'>
                 <p>마감임박회원</p>
                 <p>99999명</p>
                 <p>이용권 만료 일주일 이내 회원수는</p>
                 <p>9999명 입니다.</p>
                 <Button>{'>'}</Button>
               </Col>
-              <Col xs={3} className='sectionGlass'>
+              <Col xs={3} className='sectionGlass-manager'>
                 <p>마감회원</p>
                 <p>99999명</p>
                 <p>최근 한달이내 마감된 회원수는</p>
@@ -323,23 +334,24 @@ class Home extends Component {
                 <Button>{'>'}</Button>
               </Col>
             </Row>
-            <Row className='sectionGlass'>
-              <Col xs={6}>
-                <Row>
-                  <Col xs={6}>
-                    <p>당일 매출</p>
-                    <p>2022년 07월 30일</p>
+            <Row className='sectionGlass-manager '>
+              <Col xs={6} className='salesStatis'>
+                <Row className='d-flex justify-content-between'>
+                  <Col xs={8}>
+                    당일 매출
+                    <br />
+                    2022년 07월 30일
                   </Col>
-                  <Col xs={6}>3,200,000원</Col>
+                  <Col xs={4}>3,200,000원</Col>
                 </Row>
               </Col>
-              <Col xs={6}>
+              <Col xs={6} className='salesStatis'>
                 <Row>
-                  <Col xs={6}>
+                  <div>
                     <p>당월 누적 매출</p>
                     <p>2022년 07월</p>
-                  </Col>
-                  <Col xs={6}>3,200,000원</Col>
+                  </div>
+                  <div>3,200,000원</div>
                 </Row>
               </Col>
               <Col xs={12}>

@@ -1,3 +1,20 @@
+.sectionGlass-manager .sectionGlass-manger-Tit {
+  font-size: 20px;
+}
+.sectionGlass-manager-des {
+  white-space: nowrap;
+  font-size: 14px;
+  color: #888;
+}
+
+/* 매출 */
+.salesStatis {
+  border: 1px solid #888888;
+  border-radius: 5px;
+  padding: 30px;
+  background: #35333d;
+}
+/* 기존 메인 */
 .home {
   background-color: #000;
 }
