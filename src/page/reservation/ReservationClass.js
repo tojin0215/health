@@ -300,13 +300,11 @@ const ReservationClassItem = ({
               {number_of_people}/{/* {canRegist} */}전체
             </p>
           </Col>
-
-          <div></div>
         </Row>
       ) : (
         ''
       )}
-      {/* <Modal show={showModal}> */}
+      {/* <Modal show={true}> */}
       <Modal show={showModal}>
         <div>
           <h4 className='mb-3'>수업 수정</h4>

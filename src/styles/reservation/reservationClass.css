@@ -1,16 +1,18 @@
 /* 
-* 수업 만들기 시간표 목록
+ 수업 만들기 시간표 목록
 */
 /* thead 폰트 컬러 */
-.reservationClassWrap .table thead tr th {
-  color: #eee;
+.classTable thead tr th {
+  text-align: center;
+  font-weight: 400;
+  color: #fff;
 }
 /* tbody 폰트 컬러 */
-.reservationClassWrap tbody tr td {
+.classTable tbody tr td {
   color: #fff;
 }
 
-.reservationClassWrap .MuiInputBase-input {
+.classTable .MuiInputBase-input {
   text-align: center;
 }
 
