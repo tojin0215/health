@@ -103,15 +103,33 @@ const ReservationClassItem = ({
   const hourArray = hour >= 10 ? hour : '0' + hour;
   const minuteArray = minute >= 10 ? minute : '0' + minute;
   return (
-    <Row className='reservation__class-table--td' onClick={handleInnerOnClick}>
-      <Col xs={6}>{kind}</Col>
+    <Row
+      className='reservation-class__schedule-content'
+      onClick={handleInnerOnClick}
+    >
+      <Col>
+        <p>
+          {hourArray}:{minuteArray}
+        </p>
+      </Col>
+      <Col>
+        <p className='fw-bold'>
+          {exercise_class}
+          {/* /{kind} */}
+        </p>
+        <p>{trainer}</p>
+        <p>
+          {number_of_people}/{canRegist}
+        </p>
+      </Col>
+      {/* <Col xs={6}>{kind}</Col>
       <Col xs={6}>{trainer}</Col>
       <Col xs={6}>
         {canRegist}/{number_of_people}
       </Col>
       <Col xs={6} className='text-center fw-bold'>
         {hourArray}:{minuteArray}
-      </Col>
+      </Col> */}
       {/* <p>운동명</p> */}
       {/* <p className='fw-bold'>
         {exercise_class}[{kind}]
@@ -1474,14 +1492,18 @@ class Reservation extends Component {
                   </Button>
                 </Col>
               </Row>
-              <div className='resevation__class-Tabs mt-2'>
+              <Row className='resevation__class-Tabs mt-2'>
                 <Tabs
                   className='reservation__class-container'
                   id='reservation__class__tabs'
                   activeKey={this.key}
                   onSelect={this.selectClassTabs}
                 >
-                  <Tab className='' eventKey='pt' title='개인PT'>
+                  <Tab
+                    className='reservation__class__tabs-item'
+                    eventKey='pt'
+                    title='개인PT'
+                  >
                     <Tabs
                       activeKey={this.keyTrainer}
                       onSelect={this.selectClassTabs}
@@ -1526,59 +1548,59 @@ class Reservation extends Component {
                     </Tabs>
                   </Tab>
                 </Tabs>
-              </div>
-              <div>
-                <TableContainer>
-                  <Table class='table class-list'>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell scope='col' align='center'>
-                          {moment(this.state.reserv_date)
-                            .day(0)
-                            .add(this.state.dayIncreament, 'days')
-                            .format('MM-DD (dd)')}
-                        </TableCell>
-                        <TableCell scope='col' align='center'>
-                          {moment(this.state.reserv_date)
-                            .day(1)
-                            .add(this.state.dayIncreament, 'days')
-                            .format('MM-DD (dd)')}
-                        </TableCell>
-                        <TableCell scope='col' align='center'>
-                          {moment(this.state.reserv_date)
-                            .day(2)
-                            .add(this.state.dayIncreament, 'days')
-                            .format('MM-DD (dd)')}
-                        </TableCell>
-                        <TableCell scope='col' align='center'>
-                          {moment(this.state.reserv_date)
-                            .day(3)
-                            .add(this.state.dayIncreament, 'days')
-                            .format('MM-DD (dd)')}
-                        </TableCell>
-                        <TableCell scope='col' align='center'>
-                          {moment(this.state.reserv_date)
-                            .day(4)
-                            .add(this.state.dayIncreament, 'days')
-                            .format('MM-DD (dd)')}
-                        </TableCell>
-                        <TableCell scope='col' align='center'>
-                          {moment(this.state.reserv_date)
-                            .day(5)
-                            .add(this.state.dayIncreament, 'days')
-                            .format('MM-DD (dd)')}
-                        </TableCell>
-                        <TableCell scope='col' align='center'>
-                          {moment(this.state.reserv_date)
-                            .day(6)
-                            .add(this.state.dayIncreament, 'days')
-                            .format('MM-DD (dd)')}
-                        </TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      <TableRow>
-                        <TableCell align='center' className='align-top'>
+              </Row>
+              <Row>
+                <table className='table classTable mt-3' name='classTable'>
+                  <thead>
+                    <tr>
+                      <th scope='col' align='center'>
+                        {moment(this.state.reserv_date)
+                          .day(0)
+                          .add(this.state.dayIncreament, 'days')
+                          .format('MM-DD (dd)')}
+                      </th>
+                      <th scope='col' align='center'>
+                        {moment(this.state.reserv_date)
+                          .day(1)
+                          .add(this.state.dayIncreament, 'days')
+                          .format('MM-DD (dd)')}
+                      </th>
+                      <th scope='col' align='center'>
+                        {moment(this.state.reserv_date)
+                          .day(2)
+                          .add(this.state.dayIncreament, 'days')
+                          .format('MM-DD (dd)')}
+                      </th>
+                      <th scope='col' align='center'>
+                        {moment(this.state.reserv_date)
+                          .day(3)
+                          .add(this.state.dayIncreament, 'days')
+                          .format('MM-DD (dd)')}
+                      </th>
+                      <th scope='col' align='center'>
+                        {moment(this.state.reserv_date)
+                          .day(4)
+                          .add(this.state.dayIncreament, 'days')
+                          .format('MM-DD (dd)')}
+                      </th>
+                      <th scope='col' align='center'>
+                        {moment(this.state.reserv_date)
+                          .day(5)
+                          .add(this.state.dayIncreament, 'days')
+                          .format('MM-DD (dd)')}
+                      </th>
+                      <th scope='col' align='center'>
+                        {moment(this.state.reserv_date)
+                          .day(6)
+                          .add(this.state.dayIncreament, 'days')
+                          .format('MM-DD (dd)')}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td align='center' className='align-top'>
+                        <div className='class-info'>
                           {this.state.reservationClass.length === 0 ? (
                             <div className='py-2 my-1 text-secondary rounded'>
                               <TbMoodSuprised className='fs-3' />
@@ -1601,12 +1623,10 @@ class Reservation extends Component {
                                   )
                             )
                           )}
-                        </TableCell>
-                        <TableCell
-                          name='mon'
-                          align='center'
-                          className='align-top'
-                        >
+                        </div>
+                      </td>
+                      <td name='mon' align='center' className='align-top'>
+                        <div className='class-info'>
                           {' '}
                           {this.state.reservationClass.length == 0 ? (
                             <div className='py-2 my-1 text-secondary  rounded'>
@@ -1630,12 +1650,10 @@ class Reservation extends Component {
                                   )
                             )
                           )}
-                        </TableCell>
-                        <TableCell
-                          name='tue'
-                          align='center'
-                          className='align-top'
-                        >
+                        </div>
+                      </td>
+                      <td name='tue' align='center' className='align-top'>
+                        <div className='class-info'>
                           {this.state.reservationClass.length == 0 ? (
                             <div className='py-2 my-1 text-secondary rounded'>
                               <TbMoodSuprised className='fs-3' />
@@ -1658,12 +1676,10 @@ class Reservation extends Component {
                                   )
                             )
                           )}
-                        </TableCell>
-                        <TableCell
-                          name='wed'
-                          align='center'
-                          className='align-top'
-                        >
+                        </div>
+                      </td>
+                      <td name='wed' align='center' className='align-top'>
+                        <div className='class-info'>
                           {' '}
                           {this.state.reservationClass.length == 0 ? (
                             <div className='py-2 my-1 text-secondary rounded'>
@@ -1687,12 +1703,10 @@ class Reservation extends Component {
                                   )
                             )
                           )}
-                        </TableCell>
-                        <TableCell
-                          name='thu'
-                          align='center'
-                          className='align-top'
-                        >
+                        </div>
+                      </td>
+                      <td name='thu' align='center' className='align-top'>
+                        <div className='class-info'>
                           {' '}
                           {this.state.reservationClass.length == 0 ? (
                             <div className='py-2 my-1 text-secondary rounded'>
@@ -1716,12 +1730,10 @@ class Reservation extends Component {
                                   )
                             )
                           )}
-                        </TableCell>
-                        <TableCell
-                          name='fri'
-                          align='center'
-                          className='align-top'
-                        >
+                        </div>
+                      </td>
+                      <td name='fri' align='center' className='align-top'>
+                        <div className='class-info'>
                           {' '}
                           {this.state.reservationClass.length == 0 ? (
                             <div className='py-2 my-1 text-secondary rounded'>
@@ -1745,12 +1757,10 @@ class Reservation extends Component {
                                   )
                             )
                           )}
-                        </TableCell>
-                        <TableCell
-                          name='sat'
-                          align='center'
-                          className='align-top'
-                        >
+                        </div>
+                      </td>
+                      <td name='sat' align='center' className='align-top'>
+                        <div className='class-info'>
                           {' '}
                           {this.state.reservationClass.length == 0 ? (
                             <div className='py-2 my-1 text-secondary rounded'>
@@ -1774,12 +1784,12 @@ class Reservation extends Component {
                                   )
                             )
                           )}
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </Row>
             </Col>
             <Col className='reservation__class__console'>
               {this.props.userinfo.loginWhether === 2 ? (

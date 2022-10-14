@@ -300,13 +300,11 @@ const ReservationClassItem = ({
               {number_of_people}/{/* {canRegist} */}전체
             </p>
           </Col>
-
-          <div></div>
         </Row>
       ) : (
         ''
       )}
-      {/* <Modal show={showModal}> */}
+      {/* <Modal show={true}> */}
       <Modal show={showModal}>
         <div>
           <h4 className='mb-3'>수업 수정</h4>
@@ -358,7 +356,7 @@ const ReservationClassItem = ({
                     </Form.Check.Label>
                   </Form.Check>
                 </Col>
-                <Col xs={8} className='d-flex justify-content'>
+                <Col xs={3} /* className='d-flex justify-content' */>
                   <Form.Check>
                     <Form.Check.Input
                       type='radio'
@@ -371,6 +369,8 @@ const ReservationClassItem = ({
                       기타
                     </Form.Check.Label>
                   </Form.Check>
+                </Col>
+                <Col xs={5}>
                   <Form.Check>
                     <Form.Control
                       placeholder='기타'

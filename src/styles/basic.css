@@ -47,7 +47,7 @@ h5 .parallelogram {
 }
 
 h6 {
-  display: flex;
+  line-height: 2.8rem;
   font-weight: 400;
   align-items: center;
 }
