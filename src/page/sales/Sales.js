@@ -54,6 +54,8 @@ import Paper from '@mui/material/Paper';
 
 // nivo.rocks 그래프
 import { ResponsiveBar } from '@nivo/bar';
+// apexcharts.com
+import Chart from 'react-apexcharts';
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -62,6 +64,24 @@ require('moment-timezone');
 var moment = require('moment');
 
 moment.tz.setDefault('Asia/Seoul');
+
+// var options = {
+//   chart: {
+//     type: 'bar',
+//   },
+//   series: [
+//     {
+//       name: 'sales',
+//       data: [30, 40, 45, 50, 49, 60, 70, 91, 125],
+//     },
+//   ],
+//   xaxis: {
+//     categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
+//   },
+// };
+
+// var chart = new ApexCharts(document.querySelector('#chart'), options);
+// chart.render();
 
 const ViewsalesItem = ({
   num,
@@ -188,6 +208,42 @@ class Sales extends Component {
       lets: 0, //선택조회:1, 당일:2, 당월:3
       page: 0,
       rowsPerPage: 5,
+      options: {
+        chart: {
+          id: 'sales-bar',
+        },
+        xaxis: {
+          categories: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022],
+        },
+      },
+      series: [
+        {
+          name: '현금',
+          data: [800, 650, 760, 940, 840, 745, 850, 810],
+        },
+        {
+          name: '계좌이체',
+          data: [900, 850, 960, 840, 940, 845, 950, 910],
+        },
+        {
+          name: '카드',
+          data: [3300, 2860, 3950, 4820, 3950, 4250, 3860, 4800],
+        },
+      ],
+      // chart: {
+      //   type: 'bar',
+      //   height: 550,
+      //   stacked: true,
+      //   toolbar: {
+      //     show: true,
+      //   },
+      //   zoom: {
+      //     enabled: true,
+      //   },
+      // },
+      // optionsDonut: {},
+      // seriesDonut: [30, 40, 45, 50, 49],
+      // labelsDonut: ['A', 'B', 'C', 'D', 'E'],
     };
   }
   goLogin = () => {
@@ -730,13 +786,13 @@ class Sales extends Component {
   handleChangePage = (e, newPage) => {
     this.setState({ page: newPage });
   };
+
   render() {
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.salesViewList);
     // console.log(this.state.exerciseViewList);
     // console.log(this.state.card);
     // console.log(this.state.lets);
-
     return (
       <div className='wrap sales'>
         <div className='header'>
@@ -770,9 +826,25 @@ class Sales extends Component {
             </h5>
             <Button onClick={this.goAddSales}>결제 등록</Button>
           </div>
-          <div style={{ height: '500px', background: '#2F2F3D' }}>
-            그래프 공간입니다.
-          </div>
+          <Row>
+            <Col xs={12} className='mixed-chart'>
+              <Chart
+                options={this.state.options}
+                series={this.state.series}
+                type='bar'
+                width='100%'
+                height='400px'
+              />
+            </Col>
+            {/* <Col xs={6} className='mixed-chart'>
+              <Chart
+                options={this.state.optionsDonut}
+                series={this.state.seriesDonut}
+                type='donut'
+                width='450'
+              />
+            </Col> */}
+          </Row>
           <div className='d-flex justify-content-between my-3'>
             <Button
               onClick={() => this.handleButton('당일')}
