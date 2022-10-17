@@ -271,17 +271,17 @@ class Navigation extends Component {
                       운동 배정
                     </NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <NavLink exact to='/workoutAlloted'>
                       개별 운동 배정
                     </NavLink>
-                  </li>
+                  </li> */}
                   <li>
                     <NavLink exact to='/workoutAdd'>
                       운동값 설정
                     </NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <NavLink exact to='/workoutStage'>
                       기본 루틴 배정 (삭제)
                     </NavLink>
@@ -290,7 +290,7 @@ class Navigation extends Component {
                     <NavLink exact to='/workoutStageAdd'>
                       기본 루틴 설정 (삭제)
                     </NavLink>
-                  </li>
+                  </li> */}
                 </ul>
               </NavLink>
               <NavLink exact to='/introduce'>
@@ -311,7 +311,7 @@ class Navigation extends Component {
                       센터 관리
                     </NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <NavLink exact to='/introduceAdd'>
                       센터 소개 등록 (삭제)
                     </NavLink>
@@ -335,12 +335,12 @@ class Navigation extends Component {
                     <NavLink exact to='/genetic'>
                       DTC (삭제)
                     </NavLink>
-                  </li>
+                  </li> */}
                 </ul>
               </NavLink>
-              <NavLink exact to='/statistics'>
+              {/* <NavLink exact to='/statistics'>
                 <span className={styles.navitem}></span>
-              </NavLink>
+              </NavLink> */}
               {/* {userinfo.fitness_no === 1 ? (
                 <NavLink exact to='/admin'>
                   <span className={styles.navitem}>관리자</span>
