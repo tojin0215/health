@@ -8,8 +8,25 @@
   color: #fff;
 }
 
+.register__terms .form-check {
+  padding: 0;
+}
+
 .register .form-check-label {
   line-height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.register .form-check-label .form-check-input {
+  padding: 8px;
+  margin: 10px;
+}
+
+.form-check-input--success {
+  font-size: 18px;
+  color: green;
+  margin: 10px;
 }
 
 .register__terms {
@@ -17,13 +34,13 @@
 }
 
 .register__terms__btn {
+  display: block;
   padding: 4px 10px;
-  font-size: 12px;
-  /* font-weight: ; */
-  cursor: pointer;
+  margin: 0 16px;
   border: 1px solid #fff;
-  margin: 16px;
   border-radius: 10px;
+  font-size: 12px;
+  cursor: pointer;
   transition: all 0.5s;
 }
 .register__terms__btn:hover {
@@ -33,4 +50,5 @@
 
 .register__terms__guide {
   color: #aaa;
+  font-weight: 400;
 }
