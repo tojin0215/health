@@ -137,14 +137,10 @@
   color: #fff;
   text-align: center;
 }
+.table-dark tbody {
+  background-color: #fff;
+}
 /* mui table light*/
-.MuiTableContainer-root {
-  border-radius: 0;
-}
-.MuiTable-root {
-  border-radius: 0;
-}
-
 .table-light th {
   border-bottom: 1px solid #333;
   color: #333;

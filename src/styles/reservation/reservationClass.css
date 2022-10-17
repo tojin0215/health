@@ -82,7 +82,7 @@
   border-bottom: 1px solid #111;
 }
 /* 수업 수정 modal */
-.modal-dialog .modal-content {
+.reservationClass-modal .modal-content {
   width: 34.875rem;
 }
 

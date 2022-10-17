@@ -7,13 +7,15 @@ import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
 
-import { Row, Col, Container, Button, Table, Tab, Tabs } from 'react-bootstrap';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import { Row, Col, Container, Button } from 'react-bootstrap';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+// import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+// import 'react-datepicker/dist/react-datepicker.css';
 import Select from 'react-select';
 
 import '../../styles/sales/Sales.css';
@@ -27,6 +29,18 @@ import {
   salesSelectExercise,
   salesSelectTools,
 } from '../../api/user';
+// react icons
+import { TbMoodSuprised } from 'react-icons/tb';
+/* mui */
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TablePagination from '@mui/material/TablePagination';
+import { TextField } from '@mui/material';
+/* 
 import {
   TableBody,
   TableCell,
@@ -34,8 +48,9 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-} from '@mui/material';
+} from '@mui/material'; */
 import { DataArrayRounded } from '@mui/icons-material';
+import Paper from '@mui/material/Paper';
 
 // nivo.rocks 그래프
 import { ResponsiveBar } from '@nivo/bar';
@@ -73,11 +88,11 @@ const ViewsalesItem = ({
       <TableCell>{client_name}</TableCell>
       <TableCell>{exerciseName}</TableCell>
       <TableCell>{payDate}</TableCell>
-      <TableCell>{paidMembership ? paidMembership : ''}</TableCell>
       <TableCell>
         {startDate}
         {salesDays ? `[` + salesDays + '일' + `]` : ''}
       </TableCell>
+      <TableCell>{paidMembership ? paidMembership : ''}</TableCell>
       <TableCell>{paymentTools}</TableCell>
       <TableCell>{allPrice}</TableCell>
     </TableRow>
@@ -795,7 +810,7 @@ class Sales extends Component {
               조회하기
             </Button>
           </div>
-          <Table className='table-sales'>
+          <Table className='table-dark table-sales'>
             <TableHead>
               <TableRow>
                 <TableCell scope='col'>카드</TableCell>
@@ -804,7 +819,7 @@ class Sales extends Component {
                 <TableCell scope='col'>총매출</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody className='text-center'>
+            <TableBody>
               <TableCell scope='col'> {this.state.card}</TableCell>
               <TableCell scope='col'>{this.state.cash}</TableCell>
               <TableCell scope='col'>{this.state.transfer}</TableCell>
@@ -816,31 +831,41 @@ class Sales extends Component {
           <Tabs
             defaultActiveKey='home'
             id='uncontrolled-tab-example'
-            className='mb-3'
+            className='mb-3 mt-5'
           >
             <Tab eventKey='home' title='전체보기'>
-              <Table
-                className='table--block table-dark'
-                aria-label='simple table'
-              >
-                <TableHead>
-                  <TableRow>
-                    <TableCell scope='col'>회원명</TableCell>
-                    <TableCell scope='col'>보유이용권</TableCell>
-                    <TableCell scope='col'>결제일</TableCell>
-                    <TableCell scope='col'>이용권시작일</TableCell>
-                    <TableCell scope='col'>잔여이용권</TableCell>
-                    <TableCell scope='col'>결제도구</TableCell>
-                    <TableCell scope='col'>결제금액</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.state.salesViewList.slice(
-                    this.state.page * this.state.rowsPerPage,
-                    this.state.page * this.state.rowsPerPage +
-                      this.state.rowsPerPage
-                  )}
-                </TableBody>
+              <TableContainer component={Paper}>
+                <Table
+                  className='table--block table-dark'
+                  aria-label='simple table'
+                >
+                  <TableHead>
+                    <TableRow>
+                      <TableCell scope='col'>회원명</TableCell>
+                      <TableCell scope='col'>보유이용권</TableCell>
+                      <TableCell scope='col'>결제일</TableCell>
+                      <TableCell scope='col'>이용권시작일</TableCell>
+                      <TableCell scope='col'>잔여이용권</TableCell>
+                      <TableCell scope='col'>결제도구</TableCell>
+                      <TableCell scope='col'>결제금액</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.salesViewList.slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )}
+                  </TableBody>
+                </Table>
+                {this.state.salesViewList.length === 0 ? (
+                  <div className='p-5 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>등록된 회원이 없습니다.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
                 <TablePagination
                   rowsPerPageOptions={[
                     5,
@@ -857,7 +882,7 @@ class Sales extends Component {
                   onPageChange={this.handleChangePage}
                   onRowsPerPageChange={this.handleChangeRowsPerPage}
                 />
-              </Table>
+              </TableContainer>
             </Tab>
 
             <Tab eventKey='exercise' title='운동별'>
@@ -1046,25 +1071,38 @@ class Sales extends Component {
                 </div>
               )}
 
-              <Table className='table-dark'>
-                <TableHead>
-                  <TableRow>
-                    <TableCell scope='col'>고객명</TableCell>
-                    <TableCell scope='col'>운동명</TableCell>
-                    <TableCell scope='col'>결제일</TableCell>
-                    <TableCell scope='col'>결제된 회원권</TableCell>
-                    <TableCell scope='col'>기간권시작일[기간권일수]</TableCell>
-                    <TableCell scope='col'>결제도구</TableCell>
-                    <TableCell scope='col'>결제금액</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.state.exerciseViewList.slice(
-                    this.state.page * this.state.rowsPerPage,
-                    this.state.page * this.state.rowsPerPage +
-                      this.state.rowsPerPage
-                  )}
-                </TableBody>
+              <TableContainer component={Paper}>
+                <Table
+                  className='table--block table-dark'
+                  aria-label='simple table'
+                >
+                  <TableHead>
+                    <TableRow>
+                      <TableCell scope='col'>회원명</TableCell>
+                      <TableCell scope='col'>보유이용권</TableCell>
+                      <TableCell scope='col'>결제일</TableCell>
+                      <TableCell scope='col'>이용권시작일</TableCell>
+                      <TableCell scope='col'>잔여이용권</TableCell>
+                      <TableCell scope='col'>결제도구</TableCell>
+                      <TableCell scope='col'>결제금액</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.salesViewList.slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )}
+                  </TableBody>
+                </Table>
+                {this.state.salesViewList.length === 0 ? (
+                  <div className='p-5 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>등록된 회원이 없습니다.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
                 <TablePagination
                   rowsPerPageOptions={[
                     5,
@@ -1081,7 +1119,7 @@ class Sales extends Component {
                   onPageChange={this.handleChangePage}
                   onRowsPerPageChange={this.handleChangeRowsPerPage}
                 />
-              </Table>
+              </TableContainer>
             </Tab>
             <Tab eventKey='tools' title='결제도구별'>
               {/* 위와 동일 */}
@@ -1212,25 +1250,38 @@ class Sales extends Component {
                 </>
               )}
 
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell scope='col'>고객명</TableCell>
-                    <TableCell scope='col'>운동명</TableCell>
-                    <TableCell scope='col'>결제일</TableCell>
-                    <TableCell scope='col'>결제된 회원권</TableCell>
-                    <TableCell scope='col'>기간권시작일[기간권일수]</TableCell>
-                    <TableCell scope='col'>결제도구</TableCell>
-                    <TableCell scope='col'>결제금액</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.state.toolsViewList.slice(
-                    this.state.page * this.state.rowsPerPage,
-                    this.state.page * this.state.rowsPerPage +
-                      this.state.rowsPerPage
-                  )}
-                </TableBody>
+              <TableContainer component={Paper}>
+                <Table
+                  className='table--block table-dark'
+                  aria-label='simple table'
+                >
+                  <TableHead>
+                    <TableRow>
+                      <TableCell scope='col'>회원명</TableCell>
+                      <TableCell scope='col'>보유이용권</TableCell>
+                      <TableCell scope='col'>결제일</TableCell>
+                      <TableCell scope='col'>이용권시작일</TableCell>
+                      <TableCell scope='col'>잔여이용권</TableCell>
+                      <TableCell scope='col'>결제도구</TableCell>
+                      <TableCell scope='col'>결제금액</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.salesViewList.slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )}
+                  </TableBody>
+                </Table>
+                {this.state.salesViewList.length === 0 ? (
+                  <div className='p-5 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>등록된 회원이 없습니다.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
                 <TablePagination
                   rowsPerPageOptions={[
                     5,
@@ -1247,7 +1298,7 @@ class Sales extends Component {
                   onPageChange={this.handleChangePage}
                   onRowsPerPageChange={this.handleChangeRowsPerPage}
                 />
-              </Table>
+              </TableContainer>
             </Tab>
           </Tabs>
           <div className='tablewrap'>
