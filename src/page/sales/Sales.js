@@ -208,6 +208,7 @@ class Sales extends Component {
       lets: 0, //선택조회:1, 당일:2, 당월:3
       page: 0,
       rowsPerPage: 5,
+      // 매출 차트
       options: {
         chart: {
           id: 'sales-bar',

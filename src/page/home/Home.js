@@ -11,6 +11,7 @@ import '../../styles/home/home.css';
 
 // 라이브러리
 import DatePicker from 'react-datepicker';
+import Chart from 'react-apexcharts';
 
 // 컴포넌트
 import UserSearch from '../../component/customer/UserSearch';
@@ -20,6 +21,7 @@ import {
   selectTrainerReservation,
   workoutAllotedSelect,
 } from '../../api/user';
+import ClassTimeTable from '../../component/home/classTimeTable';
 
 // 리액트 부트스트랩 관련
 import { Container, Row, Col } from 'react-bootstrap';
@@ -41,14 +43,13 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 // import  { PC, Mobile } from '../../component/MediaQuery';
 // import Menu from '../../component/navigation/Menu';
 
 // 아이콘
 import { TbMoodSuprised } from 'react-icons/tb';
+import { AiOutlineRightCircle } from 'react-icons/ai';
 
 import { SERVER_URL } from '../../const/settings';
 import AlertToastComponent from '../../component/home/AlertToast';
@@ -111,6 +112,29 @@ class Home extends Component {
       rowsPerPage: 5,
       page: 0,
       workoutA_date: new Date(),
+      // 매출 차트
+      options: {
+        chart: {
+          id: 'sales-bar',
+        },
+        xaxis: {
+          categories: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022],
+        },
+      },
+      series: [
+        {
+          name: '현금',
+          data: [800, 650, 760, 940, 840, 745, 850, 810],
+        },
+        {
+          name: '계좌이체',
+          data: [900, 850, 960, 840, 940, 845, 950, 910],
+        },
+        {
+          name: '카드',
+          data: [3300, 2860, 3950, 4820, 3950, 4250, 3860, 4800],
+        },
+      ],
     };
     this.cusFetch();
     // console.log(`${MainVisual1}`);
@@ -948,7 +972,7 @@ class Home extends Component {
         ) : (
           // 사업자
           <Container>
-            <Button variant='secondary'>시간표</Button>
+            <ClassTimeTable />
             <Row>
               <Col className='sectionGlass-manager me-3'>
                 <Row>
@@ -957,7 +981,9 @@ class Home extends Component {
                     <br />
                     <strong>99999</strong>명
                   </Col>
-                  <Col>버튼</Col>
+                  <Col>
+                    <AiOutlineRightCircle />
+                  </Col>
                 </Row>
                 <Row>
                   <Col className='sectionGlass-manager-des mt-5'>
@@ -975,7 +1001,9 @@ class Home extends Component {
                     <br />
                     <strong>99999</strong>명
                   </Col>
-                  <Col>버튼</Col>
+                  <Col>
+                    <AiOutlineRightCircle />
+                  </Col>
                 </Row>
                 <Row>
                   <Col className='sectionGlass-manager-des mt-5'>
@@ -992,7 +1020,9 @@ class Home extends Component {
                     <br />
                     <strong>99999</strong>명
                   </Col>
-                  <Col>버튼</Col>
+                  <Col>
+                    <AiOutlineRightCircle />
+                  </Col>
                 </Row>
                 <Row>
                   <Col className='sectionGlass-manager-des mt-5'>
@@ -1009,7 +1039,9 @@ class Home extends Component {
                     <br />
                     <strong>99999</strong>명
                   </Col>
-                  <Col>버튼</Col>
+                  <Col>
+                    <AiOutlineRightCircle />
+                  </Col>
                 </Row>
                 <Row>
                   <Col className='sectionGlass-manager-des mt-5'>
@@ -1046,7 +1078,15 @@ class Home extends Component {
                 </Row>
               </Col>
               <Col xs={12}>
-                <div id='chart'>매출 차트 공간</div>
+                <div className='mixed-chart'>
+                  <Chart
+                    options={this.state.options}
+                    series={this.state.series}
+                    type='bar'
+                    width='100%'
+                    height='400px'
+                  />
+                </div>
               </Col>
             </Row>
           </Container>
