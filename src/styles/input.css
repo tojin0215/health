@@ -98,7 +98,7 @@ input[id='phone'][type='number'] {
 /* 검색 인풋 컴포넌트 가로형*/
 
 /* 드롭다운 메뉴 아래 화살표 위치 */
-.Dropdown-arrow {
+.Dropdown-arrow-wrapper .Dropdown-arrow {
   top: 1.2rem;
 }
 /* 달력 셀렉터 */
@@ -151,7 +151,7 @@ input {
   border-radius: 0.3rem;
   padding: 0 0.3rem;
 }
-.sch_list > .searchDrop {
+.sch_list > .searchDrop > .Dropdown-control {
   border: 0;
   width: 117px;
   margin-right: 1rem;
@@ -184,4 +184,8 @@ input {
   cursor: pointer;
   -webkit-text-fill-color: rgba(30, 30, 250, 1);
   font-weight: bold;
+}
+input::-webkit-input-placeholder {
+  -webkit-text-fill-color: #888;
+  font-weight: 400;
 }

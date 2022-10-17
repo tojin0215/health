@@ -724,7 +724,7 @@ const VieWTrainerItem = ({
             </Row>
             <Col xs={12} className='text-danger text-end mt-3'>
               <span className='m-2'>
-                삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+                삭제시 되돌릴 수 없습니다. 한번 더 확인해주세요.
               </span>
               <Button
                 onClick={() =>

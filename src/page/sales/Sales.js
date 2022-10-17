@@ -819,7 +819,10 @@ class Sales extends Component {
             className='mb-3'
           >
             <Tab eventKey='home' title='전체보기'>
-              <Table>
+              <Table
+                className='table--block table-dark'
+                aria-label='simple table'
+              >
                 <TableHead>
                   <TableRow>
                     <TableCell scope='col'>회원명</TableCell>

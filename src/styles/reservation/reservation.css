@@ -1,7 +1,9 @@
+/* 탭 */
+
 /*
-* 수업 - 진행중인 수업 
+ 수업 시간표 - 진행중인 수업 
 */
-.class-list {
+/* .class-list {
   border-bottom: 0;
 }
 .class-list .MuiTableHead-root {
@@ -13,8 +15,20 @@
 }
 
 .class-list .MuiTableBody-root {
+} */
+/* thead 폰트 컬러 */
+.reservationClassWrap .table thead tr th {
+  font-weight: 400;
+  color: #fff;
+}
+/* tbody 폰트 컬러 */
+.reservationClassWrap tbody tr td {
+  color: #fff;
 }
 
+.reservationClassWrap .MuiInputBase-input {
+  text-align: center;
+}
 /* 
 * 진행중인 수업 - 수업 시간표 및 예약 (reservation__class)
 */
