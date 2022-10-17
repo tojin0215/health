@@ -305,7 +305,7 @@ const ReservationClassItem = ({
         ''
       )}
       {/* <Modal show={true}> */}
-      <Modal show={showModal}>
+      <Modal show={showModal} className='reservationClass-modal'>
         <div>
           <h4 className='mb-3'>수업 수정</h4>
           <Row>

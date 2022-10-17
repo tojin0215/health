@@ -225,14 +225,14 @@
 */
 /* 페이지네이션 글자 색상 */
 .reservation .MuiTablePagination-toolbar {
-  color: #ddd;
+  /* color: #ddd; */
 }
 /* 페이지네이션 아이콘 색상 */
 .reservation .MuiTablePagination-selectIcon {
-  color: #fff;
+  /* color: #fff; */
 }
 .reservation .MuiTablePagination-actions .MuiButtonBase-root {
-  color: #fff;
+  /* color: #fff; */
 }
 /* 강사별 조회 회원별 조회 탭 색상 */
 .reservation .reservation__reservation-status .tab-content {
@@ -245,4 +245,18 @@
   padding: 20px;
 }
 .reservation__class-container {
+}
+
+/* 필터 */
+.btn-filter {
+  border: 1px solid #fff;
+  color: #ffff;
+  padding: 8px 20px;
+  border-radius: 30px;
+  margin-right: 20px;
+}
+.btn-filter:hover {
+  color: #111;
+  background-color: #ebff2e;
+  border-color: #888;
 }

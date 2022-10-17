@@ -119,7 +119,7 @@ const ReservationClassItem = ({
         </p>
         <p>{trainer}</p>
         <p>
-          {number_of_people}/{canRegist}
+          {canRegist}/{number_of_people}
         </p>
       </Col>
       {/* <Col xs={6}>{kind}</Col>
@@ -1954,319 +1954,283 @@ class Reservation extends Component {
             </Col>
           </Row>
           <div className='reservation__list'>
-            <Row xs={1} sm={3}>
-              {this.props.userinfo.loginWhether === 2 ? (
-                ''
-              ) : (
-                <Col xs={12}>
-                  <h4 className=''>예약 현황</h4>
-                </Col>
-              )}
-              {this.props.userinfo.loginWhether === 2 ? (
-                ''
-              ) : (
-                <Col
-                  xs={12}
-                  className='w-100 overflow-auto reservation__reservation-status'
-                >
-                  <Tabs
-                    defaultActiveKey='home'
-                    id='uncontrolled-tab-example'
-                    className='mb-3'
-                  >
-                    <Tab eventKey='home' title='전체보기'>
-                      <Table class='table text-center reservationListTable'>
-                        <TableHead rowCount={this.state.reservation.length}>
-                          <TableRow>
-                            <TableCell>
-                              <Button variant='dark' className='w-100 fw-bold'>
-                                회원이름
-                              </Button>
-                            </TableCell>
-                            {/* handleDate, handleExercise, handleTrainer 를 EnhancedTableHead로 변경하기 추후 */}
-                            <TableCell>
-                              <Button
-                                variant='secondary'
-                                className='w-100 fw-bold'
-                                onClick={() => this.handleDate()}
-                              >
-                                수강 날짜 <ImSortAlphaAsc />
-                              </Button>
-                            </TableCell>
-                            <TableCell>
-                              <Button
-                                variant='secondary'
-                                className='w-100 fw-bold'
-                                onClick={() => this.handleExercise()}
-                              >
-                                운동 <ImSortAlphaAsc />
-                              </Button>
-                            </TableCell>
-                            <TableCell>
-                              <Button
-                                variant='secondary'
-                                className='w-100 fw-bold'
-                                onClick={() => this.handleTrainer()}
-                              >
-                                강사 <ImSortAlphaAsc />
-                              </Button>
-                            </TableCell>
-                            <TableCell>
-                              <Button variant='dark' className='w-100 fw-bold'>
-                                인원수
-                              </Button>
-                            </TableCell>
-                            <TableCell>
-                              <Button variant='dark' className='w-100 fw-bold'>
-                                시간
-                              </Button>
-                            </TableCell>
-                            {/* <th scope='col'>상태</th>
-										<th scope='col'>취소사유</th> */}
-                            <TableCell>
-                              <Button variant='dark' className='w-100 fw-bold'>
-                                삭제
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        </TableHead>
-                        {this.state.show_exercise_table &&
-                        !this.state.show_trainer_table &&
-                        !this.state.show_date_table ? (
-                          <TableBody>
-                            {this.state.reservation_exercise.length == 0 ? (
-                              <TableCell colSpan={7}>
-                                <div className='p-3 fs-5 fw-bold text-center text-white'>
-                                  <TbMoodSuprised className='fs-3' />
-                                  <p>예약된 수업이 없습니다.</p>
-                                </div>
-                              </TableCell>
-                            ) : (
-                              this.state.reservation_exercise.slice(
-                                this.state.page * this.state.rowsPerPage,
-                                this.state.page * this.state.rowsPerPage +
-                                  this.state.rowsPerPage
-                              )
-                            )}
-                          </TableBody>
-                        ) : null}
+            {this.props.userinfo.loginWhether === 2 ? (
+              ''
+            ) : (
+              <h4 className='mt-4 mb-3'>예약 현황</h4>
+            )}
+            {this.props.userinfo.loginWhether === 2 ? (
+              ''
+            ) : (
+              <Tabs
+                defaultActiveKey='home'
+                id='uncontrolled-tab-example'
+                className='mb-3'
+              >
+                <Tab eventKey='home' title='전체보기'>
+                  <div className='my-3 text-end'>
+                    {/* handleDate, handleExercise, handleTrainer 를 EnhancedTableHead로 변경하기 추후 */}
 
-                        {this.state.show_trainer_table &&
-                        !this.state.show_exercise_table &&
-                        !this.state.show_date_table ? (
-                          <TableBody>
-                            {this.state.reservation_trainer.length == 0 ? (
-                              <TableCell colSpan={7}>
-                                <div className='p-3 fs-5 fw-bold text-center text-white'>
-                                  <TbMoodSuprised className='fs-3' />
-                                  <p>예약된 수업이 없습니다.</p>
-                                </div>
-                              </TableCell>
-                            ) : (
-                              this.state.reservation_trainer.slice(
-                                this.state.page * this.state.rowsPerPage,
-                                this.state.page * this.state.rowsPerPage +
-                                  this.state.rowsPerPage
-                              )
-                            )}
-                          </TableBody>
-                        ) : null}
-                        {this.state.show_date_table &&
-                        !this.state.show_exercise_table &&
-                        !this.state.show_trainer_table ? (
-                          <TableBody>
-                            {this.state.reservation_date.length == 0 ? (
-                              <TableCell colSpan={7}>
-                                <div className='p-3 fs-5 fw-bold text-center text-white'>
-                                  <TbMoodSuprised className='fs-3' />
-                                  <p>예약된 수업이 없습니다.</p>
-                                </div>
-                              </TableCell>
-                            ) : (
-                              this.state.reservation_date.slice(
-                                this.state.page * this.state.rowsPerPage,
-                                this.state.page * this.state.rowsPerPage +
-                                  this.state.rowsPerPage
-                              )
-                            )}
-                          </TableBody>
-                        ) : null}
+                    <Button
+                      variant='filter'
+                      className='btn-filter'
+                      onClick={() => this.handleDate()}
+                    >
+                      수강 날짜 <ImSortAlphaAsc />
+                    </Button>
+                    <Button
+                      variant='filter'
+                      className='btn-filter'
+                      onClick={() => this.handleExercise()}
+                    >
+                      운동 <ImSortAlphaAsc />
+                    </Button>
 
-                        {!this.state.show_exercise_table &&
-                        !this.state.show_trainer_table &&
-                        !this.state.show_date_table ? (
-                          <TableBody>
-                            {this.state.reservation.length == 0 ? (
-                              <TableCell colSpan={7}>
-                                <div className='p-3 fs-5 fw-bold text-center text-white'>
-                                  <TbMoodSuprised className='fs-3' />
-                                  <p>예약된 수업이 없습니다.</p>
-                                </div>
-                              </TableCell>
-                            ) : (
-                              this.state.reservation.slice(
-                                this.state.page * this.state.rowsPerPage,
-                                this.state.page * this.state.rowsPerPage +
-                                  this.state.rowsPerPage
-                              )
-                            )}
-                          </TableBody>
-                        ) : null}
-                        <TablePagination
-                          rowsPerPageOptions={[
-                            5,
-                            10,
-                            25,
-                            {
-                              label: 'All',
-                              value: this.state.reservation.length,
-                            },
-                          ]}
-                          count={this.state.reservation.length}
-                          rowsPerPage={this.state.rowsPerPage}
-                          page={this.state.page}
-                          onPageChange={this.handleChangePage}
-                          onRowsPerPageChange={this.handleChangeRowsPerPage}
-                        />
-                      </Table>
-                    </Tab>
+                    <Button
+                      variant='filter'
+                      className='btn-filter'
+                      onClick={() => this.handleTrainer()}
+                    >
+                      강사 <ImSortAlphaAsc />
+                    </Button>
+                    {/* <th scope='col'>상태</th>
+										      <th scope='col'>취소사유</th> */}
+                  </div>
+                  <TableContainer component={Paper}>
+                    <Table class='w-100 table--block table-dark reservationListTable'>
+                      <TableHead rowCount={this.state.reservation.length}>
+                        <TableRow>
+                          <TableCell>이름</TableCell>
+                          <TableCell>수강날짜</TableCell>
+                          <TableCell>운동명</TableCell>
+                          <TableCell>강사</TableCell>
+                          <TableCell>정원</TableCell>
+                          <TableCell>시간</TableCell>
+                          <TableCell>삭제</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      {this.state.show_exercise_table &&
+                      !this.state.show_trainer_table &&
+                      !this.state.show_date_table ? (
+                        <TableBody>
+                          {this.state.reservation_exercise.length == 0 ? (
+                            <div className='p-5 fs-5 fw-bold text-center'>
+                              <TbMoodSuprised className='fs-3' />
+                              <p>예약된 수업이 없습니다.</p>
+                            </div>
+                          ) : (
+                            this.state.reservation_exercise.slice(
+                              this.state.page * this.state.rowsPerPage,
+                              this.state.page * this.state.rowsPerPage +
+                                this.state.rowsPerPage
+                            )
+                          )}
+                        </TableBody>
+                      ) : null}
+                      {this.state.show_trainer_table &&
+                      !this.state.show_exercise_table &&
+                      !this.state.show_date_table ? (
+                        <TableBody>
+                          {this.state.reservation_trainer.length == 0 ? (
+                            <div className='p-3 fs-5 fw-bold text-center '>
+                              <TbMoodSuprised className='fs-3' />
+                              <p>예약된 수업이 없습니다.</p>
+                            </div>
+                          ) : (
+                            this.state.reservation_trainer.slice(
+                              this.state.page * this.state.rowsPerPage,
+                              this.state.page * this.state.rowsPerPage +
+                                this.state.rowsPerPage
+                            )
+                          )}
+                        </TableBody>
+                      ) : null}
+                      {this.state.show_date_table &&
+                      !this.state.show_exercise_table &&
+                      !this.state.show_trainer_table ? (
+                        <TableBody>
+                          {this.state.reservation_date.length == 0 ? (
+                            <TableCell>
+                              <div className='p-3 fs-5 fw-bold text-center'>
+                                <TbMoodSuprised className='fs-3' />
+                                <p>예약된 수업이 없습니다.</p>
+                              </div>
+                            </TableCell>
+                          ) : (
+                            this.state.reservation_date.slice(
+                              this.state.page * this.state.rowsPerPage,
+                              this.state.page * this.state.rowsPerPage +
+                                this.state.rowsPerPage
+                            )
+                          )}
+                        </TableBody>
+                      ) : null}
 
-                    <Tab eventKey='trainer' title='강사별 조회'>
-                      <p>{this.state.reservationClass_choice}</p>
-                      <TableContainer>
-                        <Table class='table text-center reservationListTable'>
-                          <TableHead>
-                            <TableRow>
-                              <TableCell scope='col'>회원이름</TableCell>
-                              <TableCell scope='col'>날짜</TableCell>
-                              <TableCell scope='col'>운동</TableCell>
-                              <TableCell scope='col'>강사</TableCell>
-                              <TableCell scope='col'>인원수</TableCell>
-                              <TableCell scope='col'>시간</TableCell>
-                              {/* <TableCell scope='col'>상태</TableCell>
-										<TableCell scope='col'>취소사유</TableCell> */}
-                              <TableCell scope='col'>삭제</TableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {this.state.reservation_choice_trainer.length ==
-                            0 ? (
-                              <TableCell colSpan={7}>
-                                <div className='p-3 fs-5 fw-bold text-center text-white'>
-                                  <TbMoodSuprised className='fs-3' />
-                                  <p>예약된 수업이 없습니다.</p>
-                                </div>
-                              </TableCell>
-                            ) : (
-                              this.state.reservation_choice_trainer.slice(
-                                this.state.page * this.state.rowsPerPage,
-                                this.state.page * this.state.rowsPerPage +
-                                  this.state.rowsPerPage
-                              )
-                            )}
-                          </TableBody>
-                          <TablePagination
-                            rowsPerPageOptions={[
-                              5,
-                              10,
-                              25,
-                              {
-                                label: 'All',
-                                value:
-                                  this.state.reservation_choice_trainer.length,
-                              },
-                            ]}
-                            count={this.state.reservation_choice_trainer.length}
-                            rowsPerPage={this.state.rowsPerPage}
-                            page={this.state.page}
-                            onPageChange={this.handleChangePage}
-                            onRowsPerPageChange={this.handleChangeRowsPerPage}
-                          />
-                        </Table>
-                      </TableContainer>
-                    </Tab>
-                    <Tab eventKey='client' title='회원별조회'>
-                      <Col className='text-center'>
-                        {this.state.open ? (
-                          <UserSearch
-                            open={this.state.open}
-                            setOpen={(o) => this.setState({ open: o })}
-                            fitness_no={this.props.userinfo.fitness_no}
-                            loginWhether={this.props.userinfo.loginWhether}
-                            joinNo={this.props.userinfo.joinNo}
-                            handleUser={this.handleUser}
-                          />
+                      {!this.state.show_exercise_table &&
+                      !this.state.show_trainer_table &&
+                      !this.state.show_date_table ? (
+                        <TableBody>
+                          {this.state.reservation.length == 0 ? (
+                            <TableCell>
+                              <div className='p-3 fs-5 fw-bold text-center'>
+                                <TbMoodSuprised className='fs-3' />
+                                <p>예약된 수업이 없습니다.</p>
+                              </div>
+                            </TableCell>
+                          ) : (
+                            this.state.reservation.slice(
+                              this.state.page * this.state.rowsPerPage,
+                              this.state.page * this.state.rowsPerPage +
+                                this.state.rowsPerPage
+                            )
+                          )}
+                        </TableBody>
+                      ) : null}
+                    </Table>
+                    <TablePagination
+                      rowsPerPageOptions={[
+                        5,
+                        10,
+                        25,
+                        {
+                          label: 'All',
+                          value: this.state.reservation.length,
+                        },
+                      ]}
+                      count={this.state.reservation.length}
+                      rowsPerPage={this.state.rowsPerPage}
+                      page={this.state.page}
+                      onPageChange={this.handleChangePage}
+                      onRowsPerPageChange={this.handleChangeRowsPerPage}
+                    />
+                  </TableContainer>
+                </Tab>
+                <Tab eventKey='trainer' title='강사별 조회'>
+                  <p>{this.state.reservationClass_choice}</p>
+                  <TableContainer component={Paper}>
+                    <Table class='w-100 table--block table-dark reservationListTable'>
+                      <TableHead rowCount={this.state.reservation.length}>
+                        <TableRow>
+                          <TableCell>이름</TableCell>
+                          <TableCell>수강날짜</TableCell>
+                          <TableCell>운동명</TableCell>
+                          <TableCell>강사</TableCell>
+                          <TableCell>정원</TableCell>
+                          <TableCell>시간</TableCell>
+                          <TableCell>삭제</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {this.state.reservation_choice_trainer.length == 0 ? (
+                          <TableCell>
+                            <div className='p-3 fs-5 fw-bold text-center'>
+                              <TbMoodSuprised className='fs-3' />
+                              <p>예약된 수업이 없습니다.</p>
+                            </div>
+                          </TableCell>
                         ) : (
-                          <TextField
-                            id='customer_name'
-                            label='회원 검색'
-                            disabled
-                            variant='standard'
-                            onClick={() => this.setState({ open: true })}
-                            className=''
-                            InputProps={{ disableUnderline: true }}
-                            value={this.state.customer_name}
-                            // onChange={this.handleChange}
-                            error={this.state.customer_name_err}
-                          />
+                          this.state.reservation_choice_trainer.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )
                         )}
-                      </Col>
-                      {/* 회원 선택 버튼 나열
+                      </TableBody>
+                    </Table>
+                    <TablePagination
+                      rowsPerPageOptions={[
+                        5,
+                        10,
+                        25,
+                        {
+                          label: 'All',
+                          value: this.state.reservation_choice_trainer.length,
+                        },
+                      ]}
+                      count={this.state.reservation_choice_trainer.length}
+                      rowsPerPage={this.state.rowsPerPage}
+                      page={this.state.page}
+                      onPageChange={this.handleChangePage}
+                      onRowsPerPageChange={this.handleChangeRowsPerPage}
+                    />
+                  </TableContainer>
+                </Tab>
+                <Tab eventKey='client' title='회원별조회'>
+                  <Col className='text-center'>
+                    {this.state.open ? (
+                      <UserSearch
+                        open={this.state.open}
+                        setOpen={(o) => this.setState({ open: o })}
+                        fitness_no={this.props.userinfo.fitness_no}
+                        loginWhether={this.props.userinfo.loginWhether}
+                        joinNo={this.props.userinfo.joinNo}
+                        handleUser={this.handleUser}
+                      />
+                    ) : (
+                      <TextField
+                        id='customer_name'
+                        label='회원 검색'
+                        disabled
+                        variant='standard'
+                        onClick={() => this.setState({ open: true })}
+                        className=''
+                        InputProps={{ disableUnderline: true }}
+                        value={this.state.customer_name}
+                        // onChange={this.handleChange}
+                        error={this.state.customer_name_err}
+                      />
+                    )}
+                  </Col>
+                  {/* 회원 선택 버튼 나열
                     <p>{this.state.reservationClass_choice2}</p> */}
-                      <TableContainer>
-                        <Table class='table text-center reservationListTable'>
-                          <TableHead>
-                            <TableRow>
-                              <TableCell scope='col'>회원이름</TableCell>
-                              <TableCell scope='col'>날짜</TableCell>
-                              <TableCell scope='col'>운동</TableCell>
-                              <TableCell scope='col'>강사</TableCell>
-                              <TableCell scope='col'>인원수</TableCell>
-                              <TableCell scope='col'>시간</TableCell>
-                              <TableCell scope='col'>삭제</TableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {this.state.reservation_choice_client.length ==
-                            0 ? (
-                              <TableCell colSpan={7}>
-                                <div className='p-3 fs-5 fw-bold text-center text-white'>
-                                  <TbMoodSuprised className='fs-3' />
-                                  <p>예약된 수업이 없습니다.</p>
-                                </div>
-                              </TableCell>
-                            ) : (
-                              this.state.reservation_choice_client.slice(
-                                this.state.page * this.state.rowsPerPage,
-                                this.state.page * this.state.rowsPerPage +
-                                  this.state.rowsPerPage
-                              )
-                            )}
-                          </TableBody>
-                          <TablePagination
-                            rowsPerPageOptions={[
-                              5,
-                              10,
-                              25,
-                              {
-                                label: 'All',
-                                value:
-                                  this.state.reservation_choice_client.length,
-                              },
-                            ]}
-                            count={this.state.reservation_choice_client.length}
-                            rowsPerPage={this.state.rowsPerPage}
-                            page={this.state.page}
-                            onPageChange={this.handleChangePage}
-                            onRowsPerPageChange={this.handleChangeRowsPerPage}
-                          />
-                        </Table>
-                      </TableContainer>
-                    </Tab>
-                  </Tabs>
-                </Col>
-              )}
-            </Row>
+                  <TableContainer component={Paper}>
+                    <Table class='w-100 table--block table-dark reservationListTable'>
+                      <TableHead rowCount={this.state.reservation.length}>
+                        <TableRow>
+                          <TableCell>이름</TableCell>
+                          <TableCell>수강날짜</TableCell>
+                          <TableCell>운동명</TableCell>
+                          <TableCell>강사</TableCell>
+                          <TableCell>정원</TableCell>
+                          <TableCell>시간</TableCell>
+                          <TableCell>삭제</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {this.state.reservation_choice_client.length == 0 ? (
+                          <div className='p-3 fs-5 fw-bold text-center'>
+                            <TbMoodSuprised className='fs-3' />
+                            <p>예약된 수업이 없습니다.</p>
+                          </div>
+                        ) : (
+                          this.state.reservation_choice_client.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )
+                        )}
+                      </TableBody>
+                    </Table>
+                    <TablePagination
+                      rowsPerPageOptions={[
+                        5,
+                        10,
+                        25,
+                        {
+                          label: 'All',
+                          value: this.state.reservation_choice_client.length,
+                        },
+                      ]}
+                      count={this.state.reservation_choice_client.length}
+                      rowsPerPage={this.state.rowsPerPage}
+                      page={this.state.page}
+                      onPageChange={this.handleChangePage}
+                      onRowsPerPageChange={this.handleChangeRowsPerPage}
+                    />
+                  </TableContainer>
+                </Tab>
+              </Tabs>
+            )}
           </div>
         </Container>
         <div className='footer'>
