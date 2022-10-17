@@ -1492,19 +1492,16 @@ class Reservation extends Component {
                   </Button>
                 </Col>
               </Row>
-              <Row className='resevation__class-Tabs mt-2'>
+              <Row className='resevation__class-Tabs mb-2 my-3'>
                 <Tabs
                   className='reservation__class-container'
                   id='reservation__class__tabs'
                   activeKey={this.key}
                   onSelect={this.selectClassTabs}
                 >
-                  <Tab
-                    className='reservation__class__tabs-item'
-                    eventKey='pt'
-                    title='개인PT'
-                  >
+                  <Tab eventKey='pt' title='개인PT'>
                     <Tabs
+                      className='reservation__class__tabs-item'
                       activeKey={this.keyTrainer}
                       onSelect={this.selectClassTabs}
                     >
@@ -1516,6 +1513,7 @@ class Reservation extends Component {
                   </Tab>
                   <Tab eventKey='pilates' title='필라테스'>
                     <Tabs
+                      className='reservation__class__tabs-item'
                       activeKey={this.keyTrainer}
                       onSelect={this.selectClassTabs}
                     >
@@ -1527,6 +1525,7 @@ class Reservation extends Component {
                   </Tab>
                   <Tab eventKey='gx' title='GX'>
                     <Tabs
+                      className='reservation__class__tabs-item'
                       activeKey={this.keyTrainer}
                       onSelect={this.selectClassTabs}
                     >
@@ -1538,6 +1537,7 @@ class Reservation extends Component {
                   </Tab>
                   <Tab eventKey='etc' title='기타'>
                     <Tabs
+                      className='reservation__class__tabs-item'
                       activeKey={this.keyTrainer}
                       onSelect={this.selectClassTabs}
                     >

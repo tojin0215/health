@@ -19,9 +19,9 @@
 .class-info > .reservation-class__schedule-content:hover {
   border: 1px solid #e2ff33;
 }
-
-.table td .class-info :active {
+.class-info > .reservation-class__schedule-content:active {
   background: #e2ff33;
+  color: #111;
 }
 
 /* 운동개별선택 테이블 체크박스 크기 조절 */
