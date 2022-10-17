@@ -2174,7 +2174,7 @@ class Client extends Component {
                 </Table>
                 {this.state.viewClientList.length === 0 ? (
                   <div className='p-3 fs-5 fw-bold text-center'>
-                    <TbMoodSuprised className='fs-3' />
+                    <TbMoodSuprised className='fs-5' />
                     <p>등록된 회원이 없습니다.</p>
                   </div>
                 ) : (
@@ -2234,7 +2234,7 @@ class Client extends Component {
                   </TableBody>
                 </Table>
                 {this.state.viewClientList.length === 0 ? (
-                  <div className='p-3 fs-5 fw-bold text-center'>
+                  <div className='p-5 fs-5 fw-bold text-center'>
                     <TbMoodSuprised className='fs-3' />
                     <p>등록된 회원이 없습니다.</p>
                   </div>

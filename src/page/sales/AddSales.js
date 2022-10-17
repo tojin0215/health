@@ -478,12 +478,10 @@ class AddSales extends Component {
                     ></Form.Control>
                   </Form.Check>
                   <Form.Check inline>
-                    <Form.Check.Label htmlFor='etc' className='w-100'>
-                      기타
-                    </Form.Check.Label>
+                    <Form.Check.Label htmlFor='etc'>기타</Form.Check.Label>
                     <Form.Check.Input
                       type='radio'
-                      name='exerciseGroup w-100'
+                      name='exerciseGroup '
                       id='etc'
                       checked={this.state.exerciseGroup['etc']}
                       onChange={this.handleExerciseRadio}
@@ -491,7 +489,7 @@ class AddSales extends Component {
                   </Form.Check>
                   <Form.Check inline>
                     <Form.Control
-                      className='w-100'
+                      className=''
                       placeholder='기타'
                       id='etcExercise'
                       type='text'
