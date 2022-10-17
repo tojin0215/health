@@ -1,19 +1,35 @@
-.sectionGlass-manager .sectionGlass-manger-Tit {
+strong {
   font-size: 20px;
+}
+
+.sectionGlass-manager .sectionGlass-manger-Tit {
+  font-size: 18px;
+  white-space: nowrap;
+}
+.sectionGlass-manager .sectionGlass-manger-Tit strong {
+  color: #ebff2e;
 }
 .sectionGlass-manager-des {
   white-space: nowrap;
   font-size: 14px;
   color: #888;
+  align-items: center;
 }
 
 /* 매출 */
-.salesStatis {
+.sales-statis .row {
   border: 1px solid #888888;
   border-radius: 5px;
-  padding: 30px;
+  padding: 30px 20px;
   background: #35333d;
+  align-items: center;
 }
+.sales-statis .sales-total {
+  font-size: 25px;
+  font-weight: bold;
+  text-align: end;
+}
+
 /* 기존 메인 */
 .home {
   background-color: #000;
