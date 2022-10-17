@@ -180,6 +180,11 @@ class Register extends Component {
       modalShow: false,
     });
   };
+
+  goLogin = () => {
+    this.props.history.push('/');
+  };
+
   render() {
     const { userinfo } = this.props;
     // console.log("userinfo : ");
@@ -349,23 +354,40 @@ class Register extends Component {
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col>
+              <Col xs={12} md={12} className='register__terms'>
                 <div className='form-check'>
-                  <input
-                    className='form-check-input'
-                    type='checkbox'
-                    value=''
-                    id='flexCheckDefault'
-                    onClick={this.agreeCheckModal}
-                  />
                   <label className='form-check-label'>
-                    필수 약관에 동의했습니다.{' '}
+                    {this.state.agreeCheck ? (
+                      <span className='text-success fw-bold'>
+                        필수 약관에 동의했습니다.{' '}
+                      </span>
+                    ) : (
+                      <>
+                        <input
+                          className='form-check-input'
+                          type='checkbox'
+                          value=''
+                          id='flexCheckDefault'
+                          onClick={this.agreeCheckModal}
+                        />
+                        <span onClick={this.handleModal}>
+                          필수 약관에 동의합니다.
+                        </span>
+                      </>
+                    )}
                     <a
-                      className='text-decoration-underline text-reset'
+                      className='register__terms__btn'
                       onClick={this.handleModal}
                     >
-                      약관동의
+                      이용 약관
                     </a>
+                    {this.state.agreeCheck ? (
+                      ''
+                    ) : (
+                      <span className='register__terms__guide'>
+                        이용 약관에 동의하여야 가입할 수 있습니다.
+                      </span>
+                    )}
                   </label>
                   <Modal show={this.state.modalShow}>
                     <Modal.Header
@@ -402,13 +424,9 @@ class Register extends Component {
             </Row>
           </Form>
           <div className='d-flex justify-content-center mt-3'>
-            {this.state.agreeCheck ? (
-              <Button className='btn-secondary mx-2'>이전으로</Button>
-            ) : (
-              <div>
-                <Button className='btn-secondary mx-2'>이전으로</Button>
-              </div> /* 기능추가: 뒤로가ㅓ기 */
-            )}
+            <Button className='btn-secondary mx-2' onClick={this.goLogin}>
+              이전으로
+            </Button>
             {this.state.agreeCheck ? (
               <Button
                 type='button'

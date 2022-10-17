@@ -7,3 +7,30 @@
   padding: 10px 23px;
   color: #fff;
 }
+
+.register .form-check-label {
+  line-height: 20px;
+}
+
+.register__terms {
+  padding-top: 12px;
+}
+
+.register__terms__btn {
+  padding: 6px 10px;
+  font-size: 18px;
+  /* font-weight: ; */
+  cursor: pointer;
+  border: 1px solid #fff;
+  margin: 16px;
+  border-radius: 10px;
+  transition: all 0.5s;
+}
+.register__terms__btn:hover {
+  background-color: #222;
+  border: 1px solid #ebff2e;
+}
+
+.register__terms__guide {
+  color: #aaa;
+}
