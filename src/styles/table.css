@@ -19,7 +19,7 @@
 .class-info > .reservation-class__schedule-content:hover {
   border: 1px solid #e2ff33;
 }
-.class-info > .reservation-class__schedule-content:active {
+.reservation-class__schedule-content.active {
   background: #e2ff33;
   color: #111;
 }
