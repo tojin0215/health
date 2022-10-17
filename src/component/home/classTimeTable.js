@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 
 // React-Bootstrap https://react-bootstrap.github.io
 import { Container, Row, Col } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 // Mui 컴포넌트 https://mui.com
@@ -44,9 +43,9 @@ export default function ClassTimeTable() {
     history.push('/reservation');
   };
 
-  const handleChange = (event) => {
-    setState(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setState(event.target.value);
+  // };
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -62,30 +61,35 @@ export default function ClassTimeTable() {
 
   const list = (anchor) => (
     <Box
-      className='class-time-table__box'
+      className="class-time-table__box"
       sx={{ width: 500 }}
-      role='presentation'
+      role="presentation"
       // onClick={toggleDrawer(anchor, false)}
       // onKeyDown={toggleDrawer(anchor, false)}
     >
       <h4>2022년 10월 19일 (수요일)</h4>
-      <FormControl fullWidth>
-        <InputLabel id='demo-simple-select-label'>Age</InputLabel>
+      <FormControl
+        className="class-time-table__select"
+        variant="filled"
+        fullWidth
+      >
+        <InputLabel id="demo-simple-select-label">수업 분류 선택</InputLabel>
         <Select
-          labelId='demo-simple-select-label'
-          id='demo-simple-select'
-          label='Age'
-          onChange={handleChange}
+          labelId="demo-simple-select-label"
+          id="class-time-table__select-id"
+          label="수업 분류 선택"
+          // onChange={handleChange}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value={10}>개인PT</MenuItem>
+          <MenuItem value={20}>필라테스</MenuItem>
+          <MenuItem value={30}>GX</MenuItem>
+          <MenuItem value={40}>기타</MenuItem>
         </Select>
       </FormControl>
-      {['8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00'].map(
-        (time) => (
-          <React.Fragment key={time}>
-            <div>
+      <div className="class-time-table__box__content">
+        {['8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00'].map(
+          (time) => (
+            <React.Fragment key={time}>
               <Row>
                 <Col xs={2}>{time}</Col>
                 <Col xs={10}>
@@ -93,42 +97,48 @@ export default function ClassTimeTable() {
                     <li>
                       <Row>
                         <Col xs={2}>{time}</Col>
-                        <Col>그룹필라테스 [8/10]</Col>
+                        <Col>
+                          <span>그룹필라테스</span> [8/10]
+                        </Col>
                         <Col xs={3}>김유리</Col>
                       </Row>
                     </li>
                     <li>
-                      <Row>
+                      <Row className="class-time-table__box__content--full">
                         <Col xs={2}>{time}</Col>
-                        <Col>2인 필라테스 [2/2]</Col>
+                        <Col>
+                          <span>2인 필라테스</span> [2/2]
+                        </Col>
                         <Col xs={3}>한세연</Col>
                       </Row>
                     </li>
                     <li>
-                      <Row>
+                      <Row className="class-time-table__box__content--full">
                         <Col xs={2}>{time}</Col>
-                        <Col>기구 필라테스 [3/3]</Col>
+                        <Col>
+                          <span>기구 필라테스</span> [3/3]
+                        </Col>
                         <Col xs={3}>이세영</Col>
                       </Row>
                     </li>
                   </ul>
                 </Col>
               </Row>
-            </div>
-          </React.Fragment>
-        )
-      )}
+            </React.Fragment>
+          )
+        )}
+      </div>
       <Button onClick={goReservation}>시간표 전체보기</Button>
     </Box>
   );
 
   return (
-    <div className='class-time-table'>
+    <div className="class-time-table">
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button
-            className='class-time-table__btn'
-            variant='secondary'
+            className="class-time-table__btn"
+            variant="secondary"
             onClick={toggleDrawer(anchor, true)}
           >
             <CalendarMonthIcon />
