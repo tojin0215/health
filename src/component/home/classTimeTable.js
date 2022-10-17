@@ -25,6 +25,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+// 아이콘
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+
+// css
+import './classTimeTable.css';
+
 export default function ClassTimeTable() {
   const [state, setState] = React.useState({
     top: false,
@@ -56,12 +62,13 @@ export default function ClassTimeTable() {
 
   const list = (anchor) => (
     <Box
+      className='class-time-table__box'
       sx={{ width: 500 }}
       role='presentation'
       // onClick={toggleDrawer(anchor, false)}
       // onKeyDown={toggleDrawer(anchor, false)}
     >
-      <h3>2022년 10월 19일 (수요일)</h3>
+      <h4>2022년 10월 19일 (수요일)</h4>
       <FormControl fullWidth>
         <InputLabel id='demo-simple-select-label'>Age</InputLabel>
         <Select
@@ -87,14 +94,21 @@ export default function ClassTimeTable() {
                       <Row>
                         <Col xs={2}>{time}</Col>
                         <Col>그룹필라테스 [8/10]</Col>
-                        <Col xs={3}>윤강사님</Col>
+                        <Col xs={3}>김유리</Col>
                       </Row>
                     </li>
                     <li>
                       <Row>
                         <Col xs={2}>{time}</Col>
-                        <Col>그룹필라테스 [8/10]</Col>
-                        <Col xs={3}>윤강사님</Col>
+                        <Col>2인 필라테스 [2/2]</Col>
+                        <Col xs={3}>한세연</Col>
+                      </Row>
+                    </li>
+                    <li>
+                      <Row>
+                        <Col xs={2}>{time}</Col>
+                        <Col>기구 필라테스 [3/3]</Col>
+                        <Col xs={3}>이세영</Col>
                       </Row>
                     </li>
                   </ul>
@@ -109,10 +123,15 @@ export default function ClassTimeTable() {
   );
 
   return (
-    <div>
+    <div className='class-time-table'>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button variant='secondary' onClick={toggleDrawer(anchor, true)}>
+          <Button
+            className='class-time-table__btn'
+            variant='secondary'
+            onClick={toggleDrawer(anchor, true)}
+          >
+            <CalendarMonthIcon />
             시간표
           </Button>
           <SwipeableDrawer

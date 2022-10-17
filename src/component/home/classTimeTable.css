@@ -1,0 +1,26 @@
+.class-time-table {
+  position: relative;
+}
+
+.class-time-table__btn {
+  width: 100px;
+  height: 100px;
+  background-color: #35333d;
+  border-radius: 10px;
+  border: 1px solid #888;
+  position: fixed;
+  left: 5%;
+  z-index: 1;
+}
+
+.class-time-table__btn > .MuiSvgIcon-root {
+  width: 100%;
+  font-size: 40px;
+}
+
+.class-time-table__box {
+  height: 100%;
+  background-color: #111;
+  color: #fff;
+  padding-top: 30px;
+}
