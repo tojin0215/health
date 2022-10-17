@@ -243,7 +243,16 @@
 .reservation .reservation__reservation-status .tab-content {
   background-color: #111;
 }
-/* 탭 */
+
+/* 
+* 탭
+*/
+/* 탭 메뉴에서 마우스가 떠날 때 보더 생기는 현상 제거 */
+.reservation__class .nav-tabs > a,
+.reservation__class .nav-tabs > a:focus {
+  border: 0;
+}
+
 .reservation__class-container .nav-link.active {
   border: 0;
   background-color: transparent;
