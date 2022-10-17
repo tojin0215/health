@@ -208,12 +208,22 @@ class Sales extends Component {
       lets: 0, //선택조회:1, 당일:2, 당월:3
       page: 0,
       rowsPerPage: 5,
+      // 매출 차트
       options: {
         chart: {
           id: 'sales-bar',
         },
         xaxis: {
-          categories: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022],
+          categories: [
+            '2022.03',
+            '2022.04',
+            '2022.05',
+            '2022.06',
+            '2022.07',
+            '2022.08',
+            '2022.09',
+            '2022.10',
+          ],
         },
       },
       series: [

@@ -1,30 +1,149 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { SERVER_URL } from '../../const/settings';
+import { useHistory } from 'react-router-dom';
+
+// React-Bootstrap https://react-bootstrap.github.io
+import { Container, Row, Col } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Offcanvas from 'react-bootstrap/Offcanvas';
 
-function ClassTimeTable() {
-  const [show, setShow] = useState(false);
+// Mui 컴포넌트 https://mui.com
+import Box from '@mui/material/Box';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+// 아이콘
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+
+// css
+import './classTimeTable.css';
+
+export default function ClassTimeTable() {
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+  const history = useHistory();
+
+  const goReservation = () => {
+    history.push('/reservation');
+  };
+
+  const handleChange = (event) => {
+    setState(event.target.value);
+  };
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event &&
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <Box
+      className='class-time-table__box'
+      sx={{ width: 500 }}
+      role='presentation'
+      // onClick={toggleDrawer(anchor, false)}
+      // onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <h4>2022년 10월 19일 (수요일)</h4>
+      <FormControl fullWidth>
+        <InputLabel id='demo-simple-select-label'>Age</InputLabel>
+        <Select
+          labelId='demo-simple-select-label'
+          id='demo-simple-select'
+          label='Age'
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+      {['8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00'].map(
+        (time) => (
+          <React.Fragment key={time}>
+            <div>
+              <Row>
+                <Col xs={2}>{time}</Col>
+                <Col xs={10}>
+                  <ul>
+                    <li>
+                      <Row>
+                        <Col xs={2}>{time}</Col>
+                        <Col>그룹필라테스 [8/10]</Col>
+                        <Col xs={3}>김유리</Col>
+                      </Row>
+                    </li>
+                    <li>
+                      <Row>
+                        <Col xs={2}>{time}</Col>
+                        <Col>2인 필라테스 [2/2]</Col>
+                        <Col xs={3}>한세연</Col>
+                      </Row>
+                    </li>
+                    <li>
+                      <Row>
+                        <Col xs={2}>{time}</Col>
+                        <Col>기구 필라테스 [3/3]</Col>
+                        <Col xs={3}>이세영</Col>
+                      </Row>
+                    </li>
+                  </ul>
+                </Col>
+              </Row>
+            </div>
+          </React.Fragment>
+        )
+      )}
+      <Button onClick={goReservation}>시간표 전체보기</Button>
+    </Box>
+  );
 
   return (
-    <>
-      <Button variant='secondary' onClick={handleShow}>
-        시간표
-      </Button>
-
-      <Offcanvas show={show} onHide={handleClose}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
-        </Offcanvas.Body>
-      </Offcanvas>
-    </>
+    <div className='class-time-table'>
+      {['left'].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Button
+            className='class-time-table__btn'
+            variant='secondary'
+            onClick={toggleDrawer(anchor, true)}
+          >
+            <CalendarMonthIcon />
+            시간표
+          </Button>
+          <SwipeableDrawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+            onOpen={toggleDrawer(anchor, true)}
+          >
+            {list(anchor)}
+          </SwipeableDrawer>
+        </React.Fragment>
+      ))}
+    </div>
   );
 }
-
-export default ClassTimeTable;
