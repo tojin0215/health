@@ -221,6 +221,7 @@ class Register extends Component {
                     onChange={this.handleChange}
                     id='id'
                     label='아이디'
+                    placeholder='아이디를 입력해주세요.'
                     error={this.state.id_err}
                     required
                     autoFocus
@@ -254,6 +255,7 @@ class Register extends Component {
                     value={this.state.business_number}
                     onChange={this.handleChange}
                     id='business_number'
+                    placeholder='사업자 등록번호를 입력해주세요. (-포함)'
                     label='사업자 등록번호'
                     error={this.state.business_number_err}
                     required
@@ -268,6 +270,7 @@ class Register extends Component {
                     onChange={this.handleChange}
                     type='password'
                     id='password'
+                    placeholder='비밀번호를 입력해주세요.'
                     label='비밀번호'
                     error={this.state.password_err}
                     required
@@ -282,6 +285,7 @@ class Register extends Component {
                     onChange={this.handleChange}
                     type='password'
                     id='password_confirm'
+                    placeholder='비밀번호를 한번더 입력해주세요.'
                     label='비밀번호확인'
                     error={this.state.password_confirm_err}
                     required
@@ -290,11 +294,12 @@ class Register extends Component {
               </Col>
               <Col>
                 <Form.Group>
-                  <Form.Label>사업장 이름</Form.Label>
+                  <Form.Label>사업장 명</Form.Label>
                   <Form.Control
                     value={this.state.fitness_name}
                     onChange={this.handleChange}
                     id='fitness_name'
+                    placeholder='사업장 명을 입력해주세요.'
                     label='사업장이름'
                     error={this.state.fitness_name_err}
                     required
@@ -309,6 +314,7 @@ class Register extends Component {
                     onChange={this.handleChange}
                     id='business_phone'
                     label='사업장 연락처(-제외)'
+                    placeholder='사업장 연락처를 입력해주세요.(-제외)'
                     error={this.state.business_phone_err}
                     required
                   ></Form.Control>
@@ -321,6 +327,7 @@ class Register extends Component {
                     value={this.state.manager_name}
                     onChange={this.handleChange}
                     id='manager_name'
+                    placeholder='대표자 이름을 입력해주세요.'
                     label='대표 이름'
                     error={this.state.manager_name_err}
                     required
@@ -335,6 +342,7 @@ class Register extends Component {
                     value={this.state.phone}
                     onChange={this.handleChange}
                     id='phone'
+                    placeholder='대표 연락처를 입력해주세요.'
                     label='대표 연락처(-제외)'
                     error={this.state.phone_err}
                     required
@@ -353,7 +361,6 @@ class Register extends Component {
                   <label className='form-check-label'>
                     필수 약관에 동의했습니다.{' '}
                     <a
-                      href='#'
                       className='text-decoration-underline text-reset'
                       onClick={this.handleModal}
                     >
@@ -396,15 +403,11 @@ class Register extends Component {
           </Form>
           <div className='d-flex justify-content-center mt-3'>
             {this.state.agreeCheck ? (
-              <Button type='button' className='btn-primary_dark mx-2'>
-                이전으로
-              </Button>
+              <Button className='btn-secondary mx-2'>이전으로</Button>
             ) : (
               <div>
-                <Button type='button' className='btn-primary_dark mx-2'>
-                  이전으로
-                </Button>
-              </div>
+                <Button className='btn-secondary mx-2'>이전으로</Button>
+              </div> /* 기능추가: 뒤로가ㅓ기 */
             )}
             {this.state.agreeCheck ? (
               <Button

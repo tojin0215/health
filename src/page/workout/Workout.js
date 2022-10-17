@@ -110,76 +110,74 @@ class Workout extends Component {
             <Col xs={12}>
               <h3>운동 배정</h3>
             </Col>
-            <Row>
-              <Col xs={6} className='workoutRoutine'>
-                <Link to='/workoutAlloted'>
-                  <Row>
-                    <Col xs={10} className='mb-5'>
-                      <h2>커스텀 루틴 배정</h2>
-                    </Col>
-                    <Col xs={2}>
-                      <CgArrowLongRight className='fs-1' />
-                    </Col>
-                    <Col xs={12}>
-                      <p>
-                        개별 운동을 직접 조합해서 루틴을 만들어
-                        <br />
-                        회원에게 배정해 줄 수 있습니다.
-                      </p>
-                    </Col>
-                  </Row>
-                </Link>
-              </Col>
-              <Col xs={6} className='workoutRoutine ds'>
-                <Link to='/workoutStage'>
-                  <Row>
-                    <Col xs={10} className='mb-5'>
-                      <h2>베이직 루틴 배정</h2>
-                    </Col>
-                    <Col xs={2}>
-                      <CgArrowLongRight className='fs-1' />
-                    </Col>
-                    <Col xs={12}>
-                      <p>
-                        사전에 생성한 루틴을 선택해
-                        <br />
-                        회원에게 배정해 줄 수 있습니다.
-                      </p>
-                    </Col>
-                  </Row>
-                </Link>
-              </Col>
-            </Row>
-            <Col xs={12} className='addWorkout my-4'>
-              <Link to='/workoutAdd'>
-                <Row>
-                  <Col xs={3}>
-                    <h4>운동 설정</h4>
-                  </Col>
-                  <Col xs={8}>
-                    <p>루틴에 들어갈 개별 운동들을 만들 수 있습니다.</p>
-                  </Col>
-                  <Col xs={1}>
-                    <MdArrowForwardIos />
-                  </Col>
-                </Row>
-              </Link>
+            <Col>
+              <Row>
+                <Col className='workoutRoutine me-4'>
+                  <Link to='/workoutAlloted'>
+                    <Row>
+                      <Col xs={10} className='mb-5'>
+                        <h2>커스텀 루틴 배정</h2>
+                      </Col>
+                      <Col xs={2}>
+                        <CgArrowLongRight className='fs-1' />
+                      </Col>
+                      <Col xs={12}>
+                        <p>
+                          개별 운동을 직접 조합해서 루틴을 만들어
+                          <br />
+                          회원에게 배정해 줄 수 있습니다.
+                        </p>
+                      </Col>
+                    </Row>
+                  </Link>
+                </Col>
+                <Col className='workoutRoutine'>
+                  <Link to='/workoutStage'>
+                    <Row>
+                      <Col xs={10} className='mb-5'>
+                        <h2>베이직 루틴 배정</h2>
+                      </Col>
+                      <Col xs={2}>
+                        <CgArrowLongRight className='fs-1' />
+                      </Col>
+                      <Col xs={12}>
+                        <p>
+                          단계별 기본 루틴을 선택해
+                          <br />
+                          회원에게 배정해 줄 수 있습니다.
+                        </p>
+                      </Col>
+                    </Row>
+                  </Link>
+                </Col>
+              </Row>
             </Col>
-            <Col xs={12} className='addWorkout'>
-              <Link to='/workoutStageAdd'>
-                <Row>
-                  <Col xs={3}>
-                    <h4>루틴 설정</h4>
-                  </Col>
-                  <Col xs={8}>
-                    <p>베이직 루틴을 직접 만들 수 있습니다.</p>
-                  </Col>
-                  <Col xs={1}>
-                    <MdArrowForwardIos />
-                  </Col>
-                </Row>
-              </Link>
-            </Col>
+            <Link to='/workoutAdd'>
+              <Row className='addWorkout my-4'>
+                <Col xs={4}>
+                  <h4>운동 설정</h4>
+                </Col>
+                <Col xs={7}>
+                  <p>커스텀 루틴에 들어갈 개별 운동들을 만들 수 있습니다.</p>
+                </Col>
+                <Col xs={1}>
+                  <MdArrowForwardIos />
+                </Col>
+              </Row>
+            </Link>
+            <Link to='/workoutStageAdd'>
+              <Row className='addWorkout'>
+                <Col xs={4}>
+                  <h4>루틴 설정</h4>
+                </Col>
+                <Col xs={7}>
+                  <p>베이직 루틴을 직접 만들 수 있습니다.</p>
+                </Col>
+                <Col xs={1}>
+                  <MdArrowForwardIos />
+                </Col>
+              </Row>
+            </Link>
           </Row>
         </Container>
         <div className='footer'>

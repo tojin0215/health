@@ -465,8 +465,10 @@ class WorkoutAdd extends Component {
               <Row className='workoutTabs text-center'>
                 <Col>
                   <Button
+                    type='radio'
                     className='btn-table'
                     variant='btn-table'
+                    id='danger-outlined'
                     onClick={() => this.handleOnClick(1)}
                   >
                     상체
@@ -474,8 +476,10 @@ class WorkoutAdd extends Component {
                 </Col>
                 <Col>
                   <Button
+                    type='radio'
                     className='btn-table'
                     variant='btn-table'
+                    id='danger-outlined'
                     onClick={() => this.handleOnClick(18)}
                   >
                     하체
@@ -483,6 +487,7 @@ class WorkoutAdd extends Component {
                 </Col>
                 <Col>
                   <Button
+                    type='radio'
                     className='btn-table'
                     variant='btn-table'
                     onClick={() => this.handleOnClick(28)}
@@ -492,6 +497,7 @@ class WorkoutAdd extends Component {
                 </Col>
                 <Col>
                   <Button
+                    type='radio'
                     className='btn-table'
                     variant='btn-table'
                     onClick={() => this.handleOnClick(38)}
@@ -501,6 +507,7 @@ class WorkoutAdd extends Component {
                 </Col>
                 <Col>
                   <Button
+                    type='radio'
                     className='btn-table'
                     variant='btn-table'
                     onClick={() => this.handleOnClick(48)}
@@ -510,6 +517,7 @@ class WorkoutAdd extends Component {
                 </Col>
                 <Col>
                   <Button
+                    type='radio'
                     className='btn-table'
                     variant='btn-table'
                     onClick={() => this.handleOnClick(58)}

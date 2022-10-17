@@ -6,6 +6,7 @@ import { logoutRequest } from '../../action/authentication';
 
 import Button from 'react-bootstrap/Button';
 import styles from './Navigation.css';
+import { TbHome } from 'react-icons/tb';
 //web용 내비게이션
 class Navigation extends Component {
   constructor(props) {
@@ -38,61 +39,22 @@ class Navigation extends Component {
         {userinfo.loginWhether === 2 ? (
           <Navbar>
             <Nav className='mr-auto dropdownNav navitem'>
-              <Nav.Item>
-                <span className='text-primary'>
-                  {this.props.userinfo.fitness_name}
-                </span>
-                <span className={styles.navitem}> 회원</span>
-              </Nav.Item>
               <NavLink exact to='/home'>
-                <span className={styles.navitem}>Home</span>
-                <ul>
-                  <li>
-                    <NavLink exact to='/home'>
-                      Home
-                    </NavLink>
-                  </li>
-                  {/* <li>
-                    <NavLink exact to='/qr'>
-                      QR
-                    </NavLink>
-                  </li> */}
-                </ul>
+                <Nav.Item>
+                  <span className='text-primary'>
+                    {this.props.userinfo.fitness_name}
+                  </span>
+                  <span className={styles.navitem}> 회원</span>
+                </Nav.Item>
               </NavLink>
               <NavLink exact to='/introduce'>
-                <span className={styles.navitem}>센터 소개</span>
-                <ul>
-                  <li>
-                    <NavLink exact to='/introduce'>
-                      센터 소개
-                    </NavLink>
-                  </li>
-                </ul>
+                <span className={styles.navitem}>센터</span>
               </NavLink>
-              <NavLink exact to='/inbodies'>
-                <span className={styles.navitem}>인바디 정보</span>
-                <ul>
-                  <li>
-                    <NavLink exact to='/inbodies'>
-                      인바디 정보
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/genetic'>
-                      DTC
-                    </NavLink>
-                  </li>
-                </ul>
+              <NavLink exact to='/client'>
+                <span className={styles.navitem}>회원</span>
               </NavLink>
               <NavLink exact to='/reservation'>
-                <span className={styles.navitem}>수업관리</span>
-                <ul>
-                  <li class='dropdown'>
-                    <NavLink exact to='/reservation'>
-                      수업
-                    </NavLink>
-                  </li>
-                </ul>
+                <span className={styles.navitem}>수업</span>
               </NavLink>
             </Nav>
             <Nav className={styles.navUtill}>

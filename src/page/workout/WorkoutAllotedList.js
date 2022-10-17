@@ -40,6 +40,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import { TbMoodSuprised } from 'react-icons/tb';
 import { MdPersonSearch } from 'react-icons/md';
+import { BiSearchAlt2 } from 'react-icons/bi';
 
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
@@ -317,87 +318,96 @@ class WorkoutAllotedList extends Component {
           </div>
         </div>
         <Container className='workoutallotedlist__container'>
-          <Col>
-            <Row className='sectionGlass'>
-              {this.state.line === 3 ? (
-                <Col xs={12}>
-                  <h3>
-                    <span className='text-primary'>
-                      {this.state.client_name2}
-                    </span>
+          <Row className='sectionGlass'>
+            {this.state.line === 3 ? (
+              <h5>
+                <Row xs='auto'>
+                  <Col>
+                    <strong>{this.state.client_name2}</strong>
                     님의{' '}
+                  </Col>
+                  <Col>
                     <DatePicker
-                      className='boxmorpsm text-center w-100 border-0'
+                      className='text-center'
                       selected={this.state.workoutB_date}
                       onChange={(date) => this.dateOnChange(date)}
                       dateFormat='yyyy년MM월dd일'
+                      font-size='1.6rem'
                       //  minDate={new Date()}
                     />
-                    {/* {moment(this.state.workoutB_date).format('YYYY년 MM월 DD일')} */}
-                    운동 배정 목록
-                  </h3>
-                </Col>
-              ) : (
-                <Row xs='auto'>
+                  </Col>
                   <Col>
-                    {this.state.line === 3 ? (
-                      <TextField
-                        id='customer_name'
-                        label='회원 검색'
-                        disabled
-                        variant='standard'
-                        className='customer-input--search'
-                        InputProps={{ disableUnderline: true }}
-                        value={this.state.client_name2}
-                      />
-                    ) : this.state.line === 1 ? (
-                      ''
-                    ) : this.props.userinfo.loginWhether === 2 ? (
-                      ''
-                    ) : this.state.open ? (
-                      <>
-                        <UserSearch
-                          open={this.state.open}
-                          setOpen={(o) => this.setState({ open: o })}
-                          fitness_no={this.props.userinfo.fitness_no}
-                          loginWhether={this.props.userinfo.loginWhether}
-                          joinNo={this.props.userinfo.joinNo}
-                          handleUser={this.handleUser}
-                        />
-                      </>
-                    ) : (
-                      <div className='customer_name mb-4'>
+                    {/* {moment(this.state.workoutB_date).format('YYYY년 MM월 DD일')} */}
+                    운동 배정 목록입니다.
+                  </Col>
+                </Row>
+              </h5>
+            ) : (
+              <Col className='mx-3'>
+                <h5>
+                  <Row xs='auto'>
+                    <Col className='customer_name mb-3'>
+                      {this.state.line === 3 ? (
                         <TextField
                           id='customer_name'
                           label='회원 검색'
                           disabled
                           variant='standard'
-                          onClick={() => this.setState({ open: true })}
                           className='customer-input--search'
                           InputProps={{ disableUnderline: true }}
-                          value={this.state.client_name}
+                          value={this.state.client_name2}
                         />
-                      </div>
-                    )}
-                    {/* {this.state.client_name} */}
-                  </Col>
-                  <Col>님의</Col>
-                  <Col>
-                    <DatePicker
-                      className='text-center'
-                      selected={this.state.workoutA_date}
-                      onChange={(date) => this.dateOnChange(date)}
-                      dateFormat='yyyy년MM월dd일'
-                      font-size='1.6rem'
-                      maxDate={new Date()}
-                    />
-                  </Col>
-                  <Col>에 배정된 운동목록입니다.</Col>
-                  {/* {moment(this.state.workoutA_date).format('YYYY년 MM월 DD일')} */}
-                </Row>
-              )}
+                      ) : this.state.line === 1 ? (
+                        ''
+                      ) : this.props.userinfo.loginWhether === 2 ? (
+                        ''
+                      ) : this.state.open ? (
+                        <>
+                          <UserSearch
+                            open={this.state.open}
+                            setOpen={(o) => this.setState({ open: o })}
+                            fitness_no={this.props.userinfo.fitness_no}
+                            loginWhether={this.props.userinfo.loginWhether}
+                            joinNo={this.props.userinfo.joinNo}
+                            handleUser={this.handleUser}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <TextField
+                            id='customer_name'
+                            label='회원검색'
+                            disabled
+                            variant='standard'
+                            onClick={() => this.setState({ open: true })}
+                            className='customer-input--search'
+                            InputProps={{ disableUnderline: true }}
+                            value={this.state.client_name}
+                          />
+                        </>
+                      )}
+                      {/* {this.state.client_name} */}
+                    </Col>
+                    <Col>님의</Col>
+                    <Col>
+                      <DatePicker
+                        className='text-center'
+                        selected={this.state.workoutA_date}
+                        onChange={(date) => this.dateOnChange(date)}
+                        dateFormat='yyyy년MM월dd일'
+                        font-size='1.6rem'
+                        maxDate={new Date()}
+                      />
+                    </Col>
+                    <Col>에 배정된 운동목록입니다.</Col>
+                    {/* {moment(this.state.workoutA_date).format('YYYY년 MM월 DD일')} */}
+                  </Row>
+                </h5>
+              </Col>
+            )}
+            <Col xs={12}>
               <TableContainer component={Paper}>
-                <Table className=' table-light'>
+                <Table className='table--block table-light'>
                   <TableHead>
                     <TableRow>
                       <TableCell scope='col'>부위</TableCell>
@@ -417,6 +427,14 @@ class WorkoutAllotedList extends Component {
                     )}
                   </TableBody>
                 </Table>
+                {this.state.workoutAllotlist.length ? (
+                  ''
+                ) : (
+                  <div className='p-5 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>배정된 운동이 없습니다.</p>
+                  </div>
+                )}
                 <TablePagination
                   rowsPerPageOptions={[
                     5,
@@ -434,24 +452,24 @@ class WorkoutAllotedList extends Component {
                   onRowsPerPageChange={this.handleChangeRowsPerPage}
                 />
               </TableContainer>
-            </Row>
-            <Row className='sectionGlass'>
-              <h3>
-                {this.state.line === 3
-                  ? this.state.client_name2
-                  : this.state.client_name}
-                <span className='fs-4'>님의 인바디정보</span>
-              </h3>
-              {this.state.inbodiesList[0] ? (
-                this.state.inbodiesList[0]
-              ) : (
-                <div className='p-3 fs-5 fw-bold text-center'>
-                  <TbMoodSuprised className='fs-3' />
-                  <p>등록된 인바디 정보가 없습니다.</p>
-                </div>
-              )}
-            </Row>
-          </Col>
+            </Col>
+          </Row>
+          <Row className='sectionGlass'>
+            <h3>
+              {this.state.line === 3
+                ? this.state.client_name2
+                : this.state.client_name}
+              <span className='fs-4'>님의 인바디정보</span>
+            </h3>
+            {this.state.inbodiesList[0] ? (
+              this.state.inbodiesList[0]
+            ) : (
+              <div className='p-3 fs-5 fw-bold text-center'>
+                <TbMoodSuprised className='fs-3' />
+                <p>등록된 인바디 정보가 없습니다.</p>
+              </div>
+            )}
+          </Row>
         </Container>
         <div className='footer'>
           <Footer />

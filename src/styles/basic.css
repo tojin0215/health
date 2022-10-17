@@ -35,8 +35,9 @@ h4 {
   align-items: center;
 }
 h5 {
+  font-size: large;
   line-height: 2.8rem;
-  font-weight: 500;
+  font-weight: 400;
   align-items: center;
 }
 
@@ -46,7 +47,7 @@ h5 .parallelogram {
 }
 
 h6 {
-  display: flex;
+  line-height: 2.8rem;
   font-weight: 400;
   align-items: center;
 }
@@ -87,4 +88,11 @@ p {
 
 .white-space-break-spaces {
   white-space: break-spaces;
+}
+.cf {
+}
+.cf:after {
+  content: '';
+  display: block;
+  clear: both;
 }
