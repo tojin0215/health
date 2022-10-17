@@ -1492,19 +1492,16 @@ class Reservation extends Component {
                   </Button>
                 </Col>
               </Row>
-              <Row className='resevation__class-Tabs mt-2'>
+              <Row className='resevation__class-Tabs mb-2 my-3'>
                 <Tabs
                   className='reservation__class-container'
                   id='reservation__class__tabs'
                   activeKey={this.key}
                   onSelect={this.selectClassTabs}
                 >
-                  <Tab
-                    className='reservation__class__tabs-item'
-                    eventKey='pt'
-                    title='개인PT'
-                  >
+                  <Tab eventKey='pt' title='개인PT'>
                     <Tabs
+                      className='reservation__class__tabs-item'
                       activeKey={this.keyTrainer}
                       onSelect={this.selectClassTabs}
                     >
@@ -1516,6 +1513,7 @@ class Reservation extends Component {
                   </Tab>
                   <Tab eventKey='pilates' title='필라테스'>
                     <Tabs
+                      className='reservation__class__tabs-item'
                       activeKey={this.keyTrainer}
                       onSelect={this.selectClassTabs}
                     >
@@ -1527,6 +1525,7 @@ class Reservation extends Component {
                   </Tab>
                   <Tab eventKey='gx' title='GX'>
                     <Tabs
+                      className='reservation__class__tabs-item'
                       activeKey={this.keyTrainer}
                       onSelect={this.selectClassTabs}
                     >
@@ -1538,6 +1537,7 @@ class Reservation extends Component {
                   </Tab>
                   <Tab eventKey='etc' title='기타'>
                     <Tabs
+                      className='reservation__class__tabs-item'
                       activeKey={this.keyTrainer}
                       onSelect={this.selectClassTabs}
                     >
@@ -1968,10 +1968,9 @@ class Reservation extends Component {
                 className='mb-3'
               >
                 <Tab eventKey='home' title='전체보기'>
-                  <div className='my-3 text-end'>
+                  <div className='mt-3 mb-1 text-end'>
                     {/* handleDate, handleExercise, handleTrainer 를 EnhancedTableHead로 변경하기 추후 */}
-
-                    <Button
+                    {/* <Button
                       variant='filter'
                       className='btn-filter'
                       onClick={() => this.handleDate()}
@@ -1992,7 +1991,7 @@ class Reservation extends Component {
                       onClick={() => this.handleTrainer()}
                     >
                       강사 <ImSortAlphaAsc />
-                    </Button>
+                    </Button> */}
                     {/* <th scope='col'>상태</th>
 										      <th scope='col'>취소사유</th> */}
                   </div>
@@ -2001,9 +2000,27 @@ class Reservation extends Component {
                       <TableHead rowCount={this.state.reservation.length}>
                         <TableRow>
                           <TableCell>이름</TableCell>
-                          <TableCell>수강날짜</TableCell>
-                          <TableCell>운동명</TableCell>
-                          <TableCell>강사</TableCell>
+                          <TableCell
+                            className='filter'
+                            onClick={() => this.handleDate()}
+                          >
+                            수강날짜
+                            <ImSortAlphaAsc />
+                          </TableCell>
+                          <TableCell
+                            className='filter'
+                            onClick={() => this.handleExercise()}
+                          >
+                            운동명
+                            <ImSortAlphaAsc />
+                          </TableCell>
+                          <TableCell
+                            className='filter'
+                            onClick={() => this.handleTrainer()}
+                          >
+                            강사
+                            <ImSortAlphaAsc />
+                          </TableCell>
                           <TableCell>정원</TableCell>
                           <TableCell>시간</TableCell>
                           <TableCell>삭제</TableCell>
@@ -2051,7 +2068,7 @@ class Reservation extends Component {
                         <TableBody>
                           {this.state.reservation_date.length == 0 ? (
                             <TableCell>
-                              <div className='p-3 fs-5 fw-bold text-center'>
+                              <div className='p-5 fs-5 fw-bold text-center'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>예약된 수업이 없습니다.</p>
                               </div>
@@ -2065,14 +2082,13 @@ class Reservation extends Component {
                           )}
                         </TableBody>
                       ) : null}
-
                       {!this.state.show_exercise_table &&
                       !this.state.show_trainer_table &&
                       !this.state.show_date_table ? (
                         <TableBody>
                           {this.state.reservation.length == 0 ? (
-                            <TableCell>
-                              <div className='p-3 fs-5 fw-bold text-center'>
+                            <TableCell colSpan={7}>
+                              <div className='p-5 fs-5 fw-bold text-center'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>예약된 수업이 없습니다.</p>
                               </div>
@@ -2112,9 +2128,27 @@ class Reservation extends Component {
                       <TableHead rowCount={this.state.reservation.length}>
                         <TableRow>
                           <TableCell>이름</TableCell>
-                          <TableCell>수강날짜</TableCell>
-                          <TableCell>운동명</TableCell>
-                          <TableCell>강사</TableCell>
+                          <TableCell
+                            className='filter'
+                            onClick={() => this.handleDate()}
+                          >
+                            수강날짜
+                            <ImSortAlphaAsc />
+                          </TableCell>
+                          <TableCell
+                            className='filter'
+                            onClick={() => this.handleExercise()}
+                          >
+                            운동명
+                            <ImSortAlphaAsc />
+                          </TableCell>
+                          <TableCell
+                            className='filter'
+                            onClick={() => this.handleTrainer()}
+                          >
+                            강사
+                            <ImSortAlphaAsc />
+                          </TableCell>
                           <TableCell>정원</TableCell>
                           <TableCell>시간</TableCell>
                           <TableCell>삭제</TableCell>
@@ -2122,8 +2156,8 @@ class Reservation extends Component {
                       </TableHead>
                       <TableBody>
                         {this.state.reservation_choice_trainer.length == 0 ? (
-                          <TableCell>
-                            <div className='p-3 fs-5 fw-bold text-center'>
+                          <TableCell colSpan={7}>
+                            <div className='p-5 fs-5 fw-bold text-center'>
                               <TbMoodSuprised className='fs-3' />
                               <p>예약된 수업이 없습니다.</p>
                             </div>
@@ -2155,8 +2189,8 @@ class Reservation extends Component {
                     />
                   </TableContainer>
                 </Tab>
-                <Tab eventKey='client' title='회원별조회'>
-                  <Col className='text-center'>
+                <Tab eventKey='client' title='회원별 조회'>
+                  <Col className='text-end mb-2'>
                     {this.state.open ? (
                       <UserSearch
                         open={this.state.open}
@@ -2168,12 +2202,12 @@ class Reservation extends Component {
                       />
                     ) : (
                       <TextField
+                        placeholder='회원검색'
                         id='customer_name'
-                        label='회원 검색'
                         disabled
                         variant='standard'
                         onClick={() => this.setState({ open: true })}
-                        className=''
+                        className='customer-input--search justify-content-center mt-2'
                         InputProps={{ disableUnderline: true }}
                         value={this.state.customer_name}
                         // onChange={this.handleChange}
@@ -2188,9 +2222,27 @@ class Reservation extends Component {
                       <TableHead rowCount={this.state.reservation.length}>
                         <TableRow>
                           <TableCell>이름</TableCell>
-                          <TableCell>수강날짜</TableCell>
-                          <TableCell>운동명</TableCell>
-                          <TableCell>강사</TableCell>
+                          <TableCell
+                            className='filter'
+                            onClick={() => this.handleDate()}
+                          >
+                            수강날짜
+                            <ImSortAlphaAsc />
+                          </TableCell>
+                          <TableCell
+                            className='filter'
+                            onClick={() => this.handleExercise()}
+                          >
+                            운동명
+                            <ImSortAlphaAsc />
+                          </TableCell>
+                          <TableCell
+                            className='filter'
+                            onClick={() => this.handleTrainer()}
+                          >
+                            강사
+                            <ImSortAlphaAsc />
+                          </TableCell>
                           <TableCell>정원</TableCell>
                           <TableCell>시간</TableCell>
                           <TableCell>삭제</TableCell>
@@ -2198,10 +2250,12 @@ class Reservation extends Component {
                       </TableHead>
                       <TableBody>
                         {this.state.reservation_choice_client.length == 0 ? (
-                          <div className='p-3 fs-5 fw-bold text-center'>
-                            <TbMoodSuprised className='fs-3' />
-                            <p>예약된 수업이 없습니다.</p>
-                          </div>
+                          <TableCell colSpan={7}>
+                            <div className='p-5 fs-5 fw-bold text-center'>
+                              <TbMoodSuprised className='fs-3' />
+                              <p>예약된 수업이 없습니다.</p>
+                            </div>
+                          </TableCell>
                         ) : (
                           this.state.reservation_choice_client.slice(
                             this.state.page * this.state.rowsPerPage,

@@ -827,7 +827,7 @@ class Sales extends Component {
             <Button onClick={this.goAddSales}>결제 등록</Button>
           </div>
           <Row>
-            <Col xs={12} className='mixed-chart'>
+            <Col xs={12} className='mixed-chart my-3'>
               <Chart
                 options={this.state.options}
                 series={this.state.series}

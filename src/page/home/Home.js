@@ -397,7 +397,11 @@ class Home extends Component {
                           {1 == true ? (
                             <div className='py-2 my-1 text-secondary rounded'>
                               <TbMoodSuprised className='fs-3' />
-                              <p>수업이 없습니다.</p>
+                              <p>
+                                예약된 수업이
+                                <br />
+                                없습니다
+                              </p>
                             </div>
                           ) : (
                             ''
@@ -409,7 +413,11 @@ class Home extends Component {
                           {1 == true ? (
                             <div className='py-2 my-1 text-secondary  rounded'>
                               <TbMoodSuprised className='fs-3' />
-                              <p>수업이 없습니다.</p>
+                              <p>
+                                예약된 수업이
+                                <br />
+                                없습니다
+                              </p>
                             </div>
                           ) : (
                             ''
@@ -421,7 +429,11 @@ class Home extends Component {
                           {1 == true ? (
                             <div className='py-2 my-1 text-secondary rounded'>
                               <TbMoodSuprised className='fs-3' />
-                              <p>수업이 없습니다.</p>
+                              <p>
+                                예약된 수업이
+                                <br />
+                                없습니다
+                              </p>
                             </div>
                           ) : (
                             ''
@@ -433,7 +445,11 @@ class Home extends Component {
                           {1 == true ? (
                             <div className='py-2 my-1 text-secondary rounded'>
                               <TbMoodSuprised className='fs-3' />
-                              <p>수업이 없습니다.</p>
+                              <p>
+                                예약된 수업이
+                                <br />
+                                없습니다
+                              </p>
                             </div>
                           ) : (
                             ''
@@ -445,7 +461,11 @@ class Home extends Component {
                           {1 == true ? (
                             <div className='py-2 my-1 text-secondary rounded'>
                               <TbMoodSuprised className='fs-3' />
-                              <p>수업이 없습니다.</p>
+                              <p>
+                                예약된 수업이
+                                <br />
+                                없습니다
+                              </p>
                             </div>
                           ) : (
                             ' '
@@ -457,7 +477,11 @@ class Home extends Component {
                           {1 == true ? (
                             <div className='py-2 my-1 text-secondary rounded'>
                               <TbMoodSuprised className='fs-3' />
-                              <p>수업이 없습니다.</p>
+                              <p>
+                                예약된 수업이
+                                <br />
+                                없습니다
+                              </p>
                             </div>
                           ) : (
                             ''
@@ -469,7 +493,11 @@ class Home extends Component {
                           {1 == true ? (
                             <div className='py-2 my-1 text-secondary rounded'>
                               <TbMoodSuprised className='fs-3' />
-                              <p>수업이 없습니다.</p>
+                              <p>
+                                예약된 수업이
+                                <br />
+                                없습니다
+                              </p>
                             </div>
                           ) : (
                             ''

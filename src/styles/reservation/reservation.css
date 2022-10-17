@@ -195,6 +195,11 @@
 /* 진행중인 수업 - 선택된 수업 - 회원 검색 */
 .reservation .MuiFormControl-root {
   background-color: #fff;
+  border-radius: 5px;
+}
+.reservation .MuiFormControl-root input::-webkit-input-placeholder {
+  -webkit-text-fill-color: #111;
+  font-weight: bolder;
 }
 
 .reservation .MuiTextField-root .MuiFormLabel-root {
@@ -239,24 +244,58 @@
   background-color: #111;
 }
 /* 탭 */
+.reservation__class-container .nav-link.active {
+  border: 0;
+  background-color: transparent;
+  color: #ebff2e;
+  border-bottom: 2px solid #ebff2e;
+}
+
 .resevation__class-Tabs {
   border: 1px solid #fff;
   border-radius: 5px;
   padding: 20px;
 }
-.reservation__class-container {
+.reservation__class__tabs-item {
+  border: 0;
 }
+.reservation__class__tabs-item .nav-link:hover {
+  border: 0;
+  color: #ebff2e;
+}
+.reservation__class__tabs-item .nav-item.show .nav-link,
+.reservation__class__tabs-item .nav-link.active {
+  border: 0;
+  background-color: transparent;
+  color: #ebff2e;
+}
+/* .reservation__class__tabs-item .nav-link {
+  background-color: transparent;
+  color: #ebff2e;
+} */
 
 /* 필터 */
 .btn-filter {
+  font-size: 14px;
   border: 1px solid #fff;
   color: #ffff;
-  padding: 8px 20px;
-  border-radius: 30px;
-  margin-right: 20px;
+  border-radius: 20px;
 }
 .btn-filter:hover {
   color: #111;
   background-color: #ebff2e;
   border-color: #888;
+}
+.filter {
+  cursor: pointer;
+}
+.filter:hover {
+  color: #ebff2e;
+}
+.filter.active {
+  color: #ebff2e;
+}
+.filter svg {
+  margin: 0 5px;
+  color: #ebff2e;
 }

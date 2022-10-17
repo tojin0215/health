@@ -382,9 +382,9 @@ class AddSales extends Component {
         <Container>
           <form>
             <div className='sectionGlass'>
-              <Row>
+              <Row xs='auto'>
                 <h5>
-                  <Row xs='auto'>
+                  <Row>
                     <Col className='customer_name'>
                       {this.state.open ? (
                         <UserSearch
@@ -398,7 +398,7 @@ class AddSales extends Component {
                       ) : (
                         <TextField
                           id='customer_name'
-                          label='회원 검색'
+                          placeholder='회원 검색'
                           disabled
                           variant='standard'
                           onClick={() => this.setState({ open: true })}
@@ -464,7 +464,7 @@ class AddSales extends Component {
                       checked={this.state.exerciseGroup['gx']}
                       onChange={this.handleExerciseRadio}
                     />
-                    <Form.Check.Label htmlFor='gx' className='w-100'>
+                    <Form.Check.Label htmlFor='gx' className=''>
                       GX
                     </Form.Check.Label>
                   </Form.Check>
@@ -478,7 +478,6 @@ class AddSales extends Component {
                     ></Form.Control>
                   </Form.Check>
                   <Form.Check inline>
-                    <Form.Check.Label htmlFor='etc'>기타</Form.Check.Label>
                     <Form.Check.Input
                       type='radio'
                       name='exerciseGroup '
@@ -486,6 +485,7 @@ class AddSales extends Component {
                       checked={this.state.exerciseGroup['etc']}
                       onChange={this.handleExerciseRadio}
                     />
+                    <Form.Check.Label htmlFor='etc'>기타</Form.Check.Label>
                   </Form.Check>
                   <Form.Check inline>
                     <Form.Control
