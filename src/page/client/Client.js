@@ -2096,8 +2096,6 @@ class Client extends Component {
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/home'>HOME</Link>
-                <span>&#62;</span>
                 <Link to='/client'>회원</Link>
               </div>
               {/*.breadCrumb */}
