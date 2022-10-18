@@ -2106,13 +2106,15 @@ class Client extends Component {
           {/*.localNavigation */}
         </header>
         {this.props.userinfo.loginWhether === 2 ? (
-          <Container>
+          <Container id='customerClient'>
             <h3>회원 상세정보</h3>
-            <div>
+            <div className='mb-4'>
               <CustomerCalendarComponent customer_no={this.idc} />
             </div>
-            <Row>
-              <Col xs={2}>이름</Col>
+            <Row className='clientInfo'>
+              <Col xs={2}>
+                <h5>이름</h5>
+              </Col>
               <Col xs={10}>김루피</Col>
               <Col xs={2}>생년월일</Col>
               <Col xs={10}>20010101</Col>
@@ -2124,6 +2126,8 @@ class Client extends Component {
               <Col xs={4}>3번</Col>
               <Col xs={2}>운동복 사용</Col>
               <Col xs={4}>사용</Col>
+              <Col xs={2}>가입경로</Col>
+              <Col xs={4}>간판</Col>
             </Row>
             <Row>
               <Col xs={8}>
