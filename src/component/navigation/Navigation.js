@@ -253,6 +253,11 @@ class Navigation extends Component {
                 <span className={styles.navitem}>운동</span>
                 <ul>
                   <li>
+                    <NavLink exact to='/workout'>
+                      운동 배정
+                    </NavLink>
+                  </li>
+                  <li>
                     <Link
                       to={{
                         pathname: '/workoutAllotedList',
@@ -266,11 +271,6 @@ class Navigation extends Component {
                       회원 운동 확인
                     </Link>
                   </li>
-                  <li>
-                    <NavLink exact to='/workout'>
-                      운동 배정
-                    </NavLink>
-                  </li>
                   {/* <li>
                     <NavLink exact to='/workoutAlloted'>
                       개별 운동 배정
@@ -278,7 +278,7 @@ class Navigation extends Component {
                   </li> */}
                   <li>
                     <NavLink exact to='/workoutAdd'>
-                      운동값 설정
+                      운동 설정
                     </NavLink>
                   </li>
                   {/* <li>
