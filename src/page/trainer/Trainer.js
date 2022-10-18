@@ -171,7 +171,9 @@ const TrainerName = ({
         </TableCell>
         <Modal show={showModal} size='lg' onHide={modalClose}>
           <Modal.Header>
-            <Modal.Title>강사 정보 수정</Modal.Title>
+            <Modal.Title>
+              <h5>강사 정보 수정</h5>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Row className='mb-4'>
@@ -650,7 +652,7 @@ const VieWTrainerItem = ({
         </TableCell>
         <Modal show={showModal} size='lg' onHide={modalClose}>
           <Modal.Header>
-            <Modal.Title>강사 정보 수정</Modal.Title>
+            <Modal.Title className='mb-4'>강사 정보 수정</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Row className='mb-4'>

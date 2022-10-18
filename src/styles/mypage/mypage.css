@@ -6,6 +6,10 @@
   padding: 30px;
   line-height: 30px;
 }
+.myInfo h4,
+.fitInfo h4 {
+  margin-bottom: 15px;
+}
 
 ul li:after {
   display: block;
@@ -14,6 +18,7 @@ ul li:after {
 }
 ul li strong {
   float: left;
+  font-size: 16px;
 }
 ul li p {
   float: right;
