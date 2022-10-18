@@ -175,6 +175,13 @@ section {
   margin-top: 1rem;
   box-shadow: 6px 4px 11px rgba(20, 20, 20, 0.6);
 }
+.sectionGlass-manager {
+  background-color: #2f2f3d;
+  border-radius: 0.313rem;
+  padding: 3rem;
+  margin-top: 1rem;
+  box-shadow: 6px 4px 11px rgba(20, 20, 20, 0.6);
+}
 
 @media screen and (max-width: 767px) {
   #root > div > div {

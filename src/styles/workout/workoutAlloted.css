@@ -31,7 +31,7 @@ h4 span {
  운동 선택 - 배정 버튼
 */
 .workout-alloted .workout-alloted__select--plus {
-  color: #333;
+  color: #c2c2c2;
   text-align: center;
   cursor: pointer;
   transition: color 0.5s;
@@ -40,7 +40,7 @@ h4 span {
 .workout-alloted .workout-alloted__select--plus:hover {
   /* background-color: rgba(235, 235, 46, 0.3); */
   /* background-color: #eee; */
-  color: #bedd00;
+  color: #0077fe;
 }
 
 .workout-alloted .workout-alloted__select--plus:active {
@@ -50,7 +50,7 @@ h4 span {
 배정된 운동목록 - 삭제 버튼
 */
 .workout-alloted .workout-alloted__selected--cencel {
-  color: #333;
+  color: #c2c2c2;
   text-align: center;
   cursor: pointer;
   transition: color 0.5s;

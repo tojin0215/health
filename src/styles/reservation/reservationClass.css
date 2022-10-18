@@ -1,22 +1,27 @@
 /* 
-* 수업 만들기 시간표 목록
+ 수업 만들기 시간표 목록
 */
 /* thead 폰트 컬러 */
-.reservationClassWrap .table thead tr th {
-  color: #eee;
+.classTable thead tr th {
+  text-align: center;
+  font-weight: 400;
+  color: #fff;
 }
 /* tbody 폰트 컬러 */
-.reservationClassWrap tbody tr td {
+.classTable tbody tr td {
   color: #fff;
 }
 
-.reservationClassWrap .MuiInputBase-input {
+.classTable .MuiInputBase-input {
   text-align: center;
 }
 
 /* 
 * 수업 만들기 인풋 폼
 */
+.exerciseGroup h5 {
+  white-space: nowrap;
+}
 
 /*
 * 텍스트 인풋 라벨 위치 조정
@@ -39,6 +44,9 @@
   transition: background-color 0.5s;
   cursor: pointer;
 }
+.reservation-class--trainer-input::placeholder {
+  color: #111;
+}
 
 /* 강사 검색 인풋 */
 .reservation-class--trainer-input #trainer {
@@ -59,7 +67,25 @@
   margin: 2px 0;
   text-align: center;
   cursor: pointer;
+
+  font-size: 14px;
 }
 .reservation-class__schedule-content:hover {
   background-color: rgba(240, 240, 240, 0.2);
+}
+
+.classTable .reservation-class__schedule-content {
+  border: 0;
+  background-color: #535353;
+}
+.classTable .reservation-class__schedule-content .class-info {
+  border-bottom: 1px solid #111;
+}
+/* 수업 수정 modal */
+.reservationClass-modal .modal-content {
+  width: 34.875rem;
+}
+
+.modal-dialog .modal-content .row {
+  margin-bottom: 10px;
 }

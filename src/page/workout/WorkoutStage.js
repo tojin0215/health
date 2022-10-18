@@ -18,7 +18,8 @@ import UserSearch from '../../component/customer/UserSearch';
 import Footer from '../../component/footer/Footer';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
-
+//css
+import '../../styles/workout/workoutAlloted.css';
 // mui
 import { Refresh } from '@mui/icons-material';
 import { TablePagination, TextField } from '@mui/material';
@@ -129,18 +130,16 @@ const WorkoutStageView = ({
       ? '기타 5단계'
       : '기본';
   return (
-    <>
-      <TableRow>
-        <TableCell>{stageWord}</TableCell>
-        <TableCell>{region}</TableCell>
-        <TableCell>{workout}</TableCell>
-        <TableCell>{machine}</TableCell>
-        <TableCell>{default_set}</TableCell>
-        <TableCell>{default_count}</TableCell>
-        <TableCell>{default_rest}</TableCell>
-        <TableCell>{url}</TableCell>
-      </TableRow>
-    </>
+    <TableRow>
+      <TableCell>{stageWord}</TableCell>
+      <TableCell>{region}</TableCell>
+      <TableCell>{workout}</TableCell>
+      <TableCell>{machine}</TableCell>
+      <TableCell>{default_set}</TableCell>
+      <TableCell>{default_count}</TableCell>
+      <TableCell>{default_rest}</TableCell>
+      <TableCell>{url}</TableCell>
+    </TableRow>
   );
 };
 
@@ -959,7 +958,7 @@ class WorkoutStage extends Component {
             </Col>
             <Col xs={12} className='my-3'>
               <TableContainer component={Paper}>
-                <Table className='table--block table-light'>
+                <Table className='table-light'>
                   <TableHead>
                     <TableRow>
                       <TableCell scope='col'>단계</TableCell>
@@ -1085,6 +1084,14 @@ class WorkoutStage extends Component {
                     )}
                   </TableBody>
                 </Table>
+                {this.state.workoutAllotlist.length === 0 ? (
+                  <div className='p-5 fs-5 fw-bold text-center'>
+                    <TbMoodSmile className='fs-3' />
+                    <p>회원을 선택해주세요.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
                 <TablePagination
                   rowsPerPageOptions={[
                     5,

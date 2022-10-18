@@ -557,7 +557,8 @@ class WorkoutAlloted extends Component {
               </Button>
             </Col>
           </Row>
-          {/* <Tabs
+          <div>
+            {/* <Tabs
               defaultActiveKey='1'
               id='exercise-part-tab'
               onSelect={this.handleSelect}
@@ -904,6 +905,7 @@ class WorkoutAlloted extends Component {
                 </TableContainer>
               </Tab>
             </Tabs> */}
+          </div>
           <div>
             <div>
               {/* <div className='mt-4 sectionGlass'>
@@ -1018,7 +1020,7 @@ class WorkoutAlloted extends Component {
                         <TableCell scope='col'>휴식</TableCell>
                         <TableCell scope='col'>URL</TableCell>
                         <TableCell scope='col' align='center'>
-                          삭제
+                          배정
                         </TableCell>
                       </TableRow>
                     </TableHead>
@@ -1033,7 +1035,7 @@ class WorkoutAlloted extends Component {
                   {this.state.exerciseAllotlist.length === 0 ? (
                     <div className='p-5 fs-5 fw-bold text-center'>
                       <TbMoodSuprised className='fs-3' />
-                      <p>운동을 선택하거나 설정된 운동이 없습니다.</p>
+                      <p>운동부위를 선택하거나 설정된 운동이 없습니다.</p>
                     </div>
                   ) : (
                     ''
@@ -1058,9 +1060,6 @@ class WorkoutAlloted extends Component {
                 </TableContainer>
               </Col>
             </Row>
-            {/* ) : (
-              ''
-            )} */}
             <Row className='sectionGlass'>
               <Col>
                 <h5>

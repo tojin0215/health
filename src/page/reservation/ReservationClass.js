@@ -281,33 +281,40 @@ const ReservationClassItem = ({
     <>
       {(loginWhether === 1 && loginWhetherTrainer === trainer) ||
       (loginWhether === 0 && loginWhetherTrainer !== trainer) ? (
-        <div
+        <Row
           className='reservation-class__schedule-content'
           onClick={modalOnClick}
         >
-          <p className='fw-bold'>
-            {exercise_class}/{kind}
-          </p>
-
-          <p>{trainer}</p>
-          <p>
-            {hourArray}시{minuteArray}분
-          </p>
-          <p>정원: {number_of_people}명</p>
-
-          <div></div>
-        </div>
+          <Col>
+            <p>
+              {hourArray}:{minuteArray}
+            </p>
+          </Col>
+          <Col>
+            <p className='fw-bold'>
+              {exercise_class}
+              {/* /{kind} */}
+            </p>
+            <p>{trainer}</p>
+            <p>
+              {number_of_people}/{/* {canRegist} */}전체
+            </p>
+          </Col>
+        </Row>
       ) : (
         ''
       )}
-      <Modal show={showModal}>
+      {/* <Modal show={true}> */}
+      <Modal show={showModal} className='reservationClass-modal'>
         <div>
-          <h4>수업 수정</h4>
+          <h4 className='mb-3'>수업 수정</h4>
           <Row>
-            <Col xs={3}>운동종류</Col>
-            <Col xs={9}>
+            <Col xs={3}>
+              <h5>운동종류</h5>
+            </Col>
+            <Col xs={9} className='mt-2'>
               <Row xs={2}>
-                <Col>
+                <Col xs={4}>
                   <Form.Check>
                     <Form.Check.Input
                       type='radio'
@@ -335,7 +342,7 @@ const ReservationClassItem = ({
                     </Form.Check.Label>
                   </Form.Check>
                 </Col>
-                <Col>
+                <Col xs={4}>
                   <Form.Check>
                     <Form.Check.Input
                       type='radio'
@@ -349,7 +356,7 @@ const ReservationClassItem = ({
                     </Form.Check.Label>
                   </Form.Check>
                 </Col>
-                <Col>
+                <Col xs={3} /* className='d-flex justify-content' */>
                   <Form.Check>
                     <Form.Check.Input
                       type='radio'
@@ -358,6 +365,13 @@ const ReservationClassItem = ({
                       checked={exerciseGroup['etc']}
                       onChange={handleExerciseRadio5}
                     />
+                    <Form.Check.Label htmlFor='etc' className='w-100'>
+                      기타
+                    </Form.Check.Label>
+                  </Form.Check>
+                </Col>
+                <Col xs={5}>
+                  <Form.Check>
                     <Form.Control
                       placeholder='기타'
                       id='etcExercise'
@@ -383,16 +397,25 @@ const ReservationClassItem = ({
                 </Col>
               </Row>
             </Col>
-            <Col xs={3}>운동명</Col>
+          </Row>
+          <Row>
+            <Col xs={3}>
+              <h5>운동명</h5>
+            </Col>
             <Col xs={9}>
               <Form.Control
                 value={exercise_class_input}
+                placeholder='운동명을 입력해주세요'
                 id='exercise_class'
                 onChange={updateChange}
                 error={exercise_class_err}
               ></Form.Control>
             </Col>
-            <Col xs={3}>강사</Col>
+          </Row>
+          <Row>
+            <Col xs={3}>
+              <h5>강사</h5>
+            </Col>
             <Col xs={9}>
               {loginWhether === 1 ? (
                 <Form.Control
@@ -403,6 +426,7 @@ const ReservationClassItem = ({
               ) : (
                 <Form.Control
                   value={trainer_input}
+                  placeholder='강사 검색'
                   onClick={() => setSearchOpen(true)}
                   id='trainer'
                   error={trainer_err}
@@ -420,7 +444,11 @@ const ReservationClassItem = ({
                 </div>
               </Modal>
             </Col>
-            <Col xs={3}>날짜</Col>
+          </Row>
+          <Row>
+            <Col xs={3}>
+              <h5>날짜</h5>
+            </Col>
             <Col xs={9}>
               <Form.Control
                 type='date'
@@ -431,7 +459,11 @@ const ReservationClassItem = ({
                 error={class_date_err}
               />
             </Col>
-            <Col xs={3}>시간</Col>
+          </Row>
+          <Row>
+            <Col xs={3}>
+              <h5>시간</h5>
+            </Col>
             <Col xs={9}>
               <Row>
                 <Col>
@@ -459,6 +491,8 @@ const ReservationClassItem = ({
                 </Col>
               </Row>
             </Col>
+          </Row>
+          <Row>
             <Col xs={3}>수강인원</Col>
             <Col xs={9}>
               <Form.Control
@@ -471,14 +505,16 @@ const ReservationClassItem = ({
             </Col>
           </Row>
           <Row className='mt-3'>
-            <Col xs={12}>
-              <span>삭제시 되돌릴 수 없습니다. 한번 더 확인해주세요.</span>
+            <Col xs={12} className='text-danger text-end my-3'>
+              <span className='m-2'>
+                삭제시 되돌릴 수 없습니다. 한번 더 확인해주세요.
+              </span>
               <Button
-                variant='danger'
+                variant='outline-danger'
                 onClick={() =>
                   // eslint-disable-next-line no-restricted-globals
                   confirm(
-                    '정말 삭제하시겠습니까?_예약된 회원도 같이 취소됩니다.'
+                    '정말 삭제하시겠습니까?_예약된 회원도 함께 취소됩니다.'
                   ) == true
                     ? reservationClassDelete(no)
                     : alert('삭제가 취소 되었습니다.')
@@ -487,12 +523,14 @@ const ReservationClassItem = ({
                 삭제
               </Button>
             </Col>
-            <Col xs={6}>
-              <Button variant='secondary' onClick={modalClose}>
+            <Col className='text-center'>
+              <Button
+                className='btn-primary-dark mx-1'
+                onClick={modalClose}
+                variant='primary-dark'
+              >
                 닫기
               </Button>
-            </Col>
-            <Col xs={6}>
               <Button onClick={() => reservationClassUpdate(no)}>
                 수정하기
               </Button>
@@ -863,16 +901,18 @@ class ReservationClass extends Component {
         </header>
 
         <Container>
-          <Row className='reservation-class__form sectionGlass'>
-            <Col xs={12}>
+          <Row className='reservation-class__form sectionGlass mb-5'>
+            <Col xs={12} className='mb-3'>
               <h4>수업 설정</h4>
             </Col>
-            <Col xs={1}>운동종류</Col>
-            <Col xs={9}>
-              <Form.Group>
-                <Row>
-                  <Col>
-                    <Form.Check>
+            <Col xs={12}>
+              <Row className='mb-3'>
+                <Col md={1} className='exerciseGroup'>
+                  <h5>운동종류</h5>
+                </Col>
+                <Col>
+                  <div>
+                    <Form.Check inline>
                       <Form.Check.Input
                         type='radio'
                         name='exerciseGroup'
@@ -884,9 +924,7 @@ class ReservationClass extends Component {
                         개인 PT
                       </Form.Check.Label>
                     </Form.Check>
-                  </Col>
-                  <Col>
-                    <Form.Check>
+                    <Form.Check inline>
                       <Form.Check.Input
                         type='radio'
                         name='exerciseGroup'
@@ -898,9 +936,7 @@ class ReservationClass extends Component {
                         GX
                       </Form.Check.Label>
                     </Form.Check>
-                  </Col>
-                  <Col>
-                    <Form.Check>
+                    <Form.Check inline>
                       <Form.Check.Input
                         type='radio'
                         name='exerciseGroup'
@@ -912,8 +948,26 @@ class ReservationClass extends Component {
                         필라테스
                       </Form.Check.Label>
                     </Form.Check>
-                  </Col>
-                  {/* <Col>
+                    <Form.Check inline>
+                      <Form.Check.Input
+                        type='radio'
+                        name='exerciseGroup'
+                        id='etc'
+                        checked={this.state.exerciseGroup['etc']}
+                        onChange={this.handleExerciseRadio}
+                      />
+                      <Form.Check.Label htmlFor='etc'>기타</Form.Check.Label>
+                    </Form.Check>
+                    <Form.Check inline>
+                      <Form.Control
+                        placeholder='기타'
+                        id='etcExercise'
+                        type='text'
+                        value={this.state.etcExercise}
+                        onChange={this.handleChange}
+                      ></Form.Control>
+                    </Form.Check>
+                    {/* <Col>
                       <Form.Check>
                         <Form.Check.Input
                           type='radio'
@@ -927,28 +981,10 @@ class ReservationClass extends Component {
                         </Form.Check.Label>
                       </Form.Check>
                     </Col> */}
-                  <Col>
-                    <Form.Check>
-                      <Form.Check.Input
-                        type='radio'
-                        name='exerciseGroup'
-                        id='etc'
-                        checked={this.state.exerciseGroup['etc']}
-                        onChange={this.handleExerciseRadio}
-                      />
-                      <Form.Control
-                        placeholder='기타'
-                        id='etcExercise'
-                        type='text'
-                        value={this.state.etcExercise}
-                        onChange={this.handleChange}
-                      ></Form.Control>
-                    </Form.Check>
-                  </Col>
-                </Row>
-              </Form.Group>
+                  </div>
+                </Col>
+              </Row>
             </Col>
-            <Col xs={2}></Col>
             {/* <Col xs={11}>
               <Form.Control
                 label='운동종류'
@@ -1032,23 +1068,29 @@ class ReservationClass extends Component {
                 </Row>
               </Modal>
             </Col> */}
-            <Col xs={1}>운동명</Col>
-            <Col xs={4}>
+            <Col md={1} className='mb-3'>
+              <h5>운동명</h5>
+            </Col>
+            <Col md={4}>
               <Form.Control
                 id='exercise_class'
                 value={this.state.exercise_class}
+                placeholder='운동명을 입력해주세요'
                 onChange={this.handleChange}
                 InputProps={{ disableUnderline: true }}
                 label='운동명'
                 error={this.state.exercise_class_err}
               />
             </Col>
-            <Col xs={1}>강사</Col>
+            <Col xs={1}>
+              <h5>강사</h5>
+            </Col>
             <Col xs={4}>
               {this.props.userinfo.loginWhether === 1 ? (
                 <Form.Control
                   id='trainer'
                   value={this.props.userinfo.manager_name}
+                  placeholder='강사명을 입력해주세요'
                   onChange={this.handleChange}
                   InputProps={{ disableUnderline: true }}
                   label='강사명'
@@ -1061,6 +1103,8 @@ class ReservationClass extends Component {
                     <div>
                       <TrainerSearch
                         open={this.state.open}
+                        labe='강사검색'
+                        placeholder='강사명을 입력해주세요'
                         setOpen={(o) => this.setState({ open: o })}
                         fitness_no={this.props.userinfo.fitness_no}
                         handleUser={this.handleUser}
@@ -1071,6 +1115,7 @@ class ReservationClass extends Component {
                       <Form.Control
                         id='trainer'
                         label='강사 검색'
+                        placeholder='강사명 검색'
                         onClick={() => this.setState({ open: true })}
                         value={this.state.trainer_name}
                         // onChange={this.handleChange}
@@ -1084,11 +1129,13 @@ class ReservationClass extends Component {
                 </div>
               )}
             </Col>
-            <Col xs={2}> </Col>
-            <Col xs={1}>날짜</Col>
+            <Col xs={2}></Col>
+            <Col xs={1}>
+              <h5>날짜</h5>
+            </Col>
             <Col xs={4}>
               <DatePicker
-                className='text-center w-100'
+                className='text-center w-100 mb-4'
                 selected={this.state.class_date}
                 onChange={(date) => this.setState({ class_date: date })}
                 name='class_date'
@@ -1098,7 +1145,9 @@ class ReservationClass extends Component {
                 minDate={new Date()}
               />
             </Col>
-            <Col xs={1}>시간</Col>
+            <Col xs={1}>
+              <h5>시간</h5>
+            </Col>
             <Col xs={4}>
               <Row>
                 <Col>
@@ -1109,6 +1158,7 @@ class ReservationClass extends Component {
                     onChange={this.handleChange}
                     InputProps={{ disableUnderline: true }}
                     label='시'
+                    placeholder='시'
                     error={this.state.hour_err}
                   />
                 </Col>
@@ -1123,15 +1173,19 @@ class ReservationClass extends Component {
                     onChange={this.handleChange}
                     InputProps={{ disableUnderline: true }}
                     label='분'
+                    placeholder='분'
                     error={this.state.minute_err}
                   />
                 </Col>
               </Row>
             </Col>
-            <Col xs={1}>수강인원</Col>
+            <Col xs={1}>
+              <h5>인원</h5>
+            </Col>
             <Col xs={1}>
               <Form.Control
                 className=''
+                placeholder='인원'
                 type='number'
                 id='number_of_people'
                 value={this.state.number_of_people}
@@ -1145,12 +1199,7 @@ class ReservationClass extends Component {
               <Button onClick={this.handleOnClick}>수업 만들기</Button>
             </Col>
           </Row>
-          <Row>
-            <Col>
-              <Button onClick={this.handleUpdate}>수정하기</Button>
-            </Col>
-          </Row>
-          <Row xs={3}>
+          <Row xs={3} className='mb-3'>
             <Col className='text-end'>
               <Button
                 name='prev'
@@ -1184,95 +1233,116 @@ class ReservationClass extends Component {
               </Button>
             </Col>
           </Row>
-          <Tabs activeKey={this.key} onSelect={this.selectClassTabs}>
-            <Tab eventKey='pt' title='개인PT'>
-              <Tabs activeKey={this.keyTrainer} onSelect={this.selectClassTabs}>
-                <Tab eventKey='trainerAll' title='전체'></Tab>
-                <Tab eventKey='trainer1' title='김유리 강사'></Tab>
-                <Tab eventKey='trainer2' title='박우진 강사'></Tab>
-                <Tab eventKey='trainer3' title='한세연 강사'></Tab>
-              </Tabs>
-            </Tab>
-            <Tab eventKey='pilates' title='필라테스'>
-              <Tabs activeKey={this.keyTrainer} onSelect={this.selectClassTabs}>
-                <Tab eventKey='trainerAll' title='전체'></Tab>
-                <Tab eventKey='trainer1' title='김유리 강사'></Tab>
-                <Tab eventKey='trainer2' title='박우진 강사'></Tab>
-                <Tab eventKey='trainer3' title='한세연 강사'></Tab>
-              </Tabs>
-            </Tab>
-            <Tab eventKey='gx' title='GX'>
-              <Tabs activeKey={this.keyTrainer} onSelect={this.selectClassTabs}>
-                <Tab eventKey='trainerAll' title='전체'></Tab>
-                <Tab eventKey='trainer1' title='김유리 강사'></Tab>
-                <Tab eventKey='trainer2' title='박우진 강사'></Tab>
-                <Tab eventKey='trainer3' title='한세연 강사'></Tab>
-              </Tabs>
-            </Tab>
-            <Tab eventKey='etc' title='기타'>
-              <Tabs activeKey={this.keyTrainer} onSelect={this.selectClassTabs}>
-                <Tab eventKey='trainerAll' title='전체'></Tab>
-                <Tab eventKey='trainer1' title='김유리 강사'></Tab>
-                <Tab eventKey='trainer2' title='박우진 강사'></Tab>
-                <Tab eventKey='trainer3' title='한세연 강사'></Tab>
-              </Tabs>
-            </Tab>
-          </Tabs>
-          <Row>
-            <Col
-              className='text-center py-2 w-100 overflow-auto justify-content-center'
-              xs={12}
+          <Row className='resevation__class-Tabs mb-2 my-3'>
+            <Tabs
+              className='reservation__class-container'
+              activeKey={this.key}
+              onSelect={this.selectClassTabs}
             >
-              <table className='table' name='classTable'>
-                <thead>
-                  <tr>
-                    <th scope='col'>
+              <Tab eventKey='pt' title='개인PT'>
+                <Tabs
+                  className='reservation__class__tabs-item'
+                  activeKey={this.keyTrainer}
+                  onSelect={this.selectClassTabs}
+                >
+                  <Tab eventKey='trainerAll' title='전체'></Tab>
+                  <Tab eventKey='trainer1' title='김유리 강사'></Tab>
+                  <Tab eventKey='trainer2' title='박우진 강사'></Tab>
+                  <Tab eventKey='trainer3' title='한세연 강사'></Tab>
+                </Tabs>
+              </Tab>
+              <Tab eventKey='pilates' title='필라테스'>
+                <Tabs
+                  className='reservation__class__tabs-item'
+                  activeKey={this.keyTrainer}
+                  onSelect={this.selectClassTabs}
+                >
+                  <Tab eventKey='trainerAll' title='전체'></Tab>
+                  <Tab eventKey='trainer1' title='김유리 강사'></Tab>
+                  <Tab eventKey='trainer2' title='박우진 강사'></Tab>
+                  <Tab eventKey='trainer3' title='한세연 강사'></Tab>
+                </Tabs>
+              </Tab>
+              <Tab eventKey='gx' title='GX'>
+                <Tabs
+                  className='reservation__class__tabs-item'
+                  activeKey={this.keyTrainer}
+                  onSelect={this.selectClassTabs}
+                >
+                  <Tab eventKey='trainerAll' title='전체'></Tab>
+                  <Tab eventKey='trainer1' title='김유리 강사'></Tab>
+                  <Tab eventKey='trainer2' title='박우진 강사'></Tab>
+                  <Tab eventKey='trainer3' title='한세연 강사'></Tab>
+                </Tabs>
+              </Tab>
+              <Tab eventKey='etc' title='기타'>
+                <Tabs
+                  className='reservation__class__tabs-item'
+                  activeKey={this.keyTrainer}
+                  onSelect={this.selectClassTabs}
+                >
+                  <Tab eventKey='trainerAll' title='전체'></Tab>
+                  <Tab eventKey='trainer1' title='김유리 강사'></Tab>
+                  <Tab eventKey='trainer2' title='박우진 강사'></Tab>
+                  <Tab eventKey='trainer3' title='한세연 강사'></Tab>
+                </Tabs>
+              </Tab>
+            </Tabs>
+          </Row>
+          <Row>
+            <table className='table classTable mt-3' name='classTable'>
+              <thead>
+                <tr>
+                  <th scope='col'>
+                    <div>
                       {moment(this.state.class_date)
                         .day(0)
                         .add({ days: this.state.dayIncreament })
                         .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.class_date)
-                        .day(1)
-                        .add({ days: this.state.dayIncreament })
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.class_date)
-                        .day(2)
-                        .add({ days: this.state.dayIncreament })
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.class_date)
-                        .day(3)
-                        .add({ days: this.state.dayIncreament })
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.class_date)
-                        .day(4)
-                        .add({ days: this.state.dayIncreament })
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.class_date)
-                        .day(5)
-                        .add({ days: this.state.dayIncreament })
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.class_date)
-                        .day(6)
-                        .add({ days: this.state.dayIncreament })
-                        .format('MM-DD (dd)')}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
+                    </div>
+                  </th>
+                  <th scope='col'>
+                    {moment(this.state.class_date)
+                      .day(1)
+                      .add({ days: this.state.dayIncreament })
+                      .format('MM-DD (dd)')}
+                  </th>
+                  <th scope='col'>
+                    {moment(this.state.class_date)
+                      .day(2)
+                      .add({ days: this.state.dayIncreament })
+                      .format('MM-DD (dd)')}
+                  </th>
+                  <th scope='col'>
+                    {moment(this.state.class_date)
+                      .day(3)
+                      .add({ days: this.state.dayIncreament })
+                      .format('MM-DD (dd)')}
+                  </th>
+                  <th scope='col'>
+                    {moment(this.state.class_date)
+                      .day(4)
+                      .add({ days: this.state.dayIncreament })
+                      .format('MM-DD (dd)')}
+                  </th>
+                  <th scope='col'>
+                    {moment(this.state.class_date)
+                      .day(5)
+                      .add({ days: this.state.dayIncreament })
+                      .format('MM-DD (dd)')}
+                  </th>
+                  <th scope='col'>
+                    {moment(this.state.class_date)
+                      .day(6)
+                      .add({ days: this.state.dayIncreament })
+                      .format('MM-DD (dd)')}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div className='class-info'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
@@ -1295,8 +1365,10 @@ class ReservationClass extends Component {
                               )
                         )
                       )}
-                    </td>
-                    <td>
+                    </div>
+                  </td>
+                  <td>
+                    <div className='class-info'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
@@ -1319,8 +1391,10 @@ class ReservationClass extends Component {
                               )
                         )
                       )}
-                    </td>
-                    <td>
+                    </div>
+                  </td>
+                  <td>
+                    <div className='class-info'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
@@ -1343,8 +1417,10 @@ class ReservationClass extends Component {
                               )
                         )
                       )}
-                    </td>
-                    <td>
+                    </div>
+                  </td>
+                  <td>
+                    <div className='class-info'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
@@ -1367,8 +1443,10 @@ class ReservationClass extends Component {
                               )
                         )
                       )}
-                    </td>
-                    <td>
+                    </div>
+                  </td>
+                  <td>
+                    <div className='class-info'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
@@ -1391,8 +1469,10 @@ class ReservationClass extends Component {
                               )
                         )
                       )}
-                    </td>
-                    <td>
+                    </div>
+                  </td>
+                  <td>
+                    <div className='class-info'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
@@ -1415,8 +1495,10 @@ class ReservationClass extends Component {
                               )
                         )
                       )}
-                    </td>
-                    <td>
+                    </div>
+                  </td>
+                  <td>
+                    <div className='class-info'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
                         <div className='border py-2 my-1 text-secondary'>
@@ -1439,12 +1521,13 @@ class ReservationClass extends Component {
                               )
                         )
                       )}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-              {/* <table class='table'>
+            {/* <table class='table'>
 							<thead>
 								<tr>
 									<th scope='col'>운동 클래스</th>
@@ -1463,7 +1546,6 @@ class ReservationClass extends Component {
 								)}
 							</tbody>
 						</table> */}
-            </Col>
           </Row>
         </Container>
         <div className='footer'>

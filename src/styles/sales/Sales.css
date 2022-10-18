@@ -1,27 +1,26 @@
 /* 
 * 매출 현황 테이블
 */
+.mixed-chart {
+}
 /* 테이블 폰트 색상 */
 /* 테이블 헤더 폰트 색상 */
-.sales .table thead tr th {
+/* .sales .table thead tr th {
   color: #fff;
 }
 /* 테이블 바디 폰트 색상 */
 .sales .table tbody tr td {
   color: #fff;
 }
+*/
 
 /* 
 * 전체 기록 테이블
 */
 /* 테이블 페이지네이션 폰트 색상 */
-.sales .MuiTablePagination-toolbar {
-  color: #ddd;
-}
+
 /* 페이지네이션 페이지수 화살표 색상 */
-.sales .MuiTablePagination-selectIcon {
-  color: #fff;
-}
+
 /* 페이지네이션 페이지 넘기기 버튼 색상 */
 .sales .MuiTablePagination-actions .MuiSvgIcon-root {
   color: #fff;
@@ -33,6 +32,17 @@
 
 .sales .react-datepicker__input-container input[type='text'] {
   width: 10rem;
+}
+/* 당일/당월 table - 회원검색 창 표*/
+.table-sales .MuiTableBody-root {
+  text-align: center;
+  align-items: center;
+  background: #111;
+}
+
+.table-sales .MuiTableBody-root .MuiTableCell-root {
+  color: #fff;
+  background: #111;
 }
 
 @media (max-width: 767px) {
