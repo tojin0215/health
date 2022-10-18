@@ -10,11 +10,10 @@
 }
 .customer-input--search {
   cursor: pointer;
-
   transition: background-color 0.4s;
 }
 .customer-input--search .MuiInputBase-input {
-  color: #fff;
+  /* color: #fff; */
   /* left: 30%; */
 }
 .MuiInputBase-input {
@@ -22,13 +21,13 @@
   /* left: 30%; */
 }
 .customer_name {
-  height: 45px;
+  height: 2.813rem;
   color: #fff;
   border-radius: 5px;
   border: 1px solid #fff;
 }
 .customer-input--search {
-  height: 45px;
+  height: 2.813rem;
   color: #fff;
 }
 .customer-input--search #customer_name-label {

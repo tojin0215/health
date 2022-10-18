@@ -1894,7 +1894,7 @@ class Reservation extends Component {
                         />
                       </dd>
                     </div>
-                    <div className='class_date'>
+                    {/*  <div className='class_date'>
                       <dt>예약자</dt>
                       <dd className='text-end'>
                         {this.state.class_date ? (
@@ -1903,7 +1903,7 @@ class Reservation extends Component {
                           <span>강사 이름</span>
                         )}
                       </dd>
-                    </div>
+                    </div> */}
                   </dl>
                 </div>
                 <Row>
@@ -1930,6 +1930,7 @@ class Reservation extends Component {
                   <TextField
                     id='customer_name'
                     variant='standard'
+                    className='customer-input--search w-100 justify-content-center'
                     value={this.props.userinfo.manager_name}
                     // onChange={this.handleChange}
                   />
@@ -1950,7 +1951,6 @@ class Reservation extends Component {
                       <TextField
                         id='customer_name'
                         disabled
-                        placeholder='회원검색'
                         variant='standard'
                         onClick={() => this.setState({ open: true })}
                         className='customer-input--search w-100 justify-content-center mt-2'
