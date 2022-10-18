@@ -60,6 +60,7 @@ import {
   salesSelect2,
 } from '../../api/user';
 import { height } from '@mui/system';
+import { MdOutlineArrowForwardIos } from 'react-icons/md';
 
 // css
 import '../../component/home/classTimeTable.css';
@@ -342,8 +343,8 @@ class Home extends Component {
     // console.log(userinfo.joinNo);
     // console.log(this.props.userinfo);
     return (
-      <div className="wrap home">
-        <div className="header">
+      <div className='wrap home'>
+        <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
           <Menu goLogin={this.goLogin} />
@@ -352,19 +353,19 @@ class Home extends Component {
         {/*.header */}
         {this.props.userinfo.loginWhether === 2 ? (
           // 회원
-          <Container>
+          <Container id='customerHome'>
             <Row md={3}>
-              <Col className="text-end">
+              <Col className='text-end'>
                 <Button
-                  className="reservation__class-prev"
-                  name="prev"
-                  variant="outline-light"
+                  className='reservation__class-prev'
+                  name='prev'
+                  variant='outline-light'
                   onClick={this.handleWeekClick}
                 >
                   이전주
                 </Button>
               </Col>
-              <Col className="text-center align-self-center fs-5">
+              <Col className='text-center align-self-center fs-5'>
                 {moment(this.state.reserv_date)
                   .day(0)
                   .add(this.state.dayIncreament, 'days')
@@ -375,57 +376,57 @@ class Home extends Component {
                   .add(this.state.dayIncreament, 'days')
                   .format('YYYY-MM-DD (ddd)')}
               </Col>
-              <Col className="text-start">
+              <Col className='text-start'>
                 <Button
-                  className="reservation__class-next"
-                  name="next"
-                  variant="outline-light"
+                  className='reservation__class-next'
+                  name='next'
+                  variant='outline-light'
                   onClick={this.handleWeekClick}
                 >
                   다음주
                 </Button>
               </Col>
               <Col xs={12} md={12}>
-                <table className="table classTable mt-3" name="classTable">
+                <table className='table classTable mt-3' name='classTable'>
                   <thead>
                     <tr>
-                      <th scope="col" align="center">
+                      <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(0)
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                      <th scope="col" align="center">
+                      <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(1)
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                      <th scope="col" align="center">
+                      <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(2)
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                      <th scope="col" align="center">
+                      <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(3)
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                      <th scope="col" align="center">
+                      <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(4)
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                      <th scope="col" align="center">
+                      <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(5)
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                      <th scope="col" align="center">
+                      <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(6)
                           .add(this.state.dayIncreament, 'days')
@@ -435,11 +436,11 @@ class Home extends Component {
                   </thead>
                   <tbody>
                     <tr>
-                      <td align="center" className="align-top">
-                        <div className="class-info">
+                      <td align='center' className='align-top'>
+                        <div className='class-info'>
                           {1 == true ? (
-                            <div className="py-2 my-1 text-secondary rounded">
-                              <TbMoodSuprised className="fs-3" />
+                            <div className='py-2 my-1 text-secondary rounded'>
+                              <TbMoodSuprised className='fs-3' />
                               <p>
                                 예약된 수업이
                                 <br />
@@ -451,11 +452,11 @@ class Home extends Component {
                           )}
                         </div>
                       </td>
-                      <td name="mon" align="center" className="align-top">
-                        <div className="class-info">
+                      <td name='mon' align='center' className='align-top'>
+                        <div className='class-info'>
                           {1 == true ? (
-                            <div className="py-2 my-1 text-secondary  rounded">
-                              <TbMoodSuprised className="fs-3" />
+                            <div className='py-2 my-1 text-secondary  rounded'>
+                              <TbMoodSuprised className='fs-3' />
                               <p>
                                 예약된 수업이
                                 <br />
@@ -467,11 +468,11 @@ class Home extends Component {
                           )}
                         </div>
                       </td>
-                      <td name="tue" align="center" className="align-top">
-                        <div className="class-info">
+                      <td name='tue' align='center' className='align-top'>
+                        <div className='class-info'>
                           {1 == true ? (
-                            <div className="py-2 my-1 text-secondary rounded">
-                              <TbMoodSuprised className="fs-3" />
+                            <div className='py-2 my-1 text-secondary rounded'>
+                              <TbMoodSuprised className='fs-3' />
                               <p>
                                 예약된 수업이
                                 <br />
@@ -483,11 +484,11 @@ class Home extends Component {
                           )}
                         </div>
                       </td>
-                      <td name="wed" align="center" className="align-top">
-                        <div className="class-info">
+                      <td name='wed' align='center' className='align-top'>
+                        <div className='class-info'>
                           {1 == true ? (
-                            <div className="py-2 my-1 text-secondary rounded">
-                              <TbMoodSuprised className="fs-3" />
+                            <div className='py-2 my-1 text-secondary rounded'>
+                              <TbMoodSuprised className='fs-3' />
                               <p>
                                 예약된 수업이
                                 <br />
@@ -499,11 +500,11 @@ class Home extends Component {
                           )}
                         </div>
                       </td>
-                      <td name="thu" align="center" className="align-top">
-                        <div className="class-info">
+                      <td name='thu' align='center' className='align-top'>
+                        <div className='class-info'>
                           {1 == true ? (
-                            <div className="py-2 my-1 text-secondary rounded">
-                              <TbMoodSuprised className="fs-3" />
+                            <div className='py-2 my-1 text-secondary rounded'>
+                              <TbMoodSuprised className='fs-3' />
                               <p>
                                 예약된 수업이
                                 <br />
@@ -515,11 +516,11 @@ class Home extends Component {
                           )}
                         </div>
                       </td>
-                      <td name="fri" align="center" className="align-top">
-                        <div className="class-info">
+                      <td name='fri' align='center' className='align-top'>
+                        <div className='class-info'>
                           {1 == true ? (
-                            <div className="py-2 my-1 text-secondary rounded">
-                              <TbMoodSuprised className="fs-3" />
+                            <div className='py-2 my-1 text-secondary rounded'>
+                              <TbMoodSuprised className='fs-3' />
                               <p>
                                 예약된 수업이
                                 <br />
@@ -531,11 +532,11 @@ class Home extends Component {
                           )}
                         </div>
                       </td>
-                      <td name="sat" align="center" className="align-top">
-                        <div className="class-info">
+                      <td name='sat' align='center' className='align-top'>
+                        <div className='class-info'>
                           {1 == true ? (
-                            <div className="py-2 my-1 text-secondary rounded">
-                              <TbMoodSuprised className="fs-3" />
+                            <div className='py-2 my-1 text-secondary rounded'>
+                              <TbMoodSuprised className='fs-3' />
                               <p>
                                 예약된 수업이
                                 <br />
@@ -551,10 +552,10 @@ class Home extends Component {
                   </tbody>
                 </table>
               </Col>
-              <Col className="sectionGlass" xs={12} md={12}>
+              <Col className='sectionGlass' xs={12} md={12}>
                 <h5>
-                  <Row xs="auto">
-                    <Col className="customer_name mb-3">
+                  <Row xs='auto'>
+                    <Col className='customer_name mb-3'>
                       {/* {this.state.open ? (
                         <>
                           <UserSearch
@@ -585,27 +586,27 @@ class Home extends Component {
                     <Col>님의</Col>
                     <Col>
                       <DatePicker
-                        className="text-center"
+                        className='text-center'
                         selected={this.state.workoutA_date}
                         onChange={(date) => this.dateOnChange(date)}
-                        dateFormat="yyyy년MM월dd일"
-                        font-size="1.6rem"
+                        dateFormat='yyyy년MM월dd일'
+                        font-size='1.6rem'
                         maxDate={new Date()}
                       />
                     </Col>
                     <Col>에 배정된 운동목록입니다.</Col>
                     {/* {moment(this.state.workoutA_date).format('YYYY년 MM월 DD일')} */}
                     <TableContainer component={Paper}>
-                      <Table className="table--block table-light">
+                      <Table className='table--block table-light'>
                         <TableHead>
                           <TableRow>
-                            <TableCell scope="col">부위</TableCell>
-                            <TableCell scope="col">이름</TableCell>
-                            <TableCell scope="col">운동기구</TableCell>
-                            <TableCell scope="col">세트</TableCell>
-                            <TableCell scope="col">횟수</TableCell>
-                            <TableCell scope="col">휴식</TableCell>
-                            <TableCell scope="col">URL</TableCell>
+                            <TableCell scope='col'>부위</TableCell>
+                            <TableCell scope='col'>이름</TableCell>
+                            <TableCell scope='col'>운동기구</TableCell>
+                            <TableCell scope='col'>세트</TableCell>
+                            <TableCell scope='col'>횟수</TableCell>
+                            <TableCell scope='col'>휴식</TableCell>
+                            <TableCell scope='col'>URL</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
@@ -619,8 +620,8 @@ class Home extends Component {
                       {this.state.workoutAllotlist.length ? (
                         ''
                       ) : (
-                        <div className="p-5 fs-5 fw-bold text-center">
-                          <TbMoodSuprised className="fs-3" />
+                        <div className='p-5 fs-5 fw-bold text-center'>
+                          <TbMoodSuprised className='fs-3' />
                           <p>배정된 운동이 없습니다.</p>
                         </div>
                       )}
@@ -646,31 +647,39 @@ class Home extends Component {
               </Col>
             </Row>
             <Row>
-              <Col xs={6} className="sectionGlass">
-                <h4>
-                  센터시설이용 <span>&#62;</span>
-                </h4>
+              <Col className='sectionGlass facility me-3'>
+                <div className='mb-3'>
+                  <h4>
+                    센터시설이용
+                    <MdOutlineArrowForwardIos />
+                    {/* 기능추가 */}
+                  </h4>
+                </div>
                 <Row>
-                  <Col xs={6}>사물함</Col>
-                  <Col xs={2}>3번</Col>
-                  <Col xs={4}>사용중</Col>
+                  <Col xs={8}>사물함</Col>
+                  <Col>3번</Col>
+                  <Col className='text-end'>사용중</Col>
                 </Row>
                 <Row>
-                  <Col xs={8}>운동복</Col>
-                  <Col xs={4}>사용안함</Col>
+                  <Col xs={9}>운동복</Col>
+                  <Col className='text-end'>사용안함</Col>
                 </Row>
               </Col>
-              <Col xs={6} className="sectionGlass">
-                <h4>
-                  보유중인 이용권 <span>&#62;</span>
-                </h4>
-                <Row>
-                  <Col xs={8}>GX [기간권]</Col>
-                  <Col xs={4}>[D - 365]</Col>
+              <Col className='sectionGlass Membership'>
+                <div className='mb-3'>
+                  <h4>
+                    보유중인 이용권
+                    <MdOutlineArrowForwardIos />
+                    {/* 기능추가 */}
+                  </h4>
+                </div>
+                <Row className='mb-3'>
+                  <Col>GX [기간권]</Col>
+                  <Col className='text-end'>[D - 365]</Col>
                 </Row>
                 <Row>
-                  <Col xs={8}>필라테스 [횟수권]</Col>
-                  <Col xs={4}>[30/30]</Col>
+                  <Col>필라테스 [횟수권]</Col>
+                  <Col className='text-end'>[30/30]</Col>
                 </Row>
               </Col>
             </Row>
@@ -679,17 +688,17 @@ class Home extends Component {
           // 강사
           <Container>
             <Row md={3}>
-              <Col className="text-end">
+              <Col className='text-end'>
                 <Button
-                  className="reservation__class-prev"
-                  name="prev"
-                  variant="outline-light"
+                  className='reservation__class-prev'
+                  name='prev'
+                  variant='outline-light'
                   onClick={this.handleWeekClick}
                 >
                   이전주
                 </Button>
               </Col>
-              <Col className="text-center align-self-center fs-5">
+              <Col className='text-center align-self-center fs-5'>
                 {moment(this.state.reserv_date)
                   .day(0)
                   .add(this.state.dayIncreament, 'days')
@@ -700,57 +709,57 @@ class Home extends Component {
                   .add(this.state.dayIncreament, 'days')
                   .format('YYYY-MM-DD (ddd)')}
               </Col>
-              <Col className="text-start">
+              <Col className='text-start'>
                 <Button
-                  className="reservation__class-next"
-                  name="next"
-                  variant="outline-light"
+                  className='reservation__class-next'
+                  name='next'
+                  variant='outline-light'
                   onClick={this.handleWeekClick}
                 >
                   다음주
                 </Button>
               </Col>
               <Col xs={12} md={12}>
-                <table className="table classTable mt-3" name="classTable">
+                <table className='table classTable mt-3' name='classTable'>
                   <thead>
                     <tr>
-                      <th scope="col" align="center">
+                      <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(0)
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                      <th scope="col" align="center">
+                      <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(1)
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                      <th scope="col" align="center">
+                      <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(2)
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                      <th scope="col" align="center">
+                      <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(3)
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                      <th scope="col" align="center">
+                      <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(4)
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                      <th scope="col" align="center">
+                      <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(5)
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                      <th scope="col" align="center">
+                      <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(6)
                           .add(this.state.dayIncreament, 'days')
@@ -760,11 +769,11 @@ class Home extends Component {
                   </thead>
                   <tbody>
                     <tr>
-                      <td align="center" className="align-top">
-                        <div className="class-info">
+                      <td align='center' className='align-top'>
+                        <div className='class-info'>
                           {1 == true ? (
-                            <div className="py-2 my-1 text-secondary rounded">
-                              <TbMoodSuprised className="fs-3" />
+                            <div className='py-2 my-1 text-secondary rounded'>
+                              <TbMoodSuprised className='fs-3' />
                               <p>수업이 없습니다.</p>
                             </div>
                           ) : (
@@ -772,11 +781,11 @@ class Home extends Component {
                           )}
                         </div>
                       </td>
-                      <td name="mon" align="center" className="align-top">
-                        <div className="class-info">
+                      <td name='mon' align='center' className='align-top'>
+                        <div className='class-info'>
                           {1 == true ? (
-                            <div className="py-2 my-1 text-secondary  rounded">
-                              <TbMoodSuprised className="fs-3" />
+                            <div className='py-2 my-1 text-secondary  rounded'>
+                              <TbMoodSuprised className='fs-3' />
                               <p>수업이 없습니다.</p>
                             </div>
                           ) : (
@@ -784,11 +793,11 @@ class Home extends Component {
                           )}
                         </div>
                       </td>
-                      <td name="tue" align="center" className="align-top">
-                        <div className="class-info">
+                      <td name='tue' align='center' className='align-top'>
+                        <div className='class-info'>
                           {1 == true ? (
-                            <div className="py-2 my-1 text-secondary rounded">
-                              <TbMoodSuprised className="fs-3" />
+                            <div className='py-2 my-1 text-secondary rounded'>
+                              <TbMoodSuprised className='fs-3' />
                               <p>수업이 없습니다.</p>
                             </div>
                           ) : (
@@ -796,11 +805,11 @@ class Home extends Component {
                           )}
                         </div>
                       </td>
-                      <td name="wed" align="center" className="align-top">
-                        <div className="class-info">
+                      <td name='wed' align='center' className='align-top'>
+                        <div className='class-info'>
                           {1 == true ? (
-                            <div className="py-2 my-1 text-secondary rounded">
-                              <TbMoodSuprised className="fs-3" />
+                            <div className='py-2 my-1 text-secondary rounded'>
+                              <TbMoodSuprised className='fs-3' />
                               <p>수업이 없습니다.</p>
                             </div>
                           ) : (
@@ -808,11 +817,11 @@ class Home extends Component {
                           )}
                         </div>
                       </td>
-                      <td name="thu" align="center" className="align-top">
-                        <div className="class-info">
+                      <td name='thu' align='center' className='align-top'>
+                        <div className='class-info'>
                           {1 == true ? (
-                            <div className="py-2 my-1 text-secondary rounded">
-                              <TbMoodSuprised className="fs-3" />
+                            <div className='py-2 my-1 text-secondary rounded'>
+                              <TbMoodSuprised className='fs-3' />
                               <p>수업이 없습니다.</p>
                             </div>
                           ) : (
@@ -820,11 +829,11 @@ class Home extends Component {
                           )}
                         </div>
                       </td>
-                      <td name="fri" align="center" className="align-top">
-                        <div className="class-info">
+                      <td name='fri' align='center' className='align-top'>
+                        <div className='class-info'>
                           {1 == true ? (
-                            <div className="py-2 my-1 text-secondary rounded">
-                              <TbMoodSuprised className="fs-3" />
+                            <div className='py-2 my-1 text-secondary rounded'>
+                              <TbMoodSuprised className='fs-3' />
                               <p>수업이 없습니다.</p>
                             </div>
                           ) : (
@@ -832,11 +841,11 @@ class Home extends Component {
                           )}
                         </div>
                       </td>
-                      <td name="sat" align="center" className="align-top">
-                        <div className="class-info">
+                      <td name='sat' align='center' className='align-top'>
+                        <div className='class-info'>
                           {1 == true ? (
-                            <div className="py-2 my-1 text-secondary rounded">
-                              <TbMoodSuprised className="fs-3" />
+                            <div className='py-2 my-1 text-secondary rounded'>
+                              <TbMoodSuprised className='fs-3' />
                               <p>수업이 없습니다.</p>
                             </div>
                           ) : (
@@ -848,25 +857,25 @@ class Home extends Component {
                   </tbody>
                 </table>
               </Col>
-              <Col className="reservation__class__console">
+              <Col className='reservation__class__console'>
                 {this.props.userinfo.loginWhether === 2 ? (
                   ' '
                 ) : (
                   <Button
-                    className="reservation__class__console-addbtn mb-2 w-100 "
-                    variant="outline-primary"
+                    className='reservation__class__console-addbtn mb-2 w-100 '
+                    variant='outline-primary'
                     onClick={this.goReservationClass}
                   >
                     수업추가
                   </Button>
                 )}
-                <div className="reservation__class__console-info">
+                <div className='reservation__class__console-info'>
                   <h5>선택된 수업</h5>
-                  <div className="reservation__class__console-infoContent">
+                  <div className='reservation__class__console-infoContent'>
                     <dl>
-                      <div className="exercise_name">
+                      <div className='exercise_name'>
                         <dt>운동명</dt>
-                        <dd className="text-end">
+                        <dd className='text-end'>
                           {this.state.exercise_name ? (
                             <span>
                               {this.state.exercise_name} [{this.state.kind}]
@@ -875,19 +884,19 @@ class Home extends Component {
                             <span>클래스 이름입니다[종류]</span>
                           )}
                           <TextField
-                            id="exercise_name"
-                            className="d-none"
+                            id='exercise_name'
+                            className='d-none'
                             value={this.state.exercise_name}
                             // onChange={this.handleChange}
-                            label="운동명"
+                            label='운동명'
                             err={this.state.exercise_name_err}
                           />
                         </dd>
                       </div>
-                      <div className="class_date">
+                      <div className='class_date'>
                         <dt>날짜</dt>
-                        <dd className="text-end">
-                          <p className="fw-bold text-primary">
+                        <dd className='text-end'>
+                          <p className='fw-bold text-primary'>
                             {moment(this.state.class_date).format(
                               'yyyy-MM-DD'
                             ) == 'Invalid date'
@@ -897,26 +906,26 @@ class Home extends Component {
                                 )}
                           </p>
                           <TextField
-                            id="class_date"
-                            className="d-none"
-                            name="class_date"
+                            id='class_date'
+                            className='d-none'
+                            name='class_date'
                             value={this.state.class_date}
-                            label="배정된 날짜"
+                            label='배정된 날짜'
                           />
                         </dd>
                       </div>
-                      <div className="time">
+                      <div className='time'>
                         <dt>시간</dt>
-                        <dd className="text-end">
+                        <dd className='text-end'>
                           {this.state.time == true ? (
                             <>
                               <span>{this.state.time}</span>
                               <TextField
-                                id="time"
-                                className="d-none"
+                                id='time'
+                                className='d-none'
                                 value={this.state.time}
                                 // onChange={this.handleChange}
-                                label="시간"
+                                label='시간'
                               />
                             </>
                           ) : (
@@ -924,26 +933,26 @@ class Home extends Component {
                           )}
                         </dd>
                       </div>
-                      <div className="number_of_people">
+                      <div className='number_of_people'>
                         <dt>현재정원</dt>
-                        <dd className="text-end">
+                        <dd className='text-end'>
                           {this.state.number_of_people ? (
                             <span>{this.state.number_of_people} 명</span>
                           ) : (
                             <span>9/10 명</span>
                           )}
                           <TextField
-                            id="number_of_people"
-                            className="d-none"
+                            id='number_of_people'
+                            className='d-none'
                             value={this.state.number_of_people}
                             // onChange={this.handleChange}
-                            label="최대 인원수"
+                            label='최대 인원수'
                           />
                         </dd>
                       </div>
-                      <div className="class_date">
+                      <div className='class_date'>
                         <dt>예약자</dt>
-                        <dd className="text-end">예약자이름</dd>
+                        <dd className='text-end'>예약자이름</dd>
                       </div>
                     </dl>
                   </div>
@@ -963,20 +972,20 @@ class Home extends Component {
                     // err={this.state.trainer_err}
                   />
                 </Col> */}
-                    <Col className="" xs={12} sm={4}></Col>
+                    <Col className='' xs={12} sm={4}></Col>
                   </Row>
                 </div>
                 {this.props.userinfo.loginWhether === 2 ? (
-                  <Col className="text-center my-3 ">
+                  <Col className='text-center my-3 '>
                     <TextField
-                      id="customer_name"
-                      variant="standard"
+                      id='customer_name'
+                      variant='standard'
                       value={this.props.userinfo.manager_name}
                       // onChange={this.handleChange}
                     />
                   </Col>
                 ) : (
-                  <Col className="text-center ">
+                  <Col className='text-center '>
                     {this.state.open ? (
                       <UserSearch
                         open={this.state.open}
@@ -989,12 +998,12 @@ class Home extends Component {
                     ) : (
                       <>
                         <TextField
-                          id="customer_name"
+                          id='customer_name'
                           disabled
-                          placeholder="회원검색"
-                          variant="standard"
+                          placeholder='회원검색'
+                          variant='standard'
                           onClick={() => this.setState({ open: true })}
-                          className="customer-input--search w-100 justify-content-center mt-2"
+                          className='customer-input--search w-100 justify-content-center mt-2'
                           InputProps={{ disableUnderline: true }}
                           value={this.state.customer_name}
                           // onChange={this.handleChange}
@@ -1004,10 +1013,10 @@ class Home extends Component {
                     )}
                   </Col>
                 )}
-                <Col className="text-center w-100 mt-2" xs={12}>
+                <Col className='text-center w-100 mt-2' xs={12}>
                   <Button
-                    className="btnSolid w-100"
-                    type="button"
+                    className='btnSolid w-100'
+                    type='button'
                     onClick={this.handleOnClick}
                   >
                     예약하기
@@ -1018,25 +1027,25 @@ class Home extends Component {
           </Container>
         ) : (
           // 사업자
-          <Container className="home-center">
+          <Container className='home-center'>
             <ClassTimeTable />
-            <Row className="home-center__client-status">
+            <Row className='home-center__client-status'>
               <Col
-                className="sectionGlass-manager me-3"
+                className='sectionGlass-manager me-3'
                 onClick={this.goClient}
               >
                 <Row>
-                  <Col className="sectionGlass-manger-Tit">
+                  <Col className='sectionGlass-manger-Tit'>
                     전체회원
                     <br />
                     <strong>1326</strong>명
                   </Col>
-                  <Col className="icons__right-circle">
+                  <Col className='icons__right-circle'>
                     <CiCircleChevRight />
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="sectionGlass-manager-des">
+                  <Col className='sectionGlass-manager-des'>
                     현재까지 등록된 모든 회원수는
                     <br />
                     1326명 입니다.
@@ -1045,21 +1054,21 @@ class Home extends Component {
                 {/* <Button>{'>'}</Button> */}
               </Col>
               <Col
-                className="sectionGlass-manager me-3"
+                className='sectionGlass-manager me-3'
                 onClick={this.goClient}
               >
                 <Row>
-                  <Col className="sectionGlass-manger-Tit">
+                  <Col className='sectionGlass-manger-Tit'>
                     유효회원
                     <br />
                     <strong>364</strong>명
                   </Col>
-                  <Col className="icons__right-circle">
+                  <Col className='icons__right-circle'>
                     <CiCircleChevRight />
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="sectionGlass-manager-des">
+                  <Col className='sectionGlass-manager-des'>
                     회원권을 유지중인 회원은
                     <br />
                     364명 입니다.
@@ -1067,40 +1076,40 @@ class Home extends Component {
                 </Row>
               </Col>
               <Col
-                className="sectionGlass-manager me-3"
+                className='sectionGlass-manager me-3'
                 onClick={this.goClient}
               >
                 <Row>
-                  <Col className="sectionGlass-manger-Tit">
+                  <Col className='sectionGlass-manger-Tit'>
                     마감임박회원
                     <br />
                     <strong>48</strong>명
                   </Col>
-                  <Col className="icons__right-circle">
+                  <Col className='icons__right-circle'>
                     <CiCircleChevRight />
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="sectionGlass-manager-des">
+                  <Col className='sectionGlass-manager-des'>
                     잔여 회원권 일정량 미만인 회원
                     <br />
                     48명 입니다.
                   </Col>
                 </Row>
               </Col>
-              <Col className="sectionGlass-manager" onClick={this.goClient}>
+              <Col className='sectionGlass-manager' onClick={this.goClient}>
                 <Row>
-                  <Col className="sectionGlass-manger-Tit">
+                  <Col className='sectionGlass-manger-Tit'>
                     마감회원
                     <br />
                     <strong>962</strong>명
                   </Col>
-                  <Col className="icons__right-circle">
+                  <Col className='icons__right-circle'>
                     <CiCircleChevRight />
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="sectionGlass-manager-des">
+                  <Col className='sectionGlass-manager-des'>
                     회원권이 이미 마감된 회원은
                     <br />
                     962명 입니다.
@@ -1108,39 +1117,39 @@ class Home extends Component {
                 </Row>
               </Col>
             </Row>
-            <Row className="sectionGlass-manager">
-              <Col className="sales-statis me-3">
+            <Row className='sectionGlass-manager'>
+              <Col className='sales-statis me-3'>
                 <Row onClick={this.goSales}>
                   <Col xs={7}>
                     <strong>당일 매출</strong>
                     <br />
                     2022년 07월 30일
                   </Col>
-                  <Col xs={5} className="sales-total">
+                  <Col xs={5} className='sales-total'>
                     3,200,000원
                   </Col>
                 </Row>
               </Col>
-              <Col className="sales-statis">
+              <Col className='sales-statis'>
                 <Row onClick={this.goSales}>
                   <Col xs={7}>
                     <strong>당월 누적 매출</strong>
                     <br />
                     2022년 07월
                   </Col>
-                  <Col xs={5} className="sales-total">
+                  <Col xs={5} className='sales-total'>
                     20,000,000원
                   </Col>
                 </Row>
               </Col>
               <Col xs={12}>
-                <div className="mixed-chart">
+                <div className='mixed-chart'>
                   <Chart
                     options={this.state.options}
                     series={this.state.series}
-                    type="bar"
-                    width="100%"
-                    height="400px"
+                    type='bar'
+                    width='100%'
+                    height='400px'
                   />
                 </div>
               </Col>
@@ -1148,57 +1157,57 @@ class Home extends Component {
           </Container>
         )}
         <div
-          className="home__mainvisual"
+          className='home__mainvisual'
           style={{
             backgroundImage: 'url(/assets/home__main-visual.jpg)',
           }}
         >
-          <Container className="home__main-visual--content">
-            <div className="home__main-visual--logo">
+          <Container className='home__main-visual--content'>
+            <div className='home__main-visual--logo'>
               <p>새로워진 피트니스 센터 관리</p>
               <h2>DIVVY</h2>
             </div>
-            <div className="home__main-visual--menu">
+            <div className='home__main-visual--menu'>
               {this.props.userinfo.loginWhether === 2 ? (
-                <ul className="text-cente">
+                <ul className='text-cente'>
                   <li>
-                    <Link to="introduce">센터 소개</Link>
+                    <Link to='introduce'>센터 소개</Link>
                   </li>
                   <li>
-                    <Link to="inbodies">인바디 정보</Link>
+                    <Link to='inbodies'>인바디 정보</Link>
                   </li>
                   <li>
-                    <Link to="reservation">수업 예약</Link>
+                    <Link to='reservation'>수업 예약</Link>
                   </li>
                 </ul>
               ) : this.props.userinfo.loginWhether === 1 ? (
-                <ul className="text-center">
+                <ul className='text-center'>
                   <li>
-                    <Link to="/client">회원 관리</Link>
+                    <Link to='/client'>회원 관리</Link>
                   </li>
                   <li>
-                    <Link to="reservation">수업 예약</Link>
+                    <Link to='reservation'>수업 예약</Link>
                   </li>
                   <li>
-                    <Link to="workoutAlloted">운동 배정</Link>
+                    <Link to='workoutAlloted'>운동 배정</Link>
                   </li>
                 </ul>
               ) : (
-                <Row xs={1} sm={2} md={6} className="text-center d-flex">
+                <Row xs={1} sm={2} md={6} className='text-center d-flex'>
                   <Col>
-                    <Link to="/trainer">강사 관리</Link>
+                    <Link to='/trainer'>강사 관리</Link>
                   </Col>
                   <Col>
-                    <Link to="/client">회원 관리</Link>
+                    <Link to='/client'>회원 관리</Link>
                   </Col>
                   <Col>
-                    <Link to="reservation">수업 예약</Link>
+                    <Link to='reservation'>수업 예약</Link>
                   </Col>
                   <Col>
-                    <Link to="workoutAlloted">운동 배정</Link>
+                    <Link to='workoutAlloted'>운동 배정</Link>
                   </Col>
                   <Col>
-                    <Link to="sales">매출 관리</Link>
+                    <Link to='sales'>매출 관리</Link>
                   </Col>
                 </Row>
               )}
@@ -1219,19 +1228,19 @@ class Home extends Component {
               />
             }
           </div>
-          <section className="home__about">
-            <h4 className="home_about--title">
+          <section className='home__about'>
+            <h4 className='home_about--title'>
               About 헬스케어CRM 서비스 DIVVY
             </h4>
-            <p className="home_about--explain">
+            <p className='home_about--explain'>
               헬스 회원 스마트 관리 시스템으로 <br /> 기존 회원 관리 방식에서
               탈피하여 <br />
               쉬운 회원관리, 스마트한 서비스를 제공합니다.
             </p>
-            <Row xs={2} md={5} className="home__shortcut">
+            <Row xs={2} md={5} className='home__shortcut'>
               <Col>
-                <Link to="/client">
-                  <div className="home__shortcut-box">
+                <Link to='/client'>
+                  <div className='home__shortcut-box'>
                     <Image
                       src={
                         process.env.PUBLIC_URL +
@@ -1243,8 +1252,8 @@ class Home extends Component {
                 </Link>
               </Col>
               <Col>
-                <Link to="/trainer">
-                  <div className="home__shortcut-box">
+                <Link to='/trainer'>
+                  <div className='home__shortcut-box'>
                     <Image
                       src={
                         process.env.PUBLIC_URL +
@@ -1256,8 +1265,8 @@ class Home extends Component {
                 </Link>
               </Col>
               <Col>
-                <Link to="/reservation">
-                  <div className="home__shortcut-box">
+                <Link to='/reservation'>
+                  <div className='home__shortcut-box'>
                     <Image
                       src={
                         process.env.PUBLIC_URL +
@@ -1269,8 +1278,8 @@ class Home extends Component {
                 </Link>
               </Col>
               <Col>
-                <Link to="/workoutAlloted">
-                  <div className="home__shortcut-box">
+                <Link to='/workoutAlloted'>
+                  <div className='home__shortcut-box'>
                     <Image
                       src={
                         process.env.PUBLIC_URL +
@@ -1282,8 +1291,8 @@ class Home extends Component {
                 </Link>
               </Col>
               <Col>
-                <Link to="/sales">
-                  <div className="home__shortcut-box">
+                <Link to='/sales'>
+                  <div className='home__shortcut-box'>
                     <Image
                       src={
                         process.env.PUBLIC_URL +
@@ -1299,7 +1308,7 @@ class Home extends Component {
           </section>
         </Container>
         <section
-          className="home__mission"
+          className='home__mission'
           style={{
             backgroundImage: 'url(/assets/home__mission-background.jpg)',
           }}
@@ -1315,14 +1324,14 @@ class Home extends Component {
             </p>
             <Row xs={1} md={3}>
               <Col xs={12} sm={4}>
-                <div className="home__mission--contents">
-                  <div className="home__mission--img-box">
+                <div className='home__mission--contents'>
+                  <div className='home__mission--img-box'>
                     <Image
-                      className="w-100"
+                      className='w-100'
                       src={process.env.PUBLIC_URL + '/assets/home-shopping.svg'}
                     />
                   </div>
-                  <div className="home__mission--txt-box">
+                  <div className='home__mission--txt-box'>
                     <h5>상품</h5>
                     <p>
                       헬스, 필라테스 등의 운동상품과 함께 운동복, 사물함 등의
@@ -1333,14 +1342,14 @@ class Home extends Component {
               </Col>
               <Col xs={12} sm={4}>
                 {/* misson */}
-                <div className="home__mission--contents">
-                  <div className="home__mission--img-box">
+                <div className='home__mission--contents'>
+                  <div className='home__mission--img-box'>
                     <Image
-                      className="w-100"
+                      className='w-100'
                       src={process.env.PUBLIC_URL + '/assets/home-healthy.svg'}
                     />
                   </div>
-                  <div className="home__mission--txt-box">
+                  <div className='home__mission--txt-box'>
                     <h5>운동</h5>
                     <p>
                       센터의 전문가가 사용자와 상담하고 적합한 운동 리스트를
@@ -1350,14 +1359,14 @@ class Home extends Component {
                 </div>
               </Col>
               <Col xs={12} sm={4}>
-                <div className="home__mission--contents">
-                  <div className="home__mission--img-box">
+                <div className='home__mission--contents'>
+                  <div className='home__mission--img-box'>
                     <Image
-                      className="w-100"
+                      className='w-100'
                       src={process.env.PUBLIC_URL + '/assets/home-workers.svg'}
                     />
                   </div>
-                  <div className="home__mission--txt-box">
+                  <div className='home__mission--txt-box'>
                     <h5>회원관리</h5>
                     <p>
                       회원을 쉽게 등록하고 수정할 수 있으며, 회원의 인바디 정보,

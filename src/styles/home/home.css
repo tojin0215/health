@@ -1,3 +1,27 @@
+/* 회원 메인 */
+#customerHome .sectionGlass {
+  align-items: center;
+}
+#customerHome .Membership .row {
+  background: #535353;
+  border-radius: 5px;
+  padding: 20px 10px;
+}
+.facility .row {
+  padding: 20px 10px;
+  border-bottom: 1px solid #fff;
+}
+.facility .row:last-child {
+  border: 0;
+}
+
+.sectionGlass h4 svg {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #fff;
+  vertical-align: middle;
+}
+
 strong {
   font-size: 20px;
 }
