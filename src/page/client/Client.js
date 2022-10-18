@@ -2116,51 +2116,74 @@ class Client extends Component {
                 <h5>이름</h5>
               </Col>
               <Col xs={10}>김루피</Col>
-              <Col xs={2}>생년월일</Col>
+              <Col xs={2}>
+                <h5>생년월일</h5>
+              </Col>
               <Col xs={10}>20010101</Col>
-              <Col xs={2}>연락처</Col>
+              <Col xs={2}>
+                <h5>연락처</h5>
+              </Col>
               <Col xs={10}>010-0000-0000</Col>
-              <Col xs={2}>주소</Col>
+              <Col xs={2}>
+                <h5>주소</h5>
+              </Col>
               <Col xs={10}>부산광역시 부산진구 서전로37번길 51</Col>
-              <Col xs={2}>사물함 이용</Col>
-              <Col xs={4}>3번</Col>
-              <Col xs={2}>운동복 사용</Col>
-              <Col xs={4}>사용</Col>
-              <Col xs={2}>가입경로</Col>
-              <Col xs={4}>간판</Col>
+              <Col>
+                <div className='d-flex justify-content-between'>
+                  <div className='d-flex justify-content-between'>
+                    <h5 className='me-4'>운동복</h5>
+                    <p>사용</p>
+                  </div>
+                  <div className='d-flex justify-content-between'>
+                    <h5 className='me-4'>사물함</h5>
+                    <p>10번</p>
+                  </div>
+                  <div className='d-flex justify-content-between'>
+                    <h5 className='me-4'>가입경로</h5>
+                    <p>블로그</p>
+                  </div>
+                </div>
+              </Col>
             </Row>
             <Row>
-              <Col xs={8}>
-                <h4>현재 사용중인 이용권</h4>
+              <div className='voucher'>
+                <div className='d-flex justify-content-between mt-4'>
+                  <h4>현재 사용중인 이용권</h4>
+                  <p
+                    className='text-primary more' /* onClick={viewModalOnclick} */
+                  >
+                    + 이용권 전체보기
+                  </p>
+                </div>
+              </div>
+            </Row>
+
+            <Row>
+              <Col>
+                <div className='client-infomation__detail--membership'>
+                  <h4>필라테스</h4>
+                  <br />
+                  <p>이용권: 3/20</p>
+                  <p>이용권 결제일: 2023년 01월 15일</p>
+                </div>
               </Col>
-              <Col xs={4}>
-                <Button variant='primary'>+ 지난 이용권 더보기</Button>
+              <Col>
+                <div className='client-infomation__detail--membership'>
+                  <h4>GX</h4>
+                  <p>기간권 : 123일권 [ D-118 ]</p>
+                  <p>기간권 결제일 : 2022년 08월 25일</p>
+                  <p>기간권 마감일 : 2023년 01월 15일</p>
+                </div>
               </Col>
-              <Col xs={12}>
-                <Row>
-                  <Col xs={6}>
-                    <div className='sectionGlass'>
-                      <h6>필라테스</h6>
-                      <p>이용권 : 24/60</p>
-                      <p>이용권 결제일 : 2022년 08월 25일</p>
-                    </div>
-                  </Col>
-                  <Col xs={6}>
-                    <div className='sectionGlass'>
-                      <h6>GX</h6>
-                      <p>기간권 : 123일권 [ D-118 ]</p>
-                      <p>기간권 결제일 : 2022년 08월 25일</p>
-                      <p>기간권 마감일 : 2023년 01월 15일</p>
-                    </div>
-                  </Col>
-                  <Col xs={6}>
-                    <div className='sectionGlass'>
-                      <h6>필라테스</h6>
-                      <p>이용권 : 24/60</p>
-                      <p>이용권 결제일 : 2022년 08월 25일</p>
-                    </div>
-                  </Col>
-                </Row>
+            </Row>
+            <Row>
+              <Col xs={6}>
+                <div className='client-infomation__detail--membership'>
+                  <h4>필라테스</h4>
+                  <br />
+                  <p>이용권: 3/20</p>
+                  <p>이용권 결제일: 2023년 01월 15일</p>
+                </div>
               </Col>
             </Row>
           </Container>

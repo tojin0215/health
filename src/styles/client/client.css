@@ -2,8 +2,9 @@
 #customerClient {
 }
 #customerClient .clientInfo .col-10,
-.col-4 {
-  color: #fcc;
+.col-3,
+.clientInfo p {
+  line-height: 2.8rem;
 }
 
 /* 회원정보수정-모달 */
