@@ -796,6 +796,7 @@ class AddSales extends Component {
               <Row>
                 <Col xs={2}>
                   <h5>결제 종류</h5>
+                  <h5>결제 종류</h5>
                 </Col>
                 <Col>
                   <Row className='mt-2'>
