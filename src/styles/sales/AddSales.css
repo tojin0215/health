@@ -1,7 +1,13 @@
 .voucher-info {
+  padding: 20px;
   border: 1px solid #fff;
   border-radius: 5px;
-  padding: 20px;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.voucher-info div {
+  align-items: center;
 }
 
 .add-sales__input--number-format {

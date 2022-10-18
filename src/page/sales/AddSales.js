@@ -304,6 +304,10 @@ class AddSales extends Component {
     this.setState({
       checkboxGroup: obj,
     });
+    console.log(
+      'handleCheckbox 의 checkboxGroup입니다',
+      this.state.checkboxGroup.paidMembershipCheckbox
+    );
   };
 
   handleUser = (client) => {
@@ -352,7 +356,7 @@ class AddSales extends Component {
     // console.log(userinfo);
     // console.log(this.state.paymentTools);
     // console.log(this.props.location.state.client_name);
-    console.log(this.state.client_name);
+    console.log('나는 client_name :', this.state.client_name);
     return (
       <div className='wrap addSales'>
         <div className='header'>
@@ -544,25 +548,21 @@ class AddSales extends Component {
                             htmlFor='paidMembershipCheckbox'
                             className='w-100'
                           >
-                            이용권
+                            횟수권
                           </Form.Check.Label>
                         </Form.Check>
                       </Form.Group>
                     </Col>
                   </Row>
                   <Row>
-                    <Col>
-                      {/* 기간권 이용권 라디오 버튼 선택에 따라 바뀌게 기능 수정 예정 */}
-                      {
-                        // 기간권 선택 this.state.client_name
-                        // 이용권 선택일 경우 !this.state.client_name
-                        this.state.client_name ? (
-                          <Col className='voucher-info my-3'>
+                    {this.state.checkboxGroup.salesDaysCheckbox ? (
+                      <>
+                        {/* 기간권 내용 */}
+                        {this.state.client_name ? (
+                          <Col className='voucher-info'>
                             <Row>
                               <Col xs={2}>
-                                <Form.Label>
-                                  <h6>기간시작일</h6>
-                                </Form.Label>
+                                <Form.Label>기간시작일</Form.Label>
                               </Col>
                               <Col xs={10}>
                                 <DatePicker
@@ -664,67 +664,35 @@ class AddSales extends Component {
                           </Col>
                         ) : (
                           // 이용권 선택일 경우
-                          <Col>
-                            <Row>
-                              <Col xs={RFC_2822}>
-                                <Form.Label htmlFor='paidMembership'>
-                                  이용권 횟수
-                                </Form.Label>
-                              </Col>
-                              <Col>
-                                <Form.Control
-                                  value={this.state.paidMembership}
-                                  onChange={this.handleChange}
-                                  type='number'
-                                  name='paidMembership'
-                                  id='paidMembership'
-                                  placeholder='숫자만 입력하세요'
-                                  required
-                                ></Form.Control>
-                              </Col>
-                            </Row>
+                          ''
+                        )}
+                      </>
+                    ) : (
+                      <Col className='voucher-info'>
+                        <Row>
+                          <Col xs={2}>
+                            <Form.Label htmlFor='paidMembership'>
+                              이용권 횟수
+                            </Form.Label>
                           </Col>
-                        )
-                      }
-                    </Col>
+                          <Col xs={3}>
+                            <Form.Control
+                              value={this.state.paidMembership}
+                              onChange={this.handleChange}
+                              type='number'
+                              name='paidMembership'
+                              id='paidMembership'
+                              placeholder='숫자만 입력하세요'
+                              required
+                            ></Form.Control>
+                          </Col>
+                        </Row>
+                      </Col>
+                    )}
                   </Row>
                 </Col>
               </Row>
-              <Row>
-                <Col xs={2}>테스트용(삭제예정)</Col>
-                <Col xs={1}>
-                  <Form.Label>기간 일수</Form.Label>
-                </Col>
-                <Col xs={2}>
-                  <Form.Control
-                    variant='outlined'
-                    value={this.state.salesDays}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='salesDays'
-                    placeholder='숫자만 입력하세요'
-                    required
-                  ></Form.Control>
-                </Col>
-                <Col xs={1}>
-                  <Form.Label htmlFor='paidMembership'>
-                    이용권
-                    <br />
-                    횟수
-                  </Form.Label>
-                </Col>
-                <Col xs={2}>
-                  <Form.Control
-                    value={this.state.paidMembership}
-                    onChange={this.handleChange}
-                    type='number'
-                    name='paidMembership'
-                    id='paidMembership'
-                    placeholder='숫자만 입력하세요'
-                    required
-                  ></Form.Control>
-                </Col>
-              </Row>
+              <Row></Row>
               <Row>
                 <Col xs={2}>
                   <h5>사물함</h5>
