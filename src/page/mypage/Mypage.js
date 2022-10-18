@@ -369,7 +369,7 @@ class Mypage extends Component {
                 </ul>
               </Col>
               <Col className='fitInfo'>
-                <h4>소속 센터정보</h4>
+                <h5>소속 센터정보</h5>
                 <ul>
                   <li>
                     <strong>사업장 명</strong>
