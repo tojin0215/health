@@ -584,7 +584,7 @@ class AddSales extends Component {
                                         type='radio'
                                         id='voucherPeriod1'
                                         name='PeriodQuickSelection'
-                                        value='1'
+                                        value='30'
                                       />
                                       <Form.Check.Label
                                         htmlFor='voucherPeriod1'
@@ -598,7 +598,7 @@ class AddSales extends Component {
                                         type='radio'
                                         id='voucherPeriod3'
                                         name='PeriodQuickSelection'
-                                        value='2'
+                                        value='91'
                                       />
                                       <Form.Check.Label
                                         htmlFor='voucherPeriod3'
@@ -612,7 +612,7 @@ class AddSales extends Component {
                                         type='radio'
                                         id='voucherPeriod6'
                                         name='PeriodQuickSelection'
-                                        value='3'
+                                        value='183'
                                       />
                                       <Form.Check.Label
                                         htmlFor='voucherPeriod6'
@@ -627,7 +627,7 @@ class AddSales extends Component {
                                         type='radio'
                                         id='voucherPeriod12'
                                         name='PeriodQuickSelection'
-                                        value='4'
+                                        value='365'
                                       />
                                       <Form.Check.Label
                                         htmlFor='voucherPeriod12'
@@ -652,9 +652,13 @@ class AddSales extends Component {
                                     </Form.Check>
                                     <Form.Check inline>
                                       <Form.Control
-                                        placeholder='개월'
-                                        id='etcVoucherPeriod'
+                                        variant='outlined'
+                                        value={this.state.salesDays}
+                                        onChange={this.handleChange}
                                         type='number'
+                                        id='salesDays'
+                                        placeholder='00(일)'
+                                        // required
                                       />
                                     </Form.Check>
                                   </Col>

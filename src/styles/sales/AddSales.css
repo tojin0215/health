@@ -10,6 +10,10 @@
   align-items: center;
 }
 
+.voucher-info .form-check:nth-child(6) {
+  padding-left: 0;
+}
+
 .add-sales__input--number-format {
   width: 100%;
   padding: 6px;
