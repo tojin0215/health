@@ -1,3 +1,13 @@
+/* 회원정보상세 - customerClient */
+#customerClient {
+}
+#customerClient .clientInfo .col-10,
+.col-3,
+.clientInfo p {
+  line-height: 2.8rem;
+}
+
+/* 회원정보수정-모달 */
 .modal-body,
 .modal-header {
   padding: 0;

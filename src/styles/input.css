@@ -18,7 +18,7 @@
   margin-top: 0;
 }
 .customer-input--search .MuiInputBase-input {
-  color: #fff;
+  /* color: #fff; */
   /* left: 30%; */
 }
 .customer-input--search #customer_name-label {
@@ -32,7 +32,7 @@
   /* left: 30%; */
 }
 .customer_name {
-  height: 45px;
+  height: 2.813rem;
   width: 200px;
   padding: 8px;
   background-color: #fff;
