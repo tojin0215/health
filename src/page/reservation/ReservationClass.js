@@ -1111,17 +1111,16 @@ class ReservationClass extends Component {
                       />
                     </div>
                   ) : (
-                    <div>
+                    <div onClick={() => this.setState({ open: true })}>
                       <Form.Control
                         id='trainer'
                         label='강사 검색'
                         placeholder='강사명 검색'
-                        onClick={() => this.setState({ open: true })}
                         value={this.state.trainer_name}
                         // onChange={this.handleChange}
                         InputProps={{ disableUnderline: true }}
                         error={this.state.trainer_err}
-                        // disabled
+                        disabled
                         className='reservation-class--trainer-input'
                       />
                     </div>
