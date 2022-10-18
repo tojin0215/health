@@ -13,6 +13,8 @@ import { Container, Row, Col, Table, FloatingLabel } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 import { AiFillTool } from 'react-icons/ai';
 
@@ -142,6 +144,7 @@ const ReservationClassItem = ({
       health: false,
       etc: false,
     });
+    this.setState({ kind: '개인PT' });
   };
   const handleExerciseRadio2 = () => {
     setExerciseGroup({
@@ -151,6 +154,7 @@ const ReservationClassItem = ({
       health: false,
       etc: false,
     });
+    this.setState({ kind: 'GX' });
   };
   const handleExerciseRadio3 = () => {
     setExerciseGroup({
@@ -160,6 +164,8 @@ const ReservationClassItem = ({
       health: false,
       etc: false,
     });
+    this.setState({ kind: '필라테스' });
+    console.log('kind: ', kind);
   };
   const handleExerciseRadio4 = () => {
     setExerciseGroup({
@@ -169,6 +175,7 @@ const ReservationClassItem = ({
       health: true,
       etc: false,
     });
+    this.setState({ kind: '헬스' });
   };
   const handleExerciseRadio5 = () => {
     setExerciseGroup({
@@ -178,6 +185,7 @@ const ReservationClassItem = ({
       health: false,
       etc: true,
     });
+    this.setState({ kind: '기타(' + this.state.etcExercise + ')' });
   };
 
   /*
@@ -270,248 +278,267 @@ const ReservationClassItem = ({
   };
   // console.log(kind_input);
   return (
-    <div className='border py-2 my-1 text-center'>
-      <p className='fw-bold'>
-        {exercise_class}/{kind}
-      </p>
-
-      <p>{trainer}</p>
-      <p>
-        {hourArray}시{minuteArray}분
-      </p>
-      <p>정원: {number_of_people}명</p>
+    <>
       {(loginWhether === 1 && loginWhetherTrainer === trainer) ||
       (loginWhether === 0 && loginWhetherTrainer !== trainer) ? (
-        updateOpen ? (
-          <Button variant='outline-success mt-2' onClick={modalOnClick}>
-            <AiFillTool className='align-baseline' />
-          </Button>
-        ) : (
-          ''
-        )
+        <Row
+          className='reservation-class__schedule-content'
+          onClick={modalOnClick}
+        >
+          <Col>
+            <p>
+              {hourArray}:{minuteArray}
+            </p>
+          </Col>
+          <Col>
+            <p className='fw-bold'>
+              {exercise_class}
+              {/* /{kind} */}
+            </p>
+            <p>{trainer}</p>
+            <p>
+              {number_of_people}/{/* {canRegist} */}전체
+            </p>
+          </Col>
+        </Row>
       ) : (
         ''
       )}
-
-      <div>
-        <Modal show={showModal}>
-          <Container>
-            <Row>
-              <Form.Group>
-                <Form.Label>운동종목</Form.Label>
-                <Form.Control
-                  value={kind_input}
-                  id='kind'
-                  onClick={() => setKindOpen(true)}
-                ></Form.Control>
-                <Modal show={kindOpen}>
-                  <div className='mb-5'>
-                    <Form.Group>
-                      <Row>
-                        <Col>
-                          <Form.Check>
-                            <Form.Check.Input
-                              type='radio'
-                              name='exerciseGroup'
-                              id='pt'
-                              checked={exerciseGroup['pt']}
-                              onChange={handleExerciseRadio}
-                            />
-                            <Form.Check.Label
-                              htmlFor='개인 PT'
-                              className='w-100'
-                            >
-                              개인 PT
-                            </Form.Check.Label>
-                          </Form.Check>
-                        </Col>
-                        <Col>
-                          <Form.Check>
-                            <Form.Check.Input
-                              type='radio'
-                              name='exerciseGroup'
-                              id='gx'
-                              checked={exerciseGroup['gx']}
-                              onChange={handleExerciseRadio2}
-                            />
-                            <Form.Check.Label htmlFor='GX' className='w-100'>
-                              GX
-                            </Form.Check.Label>
-                          </Form.Check>
-                        </Col>
-                        <Col>
-                          <Form.Check>
-                            <Form.Check.Input
-                              type='radio'
-                              name='exerciseGroup'
-                              id='pila'
-                              checked={exerciseGroup['pila']}
-                              onChange={handleExerciseRadio3}
-                            />
-                            <Form.Check.Label
-                              htmlFor='필라테스'
-                              className='w-100'
-                            >
-                              필라테스
-                            </Form.Check.Label>
-                          </Form.Check>
-                        </Col>
-                        <Col>
-                          <Form.Check>
-                            <Form.Check.Input
-                              type='radio'
-                              name='exerciseGroup'
-                              id='health'
-                              checked={exerciseGroup['health']}
-                              onChange={handleExerciseRadio4}
-                            />
-                            <Form.Check.Label htmlFor='헬스' className='w-100'>
-                              헬스
-                            </Form.Check.Label>
-                          </Form.Check>
-                        </Col>
-                        <Col>
-                          <Form.Check>
-                            <Form.Check.Input
-                              type='radio'
-                              name='exerciseGroup'
-                              id='etc'
-                              checked={exerciseGroup['etc']}
-                              onChange={handleExerciseRadio5}
-                            />
-                            <Form.Control
-                              placeholder='기타'
-                              id='etcExercise'
-                              type='text'
-                              value={etcExercise_input}
-                              onChange={handleChangeEtc}
-                            ></Form.Control>
-                          </Form.Check>
-                        </Col>
-                      </Row>
-                    </Form.Group>
-                    <Button onClick={exerciseKind}>선택완료</Button>
-                  </div>
-                  <Button onClick={() => setKindOpen(false)}>닫기</Button>
-                </Modal>
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>운동명</Form.Label>
-                <Form.Control
-                  value={exercise_class_input}
-                  id='exercise_class'
-                  onChange={updateChange}
-                  error={exercise_class_err}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>강사명</Form.Label>
-                {loginWhether === 1 ? (
-                  <Form.Control
-                    value={trainer_input}
-                    id='trainer'
-                    error={trainer_err}
-                  ></Form.Control>
-                ) : (
-                  <Form.Control
-                    value={trainer_input}
-                    onClick={() => setSearchOpen(true)}
-                    id='trainer'
-                    error={trainer_err}
-                  ></Form.Control>
-                )}
-
-                <Modal show={searchOpen}>
-                  <div>
-                    <TrainerSearch
-                      open={searchOpen}
-                      setOpen={(o) => setSearchOpen(o)}
-                      fitness_no={fitness_no}
-                      handleUser={handleUser}
+      {/* <Modal show={true}> */}
+      <Modal show={showModal} className='reservationClass-modal'>
+        <div>
+          <h4 className='mb-3'>수업 수정</h4>
+          <Row>
+            <Col xs={3}>
+              <h5>운동종류</h5>
+            </Col>
+            <Col xs={9} className='mt-2'>
+              <Row xs={2}>
+                <Col xs={4}>
+                  <Form.Check>
+                    <Form.Check.Input
+                      type='radio'
+                      name='exerciseGroup'
+                      id='pt'
+                      checked={exerciseGroup['pt']}
+                      onChange={handleExerciseRadio}
                     />
-                  </div>
-                </Modal>
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>날짜</Form.Label>
+                    <Form.Check.Label htmlFor='pt' className='w-100'>
+                      개인 PT
+                    </Form.Check.Label>
+                  </Form.Check>
+                </Col>
+                <Col>
+                  <Form.Check>
+                    <Form.Check.Input
+                      type='radio'
+                      name='exerciseGroup'
+                      id='gx'
+                      checked={exerciseGroup['gx']}
+                      onChange={handleExerciseRadio2}
+                    />
+                    <Form.Check.Label htmlFor='gx' className='w-100'>
+                      GX
+                    </Form.Check.Label>
+                  </Form.Check>
+                </Col>
+                <Col xs={4}>
+                  <Form.Check>
+                    <Form.Check.Input
+                      type='radio'
+                      name='exerciseGroup'
+                      id='pila'
+                      checked={exerciseGroup['pila']}
+                      onChange={handleExerciseRadio3}
+                    />
+                    <Form.Check.Label htmlFor='pila' className='w-100'>
+                      필라테스
+                    </Form.Check.Label>
+                  </Form.Check>
+                </Col>
+                <Col xs={3} /* className='d-flex justify-content' */>
+                  <Form.Check>
+                    <Form.Check.Input
+                      type='radio'
+                      name='exerciseGroup'
+                      id='etc'
+                      checked={exerciseGroup['etc']}
+                      onChange={handleExerciseRadio5}
+                    />
+                    <Form.Check.Label htmlFor='etc' className='w-100'>
+                      기타
+                    </Form.Check.Label>
+                  </Form.Check>
+                </Col>
+                <Col xs={5}>
+                  <Form.Check>
+                    <Form.Control
+                      placeholder='기타'
+                      id='etcExercise'
+                      htmlFor='etc'
+                      type='text'
+                      value={etcExercise_input}
+                      onChange={handleChangeEtc}
+                    ></Form.Control>
+                  </Form.Check>
+                  {/* <Form.Group>
+                    <Form.Control
+                      value={kind_input}
+                      id='kind'
+                      onClick={() => setKindOpen(true)}
+                    />
+                    <Modal show={kindOpen}>
+                      <div className='mb-5'>
+                        <Button onClick={exerciseKind}>선택완료</Button>
+                      </div>
+                      <Button onClick={() => setKindOpen(false)}>닫기</Button>
+                    </Modal>
+                  </Form.Group> */}
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={3}>
+              <h5>운동명</h5>
+            </Col>
+            <Col xs={9}>
+              <Form.Control
+                value={exercise_class_input}
+                placeholder='운동명을 입력해주세요'
+                id='exercise_class'
+                onChange={updateChange}
+                error={exercise_class_err}
+              ></Form.Control>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={3}>
+              <h5>강사</h5>
+            </Col>
+            <Col xs={9}>
+              {loginWhether === 1 ? (
                 <Form.Control
-                  type='date'
-                  selected={setClass_date_input}
-                  value={moment(class_date_input).format('yyyy-MM-DD')}
-                  id='class_date'
-                  onChange={updateChange6}
-                  error={class_date_err}
+                  value={trainer_input}
+                  id='trainer'
+                  error={trainer_err}
                 ></Form.Control>
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>시간</Form.Label>
+              ) : (
                 <Form.Control
-                  value={hour_input == 0 ? '00' : hour_input}
-                  type='number'
-                  id='hour'
-                  onChange={updateChange3}
-                  error={hour_err}
+                  value={trainer_input}
+                  placeholder='강사 검색'
+                  onClick={() => setSearchOpen(true)}
+                  id='trainer'
+                  error={trainer_err}
                 ></Form.Control>
-                시
-                <Form.Control
-                  type='number'
-                  value={minute_input == 0 ? '00' : minute_input}
-                  id='minute'
-                  onChange={updateChange4}
-                  error={minute_err}
-                ></Form.Control>
-                분
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>수강인원</Form.Label>
-                <Form.Control
-                  type='number'
-                  value={number_of_people_input}
-                  id='number_of_people'
-                  onChange={updateChange2}
-                  error={number_of_people_err}
-                ></Form.Control>
-              </Form.Group>
-            </Row>
-            <Row className='mt-3'>
-              <Col xs={4}>
-                <Button
-                  className='w-100'
-                  variant='danger'
-                  onClick={() =>
-                    // eslint-disable-next-line no-restricted-globals
-                    confirm(
-                      '정말 삭제하시겠습니까?_예약된 회원도 같이 취소됩니다.'
-                    ) == true
-                      ? reservationClassDelete(no)
-                      : alert('삭제가 취소 되었습니다.')
-                  }
-                >
-                  삭제
-                </Button>
-              </Col>
-              <Col xs={8}>
-                <Button
-                  className='w-100'
-                  onClick={() => reservationClassUpdate(no)}
-                >
-                  수정하기
-                </Button>
-              </Col>
-              <Col xs={12} className='mt-2'>
-                <Button
-                  className='w-100'
-                  variant='outline-light'
-                  onClick={modalClose}
-                >
-                  닫기
-                </Button>
-              </Col>
-            </Row>
-          </Container>
-        </Modal>
-      </div>
-    </div>
+              )}
+
+              <Modal show={searchOpen}>
+                <div>
+                  <TrainerSearch
+                    open={searchOpen}
+                    setOpen={(o) => setSearchOpen(o)}
+                    fitness_no={fitness_no}
+                    handleUser={handleUser}
+                  />
+                </div>
+              </Modal>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={3}>
+              <h5>날짜</h5>
+            </Col>
+            <Col xs={9}>
+              <Form.Control
+                type='date'
+                selected={setClass_date_input}
+                value={moment(class_date_input).format('yyyy-MM-DD')}
+                id='class_date'
+                onChange={updateChange6}
+                error={class_date_err}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={3}>
+              <h5>시간</h5>
+            </Col>
+            <Col xs={9}>
+              <Row>
+                <Col>
+                  <Form.Control
+                    type='number'
+                    id='hour'
+                    value={hour_input == 0 ? '00' : hour_input}
+                    onChange={updateChange3}
+                    label='시'
+                    error={hour_err}
+                  />
+                </Col>
+                <Col className='d-flex align-items-center' xs={1}>
+                  <span className='fs-6 fw-bold'>:</span>
+                </Col>
+                <Col>
+                  <Form.Control
+                    type='number'
+                    id='minute'
+                    value={minute_input == 0 ? '00' : minute_input}
+                    onChange={updateChange4}
+                    label='분'
+                    error={minute_err}
+                  />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={3}>수강인원</Col>
+            <Col xs={9}>
+              <Form.Control
+                type='number'
+                value={number_of_people_input}
+                id='number_of_people'
+                onChange={updateChange2}
+                error={number_of_people_err}
+              ></Form.Control>
+            </Col>
+          </Row>
+          <Row className='mt-3'>
+            <Col xs={12} className='text-danger text-end my-3'>
+              <span className='m-2'>
+                삭제시 되돌릴 수 없습니다. 한번 더 확인해주세요.
+              </span>
+              <Button
+                variant='outline-danger'
+                onClick={() =>
+                  // eslint-disable-next-line no-restricted-globals
+                  confirm(
+                    '정말 삭제하시겠습니까?_예약된 회원도 함께 취소됩니다.'
+                  ) == true
+                    ? reservationClassDelete(no)
+                    : alert('삭제가 취소 되었습니다.')
+                }
+              >
+                삭제
+              </Button>
+            </Col>
+            <Col className='text-center'>
+              <Button
+                className='btn-primary-dark mx-1'
+                onClick={modalClose}
+                variant='primary-dark'
+              >
+                닫기
+              </Button>
+              <Button onClick={() => reservationClassUpdate(no)}>
+                수정하기
+              </Button>
+            </Col>
+          </Row>
+        </div>
+      </Modal>
+    </>
   );
 };
 
@@ -547,6 +574,8 @@ class ReservationClass extends Component {
         health: false,
         etc: false,
       },
+      key: 'pt',
+      keyTrainer: 'trainerAll',
     };
   }
 
@@ -833,6 +862,11 @@ class ReservationClass extends Component {
       kindOpen: false,
     });
   };
+
+  selectClassTabs = (e) => {
+    this.setState({ key: e });
+  };
+
   render() {
     // console.log(this.props.userinfo.loginWhether);
     // console.log(this.state.kindOpen);
@@ -867,364 +901,97 @@ class ReservationClass extends Component {
         </header>
 
         <Container>
-          <Row className='pb-5 justify-content-center'>
-            <Col>
-              <h4>수업 만들기</h4>
+          <Row className='reservation-class__form sectionGlass mb-5'>
+            <Col xs={12} className='mb-3'>
+              <h4>수업 설정</h4>
             </Col>
-            <Col className='text-end'>
-              <Link to='/reservation'>
-                <Button variant='outline-light me-2'>돌아가기</Button>
-              </Link>
-              <Button onClick={this.handleUpdate}>수정하기</Button>
-            </Col>
-          </Row>
-          <Row xs={3}>
-            <Col className='text-end'>
-              <Button
-                name='prev'
-                variant='outline-light'
-                onClick={this.handleWeekClick}
-              >
-                이전주
-              </Button>
-            </Col>
-            <Col className='text-center align-self-center fs-5'>
-              <div>
-                {' '}
-                {moment(this.state.class_date)
-                  .day(0)
-                  .add({ days: this.state.dayIncreament })
-                  .format('YYYY-MM-DD (dd)')}{' '}
-                ~{' '}
-                {moment(this.state.class_date)
-                  .day(6)
-                  .add({ days: this.state.dayIncreament })
-                  .format('YYYY-MM-DD (dd)')}
-              </div>
-            </Col>
-            <Col className='text-start'>
-              <Button
-                name='next'
-                variant='outline-light'
-                onClick={this.handleWeekClick}
-              >
-                다음주
-              </Button>
-            </Col>
-          </Row>
-          <Row>
-            <Col
-              className='text-center py-2 w-100 overflow-auto justify-content-center'
-              xs={12}
-            >
-              <table class='table' name='classTable'>
-                <thead>
-                  <tr>
-                    <th scope='col'>
-                      {moment(this.state.class_date)
-                        .day(0)
-                        .add({ days: this.state.dayIncreament })
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.class_date)
-                        .day(1)
-                        .add({ days: this.state.dayIncreament })
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.class_date)
-                        .day(2)
-                        .add({ days: this.state.dayIncreament })
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.class_date)
-                        .day(3)
-                        .add({ days: this.state.dayIncreament })
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.class_date)
-                        .day(4)
-                        .add({ days: this.state.dayIncreament })
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.class_date)
-                        .day(5)
-                        .add({ days: this.state.dayIncreament })
-                        .format('MM-DD (dd)')}
-                    </th>
-                    <th scope='col'>
-                      {moment(this.state.class_date)
-                        .day(6)
-                        .add({ days: this.state.dayIncreament })
-                        .format('MM-DD (dd)')}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(0 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(0 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
-                    </td>
-                    <td>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(1 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(1 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
-                    </td>
-                    <td>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(2 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(2 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
-                    </td>
-                    <td>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(3 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(3 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
-                    </td>
-                    <td>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(4 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(4 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
-                    </td>
-                    <td>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(5 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(5 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
-                    </td>
-                    <td>
-                      {' '}
-                      {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
-                        </div>
-                      ) : (
-                        this.state.reservationClass.filter(
-                          (value) =>
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrAfter(
-                                moment().day(6 + this.state.dayIncreament),
-                                'day'
-                              ) &&
-                            moment(value.props.class_date.split('T')[0])
-                              .add(9, 'hour')
-                              .isSameOrBefore(
-                                moment().day(6 + this.state.dayIncreament),
-                                'day'
-                              )
-                        )
-                      )}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-              {/* <table class='table'>
-							<thead>
-								<tr>
-									<th scope='col'>운동 클래스</th>
-									<th scope='col'>강사</th>
-									<th scope='col'>수강날짜</th>
-									<th scope='col'>수강 인원</th>
-									<th scope='col'>삭제</th>
-									<th scope='col'>수정</th>
-								</tr>
-							</thead>
-							<tbody>
-								{this.state.reservationClass.length == 0 ? (
-									<p>'설정된 운동이 없습니다.'</p>
-								) : (
-									this.state.reservationClass
-								)}
-							</tbody>
-						</table> */}
-            </Col>
-          </Row>
-          <Row className='reservation-class_input-container'>
-            <Col className='text-center' xs={12} sm={3}>
-              {this.props.userinfo.loginWhether === 1 ? (
-                // <label className=' d-block w-100'>
-                <TextField
-                  id='trainer'
-                  variant='standard'
-                  value={this.props.userinfo.manager_name}
-                  onChange={this.handleChange}
-                  InputProps={{ disableUnderline: true }}
-                  label='강사명'
-                  error={this.state.trainer_err}
-                  className=''
-                />
-              ) : (
-                // </label>
-                <div>
-                  {this.state.open ? (
-                    <div>
-                      <TrainerSearch
-                        open={this.state.open}
-                        setOpen={(o) => this.setState({ open: o })}
-                        fitness_no={this.props.userinfo.fitness_no}
-                        handleUser={this.handleUser}
+            <Col xs={12}>
+              <Row className='mb-3'>
+                <Col md={1} className='exerciseGroup'>
+                  <h5>운동종류</h5>
+                </Col>
+                <Col>
+                  <div>
+                    <Form.Check inline>
+                      <Form.Check.Input
+                        type='radio'
+                        name='exerciseGroup'
+                        id='pt'
+                        checked={this.state.exerciseGroup['pt']}
+                        onChange={this.handleExerciseRadio}
                       />
-                    </div>
-                  ) : (
-                    <div>
-                      <TextField
-                        id='trainer'
-                        label='강사 검색'
-                        onClick={() => this.setState({ open: true })}
-                        value={this.state.trainer_name}
-                        // onChange={this.handleChange}
-                        InputProps={{ disableUnderline: true }}
-                        error={this.state.trainer_err}
-                        variant='standard'
-                        disabled
-                        className='boxmorpsm w-100 reservation-class--trainer-input'
-                        style={{
-                          cursor: 'pointer',
-                        }}
+                      <Form.Check.Label htmlFor='pt' className='w-100'>
+                        개인 PT
+                      </Form.Check.Label>
+                    </Form.Check>
+                    <Form.Check inline>
+                      <Form.Check.Input
+                        type='radio'
+                        name='exerciseGroup'
+                        id='gx'
+                        checked={this.state.exerciseGroup['gx']}
+                        onChange={this.handleExerciseRadio}
                       />
-                    </div>
-                  )}
-                </div>
-              )}
+                      <Form.Check.Label htmlFor='gx' className='w-100'>
+                        GX
+                      </Form.Check.Label>
+                    </Form.Check>
+                    <Form.Check inline>
+                      <Form.Check.Input
+                        type='radio'
+                        name='exerciseGroup'
+                        id='pila'
+                        checked={this.state.exerciseGroup['pila']}
+                        onChange={this.handleExerciseRadio}
+                      />
+                      <Form.Check.Label htmlFor='pila' className='w-100'>
+                        필라테스
+                      </Form.Check.Label>
+                    </Form.Check>
+                    <Form.Check inline>
+                      <Form.Check.Input
+                        type='radio'
+                        name='exerciseGroup'
+                        id='etc'
+                        checked={this.state.exerciseGroup['etc']}
+                        onChange={this.handleExerciseRadio}
+                      />
+                      <Form.Check.Label htmlFor='etc'>기타</Form.Check.Label>
+                    </Form.Check>
+                    <Form.Check inline>
+                      <Form.Control
+                        placeholder='기타'
+                        id='etcExercise'
+                        type='text'
+                        value={this.state.etcExercise}
+                        onChange={this.handleChange}
+                      ></Form.Control>
+                    </Form.Check>
+                    {/* <Col>
+                      <Form.Check>
+                        <Form.Check.Input
+                          type='radio'
+                          name='exerciseGroup'
+                          id='health'
+                          checked={this.state.exerciseGroup['health']}
+                          onChange={this.handleExerciseRadio}
+                        />
+                        <Form.Check.Label htmlFor='헬스' className='w-100'>
+                          헬스
+                        </Form.Check.Label>
+                      </Form.Check>
+                    </Col> */}
+                  </div>
+                </Col>
+              </Row>
             </Col>
-            <Col
-              className='text-center height-fit-content fs-2'
-              xs={12}
-              sm={3}
-              lg={3}
-            >
-              <label className='w-100'>
-                <TextField
-                  className='boxmorpsm w-100'
-                  variant='standard'
-                  label='운동종류'
-                  onClick={this.handlekindOpen}
-                  value={this.state.kind}
-                />
-              </label>
-            </Col>
-            <Modal show={this.state.kindOpen}>
-              <div className='mb-5'>
+            {/* <Col xs={11}>
+              <Form.Control
+                label='운동종류'
+                onClick={this.handlekindOpen}
+                value={this.state.kind}
+              />
+              <Modal show={this.state.kindOpen}>
                 <Form.Group>
                   <Row>
                     <Col>
@@ -1269,20 +1036,6 @@ class ReservationClass extends Component {
                         </Form.Check.Label>
                       </Form.Check>
                     </Col>
-                    {/* <Col>
-                      <Form.Check>
-                        <Form.Check.Input
-                          type='radio'
-                          name='exerciseGroup'
-                          id='health'
-                          checked={this.state.exerciseGroup['health']}
-                          onChange={this.handleExerciseRadio}
-                        />
-                        <Form.Check.Label htmlFor='헬스' className='w-100'>
-                          헬스
-                        </Form.Check.Label>
-                      </Form.Check>
-                    </Col> */}
                     <Col>
                       <Form.Check>
                         <Form.Check.Input
@@ -1303,27 +1056,85 @@ class ReservationClass extends Component {
                     </Col>
                   </Row>
                 </Form.Group>
-                <Button onClick={this.exerciseKind}>선택완료</Button>
-              </div>
-              <Button onClick={this.handlekindClose}>닫기</Button>
-            </Modal>
-            <Col className='text-center height-fit-content fs-2' xs={12} sm={6}>
-              <label className='w-100'>
-                <TextField
-                  className='boxmorpsm w-100'
-                  id='exercise_class'
-                  variant='standard'
-                  value={this.state.exercise_class}
+                <Row xs={2}>
+                  <Col>
+                    <Button onClick={this.handlekindClose} variant='secondary'>
+                      닫기
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button onClick={this.exerciseKind}>선택완료</Button>
+                  </Col>
+                </Row>
+              </Modal>
+            </Col> */}
+            <Col md={1} className='mb-3'>
+              <h5>운동명</h5>
+            </Col>
+            <Col md={4}>
+              <Form.Control
+                id='exercise_class'
+                value={this.state.exercise_class}
+                placeholder='운동명을 입력해주세요'
+                onChange={this.handleChange}
+                InputProps={{ disableUnderline: true }}
+                label='운동명'
+                error={this.state.exercise_class_err}
+              />
+            </Col>
+            <Col xs={1}>
+              <h5>강사</h5>
+            </Col>
+            <Col xs={4}>
+              {this.props.userinfo.loginWhether === 1 ? (
+                <Form.Control
+                  id='trainer'
+                  value={this.props.userinfo.manager_name}
+                  placeholder='강사명을 입력해주세요'
                   onChange={this.handleChange}
                   InputProps={{ disableUnderline: true }}
-                  label='운동명'
-                  error={this.state.exercise_class_err}
+                  label='강사명'
+                  error={this.state.trainer_err}
+                  className='reservation-class--trainer-input'
                 />
-              </label>
+              ) : (
+                <div>
+                  {this.state.open ? (
+                    <div>
+                      <TrainerSearch
+                        open={this.state.open}
+                        labe='강사검색'
+                        placeholder='강사명을 입력해주세요'
+                        setOpen={(o) => this.setState({ open: o })}
+                        fitness_no={this.props.userinfo.fitness_no}
+                        handleUser={this.handleUser}
+                      />
+                    </div>
+                  ) : (
+                    <div onClick={() => this.setState({ open: true })}>
+                      <Form.Control
+                        id='trainer'
+                        label='강사 검색'
+                        placeholder='강사명 검색'
+                        value={this.state.trainer_name}
+                        // onChange={this.handleChange}
+                        InputProps={{ disableUnderline: true }}
+                        error={this.state.trainer_err}
+                        disabled
+                        className='reservation-class--trainer-input'
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
             </Col>
-            <Col className='text-center height-fit-content' xs={12} sm={4}>
+            <Col xs={2}></Col>
+            <Col xs={1}>
+              <h5>날짜</h5>
+            </Col>
+            <Col xs={4}>
               <DatePicker
-                className='boxmorpsm text-center w-100 border-0'
+                className='text-center w-100 mb-4'
                 selected={this.state.class_date}
                 onChange={(date) => this.setState({ class_date: date })}
                 name='class_date'
@@ -1333,66 +1144,407 @@ class ReservationClass extends Component {
                 minDate={new Date()}
               />
             </Col>
-            <Col className=' px-1' xs={12} sm={3}>
-              <Row className=''>
-                <Col className='pe-0 height-fit-content'>
-                  <label className='w-100'>
-                    <TextField
-                      className='boxmorpsm w-100'
-                      type='number'
-                      id='hour'
-                      variant='standard'
-                      value={this.state.hour}
-                      onChange={this.handleChange}
-                      InputProps={{ disableUnderline: true }}
-                      label='시'
-                      error={this.state.hour_err}
-                    />
-                  </label>
+            <Col xs={1}>
+              <h5>시간</h5>
+            </Col>
+            <Col xs={4}>
+              <Row>
+                <Col>
+                  <Form.Control
+                    type='number'
+                    id='hour'
+                    value={this.state.hour}
+                    onChange={this.handleChange}
+                    InputProps={{ disableUnderline: true }}
+                    label='시'
+                    placeholder='시'
+                    error={this.state.hour_err}
+                  />
                 </Col>
-                <Col
-                  className='p-0 d-flex justify-content-center align-items-center'
-                  xs={1}
-                >
+                <Col className='d-flex align-items-center' xs={1}>
                   <span className='fs-5 fw-bold'>:</span>
                 </Col>
-                <Col className='text-center ps-0 height-fit-content'>
-                  <label className='w-100'>
-                    <TextField
-                      className='w-100 boxmorpsm'
-                      type='number'
-                      id='minute'
-                      variant='standard'
-                      value={this.state.minute}
-                      onChange={this.handleChange}
-                      InputProps={{ disableUnderline: true }}
-                      label='분'
-                      error={this.state.minute_err}
-                    />
-                  </label>
+                <Col>
+                  <Form.Control
+                    type='number'
+                    id='minute'
+                    value={this.state.minute}
+                    onChange={this.handleChange}
+                    InputProps={{ disableUnderline: true }}
+                    label='분'
+                    placeholder='분'
+                    error={this.state.minute_err}
+                  />
                 </Col>
               </Row>
             </Col>
-            <Col className='text-center height-fit-content' xs={12} sm={3}>
-              <label className='w-100'>
-                <TextField
-                  className='w-100 boxmorpsm'
-                  type='number'
-                  id='number_of_people'
-                  variant='standard'
-                  value={this.state.number_of_people}
-                  onChange={this.handleChange}
-                  InputProps={{ disableUnderline: true }}
-                  label='수강 인원'
-                  error={this.state.number_of_people_err}
-                />
-              </label>
+            <Col xs={1}>
+              <h5>인원</h5>
+            </Col>
+            <Col xs={1}>
+              <Form.Control
+                className=''
+                placeholder='인원'
+                type='number'
+                id='number_of_people'
+                value={this.state.number_of_people}
+                onChange={this.handleChange}
+                InputProps={{ disableUnderline: true }}
+                label='수강 인원'
+                error={this.state.number_of_people_err}
+              />
             </Col>
             <Col xs={12} className='text-center'>
-              <Button className='my-4 px-5' onClick={this.handleOnClick}>
-                수업 만들기
+              <Button onClick={this.handleOnClick}>수업 만들기</Button>
+            </Col>
+          </Row>
+          <Row xs={3} className='mb-3'>
+            <Col className='text-end'>
+              <Button
+                name='prev'
+                variant='outline-light'
+                onClick={this.handleWeekClick}
+              >
+                이전주
               </Button>
             </Col>
+            <Col className='text-center align-self-center fs-5'>
+              <div>
+                {' '}
+                {moment(this.state.class_date)
+                  .day(0)
+                  .add({ days: this.state.dayIncreament })
+                  .format('YYYY-MM-DD (dd)')}{' '}
+                ~{' '}
+                {moment(this.state.class_date)
+                  .day(6)
+                  .add({ days: this.state.dayIncreament })
+                  .format('YYYY-MM-DD (dd)')}
+              </div>
+            </Col>
+            <Col className='text-start'>
+              <Button
+                name='next'
+                variant='outline-light'
+                onClick={this.handleWeekClick}
+              >
+                다음주
+              </Button>
+            </Col>
+          </Row>
+          <Row className='resevation__class-Tabs mb-2 my-3'>
+            <Tabs
+              className='reservation__class-container'
+              activeKey={this.key}
+              onSelect={this.selectClassTabs}
+            >
+              <Tab eventKey='pt' title='개인PT'>
+                <Tabs
+                  className='reservation__class__tabs-item'
+                  activeKey={this.keyTrainer}
+                  onSelect={this.selectClassTabs}
+                >
+                  <Tab eventKey='trainerAll' title='전체'></Tab>
+                  <Tab eventKey='trainer1' title='김유리 강사'></Tab>
+                  <Tab eventKey='trainer2' title='박우진 강사'></Tab>
+                  <Tab eventKey='trainer3' title='한세연 강사'></Tab>
+                </Tabs>
+              </Tab>
+              <Tab eventKey='pilates' title='필라테스'>
+                <Tabs
+                  className='reservation__class__tabs-item'
+                  activeKey={this.keyTrainer}
+                  onSelect={this.selectClassTabs}
+                >
+                  <Tab eventKey='trainerAll' title='전체'></Tab>
+                  <Tab eventKey='trainer1' title='김유리 강사'></Tab>
+                  <Tab eventKey='trainer2' title='박우진 강사'></Tab>
+                  <Tab eventKey='trainer3' title='한세연 강사'></Tab>
+                </Tabs>
+              </Tab>
+              <Tab eventKey='gx' title='GX'>
+                <Tabs
+                  className='reservation__class__tabs-item'
+                  activeKey={this.keyTrainer}
+                  onSelect={this.selectClassTabs}
+                >
+                  <Tab eventKey='trainerAll' title='전체'></Tab>
+                  <Tab eventKey='trainer1' title='김유리 강사'></Tab>
+                  <Tab eventKey='trainer2' title='박우진 강사'></Tab>
+                  <Tab eventKey='trainer3' title='한세연 강사'></Tab>
+                </Tabs>
+              </Tab>
+              <Tab eventKey='etc' title='기타'>
+                <Tabs
+                  className='reservation__class__tabs-item'
+                  activeKey={this.keyTrainer}
+                  onSelect={this.selectClassTabs}
+                >
+                  <Tab eventKey='trainerAll' title='전체'></Tab>
+                  <Tab eventKey='trainer1' title='김유리 강사'></Tab>
+                  <Tab eventKey='trainer2' title='박우진 강사'></Tab>
+                  <Tab eventKey='trainer3' title='한세연 강사'></Tab>
+                </Tabs>
+              </Tab>
+            </Tabs>
+          </Row>
+          <Row>
+            <table className='table classTable mt-3' name='classTable'>
+              <thead>
+                <tr>
+                  <th scope='col'>
+                    <div>
+                      {moment(this.state.class_date)
+                        .day(0)
+                        .add({ days: this.state.dayIncreament })
+                        .format('MM-DD (dd)')}
+                    </div>
+                  </th>
+                  <th scope='col'>
+                    {moment(this.state.class_date)
+                      .day(1)
+                      .add({ days: this.state.dayIncreament })
+                      .format('MM-DD (dd)')}
+                  </th>
+                  <th scope='col'>
+                    {moment(this.state.class_date)
+                      .day(2)
+                      .add({ days: this.state.dayIncreament })
+                      .format('MM-DD (dd)')}
+                  </th>
+                  <th scope='col'>
+                    {moment(this.state.class_date)
+                      .day(3)
+                      .add({ days: this.state.dayIncreament })
+                      .format('MM-DD (dd)')}
+                  </th>
+                  <th scope='col'>
+                    {moment(this.state.class_date)
+                      .day(4)
+                      .add({ days: this.state.dayIncreament })
+                      .format('MM-DD (dd)')}
+                  </th>
+                  <th scope='col'>
+                    {moment(this.state.class_date)
+                      .day(5)
+                      .add({ days: this.state.dayIncreament })
+                      .format('MM-DD (dd)')}
+                  </th>
+                  <th scope='col'>
+                    {moment(this.state.class_date)
+                      .day(6)
+                      .add({ days: this.state.dayIncreament })
+                      .format('MM-DD (dd)')}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div className='class-info'>
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
+                      ) : (
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(0 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(0 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    <div className='class-info'>
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
+                      ) : (
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(1 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(1 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    <div className='class-info'>
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
+                      ) : (
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(2 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(2 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    <div className='class-info'>
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
+                      ) : (
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(3 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(3 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    <div className='class-info'>
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
+                      ) : (
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(4 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(4 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    <div className='class-info'>
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
+                      ) : (
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(5 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(5 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    <div className='class-info'>
+                      {' '}
+                      {this.state.reservationClass.length == 0 ? (
+                        <div className='border py-2 my-1 text-secondary'>
+                          수업이 없습니다.
+                        </div>
+                      ) : (
+                        this.state.reservationClass.filter(
+                          (value) =>
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrAfter(
+                                moment().day(6 + this.state.dayIncreament),
+                                'day'
+                              ) &&
+                            moment(value.props.class_date.split('T')[0])
+                              .add(9, 'hour')
+                              .isSameOrBefore(
+                                moment().day(6 + this.state.dayIncreament),
+                                'day'
+                              )
+                        )
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            {/* <table class='table'>
+							<thead>
+								<tr>
+									<th scope='col'>운동 클래스</th>
+									<th scope='col'>강사</th>
+									<th scope='col'>수강날짜</th>
+									<th scope='col'>수강 인원</th>
+									<th scope='col'>삭제</th>
+									<th scope='col'>수정</th>
+								</tr>
+							</thead>
+							<tbody>
+								{this.state.reservationClass.length == 0 ? (
+									<p>'설정된 운동이 없습니다.'</p>
+								) : (
+									this.state.reservationClass
+								)}
+							</tbody>
+						</table> */}
           </Row>
         </Container>
         <div className='footer'>

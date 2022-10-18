@@ -29,6 +29,7 @@ import {
   selectTrainerReservation,
   voucherSelect,
 } from '../../api/user';
+import { ConstructionOutlined } from '@mui/icons-material';
 
 const SalesClient = ({
   kind,
@@ -215,11 +216,14 @@ class Mypage extends Component {
   };
 
   render() {
-    // console.log(this.props.userinfo.fitness_no);
-    // console.log(this.props.userinfo.loginWhether);
-    // console.log(this.props.userinfo.joinNo);
-    // console.log(this.props.userinfo);
-    // console.log(this.state.voucher);
+    // console.log('res2', res2);
+    // const { userinfo } = this.props;
+    console.log(this.props.userinfo.fitness_no);
+    console.log(this.props.userinfo.loginWhether);
+    console.log(this.props.userinfo.joinNo);
+    console.log(this.props.userinfo);
+    console.log(this.state.voucher);
+    console.log('성별: ', this.cSex);
     return (
       <div className='wrap client_wrap'>
         <header className='header'>
@@ -266,19 +270,31 @@ class Mypage extends Component {
                 <ul>
                   <li>
                     <strong>이름</strong>
-                    <p>{this.state.myName}</p>
+                    {this.state.myName ? (
+                      <p>{this.state.myName}</p>
+                    ) : (
+                      <p>이름입니다</p>
+                    )}
                   </li>
                   <li>
                     <strong>성별</strong>
-                    <p>{this.state.cSex}</p>
+                    {this.state.cSex ? <p>{this.state.cSex}</p> : <p>남여</p>}
                   </li>
                   <li>
                     <strong>폰번호</strong>
-                    <p>{this.state.cPhone}</p>
+                    {this.state.cPhone ? (
+                      <p>{this.state.cPhone}</p>
+                    ) : (
+                      <p>010-0000-0000</p>
+                    )}
                   </li>
                   <li>
                     <strong>생년월일</strong>
-                    <p>{this.state.cBirth}</p>
+                    {this.state.cBirth ? (
+                      <p>{this.state.cBirth}</p>
+                    ) : (
+                      <p>2000.01.01</p>
+                    )}
                   </li>
                 </ul>
               </Col>
@@ -287,19 +303,35 @@ class Mypage extends Component {
                 <ul>
                   <li>
                     <strong>헬스장명</strong>
-                    <p>{this.state.fitness_name}</p>
+                    {this.state.fitness_name ? (
+                      <p>{this.state.fitness_name}</p>
+                    ) : (
+                      <p>센터이름입니다</p>
+                    )}
                   </li>
                   <li>
                     <strong>헬스장 전화번호</strong>
-                    <p>{this.state.business_phone}</p>
+                    {this.state.business_phone ? (
+                      <p>{this.state.business_phone}</p>
+                    ) : (
+                      <p>010-0000-0000</p>
+                    )}
                   </li>
                   <li>
                     <strong>락커룸</strong>
-                    <p>{this.state.cLocker}</p>
+                    {this.state.cLocker ? (
+                      <p>{this.state.cLocker}</p>
+                    ) : (
+                      <p>사용/미사용</p>
+                    )}
                   </li>
                   <li>
                     <strong>운동복</strong>
-                    <p>{this.state.cWear}</p>
+                    {this.state.cWear ? (
+                      <p>{this.state.cWear}</p>
+                    ) : (
+                      <p>사용/미사용</p>
+                    )}
                   </li>
                 </ul>
               </Col>
@@ -337,7 +369,7 @@ class Mypage extends Component {
                 </ul>
               </Col>
               <Col className='fitInfo'>
-                <h4>소속 센터정보</h4>
+                <h5>소속 센터정보</h5>
                 <ul>
                   <li>
                     <strong>사업장 명</strong>
