@@ -37,6 +37,14 @@
 .reservationClassWrap .react-datepicker__input-container input[type='text'] {
   padding-top: 19px;
   padding-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.reservationClassWrap
+  .react-datepicker__input-container
+  input[type='text']:hover {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .reservation-class--trainer-input {

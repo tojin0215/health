@@ -23,9 +23,16 @@
 }
 .customer_name {
   height: 45px;
+  padding: 8px;
+  background-color: #fff;
+  text-align: center;
   color: #fff;
   border-radius: 5px;
   border: 1px solid #fff;
+  transition: all 0.5s;
+}
+.customer_name:hover {
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .customer-input--search {
   height: 45px;
@@ -87,6 +94,12 @@ input[id='phone'][type='number'] {
   padding: 6px;
   border: 1px solid #fff;
   border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.5s;
+}
+.react-datepicker__input-container input[type='text']:hover {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 /* 달력 데이터 피커 분류(당일, 1개월) */
 .container .dateSort {
@@ -167,6 +180,7 @@ input {
 #customer_name {
   cursor: pointer;
   font-weight: bold;
+  -webkit-text-fill-color: #000;
 }
 #customer_name-label {
   color: #fff;
