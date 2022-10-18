@@ -218,6 +218,51 @@ class Navigation extends Component {
                   <span className={styles.navitem}> 센터</span>
                 </Nav.Item>
               </NavLink>
+              <NavLink exact to='/introduce'>
+                <span className={styles.navitem}>센터</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/sales'>
+                      매출 현황
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/trainer'>
+                      강사 관리
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/introduce'>
+                      센터 관리
+                    </NavLink>
+                  </li>
+                  {/* <li>
+                    <NavLink exact to='/introduceAdd'>
+                      센터 소개 등록 (삭제)
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/trainerAdd'>
+                      강사 등록 (삭제)
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/clientAdd'>
+                      회원 등록 (삭제)
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/inbodies'>
+                      인바디 정보 (삭제)
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/genetic'>
+                      DTC (삭제)
+                    </NavLink>
+                  </li> */}
+                </ul>
+              </NavLink>
               <NavLink exact to='/reservation'>
                 <span className={styles.navitem}>수업</span>
                 <ul>
@@ -235,16 +280,16 @@ class Navigation extends Component {
                 </ul>
               </NavLink>
               <NavLink exact to='/sales'>
-                <span className={styles.navitem}>매출</span>
+                <span className={styles.navitem}>회원</span>
                 <ul>
                   <li>
-                    <NavLink exact to='/sales'>
-                      매출 현황
+                    <NavLink exact to='/client'>
+                      회원 관리
                     </NavLink>
                   </li>
                   <li>
                     <NavLink exact to='/addSales'>
-                      결제 등록
+                      회원권 연장
                     </NavLink>
                   </li>
                 </ul>
@@ -289,51 +334,6 @@ class Navigation extends Component {
                   <li>
                     <NavLink exact to='/workoutStageAdd'>
                       기본 루틴 설정 (삭제)
-                    </NavLink>
-                  </li> */}
-                </ul>
-              </NavLink>
-              <NavLink exact to='/introduce'>
-                <span className={styles.navitem}>센터</span>
-                <ul>
-                  <li>
-                    <NavLink exact to='/client'>
-                      회원 관리
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/trainer'>
-                      강사 관리
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/introduce'>
-                      센터 관리
-                    </NavLink>
-                  </li>
-                  {/* <li>
-                    <NavLink exact to='/introduceAdd'>
-                      센터 소개 등록 (삭제)
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/trainerAdd'>
-                      강사 등록 (삭제)
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/clientAdd'>
-                      회원 등록 (삭제)
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/inbodies'>
-                      인바디 정보 (삭제)
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/genetic'>
-                      DTC (삭제)
                     </NavLink>
                   </li> */}
                 </ul>

@@ -194,61 +194,61 @@ class Register extends Component {
     // console.log(userinfo);
     // console.log(this.state.agreeCheck);
     return (
-      <div className="wrap loginWrap register">
+      <div className='wrap loginWrap register'>
         {/* <div className='header d-none'>
 					<Header />
 					<Navigation />
 				</div> */}
-        <div className="localNavigation">
-          <div className="container">
+        <div className='localNavigation'>
+          <div className='container'>
             <h2>
-              <div className="parallelogram"></div>
+              <div className='parallelogram'></div>
               회원가입
               <span>.</span>
             </h2>
           </div>
         </div>
         <Container>
-          <Form className="AddSalesForm productPay sectionGlass">
+          <Form className='AddSalesForm productPay sectionGlass'>
             {/* <div className='registerId'> */}
             <div
-              className="resigterVisual"
+              className='resigterVisual'
               style={{ backgroundImage: 'src/img/resiVisual.jpeg' }}
             ></div>
             <h3>사업장 회원가입</h3>
-            <p className="resigter_des">
+            <p className='resigter_des'>
               강사, 회원은 센터에서 직접 등록할 수 있습니다. 해당 센터로
               문의해주세요.
             </p>
-            <Row xs={1} md={2} className="mt-4 g-3">
+            <Row xs={1} md={2} className='mt-4 g-3'>
               <Col md={4}>
                 <Form.Group>
                   <Form.Label>아이디</Form.Label>
                   <Form.Control
                     value={this.state.id}
                     onChange={this.handleChange}
-                    id="id"
-                    label="아이디"
-                    placeholder="아이디를 입력해주세요."
+                    id='id'
+                    label='아이디'
+                    placeholder='아이디를 입력해주세요.'
                     error={this.state.id_err}
                     required
                     autoFocus
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col md={2} className="align-self-end">
+              <Col md={2} className='align-self-end'>
                 {this.state.check == 0 ? (
-                  <Button className="mt-2 w-100" onClick={this.idCheck}>
+                  <Button className='mt-2 w-100' onClick={this.idCheck}>
                     중복확인
                   </Button>
                 ) : (
                   <>
-                    <span className="register__form--id-check-ok text-success">
+                    <span className='register__form--id-check-ok text-success'>
                       사용 가능한 아이디입니다.
                     </span>
                     <Button
-                      variant="outline-success"
-                      className="mt-2 w-100"
+                      variant='outline-success'
+                      className='mt-2 w-100'
                       onClick={this.idCheck}
                     >
                       중복확인
@@ -262,9 +262,9 @@ class Register extends Component {
                   <Form.Control
                     value={this.state.business_number}
                     onChange={this.handleChange}
-                    id="business_number"
-                    placeholder="사업자 등록번호를 입력해주세요. (-포함)"
-                    label="사업자 등록번호"
+                    id='business_number'
+                    placeholder='사업자 등록번호를 입력해주세요.'
+                    label='사업자 등록번호'
                     error={this.state.business_number_err}
                     required
                   ></Form.Control>
@@ -276,10 +276,10 @@ class Register extends Component {
                   <Form.Control
                     value={this.state.password}
                     onChange={this.handleChange}
-                    type="password"
-                    id="password"
-                    placeholder="비밀번호를 입력해주세요."
-                    label="비밀번호"
+                    type='password'
+                    id='password'
+                    placeholder='비밀번호를 입력해주세요.'
+                    label='비밀번호'
                     error={this.state.password_err}
                     required
                   ></Form.Control>
@@ -291,10 +291,10 @@ class Register extends Component {
                   <Form.Control
                     value={this.state.password_confirm}
                     onChange={this.handleChange}
-                    type="password"
-                    id="password_confirm"
-                    placeholder="비밀번호를 한번더 입력해주세요."
-                    label="비밀번호확인"
+                    type='password'
+                    id='password_confirm'
+                    placeholder='비밀번호를 한번더 입력해주세요.'
+                    label='비밀번호확인'
                     error={this.state.password_confirm_err}
                     required
                   ></Form.Control>
@@ -306,9 +306,9 @@ class Register extends Component {
                   <Form.Control
                     value={this.state.fitness_name}
                     onChange={this.handleChange}
-                    id="fitness_name"
-                    placeholder="사업장 명을 입력해주세요."
-                    label="사업장이름"
+                    id='fitness_name'
+                    placeholder='사업장 명을 입력해주세요.'
+                    label='사업장이름'
                     error={this.state.fitness_name_err}
                     required
                   ></Form.Control>
@@ -320,9 +320,9 @@ class Register extends Component {
                   <Form.Control
                     value={this.state.business_phone}
                     onChange={this.handleChange}
-                    id="business_phone"
-                    label="사업장 연락처(-제외)"
-                    placeholder="사업장 연락처를 입력해주세요.(-제외)"
+                    id='business_phone'
+                    label='사업장 연락처(-제외)'
+                    placeholder='사업장 연락처를 입력해주세요.(-제외)'
                     error={this.state.business_phone_err}
                     required
                   ></Form.Control>
@@ -334,9 +334,9 @@ class Register extends Component {
                   <Form.Control
                     value={this.state.manager_name}
                     onChange={this.handleChange}
-                    id="manager_name"
-                    placeholder="대표자 이름을 입력해주세요."
-                    label="대표 이름"
+                    id='manager_name'
+                    placeholder='대표자 이름을 입력해주세요.'
+                    label='대표 이름'
                     error={this.state.manager_name_err}
                     required
                   ></Form.Control>
@@ -346,27 +346,27 @@ class Register extends Component {
                 <Form.Group>
                   <Form.Label>대표 연락처(-제외)</Form.Label>
                   <Form.Control
-                    type="number"
+                    type='number'
                     value={this.state.phone}
                     onChange={this.handleChange}
-                    id="phone"
-                    placeholder="대표 연락처를 입력해주세요."
-                    label="대표 연락처(-제외)"
+                    id='phone'
+                    placeholder='대표 연락처를 입력해주세요.'
+                    label='대표 연락처(-제외)'
                     error={this.state.phone_err}
                     required
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col xs={12} md={12} className="register__terms">
-                <div className="form-check">
-                  <label className="form-check-label">
+              <Col xs={12} md={12} className='register__terms'>
+                <div className='form-check'>
+                  <div className='form-check-label'>
                     {this.state.agreeCheck ? (
                       <>
-                        <SiCheckmarx className="form-check-input--success" />
-                        <span className="text-success fw-bold">
+                        <SiCheckmarx className='form-check-input--success' />
+                        <span className='text-success fw-bold'>
                           필수 약관에 동의했습니다.
                           <br />
-                          <span className="register__terms__guide">
+                          <span className='register__terms__guide'>
                             이용 약관을 확인해주세요.
                           </span>
                         </span>
@@ -374,16 +374,16 @@ class Register extends Component {
                     ) : (
                       <>
                         <input
-                          className="form-check-input"
-                          type="checkbox"
-                          value=""
-                          id="flexCheckDefault"
+                          className='form-check-input'
+                          type='checkbox'
+                          value=''
+                          id='flexCheckDefault'
                           onClick={this.agreeCheckModal}
                         />
                         <span onClick={this.handleModal}>
                           필수 약관에 동의합니다.
                           <br />
-                          <span className="register__terms__guide">
+                          <span className='register__terms__guide'>
                             이용 약관에 동의하여야 가입할 수 있습니다.
                           </span>
                         </span>
@@ -391,13 +391,13 @@ class Register extends Component {
                     )}
                     <div>
                       <a
-                        className="register__terms__btn"
+                        className='register__terms__btn'
                         onClick={this.handleModal}
                       >
                         이용 약관
                       </a>
                     </div>
-                  </label>
+                  </div>
                   <Modal show={this.state.modalShow}>
                     <Modal.Header
                       closeButton
@@ -432,21 +432,21 @@ class Register extends Component {
               </Col>
             </Row>
           </Form>
-          <div className="d-flex justify-content-center mt-3">
-            <Button className="btn-secondary mx-2" onClick={this.goLogin}>
+          <div className='d-flex justify-content-center mt-3'>
+            <Button className='btn-secondary mx-2' onClick={this.goLogin}>
               이전으로
             </Button>
             {this.state.agreeCheck ? (
               <Button
-                type="button"
-                className="btn-primary mx-2"
+                type='button'
+                className='btn-primary mx-2'
                 onClick={this.handleOnClick}
               >
                 등록하기
               </Button>
             ) : (
               <div>
-                <Button variant="primary" className="btn-primary mx-2" disabled>
+                <Button variant='primary' className='btn-primary mx-2' disabled>
                   등록하기
                 </Button>
               </div>
@@ -454,7 +454,7 @@ class Register extends Component {
           </div>
           {/*.AddSalesForm productPay */}
         </Container>
-        <div className="footer">
+        <div className='footer'>
           <Footer />
         </div>
       </div>

@@ -523,17 +523,15 @@ class WorkoutStage extends Component {
                 </>
               )}
             </Col>
-            <Col>
-              <Button variant='primary' onClick={this.goWorkoutStageAdd}>
-                루틴 추가
-              </Button>
-            </Col>
           </Row>
           <Row className='sectionGlass'>
             <Col>
               <div className='pageTit d-flex justify-content-between mb-3'>
                 <h4>베이직 루틴 배정</h4>
                 <p>기본 루틴 목록입니다. 회원에게 배정하세요.</p>
+                <Button variant='primary' onClick={this.goWorkoutStageAdd}>
+                  루틴 추가
+                </Button>
               </div>
             </Col>
             <Col xs={12} className='mt-2 workoutTabstage'>

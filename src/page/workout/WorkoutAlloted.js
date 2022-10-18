@@ -30,7 +30,7 @@ import TabPane from 'react-bootstrap/TabPane';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 // mui
-import { Refresh } from '@mui/icons-material';
+import { ConstructionOutlined, Refresh } from '@mui/icons-material';
 import { TablePagination, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
@@ -117,7 +117,7 @@ const ExerciseView = ({
       : part === 48
       ? '유산소'
       : '기타';
-
+  console.log('region 입니다', region);
   const plusTable = () => {
     workoutAllotedInsert(
       fitness_no,
@@ -161,42 +161,49 @@ const ExerciseView = ({
     setUrl_input(e.target.value);
   };
 
+  // console.log('exerciseAllotlist', workoutAllotedView);
   return (
-    <TableRow>
-      <TableCell>{region}</TableCell>
-      <TableCell>{workout}</TableCell>
-      <TableCell>{machine}</TableCell>
-      <TableCell>
-        <Form.Control
-          type='number'
-          value={default_set_input}
-          onChange={changeInsert}
-        />
-      </TableCell>
-      <TableCell>
-        <Form.Control
-          type='number'
-          value={default_count_input}
-          onChange={changeInsert2}
-        />
-      </TableCell>
-      <TableCell>
-        <Form.Control
-          type='number'
-          value={default_rest_input}
-          onChange={changeInsert3}
-        />
-      </TableCell>
-      <TableCell>
-        <Form.Control value={url_input} onChange={changeInsert4} />
-      </TableCell>
-      <TableCell
-        className='workout-alloted__select--plus cursor-pointer'
-        onClick={plusTable}
-      >
-        <HiOutlinePlusCircle className='fs-1' />
-      </TableCell>
-    </TableRow>
+    <>
+      {/* {this.state.exerciseAllotlist.length ? ( */}
+      <TableRow>
+        <TableCell>{region}</TableCell>
+        <TableCell>{workout}</TableCell>
+        <TableCell>{machine}</TableCell>
+        <TableCell>
+          <Form.Control
+            type='number'
+            value={default_set_input}
+            onChange={changeInsert}
+          />
+        </TableCell>
+        <TableCell>
+          <Form.Control
+            type='number'
+            value={default_count_input}
+            onChange={changeInsert2}
+          />
+        </TableCell>
+        <TableCell>
+          <Form.Control
+            type='number'
+            value={default_rest_input}
+            onChange={changeInsert3}
+          />
+        </TableCell>
+        <TableCell>
+          <Form.Control value={url_input} onChange={changeInsert4} />
+        </TableCell>
+        <TableCell
+          className='workout-alloted__select--plus cursor-pointer'
+          onClick={plusTable}
+        >
+          <HiOutlinePlusCircle className='fs-1' />
+        </TableCell>
+      </TableRow>
+      {/* ) : (
+         ''
+       )} */}
+    </>
   );
 };
 
@@ -250,7 +257,8 @@ class WorkoutAlloted extends Component {
       exerciseAllotlist: [],
       tablePlus: [],
       workoutAllotlist: [],
-      headRegion: '',
+      headRegion: 1,
+      // Region: 1,
       page: 0,
       rowsPerPage: 5,
       workoutA_date: new Date(),
@@ -414,7 +422,7 @@ class WorkoutAlloted extends Component {
           exerciseAllotlist: items,
           headRegion: key,
         });
-        // console.log(result);
+        console.log('result 입니다', result);
       });
     });
   };
@@ -481,9 +489,11 @@ class WorkoutAlloted extends Component {
   //   }
   // }
   render() {
-    // console.log(this.state.idc);
-    // console.log(this.state.workoutAllotlist);
-    console.log(this.state.workoutA_date);
+    console.log('headRegion 입니다', this.state.headRegion);
+    console.log('Region 입니다', this.state.Region);
+    // console.log('idc 입니다', this.state.idc);
+    console.log('exerciseAllotlist 입니다', this.state.exerciseAllotlist);
+    // console.log('workoutA_date 입니다', this.state.workoutA_date);
 
     return (
       <div className='workout-alloted wrap'>
@@ -937,7 +947,7 @@ class WorkoutAlloted extends Component {
                             ? '유산소 '
                             : this.state.headRegion === 58
                             ? '기타 '
-                            : ''}
+                            : '부위가 선택되지 않은 '}
                         </span>
                         운동목록
                       </h4>
@@ -1033,7 +1043,7 @@ class WorkoutAlloted extends Component {
                   {this.state.exerciseAllotlist.length === 0 ? (
                     <div className='p-5 fs-5 fw-bold text-center'>
                       <TbMoodSuprised className='fs-3' />
-                      <p>운동부위를 선택하거나 설정된 운동이 없습니다.</p>
+                      <p>설정된 운동이 없습니다.</p>
                     </div>
                   ) : (
                     ''
