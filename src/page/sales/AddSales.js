@@ -70,7 +70,7 @@ class AddSales extends Component {
       //isChecked:false,
       paymentDate: new Date(),
       client_name: !this.props.location.state
-        ? '회원'
+        ? '회원 검색하기'
         : this.props.location.state.client_name,
       inputExercise: '',
       exercisePrice: 0,
@@ -382,44 +382,44 @@ class AddSales extends Component {
         <Container>
           <form>
             <div className='sectionGlass'>
-              <Row xs='auto'>
-                <h5>
-                  <Row>
-                    <Col className='customer_name'>
-                      {this.state.open ? (
-                        <UserSearch
-                          open={this.state.open}
-                          setOpen={(o) => this.setState({ open: o })}
-                          fitness_no={this.props.userinfo.fitness_no}
-                          loginWhether={this.props.userinfo.loginWhether}
-                          joinNo={this.props.userinfo.joinNo}
-                          handleUser={this.handleUser}
-                        />
-                      ) : (
-                        <TextField
-                          id='customer_name'
-                          placeholder='회원 검색'
-                          disabled
-                          variant='standard'
-                          onClick={() => this.setState({ open: true })}
-                          className='customer-input--search'
-                          InputProps={{ disableUnderline: true }}
-                          value={this.state.client_name}
-                        />
-                      )}
-                    </Col>
-                    <Col>
-                      {/* <span className='fs-5 fw-bold'>{this.state.client_name}</span> */}
-                      님의 결제 등록입니다.
-                    </Col>
-                  </Row>
-                </h5>
-              </Row>
               <Row>
+                <Col xs={2} className='customer_name'>
+                  {this.state.open ? (
+                    <UserSearch
+                      open={this.state.open}
+                      setOpen={(o) => this.setState({ open: o })}
+                      fitness_no={this.props.userinfo.fitness_no}
+                      loginWhether={this.props.userinfo.loginWhether}
+                      joinNo={this.props.userinfo.joinNo}
+                      handleUser={this.handleUser}
+                    />
+                  ) : (
+                    <TextField
+                      id='customer_name'
+                      placeholder='회원 검색'
+                      disabled
+                      variant='standard'
+                      onClick={() => this.setState({ open: true })}
+                      className='customer-input--search'
+                      InputProps={{ disableUnderline: true }}
+                      value={this.state.client_name}
+                    />
+                  )}
+                </Col>
+                <Col className='w-100'>
+                  {/* <span className='fs-5 fw-bold'>{this.state.client_name}</span> */}
+                  <h5>
+                    {this.state.client_name !== '회원 검색하기'
+                      ? '님의 결제 등록입니다.'
+                      : '회원을 선택해주세요'}
+                  </h5>
+                </Col>
+              </Row>
+              <Row className='sports-classification'>
                 <Col xs={2}>
                   <h5>운동종목</h5>
                 </Col>
-                <Col>
+                <Col xs={10}>
                   <Form.Check inline>
                     <Form.Check.Input
                       type='radio'

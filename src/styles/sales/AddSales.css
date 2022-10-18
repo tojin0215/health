@@ -9,6 +9,17 @@
   padding: 6px;
   border-radius: 6px;
 }
+
+/* 
+* 운동 종목
+*/
+.sports-classification .form-check:nth-child(5) {
+  padding-left: 0;
+}
+.sports-classification .form-check:nth-child(7) {
+  padding-left: 0;
+}
+
 .TotalPayment-bg {
   background-color: #5c5c5c;
   border-radius: 5px;
