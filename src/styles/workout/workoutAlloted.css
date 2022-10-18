@@ -7,8 +7,22 @@
 
 .pageTit {
   background: #535353;
-  padding: 1.25rem;
+  padding: 0.65rem 1.25rem;
   border-radius: 0.313rem;
+}
+
+.pageTit > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pageTit div h4 {
+  line-height: 2.5rem;
+}
+
+.pageTit p {
+  color: #ccc;
 }
 
 /* 운동탭 */

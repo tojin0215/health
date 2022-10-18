@@ -137,8 +137,8 @@ const ExerciseView = ({
       setUrl_input(url);
       setWorkoutA_date(workoutA_date_input);
       workoutAllotedView(idc);
-      close();
-      alert(workout + '운동이 배정됩니다.');
+      // close();
+      // alert(workout + '운동이 배정됩니다.');
     });
   };
   const [default_set_input, setDefault_set_input] = useState(default_set);
@@ -230,11 +230,7 @@ const WorkoutAllotedView = ({
       <TableCell>{default_rest}</TableCell>
       <TableCell>{url}</TableCell>
       <TableCell
-        onClick={() =>
-          confirm('정말 삭제하시겠습니까?') == true
-            ? hadndleDelete(idwa)
-            : alert('삭제가 취소 되었습니다.')
-        }
+        onClick={() => hadndleDelete(idwa)}
         className='workout-alloted__selected--cencel'
       >
         <GiCancel className='fs-2' />
@@ -550,11 +546,6 @@ class WorkoutAlloted extends Component {
                   />
                 </>
               )}
-            </Col>
-            <Col>
-              <Button variant='primary' onClick={this.goWorkoutAdd}>
-                운동설정
-              </Button>
             </Col>
           </Row>
           <div>
@@ -929,26 +920,33 @@ class WorkoutAlloted extends Component {
             </div>
             <Row className='sectionGlass'>
               <Col xs={12}>
-                <div className='pageTit d-flex justify-content-between mb-3'>
-                  <h4>
-                    <span>
-                      {this.state.headRegion === 1
-                        ? '상체 '
-                        : this.state.headRegion === 18
-                        ? '하체 '
-                        : this.state.headRegion === 28
-                        ? '전신 '
-                        : this.state.headRegion === 38
-                        ? '코어 '
-                        : this.state.headRegion === 48
-                        ? '유산소 '
-                        : this.state.headRegion === 58
-                        ? '기타 '
-                        : ''}
-                    </span>
-                    운동목록
-                  </h4>
-                  <p>설정된 운동목록입니다. 회원에게 배정해주세요.</p>
+                <div className='pageTit'>
+                  <div>
+                    <div>
+                      <h4>
+                        <span>
+                          {this.state.headRegion === 1
+                            ? '상체 '
+                            : this.state.headRegion === 18
+                            ? '하체 '
+                            : this.state.headRegion === 28
+                            ? '전신 '
+                            : this.state.headRegion === 38
+                            ? '코어 '
+                            : this.state.headRegion === 48
+                            ? '유산소 '
+                            : this.state.headRegion === 58
+                            ? '기타 '
+                            : ''}
+                        </span>
+                        운동목록
+                      </h4>
+                      <p>설정된 운동목록입니다. 회원에게 배정해주세요.</p>
+                    </div>
+                    <Button variant='secondary' onClick={this.goWorkoutAdd}>
+                      운동설정
+                    </Button>
+                  </div>
                 </div>
               </Col>
               <Col className='mt-2'>
