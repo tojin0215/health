@@ -253,6 +253,10 @@
   border: 0;
 }
 
+.resevation__class-Tabs > .nav-tabs:first-child > a:focus {
+  border-bottom: 2px solid #ebff2e;
+}
+
 .reservation__class-container .nav-link.active {
   border: 0;
   background-color: transparent;
