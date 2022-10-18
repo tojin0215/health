@@ -346,11 +346,11 @@ class WorkoutAllotedList extends Component {
               <Col className='mx-3'>
                 <h5>
                   <Row xs='auto'>
-                    <Col className='customer_name mb-3'>
+                    <Col xs={2} className='customer_name'>
                       {this.state.line === 3 ? (
                         <TextField
                           id='customer_name'
-                          label='회원 검색'
+                          // label='회원 검색'
                           disabled
                           variant='standard'
                           className='customer-input--search'
@@ -373,18 +373,16 @@ class WorkoutAllotedList extends Component {
                           />
                         </>
                       ) : (
-                        <>
-                          <TextField
-                            id='customer_name'
-                            label='회원검색'
-                            disabled
-                            variant='standard'
-                            onClick={() => this.setState({ open: true })}
-                            className='customer-input--search'
-                            InputProps={{ disableUnderline: true }}
-                            value={this.state.client_name}
-                          />
-                        </>
+                        <TextField
+                          id='customer_name'
+                          placeholder='회원 검색'
+                          disabled
+                          variant='standard'
+                          onClick={() => this.setState({ open: true })}
+                          className='customer-input--search'
+                          InputProps={{ disableUnderline: true }}
+                          value={this.state.client_name}
+                        />
                       )}
                       {/* {this.state.client_name} */}
                     </Col>

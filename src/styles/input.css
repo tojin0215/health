@@ -31,20 +31,6 @@
   color: #fff;
   /* left: 30%; */
 }
-.customer_name {
-  height: 45px;
-  width: 200px;
-  padding: 8px;
-  background-color: #fff;
-  text-align: center;
-  color: #fff;
-  border-radius: 5px;
-  border: 1px solid #fff;
-  transition: all 0.5s;
-}
-.customer_name:hover {
-  background-color: rgba(255, 255, 255, 0.7);
-}
 /* .customer-input--search:hover {
   background-color: rgba(255, 255, 160, 1);
 } */
@@ -179,8 +165,22 @@ input {
 /*
 * 회원 검색
 */
-#customer_name {
+.customer_name {
+  height: 45px;
+  width: 200px;
+  padding: 8px;
+  background-color: #fff;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid #fff;
   cursor: pointer;
+  transition: all 0.5s;
+}
+.customer_name:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+#customer_name {
   font-weight: bold;
   -webkit-text-fill-color: #000;
 }
