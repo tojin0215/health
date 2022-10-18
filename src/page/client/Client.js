@@ -2077,6 +2077,7 @@ class Client extends Component {
     });
   };
   render() {
+    // consolo.log('test');
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.viewClientList);
     return (
