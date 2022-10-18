@@ -98,7 +98,7 @@ class WorkoutAllotedList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      client_name: '',
+      client_name: '회원 검색',
       open: false,
       inbodiesList: [],
       workoutAllotlist: [],
@@ -375,7 +375,6 @@ class WorkoutAllotedList extends Component {
                       ) : (
                         <TextField
                           id='customer_name'
-                          placeholder='회원 검색'
                           disabled
                           variant='standard'
                           onClick={() => this.setState({ open: true })}
@@ -386,18 +385,28 @@ class WorkoutAllotedList extends Component {
                       )}
                       {/* {this.state.client_name} */}
                     </Col>
-                    <Col>님의</Col>
                     <Col>
-                      <DatePicker
-                        className='text-center'
-                        selected={this.state.workoutA_date}
-                        onChange={(date) => this.dateOnChange(date)}
-                        dateFormat='yyyy년MM월dd일'
-                        font-size='1.6rem'
-                        maxDate={new Date()}
-                      />
+                      {this.state.client_name === '회원 검색'
+                        ? '회원을 선택해주세요'
+                        : '회원님의'}
                     </Col>
-                    <Col>에 배정된 운동목록입니다.</Col>
+                    {this.state.client_name === '회원 검색' ? (
+                      ''
+                    ) : (
+                      <>
+                        <Col>
+                          <DatePicker
+                            className='text-center'
+                            selected={this.state.workoutA_date}
+                            onChange={(date) => this.dateOnChange(date)}
+                            dateFormat='yyyy년MM월dd일'
+                            font-size='1.6rem'
+                            maxDate={new Date()}
+                          />
+                        </Col>
+                        <Col>에 배정된 운동목록입니다.</Col>
+                      </>
+                    )}
                     {/* {moment(this.state.workoutA_date).format('YYYY년 MM월 DD일')} */}
                   </Row>
                 </h5>

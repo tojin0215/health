@@ -658,7 +658,7 @@ class Reservation extends Component {
       reservationClass: [],
       reservationClass_choice: [],
       reservationClass_choice2: [],
-      customer_name: '',
+      customer_name: '회원 검색',
       customer_id: '',
       isCancel: 1,
       reserv_date: new Date(),
@@ -1958,12 +1958,12 @@ class Reservation extends Component {
                         value={this.state.customer_name}
                         // onChange={this.handleChange}
                         error={this.state.customer_name_err}
+                        // placeholder='회원 검색'
                       />
                     </>
                   )}
                 </Col>
               )}
-
               <Col className='text-center w-100 mt-2' xs={12}>
                 <Button
                   className='btnSolid w-100'

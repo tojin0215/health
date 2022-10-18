@@ -70,7 +70,7 @@ class AddSales extends Component {
       //isChecked:false,
       paymentDate: new Date(),
       client_name: !this.props.location.state
-        ? '회원 검색하기'
+        ? '회원 검색'
         : this.props.location.state.client_name,
       inputExercise: '',
       exercisePrice: 0,
@@ -367,15 +367,15 @@ class AddSales extends Component {
             <div className='container'>
               <h2>
                 <div className='parallelogram'></div>
-                결제 등록
+                이용권 등록
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/sales'>매출</Link>
+                <Link to='/client'>회원</Link>
                 <span>&#62;</span>
-                <Link to='#'>결제 등록</Link>
+                <Link to='#'>이용권 등록</Link>
               </div>
             </div>
             {/*.container */}
@@ -400,20 +400,19 @@ class AddSales extends Component {
                   ) : (
                     <TextField
                       id='customer_name'
-                      placeholder='회원 검색'
                       disabled
                       variant='standard'
-                      onClick={() => this.setState({ open: true })}
                       className='customer-input--search'
                       InputProps={{ disableUnderline: true }}
                       value={this.state.client_name}
+                      onClick={() => this.setState({ open: true })}
                     />
                   )}
                 </Col>
                 <Col className='w-100'>
                   {/* <span className='fs-5 fw-bold'>{this.state.client_name}</span> */}
                   <h5>
-                    {this.state.client_name !== '회원 검색하기'
+                    {this.state.client_name !== '회원 검색'
                       ? '님의 결제 등록입니다.'
                       : '회원을 선택해주세요'}
                   </h5>
@@ -795,7 +794,6 @@ class AddSales extends Component {
               </Row>
               <Row>
                 <Col xs={2}>
-                  <h5>결제 종류</h5>
                   <h5>결제 종류</h5>
                 </Col>
                 <Col>

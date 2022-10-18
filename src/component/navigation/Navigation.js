@@ -273,7 +273,7 @@ class Navigation extends Component {
                   </li>
                   <li>
                     <NavLink exact to='/addSales'>
-                      회원권 연장
+                      이용권 등록
                     </NavLink>
                   </li>
                 </ul>

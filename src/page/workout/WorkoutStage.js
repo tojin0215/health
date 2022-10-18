@@ -21,7 +21,7 @@ import Navigation from '../../component/navigation/Navigation';
 //css
 import '../../styles/workout/workoutAlloted.css';
 // mui
-import { Refresh } from '@mui/icons-material';
+import { ConstructionOutlined, Refresh } from '@mui/icons-material';
 import { TablePagination, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
@@ -191,7 +191,7 @@ class WorkoutStage extends Component {
       rowsPerPage: 5,
       page: 0,
       workoutA_date: new Date(),
-      client_name: '',
+      client_name: '회원 검색',
       inbodiesList: [],
       workoutAllotlist: [],
       exerciseAllotlist: [],
@@ -452,17 +452,23 @@ class WorkoutStage extends Component {
     this.workoutAllotedView(this.state.idc);
   };
 
+  UserSearchOpen = () => {
+    this.setState({ open: true });
+    this.stageOnClick(111);
+  };
+
   render() {
-    console.log(
-      'date : ',
-      moment(this.state.workoutA_date).format('YYYY-MM-DD')
-    );
+    // console.log(
+    //   'date : ',
+    //   moment(this.state.workoutA_date).format('YYYY-MM-DD')
+    // );
     // console.log('stage : ', this.state.stage);
     // console.log('stage typeof : ', typeof this.state.stage);
     // console.log('idc : ', this.state.idc); //idc=client_no
     // console.log('workoutStage : ', this.state.workoutStage);
     // console.log('workout : ', this.state.workout);
     // console.log('client_name : ', this.state.client_name);
+    // console.log('잘라', String(this.state.stage).slice(0, 1));
 
     return (
       <div className='wrap workoutStage__wrap'>
@@ -485,59 +491,103 @@ class WorkoutStage extends Component {
           </div>
         </div>
         <Container>
-          <Button variant='secondary' onClick={this.goWorkout}>
+          <Button variant='secondary' className='mb-3' onClick={this.goWorkout}>
             돌아가기
           </Button>
-          <Row className='clientSearch d-flex justify-content-between align-items-center'>
-            <Col>
-              <h4>베이직 루틴 배정</h4>
-            </Col>
-            <Col>
-              <DatePicker
-                className='text-center'
-                selected={this.state.workoutA_date}
-                onChange={(date) => this.dateOnChange(date)}
-                dateFormat='yyyy년 MM월 dd일'
-                minDate={new Date()}
-              />
-            </Col>
-            <Col className='customer_name'>
-              {this.state.open ? (
-                <UserSearch
-                  open={this.state.open}
-                  setOpen={(o) => this.setState({ open: o })}
-                  fitness_no={this.props.userinfo.fitness_no}
-                  loginWhether={this.props.userinfo.loginWhether}
-                  joinNo={this.props.userinfo.joinNo}
-                  handleUser={this.handleUser}
+          <div className='clientSearch'>
+            <h4>베이직 루틴 배정</h4>
+            <div>
+              {this.state.client_name == '회원 검색' ? (
+                <span>회원을 선택해주세요</span>
+              ) : (
+                ''
+              )}
+              <div
+                className='customer_name'
+                onClick={() => this.UserSearchOpen()}
+              >
+                <TextField
+                  id='customer_name'
+                  disabled
+                  variant='standard'
+                  className='customer-input--search'
+                  InputProps={{
+                    disableUnderline: true,
+                  }}
+                  value={this.state.client_name}
                 />
+              </div>
+              {this.state.client_name == '회원 검색' ? (
+                ''
               ) : (
                 <>
-                  <TextField
-                    placeholder='회원검색'
-                    id='customer_name'
-                    label='회원 검색'
-                    disabled
-                    variant='standard'
-                    onClick={() => this.setState({ open: true })}
-                    className='customer-input--search'
-                    InputProps={{
-                      disableUnderline: true,
-                    }}
-                    value={this.state.client_name}
+                  <span>회원님의</span>
+                  <DatePicker
+                    className='text-center'
+                    selected={this.state.workoutA_date}
+                    onChange={(date) => this.dateOnChange(date)}
+                    dateFormat='yyyy년 MM월 dd일'
+                    minDate={new Date()}
                   />
+                  <span>베이직 루틴 배정입니다.</span>
                 </>
               )}
-            </Col>
-          </Row>
+            </div>
+          </div>
+          <UserSearch
+            open={this.state.open}
+            setOpen={(o) => this.setState({ open: o })}
+            fitness_no={this.props.userinfo.fitness_no}
+            loginWhether={this.props.userinfo.loginWhether}
+            joinNo={this.props.userinfo.joinNo}
+            handleUser={this.handleUser}
+          />
           <Row className='sectionGlass'>
-            <Col>
-              <div className='pageTit d-flex justify-content-between mb-3'>
-                <h4>베이직 루틴 배정</h4>
-                <p>기본 루틴 목록입니다. 회원에게 배정하세요.</p>
-                <Button variant='primary' onClick={this.goWorkoutStageAdd}>
-                  루틴 추가
-                </Button>
+            <Col xs={12}>
+              <div className='pageTit'>
+                <div>
+                  <div>
+                    <h4>
+                      {this.state.client_name == '회원 검색' ? (
+                        ''
+                      ) : (
+                        <span>
+                          {String(this.state.stage).slice(0, 1) === '1'
+                            ? '상체 '
+                            : String(this.state.stage).slice(0, 1) === '2'
+                            ? '하체 '
+                            : String(this.state.stage).slice(0, 1) === '3'
+                            ? '전신 '
+                            : String(this.state.stage).slice(0, 1) === '4'
+                            ? '코어 '
+                            : String(this.state.stage).slice(0, 1) === '5'
+                            ? '유산소 '
+                            : String(this.state.stage).slice(0, 1) === '6'
+                            ? '기타 '
+                            : ''}
+                          {String(this.state.stage).slice(-1) === '1'
+                            ? '1단계 '
+                            : String(this.state.stage).slice(-1) === '2'
+                            ? '2단계 '
+                            : String(this.state.stage).slice(-1) === '3'
+                            ? '3단계 '
+                            : String(this.state.stage).slice(-1) === '4'
+                            ? '4단계 '
+                            : String(this.state.stage).slice(-1) === '5'
+                            ? '5단계 '
+                            : String(this.state.stage).slice(-1) === '6'
+                            ? '6단계 '
+                            : ''}
+                        </span>
+                      )}
+                      베이직 루틴 배정
+                    </h4>
+                    <p>베이직 루틴 목록입니다. 회원에게 배정해주세요.</p>
+                  </div>
+                  <Button variant='secondary' onClick={this.goWorkoutStageAdd}>
+                    루틴 수정하기
+                  </Button>
+                </div>
               </div>
             </Col>
             <Col xs={12} className='mt-2 workoutTabstage'>
@@ -976,7 +1026,9 @@ class WorkoutStage extends Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {this.state.workoutStage.length === 0
+                    {this.state.client_name == '회원 검색'
+                      ? ''
+                      : this.state.workoutStage.length === 0
                       ? ''
                       : this.state.workoutStage.slice(
                           this.state.page * this.state.rowsPerPage,
@@ -985,7 +1037,12 @@ class WorkoutStage extends Component {
                         )}
                   </TableBody>
                 </Table>
-                {this.state.stage == '' ? (
+                {this.state.client_name == '회원 검색' ? (
+                  <div className='p-5 fs-5 fw-bold text-center'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>배정할 회원을 먼저 선택해주세요.</p>
+                  </div>
+                ) : this.state.stage == '' ? (
                   <div className='p-5 fs-5 fw-bold text-center'>
                     <TbMoodSmile className='fs-3' />
                     <p>운동 단계를 선택해주세요</p>
@@ -993,15 +1050,14 @@ class WorkoutStage extends Component {
                 ) : this.state.workoutStage.length === 0 ? (
                   <div className='p-3 fs-5 fw-bold text-center'>
                     <TbMoodSuprised className='fs-3' />
-                    <p>등록된 운동 목록이 없습니다.</p>
-                    <p>설정 페이지로 이동하시겠습니까?</p>
+                    <p>해당 부위의 베이직 루틴에 등록된 운동이 없습니다.</p>
                     <Link to='/workoutStageAdd'>
                       <Button
                         variant='success'
                         to='/workoutStageAdd'
                         className=''
                       >
-                        기본 루틴 설정
+                        베이직 루틴 만들기
                       </Button>
                     </Link>
                   </div>
@@ -1027,15 +1083,8 @@ class WorkoutStage extends Component {
               </TableContainer>
             </Col>
             <Col xs={12} className='text-center'>
-              {this.state.client_name == undefined ? (
-                <Button
-                  variant='primary'
-                  className='ms-2'
-                  onClick={this.alloted}
-                  disabled
-                >
-                  루틴 배정하기
-                </Button>
+              {this.state.client_name == '회원 검색' ? (
+                ''
               ) : (
                 <Button
                   variant='primary'
@@ -1047,74 +1096,78 @@ class WorkoutStage extends Component {
               )}
             </Col>
           </Row>
-          <Row className='sectionGlass'>
-            {this.state.client_name ? (
+          {this.state.client_name == '회원 검색' ? (
+            ''
+          ) : (
+            <Row className='sectionGlass'>
+              {this.state.client_name ? (
+                <Col xs={12}>
+                  <h5>
+                    <strong>{this.state.client_name}</strong>
+                    님의{' '}
+                    <strong>
+                      {moment(this.state.workoutA_date).format(
+                        'YYYY년 MM년 DD일 (ddd요일)'
+                      )}
+                    </strong>
+                    에 배정된 운동목록입니다.
+                  </h5>
+                </Col>
+              ) : (
+                <Col xs={12}>
+                  <h5>회원을 선택해주세요.</h5>
+                </Col>
+              )}
               <Col xs={12}>
-                <h5>
-                  <strong>{this.state.client_name}</strong>
-                  님의{' '}
-                  <strong>
-                    {moment(this.state.workoutA_date).format(
-                      'YYYY년 MM년 DD일 (ddd요일)'
-                    )}
-                  </strong>
-                  에 배정된 운동목록입니다.
-                </h5>
+                <TableContainer component={Paper}>
+                  <Table className='table--block table-light'>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell scope='col'>부위</TableCell>
+                        <TableCell scope='col'>이름</TableCell>
+                        <TableCell scope='col'>운동기구</TableCell>
+                        <TableCell scope='col'>세트</TableCell>
+                        <TableCell scope='col'>횟수</TableCell>
+                        <TableCell scope='col'>휴식</TableCell>
+                        <TableCell scope='col'>URL</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.workoutAllotlist.slice(
+                        this.state.page * this.state.rowsPerPage,
+                        this.state.page * this.state.rowsPerPage +
+                          this.state.rowsPerPage
+                      )}
+                    </TableBody>
+                  </Table>
+                  {this.state.workoutAllotlist.length === 0 ? (
+                    <div className='p-5 fs-5 fw-bold text-center'>
+                      <TbMoodSmile className='fs-3' />
+                      <p>회원을 선택해주세요.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.workoutAllotlist.length,
+                      },
+                    ]}
+                    count={this.state.workoutAllotlist.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
+                </TableContainer>
               </Col>
-            ) : (
-              <Col xs={12}>
-                <h5>회원을 선택해주세요.</h5>
-              </Col>
-            )}
-            <Col xs={12}>
-              <TableContainer component={Paper}>
-                <Table className='table--block table-light'>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell scope='col'>부위</TableCell>
-                      <TableCell scope='col'>이름</TableCell>
-                      <TableCell scope='col'>운동기구</TableCell>
-                      <TableCell scope='col'>세트</TableCell>
-                      <TableCell scope='col'>횟수</TableCell>
-                      <TableCell scope='col'>휴식</TableCell>
-                      <TableCell scope='col'>URL</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.workoutAllotlist.slice(
-                      this.state.page * this.state.rowsPerPage,
-                      this.state.page * this.state.rowsPerPage +
-                        this.state.rowsPerPage
-                    )}
-                  </TableBody>
-                </Table>
-                {this.state.workoutAllotlist.length === 0 ? (
-                  <div className='p-5 fs-5 fw-bold text-center'>
-                    <TbMoodSmile className='fs-3' />
-                    <p>회원을 선택해주세요.</p>
-                  </div>
-                ) : (
-                  ''
-                )}
-                <TablePagination
-                  rowsPerPageOptions={[
-                    5,
-                    10,
-                    25,
-                    {
-                      label: 'All',
-                      value: this.state.workoutAllotlist.length,
-                    },
-                  ]}
-                  count={this.state.workoutAllotlist.length}
-                  rowsPerPage={this.state.rowsPerPage}
-                  page={this.state.page}
-                  onPageChange={this.handleChangePage}
-                  onRowsPerPageChange={this.handleChangeRowsPerPage}
-                />
-              </TableContainer>
-            </Col>
-          </Row>
+            </Row>
+          )}
         </Container>
         <div className='footer'>
           <Footer />

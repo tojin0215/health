@@ -1,8 +1,32 @@
 .clientSearch {
   background: #333;
-
-  padding: 3rem;
+  padding: 1rem 3rem;
   border-radius: 0.313rem;
+  align-items: center;
+  display: flex;
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  margin-right: calc(-0.5 * var(--bs-gutter-x));
+  margin-left: calc(-0.5 * var(--bs-gutter-x));
+}
+
+.clientSearch h4 {
+  white-space: nowrap;
+}
+
+.clientSearch > div {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  align-items: end;
+}
+
+.clientSearch > div span {
+  padding: 6px 16px;
+}
+
+.clientSearch .react-datepicker-wrapper {
+  width: auto;
 }
 
 .pageTit {
@@ -29,9 +53,17 @@
 .workoutTabstage {
   border-bottom: 1px solid #fff;
 }
+.workoutTabs > div {
+  padding: 0;
+}
 .workoutTabs Button {
+  width: 100%;
   border: 0;
 }
+.workoutTabs__btn-active {
+  background-color: #fff;
+}
+
 .sectionGlass h5 strong,
 h4 span {
   color: #ebff2e;
