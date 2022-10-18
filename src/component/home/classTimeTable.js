@@ -61,23 +61,23 @@ export default function ClassTimeTable() {
 
   const list = (anchor) => (
     <Box
-      className="class-time-table__box"
+      className='class-time-table__box'
       sx={{ width: 500 }}
-      role="presentation"
+      role='presentation'
       // onClick={toggleDrawer(anchor, false)}
       // onKeyDown={toggleDrawer(anchor, false)}
     >
       <h4>2022년 10월 19일 (수요일)</h4>
       <FormControl
-        className="class-time-table__select"
-        variant="filled"
+        className='class-time-table__select'
+        variant='filled'
         fullWidth
       >
-        <InputLabel id="demo-simple-select-label">수업 분류 선택</InputLabel>
+        <InputLabel id='demo-simple-select-label'>수업 분류 선택</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="class-time-table__select-id"
-          label="수업 분류 선택"
+          labelId='demo-simple-select-label'
+          id='class-time-table__select-id'
+          label='수업 분류 선택'
           // onChange={handleChange}
         >
           <MenuItem value={10}>개인PT</MenuItem>
@@ -86,7 +86,7 @@ export default function ClassTimeTable() {
           <MenuItem value={40}>기타</MenuItem>
         </Select>
       </FormControl>
-      <div className="class-time-table__box__content">
+      <div className='class-time-table__box__content'>
         {['8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00'].map(
           (time) => (
             <React.Fragment key={time}>
@@ -104,7 +104,7 @@ export default function ClassTimeTable() {
                       </Row>
                     </li>
                     <li>
-                      <Row className="class-time-table__box__content--full">
+                      <Row className='class-time-table__box__content--full'>
                         <Col xs={2}>{time}</Col>
                         <Col>
                           <span>2인 필라테스</span> [2/2]
@@ -113,7 +113,7 @@ export default function ClassTimeTable() {
                       </Row>
                     </li>
                     <li>
-                      <Row className="class-time-table__box__content--full">
+                      <Row className='class-time-table__box__content--full'>
                         <Col xs={2}>{time}</Col>
                         <Col>
                           <span>기구 필라테스</span> [3/3]
@@ -133,12 +133,12 @@ export default function ClassTimeTable() {
   );
 
   return (
-    <div className="class-time-table">
+    <div className='class-time-table'>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button
-            className="class-time-table__btn"
-            variant="secondary"
+            className='class-time-table__btn'
+            variant='secondary'
             onClick={toggleDrawer(anchor, true)}
           >
             <CalendarMonthIcon />

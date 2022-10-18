@@ -250,6 +250,9 @@ class WorkoutStageAdd extends Component {
   goLogin = () => {
     this.props.history.push('/');
   };
+  goWorkout = () => {
+    this.props.history.push('/workout');
+  };
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
     // get cookie by name
@@ -522,6 +525,9 @@ class WorkoutStageAdd extends Component {
           </div>
         </div>
         <Container>
+          <Button variant='secondary' onClick={this.goWorkout}>
+            돌아가기
+          </Button>
           <Row className='sectionGlass'>
             <Col xs={12}>
               <div className='pageTit d-flex justify-content-between mb-3'>

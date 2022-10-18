@@ -2010,8 +2010,11 @@ class Client extends Component {
     this.setState({ searchOption: e.value });
   };
 
-  moveClientAdd = () => {
+  goClientAdd = () => {
     this.props.history.push('/clientAdd');
+  };
+  goAddSales = () => {
+    this.props.history.push('/addSales');
   };
 
   handleOnSearch = () => {
@@ -2189,7 +2192,7 @@ class Client extends Component {
         ) : (
           <Container>
             <h3>회원 목록</h3>
-            <div className='d-flex justify-content mb-3'>
+            <div className='client__utill'>
               <div className='d-flex sch_list'>
                 <Dropdown
                   className='searchDrop'
@@ -2205,20 +2208,27 @@ class Client extends Component {
                   onChange={(e) => this.setState({ search: e.target.value })}
                 />
               </div>
-              <div>
-                <Button
-                  className='mx-2'
-                  variant='primary'
-                  onClick={this.handleOnSearch}
-                >
-                  검색
-                </Button>
-              </div>
-              <div>
-                <Button variant='outline-primary' onClick={this.moveClientAdd}>
-                  등록하기
-                </Button>
-              </div>
+              <Button
+                className='client__search'
+                variant='primary'
+                onClick={this.handleOnSearch}
+              >
+                검색
+              </Button>
+              <Button
+                className='client__registration'
+                variant='outline-primary'
+                onClick={this.goClientAdd}
+              >
+                회원 등록
+              </Button>
+              <Button
+                className='client__membership'
+                variant='outline-primary'
+                onClick={this.goAddSales}
+              >
+                이용권 등록
+              </Button>
             </div>
             <Tabs defaultActiveKey='allClient' id='client-tab'>
               <Tab eventKey='allClient' title='전체'>

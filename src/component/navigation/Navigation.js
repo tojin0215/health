@@ -263,6 +263,21 @@ class Navigation extends Component {
                   </li> */}
                 </ul>
               </NavLink>
+              <NavLink exact to='/sales'>
+                <span className={styles.navitem}>회원</span>
+                <ul>
+                  <li>
+                    <NavLink exact to='/client'>
+                      회원 관리
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/addSales'>
+                      회원권 연장
+                    </NavLink>
+                  </li>
+                </ul>
+              </NavLink>
               <NavLink exact to='/reservation'>
                 <span className={styles.navitem}>수업</span>
                 <ul>
@@ -275,21 +290,6 @@ class Navigation extends Component {
                     <NavLink exact to='/reservationClass'>
                       수업 설정
                       {/* (강사,회원 hide) */}
-                    </NavLink>
-                  </li>
-                </ul>
-              </NavLink>
-              <NavLink exact to='/sales'>
-                <span className={styles.navitem}>회원</span>
-                <ul>
-                  <li>
-                    <NavLink exact to='/client'>
-                      회원 관리
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink exact to='/addSales'>
-                      회원권 연장
                     </NavLink>
                   </li>
                 </ul>

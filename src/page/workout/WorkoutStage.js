@@ -206,6 +206,9 @@ class WorkoutStage extends Component {
   goLogin = () => {
     this.props.history.push('/');
   };
+  goWorkout = () => {
+    this.props.history.push('/workout');
+  };
   goWorkoutStageAdd = () => {
     this.props.history.push('/workoutStageAdd');
   };
@@ -482,6 +485,9 @@ class WorkoutStage extends Component {
           </div>
         </div>
         <Container>
+          <Button variant='secondary' onClick={this.goWorkout}>
+            돌아가기
+          </Button>
           <Row className='clientSearch d-flex justify-content-between align-items-center'>
             <Col>
               <h4>베이직 루틴 배정</h4>

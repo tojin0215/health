@@ -18,9 +18,13 @@
   font-size: 40px;
 }
 
+.MuiDrawer-root .MuiPaper-root {
+  padding: 30px 20px;
+  background-color: #111;
+}
+
 .class-time-table__box {
   height: 100%;
-  padding: 30px 20px;
   background-color: #111;
   text-align: center;
   color: #fff;
@@ -64,6 +68,7 @@
 
 .class-time-table__box__content ul .row {
   padding: 2px 0;
+  align-items: center;
   background-color: #888;
 }
 
