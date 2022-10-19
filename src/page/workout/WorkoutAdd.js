@@ -75,7 +75,8 @@ const ExerciseView = ({
         <TableCell>{default_rest}</TableCell>
         <TableCell>{url}</TableCell>
         <TableCell
-        /* onClick={} 기능추가 */
+          /* onClick={} 기능추가 */
+          className='workout-alloted__selected--cencel'
         >
           <GiCancel className='fs-2' />
         </TableCell>
@@ -283,13 +284,13 @@ class WorkoutAdd extends Component {
           <div className='localNavigation'>
             <div className='container'>
               <h2>
-                <div className='parallelogram'></div>운동 설정
+                <div className='parallelogram'></div>운동 만들기
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/workoutAdd'>운동 설정</Link>
+                <Link to='/workoutAdd'>운동 만들기</Link>
               </div>
             </div>
           </div>
@@ -300,7 +301,7 @@ class WorkoutAdd extends Component {
           </Button>
           <Row className='sectionGlass'>
             <Col xs={12}>
-              <h3 className='mb-4'>운동설정</h3>
+              <h3 className='mb-4'>운동 만들기</h3>
             </Col>
             <Col xs={2}>
               <h5>운동부위</h5>
