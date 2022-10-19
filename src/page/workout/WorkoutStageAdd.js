@@ -503,7 +503,7 @@ class WorkoutStageAdd extends Component {
   render() {
     // const [select_region_type, setSelect_region_type] = useState(1);
     return (
-      <div className='wrap'>
+      <div className='workoutStageAdd wrap'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />

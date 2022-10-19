@@ -41,6 +41,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { TbMoodSuprised } from 'react-icons/tb';
 import { MdPersonSearch } from 'react-icons/md';
 import { BiSearchAlt2 } from 'react-icons/bi';
+import { GiCancel } from 'react-icons/gi';
 
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
@@ -90,6 +91,13 @@ const WorkoutAllotedView = ({
       <TableCell>{default_count}</TableCell>
       <TableCell>{default_rest}</TableCell>
       <TableCell>{url}</TableCell>
+      <TableCell
+        /* onClick={destroy} */
+        className='workout-alloted__selected--cencel'
+      >
+        <GiCancel className='fs-2' />
+      </TableCell>
+      {/* 기능추가  :삭제 */}
     </TableRow>
   );
 };
@@ -424,6 +432,8 @@ class WorkoutAllotedList extends Component {
                       <TableCell scope='col'>횟수</TableCell>
                       <TableCell scope='col'>휴식</TableCell>
                       <TableCell scope='col'>URL</TableCell>
+                      <TableCell scope='col'>삭제</TableCell>
+                      {/* 기능추가: 삭제 */}
                     </TableRow>
                   </TableHead>
                   <TableBody>
