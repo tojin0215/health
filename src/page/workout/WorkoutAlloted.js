@@ -32,6 +32,7 @@ import Button from 'react-bootstrap/Button';
 // mui
 import { ConstructionOutlined, Refresh } from '@mui/icons-material';
 import { TablePagination, TextField } from '@mui/material';
+import { useFormControl } from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -139,6 +140,7 @@ const ExerciseView = ({
       workoutAllotedView(idc);
       // close();
       // alert(workout + '운동이 배정됩니다.');
+      console.log('plusTable 실행되었습니다. idc는', idc);
     });
   };
   const [default_set_input, setDefault_set_input] = useState(default_set);
@@ -222,8 +224,10 @@ const WorkoutAllotedView = ({
   workoutAllotedView,
 }) => {
   const hadndleDelete = (idwa) => {
+    console.log('idwa 입니다', idwa);
     workoutAllotedDelete(idwa).then((res) => {
-      workoutAllotedView(idc);
+      console.log('idc 입니다', this.state.idc);
+      workoutAllotedView(this.state.idc);
     });
   };
 
@@ -325,8 +329,8 @@ class WorkoutAlloted extends Component {
   }
   handleUser = (client) => {
     const { idc, client_name } = client;
-    // console.log(client_name);
-
+    console.log('handleUser 컴포넌트, client_name :', client_name);
+    console.log('handleUser 컴포넌트, idc :', idc);
     this.setState({
       client: client,
       client_name: client_name,
@@ -335,7 +339,7 @@ class WorkoutAlloted extends Component {
     });
     this.inbodiesView(idc);
     this.workoutAllotedView(idc);
-    // this.handleOnClick(1);
+    this.handleOnClick(1);
   };
 
   inbodiesView = (idc) => {
@@ -395,6 +399,7 @@ class WorkoutAlloted extends Component {
       this.workoutAllotedView(this.state.idc);
       workoutSelect(fitness_no, key).then((result) => {
         const items = result.map((data, index, array) => {
+          console.log('exercise view의 idc :', this.state.idc);
           return (
             <ExerciseView
               idw={data.idw}
@@ -493,17 +498,15 @@ class WorkoutAlloted extends Component {
   // }
 
   UserSearchOpen = () => {
-    this.handleOnClick(1);
     this.setState({ open: true });
   };
 
   render() {
-    console.log('headRegion 입니다', this.state.headRegion);
-    console.log('Region 입니다', this.state.Region);
+    // console.log('headRegion 입니다', this.state.headRegion);
+    // console.log('Region 입니다', this.state.Region);
     // console.log('idc 입니다', this.state.idc);
-    console.log('exerciseAllotlist 입니다', this.state.exerciseAllotlist);
+    // console.log('exerciseAllotlist 입니다', this.state.exerciseAllotlist);
     // console.log('workoutA_date 입니다', this.state.workoutA_date);
-
     return (
       <div className='workout-alloted wrap'>
         <div className='header'>
@@ -551,6 +554,14 @@ class WorkoutAlloted extends Component {
                   value={this.state.client_name}
                 />
               </div>
+              <UserSearch
+                open={this.state.open}
+                setOpen={(o) => this.setState({ open: o })}
+                fitness_no={this.props.userinfo.fitness_no}
+                loginWhether={this.props.userinfo.loginWhether}
+                joinNo={this.props.userinfo.joinNo}
+                handleUser={this.handleUser}
+              />
               {this.state.client_name == '회원 검색' ? (
                 ''
               ) : (
@@ -568,14 +579,6 @@ class WorkoutAlloted extends Component {
               )}
             </div>
           </div>
-          <UserSearch
-            open={this.state.open}
-            setOpen={(o) => this.setState({ open: o })}
-            fitness_no={this.props.userinfo.fitness_no}
-            loginWhether={this.props.userinfo.loginWhether}
-            joinNo={this.props.userinfo.joinNo}
-            handleUser={this.handleUser}
-          />
           {/* <div>
             <Tabs
               defaultActiveKey='1'
