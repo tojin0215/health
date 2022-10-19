@@ -50,8 +50,12 @@
 }
 
 /* 운동탭 */
+.workoutTabs {
+  padding-left: 16px;
+}
+
 .workoutTabstage {
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 .workoutTabs > div {
   padding: 0;
@@ -59,6 +63,8 @@
 .workoutTabs Button {
   width: 100%;
   border: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 .workoutTabs__btn-active {
   background-color: #fff;

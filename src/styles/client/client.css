@@ -22,6 +22,7 @@
 .modal-header {
   padding: 0;
 }
+
 .modal-footer {
   border: 0;
 }
@@ -33,6 +34,7 @@
   padding: 1.25rem;
   border-radius: 0.625rem;
 }
+
 .client-infomation__detail--membership2 {
   background-color: #333;
   color: #fff;
@@ -40,6 +42,7 @@
   padding: 1.25rem;
   border-radius: 0.625rem;
 }
+
 .rbc-calendar a {
   color: inherit;
 }
@@ -62,9 +65,21 @@
 }
 
 /* 회원상세/수정 */
-.client__modal--information {
-  line-height: 2.8rem;
+.client__modal--information-facility {
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.8rem;
 }
+
+.client__modal--information-facility .form-check .form-check-label {
+  line-height: 3rem;
+}
+
+.client__modal--information-facility strong,
+.client__modal--information-facility p {
+  line-height: 3rem;
+}
+
 .voucher {
   border-top: 1px solid #fff;
 }

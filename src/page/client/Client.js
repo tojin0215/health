@@ -487,12 +487,9 @@ const ClientPhone = ({
           )}
         </Modal.Header>
         <Modal.Body className='mw-100'>
-          <div>
-            <CustomerCalendarComponent customer_no={idc} />
-          </div>
           <Row className='mt-3 client__modal--information'>
             <Col xs={2}>
-              <h5 className='mb-1'>이름</h5>
+              <p className='mb-1'>이름</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
@@ -506,11 +503,11 @@ const ClientPhone = ({
               <Col xs={10}>{client_name}</Col>
             )}
             <Col xs={2}>
-              <h5 className='mb-1'>생년월일</h5>
+              <p className='mb-1'>생년월일</p>
             </Col>
             <Col xs={10}>{birth}</Col>
-            <Col xs={2} className='mb-2'>
-              <h5 className='mb-1'>연락처</h5>
+            <Col xs={2}>
+              <p className='mb-1'>연락처</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
@@ -523,8 +520,8 @@ const ClientPhone = ({
             ) : (
               <Col xs={10}>{phone}</Col>
             )}
-            <Col xs={2} className='mb-2'>
-              <h5 className='mb-1'>주소</h5>
+            <Col xs={2}>
+              <p className='mb-1'>주소</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
@@ -534,7 +531,7 @@ const ClientPhone = ({
               <Col xs={10}>{address}</Col>
             )}
             <Col xs={2} className='mb-3'>
-              <h5>메모</h5>
+              <p>메모</p>
             </Col>
             {/* 기능추가:메모로 변경해야함 */}
             {showUpdate ? (
@@ -547,9 +544,9 @@ const ClientPhone = ({
             ) : (
               <Col xs={10}>{client_name}</Col>
             )}
-            <div className='d-flex justify-content-between'>
+            <div className='client__modal--information-facility'>
               <div className='d-flex justify-content'>
-                <h5 className='me-4'>운동복</h5>
+                <strong className='me-4'>운동복</strong>
                 {showUpdate ? (
                   <Form.Group>
                     <Form.Check inline>
@@ -577,8 +574,8 @@ const ClientPhone = ({
                   <p>{sportswear}</p>
                 )}
               </div>
-              <div className='d-flex justify-content mb-3'>
-                <h5 className='me-3'>사물함번호</h5>
+              <div className='d-flex justify-content'>
+                <strong className='me-3'>사물함번호</strong>
                 {showUpdate ? (
                   <Col xs={2}>
                     <Form.Control
@@ -592,9 +589,38 @@ const ClientPhone = ({
                 )}
               </div>
               <div className='d-flex justify-content'>
-                <h5 className='me-3'>가입경로</h5>
+                <strong className='me-3'>가입경로</strong>
                 <p>{join_route}</p>
               </div>
+            </div>
+            <div className='text-end text-danger mt-4'>
+              {showUpdate ? (
+                loginWhether === 1 ? (
+                  ''
+                ) : (
+                  <div>
+                    <span className='m-2'>
+                      회원 삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+                    </span>
+                    <Button
+                      variant='outline-danger'
+                      onClick={() =>
+                        // eslint-disable-next-line no-restricted-globals
+                        confirm(
+                          client_name +
+                            ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
+                        ) == true
+                          ? deleteCompleted(idc)
+                          : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
+                      }
+                    >
+                      회원 삭제
+                    </Button>
+                  </div>
+                )
+              ) : (
+                ''
+              )}
             </div>
           </Row>
           <Row>
@@ -620,36 +646,11 @@ const ClientPhone = ({
                 </Modal>
               </div>
             </div>
-            <div className='text-end text-danger mt-4'>
-              {showUpdate ? (
-                loginWhether === 1 ? (
-                  ''
-                ) : (
-                  <div>
-                    <span className='m-2'>
-                      삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
-                    </span>
-                    <Button
-                      variant='outline-danger'
-                      onClick={() =>
-                        // eslint-disable-next-line no-restricted-globals
-                        confirm(
-                          client_name +
-                            ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
-                        ) == true
-                          ? deleteCompleted(idc)
-                          : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
-                      }
-                    >
-                      삭제
-                    </Button>
-                  </div>
-                )
-              ) : (
-                ''
-              )}
-            </div>
           </Row>
+          <div className='border-top'>
+            <h4 className='py-3'>일정 캘린더</h4>
+            <CustomerCalendarComponent customer_no={idc} />
+          </div>
         </Modal.Body>
         <Modal.Footer className='d-flex justify-content-center'>
           {showUpdate ? (
@@ -1099,12 +1100,9 @@ const ClientName = ({
           )}
         </Modal.Header>
         <Modal.Body className='mw-100'>
-          <div>
-            <CustomerCalendarComponent customer_no={idc} />
-          </div>
           <Row className='mt-3 client__modal--information'>
             <Col xs={2}>
-              <h5 className='mb-1'>이름</h5>
+              <p className='mb-1'>이름</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
@@ -1118,11 +1116,11 @@ const ClientName = ({
               <Col xs={10}>{client_name}</Col>
             )}
             <Col xs={2}>
-              <h5 className='mb-1'>생년월일</h5>
+              <p className='mb-1'>생년월일</p>
             </Col>
             <Col xs={10}>{birth}</Col>
-            <Col xs={2} className='mb-2'>
-              <h5 className='mb-1'>연락처</h5>
+            <Col xs={2}>
+              <p className='mb-1'>연락처</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
@@ -1135,8 +1133,8 @@ const ClientName = ({
             ) : (
               <Col xs={10}>{phone}</Col>
             )}
-            <Col xs={2} className='mb-2'>
-              <h5 className='mb-1'>주소</h5>
+            <Col xs={2}>
+              <p className='mb-1'>주소</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
@@ -1146,7 +1144,7 @@ const ClientName = ({
               <Col xs={10}>{address}</Col>
             )}
             <Col xs={2} className='mb-3'>
-              <h5>메모</h5>
+              <p>메모</p>
             </Col>
             {/* 기능추가:메모로 변경해야함 */}
             {showUpdate ? (
@@ -1159,9 +1157,9 @@ const ClientName = ({
             ) : (
               <Col xs={10}>{client_name}</Col>
             )}
-            <div className='d-flex justify-content-between'>
+            <div className='client__modal--information-facility'>
               <div className='d-flex justify-content'>
-                <h5 className='me-4'>운동복</h5>
+                <strong className='me-4'>운동복</strong>
                 {showUpdate ? (
                   <Form.Group>
                     <Form.Check inline>
@@ -1189,8 +1187,8 @@ const ClientName = ({
                   <p>{sportswear}</p>
                 )}
               </div>
-              <div className='d-flex justify-content mb-3'>
-                <h5 className='me-3'>사물함번호</h5>
+              <div className='d-flex justify-content'>
+                <strong className='me-3'>사물함번호</strong>
                 {showUpdate ? (
                   <Col xs={2}>
                     <Form.Control
@@ -1204,9 +1202,38 @@ const ClientName = ({
                 )}
               </div>
               <div className='d-flex justify-content'>
-                <h5 className='me-3'>가입경로</h5>
+                <strong className='me-3'>가입경로</strong>
                 <p>{join_route}</p>
               </div>
+            </div>
+            <div className='text-end text-danger mt-4'>
+              {showUpdate ? (
+                loginWhether === 1 ? (
+                  ''
+                ) : (
+                  <div>
+                    <span className='m-2'>
+                      회원 삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+                    </span>
+                    <Button
+                      variant='outline-danger'
+                      onClick={() =>
+                        // eslint-disable-next-line no-restricted-globals
+                        confirm(
+                          client_name +
+                            ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
+                        ) == true
+                          ? deleteCompleted(idc)
+                          : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
+                      }
+                    >
+                      회원 삭제
+                    </Button>
+                  </div>
+                )
+              ) : (
+                ''
+              )}
             </div>
           </Row>
           <Row>
@@ -1232,36 +1259,11 @@ const ClientName = ({
                 </Modal>
               </div>
             </div>
-            <div className='text-end text-danger mt-4'>
-              {showUpdate ? (
-                loginWhether === 1 ? (
-                  ''
-                ) : (
-                  <div>
-                    <span className='m-2'>
-                      삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
-                    </span>
-                    <Button
-                      variant='outline-danger'
-                      onClick={() =>
-                        // eslint-disable-next-line no-restricted-globals
-                        confirm(
-                          client_name +
-                            ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
-                        ) == true
-                          ? deleteCompleted(idc)
-                          : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
-                      }
-                    >
-                      삭제
-                    </Button>
-                  </div>
-                )
-              ) : (
-                ''
-              )}
-            </div>
           </Row>
+          <div className='border-top'>
+            <h4 className='py-3'>일정 캘린더</h4>
+            <CustomerCalendarComponent customer_no={idc} />
+          </div>
         </Modal.Body>
         <Modal.Footer className='d-flex justify-content-center'>
           {showUpdate ? (
@@ -1681,7 +1683,7 @@ const ViewClientItem = ({
   };
 
   return (
-    // 1 페이지
+    // 1 페이지 사업주용
     <TableRow>
       <TableCell onClick={modalOnClick}>{client_name}</TableCell>
       <TableCell onClick={modalOnClick}>{sex == 1 ? '남' : '여'}</TableCell>
@@ -1711,17 +1713,14 @@ const ViewClientItem = ({
           )}
         </Modal.Header>
         <Modal.Body className='mw-100'>
-          <div>
-            <CustomerCalendarComponent customer_no={idc} />
-          </div>
           <Row className='mt-3 client__modal--information'>
             <Col xs={2}>
-              <h5 className='mb-1'>이름</h5>
+              <p className='mb-1'>이름</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
                 <Form.Control
-                  className='w-50'
+                  className='w-50 mb-1'
                   value={client_name_input}
                   onChange={updateChange1}
                 />
@@ -1730,16 +1729,16 @@ const ViewClientItem = ({
               <Col xs={10}>{client_name}</Col>
             )}
             <Col xs={2}>
-              <h5 className='mb-1'>생년월일</h5>
+              <p className='mb-1'>생년월일</p>
             </Col>
             <Col xs={10}>{birth}</Col>
-            <Col xs={2} className='mb-2'>
-              <h5 className='mb-1'>연락처</h5>
+            <Col xs={2}>
+              <p className='mb-1'>연락처</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
                 <Form.Control
-                  className='w-50'
+                  className='w-50 mb-1'
                   value={phone_input}
                   onChange={updateChange3}
                 />
@@ -1747,23 +1746,28 @@ const ViewClientItem = ({
             ) : (
               <Col xs={10}>{phone}</Col>
             )}
-            <Col xs={2} className='mb-2'>
-              <h5 className='mb-1'>주소</h5>
+            <Col xs={2}>
+              <p className='mb-1'>주소</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
-                <Form.Control value={address_input} onChange={updateChange2} />
+                <Form.Control
+                  className='mb-1'
+                  value={address_input}
+                  onChange={updateChange2}
+                />
               </Col>
             ) : (
               <Col xs={10}>{address}</Col>
             )}
             <Col xs={2} className='mb-3'>
-              <h5>메모</h5>
+              <p>메모</p>
             </Col>
             {/* 기능추가:메모로 변경해야함 */}
             {showUpdate ? (
               <Col>
                 <Form.Control
+                  className='mb-1'
                   value={client_name_input}
                   onChange={updateChange1}
                 />
@@ -1771,9 +1775,9 @@ const ViewClientItem = ({
             ) : (
               <Col xs={10}>{client_name}</Col>
             )}
-            <div className='d-flex justify-content-between'>
+            <div className='client__modal--information-facility'>
               <div className='d-flex justify-content'>
-                <h5 className='me-4'>운동복</h5>
+                <strong className='me-4'>운동복</strong>
                 {showUpdate ? (
                   <Form.Group>
                     <Form.Check inline>
@@ -1801,8 +1805,8 @@ const ViewClientItem = ({
                   <p>{sportswear}</p>
                 )}
               </div>
-              <div className='d-flex justify-content mb-3'>
-                <h5 className='me-3'>사물함번호</h5>
+              <div className='d-flex justify-content'>
+                <strong className='me-3'>사물함번호</strong>
                 {showUpdate ? (
                   <Col xs={2}>
                     <Form.Control
@@ -1816,9 +1820,38 @@ const ViewClientItem = ({
                 )}
               </div>
               <div className='d-flex justify-content'>
-                <h5 className='me-3'>가입경로</h5>
+                <strong className='me-3'>가입경로</strong>
                 <p>{join_route}</p>
               </div>
+            </div>
+            <div className='text-end text-danger mt-4'>
+              {showUpdate ? (
+                loginWhether === 1 ? (
+                  ''
+                ) : (
+                  <div>
+                    <span className='m-2'>
+                      회원 삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+                    </span>
+                    <Button
+                      variant='outline-danger'
+                      onClick={() =>
+                        // eslint-disable-next-line no-restricted-globals
+                        confirm(
+                          client_name +
+                            ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
+                        ) == true
+                          ? deleteCompleted(idc)
+                          : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
+                      }
+                    >
+                      회원 삭제
+                    </Button>
+                  </div>
+                )
+              ) : (
+                ''
+              )}
             </div>
           </Row>
           <Row>
@@ -1844,36 +1877,11 @@ const ViewClientItem = ({
                 </Modal>
               </div>
             </div>
-            <div className='text-end text-danger mt-4'>
-              {showUpdate ? (
-                loginWhether === 1 ? (
-                  ''
-                ) : (
-                  <div>
-                    <span className='m-2'>
-                      삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
-                    </span>
-                    <Button
-                      variant='outline-danger'
-                      onClick={() =>
-                        // eslint-disable-next-line no-restricted-globals
-                        confirm(
-                          client_name +
-                            ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
-                        ) == true
-                          ? deleteCompleted(idc)
-                          : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
-                      }
-                    >
-                      삭제
-                    </Button>
-                  </div>
-                )
-              ) : (
-                ''
-              )}
-            </div>
           </Row>
+          <div className='border-top'>
+            <h4 className='py-3'>일정 캘린더</h4>
+            <CustomerCalendarComponent customer_no={idc} />
+          </div>
         </Modal.Body>
         <Modal.Footer className='d-flex justify-content-center'>
           {showUpdate ? (
@@ -2110,6 +2118,7 @@ class Client extends Component {
         {this.props.userinfo.loginWhether === 2 ? (
           <Container id='customerClient'>
             <h3>회원 상세정보</h3>
+            <h4 className='py-3'>일정 캘린더</h4>
             <div className='mb-4'>
               <CustomerCalendarComponent customer_no={this.idc} />
             </div>
