@@ -13,6 +13,11 @@ import {
   selectClientReservation,
   selectTrainerReservation,
   workoutAllotedSelect,
+  workoutDestroy,
+  workoutSelect,
+  workoutStageDestroy,
+  workoutStageInsert,
+  workoutStageSelect,
 } from '../../api/user';
 import Footer from '../../component/footer/Footer';
 //css
@@ -81,7 +86,15 @@ const WorkoutAllotedView = ({
   default_count,
   default_rest,
   url,
+  workoutStageView,
+  ids,
+  stage,
 }) => {
+  const destroy = () => {
+    workoutDestroy(ids).then((res) => {
+      workoutStageView(stage);
+    });
+  };
   return (
     <TableRow>
       <TableCell>{region}</TableCell>
@@ -92,7 +105,7 @@ const WorkoutAllotedView = ({
       <TableCell>{default_rest}</TableCell>
       <TableCell>{url}</TableCell>
       <TableCell
-        /* onClick={destroy} */
+        onClick={destroy}
         className='workout-alloted__selected--cencel'
       >
         <GiCancel className='fs-2' />
@@ -471,7 +484,7 @@ class WorkoutAllotedList extends Component {
               </TableContainer>
             </Col>
           </Row>
-          <Row className='sectionGlass'>
+          {/* <Row className='sectionGlass'>
             <h3>
               {this.state.line === 3
                 ? this.state.client_name2
@@ -486,7 +499,7 @@ class WorkoutAllotedList extends Component {
                 <p>등록된 인바디 정보가 없습니다.</p>
               </div>
             )}
-          </Row>
+          </Row> */}
         </Container>
         <div className='footer'>
           <Footer />
