@@ -169,32 +169,32 @@ class Authentication extends Component {
       </div>
     );
     const loginView = (
-      <Card className='text-center'>
-        <Card.Body>
-          {/* {inputBoxes} */}
-          {loginBox}
-          <Row xs={2}>
-            <Col className='align-self-center'>
-              <Button
-                href='/register'
-                variant='outline-secondary fw-bold'
-                className='w-100 border-0'
-              >
-                회원가입
-              </Button>
-            </Col>
-            <Col>
-              <Button
-                onClick={this.handleLogin}
-                variant='primary'
-                className='authentication__login-button'
-              >
-                로그인
-              </Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
+      <>
+        {/* {inputBoxes} */}
+        {loginBox}
+        <Row>
+          <Col>
+            <Button
+              onClick={this.handleLogin}
+              variant='primary'
+              className='w-100 authentication__login-button'
+            >
+              로그인
+            </Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col className='mt-2 align-self-center'>
+            <Button
+              href='/register'
+              variant='white'
+              className='btn-register w-100 border-0'
+            >
+              회원가입
+            </Button>
+          </Col>
+        </Row>
+      </>
     );
     const loginViewTrainer = (
       <Card className='text-center'>
@@ -243,7 +243,8 @@ class Authentication extends Component {
               className='text-center login_logo p-0'
             /> */}
           </h1>
-          {this.state.radioGroup['fitness'] ? (
+          {loginView}
+          {/* {this.state.radioGroup['fitness'] ? (
             <div>{this.props.mode ? loginView : ''}</div>
           ) : (
             ''
@@ -257,7 +258,7 @@ class Authentication extends Component {
             <div>{this.props.mode ? loginViewCustomer : ''}</div>
           ) : (
             ''
-          )}
+          )} */}
         </Card.Body>
         {/* <Card.Footer></Card.Footer> */}
       </Card>

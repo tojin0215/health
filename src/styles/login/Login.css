@@ -13,15 +13,24 @@
   animation: rotate_image 18s linear infinite;
   transform-origin: 50% 50%;
 }
+/* main */
+.mainVisual {
+  background-image: url(/public/assets/home__main-visual.jpg);
+  background-size: cover;
+}
+.btn-register {
+  color: #fff;
+}
 
 .login__main-visual--box {
-  background-image: url(/public/assets/login-main-visual.jpg);
-  background-size: cover;
-  height: 348px;
-  padding-top: 84px;
+  /* background-image: url(/public/assets/home__main-visual.jpg);
+  background-size: cover; */
+  height: 370px;
+  padding-top: 170px;
   position: relative;
 }
 .login__main-visual--box > p {
+  margin-left: 40px;
   font-size: 2.2rem;
   line-height: 2.8rem;
   font-weight: 500;
@@ -31,8 +40,8 @@
 }
 .login__main-visual--logo {
   position: absolute;
-  bottom: -28px;
-  left: 0;
+  bottom: -50px;
+  left: 50px;
   height: 154px;
 }
 
