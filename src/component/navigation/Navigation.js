@@ -119,7 +119,7 @@ class Navigation extends Component {
                       회원 등록
                     </NavLink>
                   </li>
-
+                  {/* 
                   <li>
                     <NavLink exact to='/inbodies'>
                       인바디 정보
@@ -129,7 +129,7 @@ class Navigation extends Component {
                     <NavLink exact to='/genetic'>
                       DTC
                     </NavLink>
-                  </li>
+                  </li> */}
                 </ul>
               </NavLink>
               <NavLink exact to='/reservation'>
@@ -148,11 +148,11 @@ class Navigation extends Component {
                   </li>
                 </ul>
               </NavLink>
-              <NavLink exact to='/workoutAlloted'>
+              <NavLink exact to='/workout'>
                 <span className={styles.navitem}>운동</span>
                 <ul>
                   <li>
-                    <NavLink exact to='/workoutAlloted'>
+                    <NavLink exact to='/workout'>
                       운동 배정
                     </NavLink>
                   </li>
@@ -175,7 +175,7 @@ class Navigation extends Component {
                       운동 설정
                     </NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <NavLink exact to='/workoutStage'>
                       기본 루틴 배정
                     </NavLink>
@@ -184,10 +184,9 @@ class Navigation extends Component {
                     <NavLink exact to='/workoutStageAdd'>
                       기본 루틴 설정
                     </NavLink>
-                  </li>
+                  </li> */}
                 </ul>
               </NavLink>
-
               <NavLink exact to='/statistics'>
                 <span className={styles.navitem}></span>
               </NavLink>
