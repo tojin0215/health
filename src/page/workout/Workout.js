@@ -119,7 +119,7 @@ class Workout extends Component {
                     <Col xs={10} className='mb-5'>
                       <h2>베이직 루틴 배정</h2>
                     </Col>
-                    <Col xs={2}>
+                    <Col xs={2} className='custom-arrow'>
                       <CgArrowLongRight className='fs-1' />
                     </Col>
                     <Col xs={12}>
@@ -136,7 +136,7 @@ class Workout extends Component {
                     <Col xs={10} className='mb-5'>
                       <h2>맞춤형 운동 배정</h2>
                     </Col>
-                    <Col xs={2}>
+                    <Col xs={2} className='personal-arrow'>
                       <CgArrowLongRight className='fs-1' />
                     </Col>
                     <Col xs={12}>

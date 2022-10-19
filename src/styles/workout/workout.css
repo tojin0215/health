@@ -14,14 +14,24 @@
   color: #e2ff33;
   background-color: #0f0e0e;
 }
+.custom h2,
+.custom .custom-arrow {
+  color: #e2ff33;
+}
 .personal {
   cursor: pointer;
   transition: all 0.4s;
 }
 .personal:hover {
-  border-color: #e04343;
-  color: #e04343;
+  border-color: #ff5a5a;
+  color: #ff5a5a;
   background-color: #0f0e0e;
+}
+.personal h2 {
+  color: #ff5a5a;
+}
+.personal .personal-arrow {
+  color: #ff5a5a;
 }
 
 .addWorkout {
