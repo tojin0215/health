@@ -173,7 +173,7 @@ class Authentication extends Component {
         {/* {inputBoxes} */}
         {loginBox}
         <Row>
-          <Col>
+          <Col xs={12}>
             <Button
               onClick={this.handleLogin}
               variant='primary'
@@ -182,12 +182,10 @@ class Authentication extends Component {
               로그인
             </Button>
           </Col>
-        </Row>
-        <Row>
-          <Col className='mt-2 align-self-center'>
+          <Col xs={12} className='mt-2 align-self-center'>
             <Button
               href='/register'
-              variant='white'
+              variant='outline-secondary'
               className='btn-register w-100 border-0'
             >
               회원가입

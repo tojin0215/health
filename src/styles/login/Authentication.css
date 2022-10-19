@@ -2,6 +2,11 @@
   /* padding-top: 6rem; */
 }
 
+.authentication .btn-register {
+  color: #fff;
+  background-color: transparent;
+}
+
 .authentication .authentication__login-button {
   /* border-radius: 50%; */
   padding: 0;
