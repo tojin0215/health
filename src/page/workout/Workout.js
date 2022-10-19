@@ -112,8 +112,8 @@ class Workout extends Component {
               <h3>운동 배정</h3>
             </Col>
             <Col>
-              <Row>
-                <Col className='workoutRoutine me-4'>
+              <Row className='workoutRoutine'>
+                <Col className='me-4 custom'>
                   <Link to='/workoutStage'>
                     <Row>
                       <Col xs={10} className='mb-5'>
@@ -132,7 +132,7 @@ class Workout extends Component {
                     </Row>
                   </Link>
                 </Col>
-                <Col className='workoutRoutine'>
+                <Col className='personal'>
                   <Link to='/workoutAlloted'>
                     <Row>
                       <Col xs={10} className='mb-5'>

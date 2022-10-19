@@ -1,8 +1,20 @@
-.workoutRoutine {
+.workoutRoutine .col {
   background: #222;
   border: 1px solid #888;
   border-radius: 0.625rem;
   padding: 3.125rem 2.5rem;
+}
+
+.custom:hover {
+  border-color: #e2ff33;
+}
+/*  border-color: #e2ff33;
+} */
+.personal:hover {
+  border-color: #e04343;
+}
+.personal a:hover {
+  color: #e04343;
 }
 
 .addWorkout {
