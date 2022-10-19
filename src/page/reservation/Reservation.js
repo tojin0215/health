@@ -1630,7 +1630,6 @@ class Reservation extends Component {
                       </td>
                       <td name='mon' align='center' className='align-top'>
                         <div className='class-info'>
-                          {' '}
                           {this.state.reservationClass.length == 0 ? (
                             <div className='py-2 my-1 text-secondary  rounded'>
                               <TbMoodSuprised className='fs-3' />
@@ -1683,7 +1682,6 @@ class Reservation extends Component {
                       </td>
                       <td name='wed' align='center' className='align-top'>
                         <div className='class-info'>
-                          {' '}
                           {this.state.reservationClass.length == 0 ? (
                             <div className='py-2 my-1 text-secondary rounded'>
                               <TbMoodSuprised className='fs-3' />
@@ -1710,7 +1708,6 @@ class Reservation extends Component {
                       </td>
                       <td name='thu' align='center' className='align-top'>
                         <div className='class-info'>
-                          {' '}
                           {this.state.reservationClass.length == 0 ? (
                             <div className='py-2 my-1 text-secondary rounded'>
                               <TbMoodSuprised className='fs-3' />
@@ -1737,7 +1734,6 @@ class Reservation extends Component {
                       </td>
                       <td name='fri' align='center' className='align-top'>
                         <div className='class-info'>
-                          {' '}
                           {this.state.reservationClass.length == 0 ? (
                             <div className='py-2 my-1 text-secondary rounded'>
                               <TbMoodSuprised className='fs-3' />
@@ -1764,7 +1760,6 @@ class Reservation extends Component {
                       </td>
                       <td name='sat' align='center' className='align-top'>
                         <div className='class-info'>
-                          {' '}
                           {this.state.reservationClass.length == 0 ? (
                             <div className='py-2 my-1 text-secondary rounded'>
                               <TbMoodSuprised className='fs-3' />
@@ -1982,6 +1977,7 @@ class Reservation extends Component {
               <h4 className='mt-4 mb-3'>예약 현황</h4>
             )}
             {this.props.userinfo.loginWhether === 2 ? (
+              // 2 사업주
               ''
             ) : (
               <Tabs
@@ -2052,79 +2048,63 @@ class Reservation extends Component {
                       !this.state.show_trainer_table &&
                       !this.state.show_date_table ? (
                         <TableBody>
-                          {this.state.reservation_exercise.length == 0 ? (
-                            <div className='p-5 fs-5 fw-bold text-center'>
-                              <TbMoodSuprised className='fs-3' />
-                              <p>예약된 수업이 없습니다.</p>
-                            </div>
-                          ) : (
-                            this.state.reservation_exercise.slice(
-                              this.state.page * this.state.rowsPerPage,
-                              this.state.page * this.state.rowsPerPage +
-                                this.state.rowsPerPage
-                            )
-                          )}
+                          {this.state.reservation_exercise.length == 0
+                            ? ''
+                            : this.state.reservation_exercise.slice(
+                                this.state.page * this.state.rowsPerPage,
+                                this.state.page * this.state.rowsPerPage +
+                                  this.state.rowsPerPage
+                              )}
                         </TableBody>
                       ) : null}
                       {this.state.show_trainer_table &&
                       !this.state.show_exercise_table &&
                       !this.state.show_date_table ? (
                         <TableBody>
-                          {this.state.reservation_trainer.length == 0 ? (
-                            <div className='p-3 fs-5 fw-bold text-center '>
-                              <TbMoodSuprised className='fs-3' />
-                              <p>예약된 수업이 없습니다.</p>
-                            </div>
-                          ) : (
-                            this.state.reservation_trainer.slice(
-                              this.state.page * this.state.rowsPerPage,
-                              this.state.page * this.state.rowsPerPage +
-                                this.state.rowsPerPage
-                            )
-                          )}
+                          {this.state.reservation_trainer.length == 0
+                            ? ''
+                            : this.state.reservation_trainer.slice(
+                                this.state.page * this.state.rowsPerPage,
+                                this.state.page * this.state.rowsPerPage +
+                                  this.state.rowsPerPage
+                              )}
                         </TableBody>
                       ) : null}
                       {this.state.show_date_table &&
                       !this.state.show_exercise_table &&
                       !this.state.show_trainer_table ? (
                         <TableBody>
-                          {this.state.reservation_date.length == 0 ? (
-                            <TableCell>
-                              <div className='p-5 fs-5 fw-bold text-center'>
-                                <TbMoodSuprised className='fs-3' />
-                                <p>예약된 수업이 없습니다.</p>
-                              </div>
-                            </TableCell>
-                          ) : (
-                            this.state.reservation_date.slice(
-                              this.state.page * this.state.rowsPerPage,
-                              this.state.page * this.state.rowsPerPage +
-                                this.state.rowsPerPage
-                            )
-                          )}
+                          {this.state.reservation_date.length == 0
+                            ? ''
+                            : this.state.reservation_date.slice(
+                                this.state.page * this.state.rowsPerPage,
+                                this.state.page * this.state.rowsPerPage +
+                                  this.state.rowsPerPage
+                              )}
                         </TableBody>
                       ) : null}
                       {!this.state.show_exercise_table &&
                       !this.state.show_trainer_table &&
                       !this.state.show_date_table ? (
                         <TableBody>
-                          {this.state.reservation.length == 0 ? (
-                            <TableCell colSpan={7}>
-                              <div className='p-5 fs-5 fw-bold text-center'>
-                                <TbMoodSuprised className='fs-3' />
-                                <p>예약된 수업이 없습니다.</p>
-                              </div>
-                            </TableCell>
-                          ) : (
-                            this.state.reservation.slice(
-                              this.state.page * this.state.rowsPerPage,
-                              this.state.page * this.state.rowsPerPage +
-                                this.state.rowsPerPage
-                            )
-                          )}
+                          {this.state.reservation.length == 0
+                            ? ''
+                            : this.state.reservation.slice(
+                                this.state.page * this.state.rowsPerPage,
+                                this.state.page * this.state.rowsPerPage +
+                                  this.state.rowsPerPage
+                              )}
                         </TableBody>
                       ) : null}
                     </Table>
+                    {this.state.reservation.length == 0 ? (
+                      <div className='p-5 fs-5 fw-bold text-center'>
+                        <TbMoodSuprised className='fs-3' />
+                        <p>예약된 수업이 없습니다.</p>
+                      </div>
+                    ) : (
+                      ''
+                    )}
                     <TablePagination
                       rowsPerPageOptions={[
                         5,
@@ -2177,22 +2157,23 @@ class Reservation extends Component {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {this.state.reservation_choice_trainer.length == 0 ? (
-                          <TableCell colSpan={7}>
-                            <div className='p-5 fs-5 fw-bold text-center'>
-                              <TbMoodSuprised className='fs-3' />
-                              <p>예약된 수업이 없습니다.</p>
-                            </div>
-                          </TableCell>
-                        ) : (
-                          this.state.reservation_choice_trainer.slice(
-                            this.state.page * this.state.rowsPerPage,
-                            this.state.page * this.state.rowsPerPage +
-                              this.state.rowsPerPage
-                          )
-                        )}
+                        {this.state.reservation_choice_trainer.length == 0
+                          ? ''
+                          : this.state.reservation_choice_trainer.slice(
+                              this.state.page * this.state.rowsPerPage,
+                              this.state.page * this.state.rowsPerPage +
+                                this.state.rowsPerPage
+                            )}
                       </TableBody>
                     </Table>
+                    {this.state.reservation_choice_client.length == 0 ? (
+                      <div className='p-5 fs-5 fw-bold text-center'>
+                        <TbMoodSuprised className='fs-3' />
+                        <p>예약된 수업이 없습니다.</p>
+                      </div>
+                    ) : (
+                      ''
+                    )}
                     <TablePagination
                       rowsPerPageOptions={[
                         5,
@@ -2271,22 +2252,23 @@ class Reservation extends Component {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {this.state.reservation_choice_client.length == 0 ? (
-                          <TableCell colSpan={7}>
-                            <div className='p-5 fs-5 fw-bold text-center'>
-                              <TbMoodSuprised className='fs-3' />
-                              <p>예약된 수업이 없습니다.</p>
-                            </div>
-                          </TableCell>
-                        ) : (
-                          this.state.reservation_choice_client.slice(
-                            this.state.page * this.state.rowsPerPage,
-                            this.state.page * this.state.rowsPerPage +
-                              this.state.rowsPerPage
-                          )
-                        )}
+                        {this.state.reservation_choice_client.length == 0
+                          ? ''
+                          : this.state.reservation_choice_client.slice(
+                              this.state.page * this.state.rowsPerPage,
+                              this.state.page * this.state.rowsPerPage +
+                                this.state.rowsPerPage
+                            )}
                       </TableBody>
                     </Table>
+                    {this.state.reservation_choice_client.length == 0 ? (
+                      <div className='p-5 fs-5 fw-bold text-center'>
+                        <TbMoodSuprised className='fs-3' />
+                        <p>예약된 수업이 없습니다.</p>
+                      </div>
+                    ) : (
+                      ''
+                    )}
                     <TablePagination
                       rowsPerPageOptions={[
                         5,

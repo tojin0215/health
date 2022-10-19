@@ -1,3 +1,8 @@
+.user-search .MuiPaper-elevation,
+trainers-search .MuiPaper-elevation {
+  padding: 20px 0;
+}
+
 .user-search__utill {
   align-items: center;
 }
