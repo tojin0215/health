@@ -108,6 +108,7 @@ class AddSales extends Component {
       },
       voucherType: '',
     };
+    this.handleSalesDaysSelect = this.handleSalesDaysSelect.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -182,6 +183,12 @@ class AddSales extends Component {
     });
   }
 
+  handleSalesDaysSelect(e) {
+    this.setState({
+      salesDays: e.target.value,
+    });
+  }
+
   handleDateChange(date) {
     this.setState({
       paymentDate: date,
@@ -205,6 +212,19 @@ class AddSales extends Component {
     let sportswearPrice1 = parseInt(
       this.state.sportswearPrice.toString().replace(/[^(0-9)]/gi, '')
     );
+
+    if (exercisePrice1 == '' || lockerPrice1 == '' || sportswearPrice1 == '') {
+      if (exercisePrice1 == '') {
+        exercisePrice1 = 0;
+      }
+      if (lockerPrice1 == '') {
+        lockerPrice1 = 0;
+      }
+      if (sportswearPrice1 == '') {
+        sportswearPrice1 = 0;
+      }
+    }
+
     if (this.state.client_name === '회원 검색') {
       alert('회원을 선택해주세요.');
     } else if (
@@ -217,12 +237,6 @@ class AddSales extends Component {
       this.state.salesDays == ''
     ) {
       alert('기간권의 올바른 기간(일)을 입력해주세요.');
-    } else if (exercisePrice1 == '') {
-      exercisePrice1 = 0;
-    } else if (lockerPrice1 == '') {
-      lockerPrice1 = 0;
-    } else if (sportswearPrice1 == '') {
-      sportswearPrice1 = 0;
     } else {
       fetch(ip + '/sales', {
         method: 'POST',
@@ -331,6 +345,10 @@ class AddSales extends Component {
       'handleCheckbox 의 checkboxGroup입니다',
       this.state.checkboxGroup.paidMembershipCheckbox
     );
+    this.setState({
+      salesDays: '',
+      paidMembership: '',
+    });
   };
 
   handleUser = (client) => {
@@ -598,6 +616,10 @@ class AddSales extends Component {
                             </Col>
                             <Col xs={10}>
                               <Row>
+                                <Col xs={12}>
+                                  <strong>{this.state.salesDays} </strong>일
+                                  기간권
+                                </Col>
                                 <Col>
                                   <Form.Check inline>
                                     <Form.Check.Input
@@ -605,6 +627,7 @@ class AddSales extends Component {
                                       id='voucherPeriod1'
                                       name='PeriodQuickSelection'
                                       value='30'
+                                      onClick={this.handleSalesDaysSelect}
                                     />
                                     <Form.Check.Label
                                       htmlFor='voucherPeriod1'
@@ -619,6 +642,7 @@ class AddSales extends Component {
                                       id='voucherPeriod3'
                                       name='PeriodQuickSelection'
                                       value='91'
+                                      onClick={this.handleSalesDaysSelect}
                                     />
                                     <Form.Check.Label
                                       htmlFor='voucherPeriod3'
@@ -633,6 +657,7 @@ class AddSales extends Component {
                                       id='voucherPeriod6'
                                       name='PeriodQuickSelection'
                                       value='183'
+                                      onClick={this.handleSalesDaysSelect}
                                     />
                                     <Form.Check.Label
                                       htmlFor='voucherPeriod6'
@@ -641,13 +666,13 @@ class AddSales extends Component {
                                       6개월
                                     </Form.Check.Label>
                                   </Form.Check>
-
                                   <Form.Check inline>
                                     <Form.Check.Input
                                       type='radio'
                                       id='voucherPeriod12'
                                       name='PeriodQuickSelection'
                                       value='365'
+                                      onClick={this.handleSalesDaysSelect}
                                     />
                                     <Form.Check.Label
                                       htmlFor='voucherPeriod12'
@@ -667,7 +692,7 @@ class AddSales extends Component {
                                       htmlFor='voucherPeriodetc'
                                       className='w-100'
                                     >
-                                      기타
+                                      일 지정
                                     </Form.Check.Label>
                                   </Form.Check>
                                   <Form.Check inline>
