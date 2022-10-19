@@ -953,7 +953,9 @@ class WorkoutAlloted extends Component {
                     <div>
                       <h4>
                         <span>
-                          {this.state.headRegion === 1
+                          {this.state.client_name == '회원 검색'
+                            ? ' '
+                            : this.state.headRegion === 1
                             ? '상체 '
                             : this.state.headRegion === 18
                             ? '하체 '
