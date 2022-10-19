@@ -57,6 +57,9 @@
 .client_wrap .nav-tabs > .nav-item:nth-child(4) {
   color: #b7b7b7;
 }
+.client_wrap .MuiTableBody-root {
+  cursor: pointer;
+}
 
 /* 회원상세/수정 */
 .client__modal--information {

@@ -403,7 +403,7 @@ class WorkoutAdd extends Component {
               <Row>
                 <Col>
                   <Form.Control
-                    placeholder='세트'
+                    placeholder='세트(숫자만 입력)'
                     type='number'
                     /* value={this.state.default_set} */
                     id='default_set'
@@ -412,7 +412,7 @@ class WorkoutAdd extends Component {
                 </Col>
                 <Col>
                   <Form.Control
-                    placeholder='횟수'
+                    placeholder='횟수(숫자만 입력)'
                     type='number'
                     /* value={this.state.default_count} */
                     id='default_count'
@@ -421,7 +421,7 @@ class WorkoutAdd extends Component {
                 </Col>
                 <Col>
                   <Form.Control
-                    placeholder='휴식'
+                    placeholder='휴식(숫자만 입력)'
                     type='number'
                     /* value={this.state.default_rest} */
                     id='default_rest'
