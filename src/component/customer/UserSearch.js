@@ -47,9 +47,9 @@ const UserSearchTableHeader = () => (
   <TableHead>
     <TableRow>
       <TableCell align='center'>번호</TableCell>
-      <TableCell>이름</TableCell>
-      <TableCell>폰번호</TableCell>
-      <TableCell>성별</TableCell>
+      <TableCell align='center'>이름</TableCell>
+      <TableCell align='center'>폰번호</TableCell>
+      <TableCell align='center'>성별</TableCell>
       <TableCell align='center'>선택</TableCell>
     </TableRow>
   </TableHead>

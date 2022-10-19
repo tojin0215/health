@@ -47,6 +47,19 @@
 .rbc-calendar a:hover {
   color: blue;
 }
+/* Tab */
+.client_wrap .nav-tabs > .nav-item:nth-child(2) {
+  color: #0b8eed;
+}
+.client_wrap .nav-tabs > .nav-item:nth-child(3) {
+  color: #dd4848;
+}
+.client_wrap .nav-tabs > .nav-item:nth-child(4) {
+  color: #b7b7b7;
+}
+.client_wrap .MuiTableBody-root {
+  cursor: pointer;
+}
 
 /* 회원상세/수정 */
 .client__modal--information {
