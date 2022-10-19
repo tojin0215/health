@@ -17,6 +17,7 @@ import Button from 'react-bootstrap/Button';
 //react-icons.github.io
 import { CgArrowRight, CgArrowLongRight } from 'react-icons/cg';
 import { MdArrowForwardIos } from 'react-icons/md';
+import { AiOutlineSetting } from 'react-icons/ai';
 
 // import { HiOutlineArrowLongRight } from 'react-icons/hi2';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -158,7 +159,7 @@ class Workout extends Component {
                 <Col xs={4}>
                   <h4>
                     운동 만들기
-                    <SettingsIcon />
+                    <AiOutlineSetting className='mx-2' />
                   </h4>
                 </Col>
                 <Col xs={7}>
@@ -176,7 +177,7 @@ class Workout extends Component {
                 <Col xs={4}>
                   <h4>
                     베이직 루틴 만들기
-                    <SettingsIcon />
+                    <AiOutlineSetting className='mx-2' />
                   </h4>
                 </Col>
                 <Col xs={7}>

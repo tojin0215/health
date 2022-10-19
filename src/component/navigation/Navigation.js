@@ -172,7 +172,7 @@ class Navigation extends Component {
                   </li>
                   <li>
                     <NavLink exact to='/workoutAdd'>
-                      운동 설정
+                      운동 만들기
                     </NavLink>
                   </li>
                   {/* <li>
@@ -322,7 +322,7 @@ class Navigation extends Component {
                   </li> */}
                   <li>
                     <NavLink exact to='/workoutAdd'>
-                      운동 설정
+                      운동 만들기
                     </NavLink>
                   </li>
                   {/* <li>
