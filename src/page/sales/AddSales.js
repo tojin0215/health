@@ -39,6 +39,7 @@ import DatePicker from 'react-datepicker';
 import UserSearch from '../../component/customer/UserSearch';
 import { voucherInsert } from '../../api/user';
 import { RFC_2822 } from 'moment/moment';
+import { FaSleigh } from 'react-icons/fa';
 // locale 오류로 임시 삭제
 // import DatePicker, { registerLocale } from 'react-datepicker';
 // import ko from 'date-fns/locale/ko';
@@ -107,6 +108,7 @@ class AddSales extends Component {
       },
       voucherType: '',
     };
+    this.handleStartDateChange = this.handleStartDateChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -174,10 +176,15 @@ class AddSales extends Component {
     });
   }
 
+  handleStartDateChange(date) {
+    this.setState({
+      salesStart_date: date,
+    });
+  }
+
   handleDateChange(date) {
     this.setState({
       paymentDate: date,
-      salesStart_date: date,
     });
   }
 
@@ -198,8 +205,24 @@ class AddSales extends Component {
     let sportswearPrice1 = parseInt(
       this.state.sportswearPrice.toString().replace(/[^(0-9)]/gi, '')
     );
-    if (this.state.client_name === '회원') {
+    if (this.state.client_name === '회원 검색') {
       alert('회원을 선택해주세요.');
+    } else if (
+      this.state.checkboxGroup['paidMembershipCheckbox'] == true &&
+      this.state.paidMembership == ''
+    ) {
+      alert('횟수권의 올바른 횟수(회)를 입력해주세요.');
+    } else if (
+      this.state.checkboxGroup['salesDaysCheckbox'] == true &&
+      this.state.salesDays == ''
+    ) {
+      alert('기간권의 올바른 기간(일)을 입력해주세요.');
+    } else if (exercisePrice1 == '') {
+      exercisePrice1 = 0;
+    } else if (lockerPrice1 == '') {
+      lockerPrice1 = 0;
+    } else if (sportswearPrice1 == '') {
+      sportswearPrice1 = 0;
     } else {
       fetch(ip + '/sales', {
         method: 'POST',
@@ -557,118 +580,112 @@ class AddSales extends Component {
                     {this.state.checkboxGroup.salesDaysCheckbox ? (
                       <>
                         {/* 기간권 내용 */}
-                        {this.state.client_name ? (
-                          <Col className='voucher-info'>
-                            <Row>
-                              <Col xs={2}>
-                                <Form.Label>기간시작일</Form.Label>
-                              </Col>
-                              <Col xs={10}>
-                                <DatePicker
-                                  selected={this.state.salesStart_date}
-                                  onChange={this.handleDateChange}
-                                  name='salesStart_date'
-                                  dateFormat='yyyy년MM월dd일'
-                                  font-size='1.6rem'
-                                />
-                              </Col>
-                              <Col xs={2}>
-                                <h6>기간</h6>
-                              </Col>
-                              <Col xs={10}>
-                                <Row>
-                                  <Col>
-                                    <Form.Check inline>
-                                      <Form.Check.Input
-                                        type='radio'
-                                        id='voucherPeriod1'
-                                        name='PeriodQuickSelection'
-                                        value='30'
-                                      />
-                                      <Form.Check.Label
-                                        htmlFor='voucherPeriod1'
-                                        className='w-100'
-                                      >
-                                        1개월
-                                      </Form.Check.Label>
-                                    </Form.Check>
-                                    <Form.Check inline>
-                                      <Form.Check.Input
-                                        type='radio'
-                                        id='voucherPeriod3'
-                                        name='PeriodQuickSelection'
-                                        value='91'
-                                      />
-                                      <Form.Check.Label
-                                        htmlFor='voucherPeriod3'
-                                        className='w-100'
-                                      >
-                                        3개월
-                                      </Form.Check.Label>
-                                    </Form.Check>
-                                    <Form.Check inline>
-                                      <Form.Check.Input
-                                        type='radio'
-                                        id='voucherPeriod6'
-                                        name='PeriodQuickSelection'
-                                        value='183'
-                                      />
-                                      <Form.Check.Label
-                                        htmlFor='voucherPeriod6'
-                                        className='w-100'
-                                      >
-                                        6개월
-                                      </Form.Check.Label>
-                                    </Form.Check>
+                        <Col className='voucher-info'>
+                          <Row>
+                            <Col xs={2}>
+                              <h5>기간시작일</h5>
+                            </Col>
+                            <Col xs={10}>
+                              <DatePicker
+                                selected={this.state.salesStart_date}
+                                onChange={this.handleStartDateChange}
+                                name='salesStart_date'
+                                dateFormat='yyyy년MM월dd일'
+                              />
+                            </Col>
+                            <Col xs={2}>
+                              <h6>기간</h6>
+                            </Col>
+                            <Col xs={10}>
+                              <Row>
+                                <Col>
+                                  <Form.Check inline>
+                                    <Form.Check.Input
+                                      type='radio'
+                                      id='voucherPeriod1'
+                                      name='PeriodQuickSelection'
+                                      value='30'
+                                    />
+                                    <Form.Check.Label
+                                      htmlFor='voucherPeriod1'
+                                      className='w-100'
+                                    >
+                                      1개월
+                                    </Form.Check.Label>
+                                  </Form.Check>
+                                  <Form.Check inline>
+                                    <Form.Check.Input
+                                      type='radio'
+                                      id='voucherPeriod3'
+                                      name='PeriodQuickSelection'
+                                      value='91'
+                                    />
+                                    <Form.Check.Label
+                                      htmlFor='voucherPeriod3'
+                                      className='w-100'
+                                    >
+                                      3개월
+                                    </Form.Check.Label>
+                                  </Form.Check>
+                                  <Form.Check inline>
+                                    <Form.Check.Input
+                                      type='radio'
+                                      id='voucherPeriod6'
+                                      name='PeriodQuickSelection'
+                                      value='183'
+                                    />
+                                    <Form.Check.Label
+                                      htmlFor='voucherPeriod6'
+                                      className='w-100'
+                                    >
+                                      6개월
+                                    </Form.Check.Label>
+                                  </Form.Check>
 
-                                    <Form.Check inline>
-                                      <Form.Check.Input
-                                        type='radio'
-                                        id='voucherPeriod12'
-                                        name='PeriodQuickSelection'
-                                        value='365'
-                                      />
-                                      <Form.Check.Label
-                                        htmlFor='voucherPeriod12'
-                                        className='w-100'
-                                      >
-                                        12개월
-                                      </Form.Check.Label>
-                                    </Form.Check>
-                                    <Form.Check inline>
-                                      <Form.Check.Input
-                                        type='radio'
-                                        id='voucherPeriodetc'
-                                        name='PeriodQuickSelection'
-                                        value='5'
-                                      />
-                                      <Form.Check.Label
-                                        htmlFor='voucherPeriodetc'
-                                        className='w-100'
-                                      >
-                                        기타
-                                      </Form.Check.Label>
-                                    </Form.Check>
-                                    <Form.Check inline>
-                                      <Form.Control
-                                        variant='outlined'
-                                        value={this.state.salesDays}
-                                        onChange={this.handleChange}
-                                        type='number'
-                                        id='salesDays'
-                                        placeholder='00(일)'
-                                        // required
-                                      />
-                                    </Form.Check>
-                                  </Col>
-                                </Row>
-                              </Col>
-                            </Row>
-                          </Col>
-                        ) : (
-                          // 이용권 선택일 경우
-                          ''
-                        )}
+                                  <Form.Check inline>
+                                    <Form.Check.Input
+                                      type='radio'
+                                      id='voucherPeriod12'
+                                      name='PeriodQuickSelection'
+                                      value='365'
+                                    />
+                                    <Form.Check.Label
+                                      htmlFor='voucherPeriod12'
+                                      className='w-100'
+                                    >
+                                      12개월
+                                    </Form.Check.Label>
+                                  </Form.Check>
+                                  <Form.Check inline>
+                                    <Form.Check.Input
+                                      type='radio'
+                                      id='voucherPeriodetc'
+                                      name='PeriodQuickSelection'
+                                      value='5'
+                                    />
+                                    <Form.Check.Label
+                                      htmlFor='voucherPeriodetc'
+                                      className='w-100'
+                                    >
+                                      기타
+                                    </Form.Check.Label>
+                                  </Form.Check>
+                                  <Form.Check inline>
+                                    <Form.Control
+                                      variant='outlined'
+                                      value={this.state.salesDays}
+                                      onChange={this.handleChange}
+                                      type='number'
+                                      id='salesDays'
+                                      placeholder='00(일)'
+                                      // required
+                                    />
+                                  </Form.Check>
+                                </Col>
+                              </Row>
+                            </Col>
+                          </Row>
+                        </Col>
                       </>
                     ) : (
                       <Col className='voucher-info'>
