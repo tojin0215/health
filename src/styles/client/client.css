@@ -49,9 +49,21 @@
 }
 
 /* 회원상세/수정 */
-.client__modal--information {
-  line-height: 2.8rem;
+.client__modal--information-facility {
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.8rem;
 }
+
+.client__modal--information-facility .form-check .form-check-label {
+  line-height: 3rem;
+}
+
+.client__modal--information-facility strong,
+.client__modal--information-facility p {
+  line-height: 3rem;
+}
+
 .voucher {
   border-top: 1px solid #fff;
 }

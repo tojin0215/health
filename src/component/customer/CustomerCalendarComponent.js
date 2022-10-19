@@ -15,6 +15,10 @@ import {
 } from '../../api/user';
 import { connect } from 'react-redux';
 
+// 아이콘
+import { AiOutlineLeft } from 'react-icons/ai';
+import { AiOutlineRight } from 'react-icons/ai';
+
 // Setup the localizer by providing the moment (or globalize) Object
 // to the correct localizer.
 moment.locale('ko-KR');
@@ -156,7 +160,7 @@ class CustomerCalendarComponent extends Component {
                 start: start,
                 end: end,
                 allDay: true,
-                title: `[헬스 운동배정]`,
+                title: `[회원 캘린더]`,
               };
             })
             .filter((item) => item != undefined),
@@ -242,23 +246,23 @@ class CustomerCalendarComponent extends Component {
     });
     var todayselect = document.querySelectorAll('.rbc-btn-group button');
 
-    if (todayselect[0]) {
-      todayselect[0].textContent = '오늘';
-      todayselect[1].textContent = '이전';
-      todayselect[2].textContent = '내일';
-      todayselect[3].textContent = '월간';
-      todayselect[4].textContent = '일간';
-      todayselect[5].textContent = '주간';
-      todayselect[6].textContent = '목록';
-    }
+    // if (todayselect[0]) {
+    //   todayselect[0].textContent = '오늘';
+    //   todayselect[1].textContent = '이전';
+    //   todayselect[2].textContent = '다음';
+    //   todayselect[3].textContent = '월간';
+    //   todayselect[4].textContent = '일간';
+    //   todayselect[5].textContent = '주간';
+    //   todayselect[6].textContent = '목록';
+    // }
     return (
-      <div className='customercalendar' style={{ height: 700 }}>
+      <div className='customercalendar' style={{ height: 500 }}>
         <Calendar
           localizer={localizer}
           events={this.state.reservations}
           startAccessor='start'
           endAccessor='end'
-          views={['month', 'day', 'week', 'agenda']}
+          views={['day', 'week', 'month', 'agenda']}
           onSelectEvent={this.handleOnSelectEvent}
           defaultDate={new Date()}
         />
