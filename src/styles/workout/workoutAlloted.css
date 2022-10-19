@@ -31,7 +31,7 @@
 
 .pageTit {
   background: #535353;
-  padding: 0.65rem 1.25rem;
+  padding: 1.25rem;
   border-radius: 0.313rem;
 }
 
@@ -82,36 +82,38 @@ h4 span {
 /*
  운동 선택 - 배정 버튼
 */
-.workout-alloted .workout-alloted__select--plus {
+/* .workout-alloted .workout-alloted__select--plus, */
+.wrap .workout-alloted__select--plus {
   color: #c2c2c2;
   text-align: center;
   cursor: pointer;
   transition: color 0.5s;
 }
 
-.workout-alloted .workout-alloted__select--plus:hover {
+.wrap .workout-alloted__select--plus:hover {
   /* background-color: rgba(235, 235, 46, 0.3); */
   /* background-color: #eee; */
   color: #0077fe;
 }
 
-.workout-alloted .workout-alloted__select--plus:active {
+.wrap .workout-alloted__select--plus:active {
   color: rgba(46, 46, 46, 1);
 }
 /*
 배정된 운동목록 - 삭제 버튼
 */
-.workout-alloted .workout-alloted__selected--cencel {
+.wrap .workout-alloted__selected--cencel {
   color: #c2c2c2;
   text-align: center;
   cursor: pointer;
   transition: color 0.5s;
 }
 
-.workout-alloted .workout-alloted__selected--cencel:hover {
+.wrap .workout-alloted__selected--cencel:hover {
   color: #dc3545;
 }
-.workout-alloted .workout-alloted__selected--cencel:active {
+
+.wrap .workout-alloted__selected--cencel:active {
   color: rgba(46, 46, 46, 1);
 }
 

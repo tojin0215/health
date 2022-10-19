@@ -222,7 +222,7 @@ const ReservationItem = ({
               : alert('삭제가 취소 되었습니다.')
           }
         >
-          <RiDeleteBin5Fill className='align-baseline' />
+          <RiDeleteBin5Fill className='fs-5' />
         </Button>
       </TableCell>
     </TableRow>
@@ -295,7 +295,7 @@ const ReservationItem_exercise = ({
               : alert('삭제가 취소 되었습니다.')
           }
         >
-          <RiDeleteBin5Fill className='align-baseline' />
+          <RiDeleteBin5Fill className='fs-5' />
         </Button>
       </TableCell>
     </TableRow>
@@ -366,7 +366,7 @@ const ReservationItem_trainer = ({
               : alert('삭제가 취소 되었습니다.')
           }
         >
-          <RiDeleteBin5Fill className='align-baseline' />
+          <RiDeleteBin5Fill className='fs-5' />
         </Button>
       </TableCell>
     </TableRow>
@@ -439,7 +439,7 @@ const ReservationItem_date = ({
               : alert('삭제가 취소 되었습니다.')
           }
         >
-          <RiDeleteBin5Fill className='align-baseline' />
+          <RiDeleteBin5Fill className='fs-5' />
         </Button>
       </TableCell>
     </TableRow>
@@ -512,7 +512,7 @@ const ReservationChoiceTrainerItem = ({
               : alert('삭제가 취소 되었습니다.')
           }
         >
-          <RiDeleteBin5Fill className='align-baseline' />
+          <RiDeleteBin5Fill className='fs-5' />
         </Button>
       </TableCell>
     </TableRow>
@@ -608,7 +608,7 @@ const ReservationChoiceClientItem = ({
               : alert('삭제가 취소 되었습니다.')
           }
         >
-          <RiDeleteBin5Fill className='align-baseline' />
+          <RiDeleteBin5Fill className='fs-5' />
         </Button>
       </TableCell>
     </TableRow>
