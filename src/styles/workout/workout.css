@@ -5,16 +5,23 @@
   padding: 3.125rem 2.5rem;
 }
 
+.custom {
+  cursor: pointer;
+  transition: all 0.4s;
+}
 .custom:hover {
   border-color: #e2ff33;
+  color: #e2ff33;
+  background-color: #0f0e0e;
 }
-/*  border-color: #e2ff33;
-} */
+.personal {
+  cursor: pointer;
+  transition: all 0.4s;
+}
 .personal:hover {
   border-color: #e04343;
-}
-.personal a:hover {
   color: #e04343;
+  background-color: #0f0e0e;
 }
 
 .addWorkout {

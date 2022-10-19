@@ -114,43 +114,39 @@ class Workout extends Component {
             </Col>
             <Col>
               <Row className='workoutRoutine'>
-                <Col className='me-4 custom'>
-                  <Link to='/workoutStage'>
-                    <Row>
-                      <Col xs={10} className='mb-5'>
-                        <h2>베이직 루틴 배정</h2>
-                      </Col>
-                      <Col xs={2}>
-                        <CgArrowLongRight className='fs-1' />
-                      </Col>
-                      <Col xs={12}>
-                        <p>
-                          단계별 기본 루틴을 선택해
-                          <br />
-                          회원에게 배정해 줄 수 있습니다.
-                        </p>
-                      </Col>
-                    </Row>
-                  </Link>
+                <Col className='me-4 custom' onClick={this.goStage}>
+                  <Row>
+                    <Col xs={10} className='mb-5'>
+                      <h2>베이직 루틴 배정</h2>
+                    </Col>
+                    <Col xs={2}>
+                      <CgArrowLongRight className='fs-1' />
+                    </Col>
+                    <Col xs={12}>
+                      <p>
+                        단계별 기본 루틴을 선택해
+                        <br />
+                        회원에게 배정해 줄 수 있습니다.
+                      </p>
+                    </Col>
+                  </Row>
                 </Col>
-                <Col className='personal'>
-                  <Link to='/workoutAlloted'>
-                    <Row>
-                      <Col xs={10} className='mb-5'>
-                        <h2>맞춤형 운동 배정</h2>
-                      </Col>
-                      <Col xs={2}>
-                        <CgArrowLongRight className='fs-1' />
-                      </Col>
-                      <Col xs={12}>
-                        <p>
-                          개별 운동을 직접 조합해서 루틴을 만들어
-                          <br />
-                          회원에게 배정해 줄 수 있습니다.
-                        </p>
-                      </Col>
-                    </Row>
-                  </Link>
+                <Col className='personal' onClick={this.goAlloted}>
+                  <Row>
+                    <Col xs={10} className='mb-5'>
+                      <h2>맞춤형 운동 배정</h2>
+                    </Col>
+                    <Col xs={2}>
+                      <CgArrowLongRight className='fs-1' />
+                    </Col>
+                    <Col xs={12}>
+                      <p>
+                        개별 운동을 직접 조합해서 루틴을 만들어
+                        <br />
+                        회원에게 배정해 줄 수 있습니다.
+                      </p>
+                    </Col>
+                  </Row>
                 </Col>
               </Row>
             </Col>
