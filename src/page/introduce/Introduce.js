@@ -91,8 +91,10 @@ const ViewIntroduceItem = ({
 
   return (
     <div className='sectionGlass introduce__article'>
-      <div className='introduce__article--header'>
+      <div className='introduce__article--header d-flex justify-content-between'>
         <h4>{manager_name}</h4>
+        <p>2022-07-17</p>
+        {/* 기능추가 : 센터명->제목으로 변경,작성일자 */}
       </div>
       <div className='introduce__article--img-box'>
         {/* <img className='width-inherit' src={picture} /> */}
@@ -102,6 +104,10 @@ const ViewIntroduceItem = ({
       <div className='introduce__article--text-box'>
         <p>{story}</p>
       </div>
+      <div className='introduce__article--link'>
+        <p>링크</p>
+      </div>
+      {/* 기능추가 :링크 */}
       {loginWhether == 2 ? (
         ''
       ) : loginWhether == 1 ? (
@@ -109,7 +115,7 @@ const ViewIntroduceItem = ({
       ) : (
         <Col>
           <Button
-            className='btn-primary'
+            className='btn-primary text-center'
             variant='secondary'
             onClick={modalOnClick}
           >
@@ -136,8 +142,20 @@ const ViewIntroduceItem = ({
                 ></Form.Control>
               </Col>
             </Row>
-            <Row className='my-2'>
-              <Col xs={1} className='mt-1'>
+            <Row className='mb-2'>
+              <Col xs={1} className=''>
+                <h5>제목</h5>
+              </Col>
+              <Col xs={11}>
+                <Form.Control
+                  id='link'
+                  type='text'
+                  placeholder='제목을 입력해주세요'
+                ></Form.Control>
+              </Col>
+            </Row>
+            <Row className='mb-3'>
+              <Col xs={1} className=''>
                 <h5>내용</h5>
               </Col>
               <Col xs={11}>
@@ -150,21 +168,35 @@ const ViewIntroduceItem = ({
                 ></Form.Control>
               </Col>
             </Row>
-            <Col xs={12} className='text-danger text-end mt-3'>
-              <span className='m-2'>
-                삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
-              </span>
-              <Button
-                onClick={() =>
-                  confirm('정말 삭제하시겠습니까?') == true
-                    ? handleDelete(idi)
-                    : alert('삭제가 취소 되었습니다.')
-                }
-                variant='outline-danger'
-              >
-                삭제
-              </Button>
-            </Col>
+            <Row className='mb-2'>
+              <Col xs={1} className=''>
+                <h5>링크</h5>
+              </Col>
+              <Col xs={11}>
+                <Form.Control
+                  id='link'
+                  type='text'
+                  placeholder='링크를 입력해주세요'
+                ></Form.Control>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12} className='text-danger text-end mt-3'>
+                <span className='m-2'>
+                  삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+                </span>
+                <Button
+                  onClick={() =>
+                    confirm('정말 삭제하시겠습니까?') == true
+                      ? handleDelete(idi)
+                      : alert('삭제가 취소 되었습니다.')
+                  }
+                  variant='outline-danger'
+                >
+                  삭제
+                </Button>
+              </Col>
+            </Row>
             <Row className='d-flex justify-content-center mt-3'>
               <Button
                 className='btn-primary-dark mx-2'

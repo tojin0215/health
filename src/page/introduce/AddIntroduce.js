@@ -146,6 +146,18 @@ class AddIntroduce extends Component {
                 ></Form.Control>
               </Col> */}
             <Row className='mb-3'>
+              <Col xs={1} className='input_tit'>
+                <h5>제목</h5>
+              </Col>
+              <Col xs={11}>
+                <Form.Control
+                  id='link'
+                  type='text'
+                  placeholder='제목을 입력해주세요'
+                ></Form.Control>
+              </Col>
+            </Row>
+            <Row className='mb-3'>
               <Col xs={1}>
                 <h5>내용</h5>
               </Col>
@@ -158,6 +170,18 @@ class AddIntroduce extends Component {
                   as='textarea'
                   placeholder='내용을 입력해주세요'
                   rows={5}
+                ></Form.Control>
+              </Col>
+            </Row>
+            <Row className='mb-3'>
+              <Col xs={1} className='input_tit'>
+                <h5>링크</h5>
+              </Col>
+              <Col xs={11}>
+                <Form.Control
+                  id='link'
+                  type='text'
+                  placeholder='URL을 입력해주세요'
                 ></Form.Control>
               </Col>
             </Row>
