@@ -11,6 +11,11 @@
   font-size: 26px;
   font-weight: 700;
   border-radius: 0.313rem;
+  align-items: center;
+}
+.introduce__article--header p {
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .introduce__article--img-box {
@@ -24,6 +29,11 @@
 .introduce__article--text-box {
   margin: 30px 24px;
   white-space: pre-wrap;
+  text-align: start;
+}
+
+.introduce__article--link {
+  margin: 30px 24px;
   text-align: start;
 }
 
