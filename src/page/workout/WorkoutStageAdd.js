@@ -617,7 +617,7 @@ class WorkoutStageAdd extends Component {
                   </TableBody>
                 </Table>
                 {this.state.workoutlist.length === 0 ? (
-                  <div className='p-3 fs-5 fw-bold text-center'>
+                  <div className='p-5 fs-5 fw-bold text-center'>
                     <TbMoodSuprised className='fs-3' />
                     <p>설정된 운동이 없습니다.</p>
                   </div>

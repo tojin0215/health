@@ -980,12 +980,13 @@ class Home extends Component {
                     <TextField
                       id='customer_name'
                       variant='standard'
+                      className='customer-input--search w-100 justify-content-center'
                       value={this.props.userinfo.manager_name}
                       // onChange={this.handleChange}
                     />
                   </Col>
                 ) : (
-                  <Col className='text-center '>
+                  <Col className='text-center'>
                     {this.state.open ? (
                       <UserSearch
                         open={this.state.open}
@@ -1000,7 +1001,8 @@ class Home extends Component {
                         <TextField
                           id='customer_name'
                           disabled
-                          placeholder='회원검색'
+                          aria-label='회원 검색'
+                          /* placeholder='회원검색' */
                           variant='standard'
                           onClick={() => this.setState({ open: true })}
                           className='customer-input--search w-100 justify-content-center mt-2'
