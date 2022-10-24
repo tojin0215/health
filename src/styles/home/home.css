@@ -330,4 +330,7 @@ strong {
     width: 7rem;
     height: 7rem;
   }
+  .sectionGlass-manager-des br {
+    display: none;
+  }
 }
