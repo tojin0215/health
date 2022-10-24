@@ -1122,24 +1122,24 @@ class Home extends Component {
             <Row className='sectionGlass-manager'>
               <Col className='sales-statis me-3'>
                 <Row onClick={this.goSales}>
-                  <Col xs={7}>
+                  <Col xs={12} md={7}>
                     <strong>당일 매출</strong>
                     <br />
                     2022년 07월 30일
                   </Col>
-                  <Col xs={5} className='sales-total'>
+                  <Col xs={12} md={5} className='sales-total'>
                     3,200,000원
                   </Col>
                 </Row>
               </Col>
               <Col className='sales-statis'>
                 <Row onClick={this.goSales}>
-                  <Col xs={7}>
+                  <Col xs={12} md={7}>
                     <strong>당월 누적 매출</strong>
                     <br />
                     2022년 07월
                   </Col>
-                  <Col xs={5} className='sales-total'>
+                  <Col xs={12} md={5} className='sales-total'>
                     20,000,000원
                   </Col>
                 </Row>
