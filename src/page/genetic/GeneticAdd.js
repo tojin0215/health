@@ -12,7 +12,7 @@ import {
   selectTrainerReservation,
 } from '../../api/user';
 import Header from '../../component/header/Header';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import Navigation from '../../component/navigation/Navigation';
 import { Container, Table, Row, Col, Button } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
@@ -365,7 +365,7 @@ class GeneticAdd extends Component {
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

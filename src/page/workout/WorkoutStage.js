@@ -1,4 +1,4 @@
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import { Button, Row, Col, Container } from 'react-bootstrap';
@@ -475,7 +475,7 @@ class WorkoutStage extends Component {
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

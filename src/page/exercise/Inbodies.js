@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import UserSearch from '../../component/customer/UserSearch';
 import Footer from '../../component/footer/Footer';
 import {
@@ -622,7 +622,7 @@ class Inbodies extends Component {
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

@@ -9,7 +9,7 @@ import {
 } from '../../api/user';
 import Footer from '../../component/footer/Footer';
 import Header from '../../component/header/Header';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import Navigation from '../../component/navigation/Navigation';
 //css
 import '../../styles/workout/workoutAlloted.css';
@@ -280,7 +280,7 @@ class WorkoutAdd extends Component {
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

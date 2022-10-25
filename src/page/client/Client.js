@@ -21,7 +21,7 @@ import {
 // 컴포넌트
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import Footer from '../../component/footer/Footer';
 import CustomerCalendarComponent from '../../component/customer/CustomerCalendarComponent';
 import Dropdown from 'react-dropdown';
@@ -2096,7 +2096,7 @@ class Client extends Component {
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>
