@@ -79,6 +79,9 @@ strong {
   color: #e04343;
 }
 .sales-statis .row {
+  margin: 0 0.2rem;
+}
+.sales-statis .row {
   border: 1px solid #888888;
   border-radius: 5px;
   padding: 30px 20px;
@@ -312,6 +315,16 @@ strong {
   padding-bottom: 36px;
   font-size: 20px;
 }
+.sales-statis .sales-total {
+  white-space: nowrap;
+}
+
+.home-center__client-status .sectionGlass-manager {
+  margin-right: 1rem;
+}
+.home-center__client-status .sectionGlass-manager:last-child {
+  margin-right: 0;
+}
 
 @media only screen and (max-width: 767px) {
   .home__main-visual--logo p {
@@ -330,7 +343,21 @@ strong {
     width: 7rem;
     height: 7rem;
   }
+  .home-center__client-status .sectionGlass-manager:nth-child(2n) {
+    margin-right: 0;
+  }
+  .sales-statis:first-child {
+    margin-right: 0;
+  }
+}
+@media only screen and (max-width: 620px) {
+  .home-center__client-status .sectionGlass-manager {
+    margin-right: 0;
+  }
   .sectionGlass-manager-des br {
     display: none;
+  }
+  .sales-statis .sales-total {
+    font-size: 20px;
   }
 }

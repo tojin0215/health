@@ -1032,12 +1032,7 @@ class Home extends Component {
           <Container className='home-center'>
             <ClassTimeTable />
             <Row className='home-center__client-status'>
-              <Col
-                xs={12}
-                md={3}
-                className='sectionGlass-manager'
-                onClick={this.goClient}
-              >
+              <Col className='sectionGlass-manager' onClick={this.goClient}>
                 <Row>
                   <Col className='sectionGlass-manger-Tit'>
                     전체회원
@@ -1057,12 +1052,7 @@ class Home extends Component {
                 </Row>
                 {/* <Button>{'>'}</Button> */}
               </Col>
-              <Col
-                xs={12}
-                md={3}
-                className='sectionGlass-manager'
-                onClick={this.goClient}
-              >
+              <Col className='sectionGlass-manager' onClick={this.goClient}>
                 <Row>
                   <Col className='sectionGlass-manger-Tit'>
                     유효회원
@@ -1081,12 +1071,7 @@ class Home extends Component {
                   </Col>
                 </Row>
               </Col>
-              <Col
-                xs={12}
-                md={3}
-                className='sectionGlass-manager'
-                onClick={this.goClient}
-              >
+              <Col className='sectionGlass-manager' onClick={this.goClient}>
                 <Row>
                   <Col className='sectionGlass-manger-Tit'>
                     마감임박회원
@@ -1105,12 +1090,7 @@ class Home extends Component {
                   </Col>
                 </Row>
               </Col>
-              <Col
-                xs={12}
-                md={3}
-                className='sectionGlass-manager'
-                onClick={this.goClient}
-              >
+              <Col className='sectionGlass-manager' onClick={this.goClient}>
                 <Row>
                   <Col className='sectionGlass-manger-Tit'>
                     마감회원
