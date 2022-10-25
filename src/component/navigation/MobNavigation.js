@@ -21,10 +21,11 @@ import $ from 'jquery';
 //app 사이드 내비게이션
 // import { MdMenu } from 'react-icons/md';
 
-import './Menu.css';
+import './MobNavigation.css';
 import { IconButton } from '@mui/material';
 
-class Menu extends Component {
+// 모바일 네비게이션 Mobile Navigation
+class MobNavigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -158,7 +159,7 @@ class Menu extends Component {
               </p>
             </div>
             <Drawer
-              variant='temporary'
+              variant='permanent'
               open={this.state.mobile}
               onClose={() => this.mobileClose()}
             >
@@ -229,7 +230,7 @@ class Menu extends Component {
             </div>
 
             <Drawer
-              variant='temporary'
+              variant='permanent'
               open={this.state.mobile}
               onClose={() => this.mobileClose()}
             >
@@ -349,11 +350,7 @@ class Menu extends Component {
               </p>
             </div>
 
-            <Drawer
-              variant='temporary'
-              open={this.state.mobile}
-              onClose={() => this.mobileClose()}
-            >
+            <Drawer open={this.state.mobile} onClose={() => this.mobileClose()}>
               <ul>
                 <h3>{this.props.userinfo.manager_name}</h3>
                 <li class='dropdown'>
@@ -504,4 +501,4 @@ const megaDispatchToProps = (dispatch) => {
     },
   };
 };
-export default connect(megaStateToProps, megaDispatchToProps)(Menu);
+export default connect(megaStateToProps, megaDispatchToProps)(MobNavigation);

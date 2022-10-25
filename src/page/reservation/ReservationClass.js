@@ -21,7 +21,7 @@ import { AiFillTool } from 'react-icons/ai';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 
 import { connect } from 'react-redux';
 import 'react-dropdown/style.css';
@@ -878,7 +878,7 @@ class ReservationClass extends Component {
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import Drawer from '../../component/navigation/Drawer';
 import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
@@ -45,7 +45,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 
 // import  { PC, Mobile } from '../../component/MediaQuery';
-// import Menu from '../../component/navigation/Menu';
+// import MobNavigation from '../../component/navigation/MobNavigation';
 
 // 아이콘
 import { TbMoodSuprised } from 'react-icons/tb';
@@ -347,8 +347,8 @@ class Home extends Component {
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
-          {/* 이전처럼 Navigation Menu 공존 */}
+          <MobNavigation goLogin={this.goLogin} />
+          {/* 이전처럼 Navigation MobNavigation 공존 */}
         </div>
         {/*.header */}
         {this.props.userinfo.loginWhether === 2 ? (

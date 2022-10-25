@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Navigation from '../../component/navigation/Navigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import { connect } from 'react-redux';
 import TextField from '@mui/material/TextField';
 
@@ -460,7 +460,7 @@ class Admin extends Component {
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>관리자페이지</h2>

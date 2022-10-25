@@ -14,7 +14,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 // const ip = Setting.ip;
 import { SERVER_URL } from '../../const/settings';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
@@ -422,7 +422,7 @@ class AssignCheckExercise extends Component {
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>
