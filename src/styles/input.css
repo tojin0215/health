@@ -9,7 +9,7 @@
   border: 0;
 }
 .customer-input--search {
-  height: 45px;
+  height: 100%;
   color: #fff;
   cursor: pointer;
   background-color: #fff;
