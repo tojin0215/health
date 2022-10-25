@@ -138,7 +138,7 @@ class MobNavigation extends Component {
     // console.log(userinfo);
 
     return (
-      <div className=''>
+      <div className='mob-navigation'>
         {userinfo.loginWhether === 2 ? (
           //회원
           <div class='menu'>
@@ -337,83 +337,69 @@ class MobNavigation extends Component {
             </Drawer>
           </div>
         ) : (
-          <div class='menu'>
+          // 0 사업주
+          <div className='menu'>
             <IconButton onClick={() => this.mobileOpen()}>
               <MenuIcon />
             </IconButton>
-            <div class='logo'>
-              <p className='fs-5'>
+            <div className='logo'>
+              <p>
                 <a href='/home'>
                   {this.props.userinfo.fitness_name}
                   <span className='text-secondary ps-2'>센터</span>
                 </a>
               </p>
             </div>
-
-            <Drawer open={this.state.mobile} onClose={() => this.mobileClose()}>
-              <ul>
+            <Drawer
+              className='mob-nav__drawer'
+              open={this.state.mobile}
+              onClose={() => this.mobileClose()}
+            >
+              <ul className='mob-nav__drawer__menu'>
                 <h3>{this.props.userinfo.manager_name}</h3>
                 <li class='dropdown'>
                   <NavLink exact to='/mypage'>
                     내 정보
                   </NavLink>
                 </li>
-                <div onClick={() => this.sideMenu()}>센터 소개(대메뉴)</div>
+                <div onClick={() => this.sideMenu()}>센터</div>
                 {this.state.sideGroup.center ? (
                   <li class='dropdown'>
-                    <NavLink exact to='/introduce'>
-                      센터 소개
+                    <NavLink exact to='/sales'>
+                      매출 현황
                     </NavLink>
                     <br />
-                    <NavLink exact to='/introduceAdd'>
-                      센터 소개 등록
+                    <NavLink exact to='/trainer'>
+                      강사 관리
+                    </NavLink>
+                    <br />
+                    <NavLink exact to='/introduce'>
+                      센터 소개
                     </NavLink>
                   </li>
                 ) : (
                   ''
                 )}
-                <div onClick={() => this.sideMenu2()}>회원(대메뉴)</div>
+                <div onClick={() => this.sideMenu2()}>회원</div>
                 {this.state.sideGroup.client ? (
                   <li class='dropdown'>
                     <NavLink exact to='/client'>
                       회원 관리
                     </NavLink>
                     <br />
-                    <NavLink exact to='/clientAdd'>
-                      회원 등록
-                    </NavLink>
-                    <br />
-                    <NavLink exact to='/inbodies'>
-                      인바디 정보
-                    </NavLink>
-                    <br />
-                    <NavLink exact to='/genetic'>
-                      DTC
+                    <NavLink exact to='/client'>
+                      이용권 등록
                     </NavLink>
                   </li>
                 ) : (
                   ''
                 )}
-                <div onClick={() => this.sideMenu3()}>강사(대메뉴)</div>
-                {this.state.sideGroup.trainer ? (
-                  <li class='dropdown'>
-                    <NavLink exact to='/trainer'>
-                      강사 관리
-                    </NavLink>
-                    <br />
-                    <NavLink exact to='/trainerAdd'>
-                      강사 등록
-                    </NavLink>
-                  </li>
-                ) : (
-                  ''
-                )}
-                <div onClick={() => this.sideMenu4()}>수업(대메뉴)</div>
+                <div onClick={() => this.sideMenu4()}>수업</div>
                 {this.state.sideGroup.reserv ? (
                   <li class='dropdown'>
                     <li>
                       <NavLink exact to='/reservation'>
-                        수업
+                        시간표/예약
                       </NavLink>
                       <br />
                       <NavLink exact to='/reservationClass'>
@@ -424,10 +410,10 @@ class MobNavigation extends Component {
                 ) : (
                   ''
                 )}
-                <div onClick={() => this.sideMenu5()}>운동(대메뉴)</div>
+                <div onClick={() => this.sideMenu5()}>운동</div>
                 {this.state.sideGroup.workout ? (
                   <li class='dropdown'>
-                    <NavLink exact to='/workoutAlloted'>
+                    <NavLink exact to='/workout'>
                       운동 배정
                     </NavLink>
                     <br />
@@ -441,39 +427,16 @@ class MobNavigation extends Component {
                         },
                       }}
                     >
-                      운동 배정된 목록
+                      회원 운동 확인
                     </Link>
                     <br />
                     <NavLink exact to='/workoutAdd'>
-                      운동 설정
-                    </NavLink>
-                    <br />
-                    <NavLink exact to='/workoutStage'>
-                      기본 루틴 배정
-                    </NavLink>
-                    <br />
-                    <NavLink exact to='/workoutStageAdd'>
-                      기본 루틴 설정
+                      운동 만들기
                     </NavLink>
                   </li>
                 ) : (
                   ''
                 )}
-                <div onClick={() => this.sideMenu6()}>매출(대메뉴)</div>
-                {this.state.sideGroup.sales ? (
-                  <li class='dropdown'>
-                    <NavLink exact to='/sales'>
-                      매출 현황
-                    </NavLink>
-                    <br />
-                    <NavLink exact to='/addSales'>
-                      결제 등록
-                    </NavLink>
-                  </li>
-                ) : (
-                  ''
-                )}
-
                 <li className='text-start mt-3'>
                   <Button variant='danger' onClick={this.handleLogout}>
                     로그아웃
