@@ -146,10 +146,10 @@ class AddIntroduce extends Component {
                 ></Form.Control>
               </Col> */}
             <Row className='mb-3'>
-              <Col xs={1} className='input_tit'>
+              <Col xs={12} md={1} className='input_tit'>
                 <h5>제목</h5>
               </Col>
-              <Col xs={11}>
+              <Col xs={12} md={11}>
                 <Form.Control
                   id='link'
                   type='text'
@@ -158,10 +158,10 @@ class AddIntroduce extends Component {
               </Col>
             </Row>
             <Row className='mb-3'>
-              <Col xs={1}>
+              <Col xs={12} md={1}>
                 <h5>내용</h5>
               </Col>
-              <Col xs={11}>
+              <Col xs={12} md={11}>
                 <Form.Control
                   id='story'
                   defaultValue={this.state.story}
@@ -174,10 +174,10 @@ class AddIntroduce extends Component {
               </Col>
             </Row>
             <Row className='mb-3'>
-              <Col xs={1} className='input_tit'>
+              <Col xs={12} md={1} className='input_tit'>
                 <h5>링크</h5>
               </Col>
-              <Col xs={11}>
+              <Col xs={12} md={11}>
                 <Form.Control
                   id='link'
                   type='text'
@@ -186,10 +186,10 @@ class AddIntroduce extends Component {
               </Col>
             </Row>
             <Row>
-              <Col xs={1} className='input_tit'>
+              <Col xs={12} md={1} className='input_tit'>
                 <h5>사진</h5>
               </Col>
-              <Col xs={11}>
+              <Col xs={12} md={11}>
                 <Form.Control
                   id='picture'
                   type='file'
