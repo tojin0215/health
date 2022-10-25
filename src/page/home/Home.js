@@ -1032,13 +1032,10 @@ class Home extends Component {
           <Container className='home-center'>
             <ClassTimeTable />
             <Row className='home-center__client-status'>
-              <Col
-                className='sectionGlass-manager me-3'
-                onClick={this.goClient}
-              >
+              <Col className='sectionGlass-manager' onClick={this.goClient}>
                 <Row>
                   <Col className='sectionGlass-manger-Tit'>
-                    전체회원
+                    전체회원&nbsp;
                     <br />
                     <strong>1326</strong>명
                   </Col>
@@ -1048,20 +1045,17 @@ class Home extends Component {
                 </Row>
                 <Row>
                   <Col className='sectionGlass-manager-des'>
-                    현재까지 등록된 모든 회원수는
+                    현재까지 등록된 모든 회원수는&nbsp;
                     <br />
                     1326명 입니다.
                   </Col>
                 </Row>
                 {/* <Button>{'>'}</Button> */}
               </Col>
-              <Col
-                className='sectionGlass-manager me-3'
-                onClick={this.goClient}
-              >
+              <Col className='sectionGlass-manager' onClick={this.goClient}>
                 <Row>
                   <Col className='sectionGlass-manger-Tit'>
-                    유효회원
+                    유효회원&nbsp;
                     <br />
                     <strong>364</strong>명
                   </Col>
@@ -1071,19 +1065,16 @@ class Home extends Component {
                 </Row>
                 <Row>
                   <Col className='sectionGlass-manager-des'>
-                    회원권을 유지중인 회원은
+                    회원권을 유지중인 회원은&nbsp;
                     <br />
                     364명 입니다.
                   </Col>
                 </Row>
               </Col>
-              <Col
-                className='sectionGlass-manager me-3'
-                onClick={this.goClient}
-              >
+              <Col className='sectionGlass-manager' onClick={this.goClient}>
                 <Row>
                   <Col className='sectionGlass-manger-Tit'>
-                    마감임박회원
+                    마감임박회원&nbsp;
                     <br />
                     <strong>48</strong>명
                   </Col>
@@ -1093,7 +1084,7 @@ class Home extends Component {
                 </Row>
                 <Row>
                   <Col className='sectionGlass-manager-des'>
-                    잔여 회원권 일정량 미만인 회원
+                    잔여 회원권 일정량 미만인 회원&nbsp;
                     <br />
                     48명 입니다.
                   </Col>
@@ -1102,7 +1093,7 @@ class Home extends Component {
               <Col className='sectionGlass-manager' onClick={this.goClient}>
                 <Row>
                   <Col className='sectionGlass-manger-Tit'>
-                    마감회원
+                    마감회원&nbsp;
                     <br />
                     <strong>962</strong>명
                   </Col>
@@ -1112,7 +1103,7 @@ class Home extends Component {
                 </Row>
                 <Row>
                   <Col className='sectionGlass-manager-des'>
-                    회원권이 이미 마감된 회원은
+                    회원권이 이미 마감된 회원은&nbsp;
                     <br />
                     962명 입니다.
                   </Col>
@@ -1120,26 +1111,26 @@ class Home extends Component {
               </Col>
             </Row>
             <Row className='sectionGlass-manager'>
-              <Col className='sales-statis me-3'>
+              <Col xs={12} md={6} className='sales-statis'>
                 <Row onClick={this.goSales}>
-                  <Col xs={12} md={7}>
+                  <Col xs={7}>
                     <strong>당일 매출</strong>
                     <br />
                     2022년 07월 30일
                   </Col>
-                  <Col xs={12} md={5} className='sales-total'>
+                  <Col xs={5} className='sales-total'>
                     3,200,000원
                   </Col>
                 </Row>
               </Col>
-              <Col className='sales-statis'>
+              <Col xs={12} md={6} className='sales-statis'>
                 <Row onClick={this.goSales}>
-                  <Col xs={12} md={7}>
+                  <Col xs={7}>
                     <strong>당월 누적 매출</strong>
                     <br />
                     2022년 07월
                   </Col>
-                  <Col xs={12} md={5} className='sales-total'>
+                  <Col xs={5} className='sales-total'>
                     20,000,000원
                   </Col>
                 </Row>
