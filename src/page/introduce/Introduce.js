@@ -130,23 +130,23 @@ const ViewIntroduceItem = ({
               <img className='w-100' src={'/api/' + picture} />
             </div>
             <Row>
-              <Col xs={1} className='input_tit'>
+              <Col md={12} lg={2} className='input_tit'>
                 <h5>사진</h5>
               </Col>
-              <Col xs={11}>
+              <Col md={12} lg={10}>
                 <Form.Control
                   type='file'
                   onChange={updateChange1}
                   accept='image/*'
-                  className='w-100 '
+                  className='w-100'
                 ></Form.Control>
               </Col>
             </Row>
             <Row className='mb-2'>
-              <Col xs={1} className=''>
+              <Col md={12} lg={2}>
                 <h5>제목</h5>
               </Col>
-              <Col xs={11}>
+              <Col md={12} lg={10}>
                 <Form.Control
                   id='link'
                   type='text'
@@ -155,10 +155,10 @@ const ViewIntroduceItem = ({
               </Col>
             </Row>
             <Row className='mb-3'>
-              <Col xs={1} className=''>
+              <Col md={12} lg={2}>
                 <h5>내용</h5>
               </Col>
-              <Col xs={11}>
+              <Col md={12} lg={10}>
                 <Form.Control
                   value={story_input}
                   onChange={updateChange2}
@@ -169,10 +169,10 @@ const ViewIntroduceItem = ({
               </Col>
             </Row>
             <Row className='mb-2'>
-              <Col xs={1} className=''>
+              <Col md={12} lg={2}>
                 <h5>링크</h5>
               </Col>
-              <Col xs={11}>
+              <Col md={12} lg={10}>
                 <Form.Control
                   id='link'
                   type='text'
