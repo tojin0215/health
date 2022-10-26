@@ -121,7 +121,7 @@ const ViewIntroduceItem = ({
           >
             수정하기
           </Button>
-          <Modal show={showModal} size='lg' onHide={() => setShowModal(false)}>
+          <Modal show={showModal} onHide={() => setShowModal(false)}>
             {/* <Modal show={true} className=''> */}
             <h2 className='text-center'>{manager_name}</h2>
             <div className='py-3 text-center'>
