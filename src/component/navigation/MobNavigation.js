@@ -23,6 +23,8 @@ import $ from 'jquery';
 
 import './MobNavigation.css';
 import { IconButton } from '@mui/material';
+import { IoSettingsOutline } from 'react-icons/io5';
+import { MdKeyboardArrowRight } from 'react-icons/md';
 
 // 모바일 네비게이션 Mobile Navigation
 class MobNavigation extends Component {
@@ -356,15 +358,24 @@ class MobNavigation extends Component {
               onClose={() => this.mobileClose()}
             >
               <ul className='mob-nav__drawer__menu'>
-                <h3>{this.props.userinfo.manager_name}</h3>
-                <li class='dropdown'>
+                <h3 exact to='/mypage'>
+                  {this.props.userinfo.manager_name}
+                  {/*  <IoSettingsOutline /> */}
+                </h3>
+                <li className='dropdown'>
                   <NavLink exact to='/mypage'>
-                    내 정보
+                    내 정보 사업자
                   </NavLink>
                 </li>
-                <div onClick={() => this.sideMenu()}>센터</div>
+                <div
+                  className='mob-nav__drawer__menu-item d-flex justify-content-between'
+                  onClick={() => this.sideMenu()}
+                >
+                  센터
+                  <MdKeyboardArrowRight />
+                </div>
                 {this.state.sideGroup.center ? (
-                  <li class='dropdown'>
+                  <li className='dropdown'>
                     <NavLink exact to='/sales'>
                       매출 현황
                     </NavLink>
@@ -380,7 +391,13 @@ class MobNavigation extends Component {
                 ) : (
                   ''
                 )}
-                <div onClick={() => this.sideMenu2()}>회원</div>
+                <div
+                  className='mob-nav__drawer__menu-item d-flex justify-content-between'
+                  onClick={() => this.sideMenu2()}
+                >
+                  회원
+                  <MdKeyboardArrowRight />
+                </div>
                 {this.state.sideGroup.client ? (
                   <li class='dropdown'>
                     <NavLink exact to='/client'>
@@ -394,7 +411,13 @@ class MobNavigation extends Component {
                 ) : (
                   ''
                 )}
-                <div onClick={() => this.sideMenu4()}>수업</div>
+                <div
+                  className='mob-nav__drawer__menu-item d-flex justify-content-between'
+                  onClick={() => this.sideMenu4()}
+                >
+                  수업
+                  <MdKeyboardArrowRight />
+                </div>
                 {this.state.sideGroup.reserv ? (
                   <li class='dropdown'>
                     <li>
@@ -410,7 +433,13 @@ class MobNavigation extends Component {
                 ) : (
                   ''
                 )}
-                <div onClick={() => this.sideMenu5()}>운동</div>
+                <div
+                  className='mob-nav__drawer__menu-item d-flex justify-content-between'
+                  onClick={() => this.sideMenu5()}
+                >
+                  운동
+                  <MdKeyboardArrowRight />
+                </div>
                 {this.state.sideGroup.workout ? (
                   <li class='dropdown'>
                     <NavLink exact to='/workout'>
@@ -437,7 +466,7 @@ class MobNavigation extends Component {
                 ) : (
                   ''
                 )}
-                <li className='text-start mt-3'>
+                <li className='text-center mt-3'>
                   <Button variant='danger' onClick={this.handleLogout}>
                     로그아웃
                   </Button>
