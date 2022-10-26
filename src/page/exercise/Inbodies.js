@@ -643,15 +643,18 @@ class Inbodies extends Component {
         </div>
         {/*.header */}
         <Container>
-          <Row className=''>
-            <Col md={6} className='text-center mb-2'>
+          <Row>
+            <Col>
+              <h4>회원선택</h4>
+            </Col>
+            <Col className='text-center mb-2'>
               {this.props.userinfo.loginWhether === 2 ? (
                 <TextField
                   id='customer_name'
-                  label='선택된 회원'
+                  /* label='선택된 회원' */
                   disabled
                   variant='standard'
-                  className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
+                  className='customer-input--search w-100 justify-content-center'
                   InputProps={{ disableUnderline: true }}
                   value={this.props.userinfo.manager_name}
                 />
@@ -674,7 +677,7 @@ class Inbodies extends Component {
                     disabled
                     variant='standard'
                     onClick={() => this.setState({ open: true })}
-                    className='boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5'
+                    className='customer-input--search w-100 justify-content-center mt-2'
                     InputProps={{ disableUnderline: true }}
                     value={this.state.client_name}
                     style={{ cursor: 'pointer' }}
@@ -682,12 +685,12 @@ class Inbodies extends Component {
                 </div>
               )}
             </Col>
-            <Col md={4} className='mb-2'>
+            <Col className='mb-2'>
               <Button className='w-100 h-100' onClick={this.clickOpen}>
                 인바디 변화 보기
               </Button>
             </Col>
-            <Col md={2} className='mb-2'>
+            <Col className='mb-2'>
               <Link
                 to={{
                   pathname: '/inbodiesAdd',

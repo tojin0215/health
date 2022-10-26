@@ -275,6 +275,11 @@ class Navigation extends Component {
                       이용권 등록
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink exact to='/inbodies'>
+                      인바디 정보 (삭제)
+                    </NavLink>
+                  </li>
                 </ul>
               </NavLink>
               <NavLink exact to='/reservation'>

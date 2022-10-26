@@ -40,6 +40,9 @@ import {
 } from '../../api/user';
 import TrainerSearch from '../../component/customer/TrainerSearch';
 
+/* icon */
+import { TbMoodSuprised } from 'react-icons/tb';
+
 // locale 오류로 임시 삭제
 // registerLocale('ko', ko);
 
@@ -1340,12 +1343,13 @@ class ReservationClass extends Component {
               </thead>
               <tbody>
                 <tr>
-                  <td>
+                  <td align='center' className='align-top'>
                     <div className='class-info'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
+                        <div className='py-2 my-1 text-secondary rounded'>
+                          <TbMoodSuprised className='fs-3' />
+                          <p>수업이 없습니다.</p>
                         </div>
                       ) : (
                         this.state.reservationClass.filter(
@@ -1366,12 +1370,13 @@ class ReservationClass extends Component {
                       )}
                     </div>
                   </td>
-                  <td>
+                  <td name='mon' align='center' className='align-top'>
                     <div className='class-info'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
+                        <div className='py-2 my-1 text-secondary rounded'>
+                          <TbMoodSuprised className='fs-3' />
+                          <p>수업이 없습니다.</p>
                         </div>
                       ) : (
                         this.state.reservationClass.filter(
@@ -1392,12 +1397,13 @@ class ReservationClass extends Component {
                       )}
                     </div>
                   </td>
-                  <td>
+                  <td name='tue' align='center' className='align-top'>
                     <div className='class-info'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
+                        <div className='py-2 my-1 text-secondary rounded'>
+                          <TbMoodSuprised className='fs-3' />
+                          <p>수업이 없습니다.</p>
                         </div>
                       ) : (
                         this.state.reservationClass.filter(
@@ -1418,12 +1424,13 @@ class ReservationClass extends Component {
                       )}
                     </div>
                   </td>
-                  <td>
+                  <td name='wed' align='center' className='align-top'>
                     <div className='class-info'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
+                        <div className='py-2 my-1 text-secondary rounded'>
+                          <TbMoodSuprised className='fs-3' />
+                          <p>수업이 없습니다.</p>
                         </div>
                       ) : (
                         this.state.reservationClass.filter(
@@ -1444,12 +1451,13 @@ class ReservationClass extends Component {
                       )}
                     </div>
                   </td>
-                  <td>
+                  <td name='thu' align='center' className='align-top'>
                     <div className='class-info'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
+                        <div className='py-2 my-1 text-secondary rounded'>
+                          <TbMoodSuprised className='fs-3' />
+                          <p>수업이 없습니다.</p>
                         </div>
                       ) : (
                         this.state.reservationClass.filter(
@@ -1470,12 +1478,13 @@ class ReservationClass extends Component {
                       )}
                     </div>
                   </td>
-                  <td>
+                  <td name='fri' align='center' className='align-top'>
                     <div className='class-info'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
+                        <div className='py-2 my-1 text-secondary rounded'>
+                          <TbMoodSuprised className='fs-3' />
+                          <p>수업이 없습니다.</p>
                         </div>
                       ) : (
                         this.state.reservationClass.filter(
@@ -1496,12 +1505,13 @@ class ReservationClass extends Component {
                       )}
                     </div>
                   </td>
-                  <td>
+                  <td name='sat' align='center' className='align-top'>
                     <div className='class-info'>
                       {' '}
                       {this.state.reservationClass.length == 0 ? (
-                        <div className='border py-2 my-1 text-secondary'>
-                          수업이 없습니다.
+                        <div className='py-2 my-1 text-secondary rounded'>
+                          <TbMoodSuprised className='fs-3' />
+                          <p>수업이 없습니다.</p>
                         </div>
                       ) : (
                         this.state.reservationClass.filter(

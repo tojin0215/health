@@ -17,7 +17,7 @@
 }
 
 /* 
-* 수업 만들기 인풋 폼
+수업 만들기 인풋 폼
 */
 .exerciseGroup h5 {
   white-space: nowrap;
@@ -54,6 +54,25 @@
 }
 .reservation-class--trainer-input::placeholder {
   color: #111;
+}
+/* 수정 */
+.resevation__class-Tabs {
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 20px;
+}
+.reservation__class__tabs-item {
+  border: 0;
+}
+.reservation__class__tabs-item .nav-link:hover {
+  border: 0;
+  color: #ebff2e;
+}
+.reservation__class__tabs-item .nav-item.show .nav-link,
+.reservation__class__tabs-item .nav-link.active {
+  border: 0;
+  background-color: transparent;
+  color: #ebff2e;
 }
 
 /* 강사 검색 인풋 */

@@ -392,7 +392,7 @@ class Mypage extends Component {
               <Col className='myName text-primary mb-4' xs={12}>
                 <h4>{this.state.fitness_name}</h4>
               </Col>
-              <Col className='myInfo me-4'>
+              <Col xs={12} md={6} className='myInfo me-4 mb-3'>
                 <h4>내정보</h4>
                 <ul>
                   <li>
@@ -409,7 +409,7 @@ class Mypage extends Component {
                   </li>
                 </ul>
               </Col>
-              <Col className='fitInfo'>
+              <Col className='fitInfo  mb-3'>
                 <h4>센터정보</h4>
                 <ul>
                   <li>

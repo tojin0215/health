@@ -2108,6 +2108,7 @@ class Reservation extends Component {
                     <TablePagination
                       rowsPerPageOptions={[
                         5,
+
                         10,
                         25,
                         {
