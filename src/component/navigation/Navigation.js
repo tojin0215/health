@@ -135,7 +135,7 @@ class Navigation extends Component {
               <NavLink exact to='/reservation'>
                 <span className={styles.navitem}>수업관리</span>
                 <ul>
-                  <li class='dropdown'>
+                  <li>
                     <NavLink exact to='/reservation'>
                       수업
                     </NavLink>
@@ -285,7 +285,7 @@ class Navigation extends Component {
               <NavLink exact to='/reservation'>
                 <span className={styles.navitem}>수업</span>
                 <ul>
-                  <li class='dropdown'>
+                  <li>
                     <NavLink exact to='/reservation'>
                       시간표/예약
                     </NavLink>
