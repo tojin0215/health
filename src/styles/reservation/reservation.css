@@ -1,26 +1,15 @@
 /* 탭 */
 
 /*
- 수업 시간표 - 진행중인 수업 
+* 수업 시간표 - 진행중인 수업 
 */
-/* .class-list {
-  border-bottom: 0;
-}
-.class-list .MuiTableHead-root {
-  background-color: #111;
-  border-bottom: 2px solid #fff;
-}
-.class-list .MuiTableHead-root > tr > th {
-  color: rgba(200, 200, 200, 1);
-}
 
-.class-list .MuiTableBody-root {
-} */
 /* thead 폰트 컬러 */
 .reservationClassWrap .table thead tr th {
   font-weight: 400;
   color: #fff;
 }
+
 /* tbody 폰트 컬러 */
 .reservationClassWrap tbody tr td {
   color: #fff;
@@ -208,12 +197,6 @@
   left: 14px;
 }
 
-/* 
-.MuiInputBase-formControl > #customer_name {
-  font-size: 1.2rem;
-  -webkit-text-fill-color: #000;
-} */
-
 .reservation .MuiTextField-root > .MuiInputBase-formControl {
   margin-top: 4px;
 }
@@ -228,17 +211,6 @@
 /* 
 * 진행중인 수업 - 예약 현황 - 페이지네이션 
 */
-/* 페이지네이션 글자 색상 */
-.reservation .MuiTablePagination-toolbar {
-  /* color: #ddd; */
-}
-/* 페이지네이션 아이콘 색상 */
-.reservation .MuiTablePagination-selectIcon {
-  /* color: #fff; */
-}
-.reservation .MuiTablePagination-actions .MuiButtonBase-root {
-  /* color: #fff; */
-}
 /* 강사별 조회 회원별 조회 탭 색상 */
 .reservation .reservation__reservation-status .tab-content {
   background-color: #111;
@@ -282,10 +254,6 @@
   background-color: transparent;
   color: #ebff2e;
 }
-/* .reservation__class__tabs-item .nav-link {
-  background-color: transparent;
-  color: #ebff2e;
-} */
 
 /* 필터 */
 .btn-filter {

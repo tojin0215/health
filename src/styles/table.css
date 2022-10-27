@@ -13,9 +13,7 @@
   padding: 10px 0;
   white-space: nowrap;
 }
-/* .reservation-class__schedule-content:hover {
-  border: 1px solid #e2ff33;
-} */
+
 .class-info > .reservation-class__schedule-content:hover {
   border: 1px solid #e2ff33;
 }
@@ -45,9 +43,7 @@
   margin: 0;
   border-color: #bbb;
 }
-/* .dropdown-toggle::after {
-	margin-left: 2rem;
-} */
+
 .react-bs-table-sizePerPage-dropdown .dropdown-menu {
   top: 126%;
   border-radius: 0.83rem;
@@ -84,7 +80,6 @@
 .react-bs-table-pagination ul li {
   width: 100%;
 }
-/**/
 
 .react-bs-table table td,
 .react-bs-table table th {

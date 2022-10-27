@@ -1,49 +1,8 @@
-/*------ 고객 검색창 ------*/
-/* 전체 창 가로 값*/
-.customerSearch {
-}
-.customerSearch button {
-}
-/* 선택창 레이아웃 */
-.MuiDialog-root .Dropdown-root {
-}
-/* 버튼, 인풋창 크기 */
-.MuiDialog-root input[type='text'] {
-}
-.MuiDialog-root button {
-}
-/* 고객 이름 등 셀렉트 */
-.MuiDialog-root .Dropdown-root .Dropdown-control {
-  /* width: 100%; */
-}
-/* 타이틀 폰트 */
-.MuiDialog-root .MuiTypography-h6 {
-}
-/* 검색창 div 크기 */
-.MuiDialog-root .customerSearch .customerSearchIn {
-  /* width: 100%; */
-}
-/* 텍스트 인풋 크기 */
-.MuiDialog-root .customerSearch .customerSearchIn #search {
-  /* width: 50%; */
-}
-/* 고객 검색 버튼크기 */
-.MuiDialog-root .customerSearch .customerSearchIn button {
-  /* width: 50%; */
-}
-/* 테이블 폰트 크기 */
-.MuiTable-root .MuiTableCell-root {
-  /* width: auto; */
-}
 /* 버튼 크기 */
 .MuiTable-root button {
   border-radius: 31px;
-  /* width: auto; */
 }
 /* 테이블 헤더 */
-.MuiTable-root .MuiTableCell-head {
-  /* text-align: center; */
-}
 
 /* 테이블 셀 사이즈 */
 
@@ -54,9 +13,6 @@
 /* 닫기 버튼 */
 .MuiPaper-root .MuiDialogActions-spacing {
   justify-content: center;
-}
-.MuiDialog-paperWidthLg {
-  /* width: 56%; */
 }
 .MuiDialogContent-root {
   min-width: 550px;
@@ -93,7 +49,7 @@
   border-radius: 5px;
   background-color: #333;
   color: #fff;
-} /* 닫기/취소 */
+} /* 닫기 취소 */
 
 .btn-paidControl {
   width: 12.5rem;
@@ -105,7 +61,9 @@
 .btn-paidControl:hover {
   background: #ebff2e;
   color: #222;
-} /* 이용권 버튼 */
+}
+
+/* 이용권 버튼 */
 .btn-secondary {
   width: 12.5rem;
   height: 2.8rem;
@@ -188,8 +146,6 @@
 /* bootstrap modal */
 .modal-header {
   border: none;
-  /* background-color: #222;
-  border-color: #333; */
 }
 .modal-content {
   padding: 3.125rem;
@@ -204,8 +160,6 @@
   font-weight: 700;
   line-height: 1;
   color: #fff;
-  /* text-shadow: 0 1px 0 #fff; */
-  /* filter: alpha(opacity=20); */
   opacity: 0.5;
 }
 .close > span:last-child {

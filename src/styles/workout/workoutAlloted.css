@@ -74,15 +74,10 @@
 h4 span {
   color: #ebff2e;
 }
-/* .workoutTabs .btn-table:hover {
-  background: #fff;
-  color: #222;
-  border-radius: 5px 5px 0 0;
-} */
+
 /*
  운동 선택 - 배정 버튼
 */
-/* .workout-alloted .workout-alloted__select--plus, */
 .wrap .workout-alloted__select--plus {
   color: #c2c2c2;
   text-align: center;
@@ -91,8 +86,6 @@ h4 span {
 }
 
 .wrap .workout-alloted__select--plus:hover {
-  /* background-color: rgba(235, 235, 46, 0.3); */
-  /* background-color: #eee; */
   color: #0077fe;
 }
 

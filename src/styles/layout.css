@@ -34,7 +34,6 @@ body {
 }
 
 .boxmorpinsm {
-  /* background-color: #222; */
   box-shadow: rgb(60, 60, 60) 5px 5px 10px 0px inset,
     rgb(60, 60, 60) -5px -5px 10px 0px inset;
   -webkit-box-shadow: rgb(60, 60, 60) 5px 5px 10px 0px inset,
@@ -71,7 +70,6 @@ body {
   -webkit-border-radius: 22px;
 }
 .redboxmorpsm:active {
-  /* background-color: rgb(240, 244, 248); */
   box-shadow: rgba(255, 138, 138, 0.5) 5px 5px 10px 0px inset,
     rgb(255, 192, 192) -5px -5px 10px 0px inset;
   -webkit-box-shadow: rgba(255, 138, 138, 0.5) 5px 5px 10px 0px inset,
@@ -119,7 +117,6 @@ body {
 }
 
 .boxmorpsm:active {
-  /* background-color: rgb(240, 244, 248); */
   box-shadow: rgba(60, 60, 60, 0.5) 5px 5px 10px 0px inset,
     rgb(255, 255, 255) -5px -5px 10px 0px inset;
   -webkit-box-shadow: rgba(60, 60, 60, 0.5) 5px 5px 10px 0px inset,

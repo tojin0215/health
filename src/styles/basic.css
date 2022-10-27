@@ -1,9 +1,5 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
-.MuiDrawer-root li a {
-  /* color: #000; */
-}
-
 html {
   font-size: 16px;
   word-break: break-word;
@@ -25,9 +21,9 @@ h2 {
 }
 
 h3 {
-  /* border-bottom: 1px solid #ebff2e; */
   padding-bottom: 0.6rem;
-} /* sectionGlass 제목  */
+}
+/* sectionGlass 제목  */
 
 h4 {
   margin: 0;
