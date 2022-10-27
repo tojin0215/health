@@ -67,12 +67,13 @@ import {
 import moment from 'moment';
 import 'moment/locale/ko';
 import { Paper } from '@mui/material';
-import { ConstructionOutlined } from '@mui/icons-material';
+import { ConstructionOutlined, Today } from '@mui/icons-material';
 moment.locale('ko'); // en - 영어
 // moment().format();
 
 const ip = SERVER_URL;
 
+const daytoday = moment().day();
 /*
  * 운동클래스 body
  */
@@ -1422,6 +1423,7 @@ class Reservation extends Component {
   selectClassTabs = (e) => {
     this.setState({ key: e });
   };
+
   render() {
     // console.log(this.state.customer_name);
     // console.log(this.state.kind);
@@ -1434,6 +1436,7 @@ class Reservation extends Component {
     // console.log("trainer", this.state.reservation_trainer);
     // console.log("reservation_choice_trainer", this.state.reservation_choice_trainer);
     // console.log('reservationClass_choice', this.state.reservationClass_choice);
+    console.log('daytoday 입니다', daytoday);
 
     return (
       <div className='wrap reservation'>
