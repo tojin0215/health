@@ -105,7 +105,7 @@
   /* scrollbar-width: none; */
 }
 
-/* mui table*/
+/* mui table */
 .table > :not(caption) > * .btn-success {
   background-color: #198754;
 }
@@ -119,7 +119,7 @@
   text-align: center;
 }
 
-/* mui table dark 회원목록 강사목록*/
+/* mui table dark 회원목록 강사목록 */
 .MuiTableContainer-root {
   border-radius: 0;
 }
@@ -135,7 +135,7 @@
 .table-dark tbody {
   background-color: #fff;
 }
-/* mui table light*/
+/* mui table light */
 .table-light th {
   border-bottom: 1px solid #333;
   color: #333;
@@ -223,7 +223,7 @@
   .trainer_wrap .table--block .trainer_table_row td:nth-child(7):before {
     content: '';
   }
-  /* user-search table--block*/
+  /* user-search table--block */
   .user-search .user-search__table {
     margin-top: 10px;
   }
