@@ -309,6 +309,12 @@
   .resevation__class-Tabs {
     padding: 2px 20px;
   }
+  /* 수업 선택 모달 */
+  .reservation__class__console {
+    position: relative;
+    margin-left: 0;
+    left: 0;
+  }
 
   .reservation__list .table--block td:before {
     display: block;
