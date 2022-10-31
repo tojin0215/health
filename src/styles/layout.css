@@ -184,6 +184,9 @@ section {
   #root > div > div {
     padding-bottom: 290px;
   }
+  .container {
+    padding: 6rem 10px;
+  }
   .container section {
     padding: 1rem;
   }

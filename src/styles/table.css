@@ -274,4 +274,17 @@
   .user-search .Dropdown-arrow {
     top: 18px;
   }
+  /* reservation list */
+  .user-search .user-search__table {
+    margin-top: 10px;
+  }
+  .user-search .table--block th,
+  .table--block td {
+    display: block;
+    position: relative;
+    padding: 10px 0;
+    padding-left: 25%;
+    border-width: 0 0 1px 0;
+    text-align: center;
+  }
 }

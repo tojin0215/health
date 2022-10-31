@@ -241,8 +241,16 @@
   border-radius: 5px;
   padding: 20px;
 }
+.resevation__class-Tabs .tab-pane {
+  overflow: auto;
+}
+.resevation__class-Tabs .tab-pane::-webkit-scrollbar {
+  display: none;
+}
+
 .reservation__class__tabs-item {
   border: 0;
+  width: max-content;
 }
 .reservation__class__tabs-item .nav-link:hover {
   border: 0;
@@ -279,4 +287,77 @@
 .filter svg {
   margin: 0 5px;
   color: #ebff2e;
+}
+
+@media screen and (max-width: 767px) {
+  .reservation .container {
+    padding-top: 0;
+  }
+
+  .reservation__class {
+    margin-top: 4rem;
+  }
+  /* 날짜 표시 */
+  .reservation__class__select-date > div:first-child {
+    padding-bottom: 4px;
+  }
+  /* 날짜 선택 [이전] [다음] 버튼 */
+  .reservation__class__select-date button {
+    width: 100%;
+  }
+  /* 종목 및 강사 선택 탭 */
+  .resevation__class-Tabs {
+    padding: 2px 20px;
+  }
+
+  .reservation__list .table--block td:before {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25%;
+    padding: 10px;
+    background: #ccc;
+    text-align: center;
+  }
+  .reservation__list .table--block td:nth-child(1):before {
+    content: '이름';
+  }
+  .reservation__list .table--block td:nth-child(2):before {
+    content: '수강날짜';
+  }
+  .reservation__list .table--block td:nth-child(3):before {
+    content: '운동명';
+  }
+  .reservation__list .table--block td:nth-child(4):before {
+    content: '강사';
+  }
+  .reservation__list .table--block td:nth-child(5):before {
+    content: '정원';
+  }
+  .reservation__list .table--block td:nth-child(6):before {
+    content: '시간';
+  }
+  .reservation__list .table--block td:nth-child(7):before {
+    content: '삭제';
+  }
+  .reservation__list .table--block td:nth-child(7) {
+    padding: 0;
+    padding-left: 25%;
+  }
+  .reservation__list .user-search__select {
+    padding: 0 10px;
+    width: 100%;
+  }
+  .reservation__list .user-search__select--tr {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-right: 10px;
+  }
+  .reservation__list .Dropdown-arrow {
+    top: 18px;
+  }
+  .reservation__list button {
+    width: auto;
+  }
 }
