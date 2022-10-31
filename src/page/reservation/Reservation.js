@@ -14,6 +14,8 @@ import { connect } from 'react-redux';
 import 'react-dropdown/style.css';
 import styles from '../../styles/reservation/reservation.css';
 
+// 미디어쿼리
+import { Mobile, PC } from '../../component/common/MediaQuery';
 // 데이터피커
 import DatePicker from 'react-datepicker';
 // 부트스트랩
@@ -1465,7 +1467,7 @@ class Reservation extends Component {
         <Container>
           <Row className='reservation__class'>
             <Col>
-              <Row md={3}>
+              <Row sm={2} md={3} className='reservation__class__select-date'>
                 <Col className='text-end'>
                   <Button
                     className='reservation__class-prev'
