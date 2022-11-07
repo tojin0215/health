@@ -219,7 +219,7 @@ class ChoiceLogin extends Component {
                     로그인하실 회원 종류 및 사업장을 선택해주세요
                   </p>
                   <Row>
-                    <Col md={6}>
+                    <Col md={6} className='choice-login__btn'>
                       <Button
                         variant='primary'
                         className='w-100 fs-4 fw-bold'

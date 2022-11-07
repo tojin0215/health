@@ -265,7 +265,7 @@ class Mypage extends Component {
                 <h4 className='text-primary'>{this.state.myName}</h4>
                 <p>내정보수정은 센터로 문의 바랍니다</p>
               </Col>
-              <Col className='myInfo me-4'>
+              <Col xs={12} md={6} className='myInfo me-4'>
                 <h4>내정보</h4>
                 <ul>
                   <li>
@@ -347,7 +347,7 @@ class Mypage extends Component {
                 <h4 className='text-primary'>{this.state.myName}</h4>
                 <p>내정보수정은 센터로 문의 바랍니다</p>
               </Col>
-              <Col className='myInfo me-4'>
+              <Col xs={12} md={6} className='myInfo me-4'>
                 <h4>내정보</h4>
                 <ul>
                   <li>
@@ -368,7 +368,7 @@ class Mypage extends Component {
                   </li>
                 </ul>
               </Col>
-              <Col className='fitInfo'>
+              <Col className='fitInfo '>
                 <h5>소속 센터정보</h5>
                 <ul>
                   <li>
@@ -409,7 +409,7 @@ class Mypage extends Component {
                   </li>
                 </ul>
               </Col>
-              <Col className='fitInfo  mb-3'>
+              <Col className='fitInfo mb-3'>
                 <h4>센터정보</h4>
                 <ul>
                   <li>
