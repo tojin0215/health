@@ -27,3 +27,9 @@
   font-weight: 800;
   justify-content: center;
 }
+
+@media screen and (max-width: 767px) {
+  .choice-login__btn {
+    margin-bottom: 1rem;
+  }
+}
