@@ -25,8 +25,11 @@ import Button from 'react-bootstrap/Button';
 import { ImSortAlphaAsc } from 'react-icons/im';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { TbMoodSuprised } from 'react-icons/tb';
-import { MdOutlineKeyboardArrowLeft } from 'react-icons/md';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import {
+  MdOutlineLibraryAdd,
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+} from 'react-icons/md';
 // MUI
 import ClickAwayListener from '@mui/base/ClickAwayListener';
 import Box from '@mui/material/Box';
@@ -1671,19 +1674,6 @@ class Reservation extends Component {
     this.setState({ key: e });
   };
 
-  TabsTrainerList = () => {};
-
-  tabsClickToScrollLeft = () => {
-    console.log('클릭투스크롤left 작동합니다.');
-    var locationLeft = document.querySelector('#tabsTrainerAll').offsetLeft;
-
-    console.log('locationLeft 작동합니다.', locationLeft);
-    document
-      .querySelector('.reservation__class-Tabs .tab-content')
-      .scrollTo({ left: locationLeft, behavior: 'auto' });
-  };
-  tabsClickToScrollRight = () => {};
-
   render() {
     // console.log(this.state.customer_name);
     // console.log(this.state.kind);
@@ -1761,8 +1751,32 @@ class Reservation extends Component {
                 </Row>
               </PC>
               <Mobile>
+                <Row className='reservation__class--cladd-add'>
+                  <Col>
+                    <Button
+                      variant='secondary'
+                      onClick={this.goReservationClass}
+                    >
+                      <MdOutlineLibraryAdd />
+                      수업 추가
+                    </Button>
+                  </Col>
+                </Row>
                 <Row className='reservation__class__select-date'>
-                  <Col xs={12} className='text-center align-self-center fs-5'>
+                  <Col xs={2} className='text-end'>
+                    <Button
+                      className='reservation__class-prev'
+                      name='prev'
+                      variant='outline-light'
+                      onClick={this.handleDayClick}
+                    >
+                      <MdOutlineKeyboardArrowLeft />
+                    </Button>
+                  </Col>
+                  <Col
+                    xs={8}
+                    className='reservation__class__select-date--header'
+                  >
                     {moment(this.state.reserv_date)
                       .day(daytoday - 1)
                       .add(this.state.dayIncreament, 'days')
@@ -1773,24 +1787,14 @@ class Reservation extends Component {
                       .add(this.state.dayIncreament, 'days')
                       .format('YYYY-MM-DD (ddd)')}
                   </Col>
-                  <Col xs={6} className='text-end'>
-                    <Button
-                      className='reservation__class-prev'
-                      name='prev'
-                      variant='outline-light'
-                      onClick={this.handleDayClick}
-                    >
-                      이전
-                    </Button>
-                  </Col>
-                  <Col xs={6} className='text-start'>
+                  <Col xs={2} className='text-start'>
                     <Button
                       className='reservation__class-next'
                       name='next'
                       variant='outline-light'
                       onClick={this.handleDayClick}
                     >
-                      다음
+                      <MdOutlineKeyboardArrowRight />
                     </Button>
                   </Col>
                 </Row>
@@ -1822,10 +1826,7 @@ class Reservation extends Component {
                       ></Tab>
                     </Tabs>
                     <Mobile>
-                      <MdOutlineKeyboardArrowLeft
-                        className='reservation__class__tabs--left'
-                        onClick={this.tabsClickToScrollLeft}
-                      />
+                      <MdOutlineKeyboardArrowLeft className='reservation__class__tabs--left' />
                       <MdOutlineKeyboardArrowRight className='reservation__class__tabs--right' />
                     </Mobile>
                   </Tab>
