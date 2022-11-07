@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import Navigation from '../../component/navigation/Navigation';
 // moment
 import moment from 'moment';
@@ -29,6 +29,7 @@ import {
   selectTrainerReservation,
   voucherSelect,
 } from '../../api/user';
+import { ConstructionOutlined } from '@mui/icons-material';
 
 const SalesClient = ({
   kind,
@@ -215,17 +216,20 @@ class Mypage extends Component {
   };
 
   render() {
-    // console.log(this.props.userinfo.fitness_no);
-    // console.log(this.props.userinfo.loginWhether);
-    // console.log(this.props.userinfo.joinNo);
-    // console.log(this.props.userinfo);
-    // console.log(this.state.voucher);
+    // console.log('res2', res2);
+    // const { userinfo } = this.props;
+    console.log(this.props.userinfo.fitness_no);
+    console.log(this.props.userinfo.loginWhether);
+    console.log(this.props.userinfo.joinNo);
+    console.log(this.props.userinfo);
+    console.log(this.state.voucher);
+    console.log('성별: ', this.cSex);
     return (
       <div className='wrap client_wrap'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>
@@ -266,19 +270,31 @@ class Mypage extends Component {
                 <ul>
                   <li>
                     <strong>이름</strong>
-                    <p>{this.state.myName}</p>
+                    {this.state.myName ? (
+                      <p>{this.state.myName}</p>
+                    ) : (
+                      <p>이름입니다</p>
+                    )}
                   </li>
                   <li>
                     <strong>성별</strong>
-                    <p>{this.state.cSex}</p>
+                    {this.state.cSex ? <p>{this.state.cSex}</p> : <p>남여</p>}
                   </li>
                   <li>
                     <strong>폰번호</strong>
-                    <p>{this.state.cPhone}</p>
+                    {this.state.cPhone ? (
+                      <p>{this.state.cPhone}</p>
+                    ) : (
+                      <p>010-0000-0000</p>
+                    )}
                   </li>
                   <li>
                     <strong>생년월일</strong>
-                    <p>{this.state.cBirth}</p>
+                    {this.state.cBirth ? (
+                      <p>{this.state.cBirth}</p>
+                    ) : (
+                      <p>2000.01.01</p>
+                    )}
                   </li>
                 </ul>
               </Col>
@@ -287,19 +303,35 @@ class Mypage extends Component {
                 <ul>
                   <li>
                     <strong>헬스장명</strong>
-                    <p>{this.state.fitness_name}</p>
+                    {this.state.fitness_name ? (
+                      <p>{this.state.fitness_name}</p>
+                    ) : (
+                      <p>센터이름입니다</p>
+                    )}
                   </li>
                   <li>
                     <strong>헬스장 전화번호</strong>
-                    <p>{this.state.business_phone}</p>
+                    {this.state.business_phone ? (
+                      <p>{this.state.business_phone}</p>
+                    ) : (
+                      <p>010-0000-0000</p>
+                    )}
                   </li>
                   <li>
                     <strong>락커룸</strong>
-                    <p>{this.state.cLocker}</p>
+                    {this.state.cLocker ? (
+                      <p>{this.state.cLocker}</p>
+                    ) : (
+                      <p>사용/미사용</p>
+                    )}
                   </li>
                   <li>
                     <strong>운동복</strong>
-                    <p>{this.state.cWear}</p>
+                    {this.state.cWear ? (
+                      <p>{this.state.cWear}</p>
+                    ) : (
+                      <p>사용/미사용</p>
+                    )}
                   </li>
                 </ul>
               </Col>
@@ -337,7 +369,7 @@ class Mypage extends Component {
                 </ul>
               </Col>
               <Col className='fitInfo'>
-                <h4>소속 센터정보</h4>
+                <h5>소속 센터정보</h5>
                 <ul>
                   <li>
                     <strong>사업장 명</strong>
@@ -360,7 +392,7 @@ class Mypage extends Component {
               <Col className='myName text-primary mb-4' xs={12}>
                 <h4>{this.state.fitness_name}</h4>
               </Col>
-              <Col className='myInfo me-4'>
+              <Col xs={12} md={6} className='myInfo me-4 mb-3'>
                 <h4>내정보</h4>
                 <ul>
                   <li>
@@ -377,7 +409,7 @@ class Mypage extends Component {
                   </li>
                 </ul>
               </Col>
-              <Col className='fitInfo'>
+              <Col className='fitInfo  mb-3'>
                 <h4>센터정보</h4>
                 <ul>
                   <li>

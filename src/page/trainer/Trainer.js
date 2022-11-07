@@ -32,7 +32,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import 'react-dropdown/style.css';
 
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import {
   deleteTrainer,
   searchTrainername,
@@ -171,7 +171,9 @@ const TrainerName = ({
         </TableCell>
         <Modal show={showModal} size='lg' onHide={modalClose}>
           <Modal.Header>
-            <Modal.Title>강사 정보 수정</Modal.Title>
+            <Modal.Title>
+              <h5>강사 정보 수정</h5>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Row className='mb-4'>
@@ -650,7 +652,7 @@ const VieWTrainerItem = ({
         </TableCell>
         <Modal show={showModal} size='lg' onHide={modalClose}>
           <Modal.Header>
-            <Modal.Title>강사 정보 수정</Modal.Title>
+            <Modal.Title className='mb-4'>강사 정보 수정</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Row className='mb-4'>
@@ -724,7 +726,7 @@ const VieWTrainerItem = ({
             </Row>
             <Col xs={12} className='text-danger text-end mt-3'>
               <span className='m-2'>
-                삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+                삭제시 되돌릴 수 없습니다. 한번 더 확인해주세요.
               </span>
               <Button
                 onClick={() =>
@@ -946,7 +948,7 @@ class Trainer extends Component {
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

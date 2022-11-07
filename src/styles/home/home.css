@@ -1,3 +1,109 @@
+/* 회원 메인 */
+#customerHome .sectionGlass {
+  align-items: center;
+}
+#customerHome .Membership .row {
+  background: #535353;
+  border-radius: 5px;
+  padding: 20px 10px;
+}
+.facility .row {
+  padding: 20px 10px;
+  border-bottom: 1px solid #fff;
+}
+.facility .row:last-child {
+  border: 0;
+}
+
+.sectionGlass h4 svg {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #fff;
+  vertical-align: middle;
+}
+
+strong {
+  font-size: 20px;
+}
+
+.home-center__client-status .sectionGlass-manager {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.home-center__client-status .sectionGlass-manager:hover {
+  background-color: #41414d;
+}
+
+.sectionGlass-manager .icons__right-circle {
+  font-size: 48px;
+  line-height: 44px;
+  text-align: end;
+  transition: all 0.5s;
+}
+
+.sectionGlass-manager .sectionGlass-manger-Tit {
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.home-center__client-status > .sectionGlass-manager:nth-child(1) strong {
+  color: #ebff2e;
+}
+.home-center__client-status > .sectionGlass-manager:nth-child(2) strong {
+  color: #0b8eed;
+}
+.home-center__client-status > .sectionGlass-manager:nth-child(3) strong {
+  color: #dd4848;
+}
+.home-center__client-status > .sectionGlass-manager:nth-child(4) strong {
+  color: #b7b7b7;
+}
+
+.sectionGlass-manager-des {
+  padding-top: 10px;
+  white-space: nowrap;
+  font-size: 14px;
+  color: #888;
+  align-items: center;
+}
+
+/* 매출 */
+.sales-statis {
+  padding-bottom: 30px;
+}
+.sales-statis:nth-child(1) .sales-total {
+  color: #e2ff33;
+}
+.sales-statis:nth-child(2) .sales-total {
+  color: #e04343;
+}
+.sales-statis .row {
+  margin: 0 0.2rem;
+}
+.sales-statis .row {
+  border: 1px solid #888888;
+  border-radius: 5px;
+  padding: 30px 20px;
+  background: #35333d;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.sales-statis .row:hover {
+  background-color: #1c1a24;
+}
+.sales-statis .sales-total {
+  font-size: 25px;
+  font-weight: bold;
+  text-align: end;
+}
+
+.home .apexcharts-menu.apexcharts-menu-open {
+  color: 000;
+}
+
+/* 기존 메인 */
 .home {
   background-color: #000;
 }
@@ -209,6 +315,16 @@
   padding-bottom: 36px;
   font-size: 20px;
 }
+.sales-statis .sales-total {
+  white-space: nowrap;
+}
+
+.home-center__client-status .sectionGlass-manager {
+  margin-right: 1rem;
+}
+.home-center__client-status .sectionGlass-manager:last-child {
+  margin-right: 0;
+}
 
 @media only screen and (max-width: 767px) {
   .home__main-visual--logo p {
@@ -226,5 +342,22 @@
   .home .home__shortcut a {
     width: 7rem;
     height: 7rem;
+  }
+  .home-center__client-status .sectionGlass-manager:nth-child(2n) {
+    margin-right: 0;
+  }
+  .sales-statis:first-child {
+    margin-right: 0;
+  }
+}
+@media only screen and (max-width: 620px) {
+  .home-center__client-status .sectionGlass-manager {
+    margin-right: 0;
+  }
+  .sectionGlass-manager br {
+    display: none;
+  }
+  .sales-statis .sales-total {
+    font-size: 20px;
   }
 }

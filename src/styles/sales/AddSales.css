@@ -1,6 +1,39 @@
+.voucher-info {
+  padding: 20px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.voucher-info div {
+  align-items: center;
+}
+
+.voucher-info .form-check:nth-child(6) {
+  padding-left: 0;
+}
+
 .add-sales__input--number-format {
+  width: 100%;
   padding: 6px;
   border-radius: 6px;
+}
+
+/* 
+* 운동 종목
+*/
+.sports-classification .form-check:nth-child(5) {
+  padding-left: 0;
+}
+.sports-classification .form-check:nth-child(7) {
+  padding-left: 0;
+}
+
+.TotalPayment-bg {
+  background-color: #5c5c5c;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 #TotalPayment {

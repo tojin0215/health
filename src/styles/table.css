@@ -1,5 +1,25 @@
 .table {
   background-color: rgb(41, 41, 41);
+  border-color: #111;
+}
+.table td {
+  border: 1px solid #111;
+  padding: 0;
+  margin: 5px 0;
+  max-width: 147px;
+}
+
+.table td .class-info {
+  padding: 10px 0;
+  white-space: nowrap;
+}
+
+.class-info > .reservation-class__schedule-content:hover {
+  border: 1px solid #e2ff33;
+}
+.reservation-class__schedule-content.active {
+  background: #e2ff33;
+  color: #111;
 }
 
 /* 운동개별선택 테이블 체크박스 크기 조절 */
@@ -23,9 +43,7 @@
   margin: 0;
   border-color: #bbb;
 }
-/* .dropdown-toggle::after {
-	margin-left: 2rem;
-} */
+
 .react-bs-table-sizePerPage-dropdown .dropdown-menu {
   top: 126%;
   border-radius: 0.83rem;
@@ -62,7 +80,6 @@
 .react-bs-table-pagination ul li {
   width: 100%;
 }
-/**/
 
 .react-bs-table table td,
 .react-bs-table table th {
@@ -88,7 +105,7 @@
   /* scrollbar-width: none; */
 }
 
-/* mui table*/
+/* mui table */
 .table > :not(caption) > * .btn-success {
   background-color: #198754;
 }
@@ -102,7 +119,7 @@
   text-align: center;
 }
 
-/* mui table dark 회원목록 강사목록*/
+/* mui table dark 회원목록 강사목록 */
 .MuiTableContainer-root {
   border-radius: 0;
 }
@@ -115,20 +132,18 @@
   color: #fff;
   text-align: center;
 }
-/* mui table light*/
-.MuiTableContainer-root {
-  border-radius: 0;
+.table-dark tbody {
+  background-color: #fff;
 }
-.MuiTable-root {
-  border-radius: 0;
-}
-
+/* mui table light */
 .table-light th {
   border-bottom: 1px solid #333;
   color: #333;
   text-align: center;
 }
-
+.MuiTableBody-root .MuiTableCell-root {
+  text-align: center;
+}
 .MuiTableCell-root input {
   border: 1px solid #d9d9d9;
   border-radius: 2.8rem;
@@ -208,7 +223,7 @@
   .trainer_wrap .table--block .trainer_table_row td:nth-child(7):before {
     content: '';
   }
-  /* user-search table--block*/
+  /* user-search table--block */
   .user-search .user-search__table {
     margin-top: 10px;
   }
@@ -258,5 +273,18 @@
   }
   .user-search .Dropdown-arrow {
     top: 18px;
+  }
+  /* reservation list */
+  .user-search .user-search__table {
+    margin-top: 10px;
+  }
+  .user-search .table--block th,
+  .table--block td {
+    display: block;
+    position: relative;
+    padding: 10px 0;
+    padding-left: 25%;
+    border-width: 0 0 1px 0;
+    text-align: center;
   }
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import { Link } from 'react-router-dom';
 import Footer from '../../component/footer/Footer';
 import { insertIntroduce } from '../../api/user';
@@ -108,7 +108,7 @@ class AddIntroduce extends Component {
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>
@@ -146,10 +146,22 @@ class AddIntroduce extends Component {
                 ></Form.Control>
               </Col> */}
             <Row className='mb-3'>
-              <Col xs={1}>
+              <Col xs={12} md={1} className='input_tit'>
+                <h5>제목</h5>
+              </Col>
+              <Col xs={12} md={11}>
+                <Form.Control
+                  id='link'
+                  type='text'
+                  placeholder='제목을 입력해주세요'
+                ></Form.Control>
+              </Col>
+            </Row>
+            <Row className='mb-3'>
+              <Col xs={12} md={1}>
                 <h5>내용</h5>
               </Col>
-              <Col xs={11}>
+              <Col xs={12} md={11}>
                 <Form.Control
                   id='story'
                   defaultValue={this.state.story}
@@ -161,11 +173,23 @@ class AddIntroduce extends Component {
                 ></Form.Control>
               </Col>
             </Row>
+            <Row className='mb-3'>
+              <Col xs={12} md={1} className='input_tit'>
+                <h5>링크</h5>
+              </Col>
+              <Col xs={12} md={11}>
+                <Form.Control
+                  id='link'
+                  type='text'
+                  placeholder='URL을 입력해주세요'
+                ></Form.Control>
+              </Col>
+            </Row>
             <Row>
-              <Col xs={1} className='input_tit'>
+              <Col xs={12} md={1} className='input_tit'>
                 <h5>사진</h5>
               </Col>
-              <Col xs={11}>
+              <Col xs={12} md={11}>
                 <Form.Control
                   id='picture'
                   type='file'

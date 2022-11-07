@@ -1,0 +1,85 @@
+.class-time-table {
+  position: relative;
+}
+
+.class-time-table .class-time-table__btn {
+  width: 100px;
+  height: 100px;
+  background-color: #35333d;
+  border-radius: 10px;
+  border: 1px solid #888;
+  position: fixed;
+  left: 5%;
+  z-index: 1;
+}
+
+.class-time-table__btn > .MuiSvgIcon-root {
+  width: 100%;
+  font-size: 40px;
+}
+
+.MuiDrawer-root .MuiPaper-root {
+  padding: 30px 20px;
+  background-color: #111;
+}
+
+.class-time-table__box {
+  height: 100%;
+  background-color: #111;
+  text-align: center;
+  color: #fff;
+}
+
+.class-time-table__box .class-time-table__select {
+  margin: 20px 0;
+}
+
+.class-time-table__box .class-time-table__select .MuiInputBase-root {
+  background-color: rgba(255, 255, 255, 1);
+}
+.class-time-table__box .class-time-table__select .MuiInputBase-root:hover {
+  background-color: #ddd;
+}
+.class-time-table__box .class-time-table__select .MuiInputBase-root:focus {
+  background-color: rgba(255, 255, 255, 1);
+}
+.class-time-table__box .class-time-table__select .MuiInputBase-root:active {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+#class-time-table__select-id {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.class-time-table__box__content {
+  padding-bottom: 20px;
+  overflow: hidden;
+}
+
+.class-time-table__box__content > .row {
+  border-top: 1px solid #111;
+  border-bottom: 3px solid #111;
+}
+
+.class-time-table__box__content ul {
+  background-color: #333;
+}
+
+.class-time-table__box__content ul .row {
+  padding: 2px 0;
+  align-items: center;
+  background-color: #888;
+}
+
+.class-time-table__box__content .row span {
+  color: #ff9900;
+}
+
+.class-time-table__box__content ul .class-time-table__box__content--full {
+  background-color: #333;
+}
+
+.class-time-table__box__content .class-time-table__box__content--full span {
+  color: #fff;
+}

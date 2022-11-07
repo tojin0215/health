@@ -5,7 +5,7 @@ import moment from 'moment';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import { Link } from 'react-router-dom';
 import UserSearch from '../../component/customer/UserSearch';
 import {
@@ -103,7 +103,7 @@ class WorkoutAllotedList2 extends Component {
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

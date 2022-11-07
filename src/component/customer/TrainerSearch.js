@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
 import Table from '@mui/material/Table';
@@ -20,6 +20,12 @@ import { searchTrainername, searchTrainerPhone } from '../../api/user';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+/* icon */
+import { BsCheckLg } from 'react-icons/bs';
+import { FaSearch } from 'react-icons/fa';
+
+// css
+import './UserSearch.css';
 
 const options = ['이름', '핸드폰'];
 
@@ -27,10 +33,10 @@ const UserSearchTableHeader = () => (
   <TableHead>
     <TableRow>
       <TableCell align='center'>번호</TableCell>
-      <TableCell>이름</TableCell>
-      <TableCell>폰번호</TableCell>
-      <TableCell>성별</TableCell>
-      <TableCell>선택</TableCell>
+      <TableCell align='center'>이름</TableCell>
+      <TableCell align='center'>폰번호</TableCell>
+      <TableCell align='center'>성별</TableCell>
+      <TableCell align='center'>선택</TableCell>
     </TableRow>
   </TableHead>
 );
@@ -44,15 +50,20 @@ const UserSearchTableItem = ({ c, handleSelectUser }) => (
       {c.phone.slice(0, 3) + '-' + c.phone.slice(3, 7) + '-' + c.phone.slice(7)}
     </TableCell>
     <TableCell>{c.sex == 1 ? '남자' : '여자'}</TableCell>
-    <TableCell>
+    <TableCell className='user-search__select--tr'>
       <DialogActions className='p-0'>
         <Button
+          className='user-search__select'
           onClick={handleSelectUser}
           id={c.idx}
           value={[c.trainer_name, c.phone]}
-          variant='primary'
+          variant='outline-success'
         >
-          선택
+          <BsCheckLg
+            onClick={handleSelectUser}
+            id={c.idx}
+            value={[c.trainer_name, c.phone]}
+          />
         </Button>
       </DialogActions>
     </TableCell>
@@ -92,11 +103,18 @@ const TrainerSearch = ({ open, setOpen, fitness_no, handleUser }) => {
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <Dialog open={open} onClose={handleClose} fullScreen={fullScreen}>
-      <DialogTitle>강사 검색</DialogTitle>
+    <Dialog
+      className='trainers-search'
+      open={open}
+      onClose={handleClose}
+      fullScreen={fullScreen}
+    >
+      <DialogTitle>
+        <h4>강사 검색</h4>
+      </DialogTitle>
       <DialogContent>
-        <Row>
-          <Col xs={3}>
+        <Row className='user-search__utill'>
+          <Col xs={12} md={3} className=''>
             <Dropdown
               className='searchDrop'
               options={options}
@@ -105,26 +123,29 @@ const TrainerSearch = ({ open, setOpen, fitness_no, handleUser }) => {
               placeholder='검색 대상을 선택하세요.'
             />
           </Col>
-          <Col xs={6}>
-            <input
-              className='w-100 h-100'
-              type='text'
-              id='search'
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
+          <Col xs={12} md={7} className='user-search__utill__classification'>
+            <Form.Group>
+              <Form.Control
+                placeholder='강사를 검색하세요'
+                type='text'
+                id='search'
+                className=''
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </Form.Group>
           </Col>
-          <Col xs={3}>
+          <Col xs={12} md={2} className='mt-2'>
             <Button
-              className='w-100 h-100'
-              variant='primary'
+              /*  className='w-100 h-100' */
+              variant='success'
               onClick={handleOnSearch}
             >
-              검색
+              <FaSearch />
             </Button>
           </Col>
         </Row>
-        <Table size='small' className='addsalesSearchTable'>
+        <Table size='small' className='user-search__table table--block '>
           <UserSearchTableHeader />
           <TableBody>
             {trainers ? (

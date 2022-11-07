@@ -22,6 +22,9 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import { registerManager } from '../../api/user';
 
+// 아이콘
+import { SiCheckmarx } from 'react-icons/si';
+
 const ip = SERVER_URL;
 // const ip = 'localhost:3000';
 
@@ -110,36 +113,67 @@ class Register extends Component {
     });
 
     if (this.state.id === '') {
+      console.log('id_err');
       this.setState({ id_err: true });
     } else if (this.state.fitness_name === '') {
+      console.log('fitness_name_err');
       this.setState({ fitness_name_err: true });
     } else if (this.state.password === '') {
+      console.log('password_err');
       this.setState({ password_err: true });
     } else if (this.state.password_confirm === '') {
+      console.log('password_confirmm_err');
       this.setState({ password_confirmm_err: true });
     } else if (this.state.manager_name === '') {
+      console.log('manager_name_err');
       this.setState({ manager_name_err: true });
     } else if (this.state.phone === '') {
+      console.log('phone_err');
       this.setState({ phone_err: true });
     } else if (this.state.business_number === '') {
+      console.log('business_number_err');
       this.setState({ business_number_err: true });
     } else if (this.state.business_phone === '') {
+      console.log('business_phone_err');
       this.setState({ business_phone_err: true });
     }
 
-    if (
-      this.state.id === '' ||
-      this.state.fitness_name === '' ||
-      this.state.password === '' ||
-      this.state.password_confirm === '' ||
-      this.state.manager_name === '' ||
-      this.state.phone === '' ||
-      this.state.business_number === '' ||
-      this.state.business_phone === ''
-    ) {
-      alert('빈칸을 채워주세요.');
+    if (this.state.id === '') {
+      alert('아이디를 입력해주세요.');
+    } else if (!this.state.fitness_name) {
+      alert('사업장 이름을 입력해주세요.');
+    } else if (!this.state.password) {
+      alert('비밀번호를 입력해주세요.');
+    } else if (!this.state.password_confirm) {
+      alert('비밀번호 확인을 입력해주세요.');
+    } else if (!this.state.manager_name) {
+      alert('대표님 이름을 입력해주세요.');
+    } else if (!this.state.phone) {
+      alert('대표님 연락처를 입력해주세요.');
+    } else if (!this.state.business_number) {
+      alert('사업자 등록 번호를 입력해주세요.');
+    } else if (!this.state.business_phone) {
+      alert('사업장 연락처를 입력해주세요.');
     } else if (this.state.password != this.state.password_confirm) {
       alert('비밀번호가 다릅니다. 다시 입력해주세요.');
+    } else if (this.state.business_number.length !== 12) {
+      alert('사업장 등록번호를 하이픈(-) 포함하여 12자리 입력해주세요.');
+    } else if (
+      !(
+        this.state.business_phone.length == 10 ||
+        this.state.business_phone.length == 11 ||
+        this.state.business_phone.length == 8
+      )
+    ) {
+      alert('올바른 사업장 연락처를 입력해주세요.');
+    } else if (
+      !(
+        this.state.phone.length == 10 ||
+        this.state.phone.length == 11 ||
+        this.state.phone.length == 8
+      )
+    ) {
+      alert('올바른 대표 연락처를 입력해주세요.');
     } else if (this.state.check == 0) {
       alert('아이디 중복체크 해주세요.');
     } else {
@@ -180,6 +214,17 @@ class Register extends Component {
       modalShow: false,
     });
   };
+
+  goLogin = () => {
+    this.props.history.push('/');
+  };
+
+  handleOnInput = (el, maxlength) => {
+    if (el.value.length > maxlength) {
+      el.value = el.value.substr(0, maxlength);
+    }
+  };
+
   render() {
     const { userinfo } = this.props;
     // console.log("userinfo : ");
@@ -221,6 +266,7 @@ class Register extends Component {
                     onChange={this.handleChange}
                     id='id'
                     label='아이디'
+                    placeholder='아이디를 입력해주세요.'
                     error={this.state.id_err}
                     required
                     autoFocus
@@ -254,8 +300,10 @@ class Register extends Component {
                     value={this.state.business_number}
                     onChange={this.handleChange}
                     id='business_number'
+                    placeholder='사업자 등록번호를 입력해주세요. 하이픈(-) 포함'
                     label='사업자 등록번호'
                     error={this.state.business_number_err}
+                    // type='number'
                     required
                   ></Form.Control>
                 </Form.Group>
@@ -268,6 +316,7 @@ class Register extends Component {
                     onChange={this.handleChange}
                     type='password'
                     id='password'
+                    placeholder='비밀번호를 입력해주세요.'
                     label='비밀번호'
                     error={this.state.password_err}
                     required
@@ -282,6 +331,7 @@ class Register extends Component {
                     onChange={this.handleChange}
                     type='password'
                     id='password_confirm'
+                    placeholder='비밀번호를 한번더 입력해주세요.'
                     label='비밀번호확인'
                     error={this.state.password_confirm_err}
                     required
@@ -290,11 +340,12 @@ class Register extends Component {
               </Col>
               <Col>
                 <Form.Group>
-                  <Form.Label>사업장 이름</Form.Label>
+                  <Form.Label>사업장 명</Form.Label>
                   <Form.Control
                     value={this.state.fitness_name}
                     onChange={this.handleChange}
                     id='fitness_name'
+                    placeholder='사업장 명을 입력해주세요.'
                     label='사업장이름'
                     error={this.state.fitness_name_err}
                     required
@@ -309,7 +360,9 @@ class Register extends Component {
                     onChange={this.handleChange}
                     id='business_phone'
                     label='사업장 연락처(-제외)'
+                    placeholder='사업장 연락처를 입력해주세요.(-제외)'
                     error={this.state.business_phone_err}
+                    type='number'
                     required
                   ></Form.Control>
                 </Form.Group>
@@ -321,6 +374,7 @@ class Register extends Component {
                     value={this.state.manager_name}
                     onChange={this.handleChange}
                     id='manager_name'
+                    placeholder='대표자 이름을 입력해주세요.'
                     label='대표 이름'
                     error={this.state.manager_name_err}
                     required
@@ -335,31 +389,54 @@ class Register extends Component {
                     value={this.state.phone}
                     onChange={this.handleChange}
                     id='phone'
+                    placeholder='대표 연락처를 입력해주세요.'
                     label='대표 연락처(-제외)'
                     error={this.state.phone_err}
                     required
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col>
+              <Col xs={12} md={12} className='register__terms'>
                 <div className='form-check'>
-                  <input
-                    className='form-check-input'
-                    type='checkbox'
-                    value=''
-                    id='flexCheckDefault'
-                    onClick={this.agreeCheckModal}
-                  />
-                  <label className='form-check-label'>
-                    필수 약관에 동의했습니다.{' '}
-                    <a
-                      href='#'
-                      className='text-decoration-underline text-reset'
-                      onClick={this.handleModal}
-                    >
-                      약관동의
-                    </a>
-                  </label>
+                  <div className='form-check-label'>
+                    {this.state.agreeCheck ? (
+                      <>
+                        <SiCheckmarx className='form-check-input--success' />
+                        <span className='text-success fw-bold'>
+                          필수 약관에 동의했습니다.
+                          <br />
+                          <span className='register__terms__guide'>
+                            이용 약관을 확인해주세요.
+                          </span>
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <input
+                          className='form-check-input'
+                          type='checkbox'
+                          value=''
+                          id='flexCheckDefault'
+                          onClick={this.agreeCheckModal}
+                        />
+                        <span onClick={this.handleModal}>
+                          필수 약관에 동의합니다.
+                          <br />
+                          <span className='register__terms__guide'>
+                            이용 약관에 동의하여야 가입할 수 있습니다.
+                          </span>
+                        </span>
+                      </>
+                    )}
+                    <div>
+                      <a
+                        className='register__terms__btn'
+                        onClick={this.handleModal}
+                      >
+                        이용 약관
+                      </a>
+                    </div>
+                  </div>
                   <Modal show={this.state.modalShow}>
                     <Modal.Header
                       closeButton
@@ -395,17 +472,9 @@ class Register extends Component {
             </Row>
           </Form>
           <div className='d-flex justify-content-center mt-3'>
-            {this.state.agreeCheck ? (
-              <Button type='button' className='btn-primary_dark mx-2'>
-                이전으로
-              </Button>
-            ) : (
-              <div>
-                <Button type='button' className='btn-primary_dark mx-2'>
-                  이전으로
-                </Button>
-              </div>
-            )}
+            <Button className='btn-secondary mx-2' onClick={this.goLogin}>
+              이전으로
+            </Button>
             {this.state.agreeCheck ? (
               <Button
                 type='button'

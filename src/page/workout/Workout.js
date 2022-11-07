@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import { Link } from 'react-router-dom';
 import Footer from '../../component/footer/Footer';
 
@@ -17,8 +17,10 @@ import Button from 'react-bootstrap/Button';
 //react-icons.github.io
 import { CgArrowRight, CgArrowLongRight } from 'react-icons/cg';
 import { MdArrowForwardIos } from 'react-icons/md';
+import { AiOutlineSetting } from 'react-icons/ai';
 
 // import { HiOutlineArrowLongRight } from 'react-icons/hi2';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 class Workout extends Component {
   constructor(props) {
@@ -85,7 +87,7 @@ class Workout extends Component {
       <div className='wrap workout'>
         <Header />
         <Navigation goLogin={this.goLogin} />
-        <Menu goLogin={this.goLogin} />
+        <MobNavigation goLogin={this.goLogin} />
         <header className='header'>
           <div className='localNavigation'>
             <div className='container'>
@@ -110,33 +112,14 @@ class Workout extends Component {
             <Col xs={12}>
               <h3>운동 배정</h3>
             </Col>
-            <Row>
-              <Col className='workoutRoutine me-4'>
-                <Link to='/workoutAlloted'>
-                  <Row>
-                    <Col xs={10} className='mb-5'>
-                      <h2>커스텀 루틴 배정</h2>
-                    </Col>
-                    <Col xs={2}>
-                      <CgArrowLongRight className='fs-1' />
-                    </Col>
-                    <Col xs={12}>
-                      <p>
-                        개별 운동을 직접 조합해서 루틴을 만들어
-                        <br />
-                        회원에게 배정해 줄 수 있습니다.
-                      </p>
-                    </Col>
-                  </Row>
-                </Link>
-              </Col>
-              <Col className='workoutRoutine'>
-                <Link to='/workoutStage'>
+            <Col>
+              <Row className='workoutRoutine'>
+                <Col className='me-4 custom' onClick={this.goStage}>
                   <Row>
                     <Col xs={10} className='mb-5'>
                       <h2>베이직 루틴 배정</h2>
                     </Col>
-                    <Col xs={2}>
+                    <Col xs={2} className='custom-arrow'>
                       <CgArrowLongRight className='fs-1' />
                     </Col>
                     <Col xs={12}>
@@ -147,16 +130,38 @@ class Workout extends Component {
                       </p>
                     </Col>
                   </Row>
-                </Link>
-              </Col>
-            </Row>
+                </Col>
+                <Col className='personal' onClick={this.goAlloted}>
+                  <Row>
+                    <Col xs={10} className='mb-5'>
+                      <h2>맞춤형 운동 배정</h2>
+                    </Col>
+                    <Col xs={2} className='personal-arrow'>
+                      <CgArrowLongRight className='fs-1' />
+                    </Col>
+                    <Col xs={12}>
+                      <p>
+                        개별 운동을 직접 조합해서 루틴을 만들어
+                        <br />
+                        회원에게 배정해 줄 수 있습니다.
+                      </p>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </Col>
             <Link to='/workoutAdd'>
               <Row className='addWorkout my-4'>
                 <Col xs={4}>
-                  <h4>운동 설정</h4>
+                  <h4>
+                    운동 만들기
+                    <AiOutlineSetting className='mx-2' />
+                  </h4>
                 </Col>
                 <Col xs={7}>
-                  <p>커스텀 루틴에 들어갈 개별 운동들을 만들 수 있습니다.</p>
+                  <p>
+                    맞춤형 운동 배정에 들어갈 개별 운동들을 만들 수 있습니다.
+                  </p>
                 </Col>
                 <Col xs={1}>
                   <MdArrowForwardIos />
@@ -166,7 +171,10 @@ class Workout extends Component {
             <Link to='/workoutStageAdd'>
               <Row className='addWorkout'>
                 <Col xs={4}>
-                  <h4>루틴 설정</h4>
+                  <h4>
+                    베이직 루틴 만들기
+                    <AiOutlineSetting className='mx-2' />
+                  </h4>
                 </Col>
                 <Col xs={7}>
                   <p>베이직 루틴을 직접 만들 수 있습니다.</p>

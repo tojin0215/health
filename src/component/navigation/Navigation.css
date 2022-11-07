@@ -34,7 +34,7 @@
   display: none; /* Chrome, Safari, Opera */
 }
 .Navigation:hover {
-  height: 18rem;
+  height: 12rem;
 }
 
 .Navigation > .navbar {
@@ -77,6 +77,8 @@
 
 .dropdownNav > a {
   position: relative;
+  font-weight: 400;
+  font-size: 1.1rem;
 }
 
 .dropdownNav ul {

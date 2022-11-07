@@ -1,13 +1,17 @@
 .authentication .card-body {
-  padding-top: 6rem;
-  background-color: #000;
+  /* padding-top: 6rem; */
+}
+
+.authentication .btn-register {
+  color: #fff;
+  background-color: transparent;
 }
 
 .authentication .authentication__login-button {
-  border-radius: 50%;
+  /* border-radius: 50%; */
   padding: 0;
-  width: 70px;
-  height: 70px;
+  width: 83px;
+  height: 36px;
 }
 
 .authentication .login__authentication__id--box {
@@ -23,6 +27,6 @@
 
 @media screen and (max-width: 767px) {
   .authentication .card-body {
-    padding-top: 18px;
+    /*  padding-top: 18px; */
   }
 }

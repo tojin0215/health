@@ -21,7 +21,7 @@ import {
 // 컴포넌트
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import Footer from '../../component/footer/Footer';
 import CustomerCalendarComponent from '../../component/customer/CustomerCalendarComponent';
 import Dropdown from 'react-dropdown';
@@ -467,7 +467,8 @@ const ClientPhone = ({
         className='client_modal'
         show={showModal}
         onHide={modalClose}
-        size='xl'
+        size='lg'
+        dialogClassName='modal-90w'
       >
         <Modal.Header className='mb-3'>
           <Modal.Title>회원 상세 정보</Modal.Title>
@@ -486,12 +487,9 @@ const ClientPhone = ({
           )}
         </Modal.Header>
         <Modal.Body className='mw-100'>
-          <div>
-            <CustomerCalendarComponent customer_no={idc} />
-          </div>
           <Row className='mt-3 client__modal--information'>
             <Col xs={2}>
-              <h5 className='mb-1'>이름</h5>
+              <p className='mb-1'>이름</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
@@ -505,11 +503,11 @@ const ClientPhone = ({
               <Col xs={10}>{client_name}</Col>
             )}
             <Col xs={2}>
-              <h5 className='mb-1'>생년월일</h5>
+              <p className='mb-1'>생년월일</p>
             </Col>
             <Col xs={10}>{birth}</Col>
-            <Col xs={2} className='mb-2'>
-              <h5 className='mb-1'>연락처</h5>
+            <Col xs={2}>
+              <p className='mb-1'>연락처</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
@@ -522,8 +520,8 @@ const ClientPhone = ({
             ) : (
               <Col xs={10}>{phone}</Col>
             )}
-            <Col xs={2} className='mb-2'>
-              <h5 className='mb-1'>주소</h5>
+            <Col xs={2}>
+              <p className='mb-1'>주소</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
@@ -533,7 +531,7 @@ const ClientPhone = ({
               <Col xs={10}>{address}</Col>
             )}
             <Col xs={2} className='mb-3'>
-              <h5>메모</h5>
+              <p>메모</p>
             </Col>
             {/* 기능추가:메모로 변경해야함 */}
             {showUpdate ? (
@@ -546,9 +544,9 @@ const ClientPhone = ({
             ) : (
               <Col xs={10}>{client_name}</Col>
             )}
-            <div className='d-flex justify-content-between'>
+            <div className='client__modal--information-facility'>
               <div className='d-flex justify-content'>
-                <h5 className='me-4'>운동복</h5>
+                <strong className='me-4'>운동복</strong>
                 {showUpdate ? (
                   <Form.Group>
                     <Form.Check inline>
@@ -576,8 +574,8 @@ const ClientPhone = ({
                   <p>{sportswear}</p>
                 )}
               </div>
-              <div className='d-flex justify-content mb-3'>
-                <h5 className='me-3'>사물함번호</h5>
+              <div className='d-flex justify-content'>
+                <strong className='me-3'>사물함번호</strong>
                 {showUpdate ? (
                   <Col xs={2}>
                     <Form.Control
@@ -591,9 +589,38 @@ const ClientPhone = ({
                 )}
               </div>
               <div className='d-flex justify-content'>
-                <h5 className='me-3'>가입경로</h5>
+                <strong className='me-3'>가입경로</strong>
                 <p>{join_route}</p>
               </div>
+            </div>
+            <div className='text-end text-danger mt-4'>
+              {showUpdate ? (
+                loginWhether === 1 ? (
+                  ''
+                ) : (
+                  <div>
+                    <span className='m-2'>
+                      회원 삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+                    </span>
+                    <Button
+                      variant='outline-danger'
+                      onClick={() =>
+                        // eslint-disable-next-line no-restricted-globals
+                        confirm(
+                          client_name +
+                            ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
+                        ) == true
+                          ? deleteCompleted(idc)
+                          : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
+                      }
+                    >
+                      회원 삭제
+                    </Button>
+                  </div>
+                )
+              ) : (
+                ''
+              )}
             </div>
           </Row>
           <Row>
@@ -619,36 +646,11 @@ const ClientPhone = ({
                 </Modal>
               </div>
             </div>
-            <div className='text-end text-danger mt-4'>
-              {showUpdate ? (
-                loginWhether === 1 ? (
-                  ''
-                ) : (
-                  <div>
-                    <span className='m-2'>
-                      삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
-                    </span>
-                    <Button
-                      variant='outline-danger'
-                      onClick={() =>
-                        // eslint-disable-next-line no-restricted-globals
-                        confirm(
-                          client_name +
-                            ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
-                        ) == true
-                          ? deleteCompleted(idc)
-                          : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
-                      }
-                    >
-                      삭제
-                    </Button>
-                  </div>
-                )
-              ) : (
-                ''
-              )}
-            </div>
           </Row>
+          <div className='border-top'>
+            <h4 className='py-3'>일정 캘린더</h4>
+            <CustomerCalendarComponent customer_no={idc} />
+          </div>
         </Modal.Body>
         <Modal.Footer className='d-flex justify-content-center'>
           {showUpdate ? (
@@ -1098,12 +1100,9 @@ const ClientName = ({
           )}
         </Modal.Header>
         <Modal.Body className='mw-100'>
-          <div>
-            <CustomerCalendarComponent customer_no={idc} />
-          </div>
           <Row className='mt-3 client__modal--information'>
             <Col xs={2}>
-              <h5 className='mb-1'>이름</h5>
+              <p className='mb-1'>이름</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
@@ -1117,11 +1116,11 @@ const ClientName = ({
               <Col xs={10}>{client_name}</Col>
             )}
             <Col xs={2}>
-              <h5 className='mb-1'>생년월일</h5>
+              <p className='mb-1'>생년월일</p>
             </Col>
             <Col xs={10}>{birth}</Col>
-            <Col xs={2} className='mb-2'>
-              <h5 className='mb-1'>연락처</h5>
+            <Col xs={2}>
+              <p className='mb-1'>연락처</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
@@ -1134,8 +1133,8 @@ const ClientName = ({
             ) : (
               <Col xs={10}>{phone}</Col>
             )}
-            <Col xs={2} className='mb-2'>
-              <h5 className='mb-1'>주소</h5>
+            <Col xs={2}>
+              <p className='mb-1'>주소</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
@@ -1145,7 +1144,7 @@ const ClientName = ({
               <Col xs={10}>{address}</Col>
             )}
             <Col xs={2} className='mb-3'>
-              <h5>메모</h5>
+              <p>메모</p>
             </Col>
             {/* 기능추가:메모로 변경해야함 */}
             {showUpdate ? (
@@ -1158,9 +1157,9 @@ const ClientName = ({
             ) : (
               <Col xs={10}>{client_name}</Col>
             )}
-            <div className='d-flex justify-content-between'>
+            <div className='client__modal--information-facility'>
               <div className='d-flex justify-content'>
-                <h5 className='me-4'>운동복</h5>
+                <strong className='me-4'>운동복</strong>
                 {showUpdate ? (
                   <Form.Group>
                     <Form.Check inline>
@@ -1188,8 +1187,8 @@ const ClientName = ({
                   <p>{sportswear}</p>
                 )}
               </div>
-              <div className='d-flex justify-content mb-3'>
-                <h5 className='me-3'>사물함번호</h5>
+              <div className='d-flex justify-content'>
+                <strong className='me-3'>사물함번호</strong>
                 {showUpdate ? (
                   <Col xs={2}>
                     <Form.Control
@@ -1203,9 +1202,38 @@ const ClientName = ({
                 )}
               </div>
               <div className='d-flex justify-content'>
-                <h5 className='me-3'>가입경로</h5>
+                <strong className='me-3'>가입경로</strong>
                 <p>{join_route}</p>
               </div>
+            </div>
+            <div className='text-end text-danger mt-4'>
+              {showUpdate ? (
+                loginWhether === 1 ? (
+                  ''
+                ) : (
+                  <div>
+                    <span className='m-2'>
+                      회원 삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+                    </span>
+                    <Button
+                      variant='outline-danger'
+                      onClick={() =>
+                        // eslint-disable-next-line no-restricted-globals
+                        confirm(
+                          client_name +
+                            ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
+                        ) == true
+                          ? deleteCompleted(idc)
+                          : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
+                      }
+                    >
+                      회원 삭제
+                    </Button>
+                  </div>
+                )
+              ) : (
+                ''
+              )}
             </div>
           </Row>
           <Row>
@@ -1231,36 +1259,11 @@ const ClientName = ({
                 </Modal>
               </div>
             </div>
-            <div className='text-end text-danger mt-4'>
-              {showUpdate ? (
-                loginWhether === 1 ? (
-                  ''
-                ) : (
-                  <div>
-                    <span className='m-2'>
-                      삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
-                    </span>
-                    <Button
-                      variant='outline-danger'
-                      onClick={() =>
-                        // eslint-disable-next-line no-restricted-globals
-                        confirm(
-                          client_name +
-                            ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
-                        ) == true
-                          ? deleteCompleted(idc)
-                          : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
-                      }
-                    >
-                      삭제
-                    </Button>
-                  </div>
-                )
-              ) : (
-                ''
-              )}
-            </div>
           </Row>
+          <div className='border-top'>
+            <h4 className='py-3'>일정 캘린더</h4>
+            <CustomerCalendarComponent customer_no={idc} />
+          </div>
         </Modal.Body>
         <Modal.Footer className='d-flex justify-content-center'>
           {showUpdate ? (
@@ -1680,7 +1683,7 @@ const ViewClientItem = ({
   };
 
   return (
-    // 1 페이지
+    // 1 페이지 사업주용
     <TableRow>
       <TableCell onClick={modalOnClick}>{client_name}</TableCell>
       <TableCell onClick={modalOnClick}>{sex == 1 ? '남' : '여'}</TableCell>
@@ -1694,7 +1697,7 @@ const ViewClientItem = ({
         size='xl'
       >
         <Modal.Header className='mb-3'>
-          <Modal.Title>회원 상3세 정보</Modal.Title>
+          <Modal.Title>회원 상세 정보</Modal.Title>
           {showUpdate ? (
             <Button onClick={modalClose} variant='outline-light'>
               <CloseIcon />
@@ -1710,17 +1713,14 @@ const ViewClientItem = ({
           )}
         </Modal.Header>
         <Modal.Body className='mw-100'>
-          <div>
-            <CustomerCalendarComponent customer_no={idc} />
-          </div>
           <Row className='mt-3 client__modal--information'>
             <Col xs={2}>
-              <h5 className='mb-1'>이름</h5>
+              <p className='mb-1'>이름</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
                 <Form.Control
-                  className='w-50'
+                  className='w-50 mb-1'
                   value={client_name_input}
                   onChange={updateChange1}
                 />
@@ -1729,16 +1729,16 @@ const ViewClientItem = ({
               <Col xs={10}>{client_name}</Col>
             )}
             <Col xs={2}>
-              <h5 className='mb-1'>생년월일</h5>
+              <p className='mb-1'>생년월일</p>
             </Col>
             <Col xs={10}>{birth}</Col>
-            <Col xs={2} className='mb-2'>
-              <h5 className='mb-1'>연락처</h5>
+            <Col xs={2}>
+              <p className='mb-1'>연락처</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
                 <Form.Control
-                  className='w-50'
+                  className='w-50 mb-1'
                   value={phone_input}
                   onChange={updateChange3}
                 />
@@ -1746,23 +1746,28 @@ const ViewClientItem = ({
             ) : (
               <Col xs={10}>{phone}</Col>
             )}
-            <Col xs={2} className='mb-2'>
-              <h5 className='mb-1'>주소</h5>
+            <Col xs={2}>
+              <p className='mb-1'>주소</p>
             </Col>
             {showUpdate ? (
               <Col xs={10}>
-                <Form.Control value={address_input} onChange={updateChange2} />
+                <Form.Control
+                  className='mb-1'
+                  value={address_input}
+                  onChange={updateChange2}
+                />
               </Col>
             ) : (
               <Col xs={10}>{address}</Col>
             )}
             <Col xs={2} className='mb-3'>
-              <h5>메모</h5>
+              <p>메모</p>
             </Col>
             {/* 기능추가:메모로 변경해야함 */}
             {showUpdate ? (
               <Col>
                 <Form.Control
+                  className='mb-1'
                   value={client_name_input}
                   onChange={updateChange1}
                 />
@@ -1770,9 +1775,9 @@ const ViewClientItem = ({
             ) : (
               <Col xs={10}>{client_name}</Col>
             )}
-            <div className='d-flex justify-content-between'>
+            <div className='client__modal--information-facility'>
               <div className='d-flex justify-content'>
-                <h5 className='me-4'>운동복</h5>
+                <strong className='me-4'>운동복</strong>
                 {showUpdate ? (
                   <Form.Group>
                     <Form.Check inline>
@@ -1800,8 +1805,8 @@ const ViewClientItem = ({
                   <p>{sportswear}</p>
                 )}
               </div>
-              <div className='d-flex justify-content mb-3'>
-                <h5 className='me-3'>사물함번호</h5>
+              <div className='d-flex justify-content'>
+                <strong className='me-3'>사물함번호</strong>
                 {showUpdate ? (
                   <Col xs={2}>
                     <Form.Control
@@ -1815,9 +1820,38 @@ const ViewClientItem = ({
                 )}
               </div>
               <div className='d-flex justify-content'>
-                <h5 className='me-3'>가입경로</h5>
+                <strong className='me-3'>가입경로</strong>
                 <p>{join_route}</p>
               </div>
+            </div>
+            <div className='text-end text-danger mt-4'>
+              {showUpdate ? (
+                loginWhether === 1 ? (
+                  ''
+                ) : (
+                  <div>
+                    <span className='m-2'>
+                      회원 삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+                    </span>
+                    <Button
+                      variant='outline-danger'
+                      onClick={() =>
+                        // eslint-disable-next-line no-restricted-globals
+                        confirm(
+                          client_name +
+                            ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
+                        ) == true
+                          ? deleteCompleted(idc)
+                          : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
+                      }
+                    >
+                      회원 삭제
+                    </Button>
+                  </div>
+                )
+              ) : (
+                ''
+              )}
             </div>
           </Row>
           <Row>
@@ -1843,36 +1877,11 @@ const ViewClientItem = ({
                 </Modal>
               </div>
             </div>
-            <div className='text-end text-danger mt-4'>
-              {showUpdate ? (
-                loginWhether === 1 ? (
-                  ''
-                ) : (
-                  <div>
-                    <span className='m-2'>
-                      삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
-                    </span>
-                    <Button
-                      variant='outline-danger'
-                      onClick={() =>
-                        // eslint-disable-next-line no-restricted-globals
-                        confirm(
-                          client_name +
-                            ' 회원을 탈퇴하시겠습니까? \n회원 삭제 시 되돌릴 수 없습니다. \n한번 더 확인해주세요.'
-                        ) == true
-                          ? deleteCompleted(idc)
-                          : alert(client_name + '회원 탈퇴를 취소 하였습니다.')
-                      }
-                    >
-                      삭제
-                    </Button>
-                  </div>
-                )
-              ) : (
-                ''
-              )}
-            </div>
           </Row>
+          <div className='border-top'>
+            <h4 className='py-3'>일정 캘린더</h4>
+            <CustomerCalendarComponent customer_no={idc} />
+          </div>
         </Modal.Body>
         <Modal.Footer className='d-flex justify-content-center'>
           {showUpdate ? (
@@ -1910,6 +1919,7 @@ class Client extends Component {
       search: '',
       client_phone: '',
       clinet_name: '',
+      idc: '',
     };
   }
   goLogin = () => {
@@ -2008,8 +2018,11 @@ class Client extends Component {
     this.setState({ searchOption: e.value });
   };
 
-  moveClientAdd = () => {
+  goClientAdd = () => {
     this.props.history.push('/clientAdd');
+  };
+  goAddSales = () => {
+    this.props.history.push('/addSales');
   };
 
   handleOnSearch = () => {
@@ -2075,6 +2088,7 @@ class Client extends Component {
     });
   };
   render() {
+    // consolo.log('test');
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.viewClientList);
     return (
@@ -2082,7 +2096,7 @@ class Client extends Component {
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>
@@ -2093,8 +2107,6 @@ class Client extends Component {
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/home'>HOME</Link>
-                <span>&#62;</span>
                 <Link to='/client'>회원</Link>
               </div>
               {/*.breadCrumb */}
@@ -2103,286 +2115,378 @@ class Client extends Component {
           </div>
           {/*.localNavigation */}
         </header>
-        <Container>
-          <h3>회원 목록</h3>
-          <div className='d-flex justify-content mb-3'>
-            <div className='d-flex sch_list'>
-              <Dropdown
-                className='searchDrop'
-                options={options}
-                onChange={this.handleOnChangeSearchOption}
-                value={this.state.searchOption}
-                placeholder='검색 대상을 선택하세요.'
-              />
-              <input
-                type='text'
-                id='search'
-                value={this.state.search}
-                onChange={(e) => this.setState({ search: e.target.value })}
-              />
+        {this.props.userinfo.loginWhether === 2 ? (
+          <Container id='customerClient'>
+            <h3>회원 상세정보</h3>
+            <h4 className='py-3'>일정 캘린더</h4>
+            <div className='mb-4'>
+              <CustomerCalendarComponent customer_no={this.idc} />
             </div>
-            <div>
+            <Row className='clientInfo'>
+              <Col xs={2}>
+                <h5>이름</h5>
+              </Col>
+              <Col xs={10}>김루피</Col>
+              <Col xs={2}>
+                <h5>생년월일</h5>
+              </Col>
+              <Col xs={10}>20010101</Col>
+              <Col xs={2}>
+                <h5>연락처</h5>
+              </Col>
+              <Col xs={10}>010-0000-0000</Col>
+              <Col xs={2}>
+                <h5>주소</h5>
+              </Col>
+              <Col xs={10}>부산광역시 부산진구 서전로37번길 51</Col>
+              <Col>
+                <div className='d-flex justify-content-between'>
+                  <div className='d-flex justify-content-between'>
+                    <h5 className='me-4'>운동복</h5>
+                    <p>사용</p>
+                  </div>
+                  <div className='d-flex justify-content-between'>
+                    <h5 className='me-4'>사물함</h5>
+                    <p>10번</p>
+                  </div>
+                  <div className='d-flex justify-content-between'>
+                    <h5 className='me-4'>가입경로</h5>
+                    <p>블로그</p>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <div className='voucher'>
+                <div className='d-flex justify-content-between mt-4'>
+                  <h4>현재 사용중인 이용권</h4>
+                  <p
+                    className='text-primary more' /* onClick={viewModalOnclick} */
+                  >
+                    + 이용권 전체보기
+                  </p>
+                </div>
+              </div>
+            </Row>
+
+            <Row>
+              <Col>
+                <div className='client-infomation__detail--membership'>
+                  <h4>필라테스</h4>
+                  <br />
+                  <p>이용권: 3/20</p>
+                  <p>이용권 결제일: 2023년 01월 15일</p>
+                </div>
+              </Col>
+              <Col>
+                <div className='client-infomation__detail--membership'>
+                  <h4>GX</h4>
+                  <p>기간권 : 123일권 [ D-118 ]</p>
+                  <p>기간권 결제일 : 2022년 08월 25일</p>
+                  <p>기간권 마감일 : 2023년 01월 15일</p>
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={6}>
+                <div className='client-infomation__detail--membership'>
+                  <h4>필라테스</h4>
+                  <br />
+                  <p>이용권: 3/20</p>
+                  <p>이용권 결제일: 2023년 01월 15일</p>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        ) : (
+          <Container>
+            <h3>회원 목록</h3>
+            <div className='client__utill'>
+              <div className='d-flex sch_list'>
+                <Dropdown
+                  className='searchDrop'
+                  options={options}
+                  onChange={this.handleOnChangeSearchOption}
+                  value={this.state.searchOption}
+                  placeholder='검색 대상을 선택하세요.'
+                />
+                <input
+                  type='text'
+                  id='search'
+                  value={this.state.search}
+                  onChange={(e) => this.setState({ search: e.target.value })}
+                />
+              </div>
               <Button
-                className='mx-2'
+                className='client__search'
                 variant='primary'
                 onClick={this.handleOnSearch}
               >
                 검색
               </Button>
-            </div>
-            <div>
-              <Button variant='outline-primary' onClick={this.moveClientAdd}>
-                등록하기
+              <Button
+                className='client__registration'
+                variant='outline-primary'
+                onClick={this.goClientAdd}
+              >
+                회원 등록
+              </Button>
+              <Button
+                className='client__membership'
+                variant='outline-primary'
+                onClick={this.goAddSales}
+              >
+                이용권 등록
               </Button>
             </div>
-          </div>
-          <Tabs defaultActiveKey='allClient' id='client-tab'>
-            <Tab eventKey='allClient' title='전체'>
-              <TableContainer component={Paper}>
-                <Table
-                  className='table--block table-dark'
-                  aria-label='simple table'
-                >
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>이름</TableCell>
-                      <TableCell>성별</TableCell>
-                      <TableCell>연락ㅇㅇㅇ처</TableCell>
-                      <TableCell>가입일</TableCell>
-                      <TableCell>사물함번호</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.client_phone
-                      ? this.state.client_phone.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )
-                      : this.state.clinet_name
-                      ? this.state.clinet_name.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )
-                      : this.state.viewClientList.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )}
-                  </TableBody>
-                </Table>
-                {this.state.viewClientList.length === 0 ? (
-                  <div className='p-3 fs-5 fw-bold text-center'>
-                    <TbMoodSuprised className='fs-3' />
-                    <p>등록된 회원이 없습니다.</p>
-                  </div>
-                ) : (
-                  ''
-                )}
-                <TablePagination
-                  rowsPerPageOptions={[
-                    5,
-                    10,
-                    25,
-                    {
-                      label: 'All',
-                      value: this.state.viewClientList.length,
-                    },
-                  ]}
-                  count={this.state.viewClientList.length}
-                  rowsPerPage={this.state.rowsPerPage}
-                  page={this.state.page}
-                  onPageChange={this.handleChangePage}
-                  onRowsPerPageChange={this.handleChangeRowsPerPage}
-                />
-              </TableContainer>
-            </Tab>
-            <Tab eventKey='activeClient' title='유효회원'>
-              <TableContainer component={Paper}>
-                <Table
-                  className='table--block table-dark'
-                  aria-label='simple table'
-                >
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>이름</TableCell>
-                      <TableCell>성별</TableCell>
-                      <TableCell>연락처</TableCell>
-                      <TableCell>가입일</TableCell>
-                      <TableCell>사물함번호</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.client_phone
-                      ? this.state.client_phone.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )
-                      : this.state.clinet_name
-                      ? this.state.clinet_name.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )
-                      : this.state.viewClientList.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )}
-                  </TableBody>
-                </Table>
-                {this.state.viewClientList.length === 0 ? (
-                  <div className='p-3 fs-5 fw-bold text-center'>
-                    <TbMoodSuprised className='fs-3' />
-                    <p>등록된 회원이 없습니다.</p>
-                  </div>
-                ) : (
-                  ''
-                )}
-                <TablePagination
-                  rowsPerPageOptions={[
-                    5,
-                    10,
-                    25,
-                    {
-                      label: 'All',
-                      value: this.state.viewClientList.length,
-                    },
-                  ]}
-                  count={this.state.viewClientList.length}
-                  rowsPerPage={this.state.rowsPerPage}
-                  page={this.state.page}
-                  onPageChange={this.handleChangePage}
-                  onRowsPerPageChange={this.handleChangeRowsPerPage}
-                />
-              </TableContainer>
-            </Tab>
-            <Tab eventKey='warningClient' title='마감임박'>
-              <TableContainer component={Paper}>
-                <Table
-                  className='table--block table-dark'
-                  aria-label='simple table'
-                >
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>이름</TableCell>
-                      <TableCell>성별</TableCell>
-                      <TableCell>연락처</TableCell>
-                      <TableCell>가입일</TableCell>
-                      <TableCell>사물함번호</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.client_phone
-                      ? this.state.client_phone.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )
-                      : this.state.clinet_name
-                      ? this.state.clinet_name.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )
-                      : this.state.viewClientList.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )}
-                  </TableBody>
-                </Table>
-                {this.state.viewClientList.length === 0 ? (
-                  <div className='p-3 fs-5 fw-bold text-center'>
-                    <TbMoodSuprised className='fs-3' />
-                    <p>등록된 회원이 없습니다.</p>
-                  </div>
-                ) : (
-                  ''
-                )}
-                <TablePagination
-                  rowsPerPageOptions={[
-                    5,
-                    10,
-                    25,
-                    {
-                      label: 'All',
-                      value: this.state.viewClientList.length,
-                    },
-                  ]}
-                  count={this.state.viewClientList.length}
-                  rowsPerPage={this.state.rowsPerPage}
-                  page={this.state.page}
-                  onPageChange={this.handleChangePage}
-                  onRowsPerPageChange={this.handleChangeRowsPerPage}
-                />
-              </TableContainer>
-            </Tab>
-            <Tab eventKey='endClient' title='마감'>
-              <TableContainer component={Paper}>
-                <Table
-                  className='table--block table-dark'
-                  aria-label='simple table'
-                >
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>이름</TableCell>
-                      <TableCell>성별</TableCell>
-                      <TableCell>연락처</TableCell>
-                      <TableCell>가입일</TableCell>
-                      <TableCell>사물함번호</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.client_phone
-                      ? this.state.client_phone.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )
-                      : this.state.clinet_name
-                      ? this.state.clinet_name.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )
-                      : this.state.viewClientList.slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )}
-                  </TableBody>
-                </Table>
-                {this.state.viewClientList.length === 0 ? (
-                  <div className='p-3 fs-5 fw-bold text-center'>
-                    <TbMoodSuprised className='fs-3' />
-                    <p>등록된 회원이 없습니다.</p>
-                  </div>
-                ) : (
-                  ''
-                )}
-                <TablePagination
-                  rowsPerPageOptions={[
-                    5,
-                    10,
-                    25,
-                    {
-                      label: 'All',
-                      value: this.state.viewClientList.length,
-                    },
-                  ]}
-                  count={this.state.viewClientList.length}
-                  rowsPerPage={this.state.rowsPerPage}
-                  page={this.state.page}
-                  onPageChange={this.handleChangePage}
-                  onRowsPerPageChange={this.handleChangeRowsPerPage}
-                />
-              </TableContainer>
-            </Tab>
-          </Tabs>
-        </Container>
+            <Tabs defaultActiveKey='allClient' id='client-tab'>
+              <Tab eventKey='allClient' title='전체'>
+                <TableContainer component={Paper}>
+                  <Table
+                    className='table--block table-dark'
+                    aria-label='simple table'
+                  >
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>이름</TableCell>
+                        <TableCell>성별</TableCell>
+                        <TableCell>연락처</TableCell>
+                        <TableCell>가입일</TableCell>
+                        <TableCell>사물함번호</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.client_phone
+                        ? this.state.client_phone.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )
+                        : this.state.clinet_name
+                        ? this.state.clinet_name.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )
+                        : this.state.viewClientList.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )}
+                    </TableBody>
+                  </Table>
+                  {this.state.viewClientList.length === 0 ? (
+                    <div className='p-5 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>등록된 회원이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.viewClientList.length,
+                      },
+                    ]}
+                    count={this.state.viewClientList.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
+                </TableContainer>
+              </Tab>
+              <Tab eventKey='activeClient' title='유효회원'>
+                <TableContainer component={Paper}>
+                  <Table
+                    className='table--block table-dark'
+                    aria-label='simple table'
+                  >
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>이름</TableCell>
+                        <TableCell>성별</TableCell>
+                        <TableCell>연락처</TableCell>
+                        <TableCell>가입일</TableCell>
+                        <TableCell>사물함번호</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.client_phone
+                        ? this.state.client_phone.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )
+                        : this.state.clinet_name
+                        ? this.state.clinet_name.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )
+                        : this.state.viewClientList.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )}
+                    </TableBody>
+                  </Table>
+                  {this.state.viewClientList.length === 0 ? (
+                    <div className='p-5 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>등록된 회원이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.viewClientList.length,
+                      },
+                    ]}
+                    count={this.state.viewClientList.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
+                </TableContainer>
+              </Tab>
+              <Tab eventKey='warningClient' title='마감임박'>
+                <TableContainer component={Paper}>
+                  <Table
+                    className='table--block table-dark'
+                    aria-label='simple table'
+                  >
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>이름</TableCell>
+                        <TableCell>성별</TableCell>
+                        <TableCell>연락처</TableCell>
+                        <TableCell>가입일</TableCell>
+                        <TableCell>사물함번호</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.client_phone
+                        ? this.state.client_phone.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )
+                        : this.state.clinet_name
+                        ? this.state.clinet_name.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )
+                        : this.state.viewClientList.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )}
+                    </TableBody>
+                  </Table>
+                  {this.state.viewClientList.length === 0 ? (
+                    <div className='p-3 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>등록된 회원이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.viewClientList.length,
+                      },
+                    ]}
+                    count={this.state.viewClientList.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
+                </TableContainer>
+              </Tab>
+              <Tab eventKey='endClient' title='마감'>
+                <TableContainer component={Paper}>
+                  <Table
+                    className='table--block table-dark'
+                    aria-label='simple table'
+                  >
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>이름</TableCell>
+                        <TableCell>성별</TableCell>
+                        <TableCell>연락처</TableCell>
+                        <TableCell>가입일</TableCell>
+                        <TableCell>사물함번호</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.client_phone
+                        ? this.state.client_phone.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )
+                        : this.state.clinet_name
+                        ? this.state.clinet_name.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )
+                        : this.state.viewClientList.slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )}
+                    </TableBody>
+                  </Table>
+                  {this.state.viewClientList.length === 0 ? (
+                    <div className='p-3 fs-5 fw-bold text-center'>
+                      <TbMoodSuprised className='fs-3' />
+                      <p>등록된 회원이 없습니다.</p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      {
+                        label: 'All',
+                        value: this.state.viewClientList.length,
+                      },
+                    ]}
+                    count={this.state.viewClientList.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                  />
+                </TableContainer>
+              </Tab>
+            </Tabs>
+          </Container>
+        )}
         <div className='footer'>
           <Footer />
         </div>

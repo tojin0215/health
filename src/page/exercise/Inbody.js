@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navigation from '../../component/navigation/Navigation';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
@@ -684,7 +684,7 @@ class Inbody extends Component {
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

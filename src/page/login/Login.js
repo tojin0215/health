@@ -89,7 +89,7 @@ class Login extends Component {
             </h1>
           </div>
         </div>
-        <div className='bg-black'>
+        <div className='mainVisual'>
           <Container className='login__authentication--container my-0'>
             <Row>
               <Col className='login__main-visual--box' md={9}>
@@ -104,7 +104,7 @@ class Login extends Component {
                   src={process.env.PUBLIC_URL + '/assets/logo-text-white.svg'}
                 />
               </Col>
-              <Col md={3}>
+              <Col md={3} className='mt-5'>
                 <Authentication mode={true} onLogin={this.handleLogin} />
               </Col>
             </Row>

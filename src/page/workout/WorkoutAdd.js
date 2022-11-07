@@ -9,7 +9,7 @@ import {
 } from '../../api/user';
 import Footer from '../../component/footer/Footer';
 import Header from '../../component/header/Header';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import Navigation from '../../component/navigation/Navigation';
 //css
 import '../../styles/workout/workoutAlloted.css';
@@ -75,7 +75,8 @@ const ExerciseView = ({
         <TableCell>{default_rest}</TableCell>
         <TableCell>{url}</TableCell>
         <TableCell
-        /* onClick={} 기능추가 */
+          /* onClick={} 기능추가 */
+          className='workout-alloted__selected--cencel'
         >
           <GiCancel className='fs-2' />
         </TableCell>
@@ -111,6 +112,9 @@ class WorkoutAdd extends Component {
   }
   goLogin = () => {
     this.props.history.push('/');
+  };
+  goWorkout = () => {
+    this.props.history.push('/workout');
   };
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
@@ -276,25 +280,28 @@ class WorkoutAdd extends Component {
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>
-                <div className='parallelogram'></div>운동 설정
+                <div className='parallelogram'></div>운동 만들기
                 <span>.</span>
               </h2>
               <div className='breadCrumb'>
                 <Link to='/home'>HOME</Link>
                 <span>&#62;</span>
-                <Link to='/workoutAdd'>운동 설정</Link>
+                <Link to='/workoutAdd'>운동 만들기</Link>
               </div>
             </div>
           </div>
         </div>
         <Container>
+          <Button variant='secondary' onClick={this.goWorkout}>
+            돌아가기
+          </Button>
           <Row className='sectionGlass'>
             <Col xs={12}>
-              <h3 className='mb-4'>운동설정</h3>
+              <h3 className='mb-4'>운동 만들기</h3>
             </Col>
             <Col xs={2}>
               <h5>운동부위</h5>
@@ -396,7 +403,7 @@ class WorkoutAdd extends Component {
               <Row>
                 <Col>
                   <Form.Control
-                    placeholder='세트'
+                    placeholder='세트(숫자만 입력)'
                     type='number'
                     /* value={this.state.default_set} */
                     id='default_set'
@@ -405,7 +412,7 @@ class WorkoutAdd extends Component {
                 </Col>
                 <Col>
                   <Form.Control
-                    placeholder='횟수'
+                    placeholder='횟수(숫자만 입력)'
                     type='number'
                     /* value={this.state.default_count} */
                     id='default_count'
@@ -414,7 +421,7 @@ class WorkoutAdd extends Component {
                 </Col>
                 <Col>
                   <Form.Control
-                    placeholder='휴식'
+                    placeholder='휴식(숫자만 입력)'
                     type='number'
                     /* value={this.state.default_rest} */
                     id='default_rest'
@@ -465,8 +472,10 @@ class WorkoutAdd extends Component {
               <Row className='workoutTabs text-center'>
                 <Col>
                   <Button
+                    type='radio'
                     className='btn-table'
                     variant='btn-table'
+                    id='danger-outlined'
                     onClick={() => this.handleOnClick(1)}
                   >
                     상체
@@ -474,8 +483,10 @@ class WorkoutAdd extends Component {
                 </Col>
                 <Col>
                   <Button
+                    type='radio'
                     className='btn-table'
                     variant='btn-table'
+                    id='danger-outlined'
                     onClick={() => this.handleOnClick(18)}
                   >
                     하체
@@ -483,6 +494,7 @@ class WorkoutAdd extends Component {
                 </Col>
                 <Col>
                   <Button
+                    type='radio'
                     className='btn-table'
                     variant='btn-table'
                     onClick={() => this.handleOnClick(28)}
@@ -492,6 +504,7 @@ class WorkoutAdd extends Component {
                 </Col>
                 <Col>
                   <Button
+                    type='radio'
                     className='btn-table'
                     variant='btn-table'
                     onClick={() => this.handleOnClick(38)}
@@ -501,6 +514,7 @@ class WorkoutAdd extends Component {
                 </Col>
                 <Col>
                   <Button
+                    type='radio'
                     className='btn-table'
                     variant='btn-table'
                     onClick={() => this.handleOnClick(48)}
@@ -510,6 +524,7 @@ class WorkoutAdd extends Component {
                 </Col>
                 <Col>
                   <Button
+                    type='radio'
                     className='btn-table'
                     variant='btn-table'
                     onClick={() => this.handleOnClick(58)}

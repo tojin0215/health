@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import { Link } from 'react-router-dom';
 import Footer from '../../component/footer/Footer';
 
@@ -91,8 +91,10 @@ const ViewIntroduceItem = ({
 
   return (
     <div className='sectionGlass introduce__article'>
-      <div className='introduce__article--header'>
+      <div className='introduce__article--header d-flex justify-content-between'>
         <h4>{manager_name}</h4>
+        <p>2022-07-17</p>
+        {/* 기능추가 : 센터명->제목으로 변경,작성일자 */}
       </div>
       <div className='introduce__article--img-box'>
         {/* <img className='width-inherit' src={picture} /> */}
@@ -102,6 +104,10 @@ const ViewIntroduceItem = ({
       <div className='introduce__article--text-box'>
         <p>{story}</p>
       </div>
+      <div className='introduce__article--link'>
+        <p>링크</p>
+      </div>
+      {/* 기능추가 :링크 */}
       {loginWhether == 2 ? (
         ''
       ) : loginWhether == 1 ? (
@@ -109,13 +115,13 @@ const ViewIntroduceItem = ({
       ) : (
         <Col>
           <Button
-            className='btn-primary'
+            className='btn-primary text-center'
             variant='secondary'
             onClick={modalOnClick}
           >
             수정하기
           </Button>
-          <Modal show={showModal} size='lg' onHide={() => setShowModal(false)}>
+          <Modal show={showModal} onHide={() => setShowModal(false)}>
             {/* <Modal show={true} className=''> */}
             <h2 className='text-center'>{manager_name}</h2>
             <div className='py-3 text-center'>
@@ -124,23 +130,35 @@ const ViewIntroduceItem = ({
               <img className='w-100' src={'/api/' + picture} />
             </div>
             <Row>
-              <Col xs={1} className='input_tit'>
+              <Col md={12} lg={2} className='input_tit'>
                 <h5>사진</h5>
               </Col>
-              <Col xs={11}>
+              <Col md={12} lg={10}>
                 <Form.Control
                   type='file'
                   onChange={updateChange1}
                   accept='image/*'
-                  className='w-100 '
+                  className='w-100'
                 ></Form.Control>
               </Col>
             </Row>
-            <Row className='my-2'>
-              <Col xs={1} className='mt-1'>
+            <Row className='mb-2'>
+              <Col md={12} lg={2}>
+                <h5>제목</h5>
+              </Col>
+              <Col md={12} lg={10}>
+                <Form.Control
+                  id='link'
+                  type='text'
+                  placeholder='제목을 입력해주세요'
+                ></Form.Control>
+              </Col>
+            </Row>
+            <Row className='mb-3'>
+              <Col md={12} lg={2}>
                 <h5>내용</h5>
               </Col>
-              <Col xs={11}>
+              <Col md={12} lg={10}>
                 <Form.Control
                   value={story_input}
                   onChange={updateChange2}
@@ -150,21 +168,35 @@ const ViewIntroduceItem = ({
                 ></Form.Control>
               </Col>
             </Row>
-            <Col xs={12} className='text-danger text-end mt-3'>
-              <span className='m-2'>
-                삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
-              </span>
-              <Button
-                onClick={() =>
-                  confirm('정말 삭제하시겠습니까?') == true
-                    ? handleDelete(idi)
-                    : alert('삭제가 취소 되었습니다.')
-                }
-                variant='outline-danger'
-              >
-                삭제
-              </Button>
-            </Col>
+            <Row className='mb-2'>
+              <Col md={12} lg={2}>
+                <h5>링크</h5>
+              </Col>
+              <Col md={12} lg={10}>
+                <Form.Control
+                  id='link'
+                  type='text'
+                  placeholder='링크를 입력해주세요'
+                ></Form.Control>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12} className='text-danger text-end mt-3'>
+                <span className='m-2'>
+                  삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+                </span>
+                <Button
+                  onClick={() =>
+                    confirm('정말 삭제하시겠습니까?') == true
+                      ? handleDelete(idi)
+                      : alert('삭제가 취소 되었습니다.')
+                  }
+                  variant='outline-danger'
+                >
+                  삭제
+                </Button>
+              </Col>
+            </Row>
             <Row className='d-flex justify-content-center mt-3'>
               <Button
                 className='btn-primary-dark mx-2'
@@ -298,7 +330,7 @@ class Introduce extends Component {
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>

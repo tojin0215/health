@@ -1,20 +1,23 @@
+/* 탭 */
+
 /*
-* 수업 - 진행중인 수업 
+* 수업 시간표 - 진행중인 수업 
 */
-.class-list {
-  border-bottom: 0;
-}
-.class-list .MuiTableHead-root {
-  background-color: #111;
-  border-bottom: 2px solid #fff;
-}
-.class-list .MuiTableHead-root > tr > th {
-  color: rgba(200, 200, 200, 1);
+
+/* thead 폰트 컬러 */
+.reservationClassWrap .table thead tr th {
+  font-weight: 400;
+  color: #fff;
 }
 
-.class-list .MuiTableBody-root {
+/* tbody 폰트 컬러 */
+.reservationClassWrap tbody tr td {
+  color: #fff;
 }
 
+.reservationClassWrap .MuiInputBase-input {
+  text-align: center;
+}
 /* 
 * 진행중인 수업 - 수업 시간표 및 예약 (reservation__class)
 */
@@ -158,16 +161,34 @@
 
 /* 진행중인 수업 - 선택된 수업 - 콘솔 박스 */
 .reservation__class__console {
+  position: fixed;
+  left: 50%;
+  margin-left: 550px;
   max-width: 275px;
   height: 420px;
 }
 .reservation__class__console-info {
-  background-color: #444;
+  background-color: #333;
+  border-radius: 5px;
+  padding: 25px 20px;
+}
+.reservation__class__console-infoContent dl div :after {
+  display: block;
+  content: '';
+  clear: both;
+}
+.reservation__class__console-infoContent dl div > dt {
+  float: left;
 }
 
 /* 진행중인 수업 - 선택된 수업 - 회원 검색 */
 .reservation .MuiFormControl-root {
   background-color: #fff;
+  border-radius: 5px;
+}
+.reservation .MuiFormControl-root input::-webkit-input-placeholder {
+  -webkit-text-fill-color: #111;
+  font-weight: bolder;
 }
 
 .reservation .MuiTextField-root .MuiFormLabel-root {
@@ -175,12 +196,6 @@
   top: 0;
   left: 14px;
 }
-
-/* 
-.MuiInputBase-formControl > #customer_name {
-  font-size: 1.2rem;
-  -webkit-text-fill-color: #000;
-} */
 
 .reservation .MuiTextField-root > .MuiInputBase-formControl {
   margin-top: 4px;
@@ -196,18 +211,159 @@
 /* 
 * 진행중인 수업 - 예약 현황 - 페이지네이션 
 */
-/* 페이지네이션 글자 색상 */
-.reservation .MuiTablePagination-toolbar {
-  color: #ddd;
-}
-/* 페이지네이션 아이콘 색상 */
-.reservation .MuiTablePagination-selectIcon {
-  color: #fff;
-}
-.reservation .MuiTablePagination-actions .MuiButtonBase-root {
-  color: #fff;
-}
 /* 강사별 조회 회원별 조회 탭 색상 */
 .reservation .reservation__reservation-status .tab-content {
   background-color: #111;
+}
+
+/* 
+* 탭
+*/
+/* 탭 메뉴에서 마우스가 떠날 때 보더 생기는 현상 제거 */
+.reservation__class .nav-tabs > a,
+.reservation__class .nav-tabs > a:focus {
+  border: 0;
+}
+
+.resevation__class-Tabs > .nav-tabs:first-child > a:focus {
+  border-bottom: 2px solid #ebff2e;
+}
+
+.reservation__class-container .nav-link.active {
+  border: 0;
+  background-color: transparent;
+  color: #ebff2e;
+  border-bottom: 2px solid #ebff2e;
+}
+
+.resevation__class-Tabs {
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 20px;
+}
+.resevation__class-Tabs .tab-pane {
+  overflow: auto;
+}
+.resevation__class-Tabs .tab-pane::-webkit-scrollbar {
+  display: none;
+}
+
+.reservation__class__tabs-item {
+  border: 0;
+  width: max-content;
+}
+.reservation__class__tabs-item .nav-link:hover {
+  border: 0;
+  color: #ebff2e;
+}
+.reservation__class__tabs-item .nav-item.show .nav-link,
+.reservation__class__tabs-item .nav-link.active {
+  border: 0;
+  background-color: transparent;
+  color: #ebff2e;
+}
+
+/* 필터 */
+.btn-filter {
+  font-size: 14px;
+  border: 1px solid #fff;
+  color: #ffff;
+  border-radius: 20px;
+}
+.btn-filter:hover {
+  color: #111;
+  background-color: #ebff2e;
+  border-color: #888;
+}
+.filter {
+  cursor: pointer;
+}
+.filter:hover {
+  color: #ebff2e;
+}
+.filter.active {
+  color: #ebff2e;
+}
+.filter svg {
+  margin: 0 5px;
+  color: #ebff2e;
+}
+
+@media screen and (max-width: 767px) {
+  .reservation .container {
+    padding-top: 0;
+  }
+
+  .reservation__class {
+    margin-top: 4rem;
+  }
+  /* 날짜 표시 */
+  .reservation__class__select-date > div:first-child {
+    padding-bottom: 4px;
+  }
+  /* 날짜 선택 [이전] [다음] 버튼 */
+  .reservation__class__select-date button {
+    width: 100%;
+  }
+  /* 종목 및 강사 선택 탭 */
+  .resevation__class-Tabs {
+    padding: 2px 20px;
+  }
+  /* 수업 선택 모달 */
+  .reservation__class__console {
+    position: relative;
+    margin-left: 0;
+    left: 0;
+  }
+
+  .reservation__list .table--block td:before {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25%;
+    padding: 10px;
+    background: #ccc;
+    text-align: center;
+  }
+  .reservation__list .table--block td:nth-child(1):before {
+    content: '이름';
+  }
+  .reservation__list .table--block td:nth-child(2):before {
+    content: '수강날짜';
+  }
+  .reservation__list .table--block td:nth-child(3):before {
+    content: '운동명';
+  }
+  .reservation__list .table--block td:nth-child(4):before {
+    content: '강사';
+  }
+  .reservation__list .table--block td:nth-child(5):before {
+    content: '정원';
+  }
+  .reservation__list .table--block td:nth-child(6):before {
+    content: '시간';
+  }
+  .reservation__list .table--block td:nth-child(7):before {
+    content: '삭제';
+  }
+  .reservation__list .table--block td:nth-child(7) {
+    padding: 0;
+    padding-left: 25%;
+  }
+  .reservation__list .user-search__select {
+    padding: 0 10px;
+    width: 100%;
+  }
+  .reservation__list .user-search__select--tr {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-right: 10px;
+  }
+  .reservation__list .Dropdown-arrow {
+    top: 18px;
+  }
+  .reservation__list button {
+    width: auto;
+  }
 }

@@ -1,166 +1,166 @@
 .assignExercise > .container {
-	position: relative;
+  position: relative;
 }
 
 .assignExercise .waySub {
-	top: 3rem;
+  top: 3rem;
 }
 .assignExercise .customerSearch .btnAssignCusSearch {
-	/* background-image: url(img/search.png);
+  /* background-image: url(img/search.png);
 	background-repeat: no-repeat;
 	background-size: 2rem auto;
 	background-position: 14.5rem center; */
-	width: 19rem;
+  width: 19rem;
 }
 
 .assignExercise > .container > section:nth-child(2) {
-	padding: 0;
+  padding: 0;
 }
 
 .assignExercise .CustomerInbody > div {
-	display: flex;
-	flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .assignExercise .CustomerInbody > div > label span {
-	font-size: 3rem;
-	padding: 0 2rem;
-	color: #0f78ff;
+  font-size: 3rem;
+  padding: 0 2rem;
+  color: #0f78ff;
 }
 
 .assignExercise .CustomerInbody > label {
-	font-size: 2rem;
+  font-size: 2rem;
 }
 
 .assignExercise .CustomerInbody h3 {
-	font-size: 2.7rem;
-	font-weight: 400;
-	border: none;
+  font-size: 2.7rem;
+  font-weight: 400;
+  border: none;
 }
 
 .assignExercise .CustomerInbody h3 span {
-	font-size: 4rem;
-	font-weight: 700;
+  font-size: 4rem;
+  font-weight: 700;
 }
 
 .assignExercise .CustomerInbody h4 {
-	font-size: 2.4rem;
-	font-weight: 300;
-	border-bottom: 1px solid #bbb;
-	padding: 0 8rem 1rem 0;
-	width: 100%;
+  font-size: 2.4rem;
+  font-weight: 300;
+  border-bottom: 1px solid #bbb;
+  padding: 0 8rem 1rem 0;
+  width: 100%;
 }
 
 .assignExercise .CustomerInbody h4 span {
-	font-weight: 500;
-	color: #0f78ff;
+  font-weight: 500;
+  color: #0f78ff;
 }
 
 .assignExercise .CustomerInbody > div {
-	display: flex;
-	justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .assignExercise .CustomerInbody > div label {
-	width: 20%;
-	height: 6rem;
-	margin-top: 6rem;
-	font-size: 2.6rem;
-	border-bottom: 1px solid #bbb;
+  width: 20%;
+  height: 6rem;
+  margin-top: 6rem;
+  font-size: 2.6rem;
+  border-bottom: 1px solid #bbb;
 }
 
 .assignExercise .CustomerInbody a {
-	width: 20rem;
-	text-decoration: none;
-	display: block;
-	margin: 5rem 0 0.6rem auto;
+  width: 20rem;
+  text-decoration: none;
+  display: block;
+  margin: 5rem 0 0.6rem auto;
 }
 
 .assignExercise .inputCheckRow {
-	padding: 2rem 0;
+  padding: 2rem 0;
 }
 
 .assignExercise .inputCheckRow > div > label {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	width: 100%;
-	font-size: 2.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  font-size: 2.2rem;
 }
 
 .assignExercise .inputCheckRow > div > label .imageBox {
-	width: 100%;
-	height: 15rem;
-	background: no-repeat center/70% auto;
+  width: 100%;
+  height: 15rem;
+  background: no-repeat center/70% auto;
 }
 
 .assignExercise .inputCheckRow > div > label:nth-child(1) .imageBox {
-	background-image: url(/src/img/assignUpper.png);
+  background-image: url(/src/img/assignUpper.png);
 }
 .assignExercise .inputCheckRow > div > label:nth-child(2) .imageBox {
-	background-image: url(/src/img/assignLower.png);
+  background-image: url(/src/img/assignLower.png);
 }
 .assignExercise .inputCheckRow > div > label:nth-child(3) > .imageBox {
-	background-image: url(/src/img/assignEntire.png);
+  background-image: url(/src/img/assignEntire.png);
 }
 .assignExercise .inputCheckRow > div > label:nth-child(4) > .imageBox {
-	background-image: url(/src/img/assignCore.png);
+  background-image: url(/src/img/assignCore.png);
 }
 .assignExercise .inputCheckRow > div > label:nth-child(5) > .imageBox {
-	background-image: url(/src/img/assignAerobic.png);
+  background-image: url(/src/img/assignAerobic.png);
 }
 
 .assignExercise .exerciseSelectList .flexbetween {
-	padding: 2rem 0;
+  padding: 2rem 0;
 }
 
 .assignExercise .exerciseSelectList .flexbetween > button {
-	width: 12rem;
-	height: 12rem;
+  width: 12rem;
+  height: 12rem;
 }
 
 .assignExercise .exerciseSelectList .flexbetween > button:focus {
-	outline: none;
-	border: 2px solid #0f78ff;
+  outline: none;
+  border: 2px solid #0f78ff;
 }
 
 .assignWorkout .btnSolid {
-	margin: 2rem auto;
-	display: block;
+  margin: 2rem auto;
+  display: block;
 }
 
 .assignExercise h3 {
-	border: none;
+  border: none;
 }
 
 @media (max-width: 767px) {
-	.assignExercise > .container {
-		padding-top: 10rem;
-	}
-	.assignExercise .waySub {
-		left: calc(50% - 75px);
-	}
-	.assignExercise .CustomerInbody h4 {
-		padding: 0 0 1rem 0;
-	}
-	.assignExercise .CustomerInbody > div label {
-		margin-top: 0;
-		height: auto;
-		font-size: 2.2rem;
-		padding-bottom: 8px;
-		width: 100%;
-	}
-	.assignExercise .CustomerInbody a {
-		margin: 2rem auto 1rem;
-	}
-	.assignExercise .exerciseSelectList .flexbetween {
-		flex-wrap: wrap;
-	}
-	.assignExercise .exerciseSelectList .flexbetween > button {
-		width: calc(50% - 2rem);
-		height: 5rem;
-	}
-	.assignWorkout > div:nth-child(5) {
-		overflow: auto;
-	}
+  .assignExercise > .container {
+    padding-top: 10rem;
+  }
+  .assignExercise .waySub {
+    left: calc(50% - 75px);
+  }
+  .assignExercise .CustomerInbody h4 {
+    padding: 0 0 1rem 0;
+  }
+  .assignExercise .CustomerInbody > div label {
+    margin-top: 0;
+    height: auto;
+    font-size: 2.2rem;
+    padding-bottom: 8px;
+    width: 100%;
+  }
+  .assignExercise .CustomerInbody a {
+    margin: 2rem auto 1rem;
+  }
+  .assignExercise .exerciseSelectList .flexbetween {
+    flex-wrap: wrap;
+  }
+  .assignExercise .exerciseSelectList .flexbetween > button {
+    width: calc(50% - 2rem);
+    height: 5rem;
+  }
+  .assignWorkout > div:nth-child(5) {
+    overflow: auto;
+  }
 }

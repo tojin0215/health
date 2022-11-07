@@ -1,12 +1,40 @@
-.workoutRoutine {
+.workoutRoutine .col {
   background: #222;
   border: 1px solid #888;
   border-radius: 0.625rem;
   padding: 3.125rem 2.5rem;
 }
 
+.custom {
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.custom:hover {
+  border-color: #e2ff33;
+  color: #e2ff33;
+  background-color: #0f0e0e;
+}
+.custom h2,
+.custom .custom-arrow {
+  color: #e2ff33;
+}
+.personal {
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.personal:hover {
+  border-color: #ff5a5a;
+  color: #ff5a5a;
+  background-color: #0f0e0e;
+}
+.personal h2 {
+  color: #ff5a5a;
+}
+.personal .personal-arrow {
+  color: #ff5a5a;
+}
+
 .addWorkout {
-  width: 100%;
   padding: 2.5rem 0.625rem;
   align-items: center;
   font-size: 20px;

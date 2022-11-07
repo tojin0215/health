@@ -36,13 +36,15 @@
 }
 
 /* 50개씩 보기 드롭다운 메뉴*/
-/* .customer .customerTableSort {
+/* 
+.customer .customerTableSort {
 	border: 1px solid #005;
 	position: absolute;
 	top: 6rem;
 	right: 1rem;
 	padding: 0.6rem;
-} */
+} 
+*/
 .customerTable {
   width: 100%;
 }

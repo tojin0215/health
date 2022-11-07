@@ -1,0 +1,93 @@
+.MuiDrawer-root .MuiPaper-root {
+  width: 70%;
+}
+
+.collapse-css-transition {
+  transition: height 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.menu {
+  display: none;
+  background-color: #333;
+  box-shadow: 0 6px 7px rgba(30, 30, 30, 0.5);
+  width: 100%;
+  position: relative;
+}
+.menu:after {
+  content: '';
+  clear: both;
+  display: block;
+}
+.menu .logo {
+  float: left;
+  padding: 16px 10px 0;
+  height: 4rem;
+  font-weight: 900;
+}
+
+.menu .MuiButtonBase-root {
+  position: absolute;
+  right: 10px;
+}
+
+.menu .MuiSvgIcon-root {
+  width: 40px;
+  height: 40px;
+  color: #fff;
+}
+
+/* 모바일 네비게이션 */
+.mob-nav__drawer {
+}
+
+.mob-nav__drawer .MuiPaper-root {
+  color: #fff;
+}
+
+.mob-nav__drawer__menu > div {
+  font-size: 1.2rem;
+  font-weight: 300;
+  padding: 20px 10px;
+  border-bottom: 1px solid #fff;
+  /*   border-bottom: 1px solid #d7d7d7; */
+}
+
+.mob-nav__drawer__menu > li {
+  font-weight: 200;
+  text-align: start;
+  margin-left: 30px;
+}
+.mob-nav__drawer__menu-item {
+  align-items: center;
+}
+.mob-nav__drawer__menu-item > svg {
+  margin-right: 15px;
+}
+.mob-nav__drawer__menu-item:hover > svg {
+  transition: all 0.8s;
+  margin-right: 0;
+}
+.dropdown {
+  margin-top: 20px;
+}
+
+.dropdown a {
+  margin: 10px 0;
+}
+
+@media screen and (max-width: 1023px) {
+  .menu {
+    display: block;
+  }
+}

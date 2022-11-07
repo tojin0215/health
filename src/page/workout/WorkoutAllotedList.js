@@ -5,7 +5,7 @@ import moment from 'moment';
 import { getStatusRequest } from '../../action/authentication';
 import Header from '../../component/header/Header';
 import Navigation from '../../component/navigation/Navigation';
-import Menu from '../../component/navigation/Menu';
+import MobNavigation from '../../component/navigation/MobNavigation';
 import { Link } from 'react-router-dom';
 import UserSearch from '../../component/customer/UserSearch';
 import {
@@ -13,6 +13,11 @@ import {
   selectClientReservation,
   selectTrainerReservation,
   workoutAllotedSelect,
+  workoutDestroy,
+  workoutSelect,
+  workoutStageDestroy,
+  workoutStageInsert,
+  workoutStageSelect,
 } from '../../api/user';
 import Footer from '../../component/footer/Footer';
 //css
@@ -41,6 +46,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { TbMoodSuprised } from 'react-icons/tb';
 import { MdPersonSearch } from 'react-icons/md';
 import { BiSearchAlt2 } from 'react-icons/bi';
+import { GiCancel } from 'react-icons/gi';
 
 const InbodiesView = ({ client_name, height, weight, bodyFat, muscleMass }) => {
   return (
@@ -80,7 +86,15 @@ const WorkoutAllotedView = ({
   default_count,
   default_rest,
   url,
+  workoutStageView,
+  ids,
+  stage,
 }) => {
+  const destroy = () => {
+    workoutDestroy(ids).then((res) => {
+      workoutStageView(stage);
+    });
+  };
   return (
     <TableRow>
       <TableCell>{region}</TableCell>
@@ -90,6 +104,13 @@ const WorkoutAllotedView = ({
       <TableCell>{default_count}</TableCell>
       <TableCell>{default_rest}</TableCell>
       <TableCell>{url}</TableCell>
+      <TableCell
+        onClick={destroy}
+        className='workout-alloted__selected--cencel'
+      >
+        <GiCancel className='fs-2' />
+      </TableCell>
+      {/* 기능추가  :삭제 */}
     </TableRow>
   );
 };
@@ -98,7 +119,7 @@ class WorkoutAllotedList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      client_name: '',
+      client_name: '회원 검색',
       open: false,
       inbodiesList: [],
       workoutAllotlist: [],
@@ -302,7 +323,7 @@ class WorkoutAllotedList extends Component {
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
-          <Menu goLogin={this.goLogin} />
+          <MobNavigation goLogin={this.goLogin} />
           <div className='localNavigation'>
             <div className='container'>
               <h2>
@@ -320,58 +341,61 @@ class WorkoutAllotedList extends Component {
         <Container className='workoutallotedlist__container'>
           <Row className='sectionGlass'>
             {this.state.line === 3 ? (
-              <Col xs={6}>
-                <h3>
-                  <span className='text-primary'>
-                    {this.state.client_name2}
-                  </span>
-                  님의{' '}
-                  <DatePicker
-                    className='text-center'
-                    selected={this.state.workoutB_date}
-                    onChange={(date) => this.dateOnChange(date)}
-                    dateFormat='yyyy년MM월dd일'
-                    font-size='1.6rem'
-                    //  minDate={new Date()}
-                  />
-                  {/* {moment(this.state.workoutB_date).format('YYYY년 MM월 DD일')} */}
-                  <span>운동 배정 목록</span>
-                </h3>
-              </Col>
-            ) : (
-              <Col>
+              <h5>
                 <Row xs='auto'>
-                  <Col className='customer_name mb-4'>
-                    {this.state.line === 3 ? (
-                      <TextField
-                        id='customer_name'
-                        label='회원 검색'
-                        disabled
-                        variant='standard'
-                        className='customer-input--search'
-                        InputProps={{ disableUnderline: true }}
-                        value={this.state.client_name2}
-                      />
-                    ) : this.state.line === 1 ? (
-                      ''
-                    ) : this.props.userinfo.loginWhether === 2 ? (
-                      ''
-                    ) : this.state.open ? (
-                      <>
-                        <UserSearch
-                          open={this.state.open}
-                          setOpen={(o) => this.setState({ open: o })}
-                          fitness_no={this.props.userinfo.fitness_no}
-                          loginWhether={this.props.userinfo.loginWhether}
-                          joinNo={this.props.userinfo.joinNo}
-                          handleUser={this.handleUser}
-                        />
-                      </>
-                    ) : (
-                      <>
+                  <Col>
+                    <strong>{this.state.client_name2}</strong>
+                    님의{' '}
+                  </Col>
+                  <Col>
+                    <DatePicker
+                      className='text-center'
+                      selected={this.state.workoutB_date}
+                      onChange={(date) => this.dateOnChange(date)}
+                      dateFormat='yyyy년MM월dd일'
+                      font-size='1.6rem'
+                      //  minDate={new Date()}
+                    />
+                  </Col>
+                  <Col>
+                    {/* {moment(this.state.workoutB_date).format('YYYY년 MM월 DD일')} */}
+                    운동 배정 목록입니다.
+                  </Col>
+                </Row>
+              </h5>
+            ) : (
+              <Col className='mx-3'>
+                <h5>
+                  <Row xs='auto'>
+                    <Col xs={2} className='customer_name'>
+                      {this.state.line === 3 ? (
                         <TextField
                           id='customer_name'
-                          label='회원검색'
+                          // label='회원 검색'
+                          disabled
+                          variant='standard'
+                          className='customer-input--search'
+                          InputProps={{ disableUnderline: true }}
+                          value={this.state.client_name2}
+                        />
+                      ) : this.state.line === 1 ? (
+                        ''
+                      ) : this.props.userinfo.loginWhether === 2 ? (
+                        ''
+                      ) : this.state.open ? (
+                        <>
+                          <UserSearch
+                            open={this.state.open}
+                            setOpen={(o) => this.setState({ open: o })}
+                            fitness_no={this.props.userinfo.fitness_no}
+                            loginWhether={this.props.userinfo.loginWhether}
+                            joinNo={this.props.userinfo.joinNo}
+                            handleUser={this.handleUser}
+                          />
+                        </>
+                      ) : (
+                        <TextField
+                          id='customer_name'
                           disabled
                           variant='standard'
                           onClick={() => this.setState({ open: true })}
@@ -379,25 +403,34 @@ class WorkoutAllotedList extends Component {
                           InputProps={{ disableUnderline: true }}
                           value={this.state.client_name}
                         />
-                        <BiSearchAlt2 className='fs-3' />
+                      )}
+                      {/* {this.state.client_name} */}
+                    </Col>
+                    <Col>
+                      {this.state.client_name === '회원 검색'
+                        ? '회원을 선택해주세요'
+                        : '회원님의'}
+                    </Col>
+                    {this.state.client_name === '회원 검색' ? (
+                      ''
+                    ) : (
+                      <>
+                        <Col>
+                          <DatePicker
+                            className='text-center'
+                            selected={this.state.workoutA_date}
+                            onChange={(date) => this.dateOnChange(date)}
+                            dateFormat='yyyy년MM월dd일'
+                            font-size='1.6rem'
+                            maxDate={new Date()}
+                          />
+                        </Col>
+                        <Col>에 배정된 운동목록입니다.</Col>
                       </>
                     )}
-                    {/* {this.state.client_name} */}
-                  </Col>
-                  <Col>님ff의</Col>
-                  <Col>
-                    <DatePicker
-                      className='text-center'
-                      selected={this.state.workoutA_date}
-                      onChange={(date) => this.dateOnChange(date)}
-                      dateFormat='yyyy년MM월dd일'
-                      font-size='1.6rem'
-                      maxDate={new Date()}
-                    />
-                  </Col>
-                  <Col>에 배정된 운동목록입니다.</Col>
-                  {/* {moment(this.state.workoutA_date).format('YYYY년 MM월 DD일')} */}
-                </Row>
+                    {/* {moment(this.state.workoutA_date).format('YYYY년 MM월 DD일')} */}
+                  </Row>
+                </h5>
               </Col>
             )}
             <Col xs={12}>
@@ -412,6 +445,8 @@ class WorkoutAllotedList extends Component {
                       <TableCell scope='col'>횟수</TableCell>
                       <TableCell scope='col'>휴식</TableCell>
                       <TableCell scope='col'>URL</TableCell>
+                      <TableCell scope='col'>삭제</TableCell>
+                      {/* 기능추가: 삭제 */}
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -449,7 +484,7 @@ class WorkoutAllotedList extends Component {
               </TableContainer>
             </Col>
           </Row>
-          <Row className='sectionGlass'>
+          {/* <Row className='sectionGlass'>
             <h3>
               {this.state.line === 3
                 ? this.state.client_name2
@@ -464,7 +499,7 @@ class WorkoutAllotedList extends Component {
                 <p>등록된 인바디 정보가 없습니다.</p>
               </div>
             )}
-          </Row>
+          </Row> */}
         </Container>
         <div className='footer'>
           <Footer />

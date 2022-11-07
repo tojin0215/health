@@ -38,15 +38,18 @@ import { BsCheckLg } from 'react-icons/bs';
 import { FaSearch } from 'react-icons/fa';
 import SearchIcon from '@mui/icons-material/Search';
 
+// css
+import './UserSearch.css';
+
 const options = ['이름', '핸드폰'];
 
 const UserSearchTableHeader = () => (
   <TableHead>
     <TableRow>
       <TableCell align='center'>번호</TableCell>
-      <TableCell>이름</TableCell>
-      <TableCell>폰번호</TableCell>
-      <TableCell>성별</TableCell>
+      <TableCell align='center'>이름</TableCell>
+      <TableCell align='center'>폰번호</TableCell>
+      <TableCell align='center'>성별</TableCell>
       <TableCell align='center'>선택</TableCell>
     </TableRow>
   </TableHead>
@@ -174,7 +177,7 @@ const UserSearch = ({
     >
       <DialogTitle>회원 검색</DialogTitle>
       <DialogContent>
-        <Row>
+        <Row className='user-search__utill'>
           <Col xs={12} md={3} className=''>
             <Dropdown
               className='searchDrop'
@@ -211,25 +214,20 @@ const UserSearch = ({
               </IconButton>
             </Paper>
           </Col> */}
-          <Col xs={12} md={8} className='mt-2'>
-            <Form.Group className='h-100'>
+          <Col xs={12} md={7} className='user-search__utill__classification'>
+            <Form.Group>
               <Form.Control
                 placeholder='회원을 검색하세요'
-                // className='w-100 h-100'
                 type='text'
                 id='search'
-                className='h-100'
+                className=''
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </Form.Group>
           </Col>
-          <Col xs={12} md={1} className='mt-2'>
-            <Button
-              className='w-100 h-100 py-1'
-              onClick={handleOnSearch}
-              variant='success'
-            >
+          <Col xs={12} md={2} className='mt-2'>
+            <Button onClick={handleOnSearch} variant='success'>
               <FaSearch />
             </Button>
           </Col>

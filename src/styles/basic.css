@@ -1,8 +1,4 @@
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
-
-.MuiDrawer-root li a {
-  color: #000;
-}
+@import url('https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css');
 
 html {
   font-size: 16px;
@@ -25,9 +21,9 @@ h2 {
 }
 
 h3 {
-  /* border-bottom: 1px solid #ebff2e; */
   padding-bottom: 0.6rem;
-} /* sectionGlass 제목  */
+}
+/* sectionGlass 제목  */
 
 h4 {
   margin: 0;
@@ -35,8 +31,9 @@ h4 {
   align-items: center;
 }
 h5 {
+  font-size: large;
   line-height: 2.8rem;
-  font-weight: 500;
+  font-weight: 400;
   align-items: center;
 }
 
@@ -46,7 +43,7 @@ h5 .parallelogram {
 }
 
 h6 {
-  display: flex;
+  line-height: 2.8rem;
   font-weight: 400;
   align-items: center;
 }
@@ -87,4 +84,11 @@ p {
 
 .white-space-break-spaces {
   white-space: break-spaces;
+}
+.cf {
+}
+.cf:after {
+  content: '';
+  display: block;
+  clear: both;
 }
