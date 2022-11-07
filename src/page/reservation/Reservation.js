@@ -149,7 +149,8 @@ const ReservationClassItem = ({
     handleShow();
   };
 
-  console.log('show', show);
+  // console.log('show', show);
+  console.log('show', this.state.fitness_no);
   const hourArray = hour >= 10 ? hour : '0' + hour;
   const minuteArray = minute >= 10 ? minute : '0' + minute;
   return (
@@ -241,20 +242,22 @@ const ReservationClassItem = ({
         {canRegist}/{number_of_people}
       </p> */}
         </Row>
-        <Modal show={show} onHide={handleClose} centered>
-          <Modal.Header closeButton>
-            <Modal.Title>테스트타이틀</Modal.Title>
-          </Modal.Header>
+        <Modal
+          // show={show}
+          show={true}
+          onHide={handleClose}
+          centered
+        >
+          <Modal.Header closeButton></Modal.Header>
           <Modal.Body>
             <Row className='reservation__class__console'>
               <div className='reservation__class__console-info'>
-                <h5>선택된 수업</h5>
+                <h5>{exercise_class ? exercise_class : '수업 이름'}</h5>
                 <div className='reservation__class__console-infoContent'>
                   <dl>
-                    <div className='exercise_name'>
+                    <div className='exercise_name d-none'>
                       <dt>운동명</dt>
                       <dd className='text-end'>
-                        {exercise_class ? exercise_class : '수업 이름'}
                         <TextField
                           id='exercise_name'
                           className='d-none'
@@ -876,7 +879,6 @@ const ReservationClassItem_choice2 = ({
 class Reservation extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       show: false,
       fitness_no: 1,
