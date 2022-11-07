@@ -558,8 +558,8 @@ class Home extends Component {
                 </h5>
               </Col>
             </Row>
-            <Row>
-              <Col className='sectionGlass facility me-3'>
+            <Row className=''>
+              <Col className='sectionGlass facility'>
                 <div className='mb-3'>
                   <h4>
                     센터시설이용
