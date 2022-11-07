@@ -23,3 +23,9 @@ ul li strong {
 ul li p {
   float: right;
 }
+
+@media screen and (max-width: 767px) {
+  .myInfo {
+    margin-bottom: 1rem;
+  }
+}

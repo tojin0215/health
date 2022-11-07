@@ -144,16 +144,11 @@ class MobNavigation extends Component {
         {userinfo.loginWhether === 2 ? (
           //회원
           <div className='menu'>
-            {/* <div id='menu-icon'>
-              <span className='first'></span>
-              <span className='second'></span>
-              <span className='third'></span>
-            </div> */}
             <IconButton onClick={() => this.mobileOpen()}>
               <MenuIcon />
             </IconButton>
             <div className='logo'>
-              <p className='fs-5'>
+              <p>
                 <a href='/home'>
                   {this.props.userinfo.fitness_name}
                   <span className='text-secondary ps-2'>회원</span>
@@ -161,18 +156,26 @@ class MobNavigation extends Component {
               </p>
             </div>
             <Drawer
-              variant='permanent'
+              className='mob-nav__drawer'
               open={this.state.mobile}
               onClose={() => this.mobileClose()}
             >
-              <ul>
-                <h3>{this.props.userinfo.manager_name}</h3>
+              <ul className='mob-nav__drawer__menu'>
+                <h3 exact to='/mypage'>
+                  {this.props.userinfo.manager_name}
+                </h3>
                 <li className='dropdown'>
                   <NavLink exact to='/mypage'>
                     내 정보
                   </NavLink>
                 </li>
-                <div onClick={() => this.sideMenu()}>센터 소개(대메뉴)</div>
+                <div
+                  className='mob-nav__drawer__menu-item d-flex justify-content-between'
+                  onClick={() => this.sideMenu()}
+                >
+                  센터 소개
+                  <MdKeyboardArrowRight />
+                </div>
                 {this.state.sideGroup.center ? (
                   <li className='dropdown'>
                     <NavLink exact to='/introduce'>
@@ -182,7 +185,13 @@ class MobNavigation extends Component {
                 ) : (
                   ''
                 )}
-                <div onClick={() => this.sideMenu2()}>회원(대메뉴)</div>
+                <div
+                  className='mob-nav__drawer__menu-item d-flex justify-content-between'
+                  onClick={() => this.sideMenu2()}
+                >
+                  회원
+                  <MdKeyboardArrowRight />
+                </div>
                 {this.state.sideGroup.client ? (
                   <li className='dropdown'>
                     <NavLink exact to='/inbodies'>
@@ -196,7 +205,13 @@ class MobNavigation extends Component {
                 ) : (
                   ''
                 )}
-                <div onClick={() => this.sideMenu4()}>수업(대메뉴)</div>
+                <div
+                  className='mob-nav__drawer__menu-item d-flex justify-content-between'
+                  onClick={() => this.sideMenu4()}
+                >
+                  수업
+                  <MdKeyboardArrowRight />
+                </div>
                 {this.state.sideGroup.reserv ? (
                   <li className='dropdown'>
                     <li>
@@ -208,7 +223,7 @@ class MobNavigation extends Component {
                 ) : (
                   ''
                 )}
-                <li className='text-center'>
+                <li className='text-center mt-3'>
                   <Button variant='danger' onClick={this.handleLogout}>
                     로그아웃
                   </Button>
@@ -355,7 +370,6 @@ class MobNavigation extends Component {
                 ) : (
                   ''
                 )}
-
                 <li className='text-center mt-3'>
                   <Button variant='danger' onClick={this.handleLogout}>
                     로그아웃
