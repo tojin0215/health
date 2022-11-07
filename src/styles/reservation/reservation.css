@@ -241,6 +241,9 @@
   border-radius: 5px;
   padding: 20px;
 }
+.resevation__class-Tabs > .tab-content {
+  position: relative;
+}
 .resevation__class-Tabs .tab-pane {
   overflow: auto;
 }
@@ -261,6 +264,20 @@
   border: 0;
   background-color: transparent;
   color: #ebff2e;
+}
+.reservation__class__tabs--left {
+  position: absolute;
+  width: 26px;
+  height: auto;
+  top: 8px;
+  left: -18px;
+}
+.reservation__class__tabs--right {
+  position: absolute;
+  width: 26px;
+  height: auto;
+  top: 8px;
+  right: -18px;
 }
 
 /* 필터 */

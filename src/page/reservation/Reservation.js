@@ -25,6 +25,8 @@ import Button from 'react-bootstrap/Button';
 import { ImSortAlphaAsc } from 'react-icons/im';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { TbMoodSuprised } from 'react-icons/tb';
+import { MdOutlineKeyboardArrowLeft } from 'react-icons/md';
+import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 // MUI
 import ClickAwayListener from '@mui/base/ClickAwayListener';
 import Box from '@mui/material/Box';
@@ -1669,6 +1671,19 @@ class Reservation extends Component {
     this.setState({ key: e });
   };
 
+  TabsTrainerList = () => {};
+
+  tabsClickToScrollLeft = () => {
+    console.log('클릭투스크롤left 작동합니다.');
+    var locationLeft = document.querySelector('#tabsTrainerAll').offsetLeft;
+
+    console.log('locationLeft 작동합니다.', locationLeft);
+    document
+      .querySelector('.reservation__class-Tabs .tab-content')
+      .scrollTo({ left: locationLeft, behavior: 'auto' });
+  };
+  tabsClickToScrollRight = () => {};
+
   render() {
     // console.log(this.state.customer_name);
     // console.log(this.state.kind);
@@ -1793,11 +1808,26 @@ class Reservation extends Component {
                       activeKey={this.keyTrainer}
                       onSelect={this.selectClassTabs}
                     >
-                      <Tab eventKey='trainerAll' title='전체'></Tab>
+                      <Tab
+                        eventKey='trainerAll'
+                        title='전체'
+                        id='tabsTrainerAll'
+                      ></Tab>
                       <Tab eventKey='trainer1' title='김유리 강사'></Tab>
                       <Tab eventKey='trainer2' title='박우진 강사'></Tab>
-                      <Tab eventKey='trainer3' title='한세연 강사'></Tab>
+                      <Tab
+                        eventKey='trainer3'
+                        title='한세연 강사'
+                        id='tabsTrainerLast'
+                      ></Tab>
                     </Tabs>
+                    <Mobile>
+                      <MdOutlineKeyboardArrowLeft
+                        className='reservation__class__tabs--left'
+                        onClick={this.tabsClickToScrollLeft}
+                      />
+                      <MdOutlineKeyboardArrowRight className='reservation__class__tabs--right' />
+                    </Mobile>
                   </Tab>
                   <Tab eventKey='pilates' title='필라테스'>
                     <Tabs

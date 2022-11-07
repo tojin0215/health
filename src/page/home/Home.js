@@ -408,30 +408,6 @@ class Home extends Component {
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                      <th scope='col' align='center'>
-                        {moment(this.state.reserv_date)
-                          .day(3)
-                          .add(this.state.dayIncreament, 'days')
-                          .format('MM-DD (dd)')}
-                      </th>
-                      <th scope='col' align='center'>
-                        {moment(this.state.reserv_date)
-                          .day(4)
-                          .add(this.state.dayIncreament, 'days')
-                          .format('MM-DD (dd)')}
-                      </th>
-                      <th scope='col' align='center'>
-                        {moment(this.state.reserv_date)
-                          .day(5)
-                          .add(this.state.dayIncreament, 'days')
-                          .format('MM-DD (dd)')}
-                      </th>
-                      <th scope='col' align='center'>
-                        {moment(this.state.reserv_date)
-                          .day(6)
-                          .add(this.state.dayIncreament, 'days')
-                          .format('MM-DD (dd)')}
-                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -469,70 +445,6 @@ class Home extends Component {
                         </div>
                       </td>
                       <td name='tue' align='center' className='align-top'>
-                        <div className='class-info'>
-                          {1 == true ? (
-                            <div className='py-2 my-1 text-secondary rounded'>
-                              <TbMoodSuprised className='fs-3' />
-                              <p>
-                                예약된 수업이
-                                <br />
-                                없습니다
-                              </p>
-                            </div>
-                          ) : (
-                            ''
-                          )}
-                        </div>
-                      </td>
-                      <td name='wed' align='center' className='align-top'>
-                        <div className='class-info'>
-                          {1 == true ? (
-                            <div className='py-2 my-1 text-secondary rounded'>
-                              <TbMoodSuprised className='fs-3' />
-                              <p>
-                                예약된 수업이
-                                <br />
-                                없습니다
-                              </p>
-                            </div>
-                          ) : (
-                            ''
-                          )}
-                        </div>
-                      </td>
-                      <td name='thu' align='center' className='align-top'>
-                        <div className='class-info'>
-                          {1 == true ? (
-                            <div className='py-2 my-1 text-secondary rounded'>
-                              <TbMoodSuprised className='fs-3' />
-                              <p>
-                                예약된 수업이
-                                <br />
-                                없습니다
-                              </p>
-                            </div>
-                          ) : (
-                            ' '
-                          )}
-                        </div>
-                      </td>
-                      <td name='fri' align='center' className='align-top'>
-                        <div className='class-info'>
-                          {1 == true ? (
-                            <div className='py-2 my-1 text-secondary rounded'>
-                              <TbMoodSuprised className='fs-3' />
-                              <p>
-                                예약된 수업이
-                                <br />
-                                없습니다
-                              </p>
-                            </div>
-                          ) : (
-                            ''
-                          )}
-                        </div>
-                      </td>
-                      <td name='sat' align='center' className='align-top'>
                         <div className='class-info'>
                           {1 == true ? (
                             <div className='py-2 my-1 text-secondary rounded'>
@@ -646,8 +558,8 @@ class Home extends Component {
                 </h5>
               </Col>
             </Row>
-            <Row>
-              <Col className='sectionGlass facility me-3'>
+            <Row className=''>
+              <Col className='sectionGlass facility'>
                 <div className='mb-3'>
                   <h4>
                     센터시설이용
@@ -741,30 +653,6 @@ class Home extends Component {
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                      <th scope='col' align='center'>
-                        {moment(this.state.reserv_date)
-                          .day(3)
-                          .add(this.state.dayIncreament, 'days')
-                          .format('MM-DD (dd)')}
-                      </th>
-                      <th scope='col' align='center'>
-                        {moment(this.state.reserv_date)
-                          .day(4)
-                          .add(this.state.dayIncreament, 'days')
-                          .format('MM-DD (dd)')}
-                      </th>
-                      <th scope='col' align='center'>
-                        {moment(this.state.reserv_date)
-                          .day(5)
-                          .add(this.state.dayIncreament, 'days')
-                          .format('MM-DD (dd)')}
-                      </th>
-                      <th scope='col' align='center'>
-                        {moment(this.state.reserv_date)
-                          .day(6)
-                          .add(this.state.dayIncreament, 'days')
-                          .format('MM-DD (dd)')}
-                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -794,54 +682,6 @@ class Home extends Component {
                         </div>
                       </td>
                       <td name='tue' align='center' className='align-top'>
-                        <div className='class-info'>
-                          {1 == true ? (
-                            <div className='py-2 my-1 text-secondary rounded'>
-                              <TbMoodSuprised className='fs-3' />
-                              <p>수업이 없습니다.</p>
-                            </div>
-                          ) : (
-                            ''
-                          )}
-                        </div>
-                      </td>
-                      <td name='wed' align='center' className='align-top'>
-                        <div className='class-info'>
-                          {1 == true ? (
-                            <div className='py-2 my-1 text-secondary rounded'>
-                              <TbMoodSuprised className='fs-3' />
-                              <p>수업이 없습니다.</p>
-                            </div>
-                          ) : (
-                            ''
-                          )}
-                        </div>
-                      </td>
-                      <td name='thu' align='center' className='align-top'>
-                        <div className='class-info'>
-                          {1 == true ? (
-                            <div className='py-2 my-1 text-secondary rounded'>
-                              <TbMoodSuprised className='fs-3' />
-                              <p>수업이 없습니다.</p>
-                            </div>
-                          ) : (
-                            ' '
-                          )}
-                        </div>
-                      </td>
-                      <td name='fri' align='center' className='align-top'>
-                        <div className='class-info'>
-                          {1 == true ? (
-                            <div className='py-2 my-1 text-secondary rounded'>
-                              <TbMoodSuprised className='fs-3' />
-                              <p>수업이 없습니다.</p>
-                            </div>
-                          ) : (
-                            ''
-                          )}
-                        </div>
-                      </td>
-                      <td name='sat' align='center' className='align-top'>
                         <div className='class-info'>
                           {1 == true ? (
                             <div className='py-2 my-1 text-secondary rounded'>
