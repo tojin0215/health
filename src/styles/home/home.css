@@ -357,7 +357,11 @@ strong {
   .sectionGlass-manager br {
     display: none;
   }
+  .sectionGlass-manager .sales-statis br {
+    display: block;
+  }
+
   .sales-statis .sales-total {
-    font-size: 20px;
+    font-size: 1.2rem;
   }
 }
