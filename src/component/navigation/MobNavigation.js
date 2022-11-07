@@ -247,7 +247,6 @@ class MobNavigation extends Component {
             </div>
             <Drawer
               className='mob-nav__drawer'
-              variant='permanent'
               open={this.state.mobile}
               onClose={() => this.mobileClose()}
             >
