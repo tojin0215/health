@@ -14,4 +14,7 @@ trainers-search .MuiPaper-elevation {
   line-height: 20px;
 }
 @media (max-width: 767px) {
+  .user-search #search {
+    border: 1px solid #ccc;
+  }
 }
