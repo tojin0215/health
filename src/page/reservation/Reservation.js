@@ -146,7 +146,6 @@ const ReservationClassItem = ({
     handleShow();
   };
 
-  console.log('show', show);
   const hourArray = hour >= 10 ? hour : '0' + hour;
   const minuteArray = minute >= 10 ? minute : '0' + minute;
   return (
@@ -1671,19 +1670,6 @@ class Reservation extends Component {
     this.setState({ key: e });
   };
 
-  TabsTrainerList = () => {};
-
-  tabsClickToScrollLeft = () => {
-    console.log('클릭투스크롤left 작동합니다.');
-    var locationLeft = document.querySelector('#tabsTrainerAll').offsetLeft;
-
-    console.log('locationLeft 작동합니다.', locationLeft);
-    document
-      .querySelector('.reservation__class-Tabs .tab-content')
-      .scrollTo({ left: locationLeft, behavior: 'auto' });
-  };
-  tabsClickToScrollRight = () => {};
-
   render() {
     // console.log(this.state.customer_name);
     // console.log(this.state.kind);
@@ -1822,10 +1808,7 @@ class Reservation extends Component {
                       ></Tab>
                     </Tabs>
                     <Mobile>
-                      <MdOutlineKeyboardArrowLeft
-                        className='reservation__class__tabs--left'
-                        onClick={this.tabsClickToScrollLeft}
-                      />
+                      <MdOutlineKeyboardArrowLeft className='reservation__class__tabs--left' />
                       <MdOutlineKeyboardArrowRight className='reservation__class__tabs--right' />
                     </Mobile>
                   </Tab>
