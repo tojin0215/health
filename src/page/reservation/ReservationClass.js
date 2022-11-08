@@ -877,7 +877,7 @@ class ReservationClass extends Component {
     // console.log(this.state.etcExercise);
     // console.log(this.state.kind);
     return (
-      <div className='wrap reservationClassWrap'>
+      <div className='wrap reservation-class'>
         <header className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -902,7 +902,6 @@ class ReservationClass extends Component {
           </div>
           {/*.localNavigation */}
         </header>
-
         <Container>
           <Row className='reservation-class__form sectionGlass mb-5'>
             <Col xs={12} className='mb-3'>
@@ -913,7 +912,7 @@ class ReservationClass extends Component {
                 <Col md={1} className='exerciseGroup'>
                   <h5>운동종류</h5>
                 </Col>
-                <Col>
+                <Col className='reservation-class__exercise-group--form'>
                   <div>
                     <Form.Check inline>
                       <Form.Check.Input
@@ -1085,10 +1084,10 @@ class ReservationClass extends Component {
                 error={this.state.exercise_class_err}
               />
             </Col>
-            <Col xs={1}>
+            <Col md={1}>
               <h5>강사</h5>
             </Col>
-            <Col xs={4}>
+            <Col md={4}>
               {this.props.userinfo.loginWhether === 1 ? (
                 <Form.Control
                   id='trainer'
@@ -1131,11 +1130,11 @@ class ReservationClass extends Component {
                 </div>
               )}
             </Col>
-            <Col xs={2}></Col>
-            <Col xs={1}>
+            <Col md={2}></Col>
+            <Col md={1}>
               <h5>날짜</h5>
             </Col>
-            <Col xs={4}>
+            <Col md={4}>
               <DatePicker
                 className='text-center w-100 mb-4'
                 selected={this.state.class_date}
@@ -1147,10 +1146,10 @@ class ReservationClass extends Component {
                 minDate={new Date()}
               />
             </Col>
-            <Col xs={1}>
+            <Col md={1}>
               <h5>시간</h5>
             </Col>
-            <Col xs={4}>
+            <Col md={4}>
               <Row>
                 <Col>
                   <Form.Control
@@ -1181,10 +1180,10 @@ class ReservationClass extends Component {
                 </Col>
               </Row>
             </Col>
-            <Col xs={1}>
+            <Col md={1}>
               <h5>인원</h5>
             </Col>
-            <Col xs={1}>
+            <Col md={1}>
               <Form.Control
                 className=''
                 placeholder='인원'
@@ -1197,7 +1196,7 @@ class ReservationClass extends Component {
                 error={this.state.number_of_people_err}
               />
             </Col>
-            <Col xs={12} className='text-center'>
+            <Col md={12} className='text-center'>
               <Button onClick={this.handleOnClick}>수업 만들기</Button>
             </Col>
           </Row>
