@@ -5,17 +5,17 @@
 */
 
 /* thead 폰트 컬러 */
-.reservationClassWrap .table thead tr th {
+.reservation-class .table thead tr th {
   font-weight: 400;
   color: #fff;
 }
 
 /* tbody 폰트 컬러 */
-.reservationClassWrap tbody tr td {
+.reservation-class tbody tr td {
   color: #fff;
 }
 
-.reservationClassWrap .MuiInputBase-input {
+.reservation-class .MuiInputBase-input {
   text-align: center;
 }
 /* 
