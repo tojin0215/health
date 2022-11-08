@@ -71,4 +71,13 @@
   .localNavigation .breadCrumb {
     display: none;
   }
+
+  .localNavigation .container h2 {
+    font-size: 1.4rem;
+  }
+
+  .localNavigation .container h2 .parallelogram {
+    height: 1.4rem;
+    margin: 4px 10px 0;
+  }
 }

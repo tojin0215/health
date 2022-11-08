@@ -25,8 +25,11 @@ import Button from 'react-bootstrap/Button';
 import { ImSortAlphaAsc } from 'react-icons/im';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { TbMoodSuprised } from 'react-icons/tb';
-import { MdOutlineKeyboardArrowLeft } from 'react-icons/md';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import {
+  MdOutlineLibraryAdd,
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+} from 'react-icons/md';
 // MUI
 import ClickAwayListener from '@mui/base/ClickAwayListener';
 import Box from '@mui/material/Box';
@@ -91,8 +94,10 @@ const ReservationClassItem = ({
   trainer,
   class_date,
   kind,
+  customer_name,
   exercise_name_err,
   time,
+  // loginWhether,
 }) => {
   // console.log('exercise_class', exercise_class);
   // console.log('number_of_people', number_of_people);
@@ -108,7 +113,7 @@ const ReservationClassItem = ({
   const handleClose = () => {
     setShow(false);
   };
-
+  console.log('안녕');
   const handleShow = () => {
     setShow(true);
     console.log('show', show);
@@ -134,7 +139,12 @@ const ReservationClassItem = ({
       hour,
       minute,
       trainer,
-      class_date
+      class_date,
+      canRegist,
+      (time = hour + ':' + minute),
+      customer_name,
+      exercise_name_err
+      // loginWhether
     );
     console.log('exercise_class', exercise_class);
     console.log('kind', kind);
@@ -143,10 +153,14 @@ const ReservationClassItem = ({
     console.log('minute', minute);
     console.log('trainer', trainer);
     console.log('class_date', class_date);
+    console.log('canRegist', canRegist);
+    console.log('time', time);
+    console.log('customer_name', customer_name);
+    // console.log('loginWhether', loginWhether);
     handleShow();
   };
 
-  console.log('show', show);
+  // console.log('show', show);
   const hourArray = hour >= 10 ? hour : '0' + hour;
   const minuteArray = minute >= 10 ? minute : '0' + minute;
   return (
@@ -238,20 +252,22 @@ const ReservationClassItem = ({
         {canRegist}/{number_of_people}
       </p> */}
         </Row>
-        <Modal show={show} onHide={handleClose} centered>
-          <Modal.Header closeButton>
-            <Modal.Title>테스트타이틀</Modal.Title>
-          </Modal.Header>
+        <Modal
+          show={show}
+          // show={true}
+          onHide={handleClose}
+          centered
+        >
+          {/* <Modal.Header closeButton></Modal.Header> */}
           <Modal.Body>
             <Row className='reservation__class__console'>
               <div className='reservation__class__console-info'>
-                <h5>선택된 수업</h5>
+                <h5>{exercise_class ? exercise_class : '수업 이름'}</h5>
                 <div className='reservation__class__console-infoContent'>
                   <dl>
-                    <div className='exercise_name'>
+                    <div className='exercise_name d-none'>
                       <dt>운동명</dt>
                       <dd className='text-end'>
-                        {exercise_class ? exercise_class : '수업 이름'}
                         <TextField
                           id='exercise_name'
                           className='d-none'
@@ -274,7 +290,7 @@ const ReservationClassItem = ({
                     <div className='class_date'>
                       <dt>날짜</dt>
                       <dd className='text-end'>
-                        {/* <p className='fw-bold text-primary'>
+                        <p className='fw-bold text-primary'>
                           {moment(class_date).format('yyyy-MM-DD') ==
                           'Invalid date' ? (
                             <span>수업 날짜</span>
@@ -288,64 +304,64 @@ const ReservationClassItem = ({
                           name='class_date'
                           value={class_date}
                           label='배정된 날짜'
-                        /> */}
+                        />
                       </dd>
                     </div>
                     <div className='time'>
                       <dt>시간</dt>
-                      {/* <dd className='text-end'>
-                        {this.state.time ? (
-                          this.state.time
-                        ) : (
-                          <span>수업 시간</span>
-                        )}
+                      <dd className='text-end'>
+                        <span>
+                          {hour}시 {minute}분
+                        </span>
                         <TextField
                           id='time'
                           className='d-none'
-                          value={this.state.time}
+                          value={time}
                           label='시간'
                         />
-                      </dd> */}
+                      </dd>
                     </div>
                     <div className='number_of_people'>
                       <dt>현재정원</dt>
                       <dd className='text-end'>
-                        {/* {this.state.number_of_people == '' ? (
-                          <span>예약인원/정원</span>
-                        ) : (
-                          '1/' + this.state.number_of_people + '명'
-                        )}
+                        <span>
+                          {canRegist}/{number_of_people} 명
+                        </span>
                         <TextField
                           id='number_of_people'
                           className='d-none'
-                          value={this.state.number_of_people}
+                          value={number_of_people}
                           label='최대 인원수'
-                        /> */}
+                        />
                       </dd>
                     </div>
                   </dl>
                 </div>
               </div>
-              {/* {this.props.userinfo.loginWhether === 2 ? (
+              {/* {this.props.userinfo.loginWhether === 2 ? ( */}
+              {2 === 2 ? (
                 <Col className='text-center my-3 '>
                   <TextField
                     id='customer_name'
                     variant='standard'
                     className='customer-input--search w-100 justify-content-center'
-                    value={this.props.userinfo.manager_name}
+                    // value={this.props.userinfo.manager_name}
+                    value={'임시회원검색자리'}
                   />
                 </Col>
               ) : (
                 <Col className='text-center '>
-                  {this.state.open ? (
-                    <UserSearch
-                      open={this.state.open}
-                      setOpen={(o) => this.setState({ open: o })}
-                      fitness_no={this.props.userinfo.fitness_no}
-                      loginWhether={this.props.userinfo.loginWhether}
-                      joinNo={this.props.userinfo.joinNo}
-                      handleUser={this.handleUser}
-                    />
+                  {/* {this.state.open ? (
+                    <>
+                      <UserSearch
+                        open={this.state.open}
+                        setOpen={(o) => this.setState({ open: o })}
+                        fitness_no={this.props.userinfo.fitness_no}
+                        loginWhether={this.props.userinfo.loginWhether}
+                        joinNo={this.props.userinfo.joinNo}
+                        handleUser={this.handleUser}
+                      />
+                    </>
                   ) : (
                     <>
                       <TextField
@@ -356,12 +372,12 @@ const ReservationClassItem = ({
                         className='customer-input--search w-100 justify-content-center mt-2'
                         InputProps={{ disableUnderline: true }}
                         value={customer_name}
-                        // error={this.state.customer_name_err}
+                        error={this.state.customer_name_err}
                       />
                     </>
-                  )}
+                  )} */}
                 </Col>
-              )} */}
+              )}
               <Col className='text-center w-100 mt-2' xs={12}>
                 <Button
                   className='btnSolid w-100'
@@ -369,6 +385,14 @@ const ReservationClassItem = ({
                   // onClick={this.handleOnClick}
                 >
                   예약하기
+                </Button>
+                <Button
+                  variant='secondary'
+                  className='w-100 mt-1'
+                  type='button'
+                  onClick={handleClose}
+                >
+                  닫기
                 </Button>
               </Col>
             </Row>
@@ -873,7 +897,6 @@ const ReservationClassItem_choice2 = ({
 class Reservation extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       show: false,
       fitness_no: 1,
@@ -1671,19 +1694,6 @@ class Reservation extends Component {
     this.setState({ key: e });
   };
 
-  TabsTrainerList = () => {};
-
-  tabsClickToScrollLeft = () => {
-    console.log('클릭투스크롤left 작동합니다.');
-    var locationLeft = document.querySelector('#tabsTrainerAll').offsetLeft;
-
-    console.log('locationLeft 작동합니다.', locationLeft);
-    document
-      .querySelector('.reservation__class-Tabs .tab-content')
-      .scrollTo({ left: locationLeft, behavior: 'auto' });
-  };
-  tabsClickToScrollRight = () => {};
-
   render() {
     // console.log(this.state.customer_name);
     // console.log(this.state.kind);
@@ -1761,8 +1771,32 @@ class Reservation extends Component {
                 </Row>
               </PC>
               <Mobile>
+                <Row className='reservation__class--cladd-add'>
+                  <Col>
+                    <Button
+                      variant='secondary'
+                      onClick={this.goReservationClass}
+                    >
+                      <MdOutlineLibraryAdd />
+                      수업 추가
+                    </Button>
+                  </Col>
+                </Row>
                 <Row className='reservation__class__select-date'>
-                  <Col xs={12} className='text-center align-self-center fs-5'>
+                  <Col xs={2} className='text-end'>
+                    <Button
+                      className='reservation__class-prev'
+                      name='prev'
+                      variant='outline-light'
+                      onClick={this.handleDayClick}
+                    >
+                      <MdOutlineKeyboardArrowLeft />
+                    </Button>
+                  </Col>
+                  <Col
+                    xs={8}
+                    className='reservation__class__select-date--header'
+                  >
                     {moment(this.state.reserv_date)
                       .day(daytoday - 1)
                       .add(this.state.dayIncreament, 'days')
@@ -1773,24 +1807,14 @@ class Reservation extends Component {
                       .add(this.state.dayIncreament, 'days')
                       .format('YYYY-MM-DD (ddd)')}
                   </Col>
-                  <Col xs={6} className='text-end'>
-                    <Button
-                      className='reservation__class-prev'
-                      name='prev'
-                      variant='outline-light'
-                      onClick={this.handleDayClick}
-                    >
-                      이전
-                    </Button>
-                  </Col>
-                  <Col xs={6} className='text-start'>
+                  <Col xs={2} className='text-start'>
                     <Button
                       className='reservation__class-next'
                       name='next'
                       variant='outline-light'
                       onClick={this.handleDayClick}
                     >
-                      다음
+                      <MdOutlineKeyboardArrowRight />
                     </Button>
                   </Col>
                 </Row>
@@ -1808,24 +1832,13 @@ class Reservation extends Component {
                       activeKey={this.keyTrainer}
                       onSelect={this.selectClassTabs}
                     >
-                      <Tab
-                        eventKey='trainerAll'
-                        title='전체'
-                        id='tabsTrainerAll'
-                      ></Tab>
+                      <Tab eventKey='trainerAll' title='전체'></Tab>
                       <Tab eventKey='trainer1' title='김유리 강사'></Tab>
                       <Tab eventKey='trainer2' title='박우진 강사'></Tab>
-                      <Tab
-                        eventKey='trainer3'
-                        title='한세연 강사'
-                        id='tabsTrainerLast'
-                      ></Tab>
+                      <Tab eventKey='trainer3' title='한세연 강사'></Tab>
                     </Tabs>
                     <Mobile>
-                      <MdOutlineKeyboardArrowLeft
-                        className='reservation__class__tabs--left'
-                        onClick={this.tabsClickToScrollLeft}
-                      />
+                      <MdOutlineKeyboardArrowLeft className='reservation__class__tabs--left' />
                       <MdOutlineKeyboardArrowRight className='reservation__class__tabs--right' />
                     </Mobile>
                   </Tab>
