@@ -243,8 +243,8 @@ const ReservationClassItem = ({
       </p> */}
         </Row>
         <Modal
-          // show={show}
-          show={true}
+          show={show}
+          // show={true}
           onHide={handleClose}
           centered
         >
@@ -1814,18 +1814,10 @@ class Reservation extends Component {
                       activeKey={this.keyTrainer}
                       onSelect={this.selectClassTabs}
                     >
-                      <Tab
-                        eventKey='trainerAll'
-                        title='전체'
-                        id='tabsTrainerAll'
-                      ></Tab>
+                      <Tab eventKey='trainerAll' title='전체'></Tab>
                       <Tab eventKey='trainer1' title='김유리 강사'></Tab>
                       <Tab eventKey='trainer2' title='박우진 강사'></Tab>
-                      <Tab
-                        eventKey='trainer3'
-                        title='한세연 강사'
-                        id='tabsTrainerLast'
-                      ></Tab>
+                      <Tab eventKey='trainer3' title='한세연 강사'></Tab>
                     </Tabs>
                     <Mobile>
                       <MdOutlineKeyboardArrowLeft className='reservation__class__tabs--left' />
