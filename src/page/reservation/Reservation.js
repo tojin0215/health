@@ -94,8 +94,10 @@ const ReservationClassItem = ({
   trainer,
   class_date,
   kind,
+  customer_name,
   exercise_name_err,
   time,
+  // loginWhether,
 }) => {
   // console.log('exercise_class', exercise_class);
   // console.log('number_of_people', number_of_people);
@@ -111,7 +113,7 @@ const ReservationClassItem = ({
   const handleClose = () => {
     setShow(false);
   };
-
+  console.log('안녕');
   const handleShow = () => {
     setShow(true);
     console.log('show', show);
@@ -137,7 +139,12 @@ const ReservationClassItem = ({
       hour,
       minute,
       trainer,
-      class_date
+      class_date,
+      canRegist,
+      (time = hour + ':' + minute),
+      customer_name,
+      exercise_name_err
+      // loginWhether
     );
     console.log('exercise_class', exercise_class);
     console.log('kind', kind);
@@ -146,11 +153,14 @@ const ReservationClassItem = ({
     console.log('minute', minute);
     console.log('trainer', trainer);
     console.log('class_date', class_date);
+    console.log('canRegist', canRegist);
+    console.log('time', time);
+    console.log('customer_name', customer_name);
+    // console.log('loginWhether', loginWhether);
     handleShow();
   };
 
   // console.log('show', show);
-  console.log('show', this.state.fitness_no);
   const hourArray = hour >= 10 ? hour : '0' + hour;
   const minuteArray = minute >= 10 ? minute : '0' + minute;
   return (
@@ -248,7 +258,7 @@ const ReservationClassItem = ({
           onHide={handleClose}
           centered
         >
-          <Modal.Header closeButton></Modal.Header>
+          {/* <Modal.Header closeButton></Modal.Header> */}
           <Modal.Body>
             <Row className='reservation__class__console'>
               <div className='reservation__class__console-info'>
@@ -280,7 +290,7 @@ const ReservationClassItem = ({
                     <div className='class_date'>
                       <dt>날짜</dt>
                       <dd className='text-end'>
-                        {/* <p className='fw-bold text-primary'>
+                        <p className='fw-bold text-primary'>
                           {moment(class_date).format('yyyy-MM-DD') ==
                           'Invalid date' ? (
                             <span>수업 날짜</span>
@@ -294,64 +304,64 @@ const ReservationClassItem = ({
                           name='class_date'
                           value={class_date}
                           label='배정된 날짜'
-                        /> */}
+                        />
                       </dd>
                     </div>
                     <div className='time'>
                       <dt>시간</dt>
-                      {/* <dd className='text-end'>
-                        {this.state.time ? (
-                          this.state.time
-                        ) : (
-                          <span>수업 시간</span>
-                        )}
+                      <dd className='text-end'>
+                        <span>
+                          {hour}시 {minute}분
+                        </span>
                         <TextField
                           id='time'
                           className='d-none'
-                          value={this.state.time}
+                          value={time}
                           label='시간'
                         />
-                      </dd> */}
+                      </dd>
                     </div>
                     <div className='number_of_people'>
                       <dt>현재정원</dt>
                       <dd className='text-end'>
-                        {/* {this.state.number_of_people == '' ? (
-                          <span>예약인원/정원</span>
-                        ) : (
-                          '1/' + this.state.number_of_people + '명'
-                        )}
+                        <span>
+                          {canRegist}/{number_of_people} 명
+                        </span>
                         <TextField
                           id='number_of_people'
                           className='d-none'
-                          value={this.state.number_of_people}
+                          value={number_of_people}
                           label='최대 인원수'
-                        /> */}
+                        />
                       </dd>
                     </div>
                   </dl>
                 </div>
               </div>
-              {/* {this.props.userinfo.loginWhether === 2 ? (
+              {/* {this.props.userinfo.loginWhether === 2 ? ( */}
+              {2 === 2 ? (
                 <Col className='text-center my-3 '>
                   <TextField
                     id='customer_name'
                     variant='standard'
                     className='customer-input--search w-100 justify-content-center'
-                    value={this.props.userinfo.manager_name}
+                    // value={this.props.userinfo.manager_name}
+                    value={'임시회원검색자리'}
                   />
                 </Col>
               ) : (
                 <Col className='text-center '>
-                  {this.state.open ? (
-                    <UserSearch
-                      open={this.state.open}
-                      setOpen={(o) => this.setState({ open: o })}
-                      fitness_no={this.props.userinfo.fitness_no}
-                      loginWhether={this.props.userinfo.loginWhether}
-                      joinNo={this.props.userinfo.joinNo}
-                      handleUser={this.handleUser}
-                    />
+                  {/* {this.state.open ? (
+                    <>
+                      <UserSearch
+                        open={this.state.open}
+                        setOpen={(o) => this.setState({ open: o })}
+                        fitness_no={this.props.userinfo.fitness_no}
+                        loginWhether={this.props.userinfo.loginWhether}
+                        joinNo={this.props.userinfo.joinNo}
+                        handleUser={this.handleUser}
+                      />
+                    </>
                   ) : (
                     <>
                       <TextField
@@ -362,12 +372,12 @@ const ReservationClassItem = ({
                         className='customer-input--search w-100 justify-content-center mt-2'
                         InputProps={{ disableUnderline: true }}
                         value={customer_name}
-                        // error={this.state.customer_name_err}
+                        error={this.state.customer_name_err}
                       />
                     </>
-                  )}
+                  )} */}
                 </Col>
-              )} */}
+              )}
               <Col className='text-center w-100 mt-2' xs={12}>
                 <Button
                   className='btnSolid w-100'
@@ -375,6 +385,14 @@ const ReservationClassItem = ({
                   // onClick={this.handleOnClick}
                 >
                   예약하기
+                </Button>
+                <Button
+                  variant='secondary'
+                  className='w-100 mt-1'
+                  type='button'
+                  onClick={handleClose}
+                >
+                  닫기
                 </Button>
               </Col>
             </Row>
