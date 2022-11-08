@@ -8,7 +8,8 @@ import Drawer from '../../component/navigation/Drawer';
 import { connect } from 'react-redux';
 import { getStatusRequest } from '../../action/authentication';
 import '../../styles/home/home.css';
-
+// 미디어쿼리
+import { Mobile, PC } from '../../component/common/MediaQuery';
 // 라이브러리
 import DatePicker from 'react-datepicker';
 import Chart from 'react-apexcharts';
@@ -65,8 +66,12 @@ import { MdOutlineArrowForwardIos } from 'react-icons/md';
 // css
 import '../../component/home/classTimeTable.css';
 
+import { ConstructionOutlined, Today } from '@mui/icons-material';
+
 const ip = SERVER_URL;
 //const ip = 'localhost:3000';
+
+const daytoday = moment().day();
 
 require('moment-timezone');
 var moment = require('moment');
@@ -634,7 +639,75 @@ class Home extends Component {
               <Col xs={12} md={12}>
                 <table className='table classTable mt-3' name='classTable'>
                   <thead>
-                    <tr>
+                    <PC>
+                      <tr>
+                        <th scope='col' align='center'>
+                          {moment(this.state.reserv_date)
+                            .day(0)
+                            .add(this.state.dayIncreament, 'days')
+                            .format('MM-DD (dd)')}
+                        </th>
+                        <th scope='col' align='center'>
+                          {moment(this.state.reserv_date)
+                            .day(1)
+                            .add(this.state.dayIncreament, 'days')
+                            .format('MM-DD (dd)')}
+                        </th>
+                        <th scope='col' align='center'>
+                          {moment(this.state.reserv_date)
+                            .day(2)
+                            .add(this.state.dayIncreament, 'days')
+                            .format('MM-DD (dd)')}
+                        </th>
+                        <th scope='col' align='center'>
+                          {moment(this.state.reserv_date)
+                            .day(3)
+                            .add(this.state.dayIncreament, 'days')
+                            .format('MM-DD (dd)')}
+                        </th>
+                        <th scope='col' align='center'>
+                          {moment(this.state.reserv_date)
+                            .day(4)
+                            .add(this.state.dayIncreament, 'days')
+                            .format('MM-DD (dd)')}
+                        </th>
+                        <th scope='col' align='center'>
+                          {moment(this.state.reserv_date)
+                            .day(5)
+                            .add(this.state.dayIncreament, 'days')
+                            .format('MM-DD (dd)')}
+                        </th>
+                        <th scope='col' align='center'>
+                          {moment(this.state.reserv_date)
+                            .day(6)
+                            .add(this.state.dayIncreament, 'days')
+                            .format('MM-DD (dd)')}
+                        </th>
+                      </tr>
+                    </PC>
+                    <Mobile>
+                      <tr>
+                        <th scope='col' align='center'>
+                          {moment(this.state.reserv_date)
+                            .day(daytoday - 1)
+                            .add(this.state.dayIncreament, 'days')
+                            .format('MM-DD (dd)')}
+                        </th>
+                        <th scope='col' align='center'>
+                          {moment(this.state.reserv_date)
+                            .day(daytoday - 1)
+                            .add(this.state.dayIncreament, 'days')
+                            .format('MM-DD (dd)')}
+                        </th>
+                        <th scope='col' align='center'>
+                          {moment(this.state.reserv_date)
+                            .day(daytoday - 1)
+                            .add(this.state.dayIncreament, 'days')
+                            .format('MM-DD (dd)')}
+                        </th>
+                      </tr>
+                    </Mobile>
+                    {/* <tr>
                       <th scope='col' align='center'>
                         {moment(this.state.reserv_date)
                           .day(0)
@@ -653,7 +726,7 @@ class Home extends Component {
                           .add(this.state.dayIncreament, 'days')
                           .format('MM-DD (dd)')}
                       </th>
-                    </tr>
+                    </tr> */}
                   </thead>
                   <tbody>
                     <tr>
