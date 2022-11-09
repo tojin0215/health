@@ -101,7 +101,7 @@ html .MuiInputLabel-outlined {
 }
 
 input {
-  height: 2.8rem;
+  height: 2.8125rem;
 }
 
 .form-control {
@@ -111,7 +111,7 @@ input {
 /* 목록검색 */
 .sch_list {
   width: 100%;
-  height: 2.8rem;
+  height: 45px;
   background: #fff;
   border-radius: 0.3rem;
   padding: 0 0.3rem;

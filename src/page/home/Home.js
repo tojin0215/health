@@ -431,7 +431,7 @@ class Home extends Component {
                   </Col>
                 </Row>
               </Mobile>
-              <Col xs={12} md={12}>
+              <Col xs={12} md={12} className='home_classTable'>
                 <table className='table classTable mt-3' name='classTable'>
                   <PC>
                     <thead>
@@ -744,8 +744,8 @@ class Home extends Component {
                 </TableContainer>
               </Col>
             </Row>
-            <Row>
-              <Col sm={12} md={6} className='sectionGlass facility'>
+            <Row className='home-clientInfo'>
+              <Col className='sectionGlass facility'>
                 <div className='mb-3'>
                   <h4>
                     센터시설이용
@@ -753,17 +753,21 @@ class Home extends Component {
                     {/* 기능추가 */}
                   </h4>
                 </div>
-                <Row>
-                  <Col xs={8}>사물함</Col>
+                <Row className=''>
+                  <Col xs={4} md={8}>
+                    사물함
+                  </Col>
                   <Col>3번</Col>
                   <Col className='text-end'>사용중</Col>
                 </Row>
                 <Row>
-                  <Col xs={9}>운동복</Col>
+                  <Col xs={5} md={9}>
+                    운동복
+                  </Col>
                   <Col className='text-end'>사용안함</Col>
                 </Row>
               </Col>
-              <Col sm={12} md={6} className='sectionGlass Membership'>
+              <Col className='sectionGlass Membership'>
                 <div className='mb-3'>
                   <h4>
                     보유중인 이용권
