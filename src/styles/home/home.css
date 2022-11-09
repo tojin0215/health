@@ -325,6 +325,9 @@ strong {
 .home-center__client-status .sectionGlass-manager:last-child {
   margin-right: 0;
 }
+.home_allotedList h5 .row {
+  padding: 0 1rem;
+}
 
 @media only screen and (max-width: 767px) {
   .home__main-visual--logo p {
@@ -346,8 +349,28 @@ strong {
   .home-center__client-status .sectionGlass-manager:nth-child(2n) {
     margin-right: 0;
   }
+
   .sales-statis:first-child {
     margin-right: 0;
+  }
+  /* 회원 */
+  .home_allotedList h5 span {
+    display: none;
+  }
+
+  .home_allotedList .customer_name {
+    padding: 0;
+    background-color: transparent;
+  }
+
+  .home_allotedList .customer_name {
+    width: 100%;
+  }
+
+  /* 강사 */
+  .reservation__class__select-date-date button {
+    width: 100%;
+    text-align: center;
   }
 }
 @media only screen and (max-width: 620px) {
