@@ -5,17 +5,17 @@
 */
 
 /* thead 폰트 컬러 */
-.reservationClassWrap .table thead tr th {
+.reservation-class .table thead tr th {
   font-weight: 400;
   color: #fff;
 }
 
 /* tbody 폰트 컬러 */
-.reservationClassWrap tbody tr td {
+.reservation-class tbody tr td {
   color: #fff;
 }
 
-.reservationClassWrap .MuiInputBase-input {
+.reservation-class .MuiInputBase-input {
   text-align: center;
 }
 /* 
@@ -241,6 +241,7 @@
   border-radius: 5px;
   padding: 20px;
 }
+
 .resevation__class-Tabs > .tab-content {
   position: relative;
 }
@@ -312,15 +313,48 @@
   }
 
   .reservation__class {
-    margin-top: 4rem;
+    margin-top: 1rem;
   }
+
+  /* 수업 추가 바로가기 버튼 */
+  .reservation__class--cladd-add {
+    padding: 16px 0;
+  }
+  .reservation__class--cladd-add > div {
+    text-align: end;
+    padding: 0;
+  }
+  .reservation__class--cladd-add > div > button {
+    width: auto;
+  }
+  .reservation__class--cladd-add > div > button > svg {
+    width: auto;
+    height: 24px;
+    margin-right: 6px;
+  }
+
   /* 날짜 표시 */
   .reservation__class__select-date > div:first-child {
-    padding-bottom: 4px;
+    padding: 0;
+  }
+  .reservation__class__select-date > div:last-child {
+    padding: 0;
+  }
+  .reservation__class__select-date--header {
+    white-space: nowrap;
+    font-size: 16px;
+    text-align: center;
+    align-self: center;
   }
   /* 날짜 선택 [이전] [다음] 버튼 */
   .reservation__class__select-date button {
     width: 100%;
+  }
+  /* 날짜 선택 [이전] [다음] 버튼의 아이콘 */
+  .reservation__class__select-date svg {
+    width: auto;
+    height: 24px;
+    margin-bottom: 3px;
   }
   /* 종목 및 강사 선택 탭 */
   .resevation__class-Tabs {
@@ -339,9 +373,10 @@
     left: 0;
     top: 0;
     width: 25%;
-    padding: 10px;
-    background: #ccc;
+    padding: 4px;
+    background: #111;
     text-align: center;
+    color: #fff;
   }
   .reservation__list .table--block td:nth-child(1):before {
     content: '이름';
