@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../../component/footer/Footer';
 import { insertIntroduce } from '../../api/user';
 
+import '../../styles/trainer/trainer.css';
 // bootstrap
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
@@ -133,7 +134,7 @@ class AddIntroduce extends Component {
           </div>
           {/*.localNavigation */}
         </header>
-        <Container>
+        <Container id='addIntroduce'>
           <div className='sectionGlass'>
             <h3>센터 소개 등록</h3>
             {/* <Col xs={12} md={6}>
@@ -200,7 +201,7 @@ class AddIntroduce extends Component {
               </Col>
             </Row>
           </div>
-          <div className='d-flex justify-content-center mt-3'>
+          <div className='btnBox d-flex justify-content-center mt-3'>
             <Button
               className='btn-primary-dark mx-2'
               variant='secondary'

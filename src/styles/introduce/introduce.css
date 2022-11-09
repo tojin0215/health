@@ -49,3 +49,6 @@ input[type='file']::file-selector-button {
 .input_tit > h5 {
   line-height: 2.5rem;
 }
+
+@media screen and (max-width: 767px) {
+}

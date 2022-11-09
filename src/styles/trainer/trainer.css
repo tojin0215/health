@@ -43,4 +43,14 @@
   .btn-close {
     margin-bottom: 1rem;
   }
+
+  /* 센터등록 addIntroduce */
+  #addIntroduce {
+  }
+  #addIntroduce .btnBox {
+    flex-wrap: wrap;
+  }
+  /*  #addIntroduce .btnBox button {
+    width: 100%;
+  } */
 }

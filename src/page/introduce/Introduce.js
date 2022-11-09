@@ -121,7 +121,7 @@ const ViewIntroduceItem = ({
           >
             수정하기
           </Button>
-          <Modal show={showModal} onHide={() => setShowModal(false)}>
+          <Modal size='lg' show={showModal} onHide={() => setShowModal(false)}>
             {/* <Modal show={true} className=''> */}
             <h2 className='text-center'>{manager_name}</h2>
             <div className='py-3 text-center'>
@@ -180,22 +180,20 @@ const ViewIntroduceItem = ({
                 ></Form.Control>
               </Col>
             </Row>
-            <Row>
-              <Col xs={12} className='text-danger text-end mt-3'>
-                <span className='m-2'>
-                  삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
-                </span>
-                <Button
-                  onClick={() =>
-                    confirm('정말 삭제하시겠습니까?') == true
-                      ? handleDelete(idi)
-                      : alert('삭제가 취소 되었습니다.')
-                  }
-                  variant='outline-danger'
-                >
-                  삭제
-                </Button>
-              </Col>
+            <Row xs='auto' className='delete-user text-danger mt-3'>
+              <span className='m-2'>
+                삭제시 되돌릴 수 없습니다 한번 더 확인해주세요
+              </span>
+              <Button
+                onClick={() =>
+                  confirm('정말 삭제하시겠습니까?') == true
+                    ? handleDelete(idi)
+                    : alert('삭제가 취소 되었습니다.')
+                }
+                variant='outline-danger'
+              >
+                삭제
+              </Button>
             </Row>
             <Row className='d-flex justify-content-center mt-3'>
               <Button
