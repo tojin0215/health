@@ -30,6 +30,7 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
+import '../../styles/trainer/trainer.css';
 import 'react-dropdown/style.css';
 
 import MobNavigation from '../../component/navigation/MobNavigation';
@@ -650,16 +651,17 @@ const VieWTrainerItem = ({
             수정
           </Button>
         </TableCell>
+        {/* 사업주 */}
         <Modal show={showModal} size='lg' onHide={modalClose}>
           <Modal.Header>
             <Modal.Title className='mb-4'>강사 정보 수정</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Row className='mb-4'>
-              <Col xs={2}>
+            <Row>
+              <Col md={12} lg={2}>
                 <h5>이름</h5>
               </Col>
-              <Col xs={10}>
+              <Col md={12} lg={10}>
                 <Form.Control
                   id='trainer_name'
                   value={trainer_name_input}
@@ -667,27 +669,27 @@ const VieWTrainerItem = ({
                 />
               </Col>
             </Row>
-            <Row className='mb-4'>
-              <Col xs={2}>
+            <Row>
+              <Col md={12} lg={2}>
                 <h5>생년월일</h5>
               </Col>
-              <Col xs={10}>
+              <Col md={12} lg={10}>
                 <Form.Control value={birth} disabled />
               </Col>
             </Row>
-            <Row className='mb-4'>
-              <Col xs={2}>
+            <Row>
+              <Col md={12} lg={2}>
                 <h5>성별</h5>
               </Col>
-              <Col xs={10}>
+              <Col md={12} lg={10}>
                 <Form.Control value={sex == 1 ? '남' : '여'} disabled />
               </Col>
             </Row>
-            <Row className='mb-4'>
-              <Col xs={2}>
+            <Row>
+              <Col md={12} lg={2}>
                 <h5>연락처</h5>
               </Col>
-              <Col xs={10}>
+              <Col md={12} lg={10}>
                 <Form.Control
                   type='number'
                   id='disabledTextInput'
@@ -696,11 +698,11 @@ const VieWTrainerItem = ({
                 />
               </Col>
             </Row>
-            <Row className='mb-4'>
-              <Col xs={2}>
+            <Row>
+              <Col md={12} lg={2}>
                 <h5>이력</h5>
               </Col>
-              <Col xs={10}>
+              <Col md={12} lg={10}>
                 <Form.Control
                   id='history'
                   onChange={updateChange4}
@@ -711,10 +713,10 @@ const VieWTrainerItem = ({
               </Col>
             </Row>
             <Row className='mb-4'>
-              <Col xs={2}>
+              <Col md={12} lg={2}>
                 <h5>자기소개</h5>
               </Col>
-              <Col xs={10}>
+              <Col md={12} lg={10}>
                 <Form.Control
                   id='ment'
                   onChange={updateChange3}
@@ -724,7 +726,7 @@ const VieWTrainerItem = ({
                 />
               </Col>
             </Row>
-            <Col xs={12} className='text-danger text-end mt-3'>
+            <Row xs='auto' className='delete-user text-danger mt-3'>
               <span className='m-2'>
                 삭제시 되돌릴 수 없습니다. 한번 더 확인해주세요.
               </span>
@@ -739,10 +741,10 @@ const VieWTrainerItem = ({
               >
                 삭제
               </Button>
-            </Col>
+            </Row>
             <Row className='d-flex justify-content-center mt-3'>
               <Button
-                className='btn-primary-dark mx-1'
+                className='btn-primary-dark mx-1 mb-2'
                 onClick={modalClose}
                 variant='primary-dark'
               >
@@ -968,8 +970,18 @@ class Trainer extends Component {
           {/*.localNavigation */}
         </header>
         <Container>
-          <h3>강사 목록</h3>
-          <div className='d-flex justify-content mb-3'>
+          <div className='trainerList d-flex justify-content-between'>
+            <h3>강사 목록</h3>
+            <p
+              className='text-primary trainer-add'
+              onClick={this.moveTrainerAdd}
+            >
+              {' '}
+              + 강사 등록하기
+            </p>
+          </div>
+          {/* <h3>강사 목록</h3> */}
+          <div className='trainer-search__utill d-flex mb-3'>
             <div className='d-flex sch_list'>
               <Dropdown
                 className='searchDrop'
@@ -985,16 +997,16 @@ class Trainer extends Component {
                 onChange={(e) => this.setState({ search: e.target.value })}
               />
             </div>
-            <div>
+            <div className='btn_search'>
               <Button
-                className='mx-2'
+                className=''
                 variant='primary'
                 onClick={this.handleOnSearch}
               >
                 검색
               </Button>
             </div>
-            <div>
+            <div className='trainer-add'>
               <Button variant='outline-primary' onClick={this.moveTrainerAdd}>
                 등록하기
               </Button>

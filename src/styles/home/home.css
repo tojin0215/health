@@ -7,12 +7,23 @@
   border-radius: 5px;
   padding: 20px 10px;
 }
+
+.facility {
+  margin-right: 1rem;
+}
 .facility .row {
   padding: 20px 10px;
   border-bottom: 1px solid #fff;
 }
 .facility .row:last-child {
   border: 0;
+}
+#customerHome .home_classTable {
+  padding: 0;
+}
+.home_allotedList .customer_name {
+  padding: 0;
+  background-color: transparent;
 }
 
 .sectionGlass h4 svg {
@@ -359,14 +370,15 @@ strong {
   }
 
   .home_allotedList .customer_name {
-    padding: 0;
-    background-color: transparent;
-  }
-
-  .home_allotedList .customer_name {
     width: 100%;
   }
 
+  .home_allotedList .col {
+    flex: 1 1 150px;
+  }
+  #customerHome .home-clientInfo .facility {
+    flex: none;
+  }
   /* 강사 */
   .reservation__class__select-date-date button {
     width: 100%;

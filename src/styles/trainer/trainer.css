@@ -1,0 +1,56 @@
+.trainerList .trainer-add {
+  display: none;
+}
+
+.trainer-search__utill div {
+  margin-right: 10px;
+}
+.trainer-search__utill div:last-child {
+  margin-right: 0;
+}
+.modal-dialog .modal-content .row {
+  margin-bottom: 1.5rem;
+}
+.delete-user {
+  justify-content: flex-end;
+}
+
+@media (max-width: 767px) {
+  .trainer-search__utill {
+    flex-wrap: wrap;
+  }
+  .sch_list {
+    margin-bottom: 0.625rem;
+  }
+
+  .trainerList .trainer-add {
+    display: block;
+  }
+
+  .trainer-search__utill .trainer-add {
+    display: none;
+  }
+  .trainer-search__utill div {
+    margin-right: 0;
+  }
+  .trainer-search__utill .btn_search,
+  .trainer-search__utill .btn_search button {
+    width: 100%;
+  }
+  .modal-dialog .modal-content .row {
+    margin-bottom: 0.5rem;
+  }
+  .btn-close {
+    margin-bottom: 1rem;
+  }
+
+  /* 센터등록 addIntroduce */
+  #addIntroduce {
+  }
+  #addIntroduce .btnBox {
+    flex-wrap: wrap;
+  }
+  /*  #addIntroduce .btnBox button {
+    width: 100%;
+  } */
+}
