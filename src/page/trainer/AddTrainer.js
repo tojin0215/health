@@ -202,7 +202,7 @@ class AddTrainer extends Component {
               <TextField value={this.props.userinfo.fitness_no} />
             </label> */}
             <Row className='mb-4'>
-              <Col xs={2}>
+              <Col md={12} lg={2}>
                 <h5>이름</h5>
               </Col>
               <Col>
@@ -214,10 +214,10 @@ class AddTrainer extends Component {
                   placeholder='이름을 입력해주세요'
                 ></Form.Control>
               </Col>
-              <Col xs={1}>
+              <Col md={12} lg={1}>
                 <h5>성별</h5>
               </Col>
-              <Col xs={2} className='mt-2'>
+              <Col md={12} lg={2} className='mt-2'>
                 <Row>
                   <Col xs={6}>
                     <Form.Check>
@@ -251,7 +251,7 @@ class AddTrainer extends Component {
               </Col>
             </Row>
             <Row className='mb-4'>
-              <Col xs={2}>
+              <Col md={12} lg={2}>
                 <h5>연락처</h5>
               </Col>
               <Col>
@@ -268,7 +268,7 @@ class AddTrainer extends Component {
               </Col>
             </Row>
             <Row className='mb-4'>
-              <Col xs={2}>
+              <Col md={12} lg={2}>
                 <h5>생년월일</h5>
               </Col>
               <Col>
@@ -283,7 +283,7 @@ class AddTrainer extends Component {
               </Col>
             </Row>
             <Row className='mb-4'>
-              <Col xs={2}>
+              <Col md={12} lg={2}>
                 <h5>이력</h5>
               </Col>
               <Col>
@@ -299,7 +299,7 @@ class AddTrainer extends Component {
               </Col>
             </Row>
             <Row className='mb-4'>
-              <Col xs={2}>
+              <Col md={12} lg={2}>
                 <h5>자기소개</h5>
               </Col>
               <Col>
