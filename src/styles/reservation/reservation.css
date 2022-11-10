@@ -317,17 +317,17 @@
   }
 
   /* 수업 추가 바로가기 버튼 */
-  .reservation__class--cladd-add {
+  .reservation__class--class-add {
     padding: 16px 0;
   }
-  .reservation__class--cladd-add > div {
+  .reservation__class--class-add > div {
     text-align: end;
     padding: 0;
   }
-  .reservation__class--cladd-add > div > button {
+  .reservation__class--class-add > div > button {
     width: auto;
   }
-  .reservation__class--cladd-add > div > button > svg {
+  .reservation__class--class-add > div > button > svg {
     width: auto;
     height: 24px;
     margin-right: 6px;

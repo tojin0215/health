@@ -1783,17 +1783,21 @@ class Reservation extends Component {
                 </Row>
               </PC>
               <Mobile>
-                <Row className='reservation__class--cladd-add'>
-                  <Col>
-                    <Button
-                      variant='secondary'
-                      onClick={this.goReservationClass}
-                    >
-                      <MdOutlineLibraryAdd />
-                      수업 추가
-                    </Button>
-                  </Col>
-                </Row>
+                {this.props.userinfo.loginWhether === 2 ? (
+                  ''
+                ) : (
+                  <Row className='reservation__class--class-add'>
+                    <Col>
+                      <Button
+                        variant='secondary'
+                        onClick={this.goReservationClass}
+                      >
+                        <MdOutlineLibraryAdd />
+                        수업 추가
+                      </Button>
+                    </Col>
+                  </Row>
+                )}
                 <Row className='reservation__class__select-date'>
                   <Col xs={2} className='text-end'>
                     <Button
