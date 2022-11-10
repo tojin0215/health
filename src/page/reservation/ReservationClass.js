@@ -732,6 +732,24 @@ class ReservationClass extends Component {
     }
   };
 
+  handleDayClick = (w) => {
+    const dayIncreament = 0;
+    const name = w.target.name;
+    if (name === 'next' || w == 'next') {
+      // eslint-disable-next-line no-unused-expressions
+      this.setState({
+        dayIncreament: this.state.dayIncreament + 1,
+      }),
+        this.reservationClassSelect();
+    } else if (name === 'prev' || w == 'prev') {
+      // eslint-disable-next-line no-unused-expressions
+      this.setState({
+        dayIncreament: this.state.dayIncreament - 1,
+      }),
+        this.reservationClassSelect();
+    }
+  };
+
   handleOnClick = () => {
     this.setState({
       exercise_class_err: false,
@@ -840,24 +858,6 @@ class ReservationClass extends Component {
       this.reservationClassSelect()
     );
     // console.log("수정하기", this.state.updateOpen);
-  };
-
-  handleDayClick = (w) => {
-    const dayIncreament = 0;
-    const name = w.target.name;
-    if (name === 'next') {
-      // eslint-disable-next-line no-unused-expressions
-      this.setState({
-        dayIncreament: this.state.dayIncreament + 1,
-      }),
-        this.reservationClassSelect();
-    } else if (name === 'prev') {
-      // eslint-disable-next-line no-unused-expressions
-      this.setState({
-        dayIncreament: this.state.dayIncreament - 1,
-      }),
-        this.reservationClassSelect();
-    }
   };
 
   goReservation = () => {
@@ -1327,9 +1327,10 @@ class ReservationClass extends Component {
               </Col>
               <Col xs={2} className='text-start'>
                 <Button
+                  type='button'
                   name='next'
                   variant='outline-light'
-                  onClick={this.handleWeekClick}
+                  onClick={this.handleDayClick}
                 >
                   <MdOutlineKeyboardArrowRight />
                 </Button>
