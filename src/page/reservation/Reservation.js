@@ -1783,7 +1783,7 @@ class Reservation extends Component {
                 </Row>
               </PC>
               <Mobile>
-                <Row className='reservation__class--cladd-add'>
+                <Row className='reservation__class--class-add'>
                   <Col>
                     <Button
                       variant='secondary'

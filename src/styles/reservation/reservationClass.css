@@ -1,3 +1,24 @@
+.reservation-class .container {
+  margin-top: 1rem;
+  padding-top: 0;
+}
+
+/* 시간표/예약 페이지로 이동 버튼 */
+.reservation__class--btn-go-reservation {
+  padding: 16px 0 0;
+}
+.reservation__class--btn-go-reservation > div {
+  padding: 0;
+}
+.reservation__class--btn-go-reservation > div > button {
+  width: auto;
+}
+.reservation__class--btn-go-reservation > div > button > svg {
+  width: auto;
+  height: 24px;
+  margin-right: 6px;
+}
+
 /* 
  수업 만들기 시간표 목록
 */
@@ -37,6 +58,7 @@
 .reservation-class .react-datepicker__input-container input[type='text'] {
   padding-top: 19px;
   padding-bottom: 20px;
+  margin-bottom: 1.5rem;
   cursor: pointer;
   transition: all 0.5s;
 }
@@ -122,5 +144,20 @@
   }
   .reservation-class__exercise-group--form > div > .form-check-inline {
     margin-bottom: 8px;
+  }
+  /* 수업 만들기 입럭 폼 */
+  .reservation-class__form h5 {
+    padding-top: 4px;
+    margin-bottom: 0;
+  }
+  .reservation-class .react-datepicker__input-container input[type='text'] {
+    margin-bottom: 0;
+  }
+  .reservation-class__form .btn {
+    margin-top: 20px;
+  }
+  /* 수업 수정 모달 */
+  .reservationClass-modal .modal-content {
+    width: auto;
   }
 }
