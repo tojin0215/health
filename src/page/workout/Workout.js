@@ -114,8 +114,8 @@ class Workout extends Component {
             </Col>
             <Col>
               <Row className='workoutRoutine'>
-                <Col className='me-4 custom' onClick={this.goStage}>
-                  <Row>
+                <Col xs={12} md={6} onClick={this.goStage}>
+                  <Row className='custom'>
                     <Col xs={10} className='mb-5'>
                       <h2>베이직 루틴 배정</h2>
                     </Col>
@@ -131,8 +131,8 @@ class Workout extends Component {
                     </Col>
                   </Row>
                 </Col>
-                <Col className='personal' onClick={this.goAlloted}>
-                  <Row>
+                <Col xs={12} md={6} onClick={this.goAlloted}>
+                  <Row className='personal'>
                     <Col xs={10} className='mb-5'>
                       <h2>맞춤형 운동 배정</h2>
                     </Col>
