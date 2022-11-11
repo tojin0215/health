@@ -14,6 +14,10 @@
 .delete-user {
   justify-content: flex-end;
 }
+/* .introduce__article .btnBox {
+  flex-wrap: nowrap;
+}
+ */
 
 @media (max-width: 767px) {
   .trainer-search__utill {
@@ -43,6 +47,9 @@
   .btn-close {
     margin-bottom: 1rem;
   }
+  /*   .introduce__article .btnBox {
+    flex-wrap: wrap;
+  } */
 
   /* 센터등록 addIntroduce */
   #addIntroduce {
