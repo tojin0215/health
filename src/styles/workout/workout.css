@@ -42,3 +42,22 @@
   font-size: 20px;
   background: #222222;
 }
+
+@media screen and (max-width: 767px) {
+  .workoutRoutine > div > .row {
+    margin-bottom: 10px;
+  }
+
+  .custom {
+    margin-right: calc(-0.5 * var(--bs-gutter-x));
+  }
+
+  .personal {
+    margin-left: calc(-0.5 * var(--bs-gutter-x));
+  }
+
+  .addWorkout p {
+    padding-top: 20px;
+    font-size: 15px;
+  }
+}
