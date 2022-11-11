@@ -1,0 +1,8 @@
+@media screen and (max-width: 767px) {
+  .workout-add
+    .stage-add--workout-exercise-list
+    .table--block
+    td:nth-child(8):before {
+    content: '삭제';
+  }
+}
