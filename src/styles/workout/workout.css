@@ -56,6 +56,9 @@
     margin-left: calc(-0.5 * var(--bs-gutter-x));
   }
 
+  .addWorkout h4 {
+    text-align: center;
+  }
   .addWorkout p {
     padding-top: 20px;
     font-size: 15px;
