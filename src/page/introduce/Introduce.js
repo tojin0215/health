@@ -195,7 +195,7 @@ const ViewIntroduceItem = ({
                 삭제
               </Button>
             </Row>
-            <Row className='d-flex justify-content-center mt-3'>
+            <Row className='btnBox d-flex justify-content-center mt-3'>
               <Button
                 className='btn-primary-dark mx-2'
                 onClick={close}
