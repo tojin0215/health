@@ -51,4 +51,7 @@ input[type='file']::file-selector-button {
 }
 
 @media screen and (max-width: 767px) {
+  .btnBox button {
+    margin-bottom: 1rem;
+  }
 }

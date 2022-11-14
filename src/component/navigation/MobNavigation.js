@@ -201,6 +201,10 @@ class MobNavigation extends Component {
                     <NavLink exact to='/genetic'>
                       DTC
                     </NavLink>
+                    <br />
+                    <NavLink exact to='/client'>
+                      회원
+                    </NavLink>
                   </li>
                 ) : (
                   ''

@@ -274,10 +274,10 @@ class AddClient extends Component {
             <Row className='sectionGlass'>
               <h3>회원 정보 입력</h3>
               <Row className='mb-4'>
-                <Col xs={2}>
+                <Col xs={12} lg={2}>
                   <h5>이름</h5>
                 </Col>
-                <Col>
+                <Col xs={12} lg={10}>
                   <Form.Control
                     id='client_name'
                     type='text'
@@ -286,10 +286,10 @@ class AddClient extends Component {
                     onChange={this.handleChange}
                   ></Form.Control>
                 </Col>
-                <Col xs={1}>
+                <Col xs={12} lg={2}>
                   <h5>성별</h5>
                 </Col>
-                <Col xs={2} className='mt-2'>
+                <Col xs={12} lg={2} className='mt-2'>
                   <Row>
                     <Col xs={6}>
                       <Form.Check>
@@ -323,7 +323,7 @@ class AddClient extends Component {
                 </Col>
               </Row>
               <Row className='mb-4'>
-                <Col xs={2}>
+                <Col xs={12} lg={2}>
                   <h5>연락처</h5>
                 </Col>
                 <Col>
@@ -339,7 +339,7 @@ class AddClient extends Component {
                 </Col>
               </Row>
               <Row className='mb-4'>
-                <Col xs={2}>
+                <Col xs={12} lg={2}>
                   <h5>생년월일</h5>
                 </Col>
                 <Col>
@@ -354,7 +354,7 @@ class AddClient extends Component {
                 </Col>
               </Row>
               <Row className='mb-4'>
-                <Col xs={2}>
+                <Col xs={12} lg={2}>
                   <h5>주소</h5>
                 </Col>
                 <Col>
@@ -368,7 +368,7 @@ class AddClient extends Component {
                 </Col>
               </Row>
               <Row className='mb-4'>
-                <Col xs={2}>
+                <Col xs={12} lg={2}>
                   <h5>메모</h5>
                 </Col>
                 <Col>
@@ -382,7 +382,7 @@ class AddClient extends Component {
                 </Col>
               </Row>
               <Row className='route'>
-                <Col md={2}>
+                <Col md={12} lg={2}>
                   <h5>가입경로</h5>
                 </Col>
                 <Col>
