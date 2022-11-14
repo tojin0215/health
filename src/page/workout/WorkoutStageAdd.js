@@ -764,7 +764,7 @@ class WorkoutStageAdd extends Component {
               </Row>
             </Col>
             <div className='selected-routine--step'>
-              <Row xs={5} className='mt-3'>
+              <Row xs={5}>
                 {this.state.nextStage1 ? (
                   <>
                     <Col>
