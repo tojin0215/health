@@ -158,4 +158,59 @@ input[type='number']::-webkit-inner-spin-button {
   .wrap .workout-alloted__select--plus {
     color: #0077fe;
   }
+
+  /* 회원 운동배정 확인 */
+  .workout-alloted-list__content--header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .workout-alloted-list
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(1):before {
+    content: '부위';
+  }
+  .workout-alloted-list
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(2):before {
+    content: '이름';
+  }
+  .workout-alloted-list
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(3):before {
+    content: '기구';
+  }
+  .workout-alloted-list
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(4):before {
+    content: '세트';
+  }
+  .workout-alloted-list
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(5):before {
+    content: '횟수';
+  }
+  .workout-alloted-list
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(6):before {
+    content: '휴식';
+  }
+  .workout-alloted-list
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(7):before {
+    content: 'URL';
+  }
+  .workout-alloted-list
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(8):before {
+    content: '삭제';
+  }
 }
