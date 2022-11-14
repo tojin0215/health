@@ -1116,8 +1116,11 @@ class WorkoutAlloted extends Component {
                     </strong>
                     에 배정된 운동 목록입니다
                   </h5>
-                  <TableContainer component={Paper}>
-                    <Table className='table-light'>
+                  <TableContainer
+                    component={Paper}
+                    className='stage-add--workout-exercise-list'
+                  >
+                    <Table className='table--block table-light'>
                       <TableHead>
                         <TableRow>
                           <TableCell scope='col'>부위</TableCell>
