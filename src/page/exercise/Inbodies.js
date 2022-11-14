@@ -644,10 +644,10 @@ class Inbodies extends Component {
         {/*.header */}
         <Container>
           <Row>
-            <Col>
+            <Col xs={12} md={3}>
               <h4>회원선택</h4>
             </Col>
-            <Col className='text-center mb-2'>
+            <Col xs={12} md={3} className='text-center mb-2'>
               {this.props.userinfo.loginWhether === 2 ? (
                 <TextField
                   id='customer_name'
@@ -685,12 +685,12 @@ class Inbodies extends Component {
                 </div>
               )}
             </Col>
-            <Col className='mb-2'>
+            <Col xs={12} md={3} className='mb-2'>
               <Button className='w-100 h-100' onClick={this.clickOpen}>
                 인바디 변화 보기
               </Button>
             </Col>
-            <Col className='mb-2'>
+            <Col xs={12} md={3} className='mb-2'>
               <Link
                 to={{
                   pathname: '/inbodiesAdd',
