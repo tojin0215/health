@@ -24,10 +24,12 @@
 }
 
 .class-time-table__box {
+  width: 500px;
   height: 100%;
   background-color: #111;
   text-align: center;
   color: #fff;
+  white-space: nowrap;
 }
 
 .class-time-table__box .class-time-table__select {
@@ -82,4 +84,33 @@
 
 .class-time-table__box__content .class-time-table__box__content--full span {
   color: #fff;
+}
+/* 시간표 전체 보기 버튼 */
+.class-time-table__box > button {
+  margin-bottom: 60px;
+}
+
+@media only screen and (max-width: 767px) {
+  /* 홈에서 시간표 여는 버튼 */
+  .class-time-table .class-time-table__btn {
+    top: 60px;
+  }
+  /* 모바일에서의 창 가로 길이 */
+  .class-time-table__box {
+    width: 100%;
+  }
+  /* 모바일에서 시간표 닫기 버튼 */
+  .class-time-table--btn-close {
+    text-align: end;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .class-time-table--btn-close button {
+    padding: 20px;
+  }
+  .class-time-table--btn-close button svg {
+    width: 34px;
+    height: auto;
+  }
 }

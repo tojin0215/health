@@ -26,7 +26,7 @@ import Select from '@mui/material/Select';
 
 // 아이콘
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-
+import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 // css
 import './classTimeTable.css';
 
@@ -62,11 +62,16 @@ export default function ClassTimeTable() {
   const list = (anchor) => (
     <Box
       className='class-time-table__box'
-      sx={{ width: 500 }}
+      // sx={{ width: 500 }}
       role='presentation'
       // onClick={toggleDrawer(anchor, false)}
       // onKeyDown={toggleDrawer(anchor, false)}
     >
+      <div className='class-time-table--btn-close'>
+        <Button variant='dark' onClick={toggleDrawer(anchor, false)}>
+          <CancelRoundedIcon />
+        </Button>
+      </div>
       <h4>2022년 10월 19일 (수요일)</h4>
       <FormControl
         className='class-time-table__select'
