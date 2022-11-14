@@ -114,8 +114,8 @@ class Workout extends Component {
             </Col>
             <Col>
               <Row className='workoutRoutine'>
-                <Col className='me-4 custom' onClick={this.goStage}>
-                  <Row>
+                <Col xs={12} md={6} onClick={this.goStage}>
+                  <Row className='custom'>
                     <Col xs={10} className='mb-5'>
                       <h2>베이직 루틴 배정</h2>
                     </Col>
@@ -131,8 +131,8 @@ class Workout extends Component {
                     </Col>
                   </Row>
                 </Col>
-                <Col className='personal' onClick={this.goAlloted}>
-                  <Row>
+                <Col xs={12} md={6} onClick={this.goAlloted}>
+                  <Row className='personal'>
                     <Col xs={10} className='mb-5'>
                       <h2>맞춤형 운동 배정</h2>
                     </Col>
@@ -152,34 +152,34 @@ class Workout extends Component {
             </Col>
             <Link to='/workoutAdd'>
               <Row className='addWorkout my-4'>
-                <Col xs={4}>
+                <Col xs={12} md={4}>
                   <h4>
                     운동 만들기
                     <AiOutlineSetting className='mx-2' />
                   </h4>
                 </Col>
-                <Col xs={7}>
+                <Col xs={11} md={7}>
                   <p>
                     맞춤형 운동 배정에 들어갈 개별 운동들을 만들 수 있습니다.
                   </p>
                 </Col>
-                <Col xs={1}>
+                <Col xs={1} md={1}>
                   <MdArrowForwardIos />
                 </Col>
               </Row>
             </Link>
             <Link to='/workoutStageAdd'>
               <Row className='addWorkout'>
-                <Col xs={4}>
+                <Col xs={12} md={4}>
                   <h4>
                     베이직 루틴 만들기
                     <AiOutlineSetting className='mx-2' />
                   </h4>
                 </Col>
-                <Col xs={7}>
+                <Col xs={11} md={7}>
                   <p>베이직 루틴을 직접 만들 수 있습니다.</p>
                 </Col>
-                <Col xs={1}>
+                <Col xs={1} md={1}>
                   <MdArrowForwardIos />
                 </Col>
               </Row>

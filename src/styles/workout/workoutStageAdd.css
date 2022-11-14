@@ -1,0 +1,173 @@
+.workout-stage-add .page-tit {
+  margin-bottom: 18px;
+}
+
+.workout-stage-add .page-tit h4 {
+  padding-bottom: 10px;
+}
+
+.selected-routin--header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (max-width: 767px) {
+  .workoutTabs > div > button {
+    padding: 12px 0;
+  }
+  .stage-add--workout-exercise-list .table--block thead {
+    display: none;
+  }
+  .stage-add--workout-exercise-list .table--block tr {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .stage-add--workout-exercise-list .table--block th,
+  .stage-add--workout-exercise-list .table--block td {
+    display: block;
+    position: relative;
+    padding: 2px;
+    padding-left: 35%;
+    border-width: 0 0 1px 0;
+    min-height: 40px;
+    line-height: 2.6;
+    font-size: 14px;
+  }
+  .stage-add--workout-exercise-list .table--block td:before {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30%;
+    padding: 2px;
+    background: #fff;
+    font-weight: 700;
+    border-right: 1px solid #ccc;
+    text-align: center;
+  }
+  .stage-add--workout-exercise-list .table--block td:nth-child(1):before {
+    content: '부위';
+  }
+  .stage-add--workout-exercise-list .table--block td:nth-child(2):before {
+    content: '이름';
+  }
+  .stage-add--workout-exercise-list .table--block td:nth-child(3):before {
+    content: '기구';
+  }
+  .stage-add--workout-exercise-list .table--block td:nth-child(4):before {
+    content: '세트';
+  }
+  .stage-add--workout-exercise-list .table--block td:nth-child(5):before {
+    content: '횟수';
+  }
+  .stage-add--workout-exercise-list .table--block td:nth-child(6):before {
+    content: '휴식';
+  }
+  .stage-add--workout-exercise-list .table--block td:nth-child(7):before {
+    content: 'URL';
+  }
+  .stage-add--workout-exercise-list .table--block td:nth-child(8):before {
+    content: '배정';
+  }
+
+  .selected-routine--header {
+    flex-wrap: wrap;
+  }
+
+  .selected-routine--header > div {
+    width: 100%;
+    text-align-last: end;
+  }
+
+  .selected-routine--step > div > div {
+    padding: 0;
+  }
+  .stage-add--workout-selected-list .table--block thead {
+    display: none;
+  }
+  .stage-add--workout-selected-list .table--block tr {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .stage-add--workout-selected-list .table--block th,
+  .stage-add--workout-selected-list .table--block td {
+    display: block;
+    position: relative;
+    padding: 2px;
+    padding-left: 35%;
+    border-width: 0 0 1px 0;
+    min-height: 40px;
+    line-height: 2.6;
+    font-size: 14px;
+  }
+  .stage-add--workout-selected-list .table--block td:before {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30%;
+    padding: 2px;
+    background: #fff;
+    font-weight: 700;
+    border-right: 1px solid #ccc;
+    text-align: center;
+  }
+  .workout-stage-add
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(1):before {
+    content: '부위';
+  }
+  .workout-stage-add
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(2):before {
+    content: '이름';
+  }
+  .workout-stage-add
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(3):before {
+    content: '기구';
+  }
+  .workout-stage-add
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(4):before {
+    content: '세트';
+  }
+  .workout-stage-add
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(5):before {
+    content: '횟수';
+  }
+  .workout-stage-add
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(6):before {
+    content: '휴식';
+  }
+  .workout-stage-add
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(7):before {
+    content: 'URL';
+  }
+  .workout-stage-add
+    .stage-add--workout-selected-list
+    .table--block
+    td:nth-child(8):before {
+    content: '삭제';
+  }
+
+  .workoutTabs .btn-table {
+    border-radius: 5px;
+  }
+
+  .selected-routine--step > div {
+    width: 100%;
+    margin: auto;
+  }
+}

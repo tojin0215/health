@@ -4,7 +4,7 @@
 }
 
 /* 회원 검색 인풋 */
-.clientSearch .MuiTextField-root {
+.client-search .MuiTextField-root {
   border-radius: 0.313rem;
   border: 0;
 }

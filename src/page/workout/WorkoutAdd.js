@@ -13,6 +13,7 @@ import MobNavigation from '../../component/navigation/MobNavigation';
 import Navigation from '../../component/navigation/Navigation';
 //css
 import '../../styles/workout/workoutAlloted.css';
+import '../../styles/workout/workoutAdd.css';
 
 // Bootstrap
 import { Container, Row, Col, FloatingLabel } from 'react-bootstrap';
@@ -276,7 +277,7 @@ class WorkoutAdd extends Component {
   render() {
     // console.log(this.state.headRegion);
     return (
-      <div className='wrap'>
+      <div className='wrap workout-add'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -299,14 +300,14 @@ class WorkoutAdd extends Component {
           <Button variant='secondary' onClick={this.goWorkout}>
             돌아가기
           </Button>
-          <Row className='sectionGlass'>
-            <Col xs={12}>
+          <Row className='sectionGlass workout-create'>
+            <Col md={12}>
               <h3 className='mb-4'>운동 만들기</h3>
             </Col>
-            <Col xs={2}>
+            <Col md={2}>
               <h5>운동부위</h5>
             </Col>
-            <Col xs={10} className='d-flex justify-content-between'>
+            <Col md={10} className='workout-add__region-check'>
               <Form.Check>
                 <Form.Check.Input
                   type='radio'
@@ -374,10 +375,10 @@ class WorkoutAdd extends Component {
                 </Form.Check.Label>
               </Form.Check>
             </Col>
-            <Col xs={2}>
+            <Col md={2}>
               <h5>운동명</h5>
             </Col>
-            <Col xs={10} className='mb-4'>
+            <Col md={10} className='mb-4'>
               <Form.Control
                 placeholder='운동명을 입력해주세요'
                 value={this.state.workout}
@@ -385,10 +386,10 @@ class WorkoutAdd extends Component {
                 onChange={this.handleChange}
               ></Form.Control>
             </Col>
-            <Col xs={2}>
+            <Col md={2}>
               <h5>기구</h5>
             </Col>
-            <Col xs={10} className='mb-4'>
+            <Col md={10} className='mb-4'>
               <Form.Control
                 placeholder='사용할 기구를 입력해주세요'
                 value={this.state.machine}
@@ -396,10 +397,10 @@ class WorkoutAdd extends Component {
                 onChange={this.handleChange}
               ></Form.Control>
             </Col>
-            <Col xs={2}>
+            <Col md={2}>
               <h5>반복</h5>
             </Col>
-            <Col xs={10} className='mb-4'>
+            <Col md={10} className='mb-4'>
               <Row>
                 <Col>
                   <Form.Control
@@ -430,10 +431,10 @@ class WorkoutAdd extends Component {
                 </Col>
               </Row>
             </Col>
-            <Col xs={2} className='mb-4'>
+            <Col md={2} className=''>
               <h5>링크</h5>
             </Col>
-            <Col xs={10}>
+            <Col md={10}>
               <Form.Control
                 placeholder='URL 링크를 입력해주세요'
                 /* value={this.state.url} */
@@ -441,7 +442,7 @@ class WorkoutAdd extends Component {
                 onChange={this.handleChange}
               ></Form.Control>
             </Col>
-            <Col xs={12} className='text-center'>
+            <Col md={12} className='text-center pt-3'>
               <Button className='btn-primary' onClick={this.workoutAdd}>
                 운동 만들기
               </Button>
@@ -470,7 +471,7 @@ class WorkoutAdd extends Component {
             </Col>
             <Col>
               <Row className='workoutTabs text-center'>
-                <Col>
+                <Col xs={4} md={2}>
                   <Button
                     type='radio'
                     className='btn-table'
@@ -481,7 +482,7 @@ class WorkoutAdd extends Component {
                     상체
                   </Button>
                 </Col>
-                <Col>
+                <Col xs={4} md={2}>
                   <Button
                     type='radio'
                     className='btn-table'
@@ -492,7 +493,7 @@ class WorkoutAdd extends Component {
                     하체
                   </Button>
                 </Col>
-                <Col>
+                <Col xs={4} md={2}>
                   <Button
                     type='radio'
                     className='btn-table'
@@ -502,7 +503,7 @@ class WorkoutAdd extends Component {
                     전신
                   </Button>
                 </Col>
-                <Col>
+                <Col xs={4} md={2}>
                   <Button
                     type='radio'
                     className='btn-table'
@@ -512,7 +513,7 @@ class WorkoutAdd extends Component {
                     코어
                   </Button>
                 </Col>
-                <Col>
+                <Col xs={4} md={2}>
                   <Button
                     type='radio'
                     className='btn-table'
@@ -522,7 +523,7 @@ class WorkoutAdd extends Component {
                     유산소
                   </Button>
                 </Col>
-                <Col>
+                <Col xs={4} md={2}>
                   <Button
                     type='radio'
                     className='btn-table'
@@ -535,8 +536,11 @@ class WorkoutAdd extends Component {
               </Row>
               <Row>
                 <Col xs={12}>
-                  <TableContainer component={Paper}>
-                    <Table className='table-light'>
+                  <TableContainer
+                    className='stage-add--workout-exercise-list'
+                    component={Paper}
+                  >
+                    <Table className='table--block table-light'>
                       <TableHead>
                         <TableRow>
                           <TableCell scope='col'>부위</TableCell>

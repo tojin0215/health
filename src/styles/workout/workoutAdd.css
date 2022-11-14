@@ -1,0 +1,32 @@
+.workout-add__region-check {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 767px) {
+  .workout-add__region-check {
+    flex-direction: column;
+    padding-left: 30px;
+    padding-bottom: 16px;
+    font-size: 16px;
+  }
+
+  .workout-add__region-check .form-check {
+    padding-bottom: 4px;
+  }
+
+  .btn-table {
+    border-radius: 5px;
+  }
+
+  .workoutTabs {
+    padding: 0 10px;
+  }
+
+  .workout-add
+    .stage-add--workout-exercise-list
+    .table--block
+    td:nth-child(8):before {
+    content: '삭제';
+  }
+}
