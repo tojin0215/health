@@ -65,6 +65,7 @@
   border: 0;
   background-color: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
 }
 .workoutTabs__btn-active {
   background-color: #fff;
