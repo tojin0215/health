@@ -1,4 +1,4 @@
-.clientSearch {
+.client-search {
   background: #333;
   padding: 1rem 3rem;
   border-radius: 0.313rem;
@@ -10,22 +10,22 @@
   margin-left: calc(-0.5 * var(--bs-gutter-x));
 }
 
-.clientSearch h4 {
+.client-search h4 {
   white-space: nowrap;
 }
 
-.clientSearch > div {
+.client-search > div {
   display: flex;
   justify-content: flex-end;
   width: 100%;
   align-items: end;
 }
 
-.clientSearch > div span {
+.client-search > div span {
   padding: 6px 16px;
 }
 
-.clientSearch .react-datepicker-wrapper {
+.client-search .react-datepicker-wrapper {
   width: auto;
 }
 
@@ -125,3 +125,37 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 /* 운동설정 */
+
+@media screen and (max-width: 767px) {
+  .client-search {
+    flex-wrap: wrap;
+  }
+  .client-search h4 {
+    padding-bottom: 16px;
+  }
+  .client-search > div {
+    flex-direction: column;
+    align-items: center;
+  }
+  .pageTit > div {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .pageTit > div > div {
+    width: 100%;
+    padding-bottom: 20px;
+  }
+  .workout-alloted
+    .workoutalloted__container
+    .MuiTable-root
+    .MuiTableCell-root
+    input[type='number'] {
+    max-width: none;
+  }
+  .wrap .workout-alloted__selected--cencel {
+    color: #dc3545;
+  }
+  .wrap .workout-alloted__select--plus {
+    color: #0077fe;
+  }
+}

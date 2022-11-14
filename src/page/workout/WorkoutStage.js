@@ -494,7 +494,7 @@ class WorkoutStage extends Component {
           <Button variant='secondary' className='mb-3' onClick={this.goWorkout}>
             돌아가기
           </Button>
-          <div className='clientSearch'>
+          <div className='client-search'>
             <h4>베이직 루틴 배정</h4>
             <div>
               {this.state.client_name == '회원 검색' ? (
