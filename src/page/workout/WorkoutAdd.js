@@ -307,7 +307,7 @@ class WorkoutAdd extends Component {
             <Col md={2}>
               <h5>운동부위</h5>
             </Col>
-            <Col md={10} className='d-flex justify-content-between'>
+            <Col md={10} className='workout-add__region-check'>
               <Form.Check>
                 <Form.Check.Input
                   type='radio'
@@ -471,7 +471,7 @@ class WorkoutAdd extends Component {
             </Col>
             <Col>
               <Row className='workoutTabs text-center'>
-                <Col>
+                <Col xs={4} md={2}>
                   <Button
                     type='radio'
                     className='btn-table'
@@ -482,7 +482,7 @@ class WorkoutAdd extends Component {
                     상체
                   </Button>
                 </Col>
-                <Col>
+                <Col xs={4} md={2}>
                   <Button
                     type='radio'
                     className='btn-table'
@@ -493,7 +493,7 @@ class WorkoutAdd extends Component {
                     하체
                   </Button>
                 </Col>
-                <Col>
+                <Col xs={4} md={2}>
                   <Button
                     type='radio'
                     className='btn-table'
@@ -503,7 +503,7 @@ class WorkoutAdd extends Component {
                     전신
                   </Button>
                 </Col>
-                <Col>
+                <Col xs={4} md={2}>
                   <Button
                     type='radio'
                     className='btn-table'
@@ -513,7 +513,7 @@ class WorkoutAdd extends Component {
                     코어
                   </Button>
                 </Col>
-                <Col>
+                <Col xs={4} md={2}>
                   <Button
                     type='radio'
                     className='btn-table'
@@ -523,7 +523,7 @@ class WorkoutAdd extends Component {
                     유산소
                   </Button>
                 </Col>
-                <Col>
+                <Col xs={4} md={2}>
                   <Button
                     type='radio'
                     className='btn-table'

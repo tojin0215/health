@@ -1,4 +1,28 @@
+.workout-add__region-check {
+  display: flex;
+  justify-content: space-between;
+}
+
 @media screen and (max-width: 767px) {
+  .workout-add__region-check {
+    flex-direction: column;
+    padding-left: 30px;
+    padding-bottom: 16px;
+    font-size: 16px;
+  }
+
+  .workout-add__region-check .form-check {
+    padding-bottom: 4px;
+  }
+
+  .workout-add .btn-table {
+    border-radius: 5px;
+  }
+
+  .workout-add .workoutTabs {
+    padding: 0 10px;
+  }
+
   .workout-add
     .stage-add--workout-exercise-list
     .table--block
