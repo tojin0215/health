@@ -172,4 +172,20 @@
     white-space: normal;
     width: 5rem;
   }
+  .client__utill {
+    flex-wrap: wrap;
+  }
+  .client__utill .client__search {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .client__utill .client__registration {
+    flex: 1;
+  }
+  .client__utill .client__membership {
+    flex: 1;
+  }
+  .voucher {
+    border-top: 0;
+  }
 }
