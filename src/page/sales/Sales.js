@@ -829,7 +829,7 @@ class Sales extends Component {
           {/*.localNavigation */}
         </div>
         {/*.header */}
-        <Container>
+        <Container className='sales_wrap'>
           <div className='d-flex justify-content-between'>
             <h5>
               <strong>투진피트니스</strong>의 매출현황입니다.
@@ -892,9 +892,9 @@ class Sales extends Component {
               조회하기
             </Button>
           </div>
-          <Table className='table-dark table-sales'>
+          <Table className='table-dark table-sales table--block'>
             <TableHead>
-              <TableRow>
+              <TableRow className='sales_table_row'>
                 <TableCell scope='col'>카드</TableCell>
                 <TableCell scope='col'>현금</TableCell>
                 <TableCell scope='col'>계좌이체</TableCell>

@@ -424,11 +424,11 @@ class AddSales extends Component {
           {/*.localNavigation */}
         </div>
         {/*.header */}
-        <Container>
+        <Container className='addSales'>
           <form>
             <div className='sectionGlass'>
               <Row>
-                <Col xs={2} className='customer_name'>
+                <Col xs={12} lg={2} className='customer_name'>
                   {this.state.open ? (
                     <UserSearch
                       open={this.state.open}
@@ -450,7 +450,7 @@ class AddSales extends Component {
                     />
                   )}
                 </Col>
-                <Col className='w-100'>
+                <Col xs={12} lg={10} className='w-100'>
                   {/* <span className='fs-5 fw-bold'>{this.state.client_name}</span> */}
                   <h5>
                     {this.state.client_name !== '회원 검색'
@@ -460,10 +460,10 @@ class AddSales extends Component {
                 </Col>
               </Row>
               <Row className='sports-classification'>
-                <Col xs={2}>
+                <Col xs={12} lg={2}>
                   <h5>운동종목</h5>
                 </Col>
-                <Col xs={10}>
+                <Col xs={12} lg={10}>
                   <Form.Check inline>
                     <Form.Check.Input
                       type='radio'
@@ -544,12 +544,12 @@ class AddSales extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col xs={2}>
+                <Col xs={12} lg={2}>
                   <h5>이용권종류</h5>
                 </Col>
                 <Col>
                   <Row>
-                    <Col xs={3} className='mt-2'>
+                    <Col xs={6} lg={3} className='mt-2'>
                       <Form.Group>
                         <Form.Check>
                           <Form.Check.Input
@@ -571,7 +571,7 @@ class AddSales extends Component {
                         </Form.Check>
                       </Form.Group>
                     </Col>
-                    <Col xs={3} className='mt-2'>
+                    <Col xs={6} lg={3} className='mt-2'>
                       <Form.Group>
                         <Form.Check>
                           <Form.Check.Input
@@ -600,7 +600,7 @@ class AddSales extends Component {
                         {/* 기간권 내용 */}
                         <Col className='voucher-info'>
                           <Row>
-                            <Col xs={2}>
+                            <Col xs={12} lg={2}>
                               <h5>기간시작일</h5>
                             </Col>
                             <Col xs={10}>
@@ -611,7 +611,7 @@ class AddSales extends Component {
                                 dateFormat='yyyy년MM월dd일'
                               />
                             </Col>
-                            <Col xs={2}>
+                            <Col xs={12} lg={2}>
                               <h6>기간</h6>
                             </Col>
                             <Col xs={10}>
@@ -739,12 +739,12 @@ class AddSales extends Component {
               </Row>
               <Row></Row>
               <Row>
-                <Col xs={2}>
+                <Col xs={12} lg={2}>
                   <h5>사물함</h5>
                 </Col>
-                <Col xs={10}>
+                <Col xs={12} lg={10}>
                   <Row>
-                    <Col xs={2} className='mt-2'>
+                    <Col xs={12} lg={2} className='mt-2'>
                       <Form.Check inline>
                         <Form.Check.Input
                           type='radio'
@@ -760,7 +760,7 @@ class AddSales extends Component {
                         </Form.Check.Label>
                       </Form.Check>
                     </Col>
-                    <Col>
+                    <Col xs={12} lg={2}>
                       <Form.Check inline>
                         <Form.Check.Input
                           type='radio'
@@ -783,12 +783,12 @@ class AddSales extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col xs={2}>
+                <Col xs={12} lg={2}>
                   <h5>운동복</h5>
                 </Col>
-                <Col xs={10}>
+                <Col xs={12} lg={10}>
                   <Row>
-                    <Col xs={2} className='mt-2'>
+                    <Col xs={6} lg={2} className='mt-2'>
                       <Form.Check>
                         <Form.Check.Input
                           type='radio'
@@ -804,7 +804,7 @@ class AddSales extends Component {
                         </Form.Check.Label>
                       </Form.Check>
                     </Col>
-                    <Col xs={2} className='mt-2'>
+                    <Col xs={6} lg={2} className='mt-2'>
                       <Form.Check>
                         <Form.Check.Input
                           type='radio'
@@ -822,7 +822,7 @@ class AddSales extends Component {
             </div>
             <div className='sectionGlass'>
               <Row>
-                <Col xs={2}>
+                <Col xs={12} lg={2}>
                   <h5>결제일</h5>
                 </Col>
                 <Col>
@@ -835,7 +835,7 @@ class AddSales extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col xs={2}>
+                <Col xs={12} lg={2}>
                   <h5>결제 종류</h5>
                 </Col>
                 <Col>
@@ -882,12 +882,12 @@ class AddSales extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col xs={2}>
+                <Col xs={12} lg={2}>
                   <h5>금액</h5>
                 </Col>
                 <Col>
                   <Row>
-                    <Col xs={1}>
+                    <Col xs={6} lg={2}>
                       <h6>이용권</h6>
                     </Col>
                     <Col>
@@ -899,7 +899,7 @@ class AddSales extends Component {
                         onChange={this.handleChange}
                       />
                     </Col>
-                    <Col xs={1}>
+                    <Col xs={6} lg={2}>
                       <h6>사물함</h6>
                     </Col>
                     <Col>
@@ -911,7 +911,7 @@ class AddSales extends Component {
                         onChange={this.handleChange}
                       />
                     </Col>
-                    <Col xs={1}>
+                    <Col xs={6} lg={2}>
                       <h6>운동복</h6>
                     </Col>
                     <Col>
@@ -927,12 +927,12 @@ class AddSales extends Component {
                 </Col>
               </Row>
               <Row className='TotalPayment-bg my-2 align-items-center'>
-                <Col xs={2}>
+                <Col xs={6} lg={2}>
                   <strong>총 결제 금액</strong>
                 </Col>
                 <Col>
                   <NumberFormat
-                    className='text-primary'
+                    className='total_price text-primary'
                     thousandSeparator={true}
                     name='payment'
                     id='TotalPayment'
@@ -959,7 +959,7 @@ class AddSales extends Component {
                 </Col>
               </Row>
             </div>
-            <Row className='text-center mt-3'>
+            <Row className='btn-group text-center mt-3'>
               <Col>
                 <Button
                   className='btn-primary-dark mx-1'

@@ -41,3 +41,27 @@
   border: 0;
   text-align: end;
 }
+
+@media (max-width: 767px) {
+  strong {
+    font-size: 1.2rem;
+  }
+  .addSales h5 {
+    margin-top: 0.5rem;
+  }
+  /* .addSales .customer_name {
+    width: 100%;
+  } */
+  .TotalPayment-bg .total_price {
+    text-align: end;
+  }
+  .btn-group button {
+    margin-bottom: 1rem;
+  }
+  .addSales .form-check {
+    display: block;
+  }
+  .addSales .form-check {
+    display: block;
+  }
+}

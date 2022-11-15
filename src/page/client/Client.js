@@ -2198,10 +2198,12 @@ class Client extends Component {
               <CustomerCalendarComponent customer_no={this.idc} />
             </div>
             <Row className='clientInfo'>
-              <Col lg={2}>
+              <Col xs={6} lg={2}>
                 <h5>이름</h5>
               </Col>
-              <Col lg={10}>김루피</Col>
+              <Col xs={6} lg={10}>
+                김루피
+              </Col>
               <Col md={4} lg={2}>
                 <h5>생년월일</h5>
               </Col>

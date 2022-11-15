@@ -188,4 +188,10 @@
   .voucher {
     border-top: 0;
   }
+  .rbc-calendar .rbc-toolbar .rbc-toolbar-label {
+    margin: 1rem 0;
+  }
+  .rbc-calendar .rbc-toolbar .rbc-btn-group {
+    font-size: 0.5rem;
+  }
 }
