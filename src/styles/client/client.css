@@ -194,4 +194,10 @@
   .rbc-calendar .rbc-toolbar .rbc-btn-group {
     font-size: 0.5rem;
   }
+  #customerClient .client__modal--information {
+    border-bottom: 1px solid #fff;
+  }
+  #customerClient .client__modal--information div {
+    margin-bottom: 1rem;
+  }
 }
