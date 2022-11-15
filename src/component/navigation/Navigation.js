@@ -277,7 +277,12 @@ class Navigation extends Component {
                   </li>
                   <li>
                     <NavLink exact to='/inbodies'>
-                      인바디 정보 (삭제)
+                      인바디 정보
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink exact to='/genetic'>
+                      DTC
                     </NavLink>
                   </li>
                 </ul>
