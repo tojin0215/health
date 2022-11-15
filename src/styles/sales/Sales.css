@@ -3,8 +3,13 @@
 */
 .mixed-chart {
 }
-/* 테이블 폰트 색상 */
-/* 테이블 헤더 폰트 색상 */
+/* 매출 페이지 헤더 */
+.sales--header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 /* 테이블 바디 폰트 색상 */
 .sales .table tbody tr td {
   color: #fff;
@@ -43,4 +48,55 @@
 }
 
 @media (max-width: 767px) {
+  .sales--header h5 {
+    width: 100%;
+  }
+  .sales--header button {
+    margin: auto;
+  }
+  .sales__search-requirement {
+    padding-bottom: 16px;
+  }
+  .sales__search-requirement button {
+    width: -webkit-fill-available;
+  }
+  /* 매출 모바일 블럭 테이블 */
+  /* 매출 요약 테이블 */
+  .sales .sales__summary-table .table--block td::before {
+    background-color: #000;
+  }
+  .sales .sales__summary-table .table--block td:nth-child(1):before {
+    content: '카드';
+  }
+  .sales .sales__summary-table .table--block td:nth-child(2):before {
+    content: '현금';
+  }
+  .sales .sales__summary-table .table--block td:nth-child(3):before {
+    content: '계좌이체';
+  }
+  .sales .sales__summary-table .table--block td:nth-child(4):before {
+    content: '총금액';
+  }
+  /* 매출 테이블 전체보기 */
+  .sales .sales__detail-table .table--block td:nth-child(1):before {
+    content: '회원명';
+  }
+  .sales .sales__detail-table .table--block td:nth-child(2):before {
+    content: '보유이용권';
+  }
+  .sales .sales__detail-table .table--block td:nth-child(3):before {
+    content: '결제일';
+  }
+  .sales .sales__detail-table .table--block td:nth-child(4):before {
+    content: '이용권시작일';
+  }
+  .sales .sales__detail-table .table--block td:nth-child(5):before {
+    content: '잔여이용권';
+  }
+  .sales .sales__detail-table .table--block td:nth-child(6):before {
+    content: '결제도구';
+  }
+  .sales .sales__detail-table .table--block td:nth-child(7):before {
+    content: '결제금액';
+  }
 }

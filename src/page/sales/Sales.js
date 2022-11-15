@@ -6,6 +6,8 @@ import MobNavigation from '../../component/navigation/MobNavigation';
 import Header from '../../component/header/Header';
 import Footer from '../../component/footer/Footer';
 import { connect } from 'react-redux';
+// 미디어쿼리
+import { Mobile, PC } from '../../component/common/MediaQuery';
 
 import { Row, Col, Container, Button } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
@@ -32,6 +34,7 @@ import {
 // react icons
 import { TbMoodSuprised } from 'react-icons/tb';
 /* mui */
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -50,7 +53,6 @@ import {
   TableRow,
 } from '@mui/material'; */
 import { DataArrayRounded } from '@mui/icons-material';
-import Paper from '@mui/material/Paper';
 
 // nivo.rocks 그래프
 import { ResponsiveBar } from '@nivo/bar';
@@ -830,7 +832,7 @@ class Sales extends Component {
         </div>
         {/*.header */}
         <Container className='sales'>
-          <div className='sales--header d-flex justify-content-between'>
+          <div className='sales--header'>
             <h5>
               <strong>투진피트니스</strong>의 매출현황입니다.
             </h5>
@@ -855,68 +857,123 @@ class Sales extends Component {
               />
             </Col> */}
           </Row>
-          <div className='d-flex justify-content-between my-3'>
-            <Button
-              onClick={() => this.handleButton('당일')}
-              variant='outline-primary'
-              className=''
-            >
-              당일
-            </Button>
-            <Button
-              onClick={() => this.handleButton('당월')}
-              variant='outline-primary'
-              className=''
-            >
-              당월
-            </Button>
-            <div>
-              <DatePicker
-                className='sales__calender--dateinput w-100 text-center'
-                dateFormat='yyyy년MM월dd일'
-                selected={this.state.today}
-                onChange={(date) => this.setState({ today: date })}
-                maxDate={this.state.today}
-              />
+          <PC>
+            <div className='d-flex justify-content-between my-3'>
+              <Button
+                onClick={() => this.handleButton('당일')}
+                variant='outline-primary'
+                className=''
+              >
+                당일
+              </Button>
+              <Button
+                onClick={() => this.handleButton('당월')}
+                variant='outline-primary'
+                className=''
+              >
+                당월
+              </Button>
+              <div>
+                <DatePicker
+                  className='sales__calender--dateinput w-100 text-center'
+                  dateFormat='yyyy년MM월dd일'
+                  selected={this.state.today}
+                  onChange={(date) => this.setState({ today: date })}
+                  maxDate={this.state.today}
+                />
+              </div>
+              <div>
+                <DatePicker
+                  className='sales__calender--dateinput w-100 text-center'
+                  dateFormat='yyyy년MM월dd일'
+                  selected={this.state.tommorrow}
+                  onChange={(date) => this.setState({ tommorrow: date })}
+                  maxDate={this.state.today}
+                />
+              </div>
+              <Button onClick={() => this.handleOnClick()} className=''>
+                조회하기
+              </Button>
             </div>
-            <div>
-              <DatePicker
-                className='sales__calender--dateinput w-100 text-center'
-                dateFormat='yyyy년MM월dd일'
-                selected={this.state.tommorrow}
-                onChange={(date) => this.setState({ tommorrow: date })}
-                maxDate={this.state.today}
-              />
-            </div>
-            <Button onClick={() => this.handleOnClick()} className=''>
-              조회하기
-            </Button>
-          </div>
-          <Table className='table-dark table-sales table--block'>
-            <TableHead>
-              <TableRow className='sales_table_row'>
-                <TableCell scope='col'>카드</TableCell>
-                <TableCell scope='col'>현금</TableCell>
-                <TableCell scope='col'>계좌이체</TableCell>
-                <TableCell scope='col'>총매출</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableCell scope='col'> {this.state.card}</TableCell>
-              <TableCell scope='col'>{this.state.cash}</TableCell>
-              <TableCell scope='col'>{this.state.transfer}</TableCell>
-              <TableCell scope='col' className='text-primary'>
-                {this.state.total}
-              </TableCell>
-            </TableBody>
-          </Table>
+          </PC>
+          <Mobile>
+            <Row className='sales__search-requirement'>
+              <Col xs={6}>
+                <DatePicker
+                  className='sales__calender--dateinput w-100 text-center'
+                  dateFormat='yyyy년MM월dd일'
+                  selected={this.state.today}
+                  onChange={(date) => this.setState({ today: date })}
+                  maxDate={this.state.today}
+                />
+              </Col>
+              <Col xs={6}>
+                <DatePicker
+                  className='sales__calender--dateinput w-100 text-center'
+                  dateFormat='yyyy년MM월dd일'
+                  selected={this.state.tommorrow}
+                  onChange={(date) => this.setState({ tommorrow: date })}
+                  maxDate={this.state.today}
+                />
+              </Col>
+              <Col xs={3}>
+                <Button
+                  onClick={() => this.handleButton('당일')}
+                  variant='outline-primary'
+                  className=''
+                >
+                  당일
+                </Button>
+              </Col>
+              <Col xs={3}>
+                <Button
+                  onClick={() => this.handleButton('당월')}
+                  variant='outline-primary'
+                  className=''
+                >
+                  당월
+                </Button>
+              </Col>
+              <Col xs={6}>
+                <Button onClick={() => this.handleOnClick()} className=''>
+                  조회하기
+                </Button>
+              </Col>
+            </Row>
+          </Mobile>
+          <TableContainer
+            component={Paper}
+            className='stage-add--workout-selected-list sales__summary-table'
+          >
+            <Table className='table-dark table-sales table--block'>
+              <TableHead>
+                <TableRow>
+                  <TableCell scope='col'>카드</TableCell>
+                  <TableCell scope='col'>현금</TableCell>
+                  <TableCell scope='col'>계좌이체</TableCell>
+                  <TableCell scope='col'>총매출</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableCell scope='col'> {this.state.card}</TableCell>
+                <TableCell scope='col'>{this.state.cash}</TableCell>
+                <TableCell scope='col'>{this.state.transfer}</TableCell>
+                <TableCell scope='col' className='text-primary'>
+                  {this.state.total}
+                </TableCell>
+              </TableBody>
+            </Table>
+          </TableContainer>
           <Tabs
             defaultActiveKey='home'
             id='uncontrolled-tab-example'
             className='mb-3 mt-5'
           >
             <Tab eventKey='home' title='전체보기'>
-              <TableContainer component={Paper}>
+              <TableContainer
+                component={Paper}
+                className='stage-add--workout-selected-list sales__detail-table'
+              >
                 <Table
                   className='table--block table-dark'
                   aria-label='simple table'
@@ -1152,8 +1209,10 @@ class Sales extends Component {
                   </Button>
                 </div>
               )}
-
-              <TableContainer component={Paper}>
+              <TableContainer
+                component={Paper}
+                className='stage-add--workout-selected-list sales__detail-table'
+              >
                 <Table
                   className='table--block table-dark'
                   aria-label='simple table'
@@ -1331,8 +1390,10 @@ class Sales extends Component {
                   </Button>
                 </>
               )}
-
-              <TableContainer component={Paper}>
+              <TableContainer
+                component={Paper}
+                className='stage-add--workout-selected-list sales__detail-table'
+              >
                 <Table
                   className='table--block table-dark'
                   aria-label='simple table'
