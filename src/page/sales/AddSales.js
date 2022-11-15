@@ -397,7 +397,7 @@ class AddSales extends Component {
     // console.log(userinfo);
     // console.log(this.state.paymentTools);
     // console.log(this.props.location.state.client_name);
-    console.log('나는 client_name :', this.state.client_name);
+    console.log('client_name :', this.state.client_name);
     return (
       <div className='wrap addSales'>
         <div className='header'>
@@ -455,7 +455,7 @@ class AddSales extends Component {
                   <h5>
                     {this.state.client_name !== '회원 검색'
                       ? '님의 결제 등록입니다.'
-                      : '회원을 선택해주세요'}
+                      : '회원을 선택해주세요.'}
                   </h5>
                 </Col>
               </Row>

@@ -443,6 +443,14 @@ class MobNavigation extends Component {
                     <NavLink exact to='/client'>
                       이용권 등록
                     </NavLink>
+                    <br />
+                    <NavLink exact to='/inbodies'>
+                      인바디 정보
+                    </NavLink>
+                    <br />
+                    <NavLink exact to='/genetic'>
+                      DTC
+                    </NavLink>
                   </li>
                 ) : (
                   ''

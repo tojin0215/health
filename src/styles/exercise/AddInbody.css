@@ -1,3 +1,17 @@
 .react-datepicker-wrapper {
   width: 100%;
 }
+
+.inbody-add--client-info > div {
+}
+
+.inbody-add--client-info h5 {
+  margin: 0;
+}
+
+.inbody-add--client-info p {
+}
+
+.inbody-add .react-datepicker__input-container input[type='text'] {
+  padding: inherit;
+}

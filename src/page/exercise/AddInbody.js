@@ -321,7 +321,7 @@ class AddInbody extends Component {
     // console.log('name', this.state.name);
 
     return (
-      <div className='wrap addInbody'>
+      <div className='wrap inbody-add'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -349,230 +349,242 @@ class AddInbody extends Component {
         {/*.header */}
         {/* <label>번호 : {this.state.member_no}</label>  */}
         <Container>
-          <Row className=''>
-            <Col xs={12}>
-              <h3>회원 정보</h3>
-            </Col>
-            <Col sm={12} md={4}>
-              <h5>이름</h5>
-              <p>{this.state.name}</p>
-            </Col>
-            <Col sm={12} md={4}>
-              <h5>생년월일</h5>
-              <p>{this.state.birth}</p>
-            </Col>
-            <Col sm={12} md={4}>
-              <h5>성별</h5>
-              <p>{this.state.sex}</p>
-            </Col>
-          </Row>
-          <Form className='mt-5'>
-            <Row>
+          <div className='sectionGlass'>
+            <Row className='inbody-add--client-info'>
               <Col xs={12}>
-                <h3>인바디 정보 입력</h3>
+                <h3>회원 정보</h3>
               </Col>
-              <Col xs={12} sm={3}>
-                <Form.Group>
-                  <Form.Label className='w-100'>검사날짜</Form.Label>
-                  <DatePicker
-                    selected={this.state.measurementDate}
-                    onChange={this.handleDateChange}
-                    name='measurementDate'
-                    dateFormat='yyyy년MM월dd일'
-                  />
-                </Form.Group>
+              <Col xs={6}>
+                <h5>이름</h5>
+                <p>{this.state.name}</p>
               </Col>
-              <Col xs={12} sm={3}>
-                <Form.Group>
-                  <Form.Label>키</Form.Label>
-                  <Form.Control
-                    variant='outlined'
-                    value={this.state.height}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='height'
-                    error={this.state.height_err}
-                    required
-                    autoFocus
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col xs={12}>
-                <h5 className='mt-3'>체성분 분석</h5>
-              </Col>
-              <Col xs={4} md={3}>
-                <Form.Group>
-                  <Form.Label>체수분</Form.Label>
-                  <Form.Control
-                    variant='outlined'
-                    value={this.state.bodyMoisture}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='bodyMoisture'
-                    error={this.state.bodyMoisture_err}
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col xs={4} md={3}>
-                <Form.Group>
-                  <Form.Label>단백질</Form.Label>
-                  <Form.Control
-                    variant='outlined'
-                    value={this.state.protein}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='protein'
-                    error={this.state.protein_err}
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col xs={4} md={3}>
-                <Form.Group>
-                  <Form.Label>무기질</Form.Label>
-                  <Form.Control
-                    variant='outlined'
-                    value={this.state.mineral}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='mineral'
-                    error={this.state.mineral_err}
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col xs={4} md={3}>
-                <Form.Group>
-                  <Form.Label>체지방</Form.Label>
-                  <Form.Control
-                    variant='outlined'
-                    value={this.state.bodyFat}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='bodyFat'
-                    error={this.state.bodyFat_err}
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col xs={4} md={3}>
-                <Form.Group>
-                  <Form.Label>근육량</Form.Label>
-                  <Form.Control
-                    variant='outlined'
-                    value={this.state.muscleMass}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='muscleMass'
-                    error={this.state.muscleMass_err}
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col xs={4} md={3}>
-                <Form.Group>
-                  <Form.Label>체지방량</Form.Label>
-                  <Form.Control
-                    variant='outlined'
-                    value={this.state.bodyFatMass1}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='bodyFatMass1'
-                    error={this.state.bodyFatMass1_err}
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col xs={4} md={3}>
-                <Form.Group>
-                  <Form.Label>체중</Form.Label>
-                  <Form.Control
-                    variant='outlined'
-                    value={this.state.weight}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='weight'
-                    error={this.state.weight_err}
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col xs={12}>
-                <h5 className='mt-3'>골격근, 지방</h5>
-              </Col>
-              <Col xs={6} md={3}>
-                <Form.Group>
-                  <Form.Label>골격근량</Form.Label>
-                  <Form.Control
-                    variant='outlined'
-                    value={this.state.skeletalMuscleMass}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='skeletalMuscleMass'
-                    error={this.state.skeletalMuscleMass_err}
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col xs={6} md={3}>
-                <Form.Group>
-                  <Form.Label>체지방량</Form.Label>
-                  <Form.Control
-                    variant='outlined'
-                    value={this.state.bodyFatMass2}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='bodyFatMass2'
-                    error={this.state.bodyFatMass2_err}
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col className='mt-3' xs={12}>
-                <h5>비만진단</h5>
-              </Col>
-              <Col xs={6} md={3}>
-                <Form.Group>
-                  <Form.Label>BMI</Form.Label>
-                  <Form.Control
-                    variant='outlined'
-                    value={this.state.bmi}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='bmi'
-                    error={this.state.bmi_err}
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col xs={6} md={3}>
-                <Form.Group>
-                  <Form.Label>체지방률</Form.Label>
-                  <Form.Control
-                    variant='outlined'
-                    value={this.state.percentBodyFat}
-                    onChange={this.handleChange}
-                    type='number'
-                    id='percentBodyFat'
-                    error={this.state.percentBodyFat_err}
-                    required
-                  ></Form.Control>
-                </Form.Group>
-              </Col>
-              <Col xs={12} className='mt-5 text-center'>
-                <Button className='w-100' onClick={this.handleOnClick}>
-                  등록하기
-                </Button>
+              <Col xs={6}>
+                <h5>생년월일</h5>
+                <p>
+                  {this.state.birth} &#40;{this.state.sex}&#41;
+                </p>
               </Col>
             </Row>
-          </Form>
+            <Form className='mt-5'>
+              <Row>
+                <Col xs={12}>
+                  <h3>인바디 정보 입력</h3>
+                </Col>
+                <Col xs={6} md={3}>
+                  <Form.Group>
+                    <Form.Label>검사날짜</Form.Label>
+                    <DatePicker
+                      selected={this.state.measurementDate}
+                      onChange={this.handleDateChange}
+                      name='measurementDate'
+                      dateFormat='yyyy년MM월dd일'
+                    />
+                  </Form.Group>
+                </Col>
+                <Col xs={6} md={3}>
+                  <Form.Group>
+                    <Form.Label>키</Form.Label>
+                    <Form.Control
+                      variant='outlined'
+                      placeholder=' ~ cm'
+                      value={this.state.height}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='height'
+                      error={this.state.height_err}
+                      required
+                      autoFocus
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col xs={12}>
+                  <h5 className='mt-3'>체성분 분석</h5>
+                </Col>
+                <Col xs={4} md={3}>
+                  <Form.Group>
+                    <Form.Label>체수분</Form.Label>
+                    <Form.Control
+                      variant='outlined'
+                      placeholder=' ~ kg'
+                      value={this.state.bodyMoisture}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='bodyMoisture'
+                      error={this.state.bodyMoisture_err}
+                      required
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col xs={4} md={3}>
+                  <Form.Group>
+                    <Form.Label>단백질</Form.Label>
+                    <Form.Control
+                      variant='outlined'
+                      placeholder=' ~ kg'
+                      value={this.state.protein}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='protein'
+                      error={this.state.protein_err}
+                      required
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col xs={4} md={3}>
+                  <Form.Group>
+                    <Form.Label>무기질</Form.Label>
+                    <Form.Control
+                      variant='outlined'
+                      placeholder=' ~ kg'
+                      value={this.state.mineral}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='mineral'
+                      error={this.state.mineral_err}
+                      required
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col xs={4} md={3}>
+                  <Form.Group>
+                    <Form.Label>체지방</Form.Label>
+                    <Form.Control
+                      variant='outlined'
+                      placeholder=' ~ kg'
+                      value={this.state.bodyFat}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='bodyFat'
+                      error={this.state.bodyFat_err}
+                      required
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col xs={4} md={3}>
+                  <Form.Group>
+                    <Form.Label>근육량</Form.Label>
+                    <Form.Control
+                      variant='outlined'
+                      placeholder=' ~ kg'
+                      value={this.state.muscleMass}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='muscleMass'
+                      error={this.state.muscleMass_err}
+                      required
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col xs={4} md={3}>
+                  <Form.Group>
+                    <Form.Label>체지방량</Form.Label>
+                    <Form.Control
+                      variant='outlined'
+                      placeholder=' ~ kg'
+                      value={this.state.bodyFatMass1}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='bodyFatMass1'
+                      error={this.state.bodyFatMass1_err}
+                      required
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col xs={4} md={3}>
+                  <Form.Group>
+                    <Form.Label>체중</Form.Label>
+                    <Form.Control
+                      variant='outlined'
+                      placeholder=' ~ kg'
+                      value={this.state.weight}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='weight'
+                      error={this.state.weight_err}
+                      required
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col xs={12}>
+                  <h5 className='mt-3'>골격근, 지방</h5>
+                </Col>
+                <Col xs={6} md={3}>
+                  <Form.Group>
+                    <Form.Label>골격근량</Form.Label>
+                    <Form.Control
+                      variant='outlined'
+                      placeholder=' ~ kg'
+                      value={this.state.skeletalMuscleMass}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='skeletalMuscleMass'
+                      error={this.state.skeletalMuscleMass_err}
+                      required
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col xs={6} md={3}>
+                  <Form.Group>
+                    <Form.Label>체지방량</Form.Label>
+                    <Form.Control
+                      variant='outlined'
+                      placeholder=' ~ kg'
+                      value={this.state.bodyFatMass2}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='bodyFatMass2'
+                      error={this.state.bodyFatMass2_err}
+                      required
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col className='mt-3' xs={12}>
+                  <h5>비만진단</h5>
+                </Col>
+                <Col xs={6} md={3}>
+                  <Form.Group>
+                    <Form.Label>BMI</Form.Label>
+                    <Form.Control
+                      variant='outlined'
+                      placeholder=' ~ %'
+                      value={this.state.bmi}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='bmi'
+                      error={this.state.bmi_err}
+                      required
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col xs={6} md={3}>
+                  <Form.Group>
+                    <Form.Label>체지방률</Form.Label>
+                    <Form.Control
+                      variant='outlined'
+                      placeholder=' ~ %'
+                      value={this.state.percentBodyFat}
+                      onChange={this.handleChange}
+                      type='number'
+                      id='percentBodyFat'
+                      error={this.state.percentBodyFat_err}
+                      required
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col xs={12} className='mt-5 text-center'>
+                  <Button className='w-100' onClick={this.handleOnClick}>
+                    등록하기
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
+          </div>
         </Container>
         <div className='footer'>
           <Footer />
         </div>
         {/*.footer */}
-      </div> /*.addInbody */
+      </div> /*.inbody-add */
     );
   }
 }
