@@ -210,7 +210,7 @@ class Inbodies extends Component {
       client_name:
         this.props.userinfo.loginWhether === 2
           ? this.props.userinfo.manager_name
-          : '',
+          : '회원 검색',
       series: [],
       inbodiesListChart: {
         chart: {
@@ -643,23 +643,19 @@ class Inbodies extends Component {
         </div>
         {/*.header */}
         <Container>
-          <Row>
-            <Col xs={12} md={3}>
-              <h4>회원선택</h4>
-            </Col>
-            <Col xs={12} md={3} className='text-center mb-2'>
-              {this.props.userinfo.loginWhether === 2 ? (
-                <TextField
-                  id='customer_name'
-                  /* label='선택된 회원' */
-                  disabled
-                  variant='standard'
-                  className='customer-input--search w-100 justify-content-center'
-                  InputProps={{ disableUnderline: true }}
-                  value={this.props.userinfo.manager_name}
-                />
-              ) : this.state.open ? (
-                <div>
+          <Row className='inbodies__utill'>
+            <Col xs={3}>
+              <div className='customer_name'>
+                {this.props.userinfo.loginWhether === 2 ? (
+                  <TextField
+                    id='customer_name'
+                    disabled
+                    variant='standard'
+                    className='customer-input--search'
+                    InputProps={{ disableUnderline: true }}
+                    value={this.props.userinfo.manager_name}
+                  />
+                ) : this.state.open ? (
                   <UserSearch
                     open={this.state.open}
                     setOpen={(o) => this.setState({ open: o })}
@@ -668,29 +664,30 @@ class Inbodies extends Component {
                     joinNo={this.props.userinfo.joinNo}
                     handleUser={this.handleUser}
                   />
-                </div>
-              ) : (
-                <div>
+                ) : (
                   <TextField
                     id='customer_name'
-                    label='회원 선택'
                     disabled
                     variant='standard'
-                    onClick={() => this.setState({ open: true })}
-                    className='customer-input--search w-100 justify-content-center mt-2'
+                    className='customer-input--search'
                     InputProps={{ disableUnderline: true }}
                     value={this.state.client_name}
-                    style={{ cursor: 'pointer' }}
+                    onClick={() => this.setState({ open: true })}
                   />
-                </div>
-              )}
+                )}
+              </div>
             </Col>
-            <Col xs={12} md={3} className='mb-2'>
-              <Button className='w-100 h-100' onClick={this.clickOpen}>
-                인바디 변화 보기
-              </Button>
+            <Col xs={5}>
+              <h5>
+                {this.state.client_name !== '회원 검색'
+                  ? '님의 인바디 정보입니다.'
+                  : '회원을 선택해주세요.'}
+              </h5>
             </Col>
-            <Col xs={12} md={3} className='mb-2'>
+            <Col xs={12} md={2} className='inbodies__utill__change'>
+              <Button onClick={this.clickOpen}>인바디 변화 보기</Button>
+            </Col>
+            <Col xs={12} md={2} className='inbodies__utill__inbody-add'>
               <Link
                 to={{
                   pathname: '/inbodiesAdd',
@@ -705,9 +702,7 @@ class Inbodies extends Component {
                   },
                 }}
               >
-                <Button className='w-100 h-100' variant='outline-primary'>
-                  인바디 추가
-                </Button>
+                <Button variant='outline-primary'>인바디 추가</Button>
               </Link>
             </Col>
           </Row>

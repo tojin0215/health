@@ -1,3 +1,15 @@
+.inbodies__utill .customer_name {
+  width: -webkit-fill-available;
+}
+
+.inbodies__utill__change button {
+  width: -webkit-fill-available;
+}
+
+.inbodies__utill__inbody-add button {
+  width: -webkit-fill-available;
+}
+
 .inbodies__chart--wrap {
   background-color: #224;
   padding: 30px;
