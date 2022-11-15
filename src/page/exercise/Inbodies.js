@@ -645,7 +645,7 @@ class Inbodies extends Component {
         {/*.header */}
         <Container>
           <Row className='inbodies__utill'>
-            <Col xs={3}>
+            <Col xs={12} md={3}>
               <div className='customer_name'>
                 {this.props.userinfo.loginWhether === 2 ? (
                   <TextField
@@ -678,17 +678,17 @@ class Inbodies extends Component {
                 )}
               </div>
             </Col>
-            <Col xs={5}>
+            <Col xs={12} md={5}>
               <h5>
                 {this.state.client_name !== '회원 검색'
                   ? '님의 인바디 정보입니다.'
                   : '회원을 선택해주세요.'}
               </h5>
             </Col>
-            <Col xs={12} md={2} className='inbodies__utill__change'>
+            <Col xs={6} md={2} className='inbodies__utill__change'>
               <Button onClick={this.clickOpen}>인바디 변화 보기</Button>
             </Col>
-            <Col xs={12} md={2} className='inbodies__utill__inbody-add'>
+            <Col xs={6} md={2} className='inbodies__utill__inbody-add'>
               <Link
                 to={{
                   pathname: '/inbodiesAdd',

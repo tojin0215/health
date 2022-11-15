@@ -41,6 +41,15 @@
 }
 
 @media screen and (max-width: 767px) {
+  /* 인바디 테이블 상단 메뉴 */
+  .inbodies__utill {
+    padding-bottom: 20px;
+  }
+
+  .inbodies__utill h5 {
+    text-align: center;
+  }
+
   .inbodies__chart--wrap {
     padding: 0;
   }
@@ -50,7 +59,6 @@
   .inbodies .inbodies__user__information--mobile {
     display: flex;
     background-color: #fff;
-    height: 5rem;
     color: #000;
     padding: 12px;
     border-radius: 10px;
