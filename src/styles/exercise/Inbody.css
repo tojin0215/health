@@ -67,7 +67,88 @@
   .inbodies .inbodies__table--mobile {
     display: none;
   }
-  .inbodies .tab-content .MuiTable-root .MuiTableCell-root {
-    padding: 4px;
+  /* 모바일 블럭형 테이블 */
+
+  .inbodies .table--block thead {
+    display: none;
+  }
+  .inbodies .table--block tr {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .inbodies .table--block th,
+  .inbodies .table--block td {
+    display: block;
+    position: relative;
+    padding: 10px;
+    padding-left: 35%;
+    border-width: 0 0 1px 0;
+    min-height: 40px;
+  }
+  .inbodies .table--block td:before {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30%;
+    padding: 10px;
+    background: #fff;
+    font-weight: 700;
+    border-right: 1px solid #ccc;
+    text-align: center;
+  }
+  /* 모바일 블럭형 테이블 - 체성분 테이블*/
+  .inbodies__table--body-composition .table--block td:nth-child(1):before {
+    content: '측정일';
+  }
+  .inbodies__table--body-composition .table--block td:nth-child(2):before {
+    content: '체수분';
+  }
+  .inbodies__table--body-composition .table--block td:nth-child(3):before {
+    content: '단백질';
+  }
+  .inbodies__table--body-composition .table--block td:nth-child(4):before {
+    content: '무기질';
+  }
+  /* 모바일 블럭형 테이블 - 체성분 상세 테이블 */
+  .inbodies__table--body-composition-detail
+    .table--block
+    td:nth-child(1):before {
+    content: '측정일';
+  }
+  .inbodies__table--body-composition-detail
+    .table--block
+    td:nth-child(2):before {
+    content: '체지방';
+  }
+  .inbodies__table--body-composition-detail
+    .table--block
+    td:nth-child(3):before {
+    content: '근육량';
+  }
+  .inbodies__table--body-composition-detail
+    .table--block
+    td:nth-child(4):before {
+    content: '체지방량1';
+  }
+  /* 모바일 블럭형 테이블 - 골격근, 지방 테이블 */
+  .inbodies__table--skeletal-muscle .table--block td:nth-child(1):before {
+    content: '측정일';
+  }
+  .inbodies__table--skeletal-muscle .table--block td:nth-child(2):before {
+    content: '골격근량';
+  }
+  .inbodies__table--skeletal-muscle .table--block td:nth-child(3):before {
+    content: '체지방량2';
+  }
+  /* 모바일 블럭형 테이블 - 비만 테이블 */
+  .inbodies__table--obesity .table--block td:nth-child(1):before {
+    content: '측정일';
+  }
+  .inbodies__table--obesity .table--block td:nth-child(2):before {
+    content: 'BMI';
+  }
+  .inbodies__table--obesity .table--block td:nth-child(3):before {
+    content: '체지방률';
   }
 }

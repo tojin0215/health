@@ -16,6 +16,8 @@ import {
 import moment from 'moment';
 import { SERVER_URL } from '../../const/settings';
 
+// 미디어쿼리
+import { Mobile, PC } from '../../component/common/MediaQuery';
 // react-bootstrap
 import { Row, Col, Container, Tabs, Tab, Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
@@ -58,12 +60,14 @@ const InbodiesView = ({
   return (
     <TableRow>
       <TableCell>{date}</TableCell>
-      <TableCell className='inbodies__table--mobile'>
-        <b>{height}</b> cm
-      </TableCell>
-      <TableCell className='inbodies__table--mobile'>
-        <b>{weight}</b> kg
-      </TableCell>
+      <PC>
+        <TableCell>
+          <b>{height}</b> cm
+        </TableCell>
+        <TableCell>
+          <b>{weight}</b> kg
+        </TableCell>
+      </PC>
       <TableCell>
         <b>{bodyMoisture}</b> kg
       </TableCell>
@@ -99,21 +103,23 @@ const InbodiesView2 = ({
   return (
     <TableRow>
       <TableCell>{date}</TableCell>
-      <TableCell className='inbodies__table--mobile'>
-        <b>{height}</b> cm
-      </TableCell>
-      <TableCell className='inbodies__table--mobile'>
-        <b>{weight}</b> kg
-      </TableCell>
-      <TableCell className='inbodies__table--mobile'>
-        <b>{bodyMoisture}</b> kg
-      </TableCell>
-      <TableCell className='inbodies__table--mobile'>
-        <b>{protein}</b> kg
-      </TableCell>
-      <TableCell className='inbodies__table--mobile'>
-        <b>{mineral}</b> kg
-      </TableCell>
+      <PC>
+        <TableCell>
+          <b>{height}</b> cm
+        </TableCell>
+        <TableCell>
+          <b>{weight}</b> kg
+        </TableCell>
+        <TableCell>
+          <b>{bodyMoisture}</b> kg
+        </TableCell>
+        <TableCell>
+          <b>{protein}</b> kg
+        </TableCell>
+        <TableCell>
+          <b>{mineral}</b> kg
+        </TableCell>
+      </PC>
       <TableCell>
         <b>{bodyFat}</b> kg
       </TableCell>
@@ -149,12 +155,14 @@ const InbodiesView3 = ({
   return (
     <TableRow>
       <TableCell>{date}</TableCell>
-      <TableCell className='inbodies__table--mobile'>
-        <b>{height}</b> cm
-      </TableCell>
-      <TableCell className='inbodies__table--mobile'>
-        <b>{weight}</b> kg
-      </TableCell>
+      <PC>
+        <TableCell>
+          <b>{height}</b> cm
+        </TableCell>
+        <TableCell>
+          <b>{weight}</b> kg
+        </TableCell>
+      </PC>
       <TableCell>
         <b>{skeletalMuscleMass}</b> kg
       </TableCell>
@@ -187,12 +195,14 @@ const InbodiesView4 = ({
   return (
     <TableRow>
       <TableCell>{date}</TableCell>
-      <TableCell className='inbodies__table--mobile'>
-        <b>{height}</b> cm
-      </TableCell>
-      <TableCell className='inbodies__table--mobile'>
-        <b>{weight}</b> kg
-      </TableCell>
+      <PC>
+        <TableCell>
+          <b>{height}</b> cm
+        </TableCell>
+        <TableCell>
+          <b>{weight}</b> kg
+        </TableCell>
+      </PC>
       <TableCell>
         <b>{BMI}</b> %
       </TableCell>
@@ -719,19 +729,24 @@ class Inbodies extends Component {
               />
             </div>
           ) : null}
-          <Row className='inbodies__user__information--mobile'>
-            <Col>
-              <h5>키</h5>
-              <p>{this.state.height}cm</p>
-            </Col>
-            <Col>
-              <h5>체중</h5>
-              <p>{this.state.weight}kg</p>
-            </Col>
-          </Row>
+          <Mobile>
+            <Row className='inbodies__user__information--mobile'>
+              <Col>
+                <h5>키</h5>
+                <p>{this.state.height}cm</p>
+              </Col>
+              <Col>
+                <h5>체중</h5>
+                <p>{this.state.weight}kg</p>
+              </Col>
+            </Row>
+          </Mobile>
           <Tabs defaultActiveKey='home' id='uncontrolled-tab-example'>
             <Tab eventKey='home' title='체성분'>
-              <TableContainer component={Paper}>
+              <TableContainer
+                component={Paper}
+                className='inbodies__table--body-composition'
+              >
                 <Table
                   className='table--block table-dark'
                   aria-label='simple table'
@@ -740,12 +755,10 @@ class Inbodies extends Component {
                   <TableHead>
                     <TableRow>
                       <TableCell>측정일</TableCell>
-                      <TableCell className='inbodies__table--mobile'>
-                        키
-                      </TableCell>
-                      <TableCell className='inbodies__table--mobile'>
-                        체중
-                      </TableCell>
+                      <PC>
+                        <TableCell>키</TableCell>
+                        <TableCell>체중</TableCell>
+                      </PC>
                       <TableCell>체수분</TableCell>
                       <TableCell>단백질</TableCell>
                       <TableCell>무기질</TableCell>
@@ -764,7 +777,10 @@ class Inbodies extends Component {
               </TableContainer>
             </Tab>
             <Tab eventKey='home2' title='체성분 상세'>
-              <TableContainer component={Paper}>
+              <TableContainer
+                component={Paper}
+                className='inbodies__table--body-composition-detail'
+              >
                 <Table
                   className='table--block table-dark'
                   aria-label='simple table'
@@ -773,21 +789,13 @@ class Inbodies extends Component {
                   <TableHead>
                     <TableRow>
                       <TableCell>측정일</TableCell>
-                      <TableCell className='inbodies__table--mobile'>
-                        키
-                      </TableCell>
-                      <TableCell className='inbodies__table--mobile'>
-                        체중
-                      </TableCell>
-                      <TableCell className='inbodies__table--mobile'>
-                        체수분
-                      </TableCell>
-                      <TableCell className='inbodies__table--mobile'>
-                        단백질
-                      </TableCell>
-                      <TableCell className='inbodies__table--mobile'>
-                        무기질
-                      </TableCell>
+                      <PC>
+                        <TableCell>키</TableCell>
+                        <TableCell>체중</TableCell>
+                        <TableCell>체수분</TableCell>
+                        <TableCell>단백질</TableCell>
+                        <TableCell>무기질</TableCell>
+                      </PC>
                       <TableCell>체지방</TableCell>
                       <TableCell>근육량</TableCell>
                       <TableCell>체지방량1</TableCell>
@@ -806,7 +814,10 @@ class Inbodies extends Component {
               </TableContainer>
             </Tab>
             <Tab eventKey='home3' title='골격근, 지방'>
-              <TableContainer component={Paper}>
+              <TableContainer
+                component={Paper}
+                className='inbodies__table--skeletal-muscle'
+              >
                 <Table
                   className='table--block table-dark'
                   aria-label='simple table'
@@ -815,12 +826,10 @@ class Inbodies extends Component {
                   <TableHead>
                     <TableRow>
                       <TableCell>측정일</TableCell>
-                      <TableCell className='inbodies__table--mobile'>
-                        키
-                      </TableCell>
-                      <TableCell className='inbodies__table--mobile'>
-                        체중
-                      </TableCell>
+                      <PC>
+                        <TableCell>키</TableCell>
+                        <TableCell>체중</TableCell>
+                      </PC>
                       <TableCell>골격근량</TableCell>
                       <TableCell>체지방량2</TableCell>
                     </TableRow>
@@ -838,7 +847,10 @@ class Inbodies extends Component {
               </TableContainer>
             </Tab>
             <Tab eventKey='home4' title='비만'>
-              <TableContainer component={Paper}>
+              <TableContainer
+                component={Paper}
+                className='inbodies__table--obesity'
+              >
                 <Table
                   className='table--block table-dark'
                   aria-label='simple table'
@@ -847,12 +859,10 @@ class Inbodies extends Component {
                   <TableHead>
                     <TableRow>
                       <TableCell>측정일</TableCell>
-                      <TableCell className='inbodies__table--mobile'>
-                        키
-                      </TableCell>
-                      <TableCell className='inbodies__table--mobile'>
-                        체중
-                      </TableCell>
+                      <PC>
+                        <TableCell>키</TableCell>
+                        <TableCell>체중</TableCell>
+                      </PC>
                       <TableCell>BMI</TableCell>
                       <TableCell>체지방률</TableCell>
                     </TableRow>
