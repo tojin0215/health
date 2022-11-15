@@ -20,6 +20,7 @@ import { SERVER_URL } from '../../const/settings';
 import { Row, Col, Container, Tabs, Tab, Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 // mui
+import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
@@ -728,133 +729,145 @@ class Inbodies extends Component {
               <p>{this.state.weight}kg</p>
             </Col>
           </Row>
-          <Tabs
-            defaultActiveKey='home'
-            id='uncontrolled-tab-example'
-            className='mb-3'
-          >
+          <Tabs defaultActiveKey='home' id='uncontrolled-tab-example'>
             <Tab eventKey='home' title='체성분'>
-              {this.state.inbodiesList.length == 0 ? (
-                <div className='p-3 fs-5 fw-bold text-center text-dark'>
-                  <TbMoodSuprised className='fs-3' />
-                  <p>등록된 인바디 정보가 없습니다.</p>
-                </div>
-              ) : (
-                <TableContainer>
-                  <Table>
-                    {/* 체성분  */}
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>측정일</TableCell>
-                        <TableCell className='inbodies__table--mobile'>
-                          키
-                        </TableCell>
-                        <TableCell className='inbodies__table--mobile'>
-                          체중
-                        </TableCell>
-                        <TableCell>체수분</TableCell>
-                        <TableCell>단백질</TableCell>
-                        <TableCell>무기질</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>{this.state.inbodiesList}</TableBody>
-                  </Table>
-                </TableContainer>
-              )}
+              <TableContainer component={Paper}>
+                <Table
+                  className='table--block table-dark'
+                  aria-label='simple table'
+                >
+                  {/* 체성분  */}
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>측정일</TableCell>
+                      <TableCell className='inbodies__table--mobile'>
+                        키
+                      </TableCell>
+                      <TableCell className='inbodies__table--mobile'>
+                        체중
+                      </TableCell>
+                      <TableCell>체수분</TableCell>
+                      <TableCell>단백질</TableCell>
+                      <TableCell>무기질</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{this.state.inbodiesList}</TableBody>
+                </Table>
+                {this.state.inbodiesList.length == 0 ? (
+                  <div className='table-empty-ment'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>등록된 인바디 정보가 없습니다.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
+              </TableContainer>
             </Tab>
             <Tab eventKey='home2' title='체성분 상세'>
-              {this.state.inbodiesList.length == 0 ? (
-                <div className='p-3 fs-5 fw-bold text-center text-dark'>
-                  <TbMoodSuprised className='fs-3' />
-                  <p>등록된 인바디 정보가 없습니다.</p>
-                </div>
-              ) : (
-                <TableContainer>
-                  <Table>
-                    {/* 체성분 상세 */}
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>측정일</TableCell>
-                        <TableCell className='inbodies__table--mobile'>
-                          키
-                        </TableCell>
-                        <TableCell className='inbodies__table--mobile'>
-                          체중
-                        </TableCell>
-                        <TableCell className='inbodies__table--mobile'>
-                          체수분
-                        </TableCell>
-                        <TableCell className='inbodies__table--mobile'>
-                          단백질
-                        </TableCell>
-                        <TableCell className='inbodies__table--mobile'>
-                          무기질
-                        </TableCell>
-                        <TableCell>체지방</TableCell>
-                        <TableCell>근육량</TableCell>
-                        <TableCell>체지방량1</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>{this.state.inbodiesList2}</TableBody>
-                  </Table>
-                </TableContainer>
-              )}
+              <TableContainer component={Paper}>
+                <Table
+                  className='table--block table-dark'
+                  aria-label='simple table'
+                >
+                  {/* 체성분 상세 */}
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>측정일</TableCell>
+                      <TableCell className='inbodies__table--mobile'>
+                        키
+                      </TableCell>
+                      <TableCell className='inbodies__table--mobile'>
+                        체중
+                      </TableCell>
+                      <TableCell className='inbodies__table--mobile'>
+                        체수분
+                      </TableCell>
+                      <TableCell className='inbodies__table--mobile'>
+                        단백질
+                      </TableCell>
+                      <TableCell className='inbodies__table--mobile'>
+                        무기질
+                      </TableCell>
+                      <TableCell>체지방</TableCell>
+                      <TableCell>근육량</TableCell>
+                      <TableCell>체지방량1</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{this.state.inbodiesList2}</TableBody>
+                </Table>
+                {this.state.inbodiesList.length == 0 ? (
+                  <div className='table-empty-ment'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>등록된 인바디 정보가 없습니다.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
+              </TableContainer>
             </Tab>
             <Tab eventKey='home3' title='골격근, 지방'>
-              {this.state.inbodiesList.length == 0 ? (
-                <div className='p-3 fs-5 fw-bold text-center text-dark'>
-                  <TbMoodSuprised className='fs-3' />
-                  <p>등록된 인바디 정보가 없습니다.</p>
-                </div>
-              ) : (
-                <TableContainer>
-                  <Table>
-                    {/* 골격근, 지방 */}
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>측정일</TableCell>
-                        <TableCell className='inbodies__table--mobile'>
-                          키
-                        </TableCell>
-                        <TableCell className='inbodies__table--mobile'>
-                          체중
-                        </TableCell>
-                        <TableCell>골격근량</TableCell>
-                        <TableCell>체지방량2</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>{this.state.inbodiesList3}</TableBody>
-                  </Table>
-                </TableContainer>
-              )}
+              <TableContainer component={Paper}>
+                <Table
+                  className='table--block table-dark'
+                  aria-label='simple table'
+                >
+                  {/* 골격근, 지방 */}
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>측정일</TableCell>
+                      <TableCell className='inbodies__table--mobile'>
+                        키
+                      </TableCell>
+                      <TableCell className='inbodies__table--mobile'>
+                        체중
+                      </TableCell>
+                      <TableCell>골격근량</TableCell>
+                      <TableCell>체지방량2</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{this.state.inbodiesList3}</TableBody>
+                </Table>
+                {this.state.inbodiesList.length == 0 ? (
+                  <div className='table-empty-ment'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>등록된 인바디 정보가 없습니다.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
+              </TableContainer>
             </Tab>
             <Tab eventKey='home4' title='비만'>
-              {this.state.inbodiesList.length == 0 ? (
-                <div className='p-3 fs-5 fw-bold text-center text-dark'>
-                  <TbMoodSuprised className='fs-3' />
-                  <p>등록된 인바디 정보가 없습니다.</p>
-                </div>
-              ) : (
-                <TableContainer>
-                  <Table>
-                    {/* 비만 */}
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>측정일</TableCell>
-                        <TableCell className='inbodies__table--mobile'>
-                          키
-                        </TableCell>
-                        <TableCell className='inbodies__table--mobile'>
-                          체중
-                        </TableCell>
-                        <TableCell>BMI</TableCell>
-                        <TableCell>체지방률</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>{this.state.inbodiesList4}</TableBody>
-                  </Table>
-                </TableContainer>
-              )}
+              <TableContainer component={Paper}>
+                <Table
+                  className='table--block table-dark'
+                  aria-label='simple table'
+                >
+                  {/* 비만 */}
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>측정일</TableCell>
+                      <TableCell className='inbodies__table--mobile'>
+                        키
+                      </TableCell>
+                      <TableCell className='inbodies__table--mobile'>
+                        체중
+                      </TableCell>
+                      <TableCell>BMI</TableCell>
+                      <TableCell>체지방률</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{this.state.inbodiesList4}</TableBody>
+                </Table>
+                {this.state.inbodiesList.length == 0 ? (
+                  <div className='table-empty-ment'>
+                    <TbMoodSuprised className='fs-3' />
+                    <p>등록된 인바디 정보가 없습니다.</p>
+                  </div>
+                ) : (
+                  ''
+                )}
+              </TableContainer>
             </Tab>
           </Tabs>
         </Container>
