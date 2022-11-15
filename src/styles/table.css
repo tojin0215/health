@@ -180,8 +180,8 @@
     margin-bottom: 10px;
     border-top: none;
   }
-  .trainer_wrap .table--block th,
-  .trainer_wrap .table--block td {
+  .table--block th,
+  .table--block td {
     display: block;
     position: relative;
     padding: 10px;
@@ -230,19 +230,6 @@
   }
   .trainer_wrap .table--block .trainer_table_row td:nth-child(7):before {
     content: '';
-  }
-  /* sales */
-  .sales .table--block .sales_table_row td:nth-child(1):before {
-    content: '카드';
-  }
-  .sales .table--block .sales_table_row td:nth-child(2):before {
-    content: '현금';
-  }
-  .sales .table--block .sales_table_row td:nth-child(3):before {
-    content: '계좌이체';
-  }
-  .sales .table--block .sales_table_row td:nth-child(4):before {
-    content: '총금액';
   }
 
   /* user-search table--block */
