@@ -400,7 +400,7 @@ class GeneticAdd extends Component {
             </Row>
           </div>
           <div className='sectionGlass mt-1 p-4'>
-            <Row xs={3} className='dtc__lamp-explain'>
+            <Row xs={1} md={3} className='dtc__lamp-explain'>
               <Col>
                 <CircleIcon /> 위험 유전자 수
               </Col>
@@ -412,8 +412,8 @@ class GeneticAdd extends Component {
               </Col>
             </Row>
             <Row className='py-4'>
-              <Col xs={3}>
-                측정일
+              <Col xs={12} md={3}>
+                <h4 className='pb-2'>측정일</h4>
                 <DatePicker
                   selected={this.state.measurementDate}
                   onChange={this.handleDateChange}
