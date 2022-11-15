@@ -51,7 +51,8 @@
   }
 
   .inbodies__chart--wrap {
-    padding: 0;
+    padding: 10px;
+    border-radius: 12px;
   }
   .MuiTable-root .MuiTableCell-root {
     text-align: center;
