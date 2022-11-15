@@ -333,23 +333,25 @@ class Genetic extends Component {
             ) : (
               <div className='sectionGlass dtc-result'>
                 <Row className='dtc__label'>
-                  <Col xs={5} className='text-center dtc__label-date'>
-                    측정일
-                    <span>
-                      {moment(this.state.measurementDate).format(
-                        'YYYY년 MM월 DD일'
-                      )}
-                    </span>
+                  <Col xs={12} md={6}>
+                    <div className='text-center dtc__label-date'>
+                      측정일
+                      <span>
+                        {moment(this.state.measurementDate).format(
+                          'YYYY년 MM월 DD일'
+                        )}
+                      </span>
+                    </div>
                   </Col>
-                  <Col>
-                    <Row xs={3} className='dtc__lamp-explain'>
-                      <Col>
+                  <Col xs={12} md={6}>
+                    <Row className='dtc__lamp-explain'>
+                      <Col xs={12} md={4}>
                         <CircleIcon /> 위험 유전자 수
                       </Col>
-                      <Col>
+                      <Col xs={12} md={4}>
                         <CircleIcon /> 주의 유전자 수
                       </Col>
-                      <Col>
+                      <Col xs={12} md={4}>
                         <CircleIcon /> 양호 유전자 수
                       </Col>
                     </Row>
@@ -390,7 +392,9 @@ class Genetic extends Component {
                           src={process.env.PUBLIC_URL + '/assets/dtc-img1.png'}
                         />
                       </Col>
-                      <Col xs={12}>체질량 지수</Col>
+                      <Col xs={12}>
+                        <h5>체질량 지수</h5>
+                      </Col>
                       <Col>
                         <CircleIcon />
                         {this.state.bmi1}
@@ -412,7 +416,9 @@ class Genetic extends Component {
                           src={process.env.PUBLIC_URL + '/assets/dtc-img2.png'}
                         />
                       </Col>
-                      <Col xs={12}>콜레스테롤</Col>
+                      <Col xs={12}>
+                        <h5>콜레스테롤</h5>
+                      </Col>
                       <Col>
                         <CircleIcon />
                         {this.state.cholesterol1}
@@ -434,7 +440,9 @@ class Genetic extends Component {
                           src={process.env.PUBLIC_URL + '/assets/dtc-img3.png'}
                         />
                       </Col>
-                      <Col xs={12}>중성지방농도</Col>
+                      <Col xs={12}>
+                        <h5>중성지방농도</h5>
+                      </Col>
                       <Col>
                         <CircleIcon />
                         {this.state.triglyceride1}
@@ -456,7 +464,9 @@ class Genetic extends Component {
                           src={process.env.PUBLIC_URL + '/assets/dtc-img4.png'}
                         />
                       </Col>
-                      <Col xs={12}>혈압</Col>
+                      <Col xs={12}>
+                        <h5>혈압</h5>
+                      </Col>
                       <Col>
                         <CircleIcon />
                         {this.state.hypertension1}
@@ -478,7 +488,9 @@ class Genetic extends Component {
                           src={process.env.PUBLIC_URL + '/assets/dtc-img5.png'}
                         />
                       </Col>
-                      <Col xs={12}>혈당</Col>
+                      <Col xs={12}>
+                        <h5>혈당</h5>
+                      </Col>
                       <Col>
                         <CircleIcon />
                         {this.state.bloodsugar1}
@@ -500,7 +512,9 @@ class Genetic extends Component {
                           src={process.env.PUBLIC_URL + '/assets/dtc-img6.png'}
                         />
                       </Col>
-                      <Col xs={12}>색소침착</Col>
+                      <Col xs={12}>
+                        <h5>색소침착</h5>
+                      </Col>
                       <Col>
                         <CircleIcon />
                         {this.state.pigmentation1}
@@ -522,7 +536,9 @@ class Genetic extends Component {
                           src={process.env.PUBLIC_URL + '/assets/dtc-img7.png'}
                         />
                       </Col>
-                      <Col xs={12}>피부노화</Col>
+                      <Col xs={12}>
+                        <h5>피부노화</h5>
+                      </Col>
                       <Col>
                         <CircleIcon />
                         {this.state.skinfold1}
@@ -544,7 +560,9 @@ class Genetic extends Component {
                           src={process.env.PUBLIC_URL + '/assets/dtc-img8.png'}
                         />
                       </Col>
-                      <Col xs={12}>피부탄력</Col>
+                      <Col xs={12}>
+                        <h5>피부탄력</h5>
+                      </Col>
                       <Col>
                         <CircleIcon />
                         {this.state.dermis1}
@@ -566,7 +584,9 @@ class Genetic extends Component {
                           src={process.env.PUBLIC_URL + '/assets/dtc-img9.png'}
                         />
                       </Col>
-                      <Col xs={12}>모발굵기</Col>
+                      <Col xs={12}>
+                        <h5>모발굵기</h5>
+                      </Col>
                       <Col>
                         <CircleIcon />
                         {this.state.hairthick1}
@@ -588,7 +608,9 @@ class Genetic extends Component {
                           src={process.env.PUBLIC_URL + '/assets/dtc-img10.png'}
                         />
                       </Col>
-                      <Col xs={12}>탈모</Col>
+                      <Col xs={12}>
+                        <h5>탈모</h5>
+                      </Col>
                       <Col>
                         <CircleIcon />
                         {this.state.nohair1}
@@ -610,7 +632,9 @@ class Genetic extends Component {
                           src={process.env.PUBLIC_URL + '/assets/dtc-img11.png'}
                         />
                       </Col>
-                      <Col xs={12}>비타민C</Col>
+                      <Col xs={12}>
+                        <h5>비타민C</h5>
+                      </Col>
                       <Col>
                         <CircleIcon />
                         {this.state.vitaminc1}
@@ -632,7 +656,9 @@ class Genetic extends Component {
                           src={process.env.PUBLIC_URL + '/assets/dtc-img12.png'}
                         />
                       </Col>
-                      <Col xs={12}>카페인 대사</Col>
+                      <Col xs={12}>
+                        <h5>카페인 대사</h5>
+                      </Col>
                       <Col>
                         <CircleIcon />
                         {this.state.caffeine1}
