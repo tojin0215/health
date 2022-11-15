@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../../component/footer/Footer';
 import { insertIntroduce } from '../../api/user';
 
-import '../../styles/trainer/trainer.css';
+import '../../styles/introduce/introduce.css';
 // bootstrap
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';

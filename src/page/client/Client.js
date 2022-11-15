@@ -25,6 +25,8 @@ import MobNavigation from '../../component/navigation/MobNavigation';
 import Footer from '../../component/footer/Footer';
 import CustomerCalendarComponent from '../../component/customer/CustomerCalendarComponent';
 import Dropdown from 'react-dropdown';
+// 미디어쿼리
+import { Mobile, PC } from '../../component/common/MediaQuery';
 // moment
 import moment from 'moment';
 // Bootstrap
@@ -647,7 +649,7 @@ const ClientPhone = ({
               </div>
             </div>
           </Row>
-          <div className='border-top'>
+          <div className=''>
             <h4 className='py-3'>일정 캘린더</h4>
             <CustomerCalendarComponent customer_no={idc} />
           </div>
@@ -1260,7 +1262,7 @@ const ClientName = ({
               </div>
             </div>
           </Row>
-          <div className='border-top'>
+          <div className=''>
             <h4 className='py-3'>일정 캘린더</h4>
             <CustomerCalendarComponent customer_no={idc} />
           </div>
@@ -1714,78 +1716,144 @@ const ViewClientItem = ({
         </Modal.Header>
         <Modal.Body className='mw-100'>
           <Row className='mt-3 client__modal--information'>
-            <Col xs={2}>
+            <Col xs={4} lg={2}>
               <p className='mb-1'>이름</p>
             </Col>
             {showUpdate ? (
-              <Col xs={10}>
+              <Col xs={8} lg={10}>
                 <Form.Control
-                  className='w-50 mb-1'
+                  className='w-50 mb-2'
                   value={client_name_input}
                   onChange={updateChange1}
                 />
               </Col>
             ) : (
-              <Col xs={10}>{client_name}</Col>
+              <Col xs={8} lg={10}>
+                {client_name}
+              </Col>
             )}
-            <Col xs={2}>
+            <Col xs={4} lg={2}>
               <p className='mb-1'>생년월일</p>
             </Col>
-            <Col xs={10}>{birth}</Col>
-            <Col xs={2}>
+            <Col xs={8} lg={10}>
+              {birth}
+            </Col>
+            <Col xs={4} lg={2}>
               <p className='mb-1'>연락처</p>
             </Col>
             {showUpdate ? (
-              <Col xs={10}>
+              <Col xs={8} lg={10}>
                 <Form.Control
-                  className='w-50 mb-1'
+                  className='w-50 mb-2'
                   value={phone_input}
                   onChange={updateChange3}
                 />
               </Col>
             ) : (
-              <Col xs={10}>{phone}</Col>
+              <Col xs={8} lg={10}>
+                {phone}
+              </Col>
             )}
-            <Col xs={2}>
+            <Col xs={4} lg={2}>
               <p className='mb-1'>주소</p>
             </Col>
             {showUpdate ? (
-              <Col xs={10}>
+              <Col xs={8} lg={10}>
                 <Form.Control
-                  className='mb-1'
+                  className='mb-2'
                   value={address_input}
                   onChange={updateChange2}
                 />
               </Col>
             ) : (
-              <Col xs={10}>{address}</Col>
+              <Col xs={8} lg={10}>
+                {address}
+              </Col>
             )}
-            <Col xs={2} className='mb-3'>
+            <Col xs={4} lg={2} className='mb-3'>
               <p>메모</p>
             </Col>
             {/* 기능추가:메모로 변경해야함 */}
             {showUpdate ? (
-              <Col>
+              <Col xs={8} lg={10}>
                 <Form.Control
-                  className='mb-1'
+                  className='mb-2'
                   value={client_name_input}
                   onChange={updateChange1}
                 />
               </Col>
             ) : (
-              <Col xs={10}>{client_name}</Col>
+              <Col xs={8} lg={10}>
+                {client_name}
+              </Col>
             )}
-            <div className='client__modal--information-facility'>
-              <div className='d-flex justify-content'>
-                <strong className='me-4'>운동복</strong>
-                {showUpdate ? (
+            <PC>
+              <div className='client__modal--information-facility'>
+                <div className='d-flex justify-content'>
+                  <p className='me-4'>운동복</p>
+                  {showUpdate ? (
+                    <Form.Group>
+                      <Form.Check inline>
+                        <Form.Check.Label htmlFor='route1'>
+                          미사용
+                        </Form.Check.Label>
+                        <Form.Check.Input
+                          className='mt-3'
+                          type='radio'
+                          checked={wear_input === '미사용'}
+                          onChange={() => setWear_input('미사용')}
+                        />
+                      </Form.Check>
+                      <Form.Check inline>
+                        <Form.Check.Label htmlFor='route1'>
+                          사용
+                        </Form.Check.Label>
+                        <Form.Check.Input
+                          className='mt-3'
+                          type='radio'
+                          checked={wear_input === '사용'}
+                          onChange={() => setWear_input('사용')}
+                        />
+                      </Form.Check>
+                    </Form.Group>
+                  ) : (
+                    <p>{sportswear}</p>
+                  )}
+                </div>
+                <div className='d-flex justify-content'>
+                  <p className='me-3'>사물함번호</p>
+                  {showUpdate ? (
+                    <Col xs={2}>
+                      <Form.Control
+                        type='number'
+                        value={locker_input}
+                        onChange={updateChange4}
+                      />
+                    </Col>
+                  ) : (
+                    <p>{lockerNumber}</p>
+                  )}
+                </div>
+                <div className='d-flex justify-content'>
+                  <p className='me-3'>가입경로</p>
+                  <p>{join_route}</p>
+                </div>
+              </div>
+            </PC>
+            <Mobile>
+              <Col xs={4} lg={2} className='mb-2'>
+                <p>운동복</p>
+              </Col>
+              {/* 기능추가:메모로 변경해야함 */}
+              {showUpdate ? (
+                <Col xs={8} lg={10}>
                   <Form.Group>
                     <Form.Check inline>
                       <Form.Check.Label htmlFor='route1'>
                         미사용
                       </Form.Check.Label>
                       <Form.Check.Input
-                        className='mt-3'
+                        className='mb-2'
                         type='radio'
                         checked={wear_input === '미사용'}
                         onChange={() => setWear_input('미사용')}
@@ -1794,36 +1862,43 @@ const ViewClientItem = ({
                     <Form.Check inline>
                       <Form.Check.Label htmlFor='route1'>사용</Form.Check.Label>
                       <Form.Check.Input
-                        className='mt-3'
+                        className='mb-2'
                         type='radio'
                         checked={wear_input === '사용'}
                         onChange={() => setWear_input('사용')}
                       />
                     </Form.Check>
                   </Form.Group>
-                ) : (
-                  <p>{sportswear}</p>
-                )}
-              </div>
-              <div className='d-flex justify-content'>
-                <strong className='me-3'>사물함번호</strong>
-                {showUpdate ? (
-                  <Col xs={2}>
-                    <Form.Control
-                      type='number'
-                      value={locker_input}
-                      onChange={updateChange4}
-                    />
-                  </Col>
-                ) : (
-                  <p>{lockerNumber}</p>
-                )}
-              </div>
-              <div className='d-flex justify-content'>
-                <strong className='me-3'>가입경로</strong>
-                <p>{join_route}</p>
-              </div>
-            </div>
+                </Col>
+              ) : (
+                <Col xs={8} lg={10}>
+                  {sportswear}
+                </Col>
+              )}
+              <Col xs={4} lg={2} className='mb-2'>
+                <p>사물함번호</p>
+              </Col>
+              {/* 기능추가:메모로 변경해야함 */}
+              {showUpdate ? (
+                <Col xs={8} lg={10}>
+                  <Form.Control
+                    type='number'
+                    value={locker_input}
+                    onChange={updateChange4}
+                  />
+                </Col>
+              ) : (
+                <Col xs={8} lg={10}>
+                  {lockerNumber}
+                </Col>
+              )}
+              <Col xs={4} lg={2}>
+                <p className='mb-1'>가입경로</p>
+              </Col>
+              <Col xs={8} lg={10}>
+                {join_route}
+              </Col>
+            </Mobile>
             <div className='text-end text-danger mt-4'>
               {showUpdate ? (
                 loginWhether === 1 ? (
@@ -1878,8 +1953,8 @@ const ViewClientItem = ({
               </div>
             </div>
           </Row>
-          <div className='border-top'>
-            <h4 className='py-3'>일정 캘린더</h4>
+          <div className=''>
+            <h4 className='py-3'>일정ff 캘린더</h4>
             <CustomerCalendarComponent customer_no={idc} />
           </div>
         </Modal.Body>
@@ -2123,14 +2198,18 @@ class Client extends Component {
               <CustomerCalendarComponent customer_no={this.idc} />
             </div>
             <Row className='clientInfo'>
-              <Col xs={2}>
+              <Col xs={6} lg={2}>
                 <h5>이름</h5>
               </Col>
-              <Col xs={10}>김루피</Col>
-              <Col xs={2}>
+              <Col xs={6} lg={10}>
+                김루피
+              </Col>
+              <Col md={4} lg={2}>
                 <h5>생년월일</h5>
               </Col>
-              <Col xs={10}>20010101</Col>
+              <Col md={10} lg={10}>
+                20010101
+              </Col>
               <Col xs={2}>
                 <h5>연락처</h5>
               </Col>
