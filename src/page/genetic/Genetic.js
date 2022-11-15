@@ -29,6 +29,8 @@ class Genetic extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      client_name: '회원 검색',
+      manager_name: '',
       genetic: [],
       measurementDate: new Date(),
       bmi1: 0,
@@ -208,9 +210,14 @@ class Genetic extends Component {
     //   'measurementDate',
     //   moment(this.state.measurementDate).format('YYYY-MM-DD')
     // );
+    console.log('this.state.customer_name: ', this.state.customer_name);
+    console.log(
+      'this.props.userinfo.loginWhether',
+      this.props.userinfo.loginWhether
+    );
 
     return (
-      <div className='wrap inbodies'>
+      <div className='wrap dtc'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -235,415 +242,415 @@ class Genetic extends Component {
         </div>
         {/*.header */}
         <Container>
-          <Row className=''>
-            <Col md={6} className='text-center mb-2'>
-              {this.props.userinfo.loginWhether === 2 ? (
-                <TextField
-                  id='customer_name'
-                  label='선택된 회원'
-                  disabled
-                  variant='standard'
-                  className='boxmorpsm h-100 w-100 text-center pb-2 px-5'
-                  InputProps={{ disableUnderline: true }}
-                  value={this.props.userinfo.manager_name}
-                />
-              ) : this.state.open ? (
-                <div>
-                  <UserSearch
-                    open={this.state.open}
-                    setOpen={(o) => this.setState({ open: o })}
-                    fitness_no={this.props.userinfo.fitness_no}
-                    loginWhether={this.props.userinfo.loginWhether}
-                    joinNo={this.props.userinfo.joinNo}
-                    handleUser={this.handleUser}
-                  />
+          <div className='sectionGlass'>
+            <Row className='dtc-result-utill'>
+              <Col md={3}>
+                <div className='customer_name'>
+                  {this.props.userinfo.loginWhether === 2 ? (
+                    <TextField
+                      id='customer_name'
+                      disabled
+                      variant='standard'
+                      className='customer-input--search'
+                      InputProps={{ disableUnderline: true }}
+                      value={this.props.userinfo.manager_name}
+                    />
+                  ) : this.state.open ? (
+                    <UserSearch
+                      open={this.state.open}
+                      setOpen={(o) => this.setState({ open: o })}
+                      fitness_no={this.props.userinfo.fitness_no}
+                      loginWhether={this.props.userinfo.loginWhether}
+                      joinNo={this.props.userinfo.joinNo}
+                      handleUser={this.handleUser}
+                    />
+                  ) : (
+                    <TextField
+                      id='customer_name'
+                      disabled
+                      variant='standard'
+                      className='customer-input--search'
+                      InputProps={{ disableUnderline: true }}
+                      value={this.state.client_name}
+                      onClick={() => this.setState({ open: true })}
+                    />
+                  )}
                 </div>
+              </Col>
+              <Col md={6}>
+                <h5>
+                  {this.state.client_name !== '회원 검색'
+                    ? '님의 결제 등록입니다.'
+                    : '회원을 선택해주세요.'}
+                </h5>
+              </Col>
+              {this.state.idc === undefined ? (
+                ''
+              ) : this.state.genetic.length === 0 ? (
+                <Col md={3} className='mb-2 dtc-result-utill__modify'>
+                  <Link
+                    to={{
+                      pathname: '/geneticAdd',
+                      state: {
+                        idc:
+                          this.props.userinfo.loginWhether === 2
+                            ? this.props.userinfo.joinNo
+                            : this.state.idc,
+                      },
+                    }}
+                  >
+                    <Button variant='outline-primary'>DTC 입력</Button>
+                  </Link>
+                </Col>
               ) : (
-                <div>
-                  <TextField
-                    id='customer_name'
-                    label='회원 선택'
-                    disabled
-                    variant='standard'
-                    onClick={() => this.setState({ open: true })}
-                    className='boxmorpsm bg-white h-100 w-100 text-center pb-2 px-5'
-                    InputProps={{ disableUnderline: true }}
-                    value={this.state.client_name}
-                    style={{ cursor: 'pointer' }}
-                  />
-                </div>
+                <Col md={2} className='mb-2 dtc-result-utill__modify'>
+                  <Link
+                    to={{
+                      pathname: '/geneticAdd',
+                      state: {
+                        idc:
+                          this.props.userinfo.loginWhether === 2
+                            ? this.props.userinfo.joinNo
+                            : this.state.idc,
+                        well: 1,
+                      },
+                    }}
+                  >
+                    <Button variant='outline-primary'>DTC 수정하기</Button>
+                  </Link>
+                </Col>
               )}
-            </Col>
+            </Row>
             {this.state.idc === undefined ? (
               ''
             ) : this.state.genetic.length === 0 ? (
-              <Col md={2} className='mb-2'>
-                <Link
-                  to={{
-                    pathname: '/geneticAdd',
-                    state: {
-                      idc:
-                        this.props.userinfo.loginWhether === 2
-                          ? this.props.userinfo.joinNo
-                          : this.state.idc,
-                    },
-                  }}
-                >
-                  <Button className='w-100 h-100' variant='outline-primary'>
-                    DTC 입력
-                  </Button>
-                </Link>
-              </Col>
-            ) : (
-              <Col md={2} className='mb-2'>
-                <Link
-                  to={{
-                    pathname: '/geneticAdd',
-                    state: {
-                      idc:
-                        this.props.userinfo.loginWhether === 2
-                          ? this.props.userinfo.joinNo
-                          : this.state.idc,
-                      well: 1,
-                    },
-                  }}
-                >
-                  <Button className='w-100 h-100' variant='outline-primary'>
-                    DTC 수정하기
-                  </Button>
-                </Link>
-              </Col>
-            )}
-          </Row>
-          {this.state.idc === undefined ? (
-            ''
-          ) : this.state.genetic.length === 0 ? (
-            <div className='mt-4 sectionGlass'>
-              <div className='p-3 fs-5 fw-bold text-center'>
-                <TbMoodSuprised className='fs-3' />
-                <p>DTC 데이터가 없습니다.</p>
+              <div className='mt-4 sectionGlass'>
+                <div className='table-empty-ment'>
+                  <TbMoodSuprised className='fs-3' />
+                  <p>DTC 데이터가 없습니다.</p>
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className='sectionGlass'>
-              <Row className='dtc__label'>
-                <Col xs={5} className='text-center dtc__label-date'>
-                  측정일
-                  <span>
-                    {moment(this.state.measurementDate).format(
-                      'YYYY년 MM월 DD일'
-                    )}
-                  </span>
-                </Col>
-                <Col>
-                  <Row xs={3} className='dtc__lamp-explain'>
-                    <Col>
-                      <CircleIcon /> 위험 유전자 수
-                    </Col>
-                    <Col>
-                      <CircleIcon /> 주의 유전자 수
-                    </Col>
-                    <Col>
-                      <CircleIcon /> 양호 유전자 수
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <p>
-                    DTC Total Care 검사결과,
-                    <span className='dtc__risk-factor'>
-                      {this.state.bmi1 >= 1 ? '체질량지수, ' : ''}
-                      {this.state.cholesterol1 >= 1 ? '콜레스테롤, ' : ''}
-                      {this.state.triglyceride1 >= 1 ? '중성지방농도, ' : ''}
-                      {this.state.hypertension1 >= 1 ? '혈압, ' : ''}
-                      {this.state.bloodsugar1 >= 1 ? '혈당, ' : ''}
-                      {this.state.pigmentation1 >= 1 ? '색소침착, ' : ''}
-                      {this.state.skinfold1 >= 1 ? '피부노화, ' : ''}
-                      {this.state.dermis1 >= 1 ? '피부탄력, ' : ''}
-                      {this.state.hairthick1 >= 1 ? '모발굵기, ' : ''}
-                      {this.state.nohair1 >= 1 ? '탈모, ' : ''}
-                      {this.state.vitaminc1 >= 1 ? '비타민C, ' : ''}
-                      {this.state.caffeine1 >= 1 ? '카페인 대사' : ''}
+            ) : (
+              <div className='sectionGlass dtc-result'>
+                <Row className='dtc__label'>
+                  <Col xs={5} className='text-center dtc__label-date'>
+                    측정일
+                    <span>
+                      {moment(this.state.measurementDate).format(
+                        'YYYY년 MM월 DD일'
+                      )}
                     </span>
-                    항목에서 위험 유전자가 확인되었습니다.
-                  </p>
-                  <p>
-                    예측된 결과를 토대로 관련된 생활습관에 대한 관리가 필요하며
-                    의학적인 소견이 필요한 경우 의사 또는 전문가와 상담하시길
-                    권고 드립니다.
-                  </p>
-                </Col>
-              </Row>
-              <Row md={6} className='dtc__lamp-box'>
-                <Col>
-                  <Row xs={3} className='dtc__lamp'>
-                    <Col xs={12}>
-                      <Image
-                        src={process.env.PUBLIC_URL + '/assets/dtc-img1.png'}
-                      />
-                    </Col>
-                    <Col xs={12}>체질량 지수</Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.bmi1}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.bmi2}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.bmi3}
-                    </Col>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row xs={3} className='dtc__lamp'>
-                    <Col xs={12}>
-                      <Image
-                        src={process.env.PUBLIC_URL + '/assets/dtc-img2.png'}
-                      />
-                    </Col>
-                    <Col xs={12}>콜레스테롤</Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.cholesterol1}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.cholesterol2}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.cholesterol3}
-                    </Col>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row xs={3} className='dtc__lamp'>
-                    <Col xs={12}>
-                      <Image
-                        src={process.env.PUBLIC_URL + '/assets/dtc-img3.png'}
-                      />
-                    </Col>
-                    <Col xs={12}>중성지방농도</Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.triglyceride1}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.triglyceride2}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.triglyceride3}
-                    </Col>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row xs={3} className='dtc__lamp'>
-                    <Col xs={12}>
-                      <Image
-                        src={process.env.PUBLIC_URL + '/assets/dtc-img4.png'}
-                      />
-                    </Col>
-                    <Col xs={12}>혈압</Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.hypertension1}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.hypertension2}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.hypertension3}
-                    </Col>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row xs={3} className='dtc__lamp'>
-                    <Col xs={12}>
-                      <Image
-                        src={process.env.PUBLIC_URL + '/assets/dtc-img5.png'}
-                      />
-                    </Col>
-                    <Col xs={12}>혈당</Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.bloodsugar1}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.bloodsugar2}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.bloodsugar3}
-                    </Col>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row xs={3} className='dtc__lamp'>
-                    <Col xs={12}>
-                      <Image
-                        src={process.env.PUBLIC_URL + '/assets/dtc-img6.png'}
-                      />
-                    </Col>
-                    <Col xs={12}>색소침착</Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.pigmentation1}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.pigmentation2}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.pigmentation3}
-                    </Col>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row xs={3} className='dtc__lamp'>
-                    <Col xs={12}>
-                      <Image
-                        src={process.env.PUBLIC_URL + '/assets/dtc-img7.png'}
-                      />
-                    </Col>
-                    <Col xs={12}>피부노화</Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.skinfold1}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.skinfold2}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.skinfold3}
-                    </Col>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row xs={3} className='dtc__lamp'>
-                    <Col xs={12}>
-                      <Image
-                        src={process.env.PUBLIC_URL + '/assets/dtc-img8.png'}
-                      />
-                    </Col>
-                    <Col xs={12}>피부탄력</Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.dermis1}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.dermis2}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.dermis3}
-                    </Col>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row xs={3} className='dtc__lamp'>
-                    <Col xs={12}>
-                      <Image
-                        src={process.env.PUBLIC_URL + '/assets/dtc-img9.png'}
-                      />
-                    </Col>
-                    <Col xs={12}>모발굵기</Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.hairthick1}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.hairthick2}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.hairthick3}
-                    </Col>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row xs={3} className='dtc__lamp'>
-                    <Col xs={12}>
-                      <Image
-                        src={process.env.PUBLIC_URL + '/assets/dtc-img10.png'}
-                      />
-                    </Col>
-                    <Col xs={12}>탈모</Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.nohair1}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.nohair2}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.nohair3}
-                    </Col>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row xs={3} className='dtc__lamp'>
-                    <Col xs={12}>
-                      <Image
-                        src={process.env.PUBLIC_URL + '/assets/dtc-img11.png'}
-                      />
-                    </Col>
-                    <Col xs={12}>비타민C</Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.vitaminc1}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.vitaminc2}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.vitaminc3}
-                    </Col>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row xs={3} className='dtc__lamp'>
-                    <Col xs={12}>
-                      <Image
-                        src={process.env.PUBLIC_URL + '/assets/dtc-img12.png'}
-                      />
-                    </Col>
-                    <Col xs={12}>카페인 대사</Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.caffeine1}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.caffeine2}
-                    </Col>
-                    <Col>
-                      <CircleIcon />
-                      {this.state.caffeine3}
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-            </div>
-          )}
+                  </Col>
+                  <Col>
+                    <Row xs={3} className='dtc__lamp-explain'>
+                      <Col>
+                        <CircleIcon /> 위험 유전자 수
+                      </Col>
+                      <Col>
+                        <CircleIcon /> 주의 유전자 수
+                      </Col>
+                      <Col>
+                        <CircleIcon /> 양호 유전자 수
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <p>
+                      DTC Total Care 검사결과,
+                      <span className='dtc__risk-factor'>
+                        {this.state.bmi1 >= 1 ? '체질량지수, ' : ''}
+                        {this.state.cholesterol1 >= 1 ? '콜레스테롤, ' : ''}
+                        {this.state.triglyceride1 >= 1 ? '중성지방농도, ' : ''}
+                        {this.state.hypertension1 >= 1 ? '혈압, ' : ''}
+                        {this.state.bloodsugar1 >= 1 ? '혈당, ' : ''}
+                        {this.state.pigmentation1 >= 1 ? '색소침착, ' : ''}
+                        {this.state.skinfold1 >= 1 ? '피부노화, ' : ''}
+                        {this.state.dermis1 >= 1 ? '피부탄력, ' : ''}
+                        {this.state.hairthick1 >= 1 ? '모발굵기, ' : ''}
+                        {this.state.nohair1 >= 1 ? '탈모, ' : ''}
+                        {this.state.vitaminc1 >= 1 ? '비타민C, ' : ''}
+                        {this.state.caffeine1 >= 1 ? '카페인 대사' : ''}
+                      </span>
+                      항목에서 위험 유전자가 확인되었습니다.
+                    </p>
+                    <p>
+                      예측된 결과를 토대로 관련된 생활습관에 대한 관리가
+                      필요하며 의학적인 소견이 필요한 경우 의사 또는 전문가와
+                      상담하시길 권고 드립니다.
+                    </p>
+                  </Col>
+                </Row>
+                <Row md={6} className='dtc__lamp-box'>
+                  <Col>
+                    <Row xs={3} className='dtc__lamp'>
+                      <Col xs={12}>
+                        <Image
+                          src={process.env.PUBLIC_URL + '/assets/dtc-img1.png'}
+                        />
+                      </Col>
+                      <Col xs={12}>체질량 지수</Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.bmi1}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.bmi2}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.bmi3}
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row xs={3} className='dtc__lamp'>
+                      <Col xs={12}>
+                        <Image
+                          src={process.env.PUBLIC_URL + '/assets/dtc-img2.png'}
+                        />
+                      </Col>
+                      <Col xs={12}>콜레스테롤</Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.cholesterol1}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.cholesterol2}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.cholesterol3}
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row xs={3} className='dtc__lamp'>
+                      <Col xs={12}>
+                        <Image
+                          src={process.env.PUBLIC_URL + '/assets/dtc-img3.png'}
+                        />
+                      </Col>
+                      <Col xs={12}>중성지방농도</Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.triglyceride1}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.triglyceride2}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.triglyceride3}
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row xs={3} className='dtc__lamp'>
+                      <Col xs={12}>
+                        <Image
+                          src={process.env.PUBLIC_URL + '/assets/dtc-img4.png'}
+                        />
+                      </Col>
+                      <Col xs={12}>혈압</Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.hypertension1}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.hypertension2}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.hypertension3}
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row xs={3} className='dtc__lamp'>
+                      <Col xs={12}>
+                        <Image
+                          src={process.env.PUBLIC_URL + '/assets/dtc-img5.png'}
+                        />
+                      </Col>
+                      <Col xs={12}>혈당</Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.bloodsugar1}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.bloodsugar2}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.bloodsugar3}
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row xs={3} className='dtc__lamp'>
+                      <Col xs={12}>
+                        <Image
+                          src={process.env.PUBLIC_URL + '/assets/dtc-img6.png'}
+                        />
+                      </Col>
+                      <Col xs={12}>색소침착</Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.pigmentation1}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.pigmentation2}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.pigmentation3}
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row xs={3} className='dtc__lamp'>
+                      <Col xs={12}>
+                        <Image
+                          src={process.env.PUBLIC_URL + '/assets/dtc-img7.png'}
+                        />
+                      </Col>
+                      <Col xs={12}>피부노화</Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.skinfold1}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.skinfold2}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.skinfold3}
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row xs={3} className='dtc__lamp'>
+                      <Col xs={12}>
+                        <Image
+                          src={process.env.PUBLIC_URL + '/assets/dtc-img8.png'}
+                        />
+                      </Col>
+                      <Col xs={12}>피부탄력</Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.dermis1}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.dermis2}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.dermis3}
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row xs={3} className='dtc__lamp'>
+                      <Col xs={12}>
+                        <Image
+                          src={process.env.PUBLIC_URL + '/assets/dtc-img9.png'}
+                        />
+                      </Col>
+                      <Col xs={12}>모발굵기</Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.hairthick1}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.hairthick2}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.hairthick3}
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row xs={3} className='dtc__lamp'>
+                      <Col xs={12}>
+                        <Image
+                          src={process.env.PUBLIC_URL + '/assets/dtc-img10.png'}
+                        />
+                      </Col>
+                      <Col xs={12}>탈모</Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.nohair1}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.nohair2}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.nohair3}
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row xs={3} className='dtc__lamp'>
+                      <Col xs={12}>
+                        <Image
+                          src={process.env.PUBLIC_URL + '/assets/dtc-img11.png'}
+                        />
+                      </Col>
+                      <Col xs={12}>비타민C</Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.vitaminc1}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.vitaminc2}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.vitaminc3}
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row xs={3} className='dtc__lamp'>
+                      <Col xs={12}>
+                        <Image
+                          src={process.env.PUBLIC_URL + '/assets/dtc-img12.png'}
+                        />
+                      </Col>
+                      <Col xs={12}>카페인 대사</Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.caffeine1}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.caffeine2}
+                      </Col>
+                      <Col>
+                        <CircleIcon />
+                        {this.state.caffeine3}
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+              </div>
+            )}
+          </div>
         </Container>
       </div>
     );
