@@ -829,8 +829,8 @@ class Sales extends Component {
           {/*.localNavigation */}
         </div>
         {/*.header */}
-        <Container className='sales_wrap'>
-          <div className='d-flex justify-content-between'>
+        <Container className='sales'>
+          <div className='sales--header d-flex justify-content-between'>
             <h5>
               <strong>투진피트니스</strong>의 매출현황입니다.
             </h5>

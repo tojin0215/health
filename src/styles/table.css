@@ -232,16 +232,16 @@
     content: '';
   }
   /* sales */
-  .sales_wrap .table--block .sales_table_row td:nth-child(1):before {
+  .sales .table--block .sales_table_row td:nth-child(1):before {
     content: '카드';
   }
-  .sales_wrap .table--block .sales_table_row td:nth-child(2):before {
+  .sales .table--block .sales_table_row td:nth-child(2):before {
     content: '현금';
   }
-  .sales_wrap .table--block .sales_table_row td:nth-child(3):before {
+  .sales .table--block .sales_table_row td:nth-child(3):before {
     content: '계좌이체';
   }
-  .sales_wrap .table--block .sales_table_row td:nth-child(4):before {
+  .sales .table--block .sales_table_row td:nth-child(4):before {
     content: '총금액';
   }
 
