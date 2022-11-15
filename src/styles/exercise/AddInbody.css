@@ -2,16 +2,7 @@
   width: 100%;
 }
 
-.inbody-add--client-info > div {
-}
-
+/* 인바디 입력 - 회원 정보 */
 .inbody-add--client-info h5 {
   margin: 0;
-}
-
-.inbody-add--client-info p {
-}
-
-.inbody-add .react-datepicker__input-container input[type='text'] {
-  padding: inherit;
 }
