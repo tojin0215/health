@@ -200,4 +200,19 @@
   #customerClient .client__modal--information div {
     margin-bottom: 1rem;
   }
+
+  /* 모바일에서 이용권 전체보기 닫기 버튼 */
+  .voucher--btn-close {
+    text-align: end;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .voucher--btn-close button {
+    padding: 20px;
+  }
+  .voucher--btn-close button svg {
+    width: 34px;
+    height: auto;
+  }
 }
