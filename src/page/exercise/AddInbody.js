@@ -370,7 +370,7 @@ class AddInbody extends Component {
                 <Col xs={12}>
                   <h3>인바디 정보 입력</h3>
                 </Col>
-                <Col xs={6} md={3}>
+                <Col xs={8} md={3}>
                   <Form.Group>
                     <Form.Label>검사날짜</Form.Label>
                     <DatePicker
@@ -381,7 +381,7 @@ class AddInbody extends Component {
                     />
                   </Form.Group>
                 </Col>
-                <Col xs={6} md={3}>
+                <Col xs={4} md={3}>
                   <Form.Group>
                     <Form.Label>키</Form.Label>
                     <Form.Control
