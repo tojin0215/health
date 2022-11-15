@@ -715,12 +715,12 @@ class AddSales extends Component {
                     ) : (
                       <Col className='voucher-info'>
                         <Row>
-                          <Col xs={2}>
+                          <Col xs={4} md={2}>
                             <Form.Label htmlFor='paidMembership'>
                               이용권 횟수
                             </Form.Label>
                           </Col>
-                          <Col xs={3}>
+                          <Col xs={8} md={3}>
                             <Form.Control
                               value={this.state.paidMembership}
                               onChange={this.handleChange}
