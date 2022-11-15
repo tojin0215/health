@@ -319,7 +319,7 @@ class WorkoutAllotedList extends Component {
     // console.log(this.state.idc2);
     // console.log(this.state.line);
     return (
-      <div className='wrap'>
+      <div className='wrap workout-alloted-list'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -366,7 +366,10 @@ class WorkoutAllotedList extends Component {
             ) : (
               <Col className='mx-3'>
                 <h5>
-                  <Row xs='auto'>
+                  <Row
+                    xs='auto'
+                    className='workout-alloted-list__content--header'
+                  >
                     <Col xs={2} className='customer_name'>
                       {this.state.line === 3 ? (
                         <TextField
@@ -425,7 +428,7 @@ class WorkoutAllotedList extends Component {
                             maxDate={new Date()}
                           />
                         </Col>
-                        <Col>에 배정된 운동목록입니다.</Col>
+                        <Col>배정된 운동목록입니다.</Col>
                       </>
                     )}
                     {/* {moment(this.state.workoutA_date).format('YYYY년 MM월 DD일')} */}
@@ -434,7 +437,10 @@ class WorkoutAllotedList extends Component {
               </Col>
             )}
             <Col xs={12}>
-              <TableContainer component={Paper}>
+              <TableContainer
+                component={Paper}
+                className='stage-add--workout-selected-list'
+              >
                 <Table className='table--block table-light'>
                   <TableHead>
                     <TableRow>

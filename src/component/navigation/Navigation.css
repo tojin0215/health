@@ -34,7 +34,7 @@
   display: none; /* Chrome, Safari, Opera */
 }
 .Navigation:hover {
-  height: 12rem;
+  height: 13rem;
 }
 
 .Navigation > .navbar {

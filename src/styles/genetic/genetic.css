@@ -1,10 +1,13 @@
+.dtc .dtc-result {
+  background-color: #222;
+}
+
 .dtc__label {
 }
 .dtc__label-date {
-  padding: 16px;
   border: 1px solid;
-  border-radius: 15px;
-  margin: 0 10px 26px;
+  border-radius: 20px;
+  padding: 12px;
 }
 .dtc__label-date span {
   padding: 1rem;
@@ -20,16 +23,15 @@
 .dtc__lamp-explain {
   border: 1px solid #fff;
   padding: 12px;
-  border-radius: 26px;
-  margin: 4px;
+  border-radius: 20px;
 }
-.dtc__lamp-explain .col:nth-child(1) {
+.dtc__lamp-explain > div:nth-child(1) {
   color: coral;
 }
-.dtc__lamp-explain .col:nth-child(2) {
+.dtc__lamp-explain > div:nth-child(2) {
   color: gold;
 }
-.dtc__lamp-explain .col:nth-child(3) {
+.dtc__lamp-explain > div:nth-child(3) {
   color: lightgreen;
 }
 .dtc__lamp-box > .col {
@@ -51,7 +53,26 @@
   color: lightgreen;
   padding-left: calc(var(--bs-gutter-x) * 0.0002);
 }
+.dtc__lamp img {
+  border-radius: 50%;
+}
 
 .dtc-add input {
   width: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+  .dtc-result-utill .customer_name {
+    width: auto;
+  }
+  .dtc-result-utill {
+    text-align: center;
+  }
+  .dtc-result-utill__modify {
+    text-align: end;
+  }
+
+  .dtc__label-date {
+    margin-bottom: 6px;
+  }
 }

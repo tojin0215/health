@@ -1,4 +1,4 @@
-.workoutRoutine .col {
+.workoutRoutine > div > .row {
   background: #222;
   border: 1px solid #888;
   border-radius: 0.625rem;
@@ -8,6 +8,7 @@
 .custom {
   cursor: pointer;
   transition: all 0.4s;
+  margin-right: 1px;
 }
 .custom:hover {
   border-color: #e2ff33;
@@ -21,6 +22,7 @@
 .personal {
   cursor: pointer;
   transition: all 0.4s;
+  margin-left: 1px;
 }
 .personal:hover {
   border-color: #ff5a5a;
@@ -39,4 +41,26 @@
   align-items: center;
   font-size: 20px;
   background: #222222;
+}
+
+@media screen and (max-width: 767px) {
+  .workoutRoutine > div > .row {
+    margin-bottom: 10px;
+  }
+
+  .custom {
+    margin-right: calc(-0.5 * var(--bs-gutter-x));
+  }
+
+  .personal {
+    margin-left: calc(-0.5 * var(--bs-gutter-x));
+  }
+
+  .addWorkout h4 {
+    text-align: center;
+  }
+  .addWorkout p {
+    padding-top: 20px;
+    font-size: 15px;
+  }
 }

@@ -471,7 +471,7 @@ class WorkoutStage extends Component {
     // console.log('잘라', String(this.state.stage).slice(0, 1));
 
     return (
-      <div className='wrap workoutStage__wrap'>
+      <div className='wrap workoutStage__wrap workout-stage'>
         <div className='header'>
           <Header />
           <Navigation goLogin={this.goLogin} />
@@ -494,7 +494,7 @@ class WorkoutStage extends Component {
           <Button variant='secondary' className='mb-3' onClick={this.goWorkout}>
             돌아가기
           </Button>
-          <div className='clientSearch'>
+          <div className='client-search'>
             <h4>베이직 루틴 배정</h4>
             <div>
               {this.state.client_name == '회원 검색' ? (
@@ -594,8 +594,8 @@ class WorkoutStage extends Component {
               ''
             ) : (
               <Col xs={12} className='mt-2 workoutTabstage'>
-                <Row xs={6} className='workoutTabs text-center w-100'>
-                  <Col>
+                <Row className='workoutTabs text-center w-100'>
+                  <Col xs={4} md={2}>
                     <Button
                       type='radio'
                       className='btn-table'
@@ -605,7 +605,7 @@ class WorkoutStage extends Component {
                       상체
                     </Button>
                   </Col>
-                  <Col>
+                  <Col xs={4} md={2}>
                     <Button
                       type='radio'
                       className='btn-table'
@@ -615,7 +615,7 @@ class WorkoutStage extends Component {
                       하체
                     </Button>
                   </Col>
-                  <Col>
+                  <Col xs={4} md={2}>
                     <Button
                       type='radio'
                       className='btn-table'
@@ -625,7 +625,7 @@ class WorkoutStage extends Component {
                       전신
                     </Button>
                   </Col>
-                  <Col>
+                  <Col xs={4} md={2}>
                     <Button
                       type='radio'
                       className='btn-table'
@@ -635,7 +635,7 @@ class WorkoutStage extends Component {
                       코어
                     </Button>
                   </Col>
-                  <Col>
+                  <Col xs={4} md={2}>
                     <Button
                       type='radio'
                       className='btn-table'
@@ -645,7 +645,7 @@ class WorkoutStage extends Component {
                       유산소
                     </Button>
                   </Col>
-                  <Col>
+                  <Col xs={4} md={2}>
                     <Button
                       type='radio'
                       className='btn-table'
@@ -661,350 +661,355 @@ class WorkoutStage extends Component {
             {this.state.client_name == '회원 검색' ? (
               ''
             ) : (
-              <Col xs={12}>
+              <div className='selected-routine--step'>
                 {/* 선택된 부위에 따른 단계 선택 버튼 표시 */}
-                {this.state.nextStage1 ? (
-                  <Row xs={5} className='mt-3'>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(111)}
-                      >
-                        1 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(112)}
-                      >
-                        2 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(113)}
-                      >
-                        3 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(114)}
-                      >
-                        4 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(115)}
-                      >
-                        5 단계
-                      </Button>
-                    </Col>
-                  </Row>
-                ) : this.state.nextStage2 ? (
-                  <Row xs={5} className='mt-3'>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(211)}
-                      >
-                        1 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(212)}
-                      >
-                        2 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(213)}
-                      >
-                        3 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(214)}
-                      >
-                        4 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(215)}
-                      >
-                        5 단계
-                      </Button>
-                    </Col>
-                  </Row>
-                ) : this.state.nextStage3 ? (
-                  <Row xs={5} className='mt-3'>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(311)}
-                      >
-                        1 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(312)}
-                      >
-                        2 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(313)}
-                      >
-                        3 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(314)}
-                      >
-                        4 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(315)}
-                      >
-                        5 단계
-                      </Button>
-                    </Col>
-                  </Row>
-                ) : this.state.nextStage4 ? (
-                  <Row xs={5} className='mt-3'>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(411)}
-                      >
-                        1 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(412)}
-                      >
-                        2 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(413)}
-                      >
-                        3 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(414)}
-                      >
-                        4 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(415)}
-                      >
-                        5 단계
-                      </Button>
-                    </Col>
-                  </Row>
-                ) : this.state.nextStage5 ? (
-                  <Row xs={5} className='mt-3'>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(511)}
-                      >
-                        1 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(512)}
-                      >
-                        2 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(513)}
-                      >
-                        3 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(514)}
-                      >
-                        4 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(515)}
-                      >
-                        5 단계
-                      </Button>
-                    </Col>
-                  </Row>
-                ) : this.state.nextStage6 ? (
-                  <Row xs={5} className='mt-3'>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(611)}
-                      >
-                        1 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(612)}
-                      >
-                        2 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(613)}
-                      >
-                        3 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(614)}
-                      >
-                        4 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(615)}
-                      >
-                        5 단계
-                      </Button>
-                    </Col>
-                  </Row>
-                ) : (
-                  <Row xs={5} className='mt-3'>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(111)}
-                      >
-                        1 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(112)}
-                      >
-                        2 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(113)}
-                      >
-                        3 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(114)}
-                      >
-                        4 단계
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant='secondary'
-                        className='w-100'
-                        onClick={() => this.stageOnClick(115)}
-                      >
-                        5 단계
-                      </Button>
-                    </Col>
-                  </Row>
-                )}
-              </Col>
+                <Row xs={5} className='mt-3'>
+                  {this.state.nextStage1 ? (
+                    <>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(111)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(112)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(113)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(114)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(115)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </>
+                  ) : this.state.nextStage2 ? (
+                    <>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(211)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(212)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(213)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(214)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(215)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </>
+                  ) : this.state.nextStage3 ? (
+                    <>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(311)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(312)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(313)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(314)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(315)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </>
+                  ) : this.state.nextStage4 ? (
+                    <>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(411)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(412)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(413)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(414)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(415)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </>
+                  ) : this.state.nextStage5 ? (
+                    <>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(511)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(512)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(513)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(514)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(515)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </>
+                  ) : this.state.nextStage6 ? (
+                    <>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(611)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(612)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(613)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(614)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(615)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </>
+                  ) : (
+                    <>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(111)}
+                        >
+                          1 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(112)}
+                        >
+                          2 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(113)}
+                        >
+                          3 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(114)}
+                        >
+                          4 단계
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant='secondary'
+                          className='w-100'
+                          onClick={() => this.stageOnClick(115)}
+                        >
+                          5 단계
+                        </Button>
+                      </Col>
+                    </>
+                  )}
+                </Row>
+              </div>
             )}
             <Col xs={12} className='my-3'>
-              <TableContainer component={Paper}>
-                <Table className='table-light'>
+              <TableContainer
+                component={Paper}
+                className='stage-add--workout-selected-list'
+              >
+                <Table className='table--block table-light'>
                   <TableHead>
                     <TableRow>
                       <TableCell scope='col'>단계</TableCell>

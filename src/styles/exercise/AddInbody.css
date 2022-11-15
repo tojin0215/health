@@ -1,3 +1,8 @@
 .react-datepicker-wrapper {
   width: 100%;
 }
+
+/* 인바디 입력 - 회원 정보 */
+.inbody-add--client-info h5 {
+  margin: 0;
+}

@@ -1,3 +1,4 @@
+// 미사용 페이지 (참고용 페이지)
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 

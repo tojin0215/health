@@ -1394,7 +1394,7 @@ class Home extends Component {
         ) : (
           // 사업주
           <Container className='home-center'>
-            <ClassTimeTable />
+            <ClassTimeTable className='home--class-time-table' />
             <Row className='home-center__client-status'>
               <Col className='sectionGlass-manager' onClick={this.goClient}>
                 <Row>

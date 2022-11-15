@@ -97,7 +97,7 @@
 .add-client__form__route-text {
 }
 
-@media (max-width: 767px) {
+@media only screen and (max-width: 767px) {
   .client_wrap .table--block thead {
     display: none;
   }

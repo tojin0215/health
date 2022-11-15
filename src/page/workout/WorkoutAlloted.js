@@ -531,7 +531,7 @@ class WorkoutAlloted extends Component {
           <Button variant='secondary' className='mb-3' onClick={this.goWorkout}>
             돌아가기
           </Button>
-          <div className='clientSearch'>
+          <div className='client-search'>
             <h4>커스텀 루틴 배정</h4>
             <div>
               {this.state.client_name == '회원 검색' ? (
@@ -984,7 +984,7 @@ class WorkoutAlloted extends Component {
               </Col>
               <Col className='mt-2'>
                 <Row className='workoutTabs text-center'>
-                  <Col>
+                  <Col xs={4} md={2}>
                     <Button
                       className='btn-table'
                       variant='btn-table'
@@ -993,7 +993,7 @@ class WorkoutAlloted extends Component {
                       상체
                     </Button>
                   </Col>
-                  <Col>
+                  <Col xs={4} md={2}>
                     <Button
                       className='btn-table'
                       variant='btn-table'
@@ -1002,7 +1002,7 @@ class WorkoutAlloted extends Component {
                       하체
                     </Button>
                   </Col>
-                  <Col>
+                  <Col xs={4} md={2}>
                     <Button
                       className='btn-table'
                       variant='btn-table'
@@ -1011,7 +1011,7 @@ class WorkoutAlloted extends Component {
                       전신
                     </Button>
                   </Col>
-                  <Col>
+                  <Col xs={4} md={2}>
                     <Button
                       className='btn-table'
                       variant='btn-table'
@@ -1020,7 +1020,7 @@ class WorkoutAlloted extends Component {
                       코어
                     </Button>
                   </Col>
-                  <Col>
+                  <Col xs={4} md={2}>
                     <Button
                       className='btn-table'
                       variant='btn-table'
@@ -1029,7 +1029,7 @@ class WorkoutAlloted extends Component {
                       유산소
                     </Button>
                   </Col>
-                  <Col>
+                  <Col xs={4} md={2}>
                     <Button
                       className='btn-table'
                       variant='btn-table'
@@ -1039,7 +1039,10 @@ class WorkoutAlloted extends Component {
                     </Button>
                   </Col>
                 </Row>
-                <TableContainer component={Paper}>
+                <TableContainer
+                  component={Paper}
+                  className='stage-add--workout-exercise-list'
+                >
                   <Table className='table--block table-light'>
                     <TableHead>
                       <TableRow>
@@ -1113,8 +1116,11 @@ class WorkoutAlloted extends Component {
                     </strong>
                     에 배정된 운동 목록입니다
                   </h5>
-                  <TableContainer component={Paper}>
-                    <Table className='table-light'>
+                  <TableContainer
+                    component={Paper}
+                    className='stage-add--workout-exercise-list'
+                  >
+                    <Table className='table--block table-light'>
                       <TableHead>
                         <TableRow>
                           <TableCell scope='col'>부위</TableCell>

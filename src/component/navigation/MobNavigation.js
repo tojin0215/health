@@ -341,9 +341,6 @@ class MobNavigation extends Component {
                     <NavLink exact to='/workout'>
                       운동 배정
                     </NavLink>
-                    <NavLink exact to='/workoutAlloted'>
-                      개별 운동 배정
-                    </NavLink>
                     <br />
                     <Link
                       to={{
@@ -449,6 +446,14 @@ class MobNavigation extends Component {
                     <br />
                     <NavLink exact to='/client'>
                       이용권 등록
+                    </NavLink>
+                    <br />
+                    <NavLink exact to='/inbodies'>
+                      인바디 정보
+                    </NavLink>
+                    <br />
+                    <NavLink exact to='/genetic'>
+                      DTC
                     </NavLink>
                   </li>
                 ) : (
