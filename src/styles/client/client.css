@@ -189,6 +189,7 @@
     border-top: 0;
   }
   .rbc-calendar .rbc-toolbar .rbc-toolbar-label {
+    width: 100%;
     margin: 1rem 0;
   }
   .rbc-calendar .rbc-toolbar .rbc-btn-group {
@@ -199,6 +200,9 @@
   }
   #customerClient .client__modal--information div {
     margin-bottom: 1rem;
+  }
+  #customerClient .clientInfo {
+    align-items: center;
   }
 
   /* 모바일에서 이용권 전체보기 닫기 버튼 */

@@ -522,7 +522,7 @@ const ReservationClassItem = ({
               ></Form.Control>
             </Col>
           </Row>
-          <Row className='mt-3'>
+          <Row className='delete-user mt-3 '>
             <Col xs={12} className='text-danger text-end my-3'>
               <span className='m-2'>
                 삭제시 되돌릴 수 없습니다. 한번 더 확인해주세요.

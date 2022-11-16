@@ -147,7 +147,7 @@ export default function ClassTimeTable() {
             onClick={toggleDrawer(anchor, true)}
           >
             <CalendarMonthIcon />
-            시간표
+            <p>시간표</p>
           </Button>
           <SwipeableDrawer
             anchor={anchor}

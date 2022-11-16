@@ -308,10 +308,6 @@
 }
 
 @media screen and (max-width: 767px) {
-  .reservation .container {
-    padding-top: 0;
-  }
-
   .reservation__class {
     margin-top: 1rem;
   }
@@ -342,7 +338,7 @@
   }
   .reservation__class__select-date--header {
     white-space: nowrap;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
     align-self: center;
   }
@@ -373,10 +369,15 @@
     left: 0;
     top: 0;
     width: 25%;
-    padding: 4px;
-    background: #111;
+    height: 100%;
+    padding: 12px;
+    background: #ccc;
     text-align: center;
-    color: #fff;
+    border-right: 1px solid #ccc;
+    color: #111;
+  }
+  .css-1ptx2yq-MuiInputBase-root-MuiInput-root:before {
+    display: none;
   }
   .reservation__list .table--block td:nth-child(1):before {
     content: '이름';

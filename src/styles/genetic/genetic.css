@@ -75,4 +75,7 @@
   .dtc__label-date {
     margin-bottom: 6px;
   }
+  .dtc-result-utill__modify button {
+    width: 100%;
+  }
 }

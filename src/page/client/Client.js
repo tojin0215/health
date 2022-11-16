@@ -2204,42 +2204,68 @@ class Client extends Component {
               <CustomerCalendarComponent customer_no={this.idc} />
             </div>
             <Row className='clientInfo'>
-              <Col xs={6} lg={2}>
+              <Col xs={5} lg={2}>
                 <h5>이름</h5>
               </Col>
-              <Col xs={6} lg={10}>
+              <Col xs={7} lg={10}>
                 김루피
               </Col>
-              <Col md={4} lg={2}>
+              <Col xs={5} lg={2}>
                 <h5>생년월일</h5>
               </Col>
-              <Col md={10} lg={10}>
+              <Col xs={7} lg={10}>
                 20010101
               </Col>
-              <Col xs={2}>
+              <Col xs={5} lg={2}>
                 <h5>연락처</h5>
               </Col>
-              <Col xs={10}>010-0000-0000</Col>
-              <Col xs={2}>
+              <Col xs={7} lg={10}>
+                010-0000-0000
+              </Col>
+              <Col xs={5} lg={2}>
                 <h5>주소</h5>
               </Col>
-              <Col xs={10}>부산광역시 부산진구 서전로37번길 51</Col>
-              <Col>
-                <div className='d-flex justify-content-between'>
-                  <div className='d-flex justify-content-between'>
-                    <h5 className='me-4'>운동복</h5>
-                    <p>사용</p>
-                  </div>
-                  <div className='d-flex justify-content-between'>
-                    <h5 className='me-4'>사물함</h5>
-                    <p>10번</p>
-                  </div>
-                  <div className='d-flex justify-content-between'>
-                    <h5 className='me-4'>가입경로</h5>
-                    <p>블로그</p>
-                  </div>
-                </div>
+              <Col xs={7} lg={10}>
+                부산광역시 부산진구 서전로37번길 51
               </Col>
+              <PC>
+                <Col>
+                  <div className='d-flex justify-content-between'>
+                    <div className='d-flex justify-content-between'>
+                      <h5 className='me-4'>운동복</h5>
+                      <p>사용</p>
+                    </div>
+                    <div className='d-flex justify-content-between'>
+                      <h5 className='me-4'>사물함</h5>
+                      <p>10번</p>
+                    </div>
+                    <div className='d-flex justify-content-between'>
+                      <h5 className='me-4'>가입경로</h5>
+                      <p>블로그</p>
+                    </div>
+                  </div>
+                </Col>
+              </PC>
+              <Mobile>
+                <Col xs={5} lg={2}>
+                  <h5>운동복</h5>
+                </Col>
+                <Col xs={7} lg={10}>
+                  사용
+                </Col>
+                <Col xs={5} lg={2}>
+                  <h5>사물함</h5>
+                </Col>
+                <Col xs={7} lg={10}>
+                  10번
+                </Col>
+                <Col xs={5} lg={2}>
+                  <h5>가입경로</h5>
+                </Col>
+                <Col xs={7} lg={10}>
+                  블로그
+                </Col>
+              </Mobile>
             </Row>
             <Row>
               <div className='voucher'>
@@ -2253,35 +2279,64 @@ class Client extends Component {
                 </div>
               </div>
             </Row>
-
-            <Row>
-              <Col>
-                <div className='client-infomation__detail--membership'>
-                  <h4>필라테스</h4>
-                  <br />
-                  <p>이용권: 3/20</p>
-                  <p>이용권 결제일: 2023년 01월 15일</p>
-                </div>
-              </Col>
-              <Col>
-                <div className='client-infomation__detail--membership'>
-                  <h4>GX</h4>
-                  <p>기간권 : 123일권 [ D-118 ]</p>
-                  <p>기간권 결제일 : 2022년 08월 25일</p>
-                  <p>기간권 마감일 : 2023년 01월 15일</p>
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={6}>
-                <div className='client-infomation__detail--membership'>
-                  <h4>필라테스</h4>
-                  <br />
-                  <p>이용권: 3/20</p>
-                  <p>이용권 결제일: 2023년 01월 15일</p>
-                </div>
-              </Col>
-            </Row>
+            <PC>
+              <Row>
+                <Col>
+                  <div className='client-infomation__detail--membership'>
+                    <h4>필라테스</h4>
+                    <br />
+                    <p>이용권: 3/20</p>
+                    <p>이용권 결제일: 2023년 01월 15일</p>
+                  </div>
+                </Col>
+                <Col>
+                  <div className='client-infomation__detail--membership'>
+                    <h4>GX</h4>
+                    <p>기간권 : 123일권 [ D-118 ]</p>
+                    <p>기간권 결제일 : 2022년 08월 25일</p>
+                    <p>기간권 마감일 : 2023년 01월 15일</p>
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={6}>
+                  <div className='client-infomation__detail--membership'>
+                    <h4>필라테스</h4>
+                    <br />
+                    <p>이용권: 3/20</p>
+                    <p>이용권 결제일: 2023년 01월 15일</p>
+                  </div>
+                </Col>
+              </Row>
+            </PC>
+            <Mobile>
+              <Row>
+                <Col xs={12}>
+                  <div className='client-infomation__detail--membership'>
+                    <h4>필라테스</h4>
+                    <br />
+                    <p>이용권: 3/20</p>
+                    <p>이용권 결제일: 2023년 01월 15일</p>
+                  </div>
+                </Col>
+                <Col xs={12}>
+                  <div className='client-infomation__detail--membership'>
+                    <h4>GX</h4>
+                    <p>기간권 : 123일권 [ D-118 ]</p>
+                    <p>기간권 결제일 : 2022년 08월 25일</p>
+                    <p>기간권 마감일 : 2023년 01월 15일</p>
+                  </div>
+                </Col>
+                <Col xs={12}>
+                  <div className='client-infomation__detail--membership'>
+                    <h4>필라테스</h4>
+                    <br />
+                    <p>이용권: 3/20</p>
+                    <p>이용권 결제일: 2023년 01월 15일</p>
+                  </div>
+                </Col>
+              </Row>
+            </Mobile>
           </Container>
         ) : (
           <Container>
