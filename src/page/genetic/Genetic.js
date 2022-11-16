@@ -24,6 +24,7 @@ import '../../styles/genetic/genetic.css';
 // icons
 import { TbMoodSuprised } from 'react-icons/tb';
 import CircleIcon from '@mui/icons-material/Circle';
+import Footer from '../../component/footer/Footer';
 
 class Genetic extends Component {
   constructor(props) {
@@ -678,6 +679,7 @@ class Genetic extends Component {
             )}
           </div>
         </Container>
+        <Footer />
       </div>
     );
   }
