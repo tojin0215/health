@@ -138,6 +138,7 @@ input[type='number']::-webkit-inner-spin-button {
     flex-direction: column;
     align-items: center;
   }
+
   .pageTit > div {
     flex-wrap: wrap;
     justify-content: flex-end;
@@ -213,5 +214,9 @@ input[type='number']::-webkit-inner-spin-button {
     .table--block
     td:nth-child(8):before {
     content: '삭제';
+  }
+
+  .workout-alloted-list .customer_name {
+    width: 100%;
   }
 }

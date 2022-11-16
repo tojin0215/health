@@ -17,4 +17,12 @@ trainers-search .MuiPaper-elevation {
   .user-search #search {
     border: 1px solid #ccc;
   }
+  .user-search .user-search__select {
+    border: 0;
+  }
+  .user-search .table--block th,
+  .table--block td,
+  .table--block td {
+    padding: 0;
+  }
 }
