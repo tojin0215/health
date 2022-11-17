@@ -365,9 +365,19 @@ strong {
   .home-center__client-status .sectionGlass-manager:nth-child(2n) {
     margin-right: 0;
   }
-
+  .home .sectionGlass-manager {
+    padding: 20px;
+  }
+  .home-center > .sectionGlass-manager {
+    padding: 18px 0;
+  }
+  /* 매출 정보 */
+  .sales-statis .row {
+    padding: 14px 10px;
+  }
   .sales-statis:first-child {
     margin-right: 0;
+    padding-bottom: 6px;
   }
   .home-center__client-status .sectionGlass-manager {
     margin-right: 0;

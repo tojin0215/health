@@ -153,6 +153,29 @@ class Home extends Component {
           data: [3300, 2860, 3950, 4820, 3950, 4250, 3860, 4800],
         },
       ],
+      //모바일 매출 차트
+      moboptions: {
+        chart: {
+          id: 'sales-bar',
+        },
+        xaxis: {
+          categories: ['2022.09', '2022.10', '2022.11'],
+        },
+      },
+      mobseries: [
+        {
+          name: '현금',
+          data: [745, 850, 810],
+        },
+        {
+          name: '계좌이체',
+          data: [845, 950, 910],
+        },
+        {
+          name: '카드',
+          data: [4250, 3860, 4800],
+        },
+      ],
     };
     this.cusFetch();
     // console.log(`${MainVisual1}`);
@@ -1410,7 +1433,9 @@ class Home extends Component {
                 <Row>
                   <Col className='sectionGlass-manager-des'>
                     현재까지 등록된 모든 회원수는&nbsp;
-                    <br />
+                    <PC>
+                      <br />
+                    </PC>
                     1326명 입니다.
                   </Col>
                 </Row>
@@ -1430,7 +1455,9 @@ class Home extends Component {
                 <Row>
                   <Col className='sectionGlass-manager-des'>
                     회원권을 유지중인 회원은&nbsp;
-                    <br />
+                    <PC>
+                      <br />
+                    </PC>
                     364명 입니다.
                   </Col>
                 </Row>
@@ -1449,7 +1476,9 @@ class Home extends Component {
                 <Row>
                   <Col className='sectionGlass-manager-des'>
                     잔여 회원권 일정량 미만인 회원&nbsp;
-                    <br />
+                    <PC>
+                      <br />
+                    </PC>
                     48명 입니다.
                   </Col>
                 </Row>
@@ -1468,7 +1497,9 @@ class Home extends Component {
                 <Row>
                   <Col className='sectionGlass-manager-des'>
                     회원권이 이미 마감된 회원은&nbsp;
-                    <br />
+                    <PC>
+                      <br />
+                    </PC>
                     962명 입니다.
                   </Col>
                 </Row>
@@ -1477,37 +1508,48 @@ class Home extends Component {
             <Row className='sectionGlass-manager'>
               <Col xs={12} md={6} className='sales-statis'>
                 <Row onClick={this.goSales}>
-                  <Col xs={12} lg={7}>
+                  <Col xs={6} lg={7}>
                     <strong>당일 매출</strong>
                     <br />
                     2022년 07월 30일
                   </Col>
-                  <Col xs={12} lg={5} className='sales-total'>
+                  <Col xs={6} lg={5} className='sales-total'>
                     3,200,000원
                   </Col>
                 </Row>
               </Col>
               <Col xs={12} md={6} className='sales-statis'>
                 <Row onClick={this.goSales}>
-                  <Col xs={12} lg={7}>
+                  <Col xs={6} lg={7}>
                     <strong>당월 누적 매출</strong>
                     <br />
                     2022년 07월
                   </Col>
-                  <Col xs={12} lg={5} className='sales-total'>
+                  <Col xs={6} lg={5} className='sales-total'>
                     20,000,000원
                   </Col>
                 </Row>
               </Col>
               <Col xs={12}>
                 <div className='mixed-chart'>
-                  <Chart
-                    options={this.state.options}
-                    series={this.state.series}
-                    type='bar'
-                    width='100%'
-                    height='400px'
-                  />
+                  <PC>
+                    <Chart
+                      options={this.state.options}
+                      series={this.state.series}
+                      type='bar'
+                      width='100%'
+                      height='400px'
+                    />
+                  </PC>
+                  <Mobile>
+                    <Chart
+                      options={this.state.moboptions}
+                      series={this.state.mobseries}
+                      type='bar'
+                      width='100%'
+                      height='400px'
+                    />
+                  </Mobile>
                 </div>
               </Col>
             </Row>

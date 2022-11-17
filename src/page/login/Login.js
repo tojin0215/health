@@ -147,8 +147,8 @@ class Login extends Component {
                 <Card.Body>
                   <Card.Title>운동</Card.Title>
                   <Card.Text>
-                    • 센터의 전문가가 사용자와 상담하고 적합한 운동의 리스트를
-                    배정해 줄 수 있습니다.
+                    • 센터의 전문가가 사용자와 상담하고{' '}
+                    <b>적합한 운동의 리스트를 배정</b>해 줄 수 있습니다.
                   </Card.Text>
                   <Card.Text>• 운동 후 체크 서비스까지</Card.Text>
                 </Card.Body>
