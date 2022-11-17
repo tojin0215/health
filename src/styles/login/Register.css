@@ -3,9 +3,10 @@
   font-weight: bold;
 }
 .resigter_des {
-  background-color: #888;
-  padding: 10px 23px;
+  background-color: #666;
+  padding: 10px 16px;
   color: #fff;
+  border-radius: 4px;
 }
 
 .register__terms .form-check {
@@ -51,4 +52,27 @@
 .register__terms__guide {
   color: #aaa;
   font-weight: 400;
+}
+
+.modal-header {
+  margin-bottom: 16px;
+}
+
+.register__terms__modal-button {
+  text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .register .form-check-label {
+    flex-wrap: wrap;
+  }
+  .register .form-check-label > div {
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .register__terms__btn {
+    padding: 8px 10px;
+  }
 }

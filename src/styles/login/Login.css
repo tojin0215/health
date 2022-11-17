@@ -63,6 +63,9 @@
 .login__introduce .card-body {
   background-color: #333;
 }
+.login__introduce-card .card-text {
+  color: #ccc;
+}
 
 @media screen and (max-width: 767px) {
   .login_logo {
@@ -91,6 +94,7 @@
   .login__introduce__title--brand {
     align-self: normal;
     font-size: 40px;
+    color: #ebff2e;
   }
   .login__introduce-card .card-title {
     font-weight: 700;

@@ -135,6 +135,7 @@
 .card {
   background-color: rgba(83, 83, 83, 0.8);
   border: none;
+  margin-bottom: 12px;
 }
 
 .card-header {
@@ -213,5 +214,8 @@
   .user-search #search {
     width: 100%;
     padding: 10px;
+  }
+  .modal-content {
+    padding: 2rem 1rem;
   }
 }
