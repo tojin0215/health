@@ -10,6 +10,9 @@ import { textlogo } from '../../../src/img/logo-text.png';
 // MUI AppBar
 //test333
 
+// 아이콘
+import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
+
 // 부트스트랩
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -160,6 +163,11 @@ class MobNavigation extends Component {
               open={this.state.mobile}
               onClose={() => this.mobileClose()}
             >
+              <div className='class-time-table--btn-close'>
+                <Button variant='dark' onClick={() => this.mobileClose()}>
+                  <CancelRoundedIcon />
+                </Button>
+              </div>
               <ul className='mob-nav__drawer__menu'>
                 <h3 exact to='/mypage'>
                   {this.props.userinfo.manager_name}
@@ -254,6 +262,11 @@ class MobNavigation extends Component {
               open={this.state.mobile}
               onClose={() => this.mobileClose()}
             >
+              <div className='class-time-table--btn-close'>
+                <Button variant='dark' onClick={() => this.mobileClose()}>
+                  <CancelRoundedIcon />
+                </Button>
+              </div>
               <ul className='mob-nav__drawer__menu'>
                 <h3 exact to='/mypage'>
                   {this.props.userinfo.manager_name}
@@ -397,6 +410,11 @@ class MobNavigation extends Component {
               open={this.state.mobile}
               onClose={() => this.mobileClose()}
             >
+              <div className='class-time-table--btn-close'>
+                <Button variant='dark' onClick={() => this.mobileClose()}>
+                  <CancelRoundedIcon />
+                </Button>
+              </div>
               <ul className='mob-nav__drawer__menu'>
                 <h3 exact to='/mypage'>
                   {this.props.userinfo.manager_name}
