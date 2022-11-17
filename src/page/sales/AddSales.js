@@ -760,7 +760,7 @@ class AddSales extends Component {
                         </Form.Check.Label>
                       </Form.Check>
                     </Col>
-                    <Col xs={12} lg={2}>
+                    <Col xs={12} lg={10}>
                       <Form.Check inline>
                         <Form.Check.Input
                           type='radio'
