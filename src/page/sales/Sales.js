@@ -805,6 +805,7 @@ class Sales extends Component {
     // console.log(this.state.exerciseViewList);
     // console.log(this.state.card);
     // console.log(this.state.lets);
+    // console.log(data.salesDays);
     return (
       <div className='wrap sales'>
         <div className='header'>

@@ -113,7 +113,6 @@ const ReservationClassItem = ({
   const handleClose = () => {
     setShow(false);
   };
-  console.log('안녕');
   const handleShow = () => {
     setShow(true);
     console.log('show', show);
@@ -162,6 +161,7 @@ const ReservationClassItem = ({
 
   const hourArray = hour >= 10 ? hour : '0' + hour;
   const minuteArray = minute >= 10 ? minute : '0' + minute;
+
   return (
     <>
       <PC>
@@ -1719,7 +1719,11 @@ class Reservation extends Component {
     // console.log("reservation_choice_trainer", this.state.reservation_choice_trainer);
     // console.log('reservationClass_choice', this.state.reservationClass_choice);
     // console.log('daytoday 입니다', daytoday);
-
+    // console.log('this.state.reservationClass', this.state.reservationClass);
+    // console.log(
+    //   'this.state.reservationClass[0]',
+    //   this.state.reservationClass[0]
+    // );
     return (
       <div className='wrap reservation'>
         <header className='header'>
@@ -1976,7 +1980,21 @@ class Reservation extends Component {
                       <tr>
                         <td align='center' className='align-top'>
                           <div className='class-info'>
-                            {this.state.reservationClass.length === 0 ? (
+                            {this.state.reservationClass.filter(
+                              (value) =>
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrAfter(
+                                    moment().day(0 + this.state.dayIncreament),
+                                    'day'
+                                  ) &&
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrBefore(
+                                    moment().day(0 + this.state.dayIncreament),
+                                    'day'
+                                  )
+                            ).length === 0 ? (
                               <div className='py-2 my-1 text-secondary rounded'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>수업이 없습니다.</p>
@@ -2006,8 +2024,22 @@ class Reservation extends Component {
                         </td>
                         <td name='mon' align='center' className='align-top'>
                           <div className='class-info'>
-                            {this.state.reservationClass.length == 0 ? (
-                              <div className='py-2 my-1 text-secondary  rounded'>
+                            {this.state.reservationClass.filter(
+                              (value) =>
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrAfter(
+                                    moment().day(1 + this.state.dayIncreament),
+                                    'day'
+                                  ) &&
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrBefore(
+                                    moment().day(1 + this.state.dayIncreament),
+                                    'day'
+                                  )
+                            ).length == 0 ? (
+                              <div className='py-2 my-1 text-secondary rounded'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>수업이 없습니다.</p>
                               </div>
@@ -2036,7 +2068,21 @@ class Reservation extends Component {
                         </td>
                         <td name='tue' align='center' className='align-top'>
                           <div className='class-info'>
-                            {this.state.reservationClass.length == 0 ? (
+                            {this.state.reservationClass.filter(
+                              (value) =>
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrAfter(
+                                    moment().day(2 + this.state.dayIncreament),
+                                    'day'
+                                  ) &&
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrBefore(
+                                    moment().day(2 + this.state.dayIncreament),
+                                    'day'
+                                  )
+                            ).length == 0 ? (
                               <div className='py-2 my-1 text-secondary rounded'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>수업이 없습니다.</p>
@@ -2066,7 +2112,21 @@ class Reservation extends Component {
                         </td>
                         <td name='wed' align='center' className='align-top'>
                           <div className='class-info'>
-                            {this.state.reservationClass.length == 0 ? (
+                            {this.state.reservationClass.filter(
+                              (value) =>
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrAfter(
+                                    moment().day(3 + this.state.dayIncreament),
+                                    'day'
+                                  ) &&
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrBefore(
+                                    moment().day(3 + this.state.dayIncreament),
+                                    'day'
+                                  )
+                            ).length == 0 ? (
                               <div className='py-2 my-1 text-secondary rounded'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>수업이 없습니다.</p>
@@ -2096,7 +2156,21 @@ class Reservation extends Component {
                         </td>
                         <td name='thu' align='center' className='align-top'>
                           <div className='class-info'>
-                            {this.state.reservationClass.length == 0 ? (
+                            {this.state.reservationClass.filter(
+                              (value) =>
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrAfter(
+                                    moment().day(4 + this.state.dayIncreament),
+                                    'day'
+                                  ) &&
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrBefore(
+                                    moment().day(4 + this.state.dayIncreament),
+                                    'day'
+                                  )
+                            ).length == 0 ? (
                               <div className='py-2 my-1 text-secondary rounded'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>수업이 없습니다.</p>
@@ -2126,7 +2200,21 @@ class Reservation extends Component {
                         </td>
                         <td name='fri' align='center' className='align-top'>
                           <div className='class-info'>
-                            {this.state.reservationClass.length == 0 ? (
+                            {this.state.reservationClass.filter(
+                              (value) =>
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrAfter(
+                                    moment().day(5 + this.state.dayIncreament),
+                                    'day'
+                                  ) &&
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrBefore(
+                                    moment().day(5 + this.state.dayIncreament),
+                                    'day'
+                                  )
+                            ).length == 0 ? (
                               <div className='py-2 my-1 text-secondary rounded'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>수업이 없습니다.</p>
@@ -2156,7 +2244,21 @@ class Reservation extends Component {
                         </td>
                         <td name='sat' align='center' className='align-top'>
                           <div className='class-info'>
-                            {this.state.reservationClass.length == 0 ? (
+                            {this.state.reservationClass.filter(
+                              (value) =>
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrAfter(
+                                    moment().day(6 + this.state.dayIncreament),
+                                    'day'
+                                  ) &&
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrBefore(
+                                    moment().day(6 + this.state.dayIncreament),
+                                    'day'
+                                  )
+                            ).length == 0 ? (
                               <div className='py-2 my-1 text-secondary rounded'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>수업이 없습니다.</p>
@@ -2190,7 +2292,25 @@ class Reservation extends Component {
                       <tr>
                         <td name='thu' align='center' className='align-top'>
                           <div className='class-info'>
-                            {this.state.reservationClass.length == 0 ? (
+                            {this.state.reservationClass.filter(
+                              (value) =>
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrAfter(
+                                    moment().day(
+                                      daytoday - 1 + this.state.dayIncreament
+                                    ),
+                                    'day'
+                                  ) &&
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrBefore(
+                                    moment().day(
+                                      daytoday - 1 + this.state.dayIncreament
+                                    ),
+                                    'day'
+                                  )
+                            ).length == 0 ? (
                               <div className='py-2 my-1 text-secondary rounded'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>수업이 없습니다.</p>
@@ -2220,7 +2340,25 @@ class Reservation extends Component {
                         </td>
                         <td name='fri' align='center' className='align-top'>
                           <div className='class-info'>
-                            {this.state.reservationClass.length == 0 ? (
+                            {this.state.reservationClass.filter(
+                              (value) =>
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrAfter(
+                                    moment().day(
+                                      daytoday + this.state.dayIncreament
+                                    ),
+                                    'day'
+                                  ) &&
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrBefore(
+                                    moment().day(
+                                      daytoday + this.state.dayIncreament
+                                    ),
+                                    'day'
+                                  )
+                            ).length == 0 ? (
                               <div className='py-2 my-1 text-secondary rounded'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>수업이 없습니다.</p>
@@ -2250,7 +2388,25 @@ class Reservation extends Component {
                         </td>
                         <td name='sat' align='center' className='align-top'>
                           <div className='class-info'>
-                            {this.state.reservationClass.length == 0 ? (
+                            {this.state.reservationClass.filter(
+                              (value) =>
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrAfter(
+                                    moment().day(
+                                      daytoday + 1 + this.state.dayIncreament
+                                    ),
+                                    'day'
+                                  ) &&
+                                moment(value.props.class_date.split('T')[0])
+                                  .add(9, 'hour')
+                                  .isSameOrBefore(
+                                    moment().day(
+                                      daytoday + 1 + this.state.dayIncreament
+                                    ),
+                                    'day'
+                                  )
+                            ).length == 0 ? (
                               <div className='py-2 my-1 text-secondary rounded'>
                                 <TbMoodSuprised className='fs-3' />
                                 <p>수업이 없습니다.</p>
