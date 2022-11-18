@@ -35,7 +35,7 @@ class Navigation extends Component {
     // console.log(this.props.userinfo);
     return (
       //2:회원, 1:강사, else(0):헬스장
-      <div className='Navigation'>
+      <div className='Navigation' style={{ maxHeight: '4.4rem' }}>
         {userinfo.loginWhether === 2 ? (
           <Navbar>
             <Nav className='mr-auto dropdownNav navitem'>
