@@ -323,6 +323,7 @@ class Introduce extends Component {
 
   render() {
     // console.log(this.state.viewIntroduceList);
+
     return (
       <div className='wrap introduce'>
         <header className='header'>
@@ -359,11 +360,15 @@ class Introduce extends Component {
               <h3>센터명</h3>
             </Col>
             <Col>
-              <div className='text-end'>
-                <Link to='/introduceAdd'>
-                  <Button variant='outline-primary'>센터소개 등록</Button>
-                </Link>
-              </div>
+              {this.props.userinfo.loginWhether === 2 ? (
+                ''
+              ) : (
+                <div className='text-end'>
+                  <Link to='/introduceAdd'>
+                    <Button variant='outline-primary'>센터소개 등록</Button>
+                  </Link>
+                </div>
+              )}
             </Col>
           </Row>
           {this.state.viewIntroduceList.length === 0 ? (
