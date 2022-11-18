@@ -161,9 +161,9 @@
 
 /* 진행중인 수업 - 선택된 수업 - 콘솔 박스 */
 .reservation__class__console {
-  position: absolute;
-  top: 140px;
-  right: 0;
+  position: fixed;
+  left: 50%;
+  margin-left: 540px;
   max-width: 275px;
   height: 420px;
 }
@@ -305,6 +305,17 @@
 .filter svg {
   margin: 0 5px;
   color: #ebff2e;
+}
+@media screen and (max-width: 1580px) and (min-width: 768px) {
+  /* 진행중인 수업 - 선택된 수업 - 콘솔 박스 */
+  .reservation__class__console {
+    position: absolute;
+    top: 140px;
+    left: unset;
+    right: 0;
+    max-width: 275px;
+    height: 420px;
+  }
 }
 
 @media screen and (max-width: 767px) {
