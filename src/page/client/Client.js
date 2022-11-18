@@ -2205,7 +2205,7 @@ class Client extends Component {
             <div className='mb-4'>
               <CustomerCalendarComponent customer_no={this.idc} />
             </div>
-            <Row className='clientInfo'>
+            <Row className='client-info'>
               <Col xs={5} lg={2}>
                 <h5>이름</h5>
               </Col>
