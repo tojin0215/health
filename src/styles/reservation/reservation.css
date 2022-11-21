@@ -161,9 +161,9 @@
 
 /* 진행중인 수업 - 선택된 수업 - 콘솔 박스 */
 .reservation__class__console {
-  position: absolute;
-  top: 140px;
-  right: 0;
+  position: fixed;
+  left: 50%;
+  margin-left: 550px;
   max-width: 275px;
   height: 420px;
 }
