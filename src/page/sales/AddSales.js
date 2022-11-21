@@ -109,6 +109,7 @@ class AddSales extends Component {
       voucherType: '',
     };
     this.handleSalesDaysSelect = this.handleSalesDaysSelect.bind(this);
+    this.handleSalesDaysInput = this.handleSalesDaysInput.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -178,12 +179,21 @@ class AddSales extends Component {
   }
 
   handleStartDateChange(date) {
+    console.log('handleStartDateChange, date : ', date);
     this.setState({
       salesStart_date: date,
     });
   }
 
   handleSalesDaysSelect(e) {
+    console.log('handleSalesDaysSelect, e : ', e);
+    console.log('handleSalesDaysSelect, e.target.value : ', e.target.value);
+    this.setState({
+      salesDays: e.target.value,
+    });
+  }
+
+  handleSalesDaysInput(e) {
     this.setState({
       salesDays: e.target.value,
     });
@@ -337,14 +347,14 @@ class AddSales extends Component {
       salesDaysCheckbox: false,
     };
     obj[e.target.id] = e.target.checked;
-    console.log('handleCheckbox 의 obj입니다', obj);
+    // console.log('handleCheckbox 의 obj입니다', obj);
     this.setState({
       checkboxGroup: obj,
     });
-    console.log(
-      'handleCheckbox 의 checkboxGroup입니다',
-      this.state.checkboxGroup.paidMembershipCheckbox
-    );
+    // console.log(
+    //   'handleCheckbox 의 checkboxGroup입니다',
+    //   this.state.checkboxGroup.paidMembershipCheckbox
+    // );
     this.setState({
       salesDays: '',
       paidMembership: '',
@@ -371,14 +381,20 @@ class AddSales extends Component {
       health: false,
       etc: false,
     };
+
     obj[e.target.id] = e.target.checked;
+
     this.setState({
       exerciseGroup: obj,
     });
   };
+
   handleChange = (e) => {
+    console.log('handleChange, e : ', e);
+    console.log('handleChange, e.target.value : ', e.target.value);
     this.setState({ [e.target.id]: e.target.value });
   };
+
   handlePayRadio = (e) => {
     let obj = {
       card: false,
@@ -699,7 +715,7 @@ class AddSales extends Component {
                                     <Form.Control
                                       variant='outlined'
                                       value={this.state.salesDays}
-                                      onChange={this.handleChange}
+                                      onChange={this.handleSalesDaysInput}
                                       type='number'
                                       id='salesDays'
                                       placeholder='00(일)'
