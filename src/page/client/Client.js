@@ -2172,8 +2172,8 @@ class Client extends Component {
     // consolo.log('test');
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.viewClientList);
-    console.log('fitness_no : ', this.state.fitness_no);
-    console.log('this.idc : ', this.idc);
+    // console.log('fitness_no : ', this.state.fitness_no);
+    // console.log('this.idc : ', this.idc);
     return (
       <div className='wrap client_wrap'>
         <header className='header'>

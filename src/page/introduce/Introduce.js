@@ -93,7 +93,7 @@ const ViewIntroduceItem = ({
     <div className='sectionGlass introduce__article'>
       <div className='introduce__article--header d-flex justify-content-between'>
         <h4>{manager_name}</h4>
-        <p>2022-07-17</p>
+        {/* <p>2022-07-17</p> */}
         {/* 기능추가 : 센터명->제목으로 변경,작성일자 */}
       </div>
       <div className='introduce__article--img-box'>
