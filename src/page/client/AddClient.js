@@ -273,7 +273,7 @@ class AddClient extends Component {
           <Form>
             <Row className='sectionGlass'>
               <h3>회원 정보 입력</h3>
-              <Row className='mb-4'>
+              <Row>
                 <Col xs={12} lg={2}>
                   <h5>이름</h5>
                 </Col>
@@ -286,6 +286,8 @@ class AddClient extends Component {
                     onChange={this.handleChange}
                   ></Form.Control>
                 </Col>
+              </Row>
+              <Row>
                 <Col xs={12} lg={2}>
                   <h5>성별</h5>
                 </Col>
