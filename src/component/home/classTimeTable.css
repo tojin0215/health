@@ -89,6 +89,20 @@
 .class-time-table__box > button {
   margin-bottom: 60px;
 }
+/* 모바일에서 시간표 닫기 버튼 */
+.class-time-table--btn-close {
+  text-align: end;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.class-time-table--btn-close button {
+  padding: 20px;
+}
+.class-time-table--btn-close button svg {
+  width: 20px;
+  height: auto;
+}
 
 @media only screen and (max-width: 767px) {
   /* 홈에서 시간표 여는 버튼 */
@@ -103,19 +117,5 @@
   /* 모바일에서의 창 가로 길이 */
   .class-time-table__box {
     width: 100%;
-  }
-  /* 모바일에서 시간표 닫기 버튼 */
-  .class-time-table--btn-close {
-    text-align: end;
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .class-time-table--btn-close button {
-    padding: 20px;
-  }
-  .class-time-table--btn-close button svg {
-    width: 20px;
-    height: auto;
   }
 }

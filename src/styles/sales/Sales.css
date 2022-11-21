@@ -60,6 +60,10 @@
   .sales__search-requirement button {
     width: -webkit-fill-available;
   }
+  /* 매출 그래프 */
+  .mixed-chart {
+    padding: 0;
+  }
   /* 매출 모바일 블럭 테이블 */
   /* 매출 요약 테이블 */
   .sales .sales__summary-table .table--block td::before {

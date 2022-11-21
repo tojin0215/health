@@ -1,9 +1,9 @@
 .newmenuWrap {
-	display: none !important;
+  display: none !important;
 }
 
 @media only screen and (min-width: 1023px) {
-	.newmenuWrap {
-		display: none !important;
-	}
+  .newmenuWrap {
+    display: none !important;
+  }
 }

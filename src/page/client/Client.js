@@ -2172,6 +2172,8 @@ class Client extends Component {
     // consolo.log('test');
     // console.log(this.props.userinfo.fitness_no);
     // console.log(this.state.viewClientList);
+    console.log('fitness_no : ', this.state.fitness_no);
+    console.log('this.idc : ', this.idc);
     return (
       <div className='wrap client_wrap'>
         <header className='header'>
@@ -2203,7 +2205,7 @@ class Client extends Component {
             <div className='mb-4'>
               <CustomerCalendarComponent customer_no={this.idc} />
             </div>
-            <Row className='clientInfo'>
+            <Row className='client-info'>
               <Col xs={5} lg={2}>
                 <h5>이름</h5>
               </Col>

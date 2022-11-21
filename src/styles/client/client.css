@@ -11,10 +11,18 @@
 /* 회원정보상세 - customerClient */
 #customerClient {
 }
-#customerClient .clientInfo .col-10,
+#customerClient .client-info .col-10,
 .col-3,
-.clientInfo p {
+.client-info p {
   line-height: 2.8rem;
+}
+
+.client-info h5 {
+  margin-bottom: 0;
+}
+
+.client-info > div {
+  align-self: center;
 }
 
 /* 회원정보수정-모달 */
@@ -201,7 +209,7 @@
   #customerClient .client__modal--information div {
     margin-bottom: 1rem;
   }
-  #customerClient .clientInfo {
+  #customerClient .client-info {
     align-items: center;
   }
 
